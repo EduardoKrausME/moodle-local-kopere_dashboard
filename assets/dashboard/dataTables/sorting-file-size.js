@@ -1,0 +1,1 @@
+jQuery.fn.dataTable.ext.type.order["file-size-pre"]=function(b){var a=b.match(/^(\d+(?:\.\d+)?)\s*([a-z]+)/i);var c={b:1,bytes:1,kb:1000,kib:1024,mb:1000000,mib:1048576,gb:1000000000,gib:1073741824,tb:1000000000000,tib:1099511627776,pb:1000000000000000,pib:1125899906842624};if(a){var d=c[a[2].toLowerCase()];return parseFloat(a[1])*d}else{return -1}};

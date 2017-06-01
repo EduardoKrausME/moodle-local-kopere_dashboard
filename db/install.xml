@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/kopere_dashboard/db" VERSION="20141018" COMMENT="XMLDB file for Moodle local/kopere_dashboard"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+    <TABLES>
+        <TABLE NAME="kopere_dashboard_menu" COMMENT="">
+            <FIELDS>
+                <FIELD NAME="id"            TYPE="int"  LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
+                <FIELD NAME="title"         TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="link"          TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="icon"          TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="kopere_dashboard_webpages" COMMENT="">
+            <FIELDS>
+                <FIELD NAME="id"            TYPE="int"  LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
+                <FIELD NAME="menuid"        TYPE="int"  LENGTH="10"  NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="courseid"      TYPE="int"  LENGTH="10"  NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="title"         TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="link"          TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="text"          TYPE="text" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="theme"         TYPE="char" LENGTH="32"  NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="visible"       TYPE="int"  LENGTH="1"   NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="pageorder"     TYPE="int"  LENGTH="10"  NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="config"        TYPE="text"              NOTNULL="false" SEQUENCE="false" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="kopere_dashboard_events" COMMENT="">
+            <FIELDS>
+                <FIELD NAME="id"            TYPE="int"  LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
+                <FIELD NAME="module"        TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="event"         TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="userfrom"      TYPE="char" LENGTH="20"  NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="userto"        TYPE="char" LENGTH="20"  NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="message"       TYPE="text"              NOTNULL="false" SEQUENCE="false" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+        </TABLE>
+    </TABLES>
+</XMLDB>

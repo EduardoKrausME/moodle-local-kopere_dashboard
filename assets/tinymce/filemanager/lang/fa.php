@@ -1,0 +1,121 @@
+<?php
+
+
+
+define ( 'lang_Select', 'انتخاب' );
+define ( 'lang_Erase', 'حذف' );
+define ( 'lang_Open', 'بازگشایی' );
+define ( 'lang_Confirm_del', 'میخواهید این فایل را حذف کنید؟' );
+define ( 'lang_All', 'همه' );
+define ( 'lang_Files', 'فایلها' );
+define ( 'lang_Images', 'تصاویر' );
+define ( 'lang_Archives', 'آرشیو' );
+define ( 'lang_Error_Upload', 'فایل آپلود شده بیش از حداکثر اندازه مجاز است.' );
+define ( 'lang_Error_extension', 'نوع فایل مجاز نیست.' );
+define ( 'lang_Upload_file', 'آپلود' );
+define ( 'lang_Filters', 'فیلترها' );
+define ( 'lang_Videos', 'ویدئوها' );
+define ( 'lang_Music', 'موزیک' );
+define ( 'lang_New_Folder', 'پوشه جدید' );
+define ( 'lang_Folder_Created', 'پوشه به درستی ایجاد شد' );
+define ( 'lang_Existing_Folder', 'پوشه های موجود' );
+define ( 'lang_Confirm_Folder_del', 'آیا میخواهید این پوشه را با تمام محتوایش حذف کنید؟' );
+define ( 'lang_Return_Files_List', 'برگشت به لیست فایلها' );
+define ( 'lang_Preview', 'پیش نمایش' );
+define ( 'lang_Download', 'دانلود' );
+define ( 'lang_Insert_Folder_Name', 'نام پوشه:' );
+define ( 'lang_Root', 'شاخه اصلی' );
+define ( 'lang_Rename', 'تغییر نام' );
+define ( 'lang_Back', 'برگشت' );
+define ( 'lang_View', 'نمایش' );
+define ( 'lang_View_list', 'نمایش لیست' );
+define ( 'lang_View_columns_list', 'نمایش لیست ستونی' );
+define ( 'lang_View_boxes', 'نمایش باکسها' );
+define ( 'lang_Toolbar', 'نوار ابزار' );
+define ( 'lang_Actions', 'عملیات' );
+define ( 'lang_Rename_existing_file', 'فایل از قبل موجود است' );
+define ( 'lang_Rename_existing_folder', 'پوشه از قبل موجود است' );
+define ( 'lang_Empty_name', 'نام خالی است' );
+define ( 'lang_Text_filter', 'فیلتر نوشته' );
+define ( 'lang_Swipe_help', 'روی نام فایل/پوشه بروید تا گزینه های بیشتری نمایش داده شوند . ' );
+define ( 'lang_Upload_base', 'آپلودر اصلی' );
+define ( 'lang_Upload_java', 'آپلودر جاوا (فایلهای حجیم)' );
+define ( 'lang_Upload_java_help', 'اگر اپلت های جاوا لود نشد , 1. مطمئن شوید که جاوا نصب شده است ، در غیر این صورت از<a href=\'http://java.com/en/download/\'>[لینک وبسایت مرجع]</a> دریافت کنید .   2. مطمئن شوید که توسط فایروال بلاک نشده باشد .' );
+define ( 'lang_Upload_base_help', 'فایلها را از سیستم خود بکشید و اینجا رها کنید یا اینجا کلیک کنید و فایل انتخاب کنید و هنگامی که آپلود تمام شد، روی کلید \"برگشت به لیست فایلها\" کلیک کنید.' );
+define ( 'lang_Type_dir', 'مسیر' );
+define ( 'lang_Type', 'نوع' );
+define ( 'lang_Dimension', 'بعد' );
+define ( 'lang_Size', 'اندازه' );
+define ( 'lang_Date', 'تاریخ' );
+define ( 'lang_Filename', 'نام فایل' );
+define ( 'lang_Operations', 'عملیات' );
+define ( 'lang_Date_type', 'y-m-d' );
+define ( 'lang_OK', 'باشه' );
+define ( 'lang_Cancel', 'لغو' );
+define ( 'lang_Sorting', 'مرتب سازی' );
+define ( 'lang_Show_url', 'نمایش آدرس' );
+define ( 'lang_Extract', 'استخراج در اینجا' );
+define ( 'lang_File_info', 'اطلاعات فایل' );
+define ( 'lang_Edit_image', 'ویرایش تصویر' );
+define ( 'lang_Duplicate', 'تکرار' );
+define ( 'lang_Folders', 'پوشه ها' );
+define ( 'lang_Copy', 'کپی' );
+define ( 'lang_Cut', 'بریدن' );
+define ( 'lang_Paste', 'درج' );
+define ( 'lang_CB', 'کلیپ برد' ); // clipboard
+define ( 'lang_Paste_Here', 'درج در این مسیر' );
+define ( 'lang_Paste_Confirm', 'آیا ممئن هستید که میخواهید در این مسیر درج کنید ؟  اگر فایل همنام وجود داشته باشد فایل جدید روی فایل قبلی OverWrite خواهد شد .' );
+define ( 'lang_Paste_Failed', 'خطا در درج فایل (ها) ! ' );
+define ( 'lang_Clear_Clipboard', 'پاک کردن کلیپ برد' );
+define ( 'lang_Clear_Clipboard_Confirm', 'مطمئنید که می خواهید کلیپ برد را خالی کنید ؟' );
+define ( 'lang_Files_ON_Clipboard', 'کلیپ برد حاوی فایل است .' );
+define ( 'lang_Copy_Cut_Size_Limit', 'فایل/پوشه انتخابی از حداکثر حجم مجاز برای %s بزرگتر هستند. محدودیت: %d MB/عملیات' ); // %s = cut or copy
+define ( 'lang_Copy_Cut_Count_Limit', 'تعداد فایل/پوشه های انتخابی برای %s بسیار زیاد است . محدودیت: %d فایل/عملیات' ); // %s = cut or copy
+define ( 'lang_Copy_Cut_Not_Allowed', 'شما اجازه %s این فایل را ندارید .' ); // %s(1) = cut or copy, %s(2) = files or folders
+define ( 'lang_Aviary_No_Save', 'نتوانست تصویر را ذخیره کند .' );
+define ( 'lang_Zip_No_Extract', 'خطا در فرآیند Unzip . ممکن است فایل آسیب دیده باشد .' );
+define ( 'lang_Zip_Invalid', 'پسوند مورد نظر پشیبانی نمیشود ، مجاز : zip, gz, tar.' );
+define ( 'lang_Dir_No_Write', 'مسیر انتخابی قابل نوشتن نیست .' );
+define ( 'lang_Function_Disabled', 'تابع %s از سمت سرور غیر فعال شده است .' ); // %s = cut or copy
+define ( 'lang_File_Permission', 'دسترسی فایل' );
+define ( 'lang_File_Permission_Not_Allowed', 'تغییر دسترسی %s مجاز نمی باشد .' ); // %s = files or folders
+define ( 'lang_File_Permission_Recursive', 'اعمال بازگشتی بودن؟' );
+define ( 'lang_File_Permission_Wrong_Mode', 'دسترسی اعمال شده اشتباه است .' );
+define ( 'lang_User', 'کاربر' );
+define ( 'lang_Group', 'گروه' );
+define ( 'lang_Yes', 'بله' );
+define ( 'lang_No', 'خبر' );
+define ( 'lang_Lang_Not_Found', 'زبان مورد نظر یافت نشد .' );
+define ( 'lang_Lang_Change', 'تغییر زبان' );
+define ( 'lang_File_Not_Found', 'نتوانست فایل را پیدا کند .' );
+define ( 'lang_File_Open_Edit_Not_Allowed', 'شما نمیتوانید این فایل را %s کنید.' ); // %s = open or edit
+define ( 'lang_Edit', 'ویرایش' );
+define ( 'lang_Edit_File', 'ویرایش محتوای فایل' );
+define ( 'lang_File_Save_OK', 'فایل با موفقیت ذخیره شد .' );
+define ( 'lang_File_Save_Error', 'خطایی در هنگام ذخیره فایل رخ داده است .' );
+define ( 'lang_New_File', 'فایل جدید' );
+define ( 'lang_No_Extension', 'شما باید پسوند وارد کنید .' );
+define ( 'lang_Valid_Extensions', 'پسوند های مجاز : %s' ); // %s = txt,log etc.
+define ( 'lang_Upload_message', 'فایل ها را اینجا بکشید تا آپلود شوند ' );
+
+define ( 'lang_SERVER ERROR', 'خطای سرور' );
+define ( 'lang_forbiden', 'ممنوع' );
+define ( 'lang_wrong path', 'مسیر اشتباه' );
+define ( 'lang_wrong name', 'نام غیر مجاز' );
+define ( 'lang_wrong extension', 'پسوند غیر مجاز' );
+define ( 'lang_wrong option', 'گزینه های غیر مجاز' );
+define ( 'lang_wrong data', 'دیتا اشتباه' );
+define ( 'lang_wrong action', 'عمل اشتباه' );
+define ( 'lang_wrong sub-action', 'خطای زیر دستور' );
+define ( 'lang_no action passed', 'بدون دستور' );
+define ( 'lang_no path', 'بدون مسیر' );
+define ( 'lang_no file', 'بدون فایل' );
+define ( 'lang_view type number missing', 'نمایش تعداد نوع های غیر مجاز' );
+define ( 'lang_Not enought Memory', 'نبود فضای کافی' );
+define ( 'lang_max_size_reached', 'پوشه تصویر شما به حداکثر اندازه خود [%d MB] رسیده است .' ); //%d = max overall size
+define ( 'lang_B', 'B' );
+define ( 'lang_KB', 'KB' );
+define ( 'lang_MB', 'MB' );
+define ( 'lang_GB', 'GB' );
+define ( 'lang_TB', 'TB' );
+define ( 'lang_total size', 'حجم کلی' );
