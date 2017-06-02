@@ -122,7 +122,7 @@ class Reports
             array( '?Reports::dashboard', 'Relatórios' ),
             $class->name ()
         ) );
-        echo '<div class="element-box">';
+        echo '<div class="element-box table-responsive">';
 
         $class->generate ();
 

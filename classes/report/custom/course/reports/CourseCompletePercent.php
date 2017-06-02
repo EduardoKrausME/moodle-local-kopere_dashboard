@@ -37,7 +37,7 @@ class CourseCompletePercent implements ReportInterface
         if ( $courseid == 0 )
             $this->listCourses ();
         else
-            $this->createReport();
+            $this->createReport ();
     }
 
     private function listCourses ()
@@ -51,7 +51,7 @@ class CourseCompletePercent implements ReportInterface
         $table->addHeader ( 'Visível', 'visible', TableHeaderItem::RENDERER_VISIBLE );
         $table->addHeader ( 'Nº alunos inscritos', 'inscritos', TableHeaderItem::TYPE_INT, null, 'width:50px;white-space:nowrap;' );
 
-        $table->setAjaxUrl ( 'Courses::listAllCourses' );
+        $table->setAjaxUrl ( 'Courses::loadAllCourses' );
         $table->setClickRedirect ( '?Reports::loadReport&type=course&report=CourseCompletePercent&courseid={id}', 'id' );
         $table->printHeader ();
         $table->close ();
@@ -72,6 +72,7 @@ class CourseCompletePercent implements ReportInterface
             = "SELECT ue.id,
                       u.id AS userid,
                       u.firstname, u.lastname, u.alternatename, u.middlename, u.lastnamephonetic, u.firstnamephonetic,
+                      u.email,
                       
                       c.id AS courseid,
                       c.fullname, 
@@ -135,14 +136,18 @@ class CourseCompletePercent implements ReportInterface
         //echo '</pre>';
 
         $table = new DataTable();
+        //$table->setTableId ( 'datatable_alunos' );
+
         $table->addHeader ( '#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px' );
         $table->addHeader ( 'Aluno', 'userfullname' );
+        $table->addHeader ( 'E-mail', 'email' );
         $table->addHeader ( 'Curso', 'fullname' );
         $table->addHeader ( 'Data da inscrição', 'timecreated', TableHeaderItem::RENDERER_DATE );
         $table->addHeader ( 'Atividades Concluídas', 'activities_completed', TableHeaderItem::TYPE_INT );
         $table->addHeader ( 'Atividades Atribuídas', 'activities_assigned', TableHeaderItem::TYPE_INT );
         $table->addHeader ( 'Completo', 'course_completed' );
 
+        $table->setIsExport ( true );
         //$table->setClickRedirect ( '?Users::details&userid={userid}', 'userid' );
         $table->printHeader ( '', false );
         $table->setRow ( $report );
@@ -155,7 +160,8 @@ class CourseCompletePercent implements ReportInterface
         // Pie::createRegular ( $pieData );
     }
 
-    public function listData ( ){
+    public function listData ()
+    {
 
     }
 }

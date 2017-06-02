@@ -36,9 +36,9 @@ if ( isset( $_POST[ 'action' ] ) ) {
 
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <link rel="stylesheet" href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/css/dashboard.css">
-    <link rel="stylesheet" href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/dataTables/jquery.dataTables.css">
+    <link  href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/css/dashboard.css" rel="stylesheet">
+    <link  href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/bootstrap/bootstrap.css" rel="stylesheet">
+    <link  href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/dataTables/jquery.dataTables.css" rel="stylesheet">
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery-3.2.1.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/dashboard.js"></script>
@@ -60,7 +60,6 @@ if ( isset( $_POST[ 'action' ] ) ) {
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery.validate-v1.15.0.js"></script>
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/custom.js"></script>
-
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v1.js"></script>

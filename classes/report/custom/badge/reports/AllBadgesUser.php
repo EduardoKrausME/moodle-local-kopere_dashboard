@@ -2,6 +2,7 @@
 
 namespace local_kopere_dashboard\report\custom\badge\reports;
 
+use local_kopere_dashboard\html\Botao;
 use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\TableHeaderItem;
 use local_kopere_dashboard\report\custom\ReportInterface;
@@ -71,7 +72,7 @@ class AllBadgesUser implements ReportInterface
         $table->addHeader ( 'Curso', 'course' );
         $table->addHeader ( 'Em', 'dateissued', TableHeaderItem::RENDERER_DATE );
 
-
+        $table->setIsExport ( true );
         //$table->setClickRedirect ( '?Courses::details&courseid={id}', 'id' );
         $table->printHeader ( '', false );
         $table->setRow ( $report );

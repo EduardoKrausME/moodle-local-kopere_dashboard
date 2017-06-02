@@ -67,8 +67,6 @@ class AllBadgesCount implements ReportInterface
             $report[] = $item;
         }
 
-
-
         $table = new DataTable();
         $table->addHeader ( '#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px' );
         $table->addHeader ( 'Nome', 'name' );
@@ -76,6 +74,7 @@ class AllBadgesCount implements ReportInterface
         $table->addHeader ( 'Ativo', 'statustext', TableHeaderItem::RENDERER_STATUS );
         $table->addHeader ( 'Quantidade de alunos', 'alunos', TableHeaderItem::TYPE_INT );
 
+        $table->setIsExport ( true );
         //$table->setClickRedirect ( '?Courses::details&courseid={id}', 'id' );
         $table->printHeader ( '', false );
         $table->setRow ( $report );

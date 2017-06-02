@@ -10,61 +10,15 @@ namespace local_kopere_dashboard\util;
 
 class Export
 {
-    private static $_sendJavascriptSend = false;
+    private static $_format;
 
-    private static function sendJavascript ()
+    public static function exportHeader ( $format, $filename = null )
     {
-        global $CFG;
+        if ( $filename == null )
+            $filename = DashboardUtil::$currentTitle;
 
-        if ( self::$_sendJavascriptSend )
-            return;
-
-        echo "<script src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/export-to-xls/xlsx.full.min.js\"></script>";
-        echo "<script src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/export-to-xls/Blob.js\"></script>";
-        echo "<script src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/export-to-xls/FileSaver.js\"></script>";
-
-        ?>
-
-        <script>
-            function export_table_to_excel ( tableId, type, filename ) {
-                var wb    = XLSX.utils.table_to_book ( document.getElementById ( tableId ), { sheet : "Sheet JS" } );
-                var wbout = XLSX.write ( wb, { bookType : type, bookSST : true, type : 'binary' } );
-                var fname = filename + '.' + type;
-                try {
-                    saveAs ( new Blob ( [ s2ab ( wbout ) ], { type : "application/octet-stream" } ), fname );
-                } catch ( e ) {
-                    if ( typeof console != 'undefined' ) console.log ( e, wbout );
-                }
-                return wbout;
-            }
-            function s2ab ( s ) {
-                if ( typeof ArrayBuffer !== 'undefined' ) {
-                    var buf1 = new ArrayBuffer ( s.length );
-                    var view = new Uint8Array ( buf1 );
-                    for ( var i = 0; i != s.length; ++i )
-                        view[ i ] = s.charCodeAt ( i ) & 0xFF;
-                    return buf1;
-                } else {
-                    var buf2 = new Array ( s.length );
-                    for ( var j = 0; j != s.length; ++j )
-                        buf2[ j ] = s.charCodeAt ( j ) & 0xFF;
-                    return buf2;
-                }
-            }
-        </script>
-        <?php
-    }
-
-    public static function addButton ( $tableId, $type, $filename, $texto )
-    {
-        self::sendJavascript ();
-        echo "<button class=\"btn btn-info navbar-btn\" onclick=\"export_table_to_excel( '$tableId', '$type', '$filename' );\">$texto</button>";
-
-    }
-
-    public static function exportHeader ( $formato, $filename )
-    {
-        if ( $formato == 'xls' ) {
+        self::$_format = $format;
+        if ( self::$_format == 'xls' ) {
             ob_clean ();
             header ( 'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' );
             header ( 'Content-Disposition: attachment; filename="' . $filename . '.xls"' );
@@ -80,13 +34,13 @@ class Export
                       -->
                       </style>
                   </head>
-                  <body>" ;
+                  <body>";
         }
     }
 
-    public static function exportClose ( $formato )
+    public static function exportClose ()
     {
-        if ( $formato == 'xls' ) {
+        if ( self::$_format == 'xls' ) {
             echo '</body></html>';
             die();
         }

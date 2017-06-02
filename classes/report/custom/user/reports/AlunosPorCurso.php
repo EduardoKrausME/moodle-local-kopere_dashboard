@@ -47,6 +47,7 @@ class AlunosPorCurso implements ReportInterface
         $table->addHeader ( 'Nome curto', 'shortname' );
         $table->addHeader ( 'Alunos', 'alunos' );
 
+        $table->setIsExport ( true );
         $table->setClickRedirect ( '?Courses::details&courseid={id}', 'id' );
         $table->printHeader ( '', false );
         $table->setRow ( $report );

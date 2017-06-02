@@ -8,14 +8,13 @@
 namespace local_kopere_dashboard\html;
 
 
+use local_kopere_dashboard\util\Export;
+
 class DataTable
 {
-    function __construct ( $adicional = '' )
+    function __construct ()
     {
         $this->tableId = 'datatable_' . uniqid ();
-        echo '<table id="' . $this->tableId . '" class="table table-hover" ';
-        echo $adicional;
-        echo '>';
     }
 
     private $column        = array();
@@ -23,8 +22,33 @@ class DataTable
     private $columnDefs    = array();
     private $ajaxUrl       = null;
     private $clickRedirect = null;
-    private $clickModal = null;
+    private $clickModal    = null;
     private $tableId       = '';
+    private $isExport      = false;
+
+    /**
+     * @param boolean $isExport
+     */
+    public function setIsExport ( $isExport )
+    {
+        $this->isExport = $isExport;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTableId ()
+    {
+        return $this->tableId;
+    }
+
+    /**
+     * @param string $tableId
+     */
+    public function setTableId ( $tableId )
+    {
+        $this->tableId = $tableId;
+    }
 
     public function setAjaxUrl ( $ajaxUrl )
     {
@@ -37,6 +61,7 @@ class DataTable
         $this->clickRedirect[ 'chave' ] = $chave;
         $this->clickRedirect[ 'url' ]   = $url;
     }
+
     public function setClickModal ( $url, $chave )
     {
         $this->clickModal            = array();
@@ -59,6 +84,14 @@ class DataTable
 
     public function printHeader ( $class = '', $printBody = true )
     {
+        if ( $this->isExport && $this->ajaxUrl == null ) {
+            Botao::info ( 'Exportar para Excel', "?{$_SERVER['QUERY_STRING']}&export=xls" );
+
+            Export::exportHeader ( optional_param ( 'export', '', PARAM_TEXT ) );
+        }
+
+        echo '<table id="' . $this->tableId . '" class="table table-hover" >';
+
         echo '<thead>';
         echo '<tr class="' . $class . '">';
         /** @var TableHeaderItem $coluna */
@@ -146,6 +179,10 @@ class DataTable
 
     public function close ( $processServer = false, $order = '' )
     {
+        echo '</table>';
+
+        Export::exportClose();
+
         $processServerHtml = '';
         if ( $processServer )
             $processServerHtml = ', "processing": true, "serverSide": true';
@@ -153,18 +190,20 @@ class DataTable
         if ( isset( $order[ 1 ] ) )
             $order = ',' . $order;
 
-        $ajaxConfig = '';
+        $ajaxConfig = $buttonExport = '';
         if ( $this->ajaxUrl )
             $ajaxConfig = 'ajax : {url:"open-ajax-table.php?' . $this->ajaxUrl . '",type: "POST"},';
+        else if ( $this->isExport && !$processServer )
+            $buttonExport = "buttons: [ 'csv', 'excel', 'pdf', 'print' ],";
 
         $columnData = implode ( ", ", $this->columnData );
         $columnDefs = implode ( ", ", $this->columnDefs );
-        echo "</table>
-              <script>
+        echo "<script>
                   {$this->tableId} = null;
                   \$(document).ready( function() {
                       {$this->tableId} = \$( '#{$this->tableId}' ).DataTable({
                           {$ajaxConfig}
+                          {$buttonExport}
                           autoWidth   : false,
                           columns     : [ {$columnData} ],
                           columnDefs  : [ {$columnDefs} ]
@@ -176,7 +215,7 @@ class DataTable
 
         if ( $this->clickRedirect )
             $this->onClickReditect ();
-        elseif ( $this->clickModal)
+        elseif ( $this->clickModal )
             $this->onClickModal ();
 
         return $this->tableId;
@@ -200,7 +239,8 @@ class DataTable
               </script>";
     }
 
-    private function onClickModal(){
+    private function onClickModal ()
+    {
 
         $clickChave = $this->clickModal[ 'chave' ];
         $clickUrl   = $this->clickModal[ 'url' ];

@@ -87,8 +87,6 @@ class ReportsCourseAccess implements ReportInterface
         $sections = $DB->get_records ( 'course_sections', array( 'course' => $cursosId ), 'section asc' );
 
         Botao::info ( 'Exportar para Excel', "?{$_SERVER['QUERY_STRING']}&export=xls" );
-        //Export::addButton ( 'list-course-access', 'xlsx', "Lista de alunos - $course->fullname", 'Exportar para Excel (XLSX)' );
-        //Export::addButton ( 'list-course-access', 'ods',  "Lista de alunos - $course->fullname", 'Exportar para LibreOffice (ODS)' );
 
         $export = optional_param ( 'export', '', PARAM_TEXT );
         Export::exportHeader ( $export, "Lista de alunos - $course->fullname" );
@@ -220,7 +218,7 @@ class ReportsCourseAccess implements ReportInterface
 
         echo '</table>';
 
-        Export::exportClose ( $export );
+        Export::exportClose ();
 
         echo '</div>';
     }

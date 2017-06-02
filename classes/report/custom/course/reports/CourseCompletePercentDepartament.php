@@ -10,7 +10,7 @@ use local_kopere_dashboard\util\Header;
 class CourseCompletePercentDepartament implements ReportInterface
 {
 
-    public $reportName = 'Progresso com percentual de conclusão por departamento';
+    public $reportName = 'Progresso com percentual de conclusão por Cargo e CPF';
 
     /**
      * @return string
@@ -36,8 +36,10 @@ class CourseCompletePercentDepartament implements ReportInterface
         $courseid = optional_param ( 'courseid', 0, PARAM_INT );
         if ( $courseid == 0 )
             $this->listCourses ();
-        else
+        else {
+            echo '<script> document.body.className += " menu-w-90"; </script>';
             $this->createReport ();
+        }
     }
 
     private function listCourses ()
@@ -51,7 +53,7 @@ class CourseCompletePercentDepartament implements ReportInterface
         $table->addHeader ( 'Visível', 'visible', TableHeaderItem::RENDERER_VISIBLE );
         $table->addHeader ( 'Nº alunos inscritos', 'inscritos', TableHeaderItem::TYPE_INT, null, 'width:50px;white-space:nowrap;' );
 
-        $table->setAjaxUrl ( 'Courses::listAllCourses' );
+        $table->setAjaxUrl ( 'Courses::loadAllCourses' );
         $table->setClickRedirect ( '?Reports::loadReport&type=course&report=CourseCompletePercentDepartament&courseid={id}', 'id' );
         $table->printHeader ();
         $table->close ();
@@ -130,17 +132,25 @@ class CourseCompletePercentDepartament implements ReportInterface
         foreach ( $reports as $item ) {
 
             $item->userfullname = fullname ( $item );
-            $item->cpf          = $DB->get_field ( 'user_info_data', 'data', array( 'shortname' => 'cpf' ) );
-            $item->cargo        = $DB->get_field ( 'user_info_data', 'data', array( 'shortname' => 'Cargo' ) );
+
+
+            $DB->get_field ( 'user_info_field', 'id', array( 'shortname' => 'Cargo' ) );
+
+            $item->cpf   = $DB->get_field ( 'user_info_data', 'data', array(
+                'fieldid' => $DB->get_field ( 'user_info_field', 'id', array( 'shortname' => 'cpf' ) ),
+                'userid'  => $item->userid
+            ) );
+            $item->cargo = $DB->get_field ( 'user_info_data', 'data', array(
+                'fieldid' => $DB->get_field ( 'user_info_field', 'id', array( 'shortname' => 'Cargo' ) ),
+                'userid'  => $item->userid
+            ) );
 
             $report[] = $item;
         }
 
-        //echo '<pre>';
-        //print_r ( $reports );
-        //echo '</pre>';
-
         $table = new DataTable();
+        $table->setTableId ( 'datatable_alunos' );
+
         $table->addHeader ( '#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px' );
         $table->addHeader ( 'Aluno', 'userfullname' );
         $table->addHeader ( 'CPF', 'cpf' );
@@ -153,6 +163,7 @@ class CourseCompletePercentDepartament implements ReportInterface
         $table->addHeader ( 'Completo', 'course_completed' );
         $table->addHeader ( 'Conclusão em', 'concluido_em', TableHeaderItem::RENDERER_DATE );
 
+        $table->setIsExport ( true );
         //$table->setClickRedirect ( '?Users::details&userid={userid}', 'userid' );
         $table->printHeader ( '', false );
         $table->setRow ( $report );

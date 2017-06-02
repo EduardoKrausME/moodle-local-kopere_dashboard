@@ -12,8 +12,11 @@ use local_kopere_dashboard\html\Botao;
 
 class DashboardUtil
 {
+    public static $currentTitle = '';
     public static function setTitulo ( $titulo, $infoUrl = null )
     {
+        self::$currentTitle = $titulo;
+
         if ( $infoUrl == null )
             return "<h3 class=\"element-header\"> $titulo </h3>";
         else

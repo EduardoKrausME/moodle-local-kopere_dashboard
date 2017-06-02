@@ -1,6 +1,6 @@
 <?php
 
-$plugin->version   = 2017052808;
+$plugin->version   = 2017060204;
 $plugin->requires  = 2011120500;
 $plugin->release   = '1.1.2';
 $plugin->maturity  = MATURITY_RC;
