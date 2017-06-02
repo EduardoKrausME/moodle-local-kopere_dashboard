@@ -14,12 +14,9 @@ require_once ( $CFG->libdir . '/adminlib.php' );
 require_login ();
 require_capability ( 'moodle/site:config', context_system::instance () );
 
-admin_externalpage_setup ( 'kopere_dashboardopen' );
-
 $PAGE->set_url ( new moodle_url( '/local/kopere_dashboard/open.php' ) );
 $PAGE->set_pagetype ( 'admin-setting' );
 $PAGE->set_context ( context_system::instance () );
-
 
 $PAGE->set_title ( 'Abrir Dashboard' );
 $PAGE->set_heading ( 'Abrir Dashboard' );

@@ -14,7 +14,6 @@ class About
 {
     public function dashboard ()
     {
-        global $CFG;
         DashboardUtil::startPage ( 'Sobre' );
 
         echo '<div class="element-box">
