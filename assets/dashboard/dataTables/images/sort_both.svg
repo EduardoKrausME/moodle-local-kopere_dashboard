@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="svg2" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"width="19px" height="19px" viewBox="0 0 19 19" enable-background="new 0 0 19 19" xml:space="preserve"><path fill="#3E4B5B" d="M9.179,16.881l-4.728-5.072l1.246-1.243l3.804,4.126l3.806-4.08l1.243,1.197l-4.726,5.072H9.179z"/><path fill="#3E4B5B" d="M9.822,2.119l4.728,5.072l-1.247,1.243L9.499,4.308L5.694,8.39L4.45,7.191l4.726-5.072H9.822z"/></svg>
+<svg version="1.1" id="svg2" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+	 width="19px" height="19px" viewBox="0 0 19 19" enable-background="new 0 0 19 19" xml:space="preserve">
+<g>
+	<path fill="#3E4B5B" d="M9.179,16.881l-4.728-5.072l1.246-1.242l3.804,4.125l3.806-4.08l1.243,1.197l-4.726,5.072H9.179z"/>
+	<path fill="#3E4B5B" d="M9.822,2.119l4.728,5.072l-1.247,1.243L9.499,4.308L5.694,8.39L4.45,7.191l4.726-5.072H9.822z"/>
+</g>
+</svg>
