@@ -57,7 +57,7 @@ class ReportsDisk implements ReportInterface
         $table->addHeader ( 'Arquivos dos Módulos', 'modulessize', TableHeaderItem::TYPE_BYTES );
 
         $table->setIsExport ( true );
-        $table->setClickRedirect ( '?Courses::details&courseid={id}', 'id' );
+        $table->setClickRedirect ( 'Courses::details&courseid={id}', 'id' );
         $table->printHeader ( '', false );
         $table->setRow ( $fileDatas );
         $table->close ( false );

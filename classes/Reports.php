@@ -119,7 +119,7 @@ class Reports
 
 
         DashboardUtil::startPage ( array(
-            array( '?Reports::dashboard', 'Relatórios' ),
+            array( 'Reports::dashboard', 'Relatórios' ),
             $class->name ()
         ) );
         echo '<div class="element-box table-responsive">';

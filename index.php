@@ -129,6 +129,26 @@ if ( strlen ( $webpages_analytics_id ) > 10 ) {
                  </script>';
 }
 
+$webpagesAnalyticsId = get_config ( 'local_kopere_dashboard', 'webpages_analytics_id' );
+
+if ( strlen ( $webpagesAnalyticsId ) > 5 && strlen ( $webpagesAnalyticsId ) < 15 ) {
+    $pageHtml
+        .= "<script>
+                (function(i,s,o,g,r,a,m){
+                    i['GoogleAnalyticsObject']=r;
+                    i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)
+                    },i[r].l=1*new Date();
+                    a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+                    a.async=1;
+                    a.src=g;
+                    m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+                ga('create', '$webpagesAnalyticsId', 'auto');
+                ga('send', 'pageview');
+            </script>";
+}
+
 $pageHtml .= $OUTPUT->footer ();
 
 if ( isloggedin () )

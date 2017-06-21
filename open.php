@@ -15,11 +15,12 @@ require_login ();
 require_capability ( 'moodle/site:config', context_system::instance () );
 
 $PAGE->set_url ( new moodle_url( '/local/kopere_dashboard/open.php' ) );
-$PAGE->set_pagetype ( 'admin-setting' );
 $PAGE->set_context ( context_system::instance () );
-
+$PAGE->set_pagetype ( 'admin-setting' );
+$PAGE->set_pagelayout ( 'admin' );
 $PAGE->set_title ( 'Abrir Dashboard' );
 $PAGE->set_heading ( 'Abrir Dashboard' );
+
 $PAGE->requires->jquery ();
 $PAGE->requires->css ( '/local/kopere_dashboard/assets/style.css' );
 $PAGE->requires->js  ( '/local/kopere_dashboard/assets/popup.js' );

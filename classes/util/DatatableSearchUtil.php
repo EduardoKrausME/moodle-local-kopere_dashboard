@@ -59,7 +59,13 @@ class DatatableSearchUtil
         }
     }
 
-    public function executeSqlAndReturn ( $sql, $group='', $params=array() )
+    /**
+     * @param          $sql
+     * @param string   $group
+     * @param array    $params
+     * @param callback $functionBeforeReturn
+     */
+    public function executeSqlAndReturn ( $sql, $group = '', $params = null, $functionBeforeReturn = null )
     {
         global $DB;
 
@@ -69,11 +75,13 @@ class DatatableSearchUtil
         $sqlTotal = $sql . " $group";
         $sqlTotal = str_replace ( '{[columns]}', 'count(*) as num', $sqlTotal );
 
-        $sqlReturn = $sql . " $this->where ORDER BY $this->order $this->orderDir $group LIMIT $this->start, $this->length";
+        $sqlReturn = $sql . " $this->where \n $group\n ORDER BY $this->order $this->orderDir \n LIMIT $this->start, $this->length";
         $sqlReturn = str_replace ( '{[columns]}', implode ( ', ', $this->columnsSelect ), $sqlReturn );
 
 
         // mail ( 'kraus@eduardokraus.com', 'aaaa', print_r ( [ $sqlSearch, $sqlTotal, $sqlReturn ], 1 ) );
+
+        error_log ( $sqlTotal );
 
         $result   = $DB->get_records_sql ( $sqlReturn, $params );
         $total    = $DB->get_record_sql ( $sqlTotal, $params );
@@ -83,6 +91,9 @@ class DatatableSearchUtil
             $searchNum = $search->num;
         } else
             $searchNum = $totalNum;
+
+        if ( $functionBeforeReturn )
+            $result = call_user_func ( $functionBeforeReturn, $result );
 
         Json::encodeAndReturn ( $result, $totalNum, $searchNum );
     }

@@ -21,7 +21,7 @@
                 <FIELD NAME="courseid"      TYPE="int"  LENGTH="10"  NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="title"         TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="link"          TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
-                <FIELD NAME="text"          TYPE="text" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="text"          TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="theme"         TYPE="char" LENGTH="32"  NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="visible"       TYPE="int"  LENGTH="1"   NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="pageorder"     TYPE="int"  LENGTH="10"  NOTNULL="false" SEQUENCE="false" />
@@ -36,8 +36,10 @@
                 <FIELD NAME="id"            TYPE="int"  LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
                 <FIELD NAME="module"        TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="event"         TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="status"        TYPE="int"  LENGTH="1"   NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="userfrom"      TYPE="char" LENGTH="20"  NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="userto"        TYPE="char" LENGTH="20"  NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="subject"       TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="message"       TYPE="text"              NOTNULL="false" SEQUENCE="false" />
             </FIELDS>
             <KEYS>

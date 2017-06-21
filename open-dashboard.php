@@ -17,7 +17,8 @@ require_login ();
 require_capability ( 'moodle/site:config', context_system::instance () );
 
 $PAGE->set_url ( new moodle_url( '/local/kopere_dashboard/open-dashboard.php' ) );
-$PAGE->set_pagetype ( 'admin-setting' );
+//$PAGE->set_pagetype ( 'admin-setting' );
+$PAGE->set_pagetype ( 'reports' );
 $PAGE->set_context ( context_system::instance () );
 
 if ( !strlen ( $_SERVER[ 'QUERY_STRING' ] ) )
@@ -125,7 +126,7 @@ if ( isset( $_POST[ 'action' ] ) ) {
 
                     //DashboardUtil::addMenu ( 'Gamification::dashboard', 'gamification', 'Gamificação' );
 
-                    //DashboardUtil::addMenu ( 'Notifications::dashboard', 'notifications', 'Notificações' );
+                    DashboardUtil::addMenu ( 'Notifications::dashboard', 'notifications', 'Notificações' );
 
                     DashboardUtil::addMenu ( 'WebPages::dashboard', 'webpages', 'Paginas estáticas' );
                     DashboardUtil::addMenu ( 'Benchmark::test', 'performace', 'Performace' );

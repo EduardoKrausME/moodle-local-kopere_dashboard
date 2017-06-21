@@ -30,6 +30,6 @@ class Settings
         Mensagem::agendaMensagemSuccess ( 'Configurações salvas!' );
 
         if ( isset( $_POST[ 'redirect' ] ) )
-            Header::location ( '?' . $_POST[ 'redirect' ] );
+            Header::location ( '' . $_POST[ 'redirect' ] );
     }
 }

@@ -14,26 +14,34 @@ function local_kopere_dashboard_extend_navigation ( global_navigation $nav )
         $menus = $DB->get_records ( 'kopere_dashboard_menu' );
         /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
         foreach ( $menus as $menu ) {
-            $nav->add (
+            $node = $nav->add (
                 $menu->title,
                 new moodle_url( $CFG->wwwroot . '/local/kopere_dashboard/?menu=' . $menu->link ),
                 navigation_node::TYPE_CUSTOM,
-                null, null,
+                null,
+                'kopere_dashboard' . $menu->link,
                 new pix_icon( 'webpages', $menu->title, 'local_kopere_dashboard' )
             );
+
+            //$node->display              = false;
+            $node->showinflatnavigation = true;
         }
-    } catch ( Exception $e ) {
-    }
+    } catch ( Exception $e ) {}
 
     $context = context_system::instance ();
     if ( isloggedin () && has_capability ( 'moodle/site:config', $context ) ) {
-        $nav->add (
+
+        $node = $nav->add (
             get_string ( 'pluginname', 'local_kopere_dashboard' ),
             new moodle_url( $CFG->wwwroot . '/local/kopere_dashboard/open.php' ),
             navigation_node::TYPE_CUSTOM,
-            null, null,
+            null,
+            'kopere_dashboard',
             new pix_icon( 'icon', get_string ( 'pluginname', 'local_kopere_dashboard' ), 'local_kopere_dashboard' )
         );
+
+        //$node->display              = false;
+        $node->showinflatnavigation = true;
     }
 
     if ( get_config ( 'local_kopere_dashboard', 'nodejs-status' ) ) {

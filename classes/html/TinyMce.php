@@ -8,25 +8,32 @@ class TinyMce
 
     public static function register ()
     {
+        global $CFG;
+
         if ( self::$_isSend )
-            return;
+            return '';
 
         self::$_isSend = true;
 
-        echo '<script src="' . self::getAbsulutePath () . 'tinymce.min.js" type="text/javascript"></script>';
+        return '<script src="' . $CFG->wwwroot . '/local/kopere_dashboard/assets/tinymce/tinymce.min.js" type="text/javascript"></script>';
     }
 
     /**
      * @param string $seletor
      * @param  int   $id
+     *
+     * @return string
      */
     public static function createInputEditor ( $seletor = '.tinymce_editor_box', $id = 0 )
     {
-        self::register ();
-        ?>
-        <script type="text/javascript">
+        global $CFG;
+        $path       = $CFG->wwwroot . '/local/kopere_dashboard/assets/tinymce/';
+        $returnHtml = self::register ();
+
+        $returnHtml
+            .= "<script type=\"text/javascript\">
             tinymce.init ( {
-                selector : '<?php echo $seletor ?>',
+                selector : '{$seletor}',
                 plugins  : [
                     'advlist autolink lists link image charmap ',
                     'searchreplace visualblocks code fullscreen responsivefilemanager',
@@ -131,11 +138,11 @@ class TinyMce
                         'fullscreen nanospell',
 
                 external_plugins : {
-                    'filemanager' : '<?php echo self::getAbsulutePath () ?>filemanager/plugin.js',
-                    'nanospell'   : '<?php echo self::getAbsulutePath () ?>nanospell/plugin.js'
+                    'filemanager' : '{$path}filemanager/plugin.js',
+                    'nanospell'   : '{$path}nanospell/plugin.js'
                 },
 
-                external_filemanager_path : '<?php echo self::getAbsulutePath () ?>filemanager/',
+                external_filemanager_path : '{$path}filemanager/',
                 filemanager_title         : 'Gerenciador de Arquivos',
 
                 nanospell_server     : 'php',
@@ -144,17 +151,10 @@ class TinyMce
                 relative_urls        : false,
                 remove_script_host   : false,
                 language             : 'pt_BR',
-                folderSaveFile       : '<?php echo $id ?>'
+                folderSaveFile       : '{$id}'
             } );
-        </script>
-        <?php
+        </script>";
+
+        return $returnHtml;
     }
-
-    private static function getAbsulutePath ()
-    {
-        global $CFG;
-
-        return $CFG->wwwroot . '/local/kopere_dashboard/assets/tinymce/';
-    }
-
 }

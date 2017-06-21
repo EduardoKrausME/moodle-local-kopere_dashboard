@@ -32,9 +32,8 @@ class Users
         $table->addHeader ( 'Cidade', 'city' );
 
         $table->setAjaxUrl ( 'Users::loadAllUsers' );
-        $table->setClickRedirect ( '?Users::details&userid={id}', 'id' );
+        $table->setClickRedirect ( 'Users::details&userid={id}', 'id' );
         $table->printHeader ();
-        //$table->close ();
         $table->close ( true, 'order:[[1,"asc"]]' );
 
         echo '</div>';

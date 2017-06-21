@@ -10,6 +10,7 @@ namespace local_kopere_dashboard\report\custom\user\reports;
 
 use local_kopere_dashboard\chartsjs\Lines;
 use local_kopere_dashboard\html\Form;
+use local_kopere_dashboard\html\inputs\InputSelect;
 use local_kopere_dashboard\report\custom\ReportInterface;
 
 class DailyUsers implements ReportInterface
@@ -51,7 +52,11 @@ class DailyUsers implements ReportInterface
 
 
         $form = new Form( '#', 'inline' );
-        $form->createSelectInput ( 'Número de dias: ', 'dias', $diasAr, $dias );
+        $form->addInput (
+            (new InputSelect())->setTitle ('Número de dias: ')
+                ->setName ('dias')
+                ->setValues ($diasAr, 0, 1)
+                ->setValue ($dias));
         $form->closeAndAutoSubmitInput ( 'dias' );
 
         $graphicDataLogins = array();

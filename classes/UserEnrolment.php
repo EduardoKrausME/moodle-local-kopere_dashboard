@@ -9,6 +9,9 @@ namespace local_kopere_dashboard;
 
 
 use local_kopere_dashboard\html\Form;
+use local_kopere_dashboard\html\inputs\InputCheckbox;
+use local_kopere_dashboard\html\inputs\InputDateRange;
+use local_kopere_dashboard\html\inputs\InputSelect;
 use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Mensagem;
@@ -22,7 +25,7 @@ class UserEnrolment
         $ueid      = optional_param ( 'ueid', 0, PARAM_INT );
         $enrolment = $DB->get_record ( 'user_enrolments', array( 'id' => $ueid ), '*' );
 
-            Header::notfoundNull ($enrolment, 'UE não localizado!' );
+        Header::notfoundNull ( $enrolment, 'UE não localizado!' );
 
         ob_clean ();
         DashboardUtil::startPopup ( 'Editar data da inscrição', 'UserEnrolment::matheditSave' );
@@ -31,18 +34,41 @@ class UserEnrolment
         $form->createHiddenInput ( 'ueid', $ueid );
 
         $statusValues = array(
-            array( 0, 'Ativo' ),
-            array( 1, 'Inativo' )
+            array( 'key' => 0, 'value' => 'Ativo' ),
+            array( 'key' => 1, 'value' => 'Inativo' )
         );
-        $form->createSelectInput ( 'Matrícula esta', 'status', $statusValues, $enrolment->status );
+        $form->addInput (
+            InputSelect::newInstance ()->setTitle ( 'Matrícula esta' )
+                ->setName ( 'status' )
+                ->setValues ( $statusValues )
+                ->setValue ( $enrolment->status ) );
 
         echo '<div class="area-inscricao-times">';
 
-        $form->createDataInput ( 'A inscrição começa em', 'timestart', userdate ( $enrolment->timestart, '%d/%m/%Y %H:%M' ), 'required' );
+        $form->addInput (
+            InputDateRange::newInstance ()
+                ->setTitle ( 'A inscrição começa em' )
+                ->setName ( 'timestart' )
+                ->setValue ( userdate ( $enrolment->timestart, '%d/%m/%Y %H:%M' ) )
+                ->setDatetimeRange ()
+                ->setRequired () );
 
         $form->printSpacer ( 10 );
-        $form->createCheckboxInput ( 'Ativar termino da inscrição', 'timeend-status', 1, $enrolment->timeend );
-        $form->createDataInput ( 'A inscrição termina em', 'timeend', userdate ( $enrolment->timeend ? $enrolment->timeend : time (), '%d/%m/%Y %H:%M' ), 'required' );
+
+        $form->addInput (
+            InputCheckbox::newInstance ()->setTitle ( 'Ativar termino da inscrição' )
+                ->setName ( 'timeend-status' )
+                ->setChecked ( $enrolment->timeend ) );
+
+        echo '<div class="area_timeend">';
+
+        $form->addInput (
+            InputDateRange::newInstance ()
+                ->setTitle ( 'A inscrição termina em' )
+                ->setName ( 'timeend' )
+                ->setValue ( userdate ( $enrolment->timeend ? $enrolment->timeend : time (), '%d/%m/%Y %H:%M' ) )
+                ->setDatetimeRange ()
+                ->setRequired () );
 
         echo '</div>';
 
@@ -60,15 +86,16 @@ class UserEnrolment
             function timeendStatusClick ( delay ) {
                 if ( delay != 0 )
                     delay = 400;
-                if ( $ ( '#timeend-status' ).is ( ":checked" ) ) {
+
+                if ( $ ( '#timeend-status' ).is ( ":checked" ) )
                     $ ( '.area_timeend' ).show ( delay );
-                } else {
+                else
                     $ ( '.area_timeend' ).hide ( delay );
-                }
             }
             function statusChange ( delay ) {
                 if ( delay != 0 )
                     delay = 400;
+
                 if ( $ ( '#status' ).val () == 0 )
                     $ ( '.area-inscricao-times' ).show ( delay );
                 else

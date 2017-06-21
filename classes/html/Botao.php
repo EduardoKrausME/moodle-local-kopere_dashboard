@@ -58,12 +58,12 @@ class Botao
         global $CFG;
         if ( $isPopup )
             return "<a data-toggle=\"modal\" data-target=\"#modal-edit\" 
-                       href=\"{$link}\"
-                       data-href=\"open-ajax-table.php{$link}\">
+                       href=\"?{$link}\"
+                       data-href=\"open-ajax-table.php?{$link}\">
                         <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" width=\"19\">
                     </a>";
         else
-            return "<a href=\"{$link}\">
+            return "<a href=\"?{$link}\">
                         <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" width=\"19\">
                     </a>";
     }
@@ -73,6 +73,8 @@ class Botao
         $_target = '';
         if ( strpos ( $link, 'http' ) === 0 )
             $_target = 'target="_blank"';
+        else
+            $link = "?$link";
 
         $bt = '';
         if ( $p )

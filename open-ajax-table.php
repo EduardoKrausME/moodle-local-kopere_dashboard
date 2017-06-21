@@ -17,12 +17,18 @@ ob_clean ();
 
 try {
     require_capability ( 'moodle/site:config', context_system::instance () );
-} catch ( Exception $e ) {
-    die( '{ "status" : "no-login" }' );
+} catch ( Exception $e ) { ?>
+    <script>
+        location.reload ();
+    </script>
+    <meta http-equiv="refresh" content="0; url=#">
+    <?php
+    die();
 }
 
 $PAGE->set_url ( new moodle_url( '/local/kopere_dashboard/open-ajax-table.php' ) );
-$PAGE->set_pagetype ( 'admin-setting' );
+//$PAGE->set_pagetype ( 'admin-setting' );
+$PAGE->set_pagetype ( 'reports' );
 $PAGE->set_context ( context_system::instance () );
 
 loadByQuery ( $_SERVER[ 'QUERY_STRING' ] );

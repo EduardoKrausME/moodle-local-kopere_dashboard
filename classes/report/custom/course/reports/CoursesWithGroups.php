@@ -65,7 +65,7 @@ class CoursesWithGroups implements ReportInterface
         $table->addHeader ( 'Group Mode', 'groupname' );
 
         $table->setIsExport ( true );
-        $table->setClickRedirect ( '?Courses::details&courseid={id}', 'id' );
+        $table->setClickRedirect ( 'Courses::details&courseid={id}', 'id' );
         $table->printHeader ( '', false );
         $table->setRow ( $report );
         $table->close ( false );

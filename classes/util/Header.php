@@ -7,10 +7,10 @@ class Header
     public static function location ( $url, $isDie = true )
     {
         ob_clean ();
-        header ( 'Location: ' . $url );
+        header ( 'Location: ?' . $url );
 
         if ( $isDie )
-            die ( 'Redirecionando para ' . $url );
+            die ( 'Redirecionando para ?' . $url );
     }
 
     public static function reload ( $isDie = true )
@@ -33,7 +33,9 @@ class Header
     {
         global $CFG;
 
-        header ( 'HTTP/1.0 404 Not Found' );
+        if ( !AJAX_SCRIPT )
+            header ( 'HTTP/1.0 404 Not Found' );
+
         DashboardUtil::startPage ( 'Erro' );
 
         echo '<div class="element-box text-center page404">

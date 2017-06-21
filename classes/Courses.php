@@ -11,6 +11,7 @@ namespace local_kopere_dashboard;
 use local_kopere_dashboard\html\Botao;
 use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\Form;
+use local_kopere_dashboard\html\inputs\InputSelect;
 use local_kopere_dashboard\html\TableHeaderItem;
 use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Header;
@@ -36,7 +37,7 @@ class Courses
         //$table->addHeader ( 'Nº alunos que completaram', 'completed' );
 
         $table->setAjaxUrl ( 'Courses::loadAllCourses' );
-        $table->setClickRedirect ( '?Courses::details&courseid={id}', 'id' );
+        $table->setClickRedirect ( 'Courses::details&courseid={id}', 'id' );
         $table->printHeader ();
         $table->close ();
 
@@ -102,7 +103,7 @@ class Courses
         Header::notfoundNull ( $course, 'Curso não localizado!' );
 
         DashboardUtil::startPage ( array(
-            array( '?Courses::dashboard', 'Cursos' ),
+            array( 'Courses::dashboard', 'Cursos' ),
             $course->fullname
         ) );
 
@@ -127,7 +128,7 @@ class Courses
         $table->addHeader ( 'Status da matrícula', 'status', TableHeaderItem::RENDERER_STATUS );
 
         $table->setAjaxUrl ( 'Enrol::ajaxdashboard&courseid=' . $courseid );
-        $table->setClickRedirect ( '?Users::details&userid={id}', 'id' );
+        $table->setClickRedirect ( 'Users::details&userid={id}', 'id' );
         $table->printHeader ();
         $table->close ();
         // $table->close ( true, 'order:[[1,"asc"]]' );
@@ -146,7 +147,7 @@ class Courses
 
             $webpagess = $DB->get_records ( 'kopere_dashboard_webpages', array( 'courseid' => $course->id ) );
 
-            if( $webpagess ) {
+            if ( $webpagess ) {
                 echo '<h4>Páginas já criadas</h4>';
 
                 /** @var kopere_dashboard_webpages $webpages */
@@ -154,12 +155,17 @@ class Courses
                     echo '<p><a href="?WebPages::details&id=' . $webpages->id . '">&nbsp;&nbsp;&nbsp;&nbsp;' . $webpages->title . '</a></p>';
             }
 
-            $form = new Form( '?WebPages::editSave', 'form-inline' );
+            $form = new Form( 'WebPages::editSave', 'form-inline' );
             $form->createHiddenInput ( 'id', 0 );
             $form->createHiddenInput ( 'courseid', $course->id );
             $form->createHiddenInput ( 'title', $course->fullname );
             $form->createHiddenInput ( 'link', Html::link ( $course->fullname ) );
-            $form->createSelectInput ( 'Menu', 'menuid', $menus );
+            $form->addInput (
+                InputSelect::newInstance ()
+                    ->setTitle ( 'Menu' )
+                    ->setName ( 'menuid' )
+                    ->setValues ( $menus )
+            );
             $form->createHiddenInput ( 'theme', get_config ( 'local_kopere_dashboard', 'webpages_theme' ) );
             $form->createHiddenInput ( 'text', $course->summary );
             $form->createHiddenInput ( 'visible', 1 );

@@ -14,6 +14,7 @@ class TableHeaderItem
     const TYPE_INT      = 'numeric';
     const TYPE_TEXT     = 'text';
     const TYPE_BYTES    = 'bytes';
+    const TYPE_ACTION      = 'action';
 
     const RENDERER_DATE      = 'rendererdate';
     const RENDERER_VISIBLE   = 'visible';
@@ -23,10 +24,12 @@ class TableHeaderItem
     const btExcluir = 'criaBotaoExcluir';
 
     public $funcao;
-    public $titulo      = '';
+    public $title       = '';
     public $type        = '';
     public $chave       = '';
     public $class       = '';
     public $styleHeader = '';
     public $styleCol    = '';
+
+    public $cols = 0;
 }

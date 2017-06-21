@@ -40,7 +40,7 @@ class ReportsAccess implements ReportInterface
         $table->addHeader ( 'Login em', 'timecreated', TableHeaderItem::RENDERER_DATE );
 
         $table->setAjaxUrl ( 'Reports::listData&type=user&report=ReportsAccess' );
-        $table->setClickRedirect ( '?Users::details&userid={id}', 'id' );
+        $table->setClickRedirect ( 'Users::details&userid={id}', 'id' );
         $table->printHeader ();
         $table->close ( true, 'order:[[4,"desc"]]' );
     }

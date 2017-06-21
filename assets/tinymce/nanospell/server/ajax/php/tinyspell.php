@@ -23,7 +23,7 @@ if ($post->method == 'spellcheck') {
 				$first = false;
 			} //$first
 			else {
-				echo ",";;
+				echo ",";
 			}
 		 		$suggestions = $spellcheckObject->Suggestions($word);
 				$strsuggestions = "[";

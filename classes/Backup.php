@@ -31,7 +31,7 @@ class Backup
                 Mensagem::printInfo ( 'Não execute backup em horários de picos!' );
                 echo '<div style="text-align: center;">
                           <p>Backup podem demorar vários minutos para executar.</p>';
-                    Botao::add ( 'Criar novo Backup agora', '?Backup::execute' );
+                    Botao::add ( 'Criar novo Backup agora', 'Backup::execute' );
                       echo '</div>';
                 echo '</div>';
             } else
@@ -46,15 +46,15 @@ class Backup
                     'data'  => $p[ 3 ] . '/' . $p[ 2 ] . '/' . $p[ 1 ] . ' às ' . $p[ 4 ] . ':' . $p[ 5 ],
                     'size'  => BytesUtil::sizeToByte ( filesize ( $backup ) ),
                     'acoes' => "<div class=\"text-center\">
-                                    " . Botao::icon ( 'download', "?Backup::download&file={$p[0]}" ) . "&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp; " . Botao::icon ( 'delete', "?Backup::delete&file={$p[0]}" ) . "
+                                    " . Botao::icon ( 'download', "Backup::download&file={$p[0]}" ) . "&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp; " . Botao::icon ( 'delete', "Backup::delete&file={$p[0]}" ) . "
                                 </div>"
                 );
             }
 
             //echo '<div class="element-box">
             //          <h3>Agendamento de backups</h3>';
-            //Botao::add ( 'Agendar Backup', '?Backup::scheduling' );
+            //Botao::add ( 'Agendar Backup', 'Backup::scheduling' );
             //echo '</div>';
 
             echo '<div class="element-box">';
@@ -84,7 +84,7 @@ class Backup
 
         if ( !ServerUtil::isFunctionEnabled ( 'shell_exec' ) ) {
             Mensagem::agendaMensagemDanger ( 'Função shell_exec esta desativada!' );
-            Header::location ( '?Backup::dashboard' );
+            Header::location ( 'Backup::dashboard' );
         }
 
         $sqlFullPath = $this->getBackupPath () . 'backup_' . date ( 'Y-m-d-H-i' );
@@ -99,7 +99,7 @@ class Backup
 
 
         Mensagem::agendaMensagemSuccess ( 'Backup criado com sucesso!' );
-        Header::location ( '?Backup::dashboard' );
+        Header::location ( 'Backup::dashboard' );
     }
 
     public function execute_DumpSql ()
@@ -151,7 +151,7 @@ class Backup
         Mensagem::printSuccess ( 'Backup concluído!' );
 
         echo '<div id="end-page-to" style="text-align: center;">';
-        Botao::add ( 'Voltar para a lista de Backups', '?Backup::dashboard' );
+        Botao::add ( 'Voltar para a lista de Backups', 'Backup::dashboard' );
         echo '<script>
                       jQuery("html,body").animate ( { scrollTop: $( "#end-page-to" ).offset().top }, "slow" );
                   </script>
@@ -174,10 +174,10 @@ class Backup
                 @unlink ( $backupfile );
 
                 Mensagem::agendaMensagemSuccess ( 'Backup excluído com sucesso!' );
-                Header::location ( '?Backup::dashboard' );
+                Header::location ( 'Backup::dashboard' );
             } else {
                 DashboardUtil::startPage ( array(
-                    array( '?Backup::dashboard', 'Backup' ),
+                    array( 'Backup::dashboard', 'Backup' ),
                     'Excluíndo Backup'
                 ) );
 
@@ -186,7 +186,7 @@ class Backup
                           <p>Deseja realmente excluir o backup <strong>{$_GET['file']}</strong> criado em <strong>$data</strong>?</p>
                           <div>";
                 Botao::delete ( 'Sim', "?Backup::delete&file={$_GET['file']}&status=sim", '', false );
-                Botao::add ( 'Não', '?Backup::dashboard', 'margin-left-10', false );
+                Botao::add ( 'Não', 'Backup::dashboard', 'margin-left-10', false );
                 echo "    </div>
                       </div>";
 
@@ -220,7 +220,7 @@ class Backup
     public function scheduling ()
     {
         DashboardUtil::startPage ( array(
-            array( '?Backup::dashboard', 'Backup' ),
+            array( 'Backup::dashboard', 'Backup' ),
             'Agendamento de Backup'
         ) );
 

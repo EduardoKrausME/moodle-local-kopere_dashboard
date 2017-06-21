@@ -52,7 +52,7 @@ class CourseCompletePercent implements ReportInterface
         $table->addHeader ( 'Nº alunos inscritos', 'inscritos', TableHeaderItem::TYPE_INT, null, 'width:50px;white-space:nowrap;' );
 
         $table->setAjaxUrl ( 'Courses::loadAllCourses' );
-        $table->setClickRedirect ( '?Reports::loadReport&type=course&report=CourseCompletePercent&courseid={id}', 'id' );
+        $table->setClickRedirect ( 'Reports::loadReport&type=course&report=CourseCompletePercent&courseid={id}', 'id' );
         $table->printHeader ();
         $table->close ();
     }
@@ -76,7 +76,7 @@ class CourseCompletePercent implements ReportInterface
                       
                       c.id AS courseid,
                       c.fullname, 
-                      ue.timecreated,
+                      ue.timecreated, 
                      
                       IFNULL((SELECT COUNT(gg.finalgrade) 
                         FROM {grade_grades} AS gg 
@@ -131,15 +131,13 @@ class CourseCompletePercent implements ReportInterface
             $report[] = $item;
         }
 
-        //echo '<pre>';
-        //print_r ( $reports );
-        //echo '</pre>';
-
         $table = new DataTable();
-        //$table->setTableId ( 'datatable_alunos' );
 
-        $table->addHeader ( '#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px' );
-        $table->addHeader ( 'Aluno', 'userfullname' );
+        $table->addInfoHeader ( 'Dados do Aluno', 3 );
+        $table->addInfoHeader ( 'Dados do Curso', 5 );
+
+        $table->addHeader ( '#', 'userid', TableHeaderItem::TYPE_INT, null, 'width: 20px' );
+        $table->addHeader ( 'Nome', 'userfullname' );
         $table->addHeader ( 'E-mail', 'email' );
         $table->addHeader ( 'Curso', 'fullname' );
         $table->addHeader ( 'Data da inscrição', 'timecreated', TableHeaderItem::RENDERER_DATE );
@@ -148,16 +146,11 @@ class CourseCompletePercent implements ReportInterface
         $table->addHeader ( 'Completo', 'course_completed' );
 
         $table->setIsExport ( true );
-        //$table->setClickRedirect ( '?Users::details&userid={userid}', 'userid' );
+        $table->setClickRedirect ( 'Users::details&userid={userid}', 'userid' );
         $table->printHeader ( '', false );
         $table->setRow ( $report );
         $table->close ( false );
 
-        //$pieData   = array();
-        //$pieData[] = new Pie( "Cursos com Grupos", count ( $report ) );
-        //$pieData[] = new Pie( "Cursos sem Grupos", Courses::countAll () - count ( $report ) );
-        //
-        // Pie::createRegular ( $pieData );
     }
 
     public function listData ()

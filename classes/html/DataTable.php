@@ -18,6 +18,7 @@ class DataTable
     }
 
     private $column        = array();
+    private $columnInfo    = array();
     private $columnData    = array();
     private $columnDefs    = array();
     private $ajaxUrl       = null;
@@ -59,7 +60,7 @@ class DataTable
     {
         $this->clickRedirect            = array();
         $this->clickRedirect[ 'chave' ] = $chave;
-        $this->clickRedirect[ 'url' ]   = $url;
+        $this->clickRedirect[ 'url' ]   = '?' . $url;
     }
 
     public function setClickModal ( $url, $chave )
@@ -69,17 +70,26 @@ class DataTable
         $this->clickModal[ 'url' ]   = $url;
     }
 
-    public function addHeader ( $titulo, $chave = null, $type = TableHeaderItem::TYPE_TEXT, $funcao = null, $styleHeader = null, $styleCol = null )
+    public function addInfoHeader ( $title, $cols )
     {
-        $coluna              = new TableHeaderItem();
-        $coluna->chave       = $chave;
-        $coluna->type        = $type;
-        $coluna->titulo      = $titulo;
-        $coluna->funcao      = $funcao;
-        $coluna->styleHeader = $styleHeader;
-        $coluna->styleCol    = $styleCol;
+        $column        = new TableHeaderItem();
+        $column->title = $title;
+        $column->cols  = $cols;
 
-        $this->column[] = $coluna;
+        $this->columnInfo[] = $column;
+    }
+
+    public function addHeader ( $title, $chave = null, $type = TableHeaderItem::TYPE_TEXT, $funcao = null, $styleHeader = null, $styleCol = null )
+    {
+        $column              = new TableHeaderItem();
+        $column->chave       = $chave;
+        $column->type        = $type;
+        $column->title       = $title;
+        $column->funcao      = $funcao;
+        $column->styleHeader = $styleHeader;
+        $column->styleCol    = $styleCol;
+
+        $this->column[] = $column;
     }
 
     public function printHeader ( $class = '', $printBody = true )
@@ -91,36 +101,49 @@ class DataTable
         }
 
         echo '<table id="' . $this->tableId . '" class="table table-hover" >';
-
         echo '<thead>';
+
+        if ( $this->columnInfo ) {
+            echo '<tr class="' . $class . '">';
+            /** @var TableHeaderItem $columnInfo */
+            foreach ( $this->columnInfo as $key => $columnInfo ) {
+                echo "<th class=\"header-col text-center\" colspan=\"{$columnInfo->cols}\">";
+                echo $columnInfo->title;
+                echo '</th>';
+            }
+            echo '</tr>';
+
+            $this->columnDefs[] = '{ visible : false, targets : -1 }';
+        }
+
         echo '<tr class="' . $class . '">';
-        /** @var TableHeaderItem $coluna */
-        foreach ( $this->column as $key => $coluna ) {
-            echo '<th class="text-center th_' . $coluna->chave . '" style="' . $coluna->styleHeader . '">';
-            if ( $coluna->titulo == '' )
+        /** @var TableHeaderItem $column */
+        foreach ( $this->column as $key => $column ) {
+            echo '<th class="text-center th_' . $column->chave . '" style="' . $column->styleHeader . '">';
+            if ( $column->title == '' )
                 echo "&nbsp;";
             else
-                echo $coluna->titulo;
+                echo $column->title;
             echo '</th>';
 
-            $this->columnData[] = '{ "data": "' . $coluna->chave . '" }';
+            $this->columnData[] = '{ "data": "' . $column->chave . '" }';
 
-            if ( $coluna->type == TableHeaderItem::TYPE_INT )
+            if ( $column->type == TableHeaderItem::TYPE_INT )
                 $this->columnDefs[] = '{ type: "numeric-comma", targets: ' . $key . ' }';
-            elseif ( $coluna->type == TableHeaderItem::TYPE_CURRENCY )
+            elseif ( $column->type == TableHeaderItem::TYPE_CURRENCY )
                 $this->columnDefs[] = '{ type: "currency", targets: ' . $key . ' }';
-            elseif ( $coluna->type == TableHeaderItem::TYPE_DATE )
+            elseif ( $column->type == TableHeaderItem::TYPE_DATE )
                 $this->columnDefs[] = '{ type: "date-uk", targets: ' . $key . ' }';
-            elseif ( $coluna->type == TableHeaderItem::TYPE_BYTES )
+            elseif ( $column->type == TableHeaderItem::TYPE_BYTES )
                 $this->columnDefs[] = '{ type: "file-size", targets: ' . $key . ' }';
 
-            elseif ( $coluna->type == TableHeaderItem::RENDERER_DATE )
+            elseif ( $column->type == TableHeaderItem::RENDERER_DATE )
                 $this->columnDefs[] = '{ render: dataDatetimeRenderer, type: "date-uk", targets: ' . $key . ' }';
-            elseif ( $coluna->type == TableHeaderItem::RENDERER_VISIBLE )
+            elseif ( $column->type == TableHeaderItem::RENDERER_VISIBLE )
                 $this->columnDefs[] = '{ render: dataVisibleRenderer, targets: ' . $key . ' }';
-            elseif ( $coluna->type == TableHeaderItem::RENDERER_STATUS )
+            elseif ( $column->type == TableHeaderItem::RENDERER_STATUS )
                 $this->columnDefs[] = '{ render: dataStatusRenderer, targets: ' . $key . ' }';
-            elseif ( $coluna->type == TableHeaderItem::RENDERER_TRUEFALSE )
+            elseif ( $column->type == TableHeaderItem::RENDERER_TRUEFALSE )
                 $this->columnDefs[] = '{ render: dataTrueFalseRenderer, targets: ' . $key . ' }';
 
         }
@@ -142,28 +165,30 @@ class DataTable
             echo '<tbody class="hover-pointer">';
         else
             echo '<tbody>';
+
         foreach ( $linhas as $linha ) {
-
             echo '<tr>';
-            foreach ( $this->column as $col ) {
-                $_class = $class . ' ' . $col->styleCol;
-                if ( $col->funcao != null ) {
-                    $funcao = $col->funcao;
-                    if ( is_array ( $linha ) )
-                        $html = $funcao( $linha, $col->chave );
-                    else
-                        $html = $funcao( $linha, $col->chave );
+            foreach ( $this->column as $column ) {
 
-                    $this->printRow ( $html, $_class );
+                $_class = $class;
+                if ( $column->type == TableHeaderItem::TYPE_INT )
+                    $_class .= ' text-center';
+                elseif ( $column->type == TableHeaderItem::TYPE_ACTION )
+                    $_class .= ' button-actions text-nowrap';
+
+                $_class .= ' ' . $column->styleCol;
+                if ( $column->funcao != null ) {
+                    $funcao = $column->funcao;
+                    $html   = $funcao( $linha, $column->chave );
                 } else {
                     if ( is_array ( $linha ) )
-                        $this->printRow ( $linha[ $col->chave ], $_class );
+                        $html = $linha[ $column->chave ];
                     else {
-                        $chave = $col->chave;
-                        $this->printRow ( $linha->$chave, $_class );
+                        $chave = $column->chave;
+                        $html  = $linha->$chave;
                     }
                 }
-
+                $this->printRow ( $html, $_class );
             }
             echo '</tr>';
         }
@@ -172,7 +197,10 @@ class DataTable
 
     public function printRow ( $html, $class = '' )
     {
-        echo '<td class=' . $class . '>';
+        if ( $class == '' || $class == ' ' )
+            echo '<td>';
+        else
+            echo "<td class=\"{$class}\">";
         echo $html;
         echo '</td>';
     }
@@ -181,7 +209,7 @@ class DataTable
     {
         echo '</table>';
 
-        Export::exportClose();
+        Export::exportClose ();
 
         $processServerHtml = '';
         if ( $processServer )
@@ -190,11 +218,9 @@ class DataTable
         if ( isset( $order[ 1 ] ) )
             $order = ',' . $order;
 
-        $ajaxConfig = $buttonExport = '';
+        $ajaxConfig = '';
         if ( $this->ajaxUrl )
             $ajaxConfig = 'ajax : {url:"open-ajax-table.php?' . $this->ajaxUrl . '",type: "POST"},';
-        else if ( $this->isExport && !$processServer )
-            $buttonExport = "buttons: [ 'csv', 'excel', 'pdf', 'print' ],";
 
         $columnData = implode ( ", ", $this->columnData );
         $columnDefs = implode ( ", ", $this->columnDefs );
@@ -203,14 +229,17 @@ class DataTable
                   \$(document).ready( function() {
                       {$this->tableId} = \$( '#{$this->tableId}' ).DataTable({
                           {$ajaxConfig}
-                          {$buttonExport}
-                          autoWidth   : false,
-                          columns     : [ {$columnData} ],
-                          columnDefs  : [ {$columnDefs} ]
+                          autoWidth  : false,
+                          columns    : [ {$columnData} ],
+                          columnDefs : [ {$columnDefs} ],
+                          language   : { url: '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json' }
                           {$processServerHtml}
                           {$order}
                       });
                   });
+                  
+
+
               </script>";
 
         if ( $this->clickRedirect )

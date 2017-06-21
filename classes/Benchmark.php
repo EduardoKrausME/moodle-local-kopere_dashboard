@@ -29,7 +29,7 @@ class Benchmark
                   <p>Este teste pode demorar até 3 minutos para executar. </p>
                   <p>Tente fazer mais de uma vês o teste para ter uma média.</p>
                   <p>E, não execute em horário de picos.</p>';
-        Botao::add ( 'Executar o teste', '?Benchmark::execute' );
+        Botao::add ( 'Executar o teste', 'Benchmark::execute' );
         echo '</div>';
 
         echo '</div>';
@@ -42,7 +42,7 @@ class Benchmark
         global $CFG;
 
         DashboardUtil::startPage ( array(
-            array( '?Benchmark::test', 'Teste de desempenho' ),
+            array( 'Benchmark::test', 'Teste de desempenho' ),
             'Desempenho'
         ) );
 

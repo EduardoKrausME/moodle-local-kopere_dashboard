@@ -28,7 +28,7 @@ class Profile
 
 
         DashboardUtil::startPage ( array(
-            array( '?Users::dashboard', 'Usuários' ),
+            array( 'Users::dashboard', 'Usuários' ),
             fullname ( $user )
         ) );
 
@@ -58,7 +58,7 @@ class Profile
             if ( $enrolment->timeend == 0 )
                 $expirationEnd = 'e nunca expira';
             else
-                $expirationEnd = 'expira em <em>' . userdate ( $enrolment->timeend, '%d de %B de %Y às %H:%M' ) . '</em>';
+                $expirationEnd = '<br>Expira em <em>' . userdate ( $enrolment->timeend, '%d de %B de %Y às %H:%M' ) . '</em>';
 
             $roleAssignments = $DB->get_records ( 'role_assignments',
                 array( 'contextid' => $course->ctxid,

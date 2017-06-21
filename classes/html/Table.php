@@ -61,11 +61,11 @@ class Table
         return $exec;
     }
 
-    public function addHeader ( $titulo, $chave = null, $funcao = null, $styleHeader = null, $styleCol = null )
+    public function addHeader ( $title, $chave = null, $funcao = null, $styleHeader = null, $styleCol = null )
     {
         $coluna              = new TableHeaderItem();
         $coluna->chave       = $chave;
-        $coluna->titulo      = $titulo;
+        $coluna->title       = $title;
         $coluna->funcao      = $funcao;
         $coluna->styleHeader = $styleHeader;
         $coluna->styleCol    = $styleCol;
@@ -80,10 +80,10 @@ class Table
         echo '<tr class="' . $class . '">';
         foreach ( $header as $key => $value ) {
             echo '<th class="text-center" style="' . $value->styleHeader . '">';
-            if ( $value->titulo == '' )
+            if ( $value->title == '' )
                 echo "&nbsp;";
             else
-                echo $value->titulo;
+                echo $value->title;
             $this->colunas[] = $value;
             echo '</th>';
         }

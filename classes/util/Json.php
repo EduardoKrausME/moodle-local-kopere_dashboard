@@ -10,13 +10,13 @@ namespace local_kopere_dashboard\util;
 
 class Json
 {
-    public static function encodeAndReturn ( $data, $recordsTotal = 0, $recordsFiltered = 0 )
+    public static function encodeAndReturn ( $data, $recordsTotal = -1, $recordsFiltered = 0 )
     {
         ob_clean ();
         header ( 'Content-Type: application/json; charset: utf-8' );
 
         $returnArray = array();
-        if ( $recordsTotal ) {
+        if ( $recordsTotal != -1 ) {
             $returnArray[ 'draw' ]            = optional_param ( 'draw', 0, PARAM_INT );
             $returnArray[ 'recordsTotal' ]    = intval ( $recordsTotal );
             $returnArray[ 'recordsFiltered' ] = intval ( $recordsFiltered );

@@ -75,7 +75,7 @@ class AllBadgesCount implements ReportInterface
         $table->addHeader ( 'Quantidade de alunos', 'alunos', TableHeaderItem::TYPE_INT );
 
         $table->setIsExport ( true );
-        //$table->setClickRedirect ( '?Courses::details&courseid={id}', 'id' );
+        //$table->setClickRedirect ( 'Courses::details&courseid={id}', 'id' );
         $table->printHeader ( '', false );
         $table->setRow ( $report );
         $table->close ( false );
