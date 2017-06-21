@@ -11,6 +11,9 @@ namespace local_kopere_dashboard;
 use local_kopere_dashboard\html\Botao;
 use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\Form;
+use local_kopere_dashboard\html\inputs\InputBase;
+use local_kopere_dashboard\html\inputs\InputCheckbox;
+use local_kopere_dashboard\html\inputs\InputText;
 use local_kopere_dashboard\html\TableHeaderItem;
 use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Json;
@@ -41,7 +44,7 @@ class UsersOnline
         }
 
         $table->setAjaxUrl ( 'UsersOnline::loadAllUsers' );
-        //$table->setClickRedirect ( '?Users::details&userid={userid}', 'userid' );
+        //$table->setClickRedirect ( 'Users::details&userid={userid}', 'userid' );
         $table->printHeader ();
         $tableName = $table->close ( false, 'order:[[1,"asc"]]' );
 
@@ -77,10 +80,15 @@ class UsersOnline
         $onlinestart = strtotime ( '-' . $time . ' minutes' );
         $timefinish  = time ();
 
-        $count = $DB->get_record_sql ( "SELECT count(*) as num
-								FROM {user} u
-                                LEFT JOIN {context} cx ON cx.instanceid = u.id AND cx.contextlevel = 30
-                                WHERE u.lastaccess BETWEEN $onlinestart AND $timefinish  ORDER BY u.timecreated DESC LIMIT 10" );
+        $count = $DB->get_record_sql (
+            "SELECT count(*) as num
+               FROM {user} u
+          LEFT JOIN {context} cx ON cx.instanceid = u.id 
+                                AND cx.contextlevel = :contextlevel
+              WHERE u.lastaccess BETWEEN $onlinestart 
+                AND $timefinish  
+           ORDER BY u.timecreated DESC LIMIT 10",
+            array( 'contextlevel' => CONTEXT_USER ) );
 
         return $count->num;
     }
@@ -94,20 +102,26 @@ class UsersOnline
 
         $form->printRowOne ( '', Botao::help ( 'Usuários-Online' ) );
 
-        $form->createCheckboxInput ( 'Habilitar Servidor de sincronização de Usuários On-line', 'nodejs-status', 1,
-            get_config ( 'local_kopere_dashboard', 'nodejs-status' ) );
+        $form->addInput (
+            InputCheckbox::newInstance ()->setTitle ( 'Habilitar Servidor de sincronização de Usuários On-line' )
+                ->setCheckedByConfig ( 'nodejs-status' ) );
 
         echo '<div class="area-status-nodejs">';
 
         $form->printSpacer ( 10 );
-        $form->createCheckboxInput ( 'Habilitar SSL?', 'nodejs-ssl', 1,
-            get_config ( 'local_kopere_dashboard', 'nodejs-ssl' ) );
 
-        $form->createTextInput ( 'URL do servidor', 'nodejs-url',
-            get_config ( 'local_kopere_dashboard', 'nodejs-url' ) );
+        $form->addInput (
+            InputCheckbox::newInstance ()->setTitle ( 'Habilitar SSL?' )
+                ->setCheckedByConfig ( 'nodejs-ssl' ) );
 
-        $form->createTextInput ( 'Porta do servidor', 'nodejs-port',
-            get_config ( 'local_kopere_dashboard', 'nodejs-port' ), 'int' );
+        $form->addInput (
+            InputText::newInstance ()->setTitle ( 'URL do servidor' )
+                ->setValueByConfig ( 'nodejs-url' ) );
+
+        $form->addInput (
+            InputText::newInstance ()->setTitle ( 'Porta do servidor' )
+                ->setValueByConfig ( 'nodejs-port' )
+                ->addValidator ( InputBase::VAL_INT ) );
 
         echo '</div>';
 

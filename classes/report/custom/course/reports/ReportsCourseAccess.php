@@ -60,7 +60,7 @@ class ReportsCourseAccess implements ReportInterface
         //$table->addHeader ( 'Nº alunos que completaram', 'completed' );
 
         $table->setAjaxUrl ( 'Courses::loadAllCourses' );
-        $table->setClickRedirect ( '?Reports::loadReport&type=course&report=ReportsCourseAccess&courseid={id}', 'id' );
+        $table->setClickRedirect ( 'Reports::loadReport&type=course&report=ReportsCourseAccess&courseid={id}', 'id' );
         $table->printHeader ();
         $table->close ();
     }
@@ -146,7 +146,7 @@ class ReportsCourseAccess implements ReportInterface
               </tr>';
 
         echo '<tr bgcolor="#C5C5C5" style="background-color: #c5c5c5;" >
-                <td bgcolor="#C5C5C5" align="left">Nome</td>';
+                <td align="center" bgcolor="#979797" style="text-align:center;">Nome</td>';
         //<td>E-mail</td>
 
         foreach ( $modinfo as $infos ) {
@@ -163,10 +163,12 @@ class ReportsCourseAccess implements ReportInterface
                  FROM {context} c
                  JOIN {role_assignments} ra ON ra.contextid = c.id
                  JOIN {user} u              ON ra.userid    = u.id
-                WHERE c.contextlevel = 50
+                WHERE c.contextlevel = contextlevel:
                   AND c.instanceid = :instanceid";
 
-        $allUserCourse = $DB->get_records_sql ( $sql, array( 'instanceid' => $cursosId ) );
+        $allUserCourse = $DB->get_records_sql ( $sql,
+            array( 'contextlevel' => CONTEXT_COURSE,
+                   'instanceid' => $cursosId ) );
 
         foreach ( $allUserCourse as $user ) {
             echo '<tr>';

@@ -51,24 +51,29 @@ class Files
                     SELECT SUM( f.filesize ) AS coursesize 
                       FROM {files} f, {context} ctx
                      WHERE ctx.id           = f.contextid 
-                       AND ctx.contextlevel = 50
+                       AND ctx.contextlevel = :contextlevel
                        AND ctx.instanceid   = :instanceid  
-                  GROUP BY ctx.instanceid", array( 'instanceid' => $course->id ) );
+                  GROUP BY ctx.instanceid",
+                array( 'contextlevel' => CONTEXT_COURSE,
+                       'instanceid'   => $course->id
+                ) );
 
             $modulessize = $DB->get_record_sql ( "
                     SELECT SUM( f.filesize ) AS modulessize 
                       FROM {course_modules} cm, {files} f, {context} ctx 
                      WHERE ctx.id = f.contextid 
                        AND ctx.instanceid   = cm.id 
-                       AND ctx.contextlevel = 70 
+                       AND ctx.contextlevel = :contextlevel 
                        AND cm.course        = :course 
-                  GROUP BY cm.course", array( 'course' => $course->id ) );
+                  GROUP BY cm.course",
+                array('contextlevel' => CONTEXT_MODULE,
+                      'course' => $course->id ) );
 
             $coursesizeVal  = isset( $coursesize->coursesize ) ? $coursesize->coursesize : 0;
             $modulessizeVal = isset( $modulessize->modulessize ) ? $modulessize->modulessize : 0;
 
-            $courses[ $course->id ]->coursesize     = BytesUtil::sizeToByte ( $coursesizeVal );
-            $courses[ $course->id ]->modulessize     = BytesUtil::sizeToByte ( $modulessizeVal );
+            $courses[ $course->id ]->coursesize  = BytesUtil::sizeToByte ( $coursesizeVal );
+            $courses[ $course->id ]->modulessize = BytesUtil::sizeToByte ( $modulessizeVal );
 
             $courses[ $course->id ]->allsize = $coursesizeVal + $modulessizeVal;
         }

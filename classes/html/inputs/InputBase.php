@@ -165,6 +165,7 @@ class InputBase implements IInput
      */
     public function setValueByConfig ( $configName )
     {
+        $this->setName ( $configName );
         $this->setValue (
             get_config ( 'local_kopere_dashboard', $configName )
         );

@@ -53,7 +53,7 @@ class DashboardUtil
                     } else {
                         $breadcrumbReturn
                             .= '<li>
-                                    <a href="' . $breadcrumbItem[ 0 ] . '">' . $breadcrumbItem[ 1 ] . '</a>
+                                    <a href="?' . $breadcrumbItem[ 0 ] . '">' . $breadcrumbItem[ 1 ] . '</a>
                                 </li>';
                         $titulo = $breadcrumbItem[ 1 ];
                     }
@@ -163,7 +163,7 @@ class DashboardUtil
         if ( $formAction ) {
             echo '<form method="post" class="validate" enctype="multipart/form-data" >';
             echo '<input type="hidden" name="POST"  value="true" />';
-            echo '<input type="hidden" name="action" value="' . $formAction . '" />';
+            echo '<input type="hidden" name="action" value="?' . $formAction . '" />';
             self::$_isWithForm = true;
         } else
             self::$_isWithForm = false;
