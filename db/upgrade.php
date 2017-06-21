@@ -35,6 +35,5 @@ function xmldb_local_kopere_dashboard_upgrade ( $oldversion )
         upgrade_plugin_savepoint ( true, 2017061102, 'local', 'kopere_dashboard' );
     }
 
-
     return true;
 }
