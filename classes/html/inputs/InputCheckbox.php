@@ -1,15 +1,29 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * User: Eduardo Kraus
- * Date: 10/06/17
- * Time: 23:33
+ * @created    10/06/17 23:33
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\html\inputs;
 
-
-class InputCheckbox extends InputBase
-{
+class InputCheckbox extends InputBase {
     /**
      * @var bool
      */
@@ -18,25 +32,22 @@ class InputCheckbox extends InputBase
     /**
      * InputCheckbox constructor.
      */
-    public function __construct ()
-    {
-        $this->setType ( 'checkbox' );
-        $this->setValue ( '1' );
+    public function __construct() {
+        $this->setType('checkbox');
+        $this->setValue('1');
     }
 
     /**
      * @return InputCheckbox
      */
-    public static function newInstance ()
-    {
+    public static function newInstance() {
         return new InputCheckbox();
     }
 
     /**
      * @return bool
      */
-    public function isChecked ()
-    {
+    public function isChecked() {
         return $this->checked;
     }
 
@@ -45,24 +56,22 @@ class InputCheckbox extends InputBase
      *
      * @return $this
      */
-    public function setChecked ( $checked )
-    {
+    public function setChecked($checked) {
         $this->checked = $checked;
 
         return $this;
     }
-
 
     /**
      * @param $configName
      *
      * @return $this
      */
-    public function setCheckedByConfig ( $configName )
-    {
-        $this->setName ( $configName );
-        if ( get_config ( 'local_kopere_dashboard', $configName ) )
+    public function setCheckedByConfig($configName) {
+        $this->setName($configName);
+        if (get_config('local_kopere_dashboard', $configName)) {
             $this->checked = true;
+        }
 
         return $this;
     }
@@ -70,23 +79,26 @@ class InputCheckbox extends InputBase
     /**
      * @return string
      */
-    public function toString ()
-    {
+    public function toString() {
         $returnInput = "<input ";
 
         $returnInput .= "id=\"$this->name\" name=\"$this->name\" type=\"checkbox\" ";
 
-        if ( $this->checked )
+        if ($this->checked) {
             $returnInput .= 'checked="checked" ';
+        }
 
-        if ( $this->value )
-            $returnInput .= "value=\"" . htmlentities ( $this->value ) . "\" ";
+        if ($this->value) {
+            $returnInput .= "value=\"" . htmlentities($this->value) . "\" ";
+        }
 
-        if ( $this->class )
+        if ($this->class) {
             $returnInput .= "class=\"$this->class\" ";
+        }
 
-        if ( $this->style )
+        if ($this->style) {
             $returnInput .= "style=\"$this->style\" ";
+        }
 
         $returnInput .= ">";
 

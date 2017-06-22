@@ -1,8 +1,24 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * User: Eduardo Kraus
- * Date: 17/05/17
- * Time: 21:02
+ * @created    17/05/17 21:02
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\events;
@@ -10,33 +26,30 @@ namespace local_kopere_dashboard\events;
 use local_kopere_dashboard\output\events\SendEvents;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
-class EventObservers
-{
-    public static function process_event ( \core\event\base $event )
-    {
+class EventObservers {
+    public static function process_event(\core\event\base $event) {
         global $DB;
 
-        if ( $event->get_data ()[ 'action' ] == 'viewed' )
+        if ($event->get_data()['action'] == 'viewed') {
             return;
-
-
-        $eventname = str_replace ( '\\\\', '\\', $event->eventname );
-
-        $kopere_dashboard_eventss = $DB->get_records ( 'kopere_dashboard_events',
-            array(
-                'event'  => $eventname,
-                'status' => 1
-            ) );
-
-        /** @var kopere_dashboard_events $kopere_dashboard_events */
-        foreach ( $kopere_dashboard_eventss as $kopere_dashboard_events ) {
-            $sendEvents = new SendEvents();
-            $sendEvents->setEvent ( $event );
-            $sendEvents->setKopereDashboardEvents ( $kopere_dashboard_events );
-
-            $sendEvents->send ();
         }
 
+        $eventname = str_replace('\\\\', '\\', $event->eventname);
+
+        $kopere_dashboard_eventss = $DB->get_records('kopere_dashboard_events',
+            array(
+                'event' => $eventname,
+                'status' => 1
+            ));
+
+        /** @var kopere_dashboard_events $kopere_dashboard_events */
+        foreach ($kopere_dashboard_eventss as $kopere_dashboard_events) {
+            $sendEvents = new SendEvents();
+            $sendEvents->setEvent($event);
+            $sendEvents->setKopereDashboardEvents($kopere_dashboard_events);
+
+            $sendEvents->send();
+        }
 
         /*   [eventname]         => \core\event\user_password_updated
          *   [component]         => core

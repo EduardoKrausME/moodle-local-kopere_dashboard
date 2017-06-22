@@ -1,35 +1,51 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * User: Eduardo Kraus
- * Date: 28/05/17
- * Time: 02:01
+ * @created    28/05/17 02:01
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-ob_start ();
+ob_start();
 
-require ( '../../config.php' );
+require('../../config.php');
 
-$src = required_param ( 'src', PARAM_TEXT );
+$src = required_param('src', PARAM_TEXT);
 
-if ( strpos ( $src, '..' ) ) {
-    die( 'Not Found!' );
+if (strpos($src, '..')) {
+    die('Not Found!');
 }
 
 
 $imageLoaded = $CFG->dataroot . '/kopere/dashboard/' . $src;
-$extension   = pathinfo ( $imageLoaded, PATHINFO_EXTENSION );
-$basename    = pathinfo ( $imageLoaded, PATHINFO_BASENAME );
-$lifetime    = 60 * 60 * 24 * 360;
-$isImage     = false;
+$extension = pathinfo($imageLoaded, PATHINFO_EXTENSION);
+$basename = pathinfo($imageLoaded, PATHINFO_BASENAME);
+$lifetime = 60 * 60 * 24 * 360;
+$isImage = false;
 
-ob_clean ();
-ob_end_flush ();
-session_write_close ();
+ob_clean();
+ob_end_flush();
+session_write_close();
 
-switch ( $extension ) {
+switch ($extension) {
     case 'jpg':
     case 'jpeg':
-        header ( 'Content-Type: image/jpeg' );
+        header('Content-Type: image/jpeg');
         $isImage = true;
         break;
     case 'png':
@@ -37,26 +53,26 @@ switch ( $extension ) {
     case 'svg':
     case 'bmp':
     case 'tiff':
-        header ( 'Content-Type: image/' . $extension );
+        header('Content-Type: image/' . $extension);
         $isImage = true;
         break;
 
     default:
-        header ( 'Content-Type: application/octet-stream' );
+        header('Content-Type: application/octet-stream');
         break;
 }
 
-if ( $isImage ) {
-    header ( 'Content-disposition: inline; filename="' . $basename . '"' );
-    header ( 'Content-disposition: inline; filename="' . $basename . '"' );
-    header ( 'Last-Modified: ' . gmdate ( 'D, d M Y H:i:s', filemtime ( $imageLoaded ) ) . ' GMT' );
-    header ( 'Expires: ' . gmdate ( 'D, d M Y H:i:s', time () + $lifetime ) . ' GMT' );
-    header ( 'Cache-Control: public, max-age=' . $lifetime . ', no-transform' );
+if ($isImage) {
+    header('Content-disposition: inline; filename="' . $basename . '"');
+    header('Content-disposition: inline; filename="' . $basename . '"');
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($imageLoaded)) . ' GMT');
+    header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $lifetime) . ' GMT');
+    header('Cache-Control: public, max-age=' . $lifetime . ', no-transform');
 } else {
-    header ( 'Content-Transfer-Encoding: Binary' );
-    header ( 'Content-disposition: attachment; filename="' . $basename . '"' );
+    header('Content-Transfer-Encoding: Binary');
+    header('Content-disposition: attachment; filename="' . $basename . '"');
 }
 
 
-readfile ( $imageLoaded );
+readfile($imageLoaded);
 

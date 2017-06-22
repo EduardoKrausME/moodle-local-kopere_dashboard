@@ -1,31 +1,53 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * @created    23/05/17 17:59
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 
 use local_kopere_dashboard\util\DashboardUtil;
 
-ob_start ();
-define ( 'AJAX_SCRIPT', false );
+ob_start();
+define('AJAX_SCRIPT', false);
 
-define ( 'BENCHSTART', microtime ( true ) );
-require ( '../../config.php' );
-define ( 'BENCHSTOP', microtime ( true ) );
+define('BENCHSTART', microtime(true));
+require('../../config.php');
+define('BENCHSTOP', microtime(true));
 
-require_once 'autoload.php';
+require_once('autoload.php');
 
 global $PAGE, $CFG, $OUTPUT;
 
-require_login ();
-require_capability ( 'moodle/site:config', context_system::instance () );
+require_login();
+require_capability('moodle/site:config', context_system::instance());
 
-$PAGE->set_url ( new moodle_url( '/local/kopere_dashboard/open-dashboard.php' ) );
-//$PAGE->set_pagetype ( 'admin-setting' );
-$PAGE->set_pagetype ( 'reports' );
-$PAGE->set_context ( context_system::instance () );
+$PAGE->set_url(new moodle_url('/local/kopere_dashboard/open-dashboard.php'));
+$PAGE->set_pagetype('reports');
+$PAGE->set_context(context_system::instance());
 
-if ( !strlen ( $_SERVER[ 'QUERY_STRING' ] ) )
-    $_SERVER[ 'QUERY_STRING' ] = 'Dashboard::start';
+if (!strlen($_SERVER['QUERY_STRING'])) {
+    $_SERVER['QUERY_STRING'] = 'Dashboard::start';
+}
 
-if ( isset( $_POST[ 'action' ] ) ) {
-    loadByQuery ( $_POST[ 'action' ] );
+if (isset($_POST['action'])) {
+    loadByQuery($_POST['action']);
 }
 
 ?>
@@ -37,9 +59,11 @@ if ( isset( $_POST[ 'action' ] ) ) {
 
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <link  href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/css/dashboard.css" rel="stylesheet">
-    <link  href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/bootstrap/bootstrap.css" rel="stylesheet">
-    <link  href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/dataTables/jquery.dataTables.css" rel="stylesheet">
+    <link href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/css/dashboard.css" rel="stylesheet">
+    <link href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/bootstrap/bootstrap.css"
+          rel="stylesheet">
+    <link href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/dataTables/jquery.dataTables.css"
+          rel="stylesheet">
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery-3.2.1.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/dashboard.js"></script>
@@ -66,16 +90,17 @@ if ( isset( $_POST[ 'action' ] ) ) {
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v1.js"></script>
 
     <?php
-    if ( get_config ( 'local_kopere_dashboard', 'nodejs-status' ) ) {
-        if ( get_config ( 'local_kopere_dashboard', 'nodejs-ssl' ) )
-            $url = "https://" . get_config ( 'local_kopere_dashboard', 'nodejs-url' ) . ':' . get_config ( 'local_kopere_dashboard', 'nodejs-port' );
-        else
-            $url = get_config ( 'local_kopere_dashboard', 'nodejs-url' ) . ':' . get_config ( 'local_kopere_dashboard', 'nodejs-port' );
+    if (get_config('local_kopere_dashboard', 'nodejs-status')) {
+        if (get_config('local_kopere_dashboard', 'nodejs-ssl')) {
+            $url = "https://" . get_config('local_kopere_dashboard', 'nodejs-url') . ':' . get_config('local_kopere_dashboard', 'nodejs-port');
+        } else {
+            $url = get_config('local_kopere_dashboard', 'nodejs-url') . ':' . get_config('local_kopere_dashboard', 'nodejs-port');
+        }
 
-        $userid     = intval ( $USER->id );
-        $fullname   = '"' . fullname ( $USER ) . '"';
-        $serverTime = time ();
-        $urlNode    = '"' . $url . '"';
+        $userid = intval($USER->id);
+        $fullname = '"' . fullname($USER) . '"';
+        $serverTime = time();
+        $urlNode = '"' . $url . '"';
 
         echo "<script type=\"text/javascript\">
                   startServer ( $userid, $fullname, $serverTime, $urlNode, 'z35admin' );
@@ -87,7 +112,7 @@ if ( isset( $_POST[ 'action' ] ) ) {
 </head>
 <body>
 <script>
-    if ( window != window.top ) {
+    if (window != window.top) {
         document.body.className += " in-iframe";
     }
 </script>
@@ -108,30 +133,30 @@ if ( isset( $_POST[ 'action' ] ) ) {
                 <ul class="main-menu">
                     <?php
 
-                    DashboardUtil::addMenu ( 'Dashboard::start', 'dashboard', 'Dashboard' );
-                    DashboardUtil::addMenu ( 'Users::dashboard', 'users', 'Usuários', array(
-                        array( 'UsersOnline::dashboard', 'Usuários Online', 'users-online' )
-                    ) );
-                    DashboardUtil::addMenu ( 'Courses::dashboard', 'courses', 'Cursos' );
+                    DashboardUtil::addMenu('Dashboard::start', 'dashboard', 'Dashboard');
+                    DashboardUtil::addMenu('Users::dashboard', 'users', 'Usuários', array(
+                        array('UsersOnline::dashboard', 'Usuários Online', 'users-online')
+                    ));
+                    DashboardUtil::addMenu('Courses::dashboard', 'courses', 'Cursos');
 
-                    $plugins = $DB->get_records_sql ( "SELECT plugin FROM {config_plugins} WHERE plugin LIKE 'local\_kopere\_dashboard\_%' AND name LIKE 'version'" );
-                    foreach ( $plugins as $plugin ) {
+                    $plugins = $DB->get_records_sql("SELECT plugin FROM {config_plugins} WHERE plugin LIKE 'local\_kopere\_dashboard\_%' AND name LIKE 'version'");
+                    foreach ($plugins as $plugin) {
                         $className = $plugin->plugin . '\\Menu';
-                        $class     = new $className();
-                        $class->showMenu ();
+                        $class = new $className();
+                        $class->showMenu();
                     }
 
-                    DashboardUtil::addMenu ( 'Reports::dashboard', 'report', 'Relatórios',
-                        \local_kopere_dashboard\Reports::globalMenus () );
+                    DashboardUtil::addMenu('Reports::dashboard', 'report', 'Relatórios',
+                        \local_kopere_dashboard\Reports::globalMenus());
 
-                    //DashboardUtil::addMenu ( 'Gamification::dashboard', 'gamification', 'Gamificação' );
+                    // DashboardUtil::addMenu ( 'Gamification::dashboard', 'gamification', 'Gamificação' );
 
-                    DashboardUtil::addMenu ( 'Notifications::dashboard', 'notifications', 'Notificações' );
+                    DashboardUtil::addMenu('Notifications::dashboard', 'notifications', 'Notificações');
 
-                    DashboardUtil::addMenu ( 'WebPages::dashboard', 'webpages', 'Paginas estáticas' );
-                    DashboardUtil::addMenu ( 'Benchmark::test', 'performace', 'Performace' );
-                    DashboardUtil::addMenu ( 'Backup::dashboard', 'data', 'Backup' );
-                    DashboardUtil::addMenu ( 'About::dashboard', 'about', 'Sobre' );
+                    DashboardUtil::addMenu('WebPages::dashboard', 'webpages', 'Paginas estáticas');
+                    DashboardUtil::addMenu('Benchmark::test', 'performace', 'Performace');
+                    DashboardUtil::addMenu('Backup::dashboard', 'data', 'Backup');
+                    DashboardUtil::addMenu('About::dashboard', 'about', 'Sobre');
                     ?>
                 </ul>
             </div>
@@ -139,8 +164,8 @@ if ( isset( $_POST[ 'action' ] ) ) {
 
         <div class="content-w">
             <?php
-            $queryString = $_SERVER[ 'QUERY_STRING' ];
-            loadByQuery ( $queryString );
+            $queryString = $_SERVER['QUERY_STRING'];
+            loadByQuery($queryString);
             ?>
         </div>
 

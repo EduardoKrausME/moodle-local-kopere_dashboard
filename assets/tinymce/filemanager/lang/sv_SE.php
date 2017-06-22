@@ -5,7 +5,7 @@
 define ( 'lang_Select', 'Välj' ); // Select
 define ( 'lang_Erase', 'Radera' ); // Erase
 define ( 'lang_Open', 'Öppna' ); // Open
-define ( 'lang_Confirm_del', 'Är du säker på att du vill radera denna fil?' ); //Are you sure you want to delete this file?
+define ( 'lang_Confirm_del', 'Är du säker på att du vill radera denna fil?' ); // Are you sure you want to delete this file?
 define ( 'lang_All', 'Alla' ); // All
 define ( 'lang_Files', 'Filer' ); // Files
 define ( 'lang_Images', 'Bilder' ); // Images
@@ -62,7 +62,7 @@ define ( 'lang_Folders', 'Folders' ); // Folders
 define ( 'lang_Copy', 'Kopiera' ); // Copy
 define ( 'lang_Cut', 'Klipp ut' ); // Cut
 define ( 'lang_Paste', 'Klistra in' ); // Paste
-define ( 'lang_CB', 'Urklipp' ); //CB,  clipboard
+define ( 'lang_CB', 'Urklipp' ); // CB,  clipboard
 define ( 'lang_Paste_Here', 'Klistra in i denna mapp' ); // Paste to this directory
 define ( 'lang_Paste_Confirm', 'Är du säker på att du vill klistra in i denna mapp? Befintliga filer och mappar kan bli överskrivna.' ); // Are you sure you want to paste to this directory? This will overwrite existing files/folders if encountered any.
 define ( 'lang_Paste_Failed', 'Misslyckades med att klistra in fil(er)' ); // Failed to paste file(s)

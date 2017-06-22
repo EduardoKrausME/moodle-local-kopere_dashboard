@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
 	 width="128px" height="128px" viewBox="86 86 128 128" enable-background="new 86 86 128 128" xml:space="preserve">
 <circle fill="#B7CE0F" cx="150" cy="150" r="64"/>
 <g id="Layer_4">
@@ -16,7 +16,7 @@
 			l27.024,11.388c1.129,0.498,2.349,0.587,3.164,0.587c0.813,0,2.033-0.089,3.163-0.587l33.169-13.963V161.626z M151.107,156.79
 			c-0.18,0.091-0.632,0.181-1.174,0.181c-0.543,0-0.996-0.09-1.175-0.181l-46.501-19.565l46.501-19.567
 			c0.18-0.092,0.632-0.182,1.175-0.182c0.542,0,0.995,0.09,1.174,0.182l46.5,19.567L151.107,156.79z"/>
-		<polygon fill="#4C9C8D" points="147.221,131.756 172.029,152.046 172.754,199.676 177.453,185.214 182.56,190.862 182.514,147.12 
+		<polygon fill="#4C9C8D" points="147.221,131.756 172.029,152.046 172.754,199.676 177.453,185.214 182.56,190.862 182.514,147.12
 					"/>
 	</g>
 </g>

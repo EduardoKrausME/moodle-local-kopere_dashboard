@@ -1,89 +1,105 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 namespace local_kopere_dashboard\html;
 
-class Table
-{
-    function __construct ( $adicional = '' )
-    {
-        $this->tableId = 'table_' . uniqid ();
+class Table {
+    public function __construct($adicional = '') {
+        $this->tableId = 'table_' . uniqid();
         echo '<table id="' . $this->tableId . '" class="table table-hover" width="100%" ';
         echo $adicional;
         echo '>';
     }
 
-    private $colunas  = array();
-    private $click    = null;
-    private $id       = null;
+    private $colunas = array();
+    private $click = null;
+    private $id = null;
     private $_isPrint = false;
     private $tableId;
 
-    public function setClick ( $exec, $chave )
-    {
-        $this->click            = array();
-        $this->click[ 'exec' ]  = $exec;
-        $this->click[ 'chave' ] = $chave;
+    public function setClick($exec, $chave) {
+        $this->click = array();
+        $this->click['exec'] = $exec;
+        $this->click['chave'] = $chave;
     }
 
-    public function setClickRedirect ( $url, $chave )
-    {
-        $this->click            = array();
-        $this->click[ 'chave' ] = $chave;
-        $this->click[ 'exec' ]  = "document.location.href='" . $url . "'";
+    public function setClickRedirect($url, $chave) {
+        $this->click = array();
+        $this->click['chave'] = $chave;
+        $this->click['exec'] = "document.location.href='" . $url . "'";
     }
 
-    public function setId ( $id )
-    {
+    public function setId($id) {
         $this->id = $id;
     }
 
-    protected function getClick ( $linha )
-    {
-        if ( $this->click == null )
+    protected function getClick($linha) {
+        if ($this->click == null) {
             return '';
+        }
 
-        $chaves = $this->click[ 'chave' ];
+        $chaves = $this->click['chave'];
 
-        if ( !is_array ( $chaves ) )
-            $chaves = array( $chaves );
+        if (!is_array($chaves)) {
+            $chaves = array($chaves);
+        }
 
-        $exec = $this->click[ 'exec' ];
-        foreach ( $chaves as $chave ) {
+        $exec = $this->click['exec'];
+        foreach ($chaves as $chave) {
 
-            if ( is_array ( $linha ) )
-                $valor = $linha[ $chave ];
-            else
+            if (is_array($linha)) {
+                $valor = $linha[$chave];
+            } else {
                 $valor = $linha->$chave;
+            }
 
-            $exec = str_replace ( $chave, $valor, $exec );
+            $exec = str_replace($chave, $valor, $exec);
         }
 
         return $exec;
     }
 
-    public function addHeader ( $title, $chave = null, $funcao = null, $styleHeader = null, $styleCol = null )
-    {
-        $coluna              = new TableHeaderItem();
-        $coluna->chave       = $chave;
-        $coluna->title       = $title;
-        $coluna->funcao      = $funcao;
+    public function addHeader($title, $chave = null, $funcao = null, $styleHeader = null, $styleCol = null) {
+        $coluna = new TableHeaderItem();
+        $coluna->chave = $chave;
+        $coluna->title = $title;
+        $coluna->funcao = $funcao;
         $coluna->styleHeader = $styleHeader;
-        $coluna->styleCol    = $styleCol;
+        $coluna->styleCol = $styleCol;
 
         $this->colunas[] = $coluna;
     }
 
-    public function printHeader ( $header, $class = '' )
-    {
+    public function printHeader($header, $class = '') {
         $this->colunas = array();
         echo '<thead>';
         echo '<tr class="' . $class . '">';
-        foreach ( $header as $key => $value ) {
+        foreach ($header as $key => $value) {
             echo '<th class="text-center" style="' . $value->styleHeader . '">';
-            if ( $value->title == '' )
+            if ($value->title == '') {
                 echo "&nbsp;";
-            else
+            } else {
                 echo $value->title;
+            }
             $this->colunas[] = $value;
             echo '</th>';
         }
@@ -93,47 +109,51 @@ class Table
         $this->_isPrint = true;
     }
 
-    public function setRow ( $linhas, $class = '' )
-    {
-        if ( !$this->_isPrint && count ( $this->colunas ) )
-            $this->printHeader ( $this->colunas );
+    public function setRow($linhas, $class = '') {
+        if (!$this->_isPrint && count($this->colunas)) {
+            $this->printHeader($this->colunas);
+        }
 
-        if ( $this->click != null )
+        if ($this->click != null) {
             echo '<tbody class="hover-pointer">';
-        else
+        } else {
             echo '<tbody>';
-        foreach ( $linhas as $linha ) {
+        }
+        foreach ($linhas as $linha) {
 
             $textId = "";
-            if ( $this->id ) {
+            if ($this->id) {
                 $chaveId = $this->id;
-                if ( is_array ( $linha ) )
-                    $valorId = $linha[ $chaveId ];
-                else
+                if (is_array($linha)) {
+                    $valorId = $linha[$chaveId];
+                } else {
                     $valorId = $linha->$chaveId;
+                }
                 $textId = 'id="' . $valorId . '"';
             }
 
-            if ( $this->click != null )
-                echo '<tr ' . $textId . ' onClick="' . $this->getClick ( $linha ) . '">';
-            else
+            if ($this->click != null) {
+                echo '<tr ' . $textId . ' onClick="' . $this->getClick($linha) . '">';
+            } else {
                 echo '<tr>';
-            foreach ( $this->colunas as $col ) {
+            }
+            foreach ($this->colunas as $col) {
                 $_class = $class . ' ' . $col->styleCol;
-                if ( $col->funcao != null ) {
+                if ($col->funcao != null) {
                     $funcao = $col->funcao;
-                    if ( is_array ( $linha ) )
-                        $html = $funcao( $linha, $col->chave );
-                    else
-                        $html = $funcao( $linha, $col->chave );
+                    if (is_array($linha)) {
+                        $html = $funcao($linha, $col->chave);
+                    } else {
+                        $html = $funcao($linha, $col->chave);
+                    }
 
-                    $this->printRow ( $html, $_class );
+                    $this->printRow($html, $_class);
                 } else {
-                    if ( is_array ( $linha ) )
-                        $this->printRow ( $linha[ $col->chave ], $_class );
-                    else {
+                    if (is_array($linha)) {
+                        $this->printRow($linha[$col->chave], $_class);
+                    } else {
                         $chave = $col->chave;
-                        $this->printRow ( $linha->$chave, $_class );
+                        $this->printRow($linha->$chave, $_class);
                     }
                 }
 
@@ -143,17 +163,15 @@ class Table
         echo '</tbody>';
     }
 
-    public function printRow ( $html, $class = '' )
-    {
+    public function printRow($html, $class = '') {
         echo '<td class=' . $class . '>';
         echo $html;
         echo '</td>';
     }
 
-    public function close ( $datatable = false )
-    {
+    public function close($datatable = false) {
         echo '</table>';
-        if ( $datatable ) {
+        if ($datatable) {
             echo '<script type="text/javascript">
                     $(document).ready(function(){
                         var table = $("#' . $this->tableId . '").DataTable();

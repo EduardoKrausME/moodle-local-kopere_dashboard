@@ -1,38 +1,59 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-function xmldb_local_kopere_dashboard_upgrade ( $oldversion )
-{
+/**
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+function xmldb_local_kopere_dashboard_upgrade($oldversion) {
     global $DB;
 
-    $dbman = $DB->get_manager ();
+    $dbman = $DB->get_manager();
 
-    if ( $oldversion < 2017061102 ) {
-        $table  = new xmldb_table( 'kopere_dashboard_events' );
-        $field1 = new xmldb_field( 'subject',
+    if ($oldversion < 2017061102) {
+        $table = new xmldb_table('kopere_dashboard_events');
+        $field1 = new xmldb_field('subject',
             XMLDB_TYPE_CHAR,
             '255',
             null,
             XMLDB_NOTNULL,
             null,
             null,
-            'userto' );
+            'userto');
 
-        if ( !$dbman->field_exists ( $table, $field1 ) )
-            $dbman->add_field ( $table, $field1 );
+        if (!$dbman->field_exists($table, $field1)) {
+            $dbman->add_field($table, $field1);
+        }
 
-        $field2 = new xmldb_field( 'status',
+        $field2 = new xmldb_field('status',
             XMLDB_TYPE_INTEGER,
             '1',
             null,
             XMLDB_NOTNULL,
             null,
             1,
-            'event' );
+            'event');
 
-        if ( !$dbman->field_exists ( $table, $field2 ) )
-            $dbman->add_field ( $table, $field2 );
+        if (!$dbman->field_exists($table, $field2)) {
+            $dbman->add_field($table, $field2);
+        }
 
-        upgrade_plugin_savepoint ( true, 2017061102, 'local', 'kopere_dashboard' );
+        upgrade_plugin_savepoint(true, 2017061102, 'local', 'kopere_dashboard');
     }
 
     return true;

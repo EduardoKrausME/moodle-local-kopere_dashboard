@@ -1,38 +1,48 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * User: Eduardo Kraus
- * Date: 10/06/17
- * Time: 23:26
+ * @created    10/06/17 23:26
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\html\inputs;
 
-
-class InputDateRange extends InputBase
-{
-    public function __construct ()
-    {
-        $this->setType ( 'text' );
+class InputDateRange extends InputBase {
+    public function __construct() {
+        $this->setType('text');
     }
 
     /**
      * @return InputDateRange
      */
-    public static function newInstance ()
-    {
+    public static function newInstance() {
         return new InputDateRange();
     }
 
-    public function setDateRange ()
-    {
-        $this->addValidator ( 'single-daterange' );
+    public function setDateRange() {
+        $this->addValidator('single-daterange');
 
         return $this;
     }
 
-    public function setDatetimeRange ()
-    {
-        $this->addValidator ( 'single-datetimerange' );
+    public function setDatetimeRange() {
+        $this->addValidator('single-datetimerange');
 
         return $this;
     }

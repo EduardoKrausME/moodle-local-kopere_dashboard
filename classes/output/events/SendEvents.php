@@ -1,17 +1,31 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * User: Eduardo Kraus
- * Date: 14/06/17
- * Time: 05:21
+ * @created    14/06/17 05:21
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\output\events;
 
-
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
-class SendEvents
-{
+class SendEvents {
     /** @var kopere_dashboard_events */
     private $kopere_dashboard_events;
 
@@ -24,203 +38,174 @@ class SendEvents
     /**
      * @return kopere_dashboard_events
      */
-    public function getKopereDashboardEvents ()
-    {
+    public function getKopereDashboardEvents() {
         return $this->kopere_dashboard_events;
     }
 
     /**
      * @param kopere_dashboard_events $kopere_dashboard_events
      */
-    public function setKopereDashboardEvents ( $kopere_dashboard_events )
-    {
+    public function setKopereDashboardEvents($kopere_dashboard_events) {
         $this->kopere_dashboard_events = $kopere_dashboard_events;
     }
 
     /**
      * @return \core\event\base
      */
-    public function getEvent ()
-    {
+    public function getEvent() {
         return $this->event;
     }
 
     /**
      * @param \core\event\base $event
      */
-    public function setEvent ( $event )
-    {
+    public function setEvent($event) {
         $this->event = $event;
     }
 
-
-    public function send ()
-    {
+    public function send() {
         global $COURSE, $CFG, $DB;
 
-        $this->loadTemplate ();
+        $this->loadTemplate();
 
-        echo '<pre>';
-        print_r ( $this->event );
-        print_r ( $this->kopere_dashboard_events );
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r($this->event);
+        // print_r($this->kopere_dashboard_events);
+        // echo '</pre>';
 
-        $this->subject = $this->replaceDate ( $this->subject );
-        $this->message = $this->replaceDate ( $this->message );
+        $this->subject = $this->replaceDate($this->subject);
+        $this->message = $this->replaceDate($this->message);
 
         $COURSE->link = "<a href=\"{$CFG->wwwroot}\" target=\"_blank\">{$CFG->wwwroot}</a>";
 
-        $this->subject = $this->replaceCourse ( $this->subject, $COURSE, 'moodle' );
-        $this->message = $this->replaceCourse ( $this->message, $COURSE, 'moodle' );
+        $this->subject = $this->replaceCourse($this->subject, $COURSE, 'moodle');
+        $this->message = $this->replaceCourse($this->message, $COURSE, 'moodle');
 
         $courseid = 0;
-        if ( $this->event->objecttable == 'course' ) {
+        if ($this->event->objecttable == 'course') {
             $courseid = $this->event->objectid;
-            $course   = $DB->get_record ( 'course', array( 'id' => $courseid ) );
-            if ( $course ) {
+            $course = $DB->get_record('course', array('id' => $courseid));
+            if ($course) {
                 $course->link = "<a href=\"{$CFG->wwwroot}/course/view.php?id={$courseid}\" target=\"_blank\">{$CFG->wwwroot}/course/view.php?id={$courseid}</a>";
 
-                $this->subject = $this->replaceCourse ( $this->subject, $course, 'course' );
-                $this->message = $this->replaceCourse ( $this->message, $course, 'course' );
+                $this->subject = $this->replaceCourse($this->subject, $course, 'course');
+                $this->message = $this->replaceCourse($this->message, $course, 'course');
             }
         }
 
-
         // de
         $userFrom = null;
-        switch ( $this->kopere_dashboard_events->userfrom ) {
+        switch ($this->kopere_dashboard_events->userfrom) {
             case 'admin':
-                $userFrom = get_admin ();
+                $userFrom = get_admin();
                 break;
         }
-        if ( $userFrom == null ) {
-            $this->mailError ( '$userFrom NOT FOUND!' );
+        if ($userFrom == null) {
+            $this->mailError('$userFrom NOT FOUND!');
 
             return;
         }
 
-        $userFrom->fullname = fullname ( $userFrom );
+        $userFrom->fullname = fullname($userFrom);
+        $this->subject = $this->replaceCourse($this->subject, $userFrom, 'from');
+        $this->message = $this->replaceCourse($this->message, $userFrom, 'from');
 
-        $this->subject = $this->replaceCourse ( $this->subject, $userFrom, 'from' );
-        $this->message = $this->replaceCourse ( $this->message, $userFrom, 'from' );
-
-
+        // Para
         $usersTo = array();
-        switch ( $this->kopere_dashboard_events->userto ) {
+        switch ($this->kopere_dashboard_events->userto) {
             case 'admin':
-                $usersTo = array( get_admin () );
+                $usersTo = array(get_admin());
                 break;
             case 'admins':
-                $usersTo = get_admins ();
+                $usersTo = get_admins();
                 break;
             case 'teachers':
-                if ( $courseid ) {
+                if ($courseid) {
                     $sql
-                             = "SELECT u.* 
-                                  FROM {course} c 
-                                  JOIN {context} cx ON c.id = cx.instanceid 
-                                  JOIN {role_assignments} ra ON cx.id = ra.contextid 
-                                                            AND ra.roleid = '3' 
-                                  JOIN {user} u ON ra.userid = u.id 
+                        = "SELECT u.*
+                                  FROM {course} c
+                                  JOIN {context} cx ON c.id = cx.instanceid
+                                  JOIN {role_assignments} ra ON cx.id = ra.contextid
+                                                            AND ra.roleid = '3'
+                                  JOIN {user} u ON ra.userid = u.id
                                  WHERE cx.contextlevel = :contextlevel
                                    AND c.id            = :courseid ";
-                    $usersTo = $DB->get_records_sql ( $sql,
-                        array( 'contextlevel' => CONTEXT_COURSE,
-                               'courseid'     => $courseid
-                        ) );
+                    $usersTo = $DB->get_records_sql($sql,
+                        array('contextlevel' => CONTEXT_COURSE,
+                            'courseid' => $courseid
+                        ));
                 }
                 break;
             case 'student':
-                $usersTo = $DB->get_records ( 'user', array( 'id' => $this->event->userid ) );
+                $usersTo = $DB->get_records('user', array('id' => $this->event->userid));
                 break;
         }
 
+        foreach ($usersTo as $userTo) {
+            $userTo->fullname = fullname($userTo);
 
-        $sendSubject = $this->subject;
-        $sendMessage = $this->message;
+            $sendSubject = $this->replaceCourse($this->subject, $userTo, 'to');
+            $sendMessage = $this->replaceCourse($this->message, $userTo, 'to');
 
-        foreach ( $usersTo as $userTo ) {
-            $userTo->fullname = fullname ( $userTo );
+            $eventdata = new \stdClass();
+            $eventdata->modulename = 'moodle';
+            $eventdata->component = 'local_kopere_dashboard';
+            $eventdata->name = 'kopere_dashboard_messages';
+            $eventdata->userfrom = $userFrom;
+            $eventdata->userto = $userTo;
+            $eventdata->subject = $sendSubject;
+            $eventdata->fullmessage = $sendMessage;
+            $eventdata->fullmessageformat = FORMAT_HTML;
+            $eventdata->fullmessagehtml = text_to_html($sendMessage);
+            $eventdata->smallmessage = '';
 
-            $sendSubject = $this->replaceCourse ( $this->subject, $userTo, 'to' );
-            $sendMessage = $this->replaceCourse ( $this->message, $userTo, 'to' );
+            message_send($eventdata);
         }
 
-        echo "<h1>$sendSubject</h1>";
-        echo $sendMessage;
+        //echo "<h1>$sendSubject</h1>";
+        //echo $sendMessage;
     }
 
-    private function loadTemplate ()
-    {
+    private function loadTemplate() {
         global $CFG;
-        $template        = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" . get_config ( 'local_kopere_dashboard', 'notificacao-template' );
-        $templateContent = file_get_contents ( $template );
+        $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" . get_config('local_kopere_dashboard', 'notificacao-template');
+        $templateContent = file_get_contents($template);
 
         $this->subject = $this->kopere_dashboard_events->subject;
-        $this->message = str_replace ( '{[message]}', $this->kopere_dashboard_events->message, $templateContent );
+        $this->message = str_replace('{[message]}', $this->kopere_dashboard_events->message, $templateContent);
     }
-
 
     /**
      * @param string $text
      *
      * @return string
      */
-    private function replaceDate ( $text )
-    {
-        if ( strpos ( $text, '{[date' ) === false )
+    private function replaceDate($text) {
+        if (strpos($text, '{[date') === false) {
             return $text;
+        }
 
-        preg_match_all ( "/\{\[date\.(\w+)\]\}/", $text, $textKeys );
+        preg_match_all("/\{\[date\.(\w+)\]\}/", $text, $textKeys);
 
-        //echo '<pre>';
-        //print_r ( $textKeys );
-        //echo '</pre>';
+        // echo '<pre>';
+        // print_r ( $textKeys );
+        // echo '</pre>';
 
         $itens = array(
-            'year'   => 'Y',
-            'month'  => 'm',
-            'day'    => 'd',
-            'hour'   => 'H',
+            'year' => 'Y',
+            'month' => 'm',
+            'day' => 'd',
+            'hour' => 'H',
             'minute' => 'i',
             'second' => 's'
         );
 
-        foreach ( $textKeys[ 1 ] as $key => $textKey ) {
+        foreach ($textKeys[1] as $key => $textKey) {
 
-            if ( isset( $itens[ $textKey ] ) ) {
-                $data      = date ( $itens[ $textKey ] );
-                $strSearch = $textKeys[ 0 ][ $key ];
-                $text      = str_replace ( $strSearch, $data, $text );
-            }
-        }
-
-        return $text;
-    }
-
-
-    /**
-     * @param string $text
-     *
-     * @return string
-     */
-    private function replaceCourse ( $text, $course, $keyName )
-    {
-        if ( strpos ( $text, "{[{$keyName}" ) === false )
-            return $text;
-
-        preg_match_all ( "/\{\[{$keyName}\.(\w+)\]\}/", $text, $textKeys );
-
-        //echo '<pre>';
-        //print_r ( $textKeys );
-        //echo '</pre>';
-
-        foreach ( $textKeys[ 1 ] as $key => $textKey ) {
-
-            if ( isset( $course->$textKey ) ) {
-                $data      = $course->$textKey;
-                $strSearch = $textKeys[ 0 ][ $key ];
-                $text      = str_replace ( $strSearch, $data, $text );
+            if (isset($itens[$textKey])) {
+                $data = date($itens[$textKey]);
+                $strSearch = $textKeys[0][$key];
+                $text = str_replace($strSearch, $data, $text);
             }
         }
 
@@ -232,32 +217,58 @@ class SendEvents
      *
      * @return string
      */
-    private function replaceUser ( $text, $user, $keyName )
-    {
-        if ( strpos ( $text, "{[{$keyName}" ) === false )
+    private function replaceCourse($text, $course, $keyName) {
+        if (strpos($text, "{[{$keyName}") === false) {
             return $text;
+        }
 
-        preg_match_all ( "/\{\[{$keyName}\.(\w+)\]\}/", $text, $textKeys );
+        preg_match_all("/\{\[{$keyName}\.(\w+)\]\}/", $text, $textKeys);
 
-        //echo '<pre>';
-        //print_r ( $textKeys );
-        //echo '</pre>';
+        // echo '<pre>';
+        // print_r ( $textKeys );
+        // echo '</pre>';
 
-        foreach ( $textKeys[ 1 ] as $key => $textKey ) {
+        foreach ($textKeys[1] as $key => $textKey) {
 
-            if ( isset( $user->$textKey ) ) {
-                $data      = $user->$textKey;
-                $strSearch = $textKeys[ 0 ][ $key ];
-                $text      = str_replace ( $strSearch, $data, $text );
+            if (isset($course->$textKey)) {
+                $data = $course->$textKey;
+                $strSearch = $textKeys[0][$key];
+                $text = str_replace($strSearch, $data, $text);
             }
         }
 
         return $text;
     }
 
-    private static function mailError ( $message )
-    {
-        //
+    /**
+     * @param string $text
+     *
+     * @return string
+     */
+    private function replaceUser($text, $user, $keyName) {
+        if (strpos($text, "{[{$keyName}") === false) {
+            return $text;
+        }
+
+        preg_match_all("/\{\[{$keyName}\.(\w+)\]\}/", $text, $textKeys);
+
+        // echo '<pre>';
+        // print_r ( $textKeys );
+        // echo '</pre>';
+
+        foreach ($textKeys[1] as $key => $textKey) {
+
+            if (isset($user->$textKey)) {
+                $data = $user->$textKey;
+                $strSearch = $textKeys[0][$key];
+                $text = str_replace($strSearch, $data, $text);
+            }
+        }
+
+        return $text;
+    }
+
+    private static function mailError($message) {
     }
 }
 
