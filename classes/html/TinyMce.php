@@ -55,7 +55,7 @@ class TinyMce {
                 plugins  : [
                     'advlist autolink lists link image charmap ',
                     'searchreplace visualblocks code fullscreen responsivefilemanager',
-                    'media table contextmenu youtube autosave paste nanospell anchor'
+                    'media table contextmenu youtube autosave paste anchor nanospell'
                 ],
 
                 style_formats : [
