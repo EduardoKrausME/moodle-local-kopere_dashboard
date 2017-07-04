@@ -18,9 +18,9 @@ Este é o recurso que eu sempre quis desenvolver e fiz ele no Kopere Dashboard. 
 
 Tudo isso em tempo real.
 
-![Imagem 1](https://github.com/eduardokraus/moodle-local-kopere_dashboard/blob/master/pix/prints/usersonline/Captura_01.png?raw=true)
+![Imagem 1](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/blob/master/pix/prints/usersonline/Captura_01.png?raw=true)
 
-[Leia mais](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/Usu%C3%A1rios-Online)
+[Clique aqui e veja mais sobre Usuários on-line](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/Usu%C3%A1rios-Online)
 
 ## Performace
 
@@ -31,12 +31,12 @@ Esta parte é uma melhoria do plug-in [report_benchmark](https://moodle.org/plug
 
 ![BenchMark teste](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/blob/master/pix/prints/benchmark/Captura_01.png)
 
-[Leia mais](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/Performace)
+[Clique aqui e veja mais sobre Performace](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/Performace)
 
 ## Páginas estáticas
 
 Páginas estáticas são páginas que você pode criar para as mais diversas finalidades. Pode, por exemplo, criar um FAQ com as principais informações para os alunos ou para quem acessa seu moodle não sendo aluno.
 
-![Imagem 1](https://github.com/eduardokraus/moodle-local-kopere_dashboard/blob/master/pix/prints/webpages/Captura_01.png)
+![Imagem 1](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/blob/master/pix/prints/webpages/Captura_01.png)
 
-[Leia mais](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/Páginas-estáticas)
+[Clique aqui e veja mais sobre págnas estáticas](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/Páginas-estáticas)
