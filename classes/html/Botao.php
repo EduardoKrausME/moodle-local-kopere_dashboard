@@ -60,7 +60,7 @@ class Botao {
     public static function help($infoUrl, $texto = 'Ajuda com esta página', $hastag = 'wiki-wrapper') {
         global $CFG;
 
-        return "<a href=\"https://github.com/eduardokraus/moodle-local-kopere_dashboard/wiki/{$infoUrl}#{$hastag}\" target=\"_blank\" class=\"help\">
+        return "<a href=\"https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/{$infoUrl}#{$hastag}\" target=\"_blank\" class=\"help\">
                   <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/help.svg\" height=\"23\" >
                   $texto
               </a>";

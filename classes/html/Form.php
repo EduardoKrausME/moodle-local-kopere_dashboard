@@ -29,9 +29,9 @@ class Form {
     private $formAction;
 
     public function __construct($formAction = null, $classExtra = '') {
+        $this->formAction = $formAction;
         if ($this->formAction) {
-            $this->formAction = '?' . $formAction;
-            echo "<form method=\"post\" class=\"validate $classExtra\" enctype=\"multipart/form-data\" action=\"{$this->formAction}\" >";
+            echo "<form method=\"post\" class=\"validate $classExtra\" enctype=\"multipart/form-data\" action=\"?{$this->formAction}\" >";
             echo '<div class="displayErroForm alert alert-danger" style="display: none;"><span></span></div>';
             echo '<input name="POST" type="hidden" value="true" />';
         }
@@ -88,7 +88,7 @@ class Form {
     }
 
     public function createSubmitInput($value = '', $class = '', $additionalText = '') {
-        $html = '<input name="" class="btn btn-success ' . $class . '" type="submit" value="' . htmlspecialchars($value) . '" />';
+        $html = '<input name="" class="btn btn-success bt-submit' . $class . '" type="submit" value="' . htmlspecialchars($value) . '" />';
         $this->printRow('', $html, 'btsubmit', $additionalText);
     }
 
