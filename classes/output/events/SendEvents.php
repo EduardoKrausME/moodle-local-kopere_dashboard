@@ -68,11 +68,6 @@ class SendEvents {
 
         $this->loadTemplate();
 
-        // echo '<pre>';
-        // print_r($this->event);
-        // print_r($this->kopere_dashboard_events);
-        // echo '</pre>';
-
         $this->subject = $this->replaceDate($this->subject);
         $this->message = $this->replaceDate($this->message);
 
@@ -137,15 +132,20 @@ class SendEvents {
                 }
                 break;
             case 'student':
-                $usersTo = $DB->get_records('user', array('id' => $this->event->userid));
+                $usersTo = $DB->get_records('user', array('id' => $this->event->relateduserid));
                 break;
         }
 
         foreach ($usersTo as $userTo) {
             $userTo->fullname = fullname($userTo);
 
+            $userTo->password = $this->event->other;
+
             $sendSubject = $this->replaceCourse($this->subject, $userTo, 'to');
-            $sendMessage = $this->replaceCourse($this->message, $userTo, 'to');
+            $htmlMessage = $this->replaceCourse($this->message, $userTo, 'to');
+
+            $magager     = "<a href=\"{$CFG->wwwroot}/message/edit.php?id={$userTo->id}\">Gerenciar mensagens</a>";
+            $htmlMessage = str_replace ( '{[manager]}', $magager, $htmlMessage );
 
             $eventdata = new \stdClass();
             $eventdata->modulename = 'moodle';
@@ -154,16 +154,13 @@ class SendEvents {
             $eventdata->userfrom = $userFrom;
             $eventdata->userto = $userTo;
             $eventdata->subject = $sendSubject;
-            $eventdata->fullmessage = $sendMessage;
+            $eventdata->fullmessage = html_to_text($htmlMessage);
             $eventdata->fullmessageformat = FORMAT_HTML;
-            $eventdata->fullmessagehtml = text_to_html($sendMessage);
+            $eventdata->fullmessagehtml = $htmlMessage;
             $eventdata->smallmessage = '';
 
             message_send($eventdata);
         }
-
-        //echo "<h1>$sendSubject</h1>";
-        //echo $sendMessage;
     }
 
     private function loadTemplate() {
@@ -186,10 +183,6 @@ class SendEvents {
         }
 
         preg_match_all("/\{\[date\.(\w+)\]\}/", $text, $textKeys);
-
-        // echo '<pre>';
-        // print_r ( $textKeys );
-        // echo '</pre>';
 
         $itens = array(
             'year' => 'Y',
@@ -224,10 +217,6 @@ class SendEvents {
 
         preg_match_all("/\{\[{$keyName}\.(\w+)\]\}/", $text, $textKeys);
 
-        // echo '<pre>';
-        // print_r ( $textKeys );
-        // echo '</pre>';
-
         foreach ($textKeys[1] as $key => $textKey) {
 
             if (isset($course->$textKey)) {
@@ -251,10 +240,6 @@ class SendEvents {
         }
 
         preg_match_all("/\{\[{$keyName}\.(\w+)\]\}/", $text, $textKeys);
-
-        // echo '<pre>';
-        // print_r ( $textKeys );
-        // echo '</pre>';
 
         foreach ($textKeys[1] as $key => $textKey) {
 
