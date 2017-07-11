@@ -7,16 +7,27 @@ var fs        = require ( 'fs' );
 var app       = require ( 'express' ) ();
 var https     = require ( 'https' );
 var useragent = require ( 'useragent' );
+var settings  = require ( './util/settings.js' );
 var accessId  = 0;
 
-var server = https.createServer ( {
-    key                : fs.readFileSync ( '/etc/letsencrypt/live/eduardokraus.com/privkey.pem' ),
-    cert               : fs.readFileSync ( '/etc/letsencrypt/live/eduardokraus.com/fullchain.pem' ),
-    ca                 : fs.readFileSync ( '/etc/letsencrypt/live/eduardokraus.com/chain.pem' ),
-    requestCert        : false,
-    rejectUnauthorized : false
-}, app );
-server.listen ( httpPort );
+
+if ( settings.ssl ) {
+    console.log ( "SSL Enabled" );
+    console.log ( "SSL Key File" + settings.ssl.key );
+    console.log ( "SSL Cert Auth File" + settings.ssl.cert );
+    console.log ( "SSL Cert Authority File" + settings.ssl.ca );
+
+    var options = {
+        key  : fs.readFileSync ( settings.ssl.key ),
+        cert : fs.readFileSync ( settings.ssl.cert ),
+        ca   : fs.readFileSync ( settings.ssl.ca )
+    };
+    app         = express ( options );
+    server      = https.createServer ( options, app ).listen ( settings.port );
+} else {
+    app    = express ();
+    server = app.listen ( settings.port );
+}
 
 // Starts listening socket.io
 var io = require ( 'socket.io' ).listen ( server );
@@ -29,7 +40,7 @@ io.sockets.on ( 'connection', function ( socket ) {
     socket.on ( 'login', function ( data ) {
 
         console.log ( 'La vamos nóis' );
-        var statusDomain = true;//domainIsValid ( socket.handshake.headers );
+        var statusDomain = domainIsValid ( socket.handshake.headers );
         if ( !statusDomain ) {
             socket.emit ( 'logof', 'Domain not allow' );
             socket.leave ( socket.room );
@@ -149,35 +160,26 @@ function createObjectUser ( socket ) {
     };
 }
 
-
 function domainIsValid ( headers ) {
     // get domain from referer
     var domainReferer = headers.referer.split ( '/' )[ 2 ];
 
-    fs                = require ( 'fs' );
-    var resultDomains = fs.readFileSync ( 'allowed-domains.txt', 'utf8' );
-    var listDomains   = resultDomains.split ( "\n" );
-
-    for ( var key in listDomains ) {
-        var lineDomain = listDomains[ key ].trim ();
-
-        // If comments or blank line
-        if ( lineDomain[ 0 ] == '#' || lineDomain.length == 0 )
-            continue;
+    for ( var key in settings.domains ) {
+        var alowedDomain = settings.domains[ key ].trim ();
 
         // It is an asterisk
-        if ( lineDomain == '*' )
+        if ( alowedDomain.equals ( '*' ) )
             return true;
 
         // It begins with asterisk
-        if ( lineDomain[ 0 ] == '*' ) {
-            lineDomain = lineDomain.slice ( 1 );
-            var reg    = new RegExp ( lineDomain + "$" );
+        if ( "*".equals ( alowedDomain[ 0 ] ) ) {
+            alowedDomain = alowedDomain.slice ( 1 );
+            var reg      = new RegExp ( alowedDomain + "$" );
             if ( reg.test ( domainReferer ) )
                 return true;
         }
         // It is equal
-        if ( domainReferer == lineDomain )
+        if ( domainReferer.equals ( alowedDomain ) )
             return true;
     }
 
