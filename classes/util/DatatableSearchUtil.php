@@ -89,9 +89,6 @@ class DatatableSearchUtil {
         $sqlReturn = $sql . " $this->where \n $group\n ORDER BY $this->order $this->orderDir \n LIMIT $this->start, $this->length";
         $sqlReturn = str_replace('{[columns]}', implode(', ', $this->columnsSelect), $sqlReturn);
 
-        // mail ( 'kraus@eduardokraus.com', 'aaaa', print_r ( [ $sqlSearch, $sqlTotal, $sqlReturn ], 1 ) );
-        // error_log($sqlTotal);
-
         $result = $DB->get_records_sql($sqlReturn, $params);
         $total = $DB->get_record_sql($sqlTotal, $params);
         $totalNum = $total->num;
