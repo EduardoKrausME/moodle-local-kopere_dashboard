@@ -58,10 +58,6 @@ class UsuariosCouseComplete implements ReportInterface {
              ORDER BY u.username';
 
         $report = $DB->get_records_sql($reportSql);
-
-        // echo '<pre>';
-        // print_r($report);
-        // echo '</pre>';
     }
 
     /**

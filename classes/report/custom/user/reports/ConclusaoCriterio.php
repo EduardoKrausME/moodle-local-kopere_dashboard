@@ -83,10 +83,6 @@ class ConclusaoCriterio implements ReportInterface {
                 JOIN {course_completion_criteria} p ON t.criteriaid = p.id';
 
         $report = $DB->get_records_sql($reportSql);
-
-        // echo '<pre>';
-        // print_r($report);
-        // echo '</pre>';
     }
 
     /**

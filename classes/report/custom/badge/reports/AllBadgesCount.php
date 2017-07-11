@@ -64,10 +64,6 @@ class AllBadgesCount implements ReportInterface
 
         $reports = $DB->get_records_sql ( $reportSql );
 
-        // echo '<pre>';
-        // print_r ( $reports );
-        // echo '</pre>';
-
         Botao::info ( get_string ( 'managebadges', 'badges' ), "{$CFG->wwwroot}/badges/index.php?type=1" );
 
         $report = array();

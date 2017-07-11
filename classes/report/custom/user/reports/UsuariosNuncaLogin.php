@@ -73,10 +73,6 @@ class UsuariosNuncaLogin implements ReportInterface {
                 WHERE ul.timeaccess IS NULL';
 
         $report = $DB->get_records_sql($reportSql);
-
-        // echo '<pre>';
-        // print_r($report);
-        // echo '</pre>';
     }
 
     /**

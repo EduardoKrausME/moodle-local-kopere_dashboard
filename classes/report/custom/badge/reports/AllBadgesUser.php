@@ -73,10 +73,6 @@ class AllBadgesUser implements ReportInterface {
             $report[] = $item;
         }
 
-        // echo '<pre>';
-        // print_r ( $report );
-        // echo '</pre>';
-
         Botao::info(get_string('managebadges', 'badges'), "{$CFG->wwwroot}/badges/index.php?type=1");
 
         $table = new DataTable();

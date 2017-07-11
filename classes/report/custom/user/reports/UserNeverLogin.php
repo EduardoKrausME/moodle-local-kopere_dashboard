@@ -55,10 +55,6 @@ class UserNeverLogin implements ReportInterface {
                           AND u.lastaccess = 0';
 
         $report = $DB->get_records_sql($reportSql);
-
-        // echo '<pre>';
-        // print_r($report);
-        // echo '</pre>';
     }
 
     /**
