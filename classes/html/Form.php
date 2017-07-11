@@ -84,7 +84,7 @@ class Form {
     }
 
     public function createHiddenInput($name, $value = '') {
-        echo '<input type="hidden" name="' . $name . '" value="' . htmlspecialchars($value) . '"/>';
+        echo '<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . htmlspecialchars($value) . '"/>';
     }
 
     public function createSubmitInput($value = '', $class = '', $additionalText = '') {

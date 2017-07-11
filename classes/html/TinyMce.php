@@ -55,7 +55,7 @@ class TinyMce {
                 plugins  : [
                     'advlist autolink lists link image charmap ',
                     'searchreplace visualblocks code fullscreen responsivefilemanager',
-                    'media table contextmenu youtube autosave paste anchor nanospell'
+                    'media table contextmenu youtube autosave paste anchor'
                 ],
 
                 style_formats : [
@@ -152,19 +152,15 @@ class TinyMce {
                         'styleselect | formatselect | fontselect | fontsizeselect | ' +
                         'alignleft aligncenter alignright alignjustify | ' +
                         'bullist numlist outdent indent | ' +
-                        'youtube | ' +
-                        'fullscreen nanospell',
+                        'youtube | fullscreen',
 
                 external_plugins : {
-                    'filemanager' : '{$path}filemanager/plugin.js',
-                    'nanospell'   : '{$path}nanospell/plugin.js'
+                    'filemanager' : '{$path}filemanager/plugin.js'
                 },
 
                 external_filemanager_path : '{$path}filemanager/',
                 filemanager_title         : 'Gerenciador de Arquivos',
 
-                nanospell_server     : 'php',
-                nanospell_dictionary : 'pt_br',
                 auto_focus           : 'elm1',
                 relative_urls        : false,
                 remove_script_host   : false,
