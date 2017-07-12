@@ -88,7 +88,7 @@ class DashboardUtil {
             $breadcrumbReturn .= '</ul>';
             $breadcrumbReturn .= '<div class="content-i"><div class="content-box">';
 
-            if ($tituloPagina != -1) {
+            if ($tituloPagina != null) {
                 $breadcrumbReturn .= self::setTitulo($tituloPagina ? $tituloPagina : $titulo, $infoUrl);
             }
 
