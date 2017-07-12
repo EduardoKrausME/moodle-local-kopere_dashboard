@@ -89,6 +89,8 @@ if (isset($_POST['action'])) {
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v1.js"></script>
 
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400" rel="stylesheet">
+
     <?php
     if (get_config('local_kopere_dashboard', 'nodejs-status')) {
         if (get_config('local_kopere_dashboard', 'nodejs-ssl')) {

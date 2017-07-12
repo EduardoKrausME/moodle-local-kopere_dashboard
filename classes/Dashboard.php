@@ -34,14 +34,14 @@ class Dashboard {
         echo '<div class="element-content">
                 <div class="row">
                     <div class="col-sm-3">
-                        <div class="element-box">
+                        <div class="element-box color1">
                             <div class="label">Usuários / Ativos</div>
                             <div class="value"><a href="?Users::dashboard">
                                 ' . Users::countAll(true) . ' / ' . Users::countAllLearners(true) . '</a></div>
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="element-box">
+                        <div class="element-box color2">
                             <div class="label">Online / Última hora</div>
                             <div class="value"><a href="?UsersOnline::dashboard">
                                 <span id="user-count-online">' . UsersOnline::countOnline(10) . '</span>
@@ -49,7 +49,7 @@ class Dashboard {
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="element-box">
+                        <div class="element-box color3">
                             <div class="label">Cursos / Visíveis</div>
                             <div class="value"><a href="?Courses::dashboard">
                             ' . Courses::countAll(true) . '
@@ -57,7 +57,7 @@ class Dashboard {
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="element-box">
+                        <div class="element-box color4">
                             <div class="label">Uso de Disco</div>
                             <div class="value"><a href="?ReportsDisk::all">
                             ' . BytesUtil::sizeToByte(Files::countAllSpace()) . '</a></div>
