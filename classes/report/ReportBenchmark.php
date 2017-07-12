@@ -125,9 +125,6 @@ class ReportBenchmark {
             $total += $result['during'];
         }
 
-        return array(
-            'total' => $total,
-            'score' => ceil($total * 100),
-        );
+        return $total;
     }
 }

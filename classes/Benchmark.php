@@ -65,13 +65,13 @@ class Benchmark {
 
         $test = new ReportBenchmark();
 
-        $score = $test->get_total()["score"];
-        if ($score < 500) {
-            Mensagem::printInfo('<strong>Pontuação total:</strong> ' . $score);
-        } else if ($score < 1000) {
-            Mensagem::printWarning('<strong>Pontuação total:</strong> ' . $score);
+        $score = $test->get_total();
+        if ($score < 4) {
+            Mensagem::printInfo('<strong>Tempo total:</strong>    ' . $this->formatNumber($score));
+        } else if ($score < 8) {
+            Mensagem::printWarning('<strong>Tempo total:</strong> ' . $this->formatNumber($score));
         } else {
-            Mensagem::printDanger('<strong>Pontuação total:</strong> ' . $score);
+            Mensagem::printDanger('<strong>Tempo total:</strong>  ' . $this->formatNumber($score));
         }
 
         echo '<table class="table" id="benchmarkresult">
