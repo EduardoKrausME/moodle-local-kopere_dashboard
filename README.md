@@ -1,16 +1,28 @@
 # Plug-in local kopere_dashboard
 
+![Imagem 1](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/blob/master/pix/prints/dashboard/Captura_01.png)
+
 ## instalando
 
-Vá na pasta [moodle]/local e execute:
+#### No Linux via GIT
+
+Vá na pasta [pasta_instalacao_moodle]/local e execute:
 
 ```
 git clone https://github.com/EduardoKrausME/moodle-local-kopere_dashboard kopere_dashboard
 ```
 
--Ou baixe o plugin em https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/archive/master.zip. Ao descompactar renomeie a pasta para ``kopere_dashboard``
+Após vá em Administração do site >> Avisos e instale o Kopere Dashboard
+
+#### Via instalador de plug-ins do Moodle
+
+Baixe o plugin em https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/archive/master.zip e envie ele no instalador de plug-ins do Moodle
 
 Após vá em Administração do site >> Avisos e instale o Kopere Dashboard
+
+#### Por FTP
+
+Baixe o plugin em https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/archive/master.zip descompacte e renomeie a pasta para ``kopere_dashboard`` após envie todos os arquivos baixados para a pasta ``[pasta_instalacao_moodle]/local/``
 
 ## Usuários on-line
 
@@ -18,7 +30,7 @@ Este é o recurso que eu sempre quis desenvolver e fiz ele no Kopere Dashboard. 
 
 Tudo isso em tempo real.
 
-![Imagem 1](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/blob/master/pix/prints/usersonline/Captura_01.png?raw=true)
+![Imagem 1](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/blob/master/pix/prints/usersonline/Captura_01.png)
 
 [Clique aqui e veja mais sobre Usuários on-line](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/Usu%C3%A1rios-Online)
 
