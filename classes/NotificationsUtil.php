@@ -26,6 +26,8 @@ namespace local_kopere_dashboard;
 use core\event\base;
 use local_kopere_dashboard\html\Form;
 use local_kopere_dashboard\html\inputs\InputSelect;
+use local_kopere_dashboard\util\Mensagem;
+use local_kopere_dashboard\util\Release;
 
 class NotificationsUtil {
     public function addFormExtra() {
@@ -193,5 +195,25 @@ class NotificationsUtil {
         }
 
         return null;
+    }
+
+    public static function mensagemNoSmtp() {
+        global $CFG;
+        if (strlen(get_config('moodle', 'smtphosts')) > 5)
+            return;
+
+        if (Release::getVersion() < 3.2) {
+            Mensagem::printDanger('<p>Para que os alunos recebam as mensagens, o SMTP precisa estar configurado.</p>
+                    <p><a href="https://moodle.eduardokraus.com/configurar-o-smtp-no-moodle"
+                          target="_blank">Leia aqui como configurar o SMTP</a></p>
+                    <p><a href="' . $CFG->wwwroot . '/admin/settings.php?section=messagesettingemail"
+                          target="_blank">Clique aqui para configurar a saída de e-mail</a></p>');
+        } else {
+            Mensagem::printDanger('<p>Para que os alunos recebam as mensagens, o SMTP precisa estar configurado.</p>
+                    <p><a href="https://moodle.eduardokraus.com/configurar-o-smtp-no-moodle"
+                          target="_blank">Leia aqui como configurar o SMTP</a></p>
+                    <p><a href="' . $CFG->wwwroot . '/admin/settings.php?section=outgoingmailconfig"
+                          target="_blank">Clique aqui para configurar a saída de e-mail</a></p>');
+        }
     }
 }

@@ -42,55 +42,49 @@ class Notifications extends NotificationsUtil {
 
         DashboardUtil::startPage('Notificações', null, 'Notifications::settings');
 
+        NotificationsUtil::mensagemNoSmtp();
+
         echo '<div class="element-box">';
         echo '<h3>Notificações</h3>';
 
         echo '<p>Receba notificações sempre que uma ação acontecer no Moodle.</p>';
 
-        if (strlen(get_config('moodle', 'smtphosts')) < 5) {
-            Mensagem::printDanger('<p>Este recurso precisa do SMTP configurado.</p>
-                    <p><a href="https://moodle.eduardokraus.com/configurar-o-smtp-no-moodle"
-                          target="_blank">Leia aqui como configurar o SMTP</a></p>
-                    <p><a href="' . $CFG->wwwroot . '/admin/settings.php?section=messagesettingemail"
-                          target="_blank">Clique aqui para configurar a saída de e-mail</a></p>');
-        } else {
-            Botao::add('Nova notificação', 'Notifications::add', '', true, false, true);
+        Botao::add('Nova notificação', 'Notifications::add', '', true, false, true);
 
-            $events = $DB->get_records('kopere_dashboard_events');
-            $eventsList = array();
-            foreach ($events as $event) {
-                /** @var base $eventClass */
-                $eventClass = $event->event;
+        $events = $DB->get_records('kopere_dashboard_events');
+        $eventsList = array();
+        foreach ($events as $event) {
+            /** @var base $eventClass */
+            $eventClass = $event->event;
 
-                $event->module_name = $this->moduleName($event->module, false);
-                $event->event_name = $eventClass::get_name();
-                $event->acoes
-                    = "<div class=\"text-center\">
+            $event->module_name = $this->moduleName($event->module, false);
+            $event->event_name = $eventClass::get_name();
+            $event->acoes
+                = "<div class=\"text-center\">
                                     " . Botao::icon('edit', "Notifications::addSegundaEtapa&id={$event->id}", false) . "&nbsp;&nbsp;&nbsp;
                                     " . Botao::icon('delete', "Notifications::delete&id={$event->id}") . "
                                 </div>";
 
-                $eventsList[] = $event;
-            }
+            $eventsList[] = $event;
+        }
 
-            if ($events) {
-                $table = new DataTable();
-                $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT);
-                $table->addHeader('Módulo', 'module_name');
-                $table->addHeader('Ação', 'event_name');
-                $table->addHeader('Assunto', 'subject');
-                $table->addHeader('Ativo', 'status', TableHeaderItem::RENDERER_VISIBLE);
-                $table->addHeader('De', 'userfrom');
-                $table->addHeader('Para', 'userto');
-                $table->addHeader('', 'acoes', TableHeaderItem::TYPE_ACTION);
+        if ($events) {
+            $table = new DataTable();
+            $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT);
+            $table->addHeader('Módulo', 'module_name');
+            $table->addHeader('Ação', 'event_name');
+            $table->addHeader('Assunto', 'subject');
+            $table->addHeader('Ativo', 'status', TableHeaderItem::RENDERER_VISIBLE);
+            $table->addHeader('De', 'userfrom');
+            $table->addHeader('Para', 'userto');
+            $table->addHeader('', 'acoes', TableHeaderItem::TYPE_ACTION);
 
-                // $table->setClickRedirect ( 'Users::details&userid={id}', 'id' );
-                $table->printHeader();
-                $table->setRow($events);
-                $table->close();
-            } else {
-                Mensagem::printWarning('Nenhuma notificação!');
-            }
+            // $table->setClickRedirect ( 'Users::details&userid={id}', 'id' );
+            $table->printHeader();
+            $table->setRow($events);
+            $table->close();
+        } else {
+            Mensagem::printWarning('Nenhuma notificação!');
         }
 
         echo '</div>';
