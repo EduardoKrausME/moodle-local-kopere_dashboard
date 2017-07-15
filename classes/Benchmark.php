@@ -67,11 +67,11 @@ class Benchmark {
 
         $score = $test->get_total();
         if ($score < 4) {
-            Mensagem::printInfo('<strong>Tempo total:</strong>    ' . $this->formatNumber($score));
+            Mensagem::printInfo('<strong>Tempo total:</strong>    ' . $this->formatNumber($score) . ' segundos');
         } else if ($score < 8) {
-            Mensagem::printWarning('<strong>Tempo total:</strong> ' . $this->formatNumber($score));
+            Mensagem::printWarning('<strong>Tempo total:</strong> ' . $this->formatNumber($score) . ' segundos');
         } else {
-            Mensagem::printDanger('<strong>Tempo total:</strong>  ' . $this->formatNumber($score));
+            Mensagem::printDanger('<strong>Tempo total:</strong>  ' . $this->formatNumber($score) . ' segundos');
         }
 
         echo '<table class="table" id="benchmarkresult">
