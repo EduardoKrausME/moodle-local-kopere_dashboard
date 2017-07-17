@@ -23,7 +23,7 @@
 
 namespace local_kopere_dashboard;
 
-use local_kopere_dashboard\html\Botao;
+use local_kopere_dashboard\html\Button;
 use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\Form;
 use local_kopere_dashboard\html\inputs\InputCheckbox;
@@ -36,6 +36,7 @@ use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Html;
 use local_kopere_dashboard\util\Mensagem;
 use local_kopere_dashboard\util\ServerUtil;
+use local_kopere_dashboard\util\TitleUtil;
 use local_kopere_dashboard\vo\kopere_dashboard_menu;
 use local_kopere_dashboard\vo\kopere_dashboard_webpages;
 
@@ -43,22 +44,22 @@ class WebPages {
     public function dashboard() {
         global $DB, $CFG;
 
-        DashboardUtil::startPage('Páginas estáticas', null, 'WebPages::settings', 'Páginas-estáticas');
+        DashboardUtil::startPage(get_string_kopere('webpages_title'), null, 'WebPages::settings', 'Páginas-estáticas');
 
         echo '<div class="element-box">';
-        echo '<h3>Menus de navegação</h3>';
+        TitleUtil::printH3('webpages_subtitle');
 
         $menus = $DB->get_records('kopere_dashboard_menu', null, 'title ASC');
 
-        Botao::add('Criar novo Menu', 'WebPages::editMenu', '', true, false, true);
+        Button::add(get_string_kopere('webpages_menu_create'), 'WebPages::editMenu', '', true, false, true);
 
         if (!$menus) {
-            Botao::help('webpages', 'Ajuda com Menus', 'Páginas-estáticas');
+            Button::help('webpages', get_string_kopere('webpages_menu_help'), 'Páginas-estáticas');
         } else {
             $table = new DataTable();
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px');
-            $table->addHeader('Link', 'link');
-            $table->addHeader('Título', 'title');
+            $table->addHeader(get_string_kopere('webpages_table_link'), 'link');
+            $table->addHeader(get_string_kopere('webpages_table_title'), 'title');
 
             $table->setClickModal('open-ajax-table.php?WebPages::editMenu&id={id}', 'id');
             $table->printHeader('', false);
@@ -69,17 +70,17 @@ class WebPages {
 
         if ($menus) {
             echo '<div class="element-box">';
-            echo '<h3>Páginas</h3>';
-            Botao::add('Criar nova página', 'WebPages::editPage');
+            TitleUtil::printH3('webpages_title');
+            Button::add(get_string_kopere('webpages_page_create'), 'WebPages::editPage');
 
             $pages = $DB->get_records('kopere_dashboard_webpages', null, 'pageorder ASC');
 
             $table = new DataTable();
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px');
-            $table->addHeader('Link', 'link');
-            $table->addHeader('Título', 'title');
-            $table->addHeader('Visível', 'visible', TableHeaderItem::RENDERER_VISIBLE);
-            $table->addHeader('Ordem', 'pageorder', TableHeaderItem::TYPE_INT);
+            $table->addHeader(get_string_kopere('webpages_table_link'), 'link');
+            $table->addHeader(get_string_kopere('webpages_table_link'), 'title');
+            $table->addHeader(get_string_kopere('webpages_table_visible'), 'visible', TableHeaderItem::RENDERER_VISIBLE);
+            $table->addHeader(get_string_kopere('webpages_table_order'), 'pageorder', TableHeaderItem::TYPE_INT);
 
             $table->setClickRedirect('WebPages::details&id={id}', 'id');
             $table->printHeader('', false);
@@ -89,7 +90,7 @@ class WebPages {
             echo '</div>';
         }
 
-        Botao::info('Se alterar a URL e as imagens derem CRASH, clique aqui', $CFG->wwwroot . '/admin/tool/replace/');
+        Button::info(get_string_kopere('webpages_page_crash'), $CFG->wwwroot . '/admin/tool/replace/');
 
         DashboardUtil::endPage();
     }
@@ -100,33 +101,33 @@ class WebPages {
         $id = optional_param('id', 0, PARAM_INT);
         /** @var kopere_dashboard_webpages $webpages */
         $webpages = $DB->get_record('kopere_dashboard_webpages', array('id' => $id));
-        Header::notfoundNull($webpages, 'Página não localizada!');
+        Header::notfoundNull($webpages, get_string_kopere('webpages_page_notfound'));
 
         DashboardUtil::startPage(array(
-            array('WebPages::dashboard', 'Páginas estáticas'),
+            array('WebPages::dashboard', get_string_kopere('webpages_title')),
             $webpages->title
         ));
         echo '<div class="element-box">';
 
         $linkPagina = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";
 
-        Botao::info('Visualizar a página', $linkPagina, '', false);
-        Botao::edit('Editar página', 'WebPages::editPage&id=' . $webpages->id, 'margin-left-15', false);
-        Botao::delete('Excluir página', 'WebPages::deletePage&id=' . $webpages->id, 'margin-left-15', false, false, true);
+        Button::info(get_string_kopere('webpages_page_view'), $linkPagina, '', false);
+        Button::edit(get_string_kopere('webpages_page_edit'), 'WebPages::editPage&id=' . $webpages->id, 'margin-left-15', false);
+        Button::delete(get_string_kopere('webpages_page_delete'), 'WebPages::deletePage&id=' . $webpages->id, 'margin-left-15', false, false, true);
 
         $form = new Form();
-        $form->printPanel('Link', "<a target='_blank' href='$linkPagina'>$linkPagina</a>");
-        $form->printPanel('Título', $webpages->title);
-        $form->printPanel('Link', $webpages->link);
+        $form->printPanel(get_string_kopere('webpages_table_link'), "<a target='_blank' href='$linkPagina'>$linkPagina</a>");
+        $form->printPanel(get_string_kopere('webpages_table_title'), $webpages->title);
+        $form->printPanel(get_string_kopere('webpages_table_link'), $webpages->link);
         if ($webpages->courseid) {
             $course = $DB->get_record('course', array('id' => $webpages->courseid));
             if ($course) {
-                $form->printPanel('Curso Vinculado', '<a href="?Courses::details&courseid=' . $webpages->courseid . '">' . $course->fullname . '</a>');
+                $form->printPanel(get_string_kopere('webpages_page_course'), '<a href="?Courses::details&courseid=' . $webpages->courseid . '">' . $course->fullname . '</a>');
             }
         }
-        $form->printPanel('Layout', $this->themeName($webpages->theme));
-        $form->printPanel('Texto', $webpages->text);
-        $form->printPanel('Visível', $webpages->visible ? 'sim' : 'não');
+        $form->printPanel(get_string_kopere('webpages_table_theme'), $this->themeName($webpages->theme));
+        $form->printPanel(get_string_kopere('webpages_table_text'), $webpages->text);
+        $form->printPanel(get_string_kopere('webpages_table_visible'), $webpages->visible ? get_string('yes') : get_string('no'));
 
         echo '</div>';
         DashboardUtil::endPage();
@@ -144,15 +145,15 @@ class WebPages {
             $webpages = kopere_dashboard_webpages::createNew();
             $webpages->theme = get_config('local_kopere_dashboard', 'webpages_theme');
             DashboardUtil::startPage(array(
-                array('WebPages::dashboard', 'Páginas estáticas'),
-                'Nova página'
+                array('WebPages::dashboard', get_string_kopere('webpages_title')),
+                get_string_kopere('webpages_page_new')
             ));
         } else {
             $webpages = kopere_dashboard_webpages::createBlank($webpages);
             DashboardUtil::startPage(array(
-                array('WebPages::dashboard', 'Páginas estáticas'),
+                array('WebPages::dashboard', get_string_kopere('webpages_title')),
                 array('WebPages::details&id=' . $webpages->id, $webpages->title),
-                'Editando página'
+                get_string_kopere('webpages_page_edit')
             ));
         }
 
@@ -161,41 +162,41 @@ class WebPages {
         $form = new Form('WebPages::editPageSave');
         $form->createHiddenInput('id', $webpages->id);
         $form->addInput(
-            InputText::newInstance()->setTitle('Título')
+            InputText::newInstance()->setTitle(get_string_kopere('webpages_page_title'))
                 ->setName('title')
                 ->setValue($webpages->title)
                 ->setRequired()
         );
         $form->addInput(
-            InputText::newInstance()->setTitle('Link')
+            InputText::newInstance()->setTitle(get_string_kopere('webpages_page_link'))
                 ->setName('link')
                 ->setValue($webpages->link)
                 ->setRequired()
         );
         $form->addInput(
-            InputSelect::newInstance()->setTitle('Menu')
+            InputSelect::newInstance()->setTitle(get_string_kopere('webpages_page_menu'))
                 ->setName('menuid')
                 ->setValues(self::listMenus())
                 ->setValue($webpages->menuid));
         $form->addInput(
-            InputSelect::newInstance()->setTitle('Layout')
+            InputSelect::newInstance()->setTitle(get_string_kopere('webpages_table_theme'))
                 ->setName('theme')
                 ->setValues($this->listThemes())
                 ->setValue($webpages->theme));
 
         $form->addInput(
-            InputHtmlEditor::newInstance()->setTitle('Texto')
+            InputHtmlEditor::newInstance()->setTitle(get_string_kopere('webpages_table_text'))
                 ->setName('text')
                 ->setValue($webpages->text)
                 ->setRequired()
         );
 
         $form->addInput(
-            InputCheckbox::newInstance()->setTitle('Visível')
+            InputCheckbox::newInstance()->setTitle(get_string_kopere('webpages_table_visible'))
                 ->setName('visible')
                 ->setChecked($webpages->visible));
 
-        $form->createSubmitInput('Salvar');
+        $form->createSubmitInput(get_string_kopere('webpages_page_save'));
         $form->close();
 
         ?>
@@ -224,14 +225,14 @@ class WebPages {
         $webpages->id = optional_param('id', 0, PARAM_INT);
 
         if ($webpages->title == '' || $webpages->text == '') {
-            Mensagem::agendaMensagemWarning('Todos os dados devem ser preenchidos!');
+            Mensagem::agendaMensagemWarning(get_string_kopere('webpages_page_error'));
             $this->editPage();
         } else {
             if ($webpages->id) {
-                Mensagem::agendaMensagemSuccess('Página atualizada!');
+                Mensagem::agendaMensagemSuccess(get_string_kopere('webpages_page_updated'));
                 $DB->update_record('kopere_dashboard_webpages', $webpages);
             } else {
-                Mensagem::agendaMensagemSuccess('Página criada!');
+                Mensagem::agendaMensagemSuccess(get_string_kopere('webpages_page_created'));
                 $webpages->id = $DB->insert_record('kopere_dashboard_webpages', $webpages);
             }
 
@@ -247,26 +248,26 @@ class WebPages {
         $id = optional_param('id', 0, PARAM_INT);
         /** @var kopere_dashboard_webpages $webpages */
         $webpages = $DB->get_record('kopere_dashboard_webpages', array('id' => $id));
-        Header::notfoundNull($webpages, 'Página não localizada!');
+        Header::notfoundNull($webpages, get_string_kopere('webpages_page_notfound'));
 
         if ($status == 'sim') {
             $DB->delete_records('kopere_dashboard_webpages', array('id' => $id));
 
             self::deleteCache();
-            Mensagem::agendaMensagemSuccess('Página excluída com sucesso!');
+            Mensagem::agendaMensagemSuccess(get_string_kopere('webpages_page_deleted'));
             Header::location('WebPages::dashboard');
         }
 
         DashboardUtil::startPage(array(
-            array('WebPages::dashboard', 'Páginas estáticas'),
+            array('WebPages::dashboard', get_string_kopere('webpages_title')),
             array('WebPages::details&id=' . $webpages->id, $webpages->title),
-            'Excluíndo Página'
+            get_string_kopere('webpages_page_delete')
         ));
 
-        echo "<h3>Excluíndo Página</h3>
-              <p>Deseja realmente excluir a página <strong>{$webpages->title}</strong>?</p>";
-        Botao::delete('Sim', 'WebPages::deletePage&status=sim&id=' . $webpages->id, '', false);
-        Botao::add('Não', 'WebPages::details&id=' . $webpages->id, 'margin-left-10', false);
+        TitleUtil::printH3('Excluíndo Página');
+        echo "<p>".get_string_kopere('webpages_page_delete_confirm', $webpages)."</p>";
+        Button::delete(get_string('yes'), 'WebPages::deletePage&status=sim&id=' . $webpages->id, '', false);
+        Button::add(get_string('no'), 'WebPages::details&id=' . $webpages->id, 'margin-left-10', false);
 
         DashboardUtil::endPage();
     }
@@ -283,22 +284,22 @@ class WebPages {
             $menus->theme = get_config('kopere_dashboard_menu', 'webpages_theme');
             if (!AJAX_SCRIPT) {
                 DashboardUtil::startPage(array(
-                    array('WebPages::dashboard', 'Páginas estáticas'),
-                    'Novo Menu'
+                    array('WebPages::dashboard', get_string_kopere('webpages_title')),
+                    get_string_kopere('webpages_menu_new')
                 ));
             } else {
-                DashboardUtil::startPopup('Novo Menu', 'WebPages::editMenuSave');
+                DashboardUtil::startPopup(get_string_kopere('webpages_menu_new'), 'WebPages::editMenuSave');
             }
         } else {
             $menus = kopere_dashboard_menu::createBlank($menus);
 
             if (!AJAX_SCRIPT) {
                 DashboardUtil::startPage(array(
-                    array('WebPages::dashboard', 'Páginas estáticas'),
-                    'Editando Menu'
+                    array('WebPages::dashboard', get_string_kopere('webpages_title')),
+                    get_string_kopere('webpages_menu_edit')
                 ));
             } else {
-                DashboardUtil::startPopup('Editando Menu', 'WebPages::editMenuSave');
+                DashboardUtil::startPopup(get_string_kopere('webpages_menu_edit'), 'WebPages::editMenuSave');
             }
         }
 
@@ -311,20 +312,20 @@ class WebPages {
         }
         $form->createHiddenInput('id', $menus->id);
         $form->addInput(
-            InputText::newInstance()->setTitle('Título do Menu')
+            InputText::newInstance()->setTitle(get_string_kopere('webpages_menu_title'))
                 ->setName('title')
                 ->setValue($menus->title)
                 ->setRequired()
         );
 
         $form->addInput(
-            InputText::newInstance()->setTitle('Link do Menu  ')
+            InputText::newInstance()->setTitle(get_string_kopere('webpages_menu_link'))
                 ->setName('link')
                 ->setValue($menus->link)
                 ->setRequired()
         );
         if (!AJAX_SCRIPT) {
-            $form->createSubmitInput('Salvar');
+            $form->createSubmitInput(get_string_kopere('webpages_menu_save'));
         }
         $form->close();
 
@@ -364,13 +365,13 @@ class WebPages {
         $menu->id = optional_param('id', 0, PARAM_INT);
 
         if ($menu->title == '') {
-            Mensagem::agendaMensagemWarning('Todos os dados devem ser preenchidos!');
+            Mensagem::agendaMensagemWarning(get_string_kopere('webpages_menu_error'));
         } else {
             if ($menu->id) {
-                Mensagem::agendaMensagemSuccess('Menu atualizado!');
+                Mensagem::agendaMensagemSuccess(get_string_kopere('webpages_menu_updated'));
                 $DB->update_record('kopere_dashboard_menu', $menu);
             } else {
-                Mensagem::agendaMensagemSuccess('Menu criado!');
+                Mensagem::agendaMensagemSuccess(get_string_kopere('webpages_menu_created'));
                 $menu->id = $DB->insert_record('kopere_dashboard_menu', $menu);
             }
 
@@ -386,25 +387,25 @@ class WebPages {
         $id = optional_param('id', 0, PARAM_INT);
         /** @var kopere_dashboard_menu $menu */
         $menu = $DB->get_record('kopere_dashboard_menu', array('id' => $id));
-        Header::notfoundNull($menu, 'Página não localizada!');
+        Header::notfoundNull($menu, get_string_kopere('webpages_page_notfound'));
 
         if ($status == 'sim') {
             $DB->delete_records('kopere_dashboard_menu', array('id' => $id));
 
             self::deleteCache();
-            Mensagem::agendaMensagemSuccess('Menu excluída com sucesso!');
+            Mensagem::agendaMensagemSuccess(get_string_kopere('webpages_menu_deleted'));
             Header::location('WebPages::dashboard');
         }
 
         DashboardUtil::startPage(array(
-            array('WebPages::dashboard', 'Menu estáticas'),
+            array('WebPages::dashboard', get_string_kopere('webpages_menu_subtitle')),
             array('WebPages::details&id=' . $menu->id, $menu->title),
-            'Excluíndo Menu'
+            get_string_kopere('webpages_menu_delete')
         ));
 
         echo "<p>Deseja realmente excluir o menu <strong>{$menu->title}</strong>?</p>";
-        Botao::delete('Sim', 'WebPages::deleteMenu&status=sim&id=' . $menu->id, '', false);
-        Botao::add('Não', 'WebPages::dashboard', 'margin-left-10', false);
+        Button::delete(get_string('yes'), 'WebPages::deleteMenu&status=sim&id=' . $menu->id, '', false);
+        Button::add(get_string('no'), 'WebPages::dashboard', 'margin-left-10', false);
 
         DashboardUtil::endPage();
     }
@@ -493,29 +494,37 @@ class WebPages {
         return $returnMenus;
     }
 
-    private function listThemes() {
+    private function listThemes()
+    {
         $layouts = array(
-            array('key' => 'base',
-                'value' => 'O layout sem os blocos'
+            array(
+                'key' => 'base',
+                'value' => 'webpages_theme_base'
             ),
-            array('key' => 'standard',
-                'value' => 'Layout padrão com blocos'
+            array(
+                'key' => 'standard',
+                'value' => 'webpages_theme_standard'
             ),
-            array('key' => 'frontpage',
-                'value' => 'Layout da home page do site.'
+            array(
+                'key' => 'frontpage',
+                'value' => 'webpages_theme_frontpage'
             ),
-            array('key' => 'popup',
-                'value' => 'Sem navegação, sem blocos, sem cabeçalho'
+            array(
+                'key' => 'popup',
+                'value' => 'webpages_theme_popup'
             ),
-            array('key' => 'frametop',
-                'value' => 'Sem blocos e rodapé mínimo'
+            array(
+                'key' => 'frametop',
+                'value' => 'webpages_theme_frametop'
             ),
-            array('key' => 'print',
-                'value' => 'Deve exibir apenas o conteúdo e os cabeçalhos básicos'
+            array(
+                'key' => 'print',
+                'value' => 'webpages_theme_print'
             ),
-            array('key' => 'report',
-                'value' => 'O layout da página usado para relatórios'
-            ),
+            array(
+                'key' => 'report',
+                'value' => 'webpages_theme_report'
+            )
         );
 
         return $layouts;
@@ -523,19 +532,19 @@ class WebPages {
 
     public function settings() {
         ob_clean();
-        DashboardUtil::startPopup('Configurações das páginas estáticas', 'Settings::settingsSave');
+        DashboardUtil::startPopup(get_string_kopere('webpages_page_settigs'), 'Settings::settingsSave');
 
         $form = new Form();
 
         $form->addInput(
-            InputSelect::newInstance()->setTitle('Layout da página "Todas as páginas"')
+            InputSelect::newInstance()->setTitle(get_string_kopere('webpages_page_theme'))
                 ->setValues($this->listThemes())
                 ->setValueByConfig('webpages_theme'));
 
         $form->addInput(
-            InputText::newInstance()->setTitle('ID de acompanhamento do Google Analytics')
+            InputText::newInstance()->setTitle(get_string_kopere('webpages_page_analytics'))
                 ->setValueByConfig('webpages_analytics_id')
-                ->setDescription('Sequencia de 13 caracteres, iniciando em UA'));
+                ->setDescription(get_string_kopere('webpages_page_analyticsdesc') ));
 
         $form->close();
 

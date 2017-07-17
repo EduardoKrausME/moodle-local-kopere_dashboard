@@ -99,7 +99,7 @@ class DataTable {
 
     public function printHeader($class = '', $printBody = true) {
         if ($this->isExport && $this->ajaxUrl == null) {
-            Botao::info('Exportar para Excel', "?{$_SERVER['QUERY_STRING']}&export=xls");
+            Button::info('Exportar para Excel', "?{$_SERVER['QUERY_STRING']}&export=xls");
 
             Export::exportHeader(optional_param('export', '', PARAM_TEXT));
         }
@@ -237,6 +237,7 @@ class DataTable {
                   {$this->tableId} = null;
                   \$(document).ready( function() {
                       {$this->tableId} = \$( '#{$this->tableId}' ).DataTable({
+                          oLanguage   : dataTables_oLanguage,
                           {$ajaxConfig}
                           autoWidth  : false,
                           columns    : [ {$columnData} ],

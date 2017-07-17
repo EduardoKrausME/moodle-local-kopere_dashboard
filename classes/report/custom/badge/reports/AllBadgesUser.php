@@ -22,7 +22,7 @@
 
 namespace local_kopere_dashboard\report\custom\badge\reports;
 
-use local_kopere_dashboard\html\Botao;
+use local_kopere_dashboard\html\Button;
 use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\TableHeaderItem;
 use local_kopere_dashboard\report\custom\ReportInterface;
@@ -73,7 +73,7 @@ class AllBadgesUser implements ReportInterface {
             $report[] = $item;
         }
 
-        Botao::info(get_string('managebadges', 'badges'), "{$CFG->wwwroot}/badges/index.php?type=1");
+        Button::info(get_string('managebadges', 'badges'), "{$CFG->wwwroot}/badges/index.php?type=1");
 
         $table = new DataTable();
         $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px');

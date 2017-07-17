@@ -23,7 +23,7 @@
 
 namespace local_kopere_dashboard;
 
-use local_kopere_dashboard\html\Botao;
+use local_kopere_dashboard\html\Button;
 use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\Form;
 use local_kopere_dashboard\html\inputs\InputBase;
@@ -32,27 +32,28 @@ use local_kopere_dashboard\html\inputs\InputText;
 use local_kopere_dashboard\html\TableHeaderItem;
 use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Json;
+use local_kopere_dashboard\util\TitleUtil;
 
 class UsersOnline {
 
     public function dashboard() {
-        DashboardUtil::startPage('Usuários Online', null, 'UsersOnline::settings', 'Usuários-Online');
+        DashboardUtil::startPage(get_string_kopere('useronline_title'), null, 'UsersOnline::settings', 'Usuários-Online');
 
         echo '<div class="element-box table-responsive">';
-        echo '<h3>Abas abertas com o Moodle</h3>';
+        TitleUtil::printH3('useronline_subtitle');
 
         $table = new DataTable();
         $table->addHeader('#', 'userid', TableHeaderItem::TYPE_INT);
-        $table->addHeader('Nome', 'fullname');
-        $table->addHeader('Data', 'servertime', TableHeaderItem::RENDERER_DATE);
+        $table->addHeader(get_string_kopere('useronline_table_fullname'), 'fullname');
+        $table->addHeader(get_string_kopere('useronline_table_date'), 'servertime', TableHeaderItem::RENDERER_DATE);
 
         if (get_config('local_kopere_dashboard', 'nodejs-status')) {
-            $table->addHeader('Página', 'page');
-            $table->addHeader('Foco', 'focus', TableHeaderItem::RENDERER_TRUEFALSE);
-            $table->addHeader('Monitor', 'screen');
-            $table->addHeader('Navegador', 'navigator');
-            $table->addHeader('Sistema Operacional', 'os');
-            $table->addHeader('Device', 'device');
+            $table->addHeader(get_string_kopere('useronline_table_page'), 'page');
+            $table->addHeader(get_string_kopere('useronline_table_focus'), 'focus', TableHeaderItem::RENDERER_TRUEFALSE);
+            $table->addHeader(get_string_kopere('useronline_table_screen'), 'screen');
+            $table->addHeader(get_string_kopere('useronline_table_navigator'), 'navigator');
+            $table->addHeader(get_string_kopere('useronline_table_os'), 'os');
+            $table->addHeader(get_string_kopere('useronline_table_device'), 'device');
         }
 
         $table->setAjaxUrl('UsersOnline::loadAllUsers');
@@ -106,14 +107,14 @@ class UsersOnline {
 
     public function settings() {
         ob_clean();
-        DashboardUtil::startPopup('Configurações do servidor sincronização de Usuários On-line', 'Settings::settingsSave');
+        DashboardUtil::startPopup(get_string_kopere('useronline_settings_title'), 'Settings::settingsSave');
 
         $form = new Form();
 
-        $form->printRowOne('', Botao::help('Usuários-Online'));
+        $form->printRowOne('', Button::help('Usuários-Online'));
 
         $form->addInput(
-            InputCheckbox::newInstance()->setTitle('Habilitar Servidor de sincronização de Usuários On-line')
+            InputCheckbox::newInstance()->setTitle(get_string_kopere('useronline_settings_status'))
                 ->setCheckedByConfig('nodejs-status'));
 
         echo '<div class="area-status-nodejs">';
@@ -121,15 +122,15 @@ class UsersOnline {
         $form->printSpacer(10);
 
         $form->addInput(
-            InputCheckbox::newInstance()->setTitle('Habilitar SSL?')
+            InputCheckbox::newInstance()->setTitle(get_string_kopere('useronline_settings_ssl'))
                 ->setCheckedByConfig('nodejs-ssl'));
 
         $form->addInput(
-            InputText::newInstance()->setTitle('URL do servidor')
+            InputText::newInstance()->setTitle(get_string_kopere('useronline_settings_url'))
                 ->setValueByConfig('nodejs-url'));
 
         $form->addInput(
-            InputText::newInstance()->setTitle('Porta do servidor')
+            InputText::newInstance()->setTitle(get_string_kopere('useronline_settings_port'))
                 ->setValueByConfig('nodejs-port')
                 ->addValidator(InputBase::VAL_INT));
 
@@ -139,13 +140,15 @@ class UsersOnline {
 
         ?>
         <script>
-            $('#nodejs-status').click(statusNodeChange);
+           jQuery('#nodejs-status').click(statusNodeChange);
 
             function statusNodeChange(delay) {
                 if (delay != 0) {
                     delay = 400;
                 }
+                console.log('nodejs-status Click');
                 if ($('#nodejs-status').is(":checked")) {
+                    console.log('nodejs-status');
                     $('.area-status-nodejs').show(delay);
                 }
                 else {

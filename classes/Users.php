@@ -27,22 +27,23 @@ use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\TableHeaderItem;
 use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\DatatableSearchUtil;
+use local_kopere_dashboard\util\TitleUtil;
 
 class Users {
     public function dashboard() {
         DashboardUtil::startPage('Usuários');
 
         echo '<div class="element-box table-responsive">';
-        echo '<h3>Usuários</h3>';
+        TitleUtil::printH3('user_title');
 
         $table = new DataTable();
         $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT);
-        $table->addHeader('Nome', 'nome');
-        $table->addHeader('Username', 'username');
-        $table->addHeader('E-mail', 'email');
-        $table->addHeader('Telefone Fixo', 'phone1');
-        $table->addHeader('Celular', 'phone2');
-        $table->addHeader('Cidade', 'city');
+        $table->addHeader(get_string_kopere('user_table_fullname'), 'fullname');
+        $table->addHeader(get_string_kopere('user_table_username'), 'username');
+        $table->addHeader(get_string_kopere('user_table_email'), 'email');
+        $table->addHeader(get_string_kopere('user_table_phone'), 'phone1');
+        $table->addHeader(get_string_kopere('user_table_celphone'), 'phone2');
+        $table->addHeader(get_string_kopere('user_table_city'), 'city');
 
         $table->setAjaxUrl('Users::loadAllUsers');
         $table->setClickRedirect('Users::details&userid={id}', 'id');
@@ -56,7 +57,7 @@ class Users {
     public function loadAllUsers() {
         $columnSelect = array(
             'id',
-            'concat(firstname, " ", lastname) as nome',
+            'concat(firstname, " ", lastname) as fullname',
             'username',
             'email',
             'phone1',
@@ -65,7 +66,7 @@ class Users {
         );
         $columnOrder = array(
             'id',
-            array('nome', 'concat(firstname, \' \', lastname)'),
+            array('fullname', 'concat(firstname, \' \', lastname)'),
             'username',
             'email',
             'phone1',

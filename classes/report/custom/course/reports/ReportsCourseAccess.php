@@ -23,7 +23,7 @@
 
 namespace local_kopere_dashboard\report\custom\course\reports;
 
-use local_kopere_dashboard\html\Botao;
+use local_kopere_dashboard\html\Button;
 use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\TableHeaderItem;
 use local_kopere_dashboard\report\custom\ReportInterface;
@@ -96,7 +96,7 @@ class ReportsCourseAccess implements ReportInterface {
 
         $sections = $DB->get_records('course_sections', array('course' => $cursosId), 'section asc');
 
-        Botao::info('Exportar para Excel', "?{$_SERVER['QUERY_STRING']}&export=xls");
+        Button::info('Exportar para Excel', "?{$_SERVER['QUERY_STRING']}&export=xls");
 
         $export = optional_param('export', '', PARAM_TEXT);
         Export::exportHeader($export, "Lista de alunos - $course->fullname");

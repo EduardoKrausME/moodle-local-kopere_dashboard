@@ -23,26 +23,24 @@
 
 namespace local_kopere_dashboard;
 
-use local_kopere_dashboard\html\Botao;
+use local_kopere_dashboard\html\Button;
 use local_kopere_dashboard\report\ReportBenchmark;
 use local_kopere_dashboard\report\ReportBenchmark_test;
 use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Mensagem;
+use local_kopere_dashboard\util\TitleUtil;
 
 class Benchmark {
     public function test() {
-        DashboardUtil::startPage('Teste de desempenho', null, null, 'Performace');
+        DashboardUtil::startPage(get_string_kopere('benchmark_title'), null, null, 'Performace');
 
         echo '<div class="element-box">';
-        Mensagem::printInfo('Plug-in baseado em
+        Mensagem::printInfo(get_string_kopere('benchmark_based').'
                     <a class="alert-link" href="https://moodle.org/plugins/report_benchmark"
                        target="_blank">report_benchmark</a>');
 
-        echo '<div style="text-align: center;">
-                  <p>Este teste pode demorar até 3 minutos para executar. </p>
-                  <p>Tente fazer mais de uma vês o teste para ter uma média.</p>
-                  <p>E, não execute em horário de picos.</p>';
-        Botao::add('Executar o teste', 'Benchmark::execute');
+        echo '<div style="text-align: center;">'.get_string_kopere('benchmark_info');
+        Button::add(get_string_kopere('benchmark_execute'), 'Benchmark::execute');
         echo '</div>';
 
         echo '</div>';
@@ -54,34 +52,34 @@ class Benchmark {
         global $CFG;
 
         DashboardUtil::startPage(array(
-            array('Benchmark::test', 'Teste de desempenho'),
-            'Desempenho'
+            array('Benchmark::test', get_string_kopere('benchmark_title')),
+            get_string_kopere('benchmark_executing')
         ));
 
-        require_once($CFG->libdir . '/filelib.php');
+        require_once($CFG->libdir.'/filelib.php');
 
         echo '<div class="element-box">';
-        echo '<h3>Teste da performance da hospedagem</h3>';
+        TitleUtil::printH3 ('benchmark_title2');
 
         $test = new ReportBenchmark();
 
         $score = $test->get_total();
         if ($score < 4) {
-            Mensagem::printInfo('<strong>Tempo total:</strong>    ' . $this->formatNumber($score) . ' segundos');
+            Mensagem::printInfo('<strong>'.get_string_kopere('benchmark_timetotal').'</strong>    '.$this->formatNumber($score).' '.get_string_kopere('benchmark_seconds'));
         } else if ($score < 8) {
-            Mensagem::printWarning('<strong>Tempo total:</strong> ' . $this->formatNumber($score) . ' segundos');
+            Mensagem::printWarning('<strong>'.get_string_kopere('benchmark_timetotal').'</strong> '.$this->formatNumber($score).' '.get_string_kopere('benchmark_seconds'));
         } else {
-            Mensagem::printDanger('<strong>Tempo total:</strong>  ' . $this->formatNumber($score) . ' segundos');
+            Mensagem::printDanger('<strong>'.get_string_kopere('benchmark_timetotal').'</strong>  '.$this->formatNumber($score).' '.get_string_kopere('benchmark_seconds'));
         }
 
         echo '<table class="table" id="benchmarkresult">
                   <thead>
                       <tr>
                           <th class="text-center media-middle">#</th>
-                          <th>Descrição</th>
-                          <th class="media-middle">Tempo, em segundos</th>
-                          <th class="media-middle">Valor máximo aceitável</th>
-                          <th class="media-middle">Limite crítico</th>
+                          <th>'.get_string_kopere('benchmark_decription').'</th>
+                          <th class="media-middle">'.get_string_kopere('benchmark_timesec').'</th>
+                          <th class="media-middle">'.get_string_kopere('benchmark_max').'</th>
+                          <th class="media-middle">'.get_string_kopere('benchmark_critical').'</th>
                       </tr>
                   </thead>
                   <tbody>';
@@ -90,15 +88,15 @@ class Benchmark {
             echo "<tr class=\"{$result['class']}\" >
                       <td class=\"text-center media-middle\">{$result['id']}</td>
                       <td >{$result['name']}<div><small>{$result['info']}</small></div></td>
-                      <td class=\"text-center media-middle\">" . $this->formatNumber($result['during']) . "</td>
-                      <td class=\"text-center media-middle\">" . $this->formatNumber($result['limit']) . "</td>
-                      <td class=\"text-center media-middle\">" . $this->formatNumber($result['over']) . "</td>
+                      <td class=\"text-center media-middle\">".$this->formatNumber($result['during'])."</td>
+                      <td class=\"text-center media-middle\">".$this->formatNumber($result['limit'])."</td>
+                      <td class=\"text-center media-middle\">".$this->formatNumber($result['over'])."</td>
                   </tr>";
         }
 
         echo '</tbody></table>';
 
-        echo '<h3>Teste das configurações do Moodle</h3>';
+        TitleUtil::printH3('benchmark_testconf');
         $this->performance();
 
         echo '</div>';
@@ -111,10 +109,10 @@ class Benchmark {
 
         echo "<table class=\"table\" id=\"benchmarkresult\">
                   <tr>
-                      <th>Problema</th>
-                      <th>Status</th>
-                      <th>Descrição</th>
-                      <th>Ação</th>
+                      <th>".get_string_kopere('benchmark_testconf_problem')."</th>
+                      <th>".get_string_kopere('benchmark_testconf_status')."</th>
+                      <th>".get_string_kopere('benchmark_testconf_description')."</th>
+                      <th>".get_string_kopere('benchmark_testconf_action')."</th>
                   </tr>";
 
         $tests = array(
@@ -130,7 +128,7 @@ class Benchmark {
                       <td>{$test['title']}</td>
                       <td>{$test['resposta']}</td>
                       <td>{$test['description']}</td>
-                      <td><a target=\"_blank\" href=\"{$CFG->wwwroot}/admin/{$test['url']}\">" . get_string('edit', '') . "</a></td>
+                      <td><a target=\"_blank\" href=\"{$CFG->wwwroot}/admin/{$test['url']}\">".get_string('edit', '')."</a></td>
                   </tr>";
         }
 

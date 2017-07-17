@@ -23,6 +23,7 @@
 
 ob_start();
 require('../../config.php');
+require('autoload.php');
 global $DB, $PAGE, $OUTPUT;
 
 $menu = optional_param('menu', 0, PARAM_TEXT);
@@ -99,13 +100,13 @@ if ($menu) {
     $pageHtml .= $webpages->text;
 
     // if ( $webpages->courseid ) {
-    // $pageHtml .= \local_kopere_dashboard\html\Botao::edit ( 'Matrícular neste curso', '#', \local_kopere_dashboard\html\Botao::BTN_GRANDE, true, true );
+    // $pageHtml .= \local_kopere_dashboard\html\Button::edit ( 'Matrícular neste curso', '#', \local_kopere_dashboard\html\Button::BTN_GRANDE, true, true );
     // }
 
 } else {
 
     $PAGE->set_url(new moodle_url("/local/kopere_dashboard/"));
-    $PAGE->set_title('Todas as páginas');
+    $PAGE->set_title(get_string_kopere('webpages_allpages'));
     $PAGE->set_pagelayout(get_config('local_kopere_dashboard', 'webpages_theme'));
 
     $pageHtml .= $OUTPUT->header();
@@ -114,7 +115,7 @@ if ($menu) {
     $webpagess = $DB->get_records_sql($sql);
 
     $pageHtml .= '<div class="courses frontpage-course-list-all">';
-    $pageHtml .= "<h1>Todas as Páginas</h1>";
+    $pageHtml .= \local_kopere_dashboard\util\TitleUtil::printH1('webpages_allpages');
 
     /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpages */
     foreach ($webpagess as $webpages) {

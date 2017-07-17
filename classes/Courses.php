@@ -23,7 +23,7 @@
 
 namespace local_kopere_dashboard;
 
-use local_kopere_dashboard\html\Botao;
+use local_kopere_dashboard\html\Button;
 use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\Form;
 use local_kopere_dashboard\html\inputs\InputSelect;
@@ -32,21 +32,22 @@ use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Html;
 use local_kopere_dashboard\util\Json;
+use local_kopere_dashboard\util\TitleUtil;
 use local_kopere_dashboard\vo\kopere_dashboard_webpages;
 
 class Courses {
     public function dashboard() {
-        DashboardUtil::startPage('Cursos');
+        DashboardUtil::startPage(get_string_kopere('courses_title'));
 
         echo '<div class="element-box">';
-        echo '<h3>Lista de Cursos</h3>';
+        TitleUtil::printH3('courses_title1');
 
         $table = new DataTable();
         $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px');
-        $table->addHeader('Nome do Curso', 'fullname');
-        $table->addHeader('Nome curto', 'shortname');
-        $table->addHeader('Visível', 'visible', TableHeaderItem::RENDERER_VISIBLE);
-        $table->addHeader('Nº alunos inscritos', 'inscritos', TableHeaderItem::TYPE_INT, null, 'width:50px;white-space:nowrap;');
+        $table->addHeader(get_string_kopere('courses_name'), 'fullname');
+        $table->addHeader(get_string_kopere('courses_shortname'), 'shortname');
+        $table->addHeader(get_string_kopere('courses_visible'), 'visible', TableHeaderItem::RENDERER_VISIBLE);
+        $table->addHeader(get_string_kopere('courses_enrol'), 'inscritos', TableHeaderItem::TYPE_INT, null, 'width:50px;white-space:nowrap;');
         // $table->addHeader ( 'Nº alunos que completaram', 'completed' );
 
         $table->setAjaxUrl('Courses::loadAllCourses');
@@ -108,21 +109,21 @@ class Courses {
 
         $courseid = optional_param('courseid', 0, PARAM_INT);
         if ($courseid == 0) {
-            Header::notfound('CourseID inválido!');
+            Header::notfound(get_string_kopere('courses_invalid'));
         }
 
         $course = $DB->get_record('course', array('id' => $courseid));
-        Header::notfoundNull($course, 'Curso não localizado!');
+        Header::notfoundNull($course, get_string_kopere('courses_notound'));
 
         DashboardUtil::startPage(array(
-            array('Courses::dashboard', 'Cursos'),
+            array('Courses::dashboard', get_string_kopere('courses_title')),
             $course->fullname
         ));
 
         echo '<div class="element-box">
-                  <h3>Sumário
-                      ' . Botao::info('Editar', $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '#id_summary_editor', Botao::BTN_PEQUENO, false, true) . '
-                      ' . Botao::primary('Acessar', $CFG->wwwroot . '/course/view.php?id=' . $course->id, Botao::BTN_PEQUENO, false, true) . '
+                  <h3>'.get_string_kopere('courses_sumary').'
+                      ' . Button::info(get_string_kopere('courses_edit'), $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '#id_summary_editor', Button::BTN_PEQUENO, false, true) . '
+                      ' . Button::primary(get_string_kopere('courses_acess'), $CFG->wwwroot . '/course/view.php?id=' . $course->id, Button::BTN_PEQUENO, false, true) . '
                   </h3>
                   <div class="panel panel-default">
                       <div class="panel-body">' . $course->summary . '</div>';
@@ -130,14 +131,14 @@ class Courses {
         echo '    </div>
               </div>';
 
-        echo '<div class="element-box table-responsive">
-                  <h3>Alunos matrículados</h3>';
+        echo '<div class="element-box table-responsive">';
+        TitleUtil::printH3('courses_titleenrol');
 
         $table = new DataTable();
         $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT);
-        $table->addHeader('Nome', 'nome');
-        $table->addHeader('E-mail', 'email');
-        $table->addHeader('Status da matrícula', 'status', TableHeaderItem::RENDERER_STATUS);
+        $table->addHeader(get_string_kopere('courses_student_name'), 'nome');
+        $table->addHeader(get_string_kopere('courses_student_email'), 'email');
+        $table->addHeader(get_string_kopere('courses_student_status'), 'status', TableHeaderItem::RENDERER_STATUS);
 
         $table->setAjaxUrl('Enrol::ajaxdashboard&courseid=' . $courseid);
         $table->setClickRedirect('Users::details&userid={id}', 'id');
@@ -159,7 +160,7 @@ class Courses {
             $webpagess = $DB->get_records('kopere_dashboard_webpages', array('courseid' => $course->id));
 
             if ($webpagess) {
-                echo '<h4>Páginas já criadas</h4>';
+                TitleUtil::printH4('courses_page_title');
 
                 /** @var kopere_dashboard_webpages $webpages */
                 foreach ($webpagess as $webpages) {
@@ -181,7 +182,7 @@ class Courses {
             $form->createHiddenInput('theme', get_config('local_kopere_dashboard', 'webpages_theme'));
             $form->createHiddenInput('text', $course->summary);
             $form->createHiddenInput('visible', 1);
-            $form->createSubmitInput('Criar página com base neste sumário', 'margin-left-15');
+            $form->createSubmitInput(get_string_kopere('courses_page_create'), 'margin-left-15');
             $form->close();
             echo '</div>';
         }

@@ -23,25 +23,25 @@
 
 namespace local_kopere_dashboard\util;
 
-use local_kopere_dashboard\html\Botao;
+use local_kopere_dashboard\html\Button;
 
 class DashboardUtil {
     public static $currentTitle = '';
 
-    public static function setTitulo($titulo, $infoUrl = null) {
-        self::$currentTitle = $titulo;
+    public static function setTitulo($title, $infoUrl = null) {
+        self::$currentTitle = $title;
 
         if ($infoUrl == null) {
-            return "<h3 class=\"element-header\"> $titulo </h3>";
+            return "<h3 class=\"element-header\"> $title </h3>";
         } else {
             return "<h3 class=\"element-header\">
-                        $titulo
-                        " . Botao::help($infoUrl) . "
+                        $title
+                        " . Button::help($infoUrl) . "
                     </h3>";
         }
     }
 
-    public static function startPage($breadcrumb, $tituloPagina = null, $settingUrl = null, $infoUrl = null) {
+    public static function startPage($breadcrumb, $pageTitle = null, $settingUrl = null, $infoUrl = null) {
         global $CFG, $SITE;
         $breadcrumbReturn = '';
 
@@ -55,21 +55,21 @@ class DashboardUtil {
                             <a href=\"?Dashboard::start\">Dashboard</a>
                         </li>";
 
-            $titulo = "";
+            $title = "";
             if (is_string($breadcrumb)) {
                 $breadcrumbReturn .= '<li><span>' . $breadcrumb . '</span></li>';
-                $titulo = $breadcrumb;
+                $title = $breadcrumb;
             } else if (is_array($breadcrumb)) {
                 foreach ($breadcrumb as $breadcrumbItem) {
                     if (is_string($breadcrumbItem)) {
                         $breadcrumbReturn .= '<li><span>' . $breadcrumbItem . '</span></li>';
-                        $titulo = $breadcrumbItem;
+                        $title = $breadcrumbItem;
                     } else {
                         $breadcrumbReturn
                             .= '<li>
                                     <a href="?' . $breadcrumbItem[0] . '">' . $breadcrumbItem[1] . '</a>
                                 </li>';
-                        $titulo = $breadcrumbItem[1];
+                        $title = $breadcrumbItem[1];
                     }
                 }
             }
@@ -88,8 +88,8 @@ class DashboardUtil {
             $breadcrumbReturn .= '</ul>';
             $breadcrumbReturn .= '<div class="content-i"><div class="content-box">';
 
-            if ($tituloPagina != null) {
-                $breadcrumbReturn .= self::setTitulo($tituloPagina ? $tituloPagina : $titulo, $infoUrl);
+            if ($pageTitle != null) {
+                $breadcrumbReturn .= self::setTitulo($pageTitle ? $pageTitle : $title, $infoUrl);
             }
 
             $breadcrumbReturn .= Mensagem::getMensagemAgendada();
@@ -177,7 +177,7 @@ class DashboardUtil {
 
     private static $_isWithForm = false;
 
-    public static function startPopup($titulo, $formAction = null) {
+    public static function startPopup($title, $formAction = null) {
         if ($formAction) {
             echo '<form method="post" class="validate" enctype="multipart/form-data" >';
             echo '<input type="hidden" name="POST"  value="true" />';
@@ -189,7 +189,7 @@ class DashboardUtil {
 
         echo '<div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">' . $titulo . '</h4>
+                <h4 class="modal-title">' . $title . '</h4>
               </div>
               <div class="modal-body">';
 
@@ -204,17 +204,17 @@ class DashboardUtil {
                   <div class=\"modal-footer\">";
 
             if ($deleteButtonUrl) {
-                Botao::delete('Excluir', $deleteButtonUrl, 'float-left', false, false, true);
+                Button::delete('Excluir', $deleteButtonUrl, 'float-left', false, false, true);
             }
 
-            echo "    <button class=\"btn btn-default\" data-dismiss=\"modal\">Cancelar</button>
-                      <input type=\"submit\" class=\"btn btn-primary margin-left-15\" value=\"Salvar\">
+            echo "    <button class=\"btn btn-default\" data-dismiss=\"modal\">".get_string('cancel')."</button>
+                      <input type=\"submit\" class=\"btn btn-primary margin-left-15\" value=\"".get_string('savechanges')."\">
                   </div>
                   </form>";
         } else {
             echo "</div>
                   <div class=\"modal-footer\">
-                      <button class=\"btn btn-default\" data-dismiss=\"modal\">Fechar</button>
+                      <button class=\"btn btn-default\" data-dismiss=\"modal\">".get_string('close')."</button>
                   </div>";
         }
         echo "<script>

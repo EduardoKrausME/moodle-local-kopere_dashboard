@@ -38,20 +38,20 @@ class UserEnrolment {
         $ueid = optional_param('ueid', 0, PARAM_INT);
         $enrolment = $DB->get_record('user_enrolments', array('id' => $ueid), '*');
 
-        Header::notfoundNull($enrolment, 'UE não localizado!');
+        Header::notfoundNull($enrolment, get_string_kopere('userenrolment_notfound'));
 
         ob_clean();
-        DashboardUtil::startPopup('Editar data da inscrição', 'UserEnrolment::matheditSave');
+        DashboardUtil::startPopup(get_string_kopere('userenrolment_edit'), 'UserEnrolment::matheditSave');
 
         $form = new Form();
         $form->createHiddenInput('ueid', $ueid);
 
         $statusValues = array(
-            array('key' => 0, 'value' => 'Ativo'),
-            array('key' => 1, 'value' => 'Inativo')
+            array('key' => 0, 'value' => get_string_kopere('userenrolment_status_active')),
+            array('key' => 1, 'value' => get_string_kopere('userenrolment_status_inactive'))
         );
         $form->addInput(
-            InputSelect::newInstance()->setTitle('Matrícula esta')
+            InputSelect::newInstance()->setTitle(get_string_kopere('userenrolment_status'))
                 ->setName('status')
                 ->setValues($statusValues)
                 ->setValue($enrolment->status));
@@ -60,16 +60,16 @@ class UserEnrolment {
 
         $form->addInput(
             InputDateRange::newInstance()
-                ->setTitle('A inscrição começa em')
+                ->setTitle(get_string_kopere('userenrolment_timestart'))
                 ->setName('timestart')
-                ->setValue(userdate($enrolment->timestart, '%d/%m/%Y %H:%M'))
+                ->setValue(userdate($enrolment->timestart, get_string_kopere('datetime')))
                 ->setDatetimeRange()
                 ->setRequired());
 
         $form->printSpacer(10);
 
         $form->addInput(
-            InputCheckbox::newInstance()->setTitle('Ativar termino da inscrição')
+            InputCheckbox::newInstance()->setTitle(get_string_kopere('userenrolment_timeendstatus'))
                 ->setName('timeend-status')
                 ->setChecked($enrolment->timeend));
 
@@ -77,17 +77,17 @@ class UserEnrolment {
 
         $form->addInput(
             InputDateRange::newInstance()
-                ->setTitle('A inscrição termina em')
+                ->setTitle(get_string_kopere('userenrolment_timeend'))
                 ->setName('timeend')
-                ->setValue(userdate($enrolment->timeend ? $enrolment->timeend : time(), '%d/%m/%Y %H:%M'))
+                ->setValue(userdate($enrolment->timeend ? $enrolment->timeend : time(), get_string_kopere('datetime')))
                 ->setDatetimeRange()
                 ->setRequired());
 
         echo '</div>';
 
         $form->printSpacer(10);
-        $form->printRow("Inscrição criada em", userdate($enrolment->timecreated, '%d de %B de %Y às %H:%M'));
-        $form->printRow("Inscrição modificadao por último em", userdate($enrolment->timemodified, '%d de %B de %Y às %H:%M'));
+        $form->printRow(get_string_kopere('userenrolment_created'), userdate($enrolment->timecreated, get_string_kopere('dateformat')));
+        $form->printRow(get_string_kopere('userenrolment_updated'), userdate($enrolment->timemodified, get_string_kopere('dateformat')));
 
         $form->close();
 
@@ -140,16 +140,16 @@ class UserEnrolment {
         $enrolment = $DB->get_record('user_enrolments', array('id' => $ueid), '*');
 
         $enrolment->status = $status;
-        $enrolment->timestart = \DateTime::createFromFormat('d/m/Y H:i', $timestart)->format('U');
+        $enrolment->timestart = \DateTime::createFromFormat(get_string_kopere('php_datetime'), $timestart)->format('U');
         if ($timeendStatus) {
-            $enrolment->timeend = \DateTime::createFromFormat('d/m/Y H:i', $timeend)->format('U');
+            $enrolment->timeend = \DateTime::createFromFormat(get_string_kopere('php_datetime'), $timeend)->format('U');
         } else {
             $enrolment->timeend = 0;
         }
 
         $DB->update_record('user_enrolments', $enrolment);
 
-        Mensagem::agendaMensagemSuccess('Inscrição alterada com sucesso!');
+        Mensagem::agendaMensagemSuccess(get_string_kopere('userenrolment_updatesuccess'));
         Header::reload();
     }
 }

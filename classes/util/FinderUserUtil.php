@@ -18,8 +18,6 @@ class FinderUserUtil
             return null;
 
         $user = $DB->get_record ( 'user', array( $key => $value, 'deleted' => 0 ), '*', IGNORE_MULTIPLE );
-        //if ( $user )
-        //    echo "achouuu $key, $value <br/>";
 
         return $user;
     }

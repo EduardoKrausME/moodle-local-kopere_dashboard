@@ -24,7 +24,7 @@
 namespace local_kopere_dashboard;
 
 use core\event\base;
-use local_kopere_dashboard\html\Botao;
+use local_kopere_dashboard\html\Button;
 use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\Form;
 use local_kopere_dashboard\html\inputs\InputSelect;
@@ -34,22 +34,23 @@ use local_kopere_dashboard\html\TinyMce;
 use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Mensagem;
+use local_kopere_dashboard\util\TitleUtil;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
 class Notifications extends NotificationsUtil {
     public function dashboard() {
-        global $CFG, $DB;
+        global $DB;
 
-        DashboardUtil::startPage('Notificações', null, 'Notifications::settings');
+        DashboardUtil::startPage(get_string_kopere('notification_title'), null, 'Notifications::settings');
 
         NotificationsUtil::mensagemNoSmtp();
 
         echo '<div class="element-box">';
-        echo '<h3>Notificações</h3>';
+        TitleUtil::printH3('notification_title');
 
-        echo '<p>Receba notificações sempre que uma ação acontecer no Moodle.</p>';
+        echo get_string_kopere('notification_subtitle');
 
-        Botao::add('Nova notificação', 'Notifications::add', '', true, false, true);
+        Button::add(get_string_kopere('notification_new'), 'Notifications::add', '', true, false, true);
 
         $events = $DB->get_records('kopere_dashboard_events');
         $eventsList = array();
@@ -59,10 +60,10 @@ class Notifications extends NotificationsUtil {
 
             $event->module_name = $this->moduleName($event->module, false);
             $event->event_name = $eventClass::get_name();
-            $event->acoes
+            $event->actions
                 = "<div class=\"text-center\">
-                                    " . Botao::icon('edit', "Notifications::addSegundaEtapa&id={$event->id}", false) . "&nbsp;&nbsp;&nbsp;
-                                    " . Botao::icon('delete', "Notifications::delete&id={$event->id}") . "
+                                    ".Button::icon('edit', "Notifications::addSegundaEtapa&id={$event->id}", false)."&nbsp;&nbsp;&nbsp;
+                                    ".Button::icon('delete', "Notifications::delete&id={$event->id}")."
                                 </div>";
 
             $eventsList[] = $event;
@@ -71,20 +72,20 @@ class Notifications extends NotificationsUtil {
         if ($events) {
             $table = new DataTable();
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT);
-            $table->addHeader('Módulo', 'module_name');
-            $table->addHeader('Ação', 'event_name');
-            $table->addHeader('Assunto', 'subject');
-            $table->addHeader('Ativo', 'status', TableHeaderItem::RENDERER_VISIBLE);
-            $table->addHeader('De', 'userfrom');
-            $table->addHeader('Para', 'userto');
-            $table->addHeader('', 'acoes', TableHeaderItem::TYPE_ACTION);
+            $table->addHeader(get_string_kopere('notification_table_module'), 'module_name');
+            $table->addHeader(get_string_kopere('notification_table_action'), 'event_name');
+            $table->addHeader(get_string_kopere('notification_table_subject'), 'subject');
+            $table->addHeader(get_string_kopere('notification_table_active'), 'status', TableHeaderItem::RENDERER_VISIBLE);
+            $table->addHeader(get_string_kopere('notification_from'), 'userfrom');
+            $table->addHeader(get_string_kopere('notification_to'), 'userto');
+            $table->addHeader('', 'actions', TableHeaderItem::TYPE_ACTION);
 
             // $table->setClickRedirect ( 'Users::details&userid={id}', 'id' );
             $table->printHeader();
             $table->setRow($events);
             $table->close();
         } else {
-            Mensagem::printWarning('Nenhuma notificação!');
+            Mensagem::printWarning(get_string_kopere('notification_table_empty'));
         }
 
         echo '</div>';
@@ -94,11 +95,11 @@ class Notifications extends NotificationsUtil {
     public function add() {
         if (!AJAX_SCRIPT) {
             DashboardUtil::startPage(array(
-                array('Notifications::dashboard', 'Notificações'),
-                'Nova Notificações'
+                array('Notifications::dashboard', get_string_kopere('notification_title')),
+                get_string_kopere('notification_new')
             ));
         } else {
-            DashboardUtil::startPopup('Nova Notificações');
+            DashboardUtil::startPopup(get_string_kopere('notification_new'));
         }
 
         echo '<div class="element-box">';
@@ -115,13 +116,13 @@ class Notifications extends NotificationsUtil {
 
         $form = new Form('Notifications::addSegundaEtapa');
         $form->addInput(
-            InputSelect::newInstance()->setTitle('De qual módulo deseja receber notificação?')
+            InputSelect::newInstance()->setTitle(get_string_kopere('notification_add_module'))
                 ->setName('module')
                 ->setValues($modulesList)
                 ->setAddSelecione(true)
-                ->setDescription('Módulos/Atividades não utilizados não aparecem!')
+                ->setDescription(get_string_kopere('notification_add_moduledesc'))
         );
-        echo '<div id="restante-form">Selecione o Módulo!</div>';
+        echo '<div id="restante-form">'.get_string_kopere('notification_add_selectmodule').'</div>';
         $form->close();
 
         ?>
@@ -154,25 +155,25 @@ class Notifications extends NotificationsUtil {
         if ($id) {
             /** @var kopere_dashboard_events $evento */
             $evento = $DB->get_record('kopere_dashboard_events', array('id' => $id));
-            Header::notfoundNull($evento, 'Notificação não localizado!');
+            Header::notfoundNull($evento, get_string_kopere('notification_notound'));
 
             $eventClass = $evento->event;
             $module = $evento->module;
 
             DashboardUtil::startPage(array(
-                array('Notifications::dashboard', 'Notificações'),
-                'Editando Notificação'
+                array('Notifications::dashboard', get_string_kopere('notification_title')),
+                get_string_kopere('notification_editing')
             ));
             echo '<div class="element-box">';
-            echo '<h3>Editando Notificação</h3>';
+            TitleUtil::printH3('notification_editing');
         } else {
             $evento = kopere_dashboard_events::createNew();
             DashboardUtil::startPage(array(
-                array('Notifications::dashboard', 'Notificações'),
-                'Nova Notificação'
+                array('Notifications::dashboard', get_string_kopere('notification_title')),
+                get_string_kopere('notification_new')
             ));
             echo '<div class="element-box">';
-            echo '<h3>Nova Notificação</h3>';
+            TitleUtil::printH3('notification_new');
         }
 
         $form = new Form('Notifications::addSave');
@@ -181,52 +182,52 @@ class Notifications extends NotificationsUtil {
         $form->createHiddenInput('module', $module);
 
         $form->printRow(
-            'De qual ação deseja receber notificações?',
+            get_string_kopere('notification_add_action'),
             $eventClass::get_name());
 
         if ($id) {
             $status = array(
-                array('key' => 1, 'value' => 'Ativo'),
-                array('key' => 0, 'value' => 'Inativo')
+                array('key' => 1, 'value' => get_string_kopere('notification_status_active')),
+                array('key' => 0, 'value' => get_string_kopere('notification_status_inactive'))
             );
             $form->addInput(
-                InputSelect::newInstance()->setTitle('Status da Notificação')
+                InputSelect::newInstance()->setTitle(get_string_kopere('notification_status'))
                     ->setName('status')
                     ->setValues($status)
                     ->setValue($evento->status)
-                    ->setDescription('Se quiser interromper as notificações, marque como "Inativo" e salve!'));
+                    ->setDescription(get_string_kopere('notification_statusdesc')));
         }
 
         $valueFrom = array(
-            array('key' => 'admin', 'value' => 'Administrador do Site')
+            array('key' => 'admin', 'value' => get_string_kopere('notification_from_admin'))
         );
         $form->addInput(
-            InputSelect::newInstance()->setTitle('De')
+            InputSelect::newInstance()->setTitle(get_string_kopere('notification_from'))
                 ->setName('userfrom')
                 ->setValues($valueFrom)
                 ->setValue($evento->userfrom)
-                ->setDescription('Quem será o remetente da mensagem?'));
+                ->setDescription(get_string_kopere('notification_fromdesc')));
 
         $valueTo = array(
-            array('key' => 'admin', 'value' => 'Administrador do Site (Somente o principal)'),
-            array('key' => 'admins', 'value' => 'Administradores do Site (Todos os administradores)'),
-            array('key' => 'teachers', 'value' => 'Professores do curso (Somente se for dentro de um curso)'),
-            array('key' => 'student', 'value' => 'O Aluno (Envia ao próprio aluno que fez a ação)')
+            array('key' => 'admin', 'value' => get_string_kopere('notification_todesc_admin')),
+            array('key' => 'admins', 'value' => get_string_kopere('notification_todesc_admins')),
+            array('key' => 'teachers', 'value' => get_string_kopere('notification_todesc_teachers')),
+            array('key' => 'student', 'value' => get_string_kopere('notification_todesc_student')),
         );
         $form->addInput(
-            InputSelect::newInstance()->setTitle('Para')
+            InputSelect::newInstance()->setTitle(get_string_kopere('notification_to'))
                 ->setName('userto')
                 ->setValues($valueTo)
                 ->setValue($evento->userto)
-                ->setDescription('Quem receberá estas mensagens?'));
+                ->setDescription(get_string_kopere('notification_todesc')));
 
         $form->addInput(
-            InputText::newInstance()->setTitle('Assunto')
+            InputText::newInstance()->setTitle(get_string_kopere('notification_subject'))
                 ->setName('subject')
                 ->setValue($evento->subject)
-                ->setDescription('Assunto da mensagem'));
+                ->setDescription(get_string_kopere('notification_subjectdesc')));
 
-        $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" . get_config('local_kopere_dashboard', 'notificacao-template');
+        $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/".get_config('local_kopere_dashboard', 'notificacao-template');
         $templateContent = file_get_contents($template);
 
         if (!$id) {
@@ -241,7 +242,7 @@ class Notifications extends NotificationsUtil {
             if (file_exists($mailText)) {
                 $htmlText = file_get_contents($mailText);
             } else {
-                $htmlText = '<p>Olá {[to.fullname]},</p><p>&nbsp;</p><p>Att,<br>{[from.fullname]}.</p>';
+                $htmlText = get_string_kopere('notification_message_html');
             }
 
             $htmlText = str_replace('{[event.name]}', $eventClass::get_name(), $htmlText);
@@ -250,15 +251,15 @@ class Notifications extends NotificationsUtil {
             $htmlText = $evento->message;
         }
 
-        $htmlTextarea = '<textarea name="message" id="message" style="height:500px">' . htmlspecialchars($htmlText) . '</textarea>';
+        $htmlTextarea = '<textarea name="message" id="message" style="height:500px">'.htmlspecialchars($htmlText).'</textarea>';
         $templateContent = str_replace('{[message]}', $htmlTextarea, $templateContent);
-        $form->printPanel('Mensagem', $templateContent);
+        $form->printPanel(get_string_kopere('notification_message'), $templateContent);
         echo TinyMce::createInputEditor('#message');
 
         if ($id) {
-            $form->createSubmitInput('Atualizar alerta');
+            $form->createSubmitInput(get_string_kopere('notification_update'));
         } else {
-            $form->createSubmitInput('Criar alerta');
+            $form->createSubmitInput(get_string_kopere('notification_create'));
         }
 
         $form->close();
@@ -278,7 +279,7 @@ class Notifications extends NotificationsUtil {
             $DB->insert_record('kopere_dashboard_events', $kopere_dashboard_events);
         }
 
-        Mensagem::agendaMensagemSuccess('Notificação criada!');
+        Mensagem::agendaMensagemSuccess(get_string_kopere('notification_created'));
         Header::location('Notifications::dashboard');
     }
 
@@ -289,23 +290,23 @@ class Notifications extends NotificationsUtil {
         $id = optional_param('id', 0, PARAM_INT);
         /** @var kopere_dashboard_events $event */
         $event = $DB->get_record('kopere_dashboard_events', array('id' => $id));
-        Header::notfoundNull($event, 'Notificação não localizada!');
+        Header::notfoundNull($event, get_string_kopere('notification_notfound'));
 
         if ($status == 'sim') {
             $DB->delete_records('kopere_dashboard_events', array('id' => $id));
 
-            Mensagem::agendaMensagemSuccess('Notificação excluída com sucesso!');
+            Mensagem::agendaMensagemSuccess(get_string_kopere('notification_delete_success'));
             Header::location('Notifications::dashboard');
         }
 
         DashboardUtil::startPage(array(
-            array('Notifications::dashboard', 'Notificações'),
-            'Excluíndo Notificação'
+            array('Notifications::dashboard', get_string_kopere('notification_title')),
+
         ));
 
-        echo "<p>Deseja realmente excluir esta Notificação?</p>";
-        Botao::delete('Sim', 'Notifications::delete&status=sim&id=' . $event->id, '', false);
-        Botao::add('Não', 'Notifications::dashboard', 'margin-left-10', false);
+        echo "<p>".get_string_kopere('notification_delete_yes')."</p>";
+        Button::delete(get_string('yes'), 'Notifications::delete&status=sim&id='.$event->id, '', false);
+        Button::add(get_string('no'), 'Notifications::dashboard', 'margin-left-10', false);
 
         DashboardUtil::endPage();
     }
@@ -313,7 +314,7 @@ class Notifications extends NotificationsUtil {
     public function settings() {
         global $CFG;
         ob_clean();
-        DashboardUtil::startPopup('Configurações do e-mail', 'Settings::settingsSave');
+        DashboardUtil::startPopup(get_string_kopere('notification_setting_config'), 'Settings::settingsSave');
 
         $form = new Form();
 
@@ -324,13 +325,13 @@ class Notifications extends NotificationsUtil {
         }
 
         $form->addInput(
-            InputSelect::newInstance()->setTitle('Template')
+            InputSelect::newInstance()->setTitle(get_string_kopere('notification_setting_template'))
                 ->setValues($values, 'key', 'key')
                 ->setValueByConfig('notificacao-template'));
 
-        $form->printPanel('Preview', "<div id=\"area-mensagem-preview\"></div>");
+        $form->printPanel(get_string_kopere('notification_setting_preview'), "<div id=\"area-mensagem-preview\"></div>");
 
-        $form->printRow('Templates estão na pasta', "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/");
+        $form->printRow(get_string_kopere('notification_setting_templatelocation'), "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/");
 
         $form->close();
 

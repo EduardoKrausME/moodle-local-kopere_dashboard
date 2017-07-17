@@ -34,7 +34,7 @@ class NotificationsUtil {
         $module = optional_param('module', '', PARAM_TEXT);
 
         if (!isset($module[1])) {
-            die('Selecione o Módulo!');
+            die(get_string_kopere('notification_add_selectmodule'));
         }
 
         $events = $this->listEvents();
@@ -50,11 +50,11 @@ class NotificationsUtil {
 
         $form = new Form();
         $form->addInput(
-            InputSelect::newInstance()->setTitle('De qual ação deseja receber notificações?')
+            InputSelect::newInstance()->setTitle(get_string_kopere('notification_add_action'))
                 ->setName('event')
                 ->setValues($eventsList)
                 ->setAddSelecione(true));
-        $form->createSubmitInput('Criar Mensagem');
+        $form->createSubmitInput(get_string_kopere('notification_add_create'));
     }
 
     public function listEvents() {
@@ -102,8 +102,8 @@ class NotificationsUtil {
                         $tmp['crudname'] = \report_eventlist_list_generator::get_crud_string($data['crud']);
 
                         if ($data['component'] == 'core') {
-                            $components[$data['component'] . '_' . $data['target']] = $data['component'] . '_' . $data['target'];
-                            $tmp['component_full'] = $data['component'] . '_' . $data['target'];
+                            $components[$data['component'].'_'.$data['target']] = $data['component'].'_'.$data['target'];
+                            $tmp['component_full'] = $data['component'].'_'.$data['target'];
                         } else {
                             $components[$data['component']] = $data['component'];
                             $tmp['component_full'] = $data['component'];
@@ -135,7 +135,7 @@ class NotificationsUtil {
         $linkManager
             = "<a href=\"{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?Notifications::dashboard\"
                   target=\"_blank\" style=\"border-bottom:1px #777777 dotted; text-decoration:none; color:#777777;\">
-                            Gerenciar Mensagens
+                            ".get_string_kopere('notification_manager')."
                         </a>";
 
         $content = str_replace('{[moodle.fullname]}', $COURSE->fullname, $content);
@@ -152,9 +152,9 @@ class NotificationsUtil {
 
         switch ($component) {
             case 'core_course_category':
-                return 'Categoria de Cursos';
+                return get_string_kopere('notification_core_course_category');
             case 'core_course':
-                return 'Cursos';
+                return get_string_kopere('notification_core_course');
             // case 'core_course_completion':
             // return 'Conclusão de Cursos';
             // case 'core_course_content':
@@ -165,18 +165,18 @@ class NotificationsUtil {
             // return 'Sessões de cursos';
 
             case 'core_user':
-                return 'Usuários';
+                return get_string_kopere('notification_core_user');
             case 'core_user_enrolment':
-                return 'Matrículas de Usuários';
+                return get_string_kopere('notification_core_user_enrolment');
             // case 'core_user_password':
             // return 'Senhas';
 
             case 'local_kopere_dashboard_hotmoodle':
-                return 'Kopere HotMoodle';
+                return get_string_kopere('notification_local_kopere_dashboard_hotmoodle');
             case 'local_kopere_dashboard_moocommerce':
-                return 'Kopere MooCommerce';
+                return get_string_kopere('notification_local_kopere_dashboard_moocommerce');
             case 'local_kopere_dashboard_pagamento':
-                return 'Kopere Pagamento';
+                return get_string_kopere('notification_local_kopere_dashboard_pagamento');
         }
 
         if (strpos($component, 'mod_') === 0) {
@@ -190,7 +190,7 @@ class NotificationsUtil {
             $count = $DB->get_record_sql($sql, array('name' => $module));
 
             if ($count->num || !$onlyUsed) {
-                return get_string('resource') . ': ' . get_string('modulename', $module);
+                return get_string('resource').': '.get_string('modulename', $module);
             }
         }
 
@@ -203,17 +203,9 @@ class NotificationsUtil {
             return;
 
         if (Release::getVersion() < 3.2) {
-            Mensagem::printDanger('<p>Para que os alunos recebam as mensagens, o SMTP precisa estar configurado.</p>
-                    <p><a href="https://moodle.eduardokraus.com/configurar-o-smtp-no-moodle"
-                          target="_blank">Leia aqui como configurar o SMTP</a></p>
-                    <p><a href="' . $CFG->wwwroot . '/admin/settings.php?section=messagesettingemail"
-                          target="_blank">Clique aqui para configurar a saída de e-mail</a></p>');
+            Mensagem::printDanger(get_string_kopere('notification_error_smtp', 'messagesettingemail'));
         } else {
-            Mensagem::printDanger('<p>Para que os alunos recebam as mensagens, o SMTP precisa estar configurado.</p>
-                    <p><a href="https://moodle.eduardokraus.com/configurar-o-smtp-no-moodle"
-                          target="_blank">Leia aqui como configurar o SMTP</a></p>
-                    <p><a href="' . $CFG->wwwroot . '/admin/settings.php?section=outgoingmailconfig"
-                          target="_blank">Clique aqui para configurar a saída de e-mail</a></p>');
+            Mensagem::printDanger(get_string_kopere('notification_error_smtp', 'outgoingmailconfig'));
         }
     }
 }

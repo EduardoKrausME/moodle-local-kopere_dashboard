@@ -71,10 +71,6 @@ class Form {
     }
 
     public function addInput(IInput $input) {
-        if ($input->getType() == 'checkbox') {
-            $this->createHiddenInput($input->getName(), 0);
-        }
-
         $this->printRow(
             $input->getTitle(),
             $input->toString(),

@@ -17,7 +17,7 @@ class Navigation
         if ( ( $totalRegisters % $perPag ) != 0 )
             $countPages += 1;
 
-        echo "<span class=\"pagination-info\">Página {$atualPage} de {$countPages}</span>";
+        echo "<span class=\"pagination-info\">" . get_string_kopere('navigation_page',{'atualPage'=>$atualPage, 'countPages'=>$countPages})."</span>";
 
         echo "<ul class=\"pagination\">";
         if ( $atualPage != 1 ) {

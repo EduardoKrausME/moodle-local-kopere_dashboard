@@ -22,6 +22,7 @@
  */
 
 require('../../config.php');
+require('autoload.php');
 
 global $PAGE, $CFG, $OUTPUT;
 
@@ -42,14 +43,14 @@ $PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
 $PAGE->requires->js('/local/kopere_dashboard/assets/popup.js');
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading('Abrir Dashboard');
+echo $OUTPUT->heading(get_string_kopere('open_dashboard'));
 
 ?>
     <div class="text-center" style="text-align: center;">
         <a type="button" target="_blank"
            class="dashboard-load-popup btn btn-lg btn-primary"
            href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/open-dashboard.php?Dashboard::start"
-           id="open-startup">Abrir Dashboard</a>
+           id="open-startup"><?php echo get_string_kopere('open_dashboard') ?></a>
     </div>
 
     <div id="modalWindow" style="display:none">

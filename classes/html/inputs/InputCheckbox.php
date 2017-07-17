@@ -80,7 +80,8 @@ class InputCheckbox extends InputBase {
      * @return string
      */
     public function toString() {
-        $returnInput = "<input ";
+        $returnInput = '<input type="hidden" name="' . $this->name . '" value="0"/>';
+        $returnInput .= "<input ";
 
         $returnInput .= "id=\"$this->name\" name=\"$this->name\" type=\"checkbox\" ";
 

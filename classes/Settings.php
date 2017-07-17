@@ -42,7 +42,7 @@ class Settings {
             set_config($name, $value, 'local_kopere_dashboard');
         }
 
-        Mensagem::agendaMensagemSuccess('Configurações salvas!');
+        Mensagem::agendaMensagemSuccess(get_string_kopere('setting_saved'));
 
         if (isset($_POST['redirect'])) {
             Header::location('' . $_POST['redirect']);

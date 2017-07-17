@@ -55,15 +55,40 @@ if (isset($_POST['action'])) {
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Kopere Dashboard</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <link href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/css/dashboard.css" rel="stylesheet">
-    <link href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/bootstrap/bootstrap.css"
-          rel="stylesheet">
-    <link href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/dataTables/jquery.dataTables.css"
-          rel="stylesheet">
+    <link href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/all.css" rel="stylesheet">
+    <link async href="https://fonts.googleapis.com/css?family=Nunito:300,400" rel="stylesheet">
+
+    <script>
+        lang_yes = '<?php echo get_string('yes') ?>';
+        lang_no = '<?php echo get_string('no') ?>';
+        dataTables_oLanguage = {
+            "sEmptyTable": "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
+            "sInfo": "<?php echo get_string_kopere('datatables_sInfo') ?>",
+            "sInfoEmpty": "<?php echo get_string_kopere('datatables_sInfoEmpty') ?>",
+            "sInfoFiltered": "<?php echo get_string_kopere('datatables_sInfoFiltered') ?>",
+            "sInfoPostFix": "<?php echo get_string_kopere('datatables_sInfoPostFix') ?>",
+            "sInfoThousands": "<?php echo get_string_kopere('datatables_sInfoThousands') ?>",
+            "sLengthMenu": "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
+            "sLoadingRecords": "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
+            "sProcessing": "<?php echo get_string_kopere('datatables_sProcessing') ?>",
+            "sZeroRecords": "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
+            "sSearch": "<?php echo get_string_kopere('datatables_sSearch') ?>",
+            "oPaginate": {
+                "sNext": "<?php echo get_string_kopere('datatables_oPaginate_sNext') ?>",
+                "sPrevious": "<?php echo get_string_kopere('datatables_oPaginate_sPrevious') ?>",
+                "sFirst": "<?php echo get_string_kopere('datatables_oPaginate_sFirst') ?>",
+                "sLast": "<?php echo get_string_kopere('datatables_oPaginate_sLast') ?>"
+            },
+            "oAria": {
+                "sSortAscending": "<?php echo get_string_kopere('datatables_oAria_sSortAscending') ?>",
+                "sSortDescending": "<?php echo get_string_kopere('datatables_oAria_sSortDescending') ?>"
+            }
+        }
+    </script>
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery-3.2.1.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/dashboard.js"></script>
@@ -88,8 +113,6 @@ if (isset($_POST['action'])) {
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v1.js"></script>
-
-    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400" rel="stylesheet">
 
     <?php
     if (get_config('local_kopere_dashboard', 'nodejs-status')) {
@@ -136,10 +159,10 @@ if (isset($_POST['action'])) {
                     <?php
 
                     DashboardUtil::addMenu('Dashboard::start', 'dashboard', 'Dashboard');
-                    DashboardUtil::addMenu('Users::dashboard', 'users', 'Usuários', array(
-                        array('UsersOnline::dashboard', 'Usuários Online', 'users-online')
+                    DashboardUtil::addMenu('Users::dashboard', 'users', get_string_kopere('user_title'), array(
+                        array('UsersOnline::dashboard', get_string_kopere('useronline_title'), 'users-online')
                     ));
-                    DashboardUtil::addMenu('Courses::dashboard', 'courses', 'Cursos');
+                    DashboardUtil::addMenu('Courses::dashboard', 'courses', get_string_kopere('courses_title'));
 
                     $plugins = $DB->get_records_sql("SELECT plugin FROM {config_plugins} WHERE plugin LIKE 'local\_kopere\_dashboard\_%' AND name LIKE 'version'");
                     foreach ($plugins as $plugin) {
@@ -148,17 +171,17 @@ if (isset($_POST['action'])) {
                         $class->showMenu();
                     }
 
-                    DashboardUtil::addMenu('Reports::dashboard', 'report', 'Relatórios',
+                    DashboardUtil::addMenu('Reports::dashboard', 'report', get_string_kopere('reports_title'),
                         \local_kopere_dashboard\Reports::globalMenus());
 
                     // DashboardUtil::addMenu ( 'Gamification::dashboard', 'gamification', 'Gamificação' );
 
-                    DashboardUtil::addMenu('Notifications::dashboard', 'notifications', 'Notificações');
+                    DashboardUtil::addMenu('Notifications::dashboard', 'notifications', get_string_kopere('notification_title'));
 
-                    DashboardUtil::addMenu('WebPages::dashboard', 'webpages', 'Paginas estáticas');
-                    DashboardUtil::addMenu('Benchmark::test', 'performace', 'Performace');
+                    DashboardUtil::addMenu('WebPages::dashboard', 'webpages', get_string_kopere('webpages_title'));
+                    DashboardUtil::addMenu('Benchmark::test', 'performace', get_string_kopere('benchmark_title'));
                     DashboardUtil::addMenu('Backup::dashboard', 'data', 'Backup');
-                    DashboardUtil::addMenu('About::dashboard', 'about', 'Sobre');
+                    DashboardUtil::addMenu('About::dashboard', 'about', get_string_kopere('about_title'));
                     ?>
                 </ul>
             </div>

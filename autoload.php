@@ -56,3 +56,7 @@ function loadByQuery($queryString) {
     $instance->$method();
 
 }
+
+function get_string_kopere($identifier, $object=null) {
+    return get_string($identifier, 'local_kopere_dashboard', $object);
+}

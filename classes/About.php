@@ -27,20 +27,20 @@ use local_kopere_dashboard\util\DashboardUtil;
 
 class About {
     public function dashboard() {
-        DashboardUtil::startPage('Sobre');
+        DashboardUtil::startPage(get_string_kopere('about_title'));
 
         echo '<div class="element-box">
                   <p><img src="https://www.eduardokraus.com/logos/kopere_dashboard.svg" /></p>
                   <p>&nbsp;</p>
-                  <p>Projeto open-source desenvolvido e mantido por
+                  <p>'.get_string_kopere('about_project').'
                      <a target="_blank" href="https://www.eduardokraus.com/kopere-dashboard">Eduardo Kraus</a>.</p>
-                  <p>Código disponível em
+                  <p>'.get_string_kopere('about_code').'
                      <a target="_blank" href="https://github.com/EduardoKrausME/moodle-local-kopere_dashboard"
                      >github.com/EduardoKrausME/moodle-local-kopere_dashboard</a>.</p>
-                  <p>Ajuda esta
+                  <p>'.get_string_kopere('about_help').'
                      <a target="_blank" href="https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki"
-                     >no Wiki</a>.</p>
-                  <p>Achou algum BUG ou gostaria de sugerir melhorias abra uma
+                     >Wiki</a>.</p>
+                  <p>'.get_string_kopere('about_bug').'
                      <a href="https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/issues"
                         target="_blank">issue</a>.</p>
               </div>';

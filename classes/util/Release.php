@@ -12,8 +12,8 @@ class Release
 {
     public static function getVersion ()
     {
-        $release  = get_config ( 'release' );
-        $releases = explode ( '.', $release );
+        global $CFG;
+        $releases = explode ( '.', $CFG->release );
 
         return intval ( $releases[ 0 ] ) . "." . intval ( $releases[ 1 ] );
     }
