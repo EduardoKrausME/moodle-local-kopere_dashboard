@@ -26,10 +26,6 @@ namespace local_kopere_dashboard\html;
 use local_kopere_dashboard\util\Export;
 
 class DataTable {
-    public function __construct() {
-        $this->tableId = 'datatable_' . uniqid();
-    }
-
     private $column = array();
     private $columnInfo = array();
     private $columnData = array();
@@ -39,6 +35,12 @@ class DataTable {
     private $clickModal = null;
     private $tableId = '';
     private $isExport = false;
+
+    public function __construct($_column = array(), $_columnInfo = array()) {
+        $this->tableId = 'datatable_' . uniqid();
+        $this->column = $_column;
+        $this->columnInfo = $_columnInfo;
+    }
 
     /**
      * @param boolean $isExport
@@ -241,8 +243,7 @@ class DataTable {
                           {$ajaxConfig}
                           autoWidth  : false,
                           columns    : [ {$columnData} ],
-                          columnDefs : [ {$columnDefs} ],
-                          language   : { url: '//cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json' }
+                          columnDefs : [ {$columnDefs} ]
                           {$processServerHtml}
                           {$order}
                       });

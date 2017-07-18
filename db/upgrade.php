@@ -55,6 +55,48 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
 
         upgrade_plugin_savepoint(true, 2017061102, 'local', 'kopere_dashboard');
     }
+    if ($oldversion < 2017071714) {
+
+        if (!$dbman->table_exists('kopere_dashboard_reportcat')) {
+            $table = new xmldb_table('kopere_dashboard_reportcat');
+
+            $table->add_field('id', XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+            $table->add_field('title', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL);
+            $table->add_field('type', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL);
+            $table->add_field('image', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL);
+            $table->add_field('enable', XMLDB_TYPE_INTEGER, '1', true, XMLDB_NOTNULL);
+            $table->add_field('enablesql', XMLDB_TYPE_TEXT, 'big');
+
+            $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+            $table->add_index('type', XMLDB_INDEX_NOTUNIQUE, array('type'));
+
+            $dbman->create_table($table);
+        }
+
+        if (!$dbman->table_exists('kopere_dashboard_reports')) {
+            $table = new xmldb_table('kopere_dashboard_reports');
+
+            $table->add_field('id', XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+            $table->add_field('reportcatid', XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL);
+            $table->add_field('reportkey', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL);
+            $table->add_field('title', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL);
+            $table->add_field('enable', XMLDB_TYPE_INTEGER, '1', true, XMLDB_NOTNULL);
+            $table->add_field('enablesql', XMLDB_TYPE_TEXT, 'big');
+            $table->add_field('reportsql', XMLDB_TYPE_TEXT, 'big');
+            $table->add_field('prerequisit', XMLDB_TYPE_CHAR, '60', null, XMLDB_NOTNULL);
+            $table->add_field('columns', XMLDB_TYPE_TEXT, 'big');
+            $table->add_field('foreach', XMLDB_TYPE_TEXT, 'big');
+
+            $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+            $dbman->create_table($table);
+        }
+
+        \local_kopere_dashboard\report\ReportInstall::createCategores();
+        \local_kopere_dashboard\report\ReportInstall::createReports();
+
+        upgrade_plugin_savepoint(true, 2017071714, 'local', 'kopere_dashboard');
+    }
 
     return true;
 }

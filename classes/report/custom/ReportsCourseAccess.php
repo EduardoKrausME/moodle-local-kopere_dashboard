@@ -21,7 +21,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_kopere_dashboard\report\custom\course\reports;
+namespace local_kopere_dashboard\report\custom;
 
 use local_kopere_dashboard\html\Button;
 use local_kopere_dashboard\html\DataTable;
@@ -51,34 +51,9 @@ class ReportsCourseAccess implements ReportInterface {
      * @return void
      */
     public function generate() {
-        $courseid = optional_param('courseid', 0, PARAM_INT);
-        if ($courseid == 0) {
-            $this->listCourses();
-        } else {
-            $this->createReport();
-        }
-    }
-
-    private function listCourses() {
-        echo '<h3>Selecione o curso para gerar o relatório</h3>';
-
-        $table = new DataTable();
-        $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px');
-        $table->addHeader('Nome do Curso', 'fullname');
-        $table->addHeader('Nome curto', 'shortname');
-        $table->addHeader('Visível', 'visible', TableHeaderItem::RENDERER_VISIBLE);
-        $table->addHeader('Nº alunos inscritos', 'inscritos', TableHeaderItem::TYPE_INT, null, 'width:50px;white-space:nowrap;');
-
-        $table->setAjaxUrl('Courses::loadAllCourses');
-        $table->setClickRedirect('Reports::loadReport&type=course&report=ReportsCourseAccess&courseid={id}', 'id');
-        $table->printHeader();
-        $table->close();
-    }
-
-    private function createReport() {
         global $DB, $CFG;
 
-        $cursosId = optional_param('courseid', 0, PARAM_INT);
+        $cursosId = optional_param('id', 0, PARAM_INT);
         if ($cursosId == 0) {
             Header::notfound('CourseID inválido!');
         }
@@ -89,10 +64,6 @@ class ReportsCourseAccess implements ReportInterface {
         echo '<script>
                   document.body.className += " menu-w-90";
               </script>';
-        echo '<div class="element-box table-responsive">';
-        echo '<h3>' . $course->fullname . '</h3>';
-
-        $cursosId = optional_param('courseid', 0, PARAM_INT);
 
         $sections = $DB->get_records('course_sections', array('course' => $cursosId), 'section asc');
 
@@ -177,12 +148,14 @@ class ReportsCourseAccess implements ReportInterface {
                  FROM {context} c
                  JOIN {role_assignments} ra ON ra.contextid = c.id
                  JOIN {user} u              ON ra.userid    = u.id
-                WHERE c.contextlevel = contextlevel:
-                  AND c.instanceid = :instanceid";
+                WHERE c.contextlevel = :contextlevel
+                  AND c.instanceid   = :instanceid";
 
         $allUserCourse = $DB->get_records_sql($sql,
-            array('contextlevel' => CONTEXT_COURSE,
-                'instanceid' => $cursosId));
+            array(
+                'contextlevel' => CONTEXT_COURSE,
+                'instanceid' => $cursosId
+            ));
 
         foreach ($allUserCourse as $user) {
             echo '<tr>';
@@ -219,8 +192,6 @@ class ReportsCourseAccess implements ReportInterface {
         echo '</table>';
 
         Export::exportClose();
-
-        echo '</div>';
     }
 
     private function td($value, $class = '', $bgcolor) {

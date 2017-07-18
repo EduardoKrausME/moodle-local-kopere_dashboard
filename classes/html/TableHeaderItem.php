@@ -22,7 +22,7 @@
 
 namespace local_kopere_dashboard\html;
 
-class TableHeaderItem {
+class TableHeaderItem extends \stdClass {
     const TYPE_DATE = 'date';
     const TYPE_CURRENCY = 'numeric';
     const TYPE_INT = 'numeric';

@@ -23,7 +23,7 @@
 function xmldb_local_kopere_dashboard_install() {
     set_config('enablegravatar', 1);
     set_config('gravatardefaulturl', 'mm');
-    set_config('timezone', 'America/Sao_Paulo');
+    // set_config('timezone', 'America/Sao_Paulo');
     // set_config ( 'autolang', '0' );
     // set_config ( 'langmenu', '0' );
     // set_config ( 'authloginviaemail', '1' );
@@ -43,3 +43,6 @@ function changeConfigTable($name, $newVale) {
         $DB->update_record('config', $config);
     }
 }
+
+\local_kopere_dashboard\report\ReportInstall::createCategores();
+\local_kopere_dashboard\report\ReportInstall::createReports();
