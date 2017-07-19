@@ -30,7 +30,7 @@ class About {
         DashboardUtil::startPage(get_string_kopere('about_title'));
 
         echo '<div class="element-box">
-                  <p><img src="https://www.eduardokraus.com/logos/kopere_dashboard.svg" /></p>
+                  <p><img src="https://www.eduardokraus.com/logos/kopere_dashboard.svg" style="max-width: 100%" /></p>
                   <p>&nbsp;</p>
                   <p>'.get_string_kopere('about_project').'
                      <a target="_blank" href="https://www.eduardokraus.com/kopere-dashboard">Eduardo Kraus</a>.</p>

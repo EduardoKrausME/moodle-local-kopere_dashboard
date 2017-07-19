@@ -110,41 +110,6 @@ class Reports {
             }
         }
 
-        /*
-        $types = glob("{$CFG->dirroot}/local/kopere_dashboard/classes/report/custom/{$type}/Info.php");
-        foreach ($types as $type) {
-            $dirname = pathinfo($type, PATHINFO_DIRNAME);
-
-            preg_match("/classes\/report\/custom\/(.*?)\/Info\.php/", $type, $typeInfo);
-            $icon = str_replace($CFG->dirroot, '', $dirname);
-
-            $className = "local_kopere_dashboard\\report\\custom\\{$typeInfo[1]}\\Info";
-            /** @var InfoInterface $class * /
-            $class = new $className();
-
-            if (!$class->isEnable()) {
-                continue;
-            }
-
-            echo "<h3><img src='{$CFG->wwwroot}{$icon}/icon.svg' alt='Icon' height='23' width='23' > " .
-                $class->getTypeName() . "</h3>";
-
-            $reports = glob($dirname . '/reports/*.php');
-
-            foreach ($reports as $report) {
-                preg_match("/classes\/report\/custom\/(.*?)\/reports\/(.*?)\.php/", $report, $reportInfo);
-
-                $className = "local_kopere_dashboard\\report\\custom\\{$reportInfo[1]}\\reports\\{$reportInfo[2]}";
-                /** @var ReportInterface $class * /
-                $class = new $className();
-
-                if ($class->isEnable()) {
-                    echo "<h4 style='padding-left: 31px;'><a href='?Reports::loadReport&type={$reportInfo[1]}&report={$reportInfo[2]}'>{$class->reportName}</a></h4>";
-                }
-            }
-        }
-        */
-
         echo '</div>';
         DashboardUtil::endPage();
     }

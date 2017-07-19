@@ -214,7 +214,7 @@ class DashboardUtil {
         } else {
             echo "</div>
                   <div class=\"modal-footer\">
-                      <button class=\"btn btn-default\" data-dismiss=\"modal\">".get_string('close')."</button>
+                      <button class=\"btn btn-default\" data-dismiss=\"modal\">".get_string_kopere('close')."</button>
                   </div>";
         }
         echo "<script>

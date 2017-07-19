@@ -60,7 +60,7 @@ class Dashboard {
                     <div class="col-sm-3">
                         <div class="element-box color4">
                             <div class="label">'.get_string_kopere('dashboard_title_disk').'</div>
-                            <div class="value"><a href="?ReportsDisk::all">
+                            <div class="value"><a href="?Reports::dashboard&type=server">
                             ' . BytesUtil::sizeToByte(Files::countAllSpace()) . '</a></div>
                         </div>
                     </div>

@@ -25,6 +25,7 @@ $string['pluginname'] = 'Kopere Dashboard';
 $string['kopere_dashboard:view'] = 'Ver Kopere Dashboard';
 $string['kopere_dashboard:manage'] = 'Gerenciar Kopere Dashboard';
 $string['settings'] = 'Configurar';
+$string['close'] = 'Fechar';
 
 $string['messageprovider:kopere_dashboard_messages'] = 'Envia Notificações';
 $string['kopere_dashboard:emailconfirmsubmission'] = 'Envia Notificações';
