@@ -70,7 +70,7 @@ function local_kopere_dashboard_extend_navigation ( global_navigation $nav )
 
         $PAGE->requires->jquery ();
         $PAGE->requires->js ( new moodle_url( $CFG->wwwroot . '/local/kopere_dashboard/node/socket.io.js' ), true );
-        $PAGE->requires->js ( new moodle_url( $CFG->wwwroot . '/local/kopere_dashboard/node/app-v1.js' ), true );
+        $PAGE->requires->js ( new moodle_url( $CFG->wwwroot . '/local/kopere_dashboard/node/app-v2.js' ), true );
 
         if ( get_config ( 'local_kopere_dashboard', 'nodejs-ssl' ) ) {
             $url = "https://" . get_config ( 'local_kopere_dashboard', 'nodejs-url' ) . ':' . get_config ( 'local_kopere_dashboard', 'nodejs-port' );

@@ -1,36 +1,39 @@
+"use strict";
 /**
  * Created by kraus on 20/05/17.
  */
-var httpPort = 8080;
-
-var fs        = require ( 'fs' );
-var app       = require ( 'express' ) ();
-var https     = require ( 'https' );
-var useragent = require ( 'useragent' );
 var settings  = require ( './util/settings.js' );
+var socket    = require ( 'socket.io' );
+var fs        = require ( 'fs' );
+var useragent = require ( 'useragent' );
 var accessId  = 0;
+var server, app, http, io;
 
-
+/**
+ * SSL Logic and Server bindings
+ */
 if ( settings.ssl ) {
-    console.log ( "SSL Enabled" );
-    console.log ( "SSL Key File" + settings.ssl.key );
-    console.log ( "SSL Cert Auth File" + settings.ssl.cert );
-    console.log ( "SSL Cert Authority File" + settings.ssl.ca );
-
+    console.log ( "SSL key:  " + settings.ssl.key );
+    console.log ( "SSL cert: " + settings.ssl.cert );
+    console.log ( "SSL ca:   " + settings.ssl.ca );
     var options = {
         key  : fs.readFileSync ( settings.ssl.key ),
         cert : fs.readFileSync ( settings.ssl.cert ),
         ca   : fs.readFileSync ( settings.ssl.ca )
     };
-    app         = express ( options );
-    server      = https.createServer ( options, app ).listen ( settings.port );
+
+    app    = require ( "express" ) ( options );
+    server = require('https').createServer( options );
 } else {
-    app    = express ();
-    server = app.listen ( settings.port );
+    app    = require ( "express" ) ();
+    server = require('http').Server( app );
 }
 
 // Starts listening socket.io
-var io = require ( 'socket.io' ).listen ( server );
+http = server.listen ( settings.port );
+io   = require('socket.io')(http);
+
+console.log ( "OK, porta " + settings.port );
 
 
 io.sockets.on ( 'connection', function ( socket ) {
@@ -39,7 +42,7 @@ io.sockets.on ( 'connection', function ( socket ) {
      */
     socket.on ( 'login', function ( data ) {
 
-        console.log ( 'La vamos nóis' );
+        //console.log ( 'La vamos nóis' );
         var statusDomain = domainIsValid ( socket.handshake.headers );
         if ( !statusDomain ) {
             socket.emit ( 'logof', 'Domain not allow' );
@@ -106,7 +109,6 @@ io.sockets.on ( 'connection', function ( socket ) {
 } );
 
 
-console.log ( 'Start on port: ' + httpPort );
 // Debug message
 setInterval ( function () {
     console.log ( new Date () );
@@ -165,24 +167,26 @@ function domainIsValid ( headers ) {
     var domainReferer = headers.referer.split ( '/' )[ 2 ];
 
     for ( var key in settings.domains ) {
-        var alowedDomain = settings.domains[ key ].trim ();
+        var alowedDomain = ""+settings.domains[ key ].trim ();
+
+        // console.log(alowedDomain);
 
         // It is an asterisk
-        if ( alowedDomain.equals ( '*' ) )
+        if ( alowedDomain == '*' )
             return true;
 
         // It begins with asterisk
-        if ( "*".equals ( alowedDomain[ 0 ] ) ) {
+        if ( "*" == alowedDomain[ 0 ] ) {
             alowedDomain = alowedDomain.slice ( 1 );
             var reg      = new RegExp ( alowedDomain + "$" );
             if ( reg.test ( domainReferer ) )
                 return true;
         }
         // It is equal
-        if ( domainReferer.equals ( alowedDomain ) )
+        if ( domainReferer == alowedDomain )
             return true;
     }
 
-    console.log ( domainReferer + ' Domain not Found' );
+    console.log ( 'Domain not Found: ' + domainReferer );
     return false;
 }

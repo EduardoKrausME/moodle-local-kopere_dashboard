@@ -112,7 +112,7 @@ if (isset($_POST['action'])) {
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/custom.js"></script>
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v1.js"></script>
+    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v2.js"></script>
 
     <?php
     if (get_config('local_kopere_dashboard', 'nodejs-status')) {

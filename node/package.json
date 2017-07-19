@@ -1,6 +1,6 @@
 {
-    "name"        : "NodeKopereDashboard",
-    "version"     : "0.0.1",
+    "name"        : "Node Kopere Dashboard",
+    "version"     : "0.0.2",
     "description" : "Realtime Kopere Dashboard",
     "main"        : "app.js",
     "scripts" : {
@@ -13,9 +13,7 @@
         "request"    : "^2.67.0",
         "fs"         : "*",
         "https"      : "*",
-        "useragent"  : "*",
         "forever"    : "*",
-        "jsonminify" : "*",
-        "os"         : "*"
+        "jsonminify" : "*"
     }
 }

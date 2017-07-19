@@ -13,6 +13,6 @@
     //     Ex: *.moodle20.com.br liberate all subdomains of .moodle20.com.br
     //         But return error if you try to access of moodle20.com.br
     "domains":[
-        "*.moodle20.com.br"
+        "*"
     ]
 }
