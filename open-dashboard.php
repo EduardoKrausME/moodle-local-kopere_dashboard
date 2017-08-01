@@ -160,7 +160,8 @@ if (isset($_POST['action'])) {
 
                     DashboardUtil::addMenu('Dashboard::start', 'dashboard', 'Dashboard');
                     DashboardUtil::addMenu('Users::dashboard', 'users', get_string_kopere('user_title'), array(
-                        array('UsersOnline::dashboard', get_string_kopere('useronline_title'), 'users-online')
+                        array('UsersOnline::dashboard', get_string_kopere('useronline_title'), 'users-online'),
+                        array('UsersImport::dashboard', get_string_kopere('userimport_title'), 'users-import')
                     ));
                     DashboardUtil::addMenu('Courses::dashboard', 'courses', get_string_kopere('courses_title'));
 

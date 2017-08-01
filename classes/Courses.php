@@ -168,7 +168,7 @@ class Courses {
                 }
             }
 
-            $form = new Form('WebPages::editSave', 'form-inline');
+            $form = new Form('WebPages::editPageSave', 'form-inline');
             $form->createHiddenInput('id', 0);
             $form->createHiddenInput('courseid', $course->id);
             $form->createHiddenInput('title', $course->fullname);

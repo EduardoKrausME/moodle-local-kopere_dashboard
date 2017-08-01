@@ -168,7 +168,7 @@ class WebPages {
                 ->setRequired()
         );
         $form->addInput(
-            InputText::newInstance()->setTitle(get_string_kopere('webpages_page_link'))
+            InputText::newInstance()->setTitle(get_string_kopere('webpages_table_link'))
                 ->setName('link')
                 ->setValue($webpages->link)
                 ->setRequired()
@@ -264,7 +264,7 @@ class WebPages {
             get_string_kopere('webpages_page_delete')
         ));
 
-        TitleUtil::printH3('Excluíndo Página');
+        TitleUtil::printH3('webpages_page_delete');
         echo "<p>".get_string_kopere('webpages_page_delete_confirm', $webpages)."</p>";
         Button::delete(get_string('yes'), 'WebPages::deletePage&status=sim&id=' . $webpages->id, '', false);
         Button::add(get_string('no'), 'WebPages::details&id=' . $webpages->id, 'margin-left-10', false);
