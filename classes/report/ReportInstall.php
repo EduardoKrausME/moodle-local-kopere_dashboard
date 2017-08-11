@@ -22,9 +22,8 @@ class ReportInstall {
         $reportcat->type = 'badge';
         $reportcat->image = 'assets/reports/badge.svg';
         $reportcat->enable = 1;
-        $reportcat->enablesql = "SELECT COUNT(*) as status FROM {badge}";
+        $reportcat->enablesql = "SELECT id as status FROM {badge} LIMIT 1";
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
-
 
         $reportcat = kopere_dashboard_reportcat::createNew();
         $reportcat->title = 'Relatório de cursos';
@@ -33,24 +32,21 @@ class ReportInstall {
         $reportcat->enable = 1;
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
 
-
         $reportcat = kopere_dashboard_reportcat::createNew();
         $reportcat->title = 'Relatório de Coortes';
         $reportcat->type = 'enrol_cohort';
         $reportcat->image = 'assets/reports/enrol_cohort.svg';
         $reportcat->enable = 1;
-        $reportcat->enablesql = "SELECT COUNT(*) as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%cohort%'";
+        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%cohort%' LIMIT 1";
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
-
 
         $reportcat = kopere_dashboard_reportcat::createNew();
         $reportcat->title = 'Relatório de Visitantes';
         $reportcat->type = 'enrol_guest';
         $reportcat->image = 'assets/reports/enrol_guest.svg';
         $reportcat->enable = 1;
-        $reportcat->enablesql = "SELECT COUNT(*) as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%guest%'";
+        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%guest%' LIMIT 1";
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
-
 
         $reportcat = kopere_dashboard_reportcat::createNew();
         $reportcat->title = 'Relatório do sistema';
@@ -58,7 +54,6 @@ class ReportInstall {
         $reportcat->image = 'assets/reports/server.svg';
         $reportcat->enable = 1;
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
-
 
         $reportcat = kopere_dashboard_reportcat::createNew();
         $reportcat->title = 'Relatório de usuários';

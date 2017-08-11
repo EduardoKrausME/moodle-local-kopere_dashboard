@@ -311,6 +311,7 @@ class UsersImport {
 
     public function proccess() {
         global $CFG, $DB, $USER;
+        $CFG->debug = 0;
 
         require_once '../../user/lib.php';
         require_once '../../lib/classes/user.php';
@@ -336,7 +337,6 @@ class UsersImport {
         $col_groupmembers = $this->getColParam('groupmembers');
         $col_enroltimestart = $this->getColParam('enroltimestart');
         $col_enroltimeend = $this->getColParam('enroltimeend');
-
 
         if (!$inserir) {
             DashboardUtil::startPage(array(
@@ -463,7 +463,7 @@ class UsersImport {
                     }
                     $newUser->password = $password;
                 } else if (strlen($password) < 5) {
-                    $password = '--a criar--';
+                    $password = get_string_kopere('userimport_passcreate');
                 }
 
                 $this->addCol($username, !$inserir);
@@ -516,39 +516,40 @@ class UsersImport {
                 if ($errors != '') {
                     $this->addCol($errors, !$inserir);
                 } elseif (!$inserir) {
-                    $this->addCol('no error', !$inserir);
+                    $this->addCol(get_string_kopere('userimport_noterror'), !$inserir);
                 }
 
                 if ($inserir) {
                     try {
                         $newUser->id = user_create_user($newUser);
-                        $this->addCol('inserted', !$inserir);
+                        $this->addCol(get_string_kopere('userimport_inserted'), !$inserir);
+                        $iserted = true;
                     } catch (\Exception $e) {
                         $this->addCol($e->getMessage(), !$inserir);
+                        $iserted = false;
                     }
+                    if( $iserted ) {
+                        $user = $DB->get_record('user', array('id' => $newUser->id), '*', IGNORE_MULTIPLE);
+                        set_user_preference('auth_forcepasswordchange', 1, $newUser);
 
-                    set_user_preference('auth_forcepasswordchange', 1, $newUser);
+                        $dataEvent = array(
+                            'objectid' => $newUser->id,
+                            'relateduserid' => $newUser->id,
+                            'other' => array(
+                                'password' => $password,
+                                'courseid' => SITEID
+                            ),
+                            'context' => \context_user::instance($newUser->id)
+                        );
 
-                    $dataEvent = array(
-                        'objectid' => $newUser->id,
-                        'relateduserid' => $newUser->id,
-                        'other' => array(
-                            'password' => $password,
-                            'courseid' => SITEID
-                        ),
-                        'context' => \context_user::instance($newUser->id)
-                    );
-
-                    try {
-                        import_user_created::create($dataEvent)->trigger();
-                    } catch (\Exception $e) {
+                        try {
+                            import_user_created::create($dataEvent)->trigger();
+                        } catch (\Exception $e) { }
                     }
-
-                    $user = $DB->get_record('user', array('id' => $newUser->id), '*', IGNORE_MULTIPLE);
                 }
             } else {
                 $this->addCol($user->username, !$inserir);
-                $this->addCol('--criptografado--', !$inserir);
+                $this->addCol(get_string_kopere('userimport_cript'), !$inserir);
                 if ($col_idnumber)
                     $this->addCol($user->idnumber, !$inserir);
                 $this->addCol($user->firstname, !$inserir);
@@ -563,7 +564,7 @@ class UsersImport {
                 if ($col_city)
                     $this->addCol($user->city, !$inserir);
                 $this->addCol($user->country, !$inserir);
-                $this->addCol('exist', !$inserir);
+                $this->addCol(get_string_kopere('userimport_exist'), !$inserir);
             }
 
             // if exist user, add extras

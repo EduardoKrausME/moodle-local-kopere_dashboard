@@ -55,6 +55,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
 
         upgrade_plugin_savepoint(true, 2017061102, 'local', 'kopere_dashboard');
     }
+
     if ($oldversion < 2017071714) {
 
         if (!$dbman->table_exists('kopere_dashboard_reportcat')) {
@@ -96,6 +97,20 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         \local_kopere_dashboard\report\ReportInstall::createReports();
 
         upgrade_plugin_savepoint(true, 2017071714, 'local', 'kopere_dashboard');
+    }
+
+    if ($oldversion < 2017081101){
+        $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type'=>'badge'));
+        $reportcat->enablesql = "SELECT id as status FROM {badge} LIMIT 1";
+        $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
+
+        $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type'=>'enrol_cohort'));
+        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%cohort%' LIMIT 1";
+        $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
+
+        $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type'=>'enrol_guest'));
+        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%guest%' LIMIT 1";
+        $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
     }
 
     return true;

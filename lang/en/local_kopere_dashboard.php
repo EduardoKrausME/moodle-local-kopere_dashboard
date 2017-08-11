@@ -349,6 +349,11 @@ $string['userimport_referencedata'] = 'Referencing Moodle data with CSV';
 $string['userimport_dataok'] = 'Data OK, Insert into Moodle';
 $string['userimport_datanotok'] = 'Not OK, I forgot something';
 $string['userimport_wait'] = 'Please wait for the data to be processed. After processing, spreadsheet with inserted data will be available. ';
+$string['userimport_noterror'] = 'No error found';
+$string['userimport_inserted'] = 'User entered';
+$string['userimport_cript'] = '--encrypted--';
+$string['userimport_exist'] = 'User already exists. Ignored';
+$string['userimport_passcreate'] = '--It will be created--';
 
 // WebPages
 $string['webpages_title'] = 'Static Pages';
