@@ -37,7 +37,7 @@ class ReportInstall {
         $reportcat->type = 'enrol_cohort';
         $reportcat->image = 'assets/reports/enrol_cohort.svg';
         $reportcat->enable = 1;
-        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%cohort%' LIMIT 1";
+        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE name LIKE 'enrol_plugins_enabled' AND value LIKE '%cohort%' LIMIT 1";
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
 
         $reportcat = kopere_dashboard_reportcat::createNew();
@@ -45,7 +45,7 @@ class ReportInstall {
         $reportcat->type = 'enrol_guest';
         $reportcat->image = 'assets/reports/enrol_guest.svg';
         $reportcat->enable = 1;
-        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%guest%' LIMIT 1";
+        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE name LIKE 'enrol_plugins_enabled' AND value LIKE '%guest%' LIMIT 1";
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
 
         $reportcat = kopere_dashboard_reportcat::createNew();
@@ -154,8 +154,8 @@ class ReportInstall {
                                       -- /*If activities_completed = activities_assigned, show date of last log entry. Otherwise,
                                       --   show percentage complete. If activities_assigned = 0, show \'n/a\'.--*/
                                       (
-                                          SELECT IF(`activities_assigned`!=\'0\', (
-                                              SELECT IF( `activities_completed` = `activities_assigned`,
+                                          SELECT IF(activities_assigned!=\'0\', (
+                                              SELECT IF( activities_completed = activities_assigned,
                                               (
                                                   SELECT CONCAT(\'100% completo\',FROM_UNIXTIME(MAX(log.time),\'%m/%d/%Y\'))
                                                     FROM {log} log
@@ -164,7 +164,7 @@ class ReportInstall {
                                               ),
                                               -- /*--Percent completed--*/
                                               (
-                                                  SELECT CONCAT(IFNULL(ROUND((`activities_completed`)/(`activities_assigned`)*100,0), \'0\'),\'% complete\')))), \'n/a\')
+                                                  SELECT CONCAT(IFNULL(ROUND((activities_completed)/(activities_assigned)*100,0), \'0\'),\'% complete\')))), \'n/a\')
                                       ) AS \'course_completed\'
                 
                                     FROM {user} u
@@ -319,7 +319,7 @@ class ReportInstall {
                                  JOIN {user}     u ON u.id = asg.userid
                                  JOIN {course}   c ON context.instanceid = c.id
                                 WHERE asg.roleid = 5
-                              GROUP BY c.id';
+                             GROUP BY c.id';
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
             $table->addHeader('Nome do Curso', 'fullname'),

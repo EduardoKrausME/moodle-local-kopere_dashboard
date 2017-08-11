@@ -105,11 +105,11 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
 
         $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type'=>'enrol_cohort'));
-        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%cohort%' LIMIT 1";
+        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE name LIKE 'enrol_plugins_enabled' AND value LIKE '%cohort%' LIMIT 1";
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
 
         $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type'=>'enrol_guest'));
-        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%guest%' LIMIT 1";
+        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE name LIKE 'enrol_plugins_enabled' AND value LIKE '%guest%' LIMIT 1";
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
     }
 
