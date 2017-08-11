@@ -32,6 +32,7 @@ use local_kopere_dashboard\html\inputs\InputSelect;
 use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\DateUtil;
 use local_kopere_dashboard\util\EnrolUtil;
+use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Mensagem;
 use local_kopere_dashboard\util\TitleUtil;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
@@ -99,6 +100,9 @@ class UsersImport {
         echo '<div class="element-box table-responsive">';
 
         $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
+        if( !file_exists($target_file))
+            Header::notfound(get_string_kopere('userimport_filenotfound', $name));
+
         $csvContent = file_get_contents($target_file, false, null, 0, 2000);
 
         if (count(explode(";", $csvContent)) > count(explode(",", $csvContent))) {
@@ -384,6 +388,9 @@ class UsersImport {
 
         $isFirst = true;
         $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
+        if( !file_exists($target_file))
+            Header::notfound(get_string_kopere('userimport_filenotfound', $name));
+
         $handle = fopen($target_file, "r");
         while (($data = fgetcsv($handle, 1000, $separator)) !== FALSE) {
             if ($isFirst) {
@@ -672,6 +679,7 @@ class UsersImport {
                   </script>
                   <style>.mensage-proccess{display:none}</style>';
         } else {
+            unlink($target_file);
             die();
         }
     }
@@ -811,6 +819,8 @@ class UsersImport {
         $separator = optional_param('separator', '', PARAM_TEXT);
 
         $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
+        if( !file_exists($target_file))
+            Header::notfound(get_string_kopere('userimport_filenotfound', $name));
 
         echo '<!DOCTYPE html>
               <html lang="pt-BR">

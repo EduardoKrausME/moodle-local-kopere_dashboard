@@ -351,6 +351,7 @@ $string['userimport_inserted'] = 'Usuário inserido';
 $string['userimport_cript'] = '--criptografado--';
 $string['userimport_exist'] = 'Usuário já existe. Ignorado';
 $string['userimport_passcreate'] = '--Será criado--';
+$string['userimport_filenotfound'] = 'Arquivo "{$a}" não foi localizado. Faça upload novamente do arquivo CSV!';
 
 // WebPages
 $string['webpages_title'] = 'Páginas estáticas';

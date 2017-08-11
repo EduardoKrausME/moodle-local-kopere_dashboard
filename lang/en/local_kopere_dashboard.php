@@ -354,6 +354,7 @@ $string['userimport_inserted'] = 'User entered';
 $string['userimport_cript'] = '--encrypted--';
 $string['userimport_exist'] = 'User already exists. Ignored';
 $string['userimport_passcreate'] = '--It will be created--';
+$string['userimport_filenotfound'] = 'File "{$a}" was not found. Upload CSV file again!';
 
 // WebPages
 $string['webpages_title'] = 'Static Pages';
