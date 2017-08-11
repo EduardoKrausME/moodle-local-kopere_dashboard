@@ -7,6 +7,7 @@
 
 namespace local_kopere_dashboard\util;
 
+defined('MOODLE_INTERNAL') || die();
 
 class TitleUtil {
     public static function printH1($title, $isKeyLang = true) {

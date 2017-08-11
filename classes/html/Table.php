@@ -22,6 +22,8 @@
 
 namespace local_kopere_dashboard\html;
 
+defined('MOODLE_INTERNAL') || die();
+
 class Table {
     public function __construct($adicional = '') {
         $this->tableId = 'table_' . uniqid();

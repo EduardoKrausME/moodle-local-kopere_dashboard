@@ -29,7 +29,8 @@ global $PAGE, $CFG, $OUTPUT;
 require_once($CFG->libdir . '/adminlib.php');
 
 require_login();
-require_capability('moodle/site:config', context_system::instance());
+require_capability('local/kopere_dashboard:view', context_system::instance());
+require_capability('local/kopere_dashboard:manage', context_system::instance());
 
 $PAGE->set_url(new moodle_url('/local/kopere_dashboard/open.php'));
 $PAGE->set_context(context_system::instance());

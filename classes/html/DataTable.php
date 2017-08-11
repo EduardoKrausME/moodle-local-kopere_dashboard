@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard\html;
 
+defined('MOODLE_INTERNAL') || die();
+
 use local_kopere_dashboard\util\Export;
 
 class DataTable {

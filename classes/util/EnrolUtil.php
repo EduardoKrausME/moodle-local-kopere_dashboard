@@ -7,6 +7,8 @@
 
 namespace local_kopere_dashboard\util;
 
+defined('MOODLE_INTERNAL') || die();
+
 
 class EnrolUtil
 {
@@ -18,7 +20,7 @@ class EnrolUtil
      *
      * @return bool
      */
-    public static function enrol ( $courseid, $userid, $timeend, $status )
+    public static function enrol ( $courseid, $userid, $timestart, $timeend, $status )
     {
         global $DB;
 
@@ -62,7 +64,7 @@ class EnrolUtil
             ) );
         if ( $user_enrolments ) {
             $user_enrolments->status       = $status;
-            $user_enrolments->timestart    = time ();
+            $user_enrolments->timestart    = $timestart;
             $user_enrolments->timeend      = $timeend;
             $user_enrolments->modifierid   = $admin->id;
             $user_enrolments->timemodified = time ();
@@ -75,7 +77,7 @@ class EnrolUtil
             $user_enrolments->status       = $status;
             $user_enrolments->enrolid      = $enrol->id;
             $user_enrolments->userid       = $user->id;
-            $user_enrolments->timestart    = time ();
+            $user_enrolments->timestart    = $timestart;
             $user_enrolments->timeend      = $timeend;
             $user_enrolments->modifierid   = $admin->id;
             $user_enrolments->timecreated  = time ();

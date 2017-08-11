@@ -7,6 +7,7 @@
 
 namespace local_kopere_dashboard\report;
 
+defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\html\TableHeaderItem;
 use local_kopere_dashboard\vo\kopere_dashboard_reportcat;

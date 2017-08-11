@@ -22,6 +22,8 @@
 
 namespace local_kopere_dashboard\util;
 
+defined('MOODLE_INTERNAL') || die();
+
 class Header {
     public static function location($url, $isDie = true) {
         ob_clean();

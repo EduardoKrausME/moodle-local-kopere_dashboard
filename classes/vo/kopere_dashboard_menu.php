@@ -22,6 +22,8 @@
 
 namespace local_kopere_dashboard\vo;
 
+defined('MOODLE_INTERNAL') || die();
+
 class kopere_dashboard_menu extends \stdClass {
 
     /**

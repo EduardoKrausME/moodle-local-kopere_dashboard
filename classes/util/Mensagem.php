@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard\util;
 
+defined('MOODLE_INTERNAL') || die();
+
 class Mensagem {
     public static function agendaMensagem($mensagem) {
         if (!isset($_SESSION['kopere_mensagem'])) {
@@ -77,15 +79,15 @@ class Mensagem {
         self::agendaMensagem(self::success($texto));
     }
 
-    public static function info($texto) {
-        return "<div class=\"alert alert-info\">
+    public static function info($texto, $extraClass='') {
+        return "<div class=\"alert alert-info $extraClass\">
             <i class=\"fa fa-info-circle\"></i>
             $texto
         </div>";
     }
 
-    public static function printInfo($texto) {
-        echo self::info($texto);
+    public static function printInfo($texto, $extraClass='') {
+        echo self::info($texto, $extraClass);
     }
 
     public static function agendaMensagemInfo($texto) {

@@ -31,7 +31,11 @@ function local_kopere_dashboard_extend_navigation ( global_navigation $nav )
     global $CFG, $PAGE, $USER, $DB;
 
     try {
-        $menus = $DB->get_records ( 'kopere_dashboard_menu' );
+        $sql = "SELECT menu.* 
+                  FROM {kopere_dashboard_menu}     AS menu
+                  JOIN {kopere_dashboard_webpages} AS page ON page.menuid = menu.id
+                 WHERE page.visible = 1";
+        $menus = $DB->get_records_sql($sql);
         /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
         foreach ( $menus as $menu ) {
             $node = $nav->add (
@@ -39,7 +43,7 @@ function local_kopere_dashboard_extend_navigation ( global_navigation $nav )
                 new moodle_url( $CFG->wwwroot . '/local/kopere_dashboard/?menu=' . $menu->link ),
                 navigation_node::TYPE_CUSTOM,
                 null,
-                'kopere_dashboard' . $menu->link,
+                'kopere_dashboard-' . $menu->id,
                 new pix_icon( 'webpages', $menu->title, 'local_kopere_dashboard' )
             );
 
@@ -50,39 +54,42 @@ function local_kopere_dashboard_extend_navigation ( global_navigation $nav )
         // Se der problema, não precisa fazer nada
     }
 
-    $context = context_system::instance ();
-    if ( isloggedin () && has_capability ( 'moodle/site:config', $context ) ) {
+    if(isloggedin ()) {
+        $context = context_system::instance();
+        if (has_capability('local/kopere_dashboard:view', $context) ||
+            has_capability('local/kopere_dashboard:manage', $context)) {
 
-        $node = $nav->add (
-            get_string ( 'pluginname', 'local_kopere_dashboard' ),
-            new moodle_url( $CFG->wwwroot . '/local/kopere_dashboard/open.php' ),
-            navigation_node::TYPE_CUSTOM,
-            null,
-            'kopere_dashboard',
-            new pix_icon( 'icon', get_string ( 'pluginname', 'local_kopere_dashboard' ), 'local_kopere_dashboard' )
-        );
+            $node = $nav->add(
+                get_string('pluginname', 'local_kopere_dashboard'),
+                new moodle_url($CFG->wwwroot . '/local/kopere_dashboard/open.php'),
+                navigation_node::TYPE_CUSTOM,
+                null,
+                'kopere_dashboard',
+                new pix_icon('icon', get_string('pluginname', 'local_kopere_dashboard'), 'local_kopere_dashboard')
+            );
 
-        // $node->display              = false;
-        $node->showinflatnavigation = true;
-    }
-
-    if ( get_config ( 'local_kopere_dashboard', 'nodejs-status' ) ) {
-
-        $PAGE->requires->jquery ();
-        $PAGE->requires->js ( new moodle_url( $CFG->wwwroot . '/local/kopere_dashboard/node/socket.io.js' ), true );
-        $PAGE->requires->js ( new moodle_url( $CFG->wwwroot . '/local/kopere_dashboard/node/app-v2.js' ), true );
-
-        if ( get_config ( 'local_kopere_dashboard', 'nodejs-ssl' ) ) {
-            $url = "https://" . get_config ( 'local_kopere_dashboard', 'nodejs-url' ) . ':' . get_config ( 'local_kopere_dashboard', 'nodejs-port' );
-        } else {
-            $url = get_config ( 'local_kopere_dashboard', 'nodejs-url' ) . ':' . get_config ( 'local_kopere_dashboard', 'nodejs-port' );
+            // $node->display              = false;
+            $node->showinflatnavigation = true;
         }
 
-        $userid     = intval ( $USER->id );
-        $fullname   = '"' . fullname ( $USER ) . '"';
-        $serverTime = time ();
-        $urlNode    = '"' . $url . '"';
+        if (get_config('local_kopere_dashboard', 'nodejs-status')) {
 
-        $PAGE->requires->js_init_code ( "startServer( $userid, $fullname, $serverTime, $urlNode )" );
+            $PAGE->requires->jquery();
+            $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/local/kopere_dashboard/node/socket.io.js'), true);
+            $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/local/kopere_dashboard/node/app-v2.js'), true);
+
+            if (get_config('local_kopere_dashboard', 'nodejs-ssl')) {
+                $url = "https://" . get_config('local_kopere_dashboard', 'nodejs-url') . ':' . get_config('local_kopere_dashboard', 'nodejs-port');
+            } else {
+                $url = get_config('local_kopere_dashboard', 'nodejs-url') . ':' . get_config('local_kopere_dashboard', 'nodejs-port');
+            }
+
+            $userid = intval($USER->id);
+            $fullname = '"' . fullname($USER) . '"';
+            $serverTime = time();
+            $urlNode = '"' . $url . '"';
+
+            $PAGE->requires->js_init_code("startServer( $userid, $fullname, $serverTime, $urlNode )");
+        }
     }
 }

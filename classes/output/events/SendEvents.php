@@ -23,6 +23,10 @@
 
 namespace local_kopere_dashboard\output\events;
 
+defined('MOODLE_INTERNAL') || die();
+
+use core\event\message_sent;
+use core\message\message;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
 class SendEvents {
@@ -139,7 +143,7 @@ class SendEvents {
         foreach ($usersTo as $userTo) {
             $userTo->fullname = fullname($userTo);
 
-            $userTo->password = $this->event->other;
+            $userTo->password = $this->event->other->password;
 
             $sendSubject = $this->replaceCourse($this->subject, $userTo, 'to');
             $htmlMessage = $this->replaceCourse($this->message, $userTo, 'to');
@@ -147,7 +151,7 @@ class SendEvents {
             $magager     = "<a href=\"{$CFG->wwwroot}/message/edit.php?id={$userTo->id}\">Gerenciar mensagens</a>";
             $htmlMessage = str_replace ( '{[manager]}', $magager, $htmlMessage );
 
-            $eventdata = new \stdClass();
+            $eventdata = new message();
             $eventdata->modulename = 'moodle';
             $eventdata->component = 'local_kopere_dashboard';
             $eventdata->name = 'kopere_dashboard_messages';
@@ -256,41 +260,3 @@ class SendEvents {
     private static function mailError($message) {
     }
 }
-
-/*
-{[moodle.fullname]}
-{[moodle.shortname]}
-Copyright © {[date.year]} {[moodle.fullname]}
-{[manager]}
-*/
-/*
-Olá {[to.fullname]},
-
-Você foi cadastrado com sucesso no {[course.fullname]}. Agora, você já pode fazer o login na área do aluno para começar estudar quando e onde quiser.
-
-É com imensa satisfação que o {[moodle.fullname]} lhe dá as boas-vindas.
-
-Acesse {[course.link]}, e bons estudos.
-
-Dúvidas estamos a disposição.
-
-Cordialmente,
-Equipe de Suporte
- */
-
-/*
-Olá {[to.fullname]},
-
-Uma conta foi criado para você no site {[moodle.fullname]}.
-
-Agora, convido você para fazer o login na área do aluno com os seguintes dados:
-
-Site: {[moodle.link]}
-Login: {[to.email]}
-Senha: {[to.password]}
-
-Dúvidas estamos a disposição.
-
-Cordialmente,
-Equipe de Suporte
-*/

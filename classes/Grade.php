@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard;
 
+defined('MOODLE_INTERNAL') || die();
+
 class Grade {
     public function getLastGrades() {
         global $DB;

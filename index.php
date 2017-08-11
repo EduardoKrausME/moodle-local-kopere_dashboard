@@ -52,12 +52,22 @@ if ($menu) {
     $PAGE->set_pagelayout(get_config('local_kopere_dashboard', 'webpages_theme'));
     $PAGE->set_title($menu->title);
 
+    $PAGE->requires->css('/local/kopere_dashboard/assets/statics-pages.css');
+
     $pageHtml .= $OUTPUT->header();
 
     $sql = "SELECT * FROM {kopere_dashboard_webpages} WHERE visible = 1 AND menuid = :menuid ORDER BY pageorder ASC";
     $webpagess = $DB->get_records_sql($sql, array('menuid' => $menu->id));
 
-    $pageHtml .= '<div class="courses frontpage-course-list-all">';
+    if( count($webpagess) == 1 ){
+        ob_clean();
+        foreach ($webpagess as $webpages) {
+            header("Location: {$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}");
+            die();
+        }
+    }
+
+    $pageHtml .= '<div class="statics-pages frontpage-course-list-all">';
     $pageHtml .= "<h1>{$menu->title}</h1>";
 
     /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpages */
@@ -65,12 +75,12 @@ if ($menu) {
         $pageHtml
             .= "<div class=\"coursebox clearfix odd first\" >
                     <div class=\"info\">
-                        <h3 class=\"coursename-\">
+                        <h3 class=\"coursename\">
                             <a href=\"{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}\">{$webpages->title}</a>
                         </h3>
                     </div>
                     <div class=\"content\">
-                        <div class=\"summary\">
+                        <div class=\"summary\" >
                             <div class=\"no-overflow\">" . \local_kopere_dashboard\util\Html::textoTruncado(strip_tags($webpages->text), 300) . "</div>
                         </div>
                     </div>

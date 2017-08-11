@@ -26,6 +26,7 @@ $string['kopere_dashboard:view'] = 'Ver Kopere Dashboard';
 $string['kopere_dashboard:manage'] = 'Gerenciar Kopere Dashboard';
 $string['settings'] = 'Configurar';
 $string['close'] = 'Fechar';
+$string['crontask_tmp'] = 'Cron que limpa a pasta TMP';
 
 $string['messageprovider:kopere_dashboard_messages'] = 'Envia Notificações';
 $string['kopere_dashboard:emailconfirmsubmission'] = 'Envia Notificações';
@@ -240,13 +241,14 @@ $string['notification_core_course_category'] = 'Categoria de Cursos';
 $string['notification_core_course'] = 'Cursos';
 $string['notification_core_user'] = 'Usuários';
 $string['notification_core_user_enrolment'] = 'Matrículas de Usuários';
+$string['notification_local_kopere_dashboard'] = 'Kopere Dashboard';
 $string['notification_local_kopere_dashboard_hotmoodle'] = 'Kopere HotMoodle';
 $string['notification_local_kopere_dashboard_moocommerce'] = 'Kopere MooCommerce';
 $string['notification_local_kopere_dashboard_pagamento'] = 'Kopere Pagamento';
 $string['notification_error_smtp'] = '<p>Para que os alunos recebam as mensagens, o SMTP precisa estar configurado.</p>
                     <p><a href="https://moodle.eduardokraus.com/configurar-o-smtp-no-moodle"
                           target="_blank">Leia aqui como configurar o SMTP</a></p>
-                    <p><a href="$CFG->wwwroot/admin/settings.php?section=$a"
+                    <p><a href="{$a->wwwroot}/admin/settings.php?section={$a->mail}"
                           target="_blank">Clique aqui para configurar a saída de e-mail</a></p>';
 
 // Profile
@@ -314,6 +316,38 @@ $string['useronline_settings_ssl'] = 'Habilitar SSL?';
 $string['useronline_settings_url'] = 'URL do servidor';
 $string['useronline_settings_port'] = 'Porta do servidor';
 
+// UserImport
+$string['userimport_title'] = 'Importar Usuários';
+$string['userimport_upload'] = 'Arraste arquivos CSV aqui ou clique para abrir a caixa de busca.';
+$string['userimport_moveuploadedfile_error'] = 'ERROR ao mover arquivo!';
+$string['userimport_title_proccess'] = 'Processando arquivo "{$a}"';
+$string['userimport_separator_error'] = 'Você deve exportar CSV com separador ";" ou ","!';
+$string['userimport_first10']  = 'Primeiros 10 registros do seu CSV';
+$string['userimport_linkall'] = 'Clique aqui para ver todos os registros do CSV';
+$string['userimport_colname'] = 'Coluna {$a}';
+$string['userimport_colselect'] = '..::Selecione a coluna::..';
+$string['userimport_empty'] = 'Se não selecionar, usará o padrão "{$a}"';
+$string['userimport_userdata'] = 'Dados de Usuário';
+$string['userimport_userfields'] = 'Campos de perfil extras';
+$string['userimport_firstname'] = 'Primeiro nome ou nome completo';
+$string['userimport_firstname_desc'] = 'Se no CSV você possuir o nome completo, preencha apenas este campo que o Kopere se encarrega de gerar os dois campos. ' .
+    'Se o seu CSV possuir primeiro nome e Sobrenome, selecione este e Sobrenome.';
+$string['userimport_courseenrol'] = 'Matrícular em um curso';
+$string['userimport_courseenrol_desc'] = 'Se você deseja que o aluno seja matrículado em um curso, selecione a coluna identificadora do curso.';
+$string['userimport_date_desc'] = 'O sistema detecta automáticamente os principais formato de data.';
+$string['userimport_group_desc'] = 'Se deseja que o aluno seja vinculado a um grupo no curso, a coluna deve ser idêntica ao nome do Grupo ou ID interno.';
+$string['userimport_next'] = 'Processar';
+$string['userimport_import_user_created_name'] = 'Usuário importado e cadastrado no Moodle';
+$string['userimport_import_course_enrol_name'] = 'Usuário importado foi cadastrado no Curso';
+$string['userimport_messages'] = 'Mensagens que os usuários receberão durante a importação';
+$string['userimport_receivemessage'] = 'Usuário receberá a mensgem com o título {$a}';
+$string['userimport_notreceivemessage'] = 'Usuário não receberá nenhuma mensagem nesta ação!';
+$string['userimport_referencedata'] = 'Referenciar os dados do Moodle com o CSV';
+$string['userimport_dataok'] = 'Dados OK, Inserir no Moodle';
+$string['userimport_datanotok'] = 'Não esta OK, esqueci de algo';
+$string['userimport_wait'] = 'Aguarde o processamento dos dados. Após processar será disponibilizado planilha com dados inseridos.';
+
+
 // WebPages
 $string['webpages_title'] = 'Páginas estáticas';
 $string['webpages_subtitle'] = 'Menus de navegação';
@@ -358,12 +392,12 @@ $string['webpages_page_settigs'] = 'Configurações das páginas estáticas';
 $string['webpages_page_theme'] = 'Layout da página "Todas as páginas"';
 $string['webpages_page_analytics'] = 'ID de acompanhamento do Google Analytics';
 $string['webpages_page_analyticsdesc'] = 'Sequencia de 13 caracteres, iniciando em UA';
-$string['webpages_theme_base'] =  'O layout sem os blocos';
-$string['webpages_theme_standard'] =  'Layout padrão com blocos';
-$string['webpages_theme_frontpage'] =  'Layout da home page do site.';
-$string['webpages_theme_popup'] =  'Sem navegação, sem blocos, sem cabeçalho';
-$string['webpages_theme_frametop'] =  'Sem blocos e rodapé mínimo';
-$string['webpages_theme_print'] =  'Deve exibir apenas o conteúdo e os cabeçalhos básicos';
-$string['webpages_theme_report'] =  'O layout da página usado para relatórios';
-$string['webpages_allpages'] =  'Todas as páginas';
+$string['webpages_theme_base'] = 'O layout sem os blocos';
+$string['webpages_theme_standard'] = 'Layout padrão com blocos';
+$string['webpages_theme_frontpage'] = 'Layout da home page do site.';
+$string['webpages_theme_popup'] = 'Sem navegação, sem blocos, sem cabeçalho';
+$string['webpages_theme_frametop'] = 'Sem blocos e rodapé mínimo';
+$string['webpages_theme_print'] = 'Deve exibir apenas o conteúdo e os cabeçalhos básicos';
+$string['webpages_theme_report'] = 'O layout da página usado para relatórios';
+$string['webpages_allpages'] = 'Todas as páginas';
 

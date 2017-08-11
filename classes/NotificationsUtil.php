@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard;
 
+defined('MOODLE_INTERNAL') || die();
+
 use core\event\base;
 use local_kopere_dashboard\html\Form;
 use local_kopere_dashboard\html\inputs\InputSelect;
@@ -171,6 +173,8 @@ class NotificationsUtil {
             // case 'core_user_password':
             // return 'Senhas';
 
+            case 'local_kopere_dashboard':
+                return get_string_kopere('notification_local_kopere_dashboard');
             case 'local_kopere_dashboard_hotmoodle':
                 return get_string_kopere('notification_local_kopere_dashboard_hotmoodle');
             case 'local_kopere_dashboard_moocommerce':
@@ -203,9 +207,11 @@ class NotificationsUtil {
             return;
 
         if (Release::getVersion() < 3.2) {
-            Mensagem::printDanger(get_string_kopere('notification_error_smtp', 'messagesettingemail'));
+            $CFG->mail = 'messagesettingemail';
+            Mensagem::printDanger(get_string_kopere('notification_error_smtp', $CFG));
         } else {
-            Mensagem::printDanger(get_string_kopere('notification_error_smtp', 'outgoingmailconfig'));
+            $CFG->mail = 'outgoingmailconfig';
+            Mensagem::printDanger(get_string_kopere('notification_error_smtp', $CFG));
         }
     }
 }

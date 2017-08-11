@@ -22,6 +22,8 @@
 
 namespace local_kopere_dashboard\html;
 
+defined('MOODLE_INTERNAL') || die();
+
 use local_kopere_dashboard\html\inputs\IInput;
 
 class Form {
@@ -38,9 +40,11 @@ class Form {
     }
 
     public function printRow($titulo, $input, $name = '', $adicionalText = '') {
+        if($titulo)
+            $titulo = '<label for="' . $name . '">' . $titulo . '</label>';
+
         echo '<div class="form-group area_' . $name . '">
-                  <label for="' . $name . '">' . $titulo . '</label>
-                  ' . $input . '
+                  ' . $titulo . $input . '
                   <div class="help-block form-text with-errors">' . $adicionalText . '</div>
               </div>';
     }
@@ -84,7 +88,7 @@ class Form {
     }
 
     public function createSubmitInput($value = '', $class = '', $additionalText = '') {
-        $html = '<input name="" class="btn btn-success bt-submit' . $class . '" type="submit" value="' . htmlspecialchars($value) . '" />';
+        $html = '<input name="" class="btn btn-success bt-submit ' . $class . '" type="submit" value="' . htmlspecialchars($value) . '" />';
         $this->printRow('', $html, 'btsubmit', $additionalText);
     }
 

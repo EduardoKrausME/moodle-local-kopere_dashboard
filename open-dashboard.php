@@ -36,7 +36,8 @@ require_once('autoload.php');
 global $PAGE, $CFG, $OUTPUT;
 
 require_login();
-require_capability('moodle/site:config', context_system::instance());
+require_capability('local/kopere_dashboard:view', context_system::instance());
+require_capability('local/kopere_dashboard:manage', context_system::instance());
 
 $PAGE->set_url(new moodle_url('/local/kopere_dashboard/open-dashboard.php'));
 $PAGE->set_pagetype('reports');
@@ -159,10 +160,19 @@ if (isset($_POST['action'])) {
                     <?php
 
                     DashboardUtil::addMenu('Dashboard::start', 'dashboard', 'Dashboard');
-                    DashboardUtil::addMenu('Users::dashboard', 'users', get_string_kopere('user_title'), array(
-                        array('UsersOnline::dashboard', get_string_kopere('useronline_title'), 'users-online'),
-                        array('UsersImport::dashboard', get_string_kopere('userimport_title'), 'users-import')
-                    ));
+
+                    if (has_capability('moodle/site:config', context_system::instance())) {
+                        $menuExtra = array(
+                            array('UsersOnline::dashboard', get_string_kopere('useronline_title'), 'users-online'),
+                            array('UsersImport::dashboard', get_string_kopere('userimport_title'), 'users-import')
+                        );
+                    } else {
+                        $menuExtra = array(
+                            array('UsersOnline::dashboard', get_string_kopere('useronline_title'), 'users-online')
+                        );
+                    }
+                    DashboardUtil::addMenu('Users::dashboard', 'users', get_string_kopere('user_title'), $menuExtra);
+
                     DashboardUtil::addMenu('Courses::dashboard', 'courses', get_string_kopere('courses_title'));
 
                     $plugins = $DB->get_records_sql("SELECT plugin FROM {config_plugins} WHERE plugin LIKE 'local\_kopere\_dashboard\_%' AND name LIKE 'version'");
@@ -177,11 +187,14 @@ if (isset($_POST['action'])) {
 
                     // DashboardUtil::addMenu ( 'Gamification::dashboard', 'gamification', 'Gamificação' );
 
-                    DashboardUtil::addMenu('Notifications::dashboard', 'notifications', get_string_kopere('notification_title'));
+                    if (has_capability('moodle/site:config', context_system::instance()))
+                        DashboardUtil::addMenu('Notifications::dashboard', 'notifications', get_string_kopere('notification_title'));
 
-                    DashboardUtil::addMenu('WebPages::dashboard', 'webpages', get_string_kopere('webpages_title'));
+                    if (has_capability('moodle/site:config', context_system::instance()))
+                        DashboardUtil::addMenu('WebPages::dashboard', 'webpages', get_string_kopere('webpages_title'));
                     DashboardUtil::addMenu('Benchmark::test', 'performace', get_string_kopere('benchmark_title'));
-                    DashboardUtil::addMenu('Backup::dashboard', 'data', 'Backup');
+                    if (has_capability('moodle/site:config', context_system::instance()))
+                        DashboardUtil::addMenu('Backup::dashboard', 'data', 'Backup');
                     DashboardUtil::addMenu('About::dashboard', 'about', get_string_kopere('about_title'));
                     ?>
                 </ul>

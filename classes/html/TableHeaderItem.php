@@ -22,6 +22,8 @@
 
 namespace local_kopere_dashboard\html;
 
+defined('MOODLE_INTERNAL') || die();
+
 class TableHeaderItem extends \stdClass {
     const TYPE_DATE = 'date';
     const TYPE_CURRENCY = 'numeric';

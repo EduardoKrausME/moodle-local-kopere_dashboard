@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard;
 
+defined('MOODLE_INTERNAL') || die();
+
 use local_kopere_dashboard\html\Form;
 use local_kopere_dashboard\html\inputs\InputCheckbox;
 use local_kopere_dashboard\html\inputs\InputDateRange;

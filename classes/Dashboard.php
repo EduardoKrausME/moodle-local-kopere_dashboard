@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard;
 
+defined('MOODLE_INTERNAL') || die();
+
 use local_kopere_dashboard\report\Files;
 use local_kopere_dashboard\util\BytesUtil;
 use local_kopere_dashboard\util\DashboardUtil;

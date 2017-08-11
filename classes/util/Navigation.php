@@ -7,6 +7,7 @@
 
 namespace local_kopere_dashboard\util;
 
+defined('MOODLE_INTERNAL') || die();
 
 class Navigation
 {
@@ -17,7 +18,7 @@ class Navigation
         if ( ( $totalRegisters % $perPag ) != 0 )
             $countPages += 1;
 
-        echo "<span class=\"pagination-info\">" . get_string_kopere('navigation_page',{'atualPage'=>$atualPage, 'countPages'=>$countPages})."</span>";
+        echo "<span class=\"pagination-info\">" . get_string_kopere('navigation_page',array('atualPage'=>$atualPage, 'countPages'=>$countPages))."</span>";
 
         echo "<ul class=\"pagination\">";
         if ( $atualPage != 1 ) {

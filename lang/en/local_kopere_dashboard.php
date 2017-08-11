@@ -26,6 +26,7 @@ $string['kopere_dashboard:view'] = 'View Kopere Dashboard';
 $string['kopere_dashboard:manage'] = 'anager Kopere Dashboard';
 $string['settings'] = 'Settings';
 $string['close'] = 'Close';
+$string['crontask_tmp'] = 'Cron clear tmp folder';
 
 $string['messageprovider:kopere_dashboard_messages'] = 'Send Notifications';
 $string['kopere_dashboard:emailconfirmsubmission'] = 'Send Notifications';
@@ -134,26 +135,26 @@ $string['benchmark_testconf_status'] = 'Status';
 $string['benchmark_testconf_description'] = 'Description';
 $string['benchmark_testconf_action'] = 'Action';
 
-$string['cloadname']            = 'Moodle loading time';
-$string['cloadmoreinfo']        = 'Run the configuration file &laquo;config.php&raquo;';
-$string['processorname']        = 'Function called many times';
-$string['processormoreinfo']    = 'A function is called in a loop to test processor speed';
-$string['filereadname']         = 'Reading files';
-$string['filereadmoreinfo']     = 'Test the read speed in Moodle\'s temporary folder';
-$string['filewritename']        = 'Creating files';
-$string['filewritemoreinfo']    = 'Test the write speed in Moodle\'s temporary folder';
-$string['coursereadname']       = 'Reading course';
-$string['coursereadmoreinfo']   = 'Test the read speed to read a course';
-$string['coursewritename']      = 'Writing course';
-$string['coursewritemoreinfo']  = 'Test the database speed to write a course';
-$string['querytype1name']       = 'Complex request (n°1)';
-$string['querytype1moreinfo']   = 'Test the database speed to execute a complex request';
-$string['querytype2name']       = 'Complex request (n°2)';
-$string['querytype2moreinfo']   = 'Test the database speed to execute a complex request';
-$string['loginguestname']       = 'Time to connect with the guest account';
-$string['loginguestmoreinfo']   = 'Measuring the time to load the login page with the guest account';
-$string['loginusername']        = 'Time to connect with a fake user account';
-$string['loginusermoreinfo']    = 'Measuring the time to load the login page with a fake user account';
+$string['cloadname'] = 'Moodle loading time';
+$string['cloadmoreinfo'] = 'Run the configuration file &laquo;config.php&raquo;';
+$string['processorname'] = 'Function called many times';
+$string['processormoreinfo'] = 'A function is called in a loop to test processor speed';
+$string['filereadname'] = 'Reading files';
+$string['filereadmoreinfo'] = 'Test the read speed in Moodle\'s temporary folder';
+$string['filewritename'] = 'Creating files';
+$string['filewritemoreinfo'] = 'Test the write speed in Moodle\'s temporary folder';
+$string['coursereadname'] = 'Reading course';
+$string['coursereadmoreinfo'] = 'Test the read speed to read a course';
+$string['coursewritename'] = 'Writing course';
+$string['coursewritemoreinfo'] = 'Test the database speed to write a course';
+$string['querytype1name'] = 'Complex request (n°1)';
+$string['querytype1moreinfo'] = 'Test the database speed to execute a complex request';
+$string['querytype2name'] = 'Complex request (n°2)';
+$string['querytype2moreinfo'] = 'Test the database speed to execute a complex request';
+$string['loginguestname'] = 'Time to connect with the guest account';
+$string['loginguestmoreinfo'] = 'Measuring the time to load the login page with the guest account';
+$string['loginusername'] = 'Time to connect with a fake user account';
+$string['loginusermoreinfo'] = 'Measuring the time to load the login page with a fake user account';
 
 //Courses
 $string['courses_title'] = 'Courses';
@@ -242,13 +243,14 @@ $string['notification_core_course_category'] = 'Course Category';
 $string['notification_core_course'] = 'Courses';
 $string['notification_core_user'] = 'Users';
 $string['notification_core_user_enrolment'] = 'User Registration';
+$string['notification_local_kopere_dashboard'] = 'Kopere Dashboard';
 $string['notification_local_kopere_dashboard_hotmoodle'] = 'Kopere HotMoodle';
 $string['notification_local_kopere_dashboard_moocommerce'] = 'Kopere MooCommerce';
 $string['notification_local_kopere_dashboard_payment'] = 'Kopere Payment';
 $string['notification_error_smtp'] = '<p>In order for students to receive the messages, SMTP must be configured.</p>
                     <p><a href="https://moodle.eduardokraus.com/configurar-o-smtp-no-moodle"
                           target="_blank">Read here how to configure SMTP</a></p>
-                    <p><a href="$CFG->wwwroot/admin/settings.php?section=$a"
+                    <p><a href="{$a->wwwroot}/admin/settings.php?section={$a->mail}"
                           target="_blank">Click here to configure email output</a></p>';
 
 // Profile
@@ -315,6 +317,38 @@ $string['useronline_settings_status'] = 'Enable Online Users Synchronization Ser
 $string['useronline_settings_ssl'] = 'Enable SSL?';
 $string['useronline_settings_url'] = 'Server URL';
 $string['useronline_settings_port'] = 'Server port';
+
+// UserImport
+$string['userimport_title'] = 'Import Users';
+$string['userimport_upload'] = 'Drag CSV files here or click to open the search box.';
+$string['userimport_moveuploadedfile_error'] = 'ERROR while moving file!';
+$string['userimport_title_proccess'] = 'Processing file "{$a}"';
+$string['userimport_separator_error'] = 'You should export CSV with separator "; Or ","!';
+$string['userimport_first10']  = 'First 10 records from your CSV';
+$string['userimport_linkall'] = 'Click here to see all CSV records';
+$string['userimport_colname'] = 'Column {$a}';
+$string['userimport_colselect'] = '..::Select column::..';
+$string['userimport_empty'] = 'If you do not select it, it will use the default "{$a}"';
+$string['userimport_userdata'] = 'User Data';
+$string['userimport_userfields'] = 'Extra profile fields';
+$string['userimport_firstname'] = 'First name or full name';
+$string['userimport_firstname_desc'] = 'If you have the full name in CSV, just fill in this field Kopere will be responsible for generating both fields. '.
+        'If your CSV has a first name and Last Name, select this and Last Name.';
+$string['userimport_courseenrol'] = 'Enroll in a course';
+$string['userimport_courseenrol_desc'] = 'If you want the student to be enrolled in a course, select the course identifier column.';
+$string['userimport_date_desc'] = 'The system automatically detects the main date format.';
+$string['userimport_group_desc'] = 'If you want the student to be bound to a group in the course, the column must be identical to the group name or internal ID.';
+$string['userimport_next'] = 'Process';
+$string['userimport_import_user_created_name'] = 'User imported and registered in Moodle';
+$string['userimport_import_course_enrol_name'] = 'Imported user was enrolled in the Course';
+$string['userimport_messages'] = 'Messages that students will receive during import';
+$string['userimport_messages'] = 'Messages that users will receive during import';
+$string['userimport_receivemessage'] = 'User will receive the message with the title {$a}';
+$string['userimport_notreceivedemessage'] = 'User will not receive any messages in this action!';
+$string['userimport_referencedata'] = 'Referencing Moodle data with CSV';
+$string['userimport_dataok'] = 'Data OK, Insert into Moodle';
+$string['userimport_datanotok'] = 'Not OK, I forgot something';
+$string['userimport_wait'] = 'Please wait for the data to be processed. After processing, spreadsheet with inserted data will be available. ';
 
 // WebPages
 $string['webpages_title'] = 'Static Pages';

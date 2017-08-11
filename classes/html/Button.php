@@ -22,6 +22,8 @@
 
 namespace local_kopere_dashboard\html;
 
+defined('MOODLE_INTERNAL') || die();
+
 /**
  * Class Button
  * @package local_kopere_dashboard\html

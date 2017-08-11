@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard\report\custom;
 
+defined('MOODLE_INTERNAL') || die();
+
 use local_kopere_dashboard\html\Button;
 use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\TableHeaderItem;

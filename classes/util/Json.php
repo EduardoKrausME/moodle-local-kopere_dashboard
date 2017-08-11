@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard\util;
 
+defined('MOODLE_INTERNAL') || die();
+
 class Json {
     public static function encodeAndReturn($data, $recordsTotal = -1, $recordsFiltered = 0) {
         ob_clean();

@@ -32,7 +32,8 @@ global $PAGE, $CFG, $OUTPUT;
 ob_clean();
 
 try {
-    require_capability('moodle/site:config', context_system::instance());
+    require_capability('local/kopere_dashboard:view', context_system::instance());
+    require_capability('local/kopere_dashboard:manage', context_system::instance());
 } catch (Exception $e) { ?>
     <script>
         location.reload();

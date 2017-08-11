@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard\util;
 
+defined('MOODLE_INTERNAL') || die();
+
 class ServerUtil {
     public static function getKoperePath($create = true) {
         global $CFG;
