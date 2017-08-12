@@ -64,8 +64,12 @@ if (isset($_POST['action'])) {
     <link async href="https://fonts.googleapis.com/css?family=Nunito:300,400" rel="stylesheet">
 
     <script>
-        lang_yes = '<?php echo get_string('yes') ?>';
-        lang_no = '<?php echo get_string('no') ?>';
+        lang_yes        = '<?php echo get_string('yes') ?>';
+        lang_no         = '<?php echo get_string('no') ?>';
+        lang_visible    = '<?php echo get_string_kopere('courses_visible')?>';
+        lang_invisible  = '<?php echo get_string_kopere('courses_invisible')?>';
+        lang_active     = '<?php echo get_string_kopere('notification_status_active')?>';
+        lang_inactive   = '<?php echo get_string_kopere('notification_status_inactive')?>';
         dataTables_oLanguage = {
             "sEmptyTable": "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
             "sInfo": "<?php echo get_string_kopere('datatables_sInfo') ?>",
@@ -201,10 +205,9 @@ if (isset($_POST['action'])) {
             </div>
         </div>
 
-        <div class="content-w">
+        <div class="content-w <?php echo getPathQuery($_SERVER['QUERY_STRING']) ?>">
             <?php
-            $queryString = $_SERVER['QUERY_STRING'];
-            loadByQuery($queryString);
+            loadByQuery($_SERVER['QUERY_STRING']);
             ?>
         </div>
 

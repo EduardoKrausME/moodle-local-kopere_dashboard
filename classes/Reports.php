@@ -32,6 +32,7 @@ use local_kopere_dashboard\report\custom\ReportInterface;
 use local_kopere_dashboard\report\custom\ReportsCourseAccess;
 use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Header;
+use local_kopere_dashboard\util\Json;
 use local_kopere_dashboard\util\TitleUtil;
 use local_kopere_dashboard\vo\kopere_dashboard_reportcat;
 use local_kopere_dashboard\vo\kopere_dashboard_reports;
@@ -117,21 +118,21 @@ class Reports {
     }
 
     public function loadReport() {
-        global $DB, $CFG;
+        global $DB;
 
         $report = optional_param('report', 0, PARAM_INT);
         $id = optional_param('id', 0, PARAM_INT);
 
         /** @var kopere_dashboard_reports $kopere_dashboard_reports */
         $kopere_dashboard_reports = $DB->get_record('kopere_dashboard_reports', array('id' => $report));
-        Header::notfoundNull($kopere_dashboard_reports, 'Relatório não localizado!');
+        Header::notfoundNull($kopere_dashboard_reports, get_string_kopere('reports_notfound'));
 
         /** @var kopere_dashboard_reportcat $kopere_dashboard_reportcat */
         $kopere_dashboard_reportcat = $DB->get_record('kopere_dashboard_reportcat', array('id' => $kopere_dashboard_reports->reportcatid));
-        Header::notfoundNull($kopere_dashboard_reportcat, 'Relatório não localizado!');
+        Header::notfoundNull($kopere_dashboard_reportcat, get_string_kopere('reports_notfound'));
 
         DashboardUtil::startPage(array(
-            array('Reports::dashboard', 'Relatórios'),
+            array('Reports::dashboard', get_string_kopere('reports_title')),
             array('Reports::dashboard&type=' . $kopere_dashboard_reportcat->type, $kopere_dashboard_reportcat->title),
             $kopere_dashboard_reports->title
         ));
@@ -152,25 +153,31 @@ class Reports {
             } else {
                 TitleUtil::printH3($kopere_dashboard_reports->title, false);
 
-                if (strlen($kopere_dashboard_reports->prerequisit)) {
-                    if ($kopere_dashboard_reports->prerequisit == 'listCourses')
-                        $reports = $DB->get_records_sql($kopere_dashboard_reports->reportsql, array('courseid' => $id));
-                } else
-                    $reports = $DB->get_records_sql($kopere_dashboard_reports->reportsql);
+                //if (strlen($kopere_dashboard_reports->prerequisit)) {
+                //    if ($kopere_dashboard_reports->prerequisit == 'listCourses')
+                //        $reports = $DB->get_records_sql($kopere_dashboard_reports->reportsql, array('courseid' => $id));
+                //} else
+                //    $reports = $DB->get_records_sql($kopere_dashboard_reports->reportsql);
+                //
+                //if (strlen($kopere_dashboard_reports->foreach)) {
+                //    foreach ($reports as $key => $item) {
+                //        eval($kopere_dashboard_reports->foreach);
+                //        $reports[$key] = $item;
+                //    }
+                //}
 
-                if (strlen($kopere_dashboard_reports->foreach))
-                    foreach ($reports as $key => $item) {
-                        eval($kopere_dashboard_reports->foreach);
-                        $reports[$key] = $item;
-                    }
                 $columns = json_decode($kopere_dashboard_reports->columns);
                 if (!isset($columns->header))
                     $columns->header = array();
                 $table = new DataTable($columns->columns, $columns->header);
                 $table->setIsExport(true);
-                $table->printHeader('', false);
-                $table->setRow($reports);
-                $table->close(false);
+                //$table->printHeader('', false);
+                //$table->setRow($reports);
+                //$table->close(false);
+
+                $table->setAjaxUrl('Reports::getdata&report=' . $report);
+                $table->printHeader();
+                $table->close(true, '', '"searching":false,"ordering":false');
             }
         }
         echo '</div>';
@@ -179,19 +186,51 @@ class Reports {
 
     private function prerequisit($report, $pre) {
         if ($pre == 'listCourses') {
-            echo '<h3>Selecione o curso para gerar o relatório</h3>';
+            TitleUtil::printH3('reports_selectcourse');
 
             $table = new DataTable();
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px');
-            $table->addHeader('Nome do Curso', 'fullname');
-            $table->addHeader('Nome curto', 'shortname');
-            $table->addHeader('Visível', 'visible', TableHeaderItem::RENDERER_VISIBLE);
-            $table->addHeader('Nº alunos inscritos', 'inscritos', TableHeaderItem::TYPE_INT, null, 'width:50px;white-space:nowrap;');
+            $table->addHeader(get_string_kopere('courses_name'), 'fullname');
+            $table->addHeader(get_string_kopere('courses_shortname'), 'shortname');
+            $table->addHeader(get_string_kopere('courses_visible'), 'visible', TableHeaderItem::RENDERER_VISIBLE);
+            $table->addHeader(get_string_kopere('courses_enrol'), 'inscritos', TableHeaderItem::TYPE_INT, null, 'width:50px;white-space:nowrap;');
 
             $table->setAjaxUrl('Courses::loadAllCourses');
             $table->setClickRedirect('Reports::loadReport&type=course&report=' . $report . '&id={id}', 'id');
             $table->printHeader();
             $table->close();
         }
+    }
+
+    public function getdata(){
+        global $DB;
+
+        $report = optional_param('report', 0, PARAM_INT);
+        $id     = optional_param('id', 0, PARAM_INT);
+        $start = optional_param('start', 0, PARAM_INT);
+        $length = optional_param('length', 0, PARAM_INT);
+
+        /** @var kopere_dashboard_reports $kopere_dashboard_reports */
+        $kopere_dashboard_reports = $DB->get_record('kopere_dashboard_reports', array('id' => $report));
+
+        $sql = "{$kopere_dashboard_reports->reportsql} LIMIT $start, $length";
+
+        if (strlen($kopere_dashboard_reports->prerequisit) && $kopere_dashboard_reports->prerequisit == 'listCourses') {
+            $reports = $DB->get_records_sql($sql, array('courseid' => $id));
+            $recordsTotal = $DB->get_recordset_sql($kopere_dashboard_reports->reportsql, array('courseid' => $id));
+        } else {
+            $reports = $DB->get_records_sql($sql);
+            $recordsTotal = $DB->get_recordset_sql($kopere_dashboard_reports->reportsql);
+        }
+
+        if (strlen($kopere_dashboard_reports->foreach)) {
+            foreach ($reports as $key => $item) {
+                eval($kopere_dashboard_reports->foreach);
+                $reports[$key] = $item;
+            }
+        }
+
+        Json::encodeAndReturn($reports, $recordsTotal, $recordsTotal);
+
     }
 }

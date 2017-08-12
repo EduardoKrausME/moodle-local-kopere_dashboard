@@ -54,7 +54,11 @@ function loadByQuery($queryString) {
     $instance = new $class();
     $method = $paths[2];
     $instance->$method();
+}
 
+function getPathQuery($queryString){
+    preg_match("/(.*?)::([a-zA-Z_0-9]+)/", $queryString, $paths);
+    return $paths[1] . '-'.$paths[2];
 }
 
 function get_string_kopere($identifier, $object=null) {

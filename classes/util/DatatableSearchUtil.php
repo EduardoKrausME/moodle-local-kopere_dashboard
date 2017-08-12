@@ -92,7 +92,7 @@ class DatatableSearchUtil {
         $sqlReturn = str_replace('{[columns]}', implode(', ', $this->columnsSelect), $sqlReturn);
 
         $result = $DB->get_records_sql($sqlReturn, $params);
-        $total = $DB->get_record_sql($sqlTotal, $params);
+        $total  = $DB->get_record_sql($sqlTotal, $params);
         $totalNum = $total->num;
         if ($this->where) {
             $search = $DB->get_record_sql($sqlSearch, $params);

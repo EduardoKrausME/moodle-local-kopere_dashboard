@@ -18,7 +18,7 @@ class ReportInstall {
         global $DB;
 
         $reportcat = kopere_dashboard_reportcat::createNew();
-        $reportcat->title = 'Relatório de Emblemas';
+        $reportcat->title = get_string('reports_reportcat_badge', 'local_kopere_dashboard');
         $reportcat->type = 'badge';
         $reportcat->image = 'assets/reports/badge.svg';
         $reportcat->enable = 1;
@@ -26,14 +26,14 @@ class ReportInstall {
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
 
         $reportcat = kopere_dashboard_reportcat::createNew();
-        $reportcat->title = 'Relatório de cursos';
+        $reportcat->title = get_string('reports_reportcat_courses', 'local_kopere_dashboard');
         $reportcat->type = 'courses';
         $reportcat->image = 'assets/reports/courses.svg';
         $reportcat->enable = 1;
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
 
         $reportcat = kopere_dashboard_reportcat::createNew();
-        $reportcat->title = 'Relatório de Coortes';
+        $reportcat->title = get_string('reports_reportcat_enrol_cohort', 'local_kopere_dashboard');
         $reportcat->type = 'enrol_cohort';
         $reportcat->image = 'assets/reports/enrol_cohort.svg';
         $reportcat->enable = 1;
@@ -41,7 +41,7 @@ class ReportInstall {
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
 
         $reportcat = kopere_dashboard_reportcat::createNew();
-        $reportcat->title = 'Relatório de Visitantes';
+        $reportcat->title = get_string('reports_reportcat_enrol_guest', 'local_kopere_dashboard');
         $reportcat->type = 'enrol_guest';
         $reportcat->image = 'assets/reports/enrol_guest.svg';
         $reportcat->enable = 1;
@@ -49,14 +49,14 @@ class ReportInstall {
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
 
         $reportcat = kopere_dashboard_reportcat::createNew();
-        $reportcat->title = 'Relatório do sistema';
+        $reportcat->title = get_string('reports_reportcat_server', 'local_kopere_dashboard');
         $reportcat->type = 'server';
         $reportcat->image = 'assets/reports/server.svg';
         $reportcat->enable = 1;
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
 
         $reportcat = kopere_dashboard_reportcat::createNew();
-        $reportcat->title = 'Relatório de usuários';
+        $reportcat->title = get_string('reports_reportcat_user', 'local_kopere_dashboard');
         $reportcat->type = 'user';
         $reportcat->image = 'assets/reports/user.svg';
         $reportcat->enable = 1;
@@ -71,16 +71,16 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'badge'));
         $report->reportkey = 'badge-1';
-        $report->title = 'Todos os Emblemas disponíveis no Moodle';
+        $report->title = get_string('reports_report_badge-1');
         $report->reportsql = ' SELECT b.id, b.name, b.description, b.type, b.status,
                                       (SELECT COUNT(*) FROM {badge_issued} d WHERE d.badgeid = b.id )AS students
                                  FROM {badge} b';
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
-            $table->addHeader('Nome', 'name'),
-            $table->addHeader('Contesto', 'context'),
-            $table->addHeader('Ativo', 'statustext', TableHeaderItem::RENDERER_STATUS),
-            $table->addHeader('Quantidade de alunos', 'students', TableHeaderItem::TYPE_INT)
+            $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'name'),
+            $table->addHeader(get_string('reports_context', 'local_kopere_dashboard'), 'context'),
+            $table->addHeader(get_string('userenrolment_status_active', 'local_kopere_dashboard'), 'statustext', TableHeaderItem::RENDERER_STATUS),
+            $table->addHeader(get_string('courses_enrol', 'local_kopere_dashboard'), 'students', TableHeaderItem::TYPE_INT)
         );
         $report->foreach = 'if ( $item->status == 0 || $item->status == 2 ) {
                                 $item->statustext = false;
@@ -102,7 +102,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'badge'));
         $report->reportkey = 'badge-2';
-        $report->title = 'Todos os Emblemas conquistado pelos Usuários';
+        $report->title = get_string('reports_report_badge-2');
         $report->reportsql = ' SELECT d.id, u.id AS userid, '.get_all_user_name_fields(true, 'u').', u.lastname, b.name AS badgename, 
                                       t.criteriatype, t.method, d.dateissued,
                                       (SELECT c.shortname FROM {course} c WHERE c.id = b.courseid) as course
@@ -114,11 +114,11 @@ class ReportInstall {
                               ORDER BY u.username';
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
-            $table->addHeader('Nome', 'name'),
-            $table->addHeader('Emblema', 'badgename'),
-            $table->addHeader('Critério', 'criteriatype'),
-            $table->addHeader('Curso', 'course'),
-            $table->addHeader('Em', 'dateissued', TableHeaderItem::RENDERER_DATE)
+            $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'name'),
+            $table->addHeader(get_string('reports_badgename', 'local_kopere_dashboard'), 'badgename'),
+            $table->addHeader(get_string('reports_criteriatype', 'local_kopere_dashboard'), 'criteriatype'),
+            $table->addHeader(get_string('courses_name', 'local_kopere_dashboard'), 'course'),
+            $table->addHeader(get_string('reports_dateissued', 'local_kopere_dashboard'), 'dateissued', TableHeaderItem::RENDERER_DATE)
         );
         $report->foreach = '$item->criteriatype = get_string(\'criteria_\' . $item->criteriatype, \'badges\');
                             $item->name = fullname($item);';
@@ -129,7 +129,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'courses'));
         $report->reportkey = 'courses-1';
-        $report->title = 'Progresso com percentual de conclusão';
+        $report->title = get_string('reports_report_courses-1');
         $report->prerequisit = 'listCourses';
         $report->reportsql = ' SELECT ue.id,
                                       u.id AS userid,'.get_all_user_name_fields(true, 'u').', u.email,
@@ -182,20 +182,20 @@ class ReportInstall {
                                   GROUP BY u.id, c.id';
         $report->columns = array(
             $table->addHeader('#', 'userid', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
-            $table->addHeader('Nome', 'userfullname'),
-            $table->addHeader('E-mail', 'email'),
-            $table->addHeader('Curso', 'fullname'),
-            $table->addHeader('Data da inscrição', 'timecreated', TableHeaderItem::RENDERER_DATE),
-            $table->addHeader('Atividades Concluídas', 'activities_completed', TableHeaderItem::TYPE_INT),
-            $table->addHeader('Atividades Atribuídas', 'activities_assigned', TableHeaderItem::TYPE_INT),
-            $table->addHeader('Completo', 'course_completed')
+            $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'userfullname'),
+            $table->addHeader(get_string('courses_student_email', 'local_kopere_dashboard'), 'email'),
+            $table->addHeader(get_string('courses_name', 'local_kopere_dashboard'), 'fullname'),
+            $table->addHeader(get_string('reports_coursecreated', 'local_kopere_dashboard'), 'timecreated', TableHeaderItem::RENDERER_DATE),
+            $table->addHeader(get_string('reports_activitiescomplete', 'local_kopere_dashboard'), 'activities_completed', TableHeaderItem::TYPE_INT),
+            $table->addHeader(get_string('reports_activitiesassigned', 'local_kopere_dashboard'), 'activities_assigned', TableHeaderItem::TYPE_INT),
+            $table->addHeader(get_string('reports_coursecompleted', 'local_kopere_dashboard'), 'course_completed')
         );
         $report->foreach = '$item->userfullname = fullname($item);';
         $report->columns = json_encode(array(
             'columns' => $report->columns,
             'header' => array(
-                $table->addInfoHeader('Dados do Aluno', 3),
-                $table->addInfoHeader('Dados do Curso', 5)
+                $table->addInfoHeader(get_string('reports_datastudents', 'local_kopere_dashboard'), 3),
+                $table->addInfoHeader(get_string('reports_datacourses', 'local_kopere_dashboard'), 5)
             )
         ));
         $DB->insert_record('kopere_dashboard_reports', $report);
@@ -204,17 +204,17 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'courses'));
         $report->reportkey = 'courses-2';
-        $report->title = 'Cursos que possuem grupos ativados';
+        $report->title = get_string('reports_report_courses-2');
         $report->reportsql = ' SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.groupmode
                                  FROM {course} c
                                  JOIN {groups} g ON c.id = g.courseid
                                 WHERE c.groupmode > 0';
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
-            $table->addHeader('Nome do Curso', 'fullname'),
-            $table->addHeader('Visível', 'visible', TableHeaderItem::RENDERER_VISIBLE),
-            $table->addHeader('Group Mode', 'groupname'),
-            $table->addHeader('Nome do Grupo', 'name')
+            $table->addHeader(get_string('courses_name', 'local_kopere_dashboard'), 'fullname'),
+            $table->addHeader(get_string('courses_visible', 'local_kopere_dashboard'), 'visible', TableHeaderItem::RENDERER_VISIBLE),
+            $table->addHeader(get_string('reports_groupnode', 'local_kopere_dashboard'), 'groupname'),
+            $table->addHeader(get_string('reports_groupname', 'local_kopere_dashboard'), 'name')
         );
         $report->foreach = 'if ($item->groupmode == 0) {
                                 $item->groupname = get_string(\'groupsnone\', \'group\');
@@ -230,7 +230,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'courses'));
         $report->reportkey = 'courses-3';
-        $report->title = 'Relatório da acesso a curso';
+        $report->title = get_string('reports_report_courses-3');
         $report->prerequisit = 'listCourses';
         $report->reportsql = 'local_kopere_dashboard\\report\\custom\\ReportsCourseAccess';
         $report->columns = json_encode(array('columns'=>$report->columns));
@@ -240,7 +240,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'enrol_cohort'));
         $report->reportkey = 'enrol_cohort-1';
-        $report->title = 'Coortes e os usuários';
+        $report->title = get_string('reports_report_enrol_cohort-1');
         $report->reportsql = ' SELECT u.id, '.get_all_user_name_fields(true, 'u').', h.idnumber, h.name
                                  FROM {cohort} h
                                  JOIN {cohort_members} hm ON h.id = hm.cohortid
@@ -248,8 +248,8 @@ class ReportInstall {
                                ORDER BY u.firstname';
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
-            $table->addHeader('Nome', 'userfullname'),
-            $table->addHeader('Nome da Coortes', 'name')
+            $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'userfullname'),
+            $table->addHeader(get_string('reports_cohort', 'local_kopere_dashboard'), 'name')
         );
         $report->foreach = '$item->userfullname = fullname($item);';
         $report->columns = json_encode(array('columns'=>$report->columns));
@@ -259,7 +259,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'enrol_guest'));
         $report->reportkey = 'enrol_guest-1';
-        $report->title = 'Relatório de Logins dos alunos';
+        $report->title = get_string('reports_report_enrol_guest-1');
         $report->reportsql = " SELECT u.id, ".get_all_user_name_fields(true, 'u').", u.id AS userid, lsl.timecreated, lsl.ip
                                  FROM {logstore_standard_log} lsl
                                  JOIN {user}                  u   ON u.id = lsl.userid
@@ -268,8 +268,8 @@ class ReportInstall {
                                   AND lsl.target LIKE 'user'";
         $report->columns = array(
             $table->addHeader('#', 'userid', TableHeaderItem::TYPE_INT),
-            $table->addHeader('Nome', 'userfullname'),
-            $table->addHeader('Login em', 'timecreated', TableHeaderItem::RENDERER_DATE),
+            $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'userfullname'),
+            $table->addHeader(get_string('reports_lastlogin', 'local_kopere_dashboard'), 'timecreated', TableHeaderItem::RENDERER_DATE),
             $table->addHeader('IP', 'ip')
         );
         $report->foreach = '$item->userfullname = fullname($item);';
@@ -280,7 +280,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'server'));
         $report->reportkey = 'server-1';
-        $report->title = 'Relatório de uso do Disco';
+        $report->title = get_string('reports_report_server-1');
         $report->reportsql = ' SELECT c.id, c.fullname, c.shortname, c.visible, c.timecreated,
                                       (SELECT SUM( f.filesize )
                                          FROM {files} f, {context} ctx
@@ -299,11 +299,11 @@ class ReportInstall {
                                 WHERE c.id > 1';
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
-            $table->addHeader('Nome do Curso', 'fullname'),
-            $table->addHeader('Nome curto', 'shortname'),
-            $table->addHeader('Visível', 'visible', TableHeaderItem::RENDERER_VISIBLE),
-            $table->addHeader('Arquivos do Curso', 'coursesize', TableHeaderItem::TYPE_BYTES),
-            $table->addHeader('Arquivos dos Módulos', 'modulessize', TableHeaderItem::TYPE_BYTES)
+            $table->addHeader(get_string('courses_name', 'local_kopere_dashboard'), 'fullname'),
+            $table->addHeader(get_string('courses_shortname', 'local_kopere_dashboard'), 'shortname'),
+            $table->addHeader(get_string('courses_visible', 'local_kopere_dashboard'), 'visible', TableHeaderItem::RENDERER_VISIBLE),
+            $table->addHeader(get_string('reports_coursesize', 'local_kopere_dashboard'), 'coursesize', TableHeaderItem::TYPE_BYTES),
+            $table->addHeader(get_string('reports_modulessize', 'local_kopere_dashboard'), 'modulessize', TableHeaderItem::TYPE_BYTES)
         );
         $report->columns = json_encode(array('columns'=>$report->columns));
         $DB->insert_record('kopere_dashboard_reports', $report);
@@ -312,7 +312,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-1';
-        $report->title = 'Contagem de alunos em cada curso';
+        $report->title = get_string('reports_report_user-1');
         $report->reportsql = ' SELECT c.id, c.fullname, c.shortname, context.id AS contextid, COUNT(c.id) AS alunos
                                  FROM {role_assignments}  asg
                                  JOIN {context}  context ON asg.contextid = context.id AND context.contextlevel = 50
@@ -322,9 +322,9 @@ class ReportInstall {
                              GROUP BY c.id';
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
-            $table->addHeader('Nome do Curso', 'fullname'),
-            $table->addHeader('Nome curto', 'shortname'),
-            $table->addHeader('Alunos', 'alunos')
+            $table->addHeader(get_string('courses_name', 'local_kopere_dashboard'), 'fullname'),
+            $table->addHeader(get_string('courses_shortname', 'local_kopere_dashboard'), 'shortname'),
+            $table->addHeader(get_string('courses_enrol', 'local_kopere_dashboard'), 'alunos')
         );
         $report->columns = json_encode(array('columns'=>$report->columns));
         $DB->insert_record('kopere_dashboard_reports', $report);
@@ -333,7 +333,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-2';
-        $report->title = 'Conclusão do curso com Critério';
+        $report->title = get_string('reports_report_user-2');
         $report->reportsql = ' SELECT concat(u.id, p.id), u.id, '.get_all_user_name_fields(true, 'u').', c.fullname, c.shortname,
                                       t.timecompleted, p.module, p.moduleinstance
                                  FROM {course_completion_crit_compl} t
@@ -342,9 +342,9 @@ class ReportInstall {
                                  JOIN {course_completion_criteria} p ON t.criteriaid = p.id';
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
-            $table->addHeader('Nome do Aluno', 'userfullname'),
-            $table->addHeader('Nome do Curso', 'fullname'),
-            $table->addHeader('Nome curto', 'shortname')
+            $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'userfullname'),
+            $table->addHeader(get_string('courses_name', 'local_kopere_dashboard'), 'fullname'),
+            $table->addHeader(get_string('courses_shortname', 'local_kopere_dashboard'), 'shortname')
         );
         $report->foreach = '$item->userfullname = fullname($item);';
         $report->columns = json_encode(array('columns'=>$report->columns));
@@ -354,7 +354,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-3';
-        $report->title = 'Relatório diário de acessos dos usuários';
+        $report->title = get_string('reports_report_user-3');
         $report->reportsql = '';
         $report->columns = array();
         $report->columns = json_encode(array('columns'=>$report->columns));
@@ -364,7 +364,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-4';
-        $report->title = 'Relatório de Logins dos alunos';
+        $report->title = get_string('reports_report_user-4');
         $report->reportsql = " SELECT lsl.id, u.id AS userid, ".get_all_user_name_fields(true, 'u').", u.email, u.city, lsl.timecreated
                                  FROM {logstore_standard_log}   lsl
                                  JOIN {user}                    u    ON u.id = lsl.userid
@@ -372,10 +372,10 @@ class ReportInstall {
                                   AND lsl.target LIKE 'user'";
         $report->columns = array(
             $table->addHeader('#', 'userid', TableHeaderItem::TYPE_INT),
-            $table->addHeader('Nome', 'userfullname'),
-            $table->addHeader('E-mail', 'email'),
-            $table->addHeader('Cidade', 'city'),
-            $table->addHeader('Cadastrado em', 'timecreated', TableHeaderItem::RENDERER_DATE)
+            $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'userfullname'),
+            $table->addHeader(get_string('courses_student_email', 'local_kopere_dashboard'), 'email'),
+            $table->addHeader(get_string('user_table_city', 'local_kopere_dashboard'), 'city'),
+            $table->addHeader(get_string('reports_timecreated', 'local_kopere_dashboard'), 'timecreated', TableHeaderItem::RENDERER_DATE)
         );
         $report->foreach = '$item->userfullname = fullname($item);';
         $report->columns = json_encode(array('columns'=>$report->columns));
@@ -385,7 +385,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-5';
-        $report->title = 'Usuários que nunca logaram';
+        $report->title = get_string('reports_report_user-5');
         $report->reportsql = ' SELECT u.id, '.get_all_user_name_fields(true, 'u').', u.email, u.city, u.timecreated
                                  FROM {user} u
                                 WHERE u.deleted    = 0
@@ -393,10 +393,10 @@ class ReportInstall {
                                   AND u.lastaccess = 0';
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT),
-            $table->addHeader('Nome', 'userfullname'),
-            $table->addHeader('E-mail', 'email'),
-            $table->addHeader('Cidade', 'city'),
-            $table->addHeader('Cadastrado em', 'timecreated', TableHeaderItem::RENDERER_DATE)
+            $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'userfullname'),
+            $table->addHeader(get_string('courses_student_email', 'local_kopere_dashboard'), 'email'),
+            $table->addHeader(get_string('user_table_city', 'local_kopere_dashboard'), 'city'),
+            $table->addHeader(get_string('reports_timecreated', 'local_kopere_dashboard'), 'timecreated', TableHeaderItem::RENDERER_DATE)
         );
         $report->foreach = '$item->userfullname = fullname($item);';
         $report->columns = json_encode(array('columns'=>$report->columns));
@@ -406,7 +406,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-6';
-        $report->title = 'Usuários que concluíram curso';
+        $report->title = get_string('reports_report_user-6');
         $report->reportsql = ' SELECT concat(u.id, p.id), u.id, '.get_all_user_name_fields(true, 'u').',
                                       c.fullname, c.shortname, p.timecompleted
                                  FROM {course_completions} p
@@ -416,19 +416,20 @@ class ReportInstall {
                              ORDER BY u.username';
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
-            $table->addHeader('Nome do Aluno', 'userfullname'),
-            $table->addHeader('Nome do Curso', 'fullname'),
-            $table->addHeader('Nome curto', 'shortname')
+            $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'userfullname'),
+            $table->addHeader(get_string('courses_name', 'local_kopere_dashboard'), 'fullname'),
+            $table->addHeader(get_string('courses_shortname', 'local_kopere_dashboard'), 'shortname')
         );
         $report->foreach = '$item->userfullname = fullname($item);';
         $report->columns = json_encode(array('columns'=>$report->columns));
         $DB->insert_record('kopere_dashboard_reports', $report);
 
 
+
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-7';
-        $report->title = 'Os usuários registrados, que não fizeram login no Curso';
+        $report->title = get_string('reports_report_user-7');
         $report->reportsql = ' SELECT u.id, ul.timeaccess, '.get_all_user_name_fields(true, 'u').', u.email, u.city, u.lastaccess,
                                       c.fullname, c.shortname,
                                       (SELECT r.name
@@ -445,9 +446,9 @@ class ReportInstall {
                                 WHERE ul.timeaccess IS NULL';
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
-            $table->addHeader('Nome do Aluno', 'userfullname'),
-            $table->addHeader('Nome do Curso', 'fullname'),
-            $table->addHeader('Nome curto', 'shortname'),
+            $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'userfullname'),
+            $table->addHeader(get_string('courses_name', 'local_kopere_dashboard'), 'fullname'),
+            $table->addHeader(get_string('courses_shortname', 'local_kopere_dashboard'), 'shortname'),
             $table->addHeader('rolename', 'rolename'),
         );
         $report->foreach = '$item->userfullname = fullname($item);';

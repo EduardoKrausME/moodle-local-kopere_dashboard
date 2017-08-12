@@ -103,7 +103,7 @@ class DataTable {
 
     public function printHeader($class = '', $printBody = true) {
         if ($this->isExport && $this->ajaxUrl == null) {
-            Button::info('Exportar para Excel', "?{$_SERVER['QUERY_STRING']}&export=xls");
+            Button::info(get_string_kopere('reports_export'), "?{$_SERVER['QUERY_STRING']}&export=xls");
 
             Export::exportHeader(optional_param('export', '', PARAM_TEXT));
         }
@@ -144,7 +144,7 @@ class DataTable {
             } else if ($column->type == TableHeaderItem::TYPE_DATE) {
                 $this->columnDefs[] = '{ type: "date-uk", targets: ' . $key . ' }';
             } else if ($column->type == TableHeaderItem::TYPE_BYTES) {
-                $this->columnDefs[] = '{ type: "file-size", targets: ' . $key . ' }';
+                $this->columnDefs[] = '{ type: "file-size", render: rendererFilesize, targets: ' . $key . ' }';
             } else if ($column->type == TableHeaderItem::RENDERER_DATE) {
                 $this->columnDefs[] = '{ render: dataDatetimeRenderer, type: "date-uk", targets: ' . $key . ' }';
             } else if ($column->type == TableHeaderItem::RENDERER_VISIBLE) {
@@ -216,7 +216,7 @@ class DataTable {
         echo '</td>';
     }
 
-    public function close($processServer = false, $order = '') {
+    public function close($processServer = false, $order = '', $extras='') {
         echo '</table>';
 
         Export::exportClose();
@@ -228,6 +228,9 @@ class DataTable {
 
         if (isset($order[1])) {
             $order = ',' . $order;
+        }
+        if (isset($extras[1])) {
+            $extras = ','.$extras;
         }
 
         $ajaxConfig = '';
@@ -247,6 +250,7 @@ class DataTable {
                           columns    : [ {$columnData} ],
                           columnDefs : [ {$columnDefs} ]
                           {$processServerHtml}
+                          {$extras}
                           {$order}
                       });
                   });
