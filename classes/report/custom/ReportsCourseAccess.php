@@ -63,6 +63,8 @@ class ReportsCourseAccess {
         $course = $DB->get_record('course', array('id' => $cursosId));
         Header::notfoundNull($course, 'Curso não localizado!');
 
+        $groups = $DB->get_records('groups', array('courseid'=>$course->id));
+
         echo '<script>
                   document.body.className += " menu-w-90";
               </script>';
@@ -128,13 +130,19 @@ class ReportsCourseAccess {
             }
         }
 
+        $groupsCols = '';
+        if( $groups ){
+            $groupsCols = '<th rowspan="2" align="center" bgcolor="#979797" style="text-align:center;" >'.get_string_kopere('reports_groupname').'</th>';
+        }
+
         echo '<tr bgcolor="#979797" style="background-color: #979797;">
-                  <th colspan="1" align="center" bgcolor="#979797" style="text-align:center;" >&nbsp;</th>
-                  ' . $printSessoes . '
+                  <th colspan="2" align="center" bgcolor="#979797" style="text-align:center;" >'.get_string_kopere('courses_titleenrol').'</th>
+                  '.$groupsCols . $printSessoes . '
               </tr>';
 
         echo '<tr bgcolor="#C5C5C5" style="background-color: #c5c5c5;" >
-                <td align="center" bgcolor="#979797" style="text-align:center;">Nome</td>';
+                <td align="center" bgcolor="#979797" style="text-align:center;">'.get_string_kopere('user_table_fullname').'</td>
+                <td align="center" bgcolor="#979797" style="text-align:center;">'.get_string_kopere('user_table_email').'</td>';
 
         foreach ($modinfo as $infos) {
             $link = $CFG->wwwroot . '/course/view.php?id=' . $infos->course . '#module-' . $infos->course_modules_id;
@@ -161,8 +169,30 @@ class ReportsCourseAccess {
 
         foreach ($allUserCourse as $user) {
             echo '<tr>';
-            $this->td('<a href="' . $CFG->wwwroot . '/user/view.php?id=' . $user->id . '&course=' . $cursosId .
-                '" target="moodle">' . $user->firstname . ' ' . $user->lastname . '</a>', 'bg-info text-nowrap', '#D9EDF7');
+            $link = $CFG->wwwroot . '/user/view.php?id=' . $user->id . '&course=' . $cursosId;
+            $this->td('<a href="' . $link . '" target="moodle">' . fullname($user) . '</a>', 'bg-info text-nowrap', '#D9EDF7');
+            $this->td($user->email, 'bg-info text-nowrap', '#D9EDF7');
+
+
+            if( $groups ){
+                
+                $sql = "SELECT * 
+                          FROM {groups_members} gm
+                          JOIN {groups} g ON g.id = gm.groupid
+                         WHERE g.courseid = :courseid
+                           AND gm.userid  = :userid";
+                $groupsUser = $DB->get_records_sql($sql,
+                    array(
+                        'courseid' => $course->id,
+                        'userid'   => $user->id
+                    ));
+                $groupsUserPrint = array();
+                foreach($groupsUser as $groupUser){
+                    $groupsUserPrint[] = $groupUser->name;
+                }
+                $this->td(implode('<br/>', $groupsUserPrint), 'bg-info text-nowrap', '#D9EDF7');
+            }
+
             foreach ($modinfo as $infos) {
 
                 $sql
@@ -182,10 +212,10 @@ class ReportsCourseAccess {
                     ));
 
                 if ($logResult->contagem) {
-                    $this->td('acessou ' . $logResult->contagem . ' vezes', 'text-nowrap bg-success', 'DFF0D8');
+                    $this->td( get_string_kopere('reports_access_n',  $logResult->contagem), 'text-nowrap bg-success', 'DFF0D8');
                     $this->td($logResult->datavisualiza, 'text-nowrap bg-success', '#DFF0D8');
                 } else {
-                    $this->td2('<span style="color: #282828">Nenhum acesso</span>', 'bg-warning text-nowrap', '#FCF8E3');
+                    $this->td2('<span style="color: #282828">'.get_string_kopere('reports_noneaccess').'</span>', 'bg-warning text-nowrap', '#FCF8E3');
                 }
             }
             echo '</tr>';

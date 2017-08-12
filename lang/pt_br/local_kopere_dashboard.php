@@ -188,7 +188,7 @@ $string['reports_report_badge-1'] = 'Todos os Emblemas disponíveis no Moodle';
 $string['reports_report_badge-2'] = 'Todos os Emblemas conquistado pelos Usuários';
 $string['reports_report_courses-1'] = 'Progresso com percentual de conclusão';
 $string['reports_report_courses-2'] = 'Cursos que possuem grupos ativados';
-$string['reports_report_courses-3'] = 'Relatório da acesso a curso';
+$string['reports_report_courses-3'] = 'Relatório de acesso ao curso';
 $string['reports_report_enrol_cohort-1'] = 'Coortes e os usuários';
 $string['reports_report_enrol_guest-1'] = 'Relatório de Logins dos alunos';
 $string['reports_report_server-1'] = 'Relatório de uso do Disco';
@@ -217,6 +217,8 @@ $string['reports_criteriatype'] = 'Critério';
 $string['reports_dateissued'] = 'Em';
 $string['reports_context'] = 'Contexto';
 $string['reports_export'] = 'Exportar para Excel';
+$string['reports_noneaccess'] = 'Nenhum acesso';
+$string['reports_access_n'] = 'acessou {$a} vezes;
 
 // Dashboard
 $string['dashboard_title_user'] = 'Usuários / Ativos';
