@@ -220,8 +220,7 @@ $string['reports_dateissued'] = 'In';
 $string['reports_context'] = 'Context';
 $string['reports_export'] = 'Export to Excel';
 $string['reports_noneaccess'] = 'No access';
-$string['reports_access_n'] = 'accessed {$a} times;
-
+$string['reports_access_n'] = 'accessed {$a} times';
 
 // Dashboard
 $string['dashboard_title_user'] = 'Users / Assets';

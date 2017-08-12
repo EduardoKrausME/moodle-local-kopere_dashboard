@@ -26,20 +26,16 @@ namespace local_kopere_dashboard\report\custom;
 defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\html\Button;
-use local_kopere_dashboard\html\DataTable;
-use local_kopere_dashboard\html\TableHeaderItem;
-use local_kopere_dashboard\report\custom\ReportInterface;
 use local_kopere_dashboard\util\Export;
 use local_kopere_dashboard\util\Header;
 
 class ReportsCourseAccess {
-    public $reportName = 'Relatório da acesso a curso';
 
     /**
      * @return string
      */
     public function name() {
-        return $this->reportName;
+        return get_string_kopere('reports_report_courses-3');
     }
 
     /**
@@ -57,11 +53,11 @@ class ReportsCourseAccess {
 
         $cursosId = optional_param('id', 0, PARAM_INT);
         if ($cursosId == 0) {
-            Header::notfound('CourseID inválido!');
+            Header::notfound(get_string_kopere('courses_notound'));
         }
 
         $course = $DB->get_record('course', array('id' => $cursosId));
-        Header::notfoundNull($course, 'Curso não localizado!');
+        Header::notfoundNull($course, get_string_kopere('courses_notound'));
 
         $groups = $DB->get_records('groups', array('courseid'=>$course->id));
 
@@ -71,7 +67,7 @@ class ReportsCourseAccess {
 
         $sections = $DB->get_records('course_sections', array('course' => $cursosId), 'section asc');
 
-        Button::info('Exportar para Excel', "?{$_SERVER['QUERY_STRING']}&export=xls");
+        Button::info(get_string_kopere('reports_export'), "?{$_SERVER['QUERY_STRING']}&export=xls");
 
         $export = optional_param('export', '', PARAM_TEXT);
         Export::exportHeader($export, "Lista de alunos - $course->fullname");

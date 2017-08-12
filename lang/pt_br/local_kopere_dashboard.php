@@ -218,7 +218,7 @@ $string['reports_dateissued'] = 'Em';
 $string['reports_context'] = 'Contexto';
 $string['reports_export'] = 'Exportar para Excel';
 $string['reports_noneaccess'] = 'Nenhum acesso';
-$string['reports_access_n'] = 'acessou {$a} vezes;
+$string['reports_access_n'] = 'acessou {$a} vezes';
 
 // Dashboard
 $string['dashboard_title_user'] = 'Usuários / Ativos';
