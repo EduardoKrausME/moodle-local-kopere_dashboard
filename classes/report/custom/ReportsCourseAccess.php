@@ -32,7 +32,7 @@ use local_kopere_dashboard\report\custom\ReportInterface;
 use local_kopere_dashboard\util\Export;
 use local_kopere_dashboard\util\Header;
 
-class ReportsCourseAccess implements ReportInterface {
+class ReportsCourseAccess {
     public $reportName = 'Relatório da acesso a curso';
 
     /**
