@@ -93,9 +93,6 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
             $dbman->create_table($table);
         }
 
-        \local_kopere_dashboard\report\ReportInstall::createCategores();
-        \local_kopere_dashboard\report\ReportInstall::createReports();
-
         upgrade_plugin_savepoint(true, 2017071714, 'local', 'kopere_dashboard');
     }
 
@@ -111,7 +108,12 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type'=>'enrol_guest'));
         $reportcat->enablesql = "SELECT id as status FROM {config} WHERE name LIKE 'enrol_plugins_enabled' AND value LIKE '%guest%' LIMIT 1";
         $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
+
+        upgrade_plugin_savepoint(true, 2017081101, 'local', 'kopere_dashboard');
     }
+
+    \local_kopere_dashboard\report\ReportInstall::createCategores();
+    \local_kopere_dashboard\report\ReportInstall::createReports();
 
     return true;
 }

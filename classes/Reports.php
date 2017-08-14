@@ -64,7 +64,7 @@ class Reports {
             }
 
             $menus[] = array('Reports::dashboard&type=' . $kopere_dashboard_reportcat->type,
-                $kopere_dashboard_reportcat->title,
+                self::getTitle( $kopere_dashboard_reportcat ),
                 $icon
             );
         }
@@ -103,13 +103,14 @@ class Reports {
             }
 
             TitleUtil::printH3("<img src='{$icon}' alt='Icon' height='23' width='23' > " .
-                $kopere_dashboard_reportcat->title, false);
+                self::getTitle($kopere_dashboard_reportcat), false);
 
             $kopere_dashboard_reportss = $DB->get_records('kopere_dashboard_reports', array('reportcatid' => $kopere_dashboard_reportcat->id, 'enable' => 1));
 
             /** @var kopere_dashboard_reports $kopere_dashboard_reports */
             foreach ($kopere_dashboard_reportss as $kopere_dashboard_reports) {
-                echo "<h4 style='padding-left: 31px;'><a href='?Reports::loadReport&report={$kopere_dashboard_reports->id}'>{$kopere_dashboard_reports->title}</a></h4>";
+                $title = self::getTitle($kopere_dashboard_reports);
+                echo "<h4 style='padding-left: 31px;'><a href='?Reports::loadReport&report={$kopere_dashboard_reports->id}'>{$title}</a></h4>";
             }
         }
 
@@ -124,17 +125,19 @@ class Reports {
         $id = optional_param('id', 0, PARAM_INT);
 
         /** @var kopere_dashboard_reports $kopere_dashboard_reports */
-        $kopere_dashboard_reports = $DB->get_record('kopere_dashboard_reports', array('id' => $report));
+        $kopere_dashboard_reports = $DB->get_record('kopere_dashboard_reports',
+            array('id' => $report));
         Header::notfoundNull($kopere_dashboard_reports, get_string_kopere('reports_notfound'));
 
         /** @var kopere_dashboard_reportcat $kopere_dashboard_reportcat */
-        $kopere_dashboard_reportcat = $DB->get_record('kopere_dashboard_reportcat', array('id' => $kopere_dashboard_reports->reportcatid));
+        $kopere_dashboard_reportcat = $DB->get_record('kopere_dashboard_reportcat',
+            array('id' => $kopere_dashboard_reports->reportcatid));
         Header::notfoundNull($kopere_dashboard_reportcat, get_string_kopere('reports_notfound'));
 
         DashboardUtil::startPage(array(
             array('Reports::dashboard', get_string_kopere('reports_title')),
-            array('Reports::dashboard&type=' . $kopere_dashboard_reportcat->type, $kopere_dashboard_reportcat->title),
-            $kopere_dashboard_reports->title
+            array('Reports::dashboard&type=' . $kopere_dashboard_reportcat->type, self::getTitle($kopere_dashboard_reportcat)),
+            self::getTitle($kopere_dashboard_reports)
         ));
 
         echo '<div class="element-box table-responsive">';
@@ -151,7 +154,7 @@ class Reports {
                 $class->generate();
 
             } else {
-                TitleUtil::printH3($kopere_dashboard_reports->title, false);
+                TitleUtil::printH3(self::getTitle($kopere_dashboard_reports), false);
 
                 $columns = json_decode($kopere_dashboard_reports->columns);
                 if (!isset($columns->header))
@@ -215,5 +218,13 @@ class Reports {
 
         Json::encodeAndReturn($reports, count($recordsTotal), count($recordsTotal));
 
+    }
+
+    private static function getTitle($obj) {
+        if (strpos($obj->title, '[[') === 0) {
+            return get_string_kopere(substr($obj->title, 2, -2));
+        } else {
+            return $obj->title;
+        }
     }
 }
