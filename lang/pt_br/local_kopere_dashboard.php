@@ -189,6 +189,7 @@ $string['reports_report_badge-2'] = 'Todos os Emblemas conquistado pelos Usuári
 $string['reports_report_courses-1'] = 'Progresso com percentual de conclusão';
 $string['reports_report_courses-2'] = 'Cursos que possuem grupos ativados';
 $string['reports_report_courses-3'] = 'Relatório de acesso ao curso';
+$string['reports_report_courses-4'] = 'Relatório de acesso ao curso com notas';
 $string['reports_report_enrol_cohort-1'] = 'Coortes e os usuários';
 $string['reports_report_enrol_guest-1'] = 'Relatório de Logins dos alunos';
 $string['reports_report_server-1'] = 'Relatório de uso do Disco';
