@@ -110,12 +110,12 @@ class ReportsCourseAccess {
                         $courseinfo[$module->course] = 1;
                     }
 
-                    $countModInfo++;
+                    $countModInfo+=2;
                 }
             }
 
             if (strlen($section->sequence)) {
-                $printSessoes .= '<th  bgcolor="#979797" align="center" colspan="' . ($countModInfo * 2) . '" style="text-align:center;">';
+                $printSessoes .= '<th  bgcolor="#979797" align="center" colspan="' . $countModInfo . '" style="text-align:center;">';
 
                 if (strlen($section->name)) {
                     $printSessoes .= $section->name;
@@ -192,12 +192,14 @@ class ReportsCourseAccess {
             foreach ($modinfo as $infos) {
 
                 $sql
-                    = "SELECT COUNT(*) as contagem, date_format(from_unixtime(MAX(timecreated)), '%d/%m/%Y %H:%i') as datavisualiza
+                    = "SELECT COUNT(*) as contagem, timecreated
                          FROM {logstore_standard_log}
                         WHERE courseid = :courseid
                           AND contextinstanceid = :contextinstanceid
                           AND action = :action
-                          AND userid = :userid";
+                          AND userid = :userid
+                     ORDER BY timecreated DESC
+                        LIMIT 1";
 
                 $logResult = $DB->get_record_sql($sql,
                     array(
@@ -209,7 +211,7 @@ class ReportsCourseAccess {
 
                 if ($logResult->contagem) {
                     $this->td( get_string_kopere('reports_access_n',  $logResult->contagem), 'text-nowrap bg-success', 'DFF0D8');
-                    $this->td($logResult->datavisualiza, 'text-nowrap bg-success', '#DFF0D8');
+                    $this->td( userdate($logResult->timecreated, get_string('strftimedatetime')), 'text-nowrap bg-success', '#DFF0D8');
                 } else {
                     $this->td2('<span style="color: #282828">'.get_string_kopere('reports_noneaccess').'</span>', 'bg-warning text-nowrap', '#FCF8E3');
                 }
