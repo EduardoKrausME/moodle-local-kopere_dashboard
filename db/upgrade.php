@@ -21,7 +21,7 @@
  */
 
 function xmldb_local_kopere_dashboard_upgrade($oldversion) {
-    global $DB;
+    global $DB, $CFG;
 
     $dbman = $DB->get_manager();
 
@@ -96,20 +96,29 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2017071714, 'local', 'kopere_dashboard');
     }
 
-    if ($oldversion < 2017081101){
-        $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type'=>'badge'));
+    if ($oldversion == 2017081505) {
+
+        $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type' => 'badge'));
         $reportcat->enablesql = "SELECT id as status FROM {badge} LIMIT 1";
-        $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
+        $DB->update_record('kopere_dashboard_reportcat', $reportcat);
 
-        $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type'=>'enrol_cohort'));
-        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE name LIKE 'enrol_plugins_enabled' AND value LIKE '%cohort%' LIMIT 1";
-        $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
+        $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type' => 'enrol_cohort'));
+        if ($CFG->dbtype == 'pgsql') {
+            $reportcat->enablesql = "SELECT id as status FROM {config} WHERE \"name\" LIKE 'enrol_plugins_enabled' AND \"value\" LIKE '%cohort%' LIMIT 1";
+        } else {
+            $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%cohort%' LIMIT 1";
+        }
+        $DB->update_record('kopere_dashboard_reportcat', $reportcat);
 
-        $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type'=>'enrol_guest'));
-        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE name LIKE 'enrol_plugins_enabled' AND value LIKE '%guest%' LIMIT 1";
-        $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
+        $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type' => 'enrol_guest'));
+        if ($CFG->dbtype == 'pgsql') {
+            $reportcat->enablesql = "SELECT id as status FROM {config} WHERE \"name\" LIKE 'enrol_plugins_enabled' AND \"value\" LIKE '%guest%' LIMIT 1";
+        } else {
+            $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%guest%' LIMIT 1";
+        }
+        $DB->update_record('kopere_dashboard_reportcat', $reportcat);
 
-        upgrade_plugin_savepoint(true, 2017081101, 'local', 'kopere_dashboard');
+        upgrade_plugin_savepoint(true, 2017081505, 'local', 'kopere_dashboard');
     }
 
     \local_kopere_dashboard\report\ReportInstall::createCategores();

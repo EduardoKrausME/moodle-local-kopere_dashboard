@@ -15,7 +15,7 @@ use local_kopere_dashboard\vo\kopere_dashboard_reports;
 
 class ReportInstall {
     public static function createCategores() {
-        global $DB;
+        global $CFG;
 
         $reportcat = kopere_dashboard_reportcat::createNew();
         $reportcat->title = get_string('reports_reportcat_badge', 'local_kopere_dashboard');
@@ -37,7 +37,11 @@ class ReportInstall {
         $reportcat->type = 'enrol_cohort';
         $reportcat->image = 'assets/reports/enrol_cohort.svg';
         $reportcat->enable = 1;
-        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE name LIKE 'enrol_plugins_enabled' AND value LIKE '%cohort%' LIMIT 1";
+        if ($CFG->dbtype == 'pgsql') {
+            $reportcat->enablesql = "SELECT id as status FROM {config} WHERE \"name\" LIKE 'enrol_plugins_enabled' AND \"value\" LIKE '%cohort%' LIMIT 1";
+        } else {
+            $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%cohort%' LIMIT 1";
+        }
         self::reportCatInsert($reportcat);
 
         $reportcat = kopere_dashboard_reportcat::createNew();
@@ -45,7 +49,11 @@ class ReportInstall {
         $reportcat->type = 'enrol_guest';
         $reportcat->image = 'assets/reports/enrol_guest.svg';
         $reportcat->enable = 1;
-        $reportcat->enablesql = "SELECT id as status FROM {config} WHERE name LIKE 'enrol_plugins_enabled' AND value LIKE '%guest%' LIMIT 1";
+        if ($CFG->dbtype == 'pgsql') {
+            $reportcat->enablesql = "SELECT id as status FROM {config} WHERE \"name\" LIKE 'enrol_plugins_enabled' AND \"value\" LIKE '%guest%' LIMIT 1";
+        }else{
+            $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%guest%' LIMIT 1";
+        }
         self::reportCatInsert($reportcat);
 
         $reportcat = kopere_dashboard_reportcat::createNew();
