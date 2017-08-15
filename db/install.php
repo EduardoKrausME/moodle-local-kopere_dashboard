@@ -44,5 +44,7 @@ function changeConfigTable($name, $newVale) {
     }
 }
 
-\local_kopere_dashboard\report\ReportInstall::createCategores();
-\local_kopere_dashboard\report\ReportInstall::createReports();
+\local_kopere_dashboard\install\ReportInstall::createCategores();
+\local_kopere_dashboard\install\ReportInstall::createReports();
+
+\local_kopere_dashboard\install\UsersImportInstall::installOrUpdate();

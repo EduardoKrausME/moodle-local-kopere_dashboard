@@ -5,7 +5,7 @@
  * Time: 21:28
  */
 
-namespace local_kopere_dashboard\report;
+namespace local_kopere_dashboard\install;
 
 defined('MOODLE_INTERNAL') || die();
 

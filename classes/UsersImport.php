@@ -603,7 +603,7 @@ class UsersImport {
                     EnrolUtil::enrol($course->id, $user->id, $enroltimestart, $enroltimeend, 0);
 
                     $dataEvent = array(
-                        'objectid' => $user->id,
+                        'objectid' => $course->id,
                         'relateduserid' => $user->id,
                         'other' => array(
                             'courseid' => $course->id

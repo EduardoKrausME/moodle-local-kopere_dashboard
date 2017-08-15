@@ -143,7 +143,7 @@ class SendEvents {
         foreach ($usersTo as $userTo) {
             $userTo->fullname = fullname($userTo);
 
-            $userTo->password = $this->event->other->password;
+            $userTo->password = $this->event->other['password'];
 
             $sendSubject = $this->replaceCourse($this->subject, $userTo, 'to');
             $htmlMessage = $this->replaceCourse($this->message, $userTo, 'to');
