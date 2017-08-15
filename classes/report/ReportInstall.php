@@ -80,9 +80,13 @@ class ReportInstall {
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'badge'));
         $report->reportkey = 'badge-1';
         $report->title = get_string('reports_report_badge-1');
-        $report->reportsql = ' SELECT b.id, b.name, b.description, b.type, b.status,
+        if ($CFG->dbtype == 'pgsql') {
+            $report->reportsql = ' SELECT b.id, b.name, b.description, b.type, b.status,
                                       (SELECT COUNT(*) FROM {badge_issued} d WHERE d.badgeid = b.id )AS students
                                  FROM {badge} b';
+        }else{
+
+        }
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
             $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'name'),
@@ -111,7 +115,8 @@ class ReportInstall {
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'badge'));
         $report->reportkey = 'badge-2';
         $report->title = get_string('reports_report_badge-2');
-        $report->reportsql = ' SELECT d.id, u.id AS userid, ' . get_all_user_name_fields(true, 'u') . ', u.lastname, b.name AS badgename, 
+        if ($CFG->dbtype == 'pgsql') {
+            $report->reportsql = ' SELECT d.id, u.id AS userid, ' . get_all_user_name_fields(true, 'u') . ', u.lastname, b."name" AS badgename, 
                                       t.criteriatype, t.method, d.dateissued,
                                       (SELECT c.shortname FROM {course} c WHERE c.id = b.courseid) as course
                                  FROM {badge_issued}   d
@@ -120,6 +125,17 @@ class ReportInstall {
                                  JOIN {badge_criteria} t ON b.id      = t.badgeid
                                 WHERE t.criteriatype != 0
                               ORDER BY u.username';
+        }else{
+            $report->reportsql = ' SELECT d.id, u.id AS userid, ' . get_all_user_name_fields(true, 'u') . ', u.lastname, b.name AS badgename, 
+                                      t.criteriatype, t.method, d.dateissued,
+                                      (SELECT c.shortname FROM {course} c WHERE c.id = b.courseid) as course
+                                 FROM {badge_issued}   d
+                                 JOIN {badge}          b ON d.badgeid = b.id
+                                 JOIN {user}           u ON d.userid  = u.id
+                                 JOIN {badge_criteria} t ON b.id      = t.badgeid
+                                WHERE t.criteriatype != 0
+                              ORDER BY u.username';
+        }
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
             $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'name'),
@@ -213,10 +229,17 @@ class ReportInstall {
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'courses'));
         $report->reportkey = 'courses-2';
         $report->title = get_string('reports_report_courses-2');
-        $report->reportsql = ' SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.groupmode
+        if ($CFG->dbtype == 'pgsql') {
+            $report->reportsql = ' SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g."name", c.visible, c.groupmode
                                  FROM {course} c
                                  JOIN {groups} g ON c.id = g.courseid
                                 WHERE c.groupmode > 0';
+        }else{
+            $report->reportsql = ' SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.groupmode
+                                 FROM {course} c
+                                 JOIN {groups} g ON c.id = g.courseid
+                                WHERE c.groupmode > 0';
+        }
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
             $table->addHeader(get_string('courses_name', 'local_kopere_dashboard'), 'fullname'),
@@ -447,7 +470,23 @@ class ReportInstall {
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-7';
         $report->title = get_string('reports_report_user-7');
-        $report->reportsql = ' SELECT u.id, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
+        if ($CFG->dbtype == 'pgsql') {
+            $report->reportsql = ' SELECT u.id, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
+                                      c.fullname, c.shortname,
+                                      (SELECT r."name"
+                                         FROM {user_enrolments} ue2
+                                         JOIN {enrol} e ON e.id = ue2.enrolid
+                                         JOIN {role}  r ON e.id = r.id
+                                        WHERE ue2.userid = u.id
+                                          AND e.courseid = c.id ) AS rolename
+                                 FROM {user_enrolments} ue
+                                 JOIN {enrol}  e ON e.id = ue.enrolid
+                                 JOIN {course} c ON c.id = e.courseid
+                                 JOIN {user}   u ON u.id = ue.userid
+                                 LEFT JOIN {user_lastaccess} ul ON ul.userid = u.id
+                                WHERE ul.timeaccess IS NULL';
+        }else{
+            $report->reportsql = ' SELECT u.id, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
                                       c.fullname, c.shortname,
                                       (SELECT r.name
                                          FROM {user_enrolments} ue2
@@ -461,6 +500,7 @@ class ReportInstall {
                                  JOIN {user}   u ON u.id = ue.userid
                                  LEFT JOIN {user_lastaccess} ul ON ul.userid = u.id
                                 WHERE ul.timeaccess IS NULL';
+        }
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
             $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'userfullname'),
