@@ -137,33 +137,35 @@ class Dashboard {
         foreach ($lastEnrol as $enrol) {
 
             $user = $DB->get_record('user', array('id' => $enrol->userid));
+            if($user) {
 
-            $userpicture = new \user_picture($user);
-            $userpicture->size = 1;
-            $profileimageurl = $userpicture->get_url($PAGE)->out(false);
+                $userpicture = new \user_picture($user);
+                $userpicture->size = 1;
+                $profileimageurl = $userpicture->get_url($PAGE)->out(false);
 
-            $statusMatricula = '<span class="btn-danger">'.get_string_kopere('dashboard_enrol_inactive').'</span>';
-            if ($enrol->status == 0) {
-                $statusMatricula = '<span class="btn-success">'.get_string_kopere('dashboard_enrol_active').'</span>';
+                $statusMatricula = '<span class="btn-danger">' . get_string_kopere('dashboard_enrol_inactive') . '</span>';
+                if ($enrol->status == 0) {
+                    $statusMatricula = '<span class="btn-success">' . get_string_kopere('dashboard_enrol_active') . '</span>';
+                }
+
+                echo '<div class="media dashboard-grade-list">
+                          <div class="media-left">
+                              <img title="' . fullname($user) . '" src="' . $profileimageurl . '" class="media-object" >
+                          </div>
+                          <div class="media-body">
+                              <h4 class="media-heading">
+                                  <a data-toggle="modal" data-target="#modal-details"
+                                     href="?Users::details&userid=' . $user->id . '"
+                                     data-href="open-ajax-table.php?Users::details&userid=' . $user->id . '">' . fullname($user) . '</a>
+                              </h4>
+                              <p>' . get_string_kopere('dashboard_enrol_text', $enrol) . '
+                                  <span class="status">' . $statusMatricula . '</span>
+                              </p>
+                              <div class="date"><small>' . get_string_kopere('dashboard_enrol_lastmodifield') . ' <i>' . userdate($enrol->timemodified, get_string_kopere('dateformat')) . '</i></small></div>
+                          </div>
+                          <div class="clear"></div>
+                      </div>';
             }
-
-            echo '<div class="media dashboard-grade-list">
-                      <div class="media-left">
-                          <img title="' . fullname($user) . '" src="' . $profileimageurl . '" class="media-object" >
-                      </div>
-                      <div class="media-body">
-                          <h4 class="media-heading">
-                              <a data-toggle="modal" data-target="#modal-details"
-                                 href="?Users::details&userid=' . $user->id . '"
-                                 data-href="open-ajax-table.php?Users::details&userid=' . $user->id . '">' . fullname($user) . '</a>
-                          </h4>
-                          <p>'.get_string_kopere('dashboard_enrol_text', $enrol).'
-                              <span class="status">' . $statusMatricula . '</span>
-                          </p>
-                          <div class="date"><small>'.get_string_kopere('dashboard_enrol_lastmodifield').' <i>' . userdate($enrol->timemodified, get_string_kopere('dateformat')) . '</i></small></div>
-                      </div>
-                      <div class="clear"></div>
-                  </div>';
         }
 
         echo '    </div>
