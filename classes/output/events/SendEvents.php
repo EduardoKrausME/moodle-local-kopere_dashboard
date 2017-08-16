@@ -75,10 +75,16 @@ class SendEvents {
         $this->subject = $this->replaceDate($this->subject);
         $this->message = $this->replaceDate($this->message);
 
+        $COURSE->wwwroot = $CFG->wwwroot;
         $COURSE->link = "<a href=\"{$CFG->wwwroot}\" target=\"_blank\">{$CFG->wwwroot}</a>";
 
-        $this->subject = $this->replaceCourse($this->subject, $COURSE, 'moodle');
-        $this->message = $this->replaceCourse($this->message, $COURSE, 'moodle');
+        // Moodle - {[moodle.???]}
+        $this->subject = $this->replaceTag($this->subject, $COURSE, 'moodle');
+        $this->message = $this->replaceTag($this->message, $COURSE, 'moodle');
+
+        // Events - {[event.???]}
+        $this->subject = $this->replaceTag($this->subject, $this->event, 'event');
+        $this->message = $this->replaceTag($this->message, $this->event, 'event');
 
         $courseid = 0;
         if ($this->event->objecttable == 'course') {
@@ -86,13 +92,20 @@ class SendEvents {
             $course = $DB->get_record('course', array('id' => $courseid));
             if ($course) {
                 $course->link = "<a href=\"{$CFG->wwwroot}/course/view.php?id={$courseid}\" target=\"_blank\">{$CFG->wwwroot}/course/view.php?id={$courseid}</a>";
+                $course->url = "{$CFG->wwwroot}/course/view.php?id={$courseid}";
 
-                $this->subject = $this->replaceCourse($this->subject, $course, 'course');
-                $this->message = $this->replaceCourse($this->message, $course, 'course');
+                $this->subject = $this->replaceTag($this->subject, $course, 'course');
+                $this->message = $this->replaceTag($this->message, $course, 'course');
             }
         }
+        if ($this->event->objecttable == 'user') {
+            $usertarget = $DB->get_record('user', array('id' => $this->event->objectid));
 
-        // de
+            $this->subject = $this->replaceTagUser($this->subject, $usertarget, 'usertarget');
+            $this->message = $this->replaceTagUser($this->message, $usertarget, 'usertarget');
+        }
+
+        // de - {[from.???]}
         $userFrom = null;
         switch ($this->kopere_dashboard_events->userfrom) {
             case 'admin':
@@ -106,10 +119,15 @@ class SendEvents {
         }
 
         $userFrom->fullname = fullname($userFrom);
-        $this->subject = $this->replaceCourse($this->subject, $userFrom, 'from');
-        $this->message = $this->replaceCourse($this->message, $userFrom, 'from');
+        $this->subject = $this->replaceTagUser($this->subject, $userFrom, 'from');
+        $this->message = $this->replaceTagUser($this->message, $userFrom, 'from');
 
-        // Para
+        // admins - {[admin.???]}
+        $admin = get_admin();
+        $this->subject = $this->replaceTagUser($this->subject, $admin, 'admin');
+        $this->message = $this->replaceTagUser($this->message, $admin, 'admin');
+
+        // Para - {[to.???]}
         $usersTo = array();
         switch ($this->kopere_dashboard_events->userto) {
             case 'admin':
@@ -145,8 +163,8 @@ class SendEvents {
 
             $userTo->password = $this->event->other['password'];
 
-            $sendSubject = $this->replaceCourse($this->subject, $userTo, 'to');
-            $htmlMessage = $this->replaceCourse($this->message, $userTo, 'to');
+            $sendSubject = $this->replaceTagUser($this->subject, $userTo, 'to');
+            $htmlMessage = $this->replaceTagUser($this->message, $userTo, 'to');
 
             $magager     = "<a href=\"{$CFG->wwwroot}/message/edit.php?id={$userTo->id}\">Gerenciar mensagens</a>";
             $htmlMessage = str_replace ( '{[manager]}', $magager, $htmlMessage );
@@ -214,7 +232,7 @@ class SendEvents {
      *
      * @return string
      */
-    private function replaceCourse($text, $course, $keyName) {
+    private function replaceTag($text, $course, $keyName) {
         if (strpos($text, "{[{$keyName}") === false) {
             return $text;
         }
@@ -238,7 +256,7 @@ class SendEvents {
      *
      * @return string
      */
-    private function replaceUser($text, $user, $keyName) {
+    private function replaceTagUser($text, $user, $keyName) {
         if (strpos($text, "{[{$keyName}") === false) {
             return $text;
         }

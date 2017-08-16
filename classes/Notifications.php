@@ -253,10 +253,13 @@ class Notifications extends NotificationsUtil {
             $htmlText = $evento->message;
         }
 
+        $form->printRow(null, Button::help('TAGS-substituídas-nas-mensagens', 'Quais as TAGS substituídas nas mensagens?'));
+
         $htmlTextarea = '<textarea name="message" id="message" style="height:500px">'.htmlspecialchars($htmlText).'</textarea>';
         $templateContent = str_replace('{[message]}', $htmlTextarea, $templateContent);
         $form->printPanel(get_string_kopere('notification_message'), $templateContent);
         echo TinyMce::createInputEditor('#message');
+
 
         if ($id) {
             $form->createSubmitInput(get_string_kopere('notification_update'));
