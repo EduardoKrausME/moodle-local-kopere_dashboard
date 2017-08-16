@@ -21,7 +21,7 @@ class UsersImportInstall {
         $event->subject = 'Seja Bem Vindo(a) - {[course.fullname]}';
         $event->status = 0;
         $event->message = "<p>Ol&aacute; {[to.fullname]},</p>\n" .
-            "<p>Voc&ecirc; foi cadastrado com sucesso no {[course.fullname]}. Agora, voc&ecirc; j&aacute; pode fazer o login na ".
+            "<p>Voc&ecirc; foi cadastrado com sucesso no {[course.fullname]}. Agora, voc&ecirc; j&aacute; pode fazer o login na " .
             "&aacute;rea do aluno para come&ccedil;ar estudar quando e onde quiser.</p>\n" .
             "<p>&Eacute; com imensa satisfa&ccedil;&atilde;o que o {[moodle.fullname]} lhe d&aacute; as boas-vindas.</p>\n" .
             "<p>Acesse {[course.link]}, e bons estudos.</p>\n" .
@@ -32,8 +32,8 @@ class UsersImportInstall {
 
 
         $event = new \local_kopere_dashboard\vo\kopere_dashboard_events();
-        $event->module = 'local_kopere_dashboard_hotmoodle';
-        $event->event = '\\local_kopere_dashboard_hotmoodle\\event\\hotmoodle_user_created';
+        $event->module = 'local_kopere_dashboard';
+        $event->event = '\\local_kopere_dashboard\\event\\import_user_created';
         $event->userfrom = 'admin';
         $event->userto = 'student';
         $event->subject = 'Seja Bem Vindo(a) - {[moodle.fullname]}';
@@ -50,7 +50,7 @@ class UsersImportInstall {
         self::insert($event);
     }
 
-    private static function insert($event) {
+    public static function insert($event) {
         global $DB;
 
         $evento = $DB->get_record('kopere_dashboard_events',

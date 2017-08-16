@@ -96,7 +96,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2017071714, 'local', 'kopere_dashboard');
     }
 
-    if ($oldversion == 2017081505) {
+    if ($oldversion < 2017081600) {
 
         $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type' => 'badge'));
         $reportcat->enablesql = "SELECT id as status FROM {badge} LIMIT 1";
@@ -120,7 +120,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
 
         // Reports
         $report = $DB->get_record('kopere_dashboard_reports', array('reportkey' => 'badge-2'));
-        if($report) {
+        if ($report) {
             if ($CFG->dbtype == 'pgsql') {
                 $report->reportsql = ' SELECT d.id, u.id AS userid, ' . get_all_user_name_fields(true, 'u') . ', u.lastname, b."name" AS badgename, 
                                       t.criteriatype, t.method, d.dateissued,
@@ -146,7 +146,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         }
 
         $report = $DB->get_record('kopere_dashboard_reports', array('reportkey' => 'courses-2'));
-        if($report) {
+        if ($report) {
             if ($CFG->dbtype == 'pgsql') {
                 $report->reportsql = ' SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g."name", c.visible, c.groupmode
                                  FROM {course} c
@@ -162,7 +162,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         }
 
         $report = $DB->get_record('kopere_dashboard_reports', array('reportkey' => 'user-7'));
-        if($report) {
+        if ($report) {
             if ($CFG->dbtype == 'pgsql') {
                 $report->reportsql = ' SELECT u.id, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
                                       c.fullname, c.shortname,
@@ -197,7 +197,18 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
             $DB->update_record('kopere_dashboard_reports', $report);
         }
 
-        upgrade_plugin_savepoint(true, 2017081505, 'local', 'kopere_dashboard');
+        $sql = "SELECT * 
+                  FROM {config_plugins} 
+                 WHERE plugin LIKE 'local\_kopere\_dashboard\_hotmoodle'";
+        $plugin = $DB->get_records_sql($sql);
+        if (!$plugin) {
+            $where = array(
+                'module' => 'local_kopere_dashboard_hotmoodle'
+            );
+            $DB->delete_records('kopere_dashboard_events', $where);
+        }
+
+        upgrade_plugin_savepoint(true, 2017081600, 'local', 'kopere_dashboard');
     }
 
     \local_kopere_dashboard\install\ReportInstall::createCategores();

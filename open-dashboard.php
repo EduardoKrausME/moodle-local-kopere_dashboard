@@ -64,33 +64,33 @@ if (isset($_POST['action'])) {
     <link async href="https://fonts.googleapis.com/css?family=Nunito:300,400" rel="stylesheet">
 
     <script>
-        lang_yes        = '<?php echo get_string('yes') ?>';
-        lang_no         = '<?php echo get_string('no') ?>';
-        lang_visible    = '<?php echo get_string_kopere('courses_visible')?>';
-        lang_invisible  = '<?php echo get_string_kopere('courses_invisible')?>';
-        lang_active     = '<?php echo get_string_kopere('notification_status_active')?>';
-        lang_inactive   = '<?php echo get_string_kopere('notification_status_inactive')?>';
+        lang_yes = '<?php echo get_string('yes') ?>';
+        lang_no = '<?php echo get_string('no') ?>';
+        lang_visible = '<?php echo get_string_kopere('courses_visible')?>';
+        lang_invisible = '<?php echo get_string_kopere('courses_invisible')?>';
+        lang_active = '<?php echo get_string_kopere('notification_status_active')?>';
+        lang_inactive = '<?php echo get_string_kopere('notification_status_inactive')?>';
         dataTables_oLanguage = {
-            "sEmptyTable": "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
-            "sInfo": "<?php echo get_string_kopere('datatables_sInfo') ?>",
-            "sInfoEmpty": "<?php echo get_string_kopere('datatables_sInfoEmpty') ?>",
-            "sInfoFiltered": "<?php echo get_string_kopere('datatables_sInfoFiltered') ?>",
-            "sInfoPostFix": "<?php echo get_string_kopere('datatables_sInfoPostFix') ?>",
-            "sInfoThousands": "<?php echo get_string_kopere('datatables_sInfoThousands') ?>",
-            "sLengthMenu": "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
-            "sLoadingRecords": "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
-            "sProcessing": "<?php echo get_string_kopere('datatables_sProcessing') ?>",
-            "sZeroRecords": "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
-            "sSearch": "<?php echo get_string_kopere('datatables_sSearch') ?>",
-            "oPaginate": {
-                "sNext": "<?php echo get_string_kopere('datatables_oPaginate_sNext') ?>",
-                "sPrevious": "<?php echo get_string_kopere('datatables_oPaginate_sPrevious') ?>",
-                "sFirst": "<?php echo get_string_kopere('datatables_oPaginate_sFirst') ?>",
-                "sLast": "<?php echo get_string_kopere('datatables_oPaginate_sLast') ?>"
+            "sEmptyTable"     : "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
+            "sInfo"           : "<?php echo get_string_kopere('datatables_sInfo') ?>",
+            "sInfoEmpty"      : "<?php echo get_string_kopere('datatables_sInfoEmpty') ?>",
+            "sInfoFiltered"   : "<?php echo get_string_kopere('datatables_sInfoFiltered') ?>",
+            "sInfoPostFix"    : "<?php echo get_string_kopere('datatables_sInfoPostFix') ?>",
+            "sInfoThousands"  : "<?php echo get_string_kopere('datatables_sInfoThousands') ?>",
+            "sLengthMenu"     : "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
+            "sLoadingRecords" : "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
+            "sProcessing"     : "<?php echo get_string_kopere('datatables_sProcessing') ?>",
+            "sZeroRecords"    : "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
+            "sSearch"         : "<?php echo get_string_kopere('datatables_sSearch') ?>",
+            "oPaginate"       : {
+                "sNext"     : "<?php echo get_string_kopere('datatables_oPaginate_sNext') ?>",
+                "sPrevious" : "<?php echo get_string_kopere('datatables_oPaginate_sPrevious') ?>",
+                "sFirst"    : "<?php echo get_string_kopere('datatables_oPaginate_sFirst') ?>",
+                "sLast"     : "<?php echo get_string_kopere('datatables_oPaginate_sLast') ?>"
             },
-            "oAria": {
-                "sSortAscending": "<?php echo get_string_kopere('datatables_oAria_sSortAscending') ?>",
-                "sSortDescending": "<?php echo get_string_kopere('datatables_oAria_sSortDescending') ?>"
+            "oAria"           : {
+                "sSortAscending"  : "<?php echo get_string_kopere('datatables_oAria_sSortAscending') ?>",
+                "sSortDescending" : "<?php echo get_string_kopere('datatables_oAria_sSortDescending') ?>"
             }
         }
     </script>
@@ -179,7 +179,11 @@ if (isset($_POST['action'])) {
 
                     DashboardUtil::addMenu('Courses::dashboard', 'courses', get_string_kopere('courses_title'));
 
-                    $plugins = $DB->get_records_sql("SELECT plugin FROM {config_plugins} WHERE plugin LIKE 'local\_kopere\_dashboard\_%' AND name LIKE 'version'");
+                    $sql = "SELECT plugin 
+                              FROM {config_plugins} 
+                             WHERE plugin LIKE 'local\_kopere\_dashboard\_%' 
+                               AND name LIKE 'version'";
+                    $plugins = $DB->get_records_sql($sql);
                     foreach ($plugins as $plugin) {
                         $className = $plugin->plugin . '\\Menu';
                         $class = new $className();

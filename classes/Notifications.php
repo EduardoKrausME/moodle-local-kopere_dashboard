@@ -302,8 +302,7 @@ class Notifications extends NotificationsUtil {
         }
 
         DashboardUtil::startPage(array(
-            array('Notifications::dashboard', get_string_kopere('notification_title')),
-
+            array('Notifications::dashboard', get_string_kopere('notification_title'))
         ));
 
         echo "<p>".get_string_kopere('notification_delete_yes')."</p>";
