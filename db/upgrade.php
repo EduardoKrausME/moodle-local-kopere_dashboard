@@ -197,8 +197,8 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
             $DB->update_record('kopere_dashboard_reports', $report);
         }
 
-        $sql = "SELECT * 
-                  FROM {config_plugins} 
+        $sql = "SELECT *
+                  FROM {config_plugins}
                  WHERE plugin LIKE 'local\_kopere\_dashboard\_hotmoodle'";
         $plugin = $DB->get_records_sql($sql);
         if (!$plugin) {
@@ -209,6 +209,43 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         }
 
         upgrade_plugin_savepoint(true, 2017081600, 'local', 'kopere_dashboard');
+    }
+
+    if ($oldversion < 2017081601) {
+        $table = new xmldb_table('kopere_dashboard_menu');
+        $index = new xmldb_index('unique', XMLDB_INDEX_NOTUNIQUE, array('link'));
+
+        if (!$dbman->index_exists($table, $index)) {
+            $dbman->add_index($table, $index);
+        }
+
+        $table = new xmldb_table('kopere_dashboard_webpages');
+        $index = new xmldb_index('unique', XMLDB_INDEX_NOTUNIQUE, array('link'));
+
+        if (!$dbman->index_exists($table, $index)) {
+            $dbman->add_index($table, $index);
+        }
+
+        $table = new xmldb_table('kopere_dashboard_events');
+        $index = new xmldb_index('unique', XMLDB_INDEX_NOTUNIQUE, array('module', 'event'));
+
+        if (!$dbman->index_exists($table, $index)) {
+            $dbman->add_index($table, $index);
+        }
+
+        $table = new xmldb_table('kopere_dashboard_reportcat');
+        $index = new xmldb_index('unique', XMLDB_INDEX_NOTUNIQUE, array('type'));
+
+        if (!$dbman->index_exists($table, $index)) {
+            $dbman->add_index($table, $index);
+        }
+
+        $table = new xmldb_table('kopere_dashboard_reports');
+        $index = new xmldb_index('unique', XMLDB_INDEX_NOTUNIQUE, array('reportkey'));
+
+        if (!$dbman->index_exists($table, $index)) {
+            $dbman->add_index($table, $index);
+        }
     }
 
     \local_kopere_dashboard\install\ReportInstall::createCategores();

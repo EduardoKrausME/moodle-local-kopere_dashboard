@@ -206,8 +206,8 @@ class WebPages {
             $('#title').focusout(function () {
                 var url = 'open-ajax-table.php?WebPages::ajaxGetPageUrl';
                 var postData = {
-                    title: $(this).val(),
-                    id: $('#id').val()
+                    title : $(this).val(),
+                    id    : $('#id').val()
                 };
                 $.post(url, postData, function (data) {
                     $('#link').val(data);
@@ -232,14 +232,24 @@ class WebPages {
         } else {
             if ($webpages->id) {
                 Mensagem::agendaMensagemSuccess(get_string_kopere('webpages_page_updated'));
-                $DB->update_record('kopere_dashboard_webpages', $webpages);
+                try {
+                    $DB->update_record('kopere_dashboard_webpages', $webpages);
+                    self::deleteCache();
+                    Header::location('WebPages::details&id=' . $webpages->id);
+                } catch (\dml_exception $e) {
+                    Mensagem::printDanger($e->getMessage());
+                }
             } else {
                 Mensagem::agendaMensagemSuccess(get_string_kopere('webpages_page_created'));
-                $webpages->id = $DB->insert_record('kopere_dashboard_webpages', $webpages);
-            }
+                try {
+                    $webpages->id = $DB->insert_record('kopere_dashboard_webpages', $webpages);
 
-            self::deleteCache();
-            Header::location('WebPages::details&id=' . $webpages->id);
+                    self::deleteCache();
+                    Header::location('WebPages::details&id=' . $webpages->id);
+                } catch (\dml_exception $e) {
+                    Mensagem::printDanger($e->getMessage());
+                }
+            }
         }
     }
 
@@ -267,7 +277,7 @@ class WebPages {
         ));
 
         TitleUtil::printH3('webpages_page_delete');
-        echo "<p>".get_string_kopere('webpages_page_delete_confirm', $webpages)."</p>";
+        echo "<p>" . get_string_kopere('webpages_page_delete_confirm', $webpages) . "</p>";
         Button::delete(get_string('yes'), 'WebPages::deletePage&status=sim&id=' . $webpages->id, '', false);
         Button::add(get_string('no'), 'WebPages::details&id=' . $webpages->id, 'margin-left-10', false);
 
@@ -338,8 +348,8 @@ class WebPages {
             $('#title').focusout(function () {
                 var url = 'open-ajax-table.php?WebPages::ajaxGetMenuUrl';
                 var postData = {
-                    title: $(this).val(),
-                    id: $('#id').val()
+                    title : $(this).val(),
+                    id    : $('#id').val()
                 };
                 $.post(url, postData, function (data) {
                     $('#link').val(data).focus();
@@ -496,8 +506,7 @@ class WebPages {
         return $returnMenus;
     }
 
-    private function listThemes()
-    {
+    private function listThemes() {
         $layouts = array(
             array(
                 'key' => 'base',
@@ -546,7 +555,7 @@ class WebPages {
         $form->addInput(
             InputText::newInstance()->setTitle(get_string_kopere('webpages_page_analytics'))
                 ->setValueByConfig('webpages_analytics_id')
-                ->setDescription(get_string_kopere('webpages_page_analyticsdesc') ));
+                ->setDescription(get_string_kopere('webpages_page_analyticsdesc')));
 
         $form->close();
 

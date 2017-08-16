@@ -12,6 +12,7 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+                <KEY NAME="unique"  TYPE="unique"  FIELDS="link" />
             </KEYS>
         </TABLE>
         <TABLE NAME="kopere_dashboard_webpages" COMMENT="">
@@ -29,13 +30,14 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+                <KEY NAME="unique"  TYPE="unique"  FIELDS="link" />
             </KEYS>
         </TABLE>
         <TABLE NAME="kopere_dashboard_events" COMMENT="">
             <FIELDS>
                 <FIELD NAME="id"            TYPE="int"  LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
-                <FIELD NAME="module"        TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
-                <FIELD NAME="event"         TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="module"        TYPE="char" LENGTH="60"  NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="event"         TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="status"        TYPE="int"  LENGTH="1"   NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="userfrom"      TYPE="char" LENGTH="20"  NOTNULL="false" SEQUENCE="false" />
                 <FIELD NAME="userto"        TYPE="char" LENGTH="20"  NOTNULL="false" SEQUENCE="false" />
@@ -44,6 +46,7 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+                <KEY NAME="unique"  TYPE="unique"  FIELDS="module, event" />
             </KEYS>
         </TABLE>
 
@@ -58,6 +61,7 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+                <KEY NAME="unique"  TYPE="unique"  FIELDS="type" />
             </KEYS>
         </TABLE>
         <TABLE NAME="kopere_dashboard_reports" COMMENT="">
@@ -75,6 +79,7 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+                <KEY NAME="unique"  TYPE="unique"  FIELDS="reportkey" />
             </KEYS>
         </TABLE>
 

@@ -64,8 +64,8 @@ class Notifications extends NotificationsUtil {
             $event->event_name = $eventClass::get_name();
             $event->actions
                 = "<div class=\"text-center\">
-                                    ".Button::icon('edit', "Notifications::addSegundaEtapa&id={$event->id}", false)."&nbsp;&nbsp;&nbsp;
-                                    ".Button::icon('delete', "Notifications::delete&id={$event->id}")."
+                                    " . Button::icon('edit', "Notifications::addSegundaEtapa&id={$event->id}", false) . "&nbsp;&nbsp;&nbsp;
+                                    " . Button::icon('delete', "Notifications::delete&id={$event->id}") . "
                                 </div>";
 
             $eventsList[] = $event;
@@ -124,14 +124,14 @@ class Notifications extends NotificationsUtil {
                 ->setAddSelecione(true)
                 ->setDescription(get_string_kopere('notification_add_moduledesc'))
         );
-        echo '<div id="restante-form">'.get_string_kopere('notification_add_selectmodule').'</div>';
+        echo '<div id="restante-form">' . get_string_kopere('notification_add_selectmodule') . '</div>';
         $form->close();
 
         ?>
         <script>
             $('#module').change(function () {
                 var data = {
-                    module: $(this).val()
+                    module : $(this).val()
                 };
                 $('#restante-form').load('open-ajax-table.php?NotificationsUtil::addFormExtra', data);
             });
@@ -229,7 +229,7 @@ class Notifications extends NotificationsUtil {
                 ->setValue($evento->subject)
                 ->setDescription(get_string_kopere('notification_subjectdesc')));
 
-        $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/".get_config('local_kopere_dashboard', 'notificacao-template');
+        $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" . get_config('local_kopere_dashboard', 'notificacao-template');
         $templateContent = file_get_contents($template);
 
         if (!$id) {
@@ -255,7 +255,7 @@ class Notifications extends NotificationsUtil {
 
         $form->printRow(null, Button::help('TAGS-substituídas-nas-mensagens', 'Quais as TAGS substituídas nas mensagens?'));
 
-        $htmlTextarea = '<textarea name="message" id="message" style="height:500px">'.htmlspecialchars($htmlText).'</textarea>';
+        $htmlTextarea = '<textarea name="message" id="message" style="height:500px">' . htmlspecialchars($htmlText) . '</textarea>';
         $templateContent = str_replace('{[message]}', $htmlTextarea, $templateContent);
         $form->printPanel(get_string_kopere('notification_message'), $templateContent);
         echo TinyMce::createInputEditor('#message');
@@ -279,13 +279,23 @@ class Notifications extends NotificationsUtil {
         $kopere_dashboard_events = kopere_dashboard_events::createNew();
 
         if ($kopere_dashboard_events->id) {
-            $DB->update_record('kopere_dashboard_events', $kopere_dashboard_events);
-        } else {
-            $DB->insert_record('kopere_dashboard_events', $kopere_dashboard_events);
-        }
+            try {
+                $DB->update_record('kopere_dashboard_events', $kopere_dashboard_events);
 
-        Mensagem::agendaMensagemSuccess(get_string_kopere('notification_created'));
-        Header::location('Notifications::dashboard');
+                Mensagem::agendaMensagemSuccess(get_string_kopere('notification_created'));
+                Header::location('Notifications::dashboard');
+            } catch (\dml_exception $e) {
+                Mensagem::printDanger($e->getMessage());
+            }
+        } else {
+            try {
+                $DB->insert_record('kopere_dashboard_events', $kopere_dashboard_events);
+                Mensagem::agendaMensagemSuccess(get_string_kopere('notification_created'));
+                Header::location('Notifications::dashboard');
+            } catch (\dml_exception $e) {
+                Mensagem::printDanger($e->getMessage());
+            }
+        }
     }
 
     public function delete() {
@@ -308,8 +318,8 @@ class Notifications extends NotificationsUtil {
             array('Notifications::dashboard', get_string_kopere('notification_title'))
         ));
 
-        echo "<p>".get_string_kopere('notification_delete_yes')."</p>";
-        Button::delete(get_string('yes'), 'Notifications::delete&status=sim&id='.$event->id, '', false);
+        echo "<p>" . get_string_kopere('notification_delete_yes') . "</p>";
+        Button::delete(get_string('yes'), 'Notifications::delete&status=sim&id=' . $event->id, '', false);
         Button::add(get_string('no'), 'Notifications::dashboard', 'margin-left-10', false);
 
         DashboardUtil::endPage();
@@ -345,7 +355,7 @@ class Notifications extends NotificationsUtil {
 
             function notificacaoTemplateChange() {
                 var data = {
-                    template: $('#notificacao-template').val()
+                    template : $('#notificacao-template').val()
                 };
                 $('#area-mensagem-preview').load('open-ajax-table.php?Notifications::settingsLoadTemplate', data);
             }
@@ -354,7 +364,7 @@ class Notifications extends NotificationsUtil {
         </script>
         <style>
             .table-messagem {
-                max-width: 600px;
+                max-width : 600px;
             }
         </style>
         <?php
