@@ -316,15 +316,13 @@ class Notifications extends NotificationsUtil {
             Header::location('Notifications::dashboard');
         }
 
-        DashboardUtil::startPage(array(
-            array('Notifications::dashboard', get_string_kopere('notification_title'))
-        ));
+        DashboardUtil::startPopup(get_string_kopere('notification_delete_yes'));
 
         echo "<p>" . get_string_kopere('notification_delete_yes') . "</p>";
         Button::delete(get_string('yes'), 'Notifications::delete&status=sim&id=' . $event->id, '', false);
         Button::add(get_string('no'), 'Notifications::dashboard', 'margin-left-10', false);
 
-        DashboardUtil::endPage();
+        DashboardUtil::endPopup();
     }
 
     public function settings() {
