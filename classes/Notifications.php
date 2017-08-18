@@ -26,6 +26,7 @@ namespace local_kopere_dashboard;
 defined('MOODLE_INTERNAL') || die();
 
 use core\event\base;
+use core\message\message;
 use local_kopere_dashboard\html\Button;
 use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\Form;
@@ -53,6 +54,7 @@ class Notifications extends NotificationsUtil {
         echo get_string_kopere('notification_subtitle');
 
         Button::add(get_string_kopere('notification_new'), 'Notifications::add', '', true, false, true);
+        Button::info(get_string_kopere('notification_testsmtp'), 'Notifications::testSmtp');
 
         $events = $DB->get_records('kopere_dashboard_events');
         $eventsList = array();
@@ -370,5 +372,38 @@ class Notifications extends NotificationsUtil {
         <?php
 
         DashboardUtil::endPopup();
+    }
+
+    public function testSmtp(){
+        global $CFG, $USER;
+
+        DashboardUtil::startPage(array(
+            array('Notifications::dashboard', get_string_kopere('notification_title')),
+            get_string_kopere('notification_testsmtp')
+        ));
+
+        NotificationsUtil::mensagemNoSmtp();
+        $CFG->debugsmtp = true;
+        $CFG->debugdisplay = true;
+        $CFG->debug = 32767;
+
+        $htmlMessage = "<p>Este é um teste de envio de E-mail.</p>";
+
+        $eventdata = new message();
+        $eventdata->courseid = SITEID;
+        $eventdata->modulename = 'moodle';
+        $eventdata->component = 'local_kopere_dashboard';
+        $eventdata->name = 'kopere_dashboard_messages';
+        $eventdata->userfrom = get_admin();
+        $eventdata->userto = $USER;
+        $eventdata->subject = "Testando envio de e-mail";
+        $eventdata->fullmessage = html_to_text($htmlMessage);
+        $eventdata->fullmessageformat = FORMAT_HTML;
+        $eventdata->fullmessagehtml = $htmlMessage;
+        $eventdata->smallmessage = '';
+
+        message_send($eventdata);
+
+        DashboardUtil::endPage();
     }
 }

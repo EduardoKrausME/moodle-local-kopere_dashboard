@@ -214,4 +214,6 @@ class NotificationsUtil {
             Mensagem::printDanger(get_string_kopere('notification_error_smtp', $CFG));
         }
     }
+
+
 }

@@ -25,7 +25,6 @@ namespace local_kopere_dashboard\output\events;
 
 defined('MOODLE_INTERNAL') || die();
 
-use core\event\message_sent;
 use core\message\message;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
@@ -170,6 +169,7 @@ class SendEvents {
             $htmlMessage = str_replace ( '{[manager]}', $magager, $htmlMessage );
 
             $eventdata = new message();
+            $eventdata->courseid = SITEID;
             $eventdata->modulename = 'moodle';
             $eventdata->component = 'local_kopere_dashboard';
             $eventdata->name = 'kopere_dashboard_messages';

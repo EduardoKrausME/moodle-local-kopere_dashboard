@@ -242,6 +242,7 @@ $string['dashboard_enrol_lastmodifield'] = 'Última alteração em';
 $string['notification_title'] = 'Notificações';
 $string['notification_subtitle'] = '<p>Receba notificações sempre que uma ação acontecer no Moodle.</p>';
 $string['notification_new'] = 'Nova notificação';
+$string['notification_testsmtp'] = 'Testar se as configurações do SMTP estão corretas.';
 $string['notification_table_module'] = 'Módulo';
 $string['notification_table_action'] = 'Ação';
 $string['notification_table_subject'] = 'Assunto';
