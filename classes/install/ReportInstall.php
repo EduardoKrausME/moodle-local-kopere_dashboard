@@ -17,6 +17,8 @@ class ReportInstall {
     public static function createCategores() {
         global $CFG;
 
+        $CFG->debugdisplay = false;
+
         $reportcat = kopere_dashboard_reportcat::createNew();
         $reportcat->title = get_string('reports_reportcat_badge', 'local_kopere_dashboard');
         $reportcat->type = 'badge';
@@ -72,7 +74,7 @@ class ReportInstall {
     }
 
     public static function createReports() {
-        global $DB;
+        global $DB, $CFG;
 
         $table = new ReportInstall();
 
@@ -81,11 +83,13 @@ class ReportInstall {
         $report->reportkey = 'badge-1';
         $report->title = get_string('reports_report_badge-1');
         if ($CFG->dbtype == 'pgsql') {
-            $report->reportsql = ' SELECT b.id, b.name, b.description, b.type, b.status,
+            $report->reportsql = ' SELECT b.id, b."name", b.description, b.type, b.status,
                                       (SELECT COUNT(*) FROM {badge_issued} d WHERE d.badgeid = b.id )AS students
                                  FROM {badge} b';
         }else{
-
+            $report->reportsql = ' SELECT b.id, b.name, b.description, b.type, b.status,
+                                      (SELECT COUNT(*) FROM {badge_issued} d WHERE d.badgeid = b.id )AS students
+                                 FROM {badge} b';
         }
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),

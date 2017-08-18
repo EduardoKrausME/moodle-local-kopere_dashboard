@@ -385,6 +385,7 @@ $string['userimport_group_desc'] = 'Se deseja que o aluno seja vinculado a um gr
 $string['userimport_next'] = 'Processar';
 $string['userimport_import_user_created_name'] = 'Usuário importado e cadastrado no Moodle';
 $string['userimport_import_course_enrol_name'] = 'Usuário importado foi cadastrado no Curso';
+$string['userimport_import_user_created_and_enrol_name'] = 'Usuário importado, cadastrado no Moodle e no Curso';
 $string['userimport_messages'] = 'Mensagens que os usuários receberão durante a importação';
 $string['userimport_receivemessage'] = 'Usuário receberá a mensgem com o título {$a}';
 $string['userimport_notreceivemessage'] = 'Usuário não receberá nenhuma mensagem nesta ação!';

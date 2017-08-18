@@ -27,6 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\event\import_course_enrol;
 use local_kopere_dashboard\event\import_user_created;
+use local_kopere_dashboard\event\import_user_created_and_enrol;
 use local_kopere_dashboard\html\Form;
 use local_kopere_dashboard\html\inputs\InputSelect;
 use local_kopere_dashboard\util\DashboardUtil;
@@ -100,7 +101,7 @@ class UsersImport {
         echo '<div class="element-box table-responsive">';
 
         $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
-        if( !file_exists($target_file))
+        if (!file_exists($target_file))
             Header::notfound(get_string_kopere('userimport_filenotfound', $name));
 
         $csvContent = file_get_contents($target_file, false, null, 0, 2000);
@@ -388,7 +389,7 @@ class UsersImport {
 
         $isFirst = true;
         $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
-        if( !file_exists($target_file))
+        if (!file_exists($target_file))
             Header::notfound(get_string_kopere('userimport_filenotfound', $name));
 
         $handle = fopen($target_file, "r");
@@ -433,6 +434,7 @@ class UsersImport {
             }
 
             $user = $this->getUser($username, $email, $idnumber);
+            $sendEventUserCreate = 0;
             if (!$user) {
                 // Not search! create user.
 
@@ -526,6 +528,7 @@ class UsersImport {
                     $this->addCol(get_string_kopere('userimport_noterror'), !$inserir);
                 }
 
+
                 if ($inserir) {
                     try {
                         $newUser->id = user_create_user($newUser);
@@ -535,23 +538,11 @@ class UsersImport {
                         $this->addCol($e->getMessage(), !$inserir);
                         $iserted = false;
                     }
-                    if( $iserted ) {
+                    if ($iserted) {
                         $user = $DB->get_record('user', array('id' => $newUser->id), '*', IGNORE_MULTIPLE);
                         set_user_preference('auth_forcepasswordchange', 1, $newUser);
 
-                        $dataEvent = array(
-                            'objectid' => $newUser->id,
-                            'relateduserid' => $newUser->id,
-                            'other' => array(
-                                'password' => $password,
-                                'courseid' => SITEID
-                            ),
-                            'context' => \context_user::instance($newUser->id)
-                        );
-
-                        try {
-                            import_user_created::create($dataEvent)->trigger();
-                        } catch (\Exception $e) { }
+                        $sendEventUserCreate = $newUser->id;
                     }
                 }
             } else {
@@ -595,6 +586,7 @@ class UsersImport {
                 }
             }
 
+            $sendEventCourseCreate = 0;
             if ($col_shortnamecourse || $col_idnumbercourse) {
                 $course = $this->getCourse($shortnamecourse, $idnumbercourse);
                 // if exist user, and exist course, add enrol
@@ -602,19 +594,7 @@ class UsersImport {
 
                     EnrolUtil::enrol($course->id, $user->id, $enroltimestart, $enroltimeend, 0);
 
-                    $dataEvent = array(
-                        'objectid' => $course->id,
-                        'relateduserid' => $user->id,
-                        'other' => array(
-                            'courseid' => $course->id
-                        ),
-                        'context' => \context_user::instance($user->id)
-                    );
-                    try {
-                        import_course_enrol::create($dataEvent)->trigger();
-                    } catch (\Exception $e) {
-                        // Não faz nada
-                    }
+                    $sendEventCourseCreate = $course->id;
 
                     $this->addCol($course->fullname, !$inserir);
                     $this->addCol($enroltimestart, !$inserir);
@@ -653,6 +633,54 @@ class UsersImport {
                         $groups_name = $groups->name;
                     }
                     $this->addCol($groups_name, !$inserir);
+                }
+            }
+
+            if ($sendEventUserCreate && $sendEventCourseCreate && $user ) {
+                $dataEvent = array(
+                    'objectid' => $sendEventCourseCreate,
+                    'relateduserid' => $user->id,
+                    'other' => array(
+                        'password' => $password,
+                        'courseid' => SITEID
+                    ),
+                    'context' => \context_user::instance($sendEventCourseCreate)
+                );
+
+                try {
+                    import_user_created_and_enrol::create($dataEvent)->trigger();
+                } catch (\Exception $e) {
+                    // Não faz nada
+                }
+            } elseif ($sendEventUserCreate && $user) {
+                $dataEvent = array(
+                    'objectid' => $user->id,
+                    'relateduserid' => $user->id,
+                    'other' => array(
+                        'password' => $password,
+                        'courseid' => SITEID
+                    ),
+                    'context' => \context_user::instance($user->id)
+                );
+
+                try {
+                    import_user_created::create($dataEvent)->trigger();
+                } catch (\Exception $e) {
+                    // Não faz nada
+                }
+            } elseif ($sendEventCourseCreate && $user) {
+                $dataEvent = array(
+                    'objectid' => $sendEventCourseCreate,
+                    'relateduserid' => $user->id,
+                    'other' => array(
+                        'courseid' => $sendEventCourseCreate
+                    ),
+                    'context' => \context_user::instance($user->id)
+                );
+                try {
+                    import_course_enrol::create($dataEvent)->trigger();
+                } catch (\Exception $e) {
+                    // Não faz nada
                 }
             }
 
@@ -819,7 +847,7 @@ class UsersImport {
         $separator = optional_param('separator', '', PARAM_TEXT);
 
         $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
-        if( !file_exists($target_file))
+        if (!file_exists($target_file))
             Header::notfound(get_string_kopere('userimport_filenotfound', $name));
 
         echo '<!DOCTYPE html>

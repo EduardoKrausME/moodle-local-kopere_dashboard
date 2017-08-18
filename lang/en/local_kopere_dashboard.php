@@ -387,6 +387,7 @@ $string['userimport_group_desc'] = 'If you want the student to be bound to a gro
 $string['userimport_next'] = 'Process';
 $string['userimport_import_user_created_name'] = 'User imported and registered in Moodle';
 $string['userimport_import_course_enrol_name'] = 'Imported user was enrolled in the Course';
+$string['userimport_import_user_created_and_enrol_name'] = 'Imported user, registered in Moodle and Course';
 $string['userimport_messages'] = 'Messages that students will receive during import';
 $string['userimport_messages'] = 'Messages that users will receive during import';
 $string['userimport_receivemessage'] = 'User will receive the message with the title {$a}';
