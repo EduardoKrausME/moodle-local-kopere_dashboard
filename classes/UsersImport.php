@@ -162,32 +162,58 @@ class UsersImport {
     private function getEvents() {
         global $DB;
 
+        TitleUtil::printH2('userimport_messages');
+
         /** @var kopere_dashboard_events $import_course_enrol */
         $import_course_enrol = $DB->get_record('kopere_dashboard_events', array(
             'event' => '\\local_kopere_dashboard\\event\\import_course_enrol',
-            'status' => 1
         ), '*', IGNORE_MULTIPLE);
-
-        /** @var kopere_dashboard_events $import_user_created */
-        $import_user_created = $DB->get_record('kopere_dashboard_events', array(
-            'event' => '\\local_kopere_dashboard\\event\\import_user_created',
-            'status' => 1
-        ), '*', IGNORE_MULTIPLE);
-
-        TitleUtil::printH2('userimport_messages');
 
         TitleUtil::printH3('userimport_import_course_enrol_name');
         if ($import_course_enrol) {
-            $link = '<a target="_blank" href="?Notifications::addSegundaEtapa&id=' . $import_course_enrol->id . '">' . $import_course_enrol->subject . '</a>';
-            echo get_string_kopere('userimport_receivemessage', $link);
+            if ($import_course_enrol->status == 1) {
+                $link = '<a target="_blank" href="?Notifications::addSegundaEtapa&id=' . $import_course_enrol->id . '">' . $import_course_enrol->subject . '</a>';
+                echo get_string_kopere('userimport_receivemessage', $link);
+            } else {
+                $link = '<a target="_blank" href="?Notifications::addSegundaEtapa&id=' . $import_course_enrol->id . '">' . $import_course_enrol->subject . '</a>';
+                Mensagem::printInfo(get_string_kopere('userimport_receivemessage', $link));
+            }
         } else {
             Mensagem::printWarning(get_string_kopere('userimport_notreceivemessage'));
         }
 
+        /** @var kopere_dashboard_events $import_user_created */
+        $import_user_created = $DB->get_record('kopere_dashboard_events', array(
+            'event' => '\\local_kopere_dashboard\\event\\import_user_created'
+        ), '*', IGNORE_MULTIPLE);
+
         TitleUtil::printH3('userimport_import_user_created_name');
         if ($import_user_created) {
-            $link = '<a target="_blank" href="?Notifications::addSegundaEtapa&id=' . $import_user_created->id . '">' . $import_user_created->subject . '</a>';
-            echo get_string_kopere('userimport_receivemessage', $link);
+            if ($import_user_created->status == 1) {
+                $link = '<a target="_blank" href="?Notifications::addSegundaEtapa&id=' . $import_user_created->id . '">' . $import_user_created->subject . '</a>';
+                echo get_string_kopere('userimport_receivemessage', $link);
+            } else {
+                $link = '<a target="_blank" href="?Notifications::addSegundaEtapa&id=' . $import_user_created->id . '">' . $import_user_created->subject . '</a>';
+                Mensagem::printInfo(get_string_kopere('userimport_receivemessage', $link));
+            }
+        } else {
+            Mensagem::printWarning(get_string_kopere('userimport_notreceivemessage'));
+        }
+
+        /** @var kopere_dashboard_events $import_user_created_and_enrol */
+        $import_user_created_and_enrol = $DB->get_record('kopere_dashboard_events', array(
+            'event' => '\\local_kopere_dashboard\\event\\import_user_created_and_enrol'
+        ), '*', IGNORE_MULTIPLE);
+
+        TitleUtil::printH3('userimport_import_user_created_and_enrol_name');
+        if ($import_user_created_and_enrol) {
+            if ($import_user_created_and_enrol->status == 1) {
+                $link = '<a target="_blank" href="?Notifications::addSegundaEtapa&id=' . $import_user_created_and_enrol->id . '">' . $import_user_created_and_enrol->subject . '</a>';
+                echo get_string_kopere('userimport_receivemessage', $link);
+            } else {
+                $link = '<a target="_blank" href="?Notifications::addSegundaEtapa&id=' . $import_user_created_and_enrol->id . '">' . $import_user_created_and_enrol->subject . '</a>';
+                Mensagem::printInfo(get_string_kopere('userimport_receivemessage', $link));
+            }
         } else {
             Mensagem::printWarning(get_string_kopere('userimport_notreceivemessage'));
         }
@@ -636,7 +662,7 @@ class UsersImport {
                 }
             }
 
-            if ($sendEventUserCreate && $sendEventCourseCreate && $user ) {
+            if ($sendEventUserCreate && $sendEventCourseCreate && $user) {
                 $dataEvent = array(
                     'objectid' => $sendEventCourseCreate,
                     'relateduserid' => $user->id,
@@ -766,7 +792,7 @@ class UsersImport {
     }
 
     private function getUser($username, $email, $idnumber) {
-        global $DB;
+        global $DB, $CFG;
 
         if (strlen($username)) {
             $user = $DB->get_record('user', array('username' => $username), '*', IGNORE_MULTIPLE);
@@ -775,11 +801,13 @@ class UsersImport {
                 return $user;
         }
 
-        if (strlen($email)) {
-            $user = $DB->get_record('user', array('email' => $email), '*', IGNORE_MULTIPLE);
+        if (empty($CFG->allowaccountssameemail)) {
+            if (strlen($email)) {
+                $user = $DB->get_record('user', array('email' => $email), '*', IGNORE_MULTIPLE);
 
-            if ($user)
-                return $user;
+                if ($user)
+                    return $user;
+            }
         }
 
         if (strlen($idnumber)) {
