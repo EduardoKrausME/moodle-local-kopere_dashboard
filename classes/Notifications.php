@@ -295,9 +295,6 @@ class Notifications extends NotificationsUtil {
                 Mensagem::agendaMensagemSuccess(get_string_kopere('notification_created'));
                 Header::location('Notifications::dashboard');
             } catch (\dml_exception $e) {
-                echo '<pre>';
-                print_r($e);
-                echo '</pre>';
                 Mensagem::printDanger($e->error);
             }
         }
