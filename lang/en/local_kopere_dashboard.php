@@ -113,13 +113,13 @@ $string['backup_returnlist'] = 'Back to the Backups list';
 $string['backup_deletesucessfull'] = 'Backup deleted successfully!';
 $string['backup_deleting'] = 'Excluding Backup';
 $string['backup_delete_confirm'] = 'Backup Deletion';
-$string['backup_delete_title'] = 'Do you really want to delete the <strong>{$a->file}</strong> backup created in <strong>{$a->date}</strong>';
+$string['backup_delete_title'] = 'Do you really want to delete the <strong>{$a->file}</strong>backup created in <strong>{$a->date}</strong>';
 $string['backup_notound'] = 'File not found!';
 
 // ReportBenchmark
 $string['benchmark_title'] = 'Performance test';
 $string['benchmark_based'] = 'Plug-in based';
-$string['benchmark_info'] = '<p> This test can take up to 1 minute to execute.</p><p>Try to do more than one test for an average.</p><p>And, do not run in peak times.</p>';
+$string['benchmark_info'] = '<p>This test can take up to 1 minute to execute.</p><p>Try to do more than one test for an average.</p><p>And, do not run in peak times.</p>';
 $string['benchmark_execute'] = 'Run the test';
 $string['benchmark_executing'] = 'Running the test';
 $string['benchmark_title2'] = 'Hosting performance test';
@@ -229,7 +229,7 @@ $string['dashboard_title_online'] = 'Online / Last hour';
 $string['dashboard_title_course'] = 'Courses / Visible';
 $string['dashboard_title_disk'] = 'Disk Usage';
 $string['dashboard_grade_title'] = 'Latest notes';
-$string['dashboard_grade_inmod'] = 'in module <strong>{$a->itemname}</strong> in course <a href="?Courses::details&courseid={$a->courseid}">{$a->coursename}</a>';
+$string['dashboard_grade_inmod'] = 'in module <strong>{$a->itemname}</strong>in course <a href="?Courses::details&courseid={$a->courseid}">{$a->coursename}</a>';
 $string['dashboard_grade_incourse'] = 'in course <a href="?Courses::details&courseid={$a->courseid}">{$a->coursename}</a>';
 $string['dashboard_grade_of'] = 'of';
 $string['dashboard_grade_text'] = 'Received note {$a->grade} in {$a->evaluation}';
@@ -403,6 +403,39 @@ $string['userimport_cript'] = '--encrypted--';
 $string['userimport_exist'] = 'User already exists. Ignored';
 $string['userimport_passcreate'] = '--It will be created--';
 $string['userimport_filenotfound'] = 'File "{$a}" was not found. Upload CSV file again!';
+
+$string['userimport_event_import_course_enrol_subject'] = 'Welcome Welcome - {[course.fullname]}';
+$string['userimport_event_import_course_enrol_message'] = '<p>{[To.fullname]},</p>
+<p>Was successfully enrolled in {[course.fullname]}. Now, J & aacute; You can login to the
+   The student area to begin studying when and where you want.</p>
+<p>& Eacute; With immense satisfaction that {[moodle.fullname]} gives you The welcome.</p>
+<p>Access {{course.link}}, and good studies.</p>
+<p>Dances are available.</p>
+<p>Sincerely,<br/>
+Support Team</p> ';
+
+$string['userimport_event_import_user_created_subject'] = 'Welcome! - {[moodle.fullname]}';
+$string['userimport_event_import_user_created_message'] = '<p>{[To.fullname]},</p>
+<p>An account has been created for you; On the site {[moodle.fullname]}.</p>
+<p>Now, I invite you to; To log in to the student\'s area with the following data:</p>
+<p><strong>Site:</strong> {[moodle.link]}<br/>
+<strong>Login:</strong> {[to.username]}<br/>
+<strong>Password:</strong> {[to.password]}</p>
+<p>Dances are available.</p>
+<p>Sincerely,<br/>
+Support Team</p> ';
+
+$string['userimport_event_import_user_created_and_enrol_subject'] = 'Welcome Welcome - {[course.fullname]}';
+$string['userimport_event_import_user_created_and_enrol_message'] = '<p>{[To.fullname]},</p>
+<p>Was successfully enrolled in {[course.fullname]}. Now, J & aacute; You can login to the
+   The student area to begin studying when and where you want.</p>
+<p>Now, I invite you to; To log in to the student\'s area with the following data:</p>
+<p><strong>Site:</strong> {[moodle.link]}<br/>
+<strong>Login:</strong> {[to.username]}<br/>
+<strong>Password:</strong> {[to.password]}</p>
+<p>Dances are available.</p>
+<p>Sincerely,<br/>
+Support Team</p> ';
 
 // WebPages
 $string['webpages_title'] = 'Static Pages';

@@ -401,6 +401,40 @@ $string['userimport_exist'] = 'Usuário já existe. Ignorado';
 $string['userimport_passcreate'] = '--Será criado--';
 $string['userimport_filenotfound'] = 'Arquivo "{$a}" não foi localizado. Faça upload novamente do arquivo CSV!';
 
+$string['userimport_event_import_course_enrol_subject'] = 'Seja Bem Vindo(a) - {[course.fullname]}';
+$string['userimport_event_import_course_enrol_message'] = '<p>Ol&aacute; {[to.fullname]},</p>
+<p>Voc&ecirc; foi cadastrado com sucesso no {[course.fullname]}. Agora, voc&ecirc; j&aacute; pode fazer o login na
+   &aacute;rea do aluno para come&ccedil;ar estudar quando e onde quiser.</p>
+<p>&Eacute; com imensa satisfa&ccedil;&atilde;o que o {[moodle.fullname]} lhe d&aacute; as boas-vindas.</p>
+<p>Acesse {[course.link]}, e bons estudos.</p>
+<p>D&uacute;vidas estamos a disposi&ccedil;&atilde;o.</p>
+<p>Cordialmente,<br />
+Equipe de Suporte</p>';
+
+$string['userimport_event_import_user_created_subject'] = 'Seja Bem Vindo(a) - {[moodle.fullname]}';
+$string['userimport_event_import_user_created_message'] = '<p>Ol&aacute; {[to.fullname]},</p>
+<p>Uma conta foi criado para voc&ecirc; no site {[moodle.fullname]}.</p>
+<p>Agora, convido voc&ecirc; para fazer o login na &aacute;rea do aluno com os seguintes dados:</p>
+<p><strong>Site:</strong> {[moodle.link]}<br />
+<strong>Login:</strong> {[to.username]}<br />
+<strong>Senha:</strong> {[to.password]}</p>
+<p>D&uacute;vidas estamos a disposi&ccedil;&atilde;o.</p>
+<p>Cordialmente,<br />
+Equipe de Suporte</p>';
+
+$string['userimport_event_import_user_created_and_enrol_subject'] = 'Seja Bem Vindo(a) - {[course.fullname]}';
+$string['userimport_event_import_user_created_and_enrol_message'] = '<p>Ol&aacute; {[to.fullname]},</p>
+<p>Voc&ecirc; foi cadastrado com sucesso no {[course.fullname]}. Agora, voc&ecirc; j&aacute; pode fazer o login na 
+   &aacute;rea do aluno para come&ccedil;ar estudar quando e onde quiser.</p>
+<p>Agora, convido voc&ecirc; para fazer o login na &aacute;rea do aluno com os seguintes dados:</p>
+<p><strong>Site:</strong> {[moodle.link]}<br />
+<strong>Login:</strong> {[to.username]}<br />
+<strong>Senha:</strong> {[to.password]}</p>
+<p>D&uacute;vidas estamos a disposi&ccedil;&atilde;o.</p>
+<p>Cordialmente,<br />
+Equipe de Suporte</p>';
+
+
 // WebPages
 $string['webpages_title'] = 'Páginas estáticas';
 $string['webpages_subtitle'] = 'Menus de navegação';

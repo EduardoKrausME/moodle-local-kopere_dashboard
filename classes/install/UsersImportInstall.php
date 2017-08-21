@@ -18,16 +18,9 @@ class UsersImportInstall {
         $event->event = '\\local_kopere_dashboard\\event\\import_course_enrol';
         $event->userfrom = 'admin';
         $event->userto = 'student';
-        $event->subject = 'Seja Bem Vindo(a) - {[course.fullname]}';
+        $event->subject = get_string('userimport_event_import_course_enrol_subject', 'local_kopere_dashboard');
         $event->status = 0;
-        $event->message = "<p>Ol&aacute; {[to.fullname]},</p>\n" .
-            "<p>Voc&ecirc; foi cadastrado com sucesso no {[course.fullname]}. Agora, voc&ecirc; j&aacute; pode fazer o login na " .
-            "&aacute;rea do aluno para come&ccedil;ar estudar quando e onde quiser.</p>\n" .
-            "<p>&Eacute; com imensa satisfa&ccedil;&atilde;o que o {[moodle.fullname]} lhe d&aacute; as boas-vindas.</p>\n" .
-            "<p>Acesse {[course.link]}, e bons estudos.</p>\n" .
-            "<p>D&uacute;vidas estamos a disposi&ccedil;&atilde;o.</p>\n" .
-            "<p>Cordialmente,<br />\n" .
-            "Equipe de Suporte</p>";
+        $event->message = get_string('userimport_event_import_course_enrol_message', 'local_kopere_dashboard');
         self::insert($event);
 
 
@@ -36,17 +29,9 @@ class UsersImportInstall {
         $event->event = '\\local_kopere_dashboard\\event\\import_user_created';
         $event->userfrom = 'admin';
         $event->userto = 'student';
-        $event->subject = 'Seja Bem Vindo(a) - {[moodle.fullname]}';
+        $event->subject = get_string('userimport_event_import_user_created_subject', 'local_kopere_dashboard');
         $event->status = 0;
-        $event->message = "<p>Ol&aacute; {[to.fullname]},</p>\n" .
-            "<p>Uma conta foi criado para voc&ecirc; no site {[moodle.fullname]}.</p>\n" .
-            "<p>Agora, convido voc&ecirc; para fazer o login na &aacute;rea do aluno com os seguintes dados:</p>\n" .
-            "<p><strong>Site:</strong> {[moodle.link]}<br />\n" .
-            "<strong>Login:</strong> {[to.username]}<br />\n" .
-            "<strong>Senha:</strong> {[to.password]}</p>\n" .
-            "<p>D&uacute;vidas estamos a disposi&ccedil;&atilde;o.</p>\n" .
-            "<p>Cordialmente,<br />\n" .
-            "Equipe de Suporte</p>";
+        $event->message = get_string('userimport_event_import_user_created_message', 'local_kopere_dashboard');
         self::insert($event);
 
 
@@ -55,18 +40,9 @@ class UsersImportInstall {
         $event->event = '\\local_kopere_dashboard\\event\\import_user_created_and_enrol';
         $event->userfrom = 'admin';
         $event->userto = 'student';
-        $event->subject = 'Seja Bem Vindo(a) - {[course.fullname]}';
+        $event->subject = get_string('userimport_event_import_user_created_and_enrol_subject', 'local_kopere_dashboard');
         $event->status = 0;
-        $event->message = "<p>Ol&aacute; {[to.fullname]},</p>\n" .
-            "<p>Voc&ecirc; foi cadastrado com sucesso no {[course.fullname]}. Agora, voc&ecirc; j&aacute; pode fazer o login na " .
-            "&aacute;rea do aluno para come&ccedil;ar estudar quando e onde quiser.</p>\n" .
-            "<p>Agora, convido voc&ecirc; para fazer o login na &aacute;rea do aluno com os seguintes dados:</p>\n" .
-            "<p><strong>Site:</strong> {[moodle.link]}<br />\n" .
-            "<strong>Login:</strong> {[to.username]}<br />\n" .
-            "<strong>Senha:</strong> {[to.password]}</p>\n" .
-            "<p>D&uacute;vidas estamos a disposi&ccedil;&atilde;o.</p>\n" .
-            "<p>Cordialmente,<br />\n" .
-            "Equipe de Suporte</p>";
+        $event->message = get_string('userimport_event_import_user_created_and_enrol_message', 'local_kopere_dashboard');
         self::insert($event);
     }
 
