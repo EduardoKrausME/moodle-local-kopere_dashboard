@@ -237,7 +237,7 @@ class WebPages {
                     self::deleteCache();
                     Header::location('WebPages::details&id=' . $webpages->id);
                 } catch (\dml_exception $e) {
-                    Mensagem::printDanger($e->getMessage());
+                    Mensagem::printDanger($e->error);
                 }
             } else {
                 Mensagem::agendaMensagemSuccess(get_string_kopere('webpages_page_created'));
@@ -247,7 +247,7 @@ class WebPages {
                     self::deleteCache();
                     Header::location('WebPages::details&id=' . $webpages->id);
                 } catch (\dml_exception $e) {
-                    Mensagem::printDanger($e->getMessage());
+                    Mensagem::printDanger($e->error);
                 }
             }
         }

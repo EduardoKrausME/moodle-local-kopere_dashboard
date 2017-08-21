@@ -561,7 +561,7 @@ class UsersImport {
                         $this->addCol(get_string_kopere('userimport_inserted'), !$inserir);
                         $iserted = true;
                     } catch (\Exception $e) {
-                        $this->addCol($e->getMessage(), !$inserir);
+                        $this->addCol($e->error, !$inserir);
                         $iserted = false;
                     }
                     if ($iserted) {

@@ -287,7 +287,7 @@ class Notifications extends NotificationsUtil {
                 Mensagem::agendaMensagemSuccess(get_string_kopere('notification_created'));
                 Header::location('Notifications::dashboard');
             } catch (\dml_exception $e) {
-                Mensagem::printDanger($e->getMessage());
+                Mensagem::printDanger($e->error);
             }
         } else {
             try {
@@ -295,7 +295,10 @@ class Notifications extends NotificationsUtil {
                 Mensagem::agendaMensagemSuccess(get_string_kopere('notification_created'));
                 Header::location('Notifications::dashboard');
             } catch (\dml_exception $e) {
-                Mensagem::printDanger($e->getMessage());
+                echo '<pre>';
+                print_r($e);
+                echo '</pre>';
+                Mensagem::printDanger($e->error);
             }
         }
     }
