@@ -81,7 +81,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'badge'));
         $report->reportkey = 'badge-1';
-        $report->title = get_string('reports_report_badge-1');
+        $report->title = get_string('reports_report_badge-1', 'local_kopere_dashboard');
         if ($CFG->dbtype == 'pgsql') {
             $report->reportsql = ' SELECT b.id, b."name", b.description, b.type, b.status,
                                       (SELECT COUNT(*) FROM {badge_issued} d WHERE d.badgeid = b.id )AS students
@@ -118,7 +118,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'badge'));
         $report->reportkey = 'badge-2';
-        $report->title = get_string('reports_report_badge-2');
+        $report->title = get_string('reports_report_badge-2', 'local_kopere_dashboard');
         if ($CFG->dbtype == 'pgsql') {
             $report->reportsql = ' SELECT d.id, u.id AS userid, ' . get_all_user_name_fields(true, 'u') . ', u.lastname, b."name" AS badgename, 
                                       t.criteriatype, t.method, d.dateissued,
@@ -157,7 +157,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'courses'));
         $report->reportkey = 'courses-1';
-        $report->title = get_string('reports_report_courses-1');
+        $report->title = get_string('reports_report_courses-1', 'local_kopere_dashboard');
         $report->prerequisit = 'listCourses';
         $report->reportsql = ' SELECT ue.id,
                                       u.id AS userid,' . get_all_user_name_fields(true, 'u') . ', u.email,
@@ -232,7 +232,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'courses'));
         $report->reportkey = 'courses-2';
-        $report->title = get_string('reports_report_courses-2');
+        $report->title = get_string('reports_report_courses-2', 'local_kopere_dashboard');
         if ($CFG->dbtype == 'pgsql') {
             $report->reportsql = ' SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g."name", c.visible, c.groupmode
                                  FROM {course} c
@@ -265,7 +265,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'courses'));
         $report->reportkey = 'courses-3';
-        $report->title = get_string('reports_report_courses-3');
+        $report->title = get_string('reports_report_courses-3', 'local_kopere_dashboard');
         $report->prerequisit = 'listCourses';
         $report->reportsql = 'local_kopere_dashboard\\report\\custom\\ReportsCourseAccess';
         $report->columns = '';
@@ -275,7 +275,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'courses'));
         $report->reportkey = 'courses-4';
-        $report->title = get_string('reports_report_courses-4');
+        $report->title = get_string('reports_report_courses-4', 'local_kopere_dashboard');
         $report->prerequisit = 'listCourses';
         $report->reportsql = 'local_kopere_dashboard\\report\\custom\\ReportsCourseAccessGrade';
         $report->columns = '';
@@ -285,7 +285,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'enrol_cohort'));
         $report->reportkey = 'enrol_cohort-1';
-        $report->title = get_string('reports_report_enrol_cohort-1');
+        $report->title = get_string('reports_report_enrol_cohort-1', 'local_kopere_dashboard');
         $report->reportsql = ' SELECT u.id, ' . get_all_user_name_fields(true, 'u') . ', h.idnumber, h.name
                                  FROM {cohort} h
                                  JOIN {cohort_members} hm ON h.id = hm.cohortid
@@ -304,7 +304,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'enrol_guest'));
         $report->reportkey = 'enrol_guest-1';
-        $report->title = get_string('reports_report_enrol_guest-1');
+        $report->title = get_string('reports_report_enrol_guest-1', 'local_kopere_dashboard');
         $report->reportsql = " SELECT u.id, " . get_all_user_name_fields(true, 'u') . ", u.id AS userid, lsl.timecreated, lsl.ip
                                  FROM {logstore_standard_log} lsl
                                  JOIN {user}                  u   ON u.id = lsl.userid
@@ -325,7 +325,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'server'));
         $report->reportkey = 'server-1';
-        $report->title = get_string('reports_report_server-1');
+        $report->title = get_string('reports_report_server-1', 'local_kopere_dashboard');
         $report->reportsql = ' SELECT c.id, c.fullname, c.shortname, c.visible, c.timecreated,
                                       (SELECT SUM( f.filesize )
                                          FROM {files} f, {context} ctx
@@ -357,7 +357,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-1';
-        $report->title = get_string('reports_report_user-1');
+        $report->title = get_string('reports_report_user-1', 'local_kopere_dashboard');
         $report->reportsql = ' SELECT c.id, c.fullname, c.shortname, context.id AS contextid, COUNT(c.id) AS alunos
                                  FROM {role_assignments}  asg
                                  JOIN {context}  context ON asg.contextid = context.id AND context.contextlevel = 50
@@ -378,7 +378,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-2';
-        $report->title = get_string('reports_report_user-2');
+        $report->title = get_string('reports_report_user-2', 'local_kopere_dashboard');
         $report->reportsql = ' SELECT concat(u.id, p.id), u.id, ' . get_all_user_name_fields(true, 'u') . ', c.fullname, c.shortname,
                                       t.timecompleted, p.module, p.moduleinstance
                                  FROM {course_completion_crit_compl} t
@@ -399,7 +399,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-3';
-        $report->title = get_string('reports_report_user-3');
+        $report->title = get_string('reports_report_user-3', 'local_kopere_dashboard');
         $report->reportsql = '';
         $report->columns = array();
         $report->columns = json_encode(array('columns' => $report->columns));
@@ -409,7 +409,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-4';
-        $report->title = get_string('reports_report_user-4');
+        $report->title = get_string('reports_report_user-4', 'local_kopere_dashboard');
         $report->reportsql = " SELECT lsl.id, u.id AS userid, " . get_all_user_name_fields(true, 'u') . ", u.email, u.city, lsl.timecreated
                                  FROM {logstore_standard_log}   lsl
                                  JOIN {user}                    u    ON u.id = lsl.userid
@@ -430,7 +430,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-5';
-        $report->title = get_string('reports_report_user-5');
+        $report->title = get_string('reports_report_user-5', 'local_kopere_dashboard');
         $report->reportsql = ' SELECT u.id, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.timecreated
                                  FROM {user} u
                                 WHERE u.deleted    = 0
@@ -451,7 +451,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-6';
-        $report->title = get_string('reports_report_user-6');
+        $report->title = get_string('reports_report_user-6', 'local_kopere_dashboard');
         $report->reportsql = ' SELECT concat(u.id, p.id), u.id, ' . get_all_user_name_fields(true, 'u') . ',
                                       c.fullname, c.shortname, p.timecompleted
                                  FROM {course_completions} p
@@ -473,7 +473,7 @@ class ReportInstall {
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-7';
-        $report->title = get_string('reports_report_user-7');
+        $report->title = get_string('reports_report_user-7', 'local_kopere_dashboard');
         if ($CFG->dbtype == 'pgsql') {
             $report->reportsql = ' SELECT u.id, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
                                       c.fullname, c.shortname,
