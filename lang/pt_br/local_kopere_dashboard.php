@@ -409,18 +409,18 @@ $string['userimport_event_import_course_enrol_message'] = '<p>Ol&aacute; {[to.fu
 <p>Acesse {[course.link]}, e bons estudos.</p>
 <p>D&uacute;vidas estamos a disposi&ccedil;&atilde;o.</p>
 <p>Cordialmente,<br />
-Equipe de Suporte</p>';
+   Equipe de Suporte</p>';
 
 $string['userimport_event_import_user_created_subject'] = 'Seja Bem Vindo(a) - {[moodle.fullname]}';
 $string['userimport_event_import_user_created_message'] = '<p>Ol&aacute; {[to.fullname]},</p>
 <p>Uma conta foi criado para voc&ecirc; no site {[moodle.fullname]}.</p>
 <p>Agora, convido voc&ecirc; para fazer o login na &aacute;rea do aluno com os seguintes dados:</p>
 <p><strong>Site:</strong> {[moodle.link]}<br />
-<strong>Login:</strong> {[to.username]}<br />
-<strong>Senha:</strong> {[to.password]}</p>
+   <strong>Login:</strong> {[to.username]}<br />
+   <strong>Senha:</strong> {[to.password]}</p>
 <p>D&uacute;vidas estamos a disposi&ccedil;&atilde;o.</p>
 <p>Cordialmente,<br />
-Equipe de Suporte</p>';
+   Equipe de Suporte</p>';
 
 $string['userimport_event_import_user_created_and_enrol_subject'] = 'Seja Bem Vindo(a) - {[course.fullname]}';
 $string['userimport_event_import_user_created_and_enrol_message'] = '<p>Ol&aacute; {[to.fullname]},</p>
@@ -428,11 +428,11 @@ $string['userimport_event_import_user_created_and_enrol_message'] = '<p>Ol&aacut
    &aacute;rea do aluno para come&ccedil;ar estudar quando e onde quiser.</p>
 <p>Agora, convido voc&ecirc; para fazer o login na &aacute;rea do aluno com os seguintes dados:</p>
 <p><strong>Site:</strong> {[moodle.link]}<br />
-<strong>Login:</strong> {[to.username]}<br />
-<strong>Senha:</strong> {[to.password]}</p>
+   <strong>Login:</strong> {[to.username]}<br />
+   <strong>Senha:</strong> {[to.password]}</p>
 <p>D&uacute;vidas estamos a disposi&ccedil;&atilde;o.</p>
 <p>Cordialmente,<br />
-Equipe de Suporte</p>';
+   Equipe de Suporte</p>';
 
 
 // WebPages

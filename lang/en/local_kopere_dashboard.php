@@ -8,16 +8,16 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    local_kopere_dashboard
- * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package  local_kopere_dashboard
+ * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 $string['modulename'] = 'Kopere Dashboard';
@@ -176,7 +176,7 @@ $string['courses_student_status'] = 'Registration Status';
 $string['courses_page_title'] = 'Pages already created';
 $string['courses_page_create'] = 'Create page based on this summary';
 
-//  Reports
+// Reports
 $string['reports_title'] = 'Reports';
 $string['reports_selectcourse'] = 'Select the course to generate the report';
 $string['reports_notfound'] = 'Report not found!';
@@ -294,10 +294,10 @@ $string['notification_local_kopere_dashboard_hotmoodle'] = 'Kopere HotMoodle';
 $string['notification_local_kopere_dashboard_moocommerce'] = 'Kopere MooCommerce';
 $string['notification_local_kopere_dashboard_payment'] = 'Kopere Payment';
 $string['notification_error_smtp'] = '<p>In order for students to receive the messages, SMTP must be configured.</p>
-                    <p><a href="https://moodle.eduardokraus.com/configurar-o-smtp-no-moodle"
-                          target="_blank">Read here how to configure SMTP</a></p>
-                    <p><a href="{$a->wwwroot}/admin/settings.php?section={$a->mail}"
-                          target="_blank">Click here to configure email output</a></p>';
+          <p><a href="https://moodle.eduardokraus.com/configurar-o-smtp-no-moodle"
+             target="_blank">Read here how to configure SMTP</a></p>
+          <p><a href="{$a->wwwroot}/admin/settings.php?section={$a->mail}"
+             target="_blank">Click here to configure email output</a></p>';
 
 // Profile
 $string['profile_invalid'] = 'Invalid UserId!';
@@ -379,7 +379,7 @@ $string['userimport_userdata'] = 'User Data';
 $string['userimport_userfields'] = 'Extra profile fields';
 $string['userimport_firstname'] = 'First name or full name';
 $string['userimport_firstname_desc'] = 'If you have the full name in CSV, just fill in this field Kopere will be responsible for generating both fields. ' .
-    'If your CSV has a first name and Last Name, select this and Last Name.';
+  'If your CSV has a first name and Last Name, select this and Last Name.';
 $string['userimport_courseenrol'] = 'Enroll in a course';
 $string['userimport_courseenrol_desc'] = 'If you want the student to be enrolled in a course, select the course identifier column.';
 $string['userimport_date_desc'] = 'The system automatically detects the main date format.';
@@ -405,37 +405,35 @@ $string['userimport_passcreate'] = '--It will be created--';
 $string['userimport_filenotfound'] = 'File "{$a}" was not found. Upload CSV file again!';
 
 $string['userimport_event_import_course_enrol_subject'] = 'Welcome Welcome - {[course.fullname]}';
-$string['userimport_event_import_course_enrol_message'] = '<p>{[To.fullname]},</p>
-<p>Was successfully enrolled in {[course.fullname]}. Now, J & aacute; You can login to the
-   The student area to begin studying when and where you want.</p>
-<p>& Eacute; With immense satisfaction that {[moodle.fullname]} gives you The welcome.</p>
+$string['userimport_event_import_course_enrol_message'] = '<p>Hello {[to.fullname]},</p>
+<p>You have been successfully enrolled in {[course.fullname]}. You can now login to the student area to begin studying when and where you want.</p>
+<p>It is with great satisfaction that {[moodle.fullname]} welcomes you.</p>
 <p>Access {{course.link}}, and good studies.</p>
-<p>Dances are available.</p>
+<p>Doubts are available.</p>
 <p>Sincerely,<br/>
-Support Team</p> ';
+   Support Team</p>';
 
 $string['userimport_event_import_user_created_subject'] = 'Welcome! - {[moodle.fullname]}';
-$string['userimport_event_import_user_created_message'] = '<p>{[To.fullname]},</p>
-<p>An account has been created for you; On the site {[moodle.fullname]}.</p>
-<p>Now, I invite you to; To log in to the student\'s area with the following data:</p>
+$string['userimport_event_import_user_created_message'] = '<p>Hello {[to.fullname]},</p>
+<p>An account was created for you on the site {[moodle.fullname]}.</p>
+<p>Now, I invite you to login to the student area with the following data:</p>
 <p><strong>Site:</strong> {[moodle.link]}<br/>
-<strong>Login:</strong> {[to.username]}<br/>
-<strong>Password:</strong> {[to.password]}</p>
-<p>Dances are available.</p>
+   <strong>Login:</strong> {[to.username]}<br/>
+   <strong>Password:</strong> {[to.password]}</p>
+<p>Doubts are available.</p>
 <p>Sincerely,<br/>
-Support Team</p> ';
+   Support Team</p>';
 
 $string['userimport_event_import_user_created_and_enrol_subject'] = 'Welcome Welcome - {[course.fullname]}';
-$string['userimport_event_import_user_created_and_enrol_message'] = '<p>{[To.fullname]},</p>
-<p>Was successfully enrolled in {[course.fullname]}. Now, J & aacute; You can login to the
-   The student area to begin studying when and where you want.</p>
-<p>Now, I invite you to; To log in to the student\'s area with the following data:</p>
+$string['userimport_event_import_user_created_and_enrol_message'] = '<p>Hello {[to.fullname]},</p>
+<p>You have been successfully enrolled in {[course.fullname]}. You can now login to the student area to begin studying when and where you want.</p>
+<p>Now, I invite you to login to the student area with the following data:</p>
 <p><strong>Site:</strong> {[moodle.link]}<br/>
-<strong>Login:</strong> {[to.username]}<br/>
-<strong>Password:</strong> {[to.password]}</p>
-<p>Dances are available.</p>
+   <strong>Login:</strong> {[to.username]}<br/>
+   <strong>Password:</strong> {[to.password]}</p>
+<p>Doubts are available.</p>
 <p>Sincerely,<br/>
-Support Team</p> ';
+   Support Team</p>';
 
 // WebPages
 $string['webpages_title'] = 'Static Pages';
