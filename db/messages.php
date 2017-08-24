@@ -7,7 +7,5 @@
 
 
 $messageproviders = array (
-    'kopere_dashboard_messages' => array(
-        'capability'  => 'local/hotmoodle:emailnotifysubmission'
-    ),
+    'kopere_dashboard_messages' => array(),
 );
