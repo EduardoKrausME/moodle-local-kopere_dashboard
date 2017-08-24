@@ -195,7 +195,6 @@ class Backup {
 
                 echo "<div class=\"element-box\">
                           <h3>".get_string_kopere('backup_delete_confirm')."</h3>
-                          <p>".get_string_kopere('backup_delete_title')."</p>
                           <p>".get_string_kopere('backup_delete_title', ['file' => $_GET['file'], 'data' => $data])."</p>
                           <div>";
                 Button::delete(get_string('yes'), "?Backup::delete&file={$_GET['file']}&status=sim", '', false);
