@@ -160,7 +160,11 @@ class SendEvents {
         foreach ($usersTo as $userTo) {
             $userTo->fullname = fullname($userTo);
 
-            $userTo->password = $this->event->other['password'];
+            if (isset($this->event->other['password'])) {
+                $userTo->password = $this->event->other['password'];
+            } else {
+                $userTo->password = '';
+            }
 
             $sendSubject = $this->replaceTagUser($this->subject, $userTo, 'to');
             $htmlMessage = $this->replaceTagUser($this->message, $userTo, 'to');

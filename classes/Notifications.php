@@ -292,6 +292,7 @@ class Notifications extends NotificationsUtil {
         } else {
             try {
                 $DB->insert_record('kopere_dashboard_events', $kopere_dashboard_events);
+
                 Mensagem::agendaMensagemSuccess(get_string_kopere('notification_created'));
                 Header::location('Notifications::dashboard');
             } catch (\dml_exception $e) {

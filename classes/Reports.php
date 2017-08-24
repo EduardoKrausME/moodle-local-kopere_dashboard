@@ -53,8 +53,9 @@ class Reports {
             // Executa o SQL e vrifica se o SQL retorna status>0
             if (strlen($kopere_dashboard_reportcat->enablesql)) {
                 $status = $DB->get_record_sql($kopere_dashboard_reportcat->enablesql);
-                if ($status->status == 0)
+                if ($status == null || $status->status == 0) {
                     continue;
+                }
             }
 
             if (strpos($kopere_dashboard_reportcat->image, 'assets/') === 0) {
@@ -92,8 +93,9 @@ class Reports {
             // Executa o SQL e vrifica se o SQL retorna status>0
             if (strlen($kopere_dashboard_reportcat->enablesql)) {
                 $status = $DB->get_record_sql($kopere_dashboard_reportcat->enablesql);
-                if ($status->status == 0)
+                if ($status == null || $status->status == 0) {
                     continue;
+                }
             }
 
             if (strpos($kopere_dashboard_reportcat->image, 'assets/') === 0) {

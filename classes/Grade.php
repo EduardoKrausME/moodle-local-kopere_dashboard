@@ -27,8 +27,13 @@ defined('MOODLE_INTERNAL') || die();
 
 class Grade {
     public function getLastGrades() {
-        global $DB;
-        $data = $DB->get_records_sql("SELECT concat(gg.id, gi.id) as id, gg.id AS ggid, gi.id as giid, u.id as userid, c.id as courseid, c.fullname AS 'coursename', gi.timemodified,
+        global $DB, $CFG;
+
+        $group='';
+        if ($CFG->dbtype == 'mysqli') {
+            $group = 'GROUP BY gg.id';
+        }
+        $data = $DB->get_records_sql("SELECT DISTINCT gg.id, gg.id AS ggid, gi.id as giid, u.id as userid, c.id as courseid, c.fullname AS coursename, gi.timemodified,
                                                gi.itemtype, gi.itemname, gg.finalgrade, gg.rawgrademax
                                         FROM {course} c
                                         JOIN {context} ctx ON c.id = ctx.instanceid
@@ -39,9 +44,9 @@ class Grade {
                                         JOIN {course_categories} cc ON cc.id = c.category
                                        WHERE gi.courseid = c.id AND gi.itemname != 'Attendance'
                                          AND gg.finalgrade IS NOT NULL
-                                    GROUP BY gg.id
+                                    $group
                                     ORDER BY gi.timemodified DESC
-                                       LIMIT 0, 10");
+                                       LIMIT 10");
 
         return $data;
     }
