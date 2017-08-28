@@ -53,14 +53,14 @@ class Enrol {
         $courseid = optional_param('courseid', 0, PARAM_INT);
 
         $sql
-            = "SELECT ue.userid AS id, firstname, lastname, u.email, ue.status
+            = "SELECT DISTINCT ue.userid AS id, firstname, lastname, u.email, ue.status
 		         FROM {user_enrolments} ue
                     LEFT JOIN {user} u ON u.id = ue.userid
                     LEFT JOIN {enrol} e ON e.id = ue.enrolid
                     LEFT JOIN {course} c ON c.id = e.courseid
                     LEFT JOIN {course_completions} cc ON cc.timecompleted > 0 AND cc.course = e.courseid and cc.userid = ue.userid
 		        WHERE c.id = :id AND u.id IS NOT NULL
-		     GROUP BY ue.userid, e.courseid";
+		     ";
 
         $result = $DB->get_records_sql($sql, array('id' => $courseid));
 
