@@ -26,6 +26,7 @@ namespace local_kopere_dashboard;
 defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\util\Json;
+use local_kopere_dashboard\util\UserUtil;
 
 class Enrol {
     public function lastEnrol() {
@@ -52,7 +53,7 @@ class Enrol {
         $courseid = optional_param('courseid', 0, PARAM_INT);
 
         $sql
-            = "SELECT ue.userid AS id, concat(firstname, ' ', lastname) as nome, u.email, ue.status
+            = "SELECT ue.userid AS id, firstname, lastname, u.email, ue.status
 		         FROM {user_enrolments} ue
                     LEFT JOIN {user} u ON u.id = ue.userid
                     LEFT JOIN {enrol} e ON e.id = ue.enrolid
@@ -62,6 +63,8 @@ class Enrol {
 		     GROUP BY ue.userid, e.courseid";
 
         $result = $DB->get_records_sql($sql, array('id' => $courseid));
+
+        $result = UserUtil::createColumnFullname($result, 'nome');
 
         Json::encodeAndReturn($result);
     }

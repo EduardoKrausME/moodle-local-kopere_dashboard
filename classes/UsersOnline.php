@@ -35,6 +35,7 @@ use local_kopere_dashboard\html\TableHeaderItem;
 use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Json;
 use local_kopere_dashboard\util\TitleUtil;
+use local_kopere_dashboard\util\UserUtil;
 
 class UsersOnline {
 
@@ -78,14 +79,15 @@ class UsersOnline {
         $onlinestart = strtotime('-' . $time . ' minutes');
         $timefinish = time();
 
-        $data = $DB->get_records_sql("
-                SELECT u.id AS userid, concat(firstname, ' ', lastname) AS fullname, lastaccess AS servertime,
+        $result = $DB->get_records_sql("
+                SELECT u.id AS userid, firstname, lastname, lastaccess AS servertime,
                        0 AS focus, '' AS page, '' AS title
                   FROM {user} u
                  WHERE u.lastaccess BETWEEN $onlinestart AND $timefinish
               ORDER BY u.timecreated DESC");
 
-        Json::encodeAndReturn($data);
+        $result = UserUtil::createColumnFullname($result, 'fullname');
+        Json::encodeAndReturn($result);
     }
 
     public static function countOnline($time) {

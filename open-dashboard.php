@@ -201,8 +201,9 @@ if (isset($_POST['action'])) {
                     if (has_capability('moodle/site:config', context_system::instance()))
                         DashboardUtil::addMenu('WebPages::dashboard', 'webpages', get_string_kopere('webpages_title'));
                     DashboardUtil::addMenu('Benchmark::test', 'performace', get_string_kopere('benchmark_title'));
-                    if (has_capability('moodle/site:config', context_system::instance()))
+                    if (has_capability('moodle/site:config', context_system::instance()) && $CFG->dbtype == 'mysqli')
                         DashboardUtil::addMenu('Backup::dashboard', 'data', 'Backup');
+
                     DashboardUtil::addMenu('About::dashboard', 'about', get_string_kopere('about_title'));
                     ?>
                 </ul>

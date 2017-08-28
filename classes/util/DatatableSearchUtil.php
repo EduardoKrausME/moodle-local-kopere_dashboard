@@ -80,7 +80,7 @@ class DatatableSearchUtil {
      * @param callback $functionBeforeReturn
      */
     public function executeSqlAndReturn($sql, $group = '', $params = null, $functionBeforeReturn = null) {
-        global $DB;
+        global $DB, $CFG;
 
         $sqlSearch = $sql . " $this->where $group";
         $sqlSearch = str_replace('{[columns]}', 'count(*) as num', $sqlSearch);
@@ -88,7 +88,11 @@ class DatatableSearchUtil {
         $sqlTotal = $sql . " $group";
         $sqlTotal = str_replace('{[columns]}', 'count(*) as num', $sqlTotal);
 
-        $sqlReturn = $sql . " $this->where \n $group\n ORDER BY $this->order $this->orderDir \n LIMIT $this->start, $this->length";
+        if ($CFG->dbtype == 'pgsql') {
+            $sqlReturn = $sql . " $this->where \n $group\n ORDER BY $this->order $this->orderDir \n LIMIT $this->length OFFSET $this->start";
+        }else{
+            $sqlReturn = $sql . " $this->where \n $group\n ORDER BY $this->order $this->orderDir \n LIMIT $this->start, $this->length";
+        }
         $sqlReturn = str_replace('{[columns]}', implode(', ', $this->columnsSelect), $sqlReturn);
 
         $result = $DB->get_records_sql($sqlReturn, $params);

@@ -59,7 +59,8 @@ class Users {
     public function loadAllUsers() {
         $columnSelect = array(
             'id',
-            'concat(firstname, " ", lastname) as fullname',
+            'firstname',
+            'lastname',
             'username',
             'email',
             'phone1',
@@ -68,7 +69,7 @@ class Users {
         );
         $columnOrder = array(
             'id',
-            array('fullname', 'concat(firstname, \' \', lastname)'),
+            'fullname'=>array('firstname'),
             'username',
             'email',
             'phone1',
@@ -81,7 +82,8 @@ class Users {
         $search->executeSqlAndReturn("
                SELECT {[columns]}
                  FROM {user} u
-                WHERE id > 1 AND deleted = 0 ");
+                WHERE id > 1 AND deleted = 0 ", '', null,
+            'local_kopere_dashboard\util\UserUtil::createColumnFullname');
     }
 
     public function details() {
