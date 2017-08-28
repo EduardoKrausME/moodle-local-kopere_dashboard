@@ -45,16 +45,25 @@ class DatatableSearchUtil {
     }
 
     public function processWhere() {
+        global $CFG;
         if (isset($_POST['search']['value']) && isset($_POST['search']['value'][0])) {
             $like = array();
             foreach ($this->columnOrder as $column) {
                 $find = $_POST['search']['value'];
                 $find = str_replace("'", "\'", $find);
                 $find = str_replace("--", "", $find);
-                if (is_array($column)) {
-                    $like [] = $column[1] . " LIKE '%{$find}%'";
-                } else {
-                    $like [] = $column . " LIKE '%{$find}%'";
+                if ($CFG->dbtype == 'pgsql') {
+                    if (is_array($column)) {
+                        $like [] = " cast( {$column[0]} as text ) LIKE '%{$find}%'";
+                    } else {
+                        $like [] = "cast( {$column} as text ) LIKE '%{$find}%'";
+                    }
+                }else{
+                    if (is_array($column)) {
+                        $like [] = "{$column[1]} LIKE '%{$find}%'";
+                    } else {
+                        $like [] = "{$column} LIKE '%{$find}%'";
+                    }
                 }
             }
             $this->where = 'AND (' . implode(' OR ', $like) . ')';
