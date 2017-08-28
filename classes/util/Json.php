@@ -26,7 +26,7 @@ namespace local_kopere_dashboard\util;
 defined('MOODLE_INTERNAL') || die();
 
 class Json {
-    public static function encodeAndReturn($data, $recordsTotal = -1, $recordsFiltered = 0) {
+    public static function encodeAndReturn($data, $recordsTotal = -1, $recordsFiltered = 0, $sql = null) {
         ob_clean();
         header('Content-Type: application/json; charset: utf-8');
 
@@ -37,6 +37,10 @@ class Json {
             $returnArray['recordsFiltered'] = intval($recordsFiltered);
         }
         $returnArray['data'] = $data;
+
+        if ($sql) {
+            $returnArray['sql'] = $sql;
+        }
 
         $json = json_encode($returnArray);
 

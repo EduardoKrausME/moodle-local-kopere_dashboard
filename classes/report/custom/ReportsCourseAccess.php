@@ -198,6 +198,7 @@ class ReportsCourseAccess {
                           AND contextinstanceid = :contextinstanceid
                           AND action = :action
                           AND userid = :userid
+                     GROUP BY timecreated
                      ORDER BY timecreated DESC
                         LIMIT 1";
 
@@ -209,7 +210,7 @@ class ReportsCourseAccess {
                         'userid' => $user->id
                     ));
 
-                if ($logResult->contagem) {
+                if ($logResult && $logResult->contagem) {
                     $this->td( get_string_kopere('reports_access_n',  $logResult->contagem), 'text-nowrap bg-success', 'DFF0D8');
                     $this->td( userdate($logResult->timecreated, get_string('strftimedatetime')), 'text-nowrap bg-success', '#DFF0D8');
                 } else {

@@ -226,7 +226,9 @@ class ReportInstall {
                 $table->addInfoHeader(get_string('reports_datacourses', 'local_kopere_dashboard'), 5)
             )
         ));
-        self::reportInsert($report);
+        if ($CFG->dbtype != 'pgsql') {
+            self::reportInsert($report);
+        }
 
 
         $report = kopere_dashboard_reports::createNew();
@@ -358,13 +360,13 @@ class ReportInstall {
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-1';
         $report->title = get_string('reports_report_user-1', 'local_kopere_dashboard');
-        $report->reportsql = ' SELECT c.id, c.fullname, c.shortname, context.id AS contextid, COUNT(c.id) AS alunos
-                                 FROM {role_assignments}  asg
-                                 JOIN {context}  context ON asg.contextid = context.id AND context.contextlevel = 50
-                                 JOIN {user}     u ON u.id = asg.userid
-                                 JOIN {course}   c ON context.instanceid = c.id
-                                WHERE asg.roleid = 5
-                             GROUP BY c.id';
+        $report->reportsql = ' SELECT DISTINCT c.id, c.fullname, c.shortname, ctx.id AS contextid, 
+                                       (SELECT COUNT(userid) FROM {role_assignments} WHERE contextid = asg.contextid GROUP BY contextid) AS alunos
+                                 FROM {role_assignments} asg
+                                 JOIN {context}          ctx ON asg.contextid = ctx.id
+                                 JOIN {course}           c   ON ctx.instanceid = c.id
+                                WHERE asg.roleid       = 5
+                                  AND ctx.contextlevel = 50 ';
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
             $table->addHeader(get_string('courses_name', 'local_kopere_dashboard'), 'fullname'),
@@ -435,6 +437,7 @@ class ReportInstall {
                                  FROM {user} u
                                 WHERE u.deleted    = 0
                                   AND u.lastlogin  = 0
+                                  AND u.id         > 1
                                   AND u.lastaccess = 0';
         $report->columns = array(
             $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT),
@@ -475,7 +478,7 @@ class ReportInstall {
         $report->reportkey = 'user-7';
         $report->title = get_string('reports_report_user-7', 'local_kopere_dashboard');
         if ($CFG->dbtype == 'pgsql') {
-            $report->reportsql = ' SELECT u.id, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
+            $report->reportsql = ' SELECT ue.id, u.id AS userid, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
                                       c.fullname, c.shortname,
                                       (SELECT r."name"
                                          FROM {user_enrolments} ue2
@@ -490,7 +493,7 @@ class ReportInstall {
                                  LEFT JOIN {user_lastaccess} ul ON ul.userid = u.id
                                 WHERE ul.timeaccess IS NULL';
         }else{
-            $report->reportsql = ' SELECT u.id, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
+            $report->reportsql = ' SELECT ue.id, u.id AS userid, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
                                       c.fullname, c.shortname,
                                       (SELECT r.name
                                          FROM {user_enrolments} ue2
@@ -506,7 +509,7 @@ class ReportInstall {
                                 WHERE ul.timeaccess IS NULL';
         }
         $report->columns = array(
-            $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
+            $table->addHeader('#', 'userid', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
             $table->addHeader(get_string('courses_student_name', 'local_kopere_dashboard'), 'userfullname'),
             $table->addHeader(get_string('courses_name', 'local_kopere_dashboard'), 'fullname'),
             $table->addHeader(get_string('courses_shortname', 'local_kopere_dashboard'), 'shortname'),

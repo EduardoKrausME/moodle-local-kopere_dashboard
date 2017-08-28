@@ -191,7 +191,7 @@ class Reports {
     }
 
     public function getdata(){
-        global $DB;
+        global $DB, $CFG;
 
         $report = optional_param('report', 0, PARAM_INT);
         $id     = optional_param('id', 0, PARAM_INT);
@@ -201,7 +201,12 @@ class Reports {
         /** @var kopere_dashboard_reports $kopere_dashboard_reports */
         $kopere_dashboard_reports = $DB->get_record('kopere_dashboard_reports', array('id' => $report));
 
-        $sql = "{$kopere_dashboard_reports->reportsql} LIMIT $start, $length";
+        if ($CFG->dbtype == 'pgsql') {
+            $sql = "{$kopere_dashboard_reports->reportsql} LIMIT $length OFFSET $start";
+        }else{
+            $sql = "{$kopere_dashboard_reports->reportsql} LIMIT $start, $length";
+        }
+
 
         if (strlen($kopere_dashboard_reports->prerequisit) && $kopere_dashboard_reports->prerequisit == 'listCourses') {
             $reports = $DB->get_records_sql($sql, array('courseid' => $id));

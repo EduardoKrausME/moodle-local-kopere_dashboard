@@ -21,7 +21,7 @@
  */
 
 function xmldb_local_kopere_dashboard_upgrade($oldversion) {
-    global $DB, $CFG;
+    global $DB;
 
     $dbman = $DB->get_manager();
 
@@ -96,121 +96,6 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2017071714, 'local', 'kopere_dashboard');
     }
 
-    if ($oldversion < 2017081600) {
-
-        $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type' => 'badge'));
-        $reportcat->enablesql = "SELECT id as status FROM {badge} LIMIT 1";
-        $DB->update_record('kopere_dashboard_reportcat', $reportcat);
-
-        $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type' => 'enrol_cohort'));
-        if ($CFG->dbtype == 'pgsql') {
-            $reportcat->enablesql = "SELECT id as status FROM {config} WHERE \"name\" LIKE 'enrol_plugins_enabled' AND \"value\" LIKE '%cohort%' LIMIT 1";
-        } else {
-            $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%cohort%' LIMIT 1";
-        }
-        $DB->update_record('kopere_dashboard_reportcat', $reportcat);
-
-        $reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type' => 'enrol_guest'));
-        if ($CFG->dbtype == 'pgsql') {
-            $reportcat->enablesql = "SELECT id as status FROM {config} WHERE \"name\" LIKE 'enrol_plugins_enabled' AND \"value\" LIKE '%guest%' LIMIT 1";
-        } else {
-            $reportcat->enablesql = "SELECT id as status FROM {config} WHERE `name` LIKE 'enrol_plugins_enabled' AND `value` LIKE '%guest%' LIMIT 1";
-        }
-        $DB->update_record('kopere_dashboard_reportcat', $reportcat);
-
-        // Reports
-        $report = $DB->get_record('kopere_dashboard_reports', array('reportkey' => 'badge-2'));
-        if ($report) {
-            if ($CFG->dbtype == 'pgsql') {
-                $report->reportsql = ' SELECT d.id, u.id AS userid, ' . get_all_user_name_fields(true, 'u') . ', u.lastname, b."name" AS badgename, 
-                                      t.criteriatype, t.method, d.dateissued,
-                                      (SELECT c.shortname FROM {course} c WHERE c.id = b.courseid) as course
-                                 FROM {badge_issued}   d
-                                 JOIN {badge}          b ON d.badgeid = b.id
-                                 JOIN {user}           u ON d.userid  = u.id
-                                 JOIN {badge_criteria} t ON b.id      = t.badgeid
-                                WHERE t.criteriatype != 0
-                              ORDER BY u.username';
-            } else {
-                $report->reportsql = ' SELECT d.id, u.id AS userid, ' . get_all_user_name_fields(true, 'u') . ', u.lastname, b.name AS badgename, 
-                                      t.criteriatype, t.method, d.dateissued,
-                                      (SELECT c.shortname FROM {course} c WHERE c.id = b.courseid) as course
-                                 FROM {badge_issued}   d
-                                 JOIN {badge}          b ON d.badgeid = b.id
-                                 JOIN {user}           u ON d.userid  = u.id
-                                 JOIN {badge_criteria} t ON b.id      = t.badgeid
-                                WHERE t.criteriatype != 0
-                              ORDER BY u.username';
-            }
-            $DB->update_record('kopere_dashboard_reports', $report);
-        }
-
-        $report = $DB->get_record('kopere_dashboard_reports', array('reportkey' => 'courses-2'));
-        if ($report) {
-            if ($CFG->dbtype == 'pgsql') {
-                $report->reportsql = ' SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g."name", c.visible, c.groupmode
-                                 FROM {course} c
-                                 JOIN {groups} g ON c.id = g.courseid
-                                WHERE c.groupmode > 0';
-            } else {
-                $report->reportsql = ' SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.groupmode
-                                 FROM {course} c
-                                 JOIN {groups} g ON c.id = g.courseid
-                                WHERE c.groupmode > 0';
-            }
-            $DB->update_record('kopere_dashboard_reports', $report);
-        }
-
-        $report = $DB->get_record('kopere_dashboard_reports', array('reportkey' => 'user-7'));
-        if ($report) {
-            if ($CFG->dbtype == 'pgsql') {
-                $report->reportsql = ' SELECT u.id, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
-                                      c.fullname, c.shortname,
-                                      (SELECT r."name"
-                                         FROM {user_enrolments} ue2
-                                         JOIN {enrol} e ON e.id = ue2.enrolid
-                                         JOIN {role}  r ON e.id = r.id
-                                        WHERE ue2.userid = u.id
-                                          AND e.courseid = c.id ) AS rolename
-                                 FROM {user_enrolments} ue
-                                 JOIN {enrol}  e ON e.id = ue.enrolid
-                                 JOIN {course} c ON c.id = e.courseid
-                                 JOIN {user}   u ON u.id = ue.userid
-                                 LEFT JOIN {user_lastaccess} ul ON ul.userid = u.id
-                                WHERE ul.timeaccess IS NULL';
-            } else {
-                $report->reportsql = ' SELECT u.id, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
-                                      c.fullname, c.shortname,
-                                      (SELECT r.name
-                                         FROM {user_enrolments} ue2
-                                         JOIN {enrol} e ON e.id = ue2.enrolid
-                                         JOIN {role}  r ON e.id = r.id
-                                        WHERE ue2.userid = u.id
-                                          AND e.courseid = c.id ) AS rolename
-                                 FROM {user_enrolments} ue
-                                 JOIN {enrol}  e ON e.id = ue.enrolid
-                                 JOIN {course} c ON c.id = e.courseid
-                                 JOIN {user}   u ON u.id = ue.userid
-                                 LEFT JOIN {user_lastaccess} ul ON ul.userid = u.id
-                                WHERE ul.timeaccess IS NULL';
-            }
-            $DB->update_record('kopere_dashboard_reports', $report);
-        }
-
-        $sql = "SELECT *
-                  FROM {config_plugins}
-                 WHERE plugin LIKE 'local\_kopere\_dashboard\_hotmoodle'";
-        $plugin = $DB->get_records_sql($sql);
-        if (!$plugin) {
-            $where = array(
-                'module' => 'local_kopere_dashboard_hotmoodle'
-            );
-            $DB->delete_records('kopere_dashboard_events', $where);
-        }
-
-        upgrade_plugin_savepoint(true, 2017081600, 'local', 'kopere_dashboard');
-    }
-
     if ($oldversion < 2017081601) {
         $table = new xmldb_table('kopere_dashboard_menu');
         $index = new xmldb_index('unique', XMLDB_INDEX_NOTUNIQUE, array('link'));
@@ -246,6 +131,14 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         if (!$dbman->index_exists($table, $index)) {
             $dbman->add_index($table, $index);
         }
+
+        upgrade_plugin_savepoint(true, 2017081601, 'local', 'kopere_dashboard');
+    }
+
+    if($oldversion < 2017082800){
+        $DB->delete_records('kopere_dashboard_reports');
+
+        upgrade_plugin_savepoint(true, 2017082800, 'local', 'kopere_dashboard');
     }
 
     \local_kopere_dashboard\install\ReportInstall::createCategores();
