@@ -191,16 +191,15 @@ class ReportsCourseAccess {
 
             foreach ($modinfo as $infos) {
 
-                $sql
-                    = "SELECT COUNT(*) as contagem, timecreated
-                         FROM {logstore_standard_log}
-                        WHERE courseid = :courseid
-                          AND contextinstanceid = :contextinstanceid
-                          AND action = :action
-                          AND userid = :userid
-                     GROUP BY timecreated
-                     ORDER BY timecreated DESC
-                        LIMIT 1";
+                $sql = "SELECT COUNT(*) as contagem, timecreated
+                          FROM {logstore_standard_log}
+                         WHERE courseid = :courseid
+                           AND contextinstanceid = :contextinstanceid
+                           AND action = :action
+                           AND userid = :userid
+                      GROUP BY timecreated
+                      ORDER BY timecreated DESC
+                         LIMIT 1";
 
                 $logResult = $DB->get_record_sql($sql,
                     array(

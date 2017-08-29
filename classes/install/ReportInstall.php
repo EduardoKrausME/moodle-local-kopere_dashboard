@@ -478,7 +478,7 @@ class ReportInstall {
         $report->reportkey = 'user-7';
         $report->title = get_string('reports_report_user-7', 'local_kopere_dashboard');
         if ($CFG->dbtype == 'pgsql') {
-            $report->reportsql = ' SELECT ue.id, u.id AS userid, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
+            $report->reportsql = 'SELECT ue.id, u.id AS userid, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
                                       c.fullname, c.shortname,
                                       (SELECT r."name"
                                          FROM {user_enrolments} ue2
@@ -493,7 +493,7 @@ class ReportInstall {
                                  LEFT JOIN {user_lastaccess} ul ON ul.userid = u.id
                                 WHERE ul.timeaccess IS NULL';
         }else{
-            $report->reportsql = ' SELECT ue.id, u.id AS userid, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
+            $report->reportsql = 'SELECT ue.id, u.id AS userid, ul.timeaccess, ' . get_all_user_name_fields(true, 'u') . ', u.email, u.city, u.lastaccess,
                                       c.fullname, c.shortname,
                                       (SELECT r.name
                                          FROM {user_enrolments} ue2
