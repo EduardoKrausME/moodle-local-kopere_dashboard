@@ -82,13 +82,12 @@ class ReportsCourseAccess {
             $partesModInfo = explode(',', $section->sequence);
             $countModInfo = 0;
             foreach ($partesModInfo as $parte) {
-                $sql
-                    = "SELECT cm.*, cm.id AS course_modules_id, m.*, m.id AS modules_id
-                         FROM {course_modules} cm
-                         JOIN {modules} m ON cm.module = m.id
-                        WHERE cm.id = :cmid";
+                $sql = "SELECT cm.*, cm.id AS course_modules_id, m.*, m.id AS modules_id
+                          FROM {course_modules} cm
+                          JOIN {modules} m ON cm.module = m.id
+                         WHERE cm.id = :cmid";
 
-                $module = $DB->get_record_sql($sql, array('cmid' => $parte));
+                $module = $DB->get_record_sql($sql, array('cmid' => intval($parte)));
 
                 if ($module != null) {
 

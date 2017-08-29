@@ -89,7 +89,7 @@ class ReportsCourseAccessGrade {
                           JOIN {modules} m ON cm.module = m.id
                          WHERE cm.id = :cmid";
 
-                $module = $DB->get_record_sql($sql, array('cmid' => $parte));
+                $module = $DB->get_record_sql($sql, array('cmid' => intval($parte)));
 
                 if ($module != null) {
 
