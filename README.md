@@ -16,13 +16,13 @@ Após vá em Administração do site >> Avisos e instale o Kopere Dashboard
 
 #### Via instalador de plug-ins do Moodle
 
-Baixe o plugin em https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/archive/master.zip e envie ele no instalador de plug-ins do Moodle
+Baixe a última versão em https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/releases e envie ele no instalador de plug-ins do Moodle
 
 Após vá em Administração do site >> Avisos e instale o Kopere Dashboard
 
 #### Por FTP
 
-Baixe o plugin em https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/archive/master.zip descompacte e renomeie a pasta para ``kopere_dashboard`` após envie todos os arquivos baixados para a pasta ``[pasta_instalacao_moodle]/local/``
+Baixe a última versão em https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/releases descompacte e renomeie a pasta para ``kopere_dashboard`` após envie todos os arquivos baixados para a pasta ``[pasta_instalacao_moodle]/local/``
 
 ## Usuários on-line
 
