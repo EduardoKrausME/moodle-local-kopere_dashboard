@@ -27,6 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\TableHeaderItem;
+use local_kopere_dashboard\html\Button;
 use local_kopere_dashboard\report\custom\InfoInterface;
 use local_kopere_dashboard\report\custom\ReportInterface;
 use local_kopere_dashboard\report\custom\ReportsCourseAccess;
@@ -34,6 +35,7 @@ use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Json;
 use local_kopere_dashboard\util\TitleUtil;
+use local_kopere_dashboard\util\Export;
 use local_kopere_dashboard\vo\kopere_dashboard_reportcat;
 use local_kopere_dashboard\vo\kopere_dashboard_reports;
 
@@ -83,10 +85,11 @@ class Reports {
 
         $type = optional_param('type', null, PARAM_TEXT);
 
-        if ($type)
+        if ($type) {
             $kopere_dashboard_reportcats = $DB->get_records('kopere_dashboard_reportcat', array('type' => $type, 'enable' => 1));
-        else
+        } else {
             $kopere_dashboard_reportcats = $DB->get_records('kopere_dashboard_reportcat', array('enable' => 1));
+        }
 
         /** @var kopere_dashboard_reportcat $kopere_dashboard_reportcat */
         foreach ($kopere_dashboard_reportcats as $kopere_dashboard_reportcat) {
@@ -162,10 +165,11 @@ class Reports {
                 if (!isset($columns->header))
                     $columns->header = array();
                 $table = new DataTable($columns->columns, $columns->header);
-                $table->setIsExport(true);
                 $table->setAjaxUrl('Reports::getdata&report=' . $report);
                 $table->printHeader();
                 $table->close(true, '', '"searching":false,"ordering":false');
+
+                Button::primary('Baixar estes dados', "Reports::download&report={$report}&id={$id}");
             }
         }
         echo '</div>';
@@ -224,7 +228,6 @@ class Reports {
         }
 
         Json::encodeAndReturn($reports, count($recordsTotal), count($recordsTotal));
-
     }
 
     private static function getTitle($obj) {
@@ -233,5 +236,36 @@ class Reports {
         } else {
             return $obj->title;
         }
+    }
+
+    public function download() {
+        global $DB;
+
+        $report = optional_param('report', 0, PARAM_INT);
+        $id = optional_param('id', 0, PARAM_INT);
+
+        /** @var kopere_dashboard_reports $kopere_dashboard_reports */
+        $kopere_dashboard_reports = $DB->get_record('kopere_dashboard_reports',
+            array('id' => $report));
+        Header::notfoundNull($kopere_dashboard_reports, get_string_kopere('reports_notfound'));
+
+        Export::exportHeader('xls', self::getTitle($kopere_dashboard_reports));
+
+        if (strlen($kopere_dashboard_reports->prerequisit) && $kopere_dashboard_reports->prerequisit == 'listCourses') {
+            $reports = $DB->get_records_sql($kopere_dashboard_reports->reportsql, array('courseid' => $id));
+        } else {
+            $reports = $DB->get_records_sql($kopere_dashboard_reports->reportsql);
+        }
+
+        $columns = json_decode($kopere_dashboard_reports->columns);
+        if (!isset($columns->header))
+            $columns->header = array();
+        $table = new DataTable($columns->columns, $columns->header);
+        $table->printHeader('', false);
+        $table->setRow($reports);
+        echo '</table>';
+
+
+        Export::exportClose();
     }
 }
