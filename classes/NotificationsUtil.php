@@ -157,21 +157,23 @@ class NotificationsUtil {
                 return get_string_kopere('notification_core_course_category');
             case 'core_course':
                 return get_string_kopere('notification_core_course');
-            // case 'core_course_completion':
-            // return 'Conclusão de Cursos';
-            // case 'core_course_content':
-            // return 'Conteúdo de Cursos';
-            // case 'core_course_module':
-            // return 'Módulo de cursos';
-            // case 'core_course_section':
-            // return 'Sessões de cursos';
+            case 'core_course_completion':
+                return 'Conclusão de Cursos';
+            case 'course_module_created':
+                return 'Criação de novo Módulo em Curso';
+            case 'core_course_content':
+                return 'Conteúdo de Cursos';
+            case 'core_course_module':
+                return 'Módulo de cursos';
+            case 'core_course_section':
+                return 'Sessões de cursos';
 
             case 'core_user':
                 return get_string_kopere('notification_core_user');
             case 'core_user_enrolment':
                 return get_string_kopere('notification_core_user_enrolment');
-            // case 'core_user_password':
-            // return 'Senhas';
+            case 'core_user_password':
+                return 'Senhas';
 
             case 'local_kopere_dashboard':
                 return get_string_kopere('notification_local_kopere_dashboard');
