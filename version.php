@@ -21,8 +21,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->version = 2017090501; // Version
+$plugin->version = 2017090502; // Version
 $plugin->requires = 2011120500;
-$plugin->release = '1.1.4';
+$plugin->release = '1.1.5';
 $plugin->maturity = MATURITY_RC;
 $plugin->component = 'local_kopere_dashboard';

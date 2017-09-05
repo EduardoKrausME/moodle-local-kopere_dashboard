@@ -1,4 +1,4 @@
-# Plug-in local kopere_dashboard
+# Plugin local kopere_dashboard
 
 ![Imagem 1](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/blob/master/pix/prints/dashboard/Captura_01.png)
 
@@ -14,15 +14,15 @@ git clone https://github.com/EduardoKrausME/moodle-local-kopere_dashboard kopere
 
 Após vá em Administração do site >> Avisos e instale o Kopere Dashboard
 
-#### Via instalador de plug-ins do Moodle
+#### Via instalador de plugins do Moodle
 
-Baixe a última versão em https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/releases e envie ele no instalador de plug-ins do Moodle
+Baixe o arquivo kopere_dashboard.zip em https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/releases/latest e envie ele no instalador de plugins do Moodle
 
 Após vá em Administração do site >> Avisos e instale o Kopere Dashboard
 
 #### Por FTP
 
-Baixe a última versão em https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/releases descompacte e renomeie a pasta para ``kopere_dashboard`` após envie todos os arquivos baixados para a pasta ``[pasta_instalacao_moodle]/local/``
+Baixe o arquivo kopere_dashboard.zip em https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/releases/latest descompacte e envie todos os arquivos baixados para a pasta ``[pasta_instalacao_moodle]/local/``
 
 ## Usuários on-line
 
@@ -38,7 +38,7 @@ Tudo isso em tempo real.
 
 Benchmark é o ato de executar um conjunto de operações, a fim de avaliar o desempenho relativo de um objeto, normalmente executando uma série de testes padrões e ensaios nele.
 
-Esta parte é uma melhoria do plug-in [report_benchmark](https://moodle.org/plugins/report_benchmark)
+Esta parte é uma melhoria do plugin [report_benchmark](https://moodle.org/plugins/report_benchmark)
 
 
 ![BenchMark teste](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/blob/master/pix/prints/benchmark/Captura_01.png)
