@@ -105,12 +105,11 @@ class Html {
     }
 
     public static function link($txt) {
-        $txt = str_replace('-', ' ', $txt);
-        $txt = trim($txt);
-        $txt = trim($txt);
+        $txt = str_replace('-', ' ', trim($txt));
+        $txt = str_replace('_', ' ', $txt);
+        $txt = preg_replace("/\s+/", " ", $txt);
         $txt = self::retiraCaracteresNaoASCII($txt);
         $txt = str_replace(' ', '-', $txt);
-        $txt = str_replace('_', '-', $txt);
 
         for ($i = 0; $i < 10; $i++) {
             $txt = str_replace('--', '-', $txt);

@@ -30,7 +30,8 @@ $menu = optional_param('menu', 0, PARAM_TEXT);
 $page = optional_param('p', 0, PARAM_TEXT);
 
 if (!isloggedin()) {
-    $cacheFilename = \local_kopere_dashboard\WebPages::getCacheDir() . $menu . '-' . $page . '.html';
+    $fileCache = \local_kopere_dashboard\util\Html::link( $menu . '-' . $page );
+    $cacheFilename = \local_kopere_dashboard\WebPages::getCacheDir() . $fileCache . '.html';
 
     if (file_exists($cacheFilename)) {
         echo file_get_contents($cacheFilename);
@@ -56,7 +57,7 @@ if ($menu) {
 
     $pageHtml .= $OUTPUT->header();
 
-    $sql = "SELECT * FROM {kopere_dashboard_webpages} WHERE visible = 1 AND menuid = :menuid ORDER BY pageorder ASC";
+    $sql =  'SELECT * FROM {kopere_dashboard_webpages} WHERE visible = 1 AND menuid = :menuid ORDER BY pageorder ASC';
     $webpagess = $DB->get_records_sql($sql, array('menuid' => $menu->id));
 
     if( count($webpagess) == 1 ){
