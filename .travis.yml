@@ -17,5 +17,4 @@ addons:
 
 cache:
   directories:
-    - $HOME/.composer/cache
-    - $HOME/.npm
+    - $HOME/.cache
