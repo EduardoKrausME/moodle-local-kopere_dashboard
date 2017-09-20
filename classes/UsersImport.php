@@ -279,14 +279,17 @@ class UsersImport {
                   <div class="panel-heading">' . get_string_kopere('userimport_userfields') . '</div>
                   <div class="panel-body">';
 
+            $fieldItem = optional_param_array('field', [], PARAM_TEXT);
+
             foreach ($fields as $field) {
 
                 $input = InputSelect::newInstance()
                     ->setName('field[' . $field->id . ']')
                     ->setValues($values)
-                    ->setValue(@$_POST['field'][$field->id])
                     ->setDescription($field->name)
                     ->setTitle($field->name);
+                if (isset($fieldItem[$field->id]))
+                    $input->setValue($fieldItem[$field->id]);
                 $form->addInput($input);
             }
             echo '</div></div>';
@@ -593,7 +596,8 @@ class UsersImport {
 
             // if exist user, add extras
             if ($user) {
-                foreach ($_POST['field'] as $key2 => $value2) {
+                $fieldItems = optional_param_array('field', [], PARAM_TEXT);
+                foreach ($fieldItems as $key2 => $value2) {
                     if ($value2) {
                         $col = str_replace('col_', '', $value2);
                         $extraData = $this->getColValue($col, $data, 0);
@@ -745,9 +749,11 @@ class UsersImport {
         $form = new Form('UsersImport::proccess');
         $form->createHiddenInput('inserir', 1);
         foreach ($_POST as $key => $value) {
+            $value = clean_param($value, PARAM_TEXT);
             if ($key == 'POST') {
             } else if ($key == 'field') {
-                foreach ($_POST['field'] as $key2 => $value2) {
+                $fieldItem = optional_param_array('field', [], PARAM_TEXT);
+                foreach ($fieldItem as $key2 => $value2) {
                     $form->createHiddenInput('field[' . $key2 . ']', $value2);
                 }
             } else {
@@ -761,9 +767,11 @@ class UsersImport {
         echo '<div style="float:left">';
         $form = new Form('UsersImport::uploadSuccess');
         foreach ($_POST as $key => $value) {
+            $value = clean_param($value, PARAM_TEXT);
             if ($key == 'POST' || $key == 'inserir') {
             } else if ($key == 'field') {
-                foreach ($_POST['field'] as $key2 => $value2) {
+                $fieldItem = optional_param_array('field', [], PARAM_TEXT);
+                foreach ($fieldItem as $key2 => $value2) {
                     $form->createHiddenInput('field[' . $key2 . ']', $value2);
                 }
             } else {

@@ -46,10 +46,13 @@ class DatatableSearchUtil {
 
     public function processWhere() {
         global $CFG;
-        if (isset($_POST['search']['value']) && isset($_POST['search']['value'][0])) {
+
+        $search = optional_param_array('search', false, PARAM_TEXT);
+
+        if ($search && isset($search['value']) && isset($search['value'][0])) {
             $like = array();
             foreach ($this->columnOrder as $column) {
-                $find = $_POST['search']['value'];
+                $find = $search['value'];
                 $find = str_replace("'", "\'", $find);
                 $find = str_replace("--", "", $find);
                 if ($CFG->dbtype == 'pgsql') {
@@ -71,14 +74,18 @@ class DatatableSearchUtil {
     }
 
     private function proccessOrder() {
-        if (isset($_POST['order']) && isset($_POST['columns'])) {
-            $_column = $_POST['order'][0]['column'];
+
+        $order = optional_param_array('order', false, PARAM_TEXT);
+        $columns = optional_param_array('columns', false, PARAM_TEXT);
+
+        if ($order && $columns) {
+            $_column = $order[0]['column'];
             if (is_array($this->columnOrder[$_column])) {
                 $this->order = $this->columnOrder[$_column][0];
             } else {
                 $this->order = $this->columnOrder[$_column];
             }
-            $this->orderDir = $_POST['order'][0]['dir'];
+            $this->orderDir = $order[0]['dir'];
         }
     }
 
