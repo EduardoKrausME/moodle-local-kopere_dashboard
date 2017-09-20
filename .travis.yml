@@ -1,0 +1,15 @@
+notifications:
+  email: false
+
+language: php
+
+php:
+    - 7.1
+    - 7.0
+
+addons:
+  postgresql: "9.6"
+  packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
