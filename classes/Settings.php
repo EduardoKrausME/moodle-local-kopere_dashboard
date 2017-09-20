@@ -31,6 +31,7 @@ use local_kopere_dashboard\util\Mensagem;
 class Settings {
     public function settingsSave() {
         foreach ($_POST as $name => $value) {
+            $value = clean_param($value, PARAM_TEXT);
             if ($name == 'POST') {
                 continue;
             }
@@ -46,8 +47,9 @@ class Settings {
 
         Mensagem::agendaMensagemSuccess(get_string_kopere('setting_saved'));
 
-        if (isset($_POST['redirect'])) {
-            Header::location('' . $_POST['redirect']);
+        $redirect = optional_param('redirect', false, PARAM_TEXT);
+        if ($redirect) {
+            Header::location($redirect);
         }
     }
 }
