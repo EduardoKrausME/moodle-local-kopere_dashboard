@@ -47,7 +47,7 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string_kopere('open_dashboard'));
 
 ?>
-    <div class="text-center" style="text-align: center;">
+    <div class="text-center kopere-dashboard" style="text-align: center;">
         <a type="button" target="_blank"
            class="dashboard-load-popup btn btn-lg btn-primary"
            href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/open-dashboard.php?Dashboard::start"
