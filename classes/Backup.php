@@ -29,6 +29,7 @@ use local_kopere_dashboard\html\Button;
 use local_kopere_dashboard\html\Table;
 use local_kopere_dashboard\util\BytesUtil;
 use local_kopere_dashboard\util\DashboardUtil;
+use local_kopere_dashboard\util\EndUtil;
 use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Mensagem;
 use local_kopere_dashboard\util\ServerUtil;
@@ -222,7 +223,7 @@ class Backup {
             header('Content-disposition: attachment; filename="'.$_GET['file'].'"');
 
             readfile($backupfile);
-            die();
+            EndUtil::endScriptShow();
         } else {
             Header::notfound(get_string_kopere('backup_notound'));
         }

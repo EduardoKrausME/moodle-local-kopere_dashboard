@@ -30,7 +30,7 @@ class Header {
         header('Location: ?' . $url);
 
         if ($isDie) {
-            die ('Redirecionando para ?' . $url);
+            EndUtil::endScriptShow ('Redirecionando para ?' . $url);
         }
     }
 
@@ -40,7 +40,7 @@ class Header {
 
         header('Location: ?' . $url);
         if ($isDie) {
-            die ('Redirecionando para ?' . $url);
+            EndUtil::endScriptShow ('Redirecionando para ?' . $url);
         }
     }
 
@@ -70,6 +70,6 @@ class Header {
               </div>';
 
         DashboardUtil::endPage();
-        die();
+        EndUtil::endScriptShow();
     }
 }

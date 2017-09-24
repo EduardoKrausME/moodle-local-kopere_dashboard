@@ -34,6 +34,7 @@ use local_kopere_dashboard\html\inputs\InputSelect;
 use local_kopere_dashboard\html\inputs\InputText;
 use local_kopere_dashboard\html\TableHeaderItem;
 use local_kopere_dashboard\util\DashboardUtil;
+use local_kopere_dashboard\util\EndUtil;
 use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Html;
 use local_kopere_dashboard\util\Mensagem;
@@ -429,7 +430,7 @@ class WebPages {
         $id = optional_param('id', 0, PARAM_INT);
 
         if ($title == '') {
-            die('');
+            EndUtil::endScriptShow ('');
         }
 
         $title = Html::link($title);
@@ -446,9 +447,9 @@ class WebPages {
                 'title' => $title,
             ));
         if ($webpages) {
-            die($title . '-2');
+            EndUtil::endScriptShow($title . '-2');
         } else {
-            die($title);
+            EndUtil::endScriptShow($title);
         }
     }
 
@@ -459,7 +460,7 @@ class WebPages {
         $id = optional_param('id', 0, PARAM_INT);
 
         if ($title == '') {
-            die('');
+            EndUti::endScriptShow();
         }
 
         $title = Html::link($title);
@@ -476,9 +477,9 @@ class WebPages {
                 'title' => $title,
             ));
         if ($webpages) {
-            die($title . '-2');
+            EndUtil::endScriptShow($title . '-2');
         } else {
-            die($title);
+            EndUtil::endScriptShow($title);
         }
     }
 

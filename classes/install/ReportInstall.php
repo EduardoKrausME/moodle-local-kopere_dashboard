@@ -543,8 +543,8 @@ class ReportInstall {
     private static function reportCatInsert($reportcat) {
         global $DB;
 
-        $kopere_dashboard_reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type' => $reportcat->type));
-        if (!$kopere_dashboard_reportcat) {
+        $kopere_reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type' => $reportcat->type));
+        if (!$kopere_reportcat) {
             $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
         }
     }
@@ -552,8 +552,8 @@ class ReportInstall {
     private static function reportInsert($report) {
         global $DB;
 
-        $kopere_dashboard_reports = $DB->get_record('kopere_dashboard_reports', array('reportkey' => $report->reportkey));
-        if (!$kopere_dashboard_reports) {
+        $kopere_reports = $DB->get_record('kopere_dashboard_reports', array('reportkey' => $report->reportkey));
+        if (!$kopere_reports) {
             $DB->insert_record('kopere_dashboard_reports', $report);
         }
     }

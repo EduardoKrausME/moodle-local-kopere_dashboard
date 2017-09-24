@@ -48,7 +48,7 @@ class Json {
         $json = str_replace('}}}', '}]}', $json);
         $json = preg_replace("/\"\d+\":{/", "{", $json);
 
-        die($json);
+        EndUtil::endScriptShow($json);
     }
 
     public static function error($message) {
@@ -60,6 +60,6 @@ class Json {
 
         $json = json_encode($returnArray);
 
-        die($json);
+        EndUtil::endScriptShow($json);
     }
 }

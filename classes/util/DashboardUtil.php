@@ -223,6 +223,6 @@ class DashboardUtil {
                   startForm ( '.modal-content' );
               </script>";
 
-        die();
+        EndUtil::endScriptShow();
     }
 }

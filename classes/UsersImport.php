@@ -32,6 +32,7 @@ use local_kopere_dashboard\html\Form;
 use local_kopere_dashboard\html\inputs\InputSelect;
 use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\DateUtil;
+use local_kopere_dashboard\util\EndUtil;
 use local_kopere_dashboard\util\EnrolUtil;
 use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Mensagem;
@@ -79,11 +80,11 @@ class UsersImport {
         $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
         if (move_uploaded_file($_FILES['file']['tmp_name'], $target_file)) {
             ob_clean();
-            die('&file=' . $file . '&name=' . urlencode($_FILES['file']['name']));
+            EndUtil::endScriptShow('&file=' . $file . '&name=' . urlencode($_FILES['file']['name']));
         } else {
             ob_clean();
             header('HTTP/1.0 404 Not Found');
-            die(get_string_kopere('userimport_moveuploadedfile_error'));
+            EndUtil::endScriptShow(get_string_kopere('userimport_moveuploadedfile_error'));
         }
     }
 
@@ -738,7 +739,7 @@ class UsersImport {
                   <style>.mensage-proccess{display:none}</style>';
         } else {
             unlink($target_file);
-            die();
+            EndUtil::endScriptShow();
         }
     }
 
@@ -919,7 +920,7 @@ class UsersImport {
         }
         echo '</table>';
 
-        die('</body></html>');
+        EndUtil::endScriptShow('</body></html>');
     }
 
     private function addCol($value, $table = true, $th = false) {

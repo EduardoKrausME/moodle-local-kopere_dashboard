@@ -49,25 +49,25 @@ class Reports {
 
         $menus = array();
 
-        $kopere_dashboard_reportcats = $DB->get_records('kopere_dashboard_reportcat', array('enable' => 1));
-        /** @var kopere_dashboard_reportcat $kopere_dashboard_reportcat */
-        foreach ($kopere_dashboard_reportcats as $kopere_dashboard_reportcat) {
+        $kopere_reportcats = $DB->get_records('kopere_dashboard_reportcat', array('enable' => 1));
+        /** @var kopere_dashboard_reportcat $kopere_reportcat */
+        foreach ($kopere_reportcats as $kopere_reportcat) {
             // Executa o SQL e vrifica se o SQL retorna status>0
-            if (strlen($kopere_dashboard_reportcat->enablesql)) {
-                $status = $DB->get_record_sql($kopere_dashboard_reportcat->enablesql);
+            if (strlen($kopere_reportcat->enablesql)) {
+                $status = $DB->get_record_sql($kopere_reportcat->enablesql);
                 if ($status == null || $status->status == 0) {
                     continue;
                 }
             }
 
-            if (strpos($kopere_dashboard_reportcat->image, 'assets/') === 0) {
-                $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$kopere_dashboard_reportcat->image}";
+            if (strpos($kopere_reportcat->image, 'assets/') === 0) {
+                $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$kopere_reportcat->image}";
             } else {
                 $icon = "{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/icon/report.svg";
             }
 
-            $menus[] = array('Reports::dashboard&type=' . $kopere_dashboard_reportcat->type,
-                self::getTitle( $kopere_dashboard_reportcat ),
+            $menus[] = array('Reports::dashboard&type=' . $kopere_reportcat->type,
+                self::getTitle( $kopere_reportcat ),
                 $icon
             );
         }
@@ -86,36 +86,36 @@ class Reports {
         $type = optional_param('type', null, PARAM_TEXT);
 
         if ($type) {
-            $kopere_dashboard_reportcats = $DB->get_records('kopere_dashboard_reportcat', array('type' => $type, 'enable' => 1));
+            $kopere_reportcats = $DB->get_records('kopere_dashboard_reportcat', array('type' => $type, 'enable' => 1));
         } else {
-            $kopere_dashboard_reportcats = $DB->get_records('kopere_dashboard_reportcat', array('enable' => 1));
+            $kopere_reportcats = $DB->get_records('kopere_dashboard_reportcat', array('enable' => 1));
         }
 
-        /** @var kopere_dashboard_reportcat $kopere_dashboard_reportcat */
-        foreach ($kopere_dashboard_reportcats as $kopere_dashboard_reportcat) {
+        /** @var kopere_dashboard_reportcat $kopere_reportcat */
+        foreach ($kopere_reportcats as $kopere_reportcat) {
             // Executa o SQL e vrifica se o SQL retorna status>0
-            if (strlen($kopere_dashboard_reportcat->enablesql)) {
-                $status = $DB->get_record_sql($kopere_dashboard_reportcat->enablesql);
+            if (strlen($kopere_reportcat->enablesql)) {
+                $status = $DB->get_record_sql($kopere_reportcat->enablesql);
                 if ($status == null || $status->status == 0) {
                     continue;
                 }
             }
 
-            if (strpos($kopere_dashboard_reportcat->image, 'assets/') === 0) {
-                $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$kopere_dashboard_reportcat->image}";
+            if (strpos($kopere_reportcat->image, 'assets/') === 0) {
+                $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$kopere_reportcat->image}";
             } else {
                 $icon = "{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/icon/report.svg";
             }
 
             TitleUtil::printH3("<img src='{$icon}' alt='Icon' height='23' width='23' > " .
-                self::getTitle($kopere_dashboard_reportcat), false);
+                self::getTitle($kopere_reportcat), false);
 
-            $kopere_dashboard_reportss = $DB->get_records('kopere_dashboard_reports', array('reportcatid' => $kopere_dashboard_reportcat->id, 'enable' => 1));
+            $kopere_reportss = $DB->get_records('kopere_dashboard_reports', array('reportcatid' => $kopere_reportcat->id, 'enable' => 1));
 
-            /** @var kopere_dashboard_reports $kopere_dashboard_reports */
-            foreach ($kopere_dashboard_reportss as $kopere_dashboard_reports) {
-                $title = self::getTitle($kopere_dashboard_reports);
-                echo "<h4 style='padding-left: 31px;'><a href='?Reports::loadReport&report={$kopere_dashboard_reports->id}'>{$title}</a></h4>";
+            /** @var kopere_dashboard_reports $kopere_reports */
+            foreach ($kopere_reportss as $kopere_reports) {
+                $title = self::getTitle($kopere_reports);
+                echo "<h4 style='padding-left: 31px;'><a href='?Reports::loadReport&report={$kopere_reports->id}'>{$title}</a></h4>";
             }
         }
 
@@ -129,39 +129,39 @@ class Reports {
         $report = optional_param('report', 0, PARAM_INT);
         $id = optional_param('id', 0, PARAM_INT);
 
-        /** @var kopere_dashboard_reports $kopere_dashboard_reports */
-        $kopere_dashboard_reports = $DB->get_record('kopere_dashboard_reports',
+        /** @var kopere_dashboard_reports $kopere_reports */
+        $kopere_reports = $DB->get_record('kopere_dashboard_reports',
             array('id' => $report));
-        Header::notfoundNull($kopere_dashboard_reports, get_string_kopere('reports_notfound'));
+        Header::notfoundNull($kopere_reports, get_string_kopere('reports_notfound'));
 
-        /** @var kopere_dashboard_reportcat $kopere_dashboard_reportcat */
-        $kopere_dashboard_reportcat = $DB->get_record('kopere_dashboard_reportcat',
-            array('id' => $kopere_dashboard_reports->reportcatid));
-        Header::notfoundNull($kopere_dashboard_reportcat, get_string_kopere('reports_notfound'));
+        /** @var kopere_dashboard_reportcat $kopere_reportcat */
+        $kopere_reportcat = $DB->get_record('kopere_dashboard_reportcat',
+            array('id' => $kopere_reports->reportcatid));
+        Header::notfoundNull($kopere_reportcat, get_string_kopere('reports_notfound'));
 
         DashboardUtil::startPage(array(
             array('Reports::dashboard', get_string_kopere('reports_title')),
-            array('Reports::dashboard&type=' . $kopere_dashboard_reportcat->type, self::getTitle($kopere_dashboard_reportcat)),
-            self::getTitle($kopere_dashboard_reports)
+            array('Reports::dashboard&type=' . $kopere_reportcat->type, self::getTitle($kopere_reportcat)),
+            self::getTitle($kopere_reports)
         ));
 
         echo '<div class="element-box table-responsive">';
 
-        if (strlen($kopere_dashboard_reports->prerequisit) && $id == 0) {
-            $this->prerequisit($report, $kopere_dashboard_reports->prerequisit);
+        if (strlen($kopere_reports->prerequisit) && $id == 0) {
+            $this->prerequisit($report, $kopere_reports->prerequisit);
         } else {
 
-            if (strpos($kopere_dashboard_reports->reportsql, 'local_kopere_dashboard') === 0) {
-                $className = $kopere_dashboard_reports->reportsql;
+            if (strpos($kopere_reports->reportsql, 'local_kopere_dashboard') === 0) {
+                $className = $kopere_reports->reportsql;
 
                 $class = new $className();
                 TitleUtil::printH3($class->name(), false);
                 $class->generate();
 
             } else {
-                TitleUtil::printH3(self::getTitle($kopere_dashboard_reports), false);
+                TitleUtil::printH3(self::getTitle($kopere_reports), false);
 
-                $columns = json_decode($kopere_dashboard_reports->columns);
+                $columns = json_decode($kopere_reports->columns);
                 if (!isset($columns->header))
                     $columns->header = array();
                 $table = new DataTable($columns->columns, $columns->header);
@@ -202,27 +202,27 @@ class Reports {
         $start = optional_param('start', 0, PARAM_INT);
         $length = optional_param('length', 0, PARAM_INT);
 
-        /** @var kopere_dashboard_reports $kopere_dashboard_reports */
-        $kopere_dashboard_reports = $DB->get_record('kopere_dashboard_reports', array('id' => $report));
+        /** @var kopere_dashboard_reports $kopere_reports */
+        $kopere_reports = $DB->get_record('kopere_dashboard_reports', array('id' => $report));
 
         if ($CFG->dbtype == 'pgsql') {
-            $sql = "{$kopere_dashboard_reports->reportsql} LIMIT $length OFFSET $start";
+            $sql = "{$kopere_reports->reportsql} LIMIT $length OFFSET $start";
         }else{
-            $sql = "{$kopere_dashboard_reports->reportsql} LIMIT $start, $length";
+            $sql = "{$kopere_reports->reportsql} LIMIT $start, $length";
         }
 
 
-        if (strlen($kopere_dashboard_reports->prerequisit) && $kopere_dashboard_reports->prerequisit == 'listCourses') {
+        if (strlen($kopere_reports->prerequisit) && $kopere_reports->prerequisit == 'listCourses') {
             $reports = $DB->get_records_sql($sql, array('courseid' => $id));
-            $recordsTotal = $DB->get_records_sql($kopere_dashboard_reports->reportsql, array('courseid' => $id));
+            $recordsTotal = $DB->get_records_sql($kopere_reports->reportsql, array('courseid' => $id));
         } else {
             $reports = $DB->get_records_sql($sql);
-            $recordsTotal = $DB->get_records_sql($kopere_dashboard_reports->reportsql);
+            $recordsTotal = $DB->get_records_sql($kopere_reports->reportsql);
         }
 
-        if (strlen($kopere_dashboard_reports->foreach)) {
+        if (strlen($kopere_reports->foreach)) {
             foreach ($reports as $key => $item) {
-                eval($kopere_dashboard_reports->foreach);
+                eval($kopere_reports->foreach);
                 $reports[$key] = $item;
             }
         }
@@ -244,20 +244,20 @@ class Reports {
         $report = optional_param('report', 0, PARAM_INT);
         $id = optional_param('id', 0, PARAM_INT);
 
-        /** @var kopere_dashboard_reports $kopere_dashboard_reports */
-        $kopere_dashboard_reports = $DB->get_record('kopere_dashboard_reports',
+        /** @var kopere_dashboard_reports $kopere_reports */
+        $kopere_reports = $DB->get_record('kopere_dashboard_reports',
             array('id' => $report));
-        Header::notfoundNull($kopere_dashboard_reports, get_string_kopere('reports_notfound'));
+        Header::notfoundNull($kopere_reports, get_string_kopere('reports_notfound'));
 
-        Export::exportHeader('xls', self::getTitle($kopere_dashboard_reports));
+        Export::exportHeader('xls', self::getTitle($kopere_reports));
 
-        if (strlen($kopere_dashboard_reports->prerequisit) && $kopere_dashboard_reports->prerequisit == 'listCourses') {
-            $reports = $DB->get_records_sql($kopere_dashboard_reports->reportsql, array('courseid' => $id));
+        if (strlen($kopere_reports->prerequisit) && $kopere_reports->prerequisit == 'listCourses') {
+            $reports = $DB->get_records_sql($kopere_reports->reportsql, array('courseid' => $id));
         } else {
-            $reports = $DB->get_records_sql($kopere_dashboard_reports->reportsql);
+            $reports = $DB->get_records_sql($kopere_reports->reportsql);
         }
 
-        $columns = json_decode($kopere_dashboard_reports->columns);
+        $columns = json_decode($kopere_reports->columns);
         if (!isset($columns->header))
             $columns->header = array();
         $table = new DataTable($columns->columns, $columns->header);

@@ -278,11 +278,11 @@ class Notifications extends NotificationsUtil {
     public function addSave() {
         global $DB;
 
-        $kopere_dashboard_events = kopere_dashboard_events::createNew();
+        $kopere_events = kopere_dashboard_events::createNew();
 
-        if ($kopere_dashboard_events->id) {
+        if ($kopere_events->id) {
             try {
-                $DB->update_record('kopere_dashboard_events', $kopere_dashboard_events);
+                $DB->update_record('kopere_dashboard_events', $kopere_events);
 
                 Mensagem::agendaMensagemSuccess(get_string_kopere('notification_created'));
                 Header::location('Notifications::dashboard');
@@ -291,7 +291,7 @@ class Notifications extends NotificationsUtil {
             }
         } else {
             try {
-                $DB->insert_record('kopere_dashboard_events', $kopere_dashboard_events);
+                $DB->insert_record('kopere_dashboard_events', $kopere_events);
 
                 Mensagem::agendaMensagemSuccess(get_string_kopere('notification_created'));
                 Header::location('Notifications::dashboard');

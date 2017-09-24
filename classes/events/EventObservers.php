@@ -36,17 +36,17 @@ class EventObservers {
 
         $eventname = str_replace('\\\\', '\\', $event->eventname);
 
-        $kopere_dashboard_eventss = $DB->get_records('kopere_dashboard_events',
+        $kopere_eventss = $DB->get_records('kopere_dashboard_events',
             array(
                 'event' => $eventname,
                 'status' => 1
             ));
 
-        /** @var kopere_dashboard_events $kopere_dashboard_events */
-        foreach ($kopere_dashboard_eventss as $kopere_dashboard_events) {
+        /** @var kopere_dashboard_events $kopere_events */
+        foreach ($kopere_eventss as $kopere_events) {
             $sendEvents = new SendEvents();
             $sendEvents->setEvent($event);
-            $sendEvents->setKopereDashboardEvents($kopere_dashboard_events);
+            $sendEvents->setKopereDashboardEvents($kopere_events);
 
             $sendEvents->send();
         }

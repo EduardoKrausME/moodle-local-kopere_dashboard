@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 use core\event\base;
 use local_kopere_dashboard\html\Form;
 use local_kopere_dashboard\html\inputs\InputSelect;
+use local_kopere_dashboard\util\EndUtil;
 use local_kopere_dashboard\util\Mensagem;
 use local_kopere_dashboard\util\Release;
 
@@ -36,7 +37,7 @@ class NotificationsUtil {
         $module = optional_param('module', '', PARAM_TEXT);
 
         if (!isset($module[1])) {
-            die(get_string_kopere('notification_add_selectmodule'));
+            EndUtil::endScriptShow(get_string_kopere('notification_add_selectmodule'));
         }
 
         $events = $this->listEvents();

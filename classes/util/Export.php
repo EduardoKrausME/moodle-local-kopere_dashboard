@@ -57,7 +57,7 @@ class Export {
     public static function exportClose() {
         if (self::$_format == 'xls') {
             echo '</body></html>';
-            die();
+            EndUtil::endScriptShow();
         }
     }
 }

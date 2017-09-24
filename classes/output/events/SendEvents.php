@@ -30,7 +30,7 @@ use local_kopere_dashboard\vo\kopere_dashboard_events;
 
 class SendEvents {
     /** @var kopere_dashboard_events */
-    private $kopere_dashboard_events;
+    private $kopere_events;
 
     /** @var \core\event\base */
     private $event;
@@ -46,10 +46,10 @@ class SendEvents {
     }
 
     /**
-     * @param kopere_dashboard_events $kopere_dashboard_events
+     * @param kopere_dashboard_events $kopere_events
      */
-    public function setKopereDashboardEvents($kopere_dashboard_events) {
-        $this->kopere_dashboard_events = $kopere_dashboard_events;
+    public function setKopereDashboardEvents($kopere_events) {
+        $this->kopere_dashboard_events = $kopere_events;
     }
 
     /**
