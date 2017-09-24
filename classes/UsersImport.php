@@ -766,6 +766,11 @@ class UsersImport {
 
         echo '<div style="float:left">';
         $form = new Form('UsersImport::uploadSuccess');
+
+        echo '<pre>';
+        print_r($_POST);
+        echo '</pre>';
+
         foreach ($_POST as $key => $value) {
             if ($key == 'POST' || $key == 'inserir') {
             } else if ($key == 'field') {

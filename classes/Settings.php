@@ -30,18 +30,19 @@ use local_kopere_dashboard\util\Mensagem;
 
 class Settings {
     public function settingsSave() {
-        foreach ($_POST as $name => $value) {
-            if ($name == 'POST') {
+        foreach ($_POST as $keyname => $value) {
+            if ($keyname == 'POST') {
                 continue;
             }
-            if ($name == 'action') {
+            if ($keyname == 'action') {
                 continue;
             }
-            if ($name == 'redirect') {
+            if ($keyname == 'redirect') {
                 continue;
             }
 
-            set_config($name, $value, 'local_kopere_dashboard');
+            $valueFiltered = optional_param($keyname, '', PARAM_RAW);
+            set_config($keyname, $valueFiltered, 'local_kopere_dashboard');
         }
 
         Mensagem::agendaMensagemSuccess(get_string_kopere('setting_saved'));

@@ -1,2 +1,5 @@
 {
+    "require": {
+        "tinymce/tinymce": ">= 4"
+    }
 }

@@ -44,6 +44,23 @@ use local_kopere_dashboard\vo\kopere_dashboard_menu;
 use local_kopere_dashboard\vo\kopere_dashboard_webpages;
 
 class WebPages {
+
+    public function teste(){
+
+        $form = new Form('WebPages::editPageSave');
+
+        $form->addInput(
+            InputHtmlEditor::newInstance()->setTitle(get_string_kopere('webpages_table_text'))
+                ->setName('text')
+                ->setValue('<p>aaaa</p>')
+                ->setRequired()
+        );
+
+        $form->createSubmitInput(get_string_kopere('webpages_page_save'));
+        $form->close();
+
+    }
+
     public function dashboard() {
         global $DB, $CFG;
 

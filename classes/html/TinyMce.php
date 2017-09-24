@@ -36,7 +36,8 @@ class TinyMce {
 
         self::$_isSend = true;
 
-        return '<script src="' . $CFG->wwwroot . '/local/kopere_dashboard/assets/tinymce/tinymce.min.js" type="text/javascript"></script>';
+        //return '<script src="' . $CFG->wwwroot . '/local/kopere_dashboard/assets/tinymce/tinymce.min.js" type="text/javascript"></script>';
+        return '<script src="' . $CFG->wwwroot . '/local/kopere_dashboard/vendor/tinymce/tinymce/tinymce.min.js" type="text/javascript"></script>';
     }
 
     /**
@@ -47,7 +48,8 @@ class TinyMce {
      */
     public static function createInputEditor($seletor = '.tinymce_editor_box', $id = 0) {
         global $CFG;
-        $path = $CFG->wwwroot . '/local/kopere_dashboard/assets/tinymce/';
+        $filemanager = $CFG->wwwroot . '/local/kopere_dashboard/vendor/responsivefilemanager/';
+
         $returnHtml = self::register();
 
         $returnHtml
@@ -56,7 +58,7 @@ class TinyMce {
                 selector : '{$seletor}',
                 plugins  : [
                     'advlist autolink lists link image charmap ',
-                    'searchreplace visualblocks code fullscreen responsivefilemanager',
+                    'searchreplace visualblocks code fullscreen ',
                     'media table contextmenu youtube autosave paste anchor'
                 ],
 
@@ -154,15 +156,13 @@ class TinyMce {
                 toolbar : 'link anchor image | ' +
                         'styleselect | formatselect | fontselect | fontsizeselect | ' +
                         'alignleft aligncenter alignright alignjustify | ' +
-                        'bullist numlist outdent indent | ' +
-                        'youtube | fullscreen',
+                        'bullist numlist outdent indent | fullscreen',
 
+                external_filemanager_path : '{$filemanager}',
+                filemanager_title : '" . get_string_kopere('filemanager_title') . "',
                 external_plugins : {
-                    'filemanager' : '{$path}filemanager/plugin.js'
+                    'filemanager' : '{$filemanager}plugin.min.js'
                 },
-
-                external_filemanager_path : '{$path}filemanager/',
-                filemanager_title         : '" . get_string_kopere('filemanager_title') . "',
 
                 auto_focus           : 'elm1',
                 relative_urls        : false,
