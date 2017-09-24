@@ -31,7 +31,6 @@ use local_kopere_dashboard\util\Mensagem;
 class Settings {
     public function settingsSave() {
         foreach ($_POST as $name => $value) {
-            $value = clean_param($value, PARAM_TEXT);
             if ($name == 'POST') {
                 continue;
             }

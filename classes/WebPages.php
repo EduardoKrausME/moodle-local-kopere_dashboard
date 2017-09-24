@@ -460,7 +460,7 @@ class WebPages {
         $id = optional_param('id', 0, PARAM_INT);
 
         if ($title == '') {
-            EndUti::endScriptShow();
+            EndUtil::endScriptShow();
         }
 
         $title = Html::link($title);

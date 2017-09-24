@@ -750,7 +750,6 @@ class UsersImport {
         $form = new Form('UsersImport::proccess');
         $form->createHiddenInput('inserir', 1);
         foreach ($_POST as $key => $value) {
-            $value = clean_param($value, PARAM_TEXT);
             if ($key == 'POST') {
             } else if ($key == 'field') {
                 $fieldItem = optional_param_array('field', [], PARAM_TEXT);
@@ -768,7 +767,6 @@ class UsersImport {
         echo '<div style="float:left">';
         $form = new Form('UsersImport::uploadSuccess');
         foreach ($_POST as $key => $value) {
-            $value = clean_param($value, PARAM_TEXT);
             if ($key == 'POST' || $key == 'inserir') {
             } else if ($key == 'field') {
                 $fieldItem = optional_param_array('field', [], PARAM_TEXT);
