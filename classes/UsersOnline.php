@@ -105,7 +105,7 @@ class UsersOnline {
                 AND cx.contextlevel = :contextlevel
            GROUP BY u.id
            ORDER BY u.timecreated DESC
-              LIMIT 10",
+              LIMIT 1",
             array(
                 'contextlevel' => CONTEXT_USER,
                 'onlinestart' => $onlinestart,
