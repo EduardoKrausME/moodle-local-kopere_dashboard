@@ -23,17 +23,33 @@
 
 namespace local_kopere_dashboard\util;
 
-defined('MOODLE_INTERNAL') || die();
+defined ( 'MOODLE_INTERNAL' ) || die();
 
-class StringUtil {
-    public static function generateRandomString($length = 10) {
-        $characters = '123456789ABCDEFGHJKMNPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = $characters[rand(10, $charactersLength - 1)];
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
+class StringUtil
+{
+    public static function generateRandomString ( $length = 10 )
+    {
+        $characters = '123456789';
+        $characters .= 'ABCDEFGHJKMNPQRSTUVWXYZ';
+        $characters .= 'abcdefghjkmnpqrstuvwxyz';
+
+        $lengthString = strlen ( $characters );
+        $string       = '';
+
+        for ( $i = 0; $i < $length; $i++ ) {
+            $string .= $characters[ rand ( 0, $lengthString - 1 ) ];
         }
 
-        return $randomString;
+        return $string;
+    }
+
+    public static function generateUID ()
+    {
+        return strtolower (
+            self::generateRandomString ( 8 ) . '-' .
+            self::generateRandomString ( 4 ) . '-' .
+            self::generateRandomString ( 4 ) . '-' .
+            self::generateRandomString ( 12 )
+        );
     }
 }

@@ -84,7 +84,7 @@ class Form {
     }
 
     public function createHiddenInput($name, $value = '') {
-        echo '<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . htmlspecialchars($value) . '"/>';
+        echo '<input type="hidden" id="hidden_' . $name . '" name="' . $name . '" id="' . $name . '" value="' . htmlspecialchars($value) . '"/>';
     }
 
     public function createSubmitInput($value = '', $class = '', $additionalText = '') {
@@ -107,5 +107,13 @@ class Form {
               </script>";
 
         $this->close();
+    }
+
+    /**
+     * @return bool
+     */
+    public static function checkPost (){
+        return optional_param ( 'POST', false, PARAM_TEXT );
+
     }
 }

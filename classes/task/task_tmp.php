@@ -9,8 +9,6 @@ namespace local_kopere_dashboard\task;
 
 defined('MOODLE_INTERNAL') || die();
 
-defined('MOODLE_INTERNAL') || die();
-
 class task_tmp  extends \core\task\scheduled_task {
     public function get_name() {
         return get_string('crontask_tmp', 'local_kopere_dashboard');

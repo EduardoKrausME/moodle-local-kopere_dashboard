@@ -181,7 +181,7 @@ class DashboardUtil {
 
     public static function startPopup($title, $formAction = null) {
         if ($formAction) {
-            echo '<form method="post" class="validate" enctype="multipart/form-data" >';
+            echo '<form method="post" class="validate" >';
             echo '<input type="hidden" name="POST"  value="true" />';
             echo '<input type="hidden" name="action" value="?' . $formAction . '" />';
             self::$_isWithForm = true;

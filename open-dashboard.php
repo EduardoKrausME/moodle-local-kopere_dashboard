@@ -47,8 +47,9 @@ if (!strlen($_SERVER['QUERY_STRING'])) {
     $_SERVER['QUERY_STRING'] = 'Dashboard::start';
 }
 
-if (isset($_POST['action'])) {
-    loadByQuery($_POST['action']);
+$action = optional_param ( 'action', null, PARAM_RAW );
+if ( !empty( $action ) && strpos ( $action, '::' ) ) {
+    loadByQuery ( $action );
 }
 
 ?>

@@ -40,6 +40,7 @@ function deleteDir($dir) {
     }
     return rmdir($dir);
 }
+
 function duplicate_file($old_path, $name) {
     if (file_exists($old_path)) {
         $info = pathinfo($old_path);
@@ -50,6 +51,7 @@ function duplicate_file($old_path, $name) {
         return copy($old_path, $new_path);
     }
 }
+
 function rename_file($old_path, $name, $transliteration) {
     $name = fix_filename($name, $transliteration);
     if (file_exists($old_path)) {
@@ -61,6 +63,7 @@ function rename_file($old_path, $name, $transliteration) {
         return rename($old_path, $new_path);
     }
 }
+
 function rename_folder($old_path, $name, $transliteration) {
     $name = fix_filename($name, $transliteration);
     if (file_exists($old_path)) {
@@ -71,6 +74,7 @@ function rename_folder($old_path, $name, $transliteration) {
         return rename($old_path, $new_path);
     }
 }
+
 function create_img_gd($imgfile, $imgthumb, $newwidth, $newheight = "") {
     if (image_check_memory_usage($imgfile, $newwidth, $newheight)) {
         require_once('php_image_magician.php');
@@ -81,6 +85,7 @@ function create_img_gd($imgfile, $imgthumb, $newwidth, $newheight = "") {
     }
     return false;
 }
+
 function create_img($imgfile, $imgthumb, $newwidth, $newheight = "") {
     if (image_check_memory_usage($imgfile, $newwidth, $newheight)) {
         require_once('php_image_magician.php');
@@ -92,6 +97,7 @@ function create_img($imgfile, $imgthumb, $newwidth, $newheight = "") {
         return false;
     }
 }
+
 function makeSize($size) {
     $units = array('B', 'KB', 'MB', 'GB', 'TB');
     $u = 0;
@@ -101,6 +107,7 @@ function makeSize($size) {
     }
     return (number_format($size, 0) . " " . $units[$u]);
 }
+
 function foldersize($path) {
     $total_size = 0;
     $files = scandir($path);
@@ -119,6 +126,7 @@ function foldersize($path) {
     }
     return $total_size;
 }
+
 function filescount($path) {
     $total_count = 0;
     $files = scandir($path);
@@ -136,6 +144,7 @@ function filescount($path) {
     }
     return $total_count;
 }
+
 function create_folder($path = false, $path_thumbs = false) {
     $oldumask = umask(0);
     if ($path && !file_exists($path)) {
@@ -146,6 +155,7 @@ function create_folder($path = false, $path_thumbs = false) {
     } // or even 01777 so you get the sticky bit set
     umask($oldumask);
 }
+
 function check_files_extensions_on_path($path, $ext) {
     if (!is_dir($path)) {
         $fileinfo = pathinfo($path);
@@ -159,6 +169,7 @@ function check_files_extensions_on_path($path, $ext) {
         }
     }
 }
+
 function check_files_extensions_on_phar($phar, &$files, $basepath, $ext) {
     foreach ($phar as $file) {
         if ($file->isFile()) {
@@ -171,9 +182,11 @@ function check_files_extensions_on_phar($phar, &$files, $basepath, $ext) {
         }
     }
 }
+
 function fix_get_params($str) {
     return strip_tags(preg_replace("/[^a-zA-Z0-9\.\[\]_| -]/", '', $str));
 }
+
 function fix_filename($str, $transliteration) {
     if ($transliteration) {
         if (function_exists('transliterator_transliterate')) {
@@ -193,9 +206,11 @@ function fix_filename($str, $transliteration) {
     }
     return trim($str);
 }
+
 function fix_dirname($str) {
     return str_replace('~', ' ', dirname(str_replace(' ', '~', $str)));
 }
+
 function fix_strtoupper($str) {
     if (function_exists('mb_strtoupper')) {
         return mb_strtoupper($str);
@@ -203,6 +218,7 @@ function fix_strtoupper($str) {
         return strtoupper($str);
     }
 }
+
 function fix_strtolower($str) {
     if (function_exists('mb_strtoupper')) {
         return mb_strtolower($str);
@@ -210,6 +226,7 @@ function fix_strtolower($str) {
         return strtolower($str);
     }
 }
+
 function fix_path($path, $transliteration) {
     $info = pathinfo($path);
     $tmp_path = $info['dirname'];
@@ -220,6 +237,7 @@ function fix_path($path, $transliteration) {
         return $str;
     }
 }
+
 function base_url() {
     return sprintf(
         "%s://%s",
@@ -227,6 +245,7 @@ function base_url() {
         $_SERVER['HTTP_HOST']
     );
 }
+
 function config_loading($current_path, $fld) {
     if (file_exists($current_path . $fld . ".config")) {
         require_once($current_path . $fld . ".config");
@@ -238,6 +257,7 @@ function config_loading($current_path, $fld) {
     }
     return false;
 }
+
 function image_check_memory_usage($img, $max_breedte, $max_hoogte) {
     if (file_exists($img)) {
         $K64 = 65536;    // number of bytes in 64K
@@ -264,9 +284,11 @@ function image_check_memory_usage($img, $max_breedte, $max_hoogte) {
         return false;
     }
 }
+
 function endsWith($haystack, $needle) {
     return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
 }
+
 function new_thumbnails_creation($targetPath, $targetFile, $name, $current_path, $relative_image_creation, $relative_path_from_current_pos, $relative_image_creation_name_to_prepend, $relative_image_creation_name_to_append, $relative_image_creation_width, $relative_image_creation_height, $fixed_image_creation, $fixed_path_from_filemanager, $fixed_image_creation_name_to_prepend, $fixed_image_creation_to_append, $fixed_image_creation_width, $fixed_image_creation_height) {
     //create relative thumbs
     $all_ok = true;
@@ -304,22 +326,25 @@ function new_thumbnails_creation($targetPath, $targetFile, $name, $current_path,
     }
     return $all_ok;
 }
+
 // Get a remote file, using whichever mechanism is enabled
 function get_file_by_url($url) {
-    if (ini_get('allow_url_fopen')) {
-        return file_get_contents($url);
-    }
-    if (!function_exists('curl_version')) {
-        return false;
-    }
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_URL, $url);
-    $data = curl_exec($ch);
-    curl_close($ch);
-    return $data;
+//    if (ini_get('allow_url_fopen')) {
+//        return file_get_contents($url);
+//    }
+//    if (!function_exists('curl_version')) {
+//        return false;
+//    }
+//    $ch = curl_init();
+//    curl_setopt($ch, CURLOPT_HEADER, 0);
+//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//    curl_setopt($ch, CURLOPT_URL, $url);
+//    $data = curl_exec($ch);
+//    curl_close($ch);
+//    return $data;
+    return false;
 }
+
 // test for dir/file writability properly
 function is_really_writable($dir) {
     $dir = rtrim($dir, '/');
@@ -343,6 +368,7 @@ function is_really_writable($dir) {
     fclose($fp);
     return true;
 }
+
 /**
  * Check if a function is callable.
  * Some servers disable copy,rename etc.
@@ -357,6 +383,7 @@ function is_function_callable($name) {
     $disabled = explode(',', ini_get('disable_functions'));
     return !in_array($name, $disabled);
 }
+
 // recursivly copies everything
 function rcopy($source, $destination, $is_rec = false) {
     if (is_dir($source)) {
@@ -385,6 +412,7 @@ function rcopy($source, $destination, $is_rec = false) {
         }
     }
 }
+
 // recursivly renames everything
 // I know copy and rename could be done with just one function
 // but i split the 2 because sometimes rename fails on windows
@@ -416,6 +444,7 @@ function rrename($source, $destination, $is_rec = false) {
         }
     }
 }
+
 // On windows rename leaves folders sometime
 // This will clear leftover folders
 // After more feedback will merge it with rrename
@@ -432,6 +461,7 @@ function rrename_after_cleaner($source) {
     }
     return rmdir($source);
 }
+
 function debugger($input, $trace = false, $halt = false) {
     ob_start();
     echo "<br>----- DEBUG DUMP -----";
