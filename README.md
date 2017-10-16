@@ -1,6 +1,6 @@
 # Plugin local kopere_dashboard
 
-[![Build Status](https://travis-ci.org/EduardoKrausME/moodle-local-kopere_dashboard.svg?branch=1.1.6)](https://travis-ci.org/EduardoKrausME/moodle-local-kopere_dashboard)
+[![Build Status](https://travis-ci.org/EduardoKrausME/moodle-local-kopere_dashboard.svg?branch=master)](https://travis-ci.org/EduardoKrausME/moodle-local-kopere_dashboard)
 
 ![Imagem 1](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/blob/master/pix/prints/dashboard/Captura_01.png)
 
