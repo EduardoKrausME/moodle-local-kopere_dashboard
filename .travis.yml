@@ -31,9 +31,9 @@ install:
   - moodle-plugin-ci install
 
 script:
-#  - moodle-plugin-ci phplint
+  - moodle-plugin-ci phplint
 #  - moodle-plugin-ci codechecker
 #  - moodle-plugin-ci csslint
-#  - moodle-plugin-ci shifter
-  - moodle-plugin-ci validate
+  - moodle-plugin-ci shifter
+#  - moodle-plugin-ci validate
   - moodle-plugin-ci behat
