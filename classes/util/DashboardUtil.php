@@ -23,31 +23,34 @@
 
 namespace local_kopere_dashboard\util;
 
-defined('MOODLE_INTERNAL') || die();
+defined ( 'MOODLE_INTERNAL' ) || die();
 
 use local_kopere_dashboard\html\Button;
 
-class DashboardUtil {
+class DashboardUtil
+{
     public static $currentTitle = '';
 
-    public static function setTitulo($title, $infoUrl = null) {
+    public static function setTitulo ( $title, $infoUrl = null )
+    {
         self::$currentTitle = $title;
 
-        if ($infoUrl == null) {
+        if ( $infoUrl == null ) {
             return "<h3 class=\"element-header\"> $title </h3>";
         } else {
             return "<h3 class=\"element-header\">
                         $title
-                        " . Button::help($infoUrl) . "
+                        " . Button::help ( $infoUrl ) . "
                     </h3>";
         }
     }
 
-    public static function startPage($breadcrumb, $pageTitle = null, $settingUrl = null, $infoUrl = null) {
+    public static function startPage ( $breadcrumb, $pageTitle = null, $settingUrl = null, $infoUrl = null )
+    {
         global $CFG, $SITE;
         $breadcrumbReturn = '';
 
-        if (!AJAX_SCRIPT) {
+        if ( !AJAX_SCRIPT ) {
             $breadcrumbReturn
                 .= "<ul class=\"breadcrumb\">
                         <li>
@@ -58,25 +61,25 @@ class DashboardUtil {
                         </li>";
 
             $title = "";
-            if (is_string($breadcrumb)) {
+            if ( is_string ( $breadcrumb ) ) {
                 $breadcrumbReturn .= '<li><span>' . $breadcrumb . '</span></li>';
-                $title = $breadcrumb;
-            } else if (is_array($breadcrumb)) {
-                foreach ($breadcrumb as $breadcrumbItem) {
-                    if (is_string($breadcrumbItem)) {
+                $title            = $breadcrumb;
+            } else if ( is_array ( $breadcrumb ) ) {
+                foreach ( $breadcrumb as $breadcrumbItem ) {
+                    if ( is_string ( $breadcrumbItem ) ) {
                         $breadcrumbReturn .= '<li><span>' . $breadcrumbItem . '</span></li>';
-                        $title = $breadcrumbItem;
+                        $title            = $breadcrumbItem;
                     } else {
                         $breadcrumbReturn
-                            .= '<li>
-                                    <a href="?' . $breadcrumbItem[0] . '">' . $breadcrumbItem[1] . '</a>
+                               .= '<li>
+                                    <a href="?' . $breadcrumbItem[ 0 ] . '">' . $breadcrumbItem[ 1 ] . '</a>
                                 </li>';
-                        $title = $breadcrumbItem[1];
+                        $title = $breadcrumbItem[ 1 ];
                     }
                 }
             }
 
-            if ($settingUrl != null) {
+            if ( $settingUrl != null ) {
                 $breadcrumbReturn
                     .= "<li class=\"setting\">
                             <a data-toggle=\"modal\" data-target=\"#modal-edit\"
@@ -90,25 +93,28 @@ class DashboardUtil {
             $breadcrumbReturn .= '</ul>';
             $breadcrumbReturn .= '<div class="content-i"><div class="content-box">';
 
-            if ($pageTitle != null) {
-                $breadcrumbReturn .= self::setTitulo($pageTitle ? $pageTitle : $title, $infoUrl);
+            if ( $pageTitle != null ) {
+                if ( $pageTitle == -1 )
+                    $pageTitle = $title;
+                $breadcrumbReturn .= self::setTitulo ( $pageTitle, $infoUrl );
             }
 
-            $breadcrumbReturn .= Mensagem::getMensagemAgendada();
+            $breadcrumbReturn .= Mensagem::getMensagemAgendada ();
         } else {
-            if (is_string($breadcrumb)) {
-                self::startPopup($breadcrumb);
+            if ( is_string ( $breadcrumb ) ) {
+                self::startPopup ( $breadcrumb );
             } else {
-                self::startPopup($breadcrumb[count($breadcrumb) - 1]);
+                self::startPopup ( $breadcrumb[ count ( $breadcrumb ) - 1 ] );
             }
         }
 
         echo $breadcrumbReturn;
     }
 
-    public static function endPage() {
-        if (AJAX_SCRIPT) {
-            self::endPopup();
+    public static function endPage ()
+    {
+        if ( AJAX_SCRIPT ) {
+            self::endPopup ();
         } else {
             echo '</div></div>';
         }
@@ -120,26 +126,27 @@ class DashboardUtil {
      * @param       $menuName
      * @param array $subMenus
      */
-    public static function addMenu($menuFunction, $menuIcon, $menuName, $subMenus = array()) {
+    public static function addMenu ( $menuFunction, $menuIcon, $menuName, $subMenus = array() )
+    {
         global $CFG;
 
-        $class = self::testMenuActive($menuFunction);
+        $class = self::testMenuActive ( $menuFunction );
 
         $plugin = '';
-        preg_match("/(.*?)-/", $menuFunction, $menuFunctionStart);
-        if (isset($menuFunctionStart[1])) {
-            $plugin = "_" . $menuFunctionStart[1];
+        preg_match ( "/(.*?)-/", $menuFunction, $menuFunctionStart );
+        if ( isset( $menuFunctionStart[ 1 ] ) ) {
+            $plugin = "_" . $menuFunctionStart[ 1 ];
         }
 
         $submenuHtml = '';
-        foreach ($subMenus as $subMenu) {
-            $classSub = self::testMenuActive($subMenu[0]);
-            if (isset ($classSub[1])) {
+        foreach ( $subMenus as $subMenu ) {
+            $classSub = self::testMenuActive ( $subMenu[ 0 ] );
+            if ( isset ( $classSub[ 1 ] ) ) {
                 $class = $classSub;
             }
 
-            if (strpos($subMenu[2], 'http') === 0) {
-                $iconUrl = $subMenu[2];
+            if ( strpos ( $subMenu[ 2 ], 'http' ) === 0 ) {
+                $iconUrl = $subMenu[ 2 ];
             } else {
                 $iconUrl = "{$CFG->wwwroot}/local/kopere_dashboard$plugin/assets/dashboard/img/iconactive/{$subMenu[2]}.svg";
             }
@@ -153,7 +160,7 @@ class DashboardUtil {
                         </a>
                     </li>";
         }
-        if ($submenuHtml != '') {
+        if ( $submenuHtml != '' ) {
             $submenuHtml = "<ul class='submenu'>$submenuHtml</ul>";
         }
 
@@ -168,9 +175,10 @@ class DashboardUtil {
                 </li>";
     }
 
-    private static function testMenuActive($menuFunction) {
-        preg_match("/.*?::/", $menuFunction, $paths);
-        if (strpos($_SERVER['QUERY_STRING'], $paths[0]) === 0) {
+    private static function testMenuActive ( $menuFunction )
+    {
+        preg_match ( "/.*?::/", $menuFunction, $paths );
+        if ( strpos ( $_SERVER[ 'QUERY_STRING' ], $paths[ 0 ] ) === 0 ) {
             return 'active';
         }
 
@@ -179,8 +187,9 @@ class DashboardUtil {
 
     private static $_isWithForm = false;
 
-    public static function startPopup($title, $formAction = null) {
-        if ($formAction) {
+    public static function startPopup ( $title, $formAction = null )
+    {
+        if ( $formAction ) {
             echo '<form method="post" class="validate" >';
             echo '<input type="hidden" name="POST"  value="true" />';
             echo '<input type="hidden" name="action" value="?' . $formAction . '" />';
@@ -195,34 +204,35 @@ class DashboardUtil {
               </div>
               <div class="modal-body">';
 
-        if ($formAction) {
+        if ( $formAction ) {
             echo '<div class="displayErroForm alert alert-danger" style="display: none;"><span></span></div>';
         }
     }
 
-    public static function endPopup($deleteButtonUrl = null) {
-        if (self::$_isWithForm) {
+    public static function endPopup ( $deleteButtonUrl = null )
+    {
+        if ( self::$_isWithForm ) {
             echo "</div>
                   <div class=\"modal-footer\">";
 
-            if ($deleteButtonUrl) {
-                Button::delete('Excluir', $deleteButtonUrl, 'float-left', false, false, true);
+            if ( $deleteButtonUrl ) {
+                Button::delete ( 'Excluir', $deleteButtonUrl, 'float-left', false, false, true );
             }
 
-            echo "    <button class=\"btn btn-default\" data-dismiss=\"modal\">".get_string('cancel')."</button>
-                      <input type=\"submit\" class=\"btn btn-primary margin-left-15\" value=\"".get_string('savechanges')."\">
+            echo "    <button class=\"btn btn-default\" data-dismiss=\"modal\">" . get_string ( 'cancel' ) . "</button>
+                      <input type=\"submit\" class=\"btn btn-primary margin-left-15\" value=\"" . get_string ( 'savechanges' ) . "\">
                   </div>
                   </form>";
         } else {
             echo "</div>
                   <div class=\"modal-footer\">
-                      <button class=\"btn btn-default\" data-dismiss=\"modal\">".get_string_kopere('close')."</button>
+                      <button class=\"btn btn-default\" data-dismiss=\"modal\">" . get_string_kopere ( 'close' ) . "</button>
                   </div>";
         }
         echo "<script>
                   startForm ( '.modal-content' );
               </script>";
 
-        EndUtil::endScriptShow();
+        EndUtil::endScriptShow ();
     }
 }
