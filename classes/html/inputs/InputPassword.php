@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 class InputPassword extends InputBase {
     public function __construct() {
-        $this->setType('select');
+        $this->setType('password');
     }
 
     /**
