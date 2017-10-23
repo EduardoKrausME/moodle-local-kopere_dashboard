@@ -64,7 +64,7 @@ class Backup {
                     'data' => $p[3].'/'.$p[2].'/'.$p[1].' às '.$p[4].':'.$p[5],
                     'size' => BytesUtil::sizeToByte(filesize($backup)),
                     'acoes' => "<div class=\"text-center\">
-                                    ".Button::icon('download', "Backup::download&file={$p[0]}")."&nbsp;&nbsp;&nbsp;
+                                    ".Button::icon('download', "Backup::download&file={$p[0]}", false)."&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp; ".Button::icon('delete', "Backup::delete&file={$p[0]}")."
                                 </div>"
                 );
@@ -125,9 +125,8 @@ class Backup {
         DashboardUtil::startPage(array(
             array('Backup::dashboard', 'Backup'),
             get_string_kopere('backup_execute_exec')
-        ));
+        ), "Executando Backup: {$CFG->dbname}");
         echo '<div class="element-box">';
-        echo "<h3>Executando Backup: {$CFG->dbname}</h3>";
 
         $backupfile = $this->getBackupPath().'backup_'.date('Y-m-d-H-i').'.sql';
 
