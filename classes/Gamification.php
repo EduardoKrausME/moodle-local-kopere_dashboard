@@ -29,10 +29,9 @@ use local_kopere_dashboard\util\DashboardUtil;
 
 class Gamification {
     public function dashboard() {
-        DashboardUtil::startPage('Gamification');
+        DashboardUtil::startPage('Gamification', -1);
 
         echo '<div class="element-box">';
-        echo '<h3>Gamification dos seus alunos</h3>';
 
         echo '</div>';
         DashboardUtil::endPage();

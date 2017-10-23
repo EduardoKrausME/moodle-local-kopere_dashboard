@@ -48,10 +48,9 @@ class WebPages {
     public function dashboard() {
         global $DB, $CFG;
 
-        DashboardUtil::startPage(get_string_kopere('webpages_title'), null, 'WebPages::settings', 'Páginas-estáticas');
+        DashboardUtil::startPage(get_string_kopere('webpages_title'), -1, 'WebPages::settings', 'Páginas-estáticas');
 
         echo '<div class="element-box">';
-        TitleUtil::printH3('webpages_subtitle');
 
         $menus = $DB->get_records('kopere_dashboard_menu', null, 'title ASC');
 
@@ -110,7 +109,7 @@ class WebPages {
         DashboardUtil::startPage(array(
             array('WebPages::dashboard', get_string_kopere('webpages_title')),
             $webpages->title
-        ));
+        ), -1);
         echo '<div class="element-box">';
 
         $linkPagina = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";
@@ -151,14 +150,14 @@ class WebPages {
             DashboardUtil::startPage(array(
                 array('WebPages::dashboard', get_string_kopere('webpages_title')),
                 get_string_kopere('webpages_page_new')
-            ));
+            ), -1);
         } else {
             $webpages = kopere_dashboard_webpages::createBlank($webpages);
             DashboardUtil::startPage(array(
                 array('WebPages::dashboard', get_string_kopere('webpages_title')),
                 array('WebPages::details&id=' . $webpages->id, $webpages->title),
                 get_string_kopere('webpages_page_edit')
-            ));
+            ), -1);
         }
 
         echo '<div class="element-box">';
@@ -185,7 +184,7 @@ class WebPages {
         $form->addInput(
             InputSelect::newInstance()->setTitle(get_string_kopere('webpages_table_theme'))
                 ->setName('theme')
-                ->setValues($this->listThemes())
+                ->setValues(self::listThemes())
                 ->setValue($webpages->theme));
 
         $form->addInput(
@@ -276,9 +275,8 @@ class WebPages {
             array('WebPages::dashboard', get_string_kopere('webpages_title')),
             array('WebPages::details&id=' . $webpages->id, $webpages->title),
             get_string_kopere('webpages_page_delete')
-        ));
+        ), -1);
 
-        TitleUtil::printH3('webpages_page_delete');
         echo "<p>" . get_string_kopere('webpages_page_delete_confirm', $webpages) . "</p>";
         Button::delete(get_string('yes'), 'WebPages::deletePage&status=sim&id=' . $webpages->id, '', false);
         Button::add(get_string('no'), 'WebPages::details&id=' . $webpages->id, 'margin-left-10', false);
@@ -311,7 +309,7 @@ class WebPages {
                 DashboardUtil::startPage(array(
                     array('WebPages::dashboard', get_string_kopere('webpages_title')),
                     get_string_kopere('webpages_menu_edit')
-                ));
+                ), -1);
             } else {
                 DashboardUtil::startPopup(get_string_kopere('webpages_menu_edit'), 'WebPages::editMenuSave');
             }
@@ -485,7 +483,7 @@ class WebPages {
     }
 
     private function themeName($theme) {
-        $themes = $this->listThemes();
+        $themes = self::listThemes();
 
         foreach ($themes as $t) {
             return $t['value'];
@@ -508,35 +506,35 @@ class WebPages {
         return $returnMenus;
     }
 
-    private function listThemes() {
+    public static function listThemes() {
         $layouts = array(
             array(
                 'key' => 'base',
-                'value' => 'webpages_theme_base'
+                'value' => 'theme_base'
             ),
             array(
                 'key' => 'standard',
-                'value' => 'webpages_theme_standard'
+                'value' => 'theme_standard'
             ),
-            array(
-                'key' => 'frontpage',
-                'value' => 'webpages_theme_frontpage'
-            ),
+            //array(
+            //    'key' => 'frontpage',
+            //    'value' => 'theme_frontpage'
+            //),
             array(
                 'key' => 'popup',
-                'value' => 'webpages_theme_popup'
+                'value' => 'theme_popup'
             ),
             array(
                 'key' => 'frametop',
-                'value' => 'webpages_theme_frametop'
+                'value' => 'theme_frametop'
             ),
             array(
                 'key' => 'print',
-                'value' => 'webpages_theme_print'
+                'value' => 'theme_print'
             ),
             array(
                 'key' => 'report',
-                'value' => 'webpages_theme_report'
+                'value' => 'theme_report'
             )
         );
 

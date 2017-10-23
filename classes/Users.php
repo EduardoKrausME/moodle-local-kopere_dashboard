@@ -33,10 +33,9 @@ use local_kopere_dashboard\util\TitleUtil;
 
 class Users {
     public function dashboard() {
-        DashboardUtil::startPage('Usuários');
+        DashboardUtil::startPage(get_string_kopere ('user_title'), -1);
 
         echo '<div class="element-box table-responsive">';
-        TitleUtil::printH3('user_title');
 
         $table = new DataTable();
         $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT);

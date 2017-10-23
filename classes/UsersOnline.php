@@ -40,10 +40,9 @@ use local_kopere_dashboard\util\UserUtil;
 class UsersOnline {
 
     public function dashboard() {
-        DashboardUtil::startPage(get_string_kopere('useronline_title'), null, 'UsersOnline::settings', 'Usuários-Online');
+        DashboardUtil::startPage(get_string_kopere('useronline_title'), -1, 'UsersOnline::settings', 'Usuários-Online');
 
         echo '<div class="element-box table-responsive">';
-        TitleUtil::printH3('useronline_subtitle');
 
         $table = new DataTable();
         $table->addHeader('#', 'userid', TableHeaderItem::TYPE_INT);

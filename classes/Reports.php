@@ -78,10 +78,9 @@ class Reports {
     public function dashboard() {
         global $CFG, $DB;
 
-        DashboardUtil::startPage(get_string_kopere('reports_title'));
+        DashboardUtil::startPage(get_string_kopere('reports_title'), -1);
 
         echo '<div class="element-box">';
-        TitleUtil::printH3('reports_title');
 
         $type = optional_param('type', null, PARAM_TEXT);
 

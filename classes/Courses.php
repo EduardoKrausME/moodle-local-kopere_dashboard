@@ -39,10 +39,9 @@ use local_kopere_dashboard\vo\kopere_dashboard_webpages;
 
 class Courses {
     public function dashboard() {
-        DashboardUtil::startPage(get_string_kopere('courses_title'));
+        DashboardUtil::startPage(get_string_kopere('courses_title'), get_string_kopere('courses_title1'));
 
         echo '<div class="element-box">';
-        TitleUtil::printH3('courses_title1');
 
         $table = new DataTable();
         $table->addHeader('#', 'id', TableHeaderItem::TYPE_INT, null, 'width: 20px');

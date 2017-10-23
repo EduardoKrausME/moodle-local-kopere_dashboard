@@ -44,12 +44,11 @@ class Notifications extends NotificationsUtil {
     public function dashboard() {
         global $DB;
 
-        DashboardUtil::startPage(get_string_kopere('notification_title'), null, 'Notifications::settings');
+        DashboardUtil::startPage(get_string_kopere('notification_title'), -1, 'Notifications::settings');
 
         NotificationsUtil::mensagemNoSmtp();
 
         echo '<div class="element-box">';
-        TitleUtil::printH3('notification_title');
 
         echo get_string_kopere('notification_subtitle');
 
@@ -101,7 +100,7 @@ class Notifications extends NotificationsUtil {
             DashboardUtil::startPage(array(
                 array('Notifications::dashboard', get_string_kopere('notification_title')),
                 get_string_kopere('notification_new')
-            ));
+            ), -1);
         } else {
             DashboardUtil::startPopup(get_string_kopere('notification_new'));
         }
@@ -167,17 +166,15 @@ class Notifications extends NotificationsUtil {
             DashboardUtil::startPage(array(
                 array('Notifications::dashboard', get_string_kopere('notification_title')),
                 get_string_kopere('notification_editing')
-            ));
+            ), -1);
             echo '<div class="element-box">';
-            TitleUtil::printH3('notification_editing');
         } else {
             $evento = kopere_dashboard_events::createNew();
             DashboardUtil::startPage(array(
                 array('Notifications::dashboard', get_string_kopere('notification_title')),
                 get_string_kopere('notification_new')
-            ));
+            ), -1);
             echo '<div class="element-box">';
-            TitleUtil::printH3('notification_new');
         }
 
         $form = new Form('Notifications::addSave');

@@ -34,7 +34,7 @@ use local_kopere_dashboard\util\TitleUtil;
 
 class Benchmark {
     public function test() {
-        DashboardUtil::startPage(get_string_kopere('benchmark_title'), null, null, 'Performace');
+        DashboardUtil::startPage(get_string_kopere('benchmark_title'), -1, null, 'Performace');
 
         echo '<div class="element-box">';
         Mensagem::printInfo(get_string_kopere('benchmark_based').'
@@ -56,12 +56,11 @@ class Benchmark {
         DashboardUtil::startPage(array(
             array('Benchmark::test', get_string_kopere('benchmark_title')),
             get_string_kopere('benchmark_executing')
-        ));
+        ), get_string_kopere('benchmark_title2'));
 
         require_once($CFG->libdir.'/filelib.php');
 
         echo '<div class="element-box">';
-        TitleUtil::printH3 ('benchmark_title2');
 
         $test = new ReportBenchmark();
 
