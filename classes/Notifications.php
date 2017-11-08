@@ -383,7 +383,7 @@ class Notifications extends NotificationsUtil {
         $CFG->debugdisplay = true;
         $CFG->debug = 32767;
 
-        $htmlMessage = "<p>Este é um teste de envio de E-mail.</p>";
+        $htmlMessage = "<p>Este é um teste de envio de E-mail.</p>" . time ();
 
         $eventdata = new message();
         $eventdata->courseid = SITEID;
@@ -392,7 +392,7 @@ class Notifications extends NotificationsUtil {
         $eventdata->name = 'kopere_dashboard_messages';
         $eventdata->userfrom = get_admin();
         $eventdata->userto = $USER;
-        $eventdata->subject = "Testando envio de e-mail";
+        $eventdata->subject = "Testando envio de e-mail - ".time ();
         $eventdata->fullmessage = html_to_text($htmlMessage);
         $eventdata->fullmessageformat = FORMAT_HTML;
         $eventdata->fullmessagehtml = $htmlMessage;

@@ -54,6 +54,7 @@ class UsersImport {
               </form>
               <br/><br/><br/><br/>
               
+              
               <script src="' . $CFG->wwwroot . '/local/kopere_dashboard/assets/dropzone/js/dropzone.js"></script>
               <script>
                   new Dropzone("#dropzone", { 

@@ -25,7 +25,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $tasks = array(                                                                                                                     
     array(
-        'classname' => 'local_kopere_dashboard\task\task_video',
+        'classname' => 'local_kopere_dashboard\task\task_tmp',
         'blocking' => 0,
         'minute' => '0',
         'hour' => '0',
