@@ -751,7 +751,9 @@ class UsersImport {
         echo '<div style="float:left;margin-right:14px">';
         $form = new Form('UsersImport::proccess');
         $form->createHiddenInput('inserir', 1);
-        foreach ($_POST as $key => $value) {
+
+        $post   = StringUtil::clearParamsAll ( null, null, PARAM_TEXT );
+        foreach ($post as $key => $value) {
             if ($key == 'POST') {
             } else if ($key == 'field') {
                 $fieldItem = StringUtil::clearParamsAll ('field', [], PARAM_TEXT);
@@ -769,11 +771,8 @@ class UsersImport {
         echo '<div style="float:left">';
         $form = new Form('UsersImport::uploadSuccess');
 
-        echo '<pre>';
-        print_r($_POST);
-        echo '</pre>';
-
-        foreach ($_POST as $key => $value) {
+        $post   = StringUtil::clearParamsAll ( null, null, PARAM_TEXT );
+        foreach ($post as $key => $value) {
             if ($key == 'POST' || $key == 'inserir') {
             } else if ($key == 'field') {
                 $fieldItem = StringUtil::clearParamsAll ('field', [], PARAM_TEXT);

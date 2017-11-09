@@ -56,6 +56,10 @@ class StringUtil
 
     public static function clearParamsAll ( $param, $default, $type )
     {
+        if( $param == null ){
+            return self::clear_all_params ( $_POST, $type );
+        }
+
         if ( !isset( $_POST[ $param ] ) ) {
             return $default;
         }

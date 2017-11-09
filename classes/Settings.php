@@ -27,10 +27,13 @@ defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Mensagem;
+use local_kopere_dashboard\util\StringUtil;
 
 class Settings {
     public function settingsSave() {
-        foreach ($_POST as $keyname => $value) {
+
+        $post   = StringUtil::clearParamsAll ( null, null, PARAM_TEXT );
+        foreach ($post as $keyname => $value) {
             if ($keyname == 'POST') {
                 continue;
             }
