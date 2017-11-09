@@ -62,7 +62,10 @@ class Notifications extends NotificationsUtil {
             $eventClass = $event->event;
 
             $event->module_name = $this->moduleName($event->module, false);
-            $event->event_name = $eventClass::get_name();
+            if ( method_exists ( $eventClass, "get_name" ) )
+                $event->event_name = $eventClass::get_name ();
+            else
+                $event->event_name = "";
             $event->actions
                 = "<div class=\"text-center\">
                                     " . Button::icon('edit', "Notifications::addSegundaEtapa&id={$event->id}", false) . "&nbsp;&nbsp;&nbsp;
