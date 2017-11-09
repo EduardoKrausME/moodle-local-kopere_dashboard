@@ -40,8 +40,6 @@ function kopere_dashboard_autoload($className) {
 }
 
 function loadByQuery($queryString) {
-    global $CFG;
-
     preg_match("/(.*?)::([a-zA-Z_0-9]+)/", $queryString, $paths);
 
     $className = $paths[1];
@@ -66,3 +64,4 @@ function getPathQuery($queryString){
 function get_string_kopere($identifier, $object=null) {
     return get_string($identifier, 'local_kopere_dashboard', $object);
 }
+

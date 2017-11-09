@@ -126,7 +126,7 @@ class Reports {
         global $DB;
 
         $report = optional_param('report', 0, PARAM_INT);
-        $id = optional_param('id', 0, PARAM_INT);
+        $courseid = optional_param('courseid', 0, PARAM_INT);
 
         /** @var kopere_dashboard_reports $kopere_reports */
         $kopere_reports = $DB->get_record('kopere_dashboard_reports',
@@ -146,7 +146,7 @@ class Reports {
 
         echo '<div class="element-box table-responsive">';
 
-        if (strlen($kopere_reports->prerequisit) && $id == 0) {
+        if (strlen($kopere_reports->prerequisit) && $courseid == 0) {
             $this->prerequisit($report, $kopere_reports->prerequisit);
         } else {
 
@@ -164,11 +164,11 @@ class Reports {
                 if (!isset($columns->header))
                     $columns->header = array();
                 $table = new DataTable($columns->columns, $columns->header);
-                $table->setAjaxUrl('Reports::getdata&report=' . $report);
+                $table->setAjaxUrl ( 'Reports::getdata&report=' . $report . '&courseid=' . $courseid );
                 $table->printHeader();
                 $table->close(true, '', '"searching":false,"ordering":false');
 
-                Button::primary('Baixar estes dados', "Reports::download&report={$report}&id={$id}");
+                Button::primary('Baixar estes dados', "Reports::download&report={$report}&courseid={$courseid}");
             }
         }
         echo '</div>';
@@ -187,7 +187,7 @@ class Reports {
             $table->addHeader(get_string_kopere('courses_enrol'), 'inscritos', TableHeaderItem::TYPE_INT, null, 'width:50px;white-space:nowrap;');
 
             $table->setAjaxUrl('Courses::loadAllCourses');
-            $table->setClickRedirect('Reports::loadReport&type=course&report=' . $report . '&id={id}', 'id');
+            $table->setClickRedirect('Reports::loadReport&type=course&report=' . $report . '&courseid={id}', 'id');
             $table->printHeader();
             $table->close();
         }
@@ -196,10 +196,10 @@ class Reports {
     public function getdata(){
         global $DB, $CFG;
 
-        $report = optional_param('report', 0, PARAM_INT);
-        $id     = optional_param('id', 0, PARAM_INT);
-        $start = optional_param('start', 0, PARAM_INT);
-        $length = optional_param('length', 0, PARAM_INT);
+        $report   = optional_param('report', 0, PARAM_INT);
+        $courseid = optional_param('courseid', 0, PARAM_INT);
+        $start    = optional_param('start', 0, PARAM_INT);
+        $length   = optional_param('length', 0, PARAM_INT);
 
         /** @var kopere_dashboard_reports $kopere_reports */
         $kopere_reports = $DB->get_record('kopere_dashboard_reports', array('id' => $report));
@@ -210,10 +210,9 @@ class Reports {
             $sql = "{$kopere_reports->reportsql} LIMIT $start, $length";
         }
 
-
         if (strlen($kopere_reports->prerequisit) && $kopere_reports->prerequisit == 'listCourses') {
-            $reports = $DB->get_records_sql($sql, array('courseid' => $id));
-            $recordsTotal = $DB->get_records_sql($kopere_reports->reportsql, array('courseid' => $id));
+            $reports = $DB->get_records_sql($sql, array('courseid' => $courseid));
+            $recordsTotal = $DB->get_records_sql($kopere_reports->reportsql, array('courseid' => $courseid));
         } else {
             $reports = $DB->get_records_sql($sql);
             $recordsTotal = $DB->get_records_sql($kopere_reports->reportsql);
@@ -241,7 +240,7 @@ class Reports {
         global $DB;
 
         $report = optional_param('report', 0, PARAM_INT);
-        $id = optional_param('id', 0, PARAM_INT);
+        $courseid = optional_param('courseid', 0, PARAM_INT);
 
         /** @var kopere_dashboard_reports $kopere_reports */
         $kopere_reports = $DB->get_record('kopere_dashboard_reports',
@@ -251,7 +250,7 @@ class Reports {
         Export::exportHeader('xls', self::getTitle($kopere_reports));
 
         if (strlen($kopere_reports->prerequisit) && $kopere_reports->prerequisit == 'listCourses') {
-            $reports = $DB->get_records_sql($kopere_reports->reportsql, array('courseid' => $id));
+            $reports = $DB->get_records_sql($kopere_reports->reportsql, array('courseid' => $courseid));
         } else {
             $reports = $DB->get_records_sql($kopere_reports->reportsql);
         }

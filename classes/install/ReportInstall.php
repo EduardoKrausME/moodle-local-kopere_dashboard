@@ -154,6 +154,7 @@ class ReportInstall {
         self::reportInsert($report);
 
 
+
         $report = kopere_dashboard_reports::createNew();
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'courses'));
         $report->reportkey = 'courses-1';
@@ -179,8 +180,6 @@ class ReportInstall {
                                         WHERE gi.courseid = c.id
                                          AND gi.itemtype=\'mod\'), \'0\') AS \'activities_assigned\',
                 
-                                      -- /*If activities_completed = activities_assigned, show date of last log entry. Otherwise,
-                                      --   show percentage complete. If activities_assigned = 0, show \'n/a\'.--*/
                                       (
                                           SELECT IF(activities_assigned!=\'0\', (
                                               SELECT IF( activities_completed = activities_assigned,
@@ -190,7 +189,6 @@ class ReportInstall {
                                                    WHERE log.course = c.id
                                                      AND log.userid = u.id
                                               ),
-                                              -- /*--Percent completed--*/
                                               (
                                                   SELECT CONCAT(IFNULL(ROUND((activities_completed)/(activities_assigned)*100,0), \'0\'),\'% complete\')))), \'n/a\')
                                       ) AS \'course_completed\'
@@ -205,8 +203,6 @@ class ReportInstall {
                 
                                     WHERE ra.roleid = 5
                                       AND c.id      = :courseid
-                                      -- AND c.visible = 1
-                                      -- AND ue.status = 0
                                   GROUP BY u.id, c.id';
         $report->columns = array(
             $table->addHeader('#', 'userid', TableHeaderItem::TYPE_INT, null, 'width: 20px'),
@@ -282,6 +278,20 @@ class ReportInstall {
         $report->reportsql = 'local_kopere_dashboard\\report\\custom\\ReportsCourseAccessGrade';
         $report->columns = '';
         self::reportInsert($report);
+
+
+        $report = kopere_dashboard_reports::createNew();
+        $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'courses'));
+        $report->reportkey = 'courses-5';
+        $report->title = get_string('reports_report_courses-5', 'local_kopere_dashboard');
+        $report->prerequisit = 'listCourses';
+        $report->reportsql = 'local_kopere_dashboard\\report\\custom\\ReportsCourseLastAccess';
+        $report->columns = '';
+        self::reportInsert($report);
+
+
+
+
 
 
         $report = kopere_dashboard_reports::createNew();

@@ -52,4 +52,34 @@ class StringUtil
             self::generateRandomString ( 12 )
         );
     }
+
+
+    public static function clearParamsAll ( $param, $default, $type )
+    {
+        if ( !isset( $_POST[ $param ] ) ) {
+            return $default;
+        }
+
+        if ( is_string ( $_POST[ $param ] ) ) {
+            return clean_param ( $param, $type );
+        }
+
+        return self::clear_all_params ( $_POST[ $param ], $type );
+    }
+
+    private static function clear_all_params ( $in, $type )
+    {
+        $out = array();
+        if ( is_array ( $in ) ) {
+            foreach ( $in as $key => $value ) {
+                $out [ $key ] = self::clear_all_params ( $value, $type );
+            }
+        } elseif ( is_string ( $in ) ) {
+            return clean_param ( $in, $type );
+        } else {
+            return $in;
+        }
+
+        return $out;
+    }
 }

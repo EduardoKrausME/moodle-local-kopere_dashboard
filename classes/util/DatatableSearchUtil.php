@@ -47,7 +47,7 @@ class DatatableSearchUtil {
     public function processWhere() {
         global $CFG;
 
-        $search = optional_param_array('search', false, PARAM_TEXT);
+        $search = StringUtil::clearParamsAll('search', false, PARAM_TEXT);
 
         if ($search && isset($search['value']) && isset($search['value'][0])) {
             $like = array();
@@ -75,8 +75,8 @@ class DatatableSearchUtil {
 
     private function proccessOrder() {
 
-        $order = optional_param_array('order', false, PARAM_TEXT);
-        $columns = optional_param_array('columns', false, PARAM_TEXT);
+        $order   = StringUtil::clearParamsAll ( 'order', [], PARAM_TEXT );
+        $columns = StringUtil::clearParamsAll ( 'columns', [], PARAM_TEXT );
 
         if ($order && $columns) {
             $_column = $order[0]['column'];

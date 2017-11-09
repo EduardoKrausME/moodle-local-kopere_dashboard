@@ -36,6 +36,7 @@ use local_kopere_dashboard\util\EndUtil;
 use local_kopere_dashboard\util\EnrolUtil;
 use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Mensagem;
+use local_kopere_dashboard\util\StringUtil;
 use local_kopere_dashboard\util\TitleUtil;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
@@ -281,7 +282,7 @@ class UsersImport {
                   <div class="panel-heading">' . get_string_kopere('userimport_userfields') . '</div>
                   <div class="panel-body">';
 
-            $fieldItem = optional_param_array('field', [], PARAM_TEXT);
+            $fieldItem = StringUtil::clearParamsAll ('field', [], PARAM_TEXT);
 
             foreach ($fields as $field) {
 
@@ -598,7 +599,7 @@ class UsersImport {
 
             // if exist user, add extras
             if ($user) {
-                $fieldItems = optional_param_array('field', [], PARAM_TEXT);
+                $fieldItems = StringUtil::clearParamsAll ('field', [], PARAM_TEXT);
                 foreach ($fieldItems as $key2 => $value2) {
                     if ($value2) {
                         $col = str_replace('col_', '', $value2);
@@ -753,7 +754,7 @@ class UsersImport {
         foreach ($_POST as $key => $value) {
             if ($key == 'POST') {
             } else if ($key == 'field') {
-                $fieldItem = optional_param_array('field', [], PARAM_TEXT);
+                $fieldItem = StringUtil::clearParamsAll ('field', [], PARAM_TEXT);
                 foreach ($fieldItem as $key2 => $value2) {
                     $form->createHiddenInput('field[' . $key2 . ']', $value2);
                 }
@@ -775,7 +776,7 @@ class UsersImport {
         foreach ($_POST as $key => $value) {
             if ($key == 'POST' || $key == 'inserir') {
             } else if ($key == 'field') {
-                $fieldItem = optional_param_array('field', [], PARAM_TEXT);
+                $fieldItem = StringUtil::clearParamsAll ('field', [], PARAM_TEXT);
                 foreach ($fieldItem as $key2 => $value2) {
                     $form->createHiddenInput('field[' . $key2 . ']', $value2);
                 }
