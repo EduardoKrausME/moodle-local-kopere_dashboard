@@ -63,7 +63,7 @@ class DatatableSearchUtil {
                     }
                 }else{
                     if (is_array($column)) {
-                        $like [] = "{$column[1]} LIKE '%{$find}%'";
+                        $like [] = "{$column[0]} LIKE '%{$find}%'";
                     } else {
                         $like [] = "{$column} LIKE '%{$find}%'";
                     }
