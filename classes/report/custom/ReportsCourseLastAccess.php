@@ -36,7 +36,7 @@ class ReportsCourseLastAccess
     {
         global $DB, $CFG;
 
-        $cursosId = optional_param ( 'id', 0, PARAM_INT );
+        $cursosId = optional_param ( 'courseid', 0, PARAM_INT );
         if ( $cursosId == 0 ) {
             Header::notfound ( get_string_kopere ( 'courses_notound' ) );
         }

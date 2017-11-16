@@ -53,7 +53,7 @@ class ReportsCourseAccessGrade {
 
         require_once $CFG->libdir . '/gradelib.php';
 
-        $courseId = optional_param('id', 0, PARAM_INT);
+        $courseId = optional_param('courseid', 0, PARAM_INT);
         if ($courseId == 0) {
             Header::notfound(get_string_kopere('courses_notound'));
         }
