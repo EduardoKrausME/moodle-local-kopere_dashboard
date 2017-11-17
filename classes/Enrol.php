@@ -28,7 +28,14 @@ defined('MOODLE_INTERNAL') || die();
 use local_kopere_dashboard\util\Json;
 use local_kopere_dashboard\util\UserUtil;
 
+/**
+ * Class Enrol
+ * @package local_kopere_dashboard
+ */
 class Enrol {
+    /**
+     * @return array
+     */
     public function lastEnrol() {
         global $DB;
 
@@ -47,6 +54,9 @@ class Enrol {
         return $DB->get_records_sql($sql);
     }
 
+    /**
+     *
+     */
     public function ajaxdashboard() {
         global $DB;
 

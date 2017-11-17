@@ -40,7 +40,14 @@ use local_kopere_dashboard\util\Mensagem;
 use local_kopere_dashboard\util\TitleUtil;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
+/**
+ * Class Notifications
+ * @package local_kopere_dashboard
+ */
 class Notifications extends NotificationsUtil {
+    /**
+     *
+     */
     public function dashboard() {
         global $DB;
 
@@ -98,6 +105,9 @@ class Notifications extends NotificationsUtil {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     public function add() {
         if (!AJAX_SCRIPT) {
             DashboardUtil::startPage(array(
@@ -150,6 +160,9 @@ class Notifications extends NotificationsUtil {
         }
     }
 
+    /**
+     *
+     */
     public function addSegundaEtapa() {
         global $CFG, $DB;
 
@@ -275,6 +288,9 @@ class Notifications extends NotificationsUtil {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     public function addSave() {
         global $DB;
 
@@ -301,6 +317,9 @@ class Notifications extends NotificationsUtil {
         }
     }
 
+    /**
+     *
+     */
     public function delete() {
         global $DB;
 
@@ -326,6 +345,9 @@ class Notifications extends NotificationsUtil {
         DashboardUtil::endPopup();
     }
 
+    /**
+     *
+     */
     public function settings() {
         global $CFG;
         ob_clean();
@@ -373,6 +395,9 @@ class Notifications extends NotificationsUtil {
         DashboardUtil::endPopup();
     }
 
+    /**
+     *
+     */
     public function testSmtp(){
         global $CFG, $USER;
 

@@ -23,9 +23,20 @@
 
 namespace local_kopere_dashboard\chartsjs;
 
+/**
+ * Class Base
+ *
+ * @package local_kopere_dashboard\chartsjs
+ */
 class Base {
+    /**
+     * @var bool
+     */
     private static $_isSend = false;
 
+    /**
+     * @var array
+     */
     private static $chartColors
         = array(
             'rgb(255, 99, 132)',
@@ -37,8 +48,14 @@ class Base {
             'rgb(201, 203, 207)'
         );
 
+    /**
+     * @var int
+     */
     private static $_lastColor = 0;
 
+    /**
+     * @return string
+     */
     protected static function getColor() {
         if (self::$_lastColor >= count(self::$chartColors)) {
             self::$_lastColor = 0;
@@ -47,6 +64,9 @@ class Base {
         return "'" . self::$chartColors[self::$_lastColor++] . "'";
     }
 
+    /**
+     *
+     */
     protected static function start() {
         global $CFG;
 

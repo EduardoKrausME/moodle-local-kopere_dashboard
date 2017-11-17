@@ -25,7 +25,15 @@ namespace local_kopere_dashboard\html\inputs;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class InputPassword
+ *
+ * @package local_kopere_dashboard\html\inputs
+ */
 class InputPassword extends InputBase {
+    /**
+     * InputPassword constructor.
+     */
     public function __construct() {
         $this->setType('password');
     }
@@ -37,6 +45,9 @@ class InputPassword extends InputBase {
         return new InputPassword();
     }
 
+    /**
+     * @return mixed|string
+     */
     public function toString() {
         $this->setValue(null);
 

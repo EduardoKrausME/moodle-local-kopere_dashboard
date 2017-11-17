@@ -35,6 +35,10 @@ use local_kopere_dashboard\util\Mensagem;
 use local_kopere_dashboard\util\ServerUtil;
 use local_kopere_dashboard\util\TitleUtil;
 
+/**
+ * Class Backup
+ * @package local_kopere_dashboard
+ */
 class Backup {
     public function dashboard() {
         DashboardUtil::startPage('Backup');

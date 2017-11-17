@@ -24,6 +24,10 @@ namespace local_kopere_dashboard\vo;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class kopere_dashboard_reports
+ * @package local_kopere_dashboard\vo
+ */
 class kopere_dashboard_reports extends \stdClass
 {
 
@@ -76,7 +80,6 @@ class kopere_dashboard_reports extends \stdClass
      * @var string
      */
     public $foreach;
-
 
     /**
      * @return kopere_dashboard_reports

@@ -25,12 +25,28 @@ namespace local_kopere_dashboard;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class PerformanceMonitor
+ * @package local_kopere_dashboard
+ */
 class PerformanceMonitor {
 
+    /**
+     * @var
+     */
     private $startTime;
+    /**
+     * @var
+     */
     private $somaRedeInStart;
+    /**
+     * @var
+     */
     private $somaRedeOutStart;
 
+    /**
+     *
+     */
     public function netWorkStart() {
         $this->startTime = microtime(true);
 
@@ -48,6 +64,9 @@ class PerformanceMonitor {
         }
     }
 
+    /**
+     *
+     */
     public function netWorkEnd() {
         $input_lines = shell_exec("cat /proc/net/dev");
         preg_match_all(
@@ -102,6 +121,9 @@ class PerformanceMonitor {
         echo '</div>';
     }
 
+    /**
+     *
+     */
     public function cpu() {
         echo '<div class="part-monitor" id="cpu">';
         echo '<h3>Uso do CPU</h3>';
@@ -135,6 +157,9 @@ class PerformanceMonitor {
         echo '</div>';
     }
 
+    /**
+     *
+     */
     public function memory() {
         $input_lines = shell_exec("cat /proc/meminfo");
         preg_match("/MemFree:\s*([0-9]+)/", $input_lines, $outputMemFreee);
@@ -177,6 +202,9 @@ class PerformanceMonitor {
         echo '</div>';
     }
 
+    /**
+     *
+     */
     public function disk() {
         $input_lines = shell_exec("df -h");
         preg_match_all("/([0-9,\.]+\w)\s+([0-9]+%)\s+\/\n/", $input_lines, $outputDiscoLinha1);
@@ -196,6 +224,9 @@ class PerformanceMonitor {
         echo '</div>';
     }
 
+    /**
+     *
+     */
     public function loadAverage() {
         $input_lines = shell_exec("uptime");
         preg_match("/average[s]?:\s*([0-9.]+),\s*([0-9.]+),\s*([0-9.]+)/", $input_lines, $outputLoad);

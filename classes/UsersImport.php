@@ -40,7 +40,14 @@ use local_kopere_dashboard\util\StringUtil;
 use local_kopere_dashboard\util\TitleUtil;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
+/**
+ * Class UsersImport
+ * @package local_kopere_dashboard
+ */
 class UsersImport {
+    /**
+     *
+     */
     public function dashboard() {
         global $CFG;
 
@@ -71,6 +78,9 @@ class UsersImport {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     public function upload() {
         global $CFG;
 
@@ -90,6 +100,9 @@ class UsersImport {
         }
     }
 
+    /**
+     *
+     */
     public function uploadSuccess() {
         global $CFG;
 
@@ -162,6 +175,9 @@ class UsersImport {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     private function getEvents() {
         global $DB;
 
@@ -222,6 +238,10 @@ class UsersImport {
         }
     }
 
+    /**
+     * @param $cols
+     * @param $separator
+     */
     private function createFormCollums($cols, $separator) {
         global $DB;
 
@@ -346,6 +366,9 @@ class UsersImport {
 
     }
 
+    /**
+     *
+     */
     public function proccess() {
         global $CFG, $DB, $USER;
         $CFG->debug = 0;
@@ -745,6 +768,9 @@ class UsersImport {
         }
     }
 
+    /**
+     *
+     */
     private function createFormProccessCollums() {
 
         echo '<div>';
@@ -789,6 +815,10 @@ class UsersImport {
         echo '</div></div>';
     }
 
+    /**
+     * @param $paramName
+     * @return mixed|null
+     */
     private function getColParam($paramName) {
         $param = optional_param($paramName, null, PARAM_TEXT);
         if ($param == null)
@@ -797,6 +827,12 @@ class UsersImport {
         return str_replace('col_', '', $param);
     }
 
+    /**
+     * @param $col
+     * @param $data
+     * @param string $default
+     * @return string
+     */
     private function getColValue($col, $data, $default = '') {
         if (isset($data[$col]))
             return $data[$col];
@@ -804,6 +840,12 @@ class UsersImport {
         return $default;
     }
 
+    /**
+     * @param $username
+     * @param $email
+     * @param $idnumber
+     * @return mixed|null
+     */
     private function getUser($username, $email, $idnumber) {
         global $DB, $CFG;
 
@@ -832,6 +874,11 @@ class UsersImport {
         return null;
     }
 
+    /**
+     * @param $shortnamecourse
+     * @param $idnumbercourse
+     * @return mixed|null
+     */
     private function getCourse($shortnamecourse, $idnumbercourse) {
         global $DB;
 
@@ -859,6 +906,11 @@ class UsersImport {
         return null;
     }
 
+    /**
+     * @param $groupmembers
+     * @param $courseid
+     * @return mixed|null
+     */
     private function getGroup($groupmembers, $courseid) {
         global $DB;
 
@@ -878,6 +930,9 @@ class UsersImport {
         return null;
     }
 
+    /**
+     *
+     */
     public function printAllLines() {
 
         global $CFG;
@@ -927,6 +982,11 @@ class UsersImport {
         EndUtil::endScriptShow('</body></html>');
     }
 
+    /**
+     * @param $value
+     * @param bool $table
+     * @param bool $th
+     */
     private function addCol($value, $table = true, $th = false) {
         if ($table) {
             if ($th) {

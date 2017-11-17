@@ -27,18 +27,61 @@ defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\util\Export;
 
+/**
+ * Class DataTable
+ *
+ * @package local_kopere_dashboard\html
+ */
 class DataTable {
+    /**
+     * @var array
+     */
     private $column = array();
+    /**
+     * @var array
+     */
     private $columnInfo = array();
+    /**
+     * @var array
+     */
     private $columnData = array();
+    /**
+     * @var array
+     */
     private $columnDefs = array();
+
+    /**
+     * @var string
+     */
     private $ajaxUrl = null;
+
+    /**
+     * @var string
+     */
     private $clickRedirect = null;
+
+    /**
+     * @var string
+     */
     private $clickModal = null;
+
+    /**
+     * @var string
+     */
     private $tableId = '';
+
+    /**
+     * @var boolean
+     */
     private $isExport = false;
 
-    public function __construct($_column = array(), $_columnInfo = array()) {
+    /**
+     * DataTable constructor.
+     *
+     * @param array $_column
+     * @param array $_columnInfo
+     */
+    public function __construct( $_column = array(), $_columnInfo = array()) {
         $this->tableId = 'datatable_' . uniqid();
         $this->column = $_column;
         $this->columnInfo = $_columnInfo;
@@ -65,23 +108,38 @@ class DataTable {
         $this->tableId = $tableId;
     }
 
-    public function setAjaxUrl($ajaxUrl) {
+    /**
+     * @param $ajaxUrl
+     */
+    public function setAjaxUrl( $ajaxUrl) {
         $this->ajaxUrl = $ajaxUrl;
     }
 
-    public function setClickRedirect($url, $chave) {
+    /**
+     * @param $url
+     * @param $chave
+     */
+    public function setClickRedirect( $url, $chave) {
         $this->clickRedirect = array();
         $this->clickRedirect['chave'] = $chave;
         $this->clickRedirect['url'] = '?' . $url;
     }
 
-    public function setClickModal($url, $chave) {
+    /**
+     * @param $url
+     * @param $chave
+     */
+    public function setClickModal( $url, $chave) {
         $this->clickModal = array();
         $this->clickModal['chave'] = $chave;
         $this->clickModal['url'] = $url;
     }
 
-    public function addInfoHeader($title, $cols) {
+    /**
+     * @param $title
+     * @param $cols
+     */
+    public function addInfoHeader( $title, $cols) {
         $column = new TableHeaderItem();
         $column->title = $title;
         $column->cols = $cols;
@@ -89,7 +147,15 @@ class DataTable {
         $this->columnInfo[] = $column;
     }
 
-    public function addHeader($title, $chave = null, $type = TableHeaderItem::TYPE_TEXT, $funcao = null, $styleHeader = null, $styleCol = null) {
+    /**
+     * @param        $title
+     * @param null   $chave
+     * @param string $type
+     * @param null   $funcao
+     * @param null   $styleHeader
+     * @param null   $styleCol
+     */
+    public function addHeader( $title, $chave = null, $type = TableHeaderItem::TYPE_TEXT, $funcao = null, $styleHeader = null, $styleCol = null) {
         $column = new TableHeaderItem();
         $column->chave = $chave;
         $column->type = $type;
@@ -101,9 +167,13 @@ class DataTable {
         $this->column[] = $column;
     }
 
-    public function printHeader($class = '', $printBody = true) {
+    /**
+     * @param string $class
+     * @param bool   $printBody
+     */
+    public function printHeader( $class = '', $printBody = true) {
         if ($this->isExport && $this->ajaxUrl == null) {
-            Button::info(get_string_kopere('reports_export'), "?{$_SERVER['QUERY_STRING']}&export=xls");
+            Button::info(get_string_kopere('reports_export'), "{$_SERVER['QUERY_STRING']}&export=xls");
 
             Export::exportHeader(optional_param('export', '', PARAM_TEXT));
         }
@@ -167,7 +237,11 @@ class DataTable {
         }
     }
 
-    public function setRow($linhas, $class = '') {
+    /**
+     * @param        $linhas
+     * @param string $class
+     */
+    public function setRow( $linhas, $class = '') {
         if ($this->clickRedirect != null) {
             echo '<tbody class="hover-pointer">';
         } else if ($this->clickModal != null) {
@@ -206,7 +280,11 @@ class DataTable {
         echo '</tbody>';
     }
 
-    public function printRow($html, $class = '') {
+    /**
+     * @param        $html
+     * @param string $class
+     */
+    public function printRow( $html, $class = '') {
         if ($class == '' || $class == ' ') {
             echo '<td>';
         } else {
@@ -216,7 +294,14 @@ class DataTable {
         echo '</td>';
     }
 
-    public function close($processServer = false, $order = '', $extras='') {
+    /**
+     * @param bool   $processServer
+     * @param string $order
+     * @param string $extras
+     *
+     * @return string
+     */
+    public function close( $processServer = false, $order = '', $extras='') {
         echo '</table>';
 
         Export::exportClose();
@@ -266,6 +351,9 @@ class DataTable {
         return $this->tableId;
     }
 
+    /**
+     *
+     */
     private function onClickReditect() {
         $clickChave = $this->clickRedirect['chave'];
         $clickUrl = $this->clickRedirect['url'];
@@ -283,6 +371,9 @@ class DataTable {
               </script>";
     }
 
+    /**
+     *
+     */
     private function onClickModal() {
 
         $clickChave = $this->clickModal['chave'];

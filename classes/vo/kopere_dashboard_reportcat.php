@@ -24,6 +24,10 @@ namespace local_kopere_dashboard\vo;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class kopere_dashboard_reportcat
+ * @package local_kopere_dashboard\vo
+ */
 class kopere_dashboard_reportcat extends \stdClass
 {
 

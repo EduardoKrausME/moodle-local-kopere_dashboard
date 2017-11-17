@@ -29,7 +29,14 @@ use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Mensagem;
 
+/**
+ * Class Profile
+ * @package local_kopere_dashboard
+ */
 class Profile {
+    /**
+     *
+     */
     public function details() {
         global $DB, $PAGE, $CFG;
 

@@ -26,8 +26,16 @@ namespace local_kopere_dashboard\events;
 use local_kopere_dashboard\output\events\SendEvents;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
+/**
+ * Class EventObservers
+ *
+ * @package local_kopere_dashboard\events
+ */
 class EventObservers {
-    public static function process_event(\core\event\base $event) {
+    /**
+     * @param \core\event\base $event
+     */
+    public static function process_event( \core\event\base $event) {
         global $DB;
 
         if ($event->get_data()['action'] == 'viewed') {

@@ -25,6 +25,11 @@ namespace local_kopere_dashboard\html\inputs;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Interface IInput
+ *
+ * @package local_kopere_dashboard\html\inputs
+ */
 interface IInput {
     /**
      * @return string
@@ -129,5 +134,8 @@ interface IInput {
      */
     public function addValidator($validator);
 
+    /**
+     * @return mixed
+     */
     public function toString();
 }

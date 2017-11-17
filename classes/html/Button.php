@@ -30,8 +30,8 @@ defined('MOODLE_INTERNAL') || die();
  */
 class Button {
     const BTN_PEQUENO = 'btn-xs';
-    const BTN_MEDIO = 'btn-sm';
-    const BTN_GRANDE = 'btn-lg';
+    const BTN_MEDIO   = 'btn-sm';
+    const BTN_GRANDE  = 'btn-lg';
 
     /**
      * @param $texto

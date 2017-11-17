@@ -32,7 +32,14 @@ use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Mensagem;
 use local_kopere_dashboard\util\TitleUtil;
 
+/**
+ * Class Benchmark
+ * @package local_kopere_dashboard
+ */
 class Benchmark {
+    /**
+     *
+     */
     public function test() {
         DashboardUtil::startPage(get_string_kopere('benchmark_title'), -1, null, 'Performace');
 
@@ -50,6 +57,9 @@ class Benchmark {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     public function execute() {
         global $CFG;
 
@@ -105,6 +115,9 @@ class Benchmark {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     public function performance() {
         global $CFG;
 
@@ -136,6 +149,10 @@ class Benchmark {
         echo '</tbody></table>';
     }
 
+    /**
+     * @param $number
+     * @return mixed
+     */
     private function formatNumber($number) {
         return str_replace('.', ',', $number);
     }

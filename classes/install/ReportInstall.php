@@ -13,7 +13,15 @@ use local_kopere_dashboard\html\TableHeaderItem;
 use local_kopere_dashboard\vo\kopere_dashboard_reportcat;
 use local_kopere_dashboard\vo\kopere_dashboard_reports;
 
+/**
+ * Class ReportInstall
+ *
+ * @package local_kopere_dashboard\install
+ */
 class ReportInstall {
+    /**
+     *
+     */
     public static function createCategores() {
         global $CFG;
 
@@ -73,6 +81,9 @@ class ReportInstall {
         self::reportCatInsert($reportcat);
     }
 
+    /**
+     *
+     */
     public static function createReports() {
         global $DB, $CFG;
 
@@ -530,7 +541,13 @@ class ReportInstall {
         self::reportInsert($report);
     }
 
-    private function addInfoHeader($title, $cols) {
+    /**
+     * @param $title
+     * @param $cols
+     *
+     * @return TableHeaderItem
+     */
+    private function addInfoHeader( $title, $cols) {
         $column = new TableHeaderItem();
         $column->title = $title;
         $column->cols = $cols;
@@ -538,7 +555,17 @@ class ReportInstall {
         return $column;
     }
 
-    private function addHeader($title, $chave = null, $type = TableHeaderItem::TYPE_TEXT, $funcao = null, $styleHeader = null, $styleCol = null) {
+    /**
+     * @param        $title
+     * @param null   $chave
+     * @param string $type
+     * @param null   $funcao
+     * @param null   $styleHeader
+     * @param null   $styleCol
+     *
+     * @return \stdClass
+     */
+    private function addHeader( $title, $chave = null, $type = TableHeaderItem::TYPE_TEXT, $funcao = null, $styleHeader = null, $styleCol = null) {
         $column = new \stdClass();
         $column->chave = $chave;
         $column->type = $type;
@@ -550,7 +577,10 @@ class ReportInstall {
         return $column;
     }
 
-    private static function reportCatInsert($reportcat) {
+    /**
+     * @param $reportcat
+     */
+    private static function reportCatInsert( $reportcat) {
         global $DB;
 
         $kopere_reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type' => $reportcat->type));
@@ -559,7 +589,10 @@ class ReportInstall {
         }
     }
 
-    private static function reportInsert($report) {
+    /**
+     * @param $report
+     */
+    private static function reportInsert( $report) {
         global $DB;
 
         $kopere_reports = $DB->get_record('kopere_dashboard_reports', array('reportkey' => $report->reportkey));

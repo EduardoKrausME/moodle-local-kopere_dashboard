@@ -8,7 +8,17 @@
 namespace local_kopere_dashboard\util;
 
 
+/**
+ * Class DateUtil
+ *
+ * @package local_kopere_dashboard\util
+ */
 class DateUtil {
+    /**
+     * @param $datetime
+     *
+     * @return false|int
+     */
     public static function convertToTime($datetime) {
         if (is_numeric($datetime))
             if ($datetime > 1000000000)

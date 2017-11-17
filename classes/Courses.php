@@ -37,7 +37,14 @@ use local_kopere_dashboard\util\Json;
 use local_kopere_dashboard\util\TitleUtil;
 use local_kopere_dashboard\vo\kopere_dashboard_webpages;
 
+/**
+ * Class Courses
+ * @package local_kopere_dashboard
+ */
 class Courses {
+    /**
+     *
+     */
     public function dashboard() {
         DashboardUtil::startPage(get_string_kopere('courses_title'), get_string_kopere('courses_title1'));
 
@@ -60,6 +67,9 @@ class Courses {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     public function loadAllCourses() {
         global $DB;
 
@@ -81,6 +91,10 @@ class Courses {
         Json::encodeAndReturn($data);
     }
 
+    /**
+     * @param bool $format
+     * @return string
+     */
     public static function countAll($format = false) {
         global $DB;
 
@@ -93,6 +107,10 @@ class Courses {
         return $count->num;
     }
 
+    /**
+     * @param bool $format
+     * @return string
+     */
     public static function countAllVisibles($format = false) {
         global $DB;
 
@@ -105,6 +123,9 @@ class Courses {
         return $count->num;
     }
 
+    /**
+     *
+     */
     public function details() {
         global $DB, $CFG;
 
@@ -151,6 +172,9 @@ class Courses {
         DashboardUtil::endPage();
     }
 
+    /**
+     * @param $course
+     */
     public function createStaticPage($course) {
         global $DB;
 

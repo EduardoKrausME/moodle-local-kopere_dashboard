@@ -9,6 +9,11 @@ namespace local_kopere_dashboard\event;
 
 use core\event\base;
 
+/**
+ * Class import_course_enrol
+ *
+ * @package local_kopere_dashboard\event
+ */
 class import_course_enrol extends base
 {
     /**

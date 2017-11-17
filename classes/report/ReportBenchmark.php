@@ -25,7 +25,15 @@ namespace local_kopere_dashboard\report;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class ReportBenchmark
+ *
+ * @package local_kopere_dashboard\report
+ */
 class ReportBenchmark {
+    /**
+     * @var array
+     */
     private $results = array();
 
     /**

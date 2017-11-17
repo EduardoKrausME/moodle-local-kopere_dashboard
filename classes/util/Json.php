@@ -25,7 +25,18 @@ namespace local_kopere_dashboard\util;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class Json
+ *
+ * @package local_kopere_dashboard\util
+ */
 class Json {
+    /**
+     * @param      $data
+     * @param int $recordsTotal
+     * @param int $recordsFiltered
+     * @param null $sql
+     */
     public static function encodeAndReturn($data, $recordsTotal = -1, $recordsFiltered = 0, $sql = null) {
         ob_clean();
         header('Content-Type: application/json; charset: utf-8');
@@ -51,6 +62,9 @@ class Json {
         EndUtil::endScriptShow($json);
     }
 
+    /**
+     * @param $message
+     */
     public static function error($message) {
         ob_clean();
         header('Content-Type: application/json; charset: utf-8');

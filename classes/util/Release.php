@@ -9,8 +9,16 @@ namespace local_kopere_dashboard\util;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class Release
+ *
+ * @package local_kopere_dashboard\util
+ */
 class Release
 {
+    /**
+     * @return string
+     */
     public static function getVersion ()
     {
         global $CFG;

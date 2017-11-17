@@ -24,8 +24,17 @@ namespace local_kopere_dashboard\util;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class Header
+ *
+ * @package local_kopere_dashboard\util
+ */
 class Header {
-    public static function location($url, $isDie = true) {
+    /**
+     * @param      $url
+     * @param bool $isDie
+     */
+    public static function location( $url, $isDie = true) {
         ob_clean();
         header('Location: ?' . $url);
 
@@ -34,7 +43,10 @@ class Header {
         }
     }
 
-    public static function reload($isDie = true) {
+    /**
+     * @param bool $isDie
+     */
+    public static function reload( $isDie = true) {
         ob_clean();
         $url = $_SERVER['QUERY_STRING'];
 
@@ -44,13 +56,20 @@ class Header {
         }
     }
 
-    public static function notfoundNull($param, $printText = false) {
+    /**
+     * @param      $param
+     * @param bool $printText
+     */
+    public static function notfoundNull( $param, $printText = false) {
         if ($param == null) {
             self::notfound($printText);
         }
     }
 
-    public static function notfound($printText = false) {
+    /**
+     * @param bool $printText
+     */
+    public static function notfound( $printText = false) {
         global $CFG;
 
         if (!AJAX_SCRIPT) {

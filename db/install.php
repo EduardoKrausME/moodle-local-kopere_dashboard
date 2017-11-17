@@ -34,6 +34,10 @@ function xmldb_local_kopere_dashboard_install() {
     return true;
 }
 
+/**
+ * @param $name
+ * @param $newVale
+ */
 function changeConfigTable($name, $newVale) {
     global $DB;
 

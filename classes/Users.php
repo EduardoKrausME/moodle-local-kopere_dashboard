@@ -31,7 +31,14 @@ use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\DatatableSearchUtil;
 use local_kopere_dashboard\util\TitleUtil;
 
+/**
+ * Class Users
+ * @package local_kopere_dashboard
+ */
 class Users {
+    /**
+     *
+     */
     public function dashboard() {
         DashboardUtil::startPage(get_string_kopere ('user_title'), -1);
 
@@ -55,6 +62,9 @@ class Users {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     public function loadAllUsers() {
         $columnSelect = array(
             'id',
@@ -85,11 +95,18 @@ class Users {
             'local_kopere_dashboard\util\UserUtil::createColumnFullname');
     }
 
+    /**
+     *
+     */
     public function details() {
         $profile = new Profile();
         $profile->details();
     }
 
+    /**
+     * @param bool $format
+     * @return string
+     */
     public static function countAll($format = false) {
         global $DB;
 
@@ -102,6 +119,10 @@ class Users {
         return $count->num;
     }
 
+    /**
+     * @param bool $format
+     * @return string
+     */
     public static function countAllLearners($format = false) {
         global $DB;
 

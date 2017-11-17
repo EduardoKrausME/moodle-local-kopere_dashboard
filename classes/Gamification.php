@@ -27,7 +27,14 @@ defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\util\DashboardUtil;
 
+/**
+ * Class Gamification
+ * @package local_kopere_dashboard
+ */
 class Gamification {
+    /**
+     *
+     */
     public function dashboard() {
         DashboardUtil::startPage('Gamification', -1);
 

@@ -11,6 +11,11 @@ use local_kopere_dashboard\html\Button;
 use local_kopere_dashboard\util\Export;
 use local_kopere_dashboard\util\Header;
 
+/**
+ * Class ReportsCourseLastAccess
+ *
+ * @package local_kopere_dashboard\report\custom
+ */
 class ReportsCourseLastAccess
 {
     /**
@@ -44,7 +49,7 @@ class ReportsCourseLastAccess
         $course = $DB->get_record ( 'course', array( 'id' => $cursosId ) );
         Header::notfoundNull ( $course, get_string_kopere ( 'courses_notound' ) );
 
-        Button::info ( get_string_kopere ( 'reports_export' ), "?{$_SERVER['QUERY_STRING']}&export=xls" );
+        Button::info ( get_string_kopere ( 'reports_export' ), "{$_SERVER['QUERY_STRING']}&export=xls" );
 
         $export = optional_param ( 'export', '', PARAM_TEXT );
         Export::exportHeader ( $export, "Lista de alunos - $course->fullname" );
@@ -148,16 +153,29 @@ class ReportsCourseLastAccess
         Export::exportClose ();
     }
 
+    /**
+     * @param        $value
+     * @param string $class
+     * @param        $bgcolor
+     */
     private function td ( $value, $class = '', $bgcolor )
     {
         echo '<td class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
     }
 
+    /**
+     * @param        $value
+     * @param string $class
+     * @param        $bgcolor
+     */
     private function td2 ( $value, $class = '', $bgcolor )
     {
         echo '<td colspan="2" class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
     }
 
+    /**
+     *
+     */
     public function listData ()
     {
     }

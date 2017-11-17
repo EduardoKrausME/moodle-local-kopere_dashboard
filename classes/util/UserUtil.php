@@ -25,7 +25,16 @@ namespace local_kopere_dashboard\util;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class UserUtil
+ * @package local_kopere_dashboard\util
+ */
 class UserUtil {
+    /**
+     * @param $result
+     * @param string $colname
+     * @return mixed
+     */
     public static function createColumnFullname($result, $colname = 'fullname') {
         foreach ($result as $key => $row) {
             $row->$colname = fullname($row);

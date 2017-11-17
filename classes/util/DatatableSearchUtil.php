@@ -25,16 +25,48 @@ namespace local_kopere_dashboard\util;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class DatatableSearchUtil
+ *
+ * @package local_kopere_dashboard\util
+ */
 class DatatableSearchUtil {
+    /**
+     * @var
+     */
     private $columnOrder;
+    /**
+     * @var
+     */
     private $columnsSelect;
+    /**
+     * @var mixed
+     */
     private $start;
+    /**
+     * @var mixed
+     */
     private $length;
+    /**
+     * @var
+     */
     private $order;
+    /**
+     * @var
+     */
     private $orderDir;
+    /**
+     * @var
+     */
     private $where;
 
-    public function __construct($columnSelect, $columnOrder) {
+    /**
+     * DatatableSearchUtil constructor.
+     *
+     * @param $columnSelect
+     * @param $columnOrder
+     */
+    public function __construct( $columnSelect, $columnOrder) {
         $this->columnOrder = $columnOrder;
         $this->columnsSelect = $columnSelect;
         $this->start = optional_param('start', 0, PARAM_INT);
@@ -44,6 +76,9 @@ class DatatableSearchUtil {
         $this->proccessOrder();
     }
 
+    /**
+     *
+     */
     public function processWhere() {
         global $CFG;
 
@@ -73,6 +108,9 @@ class DatatableSearchUtil {
         }
     }
 
+    /**
+     *
+     */
     private function proccessOrder() {
 
         $order   = StringUtil::clearParamsAll ( 'order', [], PARAM_TEXT );

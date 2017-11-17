@@ -30,7 +30,14 @@ use local_kopere_dashboard\util\BytesUtil;
 use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\TitleUtil;
 
+/**
+ * Class Dashboard
+ * @package local_kopere_dashboard
+ */
 class Dashboard {
+    /**
+     *
+     */
     public function start() {
         DashboardUtil::startPage(array());
 
@@ -77,6 +84,9 @@ class Dashboard {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     private function lastGrades() {
         global $DB, $PAGE;
         echo '<div class="col-sm-6">
@@ -125,6 +135,9 @@ class Dashboard {
               </div>';
     }
 
+    /**
+     *
+     */
     private function lastMatriculas() {
         global $DB, $PAGE;
         echo '<div class="col-sm-6 ">

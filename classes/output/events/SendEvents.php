@@ -28,6 +28,11 @@ defined('MOODLE_INTERNAL') || die();
 use core\message\message;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
+/**
+ * Class SendEvents
+ *
+ * @package local_kopere_dashboard\output\events
+ */
 class SendEvents {
     /** @var kopere_dashboard_events */
     private $kopere_events;
@@ -35,7 +40,13 @@ class SendEvents {
     /** @var \core\event\base */
     private $event;
 
+    /**
+     * @var string
+     */
     private $subject;
+    /**
+     * @var string
+     */
     private $message;
 
     /**
@@ -66,6 +77,9 @@ class SendEvents {
         $this->event = $event;
     }
 
+    /**
+     *
+     */
     public function send() {
         global $COURSE, $CFG, $DB;
 
@@ -189,6 +203,9 @@ class SendEvents {
         }
     }
 
+    /**
+     *
+     */
     private function loadTemplate() {
         global $CFG;
         $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" . get_config('local_kopere_dashboard', 'notificacao-template');
@@ -279,6 +296,9 @@ class SendEvents {
         return $text;
     }
 
-    private static function mailError($message) {
+    /**
+     * @param $message
+     */
+    private static function mailError( $message) {
     }
 }

@@ -24,9 +24,20 @@ namespace local_kopere_dashboard\html;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class TinyMce
+ *
+ * @package local_kopere_dashboard\html
+ */
 class TinyMce {
+    /**
+     * @var bool
+     */
     private static $_isSend = false;
 
+    /**
+     * @return string
+     */
     public static function register() {
         global $CFG;
 

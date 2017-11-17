@@ -23,8 +23,18 @@
 
 namespace local_kopere_dashboard\chartsjs;
 
+/**
+ * Class Lines
+ *
+ * @package local_kopere_dashboard\chartsjs
+ */
 class Lines extends Base {
-    public static function createMultiLines(array $lines, $xAxisLabel, $yAxisLabel) {
+    /**
+     * @param array $lines
+     * @param       $xAxisLabel
+     * @param       $yAxisLabel
+     */
+    public static function createMultiLines( array $lines, $xAxisLabel, $yAxisLabel) {
         self::start();
 
         $datum = $labels = array();

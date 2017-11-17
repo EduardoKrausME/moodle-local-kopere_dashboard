@@ -25,7 +25,15 @@ namespace local_kopere_dashboard\html\inputs;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class InputTextarea
+ *
+ * @package local_kopere_dashboard\html\inputs
+ */
 class InputTextarea extends InputBase {
+    /**
+     * InputTextarea constructor.
+     */
     public function __construct() {
         $this->setType('textarea');
     }

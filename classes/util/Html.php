@@ -24,7 +24,15 @@ namespace local_kopere_dashboard\util;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class Html
+ *
+ * @package local_kopere_dashboard\util
+ */
 class Html {
+    /**
+     * @var array
+     */
     private static $acentosHtml = array(
         '&aacute;', '&agrave;', '&acirc;', '&atilde;',
         '&auml;', '&eacute;', '&egrave;', '&ecirc;', '&euml;',
@@ -37,12 +45,18 @@ class Html {
         '&Otilde;', '&Ouml;', '&Uacute;', '&Ugrave;', '&Ucirc;',
         '&Uuml;', '&Ccedil;', "'", '&acute;', '`', '/', '\\', '_',
         '_', '&uml;', '&ordf;', ',', ':', ' ');
+    /**
+     * @var array
+     */
     private static $acentosASCII = array(
         'á', 'à', 'â', 'ã', 'ä', 'é', 'è', 'ê', 'ë', 'í', 'ì', 'î',
         'ï', 'ó', 'ò', 'ô', 'õ', 'ö', 'ú', 'ù', 'û', 'ü', 'ç', 'Á',
         'À', 'Â', 'Ã', 'Ä', 'É', 'È', 'Ê', 'Ë', 'Í', 'Ì', 'Î', 'Ï',
         'Ó', 'Ò', 'Ô', 'Õ', 'Ö', 'Ú', 'Ù', 'Û', 'Ü', 'Ç', "'", '´',
         '`', '/', '\\', '~', '^', '¨', 'ª', ',', ':', '_');
+    /**
+     * @var array
+     */
     private static $semAcento = array(
         'a', 'a', 'a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i',
         'i', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'c', 'A',
@@ -59,14 +73,24 @@ class Html {
         return str_replace(self::$acentosASCII, self::$acentosHtml, $html);
     }
 
-    public static function retiraAcentos($html) {
+    /**
+     * @param $html
+     *
+     * @return mixed
+     */
+    public static function retiraAcentos( $html) {
         $html = str_replace(self::$acentosHtml, self::$semAcento, $html);
         $html = str_replace(self::$acentosASCII, self::$semAcento, $html);
 
         return $html;
     }
 
-    public static function trim($html) {
+    /**
+     * @param $html
+     *
+     * @return mixed
+     */
+    public static function trim( $html) {
         for ($i = 0; $i < 10; $i++) {
             $html = str_replace("  ", ' ', $html);
         }
@@ -104,7 +128,12 @@ class Html {
         return $chr;
     }
 
-    public static function link($txt) {
+    /**
+     * @param $txt
+     *
+     * @return string
+     */
+    public static function link( $txt) {
         $txt = str_replace('-', ' ', trim($txt));
         $txt = str_replace('_', ' ', $txt);
         $txt = preg_replace("/\s+/", " ", $txt);
@@ -118,7 +147,13 @@ class Html {
         return strtolower($txt);
     }
 
-    public static function textoTruncado($texto, $caracteres) {
+    /**
+     * @param $texto
+     * @param $caracteres
+     *
+     * @return string
+     */
+    public static function textoTruncado( $texto, $caracteres) {
         if (strlen($texto) > $caracteres) {
             $a = explode(' ', $texto);
             if (count($a) > 1) {
@@ -135,7 +170,12 @@ class Html {
         }
     }
 
-    public static function makeLink($string) {
+    /**
+     * @param $string
+     *
+     * @return mixed
+     */
+    public static function makeLink( $string) {
         /***
          * Reconhece as URL sem HTTP://
          **/

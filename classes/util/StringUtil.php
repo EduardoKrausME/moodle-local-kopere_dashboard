@@ -25,8 +25,18 @@ namespace local_kopere_dashboard\util;
 
 defined ( 'MOODLE_INTERNAL' ) || die();
 
+/**
+ * Class StringUtil
+ *
+ * @package local_kopere_dashboard\util
+ */
 class StringUtil
 {
+    /**
+     * @param int $length
+     *
+     * @return string
+     */
     public static function generateRandomString ( $length = 10 )
     {
         $characters = '123456789';
@@ -43,6 +53,9 @@ class StringUtil
         return $string;
     }
 
+    /**
+     * @return string
+     */
     public static function generateUID ()
     {
         return strtolower (
@@ -54,6 +67,13 @@ class StringUtil
     }
 
 
+    /**
+     * @param $param
+     * @param $default
+     * @param $type
+     *
+     * @return array|mixed
+     */
     public static function clearParamsAll ( $param, $default, $type )
     {
         if( $param == null ){
@@ -71,6 +91,12 @@ class StringUtil
         return self::clear_all_params ( $_POST[ $param ], $type );
     }
 
+    /**
+     * @param $in
+     * @param $type
+     *
+     * @return array|mixed
+     */
     private static function clear_all_params ( $in, $type )
     {
         $out = array();

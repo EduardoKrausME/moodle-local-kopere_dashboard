@@ -43,8 +43,15 @@ use local_kopere_dashboard\util\TitleUtil;
 use local_kopere_dashboard\vo\kopere_dashboard_menu;
 use local_kopere_dashboard\vo\kopere_dashboard_webpages;
 
+/**
+ * Class WebPages
+ * @package local_kopere_dashboard
+ */
 class WebPages {
 
+    /**
+     *
+     */
     public function dashboard() {
         global $DB, $CFG;
 
@@ -98,6 +105,9 @@ class WebPages {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     public function details() {
         global $DB, $CFG;
 
@@ -137,6 +147,9 @@ class WebPages {
 
     }
 
+    /**
+     *
+     */
     public function editPage() {
         global $DB;
 
@@ -221,6 +234,9 @@ class WebPages {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     public function editPageSave() {
         global $DB;
 
@@ -254,6 +270,9 @@ class WebPages {
         }
     }
 
+    /**
+     *
+     */
     public function deletePage() {
         global $DB, $CFG;
 
@@ -284,6 +303,9 @@ class WebPages {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     public function editMenu() {
         global $DB;
 
@@ -370,6 +392,9 @@ class WebPages {
         }
     }
 
+    /**
+     *
+     */
     public function editMenuSave() {
         global $DB;
 
@@ -392,6 +417,9 @@ class WebPages {
         }
     }
 
+    /**
+     *
+     */
     public function deleteMenu() {
         global $DB;
 
@@ -422,6 +450,9 @@ class WebPages {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     public function ajaxGetPageUrl() {
         global $DB;
 
@@ -452,6 +483,9 @@ class WebPages {
         }
     }
 
+    /**
+     *
+     */
     public function ajaxGetMenuUrl() {
         global $DB;
 
@@ -482,6 +516,10 @@ class WebPages {
         }
     }
 
+    /**
+     * @param $theme
+     * @return string
+     */
     private function themeName($theme) {
         $themes = self::listThemes();
 
@@ -492,6 +530,9 @@ class WebPages {
         return '-';
     }
 
+    /**
+     * @return array
+     */
     public static function listMenus() {
         global $DB;
 
@@ -506,6 +547,9 @@ class WebPages {
         return $returnMenus;
     }
 
+    /**
+     * @return array
+     */
     public static function listThemes() {
         $layouts = array(
             array(
@@ -541,6 +585,9 @@ class WebPages {
         return $layouts;
     }
 
+    /**
+     *
+     */
     public function settings() {
         ob_clean();
         DashboardUtil::startPopup(get_string_kopere('webpages_page_settigs'), 'Settings::settingsSave');
@@ -562,6 +609,9 @@ class WebPages {
         DashboardUtil::endPopup();
     }
 
+    /**
+     * @return string
+     */
     public static function getCacheDir() {
         $path = ServerUtil::getKoperePath(true) . 'cache';
 
@@ -570,6 +620,9 @@ class WebPages {
         return $path . '/';
     }
 
+    /**
+     *
+     */
     private static function deleteCache() {
         $caches = glob(self::getCacheDir() . '*');
         foreach ($caches as $cache) {

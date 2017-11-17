@@ -24,37 +24,78 @@ namespace local_kopere_dashboard\html;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class Table
+ *
+ * @package local_kopere_dashboard\html
+ */
 class Table {
-    public function __construct($adicional = '') {
+    /**
+     * Table constructor.
+     *
+     * @param string $adicional
+     */
+    public function __construct( $adicional = '') {
         $this->tableId = 'table_' . uniqid();
         echo '<table id="' . $this->tableId . '" class="table table-hover" width="100%" ';
         echo $adicional;
         echo '>';
     }
 
-    private $colunas = array();
-    private $click = null;
+    /**
+     * @var array
+     */
+    private $colunas  = array();
+    /**
+     * @var null
+     */
+    private $click    = null;
+    /**
+     * @var null
+     */
     private $id = null;
+    /**
+     * @var bool
+     */
     private $_isPrint = false;
+    /**
+     * @var string
+     */
     private $tableId;
 
-    public function setClick($exec, $chave) {
+    /**
+     * @param $exec
+     * @param $chave
+     */
+    public function setClick( $exec, $chave) {
         $this->click = array();
         $this->click['exec'] = $exec;
         $this->click['chave'] = $chave;
     }
 
-    public function setClickRedirect($url, $chave) {
+    /**
+     * @param $url
+     * @param $chave
+     */
+    public function setClickRedirect( $url, $chave) {
         $this->click = array();
         $this->click['chave'] = $chave;
         $this->click['exec'] = "document.location.href='" . $url . "'";
     }
 
-    public function setId($id) {
+    /**
+     * @param $id
+     */
+    public function setId( $id) {
         $this->id = $id;
     }
 
-    protected function getClick($linha) {
+    /**
+     * @param $linha
+     *
+     * @return mixed|string
+     */
+    protected function getClick( $linha) {
         if ($this->click == null) {
             return '';
         }
@@ -80,7 +121,14 @@ class Table {
         return $exec;
     }
 
-    public function addHeader($title, $chave = null, $funcao = null, $styleHeader = null, $styleCol = null) {
+    /**
+     * @param      $title
+     * @param null $chave
+     * @param null $funcao
+     * @param null $styleHeader
+     * @param null $styleCol
+     */
+    public function addHeader( $title, $chave = null, $funcao = null, $styleHeader = null, $styleCol = null) {
         $coluna = new TableHeaderItem();
         $coluna->chave = $chave;
         $coluna->title = $title;
@@ -91,7 +139,11 @@ class Table {
         $this->colunas[] = $coluna;
     }
 
-    public function printHeader($header, $class = '') {
+    /**
+     * @param        $header
+     * @param string $class
+     */
+    public function printHeader( $header, $class = '') {
         $this->colunas = array();
         echo '<thead>';
         echo '<tr class="' . $class . '">';
@@ -111,7 +163,11 @@ class Table {
         $this->_isPrint = true;
     }
 
-    public function setRow($linhas, $class = '') {
+    /**
+     * @param        $linhas
+     * @param string $class
+     */
+    public function setRow( $linhas, $class = '') {
         if (!$this->_isPrint && count($this->colunas)) {
             $this->printHeader($this->colunas);
         }
@@ -165,13 +221,20 @@ class Table {
         echo '</tbody>';
     }
 
-    public function printRow($html, $class = '') {
+    /**
+     * @param        $html
+     * @param string $class
+     */
+    public function printRow( $html, $class = '') {
         echo '<td class=' . $class . '>';
         echo $html;
         echo '</td>';
     }
 
-    public function close($datatable = false) {
+    /**
+     * @param bool $datatable
+     */
+    public function close( $datatable = false) {
         echo '</table>';
         if ($datatable) {
             echo '<script type="text/javascript">

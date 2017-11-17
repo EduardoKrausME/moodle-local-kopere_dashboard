@@ -31,16 +31,19 @@ defined('MOODLE_INTERNAL') || die();
  * @package local_kopere_dashboard\html\inputs
  */
 class InputBase implements IInput {
+    /**
+     *
+     */
     const VAL_REQUIRED = 'required';
-    const VAL_INT = 'int';
-    const VAL_VALOR = 'valor';
-    const VAL_PHONE = 'phone';
-    const VAL_CEP = 'cep';
-    const VAL_CPF = 'cpf';
-    const VAL_CNPJ = 'cnpj';
-    const VAL_NOME = 'nome';
-    const VAL_URL = 'url';
-    const VAL_EMAIL = 'email';
+    const VAL_INT      = 'int';
+    const VAL_VALOR    = 'valor';
+    const VAL_PHONE    = 'phone';
+    const VAL_CEP      = 'cep';
+    const VAL_CPF      = 'cpf';
+    const VAL_CNPJ     = 'cnpj';
+    const VAL_NOME     = 'nome';
+    const VAL_URL      = 'url';
+    const VAL_EMAIL    = 'email';
 
     const MASK_PHONE = 'phone';
     const MASK_CELULAR = 'celular';

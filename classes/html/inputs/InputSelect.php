@@ -25,6 +25,11 @@ namespace local_kopere_dashboard\html\inputs;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class InputSelect
+ *
+ * @package local_kopere_dashboard\html\inputs
+ */
 class InputSelect extends InputBase {
     /**
      * @var array

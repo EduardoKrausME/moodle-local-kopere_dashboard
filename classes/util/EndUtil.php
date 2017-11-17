@@ -8,12 +8,23 @@
 namespace local_kopere_dashboard\util;
 
 
+/**
+ * Class EndUtil
+ *
+ * @package local_kopere_dashboard\util
+ */
 class EndUtil {
-    public static function endScriptShow($print = '') {
+    /**
+     * @param string $print
+     */
+    public static function endScriptShow( $print = '') {
         die($print);
     }
 
-    public static function endScriptHeader($motivo) {
+    /**
+     * @param $motivo
+     */
+    public static function endScriptHeader( $motivo) {
         header('die-motivo:' . $motivo);
         die();
     }

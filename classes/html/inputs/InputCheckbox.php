@@ -25,6 +25,11 @@ namespace local_kopere_dashboard\html\inputs;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class InputCheckbox
+ *
+ * @package local_kopere_dashboard\html\inputs
+ */
 class InputCheckbox extends InputBase {
     /**
      * @var bool

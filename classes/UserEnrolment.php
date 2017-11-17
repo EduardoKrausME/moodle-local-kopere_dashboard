@@ -33,7 +33,14 @@ use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Mensagem;
 
+/**
+ * Class UserEnrolment
+ * @package local_kopere_dashboard
+ */
 class UserEnrolment {
+    /**
+     *
+     */
     public function mathedit() {
         global $DB;
 
@@ -130,6 +137,9 @@ class UserEnrolment {
         DashboardUtil::endPopup();
     }
 
+    /**
+     *
+     */
     public function matheditSave() {
         global $DB;
 

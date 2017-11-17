@@ -10,7 +10,15 @@ namespace local_kopere_dashboard\install;
 
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
+/**
+ * Class UsersImportInstall
+ *
+ * @package local_kopere_dashboard\install
+ */
 class UsersImportInstall {
+    /**
+     *
+     */
     public static function installOrUpdate() {
 
         $event = new kopere_dashboard_events();
@@ -46,7 +54,10 @@ class UsersImportInstall {
         self::insert($event);
     }
 
-    public static function insert($event) {
+    /**
+     * @param $event
+     */
+    public static function insert( $event) {
         global $DB;
 
         $evento = $DB->get_record('kopere_dashboard_events',

@@ -23,16 +23,36 @@
 
 namespace local_kopere_dashboard\chartsjs;
 
+/**
+ * Class Pie
+ *
+ * @package local_kopere_dashboard\chartsjs
+ */
 class Pie extends Base {
+    /**
+     * @var
+     */
     public $label;
+    /**
+     * @var
+     */
     public $value;
 
-    public function __construct($label, $value) {
+    /**
+     * Pie constructor.
+     *
+     * @param $label
+     * @param $value
+     */
+    public function __construct( $label, $value) {
         $this->label = $label;
         $this->value = $value;
     }
 
-    public static function createRegular(array $pieValues) {
+    /**
+     * @param array $pieValues
+     */
+    public static function createRegular( array $pieValues) {
         self::start();
 
         $itens = array();
@@ -71,7 +91,10 @@ class Pie extends Base {
         <?php
     }
 
-    public static function createDonut(array $pieValues) {
+    /**
+     * @param array $pieValues
+     */
+    public static function createDonut( array $pieValues) {
         self::start();
 
         $itens = array();

@@ -25,7 +25,14 @@ namespace local_kopere_dashboard;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class Modules
+ * @package local_kopere_dashboard
+ */
 class Modules {
+    /**
+     * @return mixed
+     */
     public function countAll() {
         global $DB;
 

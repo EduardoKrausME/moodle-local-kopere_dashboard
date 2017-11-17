@@ -32,7 +32,14 @@ use local_kopere_dashboard\util\EndUtil;
 use local_kopere_dashboard\util\Mensagem;
 use local_kopere_dashboard\util\Release;
 
+/**
+ * Class NotificationsUtil
+ * @package local_kopere_dashboard
+ */
 class NotificationsUtil {
+    /**
+     *
+     */
     public function addFormExtra() {
         $module = optional_param('module', '', PARAM_TEXT);
 
@@ -60,6 +67,9 @@ class NotificationsUtil {
         $form->createSubmitInput(get_string_kopere('notification_add_create'));
     }
 
+    /**
+     * @return \stdClass
+     */
     public function listEvents() {
         $eventClasss = array_merge(
             \report_eventlist_list_generator::get_core_events_list(false),
@@ -127,6 +137,9 @@ class NotificationsUtil {
         return $returned;
     }
 
+    /**
+     *
+     */
     public function settingsLoadTemplate() {
         global $CFG, $COURSE;
 
@@ -150,6 +163,11 @@ class NotificationsUtil {
         echo $content;
     }
 
+    /**
+     * @param $component
+     * @param $onlyUsed
+     * @return null|string
+     */
     protected function moduleName($component, $onlyUsed) {
         global $DB;
 
@@ -204,6 +222,9 @@ class NotificationsUtil {
         return null;
     }
 
+    /**
+     *
+     */
     public static function mensagemNoSmtp() {
         global $CFG;
         if (strlen(get_config('moodle', 'smtphosts')) > 5)

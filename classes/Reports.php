@@ -25,12 +25,10 @@ namespace local_kopere_dashboard;
 
 defined('MOODLE_INTERNAL') || die();
 
+use Horde\Socket\Client\Exception;
 use local_kopere_dashboard\html\DataTable;
 use local_kopere_dashboard\html\TableHeaderItem;
 use local_kopere_dashboard\html\Button;
-use local_kopere_dashboard\report\custom\InfoInterface;
-use local_kopere_dashboard\report\custom\ReportInterface;
-use local_kopere_dashboard\report\custom\ReportsCourseAccess;
 use local_kopere_dashboard\util\DashboardUtil;
 use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Json;
@@ -39,6 +37,10 @@ use local_kopere_dashboard\util\Export;
 use local_kopere_dashboard\vo\kopere_dashboard_reportcat;
 use local_kopere_dashboard\vo\kopere_dashboard_reports;
 
+/**
+ * Class Reports
+ * @package local_kopere_dashboard
+ */
 class Reports {
 
     /**
@@ -75,6 +77,9 @@ class Reports {
         return $menus;
     }
 
+    /**
+     *
+     */
     public function dashboard() {
         global $CFG, $DB;
 
@@ -122,6 +127,9 @@ class Reports {
         DashboardUtil::endPage();
     }
 
+    /**
+     *
+     */
     public function loadReport() {
         global $DB;
 
@@ -147,6 +155,9 @@ class Reports {
         echo '<div class="element-box table-responsive">';
 
         if (strlen($kopere_reports->prerequisit) && $courseid == 0) {
+            try{
+                ini_set ( 'max_execution_time', 0 );
+            }catch(Exception $e){}
             $this->prerequisit($report, $kopere_reports->prerequisit);
         } else {
 
@@ -175,6 +186,10 @@ class Reports {
         DashboardUtil::endPage();
     }
 
+    /**
+     * @param $report
+     * @param $pre
+     */
     private function prerequisit($report, $pre) {
         if ($pre == 'listCourses') {
             TitleUtil::printH3('reports_selectcourse');
@@ -193,6 +208,9 @@ class Reports {
         }
     }
 
+    /**
+     *
+     */
     public function getdata(){
         global $DB, $CFG;
 
@@ -228,6 +246,10 @@ class Reports {
         Json::encodeAndReturn($reports, count($recordsTotal), count($recordsTotal));
     }
 
+    /**
+     * @param $obj
+     * @return string
+     */
     private static function getTitle($obj) {
         if (strpos($obj->title, '[[') === 0) {
             return get_string_kopere(substr($obj->title, 2, -2));
@@ -236,6 +258,9 @@ class Reports {
         }
     }
 
+    /**
+     *
+     */
     public function download() {
         global $DB;
 

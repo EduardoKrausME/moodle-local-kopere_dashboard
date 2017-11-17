@@ -37,8 +37,15 @@ use local_kopere_dashboard\util\Json;
 use local_kopere_dashboard\util\TitleUtil;
 use local_kopere_dashboard\util\UserUtil;
 
+/**
+ * Class UsersOnline
+ * @package local_kopere_dashboard
+ */
 class UsersOnline {
 
+    /**
+     *
+     */
     public function dashboard() {
         DashboardUtil::startPage(get_string_kopere('useronline_title'), -1, 'UsersOnline::settings', 'Usuários-Online');
 
@@ -68,6 +75,9 @@ class UsersOnline {
         DashboardUtil::endPage();
     }
 
+    /**
+     * @param int $time
+     */
     public function loadAllUsers($time = 10) {
         global $DB;
 
@@ -89,6 +99,10 @@ class UsersOnline {
         Json::encodeAndReturn($result);
     }
 
+    /**
+     * @param $time
+     * @return int
+     */
     public static function countOnline($time) {
         global $DB;
 
@@ -117,6 +131,9 @@ class UsersOnline {
             return 0;
     }
 
+    /**
+     *
+     */
     public function settings() {
         ob_clean();
         DashboardUtil::startPopup(get_string_kopere('useronline_settings_title'), 'Settings::settingsSave');

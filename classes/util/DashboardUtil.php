@@ -27,10 +27,24 @@ defined ( 'MOODLE_INTERNAL' ) || die();
 
 use local_kopere_dashboard\html\Button;
 
+/**
+ * Class DashboardUtil
+ *
+ * @package local_kopere_dashboard\util
+ */
 class DashboardUtil
 {
+    /**
+     * @var string
+     */
     public static $currentTitle = '';
 
+    /**
+     * @param      $title
+     * @param null $infoUrl
+     *
+     * @return string
+     */
     public static function setTitulo ( $title, $infoUrl = null )
     {
         self::$currentTitle = $title;
@@ -45,6 +59,12 @@ class DashboardUtil
         }
     }
 
+    /**
+     * @param      $breadcrumb
+     * @param null $pageTitle
+     * @param null $settingUrl
+     * @param null $infoUrl
+     */
     public static function startPage ( $breadcrumb, $pageTitle = null, $settingUrl = null, $infoUrl = null )
     {
         global $CFG, $SITE;
@@ -111,6 +131,9 @@ class DashboardUtil
         echo $breadcrumbReturn;
     }
 
+    /**
+     *
+     */
     public static function endPage ()
     {
         if ( AJAX_SCRIPT ) {
@@ -175,6 +198,11 @@ class DashboardUtil
                 </li>";
     }
 
+    /**
+     * @param $menuFunction
+     *
+     * @return string
+     */
     private static function testMenuActive ( $menuFunction )
     {
         preg_match ( "/.*?::/", $menuFunction, $paths );
@@ -185,8 +213,15 @@ class DashboardUtil
         return '';
     }
 
+    /**
+     * @var bool
+     */
     private static $_isWithForm = false;
 
+    /**
+     * @param      $title
+     * @param null $formAction
+     */
     public static function startPopup ( $title, $formAction = null )
     {
         if ( $formAction ) {
@@ -209,6 +244,9 @@ class DashboardUtil
         }
     }
 
+    /**
+     * @param null $deleteButtonUrl
+     */
     public static function endPopup ( $deleteButtonUrl = null )
     {
         if ( self::$_isWithForm ) {

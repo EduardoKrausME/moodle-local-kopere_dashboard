@@ -25,8 +25,16 @@ namespace local_kopere_dashboard\util;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class Mensagem
+ *
+ * @package local_kopere_dashboard\util
+ */
 class Mensagem {
-    public static function agendaMensagem($mensagem) {
+    /**
+     * @param $mensagem
+     */
+    public static function agendaMensagem( $mensagem) {
         if (!isset($_SESSION['kopere_mensagem'])) {
             $_SESSION['kopere_mensagem'] = $mensagem;
         } else {
@@ -34,6 +42,9 @@ class Mensagem {
         }
     }
 
+    /**
+     * @return string
+     */
     public static function getMensagemAgendada() {
         if (isset($_SESSION['kopere_mensagem'])) {
             $texto = $_SESSION['kopere_mensagem'];
@@ -45,67 +56,116 @@ class Mensagem {
         return "";
     }
 
+    /**
+     * return void
+     */
     public static function clearMensagem() {
         @$_SESSION['kopere_mensagem'] = null;
     }
 
-    public static function warning($texto) {
+    /**
+     * @param $texto
+     *
+     * @return string
+     */
+    public static function warning( $texto) {
         return "<div class=\"alert alert-warning\">
             <i class=\"fa fa-exclamation-circle\"></i>
             $texto
         </div>";
     }
 
-    public static function printWarning($texto) {
+    /**
+     * @param $texto
+     */
+    public static function printWarning( $texto) {
         echo self::warning($texto);
     }
 
-    public static function agendaMensagemWarning($texto) {
+    /**
+     * @param $texto
+     */
+    public static function agendaMensagemWarning( $texto) {
         self::agendaMensagem(self::warning($texto));
     }
 
-    public static function success($texto) {
+    /**
+     * @param $texto
+     *
+     * @return string
+     */
+    public static function success( $texto) {
         return "<div class=\"alert alert-success\">
             <i class=\"fa fa-check-circle\"></i>
             $texto
         </div>";
     }
 
-    public static function printSuccess($texto) {
+    /**
+     * @param $texto
+     */
+    public static function printSuccess( $texto) {
         echo self::success($texto);
     }
 
-    public static function agendaMensagemSuccess($texto) {
+    /**
+     * @param $texto
+     */
+    public static function agendaMensagemSuccess( $texto) {
         self::agendaMensagem(self::success($texto));
     }
 
-    public static function info($texto, $extraClass='') {
+    /**
+     * @param        $texto
+     * @param string $extraClass
+     *
+     * @return string
+     */
+    public static function info( $texto, $extraClass='') {
         return "<div class=\"alert alert-info $extraClass\">
             <i class=\"fa fa-info-circle\"></i>
             $texto
         </div>";
     }
 
-    public static function printInfo($texto, $extraClass='') {
+    /**
+     * @param        $texto
+     * @param string $extraClass
+     */
+    public static function printInfo( $texto, $extraClass='') {
         echo self::info($texto, $extraClass);
     }
 
-    public static function agendaMensagemInfo($texto) {
+    /**
+     * @param $texto
+     */
+    public static function agendaMensagemInfo( $texto) {
         self::agendaMensagem(self::info($texto));
     }
 
-    public static function danger($texto) {
+    /**
+     * @param $texto
+     *
+     * @return string
+     */
+    public static function danger( $texto) {
         return "<div class=\"alert alert-danger\">
             <i class=\"fa fa-times-circle\"></i>
             $texto
         </div>";
     }
 
-    public static function printDanger($texto) {
+    /**
+     * @param $texto
+     */
+    public static function printDanger( $texto) {
         echo self::danger($texto);
     }
 
-    public static function agendaMensagemDanger($texto) {
+    /**
+     * @param $texto
+     */
+    public static function agendaMensagemDanger( $texto) {
         self::agendaMensagem(self::danger($texto));
     }
 }

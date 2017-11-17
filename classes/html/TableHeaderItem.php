@@ -37,13 +37,37 @@ class TableHeaderItem extends \stdClass {
     const RENDERER_TRUEFALSE = 'truefalse';
     const RENDERER_STATUS = 'status';
 
+    /**
+     * @var
+     */
     public $funcao;
-    public $title = '';
-    public $type = '';
-    public $chave = '';
-    public $class = '';
+    /**
+     * @var string
+     */
+    public $title       = '';
+    /**
+     * @var string
+     */
+    public $type        = '';
+    /**
+     * @var string
+     */
+    public $chave       = '';
+    /**
+     * @var string
+     */
+    public $class       = '';
+    /**
+     * @var string
+     */
     public $styleHeader = '';
+    /**
+     * @var string
+     */
     public $styleCol = '';
 
+    /**
+     * @var int
+     */
     public $cols = 0;
 }

@@ -27,7 +27,14 @@ defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\util\DashboardUtil;
 
+/**
+ * Class About
+ * @package local_kopere_dashboard
+ */
 class About {
+    /**
+     *
+     */
     public function dashboard() {
         DashboardUtil::startPage(get_string_kopere('about_title'));
 

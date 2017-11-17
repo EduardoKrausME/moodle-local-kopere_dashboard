@@ -26,11 +26,25 @@ defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\html\inputs\IInput;
 
+/**
+ * Class Form
+ *
+ * @package local_kopere_dashboard\html
+ */
 class Form {
 
+    /**
+     * @var null
+     */
     private $formAction;
 
-    public function __construct($formAction = null, $classExtra = '') {
+    /**
+     * Form constructor.
+     *
+     * @param null   $formAction
+     * @param string $classExtra
+     */
+    public function __construct( $formAction = null, $classExtra = '') {
         $this->formAction = $formAction;
         if ($this->formAction) {
             echo "<form method=\"post\" class=\"validate $classExtra\" enctype=\"multipart/form-data\" action=\"?{$this->formAction}\" >";
@@ -39,7 +53,13 @@ class Form {
         }
     }
 
-    public function printRow($titulo, $input, $name = '', $adicionalText = '') {
+    /**
+     * @param        $titulo
+     * @param        $input
+     * @param string $name
+     * @param string $adicionalText
+     */
+    public function printRow( $titulo, $input, $name = '', $adicionalText = '') {
         if($titulo)
             $titulo = '<label for="' . $name . '">' . $titulo . '</label>';
 
@@ -49,7 +69,11 @@ class Form {
               </div>';
     }
 
-    public function printPanel($titulo, $panelBody) {
+    /**
+     * @param $titulo
+     * @param $panelBody
+     */
+    public function printPanel( $titulo, $panelBody) {
         echo '<div class="form-group">
                   <label>' . $titulo . '</label>
                   <div class="panel panel-default">
@@ -58,7 +82,13 @@ class Form {
               </div>';
     }
 
-    public function printRowOne($titulo, $input, $name = '', $adicionalText = '') {
+    /**
+     * @param        $titulo
+     * @param        $input
+     * @param string $name
+     * @param string $adicionalText
+     */
+    public function printRowOne( $titulo, $input, $name = '', $adicionalText = '') {
         echo '<div class="form-check area_' . $name . '"">
                   <label for="' . $name . '" class="form-check-label">
                       ' . $input . ' ' . $titulo . '</label>
@@ -66,15 +96,24 @@ class Form {
               </div>';
     }
 
-    public function printSection($sectionTitle) {
+    /**
+     * @param $sectionTitle
+     */
+    public function printSection( $sectionTitle) {
         echo '<div class="form-section"><span>' . $sectionTitle . '</span></div>';
     }
 
-    public function printSpacer($height) {
+    /**
+     * @param $height
+     */
+    public function printSpacer( $height) {
         echo '<div class="form-group" style="height: ' . $height . 'px">&nbsp;</div>';
     }
 
-    public function addInput(IInput $input) {
+    /**
+     * @param IInput $input
+     */
+    public function addInput( IInput $input) {
         $this->printRow(
             $input->getTitle(),
             $input->toString(),
@@ -83,22 +122,37 @@ class Form {
         );
     }
 
-    public function createHiddenInput($name, $value = '') {
+    /**
+     * @param        $name
+     * @param string $value
+     */
+    public function createHiddenInput( $name, $value = '') {
         echo '<input type="hidden" id="hidden_' . $name . '" name="' . $name . '" id="' . $name . '" value="' . htmlspecialchars($value) . '"/>';
     }
 
-    public function createSubmitInput($value = '', $class = '', $additionalText = '') {
+    /**
+     * @param string $value
+     * @param string $class
+     * @param string $additionalText
+     */
+    public function createSubmitInput( $value = '', $class = '', $additionalText = '') {
         $html = '<input name="" class="btn btn-success bt-submit ' . $class . '" type="submit" value="' . htmlspecialchars($value) . '" />';
         $this->printRow('', $html, 'btsubmit', $additionalText);
     }
 
+    /**
+     *
+     */
     public function close() {
         if ($this->formAction) {
             echo '</form>';
         }
     }
 
-    public function closeAndAutoSubmitInput($campo) {
+    /**
+     * @param $campo
+     */
+    public function closeAndAutoSubmitInput( $campo) {
         echo "<input id=\"submit_$campo\" name=\"\" type=\"submit\" style='display: none;' />
               <script>
                   $( '#$campo' ).change( function() {

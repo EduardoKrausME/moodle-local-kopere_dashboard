@@ -29,7 +29,14 @@ use local_kopere_dashboard\util\Header;
 use local_kopere_dashboard\util\Mensagem;
 use local_kopere_dashboard\util\StringUtil;
 
+/**
+ * Class Settings
+ * @package local_kopere_dashboard
+ */
 class Settings {
+    /**
+     *
+     */
     public function settingsSave() {
 
         $post   = StringUtil::clearParamsAll ( null, null, PARAM_TEXT );

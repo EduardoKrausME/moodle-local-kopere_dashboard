@@ -27,7 +27,15 @@ defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\util\BytesUtil;
 
+/**
+ * Class Files
+ *
+ * @package local_kopere_dashboard\report
+ */
 class Files {
+    /**
+     * @return mixed
+     */
     public static function countAllSpace() {
         global $DB;
 
@@ -36,6 +44,9 @@ class Files {
         return $count->space;
     }
 
+    /**
+     * @return mixed
+     */
     public static function countAllCourseSpace() {
         global $DB;
 
@@ -44,6 +55,9 @@ class Files {
         return $count->space;
     }
 
+    /**
+     * @return mixed
+     */
     public static function countAllUsersSpace() {
         global $DB;
 
@@ -52,6 +66,9 @@ class Files {
         return $count->space;
     }
 
+    /**
+     * @return array
+     */
     public static function listSizesCourses() {
         global $DB;
 

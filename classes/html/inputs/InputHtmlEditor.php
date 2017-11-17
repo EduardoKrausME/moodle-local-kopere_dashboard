@@ -27,6 +27,11 @@ defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\html\TinyMce;
 
+/**
+ * Class InputHtmlEditor
+ *
+ * @package local_kopere_dashboard\html\inputs
+ */
 class InputHtmlEditor extends InputTextarea {
     /**
      * @return InputHtmlEditor

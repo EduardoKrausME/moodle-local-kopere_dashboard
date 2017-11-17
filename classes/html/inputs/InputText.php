@@ -25,7 +25,15 @@ namespace local_kopere_dashboard\html\inputs;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class InputText
+ *
+ * @package local_kopere_dashboard\html\inputs
+ */
 class InputText extends InputBase {
+    /**
+     * InputText constructor.
+     */
     public function __construct() {
         $this->setType('text');
     }

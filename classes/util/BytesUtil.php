@@ -24,8 +24,16 @@ namespace local_kopere_dashboard\util;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class BytesUtil
+ *
+ * @package local_kopere_dashboard\util
+ */
 class BytesUtil {
 
+    /**
+     * @var int
+     */
     private static $divisor = 1000;
 
     /**
@@ -74,7 +82,12 @@ class BytesUtil {
         }
     }
 
-    public static function getDurationSegundos($value) {
+    /**
+     * @param $value
+     *
+     * @return int
+     */
+    public static function getDurationSegundos( $value) {
         $partes = explode(':', $value);
 
         return ($partes[0] * 60 * 60) + ($partes[1] * 60) + $partes[2];

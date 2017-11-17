@@ -25,7 +25,14 @@ namespace local_kopere_dashboard;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class Grade
+ * @package local_kopere_dashboard
+ */
 class Grade {
+    /**
+     * @return array
+     */
     public function getLastGrades() {
         global $DB, $CFG;
 

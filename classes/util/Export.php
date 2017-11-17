@@ -25,10 +25,22 @@ namespace local_kopere_dashboard\util;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class Export
+ *
+ * @package local_kopere_dashboard\util
+ */
 class Export {
+    /**
+     * @var
+     */
     private static $_format;
 
-    public static function exportHeader($format, $filename = null) {
+    /**
+     * @param      $format
+     * @param null $filename
+     */
+    public static function exportHeader( $format, $filename = null) {
         if ($filename == null) {
             $filename = DashboardUtil::$currentTitle;
         }
@@ -54,6 +66,9 @@ class Export {
         }
     }
 
+    /**
+     *
+     */
     public static function exportClose() {
         if (self::$_format == 'xls') {
             echo '</body></html>';

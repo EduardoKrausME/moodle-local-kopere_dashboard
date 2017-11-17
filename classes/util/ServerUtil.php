@@ -25,8 +25,18 @@ namespace local_kopere_dashboard\util;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class ServerUtil
+ *
+ * @package local_kopere_dashboard\util
+ */
 class ServerUtil {
-    public static function getKoperePath($create = true) {
+    /**
+     * @param bool $create
+     *
+     * @return string
+     */
+    public static function getKoperePath( $create = true) {
         global $CFG;
 
         if ($create) {
@@ -37,7 +47,12 @@ class ServerUtil {
         return $CFG->dataroot . '/kopere/dashboard/';
     }
 
-    public static function isFunctionEnabled($function) {
+    /**
+     * @param $function
+     *
+     * @return bool
+     */
+    public static function isFunctionEnabled( $function) {
         return is_callable($function) && false === stripos(ini_get('disable_functions'), $function);
     }
 
