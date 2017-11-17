@@ -39,14 +39,12 @@ $string['php_datetime'] = 'm/d/Y H:i';
 
 $string['help_title'] = 'Help with this page';
 
-// html/TinyMce
+// html/TinyMce.php
 $string['blocks'] = 'Blocks';
 $string['blocks_paragraph'] = 'Paragraph';
-
 $string['image_alignment'] = 'Image alignment';
 $string['image_alignment_left'] = 'Left alignment';
 $string['image_alignment_right'] = 'Right Alignment';
-
 $string['colors'] = 'Colors';
 $string['background'] = 'Backround';
 $string['color_red'] = 'Red';
@@ -192,10 +190,7 @@ $string['reports_report_courses-1'] = 'Progress with completion percentage';
 $string['reports_report_courses-2'] = 'Courses that are groups enabled';
 $string['reports_report_courses-3'] = 'Course access report';
 $string['reports_report_courses-4'] = 'Course access report with grades';
-
-$string['reports_report_courses-5'] = 'Último acesso ao curso';
-
-
+$string['reports_report_courses-5'] = 'Last access to course';
 $string['reports_report_enrol_cohort-1'] = 'Cohorts and users';
 $string['reports_report_enrol_guest-1'] = 'Guest Logins Report';
 $string['reports_report_server-1'] = 'Disk Usage Report';
@@ -393,7 +388,6 @@ $string['userimport_import_user_created_name'] = 'User imported and registered i
 $string['userimport_import_course_enrol_name'] = 'Imported user was enrolled in the Course';
 $string['userimport_import_user_created_and_enrol_name'] = 'Imported user, registered in Moodle and Course';
 $string['userimport_messages'] = 'Messages that students will receive during import';
-$string['userimport_messages'] = 'Messages that users will receive during import';
 $string['userimport_receivemessage'] = 'User will receive the message with the title {$a}';
 $string['userimport_messageinactive'] = 'Message titled {$a} is inactive and will not be sent';
 $string['userimport_notreceivemessage'] = 'User will not receive any messages in this action!';

@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    local_kopere_dashboard
- * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package  local_kopere_dashboard
+ * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 $string['modulename'] = 'Kopere Dashboard';
@@ -174,7 +174,7 @@ $string['courses_student_status'] = 'Status da matrícula';
 $string['courses_page_title'] = 'Páginas já criadas';
 $string['courses_page_create'] = 'Criar página com base neste sumário';
 
-//  Reports
+// Reports
 $string['reports_title'] = 'Relatórios';
 $string['reports_selectcourse'] = 'Selecione o curso para gerar o relatório';
 $string['reports_notfound'] = 'Relatório não localizado!';
@@ -190,6 +190,7 @@ $string['reports_report_courses-1'] = 'Progresso com percentual de conclusão';
 $string['reports_report_courses-2'] = 'Cursos que possuem grupos ativados';
 $string['reports_report_courses-3'] = 'Relatório de acesso ao curso';
 $string['reports_report_courses-4'] = 'Relatório de acesso ao curso com notas';
+$string['reports_report_courses-5'] = 'Último acesso ao curso';
 $string['reports_report_enrol_cohort-1'] = 'Coortes e os usuários';
 $string['reports_report_enrol_guest-1'] = 'Relatório de Logins dos visitantes';
 $string['reports_report_server-1'] = 'Relatório de uso do Disco';
