@@ -94,9 +94,9 @@ class PerformanceMonitor {
 
         echo '<span class="in">in: ';
         if ($bitsPerSecond > 1024 * 1024) {
-            echo number_format($bitsPerSecond / 1024 / 1024, 2, ',', '.') . " Mbit/s";
+            echo number_format($bitsPerSecond / 1024 / 1024, 2, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . " Mbit/s";
         } else if ($bitsPerSecond > 1024) {
-            echo number_format($bitsPerSecond / 1024, 2, ',', '.') . " Kbit/s";
+            echo number_format($bitsPerSecond / 1024, 2, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . " Kbit/s";
         } else {
             echo("< 1 Kbit/s");
         }
@@ -110,9 +110,9 @@ class PerformanceMonitor {
 
         echo '<br><span class="out">out: ';
         if ($bitsPerSecond > 1024 * 1024 * 8) {
-            echo number_format($bitsPerSecond / 1024 / 1024, 2, ',', '.') . " Mbit/s";
+            echo number_format($bitsPerSecond / 1024 / 1024, 2, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . " Mbit/s";
         } else if ($bitsPerSecond > 1024 * 8) {
-            echo number_format($bitsPerSecond / 1024, 2, ',', '.') . " Kbit/s";
+            echo number_format($bitsPerSecond / 1024, 2, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . " Kbit/s";
         } else {
             echo("< 1 Kbit/s");
         }
@@ -152,8 +152,9 @@ class PerformanceMonitor {
         // $st = $outputCpuProcess[ 8 ][ 1 ];
 
         echo $_SESSION ['cpus'] . ' CORES - ';
-        echo number_format($us + $sy + $ni, 1, ',', '') . '% <br/>';
-        echo ' us: ' . number_format($us, 1, ',', '') . '%, sys: ' . number_format($ni, 1, ',', '') . '%';
+        echo number_format($us + $sy + $ni, 1, get_string('decsep', 'langconfig'), '') . '% <br/>';
+        echo ' us: ' . number_format($us, 1, get_string('decsep', 'langconfig'), '') . '%, sys: ' .
+            number_format($ni, 1, get_string('decsep', 'langconfig'), '') . '%';
         echo '</div>';
     }
 

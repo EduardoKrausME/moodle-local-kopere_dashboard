@@ -29,16 +29,15 @@ global $DB, $PAGE, $OUTPUT;
 $menu = optional_param('menu', 0, PARAM_TEXT);
 $page = optional_param('p', 0, PARAM_TEXT);
 
-if (!isloggedin()) {
-    $fileCache = \local_kopere_dashboard\util\Html::link( $menu . '-' . $page );
-    $cacheFilename = \local_kopere_dashboard\WebPages::getCacheDir() . $fileCache . '.html';
-
-    if (file_exists($cacheFilename)) {
-        echo file_get_contents($cacheFilename);
-        die();
-    }
-}
-
+//if (!isloggedin()) {
+//    $fileCache = \local_kopere_dashboard\util\Html::link( $menu . '-' . $page );
+//    $cacheFilename = \local_kopere_dashboard\WebPages::getCacheDir() . $fileCache . '.html';
+//
+//    if (file_exists($cacheFilename)) {
+//        echo file_get_contents($cacheFilename);
+//        die();
+//    }
+//}
 
 $pageHtml = '';
 
@@ -184,29 +183,31 @@ if (strlen($webpagesAnalyticsId) > 5 && strlen($webpagesAnalyticsId) < 15) {
 
 $pageHtml .= $OUTPUT->footer();
 
-if (isloggedin()) {
-    echo $pageHtml;
-} else {
-    ob_clean();
-    $pageHtml = str_replace('// <![CDATA[', '', $pageHtml);
-    $pageHtml = str_replace('// ]]>', '', $pageHtml);
+echo $pageHtml;
 
-    $pageHtml = preg_replace("/\/\/ .*?\n/", "", $pageHtml);
-    $pageHtml = preg_replace('/\s+/', ' ', $pageHtml);
-
-    // preg_match_all ( "/<link rel=\"stylesheet\" type=\"text\/css\" href=\"(http.*?)\" \/>/", $pageHtml, $csss );
-    //
-    // foreach ( $csss[ 0 ] as $key => $css ) {
-    // $link    = $csss[ 1 ][ $key ];
-    // $cssFile = file_get_contents ( $link );
-    //
-    // $cssFile = preg_replace ( '/\s+/', ' ', $cssFile );
-    // $cssFile = preg_replace('!/\*.*?\*/!s', ' ', $cssFile);
-    //
-    // $pageHtml = str_replace ( $csss[ 0 ][ $key ], '<style>' . $cssFile . '</style>', $pageHtml );
-    // }
-
-    echo $pageHtml;
-
-    file_put_contents($cacheFilename, $pageHtml . "\n<!-- Cached on " . str_replace('T', ' ', date("c")) . " -->");
-}
+//if (isloggedin()) {
+//    echo $pageHtml;
+//} else {
+//    ob_clean();
+//    $pageHtml = str_replace('// <![CDATA[', '', $pageHtml);
+//    $pageHtml = str_replace('// ]]>', '', $pageHtml);
+//
+//    $pageHtml = preg_replace("/\/\/ .*?\n/", "", $pageHtml);
+//    $pageHtml = preg_replace('/\s+/', ' ', $pageHtml);
+//
+//    // preg_match_all ( "/<link rel=\"stylesheet\" type=\"text\/css\" href=\"(http.*?)\" \/>/", $pageHtml, $csss );
+//    //
+//    // foreach ( $csss[ 0 ] as $key => $css ) {
+//    // $link    = $csss[ 1 ][ $key ];
+//    // $cssFile = file_get_contents ( $link );
+//    //
+//    // $cssFile = preg_replace ( '/\s+/', ' ', $cssFile );
+//    // $cssFile = preg_replace('!/\*.*?\*/!s', ' ', $cssFile);
+//    //
+//    // $pageHtml = str_replace ( $csss[ 0 ][ $key ], '<style>' . $cssFile . '</style>', $pageHtml );
+//    // }
+//
+//    echo $pageHtml;
+//
+//    file_put_contents($cacheFilename, $pageHtml . "\n<!-- Cached on " . str_replace('T', ' ', date("c")) . " -->");
+//}

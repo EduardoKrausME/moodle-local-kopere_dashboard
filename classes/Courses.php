@@ -101,7 +101,7 @@ class Courses {
         $count = $DB->get_record_sql('SELECT count(*) as num FROM {course} WHERE id > 1');
 
         if ($format) {
-            return number_format($count->num, 0, ',', '.');
+            return number_format($count->num, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig'));
         }
 
         return $count->num;
@@ -117,7 +117,7 @@ class Courses {
         $count = $DB->get_record_sql('SELECT count(*) as num FROM {course} WHERE id > 1 AND visible = 1');
 
         if ($format) {
-            return number_format($count->num, 0, ',', '.');
+            return number_format($count->num, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig'));
         }
 
         return $count->num;

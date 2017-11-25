@@ -113,7 +113,7 @@ class Users {
         $count = $DB->get_record_sql('SELECT count(*) as num FROM {user} WHERE id > 1 AND deleted = 0');
 
         if ($format) {
-            return number_format($count->num, 0, ',', '.');
+            return number_format($count->num, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig'));
         }
 
         return $count->num;
@@ -129,7 +129,7 @@ class Users {
         $count = $DB->get_record_sql('SELECT count(*) as num FROM {user} WHERE id > 1 AND deleted = 0 AND lastaccess > 0');
 
         if ($format) {
-            return number_format($count->num, 0, ',', '.');
+            return number_format($count->num, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig'));
         }
 
         return $count->num;

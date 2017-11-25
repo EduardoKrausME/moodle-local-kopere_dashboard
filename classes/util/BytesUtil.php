@@ -49,22 +49,22 @@ class BytesUtil {
         }
         $bytes = $_bytes / self::$divisor;
         if ($bytes < 1000) {
-            return self::removeZero(number_format($bytes, 0, ',', '.') . ' KB', 0);
+            return self::removeZero(number_format($bytes, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . ' KB', 0);
         }
 
         $bytes = $_bytes / self::$divisor / self::$divisor;
         if ($bytes < 1000) {
-            return self::removeZero(number_format($bytes, 0, ',', '.') . ' MB', 0);
+            return self::removeZero(number_format($bytes, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . ' MB', 0);
         }
 
         $bytes = $_bytes / self::$divisor / self::$divisor / self::$divisor;
         if ($bytes < 1000) {
-            return self::removeZero(number_format($bytes, 1, ',', '.') . ' GB', 1);
+            return self::removeZero(number_format($bytes, 1, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . ' GB', 1);
         }
 
         $bytes = $_bytes / self::$divisor / self::$divisor / self::$divisor / self::$divisor;
 
-        return self::removeZero(number_format($bytes, 2, ',', '.') . ' TB', 2);
+        return self::removeZero(number_format($bytes, 2, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . ' TB', 2);
     }
 
     /**

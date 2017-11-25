@@ -112,7 +112,7 @@ class Dashboard {
                 continue;
             }
 
-            $gradeText = number_format($grade->finalgrade, 1, ',', '') . ' '.get_string_kopere('dashboard_grade_of').' ' . intval($grade->rawgrademax);
+            $gradeText = number_format($grade->finalgrade, 1, get_string('decsep', 'langconfig'), '') . ' '.get_string_kopere('dashboard_grade_of').' ' . intval($grade->rawgrademax);
 
             echo '<div class="media dashboard-grade-list">
                       <div class="media-left">
