@@ -59,7 +59,7 @@ class EnrolUtil {
                 'contextid' => $context->id,
                 'userid' => $user->id
             ));
-        if ($test_role_assignments != null) {
+        if ($test_role_assignments == null) {
             $role_assignments = new \stdClass();
             $role_assignments->roleid = 5;
             $role_assignments->contextid = $context->id;
