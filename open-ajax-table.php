@@ -47,4 +47,4 @@ $PAGE->set_url(new moodle_url('/local/kopere_dashboard/open-ajax-table.php'));
 $PAGE->set_pagetype('reports');
 $PAGE->set_context(context_system::instance());
 
-loadByQuery($_SERVER['QUERY_STRING']);
+load_by_query($_SERVER['QUERY_STRING']);
