@@ -22,31 +22,31 @@
  */
 
 spl_autoload_register("kopere_dashboard_autoload");
-function kopere_dashboard_autoload($className) {
+function kopere_dashboard_autoload($class_name) {
     global $CFG;
 
-    if (strpos($className, 'kopere') === false) {
+    if (strpos($class_name, 'kopere') === false) {
         return;
     }
 
-    $className = str_replace('\\', '/', $className);
+    $class_name = str_replace('\\', '/', $class_name);
 
-    preg_match("/local_(.*?)\/(.*)/", $className, $classPartes);
+    preg_match("/local_(.*?)\/(.*)/", $class_name, $class_partes);
 
-    $file = "{$CFG->dirroot}/local/{$classPartes[1]}/classes/{$classPartes[2]}.php";
+    $file = "{$CFG->dirroot}/local/{$class_partes[1]}/classes/{$class_partes[2]}.php";
     if (file_exists($file)) {
         require_once($file);
     }
 }
 
-function load_by_query($queryString) {
-    preg_match("/(.*?)::([a-zA-Z_0-9]+)/", $queryString, $paths);
+function load_by_query($query_string) {
+    preg_match("/(.*?)::([a-zA-Z_0-9]+)/", $query_string, $paths);
 
-    $className = strtolower($paths[1]);
-    if (strpos($className, '-')) {
-        $class = 'local_kopere_dashboard_' . str_replace('-', '\\', $className);
+    $class_name = strtolower($paths[1]);
+    if (strpos($class_name, '-')) {
+        $class = 'local_kopere_dashboard_' . str_replace('-', '\\', $class_name);
     } else {
-        $class = 'local_kopere_dashboard\\' . $className;
+        $class = 'local_kopere_dashboard\\' . $class_name;
     }
 
     $class = str_replace('?', '', $class);
@@ -56,8 +56,8 @@ function load_by_query($queryString) {
     $instance->$method();
 }
 
-function get_path_query($queryString){
-    preg_match("/(.*?)::([a-zA-Z_0-9]+)/", $queryString, $paths);
+function get_path_query($query_string){
+    preg_match("/(.*?)::([a-zA-Z_0-9]+)/", $query_string, $paths);
     return $paths[1] . '-'.$paths[2];
 }
 

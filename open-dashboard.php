@@ -130,11 +130,11 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
 
         $userid = intval($USER->id);
         $fullname = '"' . fullname($USER) . '"';
-        $serverTime = time();
-        $urlNode = '"' . $url . '"';
+        $server_time = time();
+        $url_node = '"' . $url . '"';
 
         echo "<script type=\"text/javascript\">
-                  startServer ( $userid, $fullname, $serverTime, $urlNode, 'z35admin' );
+                  startServer ( $userid, $fullname, $server_time, $url_node, 'z35admin' );
               </script>";
     }
     ?>
@@ -167,16 +167,16 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
                     dashboard_util::add_menu('dashboard::start', 'dashboard', 'Dashboard');
 
                     if (has_capability('moodle/site:config', context_system::instance())) {
-                        $menuExtra = array(
+                        $menu_extra = array(
                             array('usersonline::dashboard', get_string_kopere('useronline_title'), 'users-online'),
                             array('usersimport::dashboard', get_string_kopere('userimport_title'), 'users-import')
                         );
                     } else {
-                        $menuExtra = array(
+                        $menu_extra = array(
                             array('usersonline::dashboard', get_string_kopere('useronline_title'), 'users-online')
                         );
                     }
-                    dashboard_util::add_menu('users::dashboard', 'users', get_string_kopere('user_title'), $menuExtra);
+                    dashboard_util::add_menu('users::dashboard', 'users', get_string_kopere('user_title'), $menu_extra);
 
                     dashboard_util::add_menu('courses::dashboard', 'courses', get_string_kopere('courses_title'));
 
@@ -186,8 +186,8 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
                                AND name LIKE 'version'";
                     $plugins = $DB->get_records_sql($sql);
                     foreach ($plugins as $plugin) {
-                        $className = $plugin->plugin . '\\menu';
-                        $class = new $className();
+                        $class_name = $plugin->plugin . '\\menu';
+                        $class = new $class_name();
                         $class->show_menu();
                     }
 

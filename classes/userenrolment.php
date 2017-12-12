@@ -55,14 +55,14 @@ class userenrolment {
         $form = new form();
         $form->create_hidden_input('ueid', $ueid);
 
-        $statusValues = array(
+        $status_values = array(
             array('key' => 0, 'value' => get_string_kopere('userenrolment_status_active')),
             array('key' => 1, 'value' => get_string_kopere('userenrolment_status_inactive'))
         );
         $form->add_input(
             input_select::new_instance()->set_title(get_string_kopere('userenrolment_status'))
                 ->set_name('status')
-                ->set_values($statusValues)
+                ->set_values($status_values)
                 ->set_value($enrolment->status));
 
         echo '<div class="area-inscricao-times">';
@@ -146,14 +146,14 @@ class userenrolment {
         $ueid = optional_param('ueid', 0, PARAM_INT);
         $status = optional_param('status', 0, PARAM_INT);
         $timestart = optional_param('timestart', '', PARAM_TEXT);
-        $timeendStatus = optional_param('timeend-status', 0, PARAM_INT);
+        $timeend_status = optional_param('timeend-status', 0, PARAM_INT);
         $timeend = optional_param('timeend', '', PARAM_TEXT);
 
         $enrolment = $DB->get_record('user_enrolments', array('id' => $ueid), '*');
 
         $enrolment->status = $status;
         $enrolment->timestart = \DateTime::createFromFormat(get_string_kopere('php_datetime'), $timestart)->format('U');
-        if ($timeendStatus) {
+        if ($timeend_status) {
             $enrolment->timeend = \DateTime::createFromFormat(get_string_kopere('php_datetime'), $timeend)->format('U');
         } else {
             $enrolment->timeend = 0;

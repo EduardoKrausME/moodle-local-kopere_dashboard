@@ -249,15 +249,15 @@ class notifications extends notificationsutil {
 
         if (!$id) {
             if (strpos($module, 'mod_') === 0) {
-                $mailText = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail-text/mod.html";
+                $mail_text = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail-text/mod.html";
                 $module_name = get_string('modulename', $module);
             } else {
-                $mailText = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail-text/{$module}.html";
+                $mail_text = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail-text/{$module}.html";
                 $module_name = '';
             }
 
-            if (file_exists($mailText)) {
-                $html_text = file_get_contents($mailText);
+            if (file_exists($mail_text)) {
+                $html_text = file_get_contents($mail_text);
             } else {
                 $html_text = get_string_kopere('notification_message_html');
             }

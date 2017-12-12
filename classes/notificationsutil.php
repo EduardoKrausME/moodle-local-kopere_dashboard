@@ -48,10 +48,10 @@ class notificationsutil {
         }
 
         $events = $this->list_events();
-        $eventsList = array();
+        $events_list = array();
         foreach ($events->eventinformation as $eventinformation) {
             if ($eventinformation['component_full'] == $module) {
-                $eventsList[] = array(
+                $events_list[] = array(
                     'key' => $eventinformation['eventname'],
                     'value' => $eventinformation['fulleventname']
                 );
@@ -62,7 +62,7 @@ class notificationsutil {
         $form->add_input(
             input_select::new_instance()->set_title(get_string_kopere('notification_add_action'))
                 ->set_name('event')
-                ->set_values($eventsList)
+                ->set_values($events_list)
                 ->set_add_selecione(true));
         $form->create_submit_input(get_string_kopere('notification_add_create'));
     }
@@ -71,7 +71,7 @@ class notificationsutil {
      * @return \stdClass
      */
     public function list_events() {
-        $eventClasss = array_merge(
+        $event_classs = array_merge(
             \report_eventlist_list_generator::get_core_events_list(false),
             \report_eventlist_list_generator::get_non_core_event_list(false)
         );
@@ -79,17 +79,17 @@ class notificationsutil {
         $components = array();
         $eventinformation = array();
 
-        /** @var base $eventClass */
-        foreach ($eventClasss as $eventClass => $file) {
+        /** @var base $event_class */
+        foreach ($event_classs as $event_class => $file) {
             if ($file == 'base' || $file == 'legacy_logged' || $file === 'manager' || strpos($file, 'tool_') === 0) {
                 continue;
             }
 
             try {
-                $ref = new \ReflectionClass($eventClass);
+                $ref = new \ReflectionClass($event_class);
                 if (!$ref->isAbstract()) {
 
-                    $data = $eventClass::get_static_info();
+                    $data = $event_class::get_static_info();
 
                     if ($data['component'] == 'core') {
                         $continue = true;
@@ -111,7 +111,7 @@ class notificationsutil {
                     $crud = $data['crud'];
                     if ($crud == 'c' || $crud == 'u' || $crud == 'd') {
                         $tmp = $data;
-                        $tmp['fulleventname'] = $eventClass::get_name();
+                        $tmp['fulleventname'] = $event_class::get_name();
                         $tmp['crudname'] = \report_eventlist_list_generator::get_crud_string($data['crud']);
 
                         if ($data['component'] == 'core') {
@@ -144,11 +144,11 @@ class notificationsutil {
         global $CFG, $COURSE;
 
         $template = optional_param('template', 'blue.html', PARAM_RAW);
-        $templateFile = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$template}";
+        $template_file = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$template}";
 
-        $content = file_get_contents($templateFile);
+        $content = file_get_contents($template_file);
 
-        $linkManager
+        $link_manager
             = "<a href=\"{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?notifications::dashboard\"
                   target=\"_blank\" style=\"border-bottom:1px #777777 dotted; text-decoration:none; color:#777777;\">
                             ".get_string_kopere('notification_manager')."
@@ -158,17 +158,17 @@ class notificationsutil {
         $content = str_replace('{[moodle.shortname]}', $COURSE->shortname, $content);
         $content = str_replace('{[message]}', "<h2>Título</h2><p>Linha 1</p><p>Linha 2</p>", $content);
         $content = str_replace('{[date.year]}', userdate(time(), '%Y'), $content);
-        $content = str_replace('{[manager]}"', $linkManager, $content);
+        $content = str_replace('{[manager]}"', $link_manager, $content);
 
         echo $content;
     }
 
     /**
      * @param $component
-     * @param $onlyUsed
+     * @param $only_used
      * @return null|string
      */
-    protected function module_name($component, $onlyUsed) {
+    protected function module_name($component, $only_used) {
         global $DB;
 
         switch ($component) {
@@ -214,7 +214,7 @@ class notificationsutil {
                     WHERE m.name = :name";
             $count = $DB->get_record_sql($sql, array('name' => $module));
 
-            if ($count->num || !$onlyUsed) {
+            if ($count->num || !$only_used) {
                 return get_string('resource').': '.get_string('modulename', $module);
             }
         }

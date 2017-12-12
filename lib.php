@@ -86,10 +86,10 @@ function local_kopere_dashboard_extend_navigation ( global_navigation $nav )
 
             $userid = intval($USER->id);
             $fullname = '"' . fullname($USER) . '"';
-            $serverTime = time();
-            $urlNode = '"' . $url . '"';
+            $server_time = time();
+            $url_node = '"' . $url . '"';
 
-            $PAGE->requires->js_init_code("startServer( $userid, $fullname, $serverTime, $urlNode )");
+            $PAGE->requires->js_init_code("startServer( $userid, $fullname, $server_time, $url_node )");
         }
     }
 }

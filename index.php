@@ -161,9 +161,9 @@ if (strlen($webpages_analytics_id) > 10) {
                  </script>';
 }
 
-$webpagesAnalyticsId = get_config('local_kopere_dashboard', 'webpages_analytics_id');
+$webpages_analytics_id = get_config('local_kopere_dashboard', 'webpages_analytics_id');
 
-if (strlen($webpagesAnalyticsId) > 5 && strlen($webpagesAnalyticsId) < 15) {
+if (strlen($webpages_analytics_id) > 5 && strlen($webpages_analytics_id) < 15) {
     $page_html
         .= "<script>
                 (function(i,s,o,g,r,a,m){
@@ -176,7 +176,7 @@ if (strlen($webpagesAnalyticsId) > 5 && strlen($webpagesAnalyticsId) < 15) {
                     a.src=g;
                     m.parentNode.insertBefore(a,m)
                 })(window,document,'script','https:// www.google-analytics.com/analytics.js','ga');
-                ga('create', '$webpagesAnalyticsId', 'auto');
+                ga('create', '$webpages_analytics_id', 'auto');
                 ga('send', 'pageview');
             </script>";
 }
@@ -199,12 +199,12 @@ echo $page_html;
 //    //
 //    // foreach ( $csss[ 0 ] as $key => $css ) {
 //    // $link    = $csss[ 1 ][ $key ];
-//    // $cssFile = file_get_contents ( $link );
+//    // $css_file = file_get_contents ( $link );
 //    //
-//    // $cssFile = preg_replace ( '/\s+/', ' ', $cssFile );
-//    // $cssFile = preg_replace('!/\*.*?\*/!s', ' ', $cssFile);
+//    // $css_file = preg_replace ( '/\s+/', ' ', $css_file );
+//    // $css_file = preg_replace('!/\*.*?\*/!s', ' ', $css_file);
 //    //
-//    // $page_html = str_replace ( $csss[ 0 ][ $key ], '<style>' . $cssFile . '</style>', $page_html );
+//    // $page_html = str_replace ( $csss[ 0 ][ $key ], '<style>' . $css_file . '</style>', $page_html );
 //    // }
 //
 //    echo $page_html;
