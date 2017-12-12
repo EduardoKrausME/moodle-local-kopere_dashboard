@@ -141,10 +141,10 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2017082800, 'local', 'kopere_dashboard');
     }
 
-    \local_kopere_dashboard\install\ReportInstall::createCategores();
-    \local_kopere_dashboard\install\ReportInstall::createReports();
+    \local_kopere_dashboard\install\report_install::create_categores();
+    \local_kopere_dashboard\install\report_install::create_reports();
 
-    \local_kopere_dashboard\install\UsersImportInstall::installOrUpdate();
+    \local_kopere_dashboard\install\users_import_install::install_or_update();
 
     return true;
 }

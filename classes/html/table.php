@@ -1,0 +1,247 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+namespace local_kopere_dashboard\html;
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * Class table
+ *
+ * @package local_kopere_dashboard\html
+ */
+class table {
+    /**
+     * table constructor.
+     *
+     * @param string $adicional
+     */
+    public function __construct( $adicional = '') {
+        $this->table_id = 'table_' . uniqid();
+        echo '<table id="' . $this->table_id . '" class="table table-hover" width="100%" ';
+        echo $adicional;
+        echo '>';
+    }
+
+    /**
+     * @var array
+     */
+    private $colunas  = array();
+    /**
+     * @var null
+     */
+    private $click    = null;
+    /**
+     * @var null
+     */
+    private $id = null;
+    /**
+     * @var bool
+     */
+    private $_isprint = false;
+    /**
+     * @var string
+     */
+    private $table_id;
+
+    /**
+     * @param $exec
+     * @param $chave
+     */
+    public function set_click( $exec, $chave) {
+        $this->click = array();
+        $this->click['exec'] = $exec;
+        $this->click['chave'] = $chave;
+    }
+
+    /**
+     * @param $url
+     * @param $chave
+     */
+    public function set_click_redirect( $url, $chave) {
+        $this->click = array();
+        $this->click['chave'] = $chave;
+        $this->click['exec'] = "document.location.href='" . $url . "'";
+    }
+
+    /**
+     * @param $id
+     */
+    public function set_id( $id) {
+        $this->id = $id;
+    }
+
+    /**
+     * @param $linha
+     *
+     * @return mixed|string
+     */
+    protected function get_click( $linha) {
+        if ($this->click == null) {
+            return '';
+        }
+
+        $chaves = $this->click['chave'];
+
+        if (!is_array($chaves)) {
+            $chaves = array($chaves);
+        }
+
+        $exec = $this->click['exec'];
+        foreach ($chaves as $chave) {
+
+            if (is_array($linha)) {
+                $valor = $linha[$chave];
+            } else {
+                $valor = $linha->$chave;
+            }
+
+            $exec = str_replace($chave, $valor, $exec);
+        }
+
+        return $exec;
+    }
+
+    /**
+     * @param      $title
+     * @param null $chave
+     * @param null $funcao
+     * @param null $style_header
+     * @param null $style_col
+     */
+    public function add_header( $title, $chave = null, $funcao = null, $style_header = null, $style_col = null) {
+        $coluna = new table_header_item();
+        $coluna->chave = $chave;
+        $coluna->title = $title;
+        $coluna->funcao = $funcao;
+        $coluna->style_header = $style_header;
+        $coluna->style_col = $style_col;
+
+        $this->colunas[] = $coluna;
+    }
+
+    /**
+     * @param        $header
+     * @param string $class
+     */
+    public function print_header( $header, $class = '') {
+        $this->colunas = array();
+        echo '<thead>';
+        echo '<tr class="' . $class . '">';
+        foreach ($header as $key => $value) {
+            echo '<th class="text-center" style="' . $value->style_header . '">';
+            if ($value->title == '') {
+                echo "&nbsp;";
+            } else {
+                echo $value->title;
+            }
+            $this->colunas[] = $value;
+            echo '</th>';
+        }
+        echo '</tr>';
+        echo '</thead>';
+        echo "\n";
+        $this->_isprint = true;
+    }
+
+    /**
+     * @param        $linhas
+     * @param string $class
+     */
+    public function set_row( $linhas, $class = '') {
+        if (!$this->_isprint && count($this->colunas)) {
+            $this->print_header($this->colunas);
+        }
+
+        if ($this->click != null) {
+            echo '<tbody class="hover-pointer">';
+        } else {
+            echo '<tbody>';
+        }
+        foreach ($linhas as $linha) {
+
+            $text_id = "";
+            if ($this->id) {
+                $chave_id = $this->id;
+                if (is_array($linha)) {
+                    $valor_id = $linha[$chave_id];
+                } else {
+                    $valor_id = $linha->$chave_id;
+                }
+                $text_id = 'id="' . $valor_id . '"';
+            }
+
+            if ($this->click != null) {
+                echo '<tr ' . $text_id . ' onClick="' . $this->get_click($linha) . '">';
+            } else {
+                echo '<tr>';
+            }
+            foreach ($this->colunas as $col) {
+                $_class = $class . ' ' . $col->style_col;
+                if ($col->funcao != null) {
+                    $funcao = $col->funcao;
+                    if (is_array($linha)) {
+                        $html = $funcao($linha, $col->chave);
+                    } else {
+                        $html = $funcao($linha, $col->chave);
+                    }
+
+                    $this->print_row($html, $_class);
+                } else {
+                    if (is_array($linha)) {
+                        $this->print_row($linha[$col->chave], $_class);
+                    } else {
+                        $chave = $col->chave;
+                        $this->print_row($linha->$chave, $_class);
+                    }
+                }
+
+            }
+            echo '</tr>';
+        }
+        echo '</tbody>';
+    }
+
+    /**
+     * @param        $html
+     * @param string $class
+     */
+    public function print_row( $html, $class = '') {
+        echo '<td class=' . $class . '>';
+        echo $html;
+        echo '</td>';
+    }
+
+    /**
+     * @param bool $datatable
+     */
+    public function close( $datatable = false) {
+        echo '</table>';
+        if ($datatable) {
+            echo '<script type="text/javascript">
+                    $(document).ready(function(){
+                        var table = $("#' . $this->table_id . '").DataTable();
+                    });
+                  </script>';
+        }
+    }
+}

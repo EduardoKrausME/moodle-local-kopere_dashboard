@@ -34,21 +34,7 @@ function xmldb_local_kopere_dashboard_install() {
     return true;
 }
 
-/**
- * @param $name
- * @param $newVale
- */
-function changeConfigTable($name, $newVale) {
-    global $DB;
+\local_kopere_dashboard\install\report_install::create_categores();
+\local_kopere_dashboard\install\report_install::create_reports();
 
-    $config = $DB->get_record('config', array('name' => $name));
-    if ($config) {
-        $config->value = $newVale;
-        $DB->update_record('config', $config);
-    }
-}
-
-\local_kopere_dashboard\install\ReportInstall::createCategores();
-\local_kopere_dashboard\install\ReportInstall::createReports();
-
-\local_kopere_dashboard\install\UsersImportInstall::installOrUpdate();
+\local_kopere_dashboard\install\users_import_install::install_or_update();

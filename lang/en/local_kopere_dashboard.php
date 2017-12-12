@@ -39,7 +39,7 @@ $string['php_datetime'] = 'm/d/Y H:i';
 
 $string['help_title'] = 'Help with this page';
 
-// html/TinyMce.php
+// html/tinymce.php
 $string['blocks'] = 'Blocks';
 $string['blocks_paragraph'] = 'Paragraph';
 $string['image_alignment'] = 'Image alignment';
@@ -76,7 +76,7 @@ $string['datatables_oPaginate_sLast'] = 'Last';
 $string['datatables_oAria_sSortAscending'] = ': Sorting Columns in ascending order';
 $string['datatables_oAria_sSortDescending'] = ': Sorting columns in descending order';
 
-// util/Navigation
+// util/navigation
 $string['navigation_page'] = 'Page {$a->atualPage} of {$a->countPages}';
 
 // About
@@ -86,7 +86,7 @@ $string['about_code'] = 'Code available in';
 $string['about_help'] = 'Help is on';
 $string['about_bug'] = 'If you found some BUG or would like to suggest improvements open one issue';
 
-// Backup
+// backup
 $string['backup_windows'] = 'Not available on Windows Server!';
 $string['backup_hours'] = 'Do not run backup at peak times!';
 $string['backup_sleep'] = 'Backup may take several minutes to execute.';
@@ -114,7 +114,7 @@ $string['backup_delete_confirm'] = 'Backup Deletion';
 $string['backup_delete_title'] = 'Do you really want to delete the <strong>{$a->file}</strong>backup created in <strong>{$a->date}</strong>';
 $string['backup_notound'] = 'File not found!';
 
-// ReportBenchmark
+// report_benchmark
 $string['benchmark_title'] = 'Performance test';
 $string['benchmark_based'] = 'Plug-in based';
 $string['benchmark_info'] = '<p>This test can take up to 1 minute to execute.</p><p>Try to do more than one test for an average.</p><p>And, do not run in peak times.</p>';
@@ -154,7 +154,7 @@ $string['loginguestmoreinfo'] = 'Measuring the time to load the login page with 
 $string['loginusername'] = 'Time to connect with a fake user account';
 $string['loginusermoreinfo'] = 'Measuring the time to load the login page with a fake user account';
 
-//Courses
+// courses
 $string['courses_title'] = 'Courses';
 $string['courses_title1'] = 'Course List';
 $string['courses_name'] = 'Course Name';
@@ -174,7 +174,7 @@ $string['courses_student_status'] = 'Registration Status';
 $string['courses_page_title'] = 'Pages already created';
 $string['courses_page_create'] = 'Create page based on this summary';
 
-// Reports
+// reports
 $string['reports_title'] = 'Reports';
 $string['reports_selectcourse'] = 'Select the course to generate the report';
 $string['reports_notfound'] = 'Report not found!';
@@ -222,24 +222,24 @@ $string['reports_export'] = 'Export to Excel';
 $string['reports_noneaccess'] = 'No access';
 $string['reports_access_n'] = 'accessed {$a} times';
 
-// Dashboard
+// dashboard
 $string['dashboard_title_user'] = 'Users / Assets';
 $string['dashboard_title_online'] = 'Online / Last hour';
 $string['dashboard_title_course'] = 'Courses / Visible';
 $string['dashboard_title_disk'] = 'Disk Usage';
 $string['dashboard_grade_title'] = 'Latest notes';
-$string['dashboard_grade_inmod'] = 'in module <strong>{$a->itemname}</strong>in course <a href="?Courses::details&courseid={$a->courseid}">{$a->coursename}</a>';
-$string['dashboard_grade_incourse'] = 'in course <a href="?Courses::details&courseid={$a->courseid}">{$a->coursename}</a>';
+$string['dashboard_grade_inmod'] = 'in module <strong>{$a->itemname}</strong>in course <a href="?courses::details&courseid={$a->courseid}">{$a->coursename}</a>';
+$string['dashboard_grade_incourse'] = 'in course <a href="?courses::details&courseid={$a->courseid}">{$a->coursename}</a>';
 $string['dashboard_grade_of'] = 'of';
 $string['dashboard_grade_text'] = 'Received note {$a->grade} in {$a->evaluation}';
 $string['dashboard_grade_in'] = 'In';
 $string['dashboard_enrol_title'] = 'Last Enrollment';
 $string['dashboard_enrol_inactive'] = 'the registration is inactive';
 $string['dashboard_enrol_active'] = 'the registration is active';
-$string['dashboard_enrol_text'] = 'You have enrolled in the course <a href="?Courses::details&courseid={$a->courseid}">{$a->fullname}</a> and';
+$string['dashboard_enrol_text'] = 'You have enrolled in the course <a href="?courses::details&courseid={$a->courseid}">{$a->fullname}</a> and';
 $string['dashboard_enrol_lastmodifield'] = 'Last change in';
 
-// Notifications
+// notifications
 $string['notification_title'] = 'Notifications';
 $string['notification_subtitle'] = '<p>Receive notifications whenever an action occurs in Moodle.</p>';
 $string['notification_new'] = 'New notification';
@@ -298,7 +298,7 @@ $string['notification_error_smtp'] = '<p>In order for students to receive the me
           <p><a href="{$a->wwwroot}/admin/settings.php?section={$a->mail}"
              target="_blank">Click here to configure email output</a></p>';
 
-// Profile
+// profile
 $string['profile_invalid'] = 'Invalid UserId!';
 $string['profile_notfound'] = 'User not found!';
 $string['profile_title'] = 'Users';
@@ -324,7 +324,7 @@ $string['profile_courses_title'] = 'Registered Courses';
 // Settings
 $string['setting_saved'] = 'Settings saved!';
 
-// UserEnrolment
+// userenrolment
 $string['userenrolment_notfound'] = 'User Enrolment not found!';
 $string['userenrolment_edit'] = 'Edit registration date';
 $string['userenrolment_status'] = 'Registration is';
@@ -346,7 +346,7 @@ $string['user_table_phone'] = 'Fixed Phone';
 $string['user_table_celphone'] = 'Mobile';
 $string['user_table_city'] = 'City';
 
-// UsersOnline
+// usersonline
 $string['useronline_title'] = 'Online Users';
 $string['useronline_subtitle'] = 'Open tabs with Moodle';
 $string['useronline_table_fullname'] = 'Name';

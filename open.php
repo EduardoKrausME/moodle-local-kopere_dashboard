@@ -50,7 +50,7 @@ echo $OUTPUT->heading(get_string_kopere('open_dashboard'));
     <div class="text-center kopere-dashboard" style="text-align: center;">
         <a type="button" target="_blank"
            class="dashboard-load-popup btn btn-lg btn-primary"
-           href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/open-dashboard.php?Dashboard::start"
+           href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/open-dashboard.php?dashboard::start"
            id="open-startup"><?php echo get_string_kopere('open_dashboard') ?></a>
     </div>
 
@@ -58,7 +58,7 @@ echo $OUTPUT->heading(get_string_kopere('open_dashboard'));
         <div id="base-popup">
             <a href="#" id="base-popup-close" role="button">X</a>
             <div id="operations">
-                <iframe src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/open-dashboard.php?Dashboard::start"
+                <iframe src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/open-dashboard.php?dashboard::start"
                         frameborder="0" width="100%" height="100%"></iframe>
             </div>
         </div>

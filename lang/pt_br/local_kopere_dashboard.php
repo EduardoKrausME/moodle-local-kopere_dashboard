@@ -39,7 +39,7 @@ $string['php_datetime'] = 'd/m/Y H:i';
 
 $string['help_title'] = 'Ajuda com esta página';
 
-// html/TinyMce.php
+// html/tinymce.php
 $string['blocks'] = 'Blocos';
 $string['blocks_paragraph'] = 'Parágrafo';
 $string['image_alignment'] = 'Alinhamento de imagem';
@@ -76,17 +76,17 @@ $string['datatables_oPaginate_sLast'] = 'Último';
 $string['datatables_oAria_sSortAscending'] = ': Ordenar colunas de forma ascendente';
 $string['datatables_oAria_sSortDescending'] = ': Ordenar colunas de forma descendente';
 
-// util/Navigation
+// util/navigation
 $string['navigation_page'] = 'Página {$a->atualPage} de {$a->countPages}';
 
-// About
+// about
 $string['about_title'] = 'Sobre';
 $string['about_project'] = 'Projeto open-source desenvolvido e mantido por';
 $string['about_code'] = 'Código disponível em';
 $string['about_help'] = 'Ajuda está no';
 $string['about_bug'] = 'Achou algum BUG ou gostaria de sugerir melhorias abra uma';
 
-// Backup
+// backup
 $string['backup_windows'] = 'Não disponível em Servidor Windows!';
 $string['backup_hours'] = 'Não execute backup em horários de picos!';
 $string['backup_sleep'] = 'Backup podem demorar vários minutos para executar.';
@@ -114,7 +114,7 @@ $string['backup_delete_confirm'] = 'Exclusão do Backup';
 $string['backup_delete_title'] = 'Deseja realmente excluir o backup <strong>{$a->file}</strong> criado em <strong>{$a->data}</strong>';
 $string['backup_notound'] = 'Arquivo não localizado!';
 
-// ReportBenchmark
+// report_benchmark
 $string['benchmark_title'] = 'Teste de desempenho';
 $string['benchmark_based'] = 'Plug-in baseado em';
 $string['benchmark_info'] = '<p>Este teste pode demorar até 1 minutos para executar.</p><p>Tente fazer mais de uma vês o teste para ter uma média.</p><p>E, não execute em horário de picos.</p>';
@@ -154,7 +154,7 @@ $string['loginguestmoreinfo'] = 'Medindo o tempo para logar no Moodle com a cont
 $string['loginusername'] = 'Tempo para se conectar com uma conta de usuário falsa';
 $string['loginusermoreinfo'] = 'Medindo o tempo para logar no Moodle com uma conta de usuário falsa';
 
-//Courses
+// courses
 $string['courses_title'] = 'Cursos';
 $string['courses_title1'] = 'Lista de Cursos';
 $string['courses_name'] = 'Nome do Curso';
@@ -174,7 +174,7 @@ $string['courses_student_status'] = 'Status da matrícula';
 $string['courses_page_title'] = 'Páginas já criadas';
 $string['courses_page_create'] = 'Criar página com base neste sumário';
 
-// Reports
+// reports
 $string['reports_title'] = 'Relatórios';
 $string['reports_selectcourse'] = 'Selecione o curso para gerar o relatório';
 $string['reports_notfound'] = 'Relatório não localizado!';
@@ -222,24 +222,24 @@ $string['reports_export'] = 'Exportar para Excel';
 $string['reports_noneaccess'] = 'Nenhum acesso';
 $string['reports_access_n'] = 'acessou {$a} vezes';
 
-// Dashboard
+// dashboard
 $string['dashboard_title_user'] = 'Usuários / Ativos';
 $string['dashboard_title_online'] = 'Online / Última hora';
 $string['dashboard_title_course'] = 'Cursos / Visíveis';
 $string['dashboard_title_disk'] = 'Uso de Disco';
 $string['dashboard_grade_title'] = 'Últimas notas';
-$string['dashboard_grade_inmod'] = 'no módulo <strong>{$a->itemname}</strong> do curso <a href="?Courses::details&courseid={$a->courseid}">{$a->coursename}</a>';
-$string['dashboard_grade_incourse'] = 'no curso <a href="?Courses::details&courseid={$a->courseid}">{$a->coursename}</a>';
+$string['dashboard_grade_inmod'] = 'no módulo <strong>{$a->itemname}</strong> do curso <a href="?courses::details&courseid={$a->courseid}">{$a->coursename}</a>';
+$string['dashboard_grade_incourse'] = 'no curso <a href="?courses::details&courseid={$a->courseid}">{$a->coursename}</a>';
 $string['dashboard_grade_of'] = 'de';
 $string['dashboard_grade_text'] = 'Recebeu nota {$a->grade} em {$a->evaluation}';
 $string['dashboard_grade_in'] = 'Em';
 $string['dashboard_enrol_title'] = 'Últimas Matrículas';
 $string['dashboard_enrol_inactive'] = 'a matrícula esta inativa';
 $string['dashboard_enrol_active'] = 'a matrícula esta ativa';
-$string['dashboard_enrol_text'] = 'Matriculou-se no curso <a href="?Courses::details&courseid={$a->courseid}">{$a->fullname}</a> e';
+$string['dashboard_enrol_text'] = 'Matriculou-se no curso <a href="?courses::details&courseid={$a->courseid}">{$a->fullname}</a> e';
 $string['dashboard_enrol_lastmodifield'] = 'Última alteração em';
 
-// Notifications
+// notifications
 $string['notification_title'] = 'Notificações';
 $string['notification_subtitle'] = '<p>Receba notificações sempre que uma ação acontecer no Moodle.</p>';
 $string['notification_new'] = 'Nova notificação';
@@ -298,7 +298,7 @@ $string['notification_error_smtp'] = '<p>Para que os alunos recebam as mensagens
                     <p><a href="{$a->wwwroot}/admin/settings.php?section={$a->mail}"
                           target="_blank">Clique aqui para configurar a saída de e-mail</a></p>';
 
-// Profile
+// profile
 $string['profile_invalid'] = 'UserId inválido!';
 $string['profile_notfound'] = 'Usuário não localizado!';
 $string['profile_title'] = 'Usuários';
@@ -324,7 +324,7 @@ $string['profile_courses_title'] = 'Cursos inscritos';
 // Settings
 $string['setting_saved'] = 'Configurações salvas!';
 
-// UserEnrolment
+// userenrolment
 $string['userenrolment_notfound'] = 'User Enrolment não localizado!';
 $string['userenrolment_edit'] = 'Editar data da inscrição';
 $string['userenrolment_status'] = 'Matrícula esta';
@@ -346,7 +346,7 @@ $string['user_table_phone'] = 'Telefone Fixo';
 $string['user_table_celphone'] = 'Celular';
 $string['user_table_city'] = 'Cidade';
 
-// UsersOnline
+// usersonline
 $string['useronline_title'] = 'Usuários Online';
 $string['useronline_subtitle'] = 'Abas abertas com o Moodle';
 $string['useronline_table_fullname'] = 'Nome';
