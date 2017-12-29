@@ -69,7 +69,7 @@ class tinymce {
                 selector : '{$seletor}',
                 plugins  : [
                     'advlist autolink lists link image charmap ',
-                    'searchreplace visualblocks code fullscreen ',
+                    'visualblocks code fullscreen ',
                     'media table contextmenu autosave paste anchor'
                 ],
 
