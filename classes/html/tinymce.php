@@ -70,7 +70,7 @@ class tinymce {
                 plugins  : [
                     'advlist autolink lists link image charmap ',
                     'searchreplace visualblocks code fullscreen ',
-                    'media table contextmenu youtube autosave paste anchor'
+                    'media table contextmenu autosave paste anchor'
                 ],
 
                 style_formats : [

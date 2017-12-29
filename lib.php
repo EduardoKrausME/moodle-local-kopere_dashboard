@@ -31,7 +31,7 @@ function local_kopere_dashboard_extend_navigation ( global_navigation $nav )
     global $CFG, $PAGE, $USER, $DB;
 
     try {
-        $sql = "SELECT menu.* 
+        $sql = "SELECT DISTINCT menu.* 
                   FROM {kopere_dashboard_menu}     AS menu
                   JOIN {kopere_dashboard_webpages} AS page ON page.menuid = menu.id
                  WHERE page.visible = 1";
