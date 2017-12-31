@@ -38,4 +38,5 @@ script:
   - moodle-plugin-ci phplint
   - moodle-plugin-ci phpmd
   - moodle-plugin-ci behat
-  - moodle-plugin-ci codechecker
+  - moodle-plugin-ci grunt
+  - moodle-plugin-ci codechecker || true
