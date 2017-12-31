@@ -31,6 +31,7 @@ $string['modulename'] = 'Tablero Kopere';
 $string['pluginname'] = 'Tablero Kopere';
 $string['kopere_dashboard:view'] = 'Ver Tablero Kopere';
 $string['kopere_dashboard:manage'] = 'Mánager Tablero Kopere';
+$string['dashboard'] = 'Tablero';
 $string['settings'] = 'Configuraciones';
 $string['close'] = 'Cerrar';
 $string['crontask_tmp'] = 'Cron limpiar carpeta tmp';

@@ -51,7 +51,7 @@ class backup {
             if (server_util::function_enable('shell_exec')) {
                 mensagem::print_info(get_string_kopere('backup_hours'));
                 echo '<div style="text-align: center;">
-                          <p>'.get_string_kopere('backup_sleep').'</p>';
+                          <p>' . get_string_kopere('backup_sleep') . '</p>';
                 button::add(get_string_kopere('backup_newnow'), 'backup::execute');
                 echo '</div>';
                 echo '</div>';
@@ -59,17 +59,17 @@ class backup {
                 mensagem::print_danger(get_string_kopere('backup_noshell'));
             }
 
-            $backups = glob(self::get_backup_path(false).'backup_*');
+            $backups = glob(self::get_backup_path(false) . 'backup_*');
             $backups_lista = array();
             foreach ($backups as $backup) {
                 preg_match("/backup_(\d+)-(\d+)-(\d+)-(\d+)-(\d+).tar.gz/", $backup, $p);
                 $backups_lista[] = array(
                     'file' => $p[0],
-                    'data' => $p[3].'/'.$p[2].'/'.$p[1].' às '.$p[4].':'.$p[5],
+                    'data' => $p[3] . '/' . $p[2] . '/' . $p[1] . ' às ' . $p[4] . ':' . $p[5],
                     'size' => bytes_util::size_to_byte(filesize($backup)),
                     'acoes' => "<div class=\"text-center\">
-                                    ".button::icon('download', "backup::download&file={$p[0]}", false)."&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp; ".button::icon('delete', "backup::delete&file={$p[0]}")."
+                                    " . button::icon('download', "backup::download&file={$p[0]}", false) . "&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp; " . button::icon('delete', "backup::delete&file={$p[0]}") . "
                                 </div>"
                 );
             }
@@ -109,7 +109,7 @@ class backup {
             header::location('backup::dashboard');
         }
 
-        $sql_full_path = $this->get_backup_path().'backup_'.date('Y-m-d-H-i');
+        $sql_full_path = $this->get_backup_path() . 'backup_' . date('Y-m-d-H-i');
 
         $comando = "/usr/bin/mysqldump -h {$CFG->dbhost} -u {$CFG->dbuser} -p{$CFG->dbpass} {$CFG->dbname} > {$sql_full_path}.sql";
         shell_exec($comando);
@@ -132,35 +132,35 @@ class backup {
         ), "Executando Backup: {$CFG->dbname}");
         echo '<div class="element-box">';
 
-        $backupfile = $this->get_backup_path().'backup_'.date('Y-m-d-H-i').'.sql';
+        $backupfile = $this->get_backup_path() . 'backup_' . date('Y-m-d-H-i') . '.sql';
 
-        $dump_start = "-- Kopere Dashboard SQL Dump\n-- Host: {$CFG->dbhost}\n-- ".get_string_kopere('backup_execute_date')." ".date('d/m/Y \à\s H-i')."\n\n";
+        $dump_start = "--" . get_string_kopere('pluginname') . " SQL Dump\n-- Host: {$CFG->dbhost}\n-- " . get_string_kopere('backup_execute_date') . " " . date('d/m/Y \à\s H-i') . "\n\n";
         file_put_contents($backupfile, $dump_start);
 
-        $db_name = "--\n-- ".get_string_kopere('backup_execute_database')." `{$CFG->dbname}`\n--\n\n-- --------------------------------------------------------\n\n";
+        $db_name = "--\n-- " . get_string_kopere('backup_execute_database') . " `{$CFG->dbname}`\n--\n\n-- --------------------------------------------------------\n\n";
         file_put_contents($backupfile, $db_name, FILE_APPEND);
 
         $tables = $DB->get_records_sql('SHOW TABLES');
 
         foreach ($tables as $table => $val) {
 
-            echo "<p id='tabela-dump-$table'>".get_string_kopere('backup_execute_table')." <strong>$table</strong></p>
+            echo "<p id='tabela-dump-$table'>" . get_string_kopere('backup_execute_table') . " <strong>$table</strong></p>
                       <script>
                           jQuery( 'html,body' ).animate ( { scrollTop: $( '#tabela-dump-$table' ).offset().top }, 0 );
                       </script>";
 
-            $db_start = "--\n-- ".get_string_kopere('backup_execute_structure')." `$table`\n--\n\n";
+            $db_start = "--\n-- " . get_string_kopere('backup_execute_structure') . " `$table`\n--\n\n";
             file_put_contents($backupfile, $db_start, FILE_APPEND);
 
             $schema = $DB->get_record_sql("SHOW CREATE TABLE `{$table}`");
             if (isset($schema->{'create table'})) {
-                $table_sql = $schema->{'create table'}.";\n\n";
+                $table_sql = $schema->{'create table'} . ";\n\n";
                 file_put_contents($backupfile, $table_sql, FILE_APPEND);
 
-                $db_dump_start = "--\n-- ".get_string_kopere('backup_execute_dump')." `$table`\n--\n\n";
+                $db_dump_start = "--\n-- " . get_string_kopere('backup_execute_dump') . " `$table`\n--\n\n";
                 file_put_contents($backupfile, $db_dump_start, FILE_APPEND);
             } else {
-                $table_sql = "-- ".get_string_kopere('backup_execute_dump_error')."\n\n";
+                $table_sql = "-- " . get_string_kopere('backup_execute_dump_error') . "\n\n";
                 file_put_contents($backupfile, $table_sql, FILE_APPEND);
             }
         }
@@ -180,11 +180,11 @@ class backup {
     }
 
     public function delete() {
-        $backupfile = $this->get_backup_path().$_GET['file'];
+        $backupfile = $this->get_backup_path() . $_GET['file'];
 
         if (file_exists($backupfile)) {
             preg_match("/backup_(\d+)-(\d+)-(\d+)-(\d+)-(\d+).tar.gz/", $_GET['file'], $p);
-            $data = $p[3].'/'.$p[2].'/'.$p[1].' às '.$p[4].':'.$p[5];
+            $data = $p[3] . '/' . $p[2] . '/' . $p[1] . ' às ' . $p[4] . ':' . $p[5];
 
             if (isset($_GET['status'])) {
                 @unlink($backupfile);
@@ -198,8 +198,8 @@ class backup {
                 ));
 
                 echo "<div class=\"element-box\">
-                          <h3>".get_string_kopere('backup_delete_confirm')."</h3>
-                          <p>".get_string_kopere('backup_delete_title', ['file' => $_GET['file'], 'data' => $data])."</p>
+                          <h3>" . get_string_kopere('backup_delete_confirm') . "</h3>
+                          <p>" . get_string_kopere('backup_delete_title', ['file' => $_GET['file'], 'data' => $data]) . "</p>
                           <div>";
                 button::delete(get_string('yes'), "?backup::delete&file={$_GET['file']}&status=sim", '', false);
                 button::add(get_string('no'), 'backup::dashboard', 'margin-left-10', false);
@@ -218,12 +218,12 @@ class backup {
         ob_end_flush();
         session_write_close();
 
-        $backupfile = $this->get_backup_path().$_GET['file'];
+        $backupfile = $this->get_backup_path() . $_GET['file'];
 
         if (file_exists($backupfile)) {
             header('Content-Type: application/octet-stream');
             header('Content-Transfer-Encoding: Binary');
-            header('Content-disposition: attachment; filename="'.$_GET['file'].'"');
+            header('Content-disposition: attachment; filename="' . $_GET['file'] . '"');
 
             readfile($backupfile);
             end_util::end_script_show();
@@ -243,7 +243,7 @@ class backup {
     private function get_backup_path($create = true) {
         global $CFG;
 
-        $filepath = $CFG->dataroot.'/backup/';
+        $filepath = $CFG->dataroot . '/backup/';
         if ($create) {
             @mkdir($filepath);
         }

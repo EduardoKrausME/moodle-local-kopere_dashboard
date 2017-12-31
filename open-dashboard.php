@@ -57,7 +57,7 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Kopere Dashboard</title>
+    <title><?php echo get_string_kopere ('pluginname') ?></title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
@@ -155,16 +155,16 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
             <div class="logo-w">
                 <img class="normal"
                      src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/logo.svg"
-                     alt="Kopere DashBoard">
+                     alt="<?php echo get_string_kopere ('pluginname') ?>">
                 <img class="mobile"
                      src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/logo-notext.svg"
-                     alt="Kopere DashBoard">
+                     alt="<?php echo get_string_kopere ('pluginname') ?>">
             </div>
             <div class="menu-and-user">
                 <ul class="main-menu">
                     <?php
 
-                    dashboard_util::add_menu('dashboard::start', 'dashboard', 'Dashboard');
+                    dashboard_util::add_menu('dashboard::start', 'dashboard', get_string_kopere ('dashboard'));
 
                     if (has_capability('moodle/site:config', context_system::instance())) {
                         $menu_extra = array(

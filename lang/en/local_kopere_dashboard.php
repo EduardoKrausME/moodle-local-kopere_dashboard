@@ -24,6 +24,7 @@ $string['modulename'] = 'Kopere Dashboard';
 $string['pluginname'] = 'Kopere Dashboard';
 $string['kopere_dashboard:view'] = 'View Kopere Dashboard';
 $string['kopere_dashboard:manage'] = 'Manage Kopere Dashboard';
+$string['dashboard'] = 'Dashboard';
 $string['settings'] = 'Settings';
 $string['close'] = 'Close';
 $string['crontask_tmp'] = 'Cron clear tmp folder';

@@ -36,8 +36,8 @@ $PAGE->set_url(new moodle_url('/local/kopere_dashboard/open.php'));
 $PAGE->set_context(context_system::instance());
 $PAGE->set_pagetype('admin-setting');
 $PAGE->set_pagelayout('admin');
-$PAGE->set_title('Abrir Dashboard');
-$PAGE->set_heading('Abrir Dashboard');
+$PAGE->set_title(get_string_kopere('open_dashboard'));
+$PAGE->set_heading(get_string_kopere('open_dashboard'));
 
 $PAGE->requires->jquery();
 $PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
