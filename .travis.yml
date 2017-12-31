@@ -35,6 +35,11 @@ ignore:
   - assets/*
   - node/*
 
+exclude:
+  - vendor/*
+  - assets/*
+  - node/*
+
 script:
   - moodle-plugin-ci phplint
   - moodle-plugin-ci validate
