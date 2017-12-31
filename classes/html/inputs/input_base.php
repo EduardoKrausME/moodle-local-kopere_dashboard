@@ -168,14 +168,14 @@ class input_base implements i_input {
     }
 
     /**
-     * @param $config_name
+     * @param $configname
      *
      * @return $this
      */
-    public function set_value_by_config($config_name) {
-        $this->set_name($config_name);
+    public function set_value_by_config($configname) {
+        $this->set_name($configname);
         $this->set_value(
-            get_config('local_kopere_dashboard', $config_name)
+            get_config('local_kopere_dashboard', $configname)
         );
 
         return $this;

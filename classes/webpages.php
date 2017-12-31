@@ -122,15 +122,15 @@ class webpages {
         ), -1);
         echo '<div class="element-box">';
 
-        $link_pagina = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";
+        $linkpagina = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";
 
-        button::info(get_string_kopere('webpages_page_view'), $link_pagina, '', false);
+        button::info(get_string_kopere('webpages_page_view'), $linkpagina, '', false);
         button::edit(get_string_kopere('webpages_page_edit'), 'webpages::edit_page&id=' . $webpages->id, 'margin-left-15', false);
         button::delete(get_string_kopere('webpages_page_delete'),
             'webpages::delete_page&id=' . $webpages->id, 'margin-left-15', false, false, true);
 
         $form = new form();
-        $form->print_panel(get_string_kopere('webpages_table_link'), "<a target='_blank' href='$link_pagina'>$link_pagina</a>");
+        $form->print_panel(get_string_kopere('webpages_table_link'), "<a target='_blank' href='$linkpagina'>$linkpagina</a>");
         $form->print_panel(get_string_kopere('webpages_table_title'), $webpages->title);
         $form->print_panel(get_string_kopere('webpages_table_link'), $webpages->link);
         if ($webpages->courseid) {

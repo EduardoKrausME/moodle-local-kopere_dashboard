@@ -60,10 +60,10 @@ class backup {
             }
 
             $backups = glob(self::get_backup_path(false) . 'backup_*');
-            $backups_lista = array();
+            $backupslista = array();
             foreach ($backups as $backup) {
                 preg_match("/backup_(\d+)-(\d+)-(\d+)-(\d+)-(\d+).tar.gz/", $backup, $p);
-                $backups_lista[] = array(
+                $backupslista[] = array(
                     'file' => $p[0],
                     'data' => $p[3] . '/' . $p[2] . '/' . $p[1] . ' às ' . $p[4] . ':' . $p[5],
                     'size' => bytes_util::size_to_byte(filesize($backup)),
@@ -77,14 +77,14 @@ class backup {
             echo '<div class="element-box">';
             title_util::print_h3('backup_list');
 
-            if (isset($backups_lista[0])) {
+            if (isset($backupslista[0])) {
                 $table = new table();
                 $table->add_header(get_string_kopere('backup_list_file'), 'file');
                 $table->add_header(get_string_kopere('backup_list_created'), 'data');
                 $table->add_header(get_string_kopere('backup_list_size'), 'size');
                 $table->add_header(get_string_kopere('backup_list_action'), 'acoes');
 
-                $table->set_row($backups_lista);
+                $table->set_row($backupslista);
                 $table->close(true);
             } else {
                 mensagem::print_warning(get_string_kopere('backup_none'));
@@ -104,15 +104,15 @@ class backup {
             header::location('backup::dashboard');
         }
 
-        $sql_full_path = $this->get_backup_path() . 'backup_' . date('Y-m-d-H-i');
+        $sqlfullpath = $this->get_backup_path() . 'backup_' . date('Y-m-d-H-i');
 
-        $comando = "/usr/bin/mysqldump -h {$CFG->dbhost} -u {$CFG->dbuser} -p{$CFG->dbpass} {$CFG->dbname} > {$sql_full_path}.sql";
+        $comando = "/usr/bin/mysqldump -h {$CFG->dbhost} -u {$CFG->dbuser} -p{$CFG->dbpass} {$CFG->dbname} > {$sqlfullpath}.sql";
         shell_exec($comando);
 
-        $comando = "tar -zcvf {$sql_full_path}.tar.gz {$CFG->dataroot}/filedir {$CFG->dataroot}/kopere* {$sql_full_path}.sql";
+        $comando = "tar -zcvf {$sqlfullpath}.tar.gz {$CFG->dataroot}/filedir {$CFG->dataroot}/kopere* {$sqlfullpath}.sql";
         shell_exec($comando);
 
-        unlink("{$sql_full_path}.sql");
+        unlink("{$sqlfullpath}.sql");
 
         mensagem::agenda_mensagem_success(get_string_kopere('backup_execute_success'));
         header::location('backup::dashboard');
@@ -129,13 +129,13 @@ class backup {
 
         $backupfile = $this->get_backup_path() . 'backup_' . date('Y-m-d-H-i') . '.sql';
 
-        $dump_start = "--" . get_string_kopere('pluginname') . " SQL Dump\n-- Host: {$CFG->dbhost}\n-- " .
+        $dumpstart = "--" . get_string_kopere('pluginname') . " SQL Dump\n-- Host: {$CFG->dbhost}\n-- " .
             get_string_kopere('backup_execute_date') . " " . date('d/m/Y \à\s H-i') . "\n\n";
-        file_put_contents($backupfile, $dump_start);
+        file_put_contents($backupfile, $dumpstart);
 
-        $db_name = "--\n-- " . get_string_kopere('backup_execute_database') .
+        $dbname = "--\n-- " . get_string_kopere('backup_execute_database') .
             " `{$CFG->dbname}`\n--\n\n-- --------------------------------------------------------\n\n";
-        file_put_contents($backupfile, $db_name, FILE_APPEND);
+        file_put_contents($backupfile, $dbname, FILE_APPEND);
 
         $tables = $DB->get_records_sql('SHOW TABLES');
 
@@ -146,19 +146,19 @@ class backup {
                           jQuery( 'html,body' ).animate ( { scrollTop: $( '#tabela-dump-$table' ).offset().top }, 0 );
                       </script>";
 
-            $db_start = "--\n-- " . get_string_kopere('backup_execute_structure') . " `$table`\n--\n\n";
-            file_put_contents($backupfile, $db_start, FILE_APPEND);
+            $dbstart = "--\n-- " . get_string_kopere('backup_execute_structure') . " `$table`\n--\n\n";
+            file_put_contents($backupfile, $dbstart, FILE_APPEND);
 
             $schema = $DB->get_record_sql("SHOW CREATE TABLE `{$table}`");
             if (isset($schema->{'create table'})) {
-                $table_sql = $schema->{'create table'} . ";\n\n";
-                file_put_contents($backupfile, $table_sql, FILE_APPEND);
+                $tablesql = $schema->{'create table'} . ";\n\n";
+                file_put_contents($backupfile, $tablesql, FILE_APPEND);
 
-                $db_dump_start = "--\n-- " . get_string_kopere('backup_execute_dump') . " `$table`\n--\n\n";
-                file_put_contents($backupfile, $db_dump_start, FILE_APPEND);
+                $dbdumpstart = "--\n-- " . get_string_kopere('backup_execute_dump') . " `$table`\n--\n\n";
+                file_put_contents($backupfile, $dbdumpstart, FILE_APPEND);
             } else {
-                $table_sql = "-- " . get_string_kopere('backup_execute_dump_error') . "\n\n";
-                file_put_contents($backupfile, $table_sql, FILE_APPEND);
+                $tablesql = "-- " . get_string_kopere('backup_execute_dump_error') . "\n\n";
+                file_put_contents($backupfile, $tablesql, FILE_APPEND);
             }
         }
 

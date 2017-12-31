@@ -51,8 +51,8 @@ class settings {
                 continue;
             }
 
-            $value_filtered = optional_param($keyname, '', PARAM_RAW);
-            set_config($keyname, $value_filtered, 'local_kopere_dashboard');
+            $valuefiltered = optional_param($keyname, '', PARAM_RAW);
+            set_config($keyname, $valuefiltered, 'local_kopere_dashboard');
         }
 
         mensagem::agenda_mensagem_success(get_string_kopere('setting_saved'));

@@ -580,20 +580,20 @@ class report_install {
      * @param null $chave
      * @param string $type
      * @param null $funcao
-     * @param null $style_header
-     * @param null $style_col
+     * @param null $styleheader
+     * @param null $stylecol
      *
      * @return \stdClass
      */
     private function add_header($title, $chave = null, $type = table_header_item::TYPE_TEXT, $funcao = null,
-                                $style_header = null, $style_col = null) {
+                                $styleheader = null, $stylecol = null) {
         $column = new \stdClass();
         $column->chave = $chave;
         $column->type = $type;
         $column->title = $title;
         $column->funcao = $funcao;
-        $column->style_header = $style_header;
-        $column->style_col = $style_col;
+        $column->style_header = $styleheader;
+        $column->style_col = $stylecol;
 
         return $column;
     }
@@ -604,8 +604,8 @@ class report_install {
     private static function report_cat_insert($reportcat) {
         global $DB;
 
-        $kopere_reportcat = $DB->get_record('kopere_dashboard_reportcat', array('type' => $reportcat->type));
-        if (!$kopere_reportcat) {
+        $koperereportcat = $DB->get_record('kopere_dashboard_reportcat', array('type' => $reportcat->type));
+        if (!$koperereportcat) {
             $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
         }
     }
@@ -616,8 +616,8 @@ class report_install {
     private static function report_insert($report) {
         global $DB;
 
-        $kopere_reports = $DB->get_record('kopere_dashboard_reports', array('reportkey' => $report->reportkey));
-        if (!$kopere_reports) {
+        $koperereports = $DB->get_record('kopere_dashboard_reports', array('reportkey' => $report->reportkey));
+        if (!$koperereports) {
             $DB->insert_record('kopere_dashboard_reports', $report);
         }
     }

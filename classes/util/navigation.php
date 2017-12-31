@@ -31,26 +31,26 @@ defined('MOODLE_INTERNAL') || die();
  */
 class navigation {
     /**
-     * @param     $atual_page
-     * @param     $total_registers
-     * @param     $base_url
+     * @param     $atualpage
+     * @param     $totalregisters
+     * @param     $baseurl
      * @param int $perpag
      */
-    public static function create($atual_page, $total_registers, $base_url, $perpag = 20) {
-        $count_pages = intval($total_registers / $perpag);
+    public static function create($atualpage, $totalregisters, $baseurl, $perpag = 20) {
+        $countpages = intval($totalregisters / $perpag);
 
-        if (($total_registers % $perpag) != 0) {
-            $count_pages += 1;
+        if (($totalregisters % $perpag) != 0) {
+            $countpages += 1;
         }
 
         echo "<span class=\"pagination-info\">" . get_string_kopere('navigation_page',
-                array('atualPage' => $atual_page, 'countPages' => $count_pages)) . "</span>";
+                array('atualPage' => $atualpage, 'countPages' => $countpages)) . "</span>";
 
         echo "<ul class=\"pagination\">";
-        if ($atual_page != 1) {
-            echo "<li><a href=\"{$base_url}1\" >«</a></li>";
+        if ($atualpage != 1) {
+            echo "<li><a href=\"{$baseurl}1\" >«</a></li>";
         }
-        $i = $atual_page - 4;
+        $i = $atualpage - 4;
         if ($i < 1) {
             $i = 1;
         }
@@ -59,23 +59,23 @@ class navigation {
         }
 
         $loop = 0;
-        for (; $i <= $count_pages; $i++) {
-            if ($i == $atual_page) {
+        for (; $i <= $countpages; $i++) {
+            if ($i == $atualpage) {
                 echo "<li class=\"active\"><span>{$i}</span></li>";
             } else {
-                echo "<li><a href=\"{$base_url}{$i}\">{$i}</a></li>";
+                echo "<li><a href=\"{$baseurl}{$i}\">{$i}</a></li>";
             }
 
             $loop++;
             if ($loop == 7) {
-                if ($i != $count_pages) {
+                if ($i != $countpages) {
                     echo "<span>...</span></li>";
                 }
                 break;
             }
         }
-        if (($atual_page) != $count_pages && $count_pages > 1) {
-            echo "<li><a href=\"{$base_url}{$count_pages}\">»</a></li>";
+        if (($atualpage) != $countpages && $countpages > 1) {
+            echo "<li><a href=\"{$baseurl}{$countpages}\">»</a></li>";
         }
         echo "</ul>";
     }

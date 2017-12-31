@@ -33,7 +33,7 @@ class html {
     /**
      * @var array
      */
-    private static $acentos_html = array(
+    private static $acentoshtml = array(
         '&aacute;', '&agrave;', '&acirc;', '&atilde;',
         '&auml;', '&eacute;', '&egrave;', '&ecirc;', '&euml;',
         '&iacute;', '&igrave;', '&icirc;', '&iuml;', '&oacute;',
@@ -48,7 +48,7 @@ class html {
     /**
      * @var array
      */
-    private static $acentos_ascii = array(
+    private static $acentosascii = array(
         'á', 'à', 'â', 'ã', 'ä', 'é', 'è', 'ê', 'ë', 'í', 'ì', 'î',
         'ï', 'ó', 'ò', 'ô', 'õ', 'ö', 'ú', 'ù', 'û', 'ü', 'ç', 'Á',
         'À', 'Â', 'Ã', 'Ä', 'É', 'È', 'Ê', 'Ë', 'Í', 'Ì', 'Î', 'Ï',
@@ -57,7 +57,7 @@ class html {
     /**
      * @var array
      */
-    private static $sem_acento = array(
+    private static $semacento = array(
         'a', 'a', 'a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i',
         'i', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'c', 'A',
         'A', 'A', 'A', 'A', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I',
@@ -70,7 +70,7 @@ class html {
      * @return mixed
      */
     public static function caracter_spacial($html) {
-        return str_replace(self::$acentos_ascii, self::$acentos_html, $html);
+        return str_replace(self::$acentosascii, self::$acentoshtml, $html);
     }
 
     /**
@@ -79,8 +79,8 @@ class html {
      * @return mixed
      */
     public static function retira_acentos($html) {
-        $html = str_replace(self::$acentos_html, self::$sem_acento, $html);
-        $html = str_replace(self::$acentos_ascii, self::$sem_acento, $html);
+        $html = str_replace(self::$acentoshtml, self::$semacento, $html);
+        $html = str_replace(self::$acentosascii, self::$semacento, $html);
 
         return $html;
     }

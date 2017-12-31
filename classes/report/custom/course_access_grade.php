@@ -58,12 +58,12 @@ class course_access_grade {
 
         require_once($CFG->libdir . '/gradelib.php');
 
-        $course_id = optional_param('courseid', 0, PARAM_INT);
-        if ($course_id == 0) {
+        $courseid = optional_param('courseid', 0, PARAM_INT);
+        if ($courseid == 0) {
             header::notfound(get_string_kopere('courses_notound'));
         }
 
-        $course = $DB->get_record('course', array('id' => $course_id));
+        $course = $DB->get_record('course', array('id' => $courseid));
         header::notfound_null($course, get_string_kopere('courses_notound'));
 
         $groups = $DB->get_records('groups', array('courseid' => $course->id));
@@ -72,7 +72,7 @@ class course_access_grade {
                   document.body.className += " menu-w-90";
               </script>';
 
-        $sections = $DB->get_records('course_sections', array('course' => $course_id), 'section asc');
+        $sections = $DB->get_records('course_sections', array('course' => $courseid), 'section asc');
 
         button::info(get_string_kopere('reports_export'), "{$_SERVER['QUERY_STRING']}&export=xls");
 
@@ -81,14 +81,14 @@ class course_access_grade {
 
         echo '<table id="list-course-access" class="table table-bordered table-hover" border="1">';
         echo '<thead>';
-        $print_sessoes = '';
+        $printsessoes = '';
 
         $courseinfo = array();
         $modinfo = array();
         foreach ($sections as $key => $section) {
-            $partes_mod_info = explode(',', $section->sequence);
-            $count_mod_info = 0;
-            foreach ($partes_mod_info as $parte) {
+            $partesmodinfo = explode(',', $section->sequence);
+            $countmodinfo = 0;
+            foreach ($partesmodinfo as $parte) {
                 $sql = "SELECT cm.*, cm.id AS course_modules_id, m.*, m.id AS modules_id, cm.instance
                           FROM {course_modules} cm
                           JOIN {modules} m ON cm.module = m.id
@@ -117,7 +117,7 @@ class course_access_grade {
                     if ($module->instance) {
                         $module->grade = $DB->get_record('grade_items',
                             array(
-                                'courseid' => $course_id,
+                                'courseid' => $courseid,
                                 'iteminstance' => $moduleinfo->id,
                                 'itemtype' => 'mod',
                                 'itemmodule' => $module->name
@@ -127,36 +127,36 @@ class course_access_grade {
                     $modinfo[] = $module;
 
                     if ($module->grade) {
-                        $count_mod_info += 3;
+                        $countmodinfo += 3;
                     } else {
-                        $count_mod_info += 2;
+                        $countmodinfo += 2;
                     }
                 }
             }
 
             if (strlen($section->sequence)) {
-                $print_sessoes .= '<th bgcolor="#979797" align="center"
-                                       colspan="' . $count_mod_info . '" style="text-align:center;">';
+                $printsessoes .= '<th bgcolor="#979797" align="center"
+                                       colspan="' . $countmodinfo . '" style="text-align:center;">';
 
                 if (strlen($section->name)) {
-                    $print_sessoes .= $section->name;
+                    $printsessoes .= $section->name;
                 } else {
-                    $print_sessoes .= 'Sessão ' . $key;
+                    $printsessoes .= 'Sessão ' . $key;
                 }
-                $print_sessoes .= '</th>';
+                $printsessoes .= '</th>';
             }
         }
 
-        $groups_cols = '';
+        $groupscols = '';
         if ($groups) {
-            $groups_cols = '<th rowspan="2" align="center" bgcolor="#979797" style="text-align:center;" >' .
+            $groupscols = '<th rowspan="2" align="center" bgcolor="#979797" style="text-align:center;" >' .
                 get_string_kopere('reports_groupname') . '</th>';
         }
 
         echo '<tr bgcolor="#979797" style="background-color: #979797;">
                   <th colspan="2" align="center" bgcolor="#979797" style="text-align:center;" >' .
             get_string_kopere('courses_titleenrol') . '</th>
-                  ' . $groups_cols . $print_sessoes . '
+                  ' . $groupscols . $printsessoes . '
               </tr>';
 
         echo '<tr bgcolor="#C5C5C5" style="background-color: #c5c5c5;" >
@@ -187,15 +187,15 @@ class course_access_grade {
                  WHERE c.contextlevel = :contextlevel
                    AND c.instanceid   = :instanceid";
 
-        $all_user_course = $DB->get_records_sql($sql,
+        $allusercourse = $DB->get_records_sql($sql,
             array(
                 'contextlevel' => CONTEXT_COURSE,
-                'instanceid' => $course_id
+                'instanceid' => $courseid
             ));
 
-        foreach ($all_user_course as $user) {
+        foreach ($allusercourse as $user) {
             echo '<tr>';
-            $link = $CFG->wwwroot . '/user/view.php?id=' . $user->id . '&course=' . $course_id;
+            $link = $CFG->wwwroot . '/user/view.php?id=' . $user->id . '&course=' . $courseid;
             $this->td('<a href="' . $link . '" target="moodle">' . fullname($user) . '</a>', 'bg-info text-nowrap', '#D9EDF7');
             $this->td($user->email, 'bg-info text-nowrap', '#D9EDF7');
 
@@ -206,16 +206,16 @@ class course_access_grade {
                           JOIN {groups} g ON g.id = gm.groupid
                          WHERE g.courseid = :courseid
                            AND gm.userid  = :userid";
-                $groups_user = $DB->get_records_sql($sql,
+                $groupsuser = $DB->get_records_sql($sql,
                     array(
                         'courseid' => $course->id,
                         'userid' => $user->id
                     ));
-                $groups_user_print = array();
-                foreach ($groups_user as $group_user) {
-                    $groups_user_print[] = $group_user->name;
+                $groupsuserprint = array();
+                foreach ($groupsuser as $groupuser) {
+                    $groupsuserprint[] = $groupuser->name;
                 }
-                $this->td(implode('<br/>', $groups_user_print), 'bg-info text-nowrap', '#D9EDF7');
+                $this->td(implode('<br/>', $groupsuserprint), 'bg-info text-nowrap', '#D9EDF7');
             }
 
             foreach ($modinfo as $infos) {
@@ -230,22 +230,22 @@ class course_access_grade {
                       ORDER BY timecreated DESC
                          LIMIT 1";
 
-                $log_result = $DB->get_record_sql($sql,
+                $logresult = $DB->get_record_sql($sql,
                     array(
-                        'courseid' => $course_id,
+                        'courseid' => $courseid,
                         'contextinstanceid' => $infos->course_modules_id,
                         'action' => 'viewed',
                         'userid' => $user->id
                     ));
 
-                if ($log_result && $log_result->contagem) {
-                    $this->td(get_string_kopere('reports_access_n', $log_result->contagem), 'text-nowrap bg-success', 'DFF0D8');
-                    $this->td(userdate($log_result->timecreated, get_string('strftimedatetime')),
+                if ($logresult && $logresult->contagem) {
+                    $this->td(get_string_kopere('reports_access_n', $logresult->contagem), 'text-nowrap bg-success', 'DFF0D8');
+                    $this->td(userdate($logresult->timecreated, get_string('strftimedatetime')),
                         'text-nowrap bg-success', '#DFF0D8');
 
                     if ($infos->grade) {
-                        $grading_info = grade_get_grades($course_id, 'mod', $infos->name, $infos->instance, $user->id);
-                        foreach ($grading_info->items[0]->grades as $grade) {
+                        $gradinginfo = grade_get_grades($courseid, 'mod', $infos->name, $infos->instance, $user->id);
+                        foreach ($gradinginfo->items[0]->grades as $grade) {
                             $this->td($grade->str_grade, 'text-nowrap bg-success', '#D000D8');
                             break;
                         }

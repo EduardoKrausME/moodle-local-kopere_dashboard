@@ -94,9 +94,9 @@ class dashboard {
         title_util::print_h3('dashboard_grade_title');
 
         $grade = new grade();
-        $last_grades = $grade->get_last_grades();
+        $lastgrades = $grade->get_last_grades();
 
-        foreach ($last_grades as $grade) {
+        foreach ($lastgrades as $grade) {
 
             $user = $DB->get_record('user', array('id' => $grade->userid));
 
@@ -112,7 +112,7 @@ class dashboard {
                 continue;
             }
 
-            $grade_text = number_format($grade->finalgrade, 1, get_string('decsep', 'langconfig'), '') . ' ' .
+            $gradetext = number_format($grade->finalgrade, 1, get_string('decsep', 'langconfig'), '') . ' ' .
                 get_string_kopere('dashboard_grade_of') . ' ' . intval($grade->rawgrademax);
 
             echo '<div class="media dashboard-grade-list">
@@ -126,7 +126,7 @@ class dashboard {
                                  data-href="open-ajax-table.php?users::details&userid=' . $user->id . '">' . fullname($user) . '</a>
                           </h4>
                           <p>' . get_string_kopere('dashboard_grade_text',
-                    ['grade' => $grade_text, 'evaluation' => $evaluation]) . '</p>
+                    ['grade' => $gradetext, 'evaluation' => $evaluation]) . '</p>
                           <div class="date"><small>' . get_string_kopere('dashboard_grade_in') .
                 ' <i>' . userdate($grade->timemodified,
                     get_string_kopere('dateformat')) . '</i></small></div>
@@ -149,9 +149,9 @@ class dashboard {
         title_util::print_h3('dashboard_enrol_title');
 
         $enrol = new enroll();
-        $last_enroll = $enrol->last_enroll();
+        $lastenroll = $enrol->last_enroll();
 
-        foreach ($last_enroll as $enrol) {
+        foreach ($lastenroll as $enrol) {
 
             $user = $DB->get_record('user', array('id' => $enrol->userid));
             if ($user) {
@@ -160,9 +160,9 @@ class dashboard {
                 $userpicture->size = 1;
                 $profileimageurl = $userpicture->get_url($PAGE)->out(false);
 
-                $status_matricula = '<span class="btn-danger">' . get_string_kopere('dashboard_enrol_inactive') . '</span>';
+                $statusmatricula = '<span class="btn-danger">' . get_string_kopere('dashboard_enrol_inactive') . '</span>';
                 if ($enrol->status == 0) {
-                    $status_matricula = '<span class="btn-success">' . get_string_kopere('dashboard_enrol_active') . '</span>';
+                    $statusmatricula = '<span class="btn-success">' . get_string_kopere('dashboard_enrol_active') . '</span>';
                 }
 
                 echo '<div class="media dashboard-grade-list">
@@ -177,7 +177,7 @@ class dashboard {
                     fullname($user) . '</a>
                               </h4>
                               <p>' . get_string_kopere('dashboard_enrol_text', $enrol) . '
-                                  <span class="status">' . $status_matricula . '</span>
+                                  <span class="status">' . $statusmatricula . '</span>
                               </p>
                               <div class="date"><small>' . get_string_kopere('dashboard_enrol_lastmodifield') . ' <i>' .
                     userdate($enrol->timemodified, get_string_kopere('dateformat')) . '</i></small></div>

@@ -57,11 +57,11 @@ class table {
     /**
      * @var bool
      */
-    private $_isprint = false;
+    private $isprint = false;
     /**
      * @var string
      */
-    private $table_id;
+    private $tableid;
 
     /**
      * @param $exec
@@ -125,16 +125,16 @@ class table {
      * @param      $title
      * @param null $chave
      * @param null $funcao
-     * @param null $style_header
-     * @param null $style_col
+     * @param null $styleheader
+     * @param null $stylecol
      */
-    public function add_header( $title, $chave = null, $funcao = null, $style_header = null, $style_col = null) {
+    public function add_header( $title, $chave = null, $funcao = null, $styleheader = null, $stylecol = null) {
         $coluna = new table_header_item();
         $coluna->chave = $chave;
         $coluna->title = $title;
         $coluna->funcao = $funcao;
-        $coluna->style_header = $style_header;
-        $coluna->style_col = $style_col;
+        $coluna->style_header = $styleheader;
+        $coluna->style_col = $stylecol;
 
         $this->colunas[] = $coluna;
     }
@@ -179,24 +179,24 @@ class table {
         }
         foreach ($linhas as $linha) {
 
-            $text_id = "";
+            $textid = "";
             if ($this->id) {
-                $chave_id = $this->id;
+                $chaveid = $this->id;
                 if (is_array($linha)) {
-                    $valor_id = $linha[$chave_id];
+                    $valorid = $linha[$chaveid];
                 } else {
-                    $valor_id = $linha->$chave_id;
+                    $valorid = $linha->$chaveid;
                 }
-                $text_id = 'id="' . $valor_id . '"';
+                $textid = 'id="' . $valorid . '"';
             }
 
             if ($this->click != null) {
-                echo '<tr ' . $text_id . ' onClick="' . $this->get_click($linha) . '">';
+                echo '<tr ' . $textid . ' onClick="' . $this->get_click($linha) . '">';
             } else {
                 echo '<tr>';
             }
             foreach ($this->colunas as $col) {
-                $_class = $class . ' ' . $col->style_col;
+                $class = $class . ' ' . $col->style_col;
                 if ($col->funcao != null) {
                     $funcao = $col->funcao;
                     if (is_array($linha)) {
@@ -205,13 +205,13 @@ class table {
                         $html = $funcao($linha, $col->chave);
                     }
 
-                    $this->print_row($html, $_class);
+                    $this->print_row($html, $class);
                 } else {
                     if (is_array($linha)) {
-                        $this->print_row($linha[$col->chave], $_class);
+                        $this->print_row($linha[$col->chave], $class);
                     } else {
                         $chave = $col->chave;
-                        $this->print_row($linha->$chave, $_class);
+                        $this->print_row($linha->$chave, $class);
                     }
                 }
 

@@ -33,27 +33,27 @@ defined('MOODLE_INTERNAL') || die();
 class json {
     /**
      * @param      $data
-     * @param int $records_total
-     * @param int $records_filtered
+     * @param int $recordstotal
+     * @param int $recordsfiltered
      * @param null $sql
      */
-    public static function encode($data, $records_total = -1, $records_filtered = 0, $sql = null) {
+    public static function encode($data, $recordstotal = -1, $recordsfiltered = 0, $sql = null) {
         ob_clean();
         header('Content-Type: application/json; charset: utf-8');
 
-        $return_array = array();
-        if ($records_total != -1) {
-            $return_array['draw'] = optional_param('draw', 0, PARAM_INT);
-            $return_array['recordsTotal'] = intval($records_total);
-            $return_array['recordsFiltered'] = intval($records_filtered);
+        $returnarray = array();
+        if ($recordstotal != -1) {
+            $returnarray['draw'] = optional_param('draw', 0, PARAM_INT);
+            $returnarray['recordsTotal'] = intval($recordstotal);
+            $returnarray['recordsFiltered'] = intval($recordsfiltered);
         }
-        $return_array['data'] = $data;
+        $returnarray['data'] = $data;
 
         if ($sql) {
-            $return_array['sql'] = $sql;
+            $returnarray['sql'] = $sql;
         }
 
-        $json = json_encode($return_array);
+        $json = json_encode($returnarray);
 
         $json = str_replace('"data":{', '"data":[', $json);
         $json = str_replace('}}}', '}]}', $json);
@@ -69,10 +69,10 @@ class json {
         ob_clean();
         header('Content-Type: application/json; charset: utf-8');
 
-        $return_array = array();
-        $return_array['error'] = $message;
+        $returnarray = array();
+        $returnarray['error'] = $message;
 
-        $json = json_encode($return_array);
+        $json = json_encode($returnarray);
 
         end_util::end_script_show($json);
     }

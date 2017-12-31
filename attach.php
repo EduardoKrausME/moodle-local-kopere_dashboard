@@ -31,11 +31,11 @@ if (strpos($src, '..')) {
     die('Not Found!');
 }
 
-$image_loaded = $CFG->dataroot . '/kopere/dashboard/' . $src;
-$extension = pathinfo($image_loaded, PATHINFO_EXTENSION);
-$basename = pathinfo($image_loaded, PATHINFO_BASENAME);
+$imageloaded = $CFG->dataroot . '/kopere/dashboard/' . $src;
+$extension = pathinfo($imageloaded, PATHINFO_EXTENSION);
+$basename = pathinfo($imageloaded, PATHINFO_BASENAME);
 $lifetime = 60 * 60 * 24 * 360;
-$is_image = false;
+$isimage = false;
 
 ob_clean();
 ob_end_flush();
@@ -45,7 +45,7 @@ switch ($extension) {
     case 'jpg':
     case 'jpeg':
         header('Content-Type: image/jpeg');
-        $is_image = true;
+        $isimage = true;
         break;
     case 'png':
     case 'gif':
@@ -53,7 +53,7 @@ switch ($extension) {
     case 'bmp':
     case 'tiff':
         header('Content-Type: image/' . $extension);
-        $is_image = true;
+        $isimage = true;
         break;
 
     default:
@@ -61,10 +61,10 @@ switch ($extension) {
         break;
 }
 
-if ($is_image) {
+if ($isimage) {
     header('Content-disposition: inline; filename="' . $basename . '"');
     header('Content-disposition: inline; filename="' . $basename . '"');
-    header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($image_loaded)) . ' GMT');
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($imageloaded)) . ' GMT');
     header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $lifetime) . ' GMT');
     header('Cache-Control: public, max-age=' . $lifetime . ', no-transform');
 } else {
@@ -72,5 +72,5 @@ if ($is_image) {
     header('Content-disposition: attachment; filename="' . $basename . '"');
 }
 
-readfile($image_loaded);
+readfile($imageloaded);
 

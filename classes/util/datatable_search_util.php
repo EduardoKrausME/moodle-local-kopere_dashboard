@@ -34,11 +34,11 @@ class datatable_search_util {
     /**
      * @var
      */
-    private $column_order;
+    private $columnorder;
     /**
      * @var
      */
-    private $column_select;
+    private $columnselect;
     /**
      * @var mixed
      */
@@ -54,7 +54,7 @@ class datatable_search_util {
     /**
      * @var
      */
-    private $order_dir;
+    private $orderdir;
     /**
      * @var
      */
@@ -63,12 +63,12 @@ class datatable_search_util {
     /**
      * datatable_search_util constructor.
      *
-     * @param $column_select
-     * @param $column_order
+     * @param $columnselect
+     * @param $columnorder
      */
-    public function __construct($column_select, $column_order) {
-        $this->column_order = $column_order;
-        $this->column_select = $column_select;
+    public function __construct($columnselect, $columnorder) {
+        $this->column_order = $columnorder;
+        $this->column_select = $columnselect;
         $this->start = optional_param('start', 0, PARAM_INT);
         $this->length = optional_param('length', 0, PARAM_INT);
 
@@ -117,11 +117,11 @@ class datatable_search_util {
         $columns = string_util::clear_all_params('columns', [], PARAM_TEXT);
 
         if ($order && $columns) {
-            $_column = $order[0]['column'];
-            if (is_array($this->column_order[$_column])) {
-                $this->order = $this->column_order[$_column][0];
+            $column = $order[0]['column'];
+            if (is_array($this->column_order[$column])) {
+                $this->order = $this->column_order[$column][0];
             } else {
-                $this->order = $this->column_order[$_column];
+                $this->order = $this->column_order[$column];
             }
             $this->order_dir = $order[0]['dir'];
         }
@@ -131,40 +131,40 @@ class datatable_search_util {
      * @param          $sql
      * @param string $group
      * @param array $params
-     * @param callback $function_before_return
+     * @param callback $functionbeforereturn
      */
-    public function execute_sql_and_return($sql, $group = '', $params = null, $function_before_return = null) {
+    public function execute_sql_and_return($sql, $group = '', $params = null, $functionbeforereturn = null) {
         global $DB, $CFG;
 
-        $sql_search = $sql . " $this->where $group";
-        $sql_search = str_replace('{[columns]}', 'count(*) as num', $sql_search);
+        $sqlsearch = $sql . " $this->where $group";
+        $sqlsearch = str_replace('{[columns]}', 'count(*) as num', $sqlsearch);
 
-        $sql_total = $sql . " $group";
-        $sql_total = str_replace('{[columns]}', 'count(*) as num', $sql_total);
+        $sqltotal = $sql . " $group";
+        $sqltotal = str_replace('{[columns]}', 'count(*) as num', $sqltotal);
 
         if ($CFG->dbtype == 'pgsql') {
-            $sql_return = $sql . " $this->where \n $group\n ORDER BY $this->order $this->order_dir \n
+            $sqlreturn = $sql . " $this->where \n $group\n ORDER BY $this->order $this->order_dir \n
                                                             LIMIT $this->length OFFSET $this->start";
         } else {
-            $sql_return = $sql . " $this->where \n $group\n ORDER BY $this->order $this->order_dir \n
+            $sqlreturn = $sql . " $this->where \n $group\n ORDER BY $this->order $this->order_dir \n
                                                             LIMIT $this->start, $this->length";
         }
-        $sql_return = str_replace('{[columns]}', implode(', ', $this->column_select), $sql_return);
+        $sqlreturn = str_replace('{[columns]}', implode(', ', $this->column_select), $sqlreturn);
 
-        $result = $DB->get_records_sql($sql_return, $params);
-        $total = $DB->get_record_sql($sql_total, $params);
-        $total_num = $total->num;
+        $result = $DB->get_records_sql($sqlreturn, $params);
+        $total = $DB->get_record_sql($sqltotal, $params);
+        $totalnum = $total->num;
         if ($this->where) {
-            $search = $DB->get_record_sql($sql_search, $params);
-            $search_num = $search->num;
+            $search = $DB->get_record_sql($sqlsearch, $params);
+            $searchnum = $search->num;
         } else {
-            $search_num = $total_num;
+            $searchnum = $totalnum;
         }
 
-        if ($function_before_return) {
-            $result = call_user_func($function_before_return, $result);
+        if ($functionbeforereturn) {
+            $result = call_user_func($functionbeforereturn, $result);
         }
 
-        json::encode($result, $total_num, $search_num);
+        json::encode($result, $totalnum, $searchnum);
     }
 }

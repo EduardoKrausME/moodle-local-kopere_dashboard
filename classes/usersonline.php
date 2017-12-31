@@ -67,9 +67,9 @@ class usersonline {
 
         $table->set_ajax_url('usersonline::load_all_users');
         $table->print_header();
-        $table_name = $table->close(false, 'order:[[1,"asc"]]');
+        $tablename = $table->close(false, 'order:[[1,"asc"]]');
 
-        echo "    <div id=\"user-list-online\" data-tableid=\"$table_name\"></div>
+        echo "    <div id=\"user-list-online\" data-tableid=\"$tablename\"></div>
               </div>";
         dashboard_util::end_page();
     }

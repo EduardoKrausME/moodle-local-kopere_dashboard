@@ -117,12 +117,12 @@ class mensagem {
 
     /**
      * @param        $texto
-     * @param string $extra_class
+     * @param string $extraclass
      *
      * @return string
      */
-    public static function info($texto, $extra_class = '') {
-        return "<div class=\"alert alert-info $extra_class\">
+    public static function info($texto, $extraclass = '') {
+        return "<div class=\"alert alert-info $extraclass\">
             <i class=\"fa fa-info-circle\"></i>
             $texto
         </div>";
@@ -130,10 +130,10 @@ class mensagem {
 
     /**
      * @param        $texto
-     * @param string $extra_class
+     * @param string $extraclass
      */
-    public static function print_info($texto, $extra_class = '') {
-        echo self::info($texto, $extra_class);
+    public static function print_info($texto, $extraclass = '') {
+        echo self::info($texto, $extraclass);
     }
 
     /**

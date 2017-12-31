@@ -66,7 +66,7 @@ class users {
      *
      */
     public function load_all_users() {
-        $column_select = array(
+        $columnselect = array(
             'id',
             'firstname',
             'lastname',
@@ -76,7 +76,7 @@ class users {
             'phone2',
             'city'
         );
-        $column_order = array(
+        $columnorder = array(
             'id',
             'fullname' => array('firstname'),
             'username',
@@ -86,7 +86,7 @@ class users {
             'city'
         );
 
-        $search = new datatable_search_util($column_select, $column_order);
+        $search = new datatable_search_util($columnselect, $columnorder);
 
         $search->execute_sql_and_return("
                SELECT {[COLUMNS]}

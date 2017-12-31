@@ -60,11 +60,11 @@ class table_header_item extends \stdClass {
     /**
      * @var string
      */
-    public $style_header = '';
+    public $styleheader = '';
     /**
      * @var string
      */
-    public $style_col = '';
+    public $stylecol = '';
 
     /**
      * @var int

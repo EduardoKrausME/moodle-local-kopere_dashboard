@@ -43,11 +43,11 @@ class string_util {
         $characters .= 'ABCDEFGHJKMNPQRSTUVWXYZ';
         $characters .= 'abcdefghjkmnpqrstuvwxyz';
 
-        $length_string = strlen($characters);
+        $lengthstring = strlen($characters);
         $string = '';
 
         for ($i = 0; $i < $length; $i++) {
-            $string .= $characters[rand(0, $length_string - 1)];
+            $string .= $characters[rand(0, $lengthstring - 1)];
         }
 
         return $string;

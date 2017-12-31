@@ -54,12 +54,12 @@ class course_last_access {
     public function generate() {
         global $DB, $CFG;
 
-        $cursos_id = optional_param('courseid', 0, PARAM_INT);
-        if ($cursos_id == 0) {
+        $cursosid = optional_param('courseid', 0, PARAM_INT);
+        if ($cursosid == 0) {
             header::notfound(get_string_kopere('courses_notound'));
         }
 
-        $course = $DB->get_record('course', array('id' => $cursos_id));
+        $course = $DB->get_record('course', array('id' => $cursosid));
         header::notfound_null($course, get_string_kopere('courses_notound'));
 
         button::info(get_string_kopere('reports_export'), "{$_SERVER['QUERY_STRING']}&export=xls");
@@ -69,11 +69,11 @@ class course_last_access {
 
         echo '<table id="list-course-access" class="table table-bordered table-hover" border="1">';
 
-        $user_info_fields = $DB->get_records('user_info_field', null, 'sortorder asc');
+        $userinfofields = $DB->get_records('user_info_field', null, 'sortorder asc');
 
         $filds = '';
-        foreach ($user_info_fields as $user_info_field) {
-            $filds .= '<td align="center" bgcolor="#979797" style="text-align:center;">' . $user_info_field->name . '</td>';
+        foreach ($userinfofields as $userinfofield) {
+            $filds .= '<td align="center" bgcolor="#979797" style="text-align:center;">' . $userinfofield->name . '</td>';
         }
 
         echo '<thead>
@@ -96,23 +96,23 @@ class course_last_access {
                 WHERE c.contextlevel = :contextlevel
                   AND c.instanceid   = :instanceid";
 
-        $all_user_course = $DB->get_records_sql($sql,
+        $allusercourse = $DB->get_records_sql($sql,
             array(
                 'contextlevel' => CONTEXT_COURSE,
-                'instanceid' => $cursos_id
+                'instanceid' => $cursosid
             ));
 
-        foreach ($all_user_course as $user) {
+        foreach ($allusercourse as $user) {
             echo '<tr>';
-            $link = $CFG->wwwroot . '/user/view.php?id=' . $user->id . '&course=' . $cursos_id;
+            $link = $CFG->wwwroot . '/user/view.php?id=' . $user->id . '&course=' . $cursosid;
             $this->td('<a href="' . $link . '" target="moodle">' . fullname($user) . '</a>', 'bg-info text-nowrap', '#D9EDF7');
             $this->td($user->email, 'bg-info text-nowrap', '#D9EDF7');
 
-            foreach ($user_info_fields as $user_info_field) {
-                $user_info_data = $DB->get_record('user_info_data',
-                    array('userid' => $user->id, 'fieldid' => $user_info_field->id));
-                if ($user_info_data) {
-                    $this->td($user_info_data->data, 'text-nowrap bg-success', 'D9EDF7');
+            foreach ($userinfofields as $userinfofield) {
+                $userinfodata = $DB->get_record('user_info_data',
+                    array('userid' => $user->id, 'fieldid' => $userinfofield->id));
+                if ($userinfodata) {
+                    $this->td($userinfodata->data, 'text-nowrap bg-success', 'D9EDF7');
                 } else {
                     $this->td('', 'text-nowrap bg-success', 'D9EDF7');
                 }
@@ -127,14 +127,14 @@ class course_last_access {
                   ORDER BY timecreated ASC
                      LIMIT 1";
 
-            $log_result = $DB->get_record_sql($sql,
+            $logresult = $DB->get_record_sql($sql,
                 array(
-                    'courseid' => $cursos_id,
+                    'courseid' => $cursosid,
                     'action' => 'viewed',
                     'userid' => $user->id
                 ));
-            if ($log_result && $log_result->timecreated) {
-                $this->td(userdate($log_result->timecreated, get_string('strftimedatetime')), 'text-nowrap bg-success', 'DFF0D8');
+            if ($logresult && $logresult->timecreated) {
+                $this->td(userdate($logresult->timecreated, get_string('strftimedatetime')), 'text-nowrap bg-success', 'DFF0D8');
             } else {
                 $this->td('<span style="color: #282828">' . get_string_kopere('reports_noneaccess') .
                     '</span>', 'bg-warning text-nowrap', '#FCF8E3');
@@ -149,14 +149,14 @@ class course_last_access {
                   ORDER BY timecreated DESC
                      LIMIT 1";
 
-            $log_result = $DB->get_record_sql($sql,
+            $logresult = $DB->get_record_sql($sql,
                 array(
-                    'courseid' => $cursos_id,
+                    'courseid' => $cursosid,
                     'action' => 'viewed',
                     'userid' => $user->id
                 ));
-            if ($log_result && $log_result->timecreated) {
-                $this->td(userdate($log_result->timecreated, get_string('strftimedatetime')), 'text-nowrap bg-success', 'DFF0D8');
+            if ($logresult && $logresult->timecreated) {
+                $this->td(userdate($logresult->timecreated, get_string('strftimedatetime')), 'text-nowrap bg-success', 'DFF0D8');
             } else {
                 $this->td('<span style="color: #282828">' . get_string_kopere('reports_noneaccess') .
                     '</span>', 'bg-warning text-nowrap', '#FCF8E3');

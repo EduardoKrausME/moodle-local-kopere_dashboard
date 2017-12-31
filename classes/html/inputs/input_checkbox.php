@@ -70,13 +70,13 @@ class input_checkbox extends input_base {
     }
 
     /**
-     * @param $config_name
+     * @param $configname
      *
      * @return $this
      */
-    public function set_checked_by_config($config_name) {
-        $this->set_name($config_name);
-        if (get_config('local_kopere_dashboard', $config_name)) {
+    public function set_checked_by_config($configname) {
+        $this->set_name($configname);
+        if (get_config('local_kopere_dashboard', $configname)) {
             $this->checked = true;
         }
 

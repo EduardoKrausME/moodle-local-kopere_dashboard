@@ -37,35 +37,35 @@ class bytes_util {
     private static $divisor = 1000;
 
     /**
-     * @param int $_bytes
+     * @param int $bytes
      *
      * @return string
      */
-    public static function size_to_byte($_bytes) {
-        $_bytes = intval($_bytes);
+    public static function size_to_byte($bytes) {
+        $bytes = intval($bytes);
 
-        if ($_bytes == 0) {
+        if ($bytes == 0) {
             return '0B';
         }
-        $bytes = $_bytes / self::$divisor;
+        $bytes = $bytes / self::$divisor;
         if ($bytes < 1000) {
             return self::remove_zero(number_format($bytes, 0, get_string('decsep', 'langconfig'),
                     get_string('thousandssep', 'langconfig')) . ' KB', 0);
         }
 
-        $bytes = $_bytes / self::$divisor / self::$divisor;
+        $bytes = $bytes / self::$divisor / self::$divisor;
         if ($bytes < 1000) {
             return self::remove_zero(number_format($bytes, 0, get_string('decsep', 'langconfig'),
                     get_string('thousandssep', 'langconfig')) . ' MB', 0);
         }
 
-        $bytes = $_bytes / self::$divisor / self::$divisor / self::$divisor;
+        $bytes = $bytes / self::$divisor / self::$divisor / self::$divisor;
         if ($bytes < 1000) {
             return self::remove_zero(number_format($bytes, 1, get_string('decsep', 'langconfig'),
                     get_string('thousandssep', 'langconfig')) . ' GB', 1);
         }
 
-        $bytes = $_bytes / self::$divisor / self::$divisor / self::$divisor / self::$divisor;
+        $bytes = $bytes / self::$divisor / self::$divisor / self::$divisor / self::$divisor;
 
         return self::remove_zero(number_format($bytes, 2, get_string('decsep', 'langconfig'),
                 get_string('thousandssep', 'langconfig')) . ' TB', 2);

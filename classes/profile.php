@@ -62,9 +62,9 @@ class profile {
 
         $courses = enrol_get_all_users_courses($user->id);
 
-        $course_html = '';
+        $coursehtml = '';
         if (!count($courses)) {
-            $course_html = mensagem::warning(get_string_kopere('profile_notenrol'));
+            $coursehtml = mensagem::warning(get_string_kopere('profile_notenrol'));
         }
         foreach ($courses as $course) {
             $sql
@@ -79,39 +79,39 @@ class profile {
             $enrolment = $DB->get_record_sql($sql, $params);
 
             if ($enrolment->timeend == 0) {
-                $expiration_end = get_string_kopere('profile_enrol_notexpires');
+                $expirationend = get_string_kopere('profile_enrol_notexpires');
             } else {
-                $expiration_end = '<br>' . get_string_kopere('profile_enrol_expires') . ' <em>' .
+                $expirationend = '<br>' . get_string_kopere('profile_enrol_expires') . ' <em>' .
                     userdate($enrolment->timeend, get_string_kopere('dateformat')) . '</em>';
             }
 
-            $role_assignments = $DB->get_records('role_assignments',
+            $roleassignments = $DB->get_records('role_assignments',
                 array('contextid' => $course->ctxid,
                     'userid' => $user->id
                 ), '', 'DISTINCT roleid');
 
-            $role_html = '';
-            foreach ($role_assignments as $role_assignment) {
-                $role = $DB->get_record('role', array('id' => $role_assignment->roleid));
-                $role_html .= '<span class="btn btn-default">' . role_get_name($role) . '</span>';
+            $rolehtml = '';
+            foreach ($roleassignments as $roleassignment) {
+                $role = $DB->get_record('role', array('id' => $roleassignment->roleid));
+                $rolehtml .= '<span class="btn btn-default">' . role_get_name($role) . '</span>';
             }
 
-            $matricula_status = '<span class="btn-danger">' . get_string_kopere('profile_enrol_inactive') . '</span>';
+            $matriculastatus = '<span class="btn-danger">' . get_string_kopere('profile_enrol_inactive') . '</span>';
             if ($enrolment->status == 0) {
-                $matricula_status = '<span class="btn-success">' . get_string_kopere('profile_enrol_active') . '</span>';
+                $matriculastatus = '<span class="btn-success">' . get_string_kopere('profile_enrol_active') . '</span>';
             }
-            $course_html
+            $coursehtml
                 .= '<li>
                     <h4 class="title">' . $course->fullname . '
-                        <span class="status">' . $matricula_status . '</span>
+                        <span class="status">' . $matriculastatus . '</span>
                     </h4>
                     <div>' . get_string_kopere('profile_enrol_start') . ' <em>' .
-                userdate($enrolment->timestart, get_string_kopere('dateformat')) . '</em> ' . $expiration_end . ' -
+                userdate($enrolment->timestart, get_string_kopere('dateformat')) . '</em> ' . $expirationend . ' -
                         <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal-edit"
                                 data-href="open-ajax-table.php?userenrolment::mathedit&courseid=' . $course->id .
                 '&ueid=' . $enrolment->id . '">' . get_string_kopere('profile_edit') . '</button>
                     </div>
-                    <div class="roles">' . get_string_kopere('profile_enrol_profile') . ': ' . $role_html . '</div>
+                    <div class="roles">' . get_string_kopere('profile_enrol_profile') . ': ' . $rolehtml . '</div>
                 </li>';
         }
 
@@ -127,7 +127,7 @@ class profile {
 
                           <h2>' . get_string_kopere('profile_courses_title') . '</h2>
                           <ul class="personalDev">
-                              ' . $course_html . '
+                              ' . $coursehtml . '
                           </ul>
 
                       </div>

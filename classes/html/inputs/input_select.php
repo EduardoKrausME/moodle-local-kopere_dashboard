@@ -38,16 +38,16 @@ class input_select extends input_base {
     /**
      * @var string
      */
-    private $values_key;
+    private $valueskey;
     /**
      * @var string
      */
-    private $values_value;
+    private $valuesvalue;
 
     /**
      * @var bool
      */
-    private $add_selecione = false;
+    private $addselecione = false;
 
     /**
      * input_select constructor.
@@ -74,7 +74,7 @@ class input_select extends input_base {
      * @param array $values
      * @param string $key
      * @param string $value
-     * @param bool $add_selecione
+     * @param bool $addselecione
      *
      * @return $this
      */
@@ -87,12 +87,12 @@ class input_select extends input_base {
     }
 
     /**
-     * @param $add_selecione
+     * @param $addselecione
      *
      * @return $this
      */
-    public function set_add_selecione($add_selecione) {
-        $this->add_selecione = $add_selecione;
+    public function set_add_selecione($addselecione) {
+        $this->add_selecione = $addselecione;
 
         return $this;
     }

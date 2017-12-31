@@ -98,13 +98,13 @@ class files {
                 array('contextlevel' => CONTEXT_MODULE,
                     'course' => $course->id));
 
-            $coursesize_val = isset($coursesize->coursesize) ? $coursesize->coursesize : 0;
-            $modulessize_val = isset($modulessize->modulessize) ? $modulessize->modulessize : 0;
+            $coursesizeval = isset($coursesize->coursesize) ? $coursesize->coursesize : 0;
+            $modulessizeval = isset($modulessize->modulessize) ? $modulessize->modulessize : 0;
 
-            $courses[$course->id]->coursesize = bytes_util::size_to_byte($coursesize_val);
-            $courses[$course->id]->modulessize = bytes_util::size_to_byte($modulessize_val);
+            $courses[$course->id]->coursesize = bytes_util::size_to_byte($coursesizeval);
+            $courses[$course->id]->modulessize = bytes_util::size_to_byte($modulessizeval);
 
-            $courses[$course->id]->allsize = $coursesize_val + $modulessize_val;
+            $courses[$course->id]->allsize = $coursesizeval + $modulessizeval;
         }
 
         return $courses;

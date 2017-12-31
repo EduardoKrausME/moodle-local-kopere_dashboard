@@ -69,20 +69,20 @@ class enroll_util {
             return false;
         }
 
-        $test_role_assignments = $DB->get_record('role_assignments',
+        $testroleassignments = $DB->get_record('role_assignments',
             array(
                 'roleid' => 5,
                 'contextid' => $context->id,
                 'userid' => $user->id
             ));
-        if ($test_role_assignments == null) {
-            $role_assignments = new \stdClass();
-            $role_assignments->roleid = 5;
-            $role_assignments->contextid = $context->id;
-            $role_assignments->userid = $user->id;
-            $role_assignments->timemodified = time();
+        if ($testroleassignments == null) {
+            $roleassignments = new \stdClass();
+            $roleassignments->roleid = 5;
+            $roleassignments->contextid = $context->id;
+            $roleassignments->userid = $user->id;
+            $roleassignments->timemodified = time();
 
-            $DB->insert_record('role_assignments', $role_assignments);
+            $DB->insert_record('role_assignments', $roleassignments);
         }
 
         if ($USER && isset($USER->id) && $USER->id > 1) {
@@ -91,33 +91,33 @@ class enroll_util {
             $admin = get_admin();
         }
 
-        $user_enrolments = $DB->get_record('user_enrolments',
+        $userenrolments = $DB->get_record('user_enrolments',
             array(
                 'enrolid' => $enrol->id,
                 'userid' => $user->id
             ));
-        if ($user_enrolments != null) {
-            $user_enrolments->status = $status;
-            $user_enrolments->timestart = $timestart;
-            $user_enrolments->timeend = $timeend;
-            $user_enrolments->modifierid = $admin->id;
-            $user_enrolments->timemodified = time();
+        if ($userenrolments != null) {
+            $userenrolments->status = $status;
+            $userenrolments->timestart = $timestart;
+            $userenrolments->timeend = $timeend;
+            $userenrolments->modifierid = $admin->id;
+            $userenrolments->timemodified = time();
 
-            $DB->update_record('user_enrolments', $user_enrolments);
+            $DB->update_record('user_enrolments', $userenrolments);
 
             return true;
         } else {
-            $user_enrolments = new \stdClass();
-            $user_enrolments->status = $status;
-            $user_enrolments->enrolid = $enrol->id;
-            $user_enrolments->userid = $user->id;
-            $user_enrolments->timestart = $timestart;
-            $user_enrolments->timeend = $timeend;
-            $user_enrolments->modifierid = $admin->id;
-            $user_enrolments->timecreated = time();
-            $user_enrolments->timemodified = time();
+            $userenrolments = new \stdClass();
+            $userenrolments->status = $status;
+            $userenrolments->enrolid = $enrol->id;
+            $userenrolments->userid = $user->id;
+            $userenrolments->timestart = $timestart;
+            $userenrolments->timeend = $timeend;
+            $userenrolments->modifierid = $admin->id;
+            $userenrolments->timecreated = time();
+            $userenrolments->timemodified = time();
 
-            $DB->insert_record('user_enrolments', $user_enrolments);
+            $DB->insert_record('user_enrolments', $userenrolments);
 
             return true;
         }

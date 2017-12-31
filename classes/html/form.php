@@ -42,12 +42,12 @@ class form {
      * Form constructor.
      *
      * @param null $formaction
-     * @param string $class_extra
+     * @param string $classextra
      */
-    public function __construct($formaction = null, $class_extra = '') {
+    public function __construct($formaction = null, $classextra = '') {
         $this->formaction = $formaction;
         if ($this->formaction) {
-            echo "<form method=\"post\" class=\"validate $class_extra\" enctype=\"multipart/form-data\"
+            echo "<form method=\"post\" class=\"validate $classextra\" enctype=\"multipart/form-data\"
                         action=\"?{$this->formaction}\" >";
             echo '<div class="displayErroForm alert alert-danger" style="display: none;"><span></span></div>';
             echo '<input name="POST" type="hidden" value="true" />';
@@ -58,28 +58,28 @@ class form {
      * @param        $titulo
      * @param        $input
      * @param string $name
-     * @param string $adicional_text
+     * @param string $adicionaltext
      */
-    public function print_row($titulo, $input, $name = '', $adicional_text = '') {
+    public function print_row($titulo, $input, $name = '', $adicionaltext = '') {
         if ($titulo) {
             $titulo = '<label for="' . $name . '">' . $titulo . '</label>';
         }
 
         echo '<div class="form-group area_' . $name . '">
                   ' . $titulo . $input . '
-                  <div class="help-block form-text with-errors">' . $adicional_text . '</div>
+                  <div class="help-block form-text with-errors">' . $adicionaltext . '</div>
               </div>';
     }
 
     /**
      * @param $titulo
-     * @param $panel_body
+     * @param $panelbody
      */
-    public function print_panel($titulo, $panel_body) {
+    public function print_panel($titulo, $panelbody) {
         echo '<div class="form-group">
                   <label>' . $titulo . '</label>
                   <div class="panel panel-default">
-                      <div class=" panel-body ">' . $panel_body . '</div>
+                      <div class=" panel-body ">' . $panelbody . '</div>
                   </div>
               </div>';
     }
@@ -88,21 +88,21 @@ class form {
      * @param        $titulo
      * @param        $input
      * @param string $name
-     * @param string $adicional_text
+     * @param string $adicionaltext
      */
-    public function print_row_one($titulo, $input, $name = '', $adicional_text = '') {
+    public function print_row_one($titulo, $input, $name = '', $adicionaltext = '') {
         echo '<div class="form-check area_' . $name . '"">
                   <label for="' . $name . '" class="form-check-label">
                       ' . $input . ' ' . $titulo . '</label>
-                  <div class="help-block form-text with-errors form-control-feedback-">' . $adicional_text . '</div>
+                  <div class="help-block form-text with-errors form-control-feedback-">' . $adicionaltext . '</div>
               </div>';
     }
 
     /**
-     * @param $section_title
+     * @param $sectiontitle
      */
-    public function print_section($section_title) {
-        echo '<div class="form-section"><span>' . $section_title . '</span></div>';
+    public function print_section($sectiontitle) {
+        echo '<div class="form-section"><span>' . $sectiontitle . '</span></div>';
     }
 
     /**
@@ -136,12 +136,12 @@ class form {
     /**
      * @param string $value
      * @param string $class
-     * @param string $additional_text
+     * @param string $additionaltext
      */
-    public function create_submit_input($value = '', $class = '', $additional_text = '') {
+    public function create_submit_input($value = '', $class = '', $additionaltext = '') {
         $html = '<input name="" class="btn btn-success bt-submit ' . $class .
             '" type="submit" value="' . htmlspecialchars($value) . '" />';
-        $this->print_row('', $html, 'btsubmit', $additional_text);
+        $this->print_row('', $html, 'btsubmit', $additionaltext);
     }
 
     /**

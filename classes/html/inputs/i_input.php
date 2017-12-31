@@ -92,11 +92,11 @@ interface i_input {
     public function set_value($value);
 
     /**
-     * @param $config_name
+     * @param $configname
      *
      * @return $this
      */
-    public function set_value_by_config($config_name);
+    public function set_value_by_config($configname);
 
     /**
      * @return string

@@ -33,7 +33,7 @@ class tinymce {
     /**
      * @var bool
      */
-    private static $_issend = false;
+    private static $issend = false;
 
     /**
      * @return string
@@ -41,11 +41,11 @@ class tinymce {
     public static function register() {
         global $CFG;
 
-        if (self::$_issend) {
+        if (self::$issend) {
             return '';
         }
 
-        self::$_issend = true;
+        self::$issend = true;
 
         return '<script src="' . $CFG->wwwroot . '/local/kopere_dashboard/vendor/tinymce/tinymce/tinymce.min.js"
                         type="text/javascript"></script>';
@@ -61,9 +61,9 @@ class tinymce {
         global $CFG;
         $filemanager = $CFG->wwwroot . '/local/kopere_dashboard/vendor/responsivefilemanager/';
 
-        $return_html = self::register();
+        $returnhtml = self::register();
 
-        $return_html
+        $returnhtml
             .= "<script type=\"text/javascript\">
             tinymce.init ( {
                 selector : '{$seletor}',
@@ -221,6 +221,6 @@ class tinymce {
             } );
         </script>";
 
-        return $return_html;
+        return $returnhtml;
     }
 }

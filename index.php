@@ -30,16 +30,16 @@ $menu = optional_param('menu', 0, PARAM_TEXT);
 $page = optional_param('p', 0, PARAM_TEXT);
 
 //if (!isloggedin()) {
-//    $file_cache = \local_kopere_dashboard\util\html::link( $menu . '-' . $page );
-//    $cache_filename = \local_kopere_dashboard\webpages::get_cache_dir() . $file_cache . '.html';
+//    $filecache = \local_kopere_dashboard\util\html::link( $menu . '-' . $page );
+//    $cachefilename = \local_kopere_dashboard\webpages::get_cache_dir() . $filecache . '.html';
 //
-//    if (file_exists($cache_filename)) {
-//        echo file_get_contents($cache_filename);
+//    if (file_exists($cachefilename)) {
+//        echo file_get_contents($cachefilename);
 //        die();
 //    }
 //}
 
-$page_html = '';
+$pagehtml = '';
 
 $PAGE->set_context(context_system::instance());
 
@@ -54,7 +54,7 @@ if ($menu) {
 
     $PAGE->requires->css('/local/kopere_dashboard/assets/statics-pages.css');
 
-    $page_html .= $OUTPUT->header();
+    $pagehtml .= $OUTPUT->header();
 
     $sql =  'SELECT * FROM {kopere_dashboard_webpages} WHERE visible = 1 AND menuid = :menuid ORDER BY pageorder ASC';
     $webpagess = $DB->get_records_sql($sql, array('menuid' => $menu->id));
@@ -67,12 +67,12 @@ if ($menu) {
         }
     }
 
-    $page_html .= '<div class="statics-pages frontpage-course-list-all">';
-    $page_html .= "<h1>{$menu->title}</h1>";
+    $pagehtml .= '<div class="statics-pages frontpage-course-list-all">';
+    $pagehtml .= "<h1>{$menu->title}</h1>";
 
     /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpages */
     foreach ($webpagess as $webpages) {
-        $page_html
+        $pagehtml
             .= "<div class=\"coursebox clearfix odd first\" >
                     <div class=\"info\">
                         <h3 class=\"coursename\">
@@ -87,7 +87,7 @@ if ($menu) {
                 </div>";
     }
 
-    $page_html .= '</div>';
+    $pagehtml .= '</div>';
 
 } else if ($page) {
 
@@ -105,12 +105,12 @@ if ($menu) {
 
     $PAGE->navbar->add($webpages->title, new moodle_url('/local/kopere_dashboard/?p=' . $webpages->link));
 
-    $page_html .= $OUTPUT->header();
-    $page_html .= "<h1>{$webpages->title}</h1>";
-    $page_html .= $webpages->text;
+    $pagehtml .= $OUTPUT->header();
+    $pagehtml .= "<h1>{$webpages->title}</h1>";
+    $pagehtml .= $webpages->text;
 
     // if ( $webpages->courseid ) {
-    // $page_html .= \local_kopere_dashboard\html\button::edit ( 'Matrícular neste curso', '#', \local_kopere_dashboard\html\button::BTN_GRANDE, true, true );
+    // $pagehtml .= \local_kopere_dashboard\html\button::edit ( 'Matrícular neste curso', '#', \local_kopere_dashboard\html\button::BTN_GRANDE, true, true );
     // }
 
 } else {
@@ -119,17 +119,17 @@ if ($menu) {
     $PAGE->set_title(get_string_kopere('webpages_allpages'));
     $PAGE->set_pagelayout(get_config('local_kopere_dashboard', 'webpages_theme'));
 
-    $page_html .= $OUTPUT->header();
+    $pagehtml .= $OUTPUT->header();
 
     $sql = "SELECT * FROM {kopere_dashboard_webpages} WHERE visible = 1 ORDER BY pageorder ASC";
     $webpagess = $DB->get_records_sql($sql);
 
-    $page_html .= '<div class="courses frontpage-course-list-all">';
-    $page_html .= \local_kopere_dashboard\util\title_util::print_h1('webpages_allpages');
+    $pagehtml .= '<div class="courses frontpage-course-list-all">';
+    $pagehtml .= \local_kopere_dashboard\util\title_util::print_h1('webpages_allpages');
 
     /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpages */
     foreach ($webpagess as $webpages) {
-        $page_html
+        $pagehtml
             .= "<div class=\"coursebox clearfix odd first\" >
                     <div class=\"info\">
                         <h3 class=\"coursename-\">
@@ -143,28 +143,28 @@ if ($menu) {
                     </div>
                 </div>";
     }
-    $page_html .= '</div>';
+    $pagehtml .= '</div>';
 }
 
-$webpages_analytics_id = get_config('local_kopere_dashboard', 'webpages_analytics_id');
-if (strlen($webpages_analytics_id) > 10) {
-    $page_html
+$webpagesanalyticsid = get_config('local_kopere_dashboard', 'webpages_analytics_id');
+if (strlen($webpagesanalyticsid) > 10) {
+    $pagehtml
         .= '<script>
                      (function(i,s,o,g,r,a,m){i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){
                      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                      })(window,document,\'script\',\'https:// www.google-analytics.com/analytics.js\',\'ga\');
 
-                     ga(\'create\', \'' . $webpages_analytics_id . '\', \'auto\');
+                     ga(\'create\', \'' . $webpagesanalyticsid . '\', \'auto\');
                      ga(\'send\', \'pageview\');
 
                  </script>';
 }
 
-$webpages_analytics_id = get_config('local_kopere_dashboard', 'webpages_analytics_id');
+$webpagesanalyticsid = get_config('local_kopere_dashboard', 'webpages_analytics_id');
 
-if (strlen($webpages_analytics_id) > 5 && strlen($webpages_analytics_id) < 15) {
-    $page_html
+if (strlen($webpagesanalyticsid) > 5 && strlen($webpagesanalyticsid) < 15) {
+    $pagehtml
         .= "<script>
                 (function(i,s,o,g,r,a,m){
                     i['GoogleAnalyticsObject']=r;
@@ -176,38 +176,38 @@ if (strlen($webpages_analytics_id) > 5 && strlen($webpages_analytics_id) < 15) {
                     a.src=g;
                     m.parentNode.insertBefore(a,m)
                 })(window,document,'script','https:// www.google-analytics.com/analytics.js','ga');
-                ga('create', '$webpages_analytics_id', 'auto');
+                ga('create', '$webpagesanalyticsid', 'auto');
                 ga('send', 'pageview');
             </script>";
 }
 
-$page_html .= $OUTPUT->footer();
+$pagehtml .= $OUTPUT->footer();
 
-echo $page_html;
+echo $pagehtml;
 
 //if (isloggedin()) {
-//    echo $page_html;
+//    echo $pagehtml;
 //} else {
 //    ob_clean();
-//    $page_html = str_replace('// <![CDATA[', '', $page_html);
-//    $page_html = str_replace('// ]]>', '', $page_html);
+//    $pagehtml = str_replace('// <![CDATA[', '', $pagehtml);
+//    $pagehtml = str_replace('// ]]>', '', $pagehtml);
 //
-//    $page_html = preg_replace("/\/\/ .*?\n/", "", $page_html);
-//    $page_html = preg_replace('/\s+/', ' ', $page_html);
+//    $pagehtml = preg_replace("/\/\/ .*?\n/", "", $pagehtml);
+//    $pagehtml = preg_replace('/\s+/', ' ', $pagehtml);
 //
-//    // preg_match_all ( "/<link rel=\"stylesheet\" type=\"text\/css\" href=\"(http.*?)\" \/>/", $page_html, $csss );
+//    // preg_match_all ( "/<link rel=\"stylesheet\" type=\"text\/css\" href=\"(http.*?)\" \/>/", $pagehtml, $csss );
 //    //
 //    // foreach ( $csss[ 0 ] as $key => $css ) {
 //    // $link    = $csss[ 1 ][ $key ];
-//    // $css_file = file_get_contents ( $link );
+//    // $cssfile = file_get_contents ( $link );
 //    //
-//    // $css_file = preg_replace ( '/\s+/', ' ', $css_file );
-//    // $css_file = preg_replace('!/\*.*?\*/!s', ' ', $css_file);
+//    // $cssfile = preg_replace ( '/\s+/', ' ', $cssfile );
+//    // $cssfile = preg_replace('!/\*.*?\*/!s', ' ', $cssfile);
 //    //
-//    // $page_html = str_replace ( $csss[ 0 ][ $key ], '<style>' . $css_file . '</style>', $page_html );
+//    // $pagehtml = str_replace ( $csss[ 0 ][ $key ], '<style>' . $cssfile . '</style>', $pagehtml );
 //    // }
 //
-//    echo $page_html;
+//    echo $pagehtml;
 //
-//    file_put_contents($cache_filename, $page_html . "\n<!-- Cached on " . str_replace('T', ' ', date("c")) . " -->");
+//    file_put_contents($cachefilename, $pagehtml . "\n<!-- Cached on " . str_replace('T', ' ', date("c")) . " -->");
 //}

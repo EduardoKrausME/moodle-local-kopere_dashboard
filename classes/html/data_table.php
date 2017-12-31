@@ -40,58 +40,58 @@ class data_table {
     /**
      * @var array
      */
-    private $column_info = array();
+    private $columninfo = array();
     /**
      * @var array
      */
-    private $column_data = array();
+    private $columndata = array();
     /**
      * @var array
      */
-    private $column_defs = array();
+    private $columndefs = array();
 
     /**
      * @var string
      */
-    private $ajax_url = null;
+    private $ajaxurl = null;
 
     /**
      * @var string
      */
-    private $click_redirect = null;
+    private $clickredirect = null;
 
     /**
      * @var string
      */
-    private $click_modal = null;
+    private $clickmodal = null;
 
     /**
      * @var string
      */
-    private $table_id = '';
+    private $tableid = '';
 
     /**
      * @var boolean
      */
-    private $is_export = false;
+    private $isexport = false;
 
     /**
      * data_table constructor.
      *
-     * @param array $_column
-     * @param array $_column_info
+     * @param array $column
+     * @param array $columninfo
      */
-    public function __construct($_column = array(), $_column_info = array()) {
+    public function __construct($column = array(), $columninfo = array()) {
         $this->table_id = 'datatable_' . uniqid();
-        $this->column = $_column;
-        $this->column_info = $_column_info;
+        $this->column = $column;
+        $this->column_info = $columninfo;
     }
 
     /**
-     * @param boolean $is_export
+     * @param boolean $isexport
      */
-    public function set_is_export($is_export) {
-        $this->is_export = $is_export;
+    public function set_is_export($isexport) {
+        $this->is_export = $isexport;
     }
 
     /**
@@ -102,17 +102,17 @@ class data_table {
     }
 
     /**
-     * @param string $table_id
+     * @param string $tableid
      */
-    public function set_table_id($table_id) {
-        $this->table_id = $table_id;
+    public function set_table_id($tableid) {
+        $this->table_id = $tableid;
     }
 
     /**
-     * @param $ajax_url
+     * @param $ajaxurl
      */
-    public function set_ajax_url($ajax_url) {
-        $this->ajax_url = $ajax_url;
+    public function set_ajax_url($ajaxurl) {
+        $this->ajax_url = $ajaxurl;
     }
 
     /**
@@ -152,27 +152,27 @@ class data_table {
      * @param null $chave
      * @param string $type
      * @param null $funcao
-     * @param null $style_header
-     * @param null $style_col
+     * @param null $styleheader
+     * @param null $stylecol
      */
     public function add_header($title, $chave = null, $type = table_header_item::TYPE_TEXT,
-                               $funcao = null, $style_header = null, $style_col = null) {
+                               $funcao = null, $styleheader = null, $stylecol = null) {
         $column = new table_header_item();
         $column->chave = $chave;
         $column->type = $type;
         $column->title = $title;
         $column->funcao = $funcao;
-        $column->style_header = $style_header;
-        $column->style_col = $style_col;
+        $column->style_header = $styleheader;
+        $column->style_col = $stylecol;
 
         $this->column[] = $column;
     }
 
     /**
      * @param string $class
-     * @param bool $print_body
+     * @param bool $printbody
      */
-    public function print_header($class = '', $print_body = true) {
+    public function print_header($class = '', $printbody = true) {
         if ($this->is_export && $this->ajax_url == null) {
             button::info(get_string_kopere('reports_export'), "{$_SERVER['QUERY_STRING']}&export=xls");
 
@@ -184,10 +184,10 @@ class data_table {
 
         if ($this->column_info) {
             echo '<tr class="' . $class . '">';
-            /** @var table_header_item $column_info */
-            foreach ($this->column_info as $key => $column_info) {
-                echo "<th class=\"header-col text-center\" colspan=\"{$column_info->cols}\">";
-                echo $column_info->title;
+            /** @var table_header_item $columninfo */
+            foreach ($this->column_info as $key => $columninfo) {
+                echo "<th class=\"header-col text-center\" colspan=\"{$columninfo->cols}\">";
+                echo $columninfo->title;
                 echo '</th>';
             }
             echo '</tr>';
@@ -231,9 +231,9 @@ class data_table {
         echo '</thead>';
         echo "\n";
 
-        if ($this->click_redirect != null && $print_body) {
+        if ($this->click_redirect != null && $printbody) {
             echo '<tbody class="hover-pointer"></tbody>';
-        } else if ($this->click_modal != null && $print_body) {
+        } else if ($this->click_modal != null && $printbody) {
             echo '<tbody class="hover-pointer"></tbody>';
         }
     }
@@ -255,14 +255,14 @@ class data_table {
             echo '<tr>';
             foreach ($this->column as $column) {
 
-                $_class = $class;
+                $class = $class;
                 if ($column->type == table_header_item::TYPE_INT) {
-                    $_class .= ' text-center';
+                    $class .= ' text-center';
                 } else if ($column->type == table_header_item::TYPE_ACTION) {
-                    $_class .= ' button-actions text-nowrap';
+                    $class .= ' button-actions text-nowrap';
                 }
 
-                $_class .= ' ' . $column->style_col;
+                $class .= ' ' . $column->style_col;
                 if ($column->funcao != null) {
                     $funcao = $column->funcao;
                     $html = $funcao($linha, $column->chave);
@@ -274,7 +274,7 @@ class data_table {
                         $html = $linha->$chave;
                     }
                 }
-                $this->print_row($html, $_class);
+                $this->print_row($html, $class);
             }
             echo '</tr>';
         }
@@ -296,20 +296,20 @@ class data_table {
     }
 
     /**
-     * @param bool $process_server
+     * @param bool $processserver
      * @param string $order
      * @param string $extras
      *
      * @return string
      */
-    public function close($process_server = false, $order = '', $extras = '') {
+    public function close($processserver = false, $order = '', $extras = '') {
         echo '</table>';
 
         export::close();
 
-        $process_server_html = '';
-        if ($process_server) {
-            $process_server_html = ', "processing": true, "serverSide": true';
+        $processserverhtml = '';
+        if ($processserver) {
+            $processserverhtml = ', "processing": true, "serverSide": true';
         }
 
         if (isset($order[1])) {
@@ -319,23 +319,23 @@ class data_table {
             $extras = ',' . $extras;
         }
 
-        $ajax_config = '';
+        $ajaxconfig = '';
         if ($this->ajax_url) {
-            $ajax_config = 'ajax : {url:"open-ajax-table.php?' . $this->ajax_url . '",type: "POST"},';
+            $ajaxconfig = 'ajax : {url:"open-ajax-table.php?' . $this->ajax_url . '",type: "POST"},';
         }
 
-        $column_data = implode(", ", $this->column_data);
-        $column_defs = implode(", ", $this->column_defs);
+        $columndata = implode(", ", $this->column_data);
+        $columndefs = implode(", ", $this->column_defs);
         echo "<script>
                   {$this->table_id} = null;
                   \$(document).ready( function() {
                       {$this->table_id} = \$( '#{$this->table_id}' ).DataTable({
                           oLanguage   : dataTables_oLanguage,
-                          {$ajax_config}
+                          {$ajaxconfig}
                           autoWidth  : false,
-                          columns    : [ {$column_data} ],
-                          columnDefs : [ {$column_defs} ]
-                          {$process_server_html}
+                          columns    : [ {$columndata} ],
+                          columnDefs : [ {$columndefs} ]
+                          {$processserverhtml}
                           {$extras}
                           {$order}
                       });
@@ -356,15 +356,15 @@ class data_table {
      *
      */
     private function on_click_reditect() {
-        $click_chave = $this->click_redirect['chave'];
-        $click_url = $this->click_redirect['url'];
+        $clickchave = $this->click_redirect['chave'];
+        $clickurl = $this->click_redirect['url'];
 
         echo "<script>
                   \$(document).ready( function() {
                       \$( '#{$this->table_id} tbody' ).on( 'click', 'tr', function () {
                           var data     = {$this->table_id}.row( this ).data ();
-                          var clickUrl = '{$click_url}';
-                          newClickUrl  = clickUrl.replace( '{{$click_chave}}', data[ '{$click_chave}' ] );
+                          var clickUrl = '{$clickurl}';
+                          newClickUrl  = clickUrl.replace( '{{$clickchave}}', data[ '{$clickchave}' ] );
 
                           location.href = newClickUrl;
                       } );
@@ -377,8 +377,8 @@ class data_table {
      */
     private function on_click_modal() {
 
-        $click_chave = $this->click_modal['chave'];
-        $click_url = $this->click_modal['url'];
+        $clickchave = $this->click_modal['chave'];
+        $clickurl = $this->click_modal['url'];
 
         echo "<script>
                   \$(document).ready( function() {
@@ -386,8 +386,8 @@ class data_table {
                           var data = {$this->table_id}.row( this ).data ();
                           target = $( '#modal-edit' );
 
-                          var clickUrl = '{$click_url}';
-                          clickUrl = clickUrl.replace( '{{$click_chave}}', data[ '{$click_chave}' ] )
+                          var clickUrl = '{$clickurl}';
+                          clickUrl = clickUrl.replace( '{{$clickchave}}', data[ '{$clickchave}' ] )
 
                           var option = $.extend ( { remote : clickUrl }, target.data () );
                           target.modal( option );

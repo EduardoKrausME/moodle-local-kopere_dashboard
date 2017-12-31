@@ -68,9 +68,9 @@ class report_benchmark {
             empty($result['over']) ? $result['over'] = 0 : null;
 
             // Overwrite the result if start/stop if defined.
-            $over_start = isset($result['start']) ? $result['start'] : $start;
-            $over_stop = isset($result['stop']) ? $result['stop'] : microtime(true);
-            $stop = round($over_stop - $over_start, 3);
+            $overstart = isset($result['start']) ? $result['start'] : $start;
+            $overstop = isset($result['stop']) ? $result['stop'] : microtime(true);
+            $stop = round($overstop - $overstart, 3);
 
             // Store and merge result.
             $benchs[$name] = array(

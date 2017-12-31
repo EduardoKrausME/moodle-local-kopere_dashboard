@@ -35,7 +35,7 @@ use local_kopere_dashboard\vo\kopere_dashboard_events;
  */
 class send_events {
     /** @var kopere_dashboard_events */
-    private $kopere_events;
+    private $kopereevents;
 
     /** @var \core\event\base */
     private $event;
@@ -57,10 +57,10 @@ class send_events {
     }
 
     /**
-     * @param kopere_dashboard_events $kopere_events
+     * @param kopere_dashboard_events $kopereevents
      */
-    public function set_kopere_dashboard_events($kopere_events) {
-        $this->kopere_dashboard_events = $kopere_events;
+    public function set_kopere_dashboard_events($kopereevents) {
+        $this->kopere_dashboard_events = $kopereevents;
     }
 
     /**
@@ -120,21 +120,21 @@ class send_events {
         }
 
         // De: {[from.???]}.
-        $user_from = null;
+        $userfrom = null;
         switch ($this->kopere_dashboard_events->userfrom) {
             case 'admin':
-                $user_from = get_admin();
+                $userfrom = get_admin();
                 break;
         }
-        if ($user_from == null) {
-            $this->mail_error('$user_from NOT FOUND!');
+        if ($userfrom == null) {
+            $this->mail_error('$userfrom NOT FOUND!');
 
             return;
         }
 
-        $user_from->fullname = fullname($user_from);
-        $this->subject = $this->replace_tag_user($this->subject, $user_from, 'from');
-        $this->message = $this->replace_tag_user($this->message, $user_from, 'from');
+        $userfrom->fullname = fullname($userfrom);
+        $this->subject = $this->replace_tag_user($this->subject, $userfrom, 'from');
+        $this->message = $this->replace_tag_user($this->message, $userfrom, 'from');
 
         // Admins: {[admin.???]}.
         $admin = get_admin();
@@ -142,13 +142,13 @@ class send_events {
         $this->message = $this->replace_tag_user($this->message, $admin, 'admin');
 
         // Para: {[to.???]}.
-        $users_to = array();
+        $usersto = array();
         switch ($this->kopere_dashboard_events->userto) {
             case 'admin':
-                $users_to = array(get_admin());
+                $usersto = array(get_admin());
                 break;
             case 'admins':
-                $users_to = get_admins();
+                $usersto = get_admins();
                 break;
             case 'teachers':
                 if ($courseid) {
@@ -161,43 +161,43 @@ class send_events {
                                   JOIN {user} u ON ra.userid = u.id
                                  WHERE cx.contextlevel = :contextlevel
                                    AND c.id            = :courseid ";
-                    $users_to = $DB->get_records_sql($sql,
+                    $usersto = $DB->get_records_sql($sql,
                         array('contextlevel' => CONTEXT_COURSE,
                             'courseid' => $courseid
                         ));
                 }
                 break;
             case 'student':
-                $users_to = $DB->get_records('user', array('id' => $this->event->relateduserid));
+                $usersto = $DB->get_records('user', array('id' => $this->event->relateduserid));
                 break;
         }
 
-        foreach ($users_to as $user_to) {
-            $user_to->fullname = fullname($user_to);
+        foreach ($usersto as $userto) {
+            $userto->fullname = fullname($userto);
 
             if (isset($this->event->other['password'])) {
-                $user_to->password = $this->event->other['password'];
+                $userto->password = $this->event->other['password'];
             } else {
-                $user_to->password = '';
+                $userto->password = '';
             }
 
-            $send_subject = $this->replace_tag_user($this->subject, $user_to, 'to');
-            $html_message = $this->replace_tag_user($this->message, $user_to, 'to');
+            $sendsubject = $this->replace_tag_user($this->subject, $userto, 'to');
+            $htmlmessage = $this->replace_tag_user($this->message, $userto, 'to');
 
-            $magager     = "<a href=\"{$CFG->wwwroot}/message/edit.php?id={$user_to->id}\">Gerenciar mensagens</a>";
-            $html_message = str_replace ( '{[manager]}', $magager, $html_message );
+            $magager     = "<a href=\"{$CFG->wwwroot}/message/edit.php?id={$userto->id}\">Gerenciar mensagens</a>";
+            $htmlmessage = str_replace ( '{[manager]}', $magager, $htmlmessage );
 
             $eventdata = new message();
             $eventdata->courseid = SITEID;
             $eventdata->modulename = 'moodle';
             $eventdata->component = 'local_kopere_dashboard';
             $eventdata->name = 'kopere_dashboard_messages';
-            $eventdata->userfrom = $user_from;
-            $eventdata->userto = $user_to;
-            $eventdata->subject = $send_subject;
-            $eventdata->fullmessage = html_to_text($html_message);
+            $eventdata->userfrom = $userfrom;
+            $eventdata->userto = $userto;
+            $eventdata->subject = $sendsubject;
+            $eventdata->fullmessage = html_to_text($htmlmessage);
             $eventdata->fullmessageformat = FORMAT_HTML;
-            $eventdata->fullmessagehtml = $html_message;
+            $eventdata->fullmessagehtml = $htmlmessage;
             $eventdata->smallmessage = '';
 
             message_send($eventdata);
@@ -211,10 +211,10 @@ class send_events {
         global $CFG;
         $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" .
             get_config('local_kopere_dashboard', 'notificacao-template');
-        $template_content = file_get_contents($template);
+        $templatecontent = file_get_contents($template);
 
         $this->subject = $this->kopere_dashboard_events->subject;
-        $this->message = str_replace('{[message]}', $this->kopere_dashboard_events->message, $template_content);
+        $this->message = str_replace('{[message]}', $this->kopere_dashboard_events->message, $templatecontent);
     }
 
     /**
@@ -227,7 +227,7 @@ class send_events {
             return $text;
         }
 
-        preg_match_all("/\{\[date\.(\w+)\]\}/", $text, $text_keys);
+        preg_match_all("/\{\[date\.(\w+)\]\}/", $text, $textkeys);
 
         $itens = array(
             'year' => 'Y',
@@ -238,12 +238,12 @@ class send_events {
             'second' => 's'
         );
 
-        foreach ($text_keys[1] as $key => $text_key) {
+        foreach ($textkeys[1] as $key => $textkey) {
 
-            if (isset($itens[$text_key])) {
-                $data = date($itens[$text_key]);
-                $str_search = $text_keys[0][$key];
-                $text = str_replace($str_search, $data, $text);
+            if (isset($itens[$textkey])) {
+                $data = date($itens[$textkey]);
+                $strsearch = $textkeys[0][$key];
+                $text = str_replace($strsearch, $data, $text);
             }
         }
 
@@ -255,19 +255,19 @@ class send_events {
      *
      * @return string
      */
-    private function replace_tag($text, $course, $key_name) {
-        if (strpos($text, "{[{$key_name}") === false) {
+    private function replace_tag($text, $course, $keyname) {
+        if (strpos($text, "{[{$keyname}") === false) {
             return $text;
         }
 
-        preg_match_all("/\{\[{$key_name}\.(\w+)\]\}/", $text, $text_keys);
+        preg_match_all("/\{\[{$keyname}\.(\w+)\]\}/", $text, $textkeys);
 
-        foreach ($text_keys[1] as $key => $text_key) {
+        foreach ($textkeys[1] as $key => $textkey) {
 
-            if (isset($course->$text_key)) {
-                $data = $course->$text_key;
-                $str_search = $text_keys[0][$key];
-                $text = str_replace($str_search, $data, $text);
+            if (isset($course->$textkey)) {
+                $data = $course->$textkey;
+                $strsearch = $textkeys[0][$key];
+                $text = str_replace($strsearch, $data, $text);
             }
         }
 
@@ -279,19 +279,19 @@ class send_events {
      *
      * @return string
      */
-    private function replace_tag_user($text, $user, $key_name) {
-        if (strpos($text, "{[{$key_name}") === false) {
+    private function replace_tag_user($text, $user, $keyname) {
+        if (strpos($text, "{[{$keyname}") === false) {
             return $text;
         }
 
-        preg_match_all("/\{\[{$key_name}\.(\w+)\]\}/", $text, $text_keys);
+        preg_match_all("/\{\[{$keyname}\.(\w+)\]\}/", $text, $textkeys);
 
-        foreach ($text_keys[1] as $key => $text_key) {
+        foreach ($textkeys[1] as $key => $textkey) {
 
-            if (isset($user->$text_key)) {
-                $data = $user->$text_key;
-                $str_search = $text_keys[0][$key];
-                $text = str_replace($str_search, $data, $text);
+            if (isset($user->$textkey)) {
+                $data = $user->$textkey;
+                $strsearch = $textkeys[0][$key];
+                $text = str_replace($strsearch, $data, $text);
             }
         }
 

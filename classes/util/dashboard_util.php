@@ -36,39 +36,39 @@ class dashboard_util {
     /**
      * @var string
      */
-    public static $current_title = '';
+    public static $currenttitle = '';
 
     /**
      * @param      $title
-     * @param null $info_url
+     * @param null $infourl
      *
      * @return string
      */
-    public static function set_titulo($title, $info_url = null) {
-        self::$current_title = $title;
+    public static function set_titulo($title, $infourl = null) {
+        self::$currenttitle = $title;
 
-        if ($info_url == null) {
+        if ($infourl == null) {
             return "<h3 class=\"element-header\"> $title </h3>";
         } else {
             return "<h3 class=\"element-header\">
                         $title
-                        " . button::help($info_url) . "
+                        " . button::help($infourl) . "
                     </h3>";
         }
     }
 
     /**
      * @param      $breadcrumb
-     * @param null $page_title
-     * @param null $setting_url
-     * @param null $info_url
+     * @param null $pagetitle
+     * @param null $settingurl
+     * @param null $infourl
      */
-    public static function start_page($breadcrumb, $page_title = null, $setting_url = null, $info_url = null) {
+    public static function start_page($breadcrumb, $pagetitle = null, $settingurl = null, $infourl = null) {
         global $CFG, $SITE;
-        $breadcrumb_return = '';
+        $breadcrumbreturn = '';
 
         if (!AJAX_SCRIPT) {
-            $breadcrumb_return
+            $breadcrumbreturn
                 .= "<ul class=\"breadcrumb\">
                         <li>
                             <a target=\"_top\" href=\"{$CFG->wwwroot}/\">{$SITE->fullname}</a>
@@ -79,28 +79,28 @@ class dashboard_util {
 
             $title = "";
             if (is_string($breadcrumb)) {
-                $breadcrumb_return .= '<li><span>' . $breadcrumb . '</span></li>';
+                $breadcrumbreturn .= '<li><span>' . $breadcrumb . '</span></li>';
                 $title = $breadcrumb;
             } else if (is_array($breadcrumb)) {
-                foreach ($breadcrumb as $breadcrumb_item) {
-                    if (is_string($breadcrumb_item)) {
-                        $breadcrumb_return .= '<li><span>' . $breadcrumb_item . '</span></li>';
-                        $title = $breadcrumb_item;
+                foreach ($breadcrumb as $breadcrumbitem) {
+                    if (is_string($breadcrumbitem)) {
+                        $breadcrumbreturn .= '<li><span>' . $breadcrumbitem . '</span></li>';
+                        $title = $breadcrumbitem;
                     } else {
-                        $breadcrumb_return
+                        $breadcrumbreturn
                             .= '<li>
-                                    <a href="?' . $breadcrumb_item[0] . '">' . $breadcrumb_item[1] . '</a>
+                                    <a href="?' . $breadcrumbitem[0] . '">' . $breadcrumbitem[1] . '</a>
                                 </li>';
-                        $title = $breadcrumb_item[1];
+                        $title = $breadcrumbitem[1];
                     }
                 }
             }
 
-            if ($setting_url != null) {
-                $breadcrumb_return
+            if ($settingurl != null) {
+                $breadcrumbreturn
                     .= "<li class=\"setting\">
                             <a data-toggle=\"modal\" data-target=\"#modal-edit\"
-                               data-href=\"open-ajax-table.php?$setting_url\"
+                               data-href=\"open-ajax-table.php?$settingurl\"
                                href=\"#\">
                                 <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg\"
                                      alt=\"Settings\" >
@@ -108,17 +108,17 @@ class dashboard_util {
                         </li>";
             }
 
-            $breadcrumb_return .= '</ul>';
-            $breadcrumb_return .= '<div class="content-i"><div class="content-box">';
+            $breadcrumbreturn .= '</ul>';
+            $breadcrumbreturn .= '<div class="content-i"><div class="content-box">';
 
-            if ($page_title != null) {
-                if ($page_title == -1) {
-                    $page_title = $title;
+            if ($pagetitle != null) {
+                if ($pagetitle == -1) {
+                    $pagetitle = $title;
                 }
-                $breadcrumb_return .= self::set_titulo($page_title, $info_url);
+                $breadcrumbreturn .= self::set_titulo($pagetitle, $infourl);
             }
 
-            $breadcrumb_return .= mensagem::get_mensagem_agendada();
+            $breadcrumbreturn .= mensagem::get_mensagem_agendada();
         } else {
             if (is_string($breadcrumb)) {
                 self::start_popup($breadcrumb);
@@ -127,7 +127,7 @@ class dashboard_util {
             }
         }
 
-        echo $breadcrumb_return;
+        echo $breadcrumbreturn;
     }
 
     /**
@@ -142,66 +142,66 @@ class dashboard_util {
     }
 
     /**
-     * @param       $menu_function
-     * @param       $menu_icon
-     * @param       $menu_name
-     * @param array $sub_menus
+     * @param       $menufunction
+     * @param       $menuicon
+     * @param       $menuname
+     * @param array $submenus
      */
-    public static function add_menu($menu_function, $menu_icon, $menu_name, $sub_menus = array()) {
+    public static function add_menu($menufunction, $menuicon, $menuname, $submenus = array()) {
         global $CFG;
 
-        $class = self::test_menu_active($menu_function);
+        $class = self::test_menu_active($menufunction);
 
         $plugin = '';
-        preg_match("/(.*?)-/", $menu_function, $menu_function_start);
-        if (isset($menu_function_start[1])) {
-            $plugin = "_" . $menu_function_start[1];
+        preg_match("/(.*?)-/", $menufunction, $menufunctionstart);
+        if (isset($menufunctionstart[1])) {
+            $plugin = "_" . $menufunctionstart[1];
         }
 
-        $submenu_html = '';
-        foreach ($sub_menus as $sub_menu) {
-            $class_sub = self::test_menu_active($sub_menu[0]);
-            if (isset ($class_sub[1])) {
-                $class = $class_sub;
+        $submenuhtml = '';
+        foreach ($submenus as $submenu) {
+            $classsub = self::test_menu_active($submenu[0]);
+            if (isset ($classsub[1])) {
+                $class = $classsub;
             }
 
-            if (strpos($sub_menu[2], 'http') === 0) {
-                $icon_url = $sub_menu[2];
+            if (strpos($submenu[2], 'http') === 0) {
+                $iconurl = $submenu[2];
             } else {
-                $icon_url = "{$CFG->wwwroot}/local/kopere_dashboard$plugin/assets/dashboard/img/iconactive/{$sub_menu[2]}.svg";
+                $iconurl = "{$CFG->wwwroot}/local/kopere_dashboard$plugin/assets/dashboard/img/iconactive/{$submenu[2]}.svg";
             }
 
-            $submenu_html
-                .= "<li class=\"$class_sub\">
-                        <a href=\"?{$sub_menu[0]}\">
-                            <img src=\"$icon_url\"
+            $submenuhtml
+                .= "<li class=\"$classsub\">
+                        <a href=\"?{$submenu[0]}\">
+                            <img src=\"$iconurl\"
                                  class=\"icon-w\" alt=\"Icon\">
-                            <span>{$sub_menu[1]}</span>
+                            <span>{$submenu[1]}</span>
                         </a>
                     </li>";
         }
-        if ($submenu_html != '') {
-            $submenu_html = "<ul class='submenu'>$submenu_html</ul>";
+        if ($submenuhtml != '') {
+            $submenuhtml = "<ul class='submenu'>$submenuhtml</ul>";
         }
 
         echo "
                 <li class=\"$class\">
-                    <a href=\"?$menu_function\">
-                        <img src=\"{$CFG->wwwroot}/local/kopere_dashboard$plugin/assets/dashboard/img/icon$class/$menu_icon.svg\"
+                    <a href=\"?$menufunction\">
+                        <img src=\"{$CFG->wwwroot}/local/kopere_dashboard$plugin/assets/dashboard/img/icon$class/$menuicon.svg\"
                              class=\"icon-w\" alt=\"Icon\">
-                        <span>$menu_name</span>
+                        <span>$menuname</span>
                     </a>
-                    $submenu_html
+                    $submenuhtml
                 </li>";
     }
 
     /**
-     * @param $menu_function
+     * @param $menufunction
      *
      * @return string
      */
-    private static function test_menu_active($menu_function) {
-        preg_match("/.*?::/", $menu_function, $paths);
+    private static function test_menu_active($menufunction) {
+        preg_match("/.*?::/", $menufunction, $paths);
         if (strpos($_SERVER['QUERY_STRING'], $paths[0]) === 0) {
             return 'active';
         }
@@ -212,20 +212,20 @@ class dashboard_util {
     /**
      * @var bool
      */
-    private static $_is_with_form = false;
+    private static $iswithform = false;
 
     /**
      * @param      $title
-     * @param null $form_action
+     * @param null $formaction
      */
-    public static function start_popup($title, $form_action = null) {
-        if ($form_action) {
+    public static function start_popup($title, $formaction = null) {
+        if ($formaction) {
             echo '<form method="post" class="validate" >';
             echo '<input type="hidden" name="POST"  value="true" />';
-            echo '<input type="hidden" name="action" value="?' . $form_action . '" />';
-            self::$_is_with_form = true;
+            echo '<input type="hidden" name="action" value="?' . $formaction . '" />';
+            self::$iswithform = true;
         } else {
-            self::$_is_with_form = false;
+            self::$iswithform = false;
         }
 
         echo '<div class="modal-header">
@@ -234,7 +234,7 @@ class dashboard_util {
               </div>
               <div class="modal-body">';
 
-        if ($form_action) {
+        if ($formaction) {
             echo '<div class="displayErroForm alert alert-danger" style="display: none;"><span></span></div>';
         }
     }
@@ -243,7 +243,7 @@ class dashboard_util {
      * @param null $deletebuttonurl
      */
     public static function end_popup($deletebuttonurl = null) {
-        if (self::$_is_with_form) {
+        if (self::$iswithform) {
             echo "</div>
                   <div class=\"modal-footer\">";
 

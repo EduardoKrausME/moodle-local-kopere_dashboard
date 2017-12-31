@@ -129,11 +129,11 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
 
         $userid = intval($USER->id);
         $fullname = '"' . fullname($USER) . '"';
-        $server_time = time();
-        $url_node = '"' . $url . '"';
+        $servertime = time();
+        $urlnode = '"' . $url . '"';
 
         echo "<script type=\"text/javascript\">
-                  startServer ( $userid, $fullname, $server_time, $url_node, 'z35admin' );
+                  startServer ( $userid, $fullname, $servertime, $urlnode, 'z35admin' );
               </script>";
     }
     ?>
@@ -166,16 +166,16 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
                     dashboard_util::add_menu('dashboard::start', 'dashboard', get_string_kopere ('dashboard'));
 
                     if (has_capability('moodle/site:config', context_system::instance())) {
-                        $menu_extra = array(
+                        $menuextra = array(
                             array('usersonline::dashboard', get_string_kopere('useronline_title'), 'users-online'),
                             array('usersimport::dashboard', get_string_kopere('userimport_title'), 'users-import')
                         );
                     } else {
-                        $menu_extra = array(
+                        $menuextra = array(
                             array('usersonline::dashboard', get_string_kopere('useronline_title'), 'users-online')
                         );
                     }
-                    dashboard_util::add_menu('users::dashboard', 'users', get_string_kopere('user_title'), $menu_extra);
+                    dashboard_util::add_menu('users::dashboard', 'users', get_string_kopere('user_title'), $menuextra);
 
                     dashboard_util::add_menu('courses::dashboard', 'courses', get_string_kopere('courses_title'));
 
@@ -185,8 +185,8 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
                                AND name LIKE 'version'";
                     $plugins = $DB->get_records_sql($sql);
                     foreach ($plugins as $plugin) {
-                        $class_name = $plugin->plugin . '\\menu';
-                        $class = new $class_name();
+                        $classname = $plugin->plugin . '\\menu';
+                        $class = new $classname();
                         $class->show_menu();
                     }
 

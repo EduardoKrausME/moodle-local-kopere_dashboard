@@ -88,8 +88,8 @@ class usersimport {
         @mkdir($CFG->dataroot . '/kopere/dashboard/tmp');
 
         $file = time() . '.csv';
-        $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
-        if (move_uploaded_file($_FILES['file']['tmp_name'], $target_file)) {
+        $targetfile = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $targetfile)) {
             ob_clean();
             end_util::end_script_show('&file=' . $file . '&name=' . urlencode($_FILES['file']['name']));
         } else {
@@ -115,20 +115,20 @@ class usersimport {
 
         echo '<div class="element-box table-responsive">';
 
-        $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
-        if (!file_exists($target_file)) {
+        $targetfile = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
+        if (!file_exists($targetfile)) {
             header::notfound(get_string_kopere('userimport_filenotfound', $name));
         }
 
-        $csv_content = file_get_contents($target_file, false, null, 0, 2000);
+        $csvcontent = file_get_contents($targetfile, false, null, 0, 2000);
 
-        if (count(explode(";", $csv_content)) > count(explode(",", $csv_content))) {
+        if (count(explode(";", $csvcontent)) > count(explode(",", $csvcontent))) {
             $separator = ";";
         } else {
             $separator = ",";
         }
 
-        if (count(explode($separator, $csv_content)) < 5) {
+        if (count(explode($separator, $csvcontent)) < 5) {
             mensagem::print_danger(get_string_kopere('userimport_separator_error'));
             dashboard_util::end_page();
             return;
@@ -136,22 +136,22 @@ class usersimport {
 
         title_util::print_h3('userimport_first10');
 
-        $count_row = 0;
-        $count_cols = 0;
+        $countrow = 0;
+        $countcols = 0;
         $cols = array();
         echo '<table class="table table-bordered">';
-        $handle = fopen($target_file, "r");
+        $handle = fopen($targetfile, "r");
         while (($data = fgetcsv($handle, 1000, $separator)) !== false) {
 
             echo '<tr>';
-            if ($count_cols == 0) {
+            if ($countcols == 0) {
                 foreach ($data as $col) {
                     echo '<th>' . $col . '</th>';
-                    $cols[] = array($count_cols, $col);
-                    $count_cols++;
+                    $cols[] = array($countcols, $col);
+                    $countcols++;
                 }
             } else {
-                for ($i = 0; $i < $count_cols; $i++) {
+                for ($i = 0; $i < $countcols; $i++) {
                     if (strlen($data[$i]) == 0) {
                         echo '<td style="background: #FF9800;">(vazio)</td>';
                     } else {
@@ -161,8 +161,8 @@ class usersimport {
             }
             echo '</tr>';
 
-            $count_row++;
-            if ($count_row == (10 + 1)) {
+            $countrow++;
+            if ($countrow == (10 + 1)) {
                 break;
             }
         }
@@ -186,62 +186,62 @@ class usersimport {
 
         title_util::print_h2('userimport_messages');
 
-        /** @var kopere_dashboard_events $import_course_enrol */
-        $import_course_enrol = $DB->get_record('kopere_dashboard_events', array(
+        /** @var kopere_dashboard_events $importcourseenrol */
+        $importcourseenrol = $DB->get_record('kopere_dashboard_events', array(
             'event' => '\\local_kopere_dashboard\\event\\import_course_enrol',
         ), '*', IGNORE_MULTIPLE);
 
         title_util::print_h3('userimport_import_course_enrol_name');
-        if ($import_course_enrol) {
-            if ($import_course_enrol->status == 1) {
-                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_course_enrol->id . '">' .
-                    $import_course_enrol->subject . '</a>';
+        if ($importcourseenrol) {
+            if ($importcourseenrol->status == 1) {
+                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $importcourseenrol->id . '">' .
+                    $importcourseenrol->subject . '</a>';
                 echo get_string_kopere('userimport_receivemessage', $link);
             } else {
-                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_course_enrol->id . '">' .
-                    $import_course_enrol->subject . '</a>';
+                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $importcourseenrol->id . '">' .
+                    $importcourseenrol->subject . '</a>';
                 mensagem::print_info(get_string_kopere('userimport_receivemessage', $link));
             }
         } else {
             mensagem::print_warning(get_string_kopere('userimport_notreceivemessage'));
         }
 
-        /** @var kopere_dashboard_events $import_user_created */
-        $import_user_created = $DB->get_record('kopere_dashboard_events', array(
+        /** @var kopere_dashboard_events $importusercreated */
+        $importusercreated = $DB->get_record('kopere_dashboard_events', array(
             'event' => '\\local_kopere_dashboard\\event\\import_user_created'
         ), '*', IGNORE_MULTIPLE);
 
         title_util::print_h3('userimport_import_user_created_name');
-        if ($import_user_created) {
-            if ($import_user_created->status == 1) {
-                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_user_created->id . '">' .
-                    $import_user_created->subject . '</a>';
+        if ($importusercreated) {
+            if ($importusercreated->status == 1) {
+                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $importusercreated->id . '">' .
+                    $importusercreated->subject . '</a>';
                 echo get_string_kopere('userimport_receivemessage', $link);
             } else {
-                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_user_created->id . '">' .
-                    $import_user_created->subject . '</a>';
+                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $importusercreated->id . '">' .
+                    $importusercreated->subject . '</a>';
                 mensagem::print_info(get_string_kopere('userimport_receivemessage', $link));
             }
         } else {
             mensagem::print_warning(get_string_kopere('userimport_notreceivemessage'));
         }
 
-        /** @var kopere_dashboard_events $import_user_created_and_enrol */
-        $import_user_created_and_enrol = $DB->get_record('kopere_dashboard_events', array(
+        /** @var kopere_dashboard_events $importusercreatedandenrol */
+        $importusercreatedandenrol = $DB->get_record('kopere_dashboard_events', array(
             'event' => '\\local_kopere_dashboard\\event\\import_user_created_and_enrol'
         ), '*', IGNORE_MULTIPLE);
 
         title_util::print_h3('userimport_import_user_created_and_enrol_name');
-        if ($import_user_created_and_enrol) {
-            if ($import_user_created_and_enrol->status == 1) {
+        if ($importusercreatedandenrol) {
+            if ($importusercreatedandenrol->status == 1) {
                 $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' .
-                    $import_user_created_and_enrol->id . '">' .
-                    $import_user_created_and_enrol->subject . '</a>';
+                    $importusercreatedandenrol->id . '">' .
+                    $importusercreatedandenrol->subject . '</a>';
                 echo get_string_kopere('userimport_receivemessage', $link);
             } else {
                 $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' .
-                    $import_user_created_and_enrol->id . '">' .
-                    $import_user_created_and_enrol->subject . '</a>';
+                    $importusercreatedandenrol->id . '">' .
+                    $importusercreatedandenrol->subject . '</a>';
                 mensagem::print_info(get_string_kopere('userimport_receivemessage', $link));
             }
         } else {
@@ -270,13 +270,13 @@ class usersimport {
             'key' => '',
             'value' => get_string_kopere('userimport_colselect')
         ));
-        $coll_number = 'A';
+        $collnumber = 'A';
         foreach ($cols as $col) {
             $values[] = array(
                 'key' => 'col_' . $col[0],
-                'value' => get_string_kopere('userimport_colname', "$coll_number ({$col[1]})")
+                'value' => get_string_kopere('userimport_colname', "$collnumber ({$col[1]})")
             );
-            $coll_number++;
+            $collnumber++;
         }
 
         // Campos do usuário.
@@ -313,7 +313,7 @@ class usersimport {
                   <div class="panel-heading">' . get_string_kopere('userimport_userfields') . '</div>
                   <div class="panel-body">';
 
-            $field_item = string_util::clear_all_params('field', [], PARAM_TEXT);
+            $fielditem = string_util::clear_all_params('field', [], PARAM_TEXT);
 
             foreach ($fields as $field) {
 
@@ -322,8 +322,8 @@ class usersimport {
                     ->set_values($values)
                     ->set_description($field->name)
                     ->set_title($field->name);
-                if (isset($field_item[$field->id])) {
-                    $input->set_value($field_item[$field->id]);
+                if (isset($fielditem[$field->id])) {
+                    $input->set_value($fielditem[$field->id]);
                 }
                 $form->add_input($input);
             }
@@ -391,22 +391,22 @@ class usersimport {
         $separator = optional_param('separator', '', PARAM_TEXT);
         $inserir = optional_param('inserir', 0, PARAM_INT);
 
-        $col_username = $this->get_col_param('username');
-        $col_password = $this->get_col_param('password');
-        $col_idnumber = $this->get_col_param('idnumber');
-        $col_firstname = $this->get_col_param('firstname');
-        $col_lastname = $this->get_col_param('lastname');
-        $col_email = $this->get_col_param('email');
-        $col_phone1 = $this->get_col_param('phone1');
-        $col_phone2 = $this->get_col_param('phone2');
-        $col_address = $this->get_col_param('address');
-        $col_city = $this->get_col_param('city');
-        $col_country = $this->get_col_param('country');
-        $col_shortnamecourse = $this->get_col_param('shortnamecourse');
-        $col_idnumbercourse = $this->get_col_param('idnumbercourse');
-        $col_groupmembers = $this->get_col_param('groupmembers');
-        $col_enroltimestart = $this->get_col_param('enroltimestart');
-        $col_enroltimeend = $this->get_col_param('enroltimeend');
+        $colusername = $this->get_col_param('username');
+        $colpassword = $this->get_col_param('password');
+        $colidnumber = $this->get_col_param('idnumber');
+        $colfirstname = $this->get_col_param('firstname');
+        $collastname = $this->get_col_param('lastname');
+        $colemail = $this->get_col_param('email');
+        $colphone1 = $this->get_col_param('phone1');
+        $colphone2 = $this->get_col_param('phone2');
+        $coladdress = $this->get_col_param('address');
+        $colcity = $this->get_col_param('city');
+        $colcountry = $this->get_col_param('country');
+        $colshortnamecourse = $this->get_col_param('shortnamecourse');
+        $colidnumbercourse = $this->get_col_param('idnumbercourse');
+        $colgroupmembers = $this->get_col_param('groupmembers');
+        $colenroltimestart = $this->get_col_param('enroltimestart');
+        $colenroltimeend = $this->get_col_param('enroltimeend');
 
         if (!$inserir) {
             dashboard_util::start_page(array(
@@ -423,31 +423,31 @@ class usersimport {
 
         $this->add_col('username', !$inserir, true);
         $this->add_col('password', !$inserir, true);
-        if ($col_idnumber) {
+        if ($colidnumber) {
             $this->add_col('idnumber', !$inserir, true);
         }
         $this->add_col('firstname', !$inserir, true);
         $this->add_col('lastname', !$inserir, true);
         $this->add_col('email', !$inserir, true);
-        if ($col_phone1) {
+        if ($colphone1) {
             $this->add_col('phone1', !$inserir, true);
         }
-        if ($col_phone2) {
+        if ($colphone2) {
             $this->add_col('phone2', !$inserir, true);
         }
-        if ($col_address) {
+        if ($coladdress) {
             $this->add_col('address', !$inserir, true);
         }
-        if ($col_city) {
+        if ($colcity) {
             $this->add_col('city', !$inserir, true);
         }
         $this->add_col('country', !$inserir, true);
         $this->add_col('userstatus', !$inserir, true);
-        if ($col_shortnamecourse || $col_idnumbercourse) {
+        if ($colshortnamecourse || $colidnumbercourse) {
             $this->add_col('course', !$inserir, true);
             $this->add_col('enroltimestart', !$inserir, true);
             $this->add_col('enroltimeend', !$inserir, true);
-            if ($col_groupmembers) {
+            if ($colgroupmembers) {
                 $this->add_col('groupmembers', !$inserir, true);
             }
         }
@@ -458,35 +458,35 @@ class usersimport {
             echo "\n";
         }
 
-        $is_first = true;
-        $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
-        if (!file_exists($target_file)) {
+        $isfirst = true;
+        $targetfile = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
+        if (!file_exists($targetfile)) {
             header::notfound(get_string_kopere('userimport_filenotfound', $name));
         }
 
-        $handle = fopen($target_file, "r");
+        $handle = fopen($targetfile, "r");
         while (($data = fgetcsv($handle, 1000, $separator)) !== false) {
-            if ($is_first) {
-                $is_first = false;
+            if ($isfirst) {
+                $isfirst = false;
                 continue;
             }
 
-            $username = $this->get_col_value($col_username, $data);
-            $password = $this->get_col_value($col_password, $data);
-            $idnumber = $this->get_col_value($col_idnumber, $data);
-            $firstname = $this->get_col_value($col_firstname, $data);
-            $lastname = $this->get_col_value($col_lastname, $data);
-            $email = $this->get_col_value($col_email, $data);
-            $phone1 = $this->get_col_value($col_phone1, $data);
-            $phone2 = $this->get_col_value($col_phone2, $data);
-            $address = $this->get_col_value($col_address, $data);
-            $city = $this->get_col_value($col_city, $data, '.');
-            $country = $this->get_col_value($col_country, $data, $USER->country);
-            $shortnamecourse = $this->get_col_value($col_shortnamecourse, $data);
-            $idnumbercourse = $this->get_col_value($col_idnumbercourse, $data);
-            $groupmembers = $this->get_col_value($col_groupmembers, $data);
-            $enroltimestart = $this->get_col_value($col_enroltimestart, $data, 0);
-            $enroltimeend = $this->get_col_value($col_enroltimeend, $data, 0);
+            $username = $this->get_col_value($colusername, $data);
+            $password = $this->get_col_value($colpassword, $data);
+            $idnumber = $this->get_col_value($colidnumber, $data);
+            $firstname = $this->get_col_value($colfirstname, $data);
+            $lastname = $this->get_col_value($collastname, $data);
+            $email = $this->get_col_value($colemail, $data);
+            $phone1 = $this->get_col_value($colphone1, $data);
+            $phone2 = $this->get_col_value($colphone2, $data);
+            $address = $this->get_col_value($coladdress, $data);
+            $city = $this->get_col_value($colcity, $data, '.');
+            $country = $this->get_col_value($colcountry, $data, $USER->country);
+            $shortnamecourse = $this->get_col_value($colshortnamecourse, $data);
+            $idnumbercourse = $this->get_col_value($colidnumbercourse, $data);
+            $groupmembers = $this->get_col_value($colgroupmembers, $data);
+            $enroltimestart = $this->get_col_value($colenroltimestart, $data, 0);
+            $enroltimeend = $this->get_col_value($colenroltimeend, $data, 0);
 
             if ($enroltimestart) {
                 $enroltimestart = date_util::convert_to_time($enroltimestart);
@@ -506,7 +506,7 @@ class usersimport {
             }
 
             $user = $this->get_user($username, $email, $idnumber);
-            $send_event_user_create = 0;
+            $sendeventusercreate = 0;
             if (!$user) {
                 // Not search! create user.
 
@@ -521,82 +521,82 @@ class usersimport {
                 }
 
                 $user = null;
-                $new_user = new \stdClass();
+                $newuser = new \stdClass();
 
-                $new_user->idnumber = $idnumber;
-                $new_user->firstname = $firstname;
-                $new_user->lastname = $lastname;
-                $new_user->username = strtolower($username);
-                $new_user->email = strtolower($email);
-                $new_user->address = $address;
-                $new_user->city = $city;
-                $new_user->country = $country;
-                $new_user->phone1 = $phone1;
-                $new_user->phone2 = $phone2;
+                $newuser->idnumber = $idnumber;
+                $newuser->firstname = $firstname;
+                $newuser->lastname = $lastname;
+                $newuser->username = strtolower($username);
+                $newuser->email = strtolower($email);
+                $newuser->address = $address;
+                $newuser->city = $city;
+                $newuser->country = $country;
+                $newuser->phone1 = $phone1;
+                $newuser->phone2 = $phone2;
 
-                $new_user->auth = 'manual';
-                $new_user->confirmed = 1;
-                $new_user->mnethostid = $CFG->mnet_localhost_id;
+                $newuser->auth = 'manual';
+                $newuser->confirmed = 1;
+                $newuser->mnethostid = $CFG->mnet_localhost_id;
 
                 if ($inserir) {
                     if (strlen($password) < 5) {
                         $password = '#' . random_string();
                     }
-                    $new_user->password = $password;
+                    $newuser->password = $password;
                 } else if (strlen($password) < 5) {
                     $password = get_string_kopere('userimport_passcreate');
                 }
 
                 $this->add_col($username, !$inserir);
                 $this->add_col($password, !$inserir);
-                if ($col_idnumber) {
+                if ($colidnumber) {
                     $this->add_col($idnumber, !$inserir);
                 }
                 $this->add_col($firstname, !$inserir);
                 $this->add_col($lastname, !$inserir);
                 $this->add_col($email, !$inserir);
-                if ($col_phone1) {
+                if ($colphone1) {
                     $this->add_col($phone1, !$inserir);
                 }
-                if ($col_phone2) {
+                if ($colphone2) {
                     $this->add_col($phone2, !$inserir);
                 }
-                if ($col_address) {
+                if ($coladdress) {
                     $this->add_col($address, !$inserir);
                 }
-                if ($col_city) {
+                if ($colcity) {
                     $this->add_col($city, !$inserir);
                 }
                 $this->add_col($country, !$inserir);
 
                 $errors = "";
-                if (!empty($new_user->password)) {
+                if (!empty($newuser->password)) {
                     $errmsg = '';
-                    if (!check_password_policy($new_user->password, $errmsg)) {
+                    if (!check_password_policy($newuser->password, $errmsg)) {
                         $errors .= $errmsg;
                     }
                 }
-                if (empty($new_user->username)) {
+                if (empty($newuser->username)) {
                     $errors .= get_string('required');
-                } else if (!$user or $user->username !== $new_user->username) {
-                    if ($DB->record_exists('user', array('username' => $new_user->username,
+                } else if (!$user or $user->username !== $newuser->username) {
+                    if ($DB->record_exists('user', array('username' => $newuser->username,
                         'mnethostid' => $CFG->mnet_localhost_id))) {
                         $errors .= get_string('usernameexists');
                     }
                     // Check allowed characters.
-                    if ($new_user->username !== \core_text::strtolower($new_user->username)) {
+                    if ($newuser->username !== \core_text::strtolower($newuser->username)) {
                         $errors .= get_string('usernamelowercase');
                     } else {
-                        if ($new_user->username !== \core_user::clean_field($new_user->username, 'username')) {
+                        if ($newuser->username !== \core_user::clean_field($newuser->username, 'username')) {
                             $errors .= get_string('invalidusername');
                         }
                     }
                 }
-                if (!$user or (isset($new_user->email) && $user->email !== $new_user->email)) {
-                    if (!validate_email($new_user->email)) {
+                if (!$user or (isset($newuser->email) && $user->email !== $newuser->email)) {
+                    if (!validate_email($newuser->email)) {
                         $errors .= get_string('invalidemail');
                     } else if (empty($CFG->allowaccountssameemail)
-                        and $DB->record_exists('user', array('email' => $new_user->email,
+                        and $DB->record_exists('user', array('email' => $newuser->email,
                             'mnethostid' => $CFG->mnet_localhost_id))) {
                         $errors .= get_string('emailexists');
                     }
@@ -609,7 +609,7 @@ class usersimport {
 
                 if ($inserir) {
                     try {
-                        $new_user->id = user_create_user($new_user);
+                        $newuser->id = user_create_user($newuser);
                         $this->add_col(get_string_kopere('userimport_inserted'), !$inserir);
                         $iserted = true;
                     } catch (\Exception $e) {
@@ -617,31 +617,31 @@ class usersimport {
                         $iserted = false;
                     }
                     if ($iserted) {
-                        $user = $DB->get_record('user', array('id' => $new_user->id), '*', IGNORE_MULTIPLE);
-                        set_user_preference('auth_forcepasswordchange', 1, $new_user);
+                        $user = $DB->get_record('user', array('id' => $newuser->id), '*', IGNORE_MULTIPLE);
+                        set_user_preference('auth_forcepasswordchange', 1, $newuser);
 
-                        $send_event_user_create = $new_user->id;
+                        $sendeventusercreate = $newuser->id;
                     }
                 }
             } else {
                 $this->add_col($user->username, !$inserir);
                 $this->add_col(get_string_kopere('userimport_cript'), !$inserir);
-                if ($col_idnumber) {
+                if ($colidnumber) {
                     $this->add_col($user->idnumber, !$inserir);
                 }
                 $this->add_col($user->firstname, !$inserir);
                 $this->add_col($user->lastname, !$inserir);
                 $this->add_col($user->email, !$inserir);
-                if ($col_phone1) {
+                if ($colphone1) {
                     $this->add_col($user->phone1, !$inserir);
                 }
-                if ($col_phone2) {
+                if ($colphone2) {
                     $this->add_col($user->phone2, !$inserir);
                 }
-                if ($col_address) {
+                if ($coladdress) {
                     $this->add_col($user->address, !$inserir);
                 }
-                if ($col_city) {
+                if ($colcity) {
                     $this->add_col($user->city, !$inserir);
                 }
                 $this->add_col($user->country, !$inserir);
@@ -650,19 +650,19 @@ class usersimport {
 
             // If exist user, add extras.
             if ($user) {
-                $field_items = string_util::clear_all_params('field', [], PARAM_TEXT);
-                foreach ($field_items as $key2 => $value2) {
+                $fielditems = string_util::clear_all_params('field', [], PARAM_TEXT);
+                foreach ($fielditems as $key2 => $value2) {
                     if ($value2) {
                         $col = str_replace('col_', '', $value2);
-                        $extra_data = $this->get_col_value($col, $data, 0);
-                        if ($extra_data) {
-                            $user_info_data = new \stdClass();
-                            $user_info_data->userid = $user->id;
-                            $user_info_data->fieldid = $key2;
-                            $user_info_data->data = $extra_data;
-                            $user_info_data->dataformat = 0;
+                        $extradata = $this->get_col_value($col, $data, 0);
+                        if ($extradata) {
+                            $userinfodata = new \stdClass();
+                            $userinfodata->userid = $user->id;
+                            $userinfodata->fieldid = $key2;
+                            $userinfodata->data = $extradata;
+                            $userinfodata->dataformat = 0;
                             try {
-                                $DB->insert_record('user_info_data', $user_info_data);
+                                $DB->insert_record('user_info_data', $userinfodata);
                             } catch (\Exception $e) {
                                 debugging($e->getMessage());
                             }
@@ -671,8 +671,8 @@ class usersimport {
                 }
             }
 
-            $send_event_course_create = 0;
-            if ($col_shortnamecourse || $col_idnumbercourse) {
+            $sendeventcoursecreate = 0;
+            if ($colshortnamecourse || $colidnumbercourse) {
                 $course = $this->get_course($shortnamecourse, $idnumbercourse);
 
                 // If exist user, and exist course, add enrol.
@@ -680,34 +680,34 @@ class usersimport {
 
                     enroll_util::enrol($course->id, $user->id, $enroltimestart, $enroltimeend, 0);
 
-                    $send_event_course_create = $course->id;
+                    $sendeventcoursecreate = $course->id;
 
                     $this->add_col($course->fullname, !$inserir);
                     $this->add_col($enroltimestart, !$inserir);
                     $this->add_col($enroltimeend, !$inserir);
 
-                    if ($col_groupmembers && $groupmembers) {
+                    if ($colgroupmembers && $groupmembers) {
                         $groups = $this->get_group($groupmembers, $course->id);
-                        $groups_name = '';
+                        $groupsname = '';
                         if ($groups) {
-                            $groups_name = $groups->name;
+                            $groupsname = $groups->name;
 
                             if (!$DB->get_record('groups_members',
                                 array('groupid' => $groups->id, 'userid' => $user->id), '*', IGNORE_MULTIPLE)) {
-                                $groups_members = new \stdClass();
-                                $groups_members->groupid = $groups->id;
-                                $groups_members->userid = $user->id;
-                                $groups_members->timeadded = time();
-                                $groups_members->component = '';
-                                $groups_members->itemid = 0;
+                                $groupsmembers = new \stdClass();
+                                $groupsmembers->groupid = $groups->id;
+                                $groupsmembers->userid = $user->id;
+                                $groupsmembers->timeadded = time();
+                                $groupsmembers->component = '';
+                                $groupsmembers->itemid = 0;
                                 try {
-                                    $DB->insert_record('groups_members', $groups_members);
+                                    $DB->insert_record('groups_members', $groupsmembers);
                                 } catch (\Exception $e) {
                                     debugging($e->getMessage());
                                 }
                             }
                         }
-                        $this->add_col($groups_name, !$inserir);
+                        $this->add_col($groupsname, !$inserir);
                     }
                 } else if (!$inserir && $course) {
                     $this->add_col($course->fullname, true);
@@ -715,32 +715,32 @@ class usersimport {
                     $this->add_col($enroltimeend, true);
 
                     $groups = $this->get_group($groupmembers, $course->id);
-                    $groups_name = '';
+                    $groupsname = '';
                     if ($groups) {
-                        $groups_name = $groups->name;
+                        $groupsname = $groups->name;
                     }
-                    $this->add_col($groups_name, !$inserir);
+                    $this->add_col($groupsname, !$inserir);
                 }
             }
 
-            if ($send_event_user_create && $send_event_course_create && $user) {
-                $data_event = array(
-                    'objectid' => $send_event_course_create,
+            if ($sendeventusercreate && $sendeventcoursecreate && $user) {
+                $dataevent = array(
+                    'objectid' => $sendeventcoursecreate,
                     'relateduserid' => $user->id,
                     'other' => array(
                         'password' => $password,
                         'courseid' => SITEID
                     ),
-                    'context' => \context_user::instance($send_event_course_create)
+                    'context' => \context_user::instance($sendeventcoursecreate)
                 );
 
                 try {
-                    import_user_created_and_enrol::create($data_event)->trigger();
+                    import_user_created_and_enrol::create($dataevent)->trigger();
                 } catch (\Exception $e) {
                     debugging($e->getMessage());
                 }
-            } else if ($send_event_user_create && $user) {
-                $data_event = array(
+            } else if ($sendeventusercreate && $user) {
+                $dataevent = array(
                     'objectid' => $user->id,
                     'relateduserid' => $user->id,
                     'other' => array(
@@ -751,21 +751,21 @@ class usersimport {
                 );
 
                 try {
-                    import_user_created::create($data_event)->trigger();
+                    import_user_created::create($dataevent)->trigger();
                 } catch (\Exception $e) {
                     debugging($e->getMessage());
                 }
-            } else if ($send_event_course_create && $user) {
-                $data_event = array(
-                    'objectid' => $send_event_course_create,
+            } else if ($sendeventcoursecreate && $user) {
+                $dataevent = array(
+                    'objectid' => $sendeventcoursecreate,
                     'relateduserid' => $user->id,
                     'other' => array(
-                        'courseid' => $send_event_course_create
+                        'courseid' => $sendeventcoursecreate
                     ),
                     'context' => \context_user::instance($user->id)
                 );
                 try {
-                    import_course_enrol::create($data_event)->trigger();
+                    import_course_enrol::create($dataevent)->trigger();
                 } catch (\Exception $e) {
                     debugging($e->getMessage());
                 }
@@ -794,7 +794,7 @@ class usersimport {
                   </script>
                   <style>.mensage-proccess{display:none}</style>';
         } else {
-            unlink($target_file);
+            unlink($targetfile);
             end_util::end_script_show();
         }
     }
@@ -814,8 +814,8 @@ class usersimport {
             if ($key == 'POST') {
                 // Ignora.
             } else if ($key == 'field') {
-                $field_item = string_util::clear_all_params('field', [], PARAM_TEXT);
-                foreach ($field_item as $key2 => $value2) {
+                $fielditem = string_util::clear_all_params('field', [], PARAM_TEXT);
+                foreach ($fielditem as $key2 => $value2) {
                     $form->create_hidden_input('field[' . $key2 . ']', $value2);
                 }
             } else {
@@ -834,8 +834,8 @@ class usersimport {
             if ($key == 'POST' || $key == 'inserir') {
                 // Ignora estes dados.
             } else if ($key == 'field') {
-                $field_item = string_util::clear_all_params('field', [], PARAM_TEXT);
-                foreach ($field_item as $key2 => $value2) {
+                $fielditem = string_util::clear_all_params('field', [], PARAM_TEXT);
+                foreach ($fielditem as $key2 => $value2) {
                     $form->create_hidden_input('field[' . $key2 . ']', $value2);
                 }
             } else {
@@ -849,11 +849,11 @@ class usersimport {
     }
 
     /**
-     * @param $param_name
+     * @param $paramname
      * @return mixed|null
      */
-    private function get_col_param($param_name) {
-        $param = optional_param($param_name, null, PARAM_TEXT);
+    private function get_col_param($paramname) {
+        $param = optional_param($paramname, null, PARAM_TEXT);
         if ($param == null) {
             return null;
         }
@@ -985,8 +985,8 @@ class usersimport {
         $file = optional_param('file', '', PARAM_TEXT);
         $separator = optional_param('separator', '', PARAM_TEXT);
 
-        $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
-        if (!file_exists($target_file)) {
+        $targetfile = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
+        if (!file_exists($targetfile)) {
             header::notfound(get_string_kopere('userimport_filenotfound', $name));
         }
 
@@ -998,19 +998,19 @@ class usersimport {
               </head>
               <body>';
 
-        $count_cols = 0;
+        $countcols = 0;
         echo '<table border="1">';
-        if (($handle = fopen($target_file, "r")) !== false) {
+        if (($handle = fopen($targetfile, "r")) !== false) {
             while (($data = fgetcsv($handle, 1000, $separator)) !== false) {
 
                 echo '<tr>';
-                if ($count_cols == 0) {
+                if ($countcols == 0) {
                     foreach ($data as $col) {
                         echo '<td>' . $col . '</td>';
-                        $count_cols++;
+                        $countcols++;
                     }
                 } else {
-                    for ($i = 0; $i < $count_cols; $i++) {
+                    for ($i = 0; $i < $countcols; $i++) {
                         if (strlen($data[$i]) == 0) {
                             echo '<td style="background: #FF9800;">(vazio)</td>';
                         } else {

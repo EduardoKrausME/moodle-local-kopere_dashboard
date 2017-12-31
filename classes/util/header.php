@@ -32,44 +32,44 @@ defined('MOODLE_INTERNAL') || die();
 class header {
     /**
      * @param      $url
-     * @param bool $is_die
+     * @param bool $isdie
      */
-    public static function location( $url, $is_die = true) {
+    public static function location( $url, $isdie = true) {
         ob_clean();
         header('Location: ?' . $url);
 
-        if ($is_die) {
+        if ($isdie) {
             end_util::end_script_show ('Redirecionando para ?' . $url);
         }
     }
 
     /**
-     * @param bool $is_die
+     * @param bool $isdie
      */
-    public static function reload( $is_die = true) {
+    public static function reload( $isdie = true) {
         ob_clean();
         $url = $_SERVER['QUERY_STRING'];
 
         header('Location: ?' . $url);
-        if ($is_die) {
+        if ($isdie) {
             end_util::end_script_show ('Redirecionando para ?' . $url);
         }
     }
 
     /**
      * @param      $param
-     * @param bool $print_text
+     * @param bool $printtext
      */
-    public static function notfound_null( $param, $print_text = false) {
+    public static function notfound_null( $param, $printtext = false) {
         if ($param == null) {
-            self::notfound($print_text);
+            self::notfound($printtext);
         }
     }
 
     /**
-     * @param bool $print_text
+     * @param bool $printtext
      */
-    public static function notfound( $print_text = false) {
+    public static function notfound( $printtext = false) {
         global $CFG;
 
         if (!AJAX_SCRIPT) {
@@ -81,7 +81,7 @@ class header {
         echo '<div class="element-box text-center page404">
                   <img width="200" height="200" src="' . $CFG->wwwroot . '/local/kopere_dashboard/assets/dashboard/img/404.svg">
                   <h2>OOPS!</h2>
-                  <div class="text404 text-danger">' . $print_text . '</div>
+                  <div class="text404 text-danger">' . $printtext . '</div>
                   <p>
                       <a href="#" onclick="window.history.back();return false;"
                          class="btn btn-primary">Voltar</a>

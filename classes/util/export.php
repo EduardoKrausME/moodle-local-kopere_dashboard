@@ -34,7 +34,7 @@ class export {
     /**
      * @var
      */
-    private static $_format;
+    private static $format;
 
     /**
      * @param      $format
@@ -42,11 +42,11 @@ class export {
      */
     public static function header( $format, $filename = null) {
         if ($filename == null) {
-            $filename = dashboard_util::$current_title;
+            $filename = dashboard_util::$currenttitle;
         }
 
-        self::$_format = $format;
-        if (self::$_format == 'xls') {
+        self::$format = $format;
+        if (self::$format == 'xls') {
             ob_clean();
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment; filename="' . $filename . '.xls"');
@@ -70,7 +70,7 @@ class export {
      *
      */
     public static function close() {
-        if (self::$_format == 'xls') {
+        if (self::$format == 'xls') {
             echo '</body></html>';
             end_util::end_script_show();
         }
