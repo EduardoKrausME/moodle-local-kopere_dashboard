@@ -10,15 +10,15 @@ php:
   - 7.1
 
 env:
-  - DB=pgsql  MOODLE_BRANCH=MOODLE_32_STABLE
-  - DB=mysqli MOODLE_BRANCH=MOODLE_32_STABLE
+  - DB=pgsql  MOODLE_BRANCH=MOODLE_34_STABLE
+  - DB=mysqli MOODLE_BRANCH=MOODLE_34_STABLE
 
 matrix:
   include:
     - php: 7.1
-      env: DB=pgsql  MOODLE_BRANCH=MOODLE_32_STABLE
+      env: DB=pgsql  MOODLE_BRANCH=MOODLE_34_STABLE
     - php: 7.1
-      env: DB=mysqli MOODLE_BRANCH=MOODLE_32_STABLE
+      env: DB=mysqli MOODLE_BRANCH=MOODLE_34_STABLE
 
 before_install:
   - phpenv config-rm xdebug.ini
@@ -30,7 +30,17 @@ before_install:
 install:
   - moodle-plugin-ci install
 
+ignore:
+  - vendor/*
+  - assets/*
+
 script:
   - moodle-plugin-ci phplint
+  - moodle-plugin-ci phpunit
+  - moodle-plugin-ci phpmd
+  - moodle-plugin-ci phpcpd
+  - moodle-plugin-ci savepoints
+  - moodle-plugin-ci mustache
   - moodle-plugin-ci validate
   - moodle-plugin-ci behat
+  - moodle-plugin-ci codechecker
