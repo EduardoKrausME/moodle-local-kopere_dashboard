@@ -45,14 +45,14 @@ class dashboard {
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="element-box color1">
-                            <div class="label">'.get_string_kopere('dashboard_title_user').'</div>
+                            <div class="label">' . get_string_kopere('dashboard_title_user') . '</div>
                             <div class="value"><a href="?users::dashboard">
                                 ' . users::count_all(true) . ' / ' . users::count_all_learners(true) . '</a></div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="element-box color2">
-                            <div class="label">'.get_string_kopere('dashboard_title_online').'</div>
+                            <div class="label">' . get_string_kopere('dashboard_title_online') . '</div>
                             <div class="value"><a href="?usersonline::dashboard">
                                 <span id="user-count-online">' . usersonline::count(10) . '</span>
                                 / ' . usersonline::count(60) . '</a></div>
@@ -60,7 +60,7 @@ class dashboard {
                     </div>
                     <div class="col-sm-3">
                         <div class="element-box color3">
-                            <div class="label">'.get_string_kopere('dashboard_title_course').'</div>
+                            <div class="label">' . get_string_kopere('dashboard_title_course') . '</div>
                             <div class="value"><a href="?courses::dashboard">
                             ' . courses::count_all(true) . '
                                 / ' . courses::count_all_visibles(true) . '</a></div>
@@ -68,7 +68,7 @@ class dashboard {
                     </div>
                     <div class="col-sm-3">
                         <div class="element-box color4">
-                            <div class="label">'.get_string_kopere('dashboard_title_disk').'</div>
+                            <div class="label">' . get_string_kopere('dashboard_title_disk') . '</div>
                             <div class="value"><a href="?reports::dashboard&type=server">
                             ' . bytes_util::size_to_byte(files::count_all_space()) . '</a></div>
                         </div>
@@ -105,14 +105,15 @@ class dashboard {
             $profileimageurl = $userpicture->get_url($PAGE)->out(false);
 
             if ($grade->itemtype == 'mod') {
-                $evaluation = get_string_kopere('dashboard_grade_inmod', $grade) ;
+                $evaluation = get_string_kopere('dashboard_grade_inmod', $grade);
             } else if ($grade->itemtype == 'course') {
                 $evaluation = get_string_kopere('dashboard_grade_incourse', $grade);
             } else {
                 continue;
             }
 
-            $grade_text = number_format($grade->finalgrade, 1, get_string('decsep', 'langconfig'), '') . ' '.get_string_kopere('dashboard_grade_of').' ' . intval($grade->rawgrademax);
+            $grade_text = number_format($grade->finalgrade, 1, get_string('decsep', 'langconfig'), '') . ' ' .
+                get_string_kopere('dashboard_grade_of') . ' ' . intval($grade->rawgrademax);
 
             echo '<div class="media dashboard-grade-list">
                       <div class="media-left">
@@ -124,8 +125,11 @@ class dashboard {
                                  href="?users::details&userid=' . $user->id . '"
                                  data-href="open-ajax-table.php?users::details&userid=' . $user->id . '">' . fullname($user) . '</a>
                           </h4>
-                          <p>'.get_string_kopere('dashboard_grade_text', ['grade' => $grade_text, 'evaluation' => $evaluation]).'</p>
-                          <div class="date"><small>'.get_string_kopere('dashboard_grade_in').' <i>' . userdate($grade->timemodified, get_string_kopere('dateformat')) . '</i></small></div>
+                          <p>' . get_string_kopere('dashboard_grade_text',
+                    ['grade' => $grade_text, 'evaluation' => $evaluation]) . '</p>
+                          <div class="date"><small>' . get_string_kopere('dashboard_grade_in') .
+                ' <i>' . userdate($grade->timemodified,
+                    get_string_kopere('dateformat')) . '</i></small></div>
                       </div>
                       <div class="clear"></div>
                   </div>';
@@ -150,7 +154,7 @@ class dashboard {
         foreach ($last_enroll as $enrol) {
 
             $user = $DB->get_record('user', array('id' => $enrol->userid));
-            if($user) {
+            if ($user) {
 
                 $userpicture = new \user_picture($user);
                 $userpicture->size = 1;
@@ -169,12 +173,14 @@ class dashboard {
                               <h4 class="media-heading">
                                   <a data-toggle="modal" data-target="#modal-details"
                                      href="?users::details&userid=' . $user->id . '"
-                                     data-href="open-ajax-table.php?users::details&userid=' . $user->id . '">' . fullname($user) . '</a>
+                                     data-href="open-ajax-table.php?users::details&userid=' . $user->id . '">' .
+                    fullname($user) . '</a>
                               </h4>
                               <p>' . get_string_kopere('dashboard_enrol_text', $enrol) . '
                                   <span class="status">' . $status_matricula . '</span>
                               </p>
-                              <div class="date"><small>' . get_string_kopere('dashboard_enrol_lastmodifield') . ' <i>' . userdate($enrol->timemodified, get_string_kopere('dateformat')) . '</i></small></div>
+                              <div class="date"><small>' . get_string_kopere('dashboard_enrol_lastmodifield') . ' <i>' .
+                    userdate($enrol->timemodified, get_string_kopere('dateformat')) . '</i></small></div>
                           </div>
                           <div class="clear"></div>
                       </div>';

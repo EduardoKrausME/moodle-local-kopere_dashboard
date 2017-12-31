@@ -65,7 +65,6 @@ class string_util {
         );
     }
 
-
     /**
      * @param $param
      * @param $default
@@ -101,11 +100,11 @@ class string_util {
             foreach ($in as $key => $value) {
                 $out [$key] = self::clear_array_params($value, $type);
             }
-        } elseif (is_string($in)) {
+        } else if (is_string($in)) {
             try {
                 return clean_param($in, $type);
             } catch (\coding_exception $e) {
-                error_log($e->getMessage());
+                debugging($e->getMessage());
             }
         } else {
             return $in;

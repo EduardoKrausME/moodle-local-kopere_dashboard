@@ -126,7 +126,8 @@ class webpages {
 
         button::info(get_string_kopere('webpages_page_view'), $link_pagina, '', false);
         button::edit(get_string_kopere('webpages_page_edit'), 'webpages::edit_page&id=' . $webpages->id, 'margin-left-15', false);
-        button::delete(get_string_kopere('webpages_page_delete'), 'webpages::delete_page&id=' . $webpages->id, 'margin-left-15', false, false, true);
+        button::delete(get_string_kopere('webpages_page_delete'),
+            'webpages::delete_page&id=' . $webpages->id, 'margin-left-15', false, false, true);
 
         $form = new form();
         $form->print_panel(get_string_kopere('webpages_table_link'), "<a target='_blank' href='$link_pagina'>$link_pagina</a>");
@@ -135,7 +136,8 @@ class webpages {
         if ($webpages->courseid) {
             $course = $DB->get_record('course', array('id' => $webpages->courseid));
             if ($course) {
-                $form->print_panel(get_string_kopere('webpages_page_course'), '<a href="?courses::details&courseid=' . $webpages->courseid . '">' . $course->fullname . '</a>');
+                $form->print_panel(get_string_kopere('webpages_page_course'),
+                    '<a href="?courses::details&courseid=' . $webpages->courseid . '">' . $course->fullname . '</a>');
             }
         }
         $form->print_panel(get_string_kopere('webpages_table_theme'), $this->theme_name($webpages->theme));
@@ -460,7 +462,7 @@ class webpages {
         $id = optional_param('id', 0, PARAM_INT);
 
         if ($title == '') {
-            end_util::end_script_show ('');
+            end_util::end_script_show('');
         }
 
         $title = html::link($title);
@@ -560,10 +562,6 @@ class webpages {
                 'key' => 'standard',
                 'value' => 'theme_standard'
             ),
-            //array(
-            //    'key' => 'frontpage',
-            //    'value' => 'theme_frontpage'
-            //),
             array(
                 'key' => 'popup',
                 'value' => 'theme_popup'

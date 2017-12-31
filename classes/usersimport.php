@@ -58,14 +58,13 @@ class usersimport {
         echo '<form action="?usersimport::upload" id="dropzone" class="dropzone needsclick dz-clickable">
                   <div class="dz-message needsclick">
                       ' . get_string_kopere('userimport_upload') . '
-                  </div>                
+                  </div>
               </form>
               <br/><br/><br/><br/>
-              
-              
+
               <script src="' . $CFG->wwwroot . '/local/kopere_dashboard/assets/dropzone/js/dropzone.js"></script>
               <script>
-                  new Dropzone("#dropzone", { 
+                  new Dropzone("#dropzone", {
                       maxFiles : 1,
                       acceptedFiles: ".csv",
                       success: function(file, response){
@@ -117,8 +116,9 @@ class usersimport {
         echo '<div class="element-box table-responsive">';
 
         $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
-        if (!file_exists($target_file))
+        if (!file_exists($target_file)) {
             header::notfound(get_string_kopere('userimport_filenotfound', $name));
+        }
 
         $csv_content = file_get_contents($target_file, false, null, 0, 2000);
 
@@ -141,7 +141,7 @@ class usersimport {
         $cols = array();
         echo '<table class="table table-bordered">';
         $handle = fopen($target_file, "r");
-        while (($data = fgetcsv($handle, 1000, $separator)) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, $separator)) !== false) {
 
             echo '<tr>';
             if ($count_cols == 0) {
@@ -152,22 +152,25 @@ class usersimport {
                 }
             } else {
                 for ($i = 0; $i < $count_cols; $i++) {
-                    if (strlen($data[$i]) == 0)
+                    if (strlen($data[$i]) == 0) {
                         echo '<td style="background: #FF9800;">(vazio)</td>';
-                    else
+                    } else {
                         echo '<td>' . $data[$i] . '</td>';
+                    }
                 }
             }
             echo '</tr>';
 
             $count_row++;
-            if ($count_row == (10 + 1))
+            if ($count_row == (10 + 1)) {
                 break;
+            }
         }
         fclose($handle);
         echo '</table>';
 
-        echo '<p><a target="_blank" href="?UsersImport::printusersimportle=' . $file . '&name=' . $name . '&separator=' . $separator . '">' . get_string_kopere('userimport_linkall') . '</a></p>';
+        echo '<p><a target="_blank" href="?UsersImport::printusersimportle=' . $file . '&name=' . $name .
+            '&separator=' . $separator . '">' . get_string_kopere('userimport_linkall') . '</a></p>';
 
         $this->get_events();
         $this->create_form_collums($cols, $separator);
@@ -191,10 +194,12 @@ class usersimport {
         title_util::print_h3('userimport_import_course_enrol_name');
         if ($import_course_enrol) {
             if ($import_course_enrol->status == 1) {
-                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_course_enrol->id . '">' . $import_course_enrol->subject . '</a>';
+                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_course_enrol->id . '">' .
+                    $import_course_enrol->subject . '</a>';
                 echo get_string_kopere('userimport_receivemessage', $link);
             } else {
-                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_course_enrol->id . '">' . $import_course_enrol->subject . '</a>';
+                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_course_enrol->id . '">' .
+                    $import_course_enrol->subject . '</a>';
                 mensagem::print_info(get_string_kopere('userimport_receivemessage', $link));
             }
         } else {
@@ -209,10 +214,12 @@ class usersimport {
         title_util::print_h3('userimport_import_user_created_name');
         if ($import_user_created) {
             if ($import_user_created->status == 1) {
-                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_user_created->id . '">' . $import_user_created->subject . '</a>';
+                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_user_created->id . '">' .
+                    $import_user_created->subject . '</a>';
                 echo get_string_kopere('userimport_receivemessage', $link);
             } else {
-                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_user_created->id . '">' . $import_user_created->subject . '</a>';
+                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_user_created->id . '">' .
+                    $import_user_created->subject . '</a>';
                 mensagem::print_info(get_string_kopere('userimport_receivemessage', $link));
             }
         } else {
@@ -227,10 +234,14 @@ class usersimport {
         title_util::print_h3('userimport_import_user_created_and_enrol_name');
         if ($import_user_created_and_enrol) {
             if ($import_user_created_and_enrol->status == 1) {
-                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_user_created_and_enrol->id . '">' . $import_user_created_and_enrol->subject . '</a>';
+                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' .
+                    $import_user_created_and_enrol->id . '">' .
+                    $import_user_created_and_enrol->subject . '</a>';
                 echo get_string_kopere('userimport_receivemessage', $link);
             } else {
-                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' . $import_user_created_and_enrol->id . '">' . $import_user_created_and_enrol->subject . '</a>';
+                $link = '<a target="_blank" href="?notifications::add_segunda_etapa&id=' .
+                    $import_user_created_and_enrol->id . '">' .
+                    $import_user_created_and_enrol->subject . '</a>';
                 mensagem::print_info(get_string_kopere('userimport_receivemessage', $link));
             }
         } else {
@@ -268,7 +279,7 @@ class usersimport {
             $coll_number++;
         }
 
-        // Campos do usuário
+        // Campos do usuário.
         $fields = array(
             'password', 'idnumber', 'firstname', 'lastname', 'email', 'username', 'phone1', 'phone2', 'address', 'city', 'country'
         );
@@ -283,26 +294,26 @@ class usersimport {
                 ->set_value(optional_param($field, '', PARAM_RAW))
                 ->set_title(get_string($field) . ' (' . $field . ')');
 
-
-            if ($field == 'email')
+            if ($field == 'email') {
                 $input->set_required();
-            elseif ($field == 'firstname')
+            } else if ($field == 'firstname') {
                 $input->set_required()
                     ->set_title(get_string_kopere('userimport_firstname') . ' (firstname or fullname)')
                     ->set_description(get_string_kopere('userimport_firstname_desc'));
+            }
 
             $form->add_input($input);
         }
         echo '</div></div>';
 
-        // Campos extras
+        // Campos extras.
         $fields = $DB->get_records('user_info_field', null, 'sortorder ASC');
         if ($fields) {
             echo '<div class="panel panel-default">
                   <div class="panel-heading">' . get_string_kopere('userimport_userfields') . '</div>
                   <div class="panel-body">';
 
-            $field_item = string_util::clear_all_params ('field', [], PARAM_TEXT);
+            $field_item = string_util::clear_all_params('field', [], PARAM_TEXT);
 
             foreach ($fields as $field) {
 
@@ -311,15 +322,15 @@ class usersimport {
                     ->set_values($values)
                     ->set_description($field->name)
                     ->set_title($field->name);
-                if (isset($field_item[$field->id]))
+                if (isset($field_item[$field->id])) {
                     $input->set_value($field_item[$field->id]);
+                }
                 $form->add_input($input);
             }
             echo '</div></div>';
         }
 
-
-        // Matrícula
+        // Matrícula.
         echo '<div class="panel panel-default">
                   <div class="panel-heading">' . get_string_kopere('userimport_courseenrol') . '</div>
                   <div class="panel-body">';
@@ -360,7 +371,6 @@ class usersimport {
 
         echo '</div></div>';
 
-
         $form->create_submit_input(get_string_kopere('userimport_next'));
         $form->close();
 
@@ -373,8 +383,8 @@ class usersimport {
         global $CFG, $DB, $USER;
         $CFG->debug = 0;
 
-        require_once '../../user/lib.php';
-        require_once '../../lib/classes/user.php';
+        require_once('../../user/lib.php');
+        require_once('../../lib/classes/user.php');
 
         $name = optional_param('name', '', PARAM_TEXT);
         $file = optional_param('file', '', PARAM_TEXT);
@@ -413,27 +423,33 @@ class usersimport {
 
         $this->add_col('username', !$inserir, true);
         $this->add_col('password', !$inserir, true);
-        if ($col_idnumber)
+        if ($col_idnumber) {
             $this->add_col('idnumber', !$inserir, true);
+        }
         $this->add_col('firstname', !$inserir, true);
         $this->add_col('lastname', !$inserir, true);
         $this->add_col('email', !$inserir, true);
-        if ($col_phone1)
+        if ($col_phone1) {
             $this->add_col('phone1', !$inserir, true);
-        if ($col_phone2)
+        }
+        if ($col_phone2) {
             $this->add_col('phone2', !$inserir, true);
-        if ($col_address)
+        }
+        if ($col_address) {
             $this->add_col('address', !$inserir, true);
-        if ($col_city)
+        }
+        if ($col_city) {
             $this->add_col('city', !$inserir, true);
+        }
         $this->add_col('country', !$inserir, true);
         $this->add_col('userstatus', !$inserir, true);
         if ($col_shortnamecourse || $col_idnumbercourse) {
             $this->add_col('course', !$inserir, true);
             $this->add_col('enroltimestart', !$inserir, true);
             $this->add_col('enroltimeend', !$inserir, true);
-            if ($col_groupmembers)
+            if ($col_groupmembers) {
                 $this->add_col('groupmembers', !$inserir, true);
+            }
         }
 
         if (!$inserir) {
@@ -444,11 +460,12 @@ class usersimport {
 
         $is_first = true;
         $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
-        if (!file_exists($target_file))
+        if (!file_exists($target_file)) {
             header::notfound(get_string_kopere('userimport_filenotfound', $name));
+        }
 
         $handle = fopen($target_file, "r");
-        while (($data = fgetcsv($handle, 1000, $separator)) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, $separator)) !== false) {
             if ($is_first) {
                 $is_first = false;
                 continue;
@@ -532,19 +549,24 @@ class usersimport {
 
                 $this->add_col($username, !$inserir);
                 $this->add_col($password, !$inserir);
-                if ($col_idnumber)
+                if ($col_idnumber) {
                     $this->add_col($idnumber, !$inserir);
+                }
                 $this->add_col($firstname, !$inserir);
                 $this->add_col($lastname, !$inserir);
                 $this->add_col($email, !$inserir);
-                if ($col_phone1)
+                if ($col_phone1) {
                     $this->add_col($phone1, !$inserir);
-                if ($col_phone2)
+                }
+                if ($col_phone2) {
                     $this->add_col($phone2, !$inserir);
-                if ($col_address)
+                }
+                if ($col_address) {
                     $this->add_col($address, !$inserir);
-                if ($col_city)
+                }
+                if ($col_city) {
                     $this->add_col($city, !$inserir);
+                }
                 $this->add_col($country, !$inserir);
 
                 $errors = "";
@@ -557,7 +579,8 @@ class usersimport {
                 if (empty($new_user->username)) {
                     $errors .= get_string('required');
                 } else if (!$user or $user->username !== $new_user->username) {
-                    if ($DB->record_exists('user', array('username' => $new_user->username, 'mnethostid' => $CFG->mnet_localhost_id))) {
+                    if ($DB->record_exists('user', array('username' => $new_user->username,
+                        'mnethostid' => $CFG->mnet_localhost_id))) {
                         $errors .= get_string('usernameexists');
                     }
                     // Check allowed characters.
@@ -573,16 +596,16 @@ class usersimport {
                     if (!validate_email($new_user->email)) {
                         $errors .= get_string('invalidemail');
                     } else if (empty($CFG->allowaccountssameemail)
-                        and $DB->record_exists('user', array('email' => $new_user->email, 'mnethostid' => $CFG->mnet_localhost_id))) {
+                        and $DB->record_exists('user', array('email' => $new_user->email,
+                            'mnethostid' => $CFG->mnet_localhost_id))) {
                         $errors .= get_string('emailexists');
                     }
                 }
                 if ($errors != '') {
                     $this->add_col($errors, !$inserir);
-                } elseif (!$inserir) {
+                } else if (!$inserir) {
                     $this->add_col(get_string_kopere('userimport_noterror'), !$inserir);
                 }
-
 
                 if ($inserir) {
                     try {
@@ -603,26 +626,31 @@ class usersimport {
             } else {
                 $this->add_col($user->username, !$inserir);
                 $this->add_col(get_string_kopere('userimport_cript'), !$inserir);
-                if ($col_idnumber)
+                if ($col_idnumber) {
                     $this->add_col($user->idnumber, !$inserir);
+                }
                 $this->add_col($user->firstname, !$inserir);
                 $this->add_col($user->lastname, !$inserir);
                 $this->add_col($user->email, !$inserir);
-                if ($col_phone1)
+                if ($col_phone1) {
                     $this->add_col($user->phone1, !$inserir);
-                if ($col_phone2)
+                }
+                if ($col_phone2) {
                     $this->add_col($user->phone2, !$inserir);
-                if ($col_address)
+                }
+                if ($col_address) {
                     $this->add_col($user->address, !$inserir);
-                if ($col_city)
+                }
+                if ($col_city) {
                     $this->add_col($user->city, !$inserir);
+                }
                 $this->add_col($user->country, !$inserir);
                 $this->add_col(get_string_kopere('userimport_exist'), !$inserir);
             }
 
-            // if exist user, add extras
+            // If exist user, add extras.
             if ($user) {
-                $field_items = string_util::clear_all_params ('field', [], PARAM_TEXT);
+                $field_items = string_util::clear_all_params('field', [], PARAM_TEXT);
                 foreach ($field_items as $key2 => $value2) {
                     if ($value2) {
                         $col = str_replace('col_', '', $value2);
@@ -636,6 +664,7 @@ class usersimport {
                             try {
                                 $DB->insert_record('user_info_data', $user_info_data);
                             } catch (\Exception $e) {
+                                debugging($e->getMessage());
                             }
                         }
                     }
@@ -645,7 +674,8 @@ class usersimport {
             $send_event_course_create = 0;
             if ($col_shortnamecourse || $col_idnumbercourse) {
                 $course = $this->get_course($shortnamecourse, $idnumbercourse);
-                // if exist user, and exist course, add enrol
+
+                // If exist user, and exist course, add enrol.
                 if ($user && $course && $inserir) {
 
                     enroll_util::enrol($course->id, $user->id, $enroltimestart, $enroltimeend, 0);
@@ -673,12 +703,13 @@ class usersimport {
                                 try {
                                     $DB->insert_record('groups_members', $groups_members);
                                 } catch (\Exception $e) {
+                                    debugging($e->getMessage());
                                 }
                             }
                         }
                         $this->add_col($groups_name, !$inserir);
                     }
-                } elseif (!$inserir && $course) {
+                } else if (!$inserir && $course) {
                     $this->add_col($course->fullname, true);
                     $this->add_col($enroltimestart, true);
                     $this->add_col($enroltimeend, true);
@@ -706,9 +737,9 @@ class usersimport {
                 try {
                     import_user_created_and_enrol::create($data_event)->trigger();
                 } catch (\Exception $e) {
-                    // Não faz nada
+                    debugging($e->getMessage());
                 }
-            } elseif ($send_event_user_create && $user) {
+            } else if ($send_event_user_create && $user) {
                 $data_event = array(
                     'objectid' => $user->id,
                     'relateduserid' => $user->id,
@@ -722,9 +753,9 @@ class usersimport {
                 try {
                     import_user_created::create($data_event)->trigger();
                 } catch (\Exception $e) {
-                    // Não faz nada
+                    debugging($e->getMessage());
                 }
-            } elseif ($send_event_course_create && $user) {
+            } else if ($send_event_course_create && $user) {
                 $data_event = array(
                     'objectid' => $send_event_course_create,
                     'relateduserid' => $user->id,
@@ -736,7 +767,7 @@ class usersimport {
                 try {
                     import_course_enrol::create($data_event)->trigger();
                 } catch (\Exception $e) {
-                    // Não faz nada
+                    debugging($e->getMessage());
                 }
             }
 
@@ -778,11 +809,12 @@ class usersimport {
         $form = new form('usersimport::proccess');
         $form->create_hidden_input('inserir', 1);
 
-        $post   = string_util::clear_all_params ( null, null, PARAM_TEXT );
+        $post = string_util::clear_all_params(null, null, PARAM_TEXT);
         foreach ($post as $key => $value) {
             if ($key == 'POST') {
+                // Ignora.
             } else if ($key == 'field') {
-                $field_item = string_util::clear_all_params ('field', [], PARAM_TEXT);
+                $field_item = string_util::clear_all_params('field', [], PARAM_TEXT);
                 foreach ($field_item as $key2 => $value2) {
                     $form->create_hidden_input('field[' . $key2 . ']', $value2);
                 }
@@ -797,11 +829,12 @@ class usersimport {
         echo '<div style="float:left">';
         $form = new form('usersimport::upload_success');
 
-        $post   = string_util::clear_all_params ( null, null, PARAM_TEXT );
+        $post = string_util::clear_all_params(null, null, PARAM_TEXT);
         foreach ($post as $key => $value) {
             if ($key == 'POST' || $key == 'inserir') {
+                // Ignora estes dados.
             } else if ($key == 'field') {
-                $field_item = string_util::clear_all_params ('field', [], PARAM_TEXT);
+                $field_item = string_util::clear_all_params('field', [], PARAM_TEXT);
                 foreach ($field_item as $key2 => $value2) {
                     $form->create_hidden_input('field[' . $key2 . ']', $value2);
                 }
@@ -821,8 +854,9 @@ class usersimport {
      */
     private function get_col_param($param_name) {
         $param = optional_param($param_name, null, PARAM_TEXT);
-        if ($param == null)
+        if ($param == null) {
             return null;
+        }
 
         return str_replace('col_', '', $param);
     }
@@ -834,8 +868,9 @@ class usersimport {
      * @return string
      */
     private function get_col_value($col, $data, $default = '') {
-        if (isset($data[$col]))
+        if (isset($data[$col])) {
             return $data[$col];
+        }
 
         return $default;
     }
@@ -852,24 +887,27 @@ class usersimport {
         if (strlen($username)) {
             $user = $DB->get_record('user', array('username' => $username), '*', IGNORE_MULTIPLE);
 
-            if ($user)
+            if ($user) {
                 return $user;
+            }
         }
 
         if (empty($CFG->allowaccountssameemail)) {
             if (strlen($email)) {
                 $user = $DB->get_record('user', array('email' => $email), '*', IGNORE_MULTIPLE);
 
-                if ($user)
+                if ($user) {
                     return $user;
+                }
             }
         }
 
         if (strlen($idnumber)) {
             $user = $DB->get_record('user', array('idnumber' => $idnumber), '*', IGNORE_MULTIPLE);
 
-            if ($user)
+            if ($user) {
                 return $user;
+            }
         }
         return null;
     }
@@ -885,22 +923,25 @@ class usersimport {
         if (strlen($idnumbercourse)) {
             $course = $DB->get_record('course', array('idnumber' => $idnumbercourse), '*', IGNORE_MULTIPLE);
 
-            if ($course)
+            if ($course) {
                 return $course;
+            }
         }
 
         if (strlen($shortnamecourse)) {
             $course = $DB->get_record('course', array('shortname' => $shortnamecourse), '*', IGNORE_MULTIPLE);
 
-            if ($course)
+            if ($course) {
                 return $course;
+            }
         }
 
         if (strlen($shortnamecourse)) {
             $course = $DB->get_record('course', array('fullname' => $shortnamecourse), '*', IGNORE_MULTIPLE);
 
-            if ($course)
+            if ($course) {
                 return $course;
+            }
         }
 
         return null;
@@ -917,15 +958,17 @@ class usersimport {
         if (strlen($groupmembers)) {
             $groups = $DB->get_record('groups', array('name' => $groupmembers, 'courseid' => $courseid), '*', IGNORE_MULTIPLE);
 
-            if ($groups)
+            if ($groups) {
                 return $groups;
+            }
         }
 
         if (strlen($groupmembers)) {
             $groups = $DB->get_record('groups', array('idnumber' => $groupmembers, 'courseid' => $courseid), '*', IGNORE_MULTIPLE);
 
-            if ($groups)
+            if ($groups) {
                 return $groups;
+            }
         }
         return null;
     }
@@ -943,8 +986,9 @@ class usersimport {
         $separator = optional_param('separator', '', PARAM_TEXT);
 
         $target_file = $CFG->dataroot . '/kopere/dashboard/tmp/' . $file;
-        if (!file_exists($target_file))
+        if (!file_exists($target_file)) {
             header::notfound(get_string_kopere('userimport_filenotfound', $name));
+        }
 
         echo '<!DOCTYPE html>
               <html lang="pt-BR">
@@ -956,8 +1000,8 @@ class usersimport {
 
         $count_cols = 0;
         echo '<table border="1">';
-        if (($handle = fopen($target_file, "r")) !== FALSE) {
-            while (($data = fgetcsv($handle, 1000, $separator)) !== FALSE) {
+        if (($handle = fopen($target_file, "r")) !== false) {
+            while (($data = fgetcsv($handle, 1000, $separator)) !== false) {
 
                 echo '<tr>';
                 if ($count_cols == 0) {
@@ -967,10 +1011,11 @@ class usersimport {
                     }
                 } else {
                     for ($i = 0; $i < $count_cols; $i++) {
-                        if (strlen($data[$i]) == 0)
+                        if (strlen($data[$i]) == 0) {
                             echo '<td style="background: #FF9800;">(vazio)</td>';
-                        else
+                        } else {
                             echo '<td>' . $data[$i] . '</td>';
+                        }
                     }
                 }
                 echo '</tr>';

@@ -59,20 +59,20 @@ class report_benchmark {
 
             ++$idtest;
 
-            // Inistialize and execute the test
+            // Inistialize and execute the test.
             $start = microtime(true);
             $result = $this->start_test($name);
 
-            // Populate if empty result
+            // Populate if empty result.
             empty($result['limit']) ? $result['limit'] = 0 : null;
             empty($result['over']) ? $result['over'] = 0 : null;
 
-            // Overwrite the result if start/stop if defined
+            // Overwrite the result if start/stop if defined.
             $over_start = isset($result['start']) ? $result['start'] : $start;
             $over_stop = isset($result['stop']) ? $result['stop'] : microtime(true);
             $stop = round($over_stop - $over_start, 3);
 
-            // Store and merge result
+            // Store and merge result.
             $benchs[$name] = array(
                     'during' => $stop,
                     'id' => $idtest,
@@ -82,7 +82,7 @@ class report_benchmark {
                 ) + $result;
         }
 
-        // Store all results
+        // Store all results.
         $this->results = $benchs;
     }
 

@@ -59,7 +59,7 @@ class report_benchmark_test extends report_benchmark {
 
         $pass = 10000000;
         for ($i = 0; $i < $pass; ++$i) {
-            // Loooop muito long para teste
+            // Loooop muito long para teste.
         }
         $i = 0;
         while ($i < $pass) {
@@ -293,7 +293,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
     public static function loginuser() {
         global $CFG, $DB;
 
-        // Create a fake user
+        // Create a fake user.
         $user = new \stdClass();
         $user->auth = 'manual';
         $user->confirmed = 1;
@@ -305,11 +305,11 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         $user->firstname = 'benchtest';
         $user->id = $DB->insert_record('user', $user);
 
-        // Download login page
+        // Download login page.
         $fakeuser = array('username' => $user->username, 'password' => 'benchtest');
         download_file_content($CFG->wwwroot . '/login/index.php', null, $fakeuser, true);
 
-        // Delete fake user
+        // Delete fake user.
         $DB->delete_records('user', array('id' => $user->id));
         unset($user);
 

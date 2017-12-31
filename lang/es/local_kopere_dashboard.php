@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -45,13 +44,12 @@ $string['datetime'] = '%d/%m/%y, %H:%M';
 $string['php_datetime'] = 'm/d/Y H:i';
 $string['help_title'] = 'Ayuda con esta página';
 
-// html/tinymce.php
+// html/tinymce.
 $string['blocks'] = 'Bloques';
 $string['blocks_paragraph'] = 'Párrafo';
 $string['image_alignment'] = 'Alineación de imagen';
 $string['image_alignment_left'] = 'Alinear a la Izquierda';
 $string['image_alignment_right'] = 'Alinear a la Derecha';
-
 
 $string['about_bug'] = 'Si encontró algun PROBLEMA o si desea sugerir mejoras, abra un asunto';
 $string['about_code'] = 'Código diponible en';
@@ -105,7 +103,7 @@ $string['benchmark_title2'] = 'Alojando prueba de desempeño';
 $string['cloadmoreinfo'] = 'Correr el archivo de configuración &laquo;config.php&raquo;';
 $string['cloadname'] = 'Tiempo de carga de Moodle';
 
-// performancemonitor
+// performancemonitor.
 $string ['performancemonitor_rede'] = 'Red';
 $string ['performancemonitor_cpu'] = 'Uso del CPU';
 $string ['performancemonitor_memory'] = 'Memoria';

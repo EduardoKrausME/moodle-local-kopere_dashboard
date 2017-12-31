@@ -41,13 +41,14 @@ class form {
     /**
      * Form constructor.
      *
-     * @param null   $formaction
+     * @param null $formaction
      * @param string $class_extra
      */
-    public function __construct( $formaction = null, $class_extra = '') {
+    public function __construct($formaction = null, $class_extra = '') {
         $this->formaction = $formaction;
         if ($this->formaction) {
-            echo "<form method=\"post\" class=\"validate $class_extra\" enctype=\"multipart/form-data\" action=\"?{$this->formaction}\" >";
+            echo "<form method=\"post\" class=\"validate $class_extra\" enctype=\"multipart/form-data\"
+                        action=\"?{$this->formaction}\" >";
             echo '<div class="displayErroForm alert alert-danger" style="display: none;"><span></span></div>';
             echo '<input name="POST" type="hidden" value="true" />';
         }
@@ -59,9 +60,10 @@ class form {
      * @param string $name
      * @param string $adicional_text
      */
-    public function print_row( $titulo, $input, $name = '', $adicional_text = '') {
-        if($titulo)
+    public function print_row($titulo, $input, $name = '', $adicional_text = '') {
+        if ($titulo) {
             $titulo = '<label for="' . $name . '">' . $titulo . '</label>';
+        }
 
         echo '<div class="form-group area_' . $name . '">
                   ' . $titulo . $input . '
@@ -73,7 +75,7 @@ class form {
      * @param $titulo
      * @param $panel_body
      */
-    public function print_panel( $titulo, $panel_body) {
+    public function print_panel($titulo, $panel_body) {
         echo '<div class="form-group">
                   <label>' . $titulo . '</label>
                   <div class="panel panel-default">
@@ -88,7 +90,7 @@ class form {
      * @param string $name
      * @param string $adicional_text
      */
-    public function print_row_one( $titulo, $input, $name = '', $adicional_text = '') {
+    public function print_row_one($titulo, $input, $name = '', $adicional_text = '') {
         echo '<div class="form-check area_' . $name . '"">
                   <label for="' . $name . '" class="form-check-label">
                       ' . $input . ' ' . $titulo . '</label>
@@ -99,21 +101,21 @@ class form {
     /**
      * @param $section_title
      */
-    public function print_section( $section_title) {
+    public function print_section($section_title) {
         echo '<div class="form-section"><span>' . $section_title . '</span></div>';
     }
 
     /**
      * @param $height
      */
-    public function print_spacer( $height) {
+    public function print_spacer($height) {
         echo '<div class="form-group" style="height: ' . $height . 'px">&nbsp;</div>';
     }
 
     /**
      * @param i_input $input
      */
-    public function add_input( i_input $input) {
+    public function add_input(i_input $input) {
         $this->print_row(
             $input->get_title(),
             $input->to_string(),
@@ -126,8 +128,9 @@ class form {
      * @param        $name
      * @param string $value
      */
-    public function create_hidden_input( $name, $value = '') {
-        echo '<input type="hidden" id="hidden_' . $name . '" name="' . $name . '" id="' . $name . '" value="' . htmlspecialchars($value) . '"/>';
+    public function create_hidden_input($name, $value = '') {
+        echo '<input type="hidden" id="hidden_' . $name . '" name="' . $name .
+            '" id="' . $name . '" value="' . htmlspecialchars($value) . '"/>';
     }
 
     /**
@@ -135,8 +138,9 @@ class form {
      * @param string $class
      * @param string $additional_text
      */
-    public function create_submit_input( $value = '', $class = '', $additional_text = '') {
-        $html = '<input name="" class="btn btn-success bt-submit ' . $class . '" type="submit" value="' . htmlspecialchars($value) . '" />';
+    public function create_submit_input($value = '', $class = '', $additional_text = '') {
+        $html = '<input name="" class="btn btn-success bt-submit ' . $class .
+            '" type="submit" value="' . htmlspecialchars($value) . '" />';
         $this->print_row('', $html, 'btsubmit', $additional_text);
     }
 
@@ -152,7 +156,7 @@ class form {
     /**
      * @param $campo
      */
-    public function close_and_auto_submit_input( $campo) {
+    public function close_and_auto_submit_input($campo) {
         echo "<input id=\"submit_$campo\" name=\"\" type=\"submit\" style='display: none;' />
               <script>
                   $( '#$campo' ).change( function() {
@@ -166,8 +170,8 @@ class form {
     /**
      * @return bool
      */
-    public static function check_post (){
-        return optional_param ( 'POST', false, PARAM_TEXT );
+    public static function check_post() {
+        return optional_param('POST', false, PARAM_TEXT);
 
     }
 }

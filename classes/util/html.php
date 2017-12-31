@@ -78,7 +78,7 @@ class html {
      *
      * @return mixed
      */
-    public static function retira_acentos( $html) {
+    public static function retira_acentos($html) {
         $html = str_replace(self::$acentos_html, self::$sem_acento, $html);
         $html = str_replace(self::$acentos_ascii, self::$sem_acento, $html);
 
@@ -90,15 +90,15 @@ class html {
      *
      * @return mixed
      */
-    public static function trim( $html) {
+    public static function trim($html) {
         for ($i = 0; $i < 10; $i++) {
             $html = str_replace("  ", ' ', $html);
         }
         $html = str_replace("\r", ' ', $html);
         $html = str_replace("\n", ' ', $html);
-        $html = str_replace("\t", ' ', $html); // TAB
-        $html = str_replace("\x0B", ' ', $html); //
-        $html = preg_replace('/\s/', ' ', $html); // Escessos de espaços
+        $html = str_replace("\t", ' ', $html); // TAB.
+        $html = str_replace("\x0B", ' ', $html); // Tabulação vertical.
+        $html = preg_replace('/\s/', ' ', $html); // Escessos de espaços.
         return $html;
     }
 
@@ -117,12 +117,13 @@ class html {
         $chr = '';
         for ($i = 0; $i < $len; $i++) {
             $id = ord($txt[$i]);
-            if ($id == 32 || $id == 45 || $id == 95 || // Espaço traço e underline
-                (48 <= $id && $id <= 57) ||           // Números
-                (65 <= $id && $id <= 90) ||           // Maiúsculos
-                (97 <= $id && $id <= 122)             // Minusculos
-            )
+            if ($id == 32 || $id == 45 || $id == 95 || // Espaço traço e underline.
+                (48 <= $id && $id <= 57) ||           // Números.
+                (65 <= $id && $id <= 90) ||           // Maiúsculos.
+                (97 <= $id && $id <= 122)             // Minusculos.
+            ) {
                 $chr .= $txt[$i];
+            }
         }
 
         return $chr;
@@ -133,7 +134,7 @@ class html {
      *
      * @return string
      */
-    public static function link( $txt) {
+    public static function link($txt) {
         $txt = str_replace('-', ' ', trim($txt));
         $txt = str_replace('_', ' ', $txt);
         $txt = preg_replace("/\s+/", " ", $txt);
@@ -153,7 +154,7 @@ class html {
      *
      * @return string
      */
-    public static function truncate_text( $texto, $caracteres) {
+    public static function truncate_text($texto, $caracteres) {
         if (strlen($texto) > $caracteres) {
             $a = explode(' ', $texto);
             if (count($a) > 1) {
@@ -175,7 +176,7 @@ class html {
      *
      * @return mixed
      */
-    public static function makelink( $string) {
+    public static function makelink($string) {
         /***
          * Reconhece as URL sem HTTP://
          **/
@@ -187,7 +188,8 @@ class html {
         /***
          * Cria link para todos os E-MAIL
          **/
-        $string = preg_replace('/([\w-?&;#~=\.\/]+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,3}|[0-9]{1,3})(\]?))/i', "<a href=\"mailto:$1\">$1</A>", $string);
+        $string = preg_replace('/([\w-?&;#~=\.\/]+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,3}|[0-9]{1,3})(\]?))/i',
+            "<a href=\"mailto:$1\">$1</A>", $string);
 
         return $string;
     }

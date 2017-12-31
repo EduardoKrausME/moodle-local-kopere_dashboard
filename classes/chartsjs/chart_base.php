@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard\chartsjs;
 
+defined('MOODLE_INTERNAL') || die();
+
 /**
  * Class Base
  *
@@ -74,6 +76,7 @@ class chart_base {
             return;
         }
 
-        echo "<script src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/chartjs/Chart.bundle.js\" charset=\"utf-8\"></script>";
+        echo "<script src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/chartjs/Chart.bundle.js\"
+                      charset=\"utf-8\"></script>";
     }
 }

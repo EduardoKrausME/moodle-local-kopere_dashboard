@@ -64,7 +64,7 @@ class course_access {
         $course = $DB->get_record('course', array('id' => $cursos_id));
         header::notfound_null($course, get_string_kopere('courses_notound'));
 
-        $groups = $DB->get_records('groups', array('courseid'=>$course->id));
+        $groups = $DB->get_records('groups', array('courseid' => $course->id));
 
         echo '<script>
                   document.body.className += " menu-w-90";
@@ -114,12 +114,13 @@ class course_access {
                         $courseinfo[$module->course] = 1;
                     }
 
-                    $count_mod_info+=2;
+                    $count_mod_info += 2;
                 }
             }
 
             if (strlen($section->sequence)) {
-                $print_sessoes .= '<th  bgcolor="#979797" align="center" colspan="' . $count_mod_info . '" style="text-align:center;">';
+                $print_sessoes .= '<th  bgcolor="#979797" align="center" colspan="' .
+                    $count_mod_info . '" style="text-align:center;">';
 
                 if (strlen($section->name)) {
                     $print_sessoes .= $section->name;
@@ -131,18 +132,22 @@ class course_access {
         }
 
         $groups_cols = '';
-        if( $groups ){
-            $groups_cols = '<th rowspan="2" align="center" bgcolor="#979797" style="text-align:center;" >'.get_string_kopere('reports_groupname').'</th>';
+        if ($groups) {
+            $groups_cols = '<th rowspan="2" align="center" bgcolor="#979797" style="text-align:center;" >' .
+                get_string_kopere('reports_groupname') . '</th>';
         }
 
         echo '<tr bgcolor="#979797" style="background-color: #979797;">
-                  <th colspan="2" align="center" bgcolor="#979797" style="text-align:center;" >'.get_string_kopere('courses_titleenrol').'</th>
-                  '.$groups_cols . $print_sessoes . '
+                  <th colspan="2" align="center" bgcolor="#979797" style="text-align:center;" >' .
+            get_string_kopere('courses_titleenrol') . '</th>
+                  ' . $groups_cols . $print_sessoes . '
               </tr>';
 
         echo '<tr bgcolor="#C5C5C5" style="background-color: #c5c5c5;" >
-                <td align="center" bgcolor="#979797" style="text-align:center;">'.get_string_kopere('user_table_fullname').'</td>
-                <td align="center" bgcolor="#979797" style="text-align:center;">'.get_string_kopere('user_table_email').'</td>';
+                <td align="center" bgcolor="#979797" style="text-align:center;">' .
+            get_string_kopere('user_table_fullname') . '</td>
+                <td align="center" bgcolor="#979797" style="text-align:center;">' .
+            get_string_kopere('user_table_email') . '</td>';
 
         foreach ($modinfo as $infos) {
             $link = $CFG->wwwroot . '/course/view.php?id=' . $infos->course . '#module-' . $infos->course_modules_id;
@@ -155,9 +160,9 @@ class course_access {
 
         $sql
             = "SELECT DISTINCT u.*
-                 FROM {context} c
+                 FROM {CONTEXT} c
                  JOIN {role_assignments} ra ON ra.contextid = c.id
-                 JOIN {user} u              ON ra.userid    = u.id
+                 JOIN {USER} u              ON ra.userid    = u.id
                 WHERE c.contextlevel = :contextlevel
                   AND c.instanceid   = :instanceid";
 
@@ -173,10 +178,9 @@ class course_access {
             $this->td('<a href="' . $link . '" target="moodle">' . fullname($user) . '</a>', 'bg-info text-nowrap', '#D9EDF7');
             $this->td($user->email, 'bg-info text-nowrap', '#D9EDF7');
 
+            if ($groups) {
 
-            if( $groups ){
-                
-                $sql = "SELECT * 
+                $sql = "SELECT *
                           FROM {groups_members} gm
                           JOIN {groups} g ON g.id = gm.groupid
                          WHERE g.courseid = :courseid
@@ -184,10 +188,10 @@ class course_access {
                 $groups_user = $DB->get_records_sql($sql,
                     array(
                         'courseid' => $course->id,
-                        'userid'   => $user->id
+                        'userid' => $user->id
                     ));
                 $groups_user_print = array();
-                foreach($groups_user as $group_user){
+                foreach ($groups_user as $group_user) {
                     $groups_user_print[] = $group_user->name;
                 }
                 $this->td(implode('<br/>', $groups_user_print), 'bg-info text-nowrap', '#D9EDF7');
@@ -195,7 +199,7 @@ class course_access {
 
             foreach ($modinfo as $infos) {
 
-                $sql = "SELECT COUNT(*) as contagem, timecreated
+                $sql = "SELECT COUNT(*) AS contagem, timecreated
                           FROM {logstore_standard_log}
                          WHERE courseid = :courseid
                            AND contextinstanceid = :contextinstanceid
@@ -214,10 +218,13 @@ class course_access {
                     ));
 
                 if ($log_result && $log_result->contagem) {
-                    $this->td( get_string_kopere('reports_access_n',  $log_result->contagem), 'text-nowrap bg-success', 'DFF0D8');
-                    $this->td( userdate($log_result->timecreated, get_string('strftimedatetime')), 'text-nowrap bg-success', '#DFF0D8');
+                    $this->td(get_string_kopere('reports_access_n', $log_result->contagem),
+                        'text-nowrap bg-success', 'DFF0D8');
+                    $this->td(userdate($log_result->timecreated, get_string('strftimedatetime')),
+                        'text-nowrap bg-success', '#DFF0D8');
                 } else {
-                    $this->td2('<span style="color: #282828">'.get_string_kopere('reports_noneaccess').'</span>', 'bg-warning text-nowrap', '#FCF8E3');
+                    $this->td2('<span style="color: #282828">' . get_string_kopere('reports_noneaccess') .
+                        '</span>', 'bg-warning text-nowrap', '#FCF8E3');
                 }
             }
             echo '</tr>';
@@ -233,7 +240,7 @@ class course_access {
      * @param string $class
      * @param        $bgcolor
      */
-    private function td( $value, $class = '', $bgcolor) {
+    private function td($value, $class = '', $bgcolor) {
         echo '<td class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
     }
 
@@ -242,7 +249,7 @@ class course_access {
      * @param string $class
      * @param        $bgcolor
      */
-    private function td2( $value, $class = '', $bgcolor) {
+    private function td2($value, $class = '', $bgcolor) {
         echo '<td colspan="2" class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
     }
 

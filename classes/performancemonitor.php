@@ -94,9 +94,11 @@ class performancemonitor {
 
         echo '<span class="in">in: ';
         if ($bits_per_second > 1024 * 1024) {
-            echo number_format($bits_per_second / 1024 / 1024, 2, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . " Mbit/s";
+            echo number_format($bits_per_second / 1024 / 1024, 2, get_string('decsep', 'langconfig'),
+                    get_string('thousandssep', 'langconfig')) . " Mbit/s";
         } else if ($bits_per_second > 1024) {
-            echo number_format($bits_per_second / 1024, 2, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . " Kbit/s";
+            echo number_format($bits_per_second / 1024, 2, get_string('decsep', 'langconfig'),
+                    get_string('thousandssep', 'langconfig')) . " Kbit/s";
         } else {
             echo("< 1 Kbit/s");
         }
@@ -110,9 +112,11 @@ class performancemonitor {
 
         echo '<br><span class="out">out: ';
         if ($bits_per_second > 1024 * 1024 * 8) {
-            echo number_format($bits_per_second / 1024 / 1024, 2, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . " Mbit/s";
+            echo number_format($bits_per_second / 1024 / 1024, 2, get_string('decsep', 'langconfig'),
+                    get_string('thousandssep', 'langconfig')) . " Mbit/s";
         } else if ($bits_per_second > 1024 * 8) {
-            echo number_format($bits_per_second / 1024, 2, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . " Kbit/s";
+            echo number_format($bits_per_second / 1024, 2, get_string('decsep', 'langconfig'),
+                    get_string('thousandssep', 'langconfig')) . " Kbit/s";
         } else {
             echo("< 1 Kbit/s");
         }
@@ -139,17 +143,19 @@ class performancemonitor {
 
         $input_line = shell_exec('top -b -n 2');
         preg_match_all(
-            "/Cpu.*?([0-9.]+)%us.*?([0-9.]+)%sy.*?([0-9.]+)%ni.*?([0-9.]+)%id.*?([0-9.]+)%wa.*?([0-9.]+)%hi.*?([0-9.]+)%si.*?([0-9.]+)%st/",
+            "/Cpu.*?([0-9.]+)" .
+            "%us.*?([0-9.]+)" .
+            "%sy.*?([0-9.]+)" .
+            "%ni.*?([0-9.]+)" .
+            "%id.*?([0-9.]+)" .
+            "%wa.*?([0-9.]+)" .
+            "%hi.*?([0-9.]+)" .
+            "%si.*?([0-9.]+)%st/",
             $input_line, $output_cpu_process);
 
         $us = $output_cpu_process[1][1];
         $sy = $output_cpu_process[2][1];
         $ni = $output_cpu_process[3][1];
-        // $id = $output_cpu_process[ 4 ][ 1 ];
-        // $wa = $output_cpu_process[ 5 ][ 1 ];
-        // $hi = $output_cpu_process[ 6 ][ 1 ];
-        // $si = $output_cpu_process[ 7 ][ 1 ];
-        // $st = $output_cpu_process[ 8 ][ 1 ];
 
         echo $_SESSION ['cpus'] . ' CORES - ';
         echo number_format($us + $sy + $ni, 1, get_string('decsep', 'langconfig'), '') . '% <br/>';
@@ -165,11 +171,9 @@ class performancemonitor {
         $input_lines = shell_exec("cat /proc/meminfo");
         preg_match("/MemFree:\s*([0-9]+)/", $input_lines, $output_mem_freee);
         preg_match("/MemTotal:\s*([0-9]+)/", $input_lines, $output_mem_total);
-        // preg_match ( "/Cached:\s*([0-9]+)/", $input_lines, $output_mem_cache );
 
         $free = $output_mem_freee[1];
         $all = $output_mem_total[1];
-        // $cache = $output_mem_cache[ 1 ];
 
         echo '<div class="part-monitor" id="memoria">';
         echo '<h3>' . get_string_kopere('performancemonitor_memory') . '</h3>';
@@ -191,14 +195,6 @@ class performancemonitor {
         } else {
             echo intval($free) . " KB";
         }
-
-        // echo '<br/>Cache: ';
-        // if ( $cache > 1024 * 1024 ) {
-        // echo intval ( $cache / 1024 / 1024 ) . " GB";
-        // } else if ( $cache > 1024 ) {
-        // echo intval ( $cache / 1024 ) . " MB";
-        // } else {
-        // echo intval ( $cache ) . " KB";
 
         echo '</div>';
     }

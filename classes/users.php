@@ -40,7 +40,7 @@ class users {
      *
      */
     public function dashboard() {
-        dashboard_util::start_page(get_string_kopere ('user_title'), -1);
+        dashboard_util::start_page(get_string_kopere('user_title'), -1);
 
         echo '<div class="element-box table-responsive">';
 
@@ -78,7 +78,7 @@ class users {
         );
         $column_order = array(
             'id',
-            'fullname'=>array('firstname'),
+            'fullname' => array('firstname'),
             'username',
             'email',
             'phone1',
@@ -89,8 +89,8 @@ class users {
         $search = new datatable_search_util($column_select, $column_order);
 
         $search->execute_sql_and_return("
-               SELECT {[columns]}
-                 FROM {user} u
+               SELECT {[COLUMNS]}
+                 FROM {USER} u
                 WHERE id > 1 AND deleted = 0 ", '', null,
             'local_kopere_dashboard\util\user_util::column_fullname');
     }
@@ -110,7 +110,7 @@ class users {
     public static function count_all($format = false) {
         global $DB;
 
-        $count = $DB->get_record_sql('SELECT count(*) as num FROM {user} WHERE id > 1 AND deleted = 0');
+        $count = $DB->get_record_sql('SELECT count(*) AS num FROM {USER} WHERE id > 1 AND deleted = 0');
 
         if ($format) {
             return number_format($count->num, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig'));
@@ -126,7 +126,7 @@ class users {
     public static function count_all_learners($format = false) {
         global $DB;
 
-        $count = $DB->get_record_sql('SELECT count(*) as num FROM {user} WHERE id > 1 AND deleted = 0 AND lastaccess > 0');
+        $count = $DB->get_record_sql('SELECT count(*) AS num FROM {USER} WHERE id > 1 AND deleted = 0 AND lastaccess > 0');
 
         if ($format) {
             return number_format($count->num, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig'));

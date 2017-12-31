@@ -69,15 +69,16 @@ class notifications extends notificationsutil {
             $event_class = $event->event;
 
             $event->module_name = $this->module_name($event->module, false);
-            if ( method_exists ( $event_class, "get_name" ) )
-                $event->event_name = $event_class::get_name ();
-            else
+            if (method_exists($event_class, "get_name")) {
+                $event->event_name = $event_class::get_name();
+            } else {
                 $event->event_name = "";
+            }
             $event->actions
                 = "<div class=\"text-center\">
-                                    " . button::icon('edit', "notifications::add_segunda_etapa&id={$event->id}", false) . "&nbsp;&nbsp;&nbsp;
-                                    " . button::icon('delete', "notifications::delete&id={$event->id}") . "
-                                </div>";
+                    " . button::icon('edit', "notifications::add_segunda_etapa&id={$event->id}", false) . "&nbsp;&nbsp;&nbsp;
+                    " . button::icon('delete', "notifications::delete&id={$event->id}") . "
+                   </div>";
 
             $events_list[] = $event;
         }
@@ -88,12 +89,12 @@ class notifications extends notificationsutil {
             $table->add_header(get_string_kopere('notification_table_module'), 'module_name');
             $table->add_header(get_string_kopere('notification_table_action'), 'event_name');
             $table->add_header(get_string_kopere('notification_table_subject'), 'subject');
-            $table->add_header(get_string_kopere('notification_table_active'), 'status', table_header_item::RENDERER_VISIBLE);
+            $table->add_header(get_string_kopere('notification_table_active'),
+                'status', table_header_item::RENDERER_VISIBLE);
             $table->add_header(get_string_kopere('notification_from'), 'userfrom');
             $table->add_header(get_string_kopere('notification_to'), 'userto');
             $table->add_header('', 'actions', table_header_item::TYPE_ACTION);
 
-            // $table->set_click_redirect ( 'users::details&userid={id}', 'id' );
             $table->print_header();
             $table->set_row($events);
             $table->close();
@@ -244,7 +245,8 @@ class notifications extends notificationsutil {
                 ->set_value($evento->subject)
                 ->set_description(get_string_kopere('notification_subjectdesc')));
 
-        $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" . get_config('local_kopere_dashboard', 'notificacao-template');
+        $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" .
+            get_config('local_kopere_dashboard', 'notificacao-template');
         $template_content = file_get_contents($template);
 
         if (!$id) {
@@ -270,11 +272,11 @@ class notifications extends notificationsutil {
 
         $form->print_row(null, button::help('TAGS-substituídas-nas-mensagens', 'Quais as TAGS substituídas nas mensagens?'));
 
-        $html_textarea = '<textarea name="message" id="message" style="height:500px">' . htmlspecialchars($html_text) . '</textarea>';
+        $html_textarea = '<textarea name="message" id="message" style="height:500px">' .
+            htmlspecialchars($html_text) . '</textarea>';
         $template_content = str_replace('{[message]}', $html_textarea, $template_content);
         $form->print_panel(get_string_kopere('notification_message'), $template_content);
         echo tinymce::create_input_editor('#message');
-
 
         if ($id) {
             $form->create_submit_input(get_string_kopere('notification_update'));
@@ -368,7 +370,8 @@ class notifications extends notificationsutil {
 
         $form->print_panel(get_string_kopere('notification_setting_preview'), "<div id=\"area-mensagem-preview\"></div>");
 
-        $form->print_row(get_string_kopere('notification_setting_templatelocation'), "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/");
+        $form->print_row(get_string_kopere('notification_setting_templatelocation'),
+            "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/");
 
         $form->close();
 
@@ -387,7 +390,7 @@ class notifications extends notificationsutil {
         </script>
         <style>
             .table-messagem {
-                max-width : 600px;
+                max-width: 600px;
             }
         </style>
         <?php
@@ -398,7 +401,7 @@ class notifications extends notificationsutil {
     /**
      *
      */
-    public function test_smtp(){
+    public function test_smtp() {
         global $CFG, $USER;
 
         dashboard_util::start_page(array(
@@ -411,7 +414,7 @@ class notifications extends notificationsutil {
         $CFG->debugdisplay = true;
         $CFG->debug = 32767;
 
-        $html_message = "<p>Este é um teste de envio de E-mail.</p>" . time ();
+        $html_message = "<p>Este é um teste de envio de E-mail.</p>" . time();
 
         $eventdata = new message();
         $eventdata->courseid = SITEID;
@@ -420,7 +423,7 @@ class notifications extends notificationsutil {
         $eventdata->name = 'kopere_dashboard_messages';
         $eventdata->userfrom = get_admin();
         $eventdata->userto = $USER;
-        $eventdata->subject = "Testando envio de e-mail - ".time ();
+        $eventdata->subject = "Testando envio de e-mail - " . time();
         $eventdata->fullmessage = html_to_text($html_message);
         $eventdata->fullmessageformat = FORMAT_HTML;
         $eventdata->fullmessagehtml = $html_message;

@@ -30,8 +30,8 @@ defined('MOODLE_INTERNAL') || die();
  */
 class button {
     const BTN_PEQUENO = 'btn-xs';
-    const BTN_MEDIO   = 'btn-sm';
-    const BTN_GRANDE  = 'btn-lg';
+    const BTN_MEDIO = 'btn-sm';
+    const BTN_GRANDE = 'btn-lg';
 
     /**
      * @param $texto
@@ -117,10 +117,12 @@ class button {
     public static function help($info_url, $texto = null, $hastag = 'wiki-wrapper') {
         global $CFG;
 
-        if ($texto == null)
+        if ($texto == null) {
             $texto = get_string_kopere('help_title');
+        }
 
-        return "<a href=\"https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/{$info_url}#{$hastag}\" target=\"_blank\" class=\"help\">
+        return "<a href=\"https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/{$info_url}#{$hastag}\"
+                   target=\"_blank\" class=\"help\">
                   <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/help.svg\" height=\"23\" >
                   $texto
               </a>";

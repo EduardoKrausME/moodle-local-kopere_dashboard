@@ -74,11 +74,6 @@ class backup {
                 );
             }
 
-            // echo '<div class="element-box">
-            // <h3>Agendamento de backups</h3>';
-            // button::add ( 'Agendar Backup', 'backup::scheduling' );
-            // echo '</div>';
-
             echo '<div class="element-box">';
             title_util::print_h3('backup_list');
 
@@ -134,10 +129,12 @@ class backup {
 
         $backupfile = $this->get_backup_path() . 'backup_' . date('Y-m-d-H-i') . '.sql';
 
-        $dump_start = "--" . get_string_kopere('pluginname') . " SQL Dump\n-- Host: {$CFG->dbhost}\n-- " . get_string_kopere('backup_execute_date') . " " . date('d/m/Y \à\s H-i') . "\n\n";
+        $dump_start = "--" . get_string_kopere('pluginname') . " SQL Dump\n-- Host: {$CFG->dbhost}\n-- " .
+            get_string_kopere('backup_execute_date') . " " . date('d/m/Y \à\s H-i') . "\n\n";
         file_put_contents($backupfile, $dump_start);
 
-        $db_name = "--\n-- " . get_string_kopere('backup_execute_database') . " `{$CFG->dbname}`\n--\n\n-- --------------------------------------------------------\n\n";
+        $db_name = "--\n-- " . get_string_kopere('backup_execute_database') .
+            " `{$CFG->dbname}`\n--\n\n-- --------------------------------------------------------\n\n";
         file_put_contents($backupfile, $db_name, FILE_APPEND);
 
         $tables = $DB->get_records_sql('SHOW TABLES');
@@ -231,14 +228,6 @@ class backup {
             header::notfound(get_string_kopere('backup_notound'));
         }
     }
-
-    //public function scheduling() {
-    //    dashboard_util::start_page(array(
-    //        array('backup::dashboard', 'Backup'),
-    //        'Agendamento de Backup'
-    //    ));
-    //    dashboard_util::end_page();
-    //}
 
     private function get_backup_path($create = true) {
         global $CFG;

@@ -1,4 +1,19 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * User: Eduardo Kraus
  * Date: 15/08/17
@@ -7,6 +22,7 @@
 
 namespace local_kopere_dashboard\install;
 
+defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
@@ -31,7 +47,6 @@ class users_import_install {
         $event->message = get_string('userimport_event_import_course_enrol_message', 'local_kopere_dashboard');
         self::insert($event);
 
-
         $event = new \local_kopere_dashboard\vo\kopere_dashboard_events();
         $event->module = 'local_kopere_dashboard';
         $event->event = '\\local_kopere_dashboard\\event\\import_user_created';
@@ -41,7 +56,6 @@ class users_import_install {
         $event->status = 0;
         $event->message = get_string('userimport_event_import_user_created_message', 'local_kopere_dashboard');
         self::insert($event);
-
 
         $event = new \local_kopere_dashboard\vo\kopere_dashboard_events();
         $event->module = 'local_kopere_dashboard';
@@ -57,7 +71,7 @@ class users_import_install {
     /**
      * @param $event
      */
-    public static function insert( $event) {
+    public static function insert($event) {
         global $DB;
 
         $evento = $DB->get_record('kopere_dashboard_events',
@@ -65,7 +79,8 @@ class users_import_install {
                 'module' => $event->module,
                 'event' => $event->event
             ));
-        if (!$evento)
+        if (!$evento) {
             $DB->insert_record('kopere_dashboard_events', $event);
+        }
     }
 }

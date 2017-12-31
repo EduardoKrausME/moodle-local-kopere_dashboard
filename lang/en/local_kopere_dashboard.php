@@ -8,11 +8,11 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * @package  local_kopere_dashboard
@@ -40,7 +40,7 @@ $string['php_datetime'] = 'm/d/Y H:i';
 
 $string['help_title'] = 'Help with this page';
 
-// html/tinymce.php
+// Html/tinymce.
 $string['blocks'] = 'Blocks';
 $string['blocks_paragraph'] = 'Paragraph';
 $string['image_alignment'] = 'Image alignment';
@@ -58,7 +58,7 @@ $string['color_purple'] = 'Purple';
 $string['color_brown'] = 'Brown';
 $string['filemanager_title'] = 'File Manager';
 
-// dataTables
+// DataTables.
 $string['datatables_sEmptyTable'] = 'No records found';
 $string['datatables_sInfo'] = 'Displaying _START_ to _END_ of _TOTAL_ records';
 $string['datatables_sInfoEmpty'] = 'Displaying 0 to 0 of 0 records';
@@ -77,17 +77,17 @@ $string['datatables_oPaginate_sLast'] = 'Last';
 $string['datatables_oAria_sSortAscending'] = ': Sorting Columns in ascending order';
 $string['datatables_oAria_sSortDescending'] = ': Sorting columns in descending order';
 
-// util/navigation
+// Util/navigation.
 $string['navigation_page'] = 'Page {$a->atualPage} of {$a->countPages}';
 
-// About
+// About.
 $string['about_title'] = 'About';
 $string['about_project'] = 'Open source project developed and maintained by';
 $string['about_code'] = 'Code available in';
 $string['about_help'] = 'Help is on';
 $string['about_bug'] = 'If you found some BUG or would like to suggest improvements open one issue';
 
-// backup
+// Backup.
 $string['backup_windows'] = 'Not available on Windows Server!';
 $string['backup_hours'] = 'Do not run backup at peak times!';
 $string['backup_sleep'] = 'Backup may take several minutes to execute.';
@@ -115,7 +115,7 @@ $string['backup_delete_confirm'] = 'Backup Deletion';
 $string['backup_delete_title'] = 'Do you really want to delete the <strong>{$a->file}</strong>backup created in <strong>{$a->date}</strong>';
 $string['backup_notound'] = 'File not found!';
 
-// report_benchmark
+// Report_benchmark.
 $string['benchmark_title'] = 'Performance test';
 $string['benchmark_based'] = 'Plug-in based';
 $string['benchmark_info'] = '<p>This test can take up to 1 minute to execute.</p><p>Try to do more than one test for an average.</p><p>And, do not run in peak times.</p>';
@@ -155,7 +155,7 @@ $string['loginguestmoreinfo'] = 'Measuring the time to load the login page with 
 $string['loginusername'] = 'Time to connect with a fake user account';
 $string['loginusermoreinfo'] = 'Measuring the time to load the login page with a fake user account';
 
-// performancemonitor
+// Performancemonitor.
 $string ['performancemonitor_rede'] = 'Network';
 $string ['performancemonitor_cpu'] = 'CPU Usage';
 $string ['performancemonitor_memory'] = 'Memory';
@@ -163,7 +163,7 @@ $string ['performancemonitor_hd'] = 'HD (free)';
 $string ['performancemonitor_performance'] = 'Performance';
 $string ['performancemonitor_min'] = '{$a} min:';
 
-// courses
+// Courses.
 $string['courses_title'] = 'Courses';
 $string['courses_title1'] = 'Course List';
 $string['courses_name'] = 'Course Name';
@@ -183,7 +183,7 @@ $string['courses_student_status'] = 'Registration Status';
 $string['courses_page_title'] = 'Pages already created';
 $string['courses_page_create'] = 'Create page based on this summary';
 
-// reports
+// Reports.
 $string['reports_title'] = 'Reports';
 $string['reports_download'] = 'Download this data';
 $string['reports_selectcourse'] = 'Select the course to generate the report';
@@ -232,7 +232,7 @@ $string['reports_export'] = 'Export to Excel';
 $string['reports_noneaccess'] = 'No access';
 $string['reports_access_n'] = 'accessed {$a} times';
 
-// dashboard
+// Dashboard.
 $string['dashboard_title_user'] = 'Users / Assets';
 $string['dashboard_title_online'] = 'Online / Last hour';
 $string['dashboard_title_course'] = 'Courses / Visible';
@@ -249,7 +249,7 @@ $string['dashboard_enrol_active'] = 'the registration is active';
 $string['dashboard_enrol_text'] = 'You have enrolled in the course <a href="?courses::details&courseid={$a->courseid}">{$a->fullname}</a> and';
 $string['dashboard_enrol_lastmodifield'] = 'Last change in';
 
-// notifications
+// Notifications.
 $string['notification_title'] = 'Notifications';
 $string['notification_subtitle'] = '<p>Receive notifications whenever an action occurs in Moodle.</p>';
 $string['notification_new'] = 'New notification';
@@ -308,7 +308,7 @@ $string['notification_error_smtp'] = '<p>In order for students to receive the me
           <p><a href="{$a->wwwroot}/admin/settings.php?section={$a->mail}"
              target="_blank">Click here to configure email output</a></p>';
 
-// profile
+// Profile.
 $string['profile_invalid'] = 'Invalid UserId!';
 $string['profile_notfound'] = 'User not found!';
 $string['profile_title'] = 'Users';
@@ -331,10 +331,10 @@ $string['profile_link_edit'] = 'Edit Profile';
 $string['profile_access'] = 'Access as';
 $string['profile_courses_title'] = 'Registered Courses';
 
-// Settings
+// Settings.
 $string['setting_saved'] = 'Settings saved!';
 
-// userenrolment
+// Userenrolment.
 $string['userenrolment_notfound'] = 'User Enrolment not found!';
 $string['userenrolment_edit'] = 'Edit registration date';
 $string['userenrolment_status'] = 'Registration is';
@@ -356,7 +356,7 @@ $string['user_table_phone'] = 'Fixed Phone';
 $string['user_table_celphone'] = 'Mobile';
 $string['user_table_city'] = 'City';
 
-// usersonline
+// Usersonline.
 $string['useronline_title'] = 'Online Users';
 $string['useronline_subtitle'] = 'Open tabs with Moodle';
 $string['useronline_table_fullname'] = 'Name';
@@ -373,7 +373,7 @@ $string['useronline_settings_ssl'] = 'Enable SSL?';
 $string['useronline_settings_url'] = 'Server URL';
 $string['useronline_settings_port'] = 'Server port';
 
-// UserImport
+// UserImport.
 $string['userimport_title'] = 'Import Users';
 $string['userimport_upload'] = 'Drag CSV files here or click to open the search box.';
 $string['userimport_moveuploadedfile_error'] = 'ERROR while moving file!';
@@ -443,7 +443,7 @@ $string['userimport_event_import_user_created_and_enrol_message'] = '<p>Hello {[
 <p>Sincerely,<br/>
    Support Team</p>';
 
-// WebPages
+// WebPages.
 $string['webpages_title'] = 'Static Pages';
 $string['webpages_subtitle'] = 'Navigation Menus';
 $string['webpages_table_link'] = 'Link';

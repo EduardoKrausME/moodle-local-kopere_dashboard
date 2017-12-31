@@ -21,7 +21,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 use local_kopere_dashboard\util\dashboard_util;
 
 ob_start();
@@ -180,9 +179,9 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
 
                     dashboard_util::add_menu('courses::dashboard', 'courses', get_string_kopere('courses_title'));
 
-                    $sql = "SELECT plugin 
-                              FROM {config_plugins} 
-                             WHERE plugin LIKE 'local\_kopere\_dashboard\_%' 
+                    $sql = "SELECT plugin
+                              FROM {config_plugins}
+                             WHERE plugin LIKE 'local\_kopere\_dashboard\_%'
                                AND name LIKE 'version'";
                     $plugins = $DB->get_records_sql($sql);
                     foreach ($plugins as $plugin) {
@@ -216,7 +215,6 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
             load_by_query($_SERVER['QUERY_STRING']);
             ?>
         </div>
-
 
     </div>
 </div>

@@ -20,6 +20,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 function xmldb_local_kopere_dashboard_upgrade($oldversion) {
     global $DB;
 
@@ -135,7 +137,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2017081601, 'local', 'kopere_dashboard');
     }
 
-    if($oldversion < 2017082800){
+    if ($oldversion < 2017082800) {
         $DB->delete_records('kopere_dashboard_reports');
 
         upgrade_plugin_savepoint(true, 2017082800, 'local', 'kopere_dashboard');

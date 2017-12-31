@@ -115,8 +115,8 @@ class notificationsutil {
                         $tmp['crudname'] = \report_eventlist_list_generator::get_crud_string($data['crud']);
 
                         if ($data['component'] == 'core') {
-                            $components[$data['component'].'_'.$data['target']] = $data['component'].'_'.$data['target'];
-                            $tmp['component_full'] = $data['component'].'_'.$data['target'];
+                            $components[$data['component'] . '_' . $data['target']] = $data['component'] . '_' . $data['target'];
+                            $tmp['component_full'] = $data['component'] . '_' . $data['target'];
                         } else {
                             $components[$data['component']] = $data['component'];
                             $tmp['component_full'] = $data['component'];
@@ -126,7 +126,7 @@ class notificationsutil {
                     }
                 }
             } catch (\Exception $e) {
-                // Se der erro, ignora
+                debugging($e->getMessage());
             }
         }
 
@@ -151,7 +151,7 @@ class notificationsutil {
         $link_manager
             = "<a href=\"{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?notifications::dashboard\"
                   target=\"_blank\" style=\"border-bottom:1px #777777 dotted; text-decoration:none; color:#777777;\">
-                            ".get_string_kopere('notification_manager')."
+                            " . get_string_kopere('notification_manager') . "
                         </a>";
 
         $content = str_replace('{[moodle.fullname]}', $COURSE->fullname, $content);
@@ -208,14 +208,14 @@ class notificationsutil {
             $module = substr($component, 4);
 
             $sql
-                = "SELECT COUNT(*) as num
+                = "SELECT COUNT(*) AS num
                      FROM {course_modules} cm
                      JOIN {modules} m ON cm.module = m.id
-                    WHERE m.name = :name";
+                    WHERE m.name = :NAME";
             $count = $DB->get_record_sql($sql, array('name' => $module));
 
             if ($count->num || !$only_used) {
-                return get_string('resource').': '.get_string('modulename', $module);
+                return get_string('resource') . ': ' . get_string('modulename', $module);
             }
         }
 
@@ -227,8 +227,9 @@ class notificationsutil {
      */
     public static function mensagem_no_smtp() {
         global $CFG;
-        if (strlen(get_config('moodle', 'smtphosts')) > 5)
+        if (strlen(get_config('moodle', 'smtphosts')) > 5) {
             return;
+        }
 
         if (release::version() < 3.2) {
             $CFG->mail = 'messagesettingemail';
@@ -238,6 +239,5 @@ class notificationsutil {
             mensagem::print_danger(get_string_kopere('notification_error_smtp', $CFG));
         }
     }
-
 
 }

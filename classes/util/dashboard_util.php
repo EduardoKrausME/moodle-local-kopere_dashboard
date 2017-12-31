@@ -102,7 +102,8 @@ class dashboard_util {
                             <a data-toggle=\"modal\" data-target=\"#modal-edit\"
                                data-href=\"open-ajax-table.php?$setting_url\"
                                href=\"#\">
-                                <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg\" alt=\"Settings\" >
+                                <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg\"
+                                     alt=\"Settings\" >
                             </a>
                         </li>";
             }
@@ -111,8 +112,9 @@ class dashboard_util {
             $breadcrumb_return .= '<div class="content-i"><div class="content-box">';
 
             if ($page_title != null) {
-                if ($page_title == -1)
+                if ($page_title == -1) {
                     $page_title = $title;
+                }
                 $breadcrumb_return .= self::set_titulo($page_title, $info_url);
             }
 

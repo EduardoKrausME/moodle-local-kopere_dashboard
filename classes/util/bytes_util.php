@@ -49,22 +49,26 @@ class bytes_util {
         }
         $bytes = $_bytes / self::$divisor;
         if ($bytes < 1000) {
-            return self::remove_zero(number_format($bytes, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . ' KB', 0);
+            return self::remove_zero(number_format($bytes, 0, get_string('decsep', 'langconfig'),
+                    get_string('thousandssep', 'langconfig')) . ' KB', 0);
         }
 
         $bytes = $_bytes / self::$divisor / self::$divisor;
         if ($bytes < 1000) {
-            return self::remove_zero(number_format($bytes, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . ' MB', 0);
+            return self::remove_zero(number_format($bytes, 0, get_string('decsep', 'langconfig'),
+                    get_string('thousandssep', 'langconfig')) . ' MB', 0);
         }
 
         $bytes = $_bytes / self::$divisor / self::$divisor / self::$divisor;
         if ($bytes < 1000) {
-            return self::remove_zero(number_format($bytes, 1, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . ' GB', 1);
+            return self::remove_zero(number_format($bytes, 1, get_string('decsep', 'langconfig'),
+                    get_string('thousandssep', 'langconfig')) . ' GB', 1);
         }
 
         $bytes = $_bytes / self::$divisor / self::$divisor / self::$divisor / self::$divisor;
 
-        return self::remove_zero(number_format($bytes, 2, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig')) . ' TB', 2);
+        return self::remove_zero(number_format($bytes, 2, get_string('decsep', 'langconfig'),
+                get_string('thousandssep', 'langconfig')) . ' TB', 2);
     }
 
     /**
@@ -87,7 +91,7 @@ class bytes_util {
      *
      * @return int
      */
-    public static function et_duration_segundos( $value) {
+    public static function et_duration_segundos($value) {
         $partes = explode(':', $value);
 
         return ($partes[0] * 60 * 60) + ($partes[1] * 60) + $partes[2];

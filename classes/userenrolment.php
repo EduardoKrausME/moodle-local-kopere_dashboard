@@ -95,8 +95,10 @@ class userenrolment {
         echo '</div>';
 
         $form->print_spacer(10);
-        $form->print_row(get_string_kopere('userenrolment_created'), userdate($enrolment->timecreated, get_string_kopere('dateformat')));
-        $form->print_row(get_string_kopere('userenrolment_updated'), userdate($enrolment->timemodified, get_string_kopere('dateformat')));
+        $form->print_row(get_string_kopere('userenrolment_created'),
+            userdate($enrolment->timecreated, get_string_kopere('dateformat')));
+        $form->print_row(get_string_kopere('userenrolment_updated'),
+            userdate($enrolment->timemodified, get_string_kopere('dateformat')));
 
         $form->close();
 

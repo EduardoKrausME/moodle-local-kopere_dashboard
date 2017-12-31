@@ -55,8 +55,8 @@ class courses {
         $table->add_header(get_string_kopere('courses_name'), 'fullname');
         $table->add_header(get_string_kopere('courses_shortname'), 'shortname');
         $table->add_header(get_string_kopere('courses_visible'), 'visible', table_header_item::RENDERER_VISIBLE);
-        $table->add_header(get_string_kopere('courses_enrol'), 'inscritos', table_header_item::TYPE_INT, null, 'width:50px;white-space:nowrap;');
-        // $table->add_header ( 'Nº alunos que completaram', 'completed' );
+        $table->add_header(get_string_kopere('courses_enrol'), 'inscritos',
+            table_header_item::TYPE_INT, null, 'width:50px;white-space:nowrap;');
 
         $table->set_ajax_url('courses::load_all_courses');
         $table->set_click_redirect('courses::details&courseid={id}', 'id');
@@ -101,7 +101,8 @@ class courses {
         $count = $DB->get_record_sql('SELECT count(*) as num FROM {course} WHERE id > 1');
 
         if ($format) {
-            return number_format($count->num, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig'));
+            return number_format($count->num, 0, get_string('decsep', 'langconfig'),
+                get_string('thousandssep', 'langconfig'));
         }
 
         return $count->num;
@@ -117,7 +118,8 @@ class courses {
         $count = $DB->get_record_sql('SELECT count(*) as num FROM {course} WHERE id > 1 AND visible = 1');
 
         if ($format) {
-            return number_format($count->num, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig'));
+            return number_format($count->num, 0, get_string('decsep', 'langconfig'),
+                get_string('thousandssep', 'langconfig'));
         }
 
         return $count->num;
@@ -144,8 +146,10 @@ class courses {
 
         echo '<div class="element-box">
                   <h3>'.get_string_kopere('courses_sumary').'
-                      ' . button::info(get_string_kopere('courses_edit'), $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '#id_summary_editor', button::BTN_PEQUENO, false, true) . '
-                      ' . button::primary(get_string_kopere('courses_acess'), $CFG->wwwroot . '/course/view.php?id=' . $course->id, button::BTN_PEQUENO, false, true) . '
+                      ' . button::info(get_string_kopere('courses_edit'), $CFG->wwwroot . '/course/edit.php?id=' .
+                $course->id . '#id_summary_editor', button::BTN_PEQUENO, false, true) . '
+                      ' . button::primary(get_string_kopere('courses_acess'), $CFG->wwwroot . '/course/view.php?id=' .
+                $course->id, button::BTN_PEQUENO, false, true) . '
                   </h3>
                   <div class="panel panel-default">
                       <div class="panel-body">' . $course->summary . '</div>';
@@ -166,7 +170,6 @@ class courses {
         $table->set_click_redirect('users::details&userid={id}', 'id');
         $table->print_header();
         $table->close();
-        // $table->close ( true, 'order:[[1,"asc"]]' );
 
         echo '</div>';
         dashboard_util::end_page();
@@ -189,7 +192,8 @@ class courses {
 
                 /** @var kopere_dashboard_webpages $webpages */
                 foreach ($webpagess as $webpages) {
-                    echo '<p><a href="?webpages::details&id=' . $webpages->id . '">&nbsp;&nbsp;&nbsp;&nbsp;' . $webpages->title . '</a></p>';
+                    echo '<p><a href="?webpages::details&id=' . $webpages->id . '">&nbsp;&nbsp;&nbsp;&nbsp;' .
+                        $webpages->title . '</a></p>';
                 }
             }
 

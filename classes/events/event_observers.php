@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard\events;
 
+defined('MOODLE_INTERNAL') || die();
+
 use local_kopere_dashboard\output\events\send_events;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
@@ -30,6 +32,23 @@ use local_kopere_dashboard\vo\kopere_dashboard_events;
  * Class event_observers
  *
  * @package local_kopere_dashboard\events
+ *
+ *   [eventname]         => \core\event\user_password_updated
+ *   [component]         => core
+ *   [action]            => updated
+ *   [target]            => user_password
+ *   [objecttable]       =>
+ *   [objectid]          =>
+ *   [crud]              => u
+ *   [edulevel]          => 0
+ *   [contextid]         => 55
+ *   [contextlevel]      => 30
+ *   [contextinstanceid] => 5
+ *   [userid]            => 2
+ *   [courseid]          => 0
+ *   [relateduserid]     => 5
+ *   [anonymous]         => 0
+ *   [timecreated]       => 1496259366
  */
 class event_observers {
     /**
@@ -58,23 +77,5 @@ class event_observers {
 
             $send_events->send();
         }
-
-        /*   [eventname]         => \core\event\user_password_updated
-         *   [component]         => core
-         *   [action]            => updated
-         *   [target]            => user_password
-         *   [objecttable]       =>
-         *   [objectid]          =>
-         *   [crud]              => u
-         *   [edulevel]          => 0
-         *   [contextid]         => 55
-         *   [contextlevel]      => 30
-         *   [contextinstanceid] => 5
-         *   [userid]            => 2
-         *   [courseid]          => 0
-         *   [relateduserid]     => 5
-         *   [anonymous]         => 0
-         *   [timecreated]       => 1496259366
-         */
     }
 }

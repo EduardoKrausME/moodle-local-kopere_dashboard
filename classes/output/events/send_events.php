@@ -91,11 +91,11 @@ class send_events {
         $COURSE->wwwroot = $CFG->wwwroot;
         $COURSE->link = "<a href=\"{$CFG->wwwroot}\" target=\"_blank\">{$CFG->wwwroot}</a>";
 
-        // Moodle - {[moodle.???]}
+        // Moodle: {[moodle.???]}.
         $this->subject = $this->replace_tag($this->subject, $COURSE, 'moodle');
         $this->message = $this->replace_tag($this->message, $COURSE, 'moodle');
 
-        // Events - {[event.???]}
+        // Events: {[event.???]}.
         $this->subject = $this->replace_tag($this->subject, $this->event, 'event');
         $this->message = $this->replace_tag($this->message, $this->event, 'event');
 
@@ -104,7 +104,8 @@ class send_events {
             $courseid = $this->event->objectid;
             $course = $DB->get_record('course', array('id' => $courseid));
             if ($course) {
-                $course->link = "<a href=\"{$CFG->wwwroot}/course/view.php?id={$courseid}\" target=\"_blank\">{$CFG->wwwroot}/course/view.php?id={$courseid}</a>";
+                $course->link = "<a href=\"{$CFG->wwwroot}/course/view.php?id={$courseid}\"
+                                    target=\"_blank\">{$CFG->wwwroot}/course/view.php?id={$courseid}</a>";
                 $course->url = "{$CFG->wwwroot}/course/view.php?id={$courseid}";
 
                 $this->subject = $this->replace_tag($this->subject, $course, 'course');
@@ -118,7 +119,7 @@ class send_events {
             $this->message = $this->replace_tag_user($this->message, $usertarget, 'usertarget');
         }
 
-        // de - {[from.???]}
+        // De: {[from.???]}.
         $user_from = null;
         switch ($this->kopere_dashboard_events->userfrom) {
             case 'admin':
@@ -135,12 +136,12 @@ class send_events {
         $this->subject = $this->replace_tag_user($this->subject, $user_from, 'from');
         $this->message = $this->replace_tag_user($this->message, $user_from, 'from');
 
-        // admins - {[admin.???]}
+        // Admins: {[admin.???]}.
         $admin = get_admin();
         $this->subject = $this->replace_tag_user($this->subject, $admin, 'admin');
         $this->message = $this->replace_tag_user($this->message, $admin, 'admin');
 
-        // Para - {[to.???]}
+        // Para: {[to.???]}.
         $users_to = array();
         switch ($this->kopere_dashboard_events->userto) {
             case 'admin':
@@ -208,7 +209,8 @@ class send_events {
      */
     private function load_template() {
         global $CFG;
-        $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" . get_config('local_kopere_dashboard', 'notificacao-template');
+        $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" .
+            get_config('local_kopere_dashboard', 'notificacao-template');
         $template_content = file_get_contents($template);
 
         $this->subject = $this->kopere_dashboard_events->subject;

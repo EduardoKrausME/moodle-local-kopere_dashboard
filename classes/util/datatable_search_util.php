@@ -143,9 +143,11 @@ class datatable_search_util {
         $sql_total = str_replace('{[columns]}', 'count(*) as num', $sql_total);
 
         if ($CFG->dbtype == 'pgsql') {
-            $sql_return = $sql . " $this->where \n $group\n ORDER BY $this->order $this->order_dir \n LIMIT $this->length OFFSET $this->start";
+            $sql_return = $sql . " $this->where \n $group\n ORDER BY $this->order $this->order_dir \n
+                                                            LIMIT $this->length OFFSET $this->start";
         } else {
-            $sql_return = $sql . " $this->where \n $group\n ORDER BY $this->order $this->order_dir \n LIMIT $this->start, $this->length";
+            $sql_return = $sql . " $this->where \n $group\n ORDER BY $this->order $this->order_dir \n
+                                                            LIMIT $this->start, $this->length";
         }
         $sql_return = str_replace('{[columns]}', implode(', ', $this->column_select), $sql_return);
 

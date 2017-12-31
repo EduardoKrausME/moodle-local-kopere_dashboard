@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard\chartsjs;
 
+defined('MOODLE_INTERNAL') || die();
+
 /**
  * Class lines
  *
@@ -79,7 +81,8 @@ class lines extends chart_base {
                             title: function (tooltipItem, data) {
                                 console.log([tooltipItem, data]);
                                 var date = new Date(data.labels[tooltipItem[0].index]);
-                                return dois_digitos(date.getDate()) + " de " + get_mes(date.getMonth()) + " de " + date.getFullYear();
+                                return dois_digitos(date.getDate()) + " de " + get_mes(date.getMonth()) +
+                                    " de " + date.getFullYear();
                             }
                         }
                     },

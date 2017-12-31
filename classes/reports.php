@@ -54,7 +54,7 @@ class reports {
         $kopere_reportcats = $DB->get_records('kopere_dashboard_reportcat', array('enable' => 1));
         /** @var kopere_dashboard_reportcat $kopere_reportcat */
         foreach ($kopere_reportcats as $kopere_reportcat) {
-            // Executa o SQL e vrifica se o SQL retorna status>0
+            // Executa o SQL e vrifica se o SQL retorna status>0.
             if (strlen($kopere_reportcat->enablesql)) {
                 $status = $DB->get_record_sql($kopere_reportcat->enablesql);
                 if ($status == null || $status->status == 0) {
@@ -69,7 +69,7 @@ class reports {
             }
 
             $menus[] = array('reports::dashboard&type=' . $kopere_reportcat->type,
-                self::get_title( $kopere_reportcat ),
+                self::get_title($kopere_reportcat),
                 $icon
             );
         }
@@ -97,7 +97,7 @@ class reports {
 
         /** @var kopere_dashboard_reportcat $kopere_reportcat */
         foreach ($kopere_reportcats as $kopere_reportcat) {
-            // Executa o SQL e vrifica se o SQL retorna status>0
+            // Executa o SQL e vrifica se o SQL retorna status>0.
             if (strlen($kopere_reportcat->enablesql)) {
                 $status = $DB->get_record_sql($kopere_reportcat->enablesql);
                 if ($status == null || $status->status == 0) {
@@ -114,12 +114,14 @@ class reports {
             title_util::print_h3("<img src='{$icon}' alt='Icon' height='23' width='23' > " .
                 self::get_title($kopere_reportcat), false);
 
-            $kopere_reportss = $DB->get_records('kopere_dashboard_reports', array('reportcatid' => $kopere_reportcat->id, 'enable' => 1));
+            $kopere_reportss = $DB->get_records('kopere_dashboard_reports',
+                array('reportcatid' => $kopere_reportcat->id, 'enable' => 1));
 
             /** @var kopere_dashboard_reports $kopere_reports */
             foreach ($kopere_reportss as $kopere_reports) {
                 $title = self::get_title($kopere_reports);
-                echo "<h4 style='padding-left: 31px;'><a href='?reports::load_report&report={$kopere_reports->id}'>{$title}</a></h4>";
+                echo "<h4 style='padding-left: 31px;'>
+                         <a href='?reports::load_report&report={$kopere_reports->id}'>{$title}</a></h4>";
             }
         }
 
@@ -155,9 +157,11 @@ class reports {
         echo '<div class="element-box table-responsive">';
 
         if (strlen($kopere_reports->prerequisit) && $courseid == 0) {
-            try{
-                ini_set ( 'max_execution_time', 0 );
-            }catch(Exception $e){}
+            try {
+                ini_set('max_execution_time', 0);
+            } catch (Exception $e) {
+                debugging($e->getMessage());
+            }
             $this->prerequisit($report, $kopere_reports->prerequisit);
         } else {
 
@@ -172,14 +176,16 @@ class reports {
                 title_util::print_h3(self::get_title($kopere_reports), false);
 
                 $columns = json_decode($kopere_reports->columns);
-                if (!isset($columns->header))
+                if (!isset($columns->header)) {
                     $columns->header = array();
+                }
                 $table = new data_table($columns->columns, $columns->header);
-                $table->set_ajax_url ( 'reports::getdata&report=' . $report . '&courseid=' . $courseid );
+                $table->set_ajax_url('reports::getdata&report=' . $report . '&courseid=' . $courseid);
                 $table->print_header();
                 $table->close(true, '', '"searching":false,"ordering":false');
 
-                button::primary(get_string_kopere('reports_download'), "reports::download&report={$report}&courseid={$courseid}");
+                button::primary(get_string_kopere('reports_download'),
+                    "reports::download&report={$report}&courseid={$courseid}");
             }
         }
         echo '</div>';
@@ -199,7 +205,8 @@ class reports {
             $table->add_header(get_string_kopere('courses_name'), 'fullname');
             $table->add_header(get_string_kopere('courses_shortname'), 'shortname');
             $table->add_header(get_string_kopere('courses_visible'), 'visible', table_header_item::RENDERER_VISIBLE);
-            $table->add_header(get_string_kopere('courses_enrol'), 'inscritos', table_header_item::TYPE_INT, null, 'width:50px;white-space:nowrap;');
+            $table->add_header(get_string_kopere('courses_enrol'), 'inscritos',
+                table_header_item::TYPE_INT, null, 'width:50px;white-space:nowrap;');
 
             $table->set_ajax_url('courses::load_all_courses');
             $table->set_click_redirect('reports::load_report&type=course&report=' . $report . '&courseid={id}', 'id');
@@ -211,20 +218,20 @@ class reports {
     /**
      *
      */
-    public function getdata(){
+    public function getdata() {
         global $DB, $CFG;
 
-        $report   = optional_param('report', 0, PARAM_INT);
+        $report = optional_param('report', 0, PARAM_INT);
         $courseid = optional_param('courseid', 0, PARAM_INT);
-        $start    = optional_param('start', 0, PARAM_INT);
-        $length   = optional_param('length', 0, PARAM_INT);
+        $start = optional_param('start', 0, PARAM_INT);
+        $length = optional_param('length', 0, PARAM_INT);
 
         /** @var kopere_dashboard_reports $kopere_reports */
         $kopere_reports = $DB->get_record('kopere_dashboard_reports', array('id' => $report));
 
         if ($CFG->dbtype == 'pgsql') {
             $sql = "{$kopere_reports->reportsql} LIMIT $length OFFSET $start";
-        }else{
+        } else {
             $sql = "{$kopere_reports->reportsql} LIMIT $start, $length";
         }
 
@@ -281,13 +288,14 @@ class reports {
         }
 
         $columns = json_decode($kopere_reports->columns);
-        if (!isset($columns->header))
+        if (!isset($columns->header)) {
             $columns->header = array();
+        }
         $table = new data_table($columns->columns, $columns->header);
         $table->print_header('', false);
         $table->set_row($reports);
         echo '</table>';
-        
+
         export::close();
     }
 }

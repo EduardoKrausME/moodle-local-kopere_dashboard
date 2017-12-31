@@ -81,7 +81,8 @@ class profile {
             if ($enrolment->timeend == 0) {
                 $expiration_end = get_string_kopere('profile_enrol_notexpires');
             } else {
-                $expiration_end = '<br>'.get_string_kopere('profile_enrol_expires').' <em>' . userdate($enrolment->timeend, get_string_kopere('dateformat')) . '</em>';
+                $expiration_end = '<br>' . get_string_kopere('profile_enrol_expires') . ' <em>' .
+                    userdate($enrolment->timeend, get_string_kopere('dateformat')) . '</em>';
             }
 
             $role_assignments = $DB->get_records('role_assignments',
@@ -95,20 +96,22 @@ class profile {
                 $role_html .= '<span class="btn btn-default">' . role_get_name($role) . '</span>';
             }
 
-            $matricula_status = '<span class="btn-danger">'.get_string_kopere('profile_enrol_inactive').'</span>';
+            $matricula_status = '<span class="btn-danger">' . get_string_kopere('profile_enrol_inactive') . '</span>';
             if ($enrolment->status == 0) {
-                $matricula_status = '<span class="btn-success">'.get_string_kopere('profile_enrol_active').'</span>';
+                $matricula_status = '<span class="btn-success">' . get_string_kopere('profile_enrol_active') . '</span>';
             }
             $course_html
                 .= '<li>
                     <h4 class="title">' . $course->fullname . '
                         <span class="status">' . $matricula_status . '</span>
                     </h4>
-                    <div>'.get_string_kopere('profile_enrol_start').' <em>' . userdate($enrolment->timestart, get_string_kopere('dateformat')) . '</em> ' . $expiration_end . ' -
+                    <div>' . get_string_kopere('profile_enrol_start') . ' <em>' .
+                userdate($enrolment->timestart, get_string_kopere('dateformat')) . '</em> ' . $expiration_end . ' -
                         <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal-edit"
-                                data-href="open-ajax-table.php?userenrolment::mathedit&courseid=' . $course->id . '&ueid=' . $enrolment->id . '">'.get_string_kopere('profile_edit').'</button>
+                                data-href="open-ajax-table.php?userenrolment::mathedit&courseid=' . $course->id .
+                '&ueid=' . $enrolment->id . '">' . get_string_kopere('profile_edit') . '</button>
                     </div>
-                    <div class="roles">'.get_string_kopere('profile_enrol_profile').': ' . $role_html . '</div>
+                    <div class="roles">' . get_string_kopere('profile_enrol_profile') . ': ' . $role_html . '</div>
                 </li>';
         }
 
@@ -122,25 +125,31 @@ class profile {
                           </span>
                           <div class="desc">' . $user->description . '</div>
 
-                          <h2>'.get_string_kopere('profile_courses_title').'</h2>
+                          <h2>' . get_string_kopere('profile_courses_title') . '</h2>
                           <ul class="personalDev">
                               ' . $course_html . '
                           </ul>
 
                       </div>
                        <div class="info">
-                          <h3>'.get_string_kopere('profile_access_title').'</h3>
-                          <p>'.get_string_kopere('profile_access_first').'<br/> <strong>' . userdate($user->firstaccess, get_string_kopere('dateformat')) . '</strong></p>
-                          <p>'.get_string_kopere('profile_access_last').'<br/>   <strong>' . userdate($user->lastaccess, get_string_kopere('dateformat')) . '</strong></p>
-                          <p>'.get_string_kopere('profile_access_lastlogin').'<br/>    <strong>' . userdate($user->lastlogin, get_string_kopere('dateformat')) . '</strong></p>
-                          <h3>'.get_string_kopere('profile_userdate_title').'</h3>
+                          <h3>' . get_string_kopere('profile_access_title') . '</h3>
+                          <p>' . get_string_kopere('profile_access_first') . '<br/> <strong>' .
+            userdate($user->firstaccess, get_string_kopere('dateformat')) . '</strong></p>
+                          <p>' . get_string_kopere('profile_access_last') . '<br/>   <strong>' .
+            userdate($user->lastaccess, get_string_kopere('dateformat')) . '</strong></p>
+                          <p>' . get_string_kopere('profile_access_lastlogin') . '<br/>    <strong>' .
+            userdate($user->lastlogin, get_string_kopere('dateformat')) . '</strong></p>
+                          <h3>' . get_string_kopere('profile_userdate_title') . '</h3>
                           <p><a href="mailto:' . $user->email . '">' . $user->email . '</a></p>
                           <p>' . $user->phone1 . '</p>
                           <p>' . $user->phone2 . '</p>
-                          <h3>'.get_string_kopere('profile_link_title').'</h3>
-                          <p><a target="_blank" href="' . $CFG->wwwroot . '/user/profile.php?id=' . $user->id . '">'.get_string_kopere('profile_link_profile').'</a></p>
-                          <p><a target="_blank" href="' . $CFG->wwwroot . '/user/editadvanced.php?id=' . $user->id . '">'.get_string_kopere('profile_link_edit').'</a></p>
-                          <p><a target="_blank" href="' . $CFG->wwwroot . '/course/loginas.php?id=1&user=' . $user->id . '&sesskey=' . sesskey() . '">'.get_string_kopere('profile_access').'</a></p>
+                          <h3>' . get_string_kopere('profile_link_title') . '</h3>
+                          <p><a target="_blank" href="' . $CFG->wwwroot . '/user/profile.php?id=' . $user->id . '">' .
+            get_string_kopere('profile_link_profile') . '</a></p>
+                          <p><a target="_blank" href="' . $CFG->wwwroot . '/user/editadvanced.php?id=' . $user->id . '">' .
+            get_string_kopere('profile_link_edit') . '</a></p>
+                          <p><a target="_blank" href="' . $CFG->wwwroot . '/course/loginas.php?id=1&user=' . $user->id .
+            '&sesskey=' . sesskey() . '">' . get_string_kopere('profile_access') . '</a></p>
                       </div>';
         echo '    </div>
               </div>';

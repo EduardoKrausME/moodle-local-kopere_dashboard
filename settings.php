@@ -21,13 +21,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 defined('MOODLE_INTERNAL') || die;
 
 if (!$PAGE->requires->is_head_done()) {
     $PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
 }
-
 
 if ($hassiteconfig) {
 

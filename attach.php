@@ -31,7 +31,6 @@ if (strpos($src, '..')) {
     die('Not Found!');
 }
 
-
 $image_loaded = $CFG->dataroot . '/kopere/dashboard/' . $src;
 $extension = pathinfo($image_loaded, PATHINFO_EXTENSION);
 $basename = pathinfo($image_loaded, PATHINFO_BASENAME);
@@ -72,7 +71,6 @@ if ($is_image) {
     header('Content-Transfer-Encoding: Binary');
     header('Content-disposition: attachment; filename="' . $basename . '"');
 }
-
 
 readfile($image_loaded);
 

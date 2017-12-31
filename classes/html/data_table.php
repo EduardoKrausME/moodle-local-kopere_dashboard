@@ -81,7 +81,7 @@ class data_table {
      * @param array $_column
      * @param array $_column_info
      */
-    public function __construct( $_column = array(), $_column_info = array()) {
+    public function __construct($_column = array(), $_column_info = array()) {
         $this->table_id = 'datatable_' . uniqid();
         $this->column = $_column;
         $this->column_info = $_column_info;
@@ -111,7 +111,7 @@ class data_table {
     /**
      * @param $ajax_url
      */
-    public function set_ajax_url( $ajax_url) {
+    public function set_ajax_url($ajax_url) {
         $this->ajax_url = $ajax_url;
     }
 
@@ -119,7 +119,7 @@ class data_table {
      * @param $url
      * @param $chave
      */
-    public function set_click_redirect( $url, $chave) {
+    public function set_click_redirect($url, $chave) {
         $this->click_redirect = array();
         $this->click_redirect['chave'] = $chave;
         $this->click_redirect['url'] = '?' . $url;
@@ -129,7 +129,7 @@ class data_table {
      * @param $url
      * @param $chave
      */
-    public function set_click_modal( $url, $chave) {
+    public function set_click_modal($url, $chave) {
         $this->click_modal = array();
         $this->click_modal['chave'] = $chave;
         $this->click_modal['url'] = $url;
@@ -139,7 +139,7 @@ class data_table {
      * @param $title
      * @param $cols
      */
-    public function add_info_header( $title, $cols) {
+    public function add_info_header($title, $cols) {
         $column = new table_header_item();
         $column->title = $title;
         $column->cols = $cols;
@@ -149,13 +149,14 @@ class data_table {
 
     /**
      * @param        $title
-     * @param null   $chave
+     * @param null $chave
      * @param string $type
-     * @param null   $funcao
-     * @param null   $style_header
-     * @param null   $style_col
+     * @param null $funcao
+     * @param null $style_header
+     * @param null $style_col
      */
-    public function add_header( $title, $chave = null, $type = table_header_item::TYPE_TEXT, $funcao = null, $style_header = null, $style_col = null) {
+    public function add_header($title, $chave = null, $type = table_header_item::TYPE_TEXT,
+                               $funcao = null, $style_header = null, $style_col = null) {
         $column = new table_header_item();
         $column->chave = $chave;
         $column->type = $type;
@@ -169,9 +170,9 @@ class data_table {
 
     /**
      * @param string $class
-     * @param bool   $print_body
+     * @param bool $print_body
      */
-    public function print_header( $class = '', $print_body = true) {
+    public function print_header($class = '', $print_body = true) {
         if ($this->is_export && $this->ajax_url == null) {
             button::info(get_string_kopere('reports_export'), "{$_SERVER['QUERY_STRING']}&export=xls");
 
@@ -241,7 +242,7 @@ class data_table {
      * @param        $linhas
      * @param string $class
      */
-    public function set_row( $linhas, $class = '') {
+    public function set_row($linhas, $class = '') {
         if ($this->click_redirect != null) {
             echo '<tbody class="hover-pointer">';
         } else if ($this->click_modal != null) {
@@ -284,7 +285,7 @@ class data_table {
      * @param        $html
      * @param string $class
      */
-    public function print_row( $html, $class = '') {
+    public function print_row($html, $class = '') {
         if ($class == '' || $class == ' ') {
             echo '<td>';
         } else {
@@ -295,13 +296,13 @@ class data_table {
     }
 
     /**
-     * @param bool   $process_server
+     * @param bool $process_server
      * @param string $order
      * @param string $extras
      *
      * @return string
      */
-    public function close( $process_server = false, $order = '', $extras='') {
+    public function close($process_server = false, $order = '', $extras = '') {
         echo '</table>';
 
         export::close();
@@ -315,7 +316,7 @@ class data_table {
             $order = ',' . $order;
         }
         if (isset($extras[1])) {
-            $extras = ','.$extras;
+            $extras = ',' . $extras;
         }
 
         $ajax_config = '';

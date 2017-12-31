@@ -66,8 +66,5 @@ echo $OUTPUT->heading(get_string_kopere('open_dashboard'));
     </div>
 <?php
 
-
 echo $OUTPUT->footer();
-
-
 

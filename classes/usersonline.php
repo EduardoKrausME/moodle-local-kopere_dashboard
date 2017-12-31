@@ -66,7 +66,6 @@ class usersonline {
         }
 
         $table->set_ajax_url('usersonline::load_all_users');
-        // $table->set_click_redirect ( 'users::details&userid={userid}', 'userid' );
         $table->print_header();
         $table_name = $table->close(false, 'order:[[1,"asc"]]');
 
@@ -110,9 +109,9 @@ class usersonline {
         $timefinish = time();
 
         $count = $DB->get_record_sql(
-            "SELECT count(u.id) as num
-               FROM {user} u
-          LEFT JOIN {context} cx ON cx.instanceid = u.id
+            "SELECT count(u.id) AS num
+               FROM {USER} u
+          LEFT JOIN {CONTEXT} cx ON cx.instanceid = u.id
               WHERE u.lastaccess    > :onlinestart
                 AND u.lastaccess    < :timefinish
                 AND cx.contextlevel = :contextlevel
@@ -125,10 +124,11 @@ class usersonline {
                 'timefinish' => $timefinish
             ));
 
-        if($count)
+        if ($count) {
             return $count->num;
-        else
+        } else {
             return 0;
+        }
     }
 
     /**
@@ -169,23 +169,23 @@ class usersonline {
 
         ?>
         <script>
-            jQuery ( '#nodejs-status' ).click ( status_node_change );
+            jQuery('#nodejs-status').click(status_node_change);
 
-            function status_node_change ( delay ) {
-                if ( delay != 0 ) {
+            function status_node_change(delay) {
+                if (delay != 0) {
                     delay = 400;
                 }
-                console.log ( 'nodejs-status Click' );
-                if ( $ ( '#nodejs-status' ).is ( ":checked" ) ) {
-                    console.log ( 'nodejs-status' );
-                    $ ( '.area-status-nodejs' ).show ( delay );
+                console.log('nodejs-status Click');
+                if ($('#nodejs-status').is(":checked")) {
+                    console.log('nodejs-status');
+                    $('.area-status-nodejs').show(delay);
                 }
                 else {
-                    $ ( '.area-status-nodejs' ).hide ( delay );
+                    $('.area-status-nodejs').hide(delay);
                 }
             }
 
-            status_node_change ( 0 );
+            status_node_change(0);
         </script>
         <?php
 

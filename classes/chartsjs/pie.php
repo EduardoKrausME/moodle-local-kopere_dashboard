@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard\chartsjs;
 
+defined('MOODLE_INTERNAL') || die();
+
 /**
  * Class pie
  *

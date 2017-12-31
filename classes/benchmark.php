@@ -44,11 +44,11 @@ class benchmark {
         dashboard_util::start_page(get_string_kopere('benchmark_title'), -1, null, 'Performace');
 
         echo '<div class="element-box">';
-        mensagem::print_info(get_string_kopere('benchmark_based').'
+        mensagem::print_info(get_string_kopere('benchmark_based') . '
                     <a class="alert-link" href="https://moodle.org/plugins/report_benchmark"
                        target="_blank">report_benchmark</a>');
 
-        echo '<div style="text-align: center;">'.get_string_kopere('benchmark_info');
+        echo '<div style="text-align: center;">' . get_string_kopere('benchmark_info');
         button::add(get_string_kopere('benchmark_execute'), 'benchmark::execute');
         echo '</div>';
 
@@ -68,7 +68,7 @@ class benchmark {
             get_string_kopere('benchmark_executing')
         ), get_string_kopere('benchmark_title2'));
 
-        require_once($CFG->libdir.'/filelib.php');
+        require_once($CFG->libdir . '/filelib.php');
 
         echo '<div class="element-box">';
 
@@ -76,21 +76,24 @@ class benchmark {
 
         $score = $test->get_total();
         if ($score < 4) {
-            mensagem::print_info('<strong>'.get_string_kopere('benchmark_timetotal').'</strong>    '.$this->format_number($score).' '.get_string_kopere('benchmark_seconds'));
+            mensagem::print_info('<strong>' . get_string_kopere('benchmark_timetotal') . '</strong>
+                ' . $this->format_number($score) . ' ' . get_string_kopere('benchmark_seconds'));
         } else if ($score < 8) {
-            mensagem::print_warning('<strong>'.get_string_kopere('benchmark_timetotal').'</strong> '.$this->format_number($score).' '.get_string_kopere('benchmark_seconds'));
+            mensagem::print_warning('<strong>' . get_string_kopere('benchmark_timetotal') . '</strong>
+                ' . $this->format_number($score) . ' ' . get_string_kopere('benchmark_seconds'));
         } else {
-            mensagem::print_danger('<strong>'.get_string_kopere('benchmark_timetotal').'</strong>  '.$this->format_number($score).' '.get_string_kopere('benchmark_seconds'));
+            mensagem::print_danger('<strong>' . get_string_kopere('benchmark_timetotal') . '</strong>
+                ' . $this->format_number($score) . ' ' . get_string_kopere('benchmark_seconds'));
         }
 
         echo '<table class="table" id="benchmarkresult">
                   <thead>
                       <tr>
                           <th class="text-center media-middle">#</th>
-                          <th>'.get_string_kopere('benchmark_decription').'</th>
-                          <th class="media-middle">'.get_string_kopere('benchmark_timesec').'</th>
-                          <th class="media-middle">'.get_string_kopere('benchmark_max').'</th>
-                          <th class="media-middle">'.get_string_kopere('benchmark_critical').'</th>
+                          <th>' . get_string_kopere('benchmark_decription') . '</th>
+                          <th class="media-middle">' . get_string_kopere('benchmark_timesec') . '</th>
+                          <th class="media-middle">' . get_string_kopere('benchmark_max') . '</th>
+                          <th class="media-middle">' . get_string_kopere('benchmark_critical') . '</th>
                       </tr>
                   </thead>
                   <tbody>';
@@ -99,9 +102,9 @@ class benchmark {
             echo "<tr class=\"{$result['class']}\" >
                       <td class=\"text-center media-middle\">{$result['id']}</td>
                       <td >{$result['name']}<div><small>{$result['info']}</small></div></td>
-                      <td class=\"text-center media-middle\">".$this->format_number($result['during'])."</td>
-                      <td class=\"text-center media-middle\">".$this->format_number($result['limit'])."</td>
-                      <td class=\"text-center media-middle\">".$this->format_number($result['over'])."</td>
+                      <td class=\"text-center media-middle\">" . $this->format_number($result['during']) . "</td>
+                      <td class=\"text-center media-middle\">" . $this->format_number($result['limit']) . "</td>
+                      <td class=\"text-center media-middle\">" . $this->format_number($result['over']) . "</td>
                   </tr>";
         }
 
@@ -123,10 +126,10 @@ class benchmark {
 
         echo "<table class=\"table\" id=\"benchmarkresult\">
                   <tr>
-                      <th>".get_string_kopere('benchmark_testconf_problem')."</th>
-                      <th>".get_string_kopere('benchmark_testconf_status')."</th>
-                      <th>".get_string_kopere('benchmark_testconf_description')."</th>
-                      <th>".get_string_kopere('benchmark_testconf_action')."</th>
+                      <th>" . get_string_kopere('benchmark_testconf_problem') . "</th>
+                      <th>" . get_string_kopere('benchmark_testconf_status') . "</th>
+                      <th>" . get_string_kopere('benchmark_testconf_description') . "</th>
+                      <th>" . get_string_kopere('benchmark_testconf_action') . "</th>
                   </tr>";
 
         $tests = array(
@@ -142,7 +145,7 @@ class benchmark {
                       <td>{$test['title']}</td>
                       <td>{$test['resposta']}</td>
                       <td>{$test['description']}</td>
-                      <td><a target=\"_blank\" href=\"{$CFG->wwwroot}/admin/{$test['url']}\">".get_string('edit', '')."</a></td>
+                      <td><a target=\"_blank\" href=\"{$CFG->wwwroot}/admin/{$test['url']}\">" . get_string('edit', '') . "</a></td>
                   </tr>";
         }
 

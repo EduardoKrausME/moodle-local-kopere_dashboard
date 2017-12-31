@@ -36,11 +36,12 @@ class grade {
     public function get_last_grades() {
         global $DB, $CFG;
 
-        $group='';
+        $group = '';
         if ($CFG->dbtype == 'mysqli') {
             $group = 'GROUP BY gg.id';
         }
-        $data = $DB->get_records_sql("SELECT DISTINCT gg.id, gg.id AS ggid, gi.id as giid, u.id as userid, c.id as courseid, c.fullname AS coursename, gi.timemodified,
+        $data = $DB->get_records_sql("SELECT DISTINCT gg.id, gg.id AS ggid, gi.id as giid, u.id as userid,
+                                               c.id as courseid, c.fullname AS coursename, gi.timemodified,
                                                gi.itemtype, gi.itemname, gg.finalgrade, gg.rawgrademax
                                         FROM {course} c
                                         JOIN {context} ctx ON c.id = ctx.instanceid
