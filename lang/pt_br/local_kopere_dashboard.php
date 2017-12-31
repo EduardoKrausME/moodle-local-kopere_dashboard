@@ -155,6 +155,14 @@ $string['loginguestmoreinfo'] = 'Medindo o tempo para logar no Moodle com a cont
 $string['loginusername'] = 'Tempo para se conectar com uma conta de usuário falsa';
 $string['loginusermoreinfo'] = 'Medindo o tempo para logar no Moodle com uma conta de usuário falsa';
 
+// performancemonitor
+$string['performancemonitor_rede'] = 'Rede';
+$string['performancemonitor_cpu'] = 'Uso do CPU';
+$string['performancemonitor_memory'] = 'Memória';
+$string['performancemonitor_hd'] = 'HD (livre)';
+$string['performancemonitor_performance'] = 'Desempenho';
+$string['performancemonitor_min'] = '{$a} min: ';
+
 // courses
 $string['courses_title'] = 'Cursos';
 $string['courses_title1'] = 'Lista de Cursos';

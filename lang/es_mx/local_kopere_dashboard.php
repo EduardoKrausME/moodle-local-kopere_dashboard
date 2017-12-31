@@ -105,6 +105,14 @@ $string['benchmark_title2'] = 'Alojando prueba de desempeño';
 $string['cloadmoreinfo'] = 'Correr el archivo de configuración &laquo;config.php&raquo;';
 $string['cloadname'] = 'Tiempo de carga de Moodle';
 
+// performancemonitor
+$string ['performancemonitor_rede'] = 'Red';
+$string ['performancemonitor_cpu'] = 'Uso del CPU';
+$string ['performancemonitor_memory'] = 'Memoria';
+$string ['performancemonitor_hd'] = 'HD (libre)';
+$string ['performancemonitor_performance'] = 'Rendimiento';
+$string ['performancemonitor_min'] = '{$a} min:';
+
 $string['color_blue'] = 'Azul';
 $string['color_brown'] = 'Café';
 $string['color_green'] = 'Verde';

@@ -155,6 +155,14 @@ $string['loginguestmoreinfo'] = 'Measuring the time to load the login page with 
 $string['loginusername'] = 'Time to connect with a fake user account';
 $string['loginusermoreinfo'] = 'Measuring the time to load the login page with a fake user account';
 
+// performancemonitor
+$string ['performancemonitor_rede'] = 'Network';
+$string ['performancemonitor_cpu'] = 'CPU Usage';
+$string ['performancemonitor_memory'] = 'Memory';
+$string ['performancemonitor_hd'] = 'HD (free)';
+$string ['performancemonitor_performance'] = 'Performance';
+$string ['performancemonitor_min'] = '{$a} min:';
+
 // courses
 $string['courses_title'] = 'Courses';
 $string['courses_title1'] = 'Course List';
@@ -380,7 +388,7 @@ $string['userimport_userdata'] = 'User Data';
 $string['userimport_userfields'] = 'Extra profile fields';
 $string['userimport_firstname'] = 'First name or full name';
 $string['userimport_firstname_desc'] = 'If you have the full name in CSV, just fill in this field Kopere will be responsible for generating both fields. ' .
-  'If your CSV has a first name and Last Name, select this and Last Name.';
+    'If your CSV has a first name and Last Name, select this and Last Name.';
 $string['userimport_courseenrol'] = 'Enroll in a course';
 $string['userimport_courseenrol_desc'] = 'If you want the student to be enrolled in a course, select the course identifier column.';
 $string['userimport_date_desc'] = 'The system automatically detects the main date format.';

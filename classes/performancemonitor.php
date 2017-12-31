@@ -84,7 +84,7 @@ class performancemonitor {
         }
 
         echo '<div class="part-monitor" id="network">';
-        echo '<h3>Rede Videoteca</h3>';
+        echo '<h3>' . get_string_kopere('performancemonitor_rede') . '</h3>';
 
         $bytes = $soma_rede_in_end - $this->soma_rede_in_start;
         $seconds = $end_time - $this->start_time;
@@ -126,7 +126,7 @@ class performancemonitor {
      */
     public function cpu() {
         echo '<div class="part-monitor" id="cpu">';
-        echo '<h3>Uso do CPU</h3>';
+        echo '<h3>' . get_string_kopere('performancemonitor_cpu') . '</h3>';
 
         if ($_SESSION ['cpus'] == null) {
             $input_lines = shell_exec('cat /proc/stat');
@@ -172,7 +172,7 @@ class performancemonitor {
         // $cache = $output_mem_cache[ 1 ];
 
         echo '<div class="part-monitor" id="memoria">';
-        echo '<h3>Memória</h3>';
+        echo '<h3>' . get_string_kopere('performancemonitor_memory') . '</h3>';
 
         echo 'Total: ';
         if ($all > 1024 * 1024) {
@@ -209,18 +209,13 @@ class performancemonitor {
     public function disk() {
         $input_lines = shell_exec("df -h");
         preg_match_all("/([0-9,\.]+\w)\s+([0-9]+%)\s+\/\n/", $input_lines, $output_disco_linha1);
-        preg_match_all("/([0-9,\.]+\w)\s+([0-9]+%)\s+\/var\/www/", $input_lines, $output_disco_linha2);
 
         echo '<div class="part-monitor" id="disco">';
-        echo '<h3>HD (livre)</h3>';
+        echo '<h3>' . get_string_kopere('performancemonitor_hd') . '</h3>';
 
         echo 'SO: ';
         echo $output_disco_linha1[1][0] . 'B ';
         echo $output_disco_linha1[2][0] . '';
-
-        echo '<br/>Dados: ';
-        echo $output_disco_linha2[1][0] . 'B ';
-        echo $output_disco_linha2[2][0] . '';
 
         echo '</div>';
     }
@@ -233,11 +228,10 @@ class performancemonitor {
         preg_match("/average[s]?:\s*([0-9.]+),\s*([0-9.]+),\s*([0-9.]+)/", $input_lines, $output_load);
 
         echo '<div class="part-monitor" id="average">';
-        echo '<h3>Desempenho</h3>';
+        echo '<h3>' . get_string_kopere('performancemonitor_performance') . '</h3>';
 
-        echo ' 1 min: ' . $output_load[1] . '%<br/>';
-        // echo ' 5 min: ' . $output_load[ 2 ] . '%<br/>';
-        echo '15 min: ' . $output_load[3] . '%';
+        echo get_string_kopere('performancemonitor_min', 1) . $output_load[1] . '%<br/>';
+        echo get_string_kopere('performancemonitor_min', 5) . $output_load[3] . '%';
 
         echo '</div>';
     }
