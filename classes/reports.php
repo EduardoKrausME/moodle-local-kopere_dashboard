@@ -179,7 +179,7 @@ class reports {
                 $table->print_header();
                 $table->close(true, '', '"searching":false,"ordering":false');
 
-                button::primary('Baixar estes dados', "reports::download&report={$report}&courseid={$courseid}");
+                button::primary(get_string_kopere('reports_download'), "reports::download&report={$report}&courseid={$courseid}");
             }
         }
         echo '</div>';

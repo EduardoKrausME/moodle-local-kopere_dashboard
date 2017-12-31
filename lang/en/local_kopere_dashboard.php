@@ -176,6 +176,7 @@ $string['courses_page_create'] = 'Create page based on this summary';
 
 // reports
 $string['reports_title'] = 'Reports';
+$string['reports_download'] = 'Download this data';
 $string['reports_selectcourse'] = 'Select the course to generate the report';
 $string['reports_notfound'] = 'Report not found!';
 $string['reports_reportcat_badge'] = 'Badges Report';

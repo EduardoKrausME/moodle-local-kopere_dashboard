@@ -298,6 +298,7 @@ $string['reports_reportcat_enrol_cohort'] = 'Reporte de Cohorte';
 $string['reports_reportcat_enrol_guest'] = 'Reporte de Visitantes';
 $string['reports_reportcat_server'] = 'Reporte del Sistema';
 $string['reports_reportcat_user'] = 'Reporte de Usuario';
+$string['reports_download'] = 'Descargar estos datos';
 $string['reports_selectcourse'] = 'Seleccione el curso para generar el reporte';
 $string['reports_timecreated'] = 'Registrado en';
 $string['reports_title'] = 'Reportes';

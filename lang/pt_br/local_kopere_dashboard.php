@@ -176,6 +176,7 @@ $string['courses_page_create'] = 'Criar página com base neste sumário';
 
 // reports
 $string['reports_title'] = 'Relatórios';
+$string['reports_download'] = 'Baixar estes dados';
 $string['reports_selectcourse'] = 'Selecione o curso para gerar o relatório';
 $string['reports_notfound'] = 'Relatório não localizado!';
 $string['reports_reportcat_badge'] = 'Relatório de Emblemas';
