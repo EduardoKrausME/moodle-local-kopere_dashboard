@@ -23,6 +23,6 @@
 
 $plugin->version = 2017123002;
 $plugin->requires = 2011120500;
-$plugin->release = '1.3.3';
+$plugin->release = '1.3.4';
 $plugin->maturity = MATURITY_RC;
 $plugin->component = 'local_kopere_dashboard';
