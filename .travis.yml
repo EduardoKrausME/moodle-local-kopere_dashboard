@@ -30,6 +30,9 @@ before_install:
 install:
   - moodle-plugin-ci install
 
+ignore:
+  - vendor/*
+
 script:
   - moodle-plugin-ci phplint
   - moodle-plugin-ci validate
