@@ -32,6 +32,8 @@ install:
 
 ignore:
   - vendor/*
+  - assets/*
+  - node/*
 
 script:
   - moodle-plugin-ci phplint
