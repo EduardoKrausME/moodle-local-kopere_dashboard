@@ -90,9 +90,9 @@ class course_last_access {
 
         $sql
             = "SELECT DISTINCT u.*
-                 FROM {CONTEXT} c
+                 FROM {context} c
                  JOIN {role_assignments} ra ON ra.contextid = c.id
-                 JOIN {USER} u              ON ra.userid    = u.id
+                 JOIN {user} u              ON ra.userid    = u.id
                 WHERE c.contextlevel = :contextlevel
                   AND c.instanceid   = :instanceid";
 

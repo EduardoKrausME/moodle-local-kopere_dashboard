@@ -367,13 +367,13 @@ class report_install {
         $report->title = get_string('reports_report_server-1', 'local_kopere_dashboard');
         $report->reportsql = ' SELECT c.id, c.fullname, c.shortname, c.visible, c.timecreated,
                                       (SELECT SUM( f.filesize )
-                                         FROM {files} f, {CONTEXT} ctx
+                                         FROM {files} f, {context} ctx
                                         WHERE ctx.id           = f.contextid
                                           AND ctx.contextlevel = 50
                                           AND ctx.instanceid   = c.id
                                       GROUP BY ctx.instanceid) AS coursesize,
                                       (SELECT SUM( f.filesize ) AS modulessize
-                                         FROM {course_modules} cm, {files} f, {CONTEXT} ctx
+                                         FROM {course_modules} cm, {files} f, {context} ctx
                                         WHERE ctx.id = f.contextid
                                           AND ctx.instanceid   = cm.id
                                           AND ctx.contextlevel = 70
@@ -403,7 +403,7 @@ class report_install {
                                        (SELECT COUNT(userid) FROM {role_assignments}
                                          WHERE contextid = asg.contextid GROUP BY contextid) AS alunos
                                  FROM {role_assignments} asg
-                                 JOIN {CONTEXT}          ctx ON asg.contextid = ctx.id
+                                 JOIN {context}          ctx ON asg.contextid = ctx.id
                                  JOIN {course}           c   ON ctx.instanceid = c.id
                                 WHERE asg.roleid       = 5
                                   AND ctx.contextlevel = 50 ';

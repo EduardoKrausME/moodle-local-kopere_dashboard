@@ -68,9 +68,9 @@ class tinymce {
             tinymce.init ( {
                 selector : '{$seletor}',
                 plugins  : [
-                    'advlist autolink lists link image charmap ',
+                    'advlist anchor autolink lists link image charmap ',
                     'visualblocks code fullscreen ',
-                    'media table contextmenu autosave paste anchor'
+                    'media table contextmenu autosave paste'
                 ],
 
                 style_formats : [

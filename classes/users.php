@@ -89,8 +89,8 @@ class users {
         $search = new datatable_search_util($columnselect, $columnorder);
 
         $search->execute_sql_and_return("
-               SELECT {[COLUMNS]}
-                 FROM {USER} u
+               SELECT {[columns]}
+                 FROM {user} u
                 WHERE id > 1 AND deleted = 0 ", '', null,
             'local_kopere_dashboard\util\user_util::column_fullname');
     }
@@ -110,7 +110,7 @@ class users {
     public static function count_all($format = false) {
         global $DB;
 
-        $count = $DB->get_record_sql('SELECT count(*) AS num FROM {USER} WHERE id > 1 AND deleted = 0');
+        $count = $DB->get_record_sql('SELECT count(*) AS num FROM {user} WHERE id > 1 AND deleted = 0');
 
         if ($format) {
             return number_format($count->num, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig'));
@@ -126,7 +126,7 @@ class users {
     public static function count_all_learners($format = false) {
         global $DB;
 
-        $count = $DB->get_record_sql('SELECT count(*) AS num FROM {USER} WHERE id > 1 AND deleted = 0 AND lastaccess > 0');
+        $count = $DB->get_record_sql('SELECT count(*) AS num FROM {user} WHERE id > 1 AND deleted = 0 AND lastaccess > 0');
 
         if ($format) {
             return number_format($count->num, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig'));

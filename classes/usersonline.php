@@ -110,8 +110,8 @@ class usersonline {
 
         $count = $DB->get_record_sql(
             "SELECT count(u.id) AS num
-               FROM {USER} u
-          LEFT JOIN {CONTEXT} cx ON cx.instanceid = u.id
+               FROM {user} u
+          LEFT JOIN {context} cx ON cx.instanceid = u.id
               WHERE u.lastaccess    > :onlinestart
                 AND u.lastaccess    < :timefinish
                 AND cx.contextlevel = :contextlevel
