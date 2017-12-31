@@ -220,7 +220,7 @@ $string['reports_groupnode'] = 'Group Mode';
 $string['reports_groupname'] = 'Group Name';
 $string['reports_datastudents'] = 'Student Data';
 $string['reports_datacourses'] = 'Course Data';
-$string['reports_coursecreated'] = 'Date of enrollment';
+$string['reports_coursecreated'] = 'Date of enrolment';
 $string['reports_activitiescomplete'] = 'Activities Completed';
 $string['reports_activitiesassigned'] = 'Assigned Activities';
 $string['reports_coursecompleted'] = 'Course completed';
@@ -243,10 +243,10 @@ $string['dashboard_grade_incourse'] = 'in course <a href="?courses::details&cour
 $string['dashboard_grade_of'] = 'of';
 $string['dashboard_grade_text'] = 'Received note {$a->grade} in {$a->evaluation}';
 $string['dashboard_grade_in'] = 'In';
-$string['dashboard_enrol_title'] = 'Last Enrollment';
-$string['dashboard_enrol_inactive'] = 'the registration is inactive';
-$string['dashboard_enrol_active'] = 'the registration is active';
-$string['dashboard_enrol_text'] = 'You have enrolled in the course <a href="?courses::details&courseid={$a->courseid}">{$a->fullname}</a> and';
+$string['dashboard_enrol_title'] = 'Last Enrolment';
+$string['dashboard_enrol_inactive'] = 'the enrolment is inactive';
+$string['dashboard_enrol_active'] = 'the enrolment is active';
+$string['dashboard_enrol_text'] = 'You have enroled in the course <a href="?courses::details&courseid={$a->courseid}">{$a->fullname}</a> and';
 $string['dashboard_enrol_lastmodifield'] = 'Last change in';
 
 // Notifications.
@@ -343,9 +343,9 @@ $string['userenrolment_status_inactive'] = 'Inactive';
 $string['userenrolment_timestart'] = 'The subscription starts at';
 $string['userenrolment_timeendstatus'] = 'Enable subscription term';
 $string['userenrolment_timeend'] = 'The subscription ends in';
-$string['userenrolment_created'] = 'Enrollment created in';
-$string['userenrolment_updated'] = 'Enrollment last modified in';
-$string['userenrolment_updatesuccess'] = 'Enrollment changed successfully!';
+$string['userenrolment_created'] = 'Enrolment created in';
+$string['userenrolment_updated'] = 'Enrolment last modified in';
+$string['userenrolment_updatesuccess'] = 'Enrolment changed successfully!';
 
 // User
 $string['user_title'] = 'Users';
@@ -373,7 +373,7 @@ $string['useronline_settings_ssl'] = 'Enable SSL?';
 $string['useronline_settings_url'] = 'Server URL';
 $string['useronline_settings_port'] = 'Server port';
 
-// UserImport.
+// UserImport
 $string['userimport_title'] = 'Import Users';
 $string['userimport_upload'] = 'Drag CSV files here or click to open the search box.';
 $string['userimport_moveuploadedfile_error'] = 'ERROR while moving file!';
