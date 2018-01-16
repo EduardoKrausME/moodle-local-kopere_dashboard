@@ -40,40 +40,40 @@ class data_table {
     /**
      * @var array
      */
-    private $columninfo = array();
+    private $column_info = array();
     /**
      * @var array
      */
-    private $columndata = array();
+    private $column_data = array();
     /**
      * @var array
      */
-    private $columndefs = array();
+    private $column_defs = array();
 
     /**
      * @var string
      */
-    private $ajaxurl = null;
+    private $ajax_url = null;
 
     /**
      * @var string
      */
-    private $clickredirect = null;
+    private $click_redirect = null;
 
     /**
      * @var string
      */
-    private $clickmodal = null;
+    private $click_modal = null;
 
     /**
      * @var string
      */
-    private $tableid = '';
+    private $table_id = '';
 
     /**
      * @var boolean
      */
-    private $isexport = false;
+    private $is_export = false;
 
     /**
      * data_table constructor.
@@ -170,7 +170,9 @@ class data_table {
 
     /**
      * @param string $class
-     * @param bool $printbody
+     * @param bool   $printbody
+     *
+     * @throws \coding_exception
      */
     public function print_header($class = '', $printbody = true) {
         if ($this->is_export && $this->ajax_url == null) {
@@ -240,9 +242,9 @@ class data_table {
 
     /**
      * @param        $linhas
-     * @param string $class
+     * @param string $_class
      */
-    public function set_row($linhas, $class = '') {
+    public function set_row($linhas, $_class = '') {
         if ($this->click_redirect != null) {
             echo '<tbody class="hover-pointer">';
         } else if ($this->click_modal != null) {
@@ -255,7 +257,7 @@ class data_table {
             echo '<tr>';
             foreach ($this->column as $column) {
 
-                $class = $class;
+                $class = $_class;
                 if ($column->type == table_header_item::TYPE_INT) {
                     $class .= ' text-center';
                 } else if ($column->type == table_header_item::TYPE_ACTION) {

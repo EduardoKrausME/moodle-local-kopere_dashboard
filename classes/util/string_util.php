@@ -54,15 +54,25 @@ class string_util {
     }
 
     /**
+     * @param string $id
      * @return string
      */
-    public static function generate_uid() {
-        return strtolower(
-            self::generate_random_string(8) . '-' .
-            self::generate_random_string(4) . '-' .
-            self::generate_random_string(4) . '-' .
-            self::generate_random_string(12)
-        );
+    public static function generate_uid($id = null) {
+        if ($id) {
+            return strtolower(
+                substr($id, 0, 8) . '-' .
+                substr($id, 8, 4) . '-' .
+                substr($id, 12, 4) . '-' .
+                substr($id, 24, 12)
+            );
+        } else {
+            return strtolower(
+                self::generate_random_string(8) . '-' .
+                self::generate_random_string(4) . '-' .
+                self::generate_random_string(4) . '-' .
+                self::generate_random_string(12)
+            );
+        }
     }
 
     /**
