@@ -29,7 +29,7 @@ global $DB, $PAGE, $OUTPUT;
 $menu = optional_param('menu', 0, PARAM_TEXT);
 $page = optional_param('p', 0, PARAM_TEXT);
 
-//if (!isloggedin()) {
+// if (!isloggedin()) {
 //    $filecache = \local_kopere_dashboard\util\html::link( $menu . '-' . $page );
 //    $cachefilename = \local_kopere_dashboard\webpages::get_cache_dir() . $filecache . '.html';
 //
@@ -37,7 +37,7 @@ $page = optional_param('p', 0, PARAM_TEXT);
 //        echo file_get_contents($cachefilename);
 //        die();
 //    }
-//}
+// }
 
 $pagehtml = '';
 
@@ -59,7 +59,7 @@ if ($menu) {
     $sql =  'SELECT * FROM {kopere_dashboard_webpages} WHERE visible = 1 AND menuid = :menuid ORDER BY pageorder ASC';
     $webpagess = $DB->get_records_sql($sql, array('menuid' => $menu->id));
 
-    if( count($webpagess) == 1 ){
+    if( count($webpagess) == 1 ) {
         ob_clean();
         foreach ($webpagess as $webpages) {
             header("Location: {$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}");
@@ -185,9 +185,9 @@ $pagehtml .= $OUTPUT->footer();
 
 echo $pagehtml;
 
-//if (isloggedin()) {
+// if (isloggedin()) {
 //    echo $pagehtml;
-//} else {
+// } else {
 //    ob_clean();
 //    $pagehtml = str_replace('// <![CDATA[', '', $pagehtml);
 //    $pagehtml = str_replace('// ]]>', '', $pagehtml);
@@ -210,4 +210,4 @@ echo $pagehtml;
 //    echo $pagehtml;
 //
 //    file_put_contents($cachefilename, $pagehtml . "\n<!-- Cached on " . str_replace('T', ' ', date("c")) . " -->");
-//}
+// }
