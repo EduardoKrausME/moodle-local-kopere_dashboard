@@ -56,7 +56,7 @@ function load_by_query($querystring) {
     $instance->$method();
 }
 
-function get_path_query($querystring){
+function get_path_query ($querystring){
     preg_match("/(.*?)::([a-zA-Z_0-9]+)/", $querystring, $paths);
     return $paths[1] . '-'.$paths[2];
 }
