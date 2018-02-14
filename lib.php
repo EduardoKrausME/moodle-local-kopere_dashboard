@@ -54,7 +54,7 @@ function local_kopere_dashboard_extend_navigation ( global_navigation $nav )
         // Se der problema, não precisa fazer nada
     }
 
-    if(isloggedin ()) {
+    if (isloggedin ()) {
         $context = context_system::instance();
         if (has_capability('local/kopere_dashboard:view', $context) ||
             has_capability('local/kopere_dashboard:manage', $context)) {
