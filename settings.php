@@ -30,7 +30,7 @@ if (!$PAGE->requires->is_head_done()) {
 if ($hassiteconfig) {
 
     if (!$ADMIN->locate('integracaoroot')) {
-        $ADMIN->add('root', new admin_category('integracaoroot', 'Integrações'));
+        $ADMIN->add('root', new admin_category('integracaoroot', get_string ('integracaoroot', 'local_kopere_dashboard')));
     }
 
     $ADMIN->add('integracaoroot',
