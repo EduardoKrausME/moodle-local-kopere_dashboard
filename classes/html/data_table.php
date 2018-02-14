@@ -227,7 +227,6 @@ class data_table {
             } else if ($column->type == table_header_item::RENDERER_TRUEFALSE) {
                 $this->column_defs[] = '{ render: dataTrueFalseRenderer, targets: ' . $key . ' }';
             }
-
         }
         echo '</tr>';
         echo '</thead>';
