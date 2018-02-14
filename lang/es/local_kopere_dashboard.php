@@ -46,7 +46,7 @@ $string['datetime'] = '%d/%m/%y, %H:%M';
 $string['php_datetime'] = 'm/d/Y H:i';
 $string['help_title'] = 'Ayuda con esta página';
 
-// html/tinymce.
+// Html/tinymce.
 $string['blocks'] = 'Bloques';
 $string['blocks_paragraph'] = 'Párrafo';
 $string['image_alignment'] = 'Alineación de imagen';
@@ -105,7 +105,7 @@ $string['benchmark_title2'] = 'Alojando prueba de desempeño';
 $string['cloadmoreinfo'] = 'Correr el archivo de configuración &laquo;config.php&raquo;';
 $string['cloadname'] = 'Tiempo de carga de Moodle';
 
-// performancemonitor.
+// Performancemonitor.
 $string ['performancemonitor_rede'] = 'Red';
 $string ['performancemonitor_cpu'] = 'Uso del CPU';
 $string ['performancemonitor_memory'] = 'Memoria';

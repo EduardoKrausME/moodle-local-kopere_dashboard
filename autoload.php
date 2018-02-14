@@ -21,6 +21,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 spl_autoload_register("kopere_dashboard_autoload");
 function kopere_dashboard_autoload($classname) {
     global $CFG;
@@ -56,12 +58,12 @@ function load_by_query($querystring) {
     $instance->$method();
 }
 
-function get_path_query($querystring){
+function get_path_query($querystring) {
     preg_match("/(.*?)::([a-zA-Z_0-9]+)/", $querystring, $paths);
-    return $paths[1] . '-'.$paths[2];
+    return $paths[1] . '-' . $paths[2];
 }
 
-function get_string_kopere($identifier, $object=null) {
+function get_string_kopere($identifier, $object = null) {
     return get_string($identifier, 'local_kopere_dashboard', $object);
 }
 

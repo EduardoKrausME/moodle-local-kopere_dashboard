@@ -812,7 +812,7 @@ class usersimport {
         $post = string_util::clear_all_params(null, null, PARAM_TEXT);
         foreach ($post as $key => $value) {
             if ($key == 'POST') {
-                // Ignora.
+                continue;
             } else if ($key == 'field') {
                 $fielditem = string_util::clear_all_params('field', [], PARAM_TEXT);
                 foreach ($fielditem as $key2 => $value2) {
@@ -832,7 +832,7 @@ class usersimport {
         $post = string_util::clear_all_params(null, null, PARAM_TEXT);
         foreach ($post as $key => $value) {
             if ($key == 'POST' || $key == 'inserir') {
-                // Ignora estes dados.
+                continue;
             } else if ($key == 'field') {
                 $fielditem = string_util::clear_all_params('field', [], PARAM_TEXT);
                 foreach ($fielditem as $key2 => $value2) {

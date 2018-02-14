@@ -21,40 +21,39 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-function local_kopere_dashboard_extends_navigation ( global_navigation $nav )
-{
-    local_kopere_dashboard_extend_navigation ( $nav );
+defined('MOODLE_INTERNAL') || die();
+
+function local_kopere_dashboard_extends_navigation(global_navigation $nav) {
+    local_kopere_dashboard_extend_navigation($nav);
 }
 
-function local_kopere_dashboard_extend_navigation ( global_navigation $nav )
-{
+function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
     global $CFG, $PAGE, $USER, $DB;
 
     try {
         $sql = "SELECT DISTINCT menu.*
-                  FROM {kopere_dashboard_menu}     AS menu
-                  JOIN {kopere_dashboard_webpages} AS page ON page.menuid = menu.id
-                 WHERE page.visible = 1";
+                  FROM {kopere_dashboard_menu} menu
+                  JOIN {kopere_dashboard_webpages} PAGE ON PAGE.menuid = menu.id
+                 WHERE PAGE.visible = 1";
         $menus = $DB->get_records_sql($sql);
         /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
-        foreach ( $menus as $menu ) {
-            $node = $nav->add (
+        foreach ($menus as $menu) {
+            $node = $nav->add(
                 $menu->title,
-                new moodle_url( $CFG->wwwroot . '/local/kopere_dashboard/?menu=' . $menu->link ),
+                new moodle_url($CFG->wwwroot . '/local/kopere_dashboard/?menu=' . $menu->link),
                 navigation_node::TYPE_CUSTOM,
                 null,
                 'kopere_dashboard-' . $menu->id,
-                new pix_icon( 'webpages', $menu->title, 'local_kopere_dashboard' )
+                new pix_icon('webpages', $menu->title, 'local_kopere_dashboard')
             );
 
-            // $node->display              = false;
             $node->showinflatnavigation = true;
         }
-    } catch ( Exception $e ) {
+    } catch (Exception $e) {
         // Se der problema, não precisa fazer nada
     }
 
-    if(isloggedin ()) {
+    if (isloggedin()) {
         $context = context_system::instance();
         if (has_capability('local/kopere_dashboard:view', $context) ||
             has_capability('local/kopere_dashboard:manage', $context)) {
@@ -68,7 +67,6 @@ function local_kopere_dashboard_extend_navigation ( global_navigation $nav )
                 new pix_icon('icon', get_string('pluginname', 'local_kopere_dashboard'), 'local_kopere_dashboard')
             );
 
-            // $node->display              = false;
             $node->showinflatnavigation = true;
         }
 
@@ -79,9 +77,11 @@ function local_kopere_dashboard_extend_navigation ( global_navigation $nav )
             $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/local/kopere_dashboard/node/app-v2.js'), true);
 
             if (get_config('local_kopere_dashboard', 'nodejs-ssl')) {
-                $url = "https://" . get_config('local_kopere_dashboard', 'nodejs-url') . ':' . get_config('local_kopere_dashboard', 'nodejs-port');
+                $url = "https://" . get_config('local_kopere_dashboard', 'nodejs-url') . ':' .
+                    get_config('local_kopere_dashboard', 'nodejs-port');
             } else {
-                $url = get_config('local_kopere_dashboard', 'nodejs-url') . ':' . get_config('local_kopere_dashboard', 'nodejs-port');
+                $url = get_config('local_kopere_dashboard', 'nodejs-url') . ':' .
+                    get_config('local_kopere_dashboard', 'nodejs-port');
             }
 
             $userid = intval($USER->id);

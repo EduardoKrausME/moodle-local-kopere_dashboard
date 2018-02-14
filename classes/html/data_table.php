@@ -40,40 +40,40 @@ class data_table {
     /**
      * @var array
      */
-    private $column_info = array();
+    private $columninfo = array();
     /**
      * @var array
      */
-    private $column_data = array();
+    private $columndata = array();
     /**
      * @var array
      */
-    private $column_defs = array();
+    private $columndefs = array();
 
     /**
      * @var string
      */
-    private $ajax_url = null;
+    private $ajaxurl = null;
 
     /**
      * @var string
      */
-    private $click_redirect = null;
+    private $clickredirect = null;
 
     /**
      * @var string
      */
-    private $click_modal = null;
+    private $clickmodal = null;
 
     /**
      * @var string
      */
-    private $table_id = '';
+    private $tableid = '';
 
     /**
      * @var boolean
      */
-    private $is_export = false;
+    private $isexport = false;
 
     /**
      * data_table constructor.
@@ -82,57 +82,57 @@ class data_table {
      * @param array $columninfo
      */
     public function __construct($column = array(), $columninfo = array()) {
-        $this->table_id = 'datatable_' . uniqid();
+        $this->tableid = 'datatable_' . uniqid();
         $this->column = $column;
-        $this->column_info = $columninfo;
+        $this->columninfo = $columninfo;
     }
 
     /**
      * @param boolean $isexport
      */
     public function set_is_export($isexport) {
-        $this->is_export = $isexport;
+        $this->isexport = $isexport;
     }
 
     /**
      * @return string
      */
     public function get_table_id() {
-        return $this->table_id;
+        return $this->tableid;
     }
 
     /**
      * @param string $tableid
      */
     public function set_table_id($tableid) {
-        $this->table_id = $tableid;
+        $this->tableid = $tableid;
     }
 
     /**
      * @param $ajaxurl
      */
-    public function set_ajax_url($ajaxurl) {
-        $this->ajax_url = $ajaxurl;
+    public function set_ajaxurl($ajaxurl) {
+        $this->ajaxurl = $ajaxurl;
     }
 
     /**
      * @param $url
      * @param $chave
      */
-    public function set_click_redirect($url, $chave) {
-        $this->click_redirect = array();
-        $this->click_redirect['chave'] = $chave;
-        $this->click_redirect['url'] = '?' . $url;
+    public function set_clickredirect($url, $chave) {
+        $this->clickredirect = array();
+        $this->clickredirect['chave'] = $chave;
+        $this->clickredirect['url'] = '?' . $url;
     }
 
     /**
      * @param $url
      * @param $chave
      */
-    public function set_click_modal($url, $chave) {
-        $this->click_modal = array();
-        $this->click_modal['chave'] = $chave;
-        $this->click_modal['url'] = $url;
+    public function set_clickmodal($url, $chave) {
+        $this->clickmodal = array();
+        $this->clickmodal['chave'] = $chave;
+        $this->clickmodal['url'] = $url;
     }
 
     /**
@@ -144,7 +144,7 @@ class data_table {
         $column->title = $title;
         $column->cols = $cols;
 
-        $this->column_info[] = $column;
+        $this->columninfo[] = $column;
     }
 
     /**
@@ -175,19 +175,19 @@ class data_table {
      * @throws \coding_exception
      */
     public function print_header($class = '', $printbody = true) {
-        if ($this->is_export && $this->ajax_url == null) {
+        if ($this->isexport && $this->ajaxurl == null) {
             button::info(get_string_kopere('reports_export'), "{$_SERVER['QUERY_STRING']}&export=xls");
 
             export::header(optional_param('export', '', PARAM_TEXT));
         }
 
-        echo '<table id="' . $this->table_id . '" class="table table-hover" >';
+        echo '<table id="' . $this->tableid . '" class="table table-hover" >';
         echo '<thead>';
 
-        if ($this->column_info) {
+        if ($this->columninfo) {
             echo '<tr class="' . $class . '">';
             /** @var table_header_item $columninfo */
-            foreach ($this->column_info as $key => $columninfo) {
+            foreach ($this->columninfo as $key => $columninfo) {
                 echo "<th class=\"header-col text-center\" colspan=\"{$columninfo->cols}\">";
 
                 if (strpos($columninfo->title, '[[') === 0) {
@@ -200,7 +200,7 @@ class data_table {
             }
             echo '</tr>';
 
-            $this->column_defs[] = '{ visible : false, targets : -1 }';
+            $this->columndefs[] = '{ visible : false, targets : -1 }';
         }
 
         echo '<tr class="' . $class . '">';
@@ -214,45 +214,45 @@ class data_table {
             }
             echo '</th>';
 
-            $this->column_data[] = '{ "data": "' . $column->chave . '" }';
+            $this->columndata[] = '{ "data": "' . $column->chave . '" }';
 
             if ($column->type == table_header_item::TYPE_INT) {
-                $this->column_defs[] = '{ type: "numeric-comma", targets: ' . $key . ' }';
+                $this->columndefs[] = '{ type: "numeric-comma", targets: ' . $key . ' }';
             } else if ($column->type == table_header_item::TYPE_CURRENCY) {
-                $this->column_defs[] = '{ type: "currency", targets: ' . $key . ' }';
+                $this->columndefs[] = '{ type: "currency", targets: ' . $key . ' }';
             } else if ($column->type == table_header_item::TYPE_DATE) {
-                $this->column_defs[] = '{ type: "date-uk", targets: ' . $key . ' }';
+                $this->columndefs[] = '{ type: "date-uk", targets: ' . $key . ' }';
             } else if ($column->type == table_header_item::TYPE_BYTES) {
-                $this->column_defs[] = '{ type: "file-size", render: rendererFilesize, targets: ' . $key . ' }';
+                $this->columndefs[] = '{ type: "file-size", render: rendererFilesize, targets: ' . $key . ' }';
             } else if ($column->type == table_header_item::RENDERER_DATE) {
-                $this->column_defs[] = '{ render: dataDatetimeRenderer, type: "date-uk", targets: ' . $key . ' }';
+                $this->columndefs[] = '{ render: dataDatetimeRenderer, type: "date-uk", targets: ' . $key . ' }';
             } else if ($column->type == table_header_item::RENDERER_VISIBLE) {
-                $this->column_defs[] = '{ render: dataVisibleRenderer, targets: ' . $key . ' }';
+                $this->columndefs[] = '{ render: dataVisibleRenderer, targets: ' . $key . ' }';
             } else if ($column->type == table_header_item::RENDERER_STATUS) {
-                $this->column_defs[] = '{ render: dataStatusRenderer, targets: ' . $key . ' }';
+                $this->columndefs[] = '{ render: dataStatusRenderer, targets: ' . $key . ' }';
             } else if ($column->type == table_header_item::RENDERER_TRUEFALSE) {
-                $this->column_defs[] = '{ render: dataTrueFalseRenderer, targets: ' . $key . ' }';
+                $this->columndefs[] = '{ render: dataTrueFalseRenderer, targets: ' . $key . ' }';
             }
         }
         echo '</tr>';
         echo '</thead>';
         echo "\n";
 
-        if ($this->click_redirect != null && $printbody) {
+        if ($this->clickredirect != null && $printbody) {
             echo '<tbody class="hover-pointer"></tbody>';
-        } else if ($this->click_modal != null && $printbody) {
+        } else if ($this->clickmodal != null && $printbody) {
             echo '<tbody class="hover-pointer"></tbody>';
         }
     }
 
     /**
      * @param        $linhas
-     * @param string $_class
+     * @param string $class
      */
-    public function set_row($linhas, $_class = '') {
-        if ($this->click_redirect != null) {
+    public function set_row($linhas, $class = '') {
+        if ($this->clickredirect != null) {
             echo '<tbody class="hover-pointer">';
-        } else if ($this->click_modal != null) {
+        } else if ($this->clickmodal != null) {
             echo '<tbody class="hover-pointer">';
         } else {
             echo '<tbody>';
@@ -262,14 +262,14 @@ class data_table {
             echo '<tr>';
             foreach ($this->column as $column) {
 
-                $class = $_class;
+                $thisclass = $class;
                 if ($column->type == table_header_item::TYPE_INT) {
-                    $class .= ' text-center';
+                    $thisclass .= ' text-center';
                 } else if ($column->type == table_header_item::TYPE_ACTION) {
-                    $class .= ' button-actions text-nowrap';
+                    $thisclass .= ' button-actions text-nowrap';
                 }
 
-                $class .= ' ' . $column->style_col;
+                $thisclass .= ' ' . $column->style_col;
                 if ($column->funcao != null) {
                     $funcao = $column->funcao;
                     $html = $funcao($linha, $column->chave);
@@ -281,7 +281,7 @@ class data_table {
                         $html = $linha->$chave;
                     }
                 }
-                $this->print_row($html, $class);
+                $this->print_row($html, $thisclass);
             }
             echo '</tr>';
         }
@@ -327,16 +327,16 @@ class data_table {
         }
 
         $ajaxconfig = '';
-        if ($this->ajax_url) {
-            $ajaxconfig = 'ajax : {url:"open-ajax-table.php?' . $this->ajax_url . '",type: "POST"},';
+        if ($this->ajaxurl) {
+            $ajaxconfig = 'ajax : {url:"open-ajax-table.php?' . $this->ajaxurl . '",type: "POST"},';
         }
 
-        $columndata = implode(", ", $this->column_data);
-        $columndefs = implode(", ", $this->column_defs);
+        $columndata = implode(", ", $this->columndata);
+        $columndefs = implode(", ", $this->columndefs);
         echo "<script>
-                  {$this->table_id} = null;
+                  {$this->tableid} = null;
                   \$(document).ready( function() {
-                      {$this->table_id} = \$( '#{$this->table_id}' ).DataTable({
+                      {$this->tableid} = \$( '#{$this->tableid}' ).DataTable({
                           oLanguage   : dataTables_oLanguage,
                           {$ajaxconfig}
                           autoWidth  : false,
@@ -350,26 +350,26 @@ class data_table {
 
               </script>";
 
-        if ($this->click_redirect) {
-            $this->on_click_reditect();
-        } else if ($this->click_modal) {
-            $this->on_click_modal();
+        if ($this->clickredirect) {
+            $this->on_clickreditect();
+        } else if ($this->clickmodal) {
+            $this->on_clickmodal();
         }
 
-        return $this->table_id;
+        return $this->tableid;
     }
 
     /**
      *
      */
-    private function on_click_reditect() {
-        $clickchave = $this->click_redirect['chave'];
-        $clickurl = $this->click_redirect['url'];
+    private function on_clickreditect() {
+        $clickchave = $this->clickredirect['chave'];
+        $clickurl = $this->clickredirect['url'];
 
         echo "<script>
                   \$(document).ready( function() {
-                      \$( '#{$this->table_id} tbody' ).on( 'click', 'tr', function () {
-                          var data     = {$this->table_id}.row( this ).data ();
+                      \$( '#{$this->tableid} tbody' ).on( 'click', 'tr', function () {
+                          var data     = {$this->tableid}.row( this ).data ();
                           var clickUrl = '{$clickurl}';
                           newClickUrl  = clickUrl.replace( '{{$clickchave}}', data[ '{$clickchave}' ] );
 
@@ -382,15 +382,15 @@ class data_table {
     /**
      *
      */
-    private function on_click_modal() {
+    private function on_clickmodal() {
 
-        $clickchave = $this->click_modal['chave'];
-        $clickurl = $this->click_modal['url'];
+        $clickchave = $this->clickmodal['chave'];
+        $clickurl = $this->clickmodal['url'];
 
         echo "<script>
                   \$(document).ready( function() {
-                      \$( '#{$this->table_id} tbody' ).on( 'click', 'tr', function () {
-                          var data = {$this->table_id}.row( this ).data ();
+                      \$( '#{$this->tableid} tbody' ).on( 'click', 'tr', function () {
+                          var data = {$this->tableid}.row( this ).data ();
                           target = $( '#modal-edit' );
 
                           var clickUrl = '{$clickurl}';

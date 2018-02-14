@@ -21,6 +21,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 use local_kopere_dashboard\util\dashboard_util;
 
 ob_start();
@@ -96,7 +98,6 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
     </script>
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery-3.2.1.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/dashboard.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/bootstrap/bootstrap.js"></script>
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/dataTables/jquery.dataTables.js"></script>
@@ -122,9 +123,11 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
     <?php
     if (get_config('local_kopere_dashboard', 'nodejs-status')) {
         if (get_config('local_kopere_dashboard', 'nodejs-ssl')) {
-            $url = "https://" . get_config('local_kopere_dashboard', 'nodejs-url') . ':' . get_config('local_kopere_dashboard', 'nodejs-port');
+            $url = "https://" . get_config('local_kopere_dashboard', 'nodejs-url') . ':' .
+                get_config('local_kopere_dashboard', 'nodejs-port');
         } else {
-            $url = get_config('local_kopere_dashboard', 'nodejs-url') . ':' . get_config('local_kopere_dashboard', 'nodejs-port');
+            $url = get_config('local_kopere_dashboard', 'nodejs-url') . ':' .
+                get_config('local_kopere_dashboard', 'nodejs-port');
         }
 
         $userid = intval($USER->id);
@@ -193,16 +196,19 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
                     dashboard_util::add_menu('reports::dashboard', 'report', get_string_kopere('reports_title'),
                         \local_kopere_dashboard\reports::global_menus());
 
-                    // dashboard_util::add_menu ( 'gamification::dashboard', 'gamification', 'Gamificação' );
+                    if (has_capability('moodle/site:config', context_system::instance())) {
+                        dashboard_util::add_menu('notifications::dashboard', 'notifications',
+                            get_string_kopere('notification_title'));
+                    }
 
-                    if (has_capability('moodle/site:config', context_system::instance()))
-                        dashboard_util::add_menu('notifications::dashboard', 'notifications', get_string_kopere('notification_title'));
-
-                    if (has_capability('moodle/site:config', context_system::instance()))
-                        dashboard_util::add_menu('webpages::dashboard', 'webpages', get_string_kopere('webpages_title'));
+                    if (has_capability('moodle/site:config', context_system::instance())) {
+                        dashboard_util::add_menu('webpages::dashboard', 'webpages',
+                            get_string_kopere('webpages_title'));
+                    }
                     dashboard_util::add_menu('Benchmark::test', 'performace', get_string_kopere('benchmark_title'));
-                    if (has_capability('moodle/site:config', context_system::instance()) && $CFG->dbtype == 'mysqli')
+                    if (has_capability('moodle/site:config', context_system::instance()) && $CFG->dbtype == 'mysqli') {
                         dashboard_util::add_menu('backup::dashboard', 'data', 'Backup');
+                    }
 
                     dashboard_util::add_menu('about::dashboard', 'about', get_string_kopere('about_title'));
                     ?>

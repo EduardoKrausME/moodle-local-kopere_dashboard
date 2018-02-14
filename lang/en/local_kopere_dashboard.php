@@ -349,7 +349,7 @@ $string['userenrolment_created'] = 'Enrolment created in';
 $string['userenrolment_updated'] = 'Enrolment last modified in';
 $string['userenrolment_updatesuccess'] = 'Enrolment changed successfully!';
 
-// User
+// User.
 $string['user_title'] = 'Users';
 $string['user_table_fullname'] = 'Name';
 $string['user_table_username'] = 'Username';
@@ -375,7 +375,7 @@ $string['useronline_settings_ssl'] = 'Enable SSL?';
 $string['useronline_settings_url'] = 'Server URL';
 $string['useronline_settings_port'] = 'Server port';
 
-// UserImport
+// UserImport.
 $string['userimport_title'] = 'Import Users';
 $string['userimport_upload'] = 'Drag CSV files here or click to open the search box.';
 $string['userimport_moveuploadedfile_error'] = 'ERROR while moving file!';
@@ -419,7 +419,7 @@ $string['userimport_event_import_course_enrol_message'] = '<p>Hello {[to.fullnam
 <p>You have been successfully enrolled in {[course.fullname]}. You can now login to the student area to begin studying when and where you want.</p>
 <p>It is with great satisfaction that {[moodle.fullname]} welcomes you.</p>
 <p>Access {{course.link}}, and good studies.</p>
-<p>Doubts are available.</p>
+<p>If you have any doubts, help is available.</p>
 <p>Sincerely,<br/>
    Support Team</p>';
 
@@ -430,7 +430,7 @@ $string['userimport_event_import_user_created_message'] = '<p>Hello {[to.fullnam
 <p><strong>Site:</strong> {[moodle.link]}<br/>
    <strong>Login:</strong> {[to.username]}<br/>
    <strong>Password:</strong> {[to.password]}</p>
-<p>Doubts are available.</p>
+<p>If you have any doubts, help is available.</p>
 <p>Sincerely,<br/>
    Support Team</p>';
 
@@ -441,7 +441,7 @@ $string['userimport_event_import_user_created_and_enrol_message'] = '<p>Hello {[
 <p><strong>Site:</strong> {[moodle.link]}<br/>
    <strong>Login:</strong> {[to.username]}<br/>
    <strong>Password:</strong> {[to.password]}</p>
-<p>Doubts are available.</p>
+<p>If you have any doubts, help is available.</p>
 <p>Sincerely,<br/>
    Support Team</p>';
 

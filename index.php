@@ -21,6 +21,10 @@
  * @license    http:// www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
+use \local_kopere_dashboard\util\html;
+
 ob_start();
 require('../../config.php');
 require('autoload.php');
@@ -28,16 +32,6 @@ global $DB, $PAGE, $OUTPUT;
 
 $menu = optional_param('menu', 0, PARAM_TEXT);
 $page = optional_param('p', 0, PARAM_TEXT);
-
-//if (!isloggedin()) {
-//    $filecache = \local_kopere_dashboard\util\html::link( $menu . '-' . $page );
-//    $cachefilename = \local_kopere_dashboard\webpages::get_cache_dir() . $filecache . '.html';
-//
-//    if (file_exists($cachefilename)) {
-//        echo file_get_contents($cachefilename);
-//        die();
-//    }
-//}
 
 $pagehtml = '';
 
@@ -56,10 +50,10 @@ if ($menu) {
 
     $pagehtml .= $OUTPUT->header();
 
-    $sql =  'SELECT * FROM {kopere_dashboard_webpages} WHERE visible = 1 AND menuid = :menuid ORDER BY pageorder ASC';
+    $sql = 'SELECT * FROM {kopere_dashboard_webpages} WHERE visible = 1 AND menuid = :menuid ORDER BY pageorder ASC';
     $webpagess = $DB->get_records_sql($sql, array('menuid' => $menu->id));
 
-    if( count($webpagess) == 1 ){
+    if (count($webpagess) == 1) {
         ob_clean();
         foreach ($webpagess as $webpages) {
             header("Location: {$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}");
@@ -81,7 +75,7 @@ if ($menu) {
                     </div>
                     <div class=\"content\">
                         <div class=\"summary\" >
-                            <div class=\"no-overflow\">" . \local_kopere_dashboard\util\html::truncate_text(strip_tags($webpages->text), 300) . "</div>
+                            <div class=\"no-overflow\">" . html::truncate_text(strip_tags($webpages->text), 300) . "</div>
                         </div>
                     </div>
                 </div>";
@@ -109,10 +103,6 @@ if ($menu) {
     $pagehtml .= "<h1>{$webpages->title}</h1>";
     $pagehtml .= $webpages->text;
 
-    // if ( $webpages->courseid ) {
-    // $pagehtml .= \local_kopere_dashboard\html\button::edit ( 'Matrícular neste curso', '#', \local_kopere_dashboard\html\button::BTN_GRANDE, true, true );
-    // }
-
 } else {
 
     $PAGE->set_url(new moodle_url("/local/kopere_dashboard/"));
@@ -138,7 +128,7 @@ if ($menu) {
                     </div>
                     <div class=\"content\">
                         <div class=\"summary\">
-                            <div class=\"no-overflow\">" . \local_kopere_dashboard\util\html::truncate_text(strip_tags($webpages->text), 300) . "</div>
+                            <div class=\"no-overflow\">" . html::truncate_text(strip_tags($webpages->text), 300) . "</div>
                         </div>
                     </div>
                 </div>";
@@ -184,30 +174,3 @@ if (strlen($webpagesanalyticsid) > 5 && strlen($webpagesanalyticsid) < 15) {
 $pagehtml .= $OUTPUT->footer();
 
 echo $pagehtml;
-
-//if (isloggedin()) {
-//    echo $pagehtml;
-//} else {
-//    ob_clean();
-//    $pagehtml = str_replace('// <![CDATA[', '', $pagehtml);
-//    $pagehtml = str_replace('// ]]>', '', $pagehtml);
-//
-//    $pagehtml = preg_replace("/\/\/ .*?\n/", "", $pagehtml);
-//    $pagehtml = preg_replace('/\s+/', ' ', $pagehtml);
-//
-//    // preg_match_all ( "/<link rel=\"stylesheet\" type=\"text\/css\" href=\"(http.*?)\" \/>/", $pagehtml, $csss );
-//    //
-//    // foreach ( $csss[ 0 ] as $key => $css ) {
-//    // $link    = $csss[ 1 ][ $key ];
-//    // $cssfile = file_get_contents ( $link );
-//    //
-//    // $cssfile = preg_replace ( '/\s+/', ' ', $cssfile );
-//    // $cssfile = preg_replace('!/\*.*?\*/!s', ' ', $cssfile);
-//    //
-//    // $pagehtml = str_replace ( $csss[ 0 ][ $key ], '<style>' . $cssfile . '</style>', $pagehtml );
-//    // }
-//
-//    echo $pagehtml;
-//
-//    file_put_contents($cachefilename, $pagehtml . "\n<!-- Cached on " . str_replace('T', ' ', date("c")) . " -->");
-//}
