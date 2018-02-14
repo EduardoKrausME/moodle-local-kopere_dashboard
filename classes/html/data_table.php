@@ -189,7 +189,13 @@ class data_table {
             /** @var table_header_item $columninfo */
             foreach ($this->column_info as $key => $columninfo) {
                 echo "<th class=\"header-col text-center\" colspan=\"{$columninfo->cols}\">";
-                echo $columninfo->title;
+
+                if (strpos($columninfo->title, '[[') === 0) {
+                    echo get_string_kopere(substr($columninfo->title, 2, -2));
+                } else {
+                    echo $columninfo->title;
+                }
+
                 echo '</th>';
             }
             echo '</tr>';
