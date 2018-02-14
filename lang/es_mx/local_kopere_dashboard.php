@@ -35,6 +35,8 @@ $string['settings'] = 'Configuraciones';
 $string['close'] = 'Cerrar';
 $string['crontask_tmp'] = 'Cron limpiar carpeta tmp';
 
+$string['integracaoroot'] = 'Integraciones';
+
 $string['messageprovider:kopere_dashboard_messages'] = 'Enviar Notificaciones';
 $string['kopere_dashboard:emailconfirmsubmission'] = 'Enviar Notificaciones';
 
