@@ -22,7 +22,6 @@
  */
 
 
-defined('MOODLE_INTERNAL') || die();
 ob_start();
 
 require('../../config.php');

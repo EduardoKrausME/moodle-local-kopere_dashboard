@@ -160,7 +160,7 @@ class table {
         echo '</tr>';
         echo '</thead>';
         echo "\n";
-        $this->_isprint = true;
+        $this->isprint = true;
     }
 
     /**
@@ -168,7 +168,7 @@ class table {
      * @param string $class
      */
     public function set_row( $linhas, $class = '') {
-        if (!$this->_isprint && count($this->colunas)) {
+        if (!$this->isprint && count($this->colunas)) {
             $this->print_header($this->colunas);
         }
 

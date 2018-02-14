@@ -80,8 +80,8 @@ class input_select extends input_base {
      */
     public function set_values($values, $key = 'key', $value = 'value') {
         $this->values = $values;
-        $this->values_key = $key;
-        $this->values_value = $value;
+        $this->valueskey = $key;
+        $this->valuesvalue = $value;
 
         return $this;
     }
@@ -92,7 +92,7 @@ class input_select extends input_base {
      * @return $this
      */
     public function set_add_selecione($addselecione) {
-        $this->add_selecione = $addselecione;
+        $this->addselecione = $addselecione;
 
         return $this;
     }
@@ -114,22 +114,22 @@ class input_select extends input_base {
 
         $return .= ">";
 
-        if ($this->add_selecione) {
+        if ($this->addselecione) {
             $return .= "\n\t<option value=\"\">..::Selecione::..</option>";
         }
 
         foreach ($this->values as $row) {
             $extra = '';
             if (is_array($row)) {
-                $key = $row[$this->values_key];
-                $value = $row[$this->values_value];
+                $key = $row[$this->valueskey];
+                $value = $row[$this->valuesvalue];
 
                 if (isset($row['disableselect']) && $row['disableselect']) {
                     $extra = ' disabled="disabled"';
                 }
             } else {
-                $key = $row->{$this->values_key};
-                $value = $row->{$this->values_value};
+                $key = $row->{$this->valueskey};
+                $value = $row->{$this->valuesvalue};
 
                 if (isset($row->disableselect) && $row->disableselect) {
                     $extra = ' disabled="disabled"';

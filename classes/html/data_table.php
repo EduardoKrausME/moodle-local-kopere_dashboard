@@ -111,7 +111,7 @@ class data_table {
     /**
      * @param $ajaxurl
      */
-    public function set_ajaxurl($ajaxurl) {
+    public function set_ajax_url($ajaxurl) {
         $this->ajaxurl = $ajaxurl;
     }
 
@@ -119,7 +119,7 @@ class data_table {
      * @param $url
      * @param $chave
      */
-    public function set_clickredirect($url, $chave) {
+    public function set_click_redirect($url, $chave) {
         $this->clickredirect = array();
         $this->clickredirect['chave'] = $chave;
         $this->clickredirect['url'] = '?' . $url;
@@ -129,7 +129,7 @@ class data_table {
      * @param $url
      * @param $chave
      */
-    public function set_clickmodal($url, $chave) {
+    public function set_click_modal($url, $chave) {
         $this->clickmodal = array();
         $this->clickmodal['chave'] = $chave;
         $this->clickmodal['url'] = $url;
@@ -210,7 +210,11 @@ class data_table {
             if ($column->title == '') {
                 echo "&nbsp;";
             } else {
-                echo $column->title;
+                if (strpos($column->title, '[[') === 0) {
+                    echo get_string_kopere(substr($column->title, 2, -2));
+                } else {
+                    echo $column->title;
+                }
             }
             echo '</th>';
 

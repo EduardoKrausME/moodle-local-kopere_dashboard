@@ -49,7 +49,7 @@ class benchmark {
                        target="_blank">report_benchmark</a>');
 
         echo '<div style="text-align: center;">' . get_string_kopere('benchmark_info');
-        button::add(get_string_kopere('benchmark_execute'), 'benchmark::execute');
+        button::add(get_string_kopere('benchmark_execute'), 'Benchmark::execute');
         echo '</div>';
 
         echo '</div>';
