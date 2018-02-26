@@ -57,7 +57,7 @@ $string['color_yellow'] = 'Amarelo';
 $string['color_orange'] = 'Laranja';
 $string['color_grey'] = 'Cinza';
 $string['color_purple'] = 'Roxo';
-$string['color_brown'] = 'marrom';
+$string['color_brown'] = 'Marrom';
 $string['filemanager_title'] = 'Gerenciador de Arquivos';
 
 // DataTables.
