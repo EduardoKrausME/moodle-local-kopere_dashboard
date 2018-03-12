@@ -211,7 +211,7 @@ class notificationsutil {
                 = "SELECT COUNT(*) AS num
                      FROM {course_modules} cm
                      JOIN {modules} m ON cm.module = m.id
-                    WHERE m.name = :NAME";
+                    WHERE m.name = :name";
             $count = $DB->get_record_sql($sql, array('name' => $module));
 
             if ($count->num || !$onlyused) {
