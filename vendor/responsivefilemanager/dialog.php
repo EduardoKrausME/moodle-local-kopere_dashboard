@@ -129,26 +129,20 @@ if (optional_param('submit', false, PARAM_RAW)) {
     }
     $view = $_SESSION['RF']["view_type"];
 
-    if (isset($_GET["filter"])) {
-        $filter = fix_get_params($_GET["filter"]);
-    } else {
-        $filter = '';
-    }
+    $filter = fix_get_params(optional_param("filter", '', PARAM_TEXT));
 
     if (!isset($_SESSION['RF']['sort_by'])) {
         $_SESSION['RF']['sort_by'] = '';
     }
-    if (isset($_GET["sort_by"])) {
-        $sort_by = $_SESSION['RF']['sort_by'] = fix_get_params($_GET["sort_by"]);
-    } else {
-        $sort_by = $_SESSION['RF']['sort_by'];
-    }
+
+    $sort_by = optional_param("sort_by", '', PARAM_TEXT);
 
     if (!isset($_SESSION['RF']['descending'])) {
         $_SESSION['RF']['descending'] = false;
     }
-    if (isset($_GET["descending"])) {
-        $descending = $_SESSION['RF']['descending'] = fix_get_params($_GET["descending"]) === "true";
+
+    if (optional_param("descending", false, PARAM_TEXT)) {
+        $descending = $_SESSION['RF']['descending'] = fix_get_params(optional_param("descending", '', PARAM_TEXT)) === "true";
     } else {
         $descending = $_SESSION['RF']['descending'];
     }
@@ -184,7 +178,7 @@ if (optional_param('submit', false, PARAM_RAW)) {
         'field_id' => $field_id,
         'akey' => (isset($akey) && $akey != '' ? $akey : 'key'),
         'fldr' => '',
-        'folderSaveFile' => $_REQUEST['folderSaveFile']
+        'folderSaveFile' => optional_param('folderSaveFile', '', PARAM_TEXT)
     ));
     ?>
 
@@ -384,7 +378,7 @@ if (optional_param('submit', false, PARAM_RAW)) {
     <input type="hidden" id="lang_edit_image" value="<?php echo lang_Edit_image; ?>"/>
     <input type="hidden" id="lang_extract" value="<?php echo lang_Extract; ?>"/>
     <input type="hidden" id="transliteration" value="<?php echo $transliteration ? "true" : "false"; ?>"/>
-    <input type="hidden" id="folderSaveFile" value="<?php echo $_REQUEST['folderSaveFile']; ?>"/>
+    <input type="hidden" id="folderSaveFile" value="<?php echo optional_param('folderSaveFile', '', PARAM_TEXT) ?>"/>
     <?php if ($upload_files) { ?>
         <!-- uploader div start -->
 
@@ -401,7 +395,7 @@ if (optional_param('submit', false, PARAM_RAW)) {
                       class="dropzone">
                     <input type="hidden" name="path" value="<?php echo $cur_path ?>"/>
                     <input type="hidden" name="path_thumb" value="<?php echo $thumbs_path . $subdir ?>"/>
-                    <input type="hidden" name="folderSaveFile" value="<?php echo $_REQUEST['folderSaveFile']; ?>"/>
+                    <input type="hidden" name="folderSaveFile" value="<?php echo optional_param('folderSaveFile', '', PARAM_TEXT); ?>"/>
 
                     <div class="fallback">
                         <?php echo lang_Upload_file ?>:<br/>
@@ -802,7 +796,7 @@ if (optional_param('submit', false, PARAM_RAW)) {
                                     <input type="hidden" class="size" value="<?php echo $file_array['size']; ?>"/>
                                     <input type="hidden" class="extension" value="<?php echo lang_Type_dir; ?>"/>
                                     <input type="hidden" name="folderSaveFile"
-                                           value="<?php echo $_REQUEST['folderSaveFile']; ?>"/>
+                                           value="<?php echo optional_param('folderSaveFile', '', PARAM_TEXT); ?>"/>
                                     <div
                                             class="file-date"><?php echo date(lang_Date_type, $file_array['date']) ?></div>
                                     <?php if ($show_folder_size) { ?>
@@ -992,7 +986,7 @@ if (optional_param('submit', false, PARAM_RAW)) {
                             <input type="hidden" class="name" value=""/>
 
                             <input type="hidden" name="folderSaveFile"
-                                   value="<?php echo $_REQUEST['folderSaveFile']; ?>"/>
+                                   value="<?php echo optional_param('folderSaveFile', '', PARAM_TEXT); ?>"/>
 
                             <div class="file-date"><?php echo date(lang_Date_type, $file_array['date']) ?></div>
                             <div class="file-size"><?php echo makeSize($file_array['size']) ?></div>
@@ -1006,7 +1000,7 @@ if (optional_param('submit', false, PARAM_RAW)) {
                                     <input type="hidden" name="path" value="<?php echo $rfm_subfolder . $subdir ?>"/>
                                     <input type="hidden" class="name_download" name="name" value="<?php echo $file ?>"/>
                                     <input type="hidden" name="folderSaveFile"
-                                           value="<?php echo $_REQUEST['folderSaveFile']; ?>"/>
+                                           value="<?php echo $optional_param('folderSaveFile', '', PARAM_TEXT); ?>"/>
 
                                     <a title="<?php echo lang_Download ?>" class="tip-right" href="javascript:void('')"
                                        onclick="$('#form<?php echo $nu; ?>').submit();"><i

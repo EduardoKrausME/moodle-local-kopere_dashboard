@@ -177,13 +177,16 @@ class backup {
     }
 
     public function delete() {
-        $backupfile = $this->get_backup_path() . $_GET['file'];
+        $file = optional_param('file', '', PARAM_TEXT);
+        $status = optional_param('status', false, PARAM_TEXT);
+
+        $backupfile = $this->get_backup_path() . $file;
 
         if (file_exists($backupfile)) {
-            preg_match("/backup_(\d+)-(\d+)-(\d+)-(\d+)-(\d+).tar.gz/", $_GET['file'], $p);
+            preg_match("/backup_(\d+)-(\d+)-(\d+)-(\d+)-(\d+).tar.gz/", $file, $p);
             $data = $p[3] . '/' . $p[2] . '/' . $p[1] . ' às ' . $p[4] . ':' . $p[5];
 
-            if (isset($_GET['status'])) {
+            if ($status) {
                 @unlink($backupfile);
 
                 mensagem::agenda_mensagem_success(get_string_kopere('backup_deletesucessfull'));
@@ -196,9 +199,9 @@ class backup {
 
                 echo "<div class=\"element-box\">
                           <h3>" . get_string_kopere('backup_delete_confirm') . "</h3>
-                          <p>" . get_string_kopere('backup_delete_title', ['file' => $_GET['file'], 'data' => $data]) . "</p>
+                          <p>" . get_string_kopere('backup_delete_title', ['file' => $file, 'data' => $data]) . "</p>
                           <div>";
-                button::delete(get_string('yes'), "?backup::delete&file={$_GET['file']}&status=sim", '', false);
+                button::delete(get_string('yes'), "?backup::delete&file={$file}&status=sim", '', false);
                 button::add(get_string('no'), 'backup::dashboard', 'margin-left-10', false);
                 echo "    </div>
                       </div>";
@@ -215,12 +218,14 @@ class backup {
         ob_end_flush();
         session_write_close();
 
-        $backupfile = $this->get_backup_path() . $_GET['file'];
+        $file = optional_param('file', '', PARAM_TEXT);
+
+        $backupfile = $this->get_backup_path() . $file;
 
         if (file_exists($backupfile)) {
             header('Content-Type: application/octet-stream');
             header('Content-Transfer-Encoding: Binary');
-            header('Content-disposition: attachment; filename="' . $_GET['file'] . '"');
+            header('Content-disposition: attachment; filename="' . $file . '"');
 
             readfile($backupfile);
             end_util::end_script_show();
