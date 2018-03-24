@@ -24,10 +24,8 @@ ob_start();
 mb_internal_encoding('UTF-8');
 ob_clean();
 
-$subFolder = '';
-if (isset($_REQUEST['folderSaveFile']) && $_REQUEST['folderSaveFile']) {
-    $subFolder = $_REQUEST['folderSaveFile'] . '/';
-}
+$subFolder = optional_param('folderSaveFile', '', PARAM_TEXT);
+
 $root_dir = $CFG->dataroot . '/kopere/dashboard/';
 $root_href = $CFG->wwwroot . '/local/kopere_dashboard/attach.php?src=';
 $base_url = $CFG->wwwroot . '/local/kopere_dashboard/attach.php?src=';
