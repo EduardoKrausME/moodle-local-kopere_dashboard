@@ -83,19 +83,20 @@ class string_util {
      * @return array|mixed
      */
     public static function clear_all_params($param, $default, $type) {
+        $post = $_POST;
         if ($param == null) {
-            return self::clear_array_params($_POST, $type);
+            return self::clear_array_params($post, $type);
         }
 
-        if (!isset($_POST[$param])) {
+        if (!isset($post[$param])) {
             return $default;
         }
 
-        if (is_string($_POST[$param])) {
+        if (is_string($post[$param])) {
             return self::clear_array_params($param, $type);
         }
 
-        return self::clear_array_params($_POST[$param], $type);
+        return self::clear_array_params($post[$param], $type);
     }
 
     /**
