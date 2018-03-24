@@ -35,10 +35,11 @@ class mensagem {
      * @param $mensagem
      */
     public static function agenda_mensagem($mensagem) {
-        if (!isset($_SESSION['kopere_mensagem'])) {
-            $_SESSION['kopere_mensagem'] = $mensagem;
+        $cookie = session::get('kopere_message');
+        if (!$cookie) {
+            session::set('kopere_message', $mensagem);
         } else {
-            $_SESSION['kopere_mensagem'] .= $mensagem;
+            session::set('kopere_message', $cookie . $mensagem);
         }
     }
 
@@ -46,9 +47,10 @@ class mensagem {
      * @return string
      */
     public static function get_mensagem_agendada() {
-        if (isset($_SESSION['kopere_mensagem'])) {
-            $texto = $_SESSION['kopere_mensagem'];
-            @$_SESSION['kopere_mensagem'] = null;
+        $cookie = session::get('kopere_message');
+        if ($cookie) {
+            $texto = $cookie;
+            session::set('kopere_message', null);
             if ($texto != null) {
                 return $texto;
             }
@@ -60,7 +62,7 @@ class mensagem {
      * return void
      */
     public static function clear_mensagem() {
-        @$_SESSION['kopere_mensagem'] = null;
+        session::set('kopere_message', null);
     }
 
     /**
