@@ -35,6 +35,12 @@ $string['settings'] = 'Configuraciones';
 $string['close'] = 'Cerrar';
 $string['crontask_tmp'] = 'Cron limpiar carpeta tmp';
 
+$string['kopere_dashboard_open'] = 'Abrir Kopere';
+$string['kopere_dashboard_open_desc'] = '¿Qué forma desea abrir el Tablero Kopere';
+$string['kopere_dashboard_open_popup'] = 'En popup';
+$string['kopere_dashboard_open_blank'] = 'En nueva ventana';
+$string['kopere_dashboard_open_top'] = 'En la misma ventana';
+
 $string['integracaoroot'] = 'Integraciones';
 
 $string['messageprovider:kopere_dashboard_messages'] = 'Enviar Notificaciones';
@@ -301,6 +307,7 @@ $string['reports_report_user-4'] = 'Reporte de ingresos de estudiante';
 $string['reports_report_user-5'] = 'Usuarios que nunca han ingresado';
 $string['reports_report_user-6'] = 'Usuarios que completaron curso';
 $string['reports_report_user-7'] = 'Usuarios registrados, que no ingresan al curso';
+$string['reports_report_user-8'] = 'Todos los usuarios';
 $string['reports_reportcat_badge'] = 'Reporte de Insignias';
 $string['reports_reportcat_courses'] = 'Reporte de Curso';
 $string['reports_reportcat_enrol_cohort'] = 'Reporte de Cohorte';

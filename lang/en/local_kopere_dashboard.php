@@ -29,6 +29,12 @@ $string['settings'] = 'Settings';
 $string['close'] = 'Close';
 $string['crontask_tmp'] = 'Cron clear tmp folder';
 
+$string['kopere_dashboard_open'] = 'Open Kopere';
+$string['kopere_dashboard_open_desc'] = 'Which way do you want to open Kopere Dashboard';
+$string['kopere_dashboard_open_popup'] = 'In popup';
+$string['kopere_dashboard_open_blank'] = 'In new window';
+$string['kopere_dashboard_open_top'] = 'In the same window';
+
 $string['integracaoroot'] = 'Integration';
 
 $string['messageprovider:kopere_dashboard_messages'] = 'Send Notifications';
@@ -213,6 +219,7 @@ $string['reports_report_user-4'] = 'Student logins report';
 $string['reports_report_user-5'] = 'Users who have never logged in';
 $string['reports_report_user-6'] = 'Users who completed course';
 $string['reports_report_user-7'] = 'Registered users, who do not log in to the Course';
+$string['reports_report_user-8'] = 'All users';
 $string['reports_timecreated'] = 'Registered in';
 $string['reports_coursesize'] = 'Course Files';
 $string['reports_modulessize'] = 'Modules Files';

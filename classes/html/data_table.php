@@ -190,7 +190,9 @@ class data_table {
             foreach ($this->columninfo as $key => $columninfo) {
                 echo "<th class=\"header-col text-center\" colspan=\"{$columninfo->cols}\">";
 
-                if (strpos($columninfo->title, '[[') === 0) {
+                if (strpos($columninfo->title, '[[[') === 0) {
+                    echo get_string(substr($columninfo->title, 3, -3));
+                }elseif (strpos($columninfo->title, '[[') === 0) {
                     echo get_string_kopere(substr($columninfo->title, 2, -2));
                 } else {
                     echo $columninfo->title;
@@ -210,7 +212,9 @@ class data_table {
             if ($column->title == '') {
                 echo "&nbsp;";
             } else {
-                if (strpos($column->title, '[[') === 0) {
+                if (strpos($column->title, '[[[') === 0) {
+                    echo get_string(substr($column->title, 3, -3));
+                }elseif (strpos($column->title, '[[') === 0) {
                     echo get_string_kopere(substr($column->title, 2, -2));
                 } else {
                     echo $column->title;

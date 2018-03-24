@@ -245,7 +245,8 @@ class reports {
 
         if (strlen($koperereports->foreach)) {
             foreach ($reports as $key => $item) {
-                eval($koperereports->foreach);
+                $item = call_user_func($koperereports->foreach, $item);
+                // eval($koperereports->foreach);
                 $reports[$key] = $item;
             }
         }
@@ -258,7 +259,10 @@ class reports {
      * @return string
      */
     private static function get_title($obj) {
-        if (strpos($obj->title, '[[') === 0) {
+        if (strpos($obj->title, '[[[') === 0) {
+            return get_string(substr($obj->title, 3, -3));
+        }
+        elseif (strpos($obj->title, '[[') === 0) {
             return get_string_kopere(substr($obj->title, 2, -2));
         } else {
             return $obj->title;

@@ -29,6 +29,12 @@ $string['settings'] = 'Configurar';
 $string['close'] = 'Fechar';
 $string['crontask_tmp'] = 'Cron que limpa a pasta TMP';
 
+$string['kopere_dashboard_open'] = 'Abrir o Kopere';
+$string['kopere_dashboard_open_desc'] = 'Qual forma deseja abrir o Kopere Dashboard';
+$string['kopere_dashboard_open_popup'] = 'Em popup';
+$string['kopere_dashboard_open_blank'] = 'Em nova janela';
+$string['kopere_dashboard_open_top'] = 'Na mesma janela';
+
 $string['integracaoroot'] = 'Integrações';
 
 $string['messageprovider:kopere_dashboard_messages'] = 'Envia Notificações';
@@ -213,6 +219,7 @@ $string['reports_report_user-4'] = 'Relatório de Logins dos alunos';
 $string['reports_report_user-5'] = 'Usuários que nunca logaram';
 $string['reports_report_user-6'] = 'Usuários que concluíram curso';
 $string['reports_report_user-7'] = 'Os usuários registrados, que não fizeram login no Curso';
+$string['reports_report_user-8'] = 'Todos os usuários';
 $string['reports_timecreated'] = 'Cadastrado em';
 $string['reports_coursesize'] = 'Arquivos do Curso';
 $string['reports_modulessize'] = 'Arquivos dos Módulos';
