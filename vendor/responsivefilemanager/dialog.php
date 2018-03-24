@@ -255,7 +255,7 @@ if (optional_param('submit', false, PARAM_RAW)) {
         <script type="text/javascript" src="js/jquery.queryloader2.min.js"></script>
         <?php
         if ($aviary_active) {
-            if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) {
+            if ( strpos($CFG->wwwroot, 'https://') === 0 ) {
                 ?>
                 <script type="text/javascript" src="https://dme0ih8comzn4.cloudfront.net/js/feather.js"></script>
             <?php }else{ ?>
@@ -355,9 +355,13 @@ if (optional_param('submit', false, PARAM_RAW)) {
     <input type="hidden" id="sub_folder" value="<?php echo $rfm_subfolder; ?>"/>
     <input type="hidden" id="file_number_limit_js" value="<?php echo $file_number_limit_js; ?>"/>
     <input type="hidden" id="descending" value="<?php echo $descending ? "true" : "false"; ?>"/>
-    <?php $protocol = 'http'; ?>
+    <?php
+    global $CFG;
+    $partes = explode('/', $CFG->wwwroot);
+    $host = sprintf("%s//%s", $partes[0], $partes[2]);
+    ?>
     <input type="hidden" id="current_url"
-           value="<?php echo str_replace(array('&filter=' . $filter), array(''), $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>"/>
+           value="<?php echo str_replace(array('&filter=' . $filter), array(''), $host . $_SERVER['REQUEST_URI']); ?>"/>
     <input type="hidden" id="lang_show_url" value="<?php echo lang_Show_url; ?>"/>
     <input type="hidden" id="copy_cut_files_allowed" value="<?php if ($copy_cut_files)
         echo 1; else echo 0; ?>"/>

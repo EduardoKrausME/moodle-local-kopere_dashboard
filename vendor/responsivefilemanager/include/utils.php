@@ -239,11 +239,9 @@ function fix_path($path, $transliteration) {
 }
 
 function base_url() {
-    return sprintf(
-        "%s://%s",
-        isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
-        $_SERVER['HTTP_HOST']
-    );
+    global $CFG;
+    $partes = explode('/', $CFG->wwwroot);
+    return sprintf("%s//%s", $partes[0], $partes[2]);
 }
 
 function config_loading($current_path, $fld) {
