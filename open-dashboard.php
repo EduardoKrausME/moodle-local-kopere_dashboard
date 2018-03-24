@@ -205,8 +205,11 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
                             get_string_kopere('webpages_title'));
                     }
                     dashboard_util::add_menu('Benchmark::test', 'performace', get_string_kopere('benchmark_title'));
-                    if (has_capability('moodle/site:config', context_system::instance()) && $CFG->dbtype == 'mysqli') {
-                        dashboard_util::add_menu('backup::dashboard', 'data', 'Backup');
+
+                    if( class_exists("local_kopere_dashboard\backup") ) {
+                        if (has_capability('moodle/site:config', context_system::instance()) && $CFG->dbtype == 'mysqli') {
+                            dashboard_util::add_menu('backup::dashboard', 'data', 'Backup');
+                        }
                     }
 
                     dashboard_util::add_menu('about::dashboard', 'about', get_string_kopere('about_title'));
