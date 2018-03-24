@@ -359,9 +359,11 @@ if (optional_param('submit', false, PARAM_RAW)) {
     global $CFG;
     $partes = explode('/', $CFG->wwwroot);
     $host = sprintf("%s//%s", $partes[0], $partes[2]);
+
+    $request_uri = clean_param($_SERVER['REQUEST_URI'], PARAM_TEXT)
     ?>
     <input type="hidden" id="current_url"
-           value="<?php echo str_replace(array('&filter=' . $filter), array(''), $host . $_SERVER['REQUEST_URI']); ?>"/>
+           value="<?php echo str_replace(array('&filter=' . $filter), array(''), $host . $request_uri); ?>"/>
     <input type="hidden" id="lang_show_url" value="<?php echo lang_Show_url; ?>"/>
     <input type="hidden" id="copy_cut_files_allowed" value="<?php if ($copy_cut_files)
         echo 1; else echo 0; ?>"/>
