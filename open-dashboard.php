@@ -42,8 +42,9 @@ $PAGE->set_url(new moodle_url('/local/kopere_dashboard/open-dashboard.php'));
 $PAGE->set_pagetype('reports');
 $PAGE->set_context(context_system::instance());
 
-if (!strlen($_SERVER['QUERY_STRING'])) {
-    $_SERVER['QUERY_STRING'] = 'dashboard::start';
+$CFG->querystring = clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
+if (!strlen($CFG->querystring)) {
+    $CFG->querystring = 'dashboard::start';
 }
 
 $action = optional_param ( 'action', null, PARAM_RAW );
@@ -214,9 +215,9 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
             </div>
         </div>
 
-        <div class="content-w <?php echo get_path_query($_SERVER['QUERY_STRING']) ?>">
+        <div class="content-w <?php echo get_path_query($CFG->querystring) ?>">
             <?php
-            load_by_query($_SERVER['QUERY_STRING']);
+            load_by_query($CFG->querystring);
             ?>
         </div>
 

@@ -175,8 +175,9 @@ class data_table {
      * @throws \coding_exception
      */
     public function print_header($class = '', $printbody = true) {
+        global $CFG;
         if ($this->isexport && $this->ajaxurl == null) {
-            button::info(get_string_kopere('reports_export'), "{$_SERVER['QUERY_STRING']}&export=xls");
+            button::info(get_string_kopere('reports_export'), "{$CFG->querystring}&export=xls");
 
             export::header(optional_param('export', '', PARAM_TEXT));
         }

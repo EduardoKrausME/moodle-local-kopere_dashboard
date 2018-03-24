@@ -74,7 +74,7 @@ class course_access_grade {
 
         $sections = $DB->get_records('course_sections', array('course' => $courseid), 'section asc');
 
-        button::info(get_string_kopere('reports_export'), "{$_SERVER['QUERY_STRING']}&export=xls");
+        button::info(get_string_kopere('reports_export'), "{$CFG->querystring}&export=xls");
 
         $export = optional_param('export', '', PARAM_TEXT);
         export::header($export, "Lista de alunos - $course->fullname");

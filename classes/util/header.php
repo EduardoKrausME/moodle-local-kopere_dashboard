@@ -47,12 +47,12 @@ class header {
      * @param bool $isdie
      */
     public static function reload( $isdie = true) {
+        global $CFG;
         ob_clean();
-        $url = $_SERVER['QUERY_STRING'];
 
-        header('Location: ?' . $url);
+        header('Location: ?' . $CFG->querystring);
         if ($isdie) {
-            end_util::end_script_show ('Redirecionando para ?' . $url);
+            end_util::end_script_show ('Redirecionando para ?' . $CFG->querystring);
         }
     }
 

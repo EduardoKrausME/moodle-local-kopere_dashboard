@@ -201,8 +201,9 @@ class dashboard_util {
      * @return string
      */
     private static function test_menu_active($menufunction) {
+        global $CFG;
         preg_match("/.*?::/", $menufunction, $paths);
-        if (strpos($_SERVER['QUERY_STRING'], $paths[0]) === 0) {
+        if (strpos($CFG->querystring, $paths[0]) === 0) {
             return 'active';
         }
 
