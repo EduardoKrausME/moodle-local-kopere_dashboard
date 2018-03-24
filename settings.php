@@ -28,9 +28,11 @@ if (!$PAGE->requires->is_head_done()) {
 }
 
 if ($hassiteconfig) {
+    $settings = new admin_settingpage('kopere_dashboard', get_string('pluginname', 'local_kopere_dashboard'));
+    $ADMIN->add('localplugins', $settings);
 
     if (!$ADMIN->locate('integracaoroot')) {
-        $ADMIN->add('root', new admin_category('integracaoroot', get_string ('integracaoroot', 'local_kopere_dashboard')));
+        $ADMIN->add('root', new admin_category('integracaoroot', get_string('integracaoroot', 'local_kopere_dashboard')));
     }
 
     $ADMIN->add('integracaoroot',
@@ -38,6 +40,24 @@ if ($hassiteconfig) {
             'local_kopere_dashboard',
             get_string('modulename', 'local_kopere_dashboard'),
             $CFG->wwwroot . '/local/kopere_dashboard/open.php'
+        )
+    );
+}
+
+if ($ADMIN->fulltree) {
+
+    $open_itens = array(
+        'popup' => get_string('kopere_dashboard_open_popup', 'local_kopere_dashboard'),
+        '_top' => get_string('kopere_dashboard_open_top', 'local_kopere_dashboard'),
+        '_blank' => get_string('kopere_dashboard_open_blank', 'local_kopere_dashboard'),
+    );
+
+    $settings->add(
+        new admin_setting_configselect('kopere_dashboard_open',
+            get_string('kopere_dashboard_open', 'local_kopere_dashboard'),
+            get_string('kopere_dashboard_open_desc', 'local_kopere_dashboard'),
+            'popup',
+            $open_itens
         )
     );
 }

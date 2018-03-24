@@ -46,11 +46,40 @@ $PAGE->requires->js('/local/kopere_dashboard/assets/popup.js');
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string_kopere('open_dashboard'));
 
-?>
+$url = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?dashboard::start";
+
+if( $CFG->kopere_dashboard_open == '_blank'){?>
+
     <div class="text-center kopere-dashboard" style="text-align: center;">
         <a type="button" target="_blank"
+           class="dashboard-load-blank btn btn-lg btn-primary"
+           href="<?php echo $url ?>"
+           id="open-startup-blank"><?php echo get_string_kopere('open_dashboard') ?></a>
+    </div>
+
+    <script>
+        window.open("<?php echo $url ?>", "_blank");
+    </script>
+    <?php
+
+} elseif( $CFG->kopere_dashboard_open == '_top'){?>
+
+    <div class="text-center kopere-dashboard" style="text-align: center;">
+        <a type="button"
+           class="dashboard-load-top btn btn-lg btn-primary"
+           href="<?php echo $url ?>"
+           id="open-startup-top"><?php echo get_string_kopere('open_dashboard') ?></a>
+    </div>
+
+    <meta http-equiv="refresh" content="0; url=<?php echo $url ?>">
+    <?php
+
+} else { ?>
+
+    <div class="text-center kopere-dashboard" style="text-align: center;">
+        <a type="button"
            class="dashboard-load-popup btn btn-lg btn-primary"
-           href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/open-dashboard.php?dashboard::start"
+           href="<?php echo $url ?>"
            id="open-startup"><?php echo get_string_kopere('open_dashboard') ?></a>
     </div>
 
@@ -58,13 +87,14 @@ echo $OUTPUT->heading(get_string_kopere('open_dashboard'));
         <div id="base-popup">
             <a href="#" id="base-popup-close" role="button">X</a>
             <div id="operations">
-                <iframe src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/open-dashboard.php?dashboard::start"
+                <iframe src="<?php echo $url ?>"
                         frameborder="0" width="100%" height="100%"></iframe>
             </div>
         </div>
         <div class="ui-widget-overlay"></div>
-    </div>
-<?php
+    </div><?php
+
+}
 
 echo $OUTPUT->footer();
 
