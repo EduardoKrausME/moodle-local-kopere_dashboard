@@ -1,5 +1,5 @@
 {
-    "name": "EduardoKrausME/moodle-local-kopere_dashboard",
+    "name": "EduardoKrausME/moodle-local_kopere_dashboard",
     "type": "moodle-local",
     "require": {
         "composer/installers": "~1.0",
