@@ -47,9 +47,10 @@ if ($hassiteconfig) {
 if ($ADMIN->fulltree) {
 
     $open_itens = array(
-        'popup' => get_string('kopere_dashboard_open_popup', 'local_kopere_dashboard'),
-        '_top' => get_string('kopere_dashboard_open_top', 'local_kopere_dashboard'),
-        '_blank' => get_string('kopere_dashboard_open_blank', 'local_kopere_dashboard'),
+        'iternal' => 'Interno',
+        'popup'   => get_string('kopere_dashboard_open_popup', 'local_kopere_dashboard'),
+        '_top'    => get_string('kopere_dashboard_open_top', 'local_kopere_dashboard'),
+        '_blank'  => get_string('kopere_dashboard_open_blank', 'local_kopere_dashboard'),
     );
 
     $settings->add(

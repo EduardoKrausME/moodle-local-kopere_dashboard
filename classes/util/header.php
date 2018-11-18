@@ -36,10 +36,10 @@ class header {
      */
     public static function location( $url, $isdie = true) {
         ob_clean();
-        header('Location: ?' . $url);
+        header('Location: ' . $url);
 
         if ($isdie) {
-            end_util::end_script_show ('Redirecionando para ?' . $url);
+            end_util::end_script_show ('Redirecionando para ' . $url);
         }
     }
 
@@ -50,9 +50,9 @@ class header {
         global $CFG;
         ob_clean();
 
-        header('Location: ?' . $CFG->querystring);
+        header('Location: ?' . url_util::querystring());
         if ($isdie) {
-            end_util::end_script_show ('Redirecionando para ?' . $CFG->querystring);
+            end_util::end_script_show ('Redirecionando para ?' . url_util::querystring());
         }
     }
 

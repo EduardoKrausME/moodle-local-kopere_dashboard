@@ -26,6 +26,7 @@ namespace local_kopere_dashboard\html;
 defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\util\export;
+use local_kopere_dashboard\util\url_util;
 
 /**
  * Class data_table
@@ -122,7 +123,7 @@ class data_table {
     public function set_click_redirect($url, $chave) {
         $this->clickredirect = array();
         $this->clickredirect['chave'] = $chave;
-        $this->clickredirect['url'] = '?' . $url;
+        $this->clickredirect['url'] = $url;
     }
 
     /**
@@ -177,7 +178,7 @@ class data_table {
     public function print_header($class = '', $printbody = true) {
         global $CFG;
         if ($this->isexport && $this->ajaxurl == null) {
-            button::info(get_string_kopere('reports_export'), "{$CFG->querystring}&export=xls");
+            button::info(get_string_kopere('reports_export'), url_util::querystring(). "&export=xls");
 
             export::header(optional_param('export', '', PARAM_TEXT));
         }
@@ -337,7 +338,7 @@ class data_table {
 
         $ajaxconfig = '';
         if ($this->ajaxurl) {
-            $ajaxconfig = 'ajax : {url:"open-ajax-table.php?' . $this->ajaxurl . '",type: "POST"},';
+            $ajaxconfig = 'ajax : {url:"open-ajax-table.php' . $this->ajaxurl . '",type: "POST"},';
         }
 
         $columndata = implode(", ", $this->columndata);

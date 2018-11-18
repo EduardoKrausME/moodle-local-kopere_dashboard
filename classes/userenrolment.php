@@ -50,7 +50,7 @@ class userenrolment {
         header::notfound_null($enrolment, get_string_kopere('userenrolment_notfound'));
 
         ob_clean();
-        dashboard_util::start_popup(get_string_kopere('userenrolment_edit'), 'userenrolment::mathedit_save');
+        dashboard_util::start_popup(get_string_kopere('userenrolment_edit'), '?classname=userenrolment&method=mathedit_save');
 
         $form = new form();
         $form->create_hidden_input('ueid', $ueid);

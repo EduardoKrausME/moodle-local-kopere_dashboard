@@ -44,15 +44,36 @@ class dashboard_util {
      *
      * @return string
      */
-    public static function set_titulo($title, $infourl = null) {
+    public static function set_titulo($title, $settingurl, $infourl) {
+        global $CFG;
+
         self::$currenttitle = $title;
 
+        $breadcrumbreturn = '';
+
+        if ($settingurl != null) {
+            $breadcrumbreturn
+                .= "<div class=\"setting\">
+                        <a data-toggle=\"modal\" data-target=\"#modal-edit\"
+                           data-href=\"open-ajax-table.php{$settingurl}\"
+                           href=\"#\">
+                            <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg\"
+                                 alt=\"Settings\" >
+                        </a>
+                    </div>";
+        }
+
         if ($infourl == null) {
-            return "<h3 class=\"element-header\"> $title </h3>";
+            return "<h3 class=\"element-header\"> 
+                        {$title} 
+                        {$breadcrumbreturn}
+                    </h3>";
         } else {
+            $buttonhelp = button::help($infourl);
             return "<h3 class=\"element-header\">
-                        $title
-                        " . button::help($infourl) . "
+                        {$title}
+                        {$breadcrumbreturn}
+                        {$buttonhelp}
                     </h3>";
         }
     }
@@ -64,7 +85,7 @@ class dashboard_util {
      * @param null $infourl
      */
     public static function start_page($breadcrumb, $pagetitle = null, $settingurl = null, $infourl = null) {
-        global $CFG, $SITE;
+        global $CFG, $SITE, $PAGE;
         $breadcrumbreturn = '';
 
         if (!AJAX_SCRIPT) {
@@ -74,7 +95,7 @@ class dashboard_util {
                             <a target=\"_top\" href=\"{$CFG->wwwroot}/\">{$SITE->fullname}</a>
                         </li>
                         <li>
-                            <a href=\"?dashboard::start\">" . get_string_kopere('dashboard') . "</a>
+                            <a href=\"?classname=dashboard&method=start\">" . get_string_kopere('dashboard') . "</a>
                         </li>";
 
             $title = "";
@@ -89,9 +110,13 @@ class dashboard_util {
                     } else {
                         $breadcrumbreturn
                             .= '<li>
-                                    <a href="?' . $breadcrumbitem[0] . '">' . $breadcrumbitem[1] . '</a>
+                                    <a href="' . $breadcrumbitem[0] . '">' . $breadcrumbitem[1] . '</a>
                                 </li>';
                         $title = $breadcrumbitem[1];
+                    }
+
+                    if( $CFG->kopere_dashboard_open == 'iternal') {
+                        $PAGE->navbar->add($breadcrumbitem[1]);
                     }
                 }
             }
@@ -100,7 +125,7 @@ class dashboard_util {
                 $breadcrumbreturn
                     .= "<li class=\"setting\">
                             <a data-toggle=\"modal\" data-target=\"#modal-edit\"
-                               data-href=\"open-ajax-table.php?$settingurl\"
+                               data-href=\"open-ajax-table.php{$settingurl}\"
                                href=\"#\">
                                 <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg\"
                                      alt=\"Settings\" >
@@ -115,7 +140,11 @@ class dashboard_util {
                 if ($pagetitle == -1) {
                     $pagetitle = $title;
                 }
-                $breadcrumbreturn .= self::set_titulo($pagetitle, $infourl);
+                $breadcrumbreturn .= self::set_titulo($pagetitle, $settingurl, $infourl);
+
+                if( $CFG->kopere_dashboard_open == 'iternal') {
+                    $PAGE->navbar->add($pagetitle);
+                }
             }
 
             $breadcrumbreturn .= mensagem::get_mensagem_agendada();
@@ -142,18 +171,22 @@ class dashboard_util {
     }
 
     /**
-     * @param       $menufunction
+     * @param       $classname
+     * @param       $methodname
      * @param       $menuicon
      * @param       $menuname
      * @param array $submenus
+     * @return string
      */
-    public static function add_menu($menufunction, $menuicon, $menuname, $submenus = array()) {
+    public static function add_menu($classname, $methodname, $menuicon, $menuname, $submenus = array()) {
         global $CFG;
 
-        $class = self::test_menu_active($menufunction);
+        $retorno = "";
+
+        $class = self::test_menu_active($classname);
 
         $plugin = '';
-        preg_match("/(.*?)-/", $menufunction, $menufunctionstart);
+        preg_match("/(.*?)-/", $classname, $menufunctionstart);
         if (isset($menufunctionstart[1])) {
             $plugin = "_" . $menufunctionstart[1];
         }
@@ -168,42 +201,49 @@ class dashboard_util {
             if (strpos($submenu[2], 'http') === 0) {
                 $iconurl = $submenu[2];
             } else {
-                $iconurl = "{$CFG->wwwroot}/local/kopere_dashboard$plugin/assets/dashboard/img/iconactive/{$submenu[2]}.svg";
+                $iconurl = "{$CFG->wwwroot}/local/kopere_dashboard{$plugin}/assets/dashboard/img/iconactive/{$submenu[2]}.svg";
             }
 
             $submenuhtml
-                .= "<li class=\"$classsub\">
-                        <a href=\"?{$submenu[0]}\">
-                            <img src=\"$iconurl\"
+                .= "<li class=\"contains_branch {$classsub}\">
+                        <a href=\"{$submenu[0]}\">
+                            <img src=\"{$iconurl}\"
                                  class=\"icon-w\" alt=\"Icon\">
                             <span>{$submenu[1]}</span>
                         </a>
                     </li>";
         }
         if ($submenuhtml != '') {
-            $submenuhtml = "<ul class='submenu'>$submenuhtml</ul>";
+            $submenuhtml = "<ul class='submenu-kopere'>{$submenuhtml}</ul>";
         }
 
-        echo "
+        $retorno .= " 
                 <li class=\"$class\">
-                    <a href=\"?$menufunction\">
-                        <img src=\"{$CFG->wwwroot}/local/kopere_dashboard$plugin/assets/dashboard/img/icon$class/$menuicon.svg\"
+                    <a href=\"?classname={$classname}&method={$methodname}\">
+                        <img src=\"{$CFG->wwwroot}/local/kopere_dashboard{$plugin}/assets/dashboard/img/icon{$class}/{$menuicon}.svg\"
                              class=\"icon-w\" alt=\"Icon\">
-                        <span>$menuname</span>
+                        <span>{$menuname}</span>
                     </a>
-                    $submenuhtml
+                    {$submenuhtml}
                 </li>";
+
+        return $retorno;
     }
 
     /**
-     * @param $menufunction
+     * @param $classname
      *
      * @return string
      */
-    private static function test_menu_active($menufunction) {
-        global $CFG;
-        preg_match("/.*?::/", $menufunction, $paths);
-        if (strpos($CFG->querystring, $paths[0]) === 0) {
+    private static function test_menu_active($classname) {
+
+        $_classname = optional_param('classname', '', PARAM_TEXT);
+
+        if ($classname == $_classname) {
+            return 'active';
+        }
+
+        if (strpos($classname, explode('-', $_classname)[0]) === 0) {
             return 'active';
         }
 
@@ -223,7 +263,7 @@ class dashboard_util {
         if ($formaction) {
             echo '<form method="post" class="validate" >';
             echo '<input type="hidden" name="POST"  value="true" />';
-            echo '<input type="hidden" name="action" value="?' . $formaction . '" />';
+            echo '<input type="hidden" name="action" value="' . $formaction . '" />';
             self::$iswithform = true;
         } else {
             self::$iswithform = false;

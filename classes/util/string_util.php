@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\util;
 
-use Horde\Socket\Client\Exception;
-
 defined('MOODLE_INTERNAL') || die();
 
 /**

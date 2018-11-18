@@ -247,15 +247,15 @@ $string['dashboard_title_online'] = 'Online / Última hora';
 $string['dashboard_title_course'] = 'Cursos / Visíveis';
 $string['dashboard_title_disk'] = 'Uso de Disco';
 $string['dashboard_grade_title'] = 'Últimas notas';
-$string['dashboard_grade_inmod'] = 'no módulo <strong>{$a->itemname}</strong> do curso <a href="?courses::details&courseid={$a->courseid}">{$a->coursename}</a>';
-$string['dashboard_grade_incourse'] = 'no curso <a href="?courses::details&courseid={$a->courseid}">{$a->coursename}</a>';
+$string['dashboard_grade_inmod'] = 'no módulo <strong>{$a->itemname}</strong> do curso <a href="?classname=courses&method=details&courseid={$a->courseid}">{$a->coursename}</a>';
+$string['dashboard_grade_incourse'] = 'no curso <a href="?classname=courses&method=details&courseid={$a->courseid}">{$a->coursename}</a>';
 $string['dashboard_grade_of'] = 'de';
 $string['dashboard_grade_text'] = 'Recebeu nota {$a->grade} em {$a->evaluation}';
 $string['dashboard_grade_in'] = 'Em';
 $string['dashboard_enrol_title'] = 'Últimas Matrículas';
 $string['dashboard_enrol_inactive'] = 'a matrícula esta inativa';
 $string['dashboard_enrol_active'] = 'a matrícula esta ativa';
-$string['dashboard_enrol_text'] = 'Matriculou-se no curso <a href="?courses::details&courseid={$a->courseid}">{$a->fullname}</a> e';
+$string['dashboard_enrol_text'] = 'Matriculou-se no curso <a href="?classname=courses&method=details&courseid={$a->courseid}">{$a->fullname}</a> e';
 $string['dashboard_enrol_lastmodifield'] = 'Última alteração em';
 
 // Notifications.

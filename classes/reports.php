@@ -68,7 +68,7 @@ class reports {
                 $icon = "{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/icon/report.svg";
             }
 
-            $menus[] = array('reports::dashboard&type=' . $koperereportcat->type,
+            $menus[] = array('?classname=reports&method=dashboard&type=' . $koperereportcat->type,
                 self::get_title($koperereportcat),
                 $icon
             );
@@ -121,7 +121,7 @@ class reports {
             foreach ($koperereportss as $koperereports) {
                 $title = self::get_title($koperereports);
                 echo "<h4 style='padding-left: 31px;'>
-                         <a href='?reports::load_report&report={$koperereports->id}'>{$title}</a></h4>";
+                         <a href='?classname=reports&method=load_report&report={$koperereports->id}'>{$title}</a></h4>";
             }
         }
 
@@ -149,8 +149,8 @@ class reports {
         header::notfound_null($koperereportcat, get_string_kopere('reports_notfound'));
 
         dashboard_util::start_page(array(
-            array('reports::dashboard', get_string_kopere('reports_title')),
-            array('reports::dashboard&type=' . $koperereportcat->type, self::get_title($koperereportcat)),
+            array('?classname=reports&method=dashboard', get_string_kopere('reports_title')),
+            array('?classname=reports&method=dashboard&type=' . $koperereportcat->type, self::get_title($koperereportcat)),
             self::get_title($koperereports)
         ));
 
@@ -180,12 +180,12 @@ class reports {
                     $columns->header = array();
                 }
                 $table = new data_table($columns->columns, $columns->header);
-                $table->set_ajax_url('reports::getdata&report=' . $report . '&courseid=' . $courseid);
+                $table->set_ajax_url('?classname=reports&method=getdata&report=' . $report . '&courseid=' . $courseid);
                 $table->print_header();
                 $table->close(true, '', '"searching":false,"ordering":false');
 
                 button::primary(get_string_kopere('reports_download'),
-                    "reports::download&report={$report}&courseid={$courseid}");
+                    "?classname=reports&method=download&report={$report}&courseid={$courseid}");
             }
         }
         echo '</div>';
@@ -208,8 +208,8 @@ class reports {
             $table->add_header(get_string_kopere('courses_enrol'), 'inscritos',
                 table_header_item::TYPE_INT, null, 'width:50px;white-space:nowrap;');
 
-            $table->set_ajax_url('courses::load_all_courses');
-            $table->set_click_redirect('reports::load_report&type=course&report=' . $report . '&courseid={id}', 'id');
+            $table->set_ajax_url('?classname=courses&method=load_all_courses');
+            $table->set_click_redirect('?classname=reports&method=load_report&type=course&report=' . $report . '&courseid={id}', 'id');
             $table->print_header();
             $table->close();
         }

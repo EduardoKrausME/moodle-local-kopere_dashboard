@@ -50,7 +50,7 @@ class profile {
         header::notfound_null($user, get_string_kopere('profile_notfound'));
 
         dashboard_util::start_page(array(
-            array('users::dashboard', get_string_kopere('profile_title')),
+            array('?classname=users&method=dashboard', get_string_kopere('profile_title')),
             fullname($user)
         ));
 
@@ -108,7 +108,7 @@ class profile {
                     <div>' . get_string_kopere('profile_enrol_start') . ' <em>' .
                 userdate($enrolment->timestart, get_string_kopere('dateformat')) . '</em> ' . $expirationend . ' -
                         <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal-edit"
-                                data-href="open-ajax-table.php?userenrolment::mathedit&courseid=' . $course->id .
+                                data-href="open-ajax-table.php?classname=userenrolment&method=mathedit&courseid=' . $course->id .
                 '&ueid=' . $enrolment->id . '">' . get_string_kopere('profile_edit') . '</button>
                     </div>
                     <div class="roles">' . get_string_kopere('profile_enrol_profile') . ': ' . $rolehtml . '</div>

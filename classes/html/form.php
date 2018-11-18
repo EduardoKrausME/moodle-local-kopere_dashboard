@@ -48,7 +48,7 @@ class form {
         $this->formaction = $formaction;
         if ($this->formaction) {
             echo "<form method=\"post\" class=\"validate $classextra\" enctype=\"multipart/form-data\"
-                        action=\"?{$this->formaction}\" >";
+                        action=\"{$this->formaction}\" >";
             echo '<div class="displayErroForm alert alert-danger" style="display: none;"><span></span></div>';
             echo '<input name="POST" type="hidden" value="true" />';
         }

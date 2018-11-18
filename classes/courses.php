@@ -58,8 +58,8 @@ class courses {
         $table->add_header(get_string_kopere('courses_enrol'), 'inscritos',
             table_header_item::TYPE_INT, null, 'width:50px;white-space:nowrap;');
 
-        $table->set_ajax_url('courses::load_all_courses');
-        $table->set_click_redirect('courses::details&courseid={id}', 'id');
+        $table->set_ajax_url('?classname=courses&method=load_all_courses');
+        $table->set_click_redirect('?classname=courses&method=details&courseid={id}', 'id');
         $table->print_header();
         $table->close();
 
@@ -140,7 +140,7 @@ class courses {
         header::notfound_null($course, get_string_kopere('courses_notound'));
 
         dashboard_util::start_page(array(
-            array('courses::dashboard', get_string_kopere('courses_title')),
+            array('?classname=courses&method=dashboard', get_string_kopere('courses_title')),
             $course->fullname
         ));
 
@@ -166,8 +166,8 @@ class courses {
         $table->add_header(get_string_kopere('courses_student_email'), 'email');
         $table->add_header(get_string_kopere('courses_student_status'), 'status', table_header_item::RENDERER_STATUS);
 
-        $table->set_ajax_url('enroll::ajax_dashboard&courseid=' . $courseid);
-        $table->set_click_redirect('users::details&userid={id}', 'id');
+        $table->set_ajax_url('?classname=enroll&method=ajax_dashboard&courseid=' . $courseid);
+        $table->set_click_redirect('?classname=users&method=details&userid={id}', 'id');
         $table->print_header();
         $table->close();
 
@@ -192,12 +192,12 @@ class courses {
 
                 /** @var kopere_dashboard_webpages $webpages */
                 foreach ($webpagess as $webpages) {
-                    echo '<p><a href="?webpages::details&id=' . $webpages->id . '">&nbsp;&nbsp;&nbsp;&nbsp;' .
+                    echo '<p><a href="?classname=webpages&method=details&id=' . $webpages->id . '">&nbsp;&nbsp;&nbsp;&nbsp;' .
                         $webpages->title . '</a></p>';
                 }
             }
 
-            $form = new form('webpages::edit_page_save', 'form-inline');
+            $form = new form('?classname=webpages&method=edit_page_save', 'form-inline');
             $form->create_hidden_input('id', 0);
             $form->create_hidden_input('courseid', $course->id);
             $form->create_hidden_input('title', $course->fullname);

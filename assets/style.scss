@@ -1,0 +1,20 @@
+/***************************
+ * User: kraus
+ * Date: 01/01/2017
+ * Time: 05:01
+ ***************************/
+.tree_item a[href$="local/kopere_dashboard/open.php"],
+.tree_item a[href$="local_kopere_dashboard"] {
+    background   : url(icon-16.png) no-repeat;
+    padding-left : 21px;
+    img {
+        display : none !important;
+    }
+}
+
+@import "popup";
+@import "dashboard/css/css_alert";
+.kopere-dashboard {
+    @import "botao-add";
+}
+

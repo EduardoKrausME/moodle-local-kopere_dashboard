@@ -47,9 +47,5 @@ $PAGE->set_url(new moodle_url('/local/kopere_dashboard/open-ajax-table.php'));
 $PAGE->set_pagetype('reports');
 $PAGE->set_context(context_system::instance());
 
-$CFG->querystring = clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
-if (!strlen($CFG->querystring)) {
-    $CFG->querystring = 'dashboard::start';
-}
 
-load_by_query($CFG->querystring);
+load_class();

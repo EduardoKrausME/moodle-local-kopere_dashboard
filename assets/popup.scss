@@ -1,0 +1,163 @@
+body.remove-overflow {
+    overflow : hidden !important;
+}
+
+#base-popup {
+    background            : white;
+    border                : 0 none;
+    position              : fixed;
+    padding               : 10px;
+    overflow              : visible;
+    display               : block;
+    z-index               : 9002;
+    outline               : 0;
+    height                : auto;
+    max-height            : 1200px;
+    width                 : 1100px;
+    left                  : -550px;
+    top                   : 100px;
+    bottom                : 50px;
+    margin                : 0 50%;
+    -webkit-border-radius : 10px;
+    -moz-border-radius    : 10px;
+    border-radius         : 10px;
+    min-height            : 85px;
+    
+    #base-popup-close {
+        background : transparent url(../../kopere_dashboard/pix/dialog_close.png) no-repeat scroll 0 0;
+        border     : 0 none !important;
+        height     : 30px;
+        right      : -15px;
+        top        : -15px;
+        width      : 30px;
+        margin     : 0;
+        padding    : 0;
+        position   : absolute;
+        z-index    : 2000;
+        display    : block;
+        font-size  : 0;
+    }
+    table {
+        margin-top : 0 !important;
+        th, td {
+            padding : 1px 8px !important;
+        }
+    }
+    input[type=text] {
+        width : 79% !important;
+    }
+    .operation-container {
+        padding    : 20px;
+        color      : #FFFFFF;
+        max-height : 300px;
+        overflow   : auto;
+    }
+}
+
+#operations {
+    -webkit-box-shadow    : 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.25) inset;
+    -moz-box-shadow       : 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.25) inset;
+    box-shadow            : 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.25) inset;
+    -webkit-border-radius : 6px;
+    -moz-border-radius    : 6px;
+    border-radius         : 6px;
+    padding               : 0;
+    margin                : 0;
+    width                 : 100%;
+    color                 : #AAAAAA;
+    overflow              : hidden;
+    position              : relative;
+    background            : -webkit-linear-gradient(top left, #D7BBEA, #65A8F1);
+    background            : linear-gradient(to bottom right, #D7BBEA, #65A8F1);
+    min-height            : 120px;
+    height                : 100%;
+    img.loading {
+        display      : block;
+        margin-left  : auto;
+        margin-right : auto;
+        padding      : 15px 0;
+    }
+    a {
+        color : #CDCDCD;
+    }
+    h3.operation-header {
+        -webkit-box-shadow    : 0 1px 2px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow       : 0 1px 2px rgba(0, 0, 0, 0.25);
+        box-shadow            : 0 1px 2px rgba(0, 0, 0, 0.25);
+        -webkit-border-radius : 6px;
+        -moz-border-radius    : 6px;
+        border-radius         : 6px;
+        color                 : #FFFFFF;
+        border                : 0;
+        font-size             : 14px;
+        font-weight           : normal;
+        height                : 35px;
+        line-height           : 35px;
+        padding-left          : 8px;
+        z-index               : 13;
+        margin                : 0;
+    }
+    .operation-header img {
+        padding        : 0 10px;
+        vertical-align : middle;
+    }
+    .navigation {
+        margin-top : 20px;
+        text-align : right;
+    }
+    .ui-accordion-header.disabled, .ui-accordion-header.disabled:hover {
+        color      : #B2B2B2;
+        background : #696969;
+        background : -moz-linear-gradient(top, #797979, #585858);
+        background : -webkit-gradient(linear, left top, left bottom, color-stop(0, #797979), color-stop(1, #585858));
+        border     : 0 none
+    }
+    .ui-accordion-header.disabled img {
+        opacity : .5
+    }
+    .ui-accordion-content {
+        margin                : -6px 0 10px;
+        padding               : 26px 20px 20px;
+        overflow              : visible;
+        z-index               : 12;
+        background            : #242424;
+        border                : 0;
+        -webkit-border-radius : 0 0 6px 6px;
+        -moz-border-radius    : 0 0 6px 6px;
+        border-radius         : 0 0 6px 6px;
+        -webkit-box-shadow    : 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.25) inset;
+        -moz-box-shadow       : 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.25) inset;
+        box-shadow            : 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.25) inset;
+    }
+    .ui-accordion-content form > :last-child {
+        margin-bottom : 0
+    }
+    .description {
+        line-height : 18px;
+        color       : #999999;
+        margin      : 0 0 20px
+    }
+    h4 {
+        color         : white;
+        margin-bottom : 20px;
+        font-size     : 16px
+    }
+    
+    .server-content {
+        padding : 15px;
+    }
+}
+
+.ui-widget-overlay {
+    background : #000000;
+    opacity    : .75;
+    filter     : Alpha(Opacity=75);
+    position   : fixed;
+    top        : 0;
+    left       : 0;
+    width      : 100%;
+    height     : 100%;
+    right      : 0;
+    bottom     : 0;
+    z-index    : 1001;
+}

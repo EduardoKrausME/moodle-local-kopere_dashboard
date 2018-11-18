@@ -42,14 +42,9 @@ $PAGE->set_url(new moodle_url('/local/kopere_dashboard/open-dashboard.php'));
 $PAGE->set_pagetype('reports');
 $PAGE->set_context(context_system::instance());
 
-$CFG->querystring = clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
-if (!strlen($CFG->querystring)) {
-    $CFG->querystring = 'dashboard::start';
-}
-
-$action = optional_param ( 'action', null, PARAM_RAW );
-if ( !empty( $action ) && strpos ( $action, '::' ) ) {
-    load_by_query ( $action );
+$action = optional_param('action', null, PARAM_RAW);
+if (!empty($action) && strpos($action, '::')) {
+    load_class();
 }
 
 ?>
@@ -57,11 +52,11 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo get_string_kopere ('pluginname') ?></title>
+    <title><?php echo get_string_kopere('pluginname') ?></title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <link href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/all.css" rel="stylesheet">
+    <link href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/all-frame.css" rel="stylesheet">
     <link async href="https://fonts.googleapis.com/css?family=Nunito:300,400" rel="stylesheet">
 
     <script>
@@ -72,26 +67,26 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
         lang_active = '<?php echo get_string_kopere('notification_status_active')?>';
         lang_inactive = '<?php echo get_string_kopere('notification_status_inactive')?>';
         dataTables_oLanguage = {
-            "sEmptyTable"     : "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
-            "sInfo"           : "<?php echo get_string_kopere('datatables_sInfo') ?>",
-            "sInfoEmpty"      : "<?php echo get_string_kopere('datatables_sInfoEmpty') ?>",
-            "sInfoFiltered"   : "<?php echo get_string_kopere('datatables_sInfoFiltered') ?>",
-            "sInfoPostFix"    : "<?php echo get_string_kopere('datatables_sInfoPostFix') ?>",
-            "sInfoThousands"  : "<?php echo get_string_kopere('datatables_sInfoThousands') ?>",
-            "sLengthMenu"     : "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
-            "sLoadingRecords" : "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
-            "sProcessing"     : "<?php echo get_string_kopere('datatables_sProcessing') ?>",
-            "sZeroRecords"    : "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
-            "sSearch"         : "<?php echo get_string_kopere('datatables_sSearch') ?>",
-            "oPaginate"       : {
-                "sNext"     : "<?php echo get_string_kopere('datatables_oPaginate_sNext') ?>",
-                "sPrevious" : "<?php echo get_string_kopere('datatables_oPaginate_sPrevious') ?>",
-                "sFirst"    : "<?php echo get_string_kopere('datatables_oPaginate_sFirst') ?>",
-                "sLast"     : "<?php echo get_string_kopere('datatables_oPaginate_sLast') ?>"
+            sEmptyTable       : "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
+            sInfo             : "<?php echo get_string_kopere('datatables_sInfo') ?>",
+            sInfoEmpty        : "<?php echo get_string_kopere('datatables_sInfoEmpty') ?>",
+            sInfoFiltered     : "<?php echo get_string_kopere('datatables_sInfoFiltered') ?>",
+            sInfoPostFix      : "<?php echo get_string_kopere('datatables_sInfoPostFix') ?>",
+            sInfoThousands    : "<?php echo get_string_kopere('datatables_sInfoThousands') ?>",
+            sLengthMenu       : "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
+            sLoadingRecords   : "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
+            sProcessing       : "<?php echo get_string_kopere('datatables_sProcessing') ?>",
+            sZeroRecords      : "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
+            sSearch           : "<?php echo get_string_kopere('datatables_sSearch') ?>",
+            oPaginate         : {
+                sNext       : "<?php echo get_string_kopere('datatables_oPaginate_sNext') ?>",
+                sPrevious   : "<?php echo get_string_kopere('datatables_oPaginate_sPrevious') ?>",
+                sFirst      : "<?php echo get_string_kopere('datatables_oPaginate_sFirst') ?>",
+                sLast       : "<?php echo get_string_kopere('datatables_oPaginate_sLast') ?>"
             },
-            "oAria"           : {
-                "sSortAscending"  : "<?php echo get_string_kopere('datatables_oAria_sSortAscending') ?>",
-                "sSortDescending" : "<?php echo get_string_kopere('datatables_oAria_sSortDescending') ?>"
+            oAria             : {
+                sSortAscending    : "<?php echo get_string_kopere('datatables_oAria_sSortAscending') ?>",
+                sSortDescending   : "<?php echo get_string_kopere('datatables_oAria_sSortDescending') ?>"
             }
         }
     </script>
@@ -116,11 +111,11 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/custom.js"></script>
 
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v2.js"></script>
-
     <?php
     if (get_config('local_kopere_dashboard', 'nodejs-status')) {
+        echo "<script src=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js\"></script>
+              <script src=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v2.js\"></script>";
+
         if (get_config('local_kopere_dashboard', 'nodejs-ssl')) {
             $url = "https://" . get_config('local_kopere_dashboard', 'nodejs-url') . ':' .
                 get_config('local_kopere_dashboard', 'nodejs-port');
@@ -142,7 +137,7 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
     <link rel="icon" href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/favicon.png"/>
 
 </head>
-<body>
+<body class="kopere_dashboard_body">
 <script>
     if (window != window.top) {
         document.body.className += " in-iframe";
@@ -156,71 +151,21 @@ if ( !empty( $action ) && strpos ( $action, '::' ) ) {
             <div class="logo-w">
                 <img class="normal"
                      src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/logo.svg"
-                     alt="<?php echo get_string_kopere ('pluginname') ?>">
+                     alt="<?php echo get_string_kopere('pluginname') ?>">
                 <img class="mobile"
                      src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/logo-notext.svg"
-                     alt="<?php echo get_string_kopere ('pluginname') ?>">
+                     alt="<?php echo get_string_kopere('pluginname') ?>">
             </div>
             <div class="menu-and-user">
-                <ul class="main-menu">
-                    <?php
-
-                    dashboard_util::add_menu('dashboard::start', 'dashboard', get_string_kopere ('dashboard'));
-
-                    if (has_capability('moodle/site:config', context_system::instance())) {
-                        $menuextra = array(
-                            array('usersonline::dashboard', get_string_kopere('useronline_title'), 'users-online'),
-                            array('usersimport::dashboard', get_string_kopere('userimport_title'), 'users-import')
-                        );
-                    } else {
-                        $menuextra = array(
-                            array('usersonline::dashboard', get_string_kopere('useronline_title'), 'users-online')
-                        );
-                    }
-                    dashboard_util::add_menu('users::dashboard', 'users', get_string_kopere('user_title'), $menuextra);
-
-                    dashboard_util::add_menu('courses::dashboard', 'courses', get_string_kopere('courses_title'));
-
-                    $sql = "SELECT plugin
-                              FROM {config_plugins}
-                             WHERE plugin LIKE 'local\_kopere\_dashboard\_%'
-                               AND name LIKE 'version'";
-                    $plugins = $DB->get_records_sql($sql);
-                    foreach ($plugins as $plugin) {
-                        $classname = $plugin->plugin . '\\menu';
-                        $class = new $classname();
-                        $class->show_menu();
-                    }
-
-                    dashboard_util::add_menu('reports::dashboard', 'report', get_string_kopere('reports_title'),
-                        \local_kopere_dashboard\reports::global_menus());
-
-                    if (has_capability('moodle/site:config', context_system::instance())) {
-                        dashboard_util::add_menu('notifications::dashboard', 'notifications',
-                            get_string_kopere('notification_title'));
-                    }
-
-                    if (has_capability('moodle/site:config', context_system::instance())) {
-                        dashboard_util::add_menu('webpages::dashboard', 'webpages',
-                            get_string_kopere('webpages_title'));
-                    }
-                    dashboard_util::add_menu('Benchmark::test', 'performace', get_string_kopere('benchmark_title'));
-
-                    if( class_exists("local_kopere_dashboard\backup") ) {
-                        if (has_capability('moodle/site:config', context_system::instance()) && $CFG->dbtype == 'mysqli') {
-                            dashboard_util::add_menu('backup::dashboard', 'data', 'Backup');
-                        }
-                    }
-
-                    dashboard_util::add_menu('about::dashboard', 'about', get_string_kopere('about_title'));
-                    ?>
-                </ul>
+                <?php
+                echo \local_kopere_dashboard\output\menu::create_menu();
+                ?>
             </div>
         </div>
 
-        <div class="content-w <?php echo get_path_query($CFG->querystring) ?>">
+        <div class="content-w <?php echo get_path_query() ?>">
             <?php
-            load_by_query($CFG->querystring);
+            load_class();
             ?>
         </div>
 

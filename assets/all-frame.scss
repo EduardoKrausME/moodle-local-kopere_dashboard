@@ -1,0 +1,44 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito:300,400);
+body.kopere_dashboard_body {
+    
+    min-height: 100%;
+    background: -webkit-linear-gradient(top left, #d7bbea, #65a8f1);
+    background: linear-gradient(to bottom right, #d7bbea, #65a8f1);
+    padding: 50px;
+    font-size: .9rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #3e4b5b;
+    background-color: #fff;
+    margin: 0;
+    font-family: 'helvetica', 'Arial', sans-serif;
+    @media (max-width: 1650px) {
+        padding: 40px;
+    }
+    
+    @media (max-width: 1550px) {
+        padding: 20px;
+    }
+    
+    @media (max-width: 1000px) {
+        padding: 0;
+    }
+    @media print {
+        background: none !important;
+        padding: 0 !important;
+    }
+    &.in-iframe {
+        padding: 0;
+    }
+    
+    @import "dashboard/css/dashboard";
+    @import "dashboard/bootstrap/bootstrap";
+    @import "dashboard/dataTables/jquery.dataTables";
+    @import "dropzone/css/dropzone";
+    
+    .element-header {
+        .setting {
+            display: none !important;
+        }
+    }
+}

@@ -46,14 +46,14 @@ class dashboard {
                     <div class="col-sm-3">
                         <div class="element-box color1">
                             <div class="label">' . get_string_kopere('dashboard_title_user') . '</div>
-                            <div class="value"><a href="?users::dashboard">
+                            <div class="value"><a href="?classname=users&method=dashboard">
                                 ' . users::count_all(true) . ' / ' . users::count_all_learners(true) . '</a></div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="element-box color2">
                             <div class="label">' . get_string_kopere('dashboard_title_online') . '</div>
-                            <div class="value"><a href="?usersonline::dashboard">
+                            <div class="value"><a href="?classname=usersonline&method=dashboard">
                                 <span id="user-count-online">' . usersonline::count(10) . '</span>
                                 / ' . usersonline::count(60) . '</a></div>
                         </div>
@@ -61,7 +61,7 @@ class dashboard {
                     <div class="col-sm-3">
                         <div class="element-box color3">
                             <div class="label">' . get_string_kopere('dashboard_title_course') . '</div>
-                            <div class="value"><a href="?courses::dashboard">
+                            <div class="value"><a href="?classname=courses&method=dashboard">
                             ' . courses::count_all(true) . '
                                 / ' . courses::count_all_visibles(true) . '</a></div>
                         </div>
@@ -69,7 +69,7 @@ class dashboard {
                     <div class="col-sm-3">
                         <div class="element-box color4">
                             <div class="label">' . get_string_kopere('dashboard_title_disk') . '</div>
-                            <div class="value"><a href="?reports::dashboard&type=server">
+                            <div class="value"><a href="?classname=reports&method=dashboard&type=server">
                             ' . bytes_util::size_to_byte(files::count_all_space()) . '</a></div>
                         </div>
                     </div>
@@ -122,8 +122,8 @@ class dashboard {
                       <div class="media-body">
                           <h4 class="media-heading">
                               <a data-toggle="modal" data-target="#modal-details"
-                                 href="?users::details&userid=' . $user->id . '"
-                                 data-href="open-ajax-table.php?users::details&userid=' . $user->id . '">' . fullname($user) . '</a>
+                                 href="?classname=users&method=details&userid=' . $user->id . '"
+                                 data-href="open-ajax-table.php?classname=users&method=details&userid=' . $user->id . '">' . fullname($user) . '</a>
                           </h4>
                           <p>' . get_string_kopere('dashboard_grade_text',
                     ['grade' => $gradetext, 'evaluation' => $evaluation]) . '</p>
@@ -172,8 +172,8 @@ class dashboard {
                           <div class="media-body">
                               <h4 class="media-heading">
                                   <a data-toggle="modal" data-target="#modal-details"
-                                     href="?users::details&userid=' . $user->id . '"
-                                     data-href="open-ajax-table.php?users::details&userid=' . $user->id . '">' .
+                                     href="?classname=users&method=details&userid=' . $user->id . '"
+                                     data-href="open-ajax-table.php?classname=users&method=details&userid=' . $user->id . '">' .
                     fullname($user) . '</a>
                               </h4>
                               <p>' . get_string_kopere('dashboard_enrol_text', $enrol) . '

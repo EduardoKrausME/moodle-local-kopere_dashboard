@@ -1,0 +1,61 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito:300,400);
+#kopere_dashboard_div {
+    @import "dashboard/css/dashboard";
+    @import "dashboard/bootstrap/bootstrap";
+    @import "dashboard/dataTables/jquery.dataTables";
+    @import "dropzone/css/dropzone";
+    
+    .breadcrumb {
+        display: none !important;
+    }
+    
+    .element-header {
+        .setting {
+            display: inline-block;
+            float: right;
+            margin-left: 14px;
+            img {
+                width: 25px;
+                height: 25px;
+            }
+        }
+        .help {
+            font-size: 14px;
+            float: right;
+            line-height: 2.3;
+        }
+    }
+    .content-w {
+        //background: transparent !important;
+        border-radius: 6px;
+        .content-i .content-box {
+            padding: 12px !important;
+        }
+    }
+    
+    .menu-kopere{
+        padding: 0 !important;
+    }
+    .submenu-kopere li {
+        list-style: none !important;
+    }
+}
+#block-region-side-pre {
+    .menu-kopere {
+        .submenu-kopere {
+            display: none;
+        }
+        .active {
+            .submenu-kopere {
+                display: block !important;
+            }
+            > a > span {
+                font-weight: bold;
+            }
+        }
+        li {
+            line-height: 1.5rem;
+            padding: 1px 20px !important;
+        }
+    }
+}

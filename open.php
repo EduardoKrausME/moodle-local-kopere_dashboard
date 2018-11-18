@@ -21,6 +21,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+ob_start();
+
 require('../../config.php');
 require('autoload.php');
 
@@ -46,9 +48,16 @@ $PAGE->requires->js('/local/kopere_dashboard/assets/popup.js');
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string_kopere('open_dashboard'));
 
-$url = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?dashboard::start";
+$url = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?classname=dashboard&method=start";
 
-if( $CFG->kopere_dashboard_open == '_blank'){?>
+if ($CFG->kopere_dashboard_open == 'iternal') {
+
+    $urliternal = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard-iternal.php?classname=dashboard&method=start";
+
+    @header("Location: {$urliternal}");
+    echo "<meta http-equiv=\"refresh\" content=\"0; url={$urliternal}\">";
+
+} else if ($CFG->kopere_dashboard_open == '_blank') { ?>
 
     <div class="text-center kopere-dashboard" style="text-align: center;">
         <a type="button" target="_blank"
@@ -62,7 +71,9 @@ if( $CFG->kopere_dashboard_open == '_blank'){?>
     </script>
     <?php
 
-} elseif( $CFG->kopere_dashboard_open == '_top'){?>
+} elseif ($CFG->kopere_dashboard_open == '_top') {
+    @header("Location: {$url}");
+    ?>
 
     <div class="text-center kopere-dashboard" style="text-align: center;">
         <a type="button"
@@ -91,7 +102,7 @@ if( $CFG->kopere_dashboard_open == '_blank'){?>
                         frameborder="0" width="100%" height="100%"></iframe>
             </div>
         </div>
-        <div class="ui-widget-overlay"></div>
+    <div class="ui-widget-overlay"></div>
     </div><?php
 
 }

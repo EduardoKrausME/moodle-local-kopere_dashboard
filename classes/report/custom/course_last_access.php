@@ -27,6 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\util\export;
 use local_kopere_dashboard\util\header;
+use local_kopere_dashboard\util\url_util;
 
 /**
  * Class course_last_access
@@ -62,7 +63,7 @@ class course_last_access {
         $course = $DB->get_record('course', array('id' => $cursosid));
         header::notfound_null($course, get_string_kopere('courses_notound'));
 
-        button::info(get_string_kopere('reports_export'), "{$CFG->querystring}&export=xls");
+        button::info(get_string_kopere('reports_export'), url_util::querystring()."&export=xls");
 
         $export = optional_param('export', '', PARAM_TEXT);
         export::header($export, "Lista de alunos - $course->fullname");

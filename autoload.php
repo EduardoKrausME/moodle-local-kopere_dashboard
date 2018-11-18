@@ -41,10 +41,14 @@ function kopere_dashboard_autoload($classname) {
     }
 }
 
-function load_by_query($querystring) {
-    preg_match("/(.*?)::([a-zA-Z_0-9]+)/", $querystring, $paths);
+function load_class() {
+    $classname = optional_param('classname', false, PARAM_TEXT);
+    $method = optional_param('method', '', PARAM_TEXT);
+    if (!$classname) {
+        $classname = 'dashboard';
+        $method = 'start';
+    }
 
-    $classname = strtolower($paths[1]);
     if (strpos($classname, '-')) {
         $class = 'local_kopere_dashboard_' . str_replace('-', '\\', $classname);
     } else {
@@ -54,13 +58,13 @@ function load_by_query($querystring) {
     $class = str_replace('?', '', $class);
 
     $instance = new $class();
-    $method = $paths[2];
     $instance->$method();
 }
 
-function get_path_query($querystring) {
-    preg_match("/(.*?)::([a-zA-Z_0-9]+)/", $querystring, $paths);
-    return $paths[1] . '-' . $paths[2];
+function get_path_query() {
+    $classname = optional_param('classname', '', PARAM_TEXT);
+    $method = optional_param('method', '', PARAM_TEXT);
+    return $classname . '-' . $method;
 }
 
 function get_string_kopere($identifier, $object = null) {

@@ -149,7 +149,7 @@ class notificationsutil {
         $content = file_get_contents($templatefile);
 
         $linkmanager
-            = "<a href=\"{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?notifications::dashboard\"
+            = "<a href=\"{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?classname=notifications&method=dashboard\"
                   target=\"_blank\" style=\"border-bottom:1px #777777 dotted; text-decoration:none; color:#777777;\">
                             " . get_string_kopere('notification_manager') . "
                         </a>";
