@@ -49,16 +49,24 @@ class dashboard {
                             <div class="value"><a href="?classname=users&method=dashboard">
                                 ' . users::count_all(true) . ' / ' . users::count_all_learners(true) . '</a></div>
                         </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="element-box color2">
-                            <div class="label">' . get_string_kopere('dashboard_title_online') . '</div>
-                            <div class="value"><a href="?classname=usersonline&method=dashboard">
-                                <span id="user-count-online">' . usersonline::count(10) . '</span>
-                                / ' . usersonline::count(60) . '</a></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
+                    </div>';
+
+                    if(class_exists('local_kopere_dashboard\usersonline'))
+                        echo '<div class="col-sm-3">
+                            <div class="element-box color2">
+                                <div class="label">' . get_string_kopere('dashboard_title_online') . '</div>
+                                <div class="value"><a href="?classname=usersonline&method=dashboard">
+                                    <span id="user-count-online">' . usersonline::count(10) . '</span>
+                                    / ' . usersonline::count(60) . '</a></div>
+                            </div>
+                        </div>';
+                    else
+                        echo '<div class="col-sm-3">
+                            <div class="element-box color2">
+                                <div class="label">' . get_string_kopere('dashboard_title_online') . '</div>
+                            </div>
+                        </div>';
+                    echo '<div class="col-sm-3">
                         <div class="element-box color3">
                             <div class="label">' . get_string_kopere('dashboard_title_course') . '</div>
                             <div class="value"><a href="?classname=courses&method=dashboard">
