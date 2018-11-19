@@ -50,12 +50,12 @@ echo $OUTPUT->heading(get_string_kopere('open_dashboard'));
 
 $url = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?classname=dashboard&method=start";
 
-if ($CFG->kopere_dashboard_open == 'iternal') {
+if ($CFG->kopere_dashboard_open == 'internal') {
 
-    $urliternal = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard-iternal.php?classname=dashboard&method=start";
+    $urlinternal = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard-internal.php?classname=dashboard&method=start";
 
-    @header("Location: {$urliternal}");
-    echo "<meta http-equiv=\"refresh\" content=\"0; url={$urliternal}\">";
+    @header("Location: {$urlinternal}");
+    echo "<meta http-equiv=\"refresh\" content=\"0; url={$urlinternal}\">";
 
 } else if ($CFG->kopere_dashboard_open == '_blank') { ?>
 

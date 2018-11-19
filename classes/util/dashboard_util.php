@@ -107,16 +107,20 @@ class dashboard_util {
                     if (is_string($breadcrumbitem)) {
                         $breadcrumbreturn .= '<li><span>' . $breadcrumbitem . '</span></li>';
                         $title = $breadcrumbitem;
+
+                        if( $CFG->kopere_dashboard_open == 'internal') {
+                            $PAGE->navbar->add($breadcrumbitem);
+                        }
                     } else {
                         $breadcrumbreturn
                             .= '<li>
                                     <a href="' . $breadcrumbitem[0] . '">' . $breadcrumbitem[1] . '</a>
                                 </li>';
                         $title = $breadcrumbitem[1];
-                    }
 
-                    if( $CFG->kopere_dashboard_open == 'iternal') {
-                        $PAGE->navbar->add($breadcrumbitem[1]);
+                        if( $CFG->kopere_dashboard_open == 'internal') {
+                            $PAGE->navbar->add($breadcrumbitem[1], $breadcrumbitem[0]);
+                        }
                     }
                 }
             }
@@ -141,10 +145,6 @@ class dashboard_util {
                     $pagetitle = $title;
                 }
                 $breadcrumbreturn .= self::set_titulo($pagetitle, $settingurl, $infourl);
-
-                if( $CFG->kopere_dashboard_open == 'iternal') {
-                    $PAGE->navbar->add($pagetitle);
-                }
             }
 
             $breadcrumbreturn .= mensagem::get_mensagem_agendada();

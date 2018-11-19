@@ -31,6 +31,7 @@ $string['crontask_tmp'] = 'Cron clear tmp folder';
 
 $string['kopere_dashboard_open'] = 'Open Kopere';
 $string['kopere_dashboard_open_desc'] = 'Which way do you want to open Kopere Dashboard';
+$string['kopere_dashboard_open_internal'] = 'Open internal';
 $string['kopere_dashboard_open_popup'] = 'In popup';
 $string['kopere_dashboard_open_blank'] = 'In new window';
 $string['kopere_dashboard_open_top'] = 'In the same window';
