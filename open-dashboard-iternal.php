@@ -197,23 +197,24 @@ echo "<div id='kopere_dashboard_div'>
         <div class='content-w'>
             {$htmlApp}
         </div>
-      </div>";
 
+        <div class=\"modal fade\" id=\"modal-edit\" role=\"dialog\">
+            <div class=\"modal-dialog\">
+                <div class=\"modal-content\">
+                    <div class=\"loader\"></div>
+                </div>
+            </div>
+        </div>
+        <div class=\"modal fade\" id=\"modal-details\" role=\"dialog\">
+            <div class=\"modal-dialog modal-lg\">
+                <div class=\"modal-content\">
+                    <div class=\"loader\"></div>
+                </div>
+            </div>
+        </div> 
+    </div> 
+";
 
-echo "<div class=\"modal fade\" id=\"modal-edit\" role=\"dialog\">
-    <div class=\"modal-dialog\">
-        <div class=\"modal-content\">
-            <div class=\"loader\"></div>
-        </div>
-    </div>
-</div>
-<div class=\"modal fade\" id=\"modal-details\" role=\"dialog\">
-    <div class=\"modal-dialog modal-lg\">
-        <div class=\"modal-content\">
-            <div class=\"loader\"></div>
-        </div>
-    </div>
-</div>";
 
 echo $OUTPUT->footer();
 
