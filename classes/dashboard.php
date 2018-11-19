@@ -41,9 +41,15 @@ class dashboard {
     public function start() {
         dashboard_util::start_page(array());
 
+        $col_sm = 4;
+        if (class_exists('local_kopere_dashboard\usersonline')) {
+            $col_sm = 3;
+        }
+
+
         echo '<div class="element-content">
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-'.$col_sm.'">
                         <div class="element-box color1">
                             <div class="label">' . get_string_kopere('dashboard_title_user') . '</div>
                             <div class="value"><a href="?classname=users&method=dashboard">
@@ -51,22 +57,19 @@ class dashboard {
                         </div>
                     </div>';
 
-                    if(class_exists('local_kopere_dashboard\usersonline'))
-                        echo '<div class="col-sm-3">
-                            <div class="element-box color2">
-                                <div class="label">' . get_string_kopere('dashboard_title_online') . '</div>
-                                <div class="value"><a href="?classname=usersonline&method=dashboard">
-                                    <span id="user-count-online">' . usersonline::count(10) . '</span>
-                                    / ' . usersonline::count(60) . '</a></div>
-                            </div>
-                        </div>';
-                    else
-                        echo '<div class="col-sm-3">
-                            <div class="element-box color2">
-                                <div class="label">' . get_string_kopere('dashboard_title_online') . '</div>
-                            </div>
-                        </div>';
-                    echo '<div class="col-sm-3">
+        if (class_exists('local_kopere_dashboard\usersonline')) {
+            echo '  
+                    <div class="col-sm-3">
+                        <div class="element-box color2">
+                            <div class="label">' . get_string_kopere('dashboard_title_online') . '</div>
+                            <div class="value"><a href="?classname=usersonline&method=dashboard">
+                                <span id="user-count-online">' . usersonline::count(10) . '</span>
+                                / ' . usersonline::count(60) . '</a></div>
+                        </div>
+                    </div>';
+        }
+        echo '
+                    <div class="col-sm-'.$col_sm.'">
                         <div class="element-box color3">
                             <div class="label">' . get_string_kopere('dashboard_title_course') . '</div>
                             <div class="value"><a href="?classname=courses&method=dashboard">
@@ -74,7 +77,7 @@ class dashboard {
                                 / ' . courses::count_all_visibles(true) . '</a></div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-'.$col_sm.'">
                         <div class="element-box color4">
                             <div class="label">' . get_string_kopere('dashboard_title_disk') . '</div>
                             <div class="value"><a href="?classname=reports&method=dashboard&type=server">
