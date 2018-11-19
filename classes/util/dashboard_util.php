@@ -261,9 +261,9 @@ class dashboard_util {
      */
     public static function start_popup($title, $formaction = null) {
         if ($formaction) {
-            echo '<form method="post" class="validate" >';
+            echo '<form method="post" class="validate" action="' . $formaction . '" >';
             echo '<input type="hidden" name="POST"  value="true" />';
-            echo '<input type="hidden" name="action" value="' . $formaction . '" />';
+            // echo '<input type="hidden" name="action" value="' . $formaction . '" />';
             self::$iswithform = true;
         } else {
             self::$iswithform = false;
