@@ -64,8 +64,8 @@ class dashboard_util {
         }
 
         if ($infourl == null) {
-            return "<h3 class=\"element-header\"> 
-                        {$title} 
+            return "<h3 class=\"element-header\">
+                        {$title}
                         {$breadcrumbreturn}
                     </h3>";
         } else {
@@ -217,7 +217,7 @@ class dashboard_util {
             $submenuhtml = "<ul class='submenu-kopere'>{$submenuhtml}</ul>";
         }
 
-        $retorno .= " 
+        $retorno .= "
                 <li class=\"$class\">
                     <a href=\"?classname={$classname}&method={$methodname}\">
                         <img src=\"{$CFG->wwwroot}/local/kopere_dashboard{$plugin}/assets/dashboard/img/icon{$class}/{$menuicon}.svg\"

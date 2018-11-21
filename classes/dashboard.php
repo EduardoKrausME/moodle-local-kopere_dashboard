@@ -58,7 +58,7 @@ class dashboard {
                     </div>';
 
         if (class_exists('local_kopere_dashboard\usersonline')) {
-            echo '  
+            echo '
                     <div class="col-sm-3">
                         <div class="element-box color2">
                             <div class="label">' . get_string_kopere('dashboard_title_online') . '</div>

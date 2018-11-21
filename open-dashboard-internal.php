@@ -211,10 +211,8 @@ echo "<div id='kopere_dashboard_div'>
                     <div class=\"loader\"></div>
                 </div>
             </div>
-        </div> 
-    </div> 
-";
-
+        </div>
+    </div>";
 
 echo $OUTPUT->footer();
 
@@ -222,9 +220,9 @@ if (!$theme_boost) {
     $html = ob_get_contents();
     ob_clean();
 
-    if (strpos($html, "block-region-side-pre")) {
+    if (strpos($html, 'role="navigation"')) {
         $dashboard_menu_html .= "<style>.dashboard_menu_html-content{display:none !important}</style>";
-        echo preg_replace('/(.*block-region-side-pre".*?<\/a>)(.*)/', "\$1{$dashboard_menu_html}\$2", $html);
+        echo preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html}$2", $html);
     } else {
         echo $html;
     }
