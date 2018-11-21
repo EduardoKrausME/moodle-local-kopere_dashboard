@@ -61,9 +61,9 @@ $string['image_alignment_left'] = 'Alinear a la Izquierda';
 $string['image_alignment_right'] = 'Alinear a la Derecha';
 
 $string['about_bug'] = 'Si encontró algun PROBLEMA o si desea sugerir mejoras, abra un asunto';
-$string['about_code'] = 'Código diponible en';
+$string['about_code'] = 'Código disponible en';
 $string['about_help'] = 'Ayuda activada';
-$string['about_project'] = 'Proyecto de Código Abieerto desarrollado y mantenido por';
+$string['about_project'] = 'Proyecto de Código Abierto desarrollado y mantenido por';
 $string['about_title'] = 'Acerca de';
 $string['background'] = 'Fondo';
 $string['backup_delete_confirm'] = 'Eliminación de Respaldo';
