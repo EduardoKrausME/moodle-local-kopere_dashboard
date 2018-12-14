@@ -48,11 +48,14 @@ $PAGE->requires->js('/local/kopere_dashboard/assets/popup.js');
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string_kopere('open_dashboard'));
 
-$url = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?classname=dashboard&method=start";
+$classname = optional_param('classname', 'dashboard', PARAM_TEXT);
+$method = optional_param('method', 'start', PARAM_TEXT);
+
+$url = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?classname={$classname}&method={$method}";
 
 if ($CFG->kopere_dashboard_open == 'internal') {
 
-    $urlinternal = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard-internal.php?classname=dashboard&method=start";
+    $urlinternal = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard-internal.php?classname={$classname}&method={$method}";
 
     @header("Location: {$urlinternal}");
     echo "<meta http-equiv=\"refresh\" content=\"0; url={$urlinternal}\">";

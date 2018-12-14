@@ -144,7 +144,7 @@ class notifications extends notificationsutil {
 
         ?>
         <script>
-            $('#module').change(function () {
+            $('#module').change(function() {
                 var data = {
                     module : $(this).val()
                 };
@@ -353,7 +353,8 @@ class notifications extends notificationsutil {
     public function settings() {
         global $CFG;
         ob_clean();
-        dashboard_util::start_popup(get_string_kopere('notification_setting_config'), '?classname=settings&method=save');
+        $redirect = urlencode("classname=notifications&method=dashboard");
+        dashboard_util::start_popup(get_string_kopere('notification_setting_config'), "?classname=settings&method=save&redirect={$redirect}");
 
         $form = new form();
 

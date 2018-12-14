@@ -39,7 +39,7 @@ class settings {
      */
     public function save() {
 
-        $post   = string_util::clear_all_params ( null, null, PARAM_TEXT );
+        $post = string_util::clear_all_params(null, null, PARAM_TEXT);
         foreach ($post as $keyname => $value) {
             if ($keyname == 'POST') {
                 continue;
@@ -59,7 +59,7 @@ class settings {
 
         $redirect = optional_param('redirect', false, PARAM_TEXT);
         if ($redirect) {
-            header::location($redirect);
+            header::location("?{$redirect}");
         }
     }
 }

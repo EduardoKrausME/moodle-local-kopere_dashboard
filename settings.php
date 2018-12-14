@@ -57,7 +57,7 @@ if ($ADMIN->fulltree) {
         new admin_setting_configselect('kopere_dashboard_open',
             get_string('kopere_dashboard_open', 'local_kopere_dashboard'),
             get_string('kopere_dashboard_open_desc', 'local_kopere_dashboard'),
-            'popup',
+            'internal',
             $open_itens
         )
     );

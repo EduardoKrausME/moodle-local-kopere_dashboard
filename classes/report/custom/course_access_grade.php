@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\util\export;
 use local_kopere_dashboard\util\header;
+use local_kopere_dashboard\util\url_util;
 
 /**
  * Class course_access_grade
