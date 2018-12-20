@@ -33,14 +33,14 @@ class end_util {
     /**
      * @param string $print
      */
-    public static function end_script_show( $print = '') {
+    public static function end_script_show($print = '') {
         die($print);
     }
 
     /**
      * @param $motivo
      */
-    public static function end_script_header( $motivo) {
+    public static function end_script_header($motivo) {
         header('die-motivo:' . $motivo);
         die();
     }

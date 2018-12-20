@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito:300,400);
 body.kopere_dashboard_body {
-    
     min-height: 100%;
     background: -webkit-linear-gradient(top left, #d7bbea, #65a8f1);
     background: linear-gradient(to bottom right, #d7bbea, #65a8f1);
@@ -15,11 +14,9 @@ body.kopere_dashboard_body {
     @media (max-width: 1650px) {
         padding: 40px;
     }
-    
     @media (max-width: 1550px) {
         padding: 20px;
     }
-    
     @media (max-width: 1000px) {
         padding: 0;
     }
@@ -30,12 +27,10 @@ body.kopere_dashboard_body {
     &.in-iframe {
         padding: 0;
     }
-    
     @import "dashboard/css/dashboard";
     @import "dashboard/bootstrap/bootstrap";
     @import "dashboard/dataTables/jquery.dataTables";
     @import "dropzone/css/dropzone";
-    
     .element-header {
         .setting {
             display: none !important;

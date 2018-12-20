@@ -1228,7 +1228,6 @@ if ( typeof jQuery === 'undefined' ) {
     $ ( document ).on ( 'click.bs.modal.data-api', '[data-toggle="modal"]', function ( e ) {
 
         e.stopImmediatePropagation ();
-        
         $ ( '.modal-content' ).html ( '<div class="loader"></div>' );
 
         var $this = $ ( this );

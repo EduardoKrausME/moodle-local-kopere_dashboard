@@ -102,21 +102,27 @@ class send_events {
         $courseid = 0;
         if ($this->event->objecttable == 'course') {
             $courseid = $this->event->objectid;
-            $course = $DB->get_record('course', array('id' => $courseid));
-            if ($course) {
-                $course->link = "<a href=\"{$CFG->wwwroot}/course/view.php?id={$courseid}\"
-                                    target=\"_blank\">{$CFG->wwwroot}/course/view.php?id={$courseid}</a>";
-                $course->url = "{$CFG->wwwroot}/course/view.php?id={$courseid}";
-
-                $this->subject = $this->replace_tag($this->subject, $course, 'course');
-                $this->message = $this->replace_tag($this->message, $course, 'course');
-            }
+        } else if (isset($this->event->other) && isset($this->event->other['courseid'])) {
+            $courseid = $this->event->other['courseid'];
         }
+
         if ($this->event->objecttable == 'user') {
             $usertarget = $DB->get_record('user', array('id' => $this->event->objectid));
 
             $this->subject = $this->replace_tag_user($this->subject, $usertarget, 'usertarget');
             $this->message = $this->replace_tag_user($this->message, $usertarget, 'usertarget');
+        }
+
+        if ($courseid) {
+            $course = $DB->get_record('course', array('id' => $courseid));
+
+            $course->link
+                = "<a href=\"{$CFG->wwwroot}/course/view.php?id={$courseid}\"
+                                    target=\"_blank\">{$CFG->wwwroot}/course/view.php?id={$courseid}</a>";
+            $course->url = "{$CFG->wwwroot}/course/view.php?id={$courseid}";
+
+            $this->subject = $this->replace_tag($this->subject, $course, 'course');
+            $this->message = $this->replace_tag($this->message, $course, 'course');
         }
 
         // De: {[from.???]}.
@@ -184,8 +190,8 @@ class send_events {
             $sendsubject = $this->replace_tag_user($this->subject, $userto, 'to');
             $htmlmessage = $this->replace_tag_user($this->message, $userto, 'to');
 
-            $magager     = "<a href=\"{$CFG->wwwroot}/message/edit.php?id={$userto->id}\">Gerenciar mensagens</a>";
-            $htmlmessage = str_replace ( '{[manager]}', $magager, $htmlmessage );
+            $magager = "<a href=\"{$CFG->wwwroot}/message/edit.php?id={$userto->id}\">Gerenciar mensagens</a>";
+            $htmlmessage = str_replace('{[manager]}', $magager, $htmlmessage);
 
             $eventdata = new message();
             $eventdata->courseid = SITEID;
@@ -301,6 +307,6 @@ class send_events {
     /**
      * @param $message
      */
-    private static function mail_error( $message) {
+    private static function mail_error($message) {
     }
 }
