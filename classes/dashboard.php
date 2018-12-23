@@ -41,15 +41,15 @@ class dashboard {
     public function start() {
         dashboard_util::start_page(array());
 
-        $col_sm = 4;
+        $colsm = 4;
         if (class_exists('local_kopere_dashboard\usersonline')) {
-            $col_sm = 3;
+            $colsm = 3;
         }
 
 
         echo '<div class="element-content">
                 <div class="row">
-                    <div class="col-sm-'.$col_sm.'">
+                    <div class="col-sm-'.$colsm.'">
                         <div class="element-box color1">
                             <div class="label">' . get_string_kopere('dashboard_title_user') . '</div>
                             <div class="value"><a href="?classname=users&method=dashboard">
@@ -69,7 +69,7 @@ class dashboard {
                     </div>';
         }
         echo '
-                    <div class="col-sm-'.$col_sm.'">
+                    <div class="col-sm-'.$colsm.'">
                         <div class="element-box color3">
                             <div class="label">' . get_string_kopere('dashboard_title_course') . '</div>
                             <div class="value"><a href="?classname=courses&method=dashboard">
@@ -77,7 +77,7 @@ class dashboard {
                                 / ' . courses::count_all_visibles(true) . '</a></div>
                         </div>
                     </div>
-                    <div class="col-sm-'.$col_sm.'">
+                    <div class="col-sm-'.$colsm.'">
                         <div class="element-box color4">
                             <div class="label">' . get_string_kopere('dashboard_title_disk') . '</div>
                             <div class="value"><a href="?classname=reports&method=dashboard&type=server">
@@ -134,7 +134,8 @@ class dashboard {
                           <h4 class="media-heading">
                               <a data-toggle="modal" data-target="#modal-details"
                                  href="?classname=users&method=details&userid=' . $user->id . '"
-                                 data-href="open-ajax-table.php?classname=users&method=details&userid=' . $user->id . '">' . fullname($user) . '</a>
+                                 data-href="open-ajax-table.php?classname=users&method=details&userid=' . $user->id . '">' .
+                                        fullname($user) . '</a>
                           </h4>
                           <p>' . get_string_kopere('dashboard_grade_text',
                     ['grade' => $gradetext, 'evaluation' => $evaluation]) . '</p>
