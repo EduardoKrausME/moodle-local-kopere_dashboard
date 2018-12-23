@@ -50,7 +50,7 @@ function load_class() {
     }
 
     if (strpos($classname, '-')) {
-        $class = 'local_kopere_dashboard_' . str_replace('-', '\\', $classname);
+        $class = 'local_kopere_' . str_replace('-', '\\', $classname);
     } else {
         $class = 'local_kopere_dashboard\\' . $classname;
     }

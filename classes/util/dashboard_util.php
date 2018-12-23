@@ -185,10 +185,10 @@ class dashboard_util {
 
         $class = self::test_menu_active($classname);
 
-        $plugin = '';
+        $plugin = 'kopere_dashboard';
         preg_match("/(.*?)-/", $classname, $menufunctionstart);
         if (isset($menufunctionstart[1])) {
-            $plugin = "_" . $menufunctionstart[1];
+            $plugin = "kopere_" . $menufunctionstart[1];
         }
 
         $submenuhtml = '';
@@ -201,7 +201,7 @@ class dashboard_util {
             if (strpos($submenu[2], 'http') === 0) {
                 $iconurl = $submenu[2];
             } else {
-                $iconurl = "{$CFG->wwwroot}/local/kopere_dashboard{$plugin}/assets/dashboard/img/iconactive/{$submenu[2]}.svg";
+                $iconurl = "{$CFG->wwwroot}/local/{$plugin}/assets/dashboard/img/iconactive/{$submenu[2]}.svg";
             }
 
             $submenuhtml
@@ -220,7 +220,7 @@ class dashboard_util {
         $retorno .= "
                 <li class=\"$class\">
                     <a href=\"?classname={$classname}&method={$methodname}\">
-                        <img src=\"{$CFG->wwwroot}/local/kopere_dashboard{$plugin}/assets/dashboard/img/icon{$class}/{$menuicon}.svg\"
+                        <img src=\"{$CFG->wwwroot}/local/{$plugin}/assets/dashboard/img/icon{$class}/{$menuicon}.svg\"
                              class=\"icon-w\" alt=\"Icon\">
                         <span>{$menuname}</span>
                     </a>

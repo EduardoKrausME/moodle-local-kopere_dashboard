@@ -61,6 +61,16 @@ class tinymce {
         global $CFG;
         $filemanager = $CFG->wwwroot . '/local/kopere_dashboard/vendor/responsivefilemanager/';
 
+        $external_plugins = '';
+        if (file_exists("{$filemanager}dialog.php")) {
+            $external_plugins = "
+                external_filemanager_path : '{$filemanager}',
+                filemanager_title         : '" . get_string_kopere('filemanager_title') . "',
+                external_plugins          : {
+                    'filemanager' : '{$filemanager}plugin.min.js'
+                },";
+        }
+
         $returnhtml = self::register();
 
         $returnhtml
@@ -207,11 +217,7 @@ class tinymce {
                         'alignleft aligncenter alignright alignjustify | ' +
                         'bullist numlist outdent indent | fullscreen',
 
-                external_filemanager_path : '{$filemanager}',
-                filemanager_title : '" . get_string_kopere('filemanager_title') . "',
-                external_plugins : {
-                    'filemanager' : '{$filemanager}plugin.min.js'
-                },
+                {$external_plugins}
 
                 auto_focus           : 'elm1',
                 relative_urls        : false,

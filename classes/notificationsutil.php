@@ -196,12 +196,12 @@ class notificationsutil {
 
             case 'local_kopere_dashboard':
                 return get_string_kopere('notification_local_kopere_dashboard');
-            case 'local_kopere_dashboard_hotmoodle':
-                return get_string_kopere('notification_local_kopere_dashboard_hotmoodle');
-            case 'local_kopere_dashboard_moocommerce':
-                return get_string_kopere('notification_local_kopere_dashboard_moocommerce');
-            case 'local_kopere_dashboard_pagamento':
-                return get_string_kopere('notification_local_kopere_dashboard_pagamento');
+            case 'local_kopere_hotmoodle':
+                return get_string_kopere('notification_local_kopere_hotmoodle');
+            case 'local_kopere_moocommerce':
+                return get_string_kopere('notification_local_kopere_moocommerce');
+            case 'local_kopere_pagamento':
+                return get_string_kopere('notification_local_kopere_pagamento');
         }
 
         if (strpos($component, 'mod_') === 0) {

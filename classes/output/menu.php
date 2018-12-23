@@ -36,7 +36,7 @@ class menu {
      * @throws \dml_exception
      */
     public static function create_menu() {
-        global $DB, $CFG;
+        global $DB;
 
         $menu = "<ul class=\"main-menu block_tree list menu-kopere\">";
 
@@ -64,6 +64,11 @@ class menu {
         if (has_capability('moodle/site:config', \context_system::instance())) {
             $menu .= dashboard_util::add_menu('notifications', 'dashboard', 'notifications',
                 get_string_kopere('notification_title'));
+        }
+
+        if (has_capability('moodle/site:config', \context_system::instance())) {
+            $menu .= dashboard_util::add_menu('webpages', 'dashboard', 'webpages',
+                get_string_kopere('webpages_title'));
         }
 
         $menu .= dashboard_util::add_menu('benchmark', 'test', 'performace', get_string_kopere('benchmark_title'));

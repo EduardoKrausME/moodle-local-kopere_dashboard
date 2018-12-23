@@ -60,7 +60,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
 
             $node = $nav->add(
                 get_string('pluginname', 'local_kopere_dashboard'),
-                new moodle_url($CFG->wwwroot . '/local/kopere_dashboard/open.php'),
+                new moodle_url($CFG->wwwroot . '/local/kopere_dashboard/open.php?classname=dashboard&method=start'),
                 navigation_node::TYPE_CUSTOM,
                 null,
                 'kopere_dashboard',

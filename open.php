@@ -34,7 +34,7 @@ require_login();
 require_capability('local/kopere_dashboard:view', context_system::instance());
 require_capability('local/kopere_dashboard:manage', context_system::instance());
 
-$PAGE->set_url(new moodle_url('/local/kopere_dashboard/open.php'));
+$PAGE->set_url(new moodle_url('/local/kopere_dashboard/open.php?classname=dashboard&method=start'));
 $PAGE->set_context(context_system::instance());
 $PAGE->set_pagetype('admin-setting');
 $PAGE->set_pagelayout('admin');
