@@ -276,7 +276,7 @@ class data_table {
                 if ($column->type == table_header_item::TYPE_INT) {
                     $thisclass .= ' text-center';
                 } else if ($column->type == table_header_item::TYPE_ACTION) {
-                    $thisclass .= ' button-actions text-nowrap';
+                    $thisclass .= ' button-actions text-nowrap width-30';
                 }
 
                 $thisclass .= ' ' . $column->style_col;

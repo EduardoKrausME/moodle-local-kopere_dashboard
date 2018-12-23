@@ -1622,6 +1622,9 @@ body.kopere_dashboard_body .mark {
   padding: 0.2em;
   background-color: #fcf8e3;
 }
+body.kopere_dashboard_body .width-30 {
+  width: 30px;
+}
 body.kopere_dashboard_body .text-left {
   text-align: left;
 }

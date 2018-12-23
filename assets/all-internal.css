@@ -1587,6 +1587,9 @@
   padding: 0.2em;
   background-color: #fcf8e3;
 }
+#kopere_dashboard_div .width-30 {
+  width: 30px;
+}
 #kopere_dashboard_div .text-left {
   text-align: left;
 }
