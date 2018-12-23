@@ -24,6 +24,7 @@
 namespace local_kopere_dashboard\output;
 
 use local_kopere_dashboard\util\dashboard_util;
+use local_kopere_dashboard\util\menu_util;
 
 /**
  * Class menu
@@ -40,9 +41,21 @@ class menu {
 
         $menu = "<ul class=\"main-menu block_tree list menu-kopere\">";
 
-        $menu .= dashboard_util::add_menu('dashboard', 'start', 'dashboard', get_string_kopere('dashboard'));
-        $menu .= dashboard_util::add_menu('users', 'dashboard', 'users', get_string_kopere('user_title'));
-        $menu .= dashboard_util::add_menu('courses', 'dashboard', 'courses', get_string_kopere('courses_title'));
+        $menu .= dashboard_util::add_menu(
+            (new menu_util())->set_classname('dashboard')
+                ->set_methodname('start')
+                ->set_icon('dashboard')
+                ->set_name(get_string_kopere('dashboard')));
+        $menu .= dashboard_util::add_menu(
+            (new menu_util())->set_classname('users')
+                ->set_methodname('dashboard')
+                ->set_icon('users')
+                ->set_name(get_string_kopere('user_title')));
+        $menu .= dashboard_util::add_menu(
+            (new menu_util())->set_classname('courses')
+                ->set_methodname('dashboard')
+                ->set_icon('courses')
+                ->set_name(get_string_kopere('courses_title')));
 
         $sql = "SELECT plugin
                   FROM {config_plugins}
@@ -58,22 +71,40 @@ class menu {
             }
         }
 
-        $menu .= dashboard_util::add_menu('reports', 'dashboard', 'report', get_string_kopere('reports_title'),
-            \local_kopere_dashboard\reports::global_menus());
+        $menu .= dashboard_util::add_menu(
+            (new menu_util())->set_classname('reports')
+                ->set_methodname('dashboard')
+                ->set_icon('report')
+                ->set_name(get_string_kopere('reports_title'))
+                ->set_submenus(\local_kopere_dashboard\reports::global_menus()));
 
         if (has_capability('moodle/site:config', \context_system::instance())) {
-            $menu .= dashboard_util::add_menu('notifications', 'dashboard', 'notifications',
-                get_string_kopere('notification_title'));
+            $menu .= dashboard_util::add_menu(
+                (new menu_util())->set_classname('notifications')
+                    ->set_methodname('dashboard')
+                    ->set_icon('notifications')
+                    ->set_name(get_string_kopere('notification_title')));
         }
 
         if (has_capability('moodle/site:config', \context_system::instance())) {
-            $menu .= dashboard_util::add_menu('webpages', 'dashboard', 'webpages',
-                get_string_kopere('webpages_title'));
+            $menu .= dashboard_util::add_menu(
+                (new menu_util())->set_classname('webpages')
+                    ->set_methodname('dashboard')
+                    ->set_icon('webpages')
+                    ->set_name(get_string_kopere('webpages_title')));
         }
 
-        $menu .= dashboard_util::add_menu('benchmark', 'test', 'performace', get_string_kopere('benchmark_title'));
+        $menu .= dashboard_util::add_menu(
+            (new menu_util())->set_classname('benchmark')
+                ->set_methodname('test')
+                ->set_icon('performace')
+                ->set_name(get_string_kopere('benchmark_title')));
 
-        $menu .= dashboard_util::add_menu('about', 'dashboard', 'about', get_string_kopere('about_title'));
+        $menu .= dashboard_util::add_menu(
+            (new menu_util())->set_classname('about')
+                ->set_methodname('dashboard')
+                ->set_icon('about')
+                ->set_name(get_string_kopere('about_title')));
 
         $menu .= "</ul>";
 

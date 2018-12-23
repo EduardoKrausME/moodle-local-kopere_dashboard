@@ -32,6 +32,7 @@ use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\json;
+use local_kopere_dashboard\util\submenu_util;
 use local_kopere_dashboard\util\title_util;
 use local_kopere_dashboard\util\export;
 use local_kopere_dashboard\vo\kopere_dashboard_reportcat;
@@ -44,7 +45,7 @@ use local_kopere_dashboard\vo\kopere_dashboard_reports;
 class reports {
 
     /**
-     * @return array
+     * @return array of submenu_util
      */
     public static function global_menus() {
         global $DB, $CFG;
@@ -68,10 +69,10 @@ class reports {
                 $icon = "{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/icon/report.svg";
             }
 
-            $menus[] = array('?classname=reports&method=dashboard&type=' . $koperereportcat->type,
-                self::get_title($koperereportcat),
-                $icon
-            );
+            $menus[] = (new submenu_util())
+                ->set_host('?classname=reports&method=dashboard&type=' . $koperereportcat->type)
+                ->set_title(self::get_title($koperereportcat))
+                ->set_icon($icon);
         }
 
         return $menus;
@@ -261,8 +262,7 @@ class reports {
     private static function get_title($obj) {
         if (strpos($obj->title, '[[[') === 0) {
             return get_string(substr($obj->title, 3, -3));
-        }
-        elseif (strpos($obj->title, '[[') === 0) {
+        } elseif (strpos($obj->title, '[[') === 0) {
             return get_string_kopere(substr($obj->title, 2, -2));
         } else {
             return $obj->title;

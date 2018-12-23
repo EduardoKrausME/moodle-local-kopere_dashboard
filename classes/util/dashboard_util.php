@@ -108,7 +108,7 @@ class dashboard_util {
                         $breadcrumbreturn .= '<li><span>' . $breadcrumbitem . '</span></li>';
                         $title = $breadcrumbitem;
 
-                        if( $CFG->kopere_dashboard_open == 'internal') {
+                        if ($CFG->kopere_dashboard_open == 'internal') {
                             $PAGE->navbar->add($breadcrumbitem);
                         }
                     } else {
@@ -118,7 +118,7 @@ class dashboard_util {
                                 </li>';
                         $title = $breadcrumbitem[1];
 
-                        if( $CFG->kopere_dashboard_open == 'internal') {
+                        if ($CFG->kopere_dashboard_open == 'internal') {
                             $PAGE->navbar->add($breadcrumbitem[1], $breadcrumbitem[0]);
                         }
                     }
@@ -171,58 +171,55 @@ class dashboard_util {
     }
 
     /**
-     * @param       $classname
-     * @param       $methodname
-     * @param       $menuicon
-     * @param       $menuname
-     * @param array $submenus
+     * @param menu_util $menu
      * @return string
      */
-    public static function add_menu($classname, $methodname, $menuicon, $menuname, $submenus = array()) {
+    public static function add_menu(menu_util $menu) {
         global $CFG;
 
         $retorno = "";
 
-        $class = self::test_menu_active($classname);
+        $class = self::test_menu_active($menu->get_classname());
 
         $plugin = 'kopere_dashboard';
-        preg_match("/(.*?)-/", $classname, $menufunctionstart);
+        preg_match("/(.*?)-/", $menu->get_classname(), $menufunctionstart);
         if (isset($menufunctionstart[1])) {
             $plugin = "kopere_" . $menufunctionstart[1];
         }
 
         $submenuhtml = '';
-        foreach ($submenus as $submenu) {
-            $classsub = self::test_menu_active($submenu[0]);
+        /** @var submenu_util $submenu */
+        foreach ($menu->get_submenus() as $submenu) {
+            $classsub = self::test_menu_active($submenu->get_host());
             if (isset ($classsub[1])) {
                 $class = $classsub;
             }
 
-            if (strpos($submenu[2], 'http') === 0) {
-                $iconurl = $submenu[2];
+            if (strpos($submenu->get_icon(), 'http') === 0) {
+                $iconurl = $submenu->get_icon();
             } else {
-                $iconurl = "{$CFG->wwwroot}/local/{$plugin}/assets/dashboard/img/iconactive/{$submenu[2]}.svg";
+                $iconurl = "{$CFG->wwwroot}/local/{$plugin}/assets/dashboard/img/iconactive/{$submenu->get_icon()}.svg";
             }
 
             $submenuhtml
                 .= "<li class=\"contains_branch {$classsub}\">
-                        <a href=\"{$submenu[0]}\">
+                        <a href=\"{$submenu->get_host()}\">
                             <img src=\"{$iconurl}\"
-                                 class=\"icon-w\" alt=\"Icon\">
-                            <span>{$submenu[1]}</span>
+                                 class=\"menu-icon\" alt=\"Icon\">
+                            <span>{$submenu->get_title()}</span>
                         </a>
                     </li>";
         }
         if ($submenuhtml != '') {
-            $submenuhtml = "<ul class='submenu-kopere'>{$submenuhtml}</ul>";
+            $submenuhtml = "<ul class='submenu submenu-kopere'>{$submenuhtml}</ul>";
         }
 
         $retorno .= "
                 <li class=\"$class\">
-                    <a href=\"?classname={$classname}&method={$methodname}\">
-                        <img src=\"{$CFG->wwwroot}/local/{$plugin}/assets/dashboard/img/icon{$class}/{$menuicon}.svg\"
-                             class=\"icon-w\" alt=\"Icon\">
-                        <span>{$menuname}</span>
+                    <a href=\"?classname={$menu->get_classname()}&method={$menu->get_methodname()}\">
+                        <img src=\"{$CFG->wwwroot}/local/{$plugin}/assets/dashboard/img/icon{$class}/{$menu->get_icon()}.svg\"
+                             class=\"menu-icon\" alt=\"Icon\">
+                        <span>{$menu->get_name()}</span>
                     </a>
                     {$submenuhtml}
                 </li>";
