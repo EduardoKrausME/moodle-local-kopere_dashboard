@@ -95,7 +95,7 @@ class courses {
      * @param bool $format
      * @return string
      */
-    public static function count_all($format = false) {
+    public static function count_all($format) {
         global $DB;
 
         $count = $DB->get_record_sql('SELECT count(*) as num FROM {course} WHERE id > 1');
@@ -112,7 +112,7 @@ class courses {
      * @param bool $format
      * @return string
      */
-    public static function count_all_visibles($format = false) {
+    public static function count_all_visibles() {
         global $DB;
 
         $count = $DB->get_record_sql('SELECT count(*) as num FROM {course} WHERE id > 1 AND visible = 1');
@@ -145,7 +145,7 @@ class courses {
         ));
 
         echo '<div class="element-box">
-                  <h3>'.get_string_kopere('courses_sumary').'
+                  <h3>' . get_string_kopere('courses_sumary') . '
                       ' . button::info(get_string_kopere('courses_edit'), $CFG->wwwroot . '/course/edit.php?id=' .
                 $course->id . '#id_summary_editor', button::BTN_PEQUENO, false, true) . '
                       ' . button::primary(get_string_kopere('courses_acess'), $CFG->wwwroot . '/course/view.php?id=' .

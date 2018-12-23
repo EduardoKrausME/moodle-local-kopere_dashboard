@@ -22,6 +22,7 @@
  */
 
 ob_start();
+define('AJAX_SCRIPT', false);
 
 require('../../config.php');
 require('autoload.php');

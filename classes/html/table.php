@@ -58,10 +58,6 @@ class table {
      * @var bool
      */
     private $isprint = false;
-    /**
-     * @var string
-     */
-    private $tableid;
 
     /**
      * @param $exec
@@ -147,7 +143,7 @@ class table {
         $this->colunas = array();
         echo '<thead>';
         echo '<tr class="' . $class . '">';
-        foreach ($header as $key => $value) {
+        foreach ($header as $value) {
             echo '<th class="text-center" style="' . $value->style_header . '">';
             if ($value->title == '') {
                 echo "&nbsp;";

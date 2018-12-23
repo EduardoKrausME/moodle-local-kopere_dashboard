@@ -71,8 +71,7 @@ class webpages {
             $table->add_header(get_string_kopere('webpages_table_link'), 'link');
             $table->add_header(get_string_kopere('webpages_table_title'), 'title');
 
-            //$table->set_click_modal('open-ajax-table.php?classname=webpages&method=edit_menu&id={id}', 'id');
-            $table->set_click_redirect('open-ajax-table.php?classname=webpages&method=edit_menu&id={id}', 'id');
+            $table->set_click_redirect('?classname=webpages&method=edit_menu&id={id}', 'id');
             $table->print_header('', false);
             $table->set_row($menus);
             $table->close(false);
@@ -220,13 +219,13 @@ class webpages {
 
         ?>
         <script>
-            $('#title').focusout(function () {
+            $('#title').focusout(function() {
                 var url = 'open-ajax-table.php?classname=webpages&method=ajax_get_page_url';
                 var postData = {
                     title : $(this).val(),
                     id    : $('#id').val()
                 };
-                $.post(url, postData, function (data) {
+                $.post(url, postData, function(data) {
                     $('#link').val(data);
                     $('#theme').focus();
                 }, 'text');
@@ -366,17 +365,15 @@ class webpages {
         }
         $form->close();
 
-        echo '</div>';
-
         ?>
         <script>
-            $('#title').focusout(function () {
+            $('#title').focusout(function() {
                 var url = 'open-ajax-table.php?classname=webpages&method=ajax_get_menu_url';
                 var postData = {
                     title : $(this).val(),
                     id    : $('#id').val()
                 };
-                $.post(url, postData, function (data) {
+                $.post(url, postData, function(data) {
                     $('#link').val(data).focus();
                 }, 'text');
             });
@@ -523,11 +520,13 @@ class webpages {
      * @param $theme
      * @return string
      */
-    private function theme_name($theme) {
+    private function theme_name($themekey) {
         $themes = self::list_themes();
 
-        foreach ($themes as $t) {
-            return $t['value'];
+        foreach ($themes as $theme) {
+            if ($theme['key'] == $themekey) {
+                return $theme['value'];
+            }
         }
 
         return '-';
@@ -596,7 +595,7 @@ class webpages {
 
         $form->add_input(
             input_select::new_instance()->set_title(get_string_kopere('webpages_page_theme'))
-                ->set_values($this->list_themes())
+                ->set_values(self::list_themes())
                 ->set_value_by_config('webpages_theme'));
 
         $form->add_input(

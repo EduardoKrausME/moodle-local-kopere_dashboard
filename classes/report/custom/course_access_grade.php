@@ -75,7 +75,7 @@ class course_access_grade {
 
         $sections = $DB->get_records('course_sections', array('course' => $courseid), 'section asc');
 
-        button::info(get_string_kopere('reports_export'), url_util::querystring()."&export=xls");
+        button::info(get_string_kopere('reports_export'), url_util::querystring() . "&export=xls");
 
         $export = optional_param('export', '', PARAM_TEXT);
         export::header($export, "Lista de alunos - $course->fullname");
@@ -273,7 +273,7 @@ class course_access_grade {
      * @param string $class
      * @param        $bgcolor
      */
-    private function td($value, $class = '', $bgcolor) {
+    private function td($value, $class, $bgcolor) {
         echo '<td class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
     }
 
@@ -282,7 +282,7 @@ class course_access_grade {
      * @param string $class
      * @param        $bgcolor
      */
-    private function td2($value, $class = '', $bgcolor) {
+    private function td2($value, $class, $bgcolor) {
         echo '<td colspan="2" class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
     }
 

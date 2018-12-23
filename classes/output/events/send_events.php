@@ -133,8 +133,6 @@ class send_events {
                 break;
         }
         if ($userfrom == null) {
-            $this->mail_error('$userfrom NOT FOUND!');
-
             return;
         }
 
@@ -302,11 +300,5 @@ class send_events {
         }
 
         return $text;
-    }
-
-    /**
-     * @param $message
-     */
-    private static function mail_error($message) {
     }
 }
