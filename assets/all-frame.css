@@ -194,7 +194,7 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li a {
   align-items: center;
   position: relative;
 }
-body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li a .icon-w {
+body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li a .menu-icon {
   display: block;
   text-align: center;
   -webkit-transition: all 0.2s ease;
@@ -211,7 +211,7 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li a span {
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
-body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li a:hover .icon-w {
+body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li a:hover .menu-icon {
   -webkit-transform: translateX(10px);
   transform: translateX(10px);
 }
@@ -231,7 +231,7 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li ul.submenu l
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   padding: 2px 0;
 }
-body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li ul.submenu li a .icon-w {
+body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li ul.submenu li a .menu-icon {
   width: 30px;
   height: 30px;
 }
@@ -256,12 +256,22 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li.active ul.su
 body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li:last-child {
   border-bottom: none;
 }
+@media (max-width: 600px) {
+  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu {
+    padding: 0.3rem 2px !important;
+  }
+  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li ul.submenu {
+    padding: 6px 0 6px 11px !important;
+  }
+}
+@media (max-width: 1000px) {
+  body.kopere_dashboard_body .menu-w .menu-and-user {
+    padding: 0.6rem 1.3rem;
+  }
+}
 @media (max-width: 1000px) {
   body.kopere_dashboard_body .menu-w {
     width: 250px;
-  }
-  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu {
-    padding: 0.6rem 1.3rem;
   }
 }
 @media (max-width: 800px) {
@@ -281,7 +291,7 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li:last-child {
   body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu {
     padding: 0.6rem 1.3rem;
   }
-  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a .icon-w {
+  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a .menu-icon {
     margin: 7px 0 6px;
   }
   body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a span {
@@ -311,7 +321,7 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li:last-child {
     border-width: 10px;
     margin-top: -10px;
   }
-  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a:hover .icon-w {
+  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a:hover .menu-icon {
     -webkit-transform: none;
     transform: none;
   }
@@ -343,7 +353,7 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li:last-child {
   body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu {
     padding: 0.6rem 1.3rem;
   }
-  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a .icon-w {
+  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a .menu-icon {
     margin: 7px 0 6px;
   }
   body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a span {
@@ -373,7 +383,7 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li:last-child {
     border-width: 10px;
     margin-top: -10px;
   }
-  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a:hover .icon-w {
+  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a:hover .menu-icon {
     -webkit-transform: none;
     transform: none;
   }
@@ -389,12 +399,6 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li:last-child {
   }
   body.kopere_dashboard_body .menu-w .logo-w {
     padding: 12px 0 !important;
-  }
-  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu {
-    padding: 0.3rem 2px !important;
-  }
-  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li ul.submenu {
-    padding: 6px 0 6px 11px !important;
   }
 }
 body.kopere_dashboard_body body.menu-w-90 .menu-w {
@@ -414,7 +418,7 @@ body.kopere_dashboard_body body.menu-w-90 .menu-w .logo-w img.mobile {
 body.kopere_dashboard_body body.menu-w-90 .menu-w .menu-and-user ul.main-menu {
   padding: 0.6rem 1.3rem;
 }
-body.kopere_dashboard_body body.menu-w-90 .menu-w .menu-and-user ul.main-menu li a .icon-w {
+body.kopere_dashboard_body body.menu-w-90 .menu-w .menu-and-user ul.main-menu li a .menu-icon {
   margin: 7px 0 6px;
 }
 body.kopere_dashboard_body body.menu-w-90 .menu-w .menu-and-user ul.main-menu li a span {
@@ -444,7 +448,7 @@ body.kopere_dashboard_body body.menu-w-90 .menu-w .menu-and-user ul.main-menu li
   border-width: 10px;
   margin-top: -10px;
 }
-body.kopere_dashboard_body body.menu-w-90 .menu-w .menu-and-user ul.main-menu li a:hover .icon-w {
+body.kopere_dashboard_body body.menu-w-90 .menu-w .menu-and-user ul.main-menu li a:hover .menu-icon {
   -webkit-transform: none;
   transform: none;
 }
@@ -2929,6 +2933,7 @@ body.kopere_dashboard_body fieldset legend {
   color: #333;
   border: 0;
   padding: 0 6px;
+  width: auto;
 }
 body.kopere_dashboard_body label {
   display: inline-block;

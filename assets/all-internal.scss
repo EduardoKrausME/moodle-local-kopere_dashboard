@@ -38,6 +38,7 @@
     }
 }
 #block-region-side-pre {
+    @import "dashboard/css/main-menu";
     .menu-kopere {
         .submenu-kopere {
             display: none;
@@ -53,7 +54,7 @@
         }
         li {
             line-height: 1.5rem;
-            padding: 1px 20px !important;
+            padding: 1px 0 !important;
         }
     }
 }

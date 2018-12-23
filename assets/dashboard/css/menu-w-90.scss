@@ -12,7 +12,7 @@
     padding: 0.6rem 1.3rem;
     li {
         a {
-            .icon-w {
+            .menu-icon {
                 margin: 7px 0 6px;
             }
             span {
@@ -43,7 +43,7 @@
                 }
             }
             &:hover {
-                .icon-w {
+                .menu-icon {
                     -webkit-transform: none;
                     transform: none;
                 }
