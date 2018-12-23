@@ -1,0 +1,11 @@
+{
+    "name": "EduardoKrausME/moodle-local_kopere_dashboard",
+    "type": "moodle-local",
+    "require": {
+        "composer/installers": "~1.0",
+        "tinymce/tinymce": ">= 4"
+    },
+    "extra": {
+        "installer-name": "kopere_dashboard"
+    }
+}
