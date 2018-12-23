@@ -426,3 +426,5 @@ $string['webpages_theme_print'] = 'Solamente debe mostrar contenido y encabezado
 $string['webpages_theme_report'] = 'El diseño de la página usada para reportes';
 $string['webpages_theme_standard'] = 'Diseño por defecto con bloques';
 $string['webpages_title'] = 'Páginas Estáticas';
+
+$string['privacy:metadata'] = 'El complemento de Kopere Dashboard no almacena ningún dato personal.';

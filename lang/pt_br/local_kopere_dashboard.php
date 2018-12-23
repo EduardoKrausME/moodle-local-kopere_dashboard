@@ -508,3 +508,4 @@ $string['webpages_theme_print'] = 'Deve exibir apenas o conteúdo e os cabeçalh
 $string['webpages_theme_report'] = 'O layout da página usado para relatórios';
 $string['webpages_allpages'] = 'Todas as páginas';
 
+$string['privacy:metadata'] = 'O plugin do Kopere Dashboard não armazena nenhum dado pessoal.';
