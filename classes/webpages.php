@@ -61,17 +61,27 @@ class webpages {
 
         $menus = $DB->get_records('kopere_dashboard_menu', null, 'title ASC');
 
-        button::add(get_string_kopere('webpages_menu_create'), '?classname=webpages&method=edit_menu', '', true, false, true);
+        button::add(get_string_kopere('webpages_menu_create'), '?classname=webpages&method=menu_edit', '', true, false, true);
 
         if (!$menus) {
             button::help('webpages', get_string_kopere('webpages_menu_help'), 'Páginas-estáticas');
         } else {
+            foreach ($menus as $key => $menu) {
+                $menu->actions
+                    = "<div class=\"text-center\">
+                    " . button::icon('edit', "?classname=webpages&method=menu_edit&id={$menu->id}") . "&nbsp;&nbsp;&nbsp;
+                    " . button::icon('delete', "?classname=webpages&method=menu_delete&id={$menu->id}") . "
+                   </div>";
+
+                $menus[$key] = $menu;
+            }
+
             $table = new data_table();
             $table->add_header('#', 'id', table_header_item::TYPE_INT, null, 'width: 20px');
             $table->add_header(get_string_kopere('webpages_table_link'), 'link');
             $table->add_header(get_string_kopere('webpages_table_title'), 'title');
+            $table->add_header('', 'actions', table_header_item::TYPE_ACTION);
 
-            $table->set_click_redirect('?classname=webpages&method=edit_menu&id={id}', 'id');
             $table->print_header('', false);
             $table->set_row($menus);
             $table->close(false);
@@ -81,18 +91,30 @@ class webpages {
         if ($menus) {
             echo '<div class="element-box">';
             title_util::print_h3('webpages_title');
-            button::add(get_string_kopere('webpages_page_create'), '?classname=webpages&method=edit_page');
+            button::add(get_string_kopere('webpages_page_create'), '?classname=webpages&method=page_edit');
 
             $pages = $DB->get_records('kopere_dashboard_webpages', null, 'pageorder ASC');
+            foreach ($pages as $key => $page) {
+                $page->actions
+                    = "<div class=\"text-center\">
+                    " . button::icon('details', "?classname=webpages&method=page_details&id={$page->id}", false) . "&nbsp;&nbsp;&nbsp;
+                    " . button::icon('delete', "?classname=webpages&method=page_delete&id={$page->id}") . "
+                   </div>";
+
+                $page->menu = $DB->get_field('kopere_dashboard_menu', 'title', ['id' => $page->menuid]);
+
+                $pages[$key] = $page;
+            }
 
             $table = new data_table();
             $table->add_header('#', 'id', table_header_item::TYPE_INT, null, 'width: 20px');
             $table->add_header(get_string_kopere('webpages_table_link'), 'link');
             $table->add_header(get_string_kopere('webpages_table_link'), 'title');
-            $table->add_header(get_string_kopere('webpages_table_visible'), 'visible', table_header_item::RENDERER_VISIBLE);
+            $table->add_header(get_string_kopere('webpages_table_menutitle'), 'menu');
+            $table->add_header(get_string_kopere('webpages_table_visible'), 'visible', table_header_item::TYPE_INT);
             $table->add_header(get_string_kopere('webpages_table_order'), 'pageorder', table_header_item::TYPE_INT);
+            $table->add_header('', 'actions', table_header_item::TYPE_ACTION);
 
-            $table->set_click_redirect('?classname=webpages&method=details&id={id}', 'id');
             $table->print_header('', false);
             $table->set_row($pages);
             $table->close(false);
@@ -108,7 +130,7 @@ class webpages {
     /**
      *
      */
-    public function details() {
+    public function page_details() {
         global $DB, $CFG;
 
         $id = optional_param('id', 0, PARAM_INT);
@@ -125,9 +147,9 @@ class webpages {
         $linkpagina = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";
 
         button::info(get_string_kopere('webpages_page_view'), $linkpagina, '', false);
-        button::edit(get_string_kopere('webpages_page_edit'), '?classname=webpages&method=edit_page&id=' . $webpages->id, 'margin-left-15', false);
+        button::edit(get_string_kopere('webpages_page_edit'), '?classname=webpages&method=page_edit&id=' . $webpages->id, 'margin-left-15', false);
         button::delete(get_string_kopere('webpages_page_delete'),
-            '?classname=webpages&method=delete_page&id=' . $webpages->id, 'margin-left-15', false, false, true);
+            '?classname=webpages&method=page_delete&id=' . $webpages->id, 'margin-left-15', false, false, true);
 
         $form = new form();
         $form->print_panel(get_string_kopere('webpages_table_link'), "<a target='_blank' href='$linkpagina'>$linkpagina</a>");
@@ -137,7 +159,7 @@ class webpages {
             $course = $DB->get_record('course', array('id' => $webpages->courseid));
             if ($course) {
                 $form->print_panel(get_string_kopere('webpages_page_course'),
-                    '<a href="?classname=courses&method=details&courseid=' . $webpages->courseid . '">' . $course->fullname . '</a>');
+                    '<a href="?classname=courses&method=page_details&courseid=' . $webpages->courseid . '">' . $course->fullname . '</a>');
             }
         }
         $form->print_panel(get_string_kopere('webpages_table_theme'), $this->theme_name($webpages->theme));
@@ -152,7 +174,7 @@ class webpages {
     /**
      *
      */
-    public function edit_page() {
+    public function page_edit() {
         global $DB;
 
         $id = optional_param('id', 0, PARAM_INT);
@@ -170,47 +192,53 @@ class webpages {
             $webpages = kopere_dashboard_webpages::create_by_object($webpages);
             dashboard_util::start_page(array(
                 array('?classname=webpages&method=dashboard', get_string_kopere('webpages_title')),
-                array('?classname=webpages&method=details&id=' . $webpages->id, $webpages->title),
+                array('?classname=webpages&method=page_details&id=' . $webpages->id, $webpages->title),
                 get_string_kopere('webpages_page_edit')
             ), -1);
         }
 
         echo '<div class="element-box">';
 
-        $form = new form('?classname=webpages&method=edit_page_save');
+        $form = new form('?classname=webpages&method=page_edit_save');
         $form->create_hidden_input('id', $webpages->id);
         $form->add_input(
-            input_text::new_instance()->set_title(get_string_kopere('webpages_page_title'))
+            input_text::new_instance()
+                ->set_title(get_string_kopere('webpages_page_title'))
                 ->set_name('title')
                 ->set_value($webpages->title)
                 ->set_required()
         );
         $form->add_input(
-            input_text::new_instance()->set_title(get_string_kopere('webpages_table_link'))
+            input_text::new_instance()
+                ->set_title(get_string_kopere('webpages_table_link'))
                 ->set_name('link')
                 ->set_value($webpages->link)
                 ->set_required()
         );
         $form->add_input(
-            input_select::new_instance()->set_title(get_string_kopere('webpages_page_menu'))
+            input_select::new_instance()
+                ->set_title(get_string_kopere('webpages_page_menu'))
                 ->set_name('menuid')
                 ->set_values(self::list_menus())
                 ->set_value($webpages->menuid));
         $form->add_input(
-            input_select::new_instance()->set_title(get_string_kopere('webpages_table_theme'))
+            input_select::new_instance()
+                ->set_title(get_string_kopere('webpages_table_theme'))
                 ->set_name('theme')
                 ->set_values(self::list_themes())
                 ->set_value($webpages->theme));
 
         $form->add_input(
-            input_html_editor::new_instance()->set_title(get_string_kopere('webpages_table_text'))
+            input_html_editor::new_instance()
+                ->set_title(get_string_kopere('webpages_table_text'))
                 ->set_name('text')
                 ->set_value($webpages->text)
                 ->set_required()
         );
 
         $form->add_input(
-            input_checkbox::new_instance()->set_title(get_string_kopere('webpages_table_visible'))
+            input_checkbox::new_instance()
+                ->set_title(get_string_kopere('webpages_table_visible'))
                 ->set_name('visible')
                 ->set_checked($webpages->visible));
 
@@ -220,7 +248,7 @@ class webpages {
         ?>
         <script>
             $('#title').focusout(function() {
-                var url = 'open-ajax-table.php?classname=webpages&method=ajax_get_page_url';
+                var url = 'open-ajax-table.php?classname=webpages&method=page_ajax_get_url';
                 var postData = {
                     title : $(this).val(),
                     id    : $('#id').val()
@@ -239,7 +267,7 @@ class webpages {
     /**
      *
      */
-    public function edit_page_save() {
+    public function page_edit_save() {
         global $DB;
 
         $webpages = kopere_dashboard_webpages::create_by_default();
@@ -247,14 +275,14 @@ class webpages {
 
         if ($webpages->title == '' || $webpages->text == '') {
             mensagem::agenda_mensagem_warning(get_string_kopere('webpages_page_error'));
-            $this->edit_page();
+            $this->page_edit();
         } else {
             if ($webpages->id) {
                 mensagem::agenda_mensagem_success(get_string_kopere('webpages_page_updated'));
                 try {
                     $DB->update_record('kopere_dashboard_webpages', $webpages);
-                    self::delete_cache();
-                    header::location('?classname=webpages&method=details&id=' . $webpages->id);
+                    self::cache_delete();
+                    header::location('?classname=webpages&method=page_details&id=' . $webpages->id);
                 } catch (\dml_exception $e) {
                     mensagem::print_danger($e->error);
                 }
@@ -263,8 +291,8 @@ class webpages {
                 try {
                     $webpages->id = $DB->insert_record('kopere_dashboard_webpages', $webpages);
 
-                    self::delete_cache();
-                    header::location('?classname=webpages&method=details&id=' . $webpages->id);
+                    self::cache_delete();
+                    header::location('?classname=webpages&method=page_details&id=' . $webpages->id);
                 } catch (\dml_exception $e) {
                     mensagem::print_danger($e->error);
                 }
@@ -275,7 +303,7 @@ class webpages {
     /**
      *
      */
-    public function delete_page() {
+    public function page_delete() {
         global $DB;
 
         $status = optional_param('status', '', PARAM_TEXT);
@@ -287,20 +315,20 @@ class webpages {
         if ($status == 'sim') {
             $DB->delete_records('kopere_dashboard_webpages', array('id' => $id));
 
-            self::delete_cache();
+            self::cache_delete();
             mensagem::agenda_mensagem_success(get_string_kopere('webpages_page_deleted'));
             header::location('?classname=webpages&method=dashboard');
         }
 
         dashboard_util::start_page(array(
             array('?classname=webpages&method=dashboard', get_string_kopere('webpages_title')),
-            array('?classname=webpages&method=details&id=' . $webpages->id, $webpages->title),
+            array('?classname=webpages&method=page_details&id=' . $webpages->id, $webpages->title),
             get_string_kopere('webpages_page_delete')
         ), -1);
 
         echo "<p>" . get_string_kopere('webpages_page_delete_confirm', $webpages) . "</p>";
-        button::delete(get_string('yes'), '?classname=webpages&method=delete_page&status=sim&id=' . $webpages->id, '', false);
-        button::add(get_string('no'), '?classname=webpages&method=details&id=' . $webpages->id, 'margin-left-10', false);
+        button::delete(get_string('yes'), '?classname=webpages&method=page_delete&status=sim&id=' . $webpages->id, '', false);
+        button::close_popup(get_string('no'));
 
         dashboard_util::end_page();
     }
@@ -308,7 +336,7 @@ class webpages {
     /**
      *
      */
-    public function edit_menu() {
+    public function menu_edit() {
         global $DB;
 
         $id = optional_param('id', 0, PARAM_INT);
@@ -324,7 +352,7 @@ class webpages {
                     get_string_kopere('webpages_menu_new')
                 ));
             } else {
-                dashboard_util::start_popup(get_string_kopere('webpages_menu_new'), '?classname=webpages&method=edit_menu_save');
+                dashboard_util::start_popup(get_string_kopere('webpages_menu_new'), '?classname=webpages&method=menu_edit_save');
             }
         } else {
             $menus = kopere_dashboard_menu::create_by_object($menus);
@@ -335,14 +363,14 @@ class webpages {
                     get_string_kopere('webpages_menu_edit')
                 ), -1);
             } else {
-                dashboard_util::start_popup(get_string_kopere('webpages_menu_edit'), '?classname=webpages&method=edit_menu_save');
+                dashboard_util::start_popup(get_string_kopere('webpages_menu_edit'), '?classname=webpages&method=menu_edit_save');
             }
         }
 
         echo '<div class="element-box">';
 
         if (!AJAX_SCRIPT) {
-            $form = new form('?classname=webpages&method=edit_menu_save');
+            $form = new form('?classname=webpages&method=menu_edit_save');
         } else {
             $form = new form();
         }
@@ -368,7 +396,7 @@ class webpages {
         ?>
         <script>
             $('#title').focusout(function() {
-                var url = 'open-ajax-table.php?classname=webpages&method=ajax_get_menu_url';
+                var url = 'open-ajax-table.php?classname=webpages&method=menu_ajax_get_url';
                 var postData = {
                     title : $(this).val(),
                     id    : $('#id').val()
@@ -384,18 +412,14 @@ class webpages {
         if (!AJAX_SCRIPT) {
             dashboard_util::end_page();
         } else {
-            if ($id) {
-                dashboard_util::end_popup('?classname=webpages&method=delete_menu&id=' . $id);
-            } else {
-                dashboard_util::end_popup();
-            }
+            dashboard_util::end_popup();
         }
     }
 
     /**
      *
      */
-    public function edit_menu_save() {
+    public function menu_edit_save() {
         global $DB;
 
         $menu = kopere_dashboard_menu::create_by_default();
@@ -412,7 +436,7 @@ class webpages {
                 $menu->id = $DB->insert_record('kopere_dashboard_menu', $menu);
             }
 
-            self::delete_cache();
+            self::cache_delete();
             header::location('?classname=webpages&method=dashboard');
         }
     }
@@ -420,7 +444,7 @@ class webpages {
     /**
      *
      */
-    public function delete_menu() {
+    public function menu_delete() {
         global $DB;
 
         $status = optional_param('status', '', PARAM_TEXT);
@@ -429,23 +453,28 @@ class webpages {
         $menu = $DB->get_record('kopere_dashboard_menu', array('id' => $id));
         header::notfound_null($menu, get_string_kopere('webpages_page_notfound'));
 
-        if ($status == 'sim') {
-            $DB->delete_records('kopere_dashboard_menu', array('id' => $id));
-
-            self::delete_cache();
-            mensagem::agenda_mensagem_success(get_string_kopere('webpages_menu_deleted'));
-            header::location('?classname=webpages&method=dashboard');
-        }
-
         dashboard_util::start_page(array(
             array('?classname=webpages&method=dashboard', get_string_kopere('webpages_menu_subtitle')),
-            array('?classname=webpages&method=details&id=' . $menu->id, $menu->title),
+            array('?classname=webpages&method=page_details&id=' . $menu->id, $menu->title),
             get_string_kopere('webpages_menu_delete')
         ));
 
-        echo "<p>Deseja realmente excluir o menu <strong>{$menu->title}</strong>?</p>";
-        button::delete(get_string('yes'), '?classname=webpages&method=delete_menu&status=sim&id=' . $menu->id, '', false);
-        button::add(get_string('no'), '?classname=webpages&method=dashboard', 'margin-left-10', false);
+        $pages = $DB->get_records('kopere_dashboard_webpages', ['menuid' => $menu->id]);
+        if ($pages) {
+            echo get_string_kopere('webpages_page_nodelete');
+        } else {
+            if ($status == 'sim') {
+                $DB->delete_records('kopere_dashboard_menu', array('id' => $id));
+
+                self::cache_delete();
+                mensagem::agenda_mensagem_success(get_string_kopere('webpages_menu_deleted'));
+                header::location('?classname=webpages&method=dashboard');
+            }
+
+            echo get_string_kopere('webpages_page_confirmdeletemenu', $menu->title);
+            button::delete(get_string('yes'), '?classname=webpages&method=menu_delete&status=sim&id=' . $menu->id, '', false);
+            button::close_popup(get_string('no'));
+        }
 
         dashboard_util::end_page();
     }
@@ -453,7 +482,7 @@ class webpages {
     /**
      *
      */
-    public function ajax_get_page_url() {
+    public function page_ajax_get_url() {
         global $DB;
 
         $title = optional_param('title', '', PARAM_TEXT);
@@ -486,7 +515,7 @@ class webpages {
     /**
      *
      */
-    public function ajax_get_menu_url() {
+    public function menu_ajax_get_url() {
         global $DB;
 
         $title = optional_param('title', '', PARAM_TEXT);
@@ -611,7 +640,7 @@ class webpages {
     /**
      * @return string
      */
-    public static function get_cache_dir() {
+    public static function cache_get_dir() {
         $path = server_util::get_kopere_pathath(true) . 'cache';
 
         @mkdir($path);
@@ -622,8 +651,8 @@ class webpages {
     /**
      *
      */
-    private static function delete_cache() {
-        $caches = glob(self::get_cache_dir() . '*');
+    private static function cache_delete() {
+        $caches = glob(self::cache_get_dir() . '*');
         foreach ($caches as $cache) {
             unlink($cache);
         }

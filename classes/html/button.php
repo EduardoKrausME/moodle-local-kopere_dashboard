@@ -34,22 +34,14 @@ class button {
     const BTN_GRANDE = 'btn-lg';
 
     /**
-     * @param $texto
-     * @param $link
-     * @param string $class
-     * @param bool $p
-     * @param bool $return
-     * @param bool $modal
-     * @return string
+     * @param $text
      */
-    public static function add($texto, $link, $class = '', $p = true, $return = false, $modal = false) {
-        $class = "btn btn-primary " . $class;
-
-        return self::create_button($texto, $link, $p, $class, $return, $modal);
+    public static function close_popup($text) {
+        echo "<button class=\"btn btn-primary margin-left-10\" data-dismiss=\"modal\">{$text}</button>";
     }
 
     /**
-     * @param $texto
+     * @param $text
      * @param $link
      * @param string $class
      * @param bool $p
@@ -57,14 +49,29 @@ class button {
      * @param bool $modal
      * @return string
      */
-    public static function edit($texto, $link, $class = '', $p = true, $return = false, $modal = false) {
+    public static function add($text, $link, $class = '', $p = true, $return = false, $modal = false) {
+        $class = "btn btn-primary " . $class;
+
+        return self::create_button($text, $link, $p, $class, $return, $modal);
+    }
+
+    /**
+     * @param $text
+     * @param $link
+     * @param string $class
+     * @param bool $p
+     * @param bool $return
+     * @param bool $modal
+     * @return string
+     */
+    public static function edit($text, $link, $class = '', $p = true, $return = false, $modal = false) {
         $class = "btn btn-success " . $class;
 
-        return self::create_button($texto, $link, $p, $class, $return, $modal);
+        return self::create_button($text, $link, $p, $class, $return, $modal);
     }
 
     /**
-     * @param $texto
+     * @param $text
      * @param $link
      * @param string $class
      * @param bool $p
@@ -72,14 +79,14 @@ class button {
      * @param bool $modal
      * @return string
      */
-    public static function delete($texto, $link, $class = '', $p = true, $return = false, $modal = false) {
+    public static function delete($text, $link, $class = '', $p = true, $return = false, $modal = false) {
         $class = "btn btn-danger " . $class;
 
-        return self::create_button($texto, $link, $p, $class, $return, $modal);
+        return self::create_button($text, $link, $p, $class, $return, $modal);
     }
 
     /**
-     * @param $texto
+     * @param $text
      * @param $link
      * @param string $class
      * @param bool $p
@@ -87,14 +94,14 @@ class button {
      * @param bool $modal
      * @return string
      */
-    public static function primary($texto, $link, $class = '', $p = true, $return = false, $modal = false) {
+    public static function primary($text, $link, $class = '', $p = true, $return = false, $modal = false) {
         $class = "btn btn-primary " . $class;
 
-        return self::create_button($texto, $link, $p, $class, $return, $modal);
+        return self::create_button($text, $link, $p, $class, $return, $modal);
     }
 
     /**
-     * @param $texto
+     * @param $text
      * @param $link
      * @param string $class
      * @param bool $p
@@ -102,29 +109,29 @@ class button {
      * @param bool $modal
      * @return string
      */
-    public static function info($texto, $link, $class = '', $p = true, $return = false, $modal = false) {
+    public static function info($text, $link, $class = '', $p = true, $return = false, $modal = false) {
         $class = "btn btn-info " . $class;
 
-        return self::create_button($texto, $link, $p, $class, $return, $modal);
+        return self::create_button($text, $link, $p, $class, $return, $modal);
     }
 
     /**
      * @param $infourl
-     * @param string $texto
+     * @param string $text
      * @param string $hastag
      * @return string
      */
-    public static function help($infourl, $texto = null, $hastag = 'wiki-wrapper') {
+    public static function help($infourl, $text = null, $hastag = 'wiki-wrapper') {
         global $CFG;
 
-        if ($texto == null) {
-            $texto = get_string_kopere('help_title');
+        if ($text == null) {
+            $text = get_string_kopere('help_title');
         }
 
         return "<a href=\"https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/{$infourl}#{$hastag}\"
                    target=\"_blank\" class=\"help\">
                   <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/help.svg\" height=\"23\" >
-                  $texto
+                  $text
               </a>";
     }
 
@@ -150,7 +157,7 @@ class button {
     }
 
     /**
-     * @param $texto
+     * @param $text
      * @param $link
      * @param $p
      * @param $class
@@ -158,7 +165,7 @@ class button {
      * @param bool $modal
      * @return string
      */
-    private static function create_button($texto, $link, $p, $class, $return, $modal = false) {
+    private static function create_button($text, $link, $p, $class, $return, $modal = false) {
         $target = '';
         if (strpos($link, 'http') === 0) {
             $target = 'target="_blank"';
@@ -174,9 +181,9 @@ class button {
                 .= '<a data-toggle="modal" data-target="#modal-edit"
                        class="' . $class . '" ' . $target . '
                        href="' . $link . '"
-                       data-href="open-ajax-table.php' . $link . '">' . $texto . '</a>';
+                       data-href="open-ajax-table.php' . $link . '">' . $text . '</a>';
         } else {
-            $bt .= '<a href="' . $link . '" class="' . $class . '" ' . $target . '>' . $texto . '</a>';
+            $bt .= '<a href="' . $link . '" class="' . $class . '" ' . $target . '>' . $text . '</a>';
         }
 
         if ($p) {
