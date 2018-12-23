@@ -161,9 +161,11 @@ echo $OUTPUT->header();
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/custom.js"></script>
 
+<?php if (get_config('local_kopere_dashboard', 'nodejs-status')) { ?>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v2.js"></script>
-<?php
+    <?php
+}
 if (get_config('local_kopere_dashboard', 'nodejs-status')) {
     echo "<script src=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js\"></script>
           <script src=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v2.js\"></script>";
