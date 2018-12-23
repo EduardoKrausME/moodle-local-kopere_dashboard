@@ -1,64 +1,63 @@
 .logo-w {
-    width   : 100%;
-    padding : 1rem 0.7rem;
+    width: 100%;
+    padding: 1rem 0.7rem;
     img.normal {
-        display : none;
+        display: none;
     }
     img.mobile {
-        display : block;
+        display: block;
     }
 }
-
 .menu-and-user ul.main-menu {
-    padding : 0.6rem 1.3rem;
+    padding: 0.6rem 1.3rem;
     li {
         a {
             .icon-w {
-                margin : 7px 0 6px;
+                margin: 7px 0 6px;
             }
             span {
-                visibility         : hidden;
-                opacity            : 0;
-                background-color   : #FFFFFF;
-                padding            : 1rem 1.5rem;
-                position           : absolute;
-                z-index            : 99;
-                box-shadow         : 0 5px 30px rgba(0, 0, 0, 0.3);
-                left               : 18px;
-                white-space        : nowrap;
-                -webkit-transition : all .2s ease, opacity .2s linear;
-                transition         : all .2s ease, opacity .2s linear;
+                visibility: hidden;
+                opacity: 0;
+                background-color: #fff;
+                padding: 1rem 1.5rem;
+                position: absolute;
+                z-index: 99;
+                box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+                left: 18px;
+                white-space: nowrap;
+                -webkit-transition: all .2s ease, opacity .2s linear;
+                transition: all .2s ease, opacity .2s linear;
                 &:before {
-                    right              : 100%;
-                    top                : 50%;
-                    border             : solid transparent;
-                    content            : " ";
-                    height             : 0;
-                    width              : 0;
-                    position           : absolute;
-                    pointer-events     : none;
-                    border-color       : rgba(255, 255, 255, 0);
-                    border-right-color : #FFFFFF;
-                    border-width       : 10px;
-                    margin-top         : -10px;
+                    right: 100%;
+                    top: 50%;
+                    border: solid transparent;
+                    content: " ";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                    border-color: rgba(255, 255, 255, 0);
+                    border-right-color: #fff;
+                    border-width: 10px;
+                    margin-top: -10px;
                 }
             }
             &:hover {
                 .icon-w {
-                    -webkit-transform : none;
-                    transform         : none;
+                    -webkit-transform: none;
+                    transform: none;
                 }
                 span {
-                    visibility        : visible;
-                    opacity           : 1;
-                    -webkit-transform : none;
-                    transform         : none;
-                    left              : 83px;
+                    visibility: visible;
+                    opacity: 1;
+                    -webkit-transform: none;
+                    transform: none;
+                    left: 83px;
                 }
             }
         }
         .submenu {
-            padding : 0.5rem 0 1rem 0;
+            padding: 0.5rem 0 1rem 0;
         }
     }
 }

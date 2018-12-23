@@ -1,72 +1,71 @@
 .alert {
     .alert-link {
-        font-weight : bold
+        font-weight: bold
     }
     > p,
     > ul {
-        margin-bottom : 0
+        margin-bottom: 0
     }
     > p + p {
-        margin-top : 5px
+        margin-top: 5px
     }
     [class^="icon-"],
     [class*=" icon-"] {
-        margin-right : 5px
+        margin-right: 5px
     }
     &.alert-success {
-        background-color : #DFF0D8;
-        border-color     : #AED48E;
-        color            : #468847;
-        border-top       : 1px solid #94C56A;
+        background-color: #dff0d8;
+        border-color: #aed48e;
+        color: #468847;
+        border-top: 1px solid #94c56a;
         hr {
-            border-top-color : #A1CD7C
+            border-top-color: #a1cd7c
         }
         a {
-            color       : #356635;
-            font-weight : bold;
+            color: #356635;
+            font-weight: bold;
         }
     }
     &.alert-info {
-        background-color : #D9EDF7;
-        border-color     : #85D5E5;
-        color            : #3A87AD;
-        border-top       : 1px solid #5BC7DC;
+        background-color: #d9edf7;
+        border-color: #85d5e5;
+        color: #3a87ad;
+        border-top: 1px solid #5bc7dc;
         hr {
-            border-top-color : #70CEE1
+            border-top-color: #70cee1
         }
         a {
-            color       : #2D6987;
-            font-weight : bold;
+            color: #2d6987;
+            font-weight: bold;
         }
     }
     &.alert-warning {
-        background-color : #EDE6C2;
-        border-color     : #D6B573;
-        color            : #89724D;
-        border-top       : 1px solid #CAA14C;
+        background-color: #ede6c2;
+        border-color: #d6b573;
+        color: #89724d;
+        border-top: 1px solid #caa14c;
         hr {
-            border-top-color : #D0AB60
+            border-top-color: #d0ab60
         }
         a {
-            color       : #68573B;
-            font-weight : bold;
+            color: #68573b;
+            font-weight: bold;
         }
     }
     &.alert-danger {
-        background-color : #F7D9D9;
-        border-color     : #E58595;
-        color            : #B94A48;
-        border-top       : 1px solid #DC5B70;
+        background-color: #f7d9d9;
+        border-color: #e58595;
+        color: #b94a48;
+        border-top: 1px solid #dc5b70;
         hr {
-            border-top-color : #E17083
+            border-top-color: #e17083
         }
         a {
-            color       : #953B39;
-            font-weight : bold;
+            color: #953b39;
+            font-weight: bold;
         }
     }
 }
-
 //.btn {
 //    display             : inline-block;
 //    margin-bottom       : 0;

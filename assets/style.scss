@@ -5,10 +5,10 @@
  ***************************/
 .tree_item a[href$="classname=dashboard&method=start"],
 .tree_item a[href$="local_kopere_dashboard"] {
-    background   : url(icon-16.png) no-repeat;
-    padding-left : 21px;
+    background: url(icon-16.png) no-repeat;
+    padding-left: 21px;
     img {
-        display : none !important;
+        display: none !important;
     }
 }
 
