@@ -47,7 +47,6 @@ class header {
      * @param bool $isdie
      */
     public static function reload( $isdie = true) {
-        global $CFG;
         ob_clean();
 
         header('Location: ?' . url_util::querystring());
