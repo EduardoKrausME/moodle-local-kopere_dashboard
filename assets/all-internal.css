@@ -806,7 +806,7 @@
   border-top-color: #70cee1;
 }
 #kopere_dashboard_div .alert.alert-info a {
-  color: #2d6987;
+  color: #fff;
   font-weight: bold;
 }
 #kopere_dashboard_div .alert.alert-warning {
@@ -7979,9 +7979,16 @@
 #block-region-side-pre .menu-kopere .active > a > span {
   font-weight: bold;
 }
-#block-region-side-pre .menu-kopere li {
+#block-region-side-pre .menu-kopere > li {
   line-height: 1.5rem;
   padding: 1px 0 !important;
+}
+#block-region-side-pre .menu-kopere > li a .menu-icon {
+  width: 35px;
+  height: 35px;
+}
+#block-region-side-pre .menu-kopere > li a span {
+  padding: 11px;
 }
 
 /*# sourceMappingURL=all-internal.css.map */

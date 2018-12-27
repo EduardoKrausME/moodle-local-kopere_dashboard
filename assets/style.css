@@ -212,7 +212,7 @@ body.remove-overflow {
   border-top-color: #70cee1;
 }
 .alert.alert-info a {
-  color: #2d6987;
+  color: #fff;
   font-weight: bold;
 }
 .alert.alert-warning {
