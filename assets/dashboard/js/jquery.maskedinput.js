@@ -341,7 +341,7 @@
 
 function mackInputs() {
     jQuery("input.phone").mask("(99) 9999-9999");
-    jQuery("input.celular").mask("(99) 9 9999-9999");
+    jQuery("input.celphone").mask("(99) 9 9999-9999");
     jQuery("input.cep").mask("99999-999");
     jQuery("input.cpf").mask("999.999.999-99");
     jQuery("input.cnpj").mask("99.999.999/9999-99");

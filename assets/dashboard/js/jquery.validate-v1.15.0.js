@@ -1562,6 +1562,8 @@ function loadValidateAll()
 		}
 	});
 
+
+
 	jQuery.validator.addMethod("phoneVal", function(value, element) {
 		if( jQuery(element).hasClass('required') )
 			return value.match(/^\([1-9]{2}\)\ [0-9]{4}\-[0-9]{4}$/);
@@ -1570,6 +1572,18 @@ function loadValidateAll()
 	}, "Telefone em formáto inválido!");
 	jQuery.validator.classRuleSettings.phone = { phoneVal:true };
 
+
+
+    jQuery.validator.addMethod("celphoneVal", function(value, element) {
+        if( jQuery(element).hasClass('required') )
+            return value.match(/^\([1-9]{2}\)\ 9\ [0-9]{4}\-[0-9]{4}$/);
+        return true;
+
+    }, "Celular em formáto inválido!");
+    jQuery.validator.classRuleSettings.celphone = { celphoneVal:true };
+
+
+
 	jQuery.validator.addMethod("cepVal", function(value, element) {
 		if( jQuery(element).hasClass('required') )
 			return value.match(/^[0-9]{5}\-[0-9]{3}$/);
@@ -1577,12 +1591,37 @@ function loadValidateAll()
 	}, "CEP em formáto inválido! Somente aceito formato 99999-999");
 	jQuery.validator.classRuleSettings.cep = { cepVal:true };
 
+
+
 	jQuery.validator.addMethod("cpfVal", function(value, element) {
 		if( jQuery(element).hasClass('required') )
 			return value.match(/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/);
 		return true;
-	}, "CPF em formáto  inválido!");
+	}, "CPF em formáto inválido!");
 	jQuery.validator.classRuleSettings.cpf = { cpfVal:true };
+
+
+
+    jQuery.validator.addMethod("emailVal", function(value, element) {
+        if( jQuery(element).hasClass('required') )
+            return value.match(/^.*@.*\..*$/);
+        return true;
+    }, "E-mail em formáto inválido!");
+    jQuery.validator.classRuleSettings.email = { emailVal:true };
+
+
+    jQuery.validator.addMethod ( "passwordVal", function ( value, element ) {
+        if ( jQuery ( element ).hasClass ( 'required' ) ) {
+            if ( value.length < 6 )
+                return false;
+            if ( value == "123456" )
+                return false;
+        }
+        return true;
+    }, "E-mail em formáto inválido!" );
+    jQuery.validator.classRuleSettings.password = { passwordVal : true };
+
+
 
 	jQuery.validator.addMethod("nomeVal", function(value, element) {
 		if( jQuery(element).hasClass('required') )
@@ -1597,12 +1636,16 @@ function loadValidateAll()
 	}, "Insira seu nome completo!");
 	jQuery.validator.classRuleSettings.nome = { nomeVal:true };
 
+
+
 	jQuery.validator.addMethod("cnpjVal", function(value, element) {
 		if( jQuery(element).hasClass('required') )
 			return value.match(/^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\/[0-9]{4}\-[0-9]{2}$/);
 		return true;
 	}, "CNPJ em formáto inválido!");
 	jQuery.validator.classRuleSettings.cnpj = { cnpjVal:true };
+
+
 
 	jQuery.validator.addMethod("caracteres", function(value, element, params) {
 		if( jQuery(element).hasClass('required') )
@@ -1620,9 +1663,6 @@ function loadValidateAll()
 	/*
 	 * phone
 	 * ^\([1-9][0-9]\)\ [0-9][0-9][0-9][0-9]\-[0-9][0-9][0-9][0-9]$
-	 *
-	 * phonsp
-	 * ^\([1-9][0-9]\)\ [0-9][0-9][0-9][0-9][0-9]\-[0-9][0-9][0-9][0-9]$
 	 *
 	 * cep
 	 * ^[0-9][0-9][0-9][0-9][0-9]\-[0-9][0-9][0-9]$
