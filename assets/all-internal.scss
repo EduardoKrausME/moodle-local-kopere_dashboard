@@ -52,9 +52,18 @@
                 font-weight: bold;
             }
         }
-        li {
+        > li {
             line-height: 1.5rem;
             padding: 1px 0 !important;
+            a {
+                .menu-icon {
+                    width: 35px;
+                    height: 35px;
+                }
+                span {
+                    padding: 11px;
+                }
+            }
         }
     }
 }
