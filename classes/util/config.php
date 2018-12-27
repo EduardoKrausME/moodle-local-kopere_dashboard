@@ -35,17 +35,17 @@ class config {
      *
      * @return string
      */
-    public static function get_key($key) {
+    public static function get_key($key, $default='') {
         try {
             $value = get_config('local_kopere_dashboard', $key);
         } catch (\dml_exception $e) {
-            return "";
+            return $default;
         }
 
         try {
             return optional_param($key, $value, PARAM_RAW);
         } catch (\coding_exception $e) {
-            return "";
+            return $default;
         }
     }
 }
