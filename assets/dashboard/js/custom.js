@@ -2,7 +2,7 @@
  * Created by kraus on 15/05/17.
  */
 
-$(function () {
+$(function() {
     startForm(document);
 });
 
@@ -51,9 +51,9 @@ function startForm(element) {
     $(element).find("form.validate").validator();
     $(element).find('[data-toggle="popover"]').popover();
 
-    //$ ( '.button-actions' ).click ( function ( event ) {
-    //    event.stopImmediatePropagation ();
-    //} );
+    $('.button-actions').click(function(event) {
+        event.stopImmediatePropagation();
+    });
 
     mackInputs();
     loadValidateAll();
