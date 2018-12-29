@@ -326,7 +326,7 @@ define(
     var isPlainText = function (text) {
       // so basically any tag that is not one of the "p, div, span, br", or is one of them, but is followed
       // by some additional characters qualifies the text as not a plain text (having some HTML tags)
-      // <span style="white-space:pre"> and <br /> are added as separate exceptions to the rule
+      // <span style="white-space:pre"> and <br> are added as separate exceptions to the rule
       return !/<(?:\/?(?!(?:div|p|br|span)>)\w+|(?:(?!(?:span style="white-space:\s?pre;?">)|br\s?\/>))\w+\s[^>]+)>/i.test(text);
     };
 
@@ -361,7 +361,7 @@ define(
       var tagClose = '</' + rootTag + '>';
 
       var paragraphs = Tools.map(blocks, function (p) {
-        return p.split(/\n/).join('<br />');
+        return p.split(/\n/).join('<br>');
       });
 
       var stitch = function (p) {

@@ -195,7 +195,7 @@ class course_access {
                 foreach ($groupsuser as $groupuser) {
                     $groupsuserprint[] = $groupuser->name;
                 }
-                $this->td(implode('<br/>', $groupsuserprint), 'bg-info text-nowrap', '#D9EDF7');
+                $this->td(implode('<br>', $groupsuserprint), 'bg-info text-nowrap', '#D9EDF7');
             }
 
             foreach ($modinfo as $infos) {

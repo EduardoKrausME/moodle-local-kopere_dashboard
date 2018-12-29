@@ -428,29 +428,29 @@ $string['userimport_event_import_course_enrol_message'] = '<p>Hello {[to.fullnam
 <p>It is with great satisfaction that {[moodle.fullname]} welcomes you.</p>
 <p>Access {{course.link}}, and good studies.</p>
 <p>If you have any doubts, help is available.</p>
-<p>Sincerely,<br/>
+<p>Sincerely,<br>
    Support Team</p>';
 
 $string['userimport_event_import_user_created_subject'] = 'Welcome! - {[moodle.fullname]}';
 $string['userimport_event_import_user_created_message'] = '<p>Hello {[to.fullname]},</p>
 <p>An account was created for you on the site {[moodle.fullname]}.</p>
 <p>Now, I invite you to login to the student area with the following data:</p>
-<p><strong>Site:</strong> {[moodle.link]}<br/>
-   <strong>Login:</strong> {[to.username]}<br/>
+<p><strong>Site:</strong> {[moodle.link]}<br>
+   <strong>Login:</strong> {[to.username]}<br>
    <strong>Password:</strong> {[to.password]}</p>
 <p>If you have any doubts, help is available.</p>
-<p>Sincerely,<br/>
+<p>Sincerely,<br>
    Support Team</p>';
 
 $string['userimport_event_import_user_created_and_enrol_subject'] = 'Welcome Welcome - {[course.fullname]}';
 $string['userimport_event_import_user_created_and_enrol_message'] = '<p>Hello {[to.fullname]},</p>
 <p>You have been successfully enrolled in {[course.fullname]}. You can now login to the student area to begin studying when and where you want.</p>
 <p>Now, I invite you to login to the student area with the following data:</p>
-<p><strong>Site:</strong> {[moodle.link]}<br/>
-   <strong>Login:</strong> {[to.username]}<br/>
+<p><strong>Site:</strong> {[moodle.link]}<br>
+   <strong>Login:</strong> {[to.username]}<br>
    <strong>Password:</strong> {[to.password]}</p>
 <p>If you have any doubts, help is available.</p>
-<p>Sincerely,<br/>
+<p>Sincerely,<br>
    Support Team</p>';
 
 // WebPages.

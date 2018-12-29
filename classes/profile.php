@@ -133,11 +133,11 @@ class profile {
                       </div>
                        <div class="info">
                           <h3>' . get_string_kopere('profile_access_title') . '</h3>
-                          <p>' . get_string_kopere('profile_access_first') . '<br/> <strong>' .
+                          <p>' . get_string_kopere('profile_access_first') . '<br> <strong>' .
             userdate($user->firstaccess, get_string_kopere('dateformat')) . '</strong></p>
-                          <p>' . get_string_kopere('profile_access_last') . '<br/>   <strong>' .
+                          <p>' . get_string_kopere('profile_access_last') . '<br>   <strong>' .
             userdate($user->lastaccess, get_string_kopere('dateformat')) . '</strong></p>
-                          <p>' . get_string_kopere('profile_access_lastlogin') . '<br/>    <strong>' .
+                          <p>' . get_string_kopere('profile_access_lastlogin') . '<br>    <strong>' .
             userdate($user->lastlogin, get_string_kopere('dateformat')) . '</strong></p>
                           <h3>' . get_string_kopere('profile_userdate_title') . '</h3>
                           <p><a href="mailto:' . $user->email . '">' . $user->email . '</a></p>
