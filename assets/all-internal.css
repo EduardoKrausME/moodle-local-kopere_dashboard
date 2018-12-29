@@ -2892,6 +2892,7 @@
   border-radius: 7px;
   border: 2px solid #c5c5c5;
   margin-top: 5px;
+  margin-bottom: 27px;
 }
 #kopere_dashboard_div fieldset legend {
   display: block;
@@ -6159,7 +6160,8 @@
 #kopere_dashboard_div .embed-responsive-4by3 {
   padding-bottom: 75%;
 }
-#kopere_dashboard_div .well {
+#kopere_dashboard_div .well,
+#kopere_dashboard_div .well2 {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
@@ -6172,6 +6174,10 @@
 #kopere_dashboard_div .well blockquote {
   border-color: #ddd;
   border-color: rgba(0, 0, 0, 0.15);
+}
+#kopere_dashboard_div .well2 {
+  background-color: #e3e3e3;
+  border: 1px solid #f5f5f5;
 }
 #kopere_dashboard_div .well-lg {
   padding: 24px;

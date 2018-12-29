@@ -2927,6 +2927,7 @@ body.kopere_dashboard_body fieldset {
   border-radius: 7px;
   border: 2px solid #c5c5c5;
   margin-top: 5px;
+  margin-bottom: 27px;
 }
 body.kopere_dashboard_body fieldset legend {
   display: block;
@@ -6194,7 +6195,8 @@ body.kopere_dashboard_body .embed-responsive-16by9 {
 body.kopere_dashboard_body .embed-responsive-4by3 {
   padding-bottom: 75%;
 }
-body.kopere_dashboard_body .well {
+body.kopere_dashboard_body .well,
+body.kopere_dashboard_body .well2 {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
@@ -6207,6 +6209,10 @@ body.kopere_dashboard_body .well {
 body.kopere_dashboard_body .well blockquote {
   border-color: #ddd;
   border-color: rgba(0, 0, 0, 0.15);
+}
+body.kopere_dashboard_body .well2 {
+  background-color: #e3e3e3;
+  border: 1px solid #f5f5f5;
 }
 body.kopere_dashboard_body .well-lg {
   padding: 24px;

@@ -82,7 +82,7 @@ input {
             }
         }
     }
-    
+
     .menu-and-user {
         .logged-user-w {
             text-align: center;
@@ -119,17 +119,16 @@ input {
             padding: 0.6rem 1.3rem;
         }
     }
-    
-    
+
     @media (max-width: 1000px) {
         width: 250px;
     }
-    
+
     @media (max-width: 800px) {
         width: 90px;
         @import "menu-w-90";
     }
-    
+
     @media (max-width: 600px) {
         width: 45px !important;
         @import "menu-w-90";
@@ -153,7 +152,7 @@ body.menu-w-90 {
     display: table-cell;
     vertical-align: top;
     border-radius: 0 4px 4px 0;
-    
+
     .breadcrumb {
         list-style: none;
         border-radius: .25rem;
@@ -200,7 +199,7 @@ body.menu-w-90 {
             display: none;
         }
     }
-    
+
     .content-i {
         display: table;
         width: 100%;
@@ -208,7 +207,7 @@ body.menu-w-90 {
         .content-box {
             padding: 2rem;
             //display : table-cell;
-            
+
             .element-header {
                 border-bottom: 1px solid rgba(0, 0, 0, 0.05);
                 padding-bottom: 1rem;
@@ -242,7 +241,7 @@ body.menu-w-90 {
                 box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
                 font-family: 'Nunito', sans-serif;
                 font-weight: 400;
-                
+
                 h1, h2, h3, h4, h5, h6 {
                     margin-bottom: 1rem;
                     display: block;
@@ -274,7 +273,6 @@ body.menu-w-90 {
                     background-color: #fff;
                     box-shadow: none;
                 }
-                
                 &.color1 {
                     border-color: #e24d4d;
                     background: #e24d4d url(dashboard/img/dashboard/users.svg) no-repeat right bottom;
@@ -296,7 +294,6 @@ body.menu-w-90 {
                     background-size: 60px;
                 }
             }
-            
             @media print {
                 padding: 0;
             }
@@ -314,7 +311,6 @@ body.menu-w-90 {
             }
         }
     }
-    
     @media print {
         background: transparent;
         border-radius: 0;
@@ -342,7 +338,6 @@ body.menu-w-90 {
     .table {
         display: table;
         width: 100%;
-        
         .profile {
             color: #666;
             display: table-cell;
@@ -422,7 +417,7 @@ body.menu-w-90 {
             }
         }
     }
-    
+
     @media (max-width: 800px) {
         .table {
             display: block;
@@ -490,7 +485,7 @@ body.menu-w-90 {
         .titulo {
             display: block;
             color: #4c4949;
-            //width         : 178px;
+            //width : 178px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;

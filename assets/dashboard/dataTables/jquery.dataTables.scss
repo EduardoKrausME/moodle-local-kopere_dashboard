@@ -44,7 +44,6 @@ table.dataTable {
             padding-right: 8px;
         }
     }
-    
     tbody {
         .sorting_1 {
             background-color: rgba(245, 245, 245, 0.61);
@@ -59,14 +58,12 @@ table.dataTable {
     clear: both;
     *zoom: 1;
     zoom: 1;
-    
     .dataTables_length {
         float: left;
         select:not([size]):not([multiple]) {
             height: calc(2.125rem + 12px);
         }
     }
-    
     .dataTables_filter {
         float: right;
         text-align: left;
@@ -75,13 +72,11 @@ table.dataTable {
             margin-left: 0.5em;
         }
     }
-    
     .dataTables_info {
         clear: both;
         float: left;
         padding-top: 0.755em;
     }
-    
     .dataTables_paginate {
         float: right;
         text-align: right;
@@ -111,7 +106,6 @@ table.dataTable {
                 background: -o-linear-gradient(top, white 0%, #dcdcdc 100%);
                 background: linear-gradient(to bottom, white 0%, #dcdcdc 100%);
             }
-            
             &.disabled,
             &.disabled:hover,
             &.disabled:active {
@@ -121,7 +115,6 @@ table.dataTable {
                 background: transparent;
                 box-shadow: none;
             }
-            
             &:hover {
                 color: white !important;
                 border: 1px solid #111;
@@ -133,7 +126,6 @@ table.dataTable {
                 background: -o-linear-gradient(top, #585858 0%, #111 100%);
                 background: linear-gradient(to bottom, #585858 0%, #111 100%);
             }
-            
             &:active {
                 outline: none;
                 background-color: #2b2b2b;
@@ -169,7 +161,6 @@ table.dataTable {
         background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
         background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
     }
-    
     .dataTables_length,
     .dataTables_filter,
     .dataTables_info,
@@ -189,7 +180,6 @@ table.dataTable {
                 > tbody > tr > td {
                     vertical-align: middle;
                 }
-                
                 > thead > tr > th > div.dataTables_sizing,
                 > thead > tr > td > div.dataTables_sizing,
                 > tbody > tr > th > div.dataTables_sizing,
@@ -206,7 +196,6 @@ table.dataTable {
         .dataTables_scrollBody {
             border-bottom: 1px solid #111;
         }
-        
         div.dataTables_scrollHead > table,
         div.dataTables_scrollBody > table {
             border-bottom: none;
