@@ -39,7 +39,7 @@ class import_user_created_and_enrol extends base {
         $this->data['crud'] = 'c';
         $this->data['action'] = 'created';
         $this->data['edulevel'] = self::LEVEL_OTHER;
-        $this->data['objecttable'] = 'course';
+        $this->data['objecttable'] = 'user';
     }
 
     /**
