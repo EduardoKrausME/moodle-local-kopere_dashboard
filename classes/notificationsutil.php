@@ -201,8 +201,8 @@ class notificationsutil {
                 return get_string_kopere('notification_local_kopere_hotmoodle');
             case 'local_kopere_moocommerce':
                 return get_string_kopere('notification_local_kopere_moocommerce');
-            case 'local_kopere_pagamento':
-                return get_string_kopere('notification_local_kopere_pagamento');
+            case 'local_kopere_pay':
+                return get_string_kopere('notification_local_kopere_pay');
         }
 
         if (strpos($component, 'mod_') === 0) {
