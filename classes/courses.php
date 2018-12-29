@@ -192,7 +192,7 @@ class courses {
 
                 /** @var kopere_dashboard_webpages $webpages */
                 foreach ($webpagess as $webpages) {
-                    echo '<p><a href="?classname=webpages&method=details&id=' . $webpages->id . '">&nbsp;&nbsp;&nbsp;&nbsp;' .
+                    echo '<p><a href="?classname=webpages&method=page_details&id=' . $webpages->id . '">&nbsp;&nbsp;&nbsp;&nbsp;' .
                         $webpages->title . '</a></p>';
                 }
             }
