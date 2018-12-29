@@ -83,7 +83,7 @@ class string_util {
     public static function clear_all_params($param, $default, $type) {
         $post = $_POST;
         if ($param == null) {
-            return self::clear_array_params($post, $type);
+            return self::clear_params_array($post, $type);
         }
 
         if (!isset($post[$param])) {
@@ -91,10 +91,10 @@ class string_util {
         }
 
         if (is_string($post[$param])) {
-            return self::clear_array_params($param, $type);
+            return self::clear_params_array($param, $type);
         }
 
-        return self::clear_array_params($post[$param], $type);
+        return self::clear_params_array($post[$param], $type);
     }
 
     /**
@@ -103,11 +103,11 @@ class string_util {
      *
      * @return array|mixed
      */
-    private static function clear_array_params($in, $type) {
+    private static function clear_params_array($in, $type) {
         $out = array();
         if (is_array($in)) {
             foreach ($in as $key => $value) {
-                $out [$key] = self::clear_array_params($value, $type);
+                $out [$key] = self::clear_params_array($value, $type);
             }
         } else if (is_string($in)) {
             try {
