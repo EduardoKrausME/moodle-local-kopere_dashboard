@@ -43,8 +43,12 @@ if ($menu) {
     $PAGE->set_url(new moodle_url("/local/kopere_dashboard/?menu=" . $menu->link));
     $PAGE->set_pagelayout(get_config('local_kopere_dashboard', 'webpages_theme'));
     $PAGE->set_title($menu->title);
+    $PAGE->set_heading($webpages->title);
+    $PAGE->set_pagetype('admin-setting');
 
     $PAGE->requires->css('/local/kopere_dashboard/assets/statics-pages.css');
+
+    $PAGE->navbar->add($menu->title, new moodle_url('/local/kopere_dashboard/?menu=' . $menu->link));
 
     $pagehtml .= $OUTPUT->header();
 
@@ -93,12 +97,33 @@ if ($menu) {
 
     $PAGE->set_url(new moodle_url("/local/kopere_dashboard/?p=" . $page));
     $PAGE->set_title($webpages->title);
+    $PAGE->set_heading($webpages->title);
     $PAGE->set_pagelayout($webpages->theme);
+    $PAGE->set_pagetype('admin-setting');
 
+    $PAGE->navbar->add($menu->title, new moodle_url('/local/kopere_dashboard/?menu=' . $menu->link));
     $PAGE->navbar->add($webpages->title, new moodle_url('/local/kopere_dashboard/?p=' . $webpages->link));
 
+    preg_match_all('/\[\[(kopere_\w+)::(\w+)(->|-&gt;)(\w+)\((.*?)\)]]/', $webpages->text, $classes);
+
+    foreach ($classes[0] as $key => $replace) {
+        $className = $classes[1][$key];
+        $function = $classes[2][$key];
+        $metodo = $classes[4][$key];
+        $parametro = $classes[5][$key];
+        $class = "\\local_{$className}\\{$function}";
+
+        if (class_exists($class)) {
+            if (method_exists($class, $metodo)) {
+                $newReplace = $class::$metodo($parametro);
+
+                $webpages->text = str_replace($replace, $newReplace, $webpages->text);
+            }
+        }
+    }
+
     $pagehtml .= $OUTPUT->header();
-    $pagehtml .= "<h1>{$webpages->title}</h1>";
+    $pagehtml .= $OUTPUT->heading($webpages->title, 2);
     $pagehtml .= $webpages->text;
 
 } else {
