@@ -90,6 +90,7 @@ class send_events {
 
         $COURSE->wwwroot = $CFG->wwwroot;
         $COURSE->link = "<a href=\"{$CFG->wwwroot}\" target=\"_blank\">{$CFG->wwwroot}</a>";
+        $COURSE->url = $CFG->wwwroot;
 
         // Moodle: {[moodle.???]}.
         $this->subject = $this->replace_tag($this->subject, $COURSE, 'moodle');
