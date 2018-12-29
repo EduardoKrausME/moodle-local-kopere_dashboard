@@ -133,7 +133,8 @@ class notifications extends notificationsutil {
 
         $form = new form('?classname=notifications&method=add_segunda_etapa');
         $form->add_input(
-            input_select::new_instance()->set_title(get_string_kopere('notification_add_module'))
+            input_select::new_instance()
+                ->set_title(get_string_kopere('notification_add_module'))
                 ->set_name('module')
                 ->set_values($moduleslist)
                 ->set_add_selecione(true)
@@ -209,7 +210,8 @@ class notifications extends notificationsutil {
                 array('key' => 0, 'value' => get_string_kopere('notification_status_inactive'))
             );
             $form->add_input(
-                input_select::new_instance()->set_title(get_string_kopere('notification_status'))
+                input_select::new_instance()
+                    ->set_title(get_string_kopere('notification_status'))
                     ->set_name('status')
                     ->set_values($status)
                     ->set_value($evento->status)
@@ -220,7 +222,8 @@ class notifications extends notificationsutil {
             array('key' => 'admin', 'value' => get_string_kopere('notification_from_admin'))
         );
         $form->add_input(
-            input_select::new_instance()->set_title(get_string_kopere('notification_from'))
+            input_select::new_instance()
+                ->set_title(get_string_kopere('notification_from'))
                 ->set_name('userfrom')
                 ->set_values($valuefrom)
                 ->set_value($evento->userfrom)
@@ -233,14 +236,16 @@ class notifications extends notificationsutil {
             array('key' => 'student', 'value' => get_string_kopere('notification_todesc_student')),
         );
         $form->add_input(
-            input_select::new_instance()->set_title(get_string_kopere('notification_to'))
+            input_select::new_instance()
+                ->set_title(get_string_kopere('notification_to'))
                 ->set_name('userto')
                 ->set_values($valueto)
                 ->set_value($evento->userto)
                 ->set_description(get_string_kopere('notification_todesc')));
 
         $form->add_input(
-            input_text::new_instance()->set_title(get_string_kopere('notification_subject'))
+            input_text::new_instance()
+                ->set_title(get_string_kopere('notification_subject'))
                 ->set_name('subject')
                 ->set_value($evento->subject)
                 ->set_description(get_string_kopere('notification_subjectdesc')));
@@ -365,7 +370,8 @@ class notifications extends notificationsutil {
         }
 
         $form->add_input(
-            input_select::new_instance()->set_title(get_string_kopere('notification_setting_template'))
+            input_select::new_instance()
+                ->set_title(get_string_kopere('notification_setting_template'))
                 ->set_values($values, 'key', 'key')
                 ->set_value_by_config('notificacao-template'));
 

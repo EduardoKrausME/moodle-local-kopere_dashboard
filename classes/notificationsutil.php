@@ -60,7 +60,8 @@ class notificationsutil {
 
         $form = new form();
         $form->add_input(
-            input_select::new_instance()->set_title(get_string_kopere('notification_add_action'))
+            input_select::new_instance()
+                ->set_title(get_string_kopere('notification_add_action'))
                 ->set_name('event')
                 ->set_values($eventslist)
                 ->set_add_selecione(true));

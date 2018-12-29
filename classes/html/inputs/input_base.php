@@ -35,31 +35,31 @@ class input_base implements i_input {
      *
      */
     const VAL_REQUIRED = 'required';
-    const VAL_INT      = 'int';
-    const VAL_VALOR    = 'valor';
-    const VAL_PHONE    = 'phone';
+    const VAL_INT = 'int';
+    const VAL_VALOR = 'valor';
+    const VAL_PHONE = 'phone';
     const VAL_CELPHONE = 'celphone';
-    const VAL_CEP      = 'cep';
-    const VAL_CPF      = 'cpf';
-    const VAL_CNPJ     = 'cnpj';
-    const VAL_NOME     = 'nome';
-    const VAL_URL      = 'url';
-    const VAL_EMAIL    = 'email';
+    const VAL_CEP = 'cep';
+    const VAL_CPF = 'cpf';
+    const VAL_CNPJ = 'cnpj';
+    const VAL_NOME = 'nome';
+    const VAL_URL = 'url';
+    const VAL_EMAIL = 'email';
     const VAL_PASSWORD = 'password';
 
-    const MASK_PHONE    = 'phone';
-    const MASK_CELULAR  = 'celphone';
-    const MASK_CEP      = 'cep';
-    const MASK_CPF      = 'cpf';
-    const MASK_CNPJ     = 'cnpj';
+    const MASK_PHONE = 'phone';
+    const MASK_CELULAR = 'celphone';
+    const MASK_CEP = 'cep';
+    const MASK_CPF = 'cpf';
+    const MASK_CNPJ = 'cnpj';
     const MASK_DATAHORA = 'datahora';
-    const MASK_DATA     = 'data';
-    const MASK_INT      = 'int';
-    const MASK_VALOR    = 'valor';
-    const MASK_FLOAT    = 'float';
+    const MASK_DATA = 'data';
+    const MASK_INT = 'int';
+    const MASK_VALOR = 'valor';
+    const MASK_FLOAT = 'float';
 
     /** @var  string */
-    protected $name;
+    protected $name = null;
 
     /** @var  string */
     protected $type;
@@ -71,7 +71,7 @@ class input_base implements i_input {
     protected $style;
 
     /** @var  string */
-    protected $value=null;
+    protected $value = null;
 
     /** @var  string */
     protected $title;
@@ -96,10 +96,6 @@ class input_base implements i_input {
      */
     public function set_name($name) {
         $this->name = $name;
-
-        if($this->value==null){
-            $this->value = optional_param ($this->name, null, PARAM_RAW);
-        }
 
         return $this;
     }
@@ -171,7 +167,9 @@ class input_base implements i_input {
      * @return $this
      */
     public function set_value($value) {
-        $this->value = $value;
+        if ($this->value == null && $this->name != null) {
+            $this->value = optional_param($this->name, $value, PARAM_RAW);
+        }
 
         return $this;
     }
@@ -250,7 +248,7 @@ class input_base implements i_input {
         return $this;
     }
 
-    public function add_extras ( $extra ){
+    public function add_extras($extra) {
         $this->extras .= " {$extra}";
 
         return $this;

@@ -376,14 +376,16 @@ class webpages {
         }
         $form->create_hidden_input('id', $menus->id);
         $form->add_input(
-            input_text::new_instance()->set_title(get_string_kopere('webpages_menu_title'))
+            input_text::new_instance()
+                ->set_title(get_string_kopere('webpages_menu_title'))
                 ->set_name('title')
                 ->set_value($menus->title)
                 ->set_required()
         );
 
         $form->add_input(
-            input_text::new_instance()->set_title(get_string_kopere('webpages_menu_link'))
+            input_text::new_instance()
+                ->set_title(get_string_kopere('webpages_menu_link'))
                 ->set_name('link')
                 ->set_value($menus->link)
                 ->set_required()
@@ -623,12 +625,14 @@ class webpages {
         $form = new form();
 
         $form->add_input(
-            input_select::new_instance()->set_title(get_string_kopere('webpages_page_theme'))
+            input_select::new_instance()
+                ->set_title(get_string_kopere('webpages_page_theme'))
                 ->set_values(self::list_themes())
                 ->set_value_by_config('webpages_theme'));
 
         $form->add_input(
-            input_text::new_instance()->set_title(get_string_kopere('webpages_page_analytics'))
+            input_text::new_instance()
+                ->set_title(get_string_kopere('webpages_page_analytics'))
                 ->set_value_by_config('webpages_analytics_id')
                 ->set_description(get_string_kopere('webpages_page_analyticsdesc')));
 

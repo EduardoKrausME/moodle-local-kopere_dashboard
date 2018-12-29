@@ -60,7 +60,8 @@ class userenrolment {
             array('key' => 1, 'value' => get_string_kopere('userenrolment_status_inactive'))
         );
         $form->add_input(
-            input_select::new_instance()->set_title(get_string_kopere('userenrolment_status'))
+            input_select::new_instance()
+                ->set_title(get_string_kopere('userenrolment_status'))
                 ->set_name('status')
                 ->set_values($statusvalues)
                 ->set_value($enrolment->status));
@@ -78,7 +79,8 @@ class userenrolment {
         $form->print_spacer(10);
 
         $form->add_input(
-            input_checkbox::new_instance()->set_title(get_string_kopere('userenrolment_timeendstatus'))
+            input_checkbox::new_instance()
+                ->set_title(get_string_kopere('userenrolment_timeendstatus'))
                 ->set_name('timeend-status')
                 ->set_checked($enrolment->timeend));
 
@@ -119,6 +121,7 @@ class userenrolment {
                     $('.area_timeend').hide(delay);
                 }
             }
+
             function status_change(delay) {
                 if (delay != 0) {
                     delay = 400;
