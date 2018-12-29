@@ -387,6 +387,7 @@ $string['webpages_allpages'] = 'Todas las páginas';
 $string['webpages_menu_create'] = 'Crear nuevo Menú';
 $string['webpages_menu_created'] = '¡Menú creado!';
 $string['webpages_menu_delete'] = 'Excluyendo menú';
+$string['webpages_menu_nodelete'] = 'No se puede eliminar un menú que tiene páginas registradas!';
 $string['webpages_menu_deleted'] = '¡Menú eliminado exitosamente!';
 $string['webpages_menu_edit'] = 'Editando Menú';
 $string['webpages_menu_error'] = '¡Deben llenarse todos los datos!';

@@ -496,6 +496,7 @@ $string['webpages_menu_created'] = 'Menu created!';
 $string['webpages_menu_deleted'] = 'Menu deleted successfully!';
 $string['webpages_menu_subtitle'] = 'Static Menu';
 $string['webpages_menu_delete'] = 'Excluding Menu';
+$string['webpages_menu_nodelete'] = 'You can not delete a menu that has pages registered!';
 $string['webpages_page_settigs'] = 'Static Pages Settings';
 $string['webpages_page_theme'] = 'Page Layout "All Pages"';
 $string['webpages_page_analytics'] = 'Google Analytics Tracking ID';

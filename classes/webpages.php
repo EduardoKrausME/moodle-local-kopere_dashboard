@@ -463,7 +463,7 @@ class webpages {
 
         $pages = $DB->get_records('kopere_dashboard_webpages', ['menuid' => $menu->id]);
         if ($pages) {
-            echo get_string_kopere('webpages_page_nodelete');
+            echo get_string_kopere('webpages_menu_nodelete');
         } else {
             if ($status == 'sim') {
                 $DB->delete_records('kopere_dashboard_menu', array('id' => $id));
