@@ -33,38 +33,41 @@ use local_kopere_dashboard\vo\kopere_dashboard_events;
  */
 class users_import_install {
     /**
-     *
+     * @throws \coding_exception
      */
     public static function install_or_update() {
 
-        $event = new kopere_dashboard_events();
-        $event->module = 'local_kopere_dashboard';
-        $event->event = '\\local_kopere_dashboard\\event\\import_course_enrol';
-        $event->userfrom = 'admin';
-        $event->userto = 'student';
-        $event->subject = get_string('userimport_event_import_course_enrol_subject', 'local_kopere_dashboard');
+        $event = kopere_dashboard_events::create(
+            'local_kopere_dashboard',
+            '\\local_kopere_dashboard\\event\\import_course_enrol',
+            'admin',
+            'student',
+            get_string('userimport_event_import_course_enrol_subject', 'local_kopere_dashboard'),
+            get_string('userimport_event_import_course_enrol_message', 'local_kopere_dashboard')
+        );
         $event->status = 0;
-        $event->message = get_string('userimport_event_import_course_enrol_message', 'local_kopere_dashboard');
         self::insert($event);
 
-        $event = new \local_kopere_dashboard\vo\kopere_dashboard_events();
-        $event->module = 'local_kopere_dashboard';
-        $event->event = '\\local_kopere_dashboard\\event\\import_user_created';
-        $event->userfrom = 'admin';
-        $event->userto = 'student';
-        $event->subject = get_string('userimport_event_import_user_created_subject', 'local_kopere_dashboard');
+        $event = kopere_dashboard_events::create(
+            'local_kopere_dashboard',
+            '\\local_kopere_dashboard\\event\\import_user_created',
+            'admin',
+            'student',
+            get_string('userimport_event_import_user_created_subject', 'local_kopere_dashboard'),
+            get_string('userimport_event_import_user_created_message', 'local_kopere_dashboard')
+        );
         $event->status = 0;
-        $event->message = get_string('userimport_event_import_user_created_message', 'local_kopere_dashboard');
         self::insert($event);
 
-        $event = new \local_kopere_dashboard\vo\kopere_dashboard_events();
-        $event->module = 'local_kopere_dashboard';
-        $event->event = '\\local_kopere_dashboard\\event\\import_user_created_and_enrol';
-        $event->userfrom = 'admin';
-        $event->userto = 'student';
-        $event->subject = get_string('userimport_event_import_user_created_and_enrol_subject', 'local_kopere_dashboard');
+        $event = kopere_dashboard_events::create(
+            'local_kopere_dashboard',
+            '\\local_kopere_dashboard\\event\\import_user_created_and_enrol',
+            'admin',
+            'student',
+            get_string('userimport_event_import_user_created_and_enrol_subject', 'local_kopere_dashboard'),
+            get_string('userimport_event_import_user_created_and_enrol_message', 'local_kopere_dashboard')
+        );
         $event->status = 0;
-        $event->message = get_string('userimport_event_import_user_created_and_enrol_message', 'local_kopere_dashboard');
         self::insert($event);
     }
 
