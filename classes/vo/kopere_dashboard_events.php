@@ -69,8 +69,22 @@ class kopere_dashboard_events extends \stdClass {
      */
     public $message;
 
+    public static function create($module, $eventname, $userfrom, $userto, $subject, $message = null) {
+        $event = new kopere_dashboard_events();
+        $event->module = $module;
+        $event->event = $eventname;
+        $event->userfrom = $userfrom;
+        $event->userto = $userto;
+        $event->subject = $subject;
+        if ($message) {
+            $event->message = $message;
+        }
+        return $event;
+    }
+
     /**
      * @return kopere_dashboard_events
+     * @throws \coding_exception
      */
     public static function create_by_object($item) {
         $return = new kopere_dashboard_events();
@@ -89,6 +103,7 @@ class kopere_dashboard_events extends \stdClass {
 
     /**
      * @return kopere_dashboard_events
+     * @throws \coding_exception
      */
     public static function create_by_default() {
         $return = new kopere_dashboard_events();
