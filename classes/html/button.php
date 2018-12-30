@@ -146,7 +146,7 @@ class button {
         if ($ispopup) {
             return "<a data-toggle=\"modal\" data-target=\"#modal-edit\"
                        href=\"{$link}\"
-                       data-href=\"open-ajax-table.php{$link}\">
+                       data-href=\"load-ajax.php{$link}\">
                         <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" width=\"19\">
                     </a>";
         } else {
@@ -181,7 +181,7 @@ class button {
                 .= '<a data-toggle="modal" data-target="#modal-edit"
                        class="' . $class . '" ' . $target . '
                        href="' . $link . '"
-                       data-href="open-ajax-table.php' . $link . '">' . $text . '</a>';
+                       data-href="load-ajax.php' . $link . '">' . $text . '</a>';
         } else {
             $bt .= '<a href="' . $link . '" class="' . $class . '" ' . $target . '>' . $text . '</a>';
         }

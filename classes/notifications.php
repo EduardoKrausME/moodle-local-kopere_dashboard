@@ -149,7 +149,7 @@ class notifications extends notificationsutil {
                 var data = {
                     module : $(this).val()
                 };
-                $('#restante-form').load('open-ajax-table.php?classname=notificationsutil&method=add_form_extra', data);
+                $('#restante-form').load('load-ajax.php?classname=notificationsutil&method=add_form_extra', data);
             });
         </script>
         <?php
@@ -390,7 +390,7 @@ class notifications extends notificationsutil {
                 var data = {
                     template : $('#notificacao-template').val()
                 };
-                $('#area-mensagem-preview').load('open-ajax-table.php?classname=notifications&method=settings_load_template', data);
+                $('#area-mensagem-preview').load('load-ajax.php?classname=notifications&method=settings_load_template', data);
             }
 
             notificacao_template_change();

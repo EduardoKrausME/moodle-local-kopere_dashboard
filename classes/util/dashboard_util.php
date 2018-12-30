@@ -55,7 +55,7 @@ class dashboard_util {
             $breadcrumbreturn
                 .= "<div class=\"setting\">
                         <a data-toggle=\"modal\" data-target=\"#modal-edit\"
-                           data-href=\"open-ajax-table.php{$settingurl}\"
+                           data-href=\"load-ajax.php{$settingurl}\"
                            href=\"#\">
                             <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg\"
                                  alt=\"Settings\" >
@@ -129,7 +129,7 @@ class dashboard_util {
                 $breadcrumbreturn
                     .= "<li class=\"setting\">
                             <a data-toggle=\"modal\" data-target=\"#modal-edit\"
-                               data-href=\"open-ajax-table.php{$settingurl}\"
+                               data-href=\"load-ajax.php{$settingurl}\"
                                href=\"#\">
                                 <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg\"
                                      alt=\"Settings\" >

@@ -134,7 +134,7 @@ class dashboard {
                           <h4 class="media-heading">
                               <a data-toggle="modal" data-target="#modal-details"
                                  href="?classname=users&method=details&userid=' . $user->id . '"
-                                 data-href="open-ajax-table.php?classname=users&method=details&userid=' . $user->id . '">' .
+                                 data-href="load-ajax.php?classname=users&method=details&userid=' . $user->id . '">' .
                                         fullname($user) . '</a>
                           </h4>
                           <p>' . get_string_kopere('dashboard_grade_text',
@@ -174,7 +174,7 @@ class dashboard {
 
                 $statusmatricula = '<span class="btn-danger">' . get_string_kopere('dashboard_enrol_inactive') . '</span>';
                 if ($enrol->status == 0) {
-                    $statusmatricula = '<span class="btn-success">' . get_string_kopere('dashboard_enrol_active') . '</span>';
+                    $statusmatricula = '<span class="btn-success padding-0-8 border-radius-5">' . get_string_kopere('dashboard_enrol_active') . '</span>';
                 }
 
                 echo '<div class="media dashboard-grade-list">
@@ -185,7 +185,7 @@ class dashboard {
                               <h4 class="media-heading">
                                   <a data-toggle="modal" data-target="#modal-details"
                                      href="?classname=users&method=details&userid=' . $user->id . '"
-                                     data-href="open-ajax-table.php?classname=users&method=details&userid=' . $user->id . '">' .
+                                     data-href="load-ajax.php?classname=users&method=details&userid=' . $user->id . '">' .
                     fullname($user) . '</a>
                               </h4>
                               <p>' . get_string_kopere('dashboard_enrol_text', $enrol) . '

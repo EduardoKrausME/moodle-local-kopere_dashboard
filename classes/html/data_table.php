@@ -338,7 +338,7 @@ class data_table {
 
         $ajaxconfig = '';
         if ($this->ajaxurl) {
-            $ajaxconfig = 'ajax : {url:"open-ajax-table.php' . $this->ajaxurl . '",type: "POST"},';
+            $ajaxconfig = 'ajax : {url:"load-ajax.php' . $this->ajaxurl . '",type: "POST"},';
         }
 
         $columndata = implode(", ", $this->columndata);

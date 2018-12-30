@@ -55,7 +55,7 @@ $url = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?classname={$cl
 
 if ($CFG->kopere_dashboard_open == 'internal') {
 
-    $urlinternal = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard-internal.php?classname={$classname}&method={$method}";
+    $urlinternal = "{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?classname={$classname}&method={$method}";
 
     @header("Location: {$urlinternal}");
     echo "<meta http-equiv=\"refresh\" content=\"0; url={$urlinternal}\">";

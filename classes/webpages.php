@@ -248,7 +248,7 @@ class webpages {
         ?>
         <script>
             $('#title').focusout(function() {
-                var url = 'open-ajax-table.php?classname=webpages&method=page_ajax_get_url';
+                var url = 'load-ajax.php?classname=webpages&method=page_ajax_get_url';
                 var postData = {
                     title : $(this).val(),
                     id    : $('#id').val()
@@ -398,7 +398,7 @@ class webpages {
         ?>
         <script>
             $('#title').focusout(function() {
-                var url = 'open-ajax-table.php?classname=webpages&method=menu_ajax_get_url';
+                var url = 'load-ajax.php?classname=webpages&method=menu_ajax_get_url';
                 var postData = {
                     title : $(this).val(),
                     id    : $('#id').val()
