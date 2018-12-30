@@ -99,8 +99,9 @@ class users {
      *
      */
     public function details() {
+        $userid = optional_param('userid', 0, PARAM_INT);
         $profile = new profile();
-        $profile->details();
+        $profile->details($userid);
     }
 
     /**

@@ -31,19 +31,15 @@ use local_kopere_dashboard\util\mensagem;
 
 /**
  * Class profile
+ *
  * @package local_kopere_dashboard
  */
 class profile {
     /**
      *
      */
-    public function details() {
+    public function details($userid) {
         global $DB, $PAGE, $CFG;
-
-        $userid = optional_param('userid', 0, PARAM_INT);
-        if ($userid == 0) {
-            header::notfound(get_string_kopere('profile_invalid'));
-        }
 
         $user = $DB->get_record('user', array('id' => $userid));
 
