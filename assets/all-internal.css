@@ -1590,6 +1590,12 @@
 #kopere_dashboard_div .width-30 {
   width: 30px;
 }
+#kopere_dashboard_div .padding-0-8 {
+  padding: 0 8px;
+}
+#kopere_dashboard_div .border-radius-5 {
+  border-radius: 5px;
+}
 #kopere_dashboard_div .text-left {
   text-align: left;
 }

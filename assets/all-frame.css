@@ -1625,6 +1625,12 @@ body.kopere_dashboard_body .mark {
 body.kopere_dashboard_body .width-30 {
   width: 30px;
 }
+body.kopere_dashboard_body .padding-0-8 {
+  padding: 0 8px;
+}
+body.kopere_dashboard_body .border-radius-5 {
+  border-radius: 5px;
+}
 body.kopere_dashboard_body .text-left {
   text-align: left;
 }

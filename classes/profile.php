@@ -107,7 +107,7 @@ class profile {
 
             $matriculastatus = '<span class="btn-danger">' . get_string_kopere('profile_enrol_inactive') . '</span>';
             if ($enrolment->status == 0) {
-                $matriculastatus = '<span class="btn-success">' . get_string_kopere('profile_enrol_active') . '</span>';
+                $matriculastatus = '<span class="btn-success padding-0-8 border-radius-5">' . get_string_kopere('profile_enrol_active') . '</span>';
             }
 
             return
@@ -118,7 +118,7 @@ class profile {
                     <div>' . get_string_kopere('profile_enrol_start') . ' <em>' .
                 userdate($enrolment->timestart, get_string_kopere('dateformat')) . '</em> ' . $expirationend . ' -
                         <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal-edit"
-                                data-href="open-ajax-table.php?classname=userenrolment&method=mathedit&courseid=' . $course->id .
+                                data-href="load-ajax.php?classname=userenrolment&method=mathedit&courseid=' . $course->id .
                 '&ueid=' . $enrolment->id . '">' . get_string_kopere('profile_edit') . '</button>
                     </div>
                     <div class="roles">' . get_string_kopere('profile_enrol_profile') . ': ' . $rolehtml . '</div>
