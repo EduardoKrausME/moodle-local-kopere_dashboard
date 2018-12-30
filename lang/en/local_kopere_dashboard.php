@@ -44,7 +44,7 @@ $string['kopere_dashboard:emailconfirmsubmission'] = 'Send Notifications';
 $string['open_dashboard'] = 'Open Dashboard';
 
 $string['dateformat'] = '%d %B %Y, %I:%M %p';
-$string['datetime'] = '%d/%m/%y, %H:%M';
+$string['datetime'] = '%d/%m/%Y, %H:%M';
 $string['php_datetime'] = 'm/d/Y H:i';
 
 $string['help_title'] = 'Help with this page';

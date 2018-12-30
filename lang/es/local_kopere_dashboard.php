@@ -49,7 +49,7 @@ $string['kopere_dashboard:emailconfirmsubmission'] = 'Enviar Notificaciones';
 
 $string['open_dashboard'] = 'Abrir Tablero';
 $string['dateformat'] = '%d %B %Y, %I:%M %p';
-$string['datetime'] = '%d/%m/%y, %H:%M';
+$string['datetime'] = '%d/%m/%Y, %H:%M';
 $string['php_datetime'] = 'm/d/Y H:i';
 $string['help_title'] = 'Ayuda con esta página';
 
