@@ -34,11 +34,7 @@ class datatable_search_util {
     /**
      * @var
      */
-    private $columnorder;
-    /**
-     * @var
-     */
-    private $columnselect;
+    private $column_select;
     /**
      * @var mixed
      */
@@ -54,7 +50,7 @@ class datatable_search_util {
     /**
      * @var
      */
-    private $orderdir;
+    private $order_dir;
     /**
      * @var
      */
@@ -63,12 +59,12 @@ class datatable_search_util {
     /**
      * datatable_search_util constructor.
      *
-     * @param $columnselect
-     * @param $columnorder
+     * @param $column_select
+     *
+     * @throws \coding_exception
      */
-    public function __construct($columnselect, $columnorder) {
-        $this->column_order = $columnorder;
-        $this->column_select = $columnselect;
+    public function __construct($column_select) {
+        $this->column_select = $column_select;
         $this->start = optional_param('start', 0, PARAM_INT);
         $this->length = optional_param('length', 0, PARAM_INT);
 
@@ -86,7 +82,7 @@ class datatable_search_util {
 
         if ($search && isset($search['value']) && isset($search['value'][0])) {
             $like = array();
-            foreach ($this->column_order as $column) {
+            foreach ($this->column_select as $column) {
                 $find = $search['value'];
                 $find = str_replace("'", "\'", $find);
                 $find = str_replace("--", "", $find);
@@ -118,10 +114,10 @@ class datatable_search_util {
 
         if ($order && $columns) {
             $column = $order[0]['column'];
-            if (is_array($this->column_order[$column])) {
-                $this->order = $this->column_order[$column][0];
+            if (is_array($this->column_select[$column])) {
+                $this->order = $this->column_select[$column][0];
             } else {
-                $this->order = $this->column_order[$column];
+                $this->order = $this->column_select[$column];
             }
             $this->order_dir = $order[0]['dir'];
         }
@@ -132,6 +128,8 @@ class datatable_search_util {
      * @param string $group
      * @param array $params
      * @param callback $functionbeforereturn
+     *
+     * @throws \dml_exception
      */
     public function execute_sql_and_return($sql, $group = '', $params = null, $functionbeforereturn = null) {
         global $DB, $CFG;
