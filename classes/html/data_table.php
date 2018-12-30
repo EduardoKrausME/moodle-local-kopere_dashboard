@@ -171,14 +171,14 @@ class data_table {
 
     /**
      * @param string $class
-     * @param bool   $printbody
+     * @param bool $printbody
      *
      * @throws \coding_exception
      */
     public function print_header($class = '', $printbody = true) {
         global $CFG;
         if ($this->isexport && $this->ajaxurl == null) {
-            button::info(get_string_kopere('reports_export'), url_util::querystring(). "&export=xls");
+            button::info(get_string_kopere('reports_export'), url_util::querystring() . "&export=xls");
 
             export::header(optional_param('export', '', PARAM_TEXT));
         }
@@ -194,7 +194,7 @@ class data_table {
 
                 if (strpos($columninfo->title, '[[[') === 0) {
                     echo get_string(substr($columninfo->title, 3, -3));
-                }elseif (strpos($columninfo->title, '[[') === 0) {
+                } elseif (strpos($columninfo->title, '[[') === 0) {
                     echo get_string_kopere(substr($columninfo->title, 2, -2));
                 } else {
                     echo $columninfo->title;
@@ -216,7 +216,7 @@ class data_table {
             } else {
                 if (strpos($column->title, '[[[') === 0) {
                     echo get_string(substr($column->title, 3, -3));
-                }elseif (strpos($column->title, '[[') === 0) {
+                } elseif (strpos($column->title, '[[') === 0) {
                     echo get_string_kopere(substr($column->title, 2, -2));
                 } else {
                     echo $column->title;
@@ -373,17 +373,26 @@ class data_table {
      *
      */
     private function on_clickreditect() {
-        $clickchave = $this->clickredirect['chave'];
+
         $clickurl = $this->clickredirect['url'];
+        $clickchave = $this->clickredirect['chave'];
+
+        if (is_string($clickchave)) {
+            $clickchave = [$clickchave];
+        }
+        $clickchave = json_encode($clickchave);
 
         echo "<script>
                   \$(document).ready( function() {
                       \$( '#{$this->tableid} tbody' ).on( 'click', 'tr', function () {
-                          var data     = {$this->tableid}.row( this ).data ();
-                          var clickUrl = '{$clickurl}';
-                          newClickUrl  = clickUrl.replace( '{{$clickchave}}', data[ '{$clickchave}' ] );
+                          var data       = {$this->tableid}.row( this ).data ();
+                          var clickUrl   = '{$clickurl}';
+                          var clickchave = $clickchave;
+                          $.each(clickchave, function(id, chave){
+                              clickUrl = clickUrl.replace( '{'+chave+'}', data[ chave ] );
+                          });
 
-                          location.href = newClickUrl;
+                          location.href = clickUrl;
                       } );
                   });
               </script>";
