@@ -7990,11 +7990,11 @@
   padding: 1px 0 !important;
 }
 #block-region-side-pre .menu-kopere > li a .menu-icon {
-  width: 35px;
-  height: 35px;
+  width: 35px !important;
+  height: 35px !important;
 }
 #block-region-side-pre .menu-kopere > li a span {
-  padding: 11px;
+  padding: 11px !important;
 }
 
 /*# sourceMappingURL=all-internal.css.map */

@@ -57,11 +57,11 @@
             padding: 1px 0 !important;
             a {
                 .menu-icon {
-                    width: 35px;
-                    height: 35px;
+                    width: 35px !important;
+                    height: 35px !important;
                 }
                 span {
-                    padding: 11px;
+                    padding: 11px !important;
                 }
             }
         }
