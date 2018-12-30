@@ -30,6 +30,54 @@ defined('MOODLE_INTERNAL') || die();
  * @package local_kopere_dashboard\util
  */
 class enroll_util {
+
+    /**
+     * @param $course
+     * @param $user
+     *
+     * @return bool
+     * @throws \dml_exception
+     */
+    public static function enrolled($course, $user) {
+        global $DB;
+
+        // Evita erro.
+        $context = \context_course::instance($course->id, IGNORE_MISSING);
+        if ($context == null) {
+            return false;
+        }
+
+        $enrol = $DB->get_record('enrol',
+            array(
+                'courseid' => $course->id,
+                'enrol' => 'manual'
+            ));
+        if ($enrol == null) {
+            return false;
+        }
+
+        $testroleassignments = $DB->get_record('role_assignments',
+            array(
+                'roleid' => 5,
+                'contextid' => $context->id,
+                'userid' => $user->id
+            ));
+        if ($testroleassignments == null) {
+            return false;
+        }
+
+        $userenrolments = $DB->get_record('user_enrolments',
+            array(
+                'enrolid' => $enrol->id,
+                'userid' => $user->id
+            ));
+        if ($userenrolments != null) {
+            return !$userenrolments->status;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * @param $courseid
      * @param $userid
@@ -38,6 +86,7 @@ class enroll_util {
      * @param $status
      *
      * @return bool
+     * @throws \dml_exception
      */
     public static function enrol($course, $user, $timestart, $timeend, $status) {
         global $DB, $USER;
@@ -112,6 +161,13 @@ class enroll_util {
         }
     }
 
+    /**
+     * @param $course
+     * @param $user
+     *
+     * @return bool
+     * @throws \dml_exception
+     */
     public static function unenrol($course, $user) {
         global $DB;
 
