@@ -61,7 +61,7 @@ function local_kopere_dashboard_extend_navigation ( global_navigation $nav )
                         null,
                         'kopere_dashboard-page-' . $page->id,
                         new pix_icon( 'webpages', $page->title, 'local_kopere_dashboard' )
-                    )->make_active ();
+                    );
                 }
             }
         }
