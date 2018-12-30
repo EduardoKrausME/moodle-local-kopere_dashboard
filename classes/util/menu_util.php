@@ -13,7 +13,7 @@ class menu_util {
     private $methodname;
     private $icon;
     private $name;
-    private $submenus;
+    private $submenus=[];
 
     /**
      * @return mixed
