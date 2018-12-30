@@ -49,11 +49,8 @@ class mensagem {
     public static function get_mensagem_agendada() {
         $cookie = session::get('kopere_message');
         if ($cookie) {
-            $texto = $cookie;
             session::set('kopere_message', null);
-            if ($texto != null) {
-                return $texto;
-            }
+            return $cookie;
         }
         return "";
     }
