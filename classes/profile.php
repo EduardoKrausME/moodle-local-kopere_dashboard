@@ -38,29 +38,42 @@ class profile {
     /**
      *
      */
-    public function details($userid) {
-        global $DB, $PAGE, $CFG;
-
-        $user = $DB->get_record('user', array('id' => $userid));
-
-        header::notfound_null($user, get_string_kopere('profile_notfound'));
-
-        dashboard_util::start_page(array(
-            array('?classname=users&method=dashboard', get_string_kopere('profile_title')),
-            fullname($user)
-        ));
-
-        echo '<div class="element-box">';
+    public function details($user) {
+        global $PAGE, $CFG;
 
         $userpicture = new \user_picture($user);
         $userpicture->size = 110;
         $profileimageurl = $userpicture->get_url($PAGE)->out(false);
 
-        $courses = enrol_get_all_users_courses($user->id);
+        echo '<div class="profile-content">
+                  <div class="table">
+                      <div class="profile">
+                          <img src="' . $profileimageurl . '" alt="' . fullname($user) . '">
+                          <span class="name">' . $user->firstname . '
+                              <span class="last">' . $user->lastname . '</span>
+                              <span class="city">' . $user->city . '</span>
+                          </span>
+                          <div class="desc">' . $user->description . '</div>
 
-        $coursehtml = '';
+                          <h2>' . get_string_kopere('profile_courses_title') . '</h2>
+                          <ul class="personalDev">
+                              ' . $this->list_courses($user->id) . '
+                          </ul>
+                       </div>
+
+                       <div class="info">
+                          ' . $this->get_user_info($user) . '
+                      </div>
+                  </div>
+              </div>';
+    }
+
+    public function list_courses($user_id) {
+        global $DB;
+        $courses = enrol_get_all_users_courses($user_id);
+
         if (!count($courses)) {
-            $coursehtml = mensagem::warning(get_string_kopere('profile_notenrol'));
+            return mensagem::warning(get_string_kopere('profile_notenrol'));
         }
         foreach ($courses as $course) {
             $sql
@@ -68,7 +81,7 @@ class profile {
                          FROM {user_enrolments} ue
                          JOIN {enrol} e ON ( e.id = ue.enrolid AND e.courseid = :courseid )
                         WHERE ue.userid = :userid";
-            $params = array('userid' => $user->id,
+            $params = array('userid' => $user_id,
                 'courseid' => $course->id
             );
 
@@ -83,7 +96,7 @@ class profile {
 
             $roleassignments = $DB->get_records('role_assignments',
                 array('contextid' => $course->ctxid,
-                    'userid' => $user->id
+                    'userid' => $user_id
                 ), '', 'DISTINCT roleid');
 
             $rolehtml = '';
@@ -96,8 +109,9 @@ class profile {
             if ($enrolment->status == 0) {
                 $matriculastatus = '<span class="btn-success">' . get_string_kopere('profile_enrol_active') . '</span>';
             }
-            $coursehtml
-                .= '<li>
+
+            return
+                '<li>
                     <h4 class="title">' . $course->fullname . '
                         <span class="status">' . $matriculastatus . '</span>
                     </h4>
@@ -110,47 +124,29 @@ class profile {
                     <div class="roles">' . get_string_kopere('profile_enrol_profile') . ': ' . $rolehtml . '</div>
                 </li>';
         }
+    }
 
-        echo '<div class="profile-content">
-                  <div class="table">
-                      <div class="profile">
-                          <img src="' . $profileimageurl . '" alt="' . fullname($user) . '">
-                          <span class="name">' . $user->firstname . '
-                                <span class="last">' . $user->lastname . '</span>
-                                <span class="city">' . $user->city . '</span>
-                          </span>
-                          <div class="desc">' . $user->description . '</div>
+    public function get_user_info($user) {
+        global $CFG;
 
-                          <h2>' . get_string_kopere('profile_courses_title') . '</h2>
-                          <ul class="personalDev">
-                              ' . $coursehtml . '
-                          </ul>
-
-                      </div>
-                       <div class="info">
-                          <h3>' . get_string_kopere('profile_access_title') . '</h3>
-                          <p>' . get_string_kopere('profile_access_first') . '<br> <strong>' .
+        return '
+        <h3>' . get_string_kopere('profile_access_title') . '</h3>
+        <p>' . get_string_kopere('profile_access_first') . '<br> <strong>' .
             userdate($user->firstaccess, get_string_kopere('dateformat')) . '</strong></p>
-                          <p>' . get_string_kopere('profile_access_last') . '<br>   <strong>' .
+        <p>' . get_string_kopere('profile_access_last') . '<br>   <strong>' .
             userdate($user->lastaccess, get_string_kopere('dateformat')) . '</strong></p>
-                          <p>' . get_string_kopere('profile_access_lastlogin') . '<br>    <strong>' .
+        <p>' . get_string_kopere('profile_access_lastlogin') . '<br>    <strong>' .
             userdate($user->lastlogin, get_string_kopere('dateformat')) . '</strong></p>
-                          <h3>' . get_string_kopere('profile_userdate_title') . '</h3>
-                          <p><a href="mailto:' . $user->email . '">' . $user->email . '</a></p>
-                          <p>' . $user->phone1 . '</p>
-                          <p>' . $user->phone2 . '</p>
-                          <h3>' . get_string_kopere('profile_link_title') . '</h3>
-                          <p><a target="_blank" href="' . $CFG->wwwroot . '/user/profile.php?id=' . $user->id . '">' .
+        <h3>' . get_string_kopere('profile_userdate_title') . '</h3>
+        <p><a href="mailto:' . $user->email . '">' . $user->email . '</a></p>
+        <p>' . $user->phone1 . '</p>
+        <p>' . $user->phone2 . '</p>
+        <h3>' . get_string_kopere('profile_link_title') . '</h3>
+        <p><a target="_blank" href="' . $CFG->wwwroot . '/user/profile.php?id=' . $user->id . '">' .
             get_string_kopere('profile_link_profile') . '</a></p>
-                          <p><a target="_blank" href="' . $CFG->wwwroot . '/user/editadvanced.php?id=' . $user->id . '">' .
+        <p><a target="_blank" href="' . $CFG->wwwroot . '/user/editadvanced.php?id=' . $user->id . '">' .
             get_string_kopere('profile_link_edit') . '</a></p>
-                          <p><a target="_blank" href="' . $CFG->wwwroot . '/course/loginas.php?id=1&user=' . $user->id .
-            '&sesskey=' . sesskey() . '">' . get_string_kopere('profile_access') . '</a></p>
-                      </div>';
-        echo '    </div>
-              </div>';
-
-        echo '</div>';
-        dashboard_util::end_page();
+        <p><a target="_blank" href="' . $CFG->wwwroot . '/course/loginas.php?id=1&user=' . $user->id .
+            '&sesskey=' . sesskey() . '">' . get_string_kopere('profile_access') . '</a></p>';
     }
 }

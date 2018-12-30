@@ -29,6 +29,7 @@ use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\datatable_search_util;
+use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\title_util;
 
 /**
@@ -99,9 +100,24 @@ class users {
      *
      */
     public function details() {
+        global $DB;
+
         $userid = optional_param('userid', 0, PARAM_INT);
+
+        $user = $DB->get_record('user', array('id' => $userid));
+        header::notfound_null($user, get_string_kopere('profile_notfound'));
+
+        dashboard_util::start_page(array(
+            array('?classname=users&method=dashboard', get_string_kopere('profile_title')),
+            fullname($user)
+        ));
+        echo '<div class="element-box">';
+
         $profile = new profile();
-        $profile->details($userid);
+        $profile->details($user);
+
+        echo '</div>';
+        dashboard_util::end_page();
     }
 
     /**
