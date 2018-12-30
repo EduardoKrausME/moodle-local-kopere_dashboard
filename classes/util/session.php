@@ -24,14 +24,14 @@ namespace local_kopere_dashboard\util;
 
 class session {
     public static function get($key) {
-        if (isset($_COOKIE[$key])) {
-            return $_COOKIE[$key];
+        if (isset($_SESSION[$key])) {
+            return $_SESSION[$key];
         } else {
             return null;
         }
     }
 
     public static function set($key, $value) {
-        $_COOKIE[$key] = $value;
+        $_SESSION[$key] = $value;
     }
 }
