@@ -82,6 +82,9 @@ class input_base implements i_input {
     /** @var  string */
     protected $extras = "";
 
+    /** @var bool */
+    protected $required=false;
+
     /**
      * @return string
      */
@@ -229,6 +232,7 @@ class input_base implements i_input {
      */
     public function set_required() {
         $this->add_validator(self::VAL_REQUIRED);
+        $this->required=true;
 
         return $this;
     }
@@ -269,6 +273,10 @@ class input_base implements i_input {
 
         if ($this->style !== null) {
             $return .= " style=\"$this->style\" ";
+        }
+
+        if($this->required){
+            $return .= " required ";
         }
 
         $return .= $this->extras;
