@@ -59,11 +59,12 @@ class webpages {
         dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'));
         dashboard_util::start_page('?classname=webpages&method=settings', 'Páginas-estáticas');
 
-        echo '<div class="element-box">';
 
+        title_util::print_h3('webpages_subtitle');
         $menus = $DB->get_records('kopere_dashboard_menu', null, 'title ASC');
-
         button::add(get_string_kopere('webpages_menu_create'), '?classname=webpages&method=menu_edit', '', true, false, true);
+
+        echo '<div class="element-box">';
 
         if (!$menus) {
             button::help('webpages', get_string_kopere('webpages_menu_help'), 'Páginas-estáticas');
@@ -91,9 +92,10 @@ class webpages {
         echo '</div>';
 
         if ($menus) {
-            echo '<div class="element-box">';
             title_util::print_h3('webpages_title');
             button::add(get_string_kopere('webpages_page_create'), '?classname=webpages&method=page_edit');
+
+            echo '<div class="element-box">';
 
             $pages = $DB->get_records('kopere_dashboard_webpages', null, 'pageorder ASC');
             foreach ($pages as $key => $page) {
