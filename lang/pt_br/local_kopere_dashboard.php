@@ -127,7 +127,7 @@ $string['backup_notound'] = 'Arquivo não localizado!';
 // Report_benchmark.
 $string['benchmark_title'] = 'Teste de desempenho';
 $string['benchmark_based'] = 'Plug-in baseado em';
-$string['benchmark_info'] = '<p>Este teste pode demorar até 1 minutos para executar.</p><p>Tente fazer mais de uma vês o teste para ter uma média.</p><p>E, não execute em horário de picos.</p>';
+$string['benchmark_info'] = '<p>Este teste pode demorar até 1 minutos para executar.</p><p>Tente fazer mais de uma ves o teste para ter uma média.</p><p>E, não execute em horário de picos.</p>';
 $string['benchmark_execute'] = 'Executar o teste';
 $string['benchmark_executing'] = 'Executando o teste';
 $string['benchmark_title2'] = 'Teste da performance da hospedagem';

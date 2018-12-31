@@ -26,12 +26,20 @@ namespace local_kopere_dashboard\report;
 
 class report_foreach {
 
+    /**
+     * @param $item
+     * @return mixed
+     */
     public static function userfullname($item) {
         $item->userfullname = fullname($item);
 
         return $item;
     }
 
+    /**
+     * @param $item
+     * @return mixed
+     */
     public static function badge_status_text($item) {
         if ($item->status == 0 || $item->status == 2) {
             $item->statustext = false;
@@ -50,6 +58,11 @@ class report_foreach {
         return $item;
     }
 
+    /**
+     * @param $item
+     * @return mixed
+     * @throws \coding_exception
+     */
     public static function badge_criteria_type($item) {
         $item->criteriatype = get_string('criteria_' . $item->criteriatype, 'badges');
         $item->name = fullname($item);
@@ -57,6 +70,11 @@ class report_foreach {
         return $item;
     }
 
+    /**
+     * @param $item
+     * @return mixed
+     * @throws \coding_exception
+     */
     public static function courses_group_mode($item) {
         if ($item->groupmode == 0) {
             $item->groupname = get_string('groupsnone', 'group');

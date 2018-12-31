@@ -53,6 +53,8 @@ class course_access_grade {
 
     /**
      * @return void
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function generate() {
         global $DB, $CFG;
@@ -286,9 +288,7 @@ class course_access_grade {
         echo '<td colspan="2" class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
     }
 
-    /**
-     *
-     */
+    
     public function list_data() {
     }
 }

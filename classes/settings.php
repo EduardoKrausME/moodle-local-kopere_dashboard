@@ -34,8 +34,9 @@ use local_kopere_dashboard\util\string_util;
  * @package local_kopere_dashboard
  */
 class settings {
+
     /**
-     *
+     * @throws \coding_exception
      */
     public function save() {
 

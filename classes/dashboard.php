@@ -35,8 +35,10 @@ use local_kopere_dashboard\util\title_util;
  * @package local_kopere_dashboard
  */
 class dashboard {
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function start() {
         dashboard_util::add_breadcrumb("Kopere Dashboard");
@@ -96,8 +98,10 @@ class dashboard {
         dashboard_util::end_page();
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     private function last_grades() {
         global $DB, $PAGE;
@@ -153,7 +157,8 @@ class dashboard {
     }
 
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     private function last_enroll() {
         global $DB, $PAGE;

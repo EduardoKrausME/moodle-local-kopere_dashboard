@@ -42,8 +42,9 @@ use local_kopere_dashboard\vo\kopere_dashboard_webpages;
  * @package local_kopere_dashboard
  */
 class courses {
+
     /**
-     *
+     * @throws \coding_exception
      */
     public function dashboard() {
         dashboard_util::add_breadcrumb(get_string_kopere('courses_title'));
@@ -69,8 +70,10 @@ class courses {
         dashboard_util::end_page();
     }
 
+
     /**
-     *
+     * @throws \dml_exception
+     * @throws \coding_exception
      */
     public function load_all_courses() {
         global $DB;
@@ -96,6 +99,8 @@ class courses {
     /**
      * @param bool $format
      * @return string
+     * @throws \dml_exception
+     * @throws \coding_exception
      */
     public static function count_all($format) {
         global $DB;
@@ -113,8 +118,10 @@ class courses {
     /**
      * @param bool $format
      * @return string
+     * @throws \dml_exception
+     * @throws \coding_exception
      */
-    public static function count_all_visibles() {
+    public static function count_all_visibles($format) {
         global $DB;
 
         $count = $DB->get_record_sql('SELECT count(*) as num FROM {course} WHERE id > 1 AND visible = 1');
@@ -127,8 +134,10 @@ class courses {
         return $count->num;
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function details() {
         global $DB, $CFG;
@@ -178,6 +187,8 @@ class courses {
 
     /**
      * @param $course
+     * @throws \dml_exception
+     * @throws \coding_exception
      */
     public function create_static_page($course) {
         global $DB;

@@ -36,6 +36,7 @@ class json {
      * @param int $recordstotal
      * @param int $recordsfiltered
      * @param null $sql
+     * @throws \coding_exception
      */
     public static function encode($data, $recordstotal = -1, $recordsfiltered = 0, $sql = null) {
         ob_clean();

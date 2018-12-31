@@ -38,6 +38,7 @@ class input_checkbox extends input_base {
 
     /**
      * input_checkbox constructor.
+     * @throws \coding_exception
      */
     public function __construct() {
         $this->set_type('checkbox');
@@ -46,6 +47,7 @@ class input_checkbox extends input_base {
 
     /**
      * @return input_checkbox
+     * @throws \coding_exception
      */
     public static function new_instance() {
         return new input_checkbox();
@@ -73,6 +75,7 @@ class input_checkbox extends input_base {
      * @param $configname
      *
      * @return $this
+     * @throws \dml_exception
      */
     public function set_checked_by_config($configname) {
         $this->set_name($configname);

@@ -60,15 +60,12 @@ class export {
                           {mso-displayed-decimal-separator:\"\,\";
                           mso-displayed-thousand-separator:\"\.\";}
                       -->
-                      </style>
                   </head>
                   <body>";
         }
     }
 
-    /**
-     *
-     */
+
     public static function close() {
         if (self::$format == 'xls') {
             echo '</body></html>';

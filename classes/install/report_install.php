@@ -34,8 +34,11 @@ use local_kopere_dashboard\vo\kopere_dashboard_reports;
  * @package local_kopere_dashboard\install
  */
 class report_install {
+
     /**
      *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function create_categores() {
         global $CFG;
@@ -100,8 +103,10 @@ class report_install {
         self::report_cat_insert($reportcat);
     }
 
+
     /**
-     *
+     * @throws \dml_exception
+     * @throws \coding_exception
      */
     public static function create_reports() {
         global $DB, $CFG;
@@ -618,6 +623,7 @@ class report_install {
 
     /**
      * @param $reportcat
+     * @throws \dml_exception
      */
     private static function report_cat_insert($reportcat) {
         global $DB;
@@ -630,6 +636,7 @@ class report_install {
 
     /**
      * @param $report
+     * @throws \dml_exception
      */
     private static function report_insert($report) {
         global $DB;

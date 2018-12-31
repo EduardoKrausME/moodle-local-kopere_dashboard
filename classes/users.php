@@ -30,15 +30,15 @@ use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\datatable_search_util;
 use local_kopere_dashboard\util\header;
-use local_kopere_dashboard\util\title_util;
 
 /**
  * Class users
  * @package local_kopere_dashboard
  */
 class users {
+
     /**
-     *
+     * @throws \coding_exception
      */
     public function dashboard() {
         dashboard_util::add_breadcrumb(get_string_kopere('user_title'));
@@ -64,8 +64,10 @@ class users {
         dashboard_util::end_page();
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function load_all_users() {
         $columns = array(
@@ -88,7 +90,8 @@ class users {
     }
 
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function details() {
         global $DB;
@@ -114,6 +117,8 @@ class users {
     /**
      * @param bool $format
      * @return string
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function count_all($format = false) {
         global $DB;
@@ -130,6 +135,8 @@ class users {
     /**
      * @param bool $format
      * @return string
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function count_all_learners($format = false) {
         global $DB;

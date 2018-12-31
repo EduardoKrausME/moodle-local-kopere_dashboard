@@ -160,7 +160,6 @@ class button {
     /**
      * @param $icon
      * @param $link
-     * @param bool $ispopup
      * @return string
      */
     public static function icon_popup_table($icon, $link) {

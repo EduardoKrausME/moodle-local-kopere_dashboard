@@ -32,6 +32,7 @@ defined('MOODLE_INTERNAL') || die();
 class grade {
     /**
      * @return array
+     * @throws \dml_exception
      */
     public function get_last_grades() {
         global $DB, $CFG;

@@ -137,6 +137,7 @@ class form {
      * @param string $value
      * @param string $class
      * @param string $additionaltext
+     * @throws \coding_exception
      */
     public function create_submit_input($value = '', $class = '', $additionaltext = '') {
         if (AJAX_SCRIPT) {
@@ -150,6 +151,7 @@ class form {
             $this->print_row('', $html, 'btsubmit', $additionaltext);
         }
     }
+
 
     /**
      *
@@ -176,6 +178,7 @@ class form {
 
     /**
      * @return bool
+     * @throws \coding_exception
      */
     public static function check_post() {
         return optional_param('POST', false, PARAM_TEXT);

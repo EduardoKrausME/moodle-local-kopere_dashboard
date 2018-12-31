@@ -40,6 +40,7 @@ class bytes_util {
      * @param int $bytes
      *
      * @return string
+     * @throws \coding_exception
      */
     public static function size_to_byte($bytes) {
         $bytes = intval($bytes);
@@ -72,9 +73,9 @@ class bytes_util {
     }
 
     /**
-     * @param string $texto
-     *
-     * @return string
+     * @param $texto
+     * @param $count
+     * @return mixed
      */
     private static function remove_zero($texto, $count) {
         if ($count == 3) {

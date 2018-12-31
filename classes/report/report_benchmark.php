@@ -38,6 +38,7 @@ class report_benchmark {
 
     /**
      * benchmark constructor.
+     * @throws \coding_exception
      */
     public function __construct() {
         $tests = array(
@@ -126,7 +127,7 @@ class report_benchmark {
     }
 
     /**
-     * @return array Get the total time and score of all tests
+     * @return int
      */
     public function get_total() {
         $total = 0;

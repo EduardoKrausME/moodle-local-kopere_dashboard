@@ -47,6 +47,7 @@ class input_password extends input_base {
 
     /**
      * @return mixed|string
+     * @throws \coding_exception
      */
     public function to_string() {
         $this->set_value(null);

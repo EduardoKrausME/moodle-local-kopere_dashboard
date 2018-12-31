@@ -51,6 +51,8 @@ class course_last_access {
 
     /**
      * @return void
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function generate() {
         global $DB, $CFG;
@@ -180,9 +182,7 @@ class course_last_access {
         echo '<td class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
     }
 
-    /**
-     *
-     */
+
     public function list_data() {
     }
 }

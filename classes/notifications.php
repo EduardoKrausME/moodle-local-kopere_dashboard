@@ -45,8 +45,10 @@ use local_kopere_dashboard\vo\kopere_dashboard_events;
  * @package local_kopere_dashboard
  */
 class notifications extends notificationsutil {
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function dashboard() {
         global $DB;
@@ -107,6 +109,7 @@ class notifications extends notificationsutil {
         dashboard_util::end_page();
     }
 
+
     /**
      *
      */
@@ -155,8 +158,10 @@ class notifications extends notificationsutil {
         dashboard_util::end_page();
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function add_segunda_etapa() {
         global $CFG, $DB;
@@ -285,8 +290,9 @@ class notifications extends notificationsutil {
         dashboard_util::end_page();
     }
 
+
     /**
-     *
+     * @throws \coding_exception
      */
     public function add_save() {
         global $DB;
@@ -300,7 +306,7 @@ class notifications extends notificationsutil {
                 mensagem::agenda_mensagem_success(get_string_kopere('notification_created'));
                 header::location('?classname=notifications&method=dashboard');
             } catch (\dml_exception $e) {
-                mensagem::print_danger($e->error);
+                mensagem::print_danger($e->getMessage());
             }
         } else {
             try {
@@ -309,13 +315,15 @@ class notifications extends notificationsutil {
                 mensagem::agenda_mensagem_success(get_string_kopere('notification_created'));
                 header::location('?classname=notifications&method=dashboard');
             } catch (\dml_exception $e) {
-                mensagem::print_danger($e->error);
+                mensagem::print_danger($e->getMessage());
             }
         }
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function delete() {
         global $DB;
@@ -343,8 +351,10 @@ class notifications extends notificationsutil {
         dashboard_util::end_page();
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function settings() {
         global $CFG;
@@ -397,8 +407,10 @@ class notifications extends notificationsutil {
         dashboard_util::end_page();
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function test_smtp() {
         global $CFG, $USER;

@@ -38,8 +38,10 @@ use local_kopere_dashboard\util\mensagem;
  * @package local_kopere_dashboard
  */
 class userenrolment {
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function mathedit() {
         global $DB;
@@ -143,8 +145,10 @@ class userenrolment {
         dashboard_util::end_page();
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function mathedit_save() {
         global $DB;

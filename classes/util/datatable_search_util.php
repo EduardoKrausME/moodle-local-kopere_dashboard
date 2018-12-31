@@ -72,9 +72,7 @@ class datatable_search_util {
         $this->proccess_order();
     }
 
-    /**
-     *
-     */
+
     public function process_where() {
         global $CFG;
 
@@ -104,9 +102,7 @@ class datatable_search_util {
         }
     }
 
-    /**
-     *
-     */
+
     private function proccess_order() {
 
         $order = string_util::clear_all_params('order', [], PARAM_TEXT);
@@ -129,6 +125,7 @@ class datatable_search_util {
      * @param array $params
      * @param callback $functionbeforereturn
      *
+     * @throws \coding_exception
      * @throws \dml_exception
      */
     public function execute_sql_and_return($sql, $group = '', $params = null, $functionbeforereturn = null) {

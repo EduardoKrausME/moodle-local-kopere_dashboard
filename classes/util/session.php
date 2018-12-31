@@ -23,6 +23,10 @@
 namespace local_kopere_dashboard\util;
 
 class session {
+    /**
+     * @param $key
+     * @return null
+     */
     public static function get($key) {
         if (isset($_SESSION[$key])) {
             return $_SESSION[$key];
@@ -31,6 +35,10 @@ class session {
         }
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public static function set($key, $value) {
         $_SESSION[$key] = $value;
     }

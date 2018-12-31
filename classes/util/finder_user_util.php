@@ -35,6 +35,7 @@ class finder_user_util {
      * @param $value
      *
      * @return mixed|null
+     * @throws \dml_exception
      */
     public static function find($key, $value) {
         global $DB;

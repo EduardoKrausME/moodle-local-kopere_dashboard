@@ -79,8 +79,8 @@ class enroll_util {
     }
 
     /**
-     * @param $courseid
-     * @param $userid
+     * @param $course
+     * @param $user
      * @param $timestart
      * @param $timeend
      * @param $status

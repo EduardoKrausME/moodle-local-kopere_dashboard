@@ -61,7 +61,9 @@ class kopere_dashboard_reportcat extends \stdClass {
     public $enablesql;
 
     /**
+     * @param $item
      * @return kopere_dashboard_reportcat
+     * @throws \coding_exception
      */
     public static function create_by_object($item) {
         $return = new kopere_dashboard_reportcat();
@@ -78,6 +80,7 @@ class kopere_dashboard_reportcat extends \stdClass {
 
     /**
      * @return kopere_dashboard_reportcat
+     * @throws \coding_exception
      */
     public static function create_by_default() {
         $return = new kopere_dashboard_reportcat();

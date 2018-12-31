@@ -7746,9 +7746,7 @@
     } );
 
 
-    /**
-     *
-     */
+
     _api_register ( 'row()', function ( selector, opts ) {
         return _selector_first ( this.rows ( selector, opts ) );
     } );
@@ -8840,9 +8838,7 @@
     DataTable.camelToHungarian = _fnCamelToHungarian;
 
 
-    /**
-     *
-     */
+
     _api_register ( '$()', function ( selector, opts ) {
         var
             rows   = this.rows ( opts ).nodes (), // Get all rows

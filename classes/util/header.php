@@ -45,6 +45,7 @@ class header {
 
     /**
      * @param bool $isdie
+     * @throws \coding_exception
      */
     public static function reload($isdie = true) {
         ob_clean();

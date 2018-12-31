@@ -32,8 +32,8 @@ defined('MOODLE_INTERNAL') || die();
 class config {
     /**
      * @param $key
-     *
-     * @return string
+     * @param string $default
+     * @return mixed|string
      */
     public static function get_key($key, $default='') {
         try {

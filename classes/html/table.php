@@ -31,6 +31,11 @@ defined('MOODLE_INTERNAL') || die();
  */
 class table {
     /**
+     * @var string
+     */
+    public $table_id;
+
+    /**
      * table constructor.
      *
      * @param string $adicional
@@ -235,7 +240,7 @@ class table {
         if ($datatable) {
             echo '<script type="text/javascript">
                     $(document).ready(function(){
-                        var table = $("#' . $this->table_id . '").DataTable();
+                        $("#' . $this->table_id . '").DataTable();
                     });
                   </script>';
         }

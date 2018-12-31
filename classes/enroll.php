@@ -35,6 +35,7 @@ use local_kopere_dashboard\util\user_util;
 class enroll {
     /**
      * @return array
+     * @throws \dml_exception
      */
     public function last_enroll() {
         global $DB;
@@ -54,8 +55,10 @@ class enroll {
         return $DB->get_records_sql($sql);
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function ajax_dashboard() {
         global $DB;

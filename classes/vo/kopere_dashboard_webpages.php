@@ -83,7 +83,9 @@ class kopere_dashboard_webpages extends \stdClass {
     public $config;
 
     /**
+     * @param $item
      * @return kopere_dashboard_webpages
+     * @throws \coding_exception
      */
     public static function create_by_object($item) {
         $return = new kopere_dashboard_webpages();
@@ -104,6 +106,7 @@ class kopere_dashboard_webpages extends \stdClass {
 
     /**
      * @return kopere_dashboard_webpages
+     * @throws \coding_exception
      */
     public static function create_by_default() {
         $return = new kopere_dashboard_webpages();

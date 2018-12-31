@@ -37,6 +37,7 @@ use local_kopere_dashboard\util\title_util;
  * @package local_kopere_dashboard
  */
 class benchmark {
+
     /**
      *
      */
@@ -58,8 +59,10 @@ class benchmark {
         dashboard_util::end_page();
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function execute() {
         global $CFG;
@@ -121,6 +124,7 @@ class benchmark {
 
     /**
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function performance() {
         global $CFG;

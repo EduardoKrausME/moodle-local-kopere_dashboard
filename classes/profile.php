@@ -25,8 +25,6 @@ namespace local_kopere_dashboard;
 
 defined('MOODLE_INTERNAL') || die();
 
-use local_kopere_dashboard\util\dashboard_util;
-use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\mensagem;
 
 /**
@@ -35,11 +33,14 @@ use local_kopere_dashboard\util\mensagem;
  * @package local_kopere_dashboard
  */
 class profile {
+
     /**
-     *
+     * @param $user
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function details($user) {
-        global $PAGE, $CFG;
+        global $PAGE;
 
         $userpicture = new \user_picture($user);
         $userpicture->size = 110;
@@ -68,6 +69,12 @@ class profile {
               </div>';
     }
 
+    /**
+     * @param $user_id
+     * @return string
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
     public function list_courses($user_id) {
         global $DB;
         $courses = enrol_get_all_users_courses($user_id);
@@ -124,8 +131,13 @@ class profile {
                     <div class="roles">' . get_string_kopere('profile_enrol_profile') . ': ' . $rolehtml . '</div>
                 </li>';
         }
+        return null;
     }
 
+    /**
+     * @param $user
+     * @return string
+     */
     public function get_user_info($user) {
         global $CFG;
 

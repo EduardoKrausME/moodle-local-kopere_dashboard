@@ -74,8 +74,6 @@ class input_select extends input_base {
      * @param array $values
      * @param string $key
      * @param string $value
-     * @param bool $addselecione
-     *
      * @return $this
      */
     public function set_values($values, $key = 'key', $value = 'value') {

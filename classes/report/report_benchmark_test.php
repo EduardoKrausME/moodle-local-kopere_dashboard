@@ -127,6 +127,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Reading course
      *
      * @return array Contains the test results
+     * @throws \dml_exception
      */
     public static function courseread() {
         global $DB;
@@ -146,6 +147,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Writing course
      *
      * @return array Contains the test results
+     * @throws \dml_exception
      */
     public static function coursewrite() {
         global $DB;
@@ -175,6 +177,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Complex request (n°1)
      *
      * @return array Contains the test results
+     * @throws \dml_exception
      */
     public static function querytype1() {
         global $DB;
@@ -238,6 +241,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Complex request (n°2)
      *
      * @return array Contains the test results
+     * @throws \dml_exception
      */
     public static function querytype2() {
         global $DB;
@@ -289,6 +293,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Time to connect with the user account
      *
      * @return array Contains the test results
+     * @throws \dml_exception
      */
     public static function loginuser() {
         global $CFG, $DB;
@@ -317,6 +322,11 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
 
     }
 
+    /**
+     * @return array
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
     public static function themedesignermode() {
         $config = get_config('moodle', 'themedesignermode');
         if (!$config) {
@@ -336,6 +346,11 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         );
     }
 
+    /**
+     * @return array
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
     public static function cachejs() {
         $config = get_config('moodle', 'cachejs');
         if (!$config) {
@@ -355,6 +370,11 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         );
     }
 
+    /**
+     * @return array
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
     public static function debug() {
         $config = get_config('moodle', 'debug');
         if ($config == 0) {
@@ -387,6 +407,11 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         );
     }
 
+    /**
+     * @return array
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
     public static function backup_auto_active() {
         $config = get_config('backup', 'backup_auto_active');
 
@@ -411,6 +436,11 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         );
     }
 
+    /**
+     * @return array
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
     public static function enablestats() {
         $config = get_config('backup', 'enablestats');
         if (!$config == 1) {

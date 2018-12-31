@@ -81,7 +81,9 @@ class kopere_dashboard_reports extends \stdClass {
     public $foreach;
 
     /**
+     * @param $item
      * @return kopere_dashboard_reports
+     * @throws \coding_exception
      */
     public static function create_by_object($item) {
         $return = new kopere_dashboard_reports();
@@ -102,6 +104,7 @@ class kopere_dashboard_reports extends \stdClass {
 
     /**
      * @return kopere_dashboard_reports
+     * @throws \coding_exception
      */
     public static function create_by_default() {
         $return = new kopere_dashboard_reports();

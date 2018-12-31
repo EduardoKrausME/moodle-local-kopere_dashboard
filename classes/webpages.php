@@ -288,7 +288,7 @@ class webpages {
                     self::cache_delete();
                     header::location('?classname=webpages&method=page_details&id=' . $webpages->id);
                 } catch (\dml_exception $e) {
-                    mensagem::print_danger($e->error);
+                    mensagem::print_danger($e->getMessage());
                 }
             } else {
                 mensagem::agenda_mensagem_success(get_string_kopere('webpages_page_created'));
@@ -298,7 +298,7 @@ class webpages {
                     self::cache_delete();
                     header::location('?classname=webpages&method=page_details&id=' . $webpages->id);
                 } catch (\dml_exception $e) {
-                    mensagem::print_danger($e->error);
+                    mensagem::print_danger($e->getMessage());
                 }
             }
         }
@@ -539,7 +539,7 @@ class webpages {
     }
 
     /**
-     * @param $theme
+     * @param $themekey
      * @return string
      */
     private function theme_name($themekey) {
@@ -607,8 +607,8 @@ class webpages {
     }
 
     /**
-     *
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function settings() {
         ob_clean();
@@ -646,6 +646,7 @@ class webpages {
 
         return $path . '/';
     }
+
 
     /**
      *

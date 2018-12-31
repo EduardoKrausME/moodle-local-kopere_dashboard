@@ -44,6 +44,7 @@ class import_user_created extends base {
 
     /**
      * @return string
+     * @throws \coding_exception
      */
     public static function get_name() {
         return get_string('userimport_import_user_created_name', 'local_kopere_dashboard');

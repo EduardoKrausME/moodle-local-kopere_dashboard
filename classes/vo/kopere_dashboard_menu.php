@@ -46,7 +46,9 @@ class kopere_dashboard_menu extends \stdClass {
     public $title;
 
     /**
+     * @param $item
      * @return kopere_dashboard_menu
+     * @throws \coding_exception
      */
     public static function create_by_object($item) {
         $return = new kopere_dashboard_menu();
@@ -60,6 +62,7 @@ class kopere_dashboard_menu extends \stdClass {
 
     /**
      * @return kopere_dashboard_menu
+     * @throws \coding_exception
      */
     public static function create_by_default() {
         $return = new kopere_dashboard_menu();

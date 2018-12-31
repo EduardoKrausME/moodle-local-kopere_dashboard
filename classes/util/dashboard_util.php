@@ -38,8 +38,15 @@ class dashboard_util {
      */
     public static $currenttitle = null;
 
+    /**
+     * @var array
+     */
     public static $breadcrumb = [];
 
+    /**
+     * @param $titulo
+     * @param null $link
+     */
     public static function add_breadcrumb($titulo, $link = null) {
         if ($link) {
             self::$breadcrumb[] = [$titulo, $link];
@@ -51,9 +58,9 @@ class dashboard_util {
     }
 
     /**
-     * @param      $title
-     * @param null $infourl
-     *
+     * @param $title
+     * @param $settingurl
+     * @param $infourl
      * @return string
      */
     public static function set_titulo($title, $settingurl, $infourl) {
@@ -156,10 +163,7 @@ class dashboard_util {
      */
     public static function end_page() {
         if (AJAX_SCRIPT) {
-            try {
-                self::end_popup();
-            } catch (\coding_exception $e) {
-            }
+            self::end_popup();
         } else {
             echo '</div></div>';
         }
@@ -245,7 +249,7 @@ class dashboard_util {
     }
 
     /**
-     * @param      $title
+     * @param $title
      */
     private static function start_popup($title) {
         echo '<div class="modal-header">
@@ -256,8 +260,7 @@ class dashboard_util {
     }
 
     /**
-     * @param null $deletebuttonurl
-     * @throws \coding_exception
+     *
      */
     private static function end_popup() {
         echo "</div>

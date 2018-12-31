@@ -35,7 +35,7 @@ use local_kopere_dashboard\vo\kopere_dashboard_events;
  */
 class send_events {
     /** @var kopere_dashboard_events */
-    private $kopereevents;
+    private $kopere_dashboard_events;
 
     /** @var \core\event\base */
     private $event;
@@ -77,8 +77,10 @@ class send_events {
         $this->event = $event;
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function send() {
         global $COURSE, $CFG, $DB;
@@ -209,8 +211,9 @@ class send_events {
         }
     }
 
+
     /**
-     *
+     * @throws \dml_exception
      */
     private function load_template() {
         global $CFG;
@@ -256,9 +259,10 @@ class send_events {
     }
 
     /**
-     * @param string $text
-     *
-     * @return string
+     * @param $text
+     * @param $course
+     * @param $keyname
+     * @return mixed
      */
     private function replace_tag($text, $course, $keyname) {
         if (strpos($text, "{[{$keyname}") === false) {
@@ -280,9 +284,10 @@ class send_events {
     }
 
     /**
-     * @param string $text
-     *
-     * @return string
+     * @param $text
+     * @param $user
+     * @param $keyname
+     * @return mixed
      */
     private function replace_tag_user($text, $user, $keyname) {
         if (strpos($text, "{[{$keyname}") === false) {

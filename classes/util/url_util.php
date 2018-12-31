@@ -24,6 +24,10 @@ namespace local_kopere_dashboard\util;
 
 
 class url_util {
+    /**
+     * @return mixed
+     * @throws \coding_exception
+     */
     public static function querystring() {
         return clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
     }

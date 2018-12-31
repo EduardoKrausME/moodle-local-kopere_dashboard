@@ -32,6 +32,7 @@ defined('MOODLE_INTERNAL') || die();
 class modules {
     /**
      * @return mixed
+     * @throws \dml_exception
      */
     public function count_all() {
         global $DB;

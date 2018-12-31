@@ -57,7 +57,7 @@ class data_table {
     private $ajaxurl = null;
 
     /**
-     * @var string
+     * @var array
      */
     private $clickredirect = null;
 
@@ -116,9 +116,10 @@ class data_table {
      * @param $chave
      */
     public function set_click_redirect($url, $chave) {
-        $this->clickredirect = array();
-        $this->clickredirect['chave'] = $chave;
-        $this->clickredirect['url'] = $url;
+        $this->clickredirect = [
+            'chave' => $chave,
+            'url' => $url
+        ];
     }
 
     /**
@@ -161,7 +162,6 @@ class data_table {
      * @throws \coding_exception
      */
     public function print_header($class = '', $printbody = true) {
-        global $CFG;
         if ($this->isexport && $this->ajaxurl == null) {
             button::info(get_string_kopere('reports_export'), url_util::querystring() . "&export=xls");
 
@@ -348,6 +348,7 @@ class data_table {
         return $this->tableid;
     }
 
+
     /**
      *
      */
@@ -375,29 +376,5 @@ class data_table {
                       } );
                   });
               </script>";
-    }
-
-    /**
-     *
-     */
-    private function on_clickmodal() {
-
-        $clickchave = $this->clickmodal['chave'];
-        $clickurl = $this->clickmodal['url'];
-
-        echo "<script>
-                  \$(document).ready( function() {
-                      \$( '#{$this->tableid} tbody' ).on( 'click', 'tr', function () {
-                          var data = {$this->tableid}.row( this ).data ();
-                          target = $( '#modal-edit' );
-
-                          var clickUrl = '{$clickurl}';
-                          clickUrl = clickUrl.replace( '{{$clickchave}}', data[ '{$clickchave}' ] )
-
-                          var option = $.extend ( { remote : clickUrl }, target.data () );
-                          target.modal( option );
-                      } );
-                  });
-              </script> ";
     }
 }

@@ -25,7 +25,6 @@ namespace local_kopere_dashboard;
 
 defined('MOODLE_INTERNAL') || die();
 
-use Horde\Socket\Client\Exception;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\html\button;
@@ -46,6 +45,8 @@ class reports {
 
     /**
      * @return array of submenu_util
+     * @throws \dml_exception
+     * @throws \coding_exception
      */
     public static function global_menus() {
         global $DB, $CFG;
@@ -78,8 +79,10 @@ class reports {
         return $menus;
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function dashboard() {
         global $CFG, $DB;
@@ -131,8 +134,10 @@ class reports {
         dashboard_util::end_page();
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function load_report() {
         global $DB;
@@ -160,7 +165,7 @@ class reports {
         if (strlen($koperereports->prerequisit) && $courseid == 0) {
             try {
                 ini_set('max_execution_time', 0);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 debugging($e->getMessage());
             }
             $this->prerequisit($report, $koperereports->prerequisit);
@@ -196,6 +201,7 @@ class reports {
     /**
      * @param $report
      * @param $pre
+     * @throws \coding_exception
      */
     private function prerequisit($report, $pre) {
         if ($pre == 'listCourses') {
@@ -216,8 +222,10 @@ class reports {
         }
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function getdata() {
         global $DB, $CFG;
@@ -258,6 +266,7 @@ class reports {
     /**
      * @param $obj
      * @return string
+     * @throws \coding_exception
      */
     private static function get_title($obj) {
         if (strpos($obj->title, '[[[') === 0) {
@@ -269,8 +278,10 @@ class reports {
         }
     }
 
+
     /**
-     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function download() {
         global $DB;

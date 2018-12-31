@@ -37,8 +37,9 @@ use local_kopere_dashboard\util\release;
  * @package local_kopere_dashboard
  */
 class notificationsutil {
+
     /**
-     *
+     * @throws \coding_exception
      */
     public function add_form_extra() {
         $module = optional_param('module', '', PARAM_TEXT);
@@ -138,8 +139,9 @@ class notificationsutil {
         return $returned;
     }
 
+
     /**
-     *
+     * @throws \coding_exception
      */
     public function settings_load_template() {
         global $CFG, $COURSE;
@@ -168,6 +170,8 @@ class notificationsutil {
      * @param $component
      * @param $onlyused
      * @return null|string
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     protected function module_name($component, $onlyused) {
         global $DB;
@@ -223,8 +227,9 @@ class notificationsutil {
         return null;
     }
 
+
     /**
-     *
+     * @throws \dml_exception
      */
     public static function mensagem_no_smtp() {
         global $CFG;

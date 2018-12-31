@@ -31,9 +31,7 @@ defined('MOODLE_INTERNAL') || die();
  * @package local_kopere_dashboard\html\inputs
  */
 class input_base implements i_input {
-    /**
-     *
-     */
+
     const VAL_REQUIRED = 'required';
     const VAL_INT = 'int';
     const VAL_VALOR = 'valor';
@@ -168,6 +166,7 @@ class input_base implements i_input {
      * @param mixed $value
      *
      * @return $this
+     * @throws \coding_exception
      */
     public function set_value($value) {
         if ($this->value == null && $this->name != null) {
@@ -181,6 +180,8 @@ class input_base implements i_input {
      * @param $configname
      *
      * @return $this
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function set_value_by_config($configname) {
         $this->set_name($configname);

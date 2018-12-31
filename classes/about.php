@@ -32,6 +32,7 @@ use local_kopere_dashboard\util\dashboard_util;
  * @package local_kopere_dashboard
  */
 class about {
+
     /**
      *
      */

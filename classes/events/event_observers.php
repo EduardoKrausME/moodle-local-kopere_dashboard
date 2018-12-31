@@ -36,6 +36,8 @@ use local_kopere_dashboard\vo\kopere_dashboard_events;
 class event_observers {
     /**
      * @param \core\event\base $event
+     * @throws \dml_exception
+     * @throws \coding_exception
      */
     public static function process_event(\core\event\base $event) {
         global $DB;
