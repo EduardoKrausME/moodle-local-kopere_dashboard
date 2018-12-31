@@ -46,7 +46,7 @@ class form {
      */
     public function __construct($formaction = null, $classextra = '') {
         $this->formaction = $formaction;
-        if ($this->formaction && !AJAX_SCRIPT) {
+        if ($this->formaction) {
             echo "<form method=\"post\" class=\"validate $classextra\" enctype=\"multipart/form-data\"
                         action=\"{$this->formaction}\" >";
             echo '<div class="displayErroForm alert alert-danger" style="display: none;"><span></span></div>';
@@ -102,14 +102,14 @@ class form {
      * @param $sectiontitle
      */
     public function print_section($sectiontitle) {
-        echo '<div class="form-section"><span>' . $sectiontitle . '</span></div>';
+        echo "<div class=\"form-section\"><span>{$sectiontitle}</span></div>";
     }
 
     /**
      * @param $height
      */
     public function print_spacer($height) {
-        echo '<div class="form-group" style="height: ' . $height . 'px">&nbsp;</div>';
+        echo "<div class=\"form-group\" style=\"height: {$height}px\">&nbsp;</div>";
     }
 
     /**
@@ -139,16 +139,23 @@ class form {
      * @param string $additionaltext
      */
     public function create_submit_input($value = '', $class = '', $additionaltext = '') {
-        $html = '<input name="" class="btn btn-success bt-submit ' . $class .
-            '" type="submit" value="' . htmlspecialchars($value) . '" />';
-        $this->print_row('', $html, 'btsubmit', $additionaltext);
+        if (AJAX_SCRIPT) {
+            echo "<div class=\"modal-footer margin-form\">
+                      <button class=\"btn btn-default\" data-dismiss=\"modal\">" . get_string('cancel') . "</button>
+                      <input type=\"submit\" class=\"btn btn-primary margin-left-15\" value=\"{$value}\">
+                  </div>";
+        } else {
+            $html = '<input name="" class="btn btn-success bt-submit ' . $class .
+                '" type="submit" value="' . htmlspecialchars($value) . '" />';
+            $this->print_row('', $html, 'btsubmit', $additionaltext);
+        }
     }
 
     /**
      *
      */
     public function close() {
-        if ($this->formaction && !AJAX_SCRIPT) {
+        if ($this->formaction) {
             echo '</form>';
         }
     }
