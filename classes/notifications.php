@@ -138,7 +138,6 @@ class notifications extends notificationsutil {
         );
         echo '<div id="restante-form">' . get_string_kopere('notification_add_selectmodule') . '</div>';
 
-        $form->create_submit_input(get_string_kopere('notification_create'));
         $form->close();
 
         ?>
