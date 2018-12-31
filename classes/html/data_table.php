@@ -64,11 +64,6 @@ class data_table {
     /**
      * @var string
      */
-    private $clickmodal = null;
-
-    /**
-     * @var string
-     */
     private $tableid = '';
 
     /**
@@ -124,16 +119,6 @@ class data_table {
         $this->clickredirect = array();
         $this->clickredirect['chave'] = $chave;
         $this->clickredirect['url'] = $url;
-    }
-
-    /**
-     * @param $url
-     * @param $chave
-     */
-    public function set_click_modal($url, $chave) {
-        $this->clickmodal = array();
-        $this->clickmodal['chave'] = $chave;
-        $this->clickmodal['url'] = $url;
     }
 
     /**
@@ -250,8 +235,6 @@ class data_table {
 
         if ($this->clickredirect != null && $printbody) {
             echo '<tbody class="hover-pointer"></tbody>';
-        } else if ($this->clickmodal != null && $printbody) {
-            echo '<tbody class="hover-pointer"></tbody>';
         }
     }
 
@@ -261,8 +244,6 @@ class data_table {
      */
     public function set_row($linhas, $class = '') {
         if ($this->clickredirect != null) {
-            echo '<tbody class="hover-pointer">';
-        } else if ($this->clickmodal != null) {
             echo '<tbody class="hover-pointer">';
         } else {
             echo '<tbody>';
@@ -362,8 +343,6 @@ class data_table {
 
         if ($this->clickredirect) {
             $this->on_clickreditect();
-        } else if ($this->clickmodal) {
-            $this->on_clickmodal();
         }
 
         return $this->tableid;

@@ -32,10 +32,10 @@ class table_header_item extends \stdClass {
     const TYPE_BYTES = 'bytes';
     const TYPE_ACTION = 'action';
 
-    const RENDERER_DATE = 'rendererdate';
-    const RENDERER_VISIBLE = 'visible';
-    const RENDERER_TRUEFALSE = 'truefalse';
-    const RENDERER_STATUS = 'status';
+    const RENDERER_DATE = 'renderer_date';
+    const RENDERER_VISIBLE = 'renderer_visible';
+    const RENDERER_TRUEFALSE = 'renderer_truefalse';
+    const RENDERER_STATUS = 'renderer_status';
 
     /**
      * @var

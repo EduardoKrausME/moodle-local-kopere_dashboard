@@ -58,3 +58,15 @@ function startForm(element) {
     mackInputs();
     loadValidateAll();
 }
+
+
+function loadRemoteModal(url) {
+    $target = $('#modal-edit');
+
+    $target.modal();
+    $target.find('.modal-content').load(url);
+
+    $target.one('hidden.bs.modal', function() {
+        $('.modal-content').html('<div class="loader"></div>');
+    });
+}
