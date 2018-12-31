@@ -46,7 +46,9 @@ class courses {
      *
      */
     public function dashboard() {
-        dashboard_util::start_page(get_string_kopere('courses_title'), get_string_kopere('courses_title1'));
+        dashboard_util::add_breadcrumb(get_string_kopere('courses_title'));
+        dashboard_util::add_breadcrumb(get_string_kopere('courses_title1'));
+        dashboard_util::start_page();
 
         echo '<div class="element-box">';
 
@@ -139,10 +141,9 @@ class courses {
         $course = $DB->get_record('course', array('id' => $courseid));
         header::notfound_null($course, get_string_kopere('courses_notound'));
 
-        dashboard_util::start_page(array(
-            array('?classname=courses&method=dashboard', get_string_kopere('courses_title')),
-            $course->fullname
-        ));
+        dashboard_util::add_breadcrumb(get_string_kopere('courses_title'), '?classname=courses&method=dashboard');
+        dashboard_util::add_breadcrumb($course->fullname);
+        dashboard_util::start_page();
 
         echo '<div class="element-box">
                   <h3>' . get_string_kopere('courses_sumary') . '

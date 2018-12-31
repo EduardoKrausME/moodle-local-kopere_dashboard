@@ -51,7 +51,8 @@ class notifications extends notificationsutil {
     public function dashboard() {
         global $DB;
 
-        dashboard_util::start_page(get_string_kopere('notification_title'), -1, '?classname=notifications&method=settings');
+        dashboard_util::add_breadcrumb(get_string_kopere('notification_title'));
+        dashboard_util::start_page('?classname=notifications&method=settings');
 
         notificationsutil::mensagem_no_smtp();
 
@@ -77,7 +78,7 @@ class notifications extends notificationsutil {
             $event->actions
                 = "<div class=\"text-center\">
                     " . button::icon('edit', "?classname=notifications&method=add_segunda_etapa&id={$event->id}", false) . "&nbsp;&nbsp;&nbsp;
-                    " . button::icon('delete', "?classname=notifications&method=delete&id={$event->id}") . "
+                    " . button::icon_popup_table('delete', "?classname=notifications&method=delete&id={$event->id}") . "
                    </div>";
 
             $eventslist[] = $event;
@@ -110,14 +111,9 @@ class notifications extends notificationsutil {
      *
      */
     public function add() {
-        if (!AJAX_SCRIPT) {
-            dashboard_util::start_page(array(
-                array('?classname=notifications&method=dashboard', get_string_kopere('notification_title')),
-                get_string_kopere('notification_new')
-            ), -1);
-        } else {
-            dashboard_util::start_popup(get_string_kopere('notification_new'));
-        }
+        dashboard_util::add_breadcrumb(get_string_kopere('notification_title'), '?classname=notifications&method=dashboard');
+        dashboard_util::add_breadcrumb(get_string_kopere('notification_new'));
+        dashboard_util::start_page();
 
         echo '<div class="element-box">';
 
@@ -141,6 +137,8 @@ class notifications extends notificationsutil {
                 ->set_description(get_string_kopere('notification_add_moduledesc'))
         );
         echo '<div id="restante-form">' . get_string_kopere('notification_add_selectmodule') . '</div>';
+
+        $form->create_submit_input(get_string_kopere('notification_create'));
         $form->close();
 
         ?>
@@ -155,11 +153,7 @@ class notifications extends notificationsutil {
         <?php
 
         echo '</div>';
-        if (!AJAX_SCRIPT) {
-            dashboard_util::end_page();
-        } else {
-            dashboard_util::end_popup();
-        }
+        dashboard_util::end_page();
     }
 
     /**
@@ -181,19 +175,16 @@ class notifications extends notificationsutil {
             $eventclass = $evento->event;
             $module = $evento->module;
 
-            dashboard_util::start_page(array(
-                array('?classname=notifications&method=dashboard', get_string_kopere('notification_title')),
-                get_string_kopere('notification_editing')
-            ), -1);
-            echo '<div class="element-box">';
+            dashboard_util::add_breadcrumb(get_string_kopere('notification_title'), '?classname=notifications&method=dashboard');
+            dashboard_util::add_breadcrumb(get_string_kopere('notification_editing'));
         } else {
             $evento = kopere_dashboard_events::create_by_default();
-            dashboard_util::start_page(array(
-                array('?classname=notifications&method=dashboard', get_string_kopere('notification_title')),
-                get_string_kopere('notification_new')
-            ), -1);
-            echo '<div class="element-box">';
+
+            dashboard_util::add_breadcrumb(get_string_kopere('notification_title'), '?classname=notifications&method=dashboard');
+            dashboard_util::add_breadcrumb(get_string_kopere('notification_new'));
         }
+        dashboard_util::start_page();
+        echo '<div class="element-box">';
 
         $form = new form('?classname=notifications&method=add_save');
         $form->create_hidden_input('id', $id);
@@ -343,13 +334,14 @@ class notifications extends notificationsutil {
             header::location('?classname=notifications&method=dashboard');
         }
 
-        dashboard_util::start_popup(get_string_kopere('notification_delete_yes'));
+        dashboard_util::add_breadcrumb(get_string_kopere('notification_delete_yes'));
+        dashboard_util::start_page();
 
         echo "<p>" . get_string_kopere('notification_delete_yes') . "</p>";
         button::delete(get_string('yes'), '?classname=notifications&method=delete&status=sim&id=' . $event->id, '', false);
         button::add(get_string('no'), '?classname=notifications&method=dashboard', 'margin-left-10', false);
 
-        dashboard_util::end_popup();
+        dashboard_util::end_page();
     }
 
     /**
@@ -359,9 +351,10 @@ class notifications extends notificationsutil {
         global $CFG;
         ob_clean();
         $redirect = urlencode("classname=notifications&method=dashboard");
-        dashboard_util::start_popup(get_string_kopere('notification_setting_config'), "?classname=settings&method=save&redirect={$redirect}");
+        dashboard_util::add_breadcrumb(get_string_kopere('notification_setting_config'));
+        dashboard_util::start_page();
 
-        $form = new form();
+        $form = new form("?classname=settings&method=save&redirect={$redirect}");
 
         $values = array();
         $templates = glob("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/*.html");
@@ -402,7 +395,7 @@ class notifications extends notificationsutil {
         </style>
         <?php
 
-        dashboard_util::end_popup();
+        dashboard_util::end_page();
     }
 
     /**
@@ -411,10 +404,9 @@ class notifications extends notificationsutil {
     public function test_smtp() {
         global $CFG, $USER;
 
-        dashboard_util::start_page(array(
-            array('?classname=notifications&method=dashboard', get_string_kopere('notification_title')),
-            get_string_kopere('notification_testsmtp')
-        ));
+        dashboard_util::add_breadcrumb(get_string_kopere('notification_title'), '?classname=notifications&method=dashboard');
+        dashboard_util::add_breadcrumb(get_string_kopere('notification_testsmtp'));
+        dashboard_util::start_page();
 
         notificationsutil::mensagem_no_smtp();
         $CFG->debugsmtp = true;

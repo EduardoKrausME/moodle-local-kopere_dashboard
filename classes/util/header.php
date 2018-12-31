@@ -34,24 +34,24 @@ class header {
      * @param      $url
      * @param bool $isdie
      */
-    public static function location( $url, $isdie = true) {
+    public static function location($url, $isdie = true) {
         ob_clean();
         header('Location: ' . $url);
 
         if ($isdie) {
-            end_util::end_script_show ('Redirecionando para ' . $url);
+            end_util::end_script_show('Redirecionando para ' . $url);
         }
     }
 
     /**
      * @param bool $isdie
      */
-    public static function reload( $isdie = true) {
+    public static function reload($isdie = true) {
         ob_clean();
 
         header('Location: ?' . url_util::querystring());
         if ($isdie) {
-            end_util::end_script_show ('Redirecionando para ?' . url_util::querystring());
+            end_util::end_script_show('Redirecionando para ?' . url_util::querystring());
         }
     }
 
@@ -59,7 +59,7 @@ class header {
      * @param      $param
      * @param bool $printtext
      */
-    public static function notfound_null( $param, $printtext = false) {
+    public static function notfound_null($param, $printtext = false) {
         if ($param == null) {
             self::notfound($printtext);
         }
@@ -68,14 +68,15 @@ class header {
     /**
      * @param bool $printtext
      */
-    public static function notfound( $printtext = false) {
+    public static function notfound($printtext = false) {
         global $CFG;
 
         if (!AJAX_SCRIPT) {
             header('HTTP/1.0 404 Not Found');
         }
 
-        dashboard_util::start_page('Erro');
+        dashboard_util::add_breadcrumb("Erro");
+        dashboard_util::start_page();
 
         echo '<div class="element-box text-center page404">
                   <img width="200" height="200" src="' . $CFG->wwwroot . '/local/kopere_dashboard/assets/dashboard/img/404.svg">

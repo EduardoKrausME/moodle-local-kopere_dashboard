@@ -84,7 +84,8 @@ class reports {
     public function dashboard() {
         global $CFG, $DB;
 
-        dashboard_util::start_page(get_string_kopere('reports_title'), -1);
+        dashboard_util::add_breadcrumb(get_string_kopere('reports_title'));
+        dashboard_util::start_page();
 
         echo '<div class="element-box">';
 
@@ -149,11 +150,10 @@ class reports {
             array('id' => $koperereports->reportcatid));
         header::notfound_null($koperereportcat, get_string_kopere('reports_notfound'));
 
-        dashboard_util::start_page(array(
-            array('?classname=reports&method=dashboard', get_string_kopere('reports_title')),
-            array('?classname=reports&method=dashboard&type=' . $koperereportcat->type, self::get_title($koperereportcat)),
-            self::get_title($koperereports)
-        ));
+        dashboard_util::add_breadcrumb(get_string_kopere('reports_title'), '?classname=reports&method=dashboard');
+        dashboard_util::add_breadcrumb(self::get_title($koperereportcat), '?classname=reports&method=dashboard&type=' . $koperereportcat->type);
+        dashboard_util::add_breadcrumb(self::get_title($koperereports));
+        dashboard_util::start_page();
 
         echo '<div class="element-box table-responsive">';
 

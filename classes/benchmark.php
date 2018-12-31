@@ -41,7 +41,8 @@ class benchmark {
      *
      */
     public function test() {
-        dashboard_util::start_page(get_string_kopere('benchmark_title'), -1, null, 'Performace');
+        dashboard_util::add_breadcrumb(get_string_kopere('benchmark_title'));
+        dashboard_util::start_page(null, 'Performace');
 
         echo '<div class="element-box">';
         mensagem::print_info(get_string_kopere('benchmark_based') . '
@@ -63,10 +64,10 @@ class benchmark {
     public function execute() {
         global $CFG;
 
-        dashboard_util::start_page(array(
-            array('?classname=benchmark&method=test', get_string_kopere('benchmark_title')),
-            get_string_kopere('benchmark_executing')
-        ), get_string_kopere('benchmark_title2'));
+        dashboard_util::add_breadcrumb(get_string_kopere('benchmark_title'), '?classname=benchmark&method=test');
+        dashboard_util::add_breadcrumb(get_string_kopere('benchmark_executing'));
+        dashboard_util::add_breadcrumb(get_string_kopere('benchmark_title2'));
+        dashboard_util::start_page();
 
         require_once($CFG->libdir . '/filelib.php');
 
@@ -119,7 +120,7 @@ class benchmark {
     }
 
     /**
-     *
+     * @throws \coding_exception
      */
     public function performance() {
         global $CFG;
@@ -155,6 +156,7 @@ class benchmark {
     /**
      * @param $number
      * @return mixed
+     * @throws \coding_exception
      */
     private function format_number($number) {
         return str_replace('.', get_string('decsep', 'langconfig'), $number);

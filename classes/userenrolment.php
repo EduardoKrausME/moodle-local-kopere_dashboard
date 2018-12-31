@@ -50,9 +50,10 @@ class userenrolment {
         header::notfound_null($enrolment, get_string_kopere('userenrolment_notfound'));
 
         ob_clean();
-        dashboard_util::start_popup(get_string_kopere('userenrolment_edit'), '?classname=userenrolment&method=mathedit_save');
+        dashboard_util::add_breadcrumb(get_string_kopere('userenrolment_edit'));
+        dashboard_util::start_page();
 
-        $form = new form();
+        $form = new form('?classname=userenrolment&method=mathedit_save');
         $form->create_hidden_input('ueid', $ueid);
 
         $statusvalues = array(
@@ -139,7 +140,7 @@ class userenrolment {
             status_change(0);
         </script>
         <?php
-        dashboard_util::end_popup();
+        dashboard_util::end_page();
     }
 
     /**

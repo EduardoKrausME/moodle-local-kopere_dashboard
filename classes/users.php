@@ -41,7 +41,8 @@ class users {
      *
      */
     public function dashboard() {
-        dashboard_util::start_page(get_string_kopere('user_title'), -1);
+        dashboard_util::add_breadcrumb(get_string_kopere('user_title'));
+        dashboard_util::start_page();
 
         echo '<div class="element-box table-responsive">';
 
@@ -97,10 +98,10 @@ class users {
         $user = $DB->get_record('user', array('id' => $userid));
         header::notfound_null($user, get_string_kopere('profile_notfound'));
 
-        dashboard_util::start_page(array(
-            array('?classname=users&method=dashboard', get_string_kopere('profile_title')),
-            fullname($user)
-        ));
+        dashboard_util::add_breadcrumb(get_string_kopere('profile_title'), '?classname=users&method=dashboard');
+        dashboard_util::add_breadcrumb(fullname($user));
+        dashboard_util::start_page();
+
         echo '<div class="element-box">';
 
         $profile = new profile();
