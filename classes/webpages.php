@@ -606,6 +606,7 @@ class webpages {
 
     /**
      *
+     * @throws \coding_exception
      */
     public function settings() {
         ob_clean();
@@ -627,7 +628,7 @@ class webpages {
                 ->set_value_by_config('webpages_analytics_id')
                 ->set_description(get_string_kopere('webpages_page_analyticsdesc')));
 
-        $form->create_submit_input("Salvar");
+        $form->create_submit_input(get_string('savechanges'));
         $form->close();
 
         dashboard_util::end_page();
