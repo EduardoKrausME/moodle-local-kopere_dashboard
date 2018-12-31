@@ -806,8 +806,8 @@
   border-top-color: #70cee1;
 }
 #kopere_dashboard_div .alert.alert-info a {
-  color: #fff;
-  font-weight: bold;
+  color: #083850;
+  font-weight: normal;
 }
 #kopere_dashboard_div .alert.alert-warning {
   background-color: #ede6c2;

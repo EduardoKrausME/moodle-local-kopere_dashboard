@@ -841,8 +841,8 @@ body.kopere_dashboard_body .alert.alert-info hr {
   border-top-color: #70cee1;
 }
 body.kopere_dashboard_body .alert.alert-info a {
-  color: #fff;
-  font-weight: bold;
+  color: #083850;
+  font-weight: normal;
 }
 body.kopere_dashboard_body .alert.alert-warning {
   background-color: #ede6c2;
