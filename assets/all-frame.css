@@ -6345,6 +6345,9 @@ body.kopere_dashboard_body .modal-footer .btn-group .btn + .btn {
 body.kopere_dashboard_body .modal-footer .btn-block + .btn-block {
   margin-left: 0;
 }
+body.kopere_dashboard_body .modal-footer.margin-form {
+  margin: 19px -19px -14px;
+}
 body.kopere_dashboard_body .modal-scrollbar-measure {
   position: absolute;
   top: -9999px;

@@ -6310,6 +6310,9 @@
 #kopere_dashboard_div .modal-footer .btn-block + .btn-block {
   margin-left: 0;
 }
+#kopere_dashboard_div .modal-footer.margin-form {
+  margin: 19px -19px -14px;
+}
 #kopere_dashboard_div .modal-scrollbar-measure {
   position: absolute;
   top: -9999px;

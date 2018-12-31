@@ -5296,6 +5296,9 @@ button.close {
     .btn-block + .btn-block {
         margin-left: 0;
     }
+    &.margin-form {
+        margin: 19px -19px -14px;
+    }
 }
 .modal-scrollbar-measure {
     position: absolute;
