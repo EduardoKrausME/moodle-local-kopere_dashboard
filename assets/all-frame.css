@@ -6286,7 +6286,6 @@ body.kopere_dashboard_body .modal-open .modal {
 body.kopere_dashboard_body .modal-dialog {
   position: relative;
   width: auto;
-  margin: 10px;
 }
 body.kopere_dashboard_body .modal-content {
   position: relative;

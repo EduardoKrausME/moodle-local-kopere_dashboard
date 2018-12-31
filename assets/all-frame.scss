@@ -28,8 +28,8 @@ body.kopere_dashboard_body {
         padding: 0;
     }
     @import "dashboard/css/dashboard";
-    @import "dashboard/bootstrap/bootstrap";
-    @import "dashboard/dataTables/jquery.dataTables";
+    @import "bootstrap/bootstrap";
+    @import "dataTables/jquery.dataTables";
     @import "dropzone/css/dropzone";
     .element-header {
         .setting {

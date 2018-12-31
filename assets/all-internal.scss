@@ -1,8 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito:300,400);
 #kopere_dashboard_div {
     @import "dashboard/css/dashboard";
-    @import "dashboard/bootstrap/bootstrap";
-    @import "dashboard/dataTables/jquery.dataTables";
+    @import "bootstrap/bootstrap";
+    @import "dataTables/jquery.dataTables";
     @import "dropzone/css/dropzone";
     .breadcrumb {
         display: none !important;
