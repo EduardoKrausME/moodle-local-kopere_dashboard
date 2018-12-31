@@ -143,14 +143,14 @@ echo $OUTPUT->header();
         }
     </script>
 
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/bootstrap/bootstrap.js"></script>
+    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/bootstrap/bootstrap.js"></script>
 
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/dataTables/jquery.dataTables.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/dataTables/sorting-numeric-comma.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/dataTables/sorting-currency.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/dataTables/sorting-date-uk.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/dataTables/sorting-file-size.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/dataTables/renderer-visible.js"></script>
+    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/jquery.dataTables.js"></script>
+    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/sorting-numeric-comma.js"></script>
+    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/sorting-currency.js"></script>
+    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/sorting-date-uk.js"></script>
+    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/sorting-file-size.js"></script>
+    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/renderer-kopere.js"></script>
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/moment.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/daterangepicker.js"></script>
@@ -160,7 +160,7 @@ echo $OUTPUT->header();
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery.maskedinput.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery.validate-v1.15.0.js"></script>
 
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/custom.js"></script>
+    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/custom.js?v=8"></script>
 
 <?php if (get_config('local_kopere_dashboard', 'nodejs-status')) { ?>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js"></script>
