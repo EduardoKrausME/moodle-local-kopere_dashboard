@@ -177,13 +177,6 @@ if (!empty($action) && strpos($action, '::')) {
         </div>
     </div>
 </div>
-<div class="modal fade" id="modal-details" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="loader"></div>
-        </div>
-    </div>
-</div>
 
 </body>
 </html>

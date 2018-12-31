@@ -208,13 +208,6 @@ echo "<div id='kopere_dashboard_div'>
                 </div>
             </div>
         </div>
-        <div class=\"modal fade\" id=\"modal-details\" role=\"dialog\">
-            <div class=\"modal-dialog modal-lg\">
-                <div class=\"modal-content\">
-                    <div class=\"loader\"></div>
-                </div>
-            </div>
-        </div>
     </div>";
 
 echo $OUTPUT->footer();

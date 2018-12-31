@@ -133,7 +133,7 @@ class dashboard {
                       </div>
                       <div class="media-body">
                           <h4 class="media-heading">
-                              <a data-toggle="modal" data-target="#modal-details"
+                              <a data-toggle="modal" data-target="#modal-edit"
                                  href="?classname=users&method=details&userid=' . $user->id . '"
                                  data-href="load-ajax.php?classname=users&method=details&userid=' . $user->id . '">' .
                 fullname($user) . '</a>
@@ -184,7 +184,7 @@ class dashboard {
                           </div>
                           <div class="media-body">
                               <h4 class="media-heading">
-                                  <a data-toggle="modal" data-target="#modal-details"
+                                  <a data-toggle="modal" data-target="#modal-edit"
                                      href="?classname=users&method=details&userid=' . $user->id . '"
                                      data-href="load-ajax.php?classname=users&method=details&userid=' . $user->id . '">' .
                     fullname($user) . '</a>
