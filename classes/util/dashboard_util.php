@@ -260,21 +260,8 @@ class dashboard_util {
      * @throws \coding_exception
      */
     private static function end_popup() {
-
-        if (false) {
-            echo "</div>
-                  <div class=\"modal-footer\">
-                      <button class=\"btn btn-default\" data-dismiss=\"modal\">" . get_string('cancel') . "</button>
-                      <input type=\"submit\" class=\"btn btn-primary margin-left-15\" value=\"" . get_string('savechanges') . "\">
-                  </div>
-                  </form>";
-        } else {
-            echo "</div>
-                  <div class=\"modal-footer\">
-                      <button class=\"btn btn-default\" data-dismiss=\"modal\">" . get_string_kopere('close') . "</button>
-                  </div>";
-        }
-        echo "<script>
+        echo "</div>
+              <script>
                   startForm ( '.modal-content' );
               </script>";
 
