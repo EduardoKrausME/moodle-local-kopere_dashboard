@@ -167,16 +167,10 @@ class backup {
                     foreach ($records as $record) {
                         $parametros = [];
                         foreach ($colunas as $coluna) {
-                            if (is_float($record->$coluna)) {
-                                $parametros[] = "'" . $record->$coluna . "'";
-                            } else if (is_numeric($record->$coluna)) {
-                                $parametros[] = $record->$coluna;
-                            } else {
-                                $de = array('\\', "\0", "\n", "\r", "'", '"', "\x1a");
-                                $para = array('\\\\', '\\0', '\\n', '\\r', "\\'", '\\"', '\\Z');
-                                $param = str_replace($de, $para, $record->$coluna);
-                                $parametros[] = "'{$param}'";
-                            }
+                            $de   = array('\\',   "\0",  "\n",  "\r",  "'",   '"',   "\x1a");
+                            $para = array('\\\\', '\\0', '\\n', '\\r', "\\'", '\\"', '\\Z');
+                            $param = str_replace($de, $para, $record->$coluna);
+                            $parametros[] = "'{$param}'";
                         }
                         $sql[] = "(" . implode(", ", $parametros) . ")";
                     }
