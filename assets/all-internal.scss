@@ -66,4 +66,14 @@
             }
         }
     }
+    .dashboard_menu_html {
+        &.logo {
+            text-align: center;
+            margin: 10% 10% 0;
+            img {
+                width: 100%;
+                max-width: 270px;
+            }
+        }
+    }
 }

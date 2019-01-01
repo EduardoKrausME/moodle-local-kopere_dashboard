@@ -8004,5 +8004,13 @@
 #block-region-side-pre .menu-kopere > li a span {
   padding: 11px !important;
 }
+#block-region-side-pre .dashboard_menu_html.logo {
+  text-align: center;
+  margin: 10% 10% 0;
+}
+#block-region-side-pre .dashboard_menu_html.logo img {
+  width: 100%;
+  max-width: 270px;
+}
 
 /*# sourceMappingURL=all-internal.css.map */

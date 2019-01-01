@@ -90,9 +90,16 @@ if ($theme_boost) {
     $dashboard_menu_html = \local_kopere_dashboard\output\menu::create_menu();
 } else {
     $dashboard_menu_html = "<div id=\"inst0\" class=\"block\">
-            <div class=\"header dashboard_menu_html\">
+            <!--div class=\"header dashboard_menu_html\">
                 <div class=\"title\" >
                     <h2 id=\"instance-4-header\">" . get_string_kopere('modulename') . "</h2>
+                </div>
+            </div-->
+            <div class=\"dashboard_menu_html logo\">
+                <div class=\"logo-w\">
+                    <img class=\"normal\"
+                         src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/logo-notext.svg\"
+                         alt=\"{get_string_kopere('pluginname')}\">
                 </div>
             </div>
             <div class=\"content\">
