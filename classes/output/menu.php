@@ -37,7 +37,7 @@ class menu {
      * @throws \dml_exception
      */
     public static function create_menu() {
-        global $DB;
+        global $DB, $CFG;
 
         $menu = "<ul class=\"main-menu block_tree list menu-kopere\">";
 
@@ -99,6 +99,15 @@ class menu {
                 ->set_methodname('test')
                 ->set_icon('performace')
                 ->set_name(get_string_kopere('benchmark_title')));
+
+        if (has_capability('moodle/site:config', \context_system::instance()) && $CFG->dbtype == 'mysqli') {
+            $menu .= dashboard_util::add_menu(
+                (new menu_util())
+                    ->set_classname('backup')
+                    ->set_methodname('dashboard')
+                    ->set_icon('data')
+                    ->set_name(get_string_kopere('backup_title')));
+        }
 
         $menu .= dashboard_util::add_menu(
             (new menu_util())->set_classname('about')

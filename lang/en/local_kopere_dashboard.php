@@ -102,6 +102,7 @@ $string['backup_windows'] = 'Not available on Windows Server!';
 $string['backup_hours'] = 'Do not run backup at peak times!';
 $string['backup_sleep'] = 'Backup may take several minutes to execute.';
 $string['backup_newnow'] = 'Create new Backup now';
+$string['backup_newsqlnow'] = 'Create new database backup now';
 $string['backup_noshell'] = 'shell_exec function is disabled!';
 $string['backup_list'] = 'List of backups';
 $string['backup_list_file'] = 'File';

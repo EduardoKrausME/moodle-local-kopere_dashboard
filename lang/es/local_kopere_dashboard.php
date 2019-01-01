@@ -86,6 +86,7 @@ $string['backup_list_created'] = 'Creado en';
 $string['backup_list_file'] = 'Archivo';
 $string['backup_list_size'] = 'Tamaño';
 $string['backup_newnow'] = 'Crear nuevo respaldo ahora';
+$string['backup_newsqlnow'] = 'Crear nueva copia de seguridad de la base de datos ahora';
 $string['backup_none'] = '¡No se encontraron respaldos!';
 $string['backup_noshell'] = '¡ la función shell_exec está deshabilitada!';
 $string['backup_notound'] = '¡Archivo no encontrado!';
