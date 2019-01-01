@@ -61,6 +61,8 @@ function startForm(element) {
 
 
 function loadRemoteModal(url) {
+    event.stopImmediatePropagation();
+
     $target = $('#modal-edit');
 
     $target.modal();
