@@ -112,7 +112,7 @@ class profile {
                 $rolehtml .= '<span class="btn btn-default">' . role_get_name($role) . '</span>';
             }
 
-            $matriculastatus = '<span class="btn-danger">' . get_string_kopere('profile_enrol_inactive') . '</span>';
+            $matriculastatus = '<span class="btn-danger padding-0-8 border-radius-5">' . get_string_kopere('profile_enrol_inactive') . '</span>';
             if ($enrolment->status == 0) {
                 $matriculastatus = '<span class="btn-success padding-0-8 border-radius-5">' . get_string_kopere('profile_enrol_active') . '</span>';
             }

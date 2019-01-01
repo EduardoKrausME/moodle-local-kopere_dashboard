@@ -178,7 +178,7 @@ class dashboard {
                 $userpicture->size = 1;
                 $profileimageurl = $userpicture->get_url($PAGE)->out(false);
 
-                $statusmatricula = '<span class="btn-danger">' . get_string_kopere('dashboard_enrol_inactive') . '</span>';
+                $statusmatricula = '<span class="btn-danger padding-0-8 border-radius-5">' . get_string_kopere('dashboard_enrol_inactive') . '</span>';
                 if ($enrol->status == 0) {
                     $statusmatricula = '<span class="btn-success padding-0-8 border-radius-5">' . get_string_kopere('dashboard_enrol_active') . '</span>';
                 }
