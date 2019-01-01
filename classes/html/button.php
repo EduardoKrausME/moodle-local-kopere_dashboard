@@ -164,9 +164,9 @@ class button {
      */
     public static function icon_popup_table($icon, $link) {
         global $CFG;
-        return "<a onclick=\"loadRemoteModal('load-ajax.php{$link}')\" href=\"#\">
-                    <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" width=\"19\">
-                </a>";
+        return "<img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" 
+                     width=\"19\" role=\"button\"
+                     onclick=\"loadRemoteModal('load-ajax.php{$link}')\">";
     }
 
     /**

@@ -235,14 +235,24 @@ class table {
     /**
      * @param bool $datatable
      */
-    public function close( $datatable = false) {
+    public function close( $datatable = false, $order='', $extras='') {
         echo '</table>';
         if ($datatable) {
-            echo '<script type="text/javascript">
+            if (isset($order[1])) {
+                $order = ',' . $order;
+            }
+            if (isset($extras[1])) {
+                $extras = ',' . $extras;
+            }
+            echo "<script type=\"text/javascript\">
                     $(document).ready(function(){
-                        $("#' . $this->table_id . '").DataTable();
+                        $(\"#{$this->table_id}\").DataTable({
+                            oLanguage : dataTables_oLanguage 
+                            {$extras} 
+                            {$order}
+                        });
                     });
-                  </script>';
+                  </script>";
         }
     }
 }
