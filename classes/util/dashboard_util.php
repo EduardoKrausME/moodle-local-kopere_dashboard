@@ -190,7 +190,7 @@ class dashboard_util {
         $submenuhtml = '';
         /** @var submenu_util $submenu */
         foreach ($menu->get_submenus() as $submenu) {
-            $classsub = self::test_menu_active($submenu->get_host());
+            $classsub = self::test_menu_active($submenu->get_classname());
             if (isset ($classsub[1])) {
                 $class = $classsub;
             }
@@ -203,7 +203,7 @@ class dashboard_util {
 
             $submenuhtml
                 .= "<li class=\"contains_branch {$classsub}\">
-                        <a href=\"{$submenu->get_host()}\">
+                        <a href=\"?classname={$submenu->get_classname()}&method={$submenu->get_methodname()}{$submenu->get_urlextra()}\">
                             <img src=\"{$iconurl}\"
                                  class=\"menu-icon\" alt=\"Icon\">
                             <span>{$submenu->get_title()}</span>
@@ -238,10 +238,6 @@ class dashboard_util {
         $_classname = optional_param('classname', '', PARAM_TEXT);
 
         if ($classname == $_classname) {
-            return 'active';
-        }
-
-        if (strpos($classname, explode('-', $_classname)[0]) === 0) {
             return 'active';
         }
 

@@ -12,7 +12,15 @@ class submenu_util {
     /**
      * @var string
      */
-    private $host;
+    private $classname;
+    /**
+     * @var string
+     */
+    private $methodname;
+    /**
+     * @var string
+     */
+    public $urlextra;
     /**
      * @var string
      */
@@ -23,18 +31,50 @@ class submenu_util {
     private $icon;
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function get_host() {
-        return $this->host;
+    public function get_classname() {
+        return $this->classname;
     }
 
     /**
-     * @param string $host
+     * @param mixed $classname
      * @return submenu_util
      */
-    public function set_host($host) {
-        $this->host = $host;
+    public function set_classname($classname) {
+        $this->classname = $classname;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function get_methodname() {
+        return $this->methodname;
+    }
+
+    /**
+     * @param mixed $methodname
+     * @return submenu_util
+     */
+    public function set_methodname($methodname) {
+        $this->methodname = $methodname;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function get_urlextra() {
+        return $this->urlextra;
+    }
+
+    /**
+     * @param mixed $urlextra
+     * @return submenu_util
+     */
+    public function set_urlextra($urlextra) {
+        $this->urlextra = $urlextra;
         return $this;
     }
 

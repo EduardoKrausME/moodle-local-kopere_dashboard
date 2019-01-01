@@ -71,7 +71,9 @@ class reports {
             }
 
             $menus[] = (new submenu_util())
-                ->set_host('?classname=reports&method=dashboard&type=' . $koperereportcat->type)
+                ->set_classname('reports')
+                ->set_methodname('dashboard')
+                ->set_urlextra("&type={$koperereportcat->type}")
                 ->set_title(self::get_title($koperereportcat))
                 ->set_icon($icon);
         }
