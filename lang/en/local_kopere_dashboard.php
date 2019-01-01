@@ -97,6 +97,7 @@ $string['about_help'] = 'Help is on';
 $string['about_bug'] = 'If you found some BUG or would like to suggest improvements open one issue';
 
 // Backup.
+$string['backup_title'] = 'Backup';
 $string['backup_windows'] = 'Not available on Windows Server!';
 $string['backup_hours'] = 'Do not run backup at peak times!';
 $string['backup_sleep'] = 'Backup may take several minutes to execute.';

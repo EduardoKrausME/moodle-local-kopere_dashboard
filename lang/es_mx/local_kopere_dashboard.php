@@ -91,6 +91,7 @@ $string['backup_noshell'] = '¡La función shell_exec está deshabilitada!';
 $string['backup_notound'] = '¡Archivo no encontrado!';
 $string['backup_returnlist'] = 'Regresar a lista de Respaldos';
 $string['backup_sleep'] = 'El Respaldo puede tardar varios minutos para ejecutarse.';
+$string['backup_title'] = 'Backup';
 $string['backup_windows'] = '¡No disponible en servidor Windows!';
 $string['benchmark_based'] = 'Basado en plugin';
 $string['benchmark_critical'] = 'Límite crítico';

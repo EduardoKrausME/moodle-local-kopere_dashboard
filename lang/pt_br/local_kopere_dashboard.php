@@ -97,6 +97,7 @@ $string['about_help'] = 'Ajuda está no';
 $string['about_bug'] = 'Achou algum BUG ou gostaria de sugerir melhorias abra uma';
 
 // Backup.
+$string['backup_title'] = 'Backup';
 $string['backup_windows'] = 'Não disponível em Servidor Windows!';
 $string['backup_hours'] = 'Não execute backup em horários de picos!';
 $string['backup_sleep'] = 'Backup podem demorar vários minutos para executar.';
