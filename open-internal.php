@@ -44,7 +44,7 @@ $PAGE->set_heading(get_string_kopere('modulename'));
 
 $PAGE->requires->jquery();
 $PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
-$PAGE->requires->css('/local/kopere_dashboard/assets/all-internal.css?a=' . rand());
+$PAGE->requires->css('/local/kopere_dashboard/assets/all-internal.css');
 
 $PAGE->requires->jquery();
 
@@ -167,7 +167,7 @@ echo $OUTPUT->header();
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery.maskedinput.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery.validate-v1.15.0.js"></script>
 
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/custom.js?v=8"></script>
+    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/custom.js"></script>
 
 <?php if (get_config('local_kopere_dashboard', 'nodejs-status')) { ?>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js"></script>
