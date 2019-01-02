@@ -33,28 +33,28 @@ defined('MOODLE_INTERNAL') || die();
 class input_base implements i_input {
 
     const VAL_REQUIRED = 'required';
-    const VAL_INT = 'int';
-    const VAL_VALOR = 'valor';
-    const VAL_PHONE = 'phone';
-    const VAL_CELPHONE = 'celphone';
-    const VAL_CEP = 'cep';
-    const VAL_CPF = 'cpf';
-    const VAL_CNPJ = 'cnpj';
-    const VAL_NOME = 'nome';
-    const VAL_URL = 'url';
-    const VAL_EMAIL = 'email';
-    const VAL_PASSWORD = 'password';
+    const VAL_INT = 'val_int';
+    const VAL_VALOR = 'val_valor';
+    const VAL_PHONE = 'val_phone';
+    const VAL_CELPHONE = 'val_celphone';
+    const VAL_CEP = 'val_cep';
+    const VAL_CPF = 'val_cpf';
+    const VAL_CNPJ = 'val_cnpj';
+    const VAL_NOME = 'val_nome';
+    const VAL_URL = 'val_url';
+    const VAL_EMAIL = 'val_email';
+    const VAL_PASSWORD = 'val_password';
 
-    const MASK_PHONE = 'phone';
-    const MASK_CELULAR = 'celphone';
-    const MASK_CEP = 'cep';
-    const MASK_CPF = 'cpf';
-    const MASK_CNPJ = 'cnpj';
-    const MASK_DATAHORA = 'datahora';
-    const MASK_DATA = 'data';
-    const MASK_INT = 'int';
-    const MASK_VALOR = 'valor';
-    const MASK_FLOAT = 'float';
+    const MASK_PHONE = 'mask_phone';
+    const MASK_CELULAR = 'mask_celphone';
+    const MASK_CEP = 'mask_cep';
+    const MASK_CPF = 'mask_cpf';
+    const MASK_CNPJ = 'mask_cnpj';
+    const MASK_DATAHORA = 'mask_datahora';
+    const MASK_DATA = 'mask_data';
+    const MASK_INT = 'mask_int';
+    const MASK_VALOR = 'mask_valor';
+    const MASK_FLOAT = 'mask_float';
 
     /** @var  string */
     protected $name = null;
@@ -81,7 +81,7 @@ class input_base implements i_input {
     protected $extras = "";
 
     /** @var bool */
-    protected $required=false;
+    protected $required = false;
 
     /**
      * @return string
@@ -233,7 +233,7 @@ class input_base implements i_input {
      */
     public function set_required() {
         $this->add_validator(self::VAL_REQUIRED);
-        $this->required=true;
+        $this->required = true;
 
         return $this;
     }
@@ -248,6 +248,21 @@ class input_base implements i_input {
             $this->class .= " " . $validator;
         } else {
             $this->class = $validator;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $mask
+     *
+     * @return $this
+     */
+    public function add_mask($mask) {
+        if ($this->class) {
+            $this->class .= " " . $mask;
+        } else {
+            $this->class = $mask;
         }
 
         return $this;
@@ -276,7 +291,7 @@ class input_base implements i_input {
             $return .= " style=\"$this->style\" ";
         }
 
-        if($this->required){
+        if ($this->required) {
             $return .= " required ";
         }
 

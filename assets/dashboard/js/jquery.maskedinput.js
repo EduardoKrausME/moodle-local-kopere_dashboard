@@ -340,23 +340,23 @@
 })(jQuery);
 
 function mackInputs() {
-    jQuery("input.phone").mask("(99) 9999-9999");
-    jQuery("input.celphone").mask("(99) 9 9999-9999");
-    jQuery("input.cep").mask("99999-999");
-    jQuery("input.cpf").mask("999.999.999-99");
-    jQuery("input.cnpj").mask("99.999.999/9999-99");
-    jQuery("input.datahora").mask("99/99/9999 99:99");
-    jQuery("input.data").mask("99/99/9999");
-    jQuery("input.relatorioData").mask("9999-99");
-    jQuery("input.int").keyup(function () {
+    jQuery("input.mask_phone").mask("(99) 9999-9999");
+    jQuery("input.mask_celphone").mask("(99) 9 9999-9999");
+    jQuery("input.mask_cep").mask("99999-999");
+    jQuery("input.mask_cpf").mask("999.999.999-99");
+    jQuery("input.mask_cnpj").mask("99.999.999/9999-99");
+    jQuery("input.mask_datahora").mask("99/99/9999 99:99");
+    jQuery("input.mask_data").mask("99/99/9999");
+    jQuery("input.mask_relatorioData").mask("9999-99");
+    jQuery("input.mask_int").keyup(function () {
         var text = jQuery(this).val();
         jQuery(this).val(text.replace(/[^\d]/, ""));
     });
-    jQuery("input.float").keyup(function () {
+    jQuery("input.mask_float").keyup(function () {
         var text = jQuery(this).val();
         jQuery(this).val(text.replace(/[^\d,]/, ""));
     });
-    jQuery("input.valor").keyup(function () {
+    jQuery("input.mask_valor").keyup(function () {
         var text = jQuery(this).val();
         text = text.replace(/[^\d]/, "");
         text = parseInt(text).toString();
