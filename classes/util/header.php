@@ -57,30 +57,42 @@ class header {
     }
 
     /**
-     * @param      $param
-     * @param bool $printtext
+     * @param \stdClass $testparam
+     * @param string $printtext
+     * @throws \dml_exception
      */
-    public static function notfound_null($param, $printtext = false) {
-        if ($param == null) {
+    public static function notfound_null($testparam, $printtext) {
+        if ($testparam == null) {
             self::notfound($printtext);
         }
     }
 
     /**
-     * @param bool $printtext
+     * @param string $printtext
+     * @throws \dml_exception
      */
-    public static function notfound($printtext = false) {
-        global $CFG;
+    public static function notfound($printtext) {
+        global $PAGE, $OUTPUT;
 
         if (!AJAX_SCRIPT) {
             header('HTTP/1.0 404 Not Found');
         }
 
-        dashboard_util::add_breadcrumb("Erro");
+        if (OPEN_INTERNAL && !$PAGE->requires->is_head_done()) {
+            $PAGE->set_context(\context_system::instance());
+            $PAGE->set_pagetype('admin-setting');
+            $PAGE->set_pagelayout('standard');
+            $PAGE->set_title('Erro');
+            $PAGE->set_heading('Erro');
+
+            echo $OUTPUT->header();
+        }
+
         dashboard_util::start_page();
 
+        // <img width="200" height="200" src="' . $CFG->wwwroot .
+        // '/local/kopere_dashboard/assets/dashboard/img/404.svg">
         echo '<div class="element-box text-center page404">
-                  <img width="200" height="200" src="' . $CFG->wwwroot . '/local/kopere_dashboard/assets/dashboard/img/404.svg">
                   <h2>OOPS!</h2>
                   <div class="text404 text-danger">' . $printtext . '</div>
                   <p>
@@ -90,6 +102,10 @@ class header {
               </div>';
 
         dashboard_util::end_page();
+
+        if (OPEN_INTERNAL) {
+            echo $OUTPUT->footer();
+        }
         end_util::end_script_show();
     }
 }
