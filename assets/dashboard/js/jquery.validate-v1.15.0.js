@@ -1540,16 +1540,6 @@
 
 function loadValidateAll() {
     jQuery("form.validate").validate({
-        rules          : {
-            USUARIO_SENHA  : "required",
-            USUARIO_SENHA2 : {
-                equalTo : "#USUARIO_SENHA"
-            },
-            USUARIO_EMAIL  : "required",
-            USUARIO_EMAIL2 : {
-                equalTo : "#USUARIO_EMAIL"
-            }
-        },
         invalidHandler : function(e, validator) {
             var errors = validator.numberOfInvalids();
             if (errors) {
