@@ -212,9 +212,9 @@ class data_table {
             $this->columndata[] = '{ "data": "' . $column->chave . '" }';
 
             if ($column->type == table_header_item::TYPE_INT) {
-                $this->columndefs[] = '{ type: "numeric-comma", targets: ' . $key . ' }';
+                $this->columndefs[] = '{ type: "numeric-comma", render: centerRenderer, targets: ' . $key . ' }';
             } else if ($column->type == table_header_item::TYPE_CURRENCY) {
-                $this->columndefs[] = '{ type: "currency", targets: ' . $key . ' }';
+                $this->columndefs[] = '{ type: "currency", render: currencyRenderer, targets: ' . $key . ' }';
             } else if ($column->type == table_header_item::TYPE_DATE) {
                 $this->columndefs[] = '{ type: "date-uk", targets: ' . $key . ' }';
             } else if ($column->type == table_header_item::TYPE_BYTES) {

@@ -25,17 +25,17 @@ namespace local_kopere_dashboard\html;
 defined('MOODLE_INTERNAL') || die();
 
 class table_header_item extends \stdClass {
-    const TYPE_DATE = 'date';
-    const TYPE_CURRENCY = 'numeric';
-    const TYPE_INT = 'numeric';
+    const TYPE_DATE = 'date-uk';
+    const TYPE_CURRENCY = 'currency';
+    const TYPE_INT = 'numeric-comma';
     const TYPE_TEXT = 'text';
-    const TYPE_BYTES = 'bytes';
+    const TYPE_BYTES = 'file-size';
     const TYPE_ACTION = 'action';
 
-    const RENDERER_DATE = 'renderer_date';
-    const RENDERER_VISIBLE = 'renderer_visible';
-    const RENDERER_TRUEFALSE = 'renderer_truefalse';
-    const RENDERER_STATUS = 'renderer_status';
+    const RENDERER_DATE = 'dataDatetimeRenderer';
+    const RENDERER_VISIBLE = 'dataVisibleRenderer';
+    const RENDERER_TRUEFALSE = 'dataTrueFalseRenderer';
+    const RENDERER_STATUS = 'dataStatusRenderer';
 
     /**
      * @var
