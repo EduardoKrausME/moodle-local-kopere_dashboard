@@ -382,6 +382,8 @@ class notifications extends notificationsutil {
         $form->print_row(get_string_kopere('notification_setting_templatelocation'),
             "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/");
 
+        $form->create_submit_input(get_string('savechanges'));
+
         $form->close();
 
         ?>
