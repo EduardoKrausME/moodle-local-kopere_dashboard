@@ -647,7 +647,6 @@ class webpages {
         return $path . '/';
     }
 
-
     /**
      *
      */

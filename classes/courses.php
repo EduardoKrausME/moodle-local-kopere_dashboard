@@ -208,8 +208,8 @@ class courses {
                         $webpages->title . '</a></p>';
                 }
             }
-
-            $form = new form('?classname=webpages&method=edit_page_save', 'form-inline');
+ 
+            $form = new form('?classname=webpages&method=page_edit_save', 'form-inline');
             $form->create_hidden_input('id', 0);
             $form->create_hidden_input('courseid', $course->id);
             $form->create_hidden_input('title', $course->fullname);
