@@ -171,6 +171,8 @@ class input_base implements i_input {
     public function set_value($value) {
         if ($this->value == null && $this->name != null) {
             $this->value = optional_param($this->name, $value, PARAM_RAW);
+        } else {
+            $this->value = $value;
         }
 
         return $this;
