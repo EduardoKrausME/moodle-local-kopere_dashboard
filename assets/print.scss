@@ -1,0 +1,19 @@
+@media print {
+    #nav-drawer,
+    nav.navbar,
+    #top-footer,
+    #page-header,
+    .nav-tabs {
+        display : none !important;
+    }
+
+    #page-wrapper #page,
+    body,
+    #region-main,
+    .card,
+    .card-body {
+        padding : 0 !important;
+        margin  : 0 !important;
+        border  : none !important;
+    }
+}
