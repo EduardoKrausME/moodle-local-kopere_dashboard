@@ -224,7 +224,6 @@ class reports {
         }
     }
 
-
     /**
      * @throws \coding_exception
      * @throws \dml_exception
@@ -279,7 +278,6 @@ class reports {
             return $obj->title;
         }
     }
-
 
     /**
      * @throws \coding_exception

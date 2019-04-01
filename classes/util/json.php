@@ -32,7 +32,7 @@ defined('MOODLE_INTERNAL') || die();
  */
 class json {
     /**
-     * @param      $data
+     * @param     $data
      * @param int $recordstotal
      * @param int $recordsfiltered
      * @param null $sql
