@@ -47,8 +47,6 @@ $PAGE->requires->jquery();
 $PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
 $PAGE->requires->css('/local/kopere_dashboard/assets/all-internal.css');
 
-$PAGE->requires->jquery();
-
 $PAGE->requires->js_amd_inline("
     lang_yes = '" . get_string('yes') . "';
     lang_no = '" . get_string('no') . "';
