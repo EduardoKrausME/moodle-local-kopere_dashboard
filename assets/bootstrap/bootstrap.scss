@@ -5206,6 +5206,11 @@ button.close {
     //right                      : 0;
     //bottom                     : 0;
     //left                       : 0;
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    margin-left: -300px;
+
     width: 600px;
     z-index: 1050;
     display: none;
@@ -5257,7 +5262,7 @@ button.close {
     bottom: 0;
     left: 0;
     z-index: 1040;
-    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.36);
 }
 .modal-backdrop.fade {
     filter: alpha(opacity=0);
@@ -5297,7 +5302,7 @@ button.close {
         margin-left: 0;
     }
     &.margin-form {
-        margin: 19px -19px -14px;
+        margin: 21px -15px -14px;
     }
 }
 .modal-scrollbar-measure {

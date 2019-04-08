@@ -11,6 +11,7 @@ select,
 input,
 textarea {
     width: 100%;
+    max-width: 100%;
     height: auto;
     padding: .5rem .7rem;
     font-size: .9rem;
@@ -37,6 +38,7 @@ select {
 }
 select:not([size]):not([multiple]) {
     height: calc(2.125rem + 2px);
+    max-width: 100%;
 }
 input {
     &.single-daterange {

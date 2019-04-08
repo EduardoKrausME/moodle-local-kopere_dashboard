@@ -343,7 +343,7 @@ function mackInputs() {
     jQuery("input.mask_phone").mask("(99) 9999-9999");
     jQuery("input.mask_celphone").mask("(99) 9 9999-9999");
     jQuery("input.mask_cep").mask("99999-999");
-    jQuery("input.mask_cpf").mask("999.999.999-99");
+    jQuery("input.mask_cpf,input.val_cpf").mask("999.999.999-99");
     jQuery("input.mask_cnpj").mask("99.999.999/9999-99");
     jQuery("input.mask_datahora").mask("99/99/9999 99:99");
     jQuery("input.mask_data").mask("99/99/9999");

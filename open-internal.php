@@ -159,7 +159,7 @@ echo $OUTPUT->header();
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/renderer-kopere-v2.min.js"></script>
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/moment.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/daterangepicker.min.js"></script>
+    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/daterangepicker.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/select2.full.min.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/validator.min.js"></script>
 
