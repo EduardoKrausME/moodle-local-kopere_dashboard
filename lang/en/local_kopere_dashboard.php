@@ -512,5 +512,10 @@ $string['webpages_theme_print'] = 'Must only display content and basic headers';
 $string['webpages_theme_report'] = 'The page layout used for reporting';
 $string['webpages_allpages'] = 'All pages';
 
+$string['notification_local_kopere_dashboard'] = 'Kopere Dashboard';
+$string['notification_local_kopere_hotmoodle'] = 'Kopere HotMoodle';
+$string['notification_local_kopere_moocommerce'] = 'Kopere MooCommerce';
+$string['notification_local_kopere_pay'] = 'Kopere Pagamento';
+
 
 $string['privacy:metadata'] = 'The Kopere Dashboard plugin does not store any personal data.';
