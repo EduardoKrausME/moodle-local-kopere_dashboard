@@ -28,16 +28,6 @@ Baixe o arquivo kopere_dashboard.zip em https://github.com/EduardoKrausME/moodle
 
 Após vá em _Administração do site_ >> _Avisos_ e instale o Kopere Dashboard
 
-## Usuários on-line
-
-Este é o recurso que eu sempre quis desenvolver e fiz ele no Kopere Dashboard. Nele é mostrado os usuários on-line em tempo real, que página estão acessando, se o foco esta na página ou não, tamanho do Monitor, qual navegador esta usando e se esta acessando de um smartfone e qual modelo do mesmo.
-
-Tudo isso em tempo real. Mais lembre-se que precisa do NodeJS comfigurado e funcionando
-
-![Imagem 1](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/blob/master/pix/prints/usersonline/Captura_01.png)
-
-[Clique aqui e veja mais sobre Usuários on-line](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/Usu%C3%A1rios-Online)
-
 ## Performace
 
 Benchmark é o ato de executar um conjunto de operações, a fim de avaliar o desempenho relativo de um objeto, normalmente executando uma série de testes padrões e ensaios nele.
