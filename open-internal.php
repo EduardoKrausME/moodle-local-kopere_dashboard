@@ -47,7 +47,7 @@ $PAGE->requires->jquery();
 $PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
 $PAGE->requires->css('/local/kopere_dashboard/assets/all-internal.css');
 
-$PAGE->requires->js_amd_inline("
+$js = "
     lang_yes = '" . get_string('yes') . "';
     lang_no = '" . get_string('no') . "';
     lang_visible = '" . get_string_kopere('courses_visible') . "';
@@ -77,7 +77,12 @@ $PAGE->requires->js_amd_inline("
             sSortDescending   : '" . get_string_kopere('datatables_oAria_sSortDescending') . "'
         }
     }
-");
+";
+if(method_exists ($PAGE->requires, "js_amd_inline")){
+    $PAGE->requires->js_amd_inline($js);
+}else{
+    echo "<script type='text/javascript'>{$js}</script>";
+}
 
 require_once "{$CFG->dirroot}/theme/{$CFG->theme}/version.php";
 $theme_boost = false;
