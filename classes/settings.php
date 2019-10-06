@@ -40,7 +40,7 @@ class settings {
      */
     public function save() {
 
-        $post = string_util::clear_all_params(null, null, PARAM_TEXT);
+        $post = string_util::clear_all_params(null, null, PARAM_RAW);
         foreach ($post as $keyname => $value) {
             if ($keyname == 'POST') {
                 continue;
