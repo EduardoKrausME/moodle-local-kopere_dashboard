@@ -60,12 +60,12 @@ class form {
      * @param string $name
      * @param string $adicionaltext
      */
-    public function print_row($titulo, $input, $name = '', $adicionaltext = '') {
+    public function print_row($titulo, $input, $name = '', $adicionaltext = '', $type = '') {
         if ($titulo) {
             $titulo = '<label for="' . $name . '">' . $titulo . '</label>';
         }
 
-        echo '<div class="form-group area_' . $name . '">
+        echo '<div class="form-group area_' . $name . ' type_' . $type . '">
                   ' . $titulo . $input . '
                   <div class="help-block form-text with-errors">' . $adicionaltext . '</div>
               </div>';
@@ -120,7 +120,8 @@ class form {
             $input->get_title(),
             $input->to_string(),
             $input->get_name(),
-            $input->get_description()
+            $input->get_description(),
+            $input->get_type()
         );
     }
 

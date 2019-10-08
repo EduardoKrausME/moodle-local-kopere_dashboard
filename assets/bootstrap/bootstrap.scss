@@ -439,13 +439,13 @@ mark,
     padding: .2em;
     background-color: #fcf8e3;
 }
-.width-30{
+.width-30 {
     width: 30px;
 }
-.padding-0-8{
+.padding-0-8 {
     padding: 0 8px;
 }
-.border-radius-5{
+.border-radius-5 {
     border-radius: 5px;
 }
 .text-left {
@@ -1914,6 +1914,16 @@ input[type="search"] {
     &.area_btsubmit {
         label {
             display: none;
+        }
+    }
+    &.type_checkbox {
+        min-height: 20px;
+        label {
+            float: right;
+            width: calc(100% - 25px);
+        }
+        input {
+            float: left;
         }
     }
 }
@@ -5160,7 +5170,7 @@ button.list-group-item-danger.active:focus {
     border-color: rgba(0, 0, 0,
             .15);
 }
-.well2{
+.well2 {
     background-color: #e3e3e3;
     border: 1px solid #f5f5f5;
 }
@@ -5210,7 +5220,7 @@ button.close {
     top: 40px;
     left: 50%;
     margin-left: -300px;
-
+    
     width: 600px;
     z-index: 1050;
     display: none;

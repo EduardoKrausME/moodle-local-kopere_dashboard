@@ -270,7 +270,7 @@ class notifications extends notificationsutil {
             $htmltext = $evento->message;
         }
 
-        $form->print_row(null, button::help('TAGS-substituídas-nas-mensagens', 'Quais as TAGS substituídas nas mensagens?'));
+        $form->print_row(null, button::help('TAGS-substituídas-nas-mensagens-de-Notificações', 'Quais as TAGS substituídas nas mensagens?'));
 
         $htmltextarea = '<textarea name="message" id="message" style="height:500px">' .
             htmlspecialchars($htmltext) . '</textarea>';
