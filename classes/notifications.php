@@ -426,7 +426,11 @@ class notifications extends notificationsutil {
         $CFG->debugdisplay = true;
         $CFG->debug = 32767;
 
-        $htmlmessage = "<p>Este é um teste de envio de E-mail.</p>" . time();
+        $htmlmessage = get_string_kopere('notification_testsmtp_message') . date('d/m/Y H:m');
+        $admin = get_admin();
+        if ($admin->id == $USER->id) {
+            mensagem::print_danger(get_string_kopere('notification_testsmtp_error'));
+        }
 
         $eventdata = new message();
         $eventdata->courseid = SITEID;
@@ -435,14 +439,13 @@ class notifications extends notificationsutil {
         $eventdata->name = 'kopere_dashboard_messages';
         $eventdata->userfrom = get_admin();
         $eventdata->userto = $USER;
-        $eventdata->subject = "Testando envio de e-mail - " . time();
+        $eventdata->subject = get_string_kopere('notification_testsmtp_subject') . date('d/m/Y H:m');
         $eventdata->fullmessage = html_to_text($htmlmessage);
         $eventdata->fullmessageformat = FORMAT_HTML;
         $eventdata->fullmessagehtml = $htmlmessage;
         $eventdata->smallmessage = '';
 
         message_send($eventdata);
-
         dashboard_util::end_page();
     }
 }
