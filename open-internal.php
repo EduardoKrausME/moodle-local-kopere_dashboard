@@ -25,7 +25,9 @@ ob_start();
 define('AJAX_SCRIPT', false);
 define('OPEN_INTERNAL', true);
 
+define('BENCHSTART', microtime(true));
 require('../../config.php');
+define('BENCHSTOP', microtime(true));
 require('autoload.php');
 
 global $PAGE, $CFG, $OUTPUT;
