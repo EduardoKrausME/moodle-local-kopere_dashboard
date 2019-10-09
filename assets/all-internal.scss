@@ -78,5 +78,17 @@
         }
     }
 }
-
 @import "print";
+.modal-backdrop.fade.in {
+    opacity: .8;
+}
+.kopere_dashboard_modal_item {
+    .modal-header {
+        display: block !important;
+    }
+    .close {
+        height: 27px;
+        width: 27px;
+        text-align: center;
+    }
+}

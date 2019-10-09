@@ -67,7 +67,7 @@ class reports {
             if (strpos($koperereportcat->image, 'assets/') === 0) {
                 $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$koperereportcat->image}";
             } else {
-                $icon = "{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/icon/report.svg";
+                $icon = "{$CFG->wwwroot}/{$koperereportcat->image}";
             }
 
             $menus[] = (new submenu_util())
@@ -80,7 +80,6 @@ class reports {
 
         return $menus;
     }
-
 
     /**
      * @throws \coding_exception

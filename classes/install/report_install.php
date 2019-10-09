@@ -36,7 +36,6 @@ use local_kopere_dashboard\vo\kopere_dashboard_reports;
 class report_install {
 
     /**
-     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -102,7 +101,6 @@ class report_install {
         $reportcat->enable = 1;
         self::report_cat_insert($reportcat);
     }
-
 
     /**
      * @throws \dml_exception

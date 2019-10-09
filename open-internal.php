@@ -45,46 +45,8 @@ $PAGE->set_pagelayout('admin');
 $PAGE->set_title(get_string_kopere('modulename'));
 $PAGE->set_heading(get_string_kopere('modulename'));
 
-$PAGE->requires->jquery();
 $PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
 $PAGE->requires->css('/local/kopere_dashboard/assets/all-internal.css');
-
-$js = "
-    lang_yes = '" . get_string('yes') . "';
-    lang_no = '" . get_string('no') . "';
-    lang_visible = '" . get_string_kopere('courses_visible') . "';
-    lang_invisible = '" . get_string_kopere('courses_invisible') . "';
-    lang_active = '" . get_string_kopere('notification_status_active') . "';
-    lang_inactive = '" . get_string_kopere('notification_status_inactive') . "';
-    dataTables_oLanguage = {
-        sEmptyTable       : '" . get_string_kopere('datatables_sEmptyTable') . "',
-        sInfo             : '" . get_string_kopere('datatables_sInfo') . "',
-        sInfoEmpty        : '" . get_string_kopere('datatables_sInfoEmpty') . "',
-        sInfoFiltered     : '" . get_string_kopere('datatables_sInfoFiltered') . "',
-        sInfoPostFix      : '" . get_string_kopere('datatables_sInfoPostFix') . "',
-        sInfoThousands    : '" . get_string_kopere('datatables_sInfoThousands') . "',
-        sLengthMenu       : '" . get_string_kopere('datatables_sLengthMenu') . "',
-        sLoadingRecords   : '" . get_string_kopere('datatables_sLoadingRecords') . "',
-        sProcessing       : '" . get_string_kopere('datatables_sProcessing') . "',
-        sZeroRecords      : '" . get_string_kopere('datatables_sZeroRecords') . "',
-        sSearch           : '" . get_string_kopere('datatables_sSearch') . "',
-        oPaginate         : {
-            sNext       : '" . get_string_kopere('datatables_oPaginate_sNext') . "',
-            sPrevious   : '" . get_string_kopere('datatables_oPaginate_sPrevious') . "',
-            sFirst      : '" . get_string_kopere('datatables_oPaginate_sFirst') . "',
-            sLast       : '" . get_string_kopere('datatables_oPaginate_sLast') . "'
-        },
-        oAria             : {
-            sSortAscending    : '" . get_string_kopere('datatables_oAria_sSortAscending') . "',
-            sSortDescending   : '" . get_string_kopere('datatables_oAria_sSortDescending') . "'
-        }
-    }
-";
-if(method_exists ($PAGE->requires, "js_amd_inline")){
-    $PAGE->requires->js_amd_inline($js);
-}else{
-    echo "<script type='text/javascript'>{$js}</script>";
-}
 
 require_once "{$CFG->dirroot}/theme/{$CFG->theme}/version.php";
 $theme_boost = false;
@@ -116,7 +78,6 @@ if ($theme_boost) {
 $dashboard_menu_html = str_replace("'", '"', $dashboard_menu_html);
 
 $PAGE->navbar->add(get_string_kopere('modulename'), new moodle_url('local/kopere_dashboard/open-internal.php'));
-
 
 load_class();
 $htmlApp = ob_get_contents();
@@ -156,6 +117,7 @@ echo $OUTPUT->header();
         }
     </script>
 
+    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery-3.2.1.min.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/bootstrap/bootstrap.min.js"></script>
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/jquery.dataTables.min.js"></script>
@@ -166,7 +128,7 @@ echo $OUTPUT->header();
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/renderer-kopere-v2.min.js"></script>
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/moment.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/daterangepicker.js"></script>
+    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/daterangepicker.min.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/select2.full.min.js"></script>
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/validator.min.js"></script>
 
@@ -175,11 +137,7 @@ echo $OUTPUT->header();
 
     <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/custom.min.js"></script>
 
-<?php if (get_config('local_kopere_dashboard', 'nodejs-status')) { ?>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v2.min.js"></script>
-    <?php
-}
+<?php
 if (get_config('local_kopere_dashboard', 'nodejs-status')) {
     echo "<script src=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js\"></script>
           <script src=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v2.min.js\"></script>";
@@ -203,7 +161,6 @@ if (get_config('local_kopere_dashboard', 'nodejs-status')) {
 }
 echo "<link rel=\"icon\" href=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/favicon.png\"/>";
 
-
 echo "<div id='kopere_dashboard_div'>
          <div class=\"menu-w hidden-print dashboard_menu_html-content\">
             <div class=\"menu-and-user\">
@@ -214,7 +171,7 @@ echo "<div id='kopere_dashboard_div'>
             {$htmlApp}
         </div>
 
-        <div class=\"modal fade\" id=\"modal-edit\" role=\"dialog\">
+        <div class=\"modal fade kopere_dashboard_modal_item\" id=\"modal-edit\" role=\"dialog\">
             <div class=\"modal-dialog\">
                 <div class=\"modal-content\">
                     <div class=\"loader\"></div>
@@ -225,14 +182,14 @@ echo "<div id='kopere_dashboard_div'>
 
 echo $OUTPUT->footer();
 
+$html = ob_get_contents();
+ob_clean();
 if (!$theme_boost) {
-    $html = ob_get_contents();
-    ob_clean();
-
     if (strpos($html, 'role="navigation"')) {
         $dashboard_menu_html .= "<style>.dashboard_menu_html-content{display:none !important}</style>";
-        echo preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html}$2", $html);
-    } else {
-        echo $html;
+        $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html}$2", $html);
     }
 }
+
+$html = preg_replace('/(.*kopere_dashboard_modal_item.*?)(<script.*script>)/s', '$1', $html);
+echo $html;
