@@ -421,6 +421,7 @@ $string['webpages_page_title'] = 'Título';
 $string['webpages_page_updated'] = '¡Página actualizada!';
 $string['webpages_page_view'] = 'Ver página';
 $string['webpages_subtitle'] = 'Menúes de Navegación';
+$string['webpages_subtitle_help'] = 'Estos menús aparecen en Navegación en "Mis cursos"';
 $string['webpages_table_order'] = 'Orden';
 $string['webpages_table_text'] = 'Texto';
 $string['webpages_table_theme'] = 'Diseño';

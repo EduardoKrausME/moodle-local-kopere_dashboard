@@ -461,6 +461,7 @@ $string['userimport_event_import_user_created_and_enrol_message'] = '<p>Hello {[
 // WebPages.
 $string['webpages_title'] = 'Static Pages';
 $string['webpages_subtitle'] = 'Navigation Menus';
+$string['webpages_subtitle_help'] = 'These menus appear under Navigation under "My Courses"';
 $string['webpages_table_link'] = 'Link';
 $string['webpages_table_menutitle'] = 'Menu';
 $string['webpages_table_title'] = 'Title';

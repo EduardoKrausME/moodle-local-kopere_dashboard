@@ -463,6 +463,7 @@ $string['userimport_event_import_user_created_and_enrol_message'] = '<p>Ol&aacut
 // WebPages.
 $string['webpages_title'] = 'Páginas estáticas';
 $string['webpages_subtitle'] = 'Menus de navegação';
+$string['webpages_subtitle_help'] = 'Estes menus aparecem em Navegação, abaixo de "Meus cursos"';
 $string['webpages_table_link'] = 'Link';
 $string['webpages_table_menutitle'] = 'Menu';
 $string['webpages_table_title'] = 'Título';

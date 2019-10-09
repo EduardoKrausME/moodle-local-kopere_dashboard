@@ -61,6 +61,7 @@ class webpages {
 
 
         title_util::print_h3('webpages_subtitle');
+        title_util::print_h6('webpages_subtitle_help');
         $menus = $DB->get_records('kopere_dashboard_menu', null, 'title ASC');
         button::add(get_string_kopere('webpages_menu_create'), '?classname=webpages&method=menu_edit', '', true, false, true);
 
