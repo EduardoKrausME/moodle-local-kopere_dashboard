@@ -56,7 +56,7 @@ if (!empty($action) && strpos($action, '::')) {
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
     <link href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/all-frame.css" rel="stylesheet">
-    <link async href="https://fonts.googleapis.com/css?family=Nunito:300,400" rel="stylesheet">
+    <link async href="https://fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet">
 
     <script>
         lang_yes = '<?php echo get_string('yes') ?>';
