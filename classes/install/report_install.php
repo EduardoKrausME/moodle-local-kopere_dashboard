@@ -42,8 +42,6 @@ class report_install {
     public static function create_categores() {
         global $CFG;
 
-        $CFG->debugdisplay = false;
-
         $reportcat = kopere_dashboard_reportcat::create_by_default();
         $reportcat->title = '[[reports_reportcat_badge]]';
         $reportcat->type = 'badge';
