@@ -50,7 +50,7 @@ $PAGE->requires->css('/local/kopere_dashboard/assets/all-internal.css');
 
 require_once "{$CFG->dirroot}/theme/{$CFG->theme}/version.php";
 $theme_boost = false;
-if (isset($plugin->dependencies['theme_boost'])) {
+if (isset($plugin->dependencies['theme_boost']) && $plugin->component != 'theme_adaptable') {
     $theme_boost = true;
 }
 
