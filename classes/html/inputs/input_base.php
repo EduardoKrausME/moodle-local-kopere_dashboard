@@ -185,11 +185,15 @@ class input_base implements i_input {
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public function set_value_by_config($configname) {
+    public function set_value_by_config($configname, $default = '') {
         $this->set_name($configname);
-        $this->set_value(
-            get_config('local_kopere_dashboard', $configname)
-        );
+
+        $value = get_config('local_kopere_dashboard', $configname);
+        if ($value == null) {
+            $value = $default;
+        }
+
+        $this->set_value($value);
 
         return $this;
     }
