@@ -48,35 +48,6 @@ $PAGE->set_heading(get_string_kopere('modulename'));
 $PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
 $PAGE->requires->css('/local/kopere_dashboard/assets/all-internal.css');
 
-require_once "{$CFG->dirroot}/theme/{$CFG->theme}/version.php";
-$theme_boost = false;
-if (isset($plugin->dependencies['theme_boost']) && $plugin->component != 'theme_adaptable') {
-    $theme_boost = true;
-}
-
-if ($theme_boost) {
-    $dashboard_menu_html = \local_kopere_dashboard\output\menu::create_menu();
-} else {
-    $dashboard_menu_html = "<div id=\"inst0\" class=\"block\">
-            <!--div class=\"header dashboard_menu_html\">
-                <div class=\"title\" >
-                    <h2 id=\"instance-4-header\">" . get_string_kopere('modulename') . "</h2>
-                </div>
-            </div-->
-            <div class=\"dashboard_menu_html logo\">
-                <div class=\"logo-w\">
-                    <img class=\"normal\"
-                         src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/logo-notext.svg\"
-                         alt=\"{get_string_kopere('pluginname')}\">
-                </div>
-            </div>
-            <div class=\"content\">
-                " . \local_kopere_dashboard\output\menu::create_menu() . "
-            </div>
-        </div>";
-}
-$dashboard_menu_html = str_replace("'", '"', $dashboard_menu_html);
-
 $PAGE->navbar->add(get_string_kopere('modulename'), new moodle_url('local/kopere_dashboard/open-internal.php'));
 
 load_class();
@@ -161,10 +132,42 @@ if (get_config('local_kopere_dashboard', 'nodejs-status')) {
 }
 echo "<link rel=\"icon\" href=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/favicon.png\"/>";
 
+
+
+//require_once "{$CFG->dirroot}/theme/{$CFG->theme}/version.php";
+//$theme_boost = false;
+//if (isset($plugin->dependencies['theme_boost']) && $plugin->component != 'theme_adaptable') {
+//    $theme_boost = true;
+//}
+
+//if ($theme_boost) {
+    $dashboard_menu_html_boost = \local_kopere_dashboard\output\menu::create_menu();
+    $dashboard_menu_html_boost = str_replace("'", '"', $dashboard_menu_html_boost);
+//} else {
+    $dashboard_menu_html_old = "<div id=\"inst0\" class=\"block\">
+            <!--div class=\"header dashboard_menu_html\">
+                <div class=\"title\" >
+                    <h2 id=\"instance-4-header\">" . get_string_kopere('modulename') . "</h2>
+                </div>
+            </div-->
+            <div class=\"dashboard_menu_html logo\">
+                <div class=\"logo-w\">
+                    <img class=\"normal\"
+                         src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/logo-notext.svg\"
+                         alt=\"{get_string_kopere('pluginname')}\">
+                </div>
+            </div>
+            <div class=\"content\">
+                " . \local_kopere_dashboard\output\menu::create_menu() . "
+            </div>
+        </div>";
+    $dashboard_menu_html_old = str_replace("'", '"', $dashboard_menu_html_old);
+//}
+
 echo "<div id='kopere_dashboard_div'>
          <div class=\"menu-w hidden-print dashboard_menu_html-content\">
             <div class=\"menu-and-user\">
-                {$dashboard_menu_html}
+                {$dashboard_menu_html_boost}
             </div>
         </div>
         <div class='content-w'>
@@ -184,12 +187,12 @@ echo $OUTPUT->footer();
 
 $html = ob_get_contents();
 ob_clean();
-if (!$theme_boost) {
+//if (!$theme_boost) {
     if (strpos($html, 'role="navigation"')) {
-        $dashboard_menu_html .= "<style>.dashboard_menu_html-content{display:none !important}</style>";
-        $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html}$2", $html);
+        $dashboard_menu_html_old .= "<style>.dashboard_menu_html-content{display:none !important}</style>";
+        $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html_old}$2", $html);
     }
-}
+//}
 
 $html = preg_replace('/(.*kopere_dashboard_modal_item.*?)(<script.*script>)/s', '$1', $html);
 echo $html;
