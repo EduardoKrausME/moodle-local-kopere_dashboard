@@ -116,7 +116,7 @@ class table {
                 $valor = $linha->$chave;
             }
 
-            $exec = str_replace($chave, $valor, $exec);
+            $exec = str_replace("{{$chave}}", $valor, $exec);
         }
 
         return $exec;

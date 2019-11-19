@@ -43,7 +43,7 @@ if ($menu) {
     $PAGE->set_url(new moodle_url("/local/kopere_dashboard/?menu=" . $menu->link));
     $PAGE->set_pagelayout(get_config('local_kopere_dashboard', 'webpages_theme'));
     $PAGE->set_title($menu->title);
-    $PAGE->set_heading($webpages->title);
+    $PAGE->set_heading($menu->title);
     $PAGE->set_pagetype('admin-setting');
 
     $PAGE->requires->css('/local/kopere_dashboard/assets/statics-pages.css');
