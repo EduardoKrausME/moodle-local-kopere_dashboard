@@ -132,24 +132,9 @@ if (get_config('local_kopere_dashboard', 'nodejs-status')) {
 }
 echo "<link rel=\"icon\" href=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/favicon.png\"/>";
 
-
-
-//require_once "{$CFG->dirroot}/theme/{$CFG->theme}/version.php";
-//$theme_boost = false;
-//if (isset($plugin->dependencies['theme_boost']) && $plugin->component != 'theme_adaptable') {
-//    $theme_boost = true;
-//}
-
-//if ($theme_boost) {
-    $dashboard_menu_html_boost = \local_kopere_dashboard\output\menu::create_menu();
-    $dashboard_menu_html_boost = str_replace("'", '"', $dashboard_menu_html_boost);
-//} else {
-    $dashboard_menu_html_old = "<div id=\"inst0\" class=\"block\">
-            <!--div class=\"header dashboard_menu_html\">
-                <div class=\"title\" >
-                    <h2 id=\"instance-4-header\">" . get_string_kopere('modulename') . "</h2>
-                </div>
-            </div-->
+$dashboard_menu_html_boost = \local_kopere_dashboard\output\menu::create_menu();
+$dashboard_menu_html_boost = str_replace("'", '"', $dashboard_menu_html_boost);
+$dashboard_menu_html_old = "<div id=\"inst0\" class=\"block\">
             <div class=\"dashboard_menu_html logo\">
                 <div class=\"logo-w\">
                     <img class=\"normal\"
@@ -161,8 +146,7 @@ echo "<link rel=\"icon\" href=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboa
                 " . \local_kopere_dashboard\output\menu::create_menu() . "
             </div>
         </div>";
-    $dashboard_menu_html_old = str_replace("'", '"', $dashboard_menu_html_old);
-//}
+$dashboard_menu_html_old = str_replace("'", '"', $dashboard_menu_html_old);
 
 echo "<div id='kopere_dashboard_div'>
          <div class=\"menu-w hidden-print dashboard_menu_html-content\">
@@ -187,12 +171,10 @@ echo $OUTPUT->footer();
 
 $html = ob_get_contents();
 ob_clean();
-//if (!$theme_boost) {
-    if (strpos($html, 'role="navigation"')) {
-        $dashboard_menu_html_old .= "<style>.dashboard_menu_html-content{display:none !important}</style>";
-        $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html_old}$2", $html);
-    }
-//}
+if (strpos($html, 'role="navigation"')) {
+    $dashboard_menu_html_old .= "<style>.dashboard_menu_html-content{display:none !important}</style>";
+    $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html_old}$2", $html);
+}
 
-$html = preg_replace('/(.*kopere_dashboard_modal_item.*?)(<script.*script>)/s', '$1', $html);
+//$html = preg_replace('/(.*kopere_dashboard_modal_item.*?)(<script.*script>)/s', '$1', $html);
 echo $html;
