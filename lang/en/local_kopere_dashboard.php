@@ -123,7 +123,7 @@ $string['backup_returnlist'] = 'Back to the Backups list';
 $string['backup_deletesucessfull'] = 'Backup deleted successfully!';
 $string['backup_deleting'] = 'Excluding Backup';
 $string['backup_delete_confirm'] = 'Backup Deletion';
-$string['backup_delete_title'] = 'Do you really want to delete the <strong>{$a->file}</strong>backup created in <strong>{$a->date}</strong>';
+$string['backup_delete_title'] = 'Do you really want to delete the <strong>{$a}</strong>';
 $string['backup_notound'] = 'File not found!';
 
 // Report_benchmark.

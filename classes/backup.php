@@ -110,6 +110,8 @@ class backup {
     public function execute_dumpsql() {
         global $DB, $CFG;
 
+        set_time_limit(0);
+
         dashboard_util::add_breadcrumb(get_string_kopere('backup_title'), '?classname=backup&method=dashboard');
         dashboard_util::add_breadcrumb(get_string_kopere('backup_execute_exec'));
         dashboard_util::add_breadcrumb(get_string_kopere('backup_execute_exec') . ": {$CFG->dbname}");
@@ -167,7 +169,7 @@ class backup {
                     foreach ($records as $record) {
                         $parametros = [];
                         foreach ($colunas as $coluna) {
-                            $de   = array('\\',   "\0",  "\n",  "\r",  "'",   '"',   "\x1a");
+                            $de = array('\\', "\0", "\n", "\r", "'", '"', "\x1a");
                             $para = array('\\\\', '\\0', '\\n', '\\r', "\\'", '\\"', '\\Z');
                             $param = str_replace($de, $para, $record->$coluna);
                             $parametros[] = "'{$param}'";
@@ -202,6 +204,7 @@ class backup {
 
     /**
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function delete() {
         $file = optional_param('file', '', PARAM_TEXT);
@@ -210,9 +213,6 @@ class backup {
         $backupfile = $this->get_backup_path() . $file;
 
         if (file_exists($backupfile)) {
-            preg_match("/backup_(\d+)-(\d+)-(\d+)-(\d+)-(\d+).tar.gz/", $file, $p);
-            $data = $p[3] . '/' . $p[2] . '/' . $p[1] . ' às ' . $p[4] . ':' . $p[5];
-
             if ($status) {
                 @unlink($backupfile);
 
@@ -226,7 +226,7 @@ class backup {
 
                 echo "<div class=\"element-box\">
                           <h3>" . get_string_kopere('backup_delete_confirm') . "</h3>
-                          <p>" . get_string_kopere('backup_delete_title', ['file' => $file, 'data' => $data]) . "</p>
+                          <p>" . get_string_kopere('backup_delete_title', $file) . "</p>
                           <div>";
                 button::delete(get_string('yes'), "?classname=backup&method=delete&file={$file}&status=sim", '', false);
                 button::add(get_string('no'), '?classname=backup&method=dashboard', 'margin-left-10', false);
@@ -242,6 +242,7 @@ class backup {
 
     /**
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function download() {
         ob_clean();

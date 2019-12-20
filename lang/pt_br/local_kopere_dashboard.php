@@ -123,7 +123,7 @@ $string['backup_returnlist'] = 'Voltar para a lista de Backups';
 $string['backup_deletesucessfull'] = 'Backup excluído com sucesso!';
 $string['backup_deleting'] = 'Excluíndo Backup';
 $string['backup_delete_confirm'] = 'Exclusão do Backup';
-$string['backup_delete_title'] = 'Deseja realmente excluir o backup <strong>{$a->file}</strong> criado em <strong>{$a->data}</strong>';
+$string['backup_delete_title'] = 'Deseja realmente excluir o backup <strong>{$a}</strong>';
 $string['backup_notound'] = 'Arquivo não localizado!';
 
 // Report_benchmark.
