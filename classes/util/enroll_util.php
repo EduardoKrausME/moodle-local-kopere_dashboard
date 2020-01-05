@@ -79,6 +79,40 @@ class enroll_util {
     }
 
     /**
+     * @param $coorteid
+     * @param $userid
+     * @throws \dml_exception
+     */
+    public static function cohort_enrol($coorteid, $userid) {
+        global $DB;
+
+        $coorteid = str_replace("c", "", $coorteid);
+
+        $cohort_members = new \stdClass();
+        $cohort_members->cohortid = $coorteid;
+        $cohort_members->userid = $userid;
+        $cohort_members->timeadded = time();
+
+        $DB->insert_record('cohort_members', $cohort_members);
+    }
+
+    /**
+     * @param $coorteid
+     * @param $userid
+     * @throws \dml_exception
+     */
+    public static function cohort_unenrol($coorteid, $userid) {
+        global $DB;
+
+        $coorteid = str_replace("c", "", $coorteid);
+        $cohort_members = array(
+            "cohortid" => $coorteid,
+            "userid" => $userid
+        );
+        $DB->delete_records('cohort_members', $cohort_members);
+    }
+
+    /**
      * @param $course
      * @param $user
      * @param $timestart
