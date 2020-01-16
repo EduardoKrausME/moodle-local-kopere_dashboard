@@ -114,7 +114,7 @@ class reports {
             if (strpos($koperereportcat->image, 'assets/') === 0) {
                 $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$koperereportcat->image}";
             } else {
-                $icon = "{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/icon/report.svg";
+                $icon = "{$CFG->wwwroot}/{$koperereportcat->image}";
             }
 
             title_util::print_h3("<img src='{$icon}' alt='Icon' height='23' width='23' > " .
