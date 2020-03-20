@@ -50,9 +50,9 @@ class header {
     public static function reload($isdie = true) {
         ob_clean();
 
-        header('Location: ?' . url_util::querystring());
+        header('Location: ' . url_util::querystring());
         if ($isdie) {
-            end_util::end_script_show('Redirecionando para ?' . url_util::querystring());
+            end_util::end_script_show('Redirecionando para ' . url_util::querystring());
         }
     }
 

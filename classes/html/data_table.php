@@ -163,7 +163,7 @@ class data_table {
      */
     public function print_header($class = '', $printbody = true) {
         if ($this->isexport && $this->ajaxurl == null) {
-            button::info(get_string_kopere('reports_export'), "?" . url_util::querystring() . "&export=xls");
+            button::info(get_string_kopere('reports_export'), url_util::querystring() . "&export=xls");
         }
 
         echo '<table id="' . $this->tableid . '" class="table table-hover" >';

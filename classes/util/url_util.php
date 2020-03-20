@@ -29,7 +29,7 @@ class url_util {
      * @throws \coding_exception
      */
     public static function querystring() {
-        return clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
+        return "?" . clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
     }
 
 }
