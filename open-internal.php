@@ -54,7 +54,6 @@ load_class();
 $htmlApp = ob_get_contents();
 ob_clean();
 
-echo $OUTPUT->header();
 ?>
     <script>
         lang_yes = '<?php echo get_string('yes') ?>';
@@ -87,28 +86,32 @@ echo $OUTPUT->header();
             }
         }
     </script>
-
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery-3.2.1.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/bootstrap/bootstrap.min.js"></script>
-
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/jquery.dataTables.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/sorting-numeric-comma.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/sorting-currency.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/sorting-date-uk.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/sorting-file-size.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/renderer-kopere-v2.min.js"></script>
-
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/moment.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/daterangepicker.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/select2.full.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/validator.min.js"></script>
-
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery.maskedinput.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery.validate-v1.15.0.min.js"></script>
-
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/custom.min.js"></script>
-
 <?php
+
+$PAGE->requires->jquery();
+
+$PAGE->requires->js('/local/kopere_dashboard/assets/bootstrap/bootstrap.min.js');
+
+$PAGE->requires->js('/local/kopere_dashboard/assets/dataTables/jquery.dataTables.min.js');
+$PAGE->requires->js('/local/kopere_dashboard/assets/dataTables/sorting-numeric-comma.min.js');
+$PAGE->requires->js('/local/kopere_dashboard/assets/dataTables/sorting-currency.min.js');
+$PAGE->requires->js('/local/kopere_dashboard/assets/dataTables/sorting-date-uk.min.js');
+$PAGE->requires->js('/local/kopere_dashboard/assets/dataTables/sorting-file-size.min.js');
+$PAGE->requires->js('/local/kopere_dashboard/assets/dataTables/renderer-kopere-v2.min.js');
+
+$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/moment.min.js');
+$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/daterangepicker.min.js');
+$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/select2.full.min.js');
+$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/validator.min.js');
+
+$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/jquery.maskedinput.min.js');
+$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/jquery.validate-v1.15.0.min.js');
+
+$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/custom.min.js');
+
+
+echo $OUTPUT->header();
+
 if (get_config('local_kopere_dashboard', 'nodejs-status')) {
     echo "<script src=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js\"></script>
           <script src=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v2.min.js\"></script>";

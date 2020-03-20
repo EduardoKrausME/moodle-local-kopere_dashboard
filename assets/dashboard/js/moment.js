@@ -14,7 +14,7 @@
 
     function utils_hooks__hooks () {
         return hookCallback.apply(null, arguments);
-    }
+    } 
 
     // This is done to register the method called with moment()
     // without creating circular dependencies.
