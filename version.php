@@ -23,8 +23,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2020011600;
+$plugin->version =  2020062000;
 $plugin->requires = 2011120500; // Moodle 2.7
-$plugin->release = '2.4.4';
+$plugin->release = '2.4.5';
 $plugin->maturity = MATURITY_RC;
 $plugin->component = 'local_kopere_dashboard';

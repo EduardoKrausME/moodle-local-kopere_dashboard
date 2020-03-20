@@ -85,6 +85,16 @@ class table {
     }
 
     /**
+     * @param $url
+     * @param $chave
+     */
+    public function set_click_open( $url, $chave) {
+        $this->click = array();
+        $this->click['chave'] = $chave;
+        $this->click['exec'] = "window.open( '" . $url . "' )";
+    }
+
+    /**
      * @param $id
      */
     public function set_id( $id) {
