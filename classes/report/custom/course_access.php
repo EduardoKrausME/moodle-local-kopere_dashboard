@@ -256,7 +256,7 @@ class course_access {
         echo '<td colspan="2" class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
     }
 
-    
+
     public function list_data() {
     }
 }

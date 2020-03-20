@@ -288,7 +288,7 @@ class course_access_grade {
         echo '<td colspan="2" class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
     }
 
-    
+
     public function list_data() {
     }
 }
