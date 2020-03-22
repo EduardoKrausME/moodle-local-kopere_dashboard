@@ -24,7 +24,7 @@ namespace local_kopere_dashboard\task;
 
 defined('MOODLE_INTERNAL') || die();
 
-class task_tmp  extends \core\task\scheduled_task {
+class task_tmp extends \core\task\scheduled_task {
     /**
      * @return string
      * @throws \coding_exception
@@ -39,8 +39,8 @@ class task_tmp  extends \core\task\scheduled_task {
     public function execute() {
         global $CFG;
 
-        $files = glob( $CFG->dataroot . '/kopere/dashboard/tmp/*');
-        $now   = time();
+        $files = glob($CFG->dataroot . '/kopere/dashboard/tmp/*');
+        $now = time();
 
         foreach ($files as $file) {
             if (is_file($file)) {
@@ -50,5 +50,4 @@ class task_tmp  extends \core\task\scheduled_task {
             }
         }
     }
-
 }

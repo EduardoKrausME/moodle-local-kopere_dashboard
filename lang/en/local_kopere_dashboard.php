@@ -28,6 +28,7 @@ $string['dashboard'] = 'Dashboard';
 $string['settings'] = 'Settings';
 $string['close'] = 'Close';
 $string['crontask_tmp'] = 'Cron clear tmp folder';
+$string['crontask_performance'] = 'Cron para guardar datos de rendimiento';
 
 $string['kopere_dashboard_open'] = 'Open Kopere';
 $string['kopere_dashboard_open_desc'] = 'Which way do you want to open Kopere Dashboard';
@@ -371,7 +372,7 @@ $string['user_table_phone'] = 'Fixed Phone';
 $string['user_table_celphone'] = 'Mobile';
 $string['user_table_city'] = 'City';
 
-// Usersonline.
+// Useronline.
 $string['useronline_title'] = 'Online Users';
 $string['useronline_subtitle'] = 'Open tabs with Moodle';
 $string['useronline_table_fullname'] = 'Name';

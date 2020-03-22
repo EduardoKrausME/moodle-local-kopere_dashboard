@@ -83,5 +83,18 @@
             </KEYS>
         </TABLE>
 
+        <TABLE NAME="kopere_dashboard_performance" COMMENT="">
+            <FIELDS>
+                <FIELD NAME="id"            TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
+                <FIELD NAME="time"          TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="false" />
+                <FIELD NAME="type"          TYPE="char"  LENGTH="7"   NOTNULL="true"  SEQUENCE="false" />
+                <FIELD NAME="value"         TYPE="float" LENGTH="5"   NOTNULL="true"  SEQUENCE="false" DECIMALS="3" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+                <KEY NAME="unique"  TYPE="unique"  FIELDS="time,type" />
+            </KEYS>
+        </TABLE>
+
     </TABLES>
 </XMLDB>

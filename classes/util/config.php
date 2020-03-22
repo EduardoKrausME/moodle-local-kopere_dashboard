@@ -35,7 +35,7 @@ class config {
      * @param string $default
      * @return mixed|string
      */
-    public static function get_key($key, $default='') {
+    public static function get_key($key, $default = '') {
         try {
             $value = get_config('local_kopere_dashboard', $key);
         } catch (\dml_exception $e) {

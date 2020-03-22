@@ -45,35 +45,36 @@ class dashboard {
         dashboard_util::start_page();
 
         $colsm = 4;
-        if (class_exists('local_kopere_dashboard\usersonline')) {
+        if (class_exists('local_kopere_dashboard\useronline')) {
             $colsm = 3;
         }
 
+        performancemonitor::load_monitor();
 
         echo '<div class="element-content">
                 <div class="row">
                     <div class="col-sm-' . $colsm . '">
-                        <div class="element-box color1">
+                        <div class="element-box color_user">
                             <div class="label">' . get_string_kopere('dashboard_title_user') . '</div>
                             <div class="value"><a href="?classname=users&method=dashboard">
                                 ' . users::count_all(true) . ' / ' . users::count_all_learners(true) . '</a></div>
                         </div>
                     </div>';
 
-        if (class_exists('local_kopere_dashboard\usersonline')) {
+        if (class_exists('local_kopere_dashboard\useronline')) {
             echo '
                     <div class="col-sm-3">
-                        <div class="element-box color2">
+                        <div class="element-box color_online">
                             <div class="label">' . get_string_kopere('dashboard_title_online') . '</div>
-                            <div class="value"><a href="?classname=usersonline&method=dashboard">
-                                <span id="user-count-online">' . usersonline::count(10) . '</span>
-                                / ' . usersonline::count(60) . '</a></div>
+                            <div class="value"><a href="?classname=useronline&method=dashboard">
+                                <span id="user-count-online">' . useronline::count(10) . '</span>
+                                / ' . useronline::count(60) . '</a></div>
                         </div>
                     </div>';
         }
         echo '
                     <div class="col-sm-' . $colsm . '">
-                        <div class="element-box color3">
+                        <div class="element-box color_course">
                             <div class="label">' . get_string_kopere('dashboard_title_course') . '</div>
                             <div class="value"><a href="?classname=courses&method=dashboard">
                             ' . courses::count_all(true) . '
@@ -81,7 +82,7 @@ class dashboard {
                         </div>
                     </div>
                     <div class="col-sm-' . $colsm . '">
-                        <div class="element-box color4">
+                        <div class="element-box color_disk">
                             <div class="label">' . get_string_kopere('dashboard_title_disk') . '</div>
                             <div class="value"><a href="?classname=reports&method=dashboard&type=server">
                             ' . bytes_util::size_to_byte(files::count_all_space()) . '</a></div>

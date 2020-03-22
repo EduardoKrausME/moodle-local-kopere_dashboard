@@ -22,6 +22,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * @param $oldversion
+ * @return bool
+ * @throws Exception
+ */
 function xmldb_local_kopere_dashboard_upgrade($oldversion) {
     global $DB;
 
@@ -142,6 +147,25 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         $DB->delete_records('kopere_dashboard_reportcat');
 
         upgrade_plugin_savepoint(true, 2018032409, 'local', 'kopere_dashboard');
+    }
+
+    if ($oldversion < 2020062002) {
+        if (!$dbman->table_exists('kopere_dashboard_performance')) {
+            $table = new xmldb_table('kopere_dashboard_performance');
+
+            $table->add_field('id', XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+            $table->add_field('time', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL);
+            $table->add_field('type', XMLDB_TYPE_CHAR, '7', null, XMLDB_NOTNULL);
+
+            $field = new xmldb_field('value', XMLDB_TYPE_CHAR, '5', null, XMLDB_NOTNULL);
+            $field->setDecimals(3);
+            $table->addField($field);
+
+            $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+            $table->add_index('type', XMLDB_INDEX_NOTUNIQUE, array('time', 'type'));
+
+            $dbman->create_table($table);
+        }
     }
 
     \local_kopere_dashboard\install\report_install::create_categores();

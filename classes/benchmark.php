@@ -45,6 +45,8 @@ class benchmark {
         dashboard_util::add_breadcrumb(get_string_kopere('benchmark_title'));
         dashboard_util::start_page(null, 'Performace');
 
+        performancemonitor::load_monitor();
+
         echo '<div class="element-box">';
         mensagem::print_info(get_string_kopere('benchmark_based') . '
                     <a class="alert-link" href="https://moodle.org/plugins/report_benchmark"

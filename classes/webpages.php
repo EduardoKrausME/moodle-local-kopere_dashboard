@@ -33,6 +33,7 @@ use local_kopere_dashboard\html\inputs\input_html_editor;
 use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\html\inputs\input_text;
 use local_kopere_dashboard\html\table_header_item;
+use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\end_util;
 use local_kopere_dashboard\util\header;
@@ -189,7 +190,7 @@ class webpages {
         $webpages = $DB->get_record('kopere_dashboard_webpages', array('id' => $id));
         if (!$webpages) {
             $webpages = kopere_dashboard_webpages::create_by_default();
-            $webpages->theme = get_config('local_kopere_dashboard', 'webpages_theme');
+            $webpages->theme = config::get_key('webpages_theme');
             dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'), '?classname=webpages&method=dashboard');
             dashboard_util::add_breadcrumb(get_string_kopere('webpages_page_new'));
         } else {

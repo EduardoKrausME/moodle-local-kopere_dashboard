@@ -34,6 +34,7 @@ $string['dashboard'] = 'Tablero';
 $string['settings'] = 'Configuraciones';
 $string['close'] = 'Cerrar';
 $string['crontask_tmp'] = 'Cron limpiar carpeta tmp';
+$string['crontask_performance'] = 'Cron para guardar datos de rendimiento';
 
 $string['kopere_dashboard_open'] = 'Abrir Kopere';
 $string['kopere_dashboard_open_desc'] = '¿Qué forma desea abrir el Tablero Kopere';
