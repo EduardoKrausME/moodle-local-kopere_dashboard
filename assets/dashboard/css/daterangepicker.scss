@@ -20,7 +20,7 @@ $arrow-size: 7px !default;
 //
 // Colors
 $daterangepicker-color: inherit !default;
-$daterangepicker-bg-color: #fff !default;
+$daterangepicker-bg-color: #b0bec5 !default;
 
 $daterangepicker-cell-color: $daterangepicker-color !default;
 $daterangepicker-cell-border-color: transparent !default;
@@ -197,6 +197,7 @@ $daterangepicker-ranges-active-border-radius: $daterangepicker-border-radius !de
     }
     &.dropdown-menu {
         max-width: none;
+        width: 257px;
         z-index: $daterangepicker-dropdown-z-index;
     }
     &.single {
@@ -420,7 +421,8 @@ $daterangepicker-ranges-active-border-radius: $daterangepicker-border-radius !de
 /*  Larger Screen Styling */
 @media (min-width: 564px) {
     .#{$prefix-class} {
-        width: auto;
+        //width: auto;
+        //width: 257px;
         .ranges {
             ul {
                 width: 160px;

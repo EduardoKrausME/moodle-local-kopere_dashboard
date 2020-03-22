@@ -928,7 +928,7 @@ if (typeof jQuery === 'undefined') {
                 .find('.modal-content')
                 .load(this.options.remote, $.proxy(function() {
                     this.$element.trigger('loaded.bs.modal');
-                    console.log(this.$element);
+                    //console.log(this.$element);
                 }, this))
         }
     }
@@ -1194,9 +1194,9 @@ if (typeof jQuery === 'undefined') {
             var data = null;//$this.data ( 'bs.modal' )
             var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
-            console.log(option);
-            console.log(options);
-            console.log(data);
+            // console.log(option);
+            // console.log(options);
+            // console.log(data);
 
             if (!data)
                 $this.data('bs.modal', (data = new Modal(this, options)))

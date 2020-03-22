@@ -38,8 +38,13 @@
     }
 }
 #block-region-side-post,
-#block-region-side-pre {
+#block-region-side-pre,
+[data-region=drawer] {
     @import "dashboard/css/main-menu";
+    .kopere-list-group-item {
+        margin-bottom: 16px;
+        padding: 0;
+    }
     .menu-kopere {
         .submenu-kopere {
             display: none;
@@ -92,3 +97,4 @@
         text-align: center;
     }
 }
+@import "dashboard/css/daterangepicker";

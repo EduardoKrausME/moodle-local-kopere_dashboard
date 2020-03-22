@@ -48,11 +48,22 @@ input {
         width: 142px;
     }
 }
+#region-main,
+.card,
+.card-body {
+    visibility: hidden;
+}
 .all-wrapper {
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 40px rgba(0, 0, 0, .1);
     max-width: 1500px;
     margin: 0 auto;
-    height: 100%;
+    position: fixed;
+    visibility: visible;
+    top: 9px;
+    left: 9px;
+    right: 9px;
+    bottom: 9px;
+    overflow: auto;
     .layout-w {
         display: table;
         table-layout: fixed;
@@ -84,7 +95,7 @@ input {
             }
         }
     }
-
+    
     .menu-and-user {
         .logged-user-w {
             text-align: center;
@@ -121,16 +132,16 @@ input {
             padding: 0.6rem 1.3rem;
         }
     }
-
+    
     @media (max-width: 1000px) {
         width: 250px;
     }
-
+    
     @media (max-width: 800px) {
         width: 90px;
         @import "menu-w-90";
     }
-
+    
     @media (max-width: 600px) {
         width: 45px !important;
         @import "menu-w-90";
@@ -154,7 +165,7 @@ body.menu-w-90 {
     display: table-cell;
     vertical-align: top;
     border-radius: 0 4px 4px 0;
-
+    
     .breadcrumb {
         list-style: none;
         border-radius: .25rem;
@@ -201,7 +212,7 @@ body.menu-w-90 {
             display: none;
         }
     }
-
+    
     .content-i {
         display: table;
         width: 100%;
@@ -209,7 +220,7 @@ body.menu-w-90 {
         .content-box {
             padding: 2rem;
             //display : table-cell;
-
+            
             .element-header {
                 border-bottom: 1px solid rgba(0, 0, 0, 0.05);
                 padding-bottom: 1rem;
@@ -243,7 +254,7 @@ body.menu-w-90 {
                 box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
                 font-family: 'Nunito', sans-serif;
                 font-weight: 400;
-
+                
                 h1, h2, h3, h4, h5, h6 {
                     margin-bottom: 1rem;
                     display: block;
@@ -258,15 +269,23 @@ body.menu-w-90 {
                     font-family: 'Nunito', sans-serif;
                     background: transparent;
                 }
-                .value a {
-                    letter-spacing: -1px;
-                    line-height: 1.2;
-                    display: inline-block;
-                    vertical-align: middle;
-                    font-size: 29px;
-                    font-weight: 400;
-                    color: #fff;
-                    font-family: 'Nunito', sans-serif;
+                .value {
+                    a, span {
+                        letter-spacing: -1px;
+                        line-height: 1.2;
+                        display: inline-block;
+                        vertical-align: middle;
+                        color: #fff;
+                        font-family: 'Nunito', sans-serif;
+                    }
+                    a {
+                        font-size: 29px;
+                        font-weight: 400;
+                    }
+                    span {
+                        font-size: 20px;
+                        font-weight: 700
+                    }
                 }
                 @media print {
                     margin-bottom: 0;
@@ -275,24 +294,37 @@ body.menu-w-90 {
                     background-color: #fff;
                     box-shadow: none;
                 }
-                &.color1 {
-                    border-color: #e24d4d;
+                &.color_user {
                     background: #e24d4d url(dashboard/img/dashboard/users.svg) no-repeat right bottom;
                     background-size: 60px;
                 }
-                &.color2 {
-                    border-color: #ffb74d;
+                &.color_online {
                     background: #ffb74d url(dashboard/img/dashboard/users-online.svg) no-repeat right bottom;
                     background-size: 60px;
                 }
-                &.color3 {
-                    border-color: #64b5f6;
+                &.color_course {
                     background: #64b5f6 url(dashboard/img/dashboard/course.svg) no-repeat right bottom;
                     background-size: 60px;
                 }
-                &.color4 {
-                    border-color: #81c784;
+                &.color_disk {
                     background: #81c784 url(dashboard/img/dashboard/data.svg) no-repeat right bottom;
+                    background-size: 60px;
+                }
+                
+                &.color_cpu {
+                    background: #a992e2 url(dashboard/img/dashboard/cpu.svg) no-repeat right bottom;
+                    background-size: 60px;
+                }
+                &.color_memory {
+                    background: #55badf url(dashboard/img/dashboard/memory.svg) no-repeat right bottom;
+                    background-size: 60px;
+                }
+                &.color_hd {
+                    background: #ec6f5a url(dashboard/img/dashboard/hd.svg) no-repeat right bottom;
+                    background-size: 60px;
+                }
+                &.color_performance {
+                    background: #f7c65f url(dashboard/img/dashboard/performance.svg) no-repeat right bottom;
                     background-size: 60px;
                 }
             }
@@ -419,7 +451,7 @@ body.menu-w-90 {
             }
         }
     }
-
+    
     @media (max-width: 800px) {
         .table {
             display: block;
@@ -499,6 +531,4 @@ body.menu-w-90 {
     }
 }
 @import "css_alert";
-@import "daterangepicker";
-
 //@import "bootstrap";

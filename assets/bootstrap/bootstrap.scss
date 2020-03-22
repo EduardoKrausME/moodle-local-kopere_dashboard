@@ -1772,7 +1772,7 @@ fieldset {
         color: #333;
         border: 0;
         padding: 0 6px;
-        width: auto;
+        width: 100%;
         //padding       : 0;
         //width         : 100%;
         //border-bottom : 1px solid #E5E5E5;
@@ -2882,7 +2882,7 @@ tbody.collapse.in {
     position: absolute;
     top: 100%;
     left: 0;
-    z-index: 1000;
+    z-index: 1060;
     display: none;
     float: left;
     min-width: 160px;
