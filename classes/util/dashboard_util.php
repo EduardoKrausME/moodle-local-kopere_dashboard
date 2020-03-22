@@ -261,8 +261,11 @@ class dashboard_util {
     private static function end_popup() {
         echo "</div>
               <script>
-                  startForm ( '.modal-content' );
+                  M.util.js_pending('local_kopere_dashboard/form_popup'); 
+                  require(['local_kopere_dashboard/form_popup'], function(amd) {amd.init(); 
+                  M.util.js_complete('local_kopere_dashboard/form_popup');})
               </script>";
+        // $PAGE->requires->js_call_amd('local_kopere_dashboard/form_popup', 'init');
 
         end_util::end_script_show();
     }

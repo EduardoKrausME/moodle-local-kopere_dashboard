@@ -187,7 +187,7 @@ class data_table {
             }
             echo '</tr>';
 
-            $this->columndefs[] = '{ visible : false, targets : -1 }';
+            $this->columndefs[] = (object)array("visible" => false, "targets" => -1);
         }
 
         echo '<tr class="' . $class . '">';
@@ -207,24 +207,24 @@ class data_table {
             }
             echo '</th>';
 
-            $this->columndata[] = '{ "data": "' . $column->chave . '" }';
+            $this->columndata[] = (object)array("data" => $column->chave);
 
             if ($column->type == table_header_item::TYPE_INT) {
-                $this->columndefs[] = '{ type: "numeric-comma", render: centerRenderer, targets: ' . $key . ' }';
+                $this->columndefs[] = (object)array("type" => "numeric-comma", "render" => "centerRenderer", "targets" => $key);
             } else if ($column->type == table_header_item::TYPE_CURRENCY) {
-                $this->columndefs[] = '{ type: "currency", render: currencyRenderer, targets: ' . $key . ' }';
+                $this->columndefs[] = (object)array("type" => "currency", "render" => "currencyRenderer", "targets" => $key);
             } else if ($column->type == table_header_item::TYPE_DATE) {
-                $this->columndefs[] = '{ type: "date-uk", targets: ' . $key . ' }';
+                $this->columndefs[] = (object)array("type" => "date-uk", "targets" => $key);
             } else if ($column->type == table_header_item::TYPE_BYTES) {
-                $this->columndefs[] = '{ type: "file-size", render: rendererFilesize, targets: ' . $key . ' }';
+                $this->columndefs[] = (object)array("type" => "file-size", "render" => "rendererFilesize", "targets" => $key);
             } else if ($column->type == table_header_item::RENDERER_DATE) {
-                $this->columndefs[] = '{ render: dataDatetimeRenderer, type: "date-uk", targets: ' . $key . ' }';
+                $this->columndefs[] = (object)array("type" => "date-uk", "render" => "dataDatetimeRenderer", "targets" => $key);
             } else if ($column->type == table_header_item::RENDERER_VISIBLE) {
-                $this->columndefs[] = '{ render: dataVisibleRenderer, targets: ' . $key . ' }';
+                $this->columndefs[] = (object)array("render" => "dataVisibleRenderer", "targets" => $key);
             } else if ($column->type == table_header_item::RENDERER_STATUS) {
-                $this->columndefs[] = '{ render: dataStatusRenderer, targets: ' . $key . ' }';
+                $this->columndefs[] = (object)array("render" => "dataStatusRenderer", "targets" => $key);
             } else if ($column->type == table_header_item::RENDERER_TRUEFALSE) {
-                $this->columndefs[] = '{ render: dataTrueFalseRenderer, targets: ' . $key . ' }';
+                $this->columndefs[] = (object)array("render" => "dataTrueFalseRenderer", "targets" => $key);
             }
         }
         echo '</tr>';
@@ -298,46 +298,35 @@ class data_table {
      *
      * @return string
      */
-    public function close($processserver = false, $order = '', $extras = '') {
+    public function close($processserver = false, $extras = null) {
+        global $PAGE;
+
         echo '</table>';
 
         export::close();
 
-        $processserverhtml = '';
+        $init_params = array(
+            "autoWidth" => false,
+            "columns" => $this->columndata,
+            "columnDefs" => $this->columndefs
+        );
+        if ($extras) {
+            $init_params = array_merge($init_params, $extras);
+        }
+
         if ($processserver) {
-            $processserverhtml = ', "processing": true, "serverSide": true';
+            $init_params['processing'] = true;
+            $init_params['serverSide'] = true;
         }
 
-        if (isset($order[1])) {
-            $order = ',' . $order;
-        }
-        if (isset($extras[1])) {
-            $extras = ',' . $extras;
-        }
-
-        $ajaxconfig = '';
         if ($this->ajaxurl) {
-            $ajaxconfig = 'ajax : {url:"load-ajax.php' . $this->ajaxurl . '",type: "POST"},';
+            $init_params['ajax'] = (object)[
+                "url" => "load-ajax.php{$this->ajaxurl}",
+                "type" => "POST"
+            ];
         }
 
-        $columndata = implode(", ", $this->columndata);
-        $columndefs = implode(", ", $this->columndefs);
-        echo "<script>
-                  {$this->tableid} = null;
-                  \$(document).ready( function() {
-                      {$this->tableid} = \$( '#{$this->tableid}' ).DataTable({
-                          oLanguage   : dataTables_oLanguage,
-                          {$ajaxconfig}
-                          autoWidth  : false,
-                          columns    : [ {$columndata} ],
-                          columnDefs : [ {$columndefs} ]
-                          {$processserverhtml}
-                          {$extras}
-                          {$order}
-                      });
-                  });
-
-              </script>";
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', array($this->tableid, $init_params));
 
         if ($this->clickredirect) {
             $this->on_clickreditect();
@@ -346,11 +335,11 @@ class data_table {
         return $this->tableid;
     }
 
-
     /**
      *
      */
     private function on_clickreditect() {
+        global $PAGE;
 
         $clickurl = $this->clickredirect['url'];
         $clickchave = $this->clickredirect['chave'];
@@ -358,21 +347,7 @@ class data_table {
         if (is_string($clickchave)) {
             $clickchave = [$clickchave];
         }
-        $clickchave = json_encode($clickchave);
 
-        echo "<script>
-                  \$(document).ready( function() {
-                      \$( '#{$this->tableid} tbody' ).on( 'click', 'tr', function () {
-                          var data       = {$this->tableid}.row( this ).data ();
-                          var clickUrl   = '{$clickurl}';
-                          var clickchave = $clickchave;
-                          $.each(clickchave, function(id, chave){
-                              clickUrl = clickUrl.replace( '{'+chave+'}', data[ chave ] );
-                          });
-
-                          location.href = clickUrl;
-                      } );
-                  });
-              </script>";
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'click', array($this->tableid, $clickchave, $clickurl));
     }
 }

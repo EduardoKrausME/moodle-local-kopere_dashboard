@@ -4,7 +4,9 @@
  Licensed under the MIT license (http://digitalbush.com/projects/masked-input-plugin/#license)
  Version: 1.3.1
  */
-(function ($) {
+define([
+    "jquery"
+], function($, daterangepicker, validator) {
     function getPasteEvent() {
         var el   = document.createElement('input'),
             name = 'onpaste';
@@ -31,7 +33,7 @@
 
     $.fn.extend({
         //Helper Function for Caret positioning
-        caret  : function (begin, end) {
+        caret  : function(begin, end) {
             var range;
 
             if (this.length === 0 || this.is(":hidden")) {
@@ -40,7 +42,7 @@
 
             if (typeof begin == 'number') {
                 end = (typeof end === 'number') ? end : begin;
-                return this.each(function () {
+                return this.each(function() {
                     if (this.setSelectionRange) {
                         this.setSelectionRange(begin, end);
                     } else if (this.createTextRange) {
@@ -63,10 +65,10 @@
                 return {begin : begin, end : end};
             }
         },
-        unmask : function () {
+        unmask : function() {
             return this.trigger("unmask");
         },
-        mask   : function (mask, settings) {
+        mask   : function(mask, settings) {
             var input,
                 defs,
                 tests,
@@ -89,7 +91,7 @@
             partialPosition = len = mask.length;
             firstNonMaskPos = null;
 
-            $.each(mask.split(""), function (i, c) {
+            $.each(mask.split(""), function(i, c) {
                 if (c == '?') {
                     len--;
                     partialPosition = i;
@@ -103,11 +105,11 @@
                 }
             });
 
-            return this.trigger("unmask").each(function () {
+            return this.trigger("unmask").each(function() {
                 var input     = $(this),
                     buffer    = $.map(
                         mask.split(""),
-                        function (c, i) {
+                        function(c, i) {
                             if (c != '?') {
                                 return defs[c] ? settings.placeholder : c;
                             }
@@ -286,20 +288,20 @@
                     return (partialPosition ? i : firstNonMaskPos);
                 }
 
-                input.data($.mask.dataName, function () {
-                    return $.map(buffer, function (c, i) {
+                input.data($.mask.dataName, function() {
+                    return $.map(buffer, function(c, i) {
                         return tests[i] && c != settings.placeholder ? c : null;
                     }).join('');
                 });
 
                 if (!input.attr("readonly"))
                     input
-                        .one("unmask", function () {
+                        .one("unmask", function() {
                             input
                                 .unbind(".mask")
                                 .removeData($.mask.dataName);
                         })
-                        .bind("focus.mask", function () {
+                        .bind("focus.mask", function() {
                             clearTimeout(caretTimeoutId);
                             var pos,
                                 moveCaret;
@@ -307,7 +309,7 @@
                             focusText = input.val();
                             pos = checkVal();
 
-                            caretTimeoutId = setTimeout(function () {
+                            caretTimeoutId = setTimeout(function() {
                                 writeBuffer();
                                 if (pos == mask.length) {
                                     input.caret(0, pos);
@@ -316,15 +318,15 @@
                                 }
                             }, 10);
                         })
-                        .bind("blur.mask", function () {
+                        .bind("blur.mask", function() {
                             checkVal();
                             if (input.val() != focusText)
                                 input.change();
                         })
                         .bind("keydown.mask", keydownEvent)
                         .bind("keypress.mask", keypressEvent)
-                        .bind(pasteEventName, function () {
-                            setTimeout(function () {
+                        .bind(pasteEventName, function() {
+                            setTimeout(function() {
                                 var pos = checkVal(true);
                                 input.caret(pos);
                                 if (settings.completed && pos == input.val().length)
@@ -336,33 +338,31 @@
         }
     });
 
-
-})(jQuery);
-
-function mackInputs() {
-    jQuery("input.mask_phone").mask("(99) 9999-9999");
-    jQuery("input.mask_celphone").mask("(99) 9 9999-9999");
-    jQuery("input.mask_cep").mask("99999-999");
-    jQuery("input.mask_cpf,input.val_cpf").mask("999.999.999-99");
-    jQuery("input.mask_cnpj").mask("99.999.999/9999-99");
-    jQuery("input.mask_datahora").mask("99/99/9999 99:99");
-    jQuery("input.mask_data").mask("99/99/9999");
-    jQuery("input.mask_relatorioData").mask("9999-99");
-    jQuery("input.mask_int").keyup(function () {
-        var text = jQuery(this).val();
-        jQuery(this).val(text.replace(/[^\d]/, ""));
+    // mackInputs()
+    $("input.mask_phone").mask("(99) 9999-9999");
+    $("input.mask_celphone").mask("(99) 9 9999-9999");
+    $("input.mask_cep").mask("99999-999");
+    $("input.mask_cpf,input.val_cpf").mask("999.999.999-99");
+    $("input.mask_cnpj").mask("99.999.999/9999-99");
+    $("input.mask_datahora").mask("99/99/9999 99:99");
+    $("input.mask_data").mask("99/99/9999");
+    $("input.mask_relatorioData").mask("9999-99");
+    $("input.mask_int").keyup(function() {
+        var text = $(this).val();
+        $(this).val(text.replace(/[^\d]/, ""));
     });
-    jQuery("input.mask_float").keyup(function () {
-        var text = jQuery(this).val();
-        jQuery(this).val(text.replace(/[^\d,]/, ""));
+    $("input.mask_float").keyup(function() {
+        var text = $(this).val();
+        $(this).val(text.replace(/[^\d,]/, ""));
     });
-    jQuery("input.mask_valor").keyup(function () {
-        var text = jQuery(this).val();
+    $("input.mask_valor").keyup(function() {
+        var text = $(this).val();
         text = text.replace(/[^\d]/, "");
         text = parseInt(text).toString();
         if (text == "NaN")
             text = "";
         text = text.substr(0, text.length - 2) + "," + text.substr(text.length - 2, text.length);
-        jQuery(this).val(text);
+        $(this).val(text);
     });
-}
+
+});

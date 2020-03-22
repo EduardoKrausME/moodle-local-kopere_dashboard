@@ -25,10 +25,21 @@ ob_start();
 define('AJAX_SCRIPT', false);
 define('OPEN_INTERNAL', true);
 
+$CFG->useexternalyui = false;
+$CFG->yuicomboloading = false;
+$CFG->cachejs = false;
+$CFG->themedesignermode = true;
+
 define('BENCHSTART', microtime(true));
 require('../../config.php');
 define('BENCHSTOP', microtime(true));
 require('autoload.php');
+
+if ($CFG->kopere_dashboard_open != 'internal') {
+    $urlinternal = "{$CFG->wwwroot}/local/kopere_dashboard/open.php?" . clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
+    @header("Location: {$urlinternal}");
+    echo "<meta http-equiv=\"refresh\" content=\"0; url={$urlinternal}\">";
+}
 
 global $PAGE, $CFG, $OUTPUT;
 
@@ -48,12 +59,19 @@ $PAGE->set_heading(get_string_kopere('modulename'));
 $PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
 $PAGE->requires->css('/local/kopere_dashboard/assets/all-internal.css');
 
-$PAGE->navbar->add(get_string_kopere('modulename'), new moodle_url('local/kopere_dashboard/open-internal.php'));
+$PAGE->navbar->add(get_string_kopere('modulename'), new moodle_url('/local/kopere_dashboard/open-internal.php'));
 
 load_class();
 $htmlApp = ob_get_contents();
 ob_clean();
 
+$PAGE->requires->jquery();
+$PAGE->requires->js('/local/kopere_dashboard/assets/bootstrap/bootstrap.js');
+
+$PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
+
+echo $OUTPUT->header();
+echo "<link rel=\"icon\" href=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/favicon.png\"/>";
 ?>
     <script>
         lang_yes = '<?php echo get_string('yes') ?>';
@@ -87,53 +105,6 @@ ob_clean();
         }
     </script>
 <?php
-
-$PAGE->requires->jquery();
-
-$PAGE->requires->js('/local/kopere_dashboard/assets/bootstrap/bootstrap.min.js');
-
-$PAGE->requires->js('/local/kopere_dashboard/assets/dataTables/jquery.dataTables.min.js');
-$PAGE->requires->js('/local/kopere_dashboard/assets/dataTables/sorting-numeric-comma.min.js');
-$PAGE->requires->js('/local/kopere_dashboard/assets/dataTables/sorting-currency.min.js');
-$PAGE->requires->js('/local/kopere_dashboard/assets/dataTables/sorting-date-uk.min.js');
-$PAGE->requires->js('/local/kopere_dashboard/assets/dataTables/sorting-file-size.min.js');
-$PAGE->requires->js('/local/kopere_dashboard/assets/dataTables/renderer-kopere-v2.min.js');
-
-$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/moment.min.js');
-$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/daterangepicker.min.js');
-$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/select2.full.min.js');
-$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/validator.min.js');
-
-$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/jquery.maskedinput.min.js');
-$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/jquery.validate-v1.15.0.min.js');
-
-$PAGE->requires->js('/local/kopere_dashboard/assets/dashboard/js/custom.min.js');
-
-
-echo $OUTPUT->header();
-
-if (get_config('local_kopere_dashboard', 'nodejs-status')) {
-    echo "<script src=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js\"></script>
-          <script src=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v2.min.js\"></script>";
-
-    if (get_config('local_kopere_dashboard', 'nodejs-ssl')) {
-        $url = "https://" . get_config('local_kopere_dashboard', 'nodejs-url') . ':' .
-            get_config('local_kopere_dashboard', 'nodejs-port');
-    } else {
-        $url = get_config('local_kopere_dashboard', 'nodejs-url') . ':' .
-            get_config('local_kopere_dashboard', 'nodejs-port');
-    }
-
-    $userid = intval($USER->id);
-    $fullname = '"' . fullname($USER) . '"';
-    $servertime = time();
-    $urlnode = '"' . $url . '"';
-
-    echo "<script type=\"text/javascript\">
-              startServer ( $userid, $fullname, $servertime, $urlnode, 'z35admin' );
-          </script>";
-}
-echo "<link rel=\"icon\" href=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/favicon.png\"/>";
 
 $dashboard_menu_html_boost = \local_kopere_dashboard\output\menu::create_menu();
 $dashboard_menu_html_boost = str_replace("'", '"', $dashboard_menu_html_boost);
@@ -170,14 +141,44 @@ echo "<div id='kopere_dashboard_div'>
         </div>
     </div>";
 
+
+if (\local_kopere_dashboard\util\node::is_enables()) {
+    echo "<script src=\"" . \local_kopere_dashboard\util\node::geturl_socketio() . "\"></script>";
+    $PAGE->requires->js("/local/kopere_dashboard/node/app-v2.js");
+
+    $userid = intval($USER->id);
+    $fullname = fullname($USER);
+    $servertime = time();
+    $urlnode = \local_kopere_dashboard\util\node::base_url();
+
+    $PAGE->requires->js_init_call("startServer", array($userid, $fullname, $servertime, $urlnode, 'z35admin'));
+    //    echo "<script type=\"text/javascript\">
+    //              startServer ( {$userid}, \"{$fullname}\", {$servertime}, \"{$urlnode}\", 'z35admin' );
+    //          </script>";
+
+    $form = new \local_kopere_dashboard\html\form();
+    $form->create_hidden_input('userid', $userid);
+    $form->create_hidden_input('fullname', $fullname);
+    $form->create_hidden_input('servertime', $servertime);
+    $form->create_hidden_input('urlnode', $urlnode);
+
+}
+
+
 echo $OUTPUT->footer();
 
 $html = ob_get_contents();
 ob_clean();
+$dashboard_menu_html_old .= "<style>.dashboard_menu_html-content{display:none !important}</style>";
 if (strpos($html, 'role="navigation"')) {
-    $dashboard_menu_html_old .= "<style>.dashboard_menu_html-content{display:none !important}</style>";
     $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html_old}$2", $html);
 }
+
+if (strpos($html, 'data-region="drawer"')) {
+    $classdiv = " class='list-group-item kopere-list-group-item' ";
+    $html = preg_replace('/(.*data-region="drawer".*?>)(.*)/', "$1<div{$classdiv}>{$dashboard_menu_html_old}</div>$2", $html);
+}
+
 
 //$html = preg_replace('/(.*kopere_dashboard_modal_item.*?)(<script.*script>)/s', '$1', $html);
 echo $html;

@@ -6,10 +6,10 @@
  * @website: http://www.daterangepicker.com/
  */
 // Follow the UMD template https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js
-(function (root, factory) {
+(function(root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Make globaly available as well
-        define(['moment', 'jquery'], function (moment, jquery) {
+        define(['local_kopere_dashboard/moment', 'jquery'], function(moment, jquery) {
             return (root.daterangepicker = factory(moment, jquery));
         });
     } else if (typeof module === 'object' && module.exports) {
@@ -26,7 +26,7 @@
         // Browser globals
         root.daterangepicker = factory(root.moment, root.jQuery);
     }
-}(this, function (moment, $) {
+}(this, function(moment, $) {
     var DateRangePicker = function (element, options, cb) {
 
         //default settings for options
@@ -95,35 +95,36 @@
 
         //html template for the picker UI
         if (typeof options.template !== 'string' && !(options.template instanceof $))
-            options.template = '<div class="daterangepicker dropdown-menu">' +
-                '<div class="calendar left">' +
-                '<div class="daterangepicker_input">' +
-                '<input class="input-mini form-control" type="text" name="daterangepicker_start" value="" />' +
-                '<i class="fa fa-calendar glyphicon glyphicon-calendar"></i>' +
-                '<div class="calendar-time">' +
-                '<div></div>' +
-                '<i class="fa fa-clock-o glyphicon glyphicon-time"></i>' +
-                '</div>' +
-                '</div>' +
-                '<div class="calendar-table"></div>' +
-                '</div>' +
-                '<div class="calendar right">' +
-                '<div class="daterangepicker_input">' +
-                '<input class="input-mini form-control" type="text" name="daterangepicker_end" value="" />' +
-                '<i class="fa fa-calendar glyphicon glyphicon-calendar"></i>' +
-                '<div class="calendar-time">' +
-                '<div></div>' +
-                '<i class="fa fa-clock-o glyphicon glyphicon-time"></i>' +
-                '</div>' +
-                '</div>' +
-                '<div class="calendar-table"></div>' +
-                '</div>' +
-                '<div class="ranges">' +
-                '<div class="range_inputs">' +
-                '<button class="applyBtn" disabled="disabled" type="button"></button> ' +
-                '<button class="cancelBtn" type="button"></button>' +
-                '</div>' +
-                '</div>' +
+            options.template =
+                '<div class="daterangepicker dropdown-menu">' +
+                '    <div class="calendar left">' +
+                '        <div class="daterangepicker_input">' +
+                '           <input class="input-mini form-control" type="text" name="daterangepicker_start" value="" />' +
+                '            <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>' +
+                '            <div class="calendar-time">' +
+                '               <div></div>' +
+                '               <i class="fa fa-clock-o glyphicon glyphicon-time"></i>' +
+                '               </div>' +
+                '           </div>' +
+                '        <div class="calendar-table"></div>' +
+                '    </div>' +
+                '    <div class="calendar right">' +
+                '       <div class="daterangepicker_input">' +
+                '           <input class="input-mini form-control" type="text" name="daterangepicker_end" value="" />' +
+                '           <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>' +
+                '           <div class="calendar-time">' +
+                '               <div></div>' +
+                '               <i class="fa fa-clock-o glyphicon glyphicon-time"></i>' +
+                '           </div>' +
+                '       </div>' +
+                '       <div class="calendar-table"></div>' +
+                '   </div>' +
+                '   <div class="ranges">' +
+                '       <div class="range_inputs">' +
+                '           <button class="applyBtn" disabled="disabled" type="button"></button> ' +
+                '           <button class="cancelBtn" type="button"></button>' +
+                '       </div>' +
+                '   </div>' +
                 '</div>';
 
         this.parentEl = (options.parentEl && $(options.parentEl).length) ? $(options.parentEl) : $(this.parentEl);

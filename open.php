@@ -43,7 +43,8 @@ $PAGE->set_heading(get_string_kopere('open_dashboard'));
 
 $PAGE->requires->jquery();
 $PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
-$PAGE->requires->js('/local/kopere_dashboard/assets/popup.js');
+//$PAGE->requires->js('/local/kopere_dashboard/assets/popup.js');
+$PAGE->requires->js_call_amd('local_kopere_dashboard/popup', 'init');
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string_kopere('open_dashboard'));
@@ -51,33 +52,26 @@ echo $OUTPUT->heading(get_string_kopere('open_dashboard'));
 $classname = optional_param('classname', 'dashboard', PARAM_TEXT);
 $method = optional_param('method', 'start', PARAM_TEXT);
 
-$url = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?classname={$classname}&method={$method}";
 
+$url = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?" . clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
 if ($CFG->kopere_dashboard_open == 'internal') {
-
-    $urlinternal = "{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?classname={$classname}&method={$method}";
-
+    $urlinternal = "{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?" . clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
     @header("Location: {$urlinternal}");
     echo "<meta http-equiv=\"refresh\" content=\"0; url={$urlinternal}\">";
-
 } else if ($CFG->kopere_dashboard_open == '_blank') { ?>
-
     <div class="text-center kopere-dashboard" style="text-align: center;">
         <a type="button" target="_blank"
            class="dashboard-load-blank btn btn-lg btn-primary"
            href="<?php echo $url ?>"
            id="open-startup-blank"><?php echo get_string_kopere('open_dashboard') ?></a>
     </div>
-
     <script>
         window.open("<?php echo $url ?>", "_blank");
     </script>
     <?php
-
 } elseif ($CFG->kopere_dashboard_open == '_top') {
     @header("Location: {$url}");
     ?>
-
     <div class="text-center kopere-dashboard" style="text-align: center;">
         <a type="button"
            class="dashboard-load-top btn btn-lg btn-primary"
@@ -87,9 +81,7 @@ if ($CFG->kopere_dashboard_open == 'internal') {
 
     <meta http-equiv="refresh" content="0; url=<?php echo $url ?>">
     <?php
-
-} else { ?>
-
+} else { // popup ?>
     <div class="text-center kopere-dashboard" style="text-align: center;">
         <a type="button"
            class="dashboard-load-popup btn btn-lg btn-primary"
@@ -107,7 +99,6 @@ if ($CFG->kopere_dashboard_open == 'internal') {
         </div>
     <div class="ui-widget-overlay"></div>
     </div><?php
-
 }
 
 echo $OUTPUT->footer();

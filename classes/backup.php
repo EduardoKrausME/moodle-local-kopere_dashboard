@@ -94,7 +94,7 @@ class backup {
                 $table->add_header(get_string_kopere('backup_list_action'), 'acoes');
 
                 $table->set_row($backupslista);
-                $table->close(true, 'order:[[1,"DESC"]]');
+                $table->close(true, array("order" => array(array(1, "desc"))));
             } else {
                 mensagem::print_warning(get_string_kopere('backup_none'));
             }

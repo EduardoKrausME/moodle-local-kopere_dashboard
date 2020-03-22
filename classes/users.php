@@ -58,7 +58,7 @@ class users {
         $table->set_ajax_url('?classname=users&method=load_all_users');
         $table->set_click_redirect('?classname=users&method=details&userid={id}', 'id');
         $table->print_header();
-        $table->close(true, 'order:[[1,"asc"]]');
+        $table->close(true, array("order" => array(array(1, "asc"))));
 
         echo '</div>';
         dashboard_util::end_page();

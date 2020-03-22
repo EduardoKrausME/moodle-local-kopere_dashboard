@@ -189,7 +189,8 @@ class reports {
                 $table = new data_table($columns->columns, $columns->header);
                 $table->set_ajax_url('?classname=reports&method=getdata&report=' . $report . '&courseid=' . $courseid);
                 $table->print_header();
-                $table->close(true, '', '"searching":false,"ordering":false');
+                $table->close(true,
+                    array("searching" => false, "ordering" => false));
 
                 button::primary(get_string_kopere('reports_download'),
                     "?classname=reports&method=download&report={$report}&courseid={$courseid}");

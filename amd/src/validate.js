@@ -1,7 +1,7 @@
 /**
  * jQuery Validation Plugin v1.15.0
  *
- * http://jqueryvalidation.org/
+ * http: //jqueryvalidation.org/
  *
  * Copyright (c) 2016 Jörn Zaefferer
  * Released under the MIT license
@@ -18,7 +18,7 @@
 
     $.extend($.fn, {
 
-        // http://jqueryvalidation.org/validate/
+        // http: //jqueryvalidation.org/validate/
         validate : function(options) {
 
             // If nothing is selected, return nothing; can't chain anyway
@@ -113,7 +113,7 @@
             return validator;
         },
 
-        // http://jqueryvalidation.org/valid/
+        // http: //jqueryvalidation.org/valid/
         valid : function() {
             var valid, validator, errorList;
 
@@ -134,7 +134,7 @@
             return valid;
         },
 
-        // http://jqueryvalidation.org/rules/
+        // http: //jqueryvalidation.org/rules/
         rules : function(command, argument) {
 
             // If nothing is selected, return nothing; can't chain anyway
@@ -205,34 +205,34 @@
         }
     });
 
-// Custom selectors
+    // Custom selectors
     $.extend($.expr[":"], {
 
-        // http://jqueryvalidation.org/blank-selector/
+        // http: //jqueryvalidation.org/blank-selector/
         blank : function(a) {
             return !$.trim("" + $(a).val());
         },
 
-        // http://jqueryvalidation.org/filled-selector/
+        // http: //jqueryvalidation.org/filled-selector/
         filled : function(a) {
             var val = $(a).val();
             return val !== null && !!$.trim("" + val);
         },
 
-        // http://jqueryvalidation.org/unchecked-selector/
+        // http: //jqueryvalidation.org/unchecked-selector/
         unchecked : function(a) {
             return !$(a).prop("checked");
         }
     });
 
-// Constructor for validator
+    // Constructor for validator
     $.validator = function(options, form) {
         this.settings = $.extend(true, {}, $.validator.defaults, options);
         this.currentForm = form;
         this.init();
     };
 
-// http://jqueryvalidation.org/jQuery.validator.format/
+    // http: //jqueryvalidation.org/jQuery.validator.format/
     $.validator.format = function(source, params) {
         if (arguments.length === 1) {
             return function() {
@@ -345,7 +345,7 @@
             }
         },
 
-        // http://jqueryvalidation.org/jQuery.validator.setDefaults/
+        // http: //jqueryvalidation.org/jQuery.validator.setDefaults/
         setDefaults : function(settings) {
             $.extend($.validator.defaults, settings);
         },
@@ -354,7 +354,7 @@
             required    : "Este campo é obrigatório",
             remote      : "Por favor, corrija este campo.",
             email       : "Por favor insira um email válido.",
-            url         : "Por favor, digite uma URL válida. Uma URL começa com HTTP:// seguido do domínio.",
+            url         : "Por favor, digite uma URL válida. Uma URL começa com HTTP: // seguido do domínio.",
             date        : "Por favor insira uma data válida.",
             dateISO     : "Please enter a valid date (ISO).",
             number      : "Por favor insira um número válido.",
@@ -426,11 +426,11 @@
                 }
 
                 // Add aria-required to any Static/Data/Class required fields before first validation
-                // Screen readers require this attribute to be present before the initial submission http://www.w3.org/TR/WCAG-TECHS/ARIA2.html
+                // Screen readers require this attribute to be present before the initial submission http: //www.w3.org/TR/WCAG-TECHS/ARIA2.html
                 $(this.currentForm).find("[required], [data-rule-required], .required").attr("aria-required", "true");
             },
 
-            // http://jqueryvalidation.org/Validator.form/
+            // http: //jqueryvalidation.org/Validator.form/
             form : function() {
                 this.checkForm();
                 $.extend(this.submitted, this.errorMap);
@@ -450,7 +450,7 @@
                 return this.valid();
             },
 
-            // http://jqueryvalidation.org/Validator.element/
+            // http: //jqueryvalidation.org/Validator.element/
             element : function(element) {
                 var cleanElement = this.clean(element),
                     checkElement = this.validationTargetFor(cleanElement),
@@ -501,7 +501,7 @@
                 return result;
             },
 
-            // http://jqueryvalidation.org/Validator.showErrors/
+            // http: //jqueryvalidation.org/Validator.showErrors/
             showErrors : function(errors) {
                 if (errors) {
                     var validator = this;
@@ -527,7 +527,7 @@
                 }
             },
 
-            // http://jqueryvalidation.org/Validator.resetForm/
+            // http: //jqueryvalidation.org/Validator.resetForm/
             resetForm : function() {
                 if ($.fn.resetForm) {
                     $(this.currentForm).resetForm();
@@ -625,7 +625,7 @@
                     .not(":submit, :reset, :image, :disabled")
                     .not(this.settings.ignore)
                     .filter(function() {
-                        var name = this.name || $(this).attr("name"); // For contenteditable
+                        var name = this.name || $(this).attr("name");  // For contenteditable
                         if (!name && validator.settings.debug && window.console) {
                             console.error("%o has no name assigned", this);
                         }
@@ -992,7 +992,7 @@
                     .filter(selector);
             },
 
-            // See https://api.jquery.com/category/selectors/, for CSS
+            // See https: //api.jquery.com/category/selectors/, for CSS
             // meta-characters that should be escaped in order to be used with JQuery
             // as a literal part of a name/id or any selector.
             escapeCssMeta : function(string) {
@@ -1299,7 +1299,7 @@
             return data;
         },
 
-        // http://jqueryvalidation.org/jQuery.validator.addMethod/
+        // http: //jqueryvalidation.org/jQuery.validator.addMethod/
         addMethod : function(name, method, message) {
             $.validator.methods[name] = method;
             $.validator.messages[name] = message !== undefined ? message : $.validator.messages[name];
@@ -1308,10 +1308,10 @@
             }
         },
 
-        // http://jqueryvalidation.org/jQuery.validator.methods/
+        // http: //jqueryvalidation.org/jQuery.validator.methods/
         methods : {
 
-            // http://jqueryvalidation.org/required-method/
+            // http: //jqueryvalidation.org/required-method/
             required : function(value, element, param) {
 
                 // Check if dependency is met
@@ -1330,80 +1330,80 @@
                 return value.length > 0;
             },
 
-            // http://jqueryvalidation.org/email-method/
+            // http: //jqueryvalidation.org/email-method/
             email : function(value, element) {
 
-                // From https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address
+                // From https: //html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address
                 // Retrieved 2014-01-14
                 // If you have a problem with this implementation, report a bug against the above spec
                 // Or use custom methods to implement your own email validation
                 return this.optional(element) || /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value);
             },
 
-            // http://jqueryvalidation.org/url-method/
+            // http: //jqueryvalidation.org/url-method/
             url : function(value, element) {
 
                 // Copyright (c) 2010-2013 Diego Perini, MIT licensed
-                // https://gist.github.com/dperini/729294
-                // see also https://mathiasbynens.be/demo/url-regex
+                // https: //gist.github.com/dperini/729294
+                // see also https: //mathiasbynens.be/demo/url-regex
                 // modified to allow protocol-relative URLs
                 return this.optional(element) || /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value);
             },
 
-            // http://jqueryvalidation.org/date-method/
+            // http: //jqueryvalidation.org/date-method/
             date : function(value, element) {
                 return this.optional(element) || !/Invalid|NaN/.test(new Date(value).toString());
             },
 
-            // http://jqueryvalidation.org/dateISO-method/
+            // http: //jqueryvalidation.org/dateISO-method/
             dateISO : function(value, element) {
                 return this.optional(element) || /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(value);
             },
 
-            // http://jqueryvalidation.org/number-method/
+            // http: //jqueryvalidation.org/number-method/
             number : function(value, element) {
                 return this.optional(element) || /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(value);
             },
 
-            // http://jqueryvalidation.org/digits-method/
+            // http: //jqueryvalidation.org/digits-method/
             digits : function(value, element) {
                 return this.optional(element) || /^\d+$/.test(value);
             },
 
-            // http://jqueryvalidation.org/minlength-method/
+            // http: //jqueryvalidation.org/minlength-method/
             minlength : function(value, element, param) {
                 var length = $.isArray(value) ? value.length : this.getLength(value, element);
                 return this.optional(element) || length >= param;
             },
 
-            // http://jqueryvalidation.org/maxlength-method/
+            // http: //jqueryvalidation.org/maxlength-method/
             maxlength : function(value, element, param) {
                 var length = $.isArray(value) ? value.length : this.getLength(value, element);
                 return this.optional(element) || length <= param;
             },
 
-            // http://jqueryvalidation.org/rangelength-method/
+            // http: //jqueryvalidation.org/rangelength-method/
             rangelength : function(value, element, param) {
                 var length = $.isArray(value) ? value.length : this.getLength(value, element);
                 return this.optional(element) || (length >= param[0] && length <= param[1]);
             },
 
-            // http://jqueryvalidation.org/min-method/
+            // http: //jqueryvalidation.org/min-method/
             min : function(value, element, param) {
                 return this.optional(element) || value >= param;
             },
 
-            // http://jqueryvalidation.org/max-method/
+            // http: //jqueryvalidation.org/max-method/
             max : function(value, element, param) {
                 return this.optional(element) || value <= param;
             },
 
-            // http://jqueryvalidation.org/range-method/
+            // http: //jqueryvalidation.org/range-method/
             range : function(value, element, param) {
                 return this.optional(element) || (value >= param[0] && value <= param[1]);
             },
 
-            // http://jqueryvalidation.org/step-method/
+            // http: //jqueryvalidation.org/step-method/
             step : function(value, element, param) {
                 var type           = $(element).attr("type"),
                     errorMessage   = "Step attribute on input type " + type + " is not supported.",
@@ -1419,7 +1419,7 @@
                 return this.optional(element) || (value % param === 0);
             },
 
-            // http://jqueryvalidation.org/equalTo-method/
+            // http: //jqueryvalidation.org/equalTo-method/
             equalTo : function(value, element, param) {
 
                 // Bind to the blur event of the target in order to revalidate whenever the target field is updated
@@ -1432,7 +1432,7 @@
                 return value === target.val();
             },
 
-            // http://jqueryvalidation.org/remote-method/
+            // http: //jqueryvalidation.org/remote-method/
             remote : function(value, element, param, method) {
                 if (this.optional(element)) {
                     return "dependency-mismatch";
@@ -1499,14 +1499,14 @@
 
     });
 
-// Ajax mode: abort
-// usage: $.ajax({ mode: "abort"[, port: "uniqueport"]});
-// if mode:"abort" is used, the previous request on that port (port can be undefined) is aborted via XMLHttpRequest.abort()
+    // Ajax mode: abort
+    // usage: $.ajax({ mode: "abort"[, port: "uniqueport"]});
+    // if mode:"abort" is used, the previous request on that port (port can be undefined) is aborted via XMLHttpRequest.abort()
 
     var pendingRequests = {},
         ajax;
 
-// Use a prefilter if available (1.5+)
+    // Use a prefilter if available (1.5+)
     if ($.ajaxPrefilter) {
         $.ajaxPrefilter(function(settings, _, xhr) {
             var port = settings.port;
@@ -1535,141 +1535,141 @@
         };
     }
 
-}));
-
-
-function loadValidateAll() {
-    jQuery("form.validate").validate({
-        invalidHandler : function(e, validator) {
-            var errors = validator.numberOfInvalids();
-            if (errors) {
-                var message = 'você tem ' + errors + ' items obrigatórios.';
-                if (errors == 1) {
-                    message = 'você tem um item obrigatório.';
+    function loadValidateAll() {
+        $("form.validate").validate({
+            invalidHandler : function(e, validator) {
+                var errors = validator.numberOfInvalids();
+                if (errors) {
+                    var message = 'você tem ' + errors + ' items obrigatórios.';
+                    if (errors == 1) {
+                        message = 'você tem um item obrigatório.';
+                    }
+                    $("div.displayErroForm span").html(message);
+                    $("div.displayErroForm").show();
+                } else {
+                    $("div.displayErroForm").hide();
                 }
-                jQuery("div.displayErroForm span").html(message);
-                jQuery("div.displayErroForm").show();
-            } else {
-                jQuery("div.displayErroForm").hide();
             }
-        }
-    });
+        });
 
 
-    jQuery.validator.addMethod("phoneVal", function(value, element) {
-        if (jQuery(element).hasClass('required')) {
-            return value.match(/^\([1-9]{2}\)\ [0-9]{4}\-[0-9]{4}$/);
-        }
-        return true;
-
-    }, "Telefone em formáto inválido!");
-    jQuery.validator.classRuleSettings.val_phone = {phoneVal : true};
-
-
-    jQuery.validator.addMethod("celphoneVal", function(value, element) {
-        if (jQuery(element).hasClass('required')) {
-            return value.match(/^\([1-9]{2}\)\ 9\ [0-9]{4}\-[0-9]{4}$/);
-        }
-        return true;
-
-    }, "Celular em formáto inválido!");
-    jQuery.validator.classRuleSettings.val_celphone = {celphoneVal : true};
-
-
-    jQuery.validator.addMethod("cepVal", function(value, element) {
-        if (jQuery(element).hasClass('required')) {
-            return value.match(/^[0-9]{5}\-[0-9]{3}$/);
-        }
-        return true;
-    }, "CEP em formáto inválido! Somente aceito formato 99999-999");
-    jQuery.validator.classRuleSettings.val_cep = {cepVal : true};
-
-
-    jQuery.validator.addMethod("cpfVal", function(value, element) {
-        if (jQuery(element).hasClass('required')) {
-            return value.match(/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/);
-        }
-        return true;
-    }, "CPF em formáto inválido!");
-    jQuery.validator.classRuleSettings.val_cpf = {cpfVal : true};
-
-
-    jQuery.validator.addMethod("emailVal", function(value, element) {
-        if (jQuery(element).hasClass('required')) {
-            return value.match(/^.*@.*\..*$/);
-        }
-        return true;
-    }, "E-mail em formáto inválido!");
-    jQuery.validator.classRuleSettings.val_email = {emailVal : true};
-
-
-    jQuery.validator.addMethod("passwordVal", function(value, element) {
-        if (jQuery(element).hasClass('required')) {
-            if (value.length < 6) {
-                return false;
+        $.validator.addMethod("phoneVal", function(value, element) {
+            if ($(element).hasClass('required')) {
+                return value.match(/^\([1-9]{2}\)\ [0-9]{4}\-[0-9]{4}$/);
             }
-            if (value == "123456") {
-                return false;
+            return true;
+
+        }, "Telefone em formáto inválido!");
+        $.validator.classRuleSettings.val_phone = {phoneVal : true};
+
+
+        $.validator.addMethod("celphoneVal", function(value, element) {
+            if ($(element).hasClass('required')) {
+                return value.match(/^\([1-9]{2}\)\ 9\ [0-9]{4}\-[0-9]{4}$/);
             }
-        }
-        return true;
-    }, "Senha no mínimo 6 caracteres e não pode ser 123456!");
-    jQuery.validator.classRuleSettings.val_password = {passwordVal : true};
+            return true;
+
+        }, "Celular em formáto inválido!");
+        $.validator.classRuleSettings.val_celphone = {celphoneVal : true};
 
 
-    jQuery.validator.addMethod("nomeVal", function(value, element) {
-        if (jQuery(element).hasClass('required')) {
-            value = value.replace(/^\s+|\s+$/g, "");
-            if (value.indexOf(' ') > 0) {
-                return true;
-            } else {
-                return false;
+        $.validator.addMethod("cepVal", function(value, element) {
+            if ($(element).hasClass('required')) {
+                return value.match(/^[0-9]{5}\-[0-9]{3}$/);
             }
-        }
-        return true;
-    }, "Insira seu nome completo!");
-    jQuery.validator.classRuleSettings.val_nome = {nomeVal : true};
+            return true;
+        }, "CEP em formáto inválido! Somente aceito formato 99999-999");
+        $.validator.classRuleSettings.val_cep = {cepVal : true};
 
 
-    jQuery.validator.addMethod("cnpjVal", function(value, element) {
-        if (jQuery(element).hasClass('required')) {
-            return value.match(/^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\/[0-9]{4}\-[0-9]{2}$/);
-        }
-        return true;
-    }, "CNPJ em formáto inválido!");
-    jQuery.validator.classRuleSettings.val_cnpj = {cnpjVal : true};
+        $.validator.addMethod("cpfVal", function(value, element) {
+            if ($(element).hasClass('required')) {
+                return value.match(/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/);
+            }
+            return true;
+        }, "CPF em formáto inválido!");
+        $.validator.classRuleSettings.val_cpf = {cpfVal : true};
 
 
-    // jQuery.validator.addMethod("caracteres", function(value, element, params) {
-    //     if (jQuery(element).hasClass('required')) {
-    //         if (jQuery(element).attr('caracteres') == jQuery(element).val().length) {
-    //             return true;
-    //         } else {
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }, jQuery.validator.format("Você deve adicionar {0} caracteres!"));
-    //jQuery.validator.classRuleSettings.val_caracteres = { caracteresVal:true };
+        $.validator.addMethod("emailVal", function(value, element) {
+            if ($(element).hasClass('required')) {
+                return value.match(/^.*@.*\..*$/);
+            }
+            return true;
+        }, "E-mail em formáto inválido!");
+        $.validator.classRuleSettings.val_email = {emailVal : true};
 
 
-    /*
-	 * phone
-	 * ^\([1-9][0-9]\)\ [0-9][0-9][0-9][0-9]\-[0-9][0-9][0-9][0-9]$
-	 *
-	 * cep
-	 * ^[0-9][0-9][0-9][0-9][0-9]\-[0-9][0-9][0-9]$
-	 *
-	 * cpf
-	 * ^[0-9][0-9][0-9]\.[0-9][0-9][0-9]\.[0-9][0-9][0-9]\-[0-9][0-9]$
-	 *
-	 * cnpj
-	 * ^[0-9][0-9]\.[0-9][0-9][0-9]\.[0-9][0-9][0-9]\/[0-9][0-9][0-9][0-9]\-[0-9][0-9]$
-	 *
-	 * datahora
-	 * ^[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]\ [0-9][0-9]\:[0-9][0-9]$
-	 *
-	 * data
-	 * ^[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]$
-	 */
-};
+        $.validator.addMethod("passwordVal", function(value, element) {
+            if ($(element).hasClass('required')) {
+                if (value.length < 6) {
+                    return false;
+                }
+                if (value == "123456") {
+                    return false;
+                }
+            }
+            return true;
+        }, "Senha no mínimo 6 caracteres e não pode ser 123456!");
+        $.validator.classRuleSettings.val_password = {passwordVal : true};
+
+
+        $.validator.addMethod("nomeVal", function(value, element) {
+            if ($(element).hasClass('required')) {
+                value = value.replace(/^\s+|\s+$/g, "");
+                if (value.indexOf(' ') > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        }, "Insira seu nome completo!");
+        $.validator.classRuleSettings.val_nome = {nomeVal : true};
+
+
+        $.validator.addMethod("cnpjVal", function(value, element) {
+            if ($(element).hasClass('required')) {
+                return value.match(/^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\/[0-9]{4}\-[0-9]{2}$/);
+            }
+            return true;
+        }, "CNPJ em formáto inválido!");
+        $.validator.classRuleSettings.val_cnpj = {cnpjVal : true};
+
+
+        // $.validator.addMethod("caracteres", function(value, element, params) {
+        //     if ($(element).hasClass('required')) {
+        //         if ($(element).attr('caracteres') == $(element).val().length) {
+        //             return true;
+        //         } else {
+        //             return false;
+        //         }
+        //     }
+        //     return true;
+        // }, $.validator.format("Você deve adicionar {0} caracteres!"));
+        //$.validator.classRuleSettings.val_caracteres = { caracteresVal:true };
+
+
+        /*
+         * phone
+         * ^\([1-9][0-9]\)\ [0-9][0-9][0-9][0-9]\-[0-9][0-9][0-9][0-9]$
+         *
+         * cep
+         * ^[0-9][0-9][0-9][0-9][0-9]\-[0-9][0-9][0-9]$
+         *
+         * cpf
+         * ^[0-9][0-9][0-9]\.[0-9][0-9][0-9]\.[0-9][0-9][0-9]\-[0-9][0-9]$
+         *
+         * cnpj
+         * ^[0-9][0-9]\.[0-9][0-9][0-9]\.[0-9][0-9][0-9]\/[0-9][0-9][0-9][0-9]\-[0-9][0-9]$
+         *
+         * datahora
+         * ^[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]\ [0-9][0-9]\:[0-9][0-9]$
+         *
+         * data
+         * ^[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]$
+         */
+    };
+    loadValidateAll();
+
+}));

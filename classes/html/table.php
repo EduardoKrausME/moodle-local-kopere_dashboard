@@ -40,7 +40,7 @@ class table {
      *
      * @param string $adicional
      */
-    public function __construct( $adicional = '') {
+    public function __construct($adicional = '') {
         $this->table_id = 'table_' . uniqid();
         echo '<table id="' . $this->table_id . '" class="table table-hover" width="100%" ';
         echo $adicional;
@@ -50,11 +50,11 @@ class table {
     /**
      * @var array
      */
-    private $colunas  = array();
+    private $colunas = array();
     /**
      * @var null
      */
-    private $click    = null;
+    private $click = null;
     /**
      * @var null
      */
@@ -68,7 +68,7 @@ class table {
      * @param $exec
      * @param $chave
      */
-    public function set_click( $exec, $chave) {
+    public function set_click($exec, $chave) {
         $this->click = array();
         $this->click['exec'] = $exec;
         $this->click['chave'] = $chave;
@@ -78,7 +78,7 @@ class table {
      * @param $url
      * @param $chave
      */
-    public function set_click_redirect( $url, $chave) {
+    public function set_click_redirect($url, $chave) {
         $this->click = array();
         $this->click['chave'] = $chave;
         $this->click['exec'] = "document.location.href='" . $url . "'";
@@ -88,7 +88,7 @@ class table {
      * @param $url
      * @param $chave
      */
-    public function set_click_open( $url, $chave) {
+    public function set_click_open($url, $chave) {
         $this->click = array();
         $this->click['chave'] = $chave;
         $this->click['exec'] = "window.open( '" . $url . "' )";
@@ -97,7 +97,7 @@ class table {
     /**
      * @param $id
      */
-    public function set_id( $id) {
+    public function set_id($id) {
         $this->id = $id;
     }
 
@@ -106,7 +106,7 @@ class table {
      *
      * @return mixed|string
      */
-    protected function get_click( $linha) {
+    protected function get_click($linha) {
         if ($this->click == null) {
             return '';
         }
@@ -139,7 +139,7 @@ class table {
      * @param null $styleheader
      * @param null $stylecol
      */
-    public function add_header( $title, $chave = null, $funcao = null, $styleheader = null, $stylecol = null) {
+    public function add_header($title, $chave = null, $funcao = null, $styleheader = null, $stylecol = null) {
         $coluna = new table_header_item();
         $coluna->chave = $chave;
         $coluna->title = $title;
@@ -154,7 +154,7 @@ class table {
      * @param        $header
      * @param string $class
      */
-    public function print_header( $header, $class = '') {
+    public function print_header($header, $class = '') {
         $this->colunas = array();
         echo '<thead>';
         echo '<tr class="' . $class . '">';
@@ -178,7 +178,7 @@ class table {
      * @param        $linhas
      * @param string $class
      */
-    public function set_row( $linhas, $class = '') {
+    public function set_row($linhas, $class = '') {
         if (!$this->isprint && count($this->colunas)) {
             $this->print_header($this->colunas);
         }
@@ -236,7 +236,7 @@ class table {
      * @param        $html
      * @param string $class
      */
-    public function print_row( $html, $class = '') {
+    public function print_row($html, $class = '') {
         echo '<td class=' . $class . '>';
         echo $html;
         echo '</td>';
@@ -245,24 +245,20 @@ class table {
     /**
      * @param bool $datatable
      */
-    public function close( $datatable = false, $order='', $extras='') {
+    public function close($datatable = false, $extras = null) {
+        global $PAGE;
+
         echo '</table>';
         if ($datatable) {
-            if (isset($order[1])) {
-                $order = ',' . $order;
+
+            $init_params = array(
+                "autoWidth" => false,
+            );
+            if ($extras) {
+                $init_params = array_merge($init_params, $extras);
             }
-            if (isset($extras[1])) {
-                $extras = ',' . $extras;
-            }
-            echo "<script type=\"text/javascript\">
-                    $(document).ready(function(){
-                        $(\"#{$this->table_id}\").DataTable({
-                            oLanguage : dataTables_oLanguage 
-                            {$extras} 
-                            {$order}
-                        });
-                    });
-                  </script>";
+
+            $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', array($this->table_id, $init_params));
         }
     }
 }

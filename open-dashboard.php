@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    23/05/17 17:59
+ * @created    16/11/18 02:01
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -23,41 +23,58 @@
 
 ob_start();
 define('AJAX_SCRIPT', false);
-define('OPEN_INTERNAL', false);
+define('OPEN_INTERNAL', true);
+
+$CFG->useexternalyui = false;
+$CFG->yuicomboloading = false;
+$CFG->cachejs = false;
+$CFG->themedesignermode = true;
 
 define('BENCHSTART', microtime(true));
 require('../../config.php');
 define('BENCHSTOP', microtime(true));
+require('autoload.php');
 
-require_once('autoload.php');
+if ($CFG->kopere_dashboard_open == 'internal') {
+    $urlinternal = "{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?" . clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
+    @header("Location: {$urlinternal}");
+    echo "<meta http-equiv=\"refresh\" content=\"0; url={$urlinternal}\">";
+}
 
 global $PAGE, $CFG, $OUTPUT;
+
+require_once($CFG->libdir . '/adminlib.php');
 
 require_login();
 require_capability('local/kopere_dashboard:view', context_system::instance());
 require_capability('local/kopere_dashboard:manage', context_system::instance());
 
 $PAGE->set_url(new moodle_url('/local/kopere_dashboard/open-dashboard.php'));
-$PAGE->set_pagetype('reports');
 $PAGE->set_context(context_system::instance());
+$PAGE->set_pagetype('admin-setting');
+$PAGE->set_pagelayout('popup');
+$PAGE->set_title(get_string_kopere('modulename'));
+$PAGE->set_heading(get_string_kopere('modulename'));
 
-$action = optional_param('action', null, PARAM_RAW);
-if (!empty($action) && strpos($action, '::')) {
-    load_class();
-}
+$PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
+$PAGE->requires->css('/local/kopere_dashboard/assets/all-frame.css');
 
+$PAGE->navbar->add(get_string_kopere('modulename'), new moodle_url('/local/kopere_dashboard/open-dashboard.php'));
+
+load_class();
+$htmlApp = ob_get_contents();
+ob_clean();
+
+$PAGE->requires->jquery();
+$PAGE->requires->js('/local/kopere_dashboard/assets/bootstrap/bootstrap.js');
+
+$PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
+
+$PAGE->add_body_class("kopere_dashboard_body");
+
+echo $OUTPUT->header();
+echo "<link rel=\"icon\" href=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/favicon.png\"/>";
 ?>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title><?php echo get_string_kopere('pluginname') ?></title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <link href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/all-frame.css" rel="stylesheet">
-    <link async href="https://fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet">
-
     <script>
         lang_yes = '<?php echo get_string('yes') ?>';
         lang_no = '<?php echo get_string('no') ?>';
@@ -66,118 +83,93 @@ if (!empty($action) && strpos($action, '::')) {
         lang_active = '<?php echo get_string_kopere('notification_status_active')?>';
         lang_inactive = '<?php echo get_string_kopere('notification_status_inactive')?>';
         dataTables_oLanguage = {
-            sEmptyTable       : "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
-            sInfo             : "<?php echo get_string_kopere('datatables_sInfo') ?>",
-            sInfoEmpty        : "<?php echo get_string_kopere('datatables_sInfoEmpty') ?>",
-            sInfoFiltered     : "<?php echo get_string_kopere('datatables_sInfoFiltered') ?>",
-            sInfoPostFix      : "<?php echo get_string_kopere('datatables_sInfoPostFix') ?>",
-            sInfoThousands    : "<?php echo get_string_kopere('datatables_sInfoThousands') ?>",
-            sLengthMenu       : "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
-            sLoadingRecords   : "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
-            sProcessing       : "<?php echo get_string_kopere('datatables_sProcessing') ?>",
-            sZeroRecords      : "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
-            sSearch           : "<?php echo get_string_kopere('datatables_sSearch') ?>",
-            oPaginate         : {
-                sNext       : "<?php echo get_string_kopere('datatables_oPaginate_sNext') ?>",
-                sPrevious   : "<?php echo get_string_kopere('datatables_oPaginate_sPrevious') ?>",
-                sFirst      : "<?php echo get_string_kopere('datatables_oPaginate_sFirst') ?>",
-                sLast       : "<?php echo get_string_kopere('datatables_oPaginate_sLast') ?>"
+            sEmptyTable     : "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
+            sInfo           : "<?php echo get_string_kopere('datatables_sInfo') ?>",
+            sInfoEmpty      : "<?php echo get_string_kopere('datatables_sInfoEmpty') ?>",
+            sInfoFiltered   : "<?php echo get_string_kopere('datatables_sInfoFiltered') ?>",
+            sInfoPostFix    : "<?php echo get_string_kopere('datatables_sInfoPostFix') ?>",
+            sInfoThousands  : "<?php echo get_string_kopere('datatables_sInfoThousands') ?>",
+            sLengthMenu     : "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
+            sLoadingRecords : "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
+            sProcessing     : "<?php echo get_string_kopere('datatables_sProcessing') ?>",
+            sZeroRecords    : "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
+            sSearch         : "<?php echo get_string_kopere('datatables_sSearch') ?>",
+            oPaginate       : {
+                sNext     : "<?php echo get_string_kopere('datatables_oPaginate_sNext') ?>",
+                sPrevious : "<?php echo get_string_kopere('datatables_oPaginate_sPrevious') ?>",
+                sFirst    : "<?php echo get_string_kopere('datatables_oPaginate_sFirst') ?>",
+                sLast     : "<?php echo get_string_kopere('datatables_oPaginate_sLast') ?>"
             },
-            oAria             : {
-                sSortAscending    : "<?php echo get_string_kopere('datatables_oAria_sSortAscending') ?>",
-                sSortDescending   : "<?php echo get_string_kopere('datatables_oAria_sSortDescending') ?>"
+            oAria           : {
+                sSortAscending  : "<?php echo get_string_kopere('datatables_oAria_sSortAscending') ?>",
+                sSortDescending : "<?php echo get_string_kopere('datatables_oAria_sSortDescending') ?>"
             }
         }
     </script>
 
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery-3.2.1.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/bootstrap/bootstrap.min.js"></script>
-
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/jquery.dataTables.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/sorting-numeric-comma.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/sorting-currency.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/sorting-date-uk.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/sorting-file-size.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dataTables/renderer-kopere-v2.min.js"></script>
-
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/moment.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/daterangepicker.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/select2.full.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/validator.min.js"></script>
-
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery.maskedinput.min.js"></script>
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/jquery.validate-v1.15.0.min.js"></script>
-
-    <script src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/js/custom.min.js"></script>
-
-    <?php
-    if (get_config('local_kopere_dashboard', 'nodejs-status')) {
-        echo "<script src=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/socket.io.js\"></script>
-              <script src=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/node/app-v2.min.js\"></script>";
-
-        if (get_config('local_kopere_dashboard', 'nodejs-ssl')) {
-            $url = "https://" . get_config('local_kopere_dashboard', 'nodejs-url') . ':' .
-                get_config('local_kopere_dashboard', 'nodejs-port');
-        } else {
-            $url = get_config('local_kopere_dashboard', 'nodejs-url') . ':' .
-                get_config('local_kopere_dashboard', 'nodejs-port');
+    <script>
+        if (window != window.top) {
+            document.body.className += " in-iframe";
         }
+    </script>
+    <div class="all-wrapper">
 
-        $userid = intval($USER->id);
-        $fullname = '"' . fullname($USER) . '"';
-        $servertime = time();
-        $urlnode = '"' . $url . '"';
+        <div class="layout-w">
 
-        echo "<script type=\"text/javascript\">
-                  startServer ( $userid, $fullname, $servertime, $urlnode, 'z35admin' );
-              </script>";
-    }
-    ?>
-    <link rel="icon" href="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/favicon.png"/>
-
-</head>
-<body class="kopere_dashboard_body">
-<script>
-    if (window != window.top) {
-        document.body.className += " in-iframe";
-    }
-</script>
-<div class="all-wrapper">
-
-    <div class="layout-w">
-
-        <div class="menu-w hidden-print">
-            <div class="logo-w">
-                <img class="normal"
-                     src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/logo.svg"
-                     alt="<?php echo get_string_kopere('pluginname') ?>">
-                <img class="mobile"
-                     src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/logo-notext.svg"
-                     alt="<?php echo get_string_kopere('pluginname') ?>">
+            <div class="menu-w hidden-print">
+                <div class="logo-w">
+                    <img class="normal"
+                         src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/logo.svg"
+                         alt="<?php echo get_string_kopere('pluginname') ?>">
+                    <img class="mobile"
+                         src="<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/logo-notext.svg"
+                         alt="<?php echo get_string_kopere('pluginname') ?>">
+                </div>
+                <div class="menu-and-user">
+                    <?php
+                    echo \local_kopere_dashboard\output\menu::create_menu();
+                    ?>
+                </div>
             </div>
-            <div class="menu-and-user">
+
+            <div class="content-w <?php echo get_path_query() ?>">
                 <?php
-                echo \local_kopere_dashboard\output\menu::create_menu();
+                load_class();
                 ?>
             </div>
-        </div>
 
-        <div class="content-w <?php echo get_path_query() ?>">
-            <?php
-            load_class();
-            ?>
-        </div>
-
-    </div>
-</div>
-
-<div class="modal fade" id="modal-edit" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="loader"></div>
         </div>
     </div>
-</div>
 
-</body>
-</html>
+    <div class="modal fade" id="modal-edit" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </div>
+
+<?php
+if (\local_kopere_dashboard\util\node::is_enables()) {
+    echo "<script src=\"" . \local_kopere_dashboard\util\node::geturl_socketio() . "\"></script>";
+    $PAGE->requires->js("/local/kopere_dashboard/node/app-v2.js");
+
+    $userid = intval($USER->id);
+    $fullname = fullname($USER);
+    $servertime = time();
+    $urlnode = \local_kopere_dashboard\util\node::base_url();
+
+    $PAGE->requires->js_init_call("startServer", array($userid, $fullname, $servertime, $urlnode, 'z35admin'));
+    //    echo "<script type=\"text/javascript\">
+    //              startServer ( {$userid}, \"{$fullname}\", {$servertime}, \"{$urlnode}\", 'z35admin' );
+    //          </script>";
+
+    $form = new \local_kopere_dashboard\html\form();
+    $form->create_hidden_input('userid', $userid);
+    $form->create_hidden_input('fullname', $fullname);
+    $form->create_hidden_input('servertime', $servertime);
+    $form->create_hidden_input('urlnode', $urlnode);
+
+}
+
+echo $OUTPUT->footer();
