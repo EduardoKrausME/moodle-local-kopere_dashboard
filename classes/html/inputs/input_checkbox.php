@@ -23,6 +23,8 @@
 
 namespace local_kopere_dashboard\html\inputs;
 
+use local_kopere_dashboard\util\config;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -79,7 +81,7 @@ class input_checkbox extends input_base {
      */
     public function set_checked_by_config($configname) {
         $this->set_name($configname);
-        if (get_config('local_kopere_dashboard', $configname)) {
+        if (config::get_key($configname)) {
             $this->checked = true;
         }
 

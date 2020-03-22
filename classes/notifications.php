@@ -34,6 +34,7 @@ use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\html\inputs\input_text;
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\html\tinymce;
+use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\mensagem;
@@ -246,7 +247,7 @@ class notifications extends notificationsutil {
                 ->set_description(get_string_kopere('notification_subjectdesc')));
 
         $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" .
-            get_config('local_kopere_dashboard', 'notificacao-template');
+            config::get_key('notificacao-template');
         $templatecontent = file_get_contents($template);
 
         if (!$id) {

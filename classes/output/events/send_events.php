@@ -26,6 +26,7 @@ namespace local_kopere_dashboard\output\events;
 defined('MOODLE_INTERNAL') || die();
 
 use core\message\message;
+use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
 /**
@@ -217,8 +218,7 @@ class send_events {
      */
     private function load_template() {
         global $CFG;
-        $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" .
-            get_config('local_kopere_dashboard', 'notificacao-template');
+        $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" . config::get_key('notificacao-template');
         $templatecontent = file_get_contents($template);
 
         $this->subject = $this->kopere_dashboard_events->subject;

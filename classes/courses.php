@@ -30,6 +30,7 @@ use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
 use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\html\table_header_item;
+use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\html;
@@ -208,7 +209,7 @@ class courses {
                         $webpages->title . '</a></p>';
                 }
             }
- 
+
             $form = new form('?classname=webpages&method=page_edit_save', 'form-inline');
             $form->create_hidden_input('id', 0);
             $form->create_hidden_input('courseid', $course->id);
@@ -220,7 +221,7 @@ class courses {
                     ->set_name('menuid')
                     ->set_values($menus)
             );
-            $form->create_hidden_input('theme', get_config('local_kopere_dashboard', 'webpages_theme'));
+            $form->create_hidden_input('theme', config::get_key('webpages_theme'));
             $form->create_hidden_input('text', $course->summary);
             $form->create_hidden_input('visible', 1);
             $form->create_submit_input(get_string_kopere('courses_page_create'), 'margin-left-15');
