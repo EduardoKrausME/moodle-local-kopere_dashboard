@@ -25,11 +25,6 @@ ob_start();
 define('AJAX_SCRIPT', false);
 define('OPEN_INTERNAL', true);
 
-$CFG->useexternalyui = false;
-$CFG->yuicomboloading = false;
-$CFG->cachejs = false;
-$CFG->themedesignermode = true;
-
 define('BENCHSTART', microtime(true));
 require('../../config.php');
 define('BENCHSTOP', microtime(true));
@@ -141,40 +136,18 @@ echo "<div id='kopere_dashboard_div'>
         </div>
     </div>";
 
-
-if (\local_kopere_dashboard\util\node::is_enables()) {
-    echo "<script src=\"" . \local_kopere_dashboard\util\node::geturl_socketio() . "\"></script>";
-    $PAGE->requires->js("/local/kopere_dashboard/node/app-v2.js");
-
-    $userid = intval($USER->id);
-    $fullname = fullname($USER);
-    $servertime = time();
-    $urlnode = \local_kopere_dashboard\util\node::base_url();
-
-    $PAGE->requires->js_init_call("startServer", array($userid, $fullname, $servertime, $urlnode, 'z35admin'));
-    //    echo "<script type=\"text/javascript\">
-    //              startServer ( {$userid}, \"{$fullname}\", {$servertime}, \"{$urlnode}\", 'z35admin' );
-    //          </script>";
-
-    $form = new \local_kopere_dashboard\html\form();
-    $form->create_hidden_input('userid', $userid);
-    $form->create_hidden_input('fullname', $fullname);
-    $form->create_hidden_input('servertime', $servertime);
-    $form->create_hidden_input('urlnode', $urlnode);
-
-}
-
-
 echo $OUTPUT->footer();
 
 $html = ob_get_contents();
 ob_clean();
 $dashboard_menu_html_old .= "<style>.dashboard_menu_html-content{display:none !important}</style>";
-if (strpos($html, 'role="navigation"')) {
-    $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html_old}$2", $html);
-}
 
-if (strpos($html, 'data-region="drawer"')) {
+
+if (preg_match_all('/(.*)(<div.*?class="block_navigation.*)/', $html)) {
+    $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html_old}$2", $html);
+} else if (preg_match_all('/(.*)(<section.*?class="(\s+)?block_navigation.*)/s', $html)) {
+    $html = preg_replace('/(.*)(<section.*?class="(\s+)?block_navigation.*)/s', "$1<div class='card mb-3'>{$dashboard_menu_html_old}</div>$2", $html);
+} else if (strpos($html, 'data-region="drawer"')) {
     $classdiv = " class='list-group-item kopere-list-group-item' ";
     $html = preg_replace('/(.*data-region="drawer".*?>)(.*)/', "$1<div{$classdiv}>{$dashboard_menu_html_old}</div>$2", $html);
 }

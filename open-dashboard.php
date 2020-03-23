@@ -25,11 +25,6 @@ ob_start();
 define('AJAX_SCRIPT', false);
 define('OPEN_INTERNAL', true);
 
-$CFG->useexternalyui = false;
-$CFG->yuicomboloading = false;
-$CFG->cachejs = false;
-$CFG->themedesignermode = true;
-
 define('BENCHSTART', microtime(true));
 require('../../config.php');
 define('BENCHSTOP', microtime(true));
@@ -150,26 +145,6 @@ echo "<link rel=\"icon\" href=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboa
     </div>
 
 <?php
-if (\local_kopere_dashboard\util\node::is_enables()) {
-    echo "<script src=\"" . \local_kopere_dashboard\util\node::geturl_socketio() . "\"></script>";
-    $PAGE->requires->js("/local/kopere_dashboard/node/app-v2.js");
 
-    $userid = intval($USER->id);
-    $fullname = fullname($USER);
-    $servertime = time();
-    $urlnode = \local_kopere_dashboard\util\node::base_url();
-
-    $PAGE->requires->js_init_call("startServer", array($userid, $fullname, $servertime, $urlnode, 'z35admin'));
-    //    echo "<script type=\"text/javascript\">
-    //              startServer ( {$userid}, \"{$fullname}\", {$servertime}, \"{$urlnode}\", 'z35admin' );
-    //          </script>";
-
-    $form = new \local_kopere_dashboard\html\form();
-    $form->create_hidden_input('userid', $userid);
-    $form->create_hidden_input('fullname', $fullname);
-    $form->create_hidden_input('servertime', $servertime);
-    $form->create_hidden_input('urlnode', $urlnode);
-
-}
 
 echo $OUTPUT->footer();
