@@ -34,6 +34,7 @@ defined('MOODLE_INTERNAL') || die();
  * @package local_kopere_dashboard
  */
 class performancemonitor {
+
     /**
      * @var bool
      */
