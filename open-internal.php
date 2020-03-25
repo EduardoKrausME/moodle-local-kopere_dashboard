@@ -104,7 +104,7 @@ echo "<link rel=\"icon\" href=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboa
 $dashboard_menu_html_boost = \local_kopere_dashboard\output\menu::create_menu();
 $dashboard_menu_html_boost = str_replace("'", '"', $dashboard_menu_html_boost);
 $dashboard_menu_html_old = "<div id=\"inst0\" class=\"block\">
-            <div class=\"dashboard_menu_html logo\">
+            <div class=\"dashboard_menu_html kopere-logo\">
                 <div class=\"logo-w\">
                     <img class=\"normal\"
                          src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/logo-notext.svg\"
