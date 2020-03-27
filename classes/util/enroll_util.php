@@ -118,11 +118,20 @@ class enroll_util {
      * @param $timestart
      * @param $timeend
      * @param $status
+     * @param $roleid
+     *      1 => manager
+     *      2 => coursecreator
+     *      3 => editingteacher
+     *      4 => teacher
+     *      5 => student
+     *      6 => guest
+     *      7 => user
+     *      8 => frontpage
      *
      * @return bool
      * @throws \dml_exception
      */
-    public static function enrol($course, $user, $timestart, $timeend, $status) {
+    public static function enrol($course, $user, $timestart, $timeend, $status, $roleid=5) {
         global $DB, $USER;
 
         // Evita erro.
@@ -143,7 +152,7 @@ class enroll_util {
 
         $testroleassignments = $DB->get_record('role_assignments',
             array(
-                'roleid' => 5,
+                'roleid' => $roleid,
                 'contextid' => $context->id,
                 'userid' => $user->id
             ));
