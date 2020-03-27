@@ -82,7 +82,7 @@ class course_access_grade {
         $export = optional_param('export', '', PARAM_TEXT);
         export::header($export, "Lista de alunos - $course->fullname");
 
-        echo '<table id="list-course-access" class="kopere-table table-bordered table-hover" border="1">';
+        echo '<table id="list-course-access" class="table table-bordered table-hover" border="1">';
         echo '<thead>';
         $printsessoes = '';
 

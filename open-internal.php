@@ -152,6 +152,4 @@ if (preg_match_all('/(.*)(<div.*?class="block_navigation.*)/', $html)) {
     $html = preg_replace('/(.*data-region="drawer".*?>)(.*)/', "$1<div{$classdiv}>{$dashboard_menu_html_old}</div>$2", $html);
 }
 
-
-//$html = preg_replace('/(.*kopere_dashboard_modal_item.*?)(<script.*script>)/s', '$1', $html);
 echo $html;

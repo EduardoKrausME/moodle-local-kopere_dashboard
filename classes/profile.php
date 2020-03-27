@@ -47,7 +47,7 @@ class profile {
         $profileimageurl = $userpicture->get_url($PAGE)->out(false);
 
         echo '<div class="profile-content">
-                  <div class="kopere-table">
+                  <div class="table">
                       <div class="profile">
                           <img src="' . $profileimageurl . '" alt="' . fullname($user) . '">
                           <span class="name">' . $user->firstname . '

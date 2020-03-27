@@ -370,7 +370,7 @@ body.menu-w-90 {
     }
 }
 .profile-content {
-    .kopere-table {
+    .table {
         display: table;
         width: 100%;
         .profile {
@@ -454,7 +454,7 @@ body.menu-w-90 {
     }
     
     @media (max-width: 800px) {
-        .kopere-table {
+        .table {
             display: block;
             .profile {
                 display: block;

@@ -1,6 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito:300,400,700);
 #kopere_dashboard_div {
     color: #3a3a3a;
+    .table {
+        color: rgba(58, 58, 58, 0.76);
+        tr:hover {
+            color: #3a3a3a;
+        }
+    }
     @import "dashboard/css/dashboard";
     @import "bootstrap/bootstrap";
     @import "dataTables/jquery.dataTables";

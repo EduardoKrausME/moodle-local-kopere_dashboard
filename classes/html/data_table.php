@@ -166,7 +166,7 @@ class data_table {
             button::info(get_string_kopere('reports_export'), url_util::querystring() . "&export=xls");
         }
 
-        echo '<table id="' . $this->tableid . '" class="kopere-table table-hover" >';
+        echo '<table id="' . $this->tableid . '" class="table table-hover" >';
         echo '<thead>';
 
         if ($this->columninfo) {

@@ -42,7 +42,7 @@ class table {
      */
     public function __construct($adicional = '') {
         $this->table_id = 'table_' . uniqid();
-        echo '<table id="' . $this->table_id . '" class="kopere-table table-hover" width="100%" ';
+        echo '<table id="' . $this->table_id . '" class="table table-hover" width="100%" ';
         echo $adicional;
         echo '>';
     }
