@@ -92,7 +92,7 @@ class benchmark {
                 ' . $this->format_number($score) . ' ' . get_string_kopere('benchmark_seconds'));
         }
 
-        echo '<table class="table" id="benchmarkresult">
+        echo '<table class="kopere-table" id="benchmarkresult">
                   <thead>
                       <tr>
                           <th class="text-center media-middle">#</th>
@@ -131,7 +131,7 @@ class benchmark {
     public function performance() {
         global $CFG;
 
-        echo "<table class=\"table\" id=\"benchmarkresult\">
+        echo "<table class=\"kopere-table\" id=\"benchmarkresult\">
                   <tr>
                       <th>" . get_string_kopere('benchmark_testconf_problem') . "</th>
                       <th>" . get_string_kopere('benchmark_testconf_status') . "</th>

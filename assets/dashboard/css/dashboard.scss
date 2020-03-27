@@ -227,6 +227,7 @@ body.menu-w-90 {
                 margin-bottom: 2rem;
                 position: relative;
                 margin-top: 0;
+                color: #202020;
                 .help {
                     font-size: 12px;
                     float: right;
@@ -369,7 +370,7 @@ body.menu-w-90 {
     }
 }
 .profile-content {
-    .table {
+    .kopere-table {
         display: table;
         width: 100%;
         .profile {
@@ -453,7 +454,7 @@ body.menu-w-90 {
     }
     
     @media (max-width: 800px) {
-        .table {
+        .kopere-table {
             display: block;
             .profile {
                 display: block;
