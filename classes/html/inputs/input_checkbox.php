@@ -32,7 +32,7 @@ defined('MOODLE_INTERNAL') || die();
  *
  * @package local_kopere_dashboard\html\inputs
  */
-class input_checkbox extends input_base {
+class input_checkbox extends input_select {
     /**
      * @var bool
      */
@@ -43,8 +43,11 @@ class input_checkbox extends input_base {
      * @throws \coding_exception
      */
     public function __construct() {
-        $this->set_type('checkbox');
-        $this->set_value('1');
+        $this->set_value("false");
+        $this->set_values(array(
+            array('key' => 0, 'value' => get_string('no')),
+            array('key' => 1, 'value' => get_string('yes')),
+        ));
     }
 
     /**
@@ -66,9 +69,16 @@ class input_checkbox extends input_base {
      * @param $checked
      *
      * @return $this
+     * @throws \coding_exception
      */
     public function set_checked($checked) {
         $this->checked = $checked;
+
+        if ($this->checked) {
+            $this->set_value(1);
+        } else {
+            $this->set_value(0);
+        }
 
         return $this;
     }
@@ -86,35 +96,5 @@ class input_checkbox extends input_base {
         }
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function to_string() {
-        $return = '<input type="hidden" name="' . $this->name . '" value="0"/>';
-        $return .= "<input ";
-
-        $return .= "id=\"$this->name\" name=\"$this->name\" type=\"checkbox\" ";
-
-        if ($this->checked) {
-            $return .= 'checked="checked" ';
-        }
-
-        if ($this->value) {
-            $return .= "value=\"" . htmlentities($this->value) . "\" ";
-        }
-
-        if ($this->class) {
-            $return .= "class=\"$this->class\" ";
-        }
-
-        if ($this->style) {
-            $return .= "style=\"$this->style\" ";
-        }
-
-        $return .= ">";
-
-        return $return;
     }
 }
