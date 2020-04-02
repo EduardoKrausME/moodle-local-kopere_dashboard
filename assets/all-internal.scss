@@ -2,9 +2,17 @@
 #kopere_dashboard_div {
     color: #3a3a3a;
     .table {
-        color: rgba(58, 58, 58, 0.76);
-        tr:hover {
-            color: #3a3a3a;
+        color: rgba(0, 0, 0, 0.9);
+        th {
+            color: rgba(58, 58, 58, 0.95);
+            &:hover {
+                color: #3a3a3a;
+            }
+        }
+        td {
+            &:hover {
+                color: #3a3a3a;
+            }
         }
     }
     @import "dashboard/css/dashboard";
