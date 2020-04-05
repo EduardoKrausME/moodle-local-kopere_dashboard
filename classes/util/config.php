@@ -48,4 +48,23 @@ class config {
             return $default;
         }
     }
+
+    /**
+     * @param $key
+     * @param int $default
+     * @return int
+     */
+    public static function get_key_int($key, $default = 0) {
+        try {
+            $value = get_config('local_kopere_dashboard', $key);
+        } catch (\dml_exception $e) {
+            return intval($default);
+        }
+
+        try {
+            return optional_param($key, $value, PARAM_INT);
+        } catch (\coding_exception $e) {
+            return intval($default);
+        }
+    }
 }

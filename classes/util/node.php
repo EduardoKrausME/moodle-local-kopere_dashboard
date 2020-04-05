@@ -34,7 +34,7 @@ class node {
     }
 
     public static function is_enables() {
-        if (config::get_key('nodejs-status')) {
+        if (config::get_key_int('nodejs-status')) {
             return true;
         }
         return false;
@@ -44,7 +44,7 @@ class node {
      * @return bool
      */
     public static function is_ssl() {
-        if (config::get_key('nodejs-ssl')) {
+        if (config::get_key_int('nodejs-ssl')) {
             return true;
         }
         return false;
