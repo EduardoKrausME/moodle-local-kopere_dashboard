@@ -25,6 +25,7 @@ namespace local_kopere_dashboard\output;
 
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\menu_util;
+use local_kopere_dashboard\util\submenu_util;
 
 /**
  * Class menu
@@ -46,11 +47,18 @@ class menu {
                 ->set_methodname('start')
                 ->set_icon('dashboard')
                 ->set_name(get_string_kopere('dashboard')));
+        $menuextra = array();
+            $menuextra[] = (new submenu_util())
+                ->set_classname('useronline')
+                ->set_methodname('dashboard')
+                ->set_title(get_string_kopere('useronline_title'))
+                ->set_icon('users-online');
         $menu .= dashboard_util::add_menu(
             (new menu_util())->set_classname('users')
                 ->set_methodname('dashboard')
                 ->set_icon('users')
-                ->set_name(get_string_kopere('user_title')));
+                ->set_name(get_string_kopere('user_title'))
+                ->set_submenus($menuextra));
         $menu .= dashboard_util::add_menu(
             (new menu_util())->set_classname('courses')
                 ->set_methodname('dashboard')

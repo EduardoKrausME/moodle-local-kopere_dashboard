@@ -1,0 +1,8 @@
+{
+    "port" : 8080,
+    "ssl"  : {
+        "key"  : "/path/to/privkey.pem",
+        "cert" : "/path/to/fullchain.pem",
+        "ca"   : "/path/to/chain.pem"
+    }
+}

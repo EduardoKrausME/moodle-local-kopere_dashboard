@@ -20,26 +20,23 @@ define([
                 console.log('Error connect server');
             }
 
-            $(window).blur(function() {
-                isFocus = false;
+            function sendFocus(isFocus) {
                 if (isConnected && privilegio == undefined) {
-                    console.log("isFocus = false");
+                    console.log("send isFocus = " + isFocus);
                     socketio.emit("isFocus", {
                         userid : userid,
                         focus  : isFocus + ""
                     });
                 }
-            });
-            $(window).focus(function() {
-                isFocus = true;
-                if (isConnected && privilegio == undefined) {
-                    console.log("isFocus = true");
-                    socketio.emit("isFocus", {
-                        userid : userid,
-                        focus  : isFocus + ""
-                    });
-                }
-            });
+            }
+
+            $(window)
+                .blur(function() {
+                    sendFocus(false);
+                })
+                .focus(function() {
+                    sendFocus(true);
+                });
 
             // When connecting make:
             socketio.on('connect', function() {
@@ -71,6 +68,9 @@ define([
 
             // process list on-line user
             socketio.on("allOnnlineUsers", function(allUsers) {
+
+                console.log("allOnnlineUsers", allUsers);
+
                 if (document.getElementById('user-count-online')) {
                     allUsersLength = allUsers.length;
                     $('#user-count-online').html(allUsersLength);
@@ -96,6 +96,9 @@ define([
             });
 
             socketio.on("statusOnlineUser", function(status, user) {
+
+                console.log("statusOnlineUser", status, user);
+
                 if (document.getElementById('user-count-online')) {
                     if (status == 'connect')
                         allUsersLength++;

@@ -85,10 +85,6 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
         }
 
         require_once __DIR__ . "/classes/util/node.php";
-        if (\local_kopere_dashboard\util\node::is_enables()) {
-            $urlnode = \local_kopere_dashboard\util\node::base_url();
-            $PAGE->requires->js_call_amd('local_kopere_dashboard/online_app', 'connectServer',
-                array($USER->id, fullname($USER), time(), $urlnode));
-        }
+        \local_kopere_dashboard\util\node::add_admin_code();
     }
 }
