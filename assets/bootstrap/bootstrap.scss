@@ -5231,7 +5231,7 @@ button.close {
     -webkit-overflow-scrolling: touch;
     outline: 0;
 }
-.modal.fade .modal-dialog {
+.modal.fade .kopere-modal-dialog {
     -webkit-transition: -webkit-transform .3s ease-out;
     -o-transition: -o-transform .3s ease-out;
     transition: transform .3s ease-out;
@@ -5240,7 +5240,7 @@ button.close {
     -o-transform: translate(0, -25%);
     transform: translate(0, -25%);
 }
-.modal.in .modal-dialog {
+.modal.in .kopere-modal-dialog {
     -webkit-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
     -o-transform: translate(0, 0);
@@ -5250,11 +5250,11 @@ button.close {
     overflow-x: hidden;
     overflow-y: auto;
 }
-.modal-dialog {
+.kopere-modal-dialog {
     position: relative;
     width: auto;
 }
-.modal-content {
+.kopere-modal-content {
     position: relative;
     background-color: #fff;
     -webkit-background-clip: padding-box;
@@ -5326,10 +5326,10 @@ button.close {
     overflow: scroll;
 }
 @media (min-width: 768px) {
-    .modal-dialog {
+    .kopere-modal-dialog {
         width: 600px;
     }
-    .modal-content {
+    .kopere-modal-content {
         -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
         box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
     }
@@ -5341,7 +5341,7 @@ button.close {
     }
 }
 @media (min-width: 992px) {
-    .modal-dialog {
+    .kopere-modal-dialog {
         //width  : 700px;
         //margin : 30px auto;
         margin: 0;

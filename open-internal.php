@@ -128,8 +128,8 @@ echo "<div id='kopere_dashboard_div'>
         </div>
 
         <div class=\"modal fade kopere_dashboard_modal_item\" id=\"modal-edit\" role=\"dialog\">
-            <div class=\"modal-dialog\">
-                <div class=\"modal-content\">
+            <div class=\"kopere-modal-dialog\">
+                <div class=\"kopere-modal-content\">
                     <div class=\"loader\"></div>
                 </div>
             </div>

@@ -916,7 +916,7 @@ if (typeof jQuery === 'undefined') {
         this.options = options
         this.$body = $(document.body)
         this.$element = $(element)
-        this.$dialog = this.$element.find('.modal-dialog')
+        this.$dialog = this.$element.find('.kopere-modal-dialog')
         this.$backdrop = null
         this.isShown = null
         this.originalBodyPad = null
@@ -925,7 +925,7 @@ if (typeof jQuery === 'undefined') {
 
         if (this.options.remote) {
             this.$element
-                .find('.modal-content')
+                .find('.kopere-modal-content')
                 .load(this.options.remote, $.proxy(function() {
                     this.$element.trigger('loaded.bs.modal');
                     //console.log(this.$element);
@@ -1228,7 +1228,7 @@ if (typeof jQuery === 'undefined') {
     $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function(e) {
 
         e.stopImmediatePropagation();
-        $('.modal-content').html('<div class="loader"></div>');
+        $('.kopere-modal-content').html('<div class="loader"></div>');
 
         var $this = $(this);
         if ($this.is('a'))
@@ -1249,7 +1249,7 @@ if (typeof jQuery === 'undefined') {
             if (showEvent.isDefaultPrevented())
                 return; // only register focus restorer if modal will actually get shown
             $target.one('hidden.bs.modal', function() {
-                $('.modal-content').html('<div class="loader"></div>');
+                $('.kopere-modal-content').html('<div class="loader"></div>');
                 $this.is(':visible') && $this.trigger('focus');
             })
         });
