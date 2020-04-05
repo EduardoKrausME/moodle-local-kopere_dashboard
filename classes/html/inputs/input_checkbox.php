@@ -87,12 +87,14 @@ class input_checkbox extends input_select {
      * @param $configname
      *
      * @return $this
-     * @throws \dml_exception
+     * @throws \coding_exception
      */
     public function set_checked_by_config($configname) {
         $this->set_name($configname);
-        if (config::get_key($configname)) {
-            $this->checked = true;
+        if (config::get_key_int($configname)) {
+            $this->set_checked(1);
+        } else {
+            $this->set_checked(0);
         }
 
         return $this;

@@ -109,18 +109,17 @@ class userenrolment {
 
         ?>
         <script>
-            $('#timeend-status').click(timeend_status_click);
+            $('#timeend-status').change(timeend_status_change);
             $('#status').change(status_change);
 
-            function timeend_status_click(delay) {
+            function timeend_status_change(delay) {
                 if (delay != 0) {
                     delay = 400;
                 }
 
-                if ($('#timeend-status').is(":checked")) {
+                if ($('#timeend-status').val() == 1) {
                     $('.area_timeend').show(delay);
-                }
-                else {
+                } else {
                     $('.area_timeend').hide(delay);
                 }
             }
@@ -132,13 +131,12 @@ class userenrolment {
 
                 if ($('#status').val() == 0) {
                     $('.area-inscricao-times').show(delay);
-                }
-                else {
+                } else {
                     $('.area-inscricao-times').hide(delay);
                 }
             }
 
-            timeend_status_click(0);
+            timeend_status_change(0);
             status_change(0);
         </script>
         <?php
