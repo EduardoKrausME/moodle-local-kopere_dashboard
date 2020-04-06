@@ -134,6 +134,7 @@ class enroll_util {
     public static function enrol($course, $user, $timestart, $timeend, $status, $roleid=5) {
         global $DB, $USER;
 
+
         // Evita erro.
         $context = \context_course::instance($course->id, IGNORE_MISSING);
         if ($context == null) {
@@ -158,7 +159,7 @@ class enroll_util {
             ));
         if ($testroleassignments == null) {
             $roleassignments = new \stdClass();
-            $roleassignments->roleid = 5;
+            $roleassignments->roleid = $roleid    ;
             $roleassignments->contextid = $context->id;
             $roleassignments->userid = $user->id;
             $roleassignments->timemodified = time();
