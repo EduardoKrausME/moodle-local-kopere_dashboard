@@ -17,11 +17,15 @@ exports.defaults = {
 exports.loadSettings = function() {
     var settings_file = "settings.json";
     var user_settings = {};
+
     try {
         user_settings = fs.readFileSync(settings_file).toString();
         //minify to remove comments and whitepsace before parsing
         user_settings = JSON.parse(JSON.minify(user_settings));
     } catch (e) {
+
+        console.error("Verifique se você renomeou o 'settings.json.template' para 'settings.json'");
+
         console.error('There was an error processing your settings.json file: ' + e.message);
         process.exit(1);
     }
