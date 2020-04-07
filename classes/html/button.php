@@ -179,6 +179,7 @@ class button {
      * @return string
      */
     private static function create_button($text, $link, $p, $class, $return, $modal = false) {
+        $modal = false;
         $target = '';
         if (strpos($link, 'http') === 0) {
             $target = 'target="_blank"';
