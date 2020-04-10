@@ -48,11 +48,16 @@ class menu {
                 ->set_icon('dashboard')
                 ->set_name(get_string_kopere('dashboard')));
         $menuextra = array();
-            $menuextra[] = (new submenu_util())
-                ->set_classname('useronline')
-                ->set_methodname('dashboard')
-                ->set_title(get_string_kopere('useronline_title'))
-                ->set_icon('users-online');
+        $menuextra[] = (new submenu_util())
+            ->set_classname('useronline')
+            ->set_methodname('dashboard')
+            ->set_title(get_string_kopere('useronline_title'))
+        ->set_icon('users-online');
+        $menuextra[] = (new submenu_util())
+            ->set_classname('access')
+            ->set_methodname('dashboard')
+            ->set_title(get_string_kopere('useraccess_title'))
+            ->set_icon('users-access');
         $menu .= dashboard_util::add_menu(
             (new menu_util())->set_classname('users')
                 ->set_methodname('dashboard')

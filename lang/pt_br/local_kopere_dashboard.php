@@ -389,6 +389,9 @@ $string['useronline_settings_ssl'] = 'Habilitar SSL?';
 $string['useronline_settings_url'] = 'URL do servidor';
 $string['useronline_settings_port'] = 'Porta do servidor';
 
+// Acessos dos usuários
+$string['useraccess_title'] = 'Acessos dos usuários';
+
 // UserImport.
 $string['userimport_title'] = 'Importar Usuários';
 $string['userimport_upload'] = 'Arraste arquivos CSV aqui ou clique para abrir a caixa de busca.';

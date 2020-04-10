@@ -370,6 +370,10 @@ $string['userimport_messages'] = 'Mensajes que los estudiantes recibirán durant
 $string['userimport_moveuploadedfile_error'] = '¡ERROR al mover archivo!';
 $string['userimport_noterror'] = 'No se encontró error';
 $string['userimport_passcreate'] = '--Será creado--';
+
+// Acessos dos usuários
+$string['useraccess_title'] = 'Acceso del usuario';
+
 $string['userimport_title'] = 'Importar Usuarios';
 $string['userimport_title_proccess'] = 'Procesando archivo "{$a}"';
 $string['userimport_upload'] = 'Arrastrar aquí archivos CSV o hacer click para abrir la caja de búsqueda.';
