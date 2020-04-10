@@ -265,7 +265,6 @@ class dashboard_util {
                   require(['local_kopere_dashboard/form_popup'], function(amd) {amd.init(); 
                   M.util.js_complete('local_kopere_dashboard/form_popup');})
               </script>";
-        // $PAGE->requires->js_call_amd('local_kopere_dashboard/form_popup', 'init');
 
         end_util::end_script_show();
     }

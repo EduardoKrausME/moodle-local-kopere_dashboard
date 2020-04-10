@@ -2,6 +2,7 @@ define([
     "jquery"
 ], function($) {
     return {
+
         useraccess_changue_mes : function() {
             $('.area_changue_mes').show();
             $('#changue_mes').change(function() {
@@ -118,7 +119,18 @@ define([
                     $('#link').val(data).focus();
                 }, 'text');
             });
+        },
+
+        animate_scrollTop : function(key) {
+            jQuery('html,body').animate({scrollTop : $(key).offset().top}, 0);
+        },
+
+        form_close_and_auto_submit_input : function(campo) {
+            $('#' + campo).change(function() {
+                $('#submit_' + campo).click();
+            });
         }
+
     };
 });
 

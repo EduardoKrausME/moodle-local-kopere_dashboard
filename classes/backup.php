@@ -108,7 +108,7 @@ class backup {
      * @throws \dml_exception
      */
     public function execute_dumpsql() {
-        global $DB, $CFG;
+        global $DB, $CFG, $PAGE;
 
         set_time_limit(0);
 
@@ -134,10 +134,9 @@ class backup {
 
         foreach ($tables as $table => $val) {
 
-            echo "<p id='tabela-dump-$table'>" . get_string_kopere('backup_execute_table') . " <strong>$table</strong></p>
-                      <script>
-                          jQuery( 'html,body' ).animate ( { scrollTop: $( '#tabela-dump-$table' ).offset().top }, 0 );
-                      </script>";
+            echo "<p id='tabela-dump-$table'>" . get_string_kopere('backup_execute_table') . " <strong>$table</strong></p>";
+
+            $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'animate_scrollTop', array("#tabela-dump-$table"));
 
             $dbstart = "\n\n\n--\n-- " . get_string_kopere('backup_execute_structure') . " `$table`\n--\n\n";
             file_put_contents($backupfile, $dbstart, FILE_APPEND);
@@ -192,10 +191,8 @@ class backup {
 
         echo '<div id="end-page-to" style="text-align: center;">';
         button::add(get_string_kopere('backup_returnlist'), '?classname=backup&method=dashboard');
-        echo '<script>
-                      jQuery("html,body").animate ( { scrollTop: $( "#end-page-to" ).offset().top }, "slow" );
-                  </script>
-              </div>';
+        echo '</div>';
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'animate_scrollTop',array("#end-page-to"));
 
         echo '</div>';
 

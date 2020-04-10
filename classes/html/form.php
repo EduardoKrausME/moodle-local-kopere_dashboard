@@ -167,12 +167,10 @@ class form {
      * @param $campo
      */
     public function close_and_auto_submit_input($campo) {
-        echo "<input id=\"submit_$campo\" name=\"\" type=\"submit\" style='display: none;' />
-              <script>
-                  $( '#$campo' ).change( function() {
-                      $( '#submit_$campo' ).click();
-                  });
-              </script>";
+        global $PAGE;
+        echo "<input id=\"submit_$campo\" name=\"\" type=\"submit\" style='display: none;' />";
+
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'form_close_and_auto_submit_input',array($campo));
 
         $this->close();
     }
