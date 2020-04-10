@@ -145,6 +145,8 @@ class useronline {
      * @throws \dml_exception
      */
     public function settings() {
+        global $PAGE;
+
         ob_clean();
         $redirect = urlencode("classname=useronline&method=dashboard");
         dashboard_util::add_breadcrumb(get_string_kopere('useronline_settings_title'));
@@ -184,23 +186,7 @@ class useronline {
         $form->create_submit_input(get_string('savechanges'));
         $form->close();
 
-        ?>
-        <script>
-            jQuery('#nodejs-status').change(status_node_change);
-
-            function status_node_change(delay) {
-                if (delay != 0) {
-                    delay = 400;
-                }
-                if ($('#nodejs-status').val() == 1) {
-                    $('.area-status-nodejs').show(delay);
-                } else {
-                    $('.area-status-nodejs').hide(delay);
-                }
-            }
-
-            status_node_change(0);
-        </script><?php
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'useronline_status');
 
         dashboard_util::end_page();
     }

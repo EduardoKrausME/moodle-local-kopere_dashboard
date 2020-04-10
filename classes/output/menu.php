@@ -54,7 +54,7 @@ class menu {
             ->set_title(get_string_kopere('useronline_title'))
         ->set_icon('users-online');
         $menuextra[] = (new submenu_util())
-            ->set_classname('access')
+            ->set_classname('useraccess')
             ->set_methodname('dashboard')
             ->set_title(get_string_kopere('useraccess_title'))
             ->set_icon('users-access');

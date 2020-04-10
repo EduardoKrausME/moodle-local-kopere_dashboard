@@ -44,7 +44,7 @@ class userenrolment {
      * @throws \dml_exception
      */
     public function mathedit() {
-        global $DB;
+        global $DB,$PAGE;
 
         $ueid = optional_param('ueid', 0, PARAM_INT);
         $enrolment = $DB->get_record('user_enrolments', array('id' => $ueid), '*');
@@ -107,37 +107,10 @@ class userenrolment {
 
         $form->close();
 
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'userenrolment_status');
         ?>
         <script>
-            $('#timeend-status').change(timeend_status_change);
-            $('#status').change(status_change);
 
-            function timeend_status_change(delay) {
-                if (delay != 0) {
-                    delay = 400;
-                }
-
-                if ($('#timeend-status').val() == 1) {
-                    $('.area_timeend').show(delay);
-                } else {
-                    $('.area_timeend').hide(delay);
-                }
-            }
-
-            function status_change(delay) {
-                if (delay != 0) {
-                    delay = 400;
-                }
-
-                if ($('#status').val() == 0) {
-                    $('.area-inscricao-times').show(delay);
-                } else {
-                    $('.area-inscricao-times').hide(delay);
-                }
-            }
-
-            timeend_status_change(0);
-            status_change(0);
         </script>
         <?php
         dashboard_util::end_page();
