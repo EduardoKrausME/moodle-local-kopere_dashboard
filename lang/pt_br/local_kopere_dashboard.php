@@ -168,10 +168,9 @@ $string['loginusername'] = 'Tempo para se conectar com uma conta de usuário fal
 $string['loginusermoreinfo'] = 'Medindo o tempo para logar no Moodle com uma conta de usuário falsa';
 
 // Performancemonitor.
-$string['performancemonitor_rede'] = 'Rede';
 $string['performancemonitor_cpu'] = 'Uso do CPU';
 $string['performancemonitor_memory'] = 'Memória';
-$string['performancemonitor_hd'] = 'HD (livre)';
+$string['performancemonitor_hd'] = 'Moodledata';
 $string['performancemonitor_performance'] = 'Desempenho';
 $string['performancemonitor_min'] = '{$a} min: ';
 

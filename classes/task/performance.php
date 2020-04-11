@@ -21,7 +21,7 @@ class performance extends \core\task\scheduled_task {
     }
 
     /**
-     *
+     * @throws \coding_exception
      */
     public function execute() {
         if (!performancemonitor::CRON) {
@@ -31,7 +31,7 @@ class performance extends \core\task\scheduled_task {
         $time = time();
         $this->add_data($time, 'cpu',     performancemonitor::cpu(true));
         $this->add_data($time, 'memory',  performancemonitor::memory(true));
-        $this->add_data($time, 'disk',    performancemonitor::disk(true));
+        $this->add_data($time, 'disk',    performancemonitor::disk_moodledata(true));
         $this->add_data($time, 'average', performancemonitor::load_average(true));
         $this->add_data($time, 'average', performancemonitor::online());
     }
