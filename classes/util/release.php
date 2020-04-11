@@ -37,6 +37,6 @@ class release {
         global $CFG;
         $releases = explode('.', $CFG->release);
 
-        return intval($releases[0]) . "." . intval($releases[1]);
+        return intval($releases[0]) + (intval($releases[1]) * 0.1);
     }
 }

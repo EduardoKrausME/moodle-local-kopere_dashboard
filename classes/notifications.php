@@ -38,6 +38,7 @@ use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\mensagem;
+use local_kopere_dashboard\util\release;
 use local_kopere_dashboard\util\title_util;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
@@ -411,8 +412,10 @@ class notifications extends notificationsutil {
         }
 
         $eventdata = new message();
-        $eventdata->courseid = SITEID;
-        $eventdata->modulename = 'moodle';
+        if (release::version() >= 3.2) {
+            $eventdata->courseid = SITEID;
+            $eventdata->modulename = 'moodle';
+        }
         $eventdata->component = 'local_kopere_dashboard';
         $eventdata->name = 'kopere_dashboard_messages';
         $eventdata->userfrom = get_admin();
