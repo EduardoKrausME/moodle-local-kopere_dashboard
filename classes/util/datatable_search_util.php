@@ -128,27 +128,34 @@ class datatable_search_util {
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public function execute_sql_and_return($sql, $group = '', $params = null, $functionbeforereturn = null) {
+    public function execute_sql_and_return($sql, $group = null, $params = null, $functionbeforereturn = null) {
         global $DB, $CFG;
 
-        $sqlsearch = $sql . " $this->where $group";
-        $sqlsearch = str_replace('{[columns]}', 'count(*) as num', $sqlsearch);
+        $find = str_replace("GROUP BY", "", $group);
 
-        $sqltotal = $sql . " $group";
-        $sqltotal = str_replace('{[columns]}', 'count(*) as num', $sqltotal);
+        $sqlsearch = $sql . " " . $this->where;
+        $sqltotal = $sql;
+        if ($group) {
+            $sqlsearch = str_replace('{[columns]}', "count(DISTINCT {$find}) as num", $sqlsearch);
+            $sqltotal  = str_replace('{[columns]}', "count(DISTINCT {$find}) as num", $sqltotal);
+        } else {
+            $sqlsearch = str_replace('{[columns]}', 'count(*) as num', $sqlsearch);
+            $sqltotal  = str_replace('{[columns]}', 'count(*) as num', $sqltotal);
+        }
 
         if ($CFG->dbtype == 'pgsql') {
-            $sqlreturn = $sql . " $this->where \n $group\n ORDER BY $this->order $this->order_dir \n
-                                                            LIMIT $this->length OFFSET $this->start";
+            $sqlreturn = $sql . " $this->where $group ORDER BY $this->order $this->order_dir \n
+                                LIMIT $this->length OFFSET $this->start";
         } else {
-            $sqlreturn = $sql . " $this->where \n $group\n ORDER BY $this->order $this->order_dir \n
-                                                            LIMIT $this->start, $this->length";
+            $sqlreturn = $sql . " $this->where $group ORDER BY $this->order $this->order_dir \n
+                                LIMIT $this->start, $this->length";
         }
         $sqlreturn = str_replace('{[columns]}', implode(', ', $this->column_select), $sqlreturn);
 
         $result = $DB->get_records_sql($sqlreturn, $params);
         $total = $DB->get_record_sql($sqltotal, $params);
         $totalnum = $total->num;
+
         if ($this->where) {
             $search = $DB->get_record_sql($sqlsearch, $params);
             $searchnum = $search->num;
