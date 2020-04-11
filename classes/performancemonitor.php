@@ -117,15 +117,9 @@ class performancemonitor {
 
 
         $inputline = shell_exec('top -b -n 2');
+
         preg_match_all(
-            "/Cpu.*?([0-9.]+)" .
-            "%us.*?([0-9.]+)" .
-            "%sy.*?([0-9.]+)" .
-            "%ni.*?([0-9.]+)" .
-            "%id.*?([0-9.]+)" .
-            "%wa.*?([0-9.]+)" .
-            "%hi.*?([0-9.]+)" .
-            "%si.*?([0-9.]+)%st/",
+            "/Cpu.*?([0-9.]+).*?us.*?([0-9.]+).*?sy.*?([0-9.]+).*?ni/",
             $inputline, $outputcpuprocess);
 
         $us = $outputcpuprocess[1][1];
