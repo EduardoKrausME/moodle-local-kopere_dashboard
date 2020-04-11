@@ -23,7 +23,7 @@
 
 ob_start();
 define('AJAX_SCRIPT', false);
-define('OPEN_INTERNAL', true);
+define('OPEN_INTERNAL', false);
 
 define('BENCHSTART', microtime(true));
 require('../../config.php');
