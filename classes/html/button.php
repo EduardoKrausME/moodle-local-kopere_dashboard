@@ -144,10 +144,7 @@ class button {
     public static function icon($icon, $link, $ispopup = true) {
         global $CFG;
         if ($ispopup) {
-            return "<a data-toggle=\"modal\" data-target=\"#modal-edit\"
-                       onclick=\"loadRemoteModal('load-ajax.php{$link}')\"
-                       href=\"#{$link}\"
-                       data-href=\"load-ajax.php{$link}\">
+            return "<a href='{$link}'>
                         <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" width=\"19\">
                     </a>";
         } else {
@@ -164,9 +161,10 @@ class button {
      */
     public static function icon_popup_table($icon, $link) {
         global $CFG;
-        return "<img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" 
-                     width=\"19\" role=\"button\"
-                     onclick=\"loadRemoteModal('load-ajax.php{$link}')\">";
+        return "<a href='{$link}'>
+                    <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" 
+                         width=\"19\" role=\"button\">
+                 </a>";
     }
 
     /**

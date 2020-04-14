@@ -140,7 +140,7 @@ echo $OUTPUT->footer();
 
 $html = ob_get_contents();
 ob_clean();
-$dashboard_menu_html_old .= "<style>.dashboard_menu_html-content{display:none !important}</style>";
+$dashboard_menu_html_old = "<style>.dashboard_menu_html-content{display:none !important}</style>" . $dashboard_menu_html_old;
 
 
 if (preg_match_all('/(.*)(<div.*?class="block_navigation.*)/', $html)) {
