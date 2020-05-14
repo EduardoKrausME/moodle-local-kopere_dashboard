@@ -182,7 +182,7 @@ class webpages {
      * @throws \dml_exception
      */
     public function page_edit() {
-        global $DB,$PAGE;
+        global $DB, $PAGE;
 
         $id = optional_param('id', 0, PARAM_INT);
 
@@ -219,6 +219,20 @@ class webpages {
                 ->set_value($webpages->link)
                 ->set_required()
         );
+
+        $courses1 = [(object)[
+            'id' => 0,
+            'fullname' => "(Nenhum curso)"]];
+        $courses2 = $DB->get_records_sql('SELECT id, fullname FROM {course} WHERE id > 1 ORDER BY fullname ASC');
+        $courses = array_merge($courses1, $courses2);;
+
+        $form->add_input(
+            input_select::new_instance()
+                ->set_title('Curso')
+                ->set_name('courseid')
+                ->set_value($webpages->courseid)
+                ->set_values($courses, 'id', 'fullname'));
+
         $form->add_input(
             input_select::new_instance()
                 ->set_title(get_string_kopere('webpages_page_menu'))
@@ -330,7 +344,7 @@ class webpages {
      * @throws \dml_exception
      */
     public function menu_edit() {
-        global $DB,$PAGE;
+        global $DB, $PAGE;
 
         $id = optional_param('id', 0, PARAM_INT);
 
