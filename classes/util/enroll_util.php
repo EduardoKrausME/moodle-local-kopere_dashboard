@@ -51,7 +51,7 @@ class enroll_util {
             array(
                 'courseid' => $course->id,
                 'enrol' => 'manual'
-            ));
+            ), '*', IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
         }
@@ -61,7 +61,7 @@ class enroll_util {
                 'roleid' => 5,
                 'contextid' => $context->id,
                 'userid' => $user->id
-            ));
+            ), '*', IGNORE_MULTIPLE);
         if ($testroleassignments == null) {
             return false;
         }
@@ -70,7 +70,7 @@ class enroll_util {
             array(
                 'enrolid' => $enrol->id,
                 'userid' => $user->id
-            ));
+            ), '*', IGNORE_MULTIPLE);
         if ($userenrolments != null) {
             return !$userenrolments->status;
         } else {
@@ -131,7 +131,7 @@ class enroll_util {
      * @return bool
      * @throws \dml_exception
      */
-    public static function enrol($course, $user, $timestart, $timeend, $status, $roleid=5) {
+    public static function enrol($course, $user, $timestart, $timeend, $status, $roleid = 5) {
         global $DB, $USER;
 
 
@@ -159,7 +159,7 @@ class enroll_util {
             ));
         if ($testroleassignments == null) {
             $roleassignments = new \stdClass();
-            $roleassignments->roleid = $roleid    ;
+            $roleassignments->roleid = $roleid;
             $roleassignments->contextid = $context->id;
             $roleassignments->userid = $user->id;
             $roleassignments->timemodified = time();
