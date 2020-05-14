@@ -32,23 +32,11 @@ defined('MOODLE_INTERNAL') || die();
  *
  * @package local_kopere_dashboard\html\inputs
  */
-class input_checkbox extends input_select {
+class input_checkbox extends input_base {
     /**
      * @var bool
      */
     private $checked = false;
-
-    /**
-     * input_checkbox constructor.
-     * @throws \coding_exception
-     */
-    public function __construct() {
-        $this->set_value("false");
-        $this->set_values(array(
-            array('key' => 0, 'value' => get_string('no')),
-            array('key' => 1, 'value' => get_string('yes')),
-        ));
-    }
 
     /**
      * @return input_checkbox
@@ -69,16 +57,9 @@ class input_checkbox extends input_select {
      * @param $checked
      *
      * @return $this
-     * @throws \coding_exception
      */
     public function set_checked($checked) {
         $this->checked = $checked;
-
-        if ($this->checked) {
-            $this->set_value(1);
-        } else {
-            $this->set_value(0);
-        }
 
         return $this;
     }
@@ -87,16 +68,37 @@ class input_checkbox extends input_select {
      * @param $configname
      *
      * @return $this
-     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function set_checked_by_config($configname) {
         $this->set_name($configname);
-        if (config::get_key_int($configname)) {
-            $this->set_checked(1);
-        } else {
-            $this->set_checked(0);
+        if (config::get_key($configname)) {
+            $this->checked = true;
         }
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function to_string() {
+        //$return = "<input type='hidden' name='{$this->name}' value='0'/>";
+        $return = "<input id='{$this->name}' name='{$this->name}' type='checkbox' ";
+
+        if ($this->value) {
+            $value = htmlentities($this->value);
+            $return .= "value='{$value}' ";
+        }
+        if ($this->style) {
+            $return .= "style='{$this->style}' ";
+        }
+        if ($this->checked) {
+            $return .= 'checked="checked" ';
+        }
+
+        $return .= "class='ios-checkbox {$this->class}'>";
+
+        return $return;
     }
 }

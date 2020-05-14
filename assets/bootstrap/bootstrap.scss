@@ -1926,7 +1926,7 @@ input[type="search"] {
             float: left;
         }
         .help-block {
-            padding-top: 28px;
+            //padding-top: 28px;
         }
     }
 }
@@ -4317,6 +4317,7 @@ a.thumbnail.active {
     margin-bottom: 20px;
     border: 1px solid transparent;
     border-radius: 4px;
+    word-wrap: break-word;
 }
 .alert h4 {
     margin-top: 0;
