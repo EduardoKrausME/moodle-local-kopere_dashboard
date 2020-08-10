@@ -59,6 +59,7 @@ class backup {
                 echo '<div style="text-align: center;">
                           <p>' . get_string_kopere('backup_sleep') . '</p>';
 
+                button::add(get_string_kopere('backup_newnow'), '?classname=backup&method=execute');
                 button::add(get_string_kopere('backup_newsqlnow'), '?classname=backup&method=execute_dumpsql');
 
                 echo '</div>';
@@ -105,12 +106,35 @@ class backup {
     }
 
     /**
+     *
+     */
+    public function execute() {
+        global $CFG;
+
+        if (!server_util::function_enable('shell_exec')) {
+            mensagem::agenda_mensagem_danger(get_string_kopere('backup_noshell'));
+            header::location('?classname=backup&method=dashboard');
+        }
+
+        $backupfullpath = $this->get_backup_path() . 'backup_' . date('Y-m-d-H-i');
+
+        $comando = "/usr/bin/mysqldump -h {$CFG->dbhost} -u {$CFG->dbuser} -p{$CFG->dbpass} {$CFG->dbname} > {$backupfullpath}.sql";
+        shell_exec($comando);
+
+        $comando = "tar -zcvf {$backupfullpath}.tar.gz {$CFG->dataroot}/filedir {$CFG->dataroot}/kopere* {$backupfullpath}.sql";
+        shell_exec($comando);
+
+        unlink("{$backupfullpath}.sql");
+
+        mensagem::agenda_mensagem_success(get_string_kopere('backup_execute_success'));
+        header::location('?classname=backup&method=dashboard');
+    }
+
+    /**
      * @throws \dml_exception
      */
     public function execute_dumpsql() {
         global $DB, $CFG, $PAGE;
-
-        set_time_limit(0);
 
         dashboard_util::add_breadcrumb(get_string_kopere('backup_title'), '?classname=backup&method=dashboard');
         dashboard_util::add_breadcrumb(get_string_kopere('backup_execute_exec'));
@@ -192,7 +216,8 @@ class backup {
         echo '<div id="end-page-to" style="text-align: center;">';
         button::add(get_string_kopere('backup_returnlist'), '?classname=backup&method=dashboard');
         echo '</div>';
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'animate_scrollTop',array("#end-page-to"));
+
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'animate_scrollTop', array("#end-page-to"));
 
         echo '</div>';
 
@@ -210,6 +235,9 @@ class backup {
         $backupfile = $this->get_backup_path() . $file;
 
         if (file_exists($backupfile)) {
+            preg_match("/backup_(\d+)-(\d+)-(\d+)-(\d+)-(\d+).tar.gz/", $file, $p);
+            $data = $p[3] . '/' . $p[2] . '/' . $p[1] . ' às ' . $p[4] . ':' . $p[5];
+
             if ($status) {
                 @unlink($backupfile);
 
@@ -239,7 +267,6 @@ class backup {
 
     /**
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public function download() {
         ob_clean();
