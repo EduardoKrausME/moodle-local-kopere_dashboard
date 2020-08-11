@@ -39,7 +39,6 @@ use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\mensagem;
 use local_kopere_dashboard\util\release;
-use local_kopere_dashboard\util\title_util;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
 /**
