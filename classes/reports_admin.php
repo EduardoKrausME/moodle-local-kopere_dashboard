@@ -68,10 +68,6 @@ class reports_admin {
             $koperereports = $DB->get_record('kopere_dashboard_reports',
                 array('id' => $report));
             header::notfound_null($koperereports, get_string_kopere('reports_notfound'));
-
-            //echo '<pre>';
-            //print_r($koperereports);
-            //echo '</pre>';
         }
 
         $form = new form("?classname=reports&method=save&report={$report}");
@@ -83,10 +79,6 @@ class reports_admin {
                 ->set_title(get_string_kopere('reports_settings_form_title'))
                 ->set_name('title')
                 ->set_value($koperereports->title));
-
-        echo '<pre>';
-        print_r($koperereports);
-        echo '</pre>';
 
         $form->add_input(
             input_checkbox::new_instance()
