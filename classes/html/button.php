@@ -184,9 +184,6 @@ class button {
         }
 
         $bt = '';
-        if ($p) {
-            $bt .= '<div style="width: 100%; min-height: 30px; padding: 0 0 20px;">';
-        }
 
         if ($modal) {
             $bt
@@ -199,15 +196,14 @@ class button {
         }
 
         if ($p) {
-            $bt .= '</div>';
+            $bt .= '<div style="width: 100%; min-height: 30px; padding: 0 0 20px;">' . $bt . '</div>';
         }
 
         if ($return) {
             return $bt;
         } else {
             echo $bt;
+            return '';
         }
-
-        return '';
     }
 }
