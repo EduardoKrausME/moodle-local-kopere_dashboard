@@ -30,8 +30,7 @@
         define(['jquery', 'local_kopere_dashboard/dataTables'], function($) {
             return factory($, window, document);
         });
-    }
-    else if (typeof exports === 'object') {
+    } else if (typeof exports === 'object') {
         // CommonJS
         module.exports = function(root, $) {
             if (!root) {
@@ -39,7 +38,7 @@
             }
 
             if (!$ || !$.fn.dataTable) {
-                $ = require('datatables.net')(root, $).$;
+                $ = require('local_kopere_dashboard/dataTables')(root, $).$;
             }
 
             return factory($, root, root.document);

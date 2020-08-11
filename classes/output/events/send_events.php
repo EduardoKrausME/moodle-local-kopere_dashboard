@@ -27,6 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 use core\message\message;
 use local_kopere_dashboard\util\config;
+use local_kopere_dashboard\util\release;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
 /**
@@ -196,8 +197,10 @@ class send_events {
             $htmlmessage = str_replace('{[manager]}', $magager, $htmlmessage);
 
             $eventdata = new message();
-            $eventdata->courseid = SITEID;
-            $eventdata->modulename = 'moodle';
+            if (release::version() >= 3.2) {
+                $eventdata->courseid = SITEID;
+                $eventdata->modulename = 'moodle';
+            }
             $eventdata->component = 'local_kopere_dashboard';
             $eventdata->name = 'kopere_dashboard_messages';
             $eventdata->userfrom = $userfrom;

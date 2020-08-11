@@ -9,8 +9,8 @@ define([
 
             console.log("form_popup.js");
 
-            if ($(".modal-content input.single-daterange").length) {
-                $(".modal-content input.single-daterange").daterangepicker({
+            if ($(".kopere-modal-content input.single-daterange").length) {
+                $(".kopere-modal-content input.single-daterange").daterangepicker({
                     locale                : {
                         format           : 'DD/MM/YYYY',
                         separator        : ' - ',
@@ -29,9 +29,9 @@ define([
                     "alwaysShowCalendars" : true
                 });
             }
-            if ($(".modal-content input.single-datetimerange").length) {
+            if ($(".kopere-modal-content input.single-datetimerange").length) {
                 console.log("single-datetimerange eba");
-                $(".modal-content input.single-datetimerange").daterangepicker({
+                $(".kopere-modal-content input.single-datetimerange").daterangepicker({
                     locale                : {
                         format           : 'DD/MM/YYYY HH:mm',
                         separator        : ' - ',
@@ -53,11 +53,11 @@ define([
                 });
             }
 
-            if ($(".modal-content form.validate").length) {
-                $(".modal-content form.validate").validator();
+            if ($(".kopere-modal-content form.validate").length) {
+                $(".kopere-modal-content form.validate").validator();
             }
 
-            $('.modal-content .button-actions').click(function(event) {
+            $('.kopere-modal-content .button-actions').click(function(event) {
                 event.stopImmediatePropagation();
             });
         }

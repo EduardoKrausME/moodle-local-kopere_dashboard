@@ -78,7 +78,7 @@ class header {
             header('HTTP/1.0 404 Not Found');
         }
 
-        if (OPEN_INTERNAL && !$PAGE->requires->is_head_done()) {
+        if (!$PAGE->requires->is_head_done()) {
             $PAGE->set_context(\context_system::instance());
             $PAGE->set_pagetype('admin-setting');
             $PAGE->set_pagelayout('standard');
@@ -103,9 +103,7 @@ class header {
 
         dashboard_util::end_page();
 
-        if (OPEN_INTERNAL) {
-            echo $OUTPUT->footer();
-        }
+        echo $OUTPUT->footer();
         end_util::end_script_show();
     }
 }

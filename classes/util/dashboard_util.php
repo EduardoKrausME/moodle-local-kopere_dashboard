@@ -26,6 +26,7 @@ namespace local_kopere_dashboard\util;
 defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\html\button;
+use theme_flixcurso\colors;
 
 /**
  * Class dashboard_util
@@ -72,24 +73,24 @@ class dashboard_util {
 
         if ($settingurl != null) {
             $link
-                .= "<div class=\"setting\">
-                        <a data-toggle=\"modal\" data-target=\"#modal-edit\"
-                           data-href=\"load-ajax.php{$settingurl}\"
-                           href=\"#\">
-                            <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg\"
-                                 alt=\"Settings\" >
+                .= "<div class='setting'>
+                        <a data-toggle='modal' data-target='#modal-edit'
+                           data-href='load-ajax.php{$settingurl}'
+                           href='#'>
+                            <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg'
+                                 alt='Settings' >
                         </a>
                     </div>";
         }
 
         if ($infourl == null) {
-            return "<h3 class=\"element-header\">
+            return "<h3 class='element-header'>
                         {$title}
                         {$link} 
                     </h3>";
         } else {
             $buttonhelp = button::help($infourl);
-            return "<h3 class=\"element-header\">
+            return "<h3 class='element-header'>
                         {$title}
                         {$link}
                         {$buttonhelp}
@@ -111,12 +112,12 @@ class dashboard_util {
             return;
         } else {
             $return
-                .= "<ul class=\"breadcrumb\">
+                .= "<ul class='breadcrumb'>
                         <li>
-                            <a target=\"_top\" href=\"{$CFG->wwwroot}/\">{$SITE->fullname}</a>
+                            <a target='_top' href='{$CFG->wwwroot}/'>{$SITE->fullname}</a>
                         </li>
                         <li>
-                            <a href=\"?classname=dashboard&method=start\">" . get_string_kopere('dashboard') . "</a>
+                            <a href='?classname=dashboard&method=start'>" . get_string_kopere('dashboard') . "</a>
                         </li>";
 
 
@@ -128,7 +129,7 @@ class dashboard_util {
                         $PAGE->navbar->add($item);
                     }
                 } else {
-                    $return .= "<li><a href=\"{$item[1]}\">{$item[0]}</a></li>";
+                    $return .= "<li><a href='{$item[1]}'>{$item[0]}</a></li>";
 
                     if ($CFG->kopere_dashboard_open == 'internal') {
                         $PAGE->navbar->add($item[0], $item[1]);
@@ -138,12 +139,12 @@ class dashboard_util {
 
             if ($settingurl != null) {
                 $return
-                    .= "<li class=\"setting\">
-                            <a data-toggle=\"modal\" data-target=\"#modal-edit\"
-                               data-href=\"load-ajax.php{$settingurl}\"
-                               href=\"#\">
-                                <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg\"
-                                     alt=\"Settings\" >
+                    .= "<li class='setting'>
+                            <a data-toggle='modal' data-target='#modal-edit'
+                               data-href='load-ajax.php{$settingurl}'
+                               href='#'>
+                                <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg'
+                                     alt='Settings' >
                             </a>
                         </li>";
             }
@@ -198,14 +199,13 @@ class dashboard_util {
             if (strpos($submenu->get_icon(), 'http') === 0) {
                 $iconurl = $submenu->get_icon();
             } else {
-                $iconurl = "{$CFG->wwwroot}/local/{$plugin}/assets/dashboard/img/iconactive/{$submenu->get_icon()}.svg";
+                $iconurl = self::get_icon("/local/{$plugin}/assets/dashboard/img/iconactive/{$submenu->get_icon()}.svg");
             }
 
             $submenuhtml
-                .= "<li class=\"contains_branch {$classsub}\">
-                        <a href=\"?classname={$submenu->get_classname()}&method={$submenu->get_methodname()}{$submenu->get_urlextra()}\">
-                            <img src=\"{$iconurl}\"
-                                 class=\"menu-icon\" alt=\"Icon\">
+                .= "<li class='contains_branch {$classsub}'>
+                        <a href='?classname={$submenu->get_classname()}&method={$submenu->get_methodname()}{$submenu->get_urlextra()}'>
+                            <img src='{$iconurl}' class='menu-icon' alt='Icon {$submenu->get_title()}'>
                             <span>{$submenu->get_title()}</span>
                         </a>
                     </li>";
@@ -214,17 +214,45 @@ class dashboard_util {
             $submenuhtml = "<ul class='submenu submenu-kopere'>{$submenuhtml}</ul>";
         }
 
+        $iconurl = self::get_icon("/local/{$plugin}/assets/dashboard/img/icon{$class}/{$menu->get_icon()}.svg");
         $retorno .= "
-                <li class=\"$class\">
-                    <a href=\"?classname={$menu->get_classname()}&method={$menu->get_methodname()}\">
-                        <img src=\"{$CFG->wwwroot}/local/{$plugin}/assets/dashboard/img/icon{$class}/{$menu->get_icon()}.svg\"
-                             class=\"menu-icon\" alt=\"Icon\">
+                <li class='$class'>
+                    <a href='?classname={$menu->get_classname()}&method={$menu->get_methodname()}'>
+                        <img src='{$iconurl}' class='menu-icon' alt='Icon {$menu->get_name()}'>
                         <span>{$menu->get_name()}</span>
                     </a>
                     {$submenuhtml}
                 </li>";
 
         return $retorno;
+    }
+
+    /**
+     * @param $filename
+     * @return string
+     */
+    private static function get_icon($filename) {
+        global $CFG;
+        $dirroot_filename = $CFG->dirroot . $filename;
+        if (file_exists($dirroot_filename)) {
+            $svg = file_get_contents($dirroot_filename);
+
+            // Caso o thema for o flixcurso, troca as cores dos icones
+            if ($CFG->theme == 'flixcurso' && OPEN_INTERNAL) {
+                $svg = str_ireplace("#3e4b5b", "#aaa", $svg);
+
+                $cores = colors::get_theme_color();
+
+                $svg = str_ireplace("#308af4", $cores['color_secundary'], $svg);
+                $svg = str_ireplace("#4c9c8d", $cores['color_primary'], $svg);
+            }
+
+            $svg64 = base64_encode($svg);
+            return "data:image/svg+xml;base64,{$svg64}";
+
+        } else {
+            return $CFG->wwwroot . $filename;
+        }
     }
 
     /**
@@ -265,7 +293,6 @@ class dashboard_util {
                   require(['local_kopere_dashboard/form_popup'], function(amd) {amd.init(); 
                   M.util.js_complete('local_kopere_dashboard/form_popup');})
               </script>";
-        // $PAGE->requires->js_call_amd('local_kopere_dashboard/form_popup', 'init');
 
         end_util::end_script_show();
     }

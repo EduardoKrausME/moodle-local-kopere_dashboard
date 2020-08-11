@@ -14,27 +14,37 @@ namespace local_kopere_dashboard\util;
  */
 class node {
 
+    /**
+     * @throws \coding_exception
+     */
     public static function add_admin_code() {
         global $PAGE, $USER;
 
         if (node::is_enables()) {
-            echo "<script src=\"" . node::geturl_socketio() . "\"></script>";
-            // $PAGE->requires->js("/local/kopere_dashboard/node/app.js");
+            $urlnode = self::base_url();
+            if (isset($USER->id) && $USER->id >= 2) {
+                $id = $USER->id;
+                $fullname = fullname($USER);
+            } else {
+                $id = 0;
+                $fullname = "Visitante";
+            }
 
-            $userid = intval($USER->id);
-            $fullname = fullname($USER);
-            $servertime = time();
-            $urlnode = node::base_url();
-
-            $PAGE->requires->js_init_call("startServer", array($userid, $fullname, $servertime, $urlnode, 'z35admin'));
-            //    echo "<script type=\"text/javascript\">
-            //              startServer ( {$userid}, \"{$fullname}\", {$servertime}, \"{$urlnode}\", 'z35admin' );
-            //          </script>";
+            if (optional_param('classname', false, PARAM_TEXT) == 'useronline') {
+                $PAGE->requires->js_call_amd('local_kopere_dashboard/online_app', 'connectServer',
+                    array($id, $fullname, time(), $urlnode, 'z35admin'));
+            } else {
+                $PAGE->requires->js_call_amd('local_kopere_dashboard/online_app', 'connectServer',
+                    array($id, $fullname, time(), $urlnode));
+            }
         }
     }
 
+    /**
+     * @return bool
+     */
     public static function is_enables() {
-        if (config::get_key('nodejs-status')) {
+        if (config::get_key_int('nodejs-status')) {
             return true;
         }
         return false;
@@ -44,7 +54,7 @@ class node {
      * @return bool
      */
     public static function is_ssl() {
-        if (config::get_key('nodejs-ssl')) {
+        if (config::get_key_int('nodejs-ssl')) {
             return true;
         }
         return false;

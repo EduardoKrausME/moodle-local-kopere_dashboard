@@ -23,7 +23,7 @@
 
 ob_start();
 define('AJAX_SCRIPT', false);
-define('OPEN_INTERNAL', true);
+define('OPEN_INTERNAL', false);
 
 define('BENCHSTART', microtime(true));
 require('../../config.php');
@@ -137,8 +137,8 @@ echo "<link rel=\"icon\" href=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboa
     </div>
 
     <div class="modal fade" id="modal-edit" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="kopere-modal-dialog">
+            <div class="kopere-modal-content">
                 <div class="loader"></div>
             </div>
         </div>

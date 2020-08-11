@@ -168,7 +168,6 @@ $string['loginusername'] = 'Tiempo para conectar con una cuenta de usuario falso
 $string['loginusermoreinfo'] = 'Midiendo el tiempo para cargar la página de ingreso con una cuenta falsa de usuario';
 
 // Performancemonitor.
-$string ['performancemonitor_rede'] = 'Red';
 $string ['performancemonitor_cpu'] = 'Uso del CPU';
 $string ['performancemonitor_memory'] = 'Memoria';
 $string ['performancemonitor_hd'] = 'HD (libre)';
@@ -490,6 +489,30 @@ $string['webpages_page_updated'] = '¡Página actualizada!';
 $string['webpages_page_deleted'] = '¡Página eliminada exitosamente!';
 $string['webpages_page_delete'] = 'Excluyendo Página';
 $string['webpages_page_delete_confirm'] = '¿Realmente desea eliminar la página <strong>{$a->title}</strong>?';
+
+// Acessos dos usuários
+$string['useraccess_title'] = 'Acceso del usuario';
+
+$string['userimport_title'] = 'Importar Usuarios';
+$string['userimport_title_proccess'] = 'Procesando archivo "{$a}"';
+$string['userimport_upload'] = 'Arrastrar aquí archivos CSV o hacer click para abrir la caja de búsqueda.';
+$string['userimport_userdata'] = 'Datos del Usuario';
+$string['userimport_userfields'] = 'Campos extra del perfil';
+$string['userimport_wait'] = 'Por favor espere a que los datos sean procesados. Después de procesarlos, estará disponible una hoja de cálculo con datos insertados.';
+$string['useronline_settings_port'] = 'Puerto del servidor';
+$string['useronline_settings_ssl'] = '¿Habilitar SSL?';
+$string['useronline_settings_status'] = 'Habilitar Servidor de Sincronización de Usuarios En-línea';
+$string['useronline_settings_url'] = 'URL del Servidor';
+$string['useronline_subtitle'] = 'Abrir pestañas con Moodle';
+$string['useronline_table_date'] = 'Datos';
+$string['useronline_table_device'] = 'Dispositivo';
+$string['useronline_table_focus'] = 'Foco';
+$string['useronline_table_fullname'] = 'Nombre';
+$string['useronline_table_navigator'] = 'Navegador';
+$string['useronline_table_os'] = 'Sistema Operativo';
+$string['useronline_table_page'] = 'Página';
+$string['useronline_title'] = 'Usuarios En línea';
+$string['webpages_allpages'] = 'Todas las páginas';
 $string['webpages_menu_create'] = 'Crear nuevo Menú';
 $string['webpages_menu_help'] = 'Ayuda con Menús';
 $string['webpages_menu_new'] = 'Nuevo Menú';
@@ -515,7 +538,10 @@ $string['webpages_theme_popup'] = 'Sin navegación, ni bloques, ni encabezado';
 $string['webpages_theme_frametop'] = 'Sin bloques y con mínimo pie de página';
 $string['webpages_theme_print'] = 'Solamente mostrar contenido y encabezados básicos';
 $string['webpages_theme_report'] = 'El diseño de página empleado para reportes';
-$string['webpages_allpages'] = 'Todas las páginas';
+$string['
+
+
+'] = 'Todas las páginas';
 
 $string['notification_local_kopere_dashboard'] = 'Kopere Dashboard';
 $string['notification_local_kopere_hotmoodle'] = 'Kopere HotMoodle';

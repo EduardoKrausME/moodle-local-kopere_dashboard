@@ -1,9 +1,25 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito:300,400,700);
 #kopere_dashboard_div {
+    color: #3a3a3a;
+    .table {
+        color: rgba(0, 0, 0, 0.9);
+        th {
+            color: rgba(58, 58, 58, 0.95);
+            &:hover {
+                color: #3a3a3a;
+            }
+        }
+        td {
+            &:hover {
+                color: #3a3a3a;
+            }
+        }
+    }
     @import "dashboard/css/dashboard";
     @import "bootstrap/bootstrap";
     @import "dataTables/jquery.dataTables";
     @import "dropzone/css/dropzone";
+    @import "iosCheckbox";
     .breadcrumb {
         display: none !important;
     }
@@ -73,7 +89,13 @@
         }
     }
     .dashboard_menu_html {
-        &.logo {
+        .logo-w {
+            img {
+                width: 100%;
+                max-width: 270px;
+            }
+        }
+        .kopere-logo {
             text-align: center;
             margin: 10% 10% 0;
             img {
@@ -88,6 +110,7 @@
     opacity: .8;
 }
 .kopere_dashboard_modal_item {
+    color: #3a3a3a;
     .modal-header {
         display: block !important;
     }

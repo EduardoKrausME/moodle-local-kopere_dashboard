@@ -38,7 +38,7 @@ use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\mensagem;
-use local_kopere_dashboard\util\title_util;
+use local_kopere_dashboard\util\release;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
 /**
@@ -115,6 +115,8 @@ class notifications extends notificationsutil {
      *
      */
     public function add() {
+        global $PAGE;
+
         dashboard_util::add_breadcrumb(get_string_kopere('notification_title'), '?classname=notifications&method=dashboard');
         dashboard_util::add_breadcrumb(get_string_kopere('notification_new'));
         dashboard_util::start_page();
@@ -144,16 +146,7 @@ class notifications extends notificationsutil {
 
         $form->close();
 
-        ?>
-        <script>
-            $('#module').change(function() {
-                var data = {
-                    module : $(this).val()
-                };
-                $('#restante-form').load('load-ajax.php?classname=notificationsutil&method=add_form_extra', data);
-            });
-        </script>
-        <?php
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'notifications_add_form_extra');
 
         echo '</div>';
         dashboard_util::end_page();
@@ -358,7 +351,8 @@ class notifications extends notificationsutil {
      * @throws \dml_exception
      */
     public function settings() {
-        global $CFG;
+        global $CFG, $PAGE;
+
         ob_clean();
         $redirect = urlencode("classname=notifications&method=dashboard");
         dashboard_util::add_breadcrumb(get_string_kopere('notification_setting_config'));
@@ -387,25 +381,8 @@ class notifications extends notificationsutil {
 
         $form->close();
 
-        ?>
-        <script>
-            $('#notificacao-template').change(notificacao_template_change);
-
-            function notificacao_template_change() {
-                var data = {
-                    template : $('#notificacao-template').val()
-                };
-                $('#area-mensagem-preview').load('load-ajax.php?classname=notifications&method=settings_load_template', data);
-            }
-
-            notificacao_template_change();
-        </script>
-        <style>
-            .table-messagem {
-                max-width: 600px;
-            }
-        </style>
-        <?php
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'notifications_settings_load_template');
+        echo "<style>.table-messagem{max-width:600px;}</style>";
 
         dashboard_util::end_page();
     }
@@ -434,8 +411,10 @@ class notifications extends notificationsutil {
         }
 
         $eventdata = new message();
-        $eventdata->courseid = SITEID;
-        $eventdata->modulename = 'moodle';
+        if (release::version() >= 3.2) {
+            $eventdata->courseid = SITEID;
+            $eventdata->modulename = 'moodle';
+        }
         $eventdata->component = 'local_kopere_dashboard';
         $eventdata->name = 'kopere_dashboard_messages';
         $eventdata->userfrom = get_admin();

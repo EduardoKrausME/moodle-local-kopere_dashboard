@@ -168,10 +168,9 @@ $string['loginusername'] = 'Tempo para se conectar com uma conta de usuário fal
 $string['loginusermoreinfo'] = 'Medindo o tempo para logar no Moodle com uma conta de usuário falsa';
 
 // Performancemonitor.
-$string['performancemonitor_rede'] = 'Rede';
 $string['performancemonitor_cpu'] = 'Uso do CPU';
 $string['performancemonitor_memory'] = 'Memória';
-$string['performancemonitor_hd'] = 'HD (livre)';
+$string['performancemonitor_hd'] = 'Moodledata';
 $string['performancemonitor_performance'] = 'Desempenho';
 $string['performancemonitor_min'] = '{$a} min: ';
 
@@ -244,6 +243,31 @@ $string['reports_context'] = 'Contexto';
 $string['reports_export'] = 'Exportar para Excel';
 $string['reports_noneaccess'] = 'Nenhum acesso';
 $string['reports_access_n'] = 'acessou {$a} vezes';
+
+$string['reports_settings_title'] = 'Editar relatório';
+$string['reports_settings_form_title'] = 'Editar relatório';
+$string['reports_settings_form_enable'] = 'Habilitado?';
+$string['reports_settings_form_reportsql'] = 'SQL do relatório';
+$string['reports_settings_form_prerequisit'] = 'Pré-requisito antes de carregar o relatório';
+$string['reports_settings_form_none'] = 'Nenhum';
+$string['reports_settings_form_prerequisit_listCourses'] = 'Lista de cursos';
+$string['reports_settings_form_prerequisit_badge_status_text'] = 'Altera o status do Badge em Texto';
+$string['reports_settings_form_prerequisit_badge_criteria_type'] = 'Altera o criteria do Badge em Texto';
+$string['reports_settings_form_prerequisit_userfullname'] = 'Executa o fullname($user) em cada linha do relatório';
+$string['reports_settings_form_prerequisit_courses_group_mode'] = 'Coloca o modo do grupo em texto';
+$string['reports_settings_form_foreach'] = 'Alteração de colunas do SQL';
+$string['reports_settings_form_colunas'] = 'Colunas';
+$string['reports_settings_form_colunas_title'] = 'Título';
+$string['reports_settings_form_colunas_chave'] = 'Coluna do SQL';
+$string['reports_settings_form_colunas_type'] = 'Tipo de dado';
+$string['reports_settings_form_colunas_type_int'] = 'Número';
+$string['reports_settings_form_colunas_type_date'] = 'Data';
+$string['reports_settings_form_colunas_type_currency'] = 'Moedas';
+$string['reports_settings_form_colunas_type_text'] = 'Texto';
+$string['reports_settings_form_colunas_type_bytes'] = 'Bytes';
+$string['reports_settings_form_colunas_extra'] = 'Estes abaixo deixe em branco caso não precise!';
+$string['reports_settings_savesuccess'] = 'Salvo com sucesso!';
+$string['reports_settings_form_save'] = 'Salvar relatório';
 
 // Dashboard.
 $string['dashboard_title_user'] = 'Usuários / Ativos';
@@ -388,6 +412,9 @@ $string['useronline_settings_status'] = 'Habilitar Servidor de sincronização d
 $string['useronline_settings_ssl'] = 'Habilitar SSL?';
 $string['useronline_settings_url'] = 'URL do servidor';
 $string['useronline_settings_port'] = 'Porta do servidor';
+
+// Acessos dos usuários
+$string['useraccess_title'] = 'Acessos dos usuários';
 
 // UserImport.
 $string['userimport_title'] = 'Importar Usuários';

@@ -1,0 +1,12 @@
+# Start with hashtag for comments
+# If you define "config.php" the domain accessed must be the same as Moodle
+config.php
+
+# You can start with a wildcard (*) for all subdomains
+*.aulaemvideo.com.br
+
+# Or you can set the exact domain
+www.moodle20.com.br
+
+# If it is just the wildcard (*), it releases all accesses.
+# *

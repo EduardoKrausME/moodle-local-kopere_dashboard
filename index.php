@@ -22,6 +22,7 @@
  */
 
 use \local_kopere_dashboard\util\html;
+define('OPEN_INTERNAL', true);
 
 ob_start();
 require('../../config.php');

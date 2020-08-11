@@ -104,7 +104,7 @@ echo "<link rel=\"icon\" href=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboa
 $dashboard_menu_html_boost = \local_kopere_dashboard\output\menu::create_menu();
 $dashboard_menu_html_boost = str_replace("'", '"', $dashboard_menu_html_boost);
 $dashboard_menu_html_old = "<div id=\"inst0\" class=\"block\">
-            <div class=\"dashboard_menu_html logo\">
+            <div class=\"dashboard_menu_html kopere-logo\">
                 <div class=\"logo-w\">
                     <img class=\"normal\"
                          src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/logo-notext.svg\"
@@ -128,8 +128,8 @@ echo "<div id='kopere_dashboard_div'>
         </div>
 
         <div class=\"modal fade kopere_dashboard_modal_item\" id=\"modal-edit\" role=\"dialog\">
-            <div class=\"modal-dialog\">
-                <div class=\"modal-content\">
+            <div class=\"kopere-modal-dialog\">
+                <div class=\"kopere-modal-content\">
                     <div class=\"loader\"></div>
                 </div>
             </div>
@@ -140,7 +140,7 @@ echo $OUTPUT->footer();
 
 $html = ob_get_contents();
 ob_clean();
-$dashboard_menu_html_old .= "<style>.dashboard_menu_html-content{display:none !important}</style>";
+$dashboard_menu_html_old = "<style>.dashboard_menu_html-content{display:none !important}</style>" . $dashboard_menu_html_old;
 
 
 if (preg_match_all('/(.*)(<div.*?class="block_navigation.*)/', $html)) {
@@ -152,6 +152,4 @@ if (preg_match_all('/(.*)(<div.*?class="block_navigation.*)/', $html)) {
     $html = preg_replace('/(.*data-region="drawer".*?>)(.*)/', "$1<div{$classdiv}>{$dashboard_menu_html_old}</div>$2", $html);
 }
 
-
-//$html = preg_replace('/(.*kopere_dashboard_modal_item.*?)(<script.*script>)/s', '$1', $html);
 echo $html;

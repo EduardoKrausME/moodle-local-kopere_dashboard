@@ -51,7 +51,7 @@ class enroll_util {
             array(
                 'courseid' => $course->id,
                 'enrol' => 'manual'
-            ));
+            ), '*', IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
         }
@@ -61,7 +61,7 @@ class enroll_util {
                 'roleid' => 5,
                 'contextid' => $context->id,
                 'userid' => $user->id
-            ));
+            ), '*', IGNORE_MULTIPLE);
         if ($testroleassignments == null) {
             return false;
         }
@@ -70,7 +70,7 @@ class enroll_util {
             array(
                 'enrolid' => $enrol->id,
                 'userid' => $user->id
-            ));
+            ), '*', IGNORE_MULTIPLE);
         if ($userenrolments != null) {
             return !$userenrolments->status;
         } else {
@@ -118,12 +118,22 @@ class enroll_util {
      * @param $timestart
      * @param $timeend
      * @param $status
+     * @param $roleid
+     *      1 => manager
+     *      2 => coursecreator
+     *      3 => editingteacher
+     *      4 => teacher
+     *      5 => student
+     *      6 => guest
+     *      7 => user
+     *      8 => frontpage
      *
      * @return bool
      * @throws \dml_exception
      */
-    public static function enrol($course, $user, $timestart, $timeend, $status) {
+    public static function enrol($course, $user, $timestart, $timeend, $status, $roleid = 5) {
         global $DB, $USER;
+
 
         // Evita erro.
         $context = \context_course::instance($course->id, IGNORE_MISSING);
@@ -143,13 +153,13 @@ class enroll_util {
 
         $testroleassignments = $DB->get_record('role_assignments',
             array(
-                'roleid' => 5,
+                'roleid' => $roleid,
                 'contextid' => $context->id,
                 'userid' => $user->id
             ));
         if ($testroleassignments == null) {
             $roleassignments = new \stdClass();
-            $roleassignments->roleid = 5;
+            $roleassignments->roleid = $roleid;
             $roleassignments->contextid = $context->id;
             $roleassignments->userid = $user->id;
             $roleassignments->timemodified = time();

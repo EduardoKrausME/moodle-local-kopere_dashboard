@@ -144,10 +144,7 @@ class button {
     public static function icon($icon, $link, $ispopup = true) {
         global $CFG;
         if ($ispopup) {
-            return "<a data-toggle=\"modal\" data-target=\"#modal-edit\"
-                       onclick=\"loadRemoteModal('load-ajax.php{$link}')\"
-                       href=\"#{$link}\"
-                       data-href=\"load-ajax.php{$link}\">
+            return "<a href='{$link}'>
                         <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" width=\"19\">
                     </a>";
         } else {
@@ -164,9 +161,10 @@ class button {
      */
     public static function icon_popup_table($icon, $link) {
         global $CFG;
-        return "<img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" 
-                     width=\"19\" role=\"button\"
-                     onclick=\"loadRemoteModal('load-ajax.php{$link}')\">";
+        return "<a href='{$link}'>
+                    <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" 
+                         width=\"19\" role=\"button\">
+                 </a>";
     }
 
     /**
@@ -179,15 +177,13 @@ class button {
      * @return string
      */
     private static function create_button($text, $link, $p, $class, $return, $modal = false) {
+        $modal = false;
         $target = '';
         if (strpos($link, 'http') === 0) {
             $target = 'target="_blank"';
         }
 
         $bt = '';
-        if ($p) {
-            $bt .= '<div style="width: 100%; min-height: 30px; padding: 0 0 20px;">';
-        }
 
         if ($modal) {
             $bt
@@ -200,15 +196,14 @@ class button {
         }
 
         if ($p) {
-            $bt .= '</div>';
+            $bt .= '<div style="width: 100%; min-height: 30px; padding: 0 0 20px;">' . $bt . '</div>';
         }
 
         if ($return) {
             return $bt;
         } else {
             echo $bt;
+            return '';
         }
-
-        return '';
     }
 }

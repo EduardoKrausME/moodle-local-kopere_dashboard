@@ -227,6 +227,7 @@ body.menu-w-90 {
                 margin-bottom: 2rem;
                 position: relative;
                 margin-top: 0;
+                color: #202020;
                 .help {
                     font-size: 12px;
                     float: right;
@@ -264,12 +265,13 @@ body.menu-w-90 {
                 .label {
                     display: block;
                     color: #fff;
-                    font-size: 1rem;
+                    font-size: 1.3rem;
                     font-weight: 300;
                     font-family: 'Nunito', sans-serif;
                     background: transparent;
                 }
                 .value {
+                    text-align: center;
                     a, span {
                         letter-spacing: -1px;
                         line-height: 1.2;

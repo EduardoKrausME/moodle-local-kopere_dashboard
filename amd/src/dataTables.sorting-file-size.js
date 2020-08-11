@@ -37,7 +37,7 @@
             }
 
             if (!$ || !$.fn.dataTable) {
-                $ = require('datatables.net')(root, $).$;
+                $ = require('local_kopere_dashboard/dataTables')(root, $).$;
             }
 
             return factory($, root, root.document);

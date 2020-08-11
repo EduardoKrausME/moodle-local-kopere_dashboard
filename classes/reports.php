@@ -41,45 +41,7 @@ use local_kopere_dashboard\vo\kopere_dashboard_reports;
  * Class reports
  * @package local_kopere_dashboard
  */
-class reports {
-
-    /**
-     * @return array of submenu_util
-     * @throws \dml_exception
-     * @throws \coding_exception
-     */
-    public static function global_menus() {
-        global $DB, $CFG;
-
-        $menus = array();
-
-        $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', array('enable' => 1));
-        /** @var kopere_dashboard_reportcat $koperereportcat */
-        foreach ($koperereportcats as $koperereportcat) {
-            // Executa o SQL e vrifica se o SQL retorna status>0.
-            if (strlen($koperereportcat->enablesql)) {
-                $status = $DB->get_record_sql($koperereportcat->enablesql);
-                if ($status == null || $status->status == 0) {
-                    continue;
-                }
-            }
-
-            if (strpos($koperereportcat->image, 'assets/') === 0) {
-                $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$koperereportcat->image}";
-            } else {
-                $icon = "{$CFG->wwwroot}/{$koperereportcat->image}";
-            }
-
-            $menus[] = (new submenu_util())
-                ->set_classname('reports')
-                ->set_methodname('dashboard')
-                ->set_urlextra("&type={$koperereportcat->type}")
-                ->set_title(self::get_title($koperereportcat))
-                ->set_icon($icon);
-        }
-
-        return $menus;
-    }
+class reports extends reports_admin {
 
     /**
      * @throws \coding_exception
@@ -88,6 +50,9 @@ class reports {
     public function dashboard() {
         global $CFG, $DB;
 
+        $is_admin = has_capability('moodle/site:config', \context_system::instance());
+        $is_edit = optional_param('edit', false, PARAM_INT);
+
         dashboard_util::add_breadcrumb(get_string_kopere('reports_title'));
         dashboard_util::start_page();
 
@@ -95,10 +60,14 @@ class reports {
 
         $type = optional_param('type', null, PARAM_TEXT);
 
-        if ($type) {
-            $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', array('type' => $type, 'enable' => 1));
+        if ($is_edit) {
+            $koperereportcats = $DB->get_records('kopere_dashboard_reportcat');
         } else {
-            $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', array('enable' => 1));
+            if ($type) {
+                $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', array('type' => $type, 'enable' => 1));
+            } else {
+                $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', array('enable' => 1));
+            }
         }
 
         /** @var kopere_dashboard_reportcat $koperereportcat */
@@ -120,21 +89,41 @@ class reports {
             title_util::print_h3("<img src='{$icon}' alt='Icon' height='23' width='23' > " .
                 self::get_title($koperereportcat), false);
 
-            $koperereportss = $DB->get_records('kopere_dashboard_reports',
-                array('reportcatid' => $koperereportcat->id, 'enable' => 1));
+            if ($is_edit) {
+                $koperereportss = $DB->get_records('kopere_dashboard_reports',
+                    array('reportcatid' => $koperereportcat->id));
+            } else {
+                $koperereportss = $DB->get_records('kopere_dashboard_reports',
+                    array('reportcatid' => $koperereportcat->id, 'enable' => 1));
+            }
 
             /** @var kopere_dashboard_reports $koperereports */
             foreach ($koperereportss as $koperereports) {
                 $title = self::get_title($koperereports);
-                echo "<h4 style='padding-left: 31px;'>
-                         <a href='?classname=reports&method=load_report&report={$koperereports->id}'>{$title}</a></h4>";
+                $botaoEdit = "";
+                if ($is_admin && $is_edit) {
+                    $botaoEdit = button::info("Editar", "?classname=reports&method=editar&report={$koperereports->id}", 'float-right', false, true);
+                }
+                $extraEnable = '';
+                if (!$koperereports->enable) {
+                    $extraEnable = "Desativado: -";
+                }
+                echo "<h4 style='padding-left:31px;'>
+                          {$extraEnable} <a href='?classname=reports&method=load_report&report={$koperereports->id}'>{$title}</a>
+                          {$botaoEdit}
+                      </h4>";
+            }
+            if ($is_admin && $is_edit) {
+                $botaoAdd = button::add("Novo relatório", "?classname=reports&method=editar&report=-1&reportcat={$koperereportcat->id}", 'float-right', false, true);
+                echo "<h4 style='padding-left: 31px;height: 20px'>
+                          {$botaoAdd}
+                      </h4>";
             }
         }
 
         echo '</div>';
         dashboard_util::end_page();
     }
-
 
     /**
      * @throws \coding_exception
@@ -265,21 +254,6 @@ class reports {
     }
 
     /**
-     * @param $obj
-     * @return string
-     * @throws \coding_exception
-     */
-    private static function get_title($obj) {
-        if (strpos($obj->title, '[[[') === 0) {
-            return get_string(substr($obj->title, 3, -3));
-        } elseif (strpos($obj->title, '[[') === 0) {
-            return get_string_kopere(substr($obj->title, 2, -2));
-        } else {
-            return $obj->title;
-        }
-    }
-
-    /**
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -312,5 +286,67 @@ class reports {
         echo '</table>';
 
         export::close();
+    }
+
+    /**
+     * @param $obj
+     * @return string
+     * @throws \coding_exception
+     */
+    private static function get_title($obj) {
+        if (strpos($obj->title, '[[[') === 0) {
+            return get_string(substr($obj->title, 3, -3));
+        } elseif (strpos($obj->title, '[[') === 0) {
+            return get_string_kopere(substr($obj->title, 2, -2));
+        } else {
+            return $obj->title;
+        }
+    }
+
+    /**
+     * @return array of submenu_util
+     * @throws \dml_exception
+     * @throws \coding_exception
+     */
+    public static function global_menus() {
+        global $DB, $CFG;
+
+        $menus = array();
+
+        $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', array('enable' => 1));
+        /** @var kopere_dashboard_reportcat $koperereportcat */
+        foreach ($koperereportcats as $koperereportcat) {
+            // Executa o SQL e vrifica se o SQL retorna status>0.
+            if (strlen($koperereportcat->enablesql)) {
+                $status = $DB->get_record_sql($koperereportcat->enablesql);
+                if ($status == null || $status->status == 0) {
+                    continue;
+                }
+            }
+
+            if (strpos($koperereportcat->image, 'assets/') === 0) {
+                $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$koperereportcat->image}";
+            } else {
+                $icon = "{$CFG->wwwroot}/{$koperereportcat->image}";
+            }
+
+            $menus[] = (new submenu_util())
+                ->set_classname('reports')
+                ->set_methodname('dashboard')
+                ->set_urlextra("&type={$koperereportcat->type}")
+                ->set_title(self::get_title($koperereportcat))
+                ->set_icon($icon);
+        }
+
+        if (has_capability('moodle/site:config', \context_system::instance())) {
+            $menus[] = (new submenu_util())
+                ->set_classname('reports')
+                ->set_methodname('dashboard')
+                ->set_urlextra("&edit=1")
+                ->set_title(get_string_kopere("reports_settings_title"))
+                ->set_icon("settings");
+        }
+
+        return $menus;
     }
 }

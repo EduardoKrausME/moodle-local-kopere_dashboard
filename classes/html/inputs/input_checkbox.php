@@ -39,15 +39,6 @@ class input_checkbox extends input_base {
     private $checked = false;
 
     /**
-     * input_checkbox constructor.
-     * @throws \coding_exception
-     */
-    public function __construct() {
-        $this->set_type('checkbox');
-        $this->set_value('1');
-    }
-
-    /**
      * @return input_checkbox
      * @throws \coding_exception
      */
@@ -92,28 +83,21 @@ class input_checkbox extends input_base {
      * @return string
      */
     public function to_string() {
-        $return = '<input type="hidden" name="' . $this->name . '" value="0"/>';
-        $return .= "<input ";
+        //$return = "<input type='hidden' name='{$this->name}' value='0'/>";
+        $return = "<input id='{$this->name}' name='{$this->name}' type='checkbox' ";
 
-        $return .= "id=\"$this->name\" name=\"$this->name\" type=\"checkbox\" ";
-
+        if ($this->value) {
+            $value = htmlentities($this->value);
+            $return .= "value='{$value}' ";
+        }
+        if ($this->style) {
+            $return .= "style='{$this->style}' ";
+        }
         if ($this->checked) {
             $return .= 'checked="checked" ';
         }
 
-        if ($this->value) {
-            $return .= "value=\"" . htmlentities($this->value) . "\" ";
-        }
-
-        if ($this->class) {
-            $return .= "class=\"$this->class\" ";
-        }
-
-        if ($this->style) {
-            $return .= "style=\"$this->style\" ";
-        }
-
-        $return .= ">";
+        $return .= "class='ios-checkbox {$this->class}'>";
 
         return $return;
     }

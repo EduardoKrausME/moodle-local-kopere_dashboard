@@ -168,10 +168,9 @@ $string['loginusername'] = 'Time to connect with a fake user account';
 $string['loginusermoreinfo'] = 'Measuring the time to load the login page with a fake user account';
 
 // Performancemonitor.
-$string ['performancemonitor_rede'] = 'Network';
 $string ['performancemonitor_cpu'] = 'CPU Usage';
 $string ['performancemonitor_memory'] = 'Memory';
-$string ['performancemonitor_hd'] = 'HD (free)';
+$string ['performancemonitor_hd'] = 'Moodledata';
 $string ['performancemonitor_performance'] = 'Performance';
 $string ['performancemonitor_min'] = '{$a} min:';
 
@@ -244,6 +243,31 @@ $string['reports_context'] = 'Context';
 $string['reports_export'] = 'Export to Excel';
 $string['reports_noneaccess'] = 'No access';
 $string['reports_access_n'] = 'accessed {$a} times';
+
+$string['reports_settings_title'] = 'Edit report';
+$string['reports_settings_form_title'] = 'Edit report';
+$string['reports_settings_form_enable'] = 'Enabled?';
+$string['reports_settings_form_reportsql'] = 'Report SQL';
+$string['reports_settings_form_prerequisit'] = 'Prerequisite before loading the report';
+$string['reports_settings_form_none'] = 'None';
+$string['reports_settings_form_prerequisit_listCourses'] = 'Course list';
+$string['reports_settings_form_prerequisit_badge_status_text'] = 'Change the status of the Badge to Text';
+$string['reports_settings_form_prerequisit_badge_criteria_type'] = 'Change the Badge criteria to Text';
+$string['reports_settings_form_prerequisit_userfullname'] = 'Execute fullname ($ user) on each line of the report';
+$string['reports_settings_form_prerequisit_courses_group_mode'] = 'Put the group mode in text';
+$string['reports_settings_form_foreach'] = 'Changing SQL columns';
+$string['reports_settings_form_colunas'] = 'Columns';
+$string['reports_settings_form_colunas_title'] = 'Title';
+$string['reports_settings_form_colunas_key'] = 'SQL column';
+$string['reports_settings_form_colunas_type'] = 'Data type';
+$string['reports_settings_form_colunas_type_int'] = 'Number';
+$string['reports_settings_form_colunas_type_date'] = 'Data';
+$string['reports_settings_form_colunas_type_currency'] = 'Currencies';
+$string['reports_settings_form_colunas_type_text'] = 'Text';
+$string['reports_settings_form_colunas_type_bytes'] = 'Bytes';
+$string['reports_settings_form_colunas_extra'] = 'These below leave it blank if you don\'t need to!';
+$string['reports_settings_savesuccess'] = 'Saved successfully!';
+$string['reports_settings_form_save'] = 'Save report';
 
 // Dashboard.
 $string['dashboard_title_user'] = 'Users / Assets';
@@ -388,6 +412,9 @@ $string['useronline_settings_status'] = 'Enable Online Users Synchronization Ser
 $string['useronline_settings_ssl'] = 'Enable SSL?';
 $string['useronline_settings_url'] = 'Server URL';
 $string['useronline_settings_port'] = 'Server port';
+
+// Acessos dos usuários
+$string['useraccess_title'] = 'User access';
 
 // UserImport.
 $string['userimport_title'] = 'Import Users';
