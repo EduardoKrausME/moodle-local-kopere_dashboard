@@ -244,6 +244,31 @@ $string['reports_export'] = 'Export to Excel';
 $string['reports_noneaccess'] = 'No access';
 $string['reports_access_n'] = 'accessed {$a} times';
 
+$string['reports_settings_title'] = 'Edit report';
+$string['reports_settings_form_title'] = 'Edit report';
+$string['reports_settings_form_enable'] = 'Enabled?';
+$string['reports_settings_form_reportsql'] = 'Report SQL';
+$string['reports_settings_form_prerequisit'] = 'Prerequisite before loading the report';
+$string['reports_settings_form_none'] = 'None';
+$string['reports_settings_form_prerequisit_listCourses'] = 'Course list';
+$string['reports_settings_form_prerequisit_badge_status_text'] = 'Change the status of the Badge to Text';
+$string['reports_settings_form_prerequisit_badge_criteria_type'] = 'Change the Badge criteria to Text';
+$string['reports_settings_form_prerequisit_userfullname'] = 'Execute fullname ($ user) on each line of the report';
+$string['reports_settings_form_prerequisit_courses_group_mode'] = 'Put the group mode in text';
+$string['reports_settings_form_foreach'] = 'Changing SQL columns';
+$string['reports_settings_form_colunas'] = 'Columns';
+$string['reports_settings_form_colunas_title'] = 'Title';
+$string['reports_settings_form_colunas_key'] = 'SQL column';
+$string['reports_settings_form_colunas_type'] = 'Data type';
+$string['reports_settings_form_colunas_type_int'] = 'Number';
+$string['reports_settings_form_colunas_type_date'] = 'Data';
+$string['reports_settings_form_colunas_type_currency'] = 'Currencies';
+$string['reports_settings_form_colunas_type_text'] = 'Text';
+$string['reports_settings_form_colunas_type_bytes'] = 'Bytes';
+$string['reports_settings_form_colunas_extra'] = 'These below leave it blank if you don\'t need to!';
+$string['reports_settings_savesuccess'] = 'Saved successfully!';
+$string['reports_settings_form_save'] = 'Save report';
+
 // Dashboard.
 $string['dashboard_title_user'] = 'Users / Assets';
 $string['dashboard_title_online'] = 'Online / Last hour';

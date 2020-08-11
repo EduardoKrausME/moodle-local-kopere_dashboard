@@ -244,6 +244,31 @@ $string['reports_export'] = 'Exportar para Excel';
 $string['reports_noneaccess'] = 'Nenhum acesso';
 $string['reports_access_n'] = 'acessou {$a} vezes';
 
+$string['reports_settings_title'] = 'Editar relatório';
+$string['reports_settings_form_title'] = 'Editar relatório';
+$string['reports_settings_form_enable'] = 'Habilitado?';
+$string['reports_settings_form_reportsql'] = 'SQL do relatório';
+$string['reports_settings_form_prerequisit'] = 'Pré-requisito antes de carregar o relatório';
+$string['reports_settings_form_none'] = 'Nenhum';
+$string['reports_settings_form_prerequisit_listCourses'] = 'Lista de cursos';
+$string['reports_settings_form_prerequisit_badge_status_text'] = 'Altera o status do Badge em Texto';
+$string['reports_settings_form_prerequisit_badge_criteria_type'] = 'Altera o criteria do Badge em Texto';
+$string['reports_settings_form_prerequisit_userfullname'] = 'Executa o fullname($user) em cada linha do relatório';
+$string['reports_settings_form_prerequisit_courses_group_mode'] = 'Coloca o modo do grupo em texto';
+$string['reports_settings_form_foreach'] = 'Alteração de colunas do SQL';
+$string['reports_settings_form_colunas'] = 'Colunas';
+$string['reports_settings_form_colunas_title'] = 'Título';
+$string['reports_settings_form_colunas_chave'] = 'Coluna do SQL';
+$string['reports_settings_form_colunas_type'] = 'Tipo de dado';
+$string['reports_settings_form_colunas_type_int'] = 'Número';
+$string['reports_settings_form_colunas_type_date'] = 'Data';
+$string['reports_settings_form_colunas_type_currency'] = 'Moedas';
+$string['reports_settings_form_colunas_type_text'] = 'Texto';
+$string['reports_settings_form_colunas_type_bytes'] = 'Bytes';
+$string['reports_settings_form_colunas_extra'] = 'Estes abaixo deixe em branco caso não precise!';
+$string['reports_settings_savesuccess'] = 'Salvo com sucesso!';
+$string['reports_settings_form_save'] = 'Salvar relatório';
+
 // Dashboard.
 $string['dashboard_title_user'] = 'Usuários / Ativos';
 $string['dashboard_title_online'] = 'Online / Última hora';
