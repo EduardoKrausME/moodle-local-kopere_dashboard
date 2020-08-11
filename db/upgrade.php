@@ -166,6 +166,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
 
             $dbman->create_table($table);
         }
+        upgrade_plugin_savepoint(true, 2020062002, 'local', 'kopere_dashboard');
     }
 
     if ($oldversion < 2020081000) {
