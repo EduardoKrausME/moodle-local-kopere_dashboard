@@ -196,7 +196,7 @@ class button {
         }
 
         if ($p) {
-            $bt .= '<div style="width: 100%; min-height: 30px; padding: 0 0 20px;">' . $bt . '</div>';
+            $bt = '<div style="width: 100%; min-height: 30px; padding: 0 0 20px;">' . $bt . '</div>';
         }
 
         if ($return) {
