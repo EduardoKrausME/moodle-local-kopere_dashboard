@@ -143,13 +143,15 @@ ob_clean();
 $dashboard_menu_html_old = "<style>.dashboard_menu_html-content{display:none !important}</style>" . $dashboard_menu_html_old;
 
 
-if (preg_match_all('/(.*)(<div.*?class="block_navigation.*)/', $html)) {
-    $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html_old}$2", $html);
-} else if (preg_match_all('/(.*)(<section.*?class="(\s+)?block_navigation.*)/s', $html)) {
-    $html = preg_replace('/(.*)(<section.*?class="(\s+)?block_navigation.*)/s', "$1<div class='card mb-3'>{$dashboard_menu_html_old}</div>$2", $html);
-} else if (strpos($html, 'data-region="drawer"')) {
-    $classdiv = " class='list-group-item kopere-list-group-item' ";
-    $html = preg_replace('/(.*data-region="drawer".*?>)(.*)/', "$1<div{$classdiv}>{$dashboard_menu_html_old}</div>$2", $html);
+if ($CFG->theme != 'moove') {
+    if (preg_match_all('/(.*)(<div.*?class="block_navigation.*)/', $html)) {
+        $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html_old}$2", $html);
+    } else if (preg_match_all('/(.*)(<section.*?class="(\s+)?block_navigation.*)/s', $html)) {
+        $html = preg_replace('/(.*)(<section.*?class="(\s+)?block_navigation.*)/s', "$1<div class='card mb-3'>{$dashboard_menu_html_old}</div>$2", $html);
+    } else if (strpos($html, 'data-region="drawer"')) {
+        $classdiv = " class='list-group-item kopere-list-group-item' ";
+        $html = preg_replace('/(.*data-region="drawer".*?>)(.*)/', "$1<div{$classdiv}>{$dashboard_menu_html_old}</div>$2", $html);
+    }
 }
 
 echo $html;
