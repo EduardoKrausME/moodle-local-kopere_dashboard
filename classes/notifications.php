@@ -399,16 +399,18 @@ class notifications extends notificationsutil {
         dashboard_util::add_breadcrumb(get_string_kopere('notification_testsmtp'));
         dashboard_util::start_page();
 
+        if (!$CFG->debugdisplay || $CFG->debug == 0) {
+            mensagem::print_danger("Você precisa ativar o Modo desenvolvedor e Mostrar as mensagens de debug");
+        }
+
         notificationsutil::mensagem_no_smtp();
         $CFG->debugsmtp = true;
-        $CFG->debugdisplay = true;
-        $CFG->debug = 32767;
 
         $htmlmessage = get_string_kopere('notification_testsmtp_message') . date('d/m/Y H:m');
         $admin = get_admin();
-        if ($admin->id == $USER->id) {
-            mensagem::print_danger(get_string_kopere('notification_testsmtp_error'));
-        }
+        //if ($admin->id == $USER->id) {
+        //  mensagem::print_danger(get_string_kopere('notification_testsmtp_error'));
+        //}
 
         $eventdata = new message();
         if (release::version() >= 3.2) {
