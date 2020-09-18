@@ -176,8 +176,6 @@ class dashboard_util {
      * @throws \coding_exception
      */
     public static function add_menu(menu_util $menu) {
-        global $CFG;
-
         $retorno = "";
 
         $class = self::test_menu_active($menu->get_classname());
