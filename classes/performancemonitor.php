@@ -54,16 +54,18 @@ class performancemonitor {
         dashboard_util::add_breadcrumb("Performance Monitor");
         dashboard_util::start_page();
 
-        self::load_monitor();
+        echo self::load_monitor();
 
         dashboard_util::end_page();
     }
 
     /**
      * @throws \coding_exception
+     * @return string
      */
     public static function load_monitor() {
-        echo '<div class="element-content">
+        return '
+            <div class="element-content">
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="element-box color_cpu">

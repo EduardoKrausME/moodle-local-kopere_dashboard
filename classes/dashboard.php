@@ -44,7 +44,7 @@ class dashboard {
         dashboard_util::add_breadcrumb("Kopere Dashboard");
         dashboard_util::start_page();
 
-        performancemonitor::load_monitor();
+        echo performancemonitor::load_monitor();
 
         echo '<div class="element-content">
                 <div class="row">
