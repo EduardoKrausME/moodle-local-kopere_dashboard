@@ -36,7 +36,14 @@ if ($CFG->kopere_dashboard_open != 'internal') {
     echo "<meta http-equiv=\"refresh\" content=\"0; url={$urlinternal}\">";
 }
 
-global $PAGE, $CFG, $OUTPUT;
+global $PAGE, $CFG, $OUTPUT, $USER;
+
+if ( $CFG->theme == 'smartlms' ) {
+    $preference_drawer_open_nav  = @$USER->preference[ 'drawer-open-nav' ];
+    $preference_sidebar_open_nav = @$USER->preference[ 'sidebar-open-nav' ];
+    @$USER->preference[ 'drawer-open-nav' ]  = false;
+    @$USER->preference[ 'sidebar-open-nav' ] = false;
+}
 
 require_once($CFG->libdir . '/adminlib.php');
 
@@ -66,7 +73,7 @@ $PAGE->requires->js('/local/kopere_dashboard/assets/bootstrap/bootstrap.js');
 $PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
 
 echo $OUTPUT->header();
-echo "<link rel=\"icon\" href=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/favicon.png\"/>";
+echo "<link rel=\"icon\" href=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/favicon.png\"/>";
 ?>
     <script>
         lang_yes = '<?php echo get_string('yes') ?>';
@@ -143,7 +150,10 @@ ob_clean();
 $dashboard_menu_html_old = "<style>.dashboard_menu_html-content{display:none !important}</style>" . $dashboard_menu_html_old;
 
 
-if ($CFG->theme != 'moove') {
+if ( $CFG->theme == 'smartlms' ) {
+    $USER->preference[ 'drawer-open-nav' ]  = $preference_drawer_open_nav;
+    $USER->preference[ 'sidebar-open-nav' ] = $preference_sidebar_open_nav;
+} elseif ($CFG->theme != 'moove') {
     if (preg_match_all('/(.*)(<div.*?class="block_navigation.*)/', $html)) {
         $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html_old}$2", $html);
     } else if (preg_match_all('/(.*)(<section.*?class="(\s+)?block_navigation.*)/s', $html)) {

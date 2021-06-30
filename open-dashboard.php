@@ -68,7 +68,7 @@ $PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
 $PAGE->add_body_class("kopere_dashboard_body");
 
 echo $OUTPUT->header();
-echo "<link rel=\"icon\" href=\"<?php echo $CFG->wwwroot ?>/local/kopere_dashboard/assets/dashboard/img/favicon.png\"/>";
+echo "<link rel=\"icon\" href=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/favicon.png\"/>";
 ?>
     <script>
         lang_yes = '<?php echo get_string('yes') ?>';
