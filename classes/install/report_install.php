@@ -183,67 +183,61 @@ ORDER BY u.username";
         $report->title = '[[reports_report_courses-1]]';
         $report->prerequisit = 'listCourses';
         $report->reportsql = " 
-SELECT ue.id,
-       u.id AS userid, {$alternatenames}, u.email,
-       c.id AS courseid,
-       c.fullname,
-       ue.timecreated,
-       IFNULL((SELECT COUNT(gg.finalgrade)
-          FROM {grade_grades}  gg
-          JOIN {grade_items}  gi ON gg.itemid=gi.id
-         WHERE gi.courseid=c.id
-           AND gg.userid=u.id
-           AND gi.itemtype='mod'
-          GROUP BY u.id,c.id),'0') AS 'activities_completed',
-
-       IFNULL((SELECT COUNT( gi.itemname )
-           FROM {grade_items}  gi
-          WHERE gi.courseid = c.id
-            AND gi.itemtype='mod'), '0') AS 'activities_assigned',
-      (
-          SELECT IF(activities_assigned!='0', (
-              SELECT IF( activities_completed = activities_assigned,
-              (
-                  SELECT CONCAT('100% completo',FROM_UNIXTIME(MAX(log.time),'%m/%d/%Y'))
-                    FROM {log} log
-                   WHERE log.course = c.id
-                     AND log.userid = u.id
-              ),
-              (
-                  SELECT CONCAT(IFNULL(ROUND((activities_completed)/(activities_assigned)*100,0),
-                        '0'),'% complete')))), 'n/a')
-      ) AS 'course_completed'
-
-    FROM {user} u
-    JOIN {user_enrolments}  ue  ON ue.userid = u.id
-    JOIN {enrol}            e   ON e.id = ue.enrolid
-    JOIN {course}           c   ON c.id = e.courseid
-    JOIN {context}          ctx ON ctx.instanceid = c.id AND ctx.instanceid = c.id
-    JOIN {role_assignments} ra  ON ra.contextid = ctx.id AND ra.userid = u.id
-    JOIN {role}             r   ON r.id = e.roleid
-    WHERE ra.roleid = 5
-      AND c.id      = :courseid
- GROUP BY u.id, c.id";
+    SELECT ue.id, u.id AS userid, {$alternatenames},
+           u.email,
+           ue.timecreated,
+           IFNULL( MAX(cc.timecompleted), 0) AS timecompleted,
+           IFNULL( MAX(m.modules), 0)        AS activities_assigned,
+           IFNULL( MAX(cmc.completed), 0)    AS activities_completed,
+           CONCAT(IFNULL( round(((MAX(cmc.completed)/MAX(m.modules))*100), 0), 0), ' %') AS course_completed
+      FROM {user_enrolments}    ue
+      JOIN {user}                u ON u.id = ue.userid
+      JOIN {enrol}               e ON e.id = ue.enrolid
+      JOIN {course}              c ON c.id = e.courseid
+ LEFT JOIN {course_completions} cc ON cc.timecompleted > 0 
+                                  AND cc.course        = e.courseid 
+                                  AND cc.userid        = ue.userid
+ LEFT JOIN (
+          SELECT course, count(id) AS modules
+            FROM {course_modules}
+           WHERE visible    = 1
+             AND completion > 0
+        GROUP BY course
+      ) AS m ON m.course = c.id
+ LEFT JOIN (
+          SELECT cm_i.course, cmc_i.userid, COUNT(DISTINCT cmc_i.id) AS completed
+            FROM {course_modules}            cm_i,
+                 {course_modules_completion} cmc_i
+           WHERE cmc_i.coursemoduleid  =  cm_i.id
+             AND cm_i.visible          =  1
+             AND cmc_i.completionstate IN (1,2)
+        GROUP BY cm_i.course, cmc_i.userid
+      ) AS cmc ON cmc.course = c.id 
+              AND cmc.userid = ue.userid
+     WHERE ue.id       > 0
+       AND u.id        > 1
+       AND u.deleted   = 0
+       AND u.suspended = 0
+       AND ue.status   = 0
+       AND e.status    = 0
+       AND c.id        = :courseid
+  GROUP BY u.id";
         $report->columns = array(
             $table->add_header('#', 'userid', table_header_item::TYPE_INT, null, 'width:20px'),
             $table->add_header('[[courses_student_name]]', 'userfullname'),
             $table->add_header('[[courses_student_email]]', 'email'),
-            $table->add_header('[[courses_name]]', 'fullname'),
-            $table->add_header('[[reports_coursecreated]]',
-                'timecreated', table_header_item::RENDERER_DATE),
-            $table->add_header('[[reports_activitiescomplete]]',
-                'activities_completed', table_header_item::TYPE_INT),
-            $table->add_header('[[reports_activitiesassigned]]',
-                'activities_assigned', table_header_item::TYPE_INT),
+            $table->add_header('[[reports_coursecreated]]', 'timecreated', table_header_item::RENDERER_DATE),
+            $table->add_header('[[reports_activitiescomplete]]', 'activities_completed', table_header_item::TYPE_INT),
+            $table->add_header('[[reports_activitiesassigned]]', 'activities_assigned', table_header_item::TYPE_INT),
             $table->add_header('[[reports_coursecompleted]]', 'course_completed')
         );
         $report->foreach = 'local_kopere_dashboard\report\report_foreach::userfullname';
         $report->columns = json_encode(array(
             'columns' => $report->columns,
-            'header' => array(
-                $table->add_info_header('[[reports_datastudents]]', 3),
-                $table->add_info_header('[[reports_datacourses]]', 5)
-            )
+//            'header' => array(
+//                $table->add_info_header('[[reports_datastudents]]', 3),
+//                $table->add_info_header('[[reports_datacourses]]', 7)
+//            )
         ));
         if ($CFG->dbtype != 'pgsql') {
             self::report_insert($report);
