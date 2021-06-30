@@ -69,6 +69,8 @@ class course_last_access {
 
         // $export = optional_param('export', '', PARAM_TEXT);
         session_write_close();
+        ob_clean();
+        ob_end_clean();
         $export = "xls";
         export::header($export, $course->fullname);
 
@@ -168,6 +170,7 @@ class course_last_access {
             }
 
             echo '</tr>';
+            @ob_end_flush();
         }
 
         echo '</table>';

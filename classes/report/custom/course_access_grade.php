@@ -81,6 +81,8 @@ class course_access_grade {
 
         // $export = optional_param('export', '', PARAM_TEXT);
         session_write_close();
+        ob_clean();
+        ob_end_clean();
         $export = "xls";
         export::header($export, $course->fullname);
 
@@ -150,6 +152,8 @@ class course_access_grade {
                 }
                 $printsessoes .= '</th>';
             }
+
+            @ob_end_flush();
         }
 
         $groupscols = '';
