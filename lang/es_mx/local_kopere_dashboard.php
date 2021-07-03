@@ -371,6 +371,46 @@ $string['profile_notenrol'] = '¡El usuario no tiene registro!';
 $string['profile_title'] = 'Usuarios';
 $string['profile_userdate_title'] = 'Datos';
 
+// Settings.
+$string['setting_saved'] = '¡Configuraciones guardadas!';
+
+// Userenrolment.
+$string['userenrolment_created'] = 'Inscripción creada en';
+$string['userenrolment_edit'] = 'Editar fecha de inscripción';
+$string['userenrolment_notfound'] = '¡Inscripción de usuario no encontrada!';
+$string['userenrolment_status'] = 'La inscripción está';
+$string['userenrolment_status_active'] = 'Activa';
+$string['userenrolment_status_inactive'] = 'Inactiva';
+$string['userenrolment_timeend'] = 'La inscripción termina en';
+$string['userenrolment_timeendstatus'] = 'Habilitar período de inscripción';
+$string['userenrolment_timestart'] = 'La inscripción inicia en';
+$string['userenrolment_updated'] = 'Última modificación de inscripción en';
+$string['userenrolment_updatesuccess'] = '¡Inscripción cambiada exitosamente!';
+
+// User.
+$string['user_table_celphone'] = 'Mobile';
+$string['user_table_city'] = 'Ciudad';
+$string['user_table_email'] = 'E-mail';
+$string['user_table_fullname'] = 'Nombre';
+$string['user_table_phone'] = 'Teléfono fijo';
+$string['user_table_username'] = 'Nombre_de_usuario';
+$string['user_title'] = 'Usuarios';
+
+// Useronline.
+$string['useronline_settings_port'] = 'Puerto del servidor';
+$string['useronline_settings_ssl'] = '¿Habilitar SSL?';
+$string['useronline_settings_status'] = 'Habilitar Servidor de Sincronización de Usuarios En-línea';
+$string['useronline_settings_url'] = 'URL del Servidor';
+$string['useronline_subtitle'] = 'Abrir pestañas con Moodle';
+$string['useronline_table_date'] = 'Datos';
+$string['useronline_table_device'] = 'Dispositivo';
+$string['useronline_table_focus'] = 'Foco';
+$string['useronline_table_fullname'] = 'Nombre';
+$string['useronline_table_navigator'] = 'Navegador';
+$string['useronline_table_os'] = 'Sistema Operativo';
+$string['useronline_table_page'] = 'Página';
+$string['useronline_title'] = 'Usuarios En línea';
+
 $string['color_blue'] = 'Azul';
 $string['color_brown'] = 'Café';
 $string['color_green'] = 'Verde';
@@ -405,25 +445,6 @@ $string['querytype1moreinfo'] = 'Probar la velocidad de la base de datos para ej
 $string['querytype1name'] = 'Solicitud compleja (n°1)';
 $string['querytype2moreinfo'] = 'Probar la velocidad de la base de datos para ejecutar una solicitud compleja';
 $string['querytype2name'] = 'Solicitud compleja (n°2)';
-$string['setting_saved'] = '¡configuraciones gruardadas!';
-$string['user_table_celphone'] = 'Mobile';
-$string['user_table_city'] = 'Ciudad';
-$string['user_table_email'] = 'E-mail';
-$string['user_table_fullname'] = 'Nombre';
-$string['user_table_phone'] = 'Teléfono fijo';
-$string['user_table_username'] = 'Nombre_de_usuario';
-$string['user_title'] = 'Usuarios';
-$string['userenrolment_created'] = 'Inscripción creada en';
-$string['userenrolment_edit'] = 'Editar fecha de inscripción';
-$string['userenrolment_notfound'] = '¡Inscripción de usuario no encontrada!';
-$string['userenrolment_status'] = 'La inscripción está';
-$string['userenrolment_status_active'] = 'Activa';
-$string['userenrolment_status_inactive'] = 'Inactiva';
-$string['userenrolment_timeend'] = 'La inscripción termina en';
-$string['userenrolment_timeendstatus'] = 'Habilitar período de inscripción';
-$string['userenrolment_timestart'] = 'La inscripción inicia en';
-$string['userenrolment_updated'] = 'Última modificación de inscripción en';
-$string['userenrolment_updatesuccess'] = '¡Inscripción cambiada exitosamente!';
 $string['userimport_colname'] = 'Columna {$a}';
 $string['userimport_colselect'] = '..::Seleccionar columna::..';
 $string['userimport_courseenrol'] = 'Inscribir en un curso';
@@ -460,19 +481,6 @@ $string['userimport_upload'] = 'Arrastrar aquí archivos CSV o hacer click para 
 $string['userimport_userdata'] = 'Datos del Usuario';
 $string['userimport_userfields'] = 'Campos extra del perfil';
 $string['userimport_wait'] = 'Por favor espere a que los datos sean procesados. Después de procesarlos, estará disponible una hoja de cálculo con datos insertados.';
-$string['useronline_settings_port'] = 'Puerto del servidor';
-$string['useronline_settings_ssl'] = '¿Habilitar SSL?';
-$string['useronline_settings_status'] = 'Habilitar Servidor de Sincronización de Usuarios En-línea';
-$string['useronline_settings_url'] = 'URL del Servidor';
-$string['useronline_subtitle'] = 'Abrir pestañas con Moodle';
-$string['useronline_table_date'] = 'Datos';
-$string['useronline_table_device'] = 'Dispositivo';
-$string['useronline_table_focus'] = 'Foco';
-$string['useronline_table_fullname'] = 'Nombre';
-$string['useronline_table_navigator'] = 'Navegador';
-$string['useronline_table_os'] = 'Sistema Operativo';
-$string['useronline_table_page'] = 'Página';
-$string['useronline_title'] = 'Usuarios En línea';
 $string['webpages_allpages'] = 'Todas las páginas';
 $string['webpages_menu_create'] = 'Crear nuevo Menú';
 $string['webpages_menu_created'] = '¡Menú creado!';
