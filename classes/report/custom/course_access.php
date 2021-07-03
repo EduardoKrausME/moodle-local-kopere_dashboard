@@ -39,9 +39,12 @@ class course_access {
 
     /**
      * @return string
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function name() {
-        return get_string_kopere('reports_report_courses-3');
+        $cursosid = optional_param('courseid', 0, PARAM_INT);
+        return get_string_kopere('reports_report_courses-3') . ' ' . get_course($cursosid)->fullname;
     }
 
     /**
@@ -64,6 +67,10 @@ class course_access {
             header::notfound(get_string_kopere('courses_notound'));
         }
 
+        $perPage = 10;
+        $atualPage     = optional_param ( 'page', 1, PARAM_INT );
+        $startLimit    = ( $atualPage - 1 ) * $perPage;
+
         $course = $DB->get_record('course', array('id' => $cursosid));
         header::notfound_null($course, get_string_kopere('courses_notound'));
 
@@ -77,11 +84,8 @@ class course_access {
 
         button::info(get_string_kopere('reports_export'), url_util::querystring() . "&export=xls");
 
-        // $export = optional_param('export', '', PARAM_TEXT);
         session_write_close();
-        ob_clean();
-        ob_end_clean();
-        $export = "xls";
+        $export = optional_param('export', '', PARAM_TEXT);
         export::header($export, $course->fullname);
 
         echo '<table id="list-course-access" class="table table-bordered table-hover" border="1">';
@@ -136,7 +140,6 @@ class course_access {
                 }
                 $printsessoes .= '</th>';
             }
-            @ob_end_flush();
         }
 
         $groupscols = '';
@@ -166,19 +169,36 @@ class course_access {
         echo '</tr>';
         echo '</thead>';
 
-        $sql
-            = "SELECT DISTINCT u.*
+        if ( $export == 'xls' ) {
+            $sql = "
+               SELECT DISTINCT SQL_CALC_FOUND_ROWS u.*
                  FROM {context} c
                  JOIN {role_assignments} ra ON ra.contextid = c.id
-                 JOIN {user} u              ON ra.userid    = u.id
+                 JOIN {user}             u  ON ra.userid    = u.id
+                 JOIN {user_lastaccess}  ul ON ul.courseid  = c.instanceid AND ul.userid = u.id
                 WHERE c.contextlevel = :contextlevel
+		          AND u.id      NOT IN ({$CFG->siteadmins})
                   AND c.instanceid   = :instanceid";
+        } else {
+            $sql = "
+               SELECT DISTINCT SQL_CALC_FOUND_ROWS u.*
+                 FROM {context} c
+                 JOIN {role_assignments} ra ON ra.contextid = c.id
+                 JOIN {user}             u  ON ra.userid    = u.id
+                 JOIN {user_lastaccess}  ul ON ul.courseid  = c.instanceid AND ul.userid = u.id
+                WHERE c.contextlevel = :contextlevel
+		          AND u.id      NOT IN ({$CFG->siteadmins})
+                  AND c.instanceid   = :instanceid
+                LIMIT {$startLimit}, {$perPage}";
+        }
 
         $allusercourse = $DB->get_records_sql($sql,
             array(
                 'contextlevel' => CONTEXT_COURSE,
                 'instanceid' => $cursosid
             ));
+
+        $total = $DB->get_record_sql ( "SELECT FOUND_ROWS() as num_itens" );
 
         foreach ($allusercourse as $user) {
             echo '<tr>';
@@ -217,6 +237,7 @@ class course_access {
                       ORDER BY timecreated DESC
                          LIMIT 1";
 
+
                 $logresult = $DB->get_record_sql($sql,
                     array(
                         'courseid' => $cursosid,
@@ -236,12 +257,12 @@ class course_access {
                 }
             }
             echo '</tr>';
-            @ob_end_flush();
         }
 
         echo '</table>';
 
         export::close();
+        pagination::create ( $atualPage, $total->num_itens, $perPage );
     }
 
     /**
