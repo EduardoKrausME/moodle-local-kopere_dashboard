@@ -88,7 +88,7 @@ $string['datatables_oAria_sSortAscending'] = ': Ordenar Columnas en orden Ascend
 $string['datatables_oAria_sSortDescending'] = ': Ordenar Columnas en orden Descendiente';
 
 // Util/navigation.
-$string['navigation_page'] = 'Páginae {$a->atualPage} de {$a->countPages}';
+$string['navigation_page'] = 'Página {$a->atualPage} de {$a->countPages}';
 
 // About.
 $string['about_title'] = 'Acerca de';
@@ -98,13 +98,13 @@ $string['about_help'] = 'Ayuda está en';
 $string['about_bug'] = 'Si encontró algún problema o quisiera sugerir mejoras, abra un asunto';
 
 // Backup.
-$string['backup_title'] = 'Backup';
+$string['backup_title'] = 'Respaldo';
 $string['backup_windows'] = '¡No disponible en servidor Windows!';
 $string['backup_hours'] = '¡No correr respaldo en horas pico!';
 $string['backup_sleep'] = 'El Respaldo puede tardar varios minutos para ejecutarse.';
 $string['backup_newnow'] = 'Crear nuevo respaldo ahora';
-$string['backup_newnow'] = 'Crear nuevo respaldo ahora';
-$string['backup_noshell'] = 'shell_exec function is disabled!';
+$string['backup_newsqlnow'] = 'Crear nuevo respaldo de base de datos ahora mismo';
+$string['backup_noshell'] = '¡la función shell_exec function está deshabilitada!';
 $string['backup_list'] = 'Lista de respaldos';
 $string['backup_list_file'] = 'Archivo';
 $string['backup_list_created'] = 'Creado en';
@@ -214,7 +214,7 @@ $string['reports_report_courses-4'] = 'Reporte del acceso al curso con calificac
 $string['reports_report_courses-5'] = 'Último acceso al curso';
 $string['reports_report_enrol_cohort-1'] = 'Cohortes y usuarios';
 $string['reports_report_enrol_guest-1'] = 'Reporte de Ingresos de Invitado';
-$string['reports_report_server-1'] = 'Disk Usage Report';
+$string['reports_report_server-1'] = 'Reporte de Uso de Disco';
 $string['reports_report_user-1'] = 'Número de estudiantes en cada curso';
 $string['reports_report_user-2'] = 'Finalización del Curso con Criterios';
 $string['reports_report_user-3'] = 'Reporte de acceso de usuario diario';
@@ -258,7 +258,7 @@ $string['reports_settings_form_prerequisit_courses_group_mode'] = 'Poner el modo
 $string['reports_settings_form_foreach'] = 'Cambiando columnas SQL';
 $string['reports_settings_form_colunas'] = 'Columnas';
 $string['reports_settings_form_colunas_title'] = 'Título';
-$string['reports_settings_form_colunas_key'] = 'columna SQL';
+$string['reports_settings_form_colunas_key'] = 'Columna SQL';
 $string['reports_settings_form_colunas_type'] = 'Tipo de datos';
 $string['reports_settings_form_colunas_type_int'] = 'Número';
 $string['reports_settings_form_colunas_type_date'] = 'Datos';
@@ -266,7 +266,7 @@ $string['reports_settings_form_colunas_type_currency'] = 'Divisas';
 $string['reports_settings_form_colunas_type_text'] = 'Texto';
 $string['reports_settings_form_colunas_type_bytes'] = 'Bytes';
 $string['reports_settings_form_colunas_extra'] = '¡Deje vacíos los de abajo si no los necesita!';
-$string['reports_settings_savesuccess'] = '¿Guardado exitosamente!';
+$string['reports_settings_savesuccess'] = '¡Guardado exitosamente!';
 $string['reports_settings_form_save'] = 'Guardar reporte';
 
 // Dashboard.
@@ -274,7 +274,7 @@ $string['dashboard_title_user'] = 'Usuarios / Recursos';
 $string['dashboard_title_online'] = 'EnLínea / Última hora';
 $string['dashboard_title_course'] = 'Cursos / Visible';
 $string['dashboard_title_disk'] = 'Uso de Disco';
-$string['dashboard_grade_title'] = 'Notas más recientes';
+$string['dashboard_grade_title'] = 'Calificaciones más recientes';
 $string['dashboard_grade_inmod'] = 'en módulo <strong>{$a->itemname}</strong>en curso <a href="?classname=courses&method=details&courseid={$a->courseid}">{$a->coursename}</a>';
 $string['dashboard_grade_incourse'] = 'en curso <a href="?classname=courses&method=details&courseid={$a->courseid}">{$a->coursename}</a>';
 $string['dashboard_grade_of'] = 'de';
@@ -291,9 +291,9 @@ $string['notification_title'] = 'Notificaciones';
 $string['notification_subtitle'] = '<p>Recibir notificaciones siempre que ocurra una acción en Moodle.</p>';
 $string['notification_new'] = 'Nueva notificación';
 $string['notification_testsmtp'] = 'Probar si las configuraciones SMTP son correctas.';
-$string['notification_testsmtp_message'] = '<p> This is an Email submission test. </p>';
-$string['notification_testsmtp_error'] = 'Moodle does not send email when recipient and sender are the same! <br> And you are the main administrator of this moodle. So to test you must log in with another administrator.';
-$string['notification_testsmtp_subject'] = 'Testing Email Submission - ';
+$string['notification_testsmtp_message'] = '<p> Esta es la prueba de envío de Email. </p>';
+$string['notification_testsmtp_error'] = '¡Moodle no envía Email cuando el remitente y el destinatario son el mismo! <br> Y Usted es el administrador principal de este Moodlee. Por lo que,para probar esto, debe ingresar como otro administrador.';
+$string['notification_testsmtp_subject'] = 'Probando Envío de Email - ';
 $string['notification_table_module'] = 'Módulo';
 $string['notification_table_action'] = 'Acción';
 $string['notification_table_subject'] = 'Asunto';
@@ -313,7 +313,7 @@ $string['notification_to'] = 'Para';
 $string['notification_todesc'] = '¿Quién recibirá estos mensajes?';
 $string['notification_todesc_admin'] = 'Administrador del sitio (Primario solamente)';
 $string['notification_todesc_admins'] = 'Administradores del sitio (Todos los Administradores)';
-$string['notification_todesc_teachers'] = 'Profesores del curso (Solamente si es dentro de un curso)';
+$string['notification_todesc_teachers'] = 'Profesores del curso (Solamente si están dentro de un curso)';
 $string['notification_todesc_student'] = 'El estudiante (Enviar al estudiante que hizo la acción)';
 $string['notification_status'] = 'Estatus';
 $string['notification_statusdesc'] = '¡Si Usted quier detener las notificaciones, marcar como "Idle" (ociosa) y guardar!';
@@ -346,17 +346,12 @@ $string['notification_error_smtp'] = '<p>Para que los estudiantes reciban los me
           <p><a href="https://moodle.eduardokraus.com/configurar-o-smtp-no-moodle"
              target="_blank">Leer aquí como configurar SMTP</a></p>
           <p><a href="{$a->wwwroot}/admin/settings.php?section={$a->mail}"
-              target="_blank">Hacer click aquí para configurar la salida de Email</a></p>';
+              target="_blank">Hacer clic aquí para configurar la salida de Email</a></p>';
 
 // Profile.
 $string['profile_invalid'] = '¡ID de usuario inválida!';
 $string['profile_notfound'] = '¡Usuario no encontrado!';
-$string['profile_access'] = 'Acceder como';
-$string['profile_access_first'] = 'Primer acceso en:';
-$string['profile_access_last'] = 'Último acceso en:';
-$string['profile_access_lastlogin'] = 'Último acceso en:';
 $string['profile_access_title'] = 'Acceso';
-$string['profile_courses_title'] = 'Cursos Registrados';
 $string['profile_edit'] = 'Editar';
 $string['profile_enrol_active'] = 'Registro está activo';
 $string['profile_enrol_expires'] = 'Caduca en';
@@ -364,12 +359,17 @@ $string['profile_enrol_inactive'] = 'Registro está inactivo';
 $string['profile_enrol_notexpires'] = 'y nunca caduca';
 $string['profile_enrol_profile'] = 'Perfiles';
 $string['profile_enrol_start'] = 'Iniciar en';
-$string['profile_link_edit'] = 'Editar Perfil';
-$string['profile_link_profile'] = 'Ver Perfil';
-$string['profile_link_title'] = 'Enlaces Útiles';
 $string['profile_notenrol'] = '¡El usuario no tiene registro!';
 $string['profile_title'] = 'Usuarios';
+$string['profile_access_first'] = 'Primer acceso en:';
+$string['profile_access_last'] = 'Último acceso en:';
+$string['profile_access_lastlogin'] = 'Último ingreso en:';
 $string['profile_userdate_title'] = 'Datos';
+$string['profile_link_title'] = 'Enlaces Útiles';
+$string['profile_link_profile'] = 'Ver Perfil';
+$string['profile_link_edit'] = 'Editar Perfil';
+$string['profile_access'] = 'Acceder como';
+$string['profile_courses_title'] = 'Cursos Registrados';
 
 // Settings.
 $string['setting_saved'] = '¡Configuraciones guardadas!';
@@ -388,7 +388,7 @@ $string['userenrolment_updated'] = 'Última modificación de inscripción en';
 $string['userenrolment_updatesuccess'] = '¡Inscripción cambiada exitosamente!';
 
 // User.
-$string['user_table_celphone'] = 'Mobile';
+$string['user_table_celphone'] = 'Teléfono celular';
 $string['user_table_city'] = 'Ciudad';
 $string['user_table_email'] = 'E-mail';
 $string['user_table_fullname'] = 'Nombre';
@@ -421,37 +421,37 @@ $string['userimport_title'] = 'Importar Usuarios';
 $string['userimport_upload'] = 'Arrastrar aquí archivos CSV o hacer click para abrir la caja de búsqueda.';
 $string['userimport_moveuploadedfile_error'] = '¡ERROR al mover archivo!';
 $string['userimport_title_proccess'] = 'Procesando archivo "{$a}"';
-$string['userimport_separator_error'] = 'You should export CSV with separator "; Or ","!';
+$string['userimport_separator_error'] = 'Usted debería importar CSV con separador "; O ","!';
 $string['userimport_first10'] = 'Primeros 10 registros de su CSV';
-$string['userimport_linkall'] = 'Haga click aquí para ver todos los registros CSV';
+$string['userimport_linkall'] = 'Haga clic aquí para ver todos los registros CSV';
 $string['userimport_colname'] = 'Columna {$a}';
 $string['userimport_colselect'] = '..::Seleccionar columna::..';
 $string['userimport_empty'] = 'Si Usted no lo selecciona, se usará el valor por defecto de "{$a}"';
 $string['userimport_userdata'] = 'Datos del Usuario';
 $string['userimport_userfields'] = 'Campos extra del perfil';
 $string['userimport_firstname'] = 'Nombre o nombre completo';
-$string['userimport_firstname_desc'] = 'If you have the full name in CSV, just fill in this field Kopere will be responsible for generating both fields. ' .
-    'If your CSV has a first name and Last Name, select this and Last Name.';
+$string['userimport_firstname_desc'] = 'Si tiene el nombre completo en el CSV, solo llene este campo y Kopere se encargará de generar ambos campos. ' .
+    'Si su CSV tiene un Nombre y Apellido(s), seleccione esto y Apellido(s).';
 $string['userimport_courseenrol'] = 'Inscribir en un curso';
 $string['userimport_courseenrol_desc'] = 'Si Usted quiere que el estudiante sea inscrito en un curso, seleccione la columna identificadora del curso.';
-$string['userimport_date_desc'] = 'The system automatically detects the main date format.';
-$string['userimport_group_desc'] = 'If you want the student to be bound to a group in the course, the column must be identical to the group name or internal ID.';
-$string['userimport_next'] = 'Process';
+$string['userimport_date_desc'] = 'El sistema detecta automáticamente el formato principal de fecha.';
+$string['userimport_group_desc'] = 'Si quiere que el estudiante esté ligado a un grupo en el curso, la columna debe ser idéntica al nombre del grupo o la ID interna.';
+$string['userimport_next'] = 'Procesar';
 $string['userimport_import_user_created_name'] = 'Usuario importado y registrado en Moodle';
 $string['userimport_import_course_enrol_name'] = 'Usuario importado fue inscrito en el Curso';
 $string['userimport_import_user_created_and_enrol_name'] = 'Usuario importado, registrado en Moodle y curso';
 $string['userimport_messages'] = 'Mensajes que los estudiantes recibirán durante la importación';
-$string['userimport_receivemessage'] = 'User will receive the message with the title {$a}';
-$string['userimport_messageinactive'] = 'Message titled {$a} is inactive and will not be sent';
+$string['userimport_receivemessage'] = 'El usuario recibirá el mensaje con el título de {$a}';
+$string['userimport_messageinactive'] = 'El mensaje titulado {$a} está inactivo y no sserá enviado';
 $string['userimport_notreceivemessage'] = 'User will not receive any messages in this action!';
-$string['userimport_referencedata'] = 'Referencing Moodle data with CSV';
-$string['userimport_dataok'] = 'Data OK, Insert into Moodle';
-$string['userimport_datanotok'] = 'Not OK, I forgot something';
+$string['userimport_referencedata'] = 'Referenciando datos de Moodle con CSV';
+$string['userimport_dataok'] = 'Datos OK, Insertar a Moodle';
+$string['userimport_datanotok'] = 'No están OK, Se me olvidó algo';
 $string['userimport_wait'] = 'Por favor espere a que los datos sean procesados. Después de procesarlos, estará disponible una hoja de cálculo con datos insertados.';
 $string['userimport_noterror'] = 'No se encontró error';
 $string['userimport_inserted'] = 'Usuario ingresado';
-$string['userimport_cript'] = '--encrypted--';
-$string['userimport_exist'] = 'User already exists. Ignored';
+$string['userimport_cript'] = '--encryptado--';
+$string['userimport_exist'] = 'Userio ya existía. Ignorado';
 $string['userimport_passcreate'] = '--Será creado--';
 $string['userimport_filenotfound'] = 'No se encontró el archivo "{$a}" ¡Subir CSV nuevamente!';
 
@@ -460,7 +460,7 @@ $string['userimport_event_import_course_enrol_message'] = '<p>Hola {[to.fullname
 <p>Usted ha sido inscrito exitosamente en {[course.fullname]}. Ahora Usted puede ingresar al área de estudiante y comenzar a estudiar cuando y donde lo desee.</p>
 <p>Es con gran satizfacción que {[moodle.fullname]} le da la BienVenida.</p>
 <p>Acceda a {{course.link}}, y que tenga buenos estudios.</p>
-<p>ISi tuviera cualquier duda, hay ayuda disponible.</p>
+<p>Si tuviera cualquier duda, hay ayuda disponible.</p>
 <p>Sinceramente,<br>
    El Equipo de Apoyo</p>';
 
@@ -488,7 +488,7 @@ $string['userimport_event_import_user_created_and_enrol_message'] = '<p>Hola {[t
 
 // WebPages.
 $string['webpages_title'] = 'Páginas Estáticas';
-$string['webpages_subtitle'] = 'Menúes de navegacións';
+$string['webpages_subtitle'] = 'Menúes de navegación';
 $string['webpages_subtitle_help'] = 'Estos menúes aparecen debajo de Navegación debajo de "Mis Cursos"';
 $string['webpages_table_link'] = 'Enlace';
 $string['webpages_table_menutitle'] = 'Menú';
@@ -500,7 +500,7 @@ $string['webpages_table_text'] = 'Texto';
 $string['webpages_table_title'] = 'Título';
 $string['webpages_page_menu'] = 'Menú';
 $string['webpages_page_create'] = 'Crear nueva página';
-$string['webpages_page_crash'] = 'Si Usted cambia la URL de Moodle y la imagen le da un CRASH (se cae), haga click aquí';
+$string['webpages_page_crash'] = 'Si Usted cambia la URL de Moodle y la imagen le da un CRASH (se cae), haga clic aquí';
 $string['webpages_page_notfound'] = '¡Página no encontrada!';
 $string['webpages_page_nomenudelete'] = '<p>Este menú tiene páginas internas y no se puede borrar!</p>';
 $string['webpages_page_confirmdeletemenu'] = '<p>¿Desea realmente eliminar el menú <strong>{$a}</strong>?</p>';
@@ -509,11 +509,11 @@ $string['webpages_page_edit'] = 'Editar página';
 $string['webpages_page_delete'] = 'Eliminar página';
 $string['webpages_page_course'] = 'Curso Enlazado';
 $string['webpages_page_new'] = 'Nueva página';
-$string['webpages_page_edit'] = 'Editing page';
+$string['webpages_page_edit'] = 'Editando página';
 $string['webpages_page_save'] = 'Guardar página';
-$string['webpages_page_error'] = 'All data must be filled in!';
+$string['webpages_page_error'] = '¡Deben llenarse todos los datos!';
 $string['webpages_page_created'] = '¡Página creada!';
-$string['webpages_page_updated'] = '¿Página actualizada!';
+$string['webpages_page_updated'] = '¡Página actualizada!';
 $string['webpages_page_deleted'] = '¡Página eliminada exitosamente!';
 $string['webpages_page_delete'] = 'Excluyendo Página';
 $string['webpages_page_delete_confirm'] = '¿Realmente desea eliminar la página <strong>{$a->title}</strong>?';
