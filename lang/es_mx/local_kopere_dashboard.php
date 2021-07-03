@@ -15,16 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Local language pack from http://localhost
- *
- * @package    local
- * @subpackage kopere_dashboard
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- *
- * Muchas gracias a Germán Valero https://github.com/germanvaleroelizondo
+ * @package  local_kopere_dashboard
+ * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-defined('MOODLE_INTERNAL') || die();
 
 $string['modulename'] = 'Tablero Kopere';
 $string['pluginname'] = 'Tablero Kopere';
@@ -49,9 +43,11 @@ $string['messageprovider:kopere_dashboard_messages'] = 'Enviar Notificaciones';
 $string['kopere_dashboard:emailconfirmsubmission'] = 'Enviar Notificaciones';
 
 $string['open_dashboard'] = 'Abrir Tablero';
+
 $string['dateformat'] = '%d %B %Y, %I:%M %p';
 $string['datetime'] = '%d/%m/%Y, %H:%M';
 $string['php_datetime'] = 'm/d/Y H:i';
+
 $string['help_title'] = 'Ayuda con esta página';
 
 // Html/tinymce.
@@ -60,13 +56,49 @@ $string['blocks_paragraph'] = 'Párrafo';
 $string['image_alignment'] = 'Alineación de imagen';
 $string['image_alignment_left'] = 'Alinear a la Izquierda';
 $string['image_alignment_right'] = 'Alinear a la Derecha';
-
-$string['about_bug'] = 'Si encontró algun PROBLEMA o si desea sugerir mejoras, abra un asunto';
-$string['about_code'] = 'Código disponible en';
-$string['about_help'] = 'Ayuda activada';
-$string['about_project'] = 'Proyecto de Código Abierto desarrollado y mantenido por';
-$string['about_title'] = 'Acerca de';
+$string['colors'] = 'Colores';
 $string['background'] = 'Fondo';
+$string['color_red'] = 'Rojo';
+$string['color_blue'] = 'Azul';
+$string['color_green'] = 'Verde';
+$string['color_yellow'] = 'Amarillo';
+$string['color_orange'] = 'Naranja';
+$string['color_grey'] = 'Gris';
+$string['color_purple'] = 'Morado';
+$string['color_brown'] = 'Café';
+$string['filemanager_title'] = 'Gestor de archivos';
+
+// DataTables.
+$string['datatables_sEmptyTable'] = 'Sin registros encontrados';
+$string['datatables_sInfo'] = 'Mostrando _START_ a _END_ of _TOTAL_ registros';
+$string['datatables_sInfoEmpty'] = 'Mostrando 0 a 0 de 0 registros';
+$string['datatables_sInfoFiltered'] = '(Filtrado de _MAX_ records)';
+$string['datatables_sInfoPostFix'] = '';
+$string['datatables_sInfoThousands'] = '.';
+$string['datatables_sLengthMenu'] = '_MENU_ resultados por página';
+$string['datatables_sLoadingRecords'] = 'Cargando ...';
+$string['datatables_sProcessing'] = 'Procesando ...';
+$string['datatables_sZeroRecords'] = 'Sin registros encontrados';
+$string['datatables_sSearch'] = 'Buscar:';
+$string['datatables_oPaginate_sNext'] = 'Siguiente';
+$string['datatables_oPaginate_sPrevious'] = 'Anterior';
+$string['datatables_oPaginate_sFirst'] = 'Primero';
+$string['datatables_oPaginate_sLast'] = 'Último';
+$string['datatables_oAria_sSortAscending'] = ': Ordenar Columnas en orden Ascendente';
+$string['datatables_oAria_sSortDescending'] = ': Ordenar Columnas en orden Descendiente';
+
+// Util/navigation.
+$string['navigation_page'] = 'Páginae {$a->atualPage} de {$a->countPages}';
+
+// About.
+$string['about_title'] = 'Acerca de';
+$string['about_project'] = 'Proyecto de código abierto desarrollado y mantenido por';
+$string['about_code'] = 'Código disponible en';
+$string['about_help'] = 'Ayuda está en';
+$string['about_bug'] = 'Si encontró algún problema o quisiera sugerir mejoras, abra un asunto';
+
+// Backup.
+
 $string['backup_delete_confirm'] = 'Eliminación de Respaldo';
 $string['backup_delete_title'] = '¿Realmente desea eliminar el respaldo <strong>{$a}</strong>';
 $string['backup_deletesucessfull'] = '¡Respaldo eliminado exitosamente!';
@@ -168,21 +200,6 @@ $string['dashboard_title_course'] = 'Cursos / Visible';
 $string['dashboard_title_disk'] = 'Uso de Disco';
 $string['dashboard_title_online'] = 'En-línea / Última hora';
 $string['dashboard_title_user'] = 'Usuarios / Bienes';
-$string['datatables_oAria_sSortAscending'] = ': Ordenar Columnas Ascendente';
-$string['datatables_oAria_sSortDescending'] = ': Ordenar Columnas en orden Descendiente';
-$string['datatables_oPaginate_sFirst'] = 'Primero';
-$string['datatables_oPaginate_sLast'] = 'Último';
-$string['datatables_oPaginate_sNext'] = 'Siguiente';
-$string['datatables_oPaginate_sPrevious'] = 'Anterior';
-$string['datatables_sEmptyTable'] = 'Sin registros encontrados';
-$string['datatables_sInfo'] = 'Mostrando _START_ a _END_ of _TOTAL_ registros';
-$string['datatables_sInfoEmpty'] = 'Mostrando 0 a 0 de 0 registros';
-$string['datatables_sInfoFiltered'] = '(Filtrado de _MAX_ records)';
-$string['datatables_sLengthMenu'] = '_MENU_ resultados por página';
-$string['datatables_sLoadingRecords'] = 'Cargando ...';
-$string['datatables_sProcessing'] = 'Procesando ...';
-$string['datatables_sSearch'] = 'Buscar:';
-$string['datatables_sZeroRecords'] = 'Sin registros encontrados';
 $string['filemanager_title'] = 'Gestor de Archivos';
 $string['filereadmoreinfo'] = 'Probar la velocidad para leer en carpeta temporal de Moodle';
 $string['filereadname'] = 'Leyendo archivos';
