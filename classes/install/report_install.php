@@ -200,17 +200,19 @@ ORDER BY u.username";
  LEFT JOIN (
           SELECT course, count(id) AS modules
             FROM {course_modules}
-           WHERE visible    = 1
-             AND completion > 0
+           WHERE visible            = 1
+             AND completion         > 0
+             AND deletioninprogress = 0
         GROUP BY course
       ) AS m ON m.course = c.id
  LEFT JOIN (
           SELECT cm_i.course, cmc_i.userid, COUNT(DISTINCT cmc_i.id) AS completed
             FROM {course_modules}            cm_i,
                  {course_modules_completion} cmc_i
-           WHERE cmc_i.coursemoduleid  =  cm_i.id
-             AND cm_i.visible          =  1
-             AND cmc_i.completionstate IN (1,2)
+           WHERE cmc_i.coursemoduleid    =  cm_i.id
+             AND cm_i.visible            =  1
+             AND cmc_i.completionstate   IN (1,2)
+             AND cm_i.deletioninprogress = 0
         GROUP BY cm_i.course, cmc_i.userid
       ) AS cmc ON cmc.course = c.id 
               AND cmc.userid = ue.userid
