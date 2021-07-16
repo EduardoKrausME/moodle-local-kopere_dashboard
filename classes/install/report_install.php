@@ -367,6 +367,7 @@ SELECT c.id, c.fullname, c.shortname, c.visible, c.timecreated,
           AND ctx.instanceid   = cm.id
           AND ctx.contextlevel = 70
           AND cm.course        = c.id
+          AND cm.deletioninprogress = 0
      GROUP BY cm.course) AS modulessize
   FROM {course} c
  WHERE c.id > 1";

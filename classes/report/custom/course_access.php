@@ -101,7 +101,8 @@ class course_access {
                 $sql = "SELECT cm.*, cm.id AS course_modules_id, m.*, m.id AS modules_id
                           FROM {course_modules} cm
                           JOIN {modules} m ON cm.module = m.id
-                         WHERE cm.id = :cmid";
+                         WHERE cm.id = :cmid
+                           AND cm.deletioninprogress = 0";
 
                 $module = $DB->get_record_sql($sql, array('cmid' => intval($parte)));
 
