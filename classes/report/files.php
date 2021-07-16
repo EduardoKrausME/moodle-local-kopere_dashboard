@@ -99,6 +99,7 @@ class files {
                        AND ctx.instanceid   = cm.id
                        AND ctx.contextlevel = :contextlevel
                        AND cm.course        = :course
+                       AND cm.deletioninprogress = 0
                   GROUP BY cm.course",
                 array('contextlevel' => CONTEXT_MODULE,
                     'course' => $course->id));
