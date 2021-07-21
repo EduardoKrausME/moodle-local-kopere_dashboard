@@ -414,7 +414,7 @@ SELECT DISTINCT c.id, c.fullname, c.shortname, ctx.id AS contextid,
         $report->reportkey = 'user-2';
         $report->title = '[[reports_report_user-2]]';
         $report->reportsql = " 
-SELECT concat(u.id, p.id), u.id, {$alternatenames}, 
+SELECT concat(u.id, p.id) AS id, u.id AS userid, {$alternatenames}, 
        c.fullname, c.shortname, t.timecompleted, p.module, p.moduleinstance
   FROM {course_completion_crit_compl} t
   JOIN {user}    u ON t.userid = u.id
@@ -483,12 +483,14 @@ SELECT u.id, {$alternatenames}, u.email, u.city, u.timecreated
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-6';
         $report->title = '[[reports_report_user-6]]';
+        $report->prerequisit = 'listCourses';
         $report->reportsql = "SELECT concat(u.id, p.id), u.id, {$alternatenames},
                                       c.fullname, c.shortname, p.timecompleted
                                  FROM {course_completions} p
                                  JOIN {course} c ON p.course = c.id
                                  JOIN {user}   u ON p.userid = u.id
                                 WHERE c.enablecompletion = 1
+                                  AND c.id               = :courseid
                              ORDER BY u.username";
         $report->columns = array(
             $table->add_header('#', 'id', table_header_item::TYPE_INT, null, 'width:20px'),

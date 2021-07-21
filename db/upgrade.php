@@ -181,6 +181,16 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         $DB->delete_records('kopere_dashboard_reports', array('reportkey' => 'courses-1'));
     }
 
+    if ($oldversion < 2021071600) {
+        echo "Apagado<br>";
+        $DB->delete_records('kopere_dashboard_reports', array('reportkey' => 'courses-1'));
+    }
+
+    if ($oldversion < 2021072100) {
+        $DB->delete_records('kopere_dashboard_reports', array('reportkey' => 'user-6'));
+    }
+
+
     \local_kopere_dashboard\install\report_install::create_categores();
     \local_kopere_dashboard\install\report_install::create_reports();
 
