@@ -276,6 +276,13 @@ class reports extends reports_admin {
             $reports = $DB->get_records_sql($koperereports->reportsql);
         }
 
+        if (strlen($koperereports->foreach)) {
+            foreach ($reports as $key => $item) {
+                $item = call_user_func($koperereports->foreach, $item);
+                $reports[$key] = $item;
+            }
+        }
+
         $columns = json_decode($koperereports->columns);
         if (!isset($columns->header)) {
             $columns->header = array();
