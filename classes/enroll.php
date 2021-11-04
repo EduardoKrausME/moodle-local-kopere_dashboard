@@ -40,19 +40,18 @@ class enroll {
     public function last_enroll() {
         global $DB;
 
-        $sql
-            = "SELECT DISTINCT ue.id, ra.roleid, e.courseid, c.fullname, ue.userid, ue.timemodified, ue.timeend, ue.status, e.enrol
-                 FROM {user_enrolments} ue
-                 JOIN {role_assignments} ra ON ue.userid = ra.userid
-                 JOIN {enrol} e             ON e.id = ue.enrolid
-                 JOIN {context} ctx         ON ctx.instanceid = e.courseid
-                 JOIN {course} c            ON c.id = e.courseid
+        return $DB->get_records_sql("
+               SELECT DISTINCT ue.id, ra.roleid, e.courseid, c.fullname, 
+                               ue.userid, ue.timemodified, ue.timeend, ue.status, e.enrol
+                 FROM {user_enrolments}  ue
+                 JOIN {role_assignments} ra  ON ue.userid = ra.userid
+                 JOIN {enrol}            e   ON e.id = ue.enrolid
+                 JOIN {context}          ctx ON ctx.instanceid = e.courseid
+                 JOIN {course}           c   ON c.id = e.courseid
                 WHERE ra.contextid = ctx.id
              --  GROUP BY e.courseid, ue.userid
              ORDER BY ue.timemodified DESC
-                LIMIT 10";
-
-        return $DB->get_records_sql($sql);
+                LIMIT 10");
     }
 
 

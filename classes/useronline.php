@@ -120,18 +120,11 @@ class useronline {
         $count = $DB->get_record_sql(
             "SELECT count(u.id) AS num
                FROM {user} u
-          LEFT JOIN {context} cx ON cx.instanceid = u.id
-              WHERE u.lastaccess    > :onlinestart
-                AND u.lastaccess    < :timefinish
-                AND cx.contextlevel = :contextlevel
+              WHERE u.lastaccess > :onlinestart
            GROUP BY u.id
            ORDER BY u.timecreated DESC
               LIMIT 1",
-            array(
-                'contextlevel' => CONTEXT_USER,
-                'onlinestart' => $onlinestart,
-                'timefinish' => $timefinish
-            ));
+            array('onlinestart' => $onlinestart));
 
         if ($count) {
             return $count->num;

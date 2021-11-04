@@ -41,21 +41,23 @@ class grade {
         if ($CFG->dbtype == 'mysqli') {
             $group = 'GROUP BY gg.id';
         }
-        $data = $DB->get_records_sql("SELECT DISTINCT gg.id, gg.id AS ggid, gi.id as giid, u.id as userid,
-                                               c.id as courseid, c.fullname AS coursename, gi.timemodified,
-                                               gi.itemtype, gi.itemname, gg.finalgrade, gg.rawgrademax
-                                        FROM {course} c
-                                        JOIN {context} ctx ON c.id = ctx.instanceid
-                                        JOIN {role_assignments} ra ON ra.contextid = ctx.id
-                                        JOIN {user} u ON u.id = ra.userid
-                                        JOIN {grade_grades} gg ON gg.userid = u.id
-                                        JOIN {grade_items} gi ON gi.id = gg.itemid
-                                        JOIN {course_categories} cc ON cc.id = c.category
-                                       WHERE gi.courseid = c.id AND gi.itemname != 'Attendance'
-                                         AND gg.finalgrade IS NOT NULL
-                                    $group
-                                    ORDER BY gi.timemodified DESC
-                                       LIMIT 10");
+        $data = $DB->get_records_sql("
+                      SELECT DISTINCT gg.id, gg.id AS ggid, gi.id as giid, u.id as userid,
+                                      c.id as courseid, c.fullname AS coursename, gi.timemodified,
+                                      gi.itemtype, gi.itemname, gg.finalgrade, gg.rawgrademax
+                        FROM {course}            c
+                        JOIN {context}           ctx ON c.id = ctx.instanceid
+                        JOIN {role_assignments}  ra ON ra.contextid = ctx.id
+                        JOIN {user}              u ON u.id = ra.userid
+                        JOIN {grade_grades}      gg ON gg.userid = u.id
+                        JOIN {grade_items}       gi ON gi.id = gg.itemid
+                        JOIN {course_categories} cc ON cc.id = c.category
+                       WHERE gi.courseid    = c.id 
+                         AND gi.itemname   != 'Attendance'
+                         AND gg.finalgrade IS NOT NULL
+                    $group
+                    ORDER BY gi.timemodified DESC
+                       LIMIT 10");
 
         return $data;
     }

@@ -88,7 +88,8 @@ class files {
                        AND ctx.contextlevel = :contextlevel
                        AND ctx.instanceid   = :instanceid
                   GROUP BY ctx.instanceid",
-                array('contextlevel' => CONTEXT_COURSE,
+                array(
+                    'contextlevel' => CONTEXT_COURSE,
                     'instanceid' => $course->id
                 ));
 
@@ -101,8 +102,10 @@ class files {
                        AND cm.course        = :course
                        AND cm.deletioninprogress = 0
                   GROUP BY cm.course",
-                array('contextlevel' => CONTEXT_MODULE,
-                    'course' => $course->id));
+                array(
+                    'contextlevel' => CONTEXT_MODULE,
+                    'course' => $course->id
+                ));
 
             $coursesizeval = isset($coursesize->coursesize) ? $coursesize->coursesize : 0;
             $modulessizeval = isset($modulessize->modulessize) ? $modulessize->modulessize : 0;
