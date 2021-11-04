@@ -23,6 +23,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$debug = optional_param("debug", false, PARAM_INT);
+if ($debug) {
+    global $DB;
+    $DB->set_debug(true);
+}
+
 spl_autoload_register("kopere_dashboard_autoload");
 function kopere_dashboard_autoload($classname) {
     global $CFG;
