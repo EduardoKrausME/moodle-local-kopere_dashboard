@@ -64,6 +64,10 @@ class performancemonitor {
      * @return string
      */
     public static function load_monitor() {
+        global $PAGE;
+
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/monitor', 'init');
+
         return '
             <div class="element-content">
                 <div class="row">
@@ -86,9 +90,7 @@ class performancemonitor {
                     <div class="col-sm-2">
                         <div class="element-box color_hd">
                             <div class="label">' . get_string_kopere('performancemonitor_hd') . '</div>
-                            <div class="value"><span>
-                                ' . performancemonitor::disk_moodledata(false) . '
-                            </span></div>
+                            <div class="value"><span id="load_monitor-performancemonitor_hd"></span></div>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -170,6 +172,11 @@ class performancemonitor {
     public static function disk_moodledata($return_number) {
         global $CFG;
 
+        $cache = \cache::make('local_kopere_dashboard', 'performancemonitor');
+        if ($cache->has('disk_moodledata')) {
+            return $cache->get('disk_moodledata');
+        }
+
         if (!server_util::function_enable('shell_exec')) {
             if ($return_number) {
                 return -1;
@@ -183,6 +190,8 @@ class performancemonitor {
         $pos = strrpos($lines, "\n");
         $lastLine = substr($lines, $pos);
         $bytes = explode("\t", $lastLine)[0];
+
+        $cache->set('disk_moodledata', $bytes);
 
         return $bytes;
     }
