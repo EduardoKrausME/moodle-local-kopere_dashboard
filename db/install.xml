@@ -12,7 +12,6 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
-                <KEY NAME="unique"  TYPE="unique"  FIELDS="link" />
             </KEYS>
         </TABLE>
         <TABLE NAME="kopere_dashboard_webpages" COMMENT="">
@@ -30,7 +29,6 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
-                <KEY NAME="unique"  TYPE="unique"  FIELDS="link" />
             </KEYS>
         </TABLE>
         <TABLE NAME="kopere_dashboard_events" COMMENT="">
@@ -46,7 +44,6 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
-                <KEY NAME="unique"  TYPE="unique"  FIELDS="module, event" />
             </KEYS>
         </TABLE>
 
@@ -61,7 +58,6 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
-                <KEY NAME="unique"  TYPE="unique"  FIELDS="type" />
             </KEYS>
         </TABLE>
         <TABLE NAME="kopere_dashboard_reports" COMMENT="">
@@ -79,7 +75,6 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
-                <KEY NAME="unique"  TYPE="unique"  FIELDS="reportkey" />
             </KEYS>
         </TABLE>
 

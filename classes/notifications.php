@@ -291,25 +291,37 @@ class notifications extends notificationsutil {
     public function add_save() {
         global $DB;
 
-        $kopereevents = kopere_dashboard_events::create_by_default();
+        $event = kopere_dashboard_events::create_by_default();
 
-        if ($kopereevents->id) {
-            try {
-                $DB->update_record('kopere_dashboard_events', $kopereevents);
+        if ($event->id) {
+            $event_exist = $DB->record_exists_select('kopere_dashboard_events',
+                'module = :module AND event = :event AND id != :id',
+                ['module' => $event->module, 'event' => $event->event, 'id' => $event->id]);
+            if ($event_exist) {
+                mensagem::agenda_mensagem_danger(get_string_kopere('notification_duplicate'));
+            } else {
+                try {
+                    $DB->update_record('kopere_dashboard_events', $event);
 
-                mensagem::agenda_mensagem_success(get_string_kopere('notification_created'));
-                header::location('?classname=notifications&method=dashboard');
-            } catch (\dml_exception $e) {
-                mensagem::print_danger($e->getMessage());
+                    mensagem::agenda_mensagem_success(get_string_kopere('notification_created'));
+                    header::location('?classname=notifications&method=dashboard');
+                } catch (\dml_exception $e) {
+                    mensagem::print_danger($e->getMessage());
+                }
             }
         } else {
-            try {
-                $DB->insert_record('kopere_dashboard_events', $kopereevents);
+            $event_exist = $DB->record_exists('kopere_dashboard_events', ['module' => $event->module, 'event' => $event->event]);
+            if ($event_exist) {
+                mensagem::agenda_mensagem_danger(get_string_kopere('notification_duplicate'));
+            } else {
+                try {
+                    $DB->insert_record('kopere_dashboard_events', $event);
 
-                mensagem::agenda_mensagem_success(get_string_kopere('notification_created'));
-                header::location('?classname=notifications&method=dashboard');
-            } catch (\dml_exception $e) {
-                mensagem::print_danger($e->getMessage());
+                    mensagem::agenda_mensagem_success(get_string_kopere('notification_created'));
+                    header::location('?classname=notifications&method=dashboard');
+                } catch (\dml_exception $e) {
+                    mensagem::print_danger($e->getMessage());
+                }
             }
         }
     }

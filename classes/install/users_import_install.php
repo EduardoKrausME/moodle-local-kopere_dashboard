@@ -79,11 +79,7 @@ class users_import_install {
     public static function insert($event) {
         global $DB;
 
-        $evento = $DB->get_record('kopere_dashboard_events',
-            array(
-                'module' => $event->module,
-                'event' => $event->event
-            ));
+        $evento = $DB->record_exists('kopere_dashboard_events', ['module' => $event->module, 'event' => $event->event]);
         if (!$evento) {
             $DB->insert_record('kopere_dashboard_events', $event);
         }

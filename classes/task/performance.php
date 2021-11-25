@@ -29,9 +29,9 @@ class performance extends \core\task\scheduled_task {
         }
 
         $time = time();
-        $this->add_data($time, 'cpu',     performancemonitor::cpu(true));
-        $this->add_data($time, 'memory',  performancemonitor::memory(true));
-        $this->add_data($time, 'disk',    performancemonitor::disk_moodledata(true));
+        $this->add_data($time, 'cpu', performancemonitor::cpu(true));
+        $this->add_data($time, 'memory', performancemonitor::memory(true));
+        $this->add_data($time, 'disk', performancemonitor::disk_moodledata(true));
         $this->add_data($time, 'average', performancemonitor::load_average(true));
         $this->add_data($time, 'average', performancemonitor::online());
     }
@@ -39,11 +39,16 @@ class performance extends \core\task\scheduled_task {
     private function add_data($time, $type, $value) {
         global $DB;
 
-        $kopere_dashboard_performance = (object)array(
+        $kopere_dashboard_performance = (object)[
             'time' => $time,
             'type' => $type,
             'value' => $value
-        );
+        ];
+
+        $exists = $DB->record_exists('kopere_dashboard_performance', ['time' => $time, 'type' => $type]);
+        if ($exists) {
+            return false;
+        }
 
         try {
             $DB->insert_record("kopere_dashboard_performance", $kopere_dashboard_performance);

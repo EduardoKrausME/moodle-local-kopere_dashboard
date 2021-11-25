@@ -617,8 +617,8 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
     private static function report_cat_insert($reportcat) {
         global $DB;
 
-        $koperereportcat = $DB->get_record('kopere_dashboard_reportcat', array('type' => $reportcat->type));
-        if (!$koperereportcat) {
+        $koperereportcat_exist = $DB->record_exists('kopere_dashboard_reportcat', ['type' => $reportcat->type]);
+        if (!$koperereportcat_exist) {
             $DB->insert_record('kopere_dashboard_reportcat', $reportcat);
         }
     }
