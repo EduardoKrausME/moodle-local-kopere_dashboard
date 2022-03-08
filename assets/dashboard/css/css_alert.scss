@@ -1,4 +1,11 @@
 .alert {
+    padding-left: 36px !important;
+    > i.fa {
+        font-size: 22px;
+        position: absolute;
+        left: 8px;
+        top: 15px;
+    }
     .alert-link {
         font-weight: bold
     }
