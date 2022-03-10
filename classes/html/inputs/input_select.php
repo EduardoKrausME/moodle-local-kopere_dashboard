@@ -100,14 +100,16 @@ class input_select extends input_base {
      */
     public function to_string() {
         $return = "<select ";
-        $return .= "id=\"$this->name\" name=\"$this->name\" ";
+
+        $input_id = preg_replace('/[\W]/', '', $this->name);
+        $return .= "id=\"{$input_id}\" name=\"{$this->name}\" ";
 
         if ($this->class) {
-            $return .= "class=\"$this->class\" ";
+            $return .= "class=\"{$this->class}\" ";
         }
 
         if ($this->style) {
-            $return .= "style=\"$this->style\" ";
+            $return .= "style=\"{$this->style}\" ";
         }
 
         $return .= ">";
@@ -134,7 +136,7 @@ class input_select extends input_base {
                 }
             }
 
-            $return .= "\n\t<option value=\"$key\"";
+            $return .= "\n\t<option value=\"{$key}\"";
             if ($key == $this->value) {
                 $return .= ' selected="selected"';
             }

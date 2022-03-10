@@ -283,20 +283,23 @@ class input_base implements i_input {
     }
 
     public function to_string() {
-        $return = "<input id=\"$this->name\"
-                          name=\"$this->name\"
-                          type=\"$this->type\"";
+
+        $input_id = preg_replace('/[\W]/', '', $this->name);
+
+        $return = "<input id=\"{$input_id}\"
+                          name=\"{$this->name}\"
+                          type=\"{$this->type}\"";
 
         if ($this->value !== null) {
             $return .= " value=\"" . htmlentities($this->value) . "\" ";
         }
 
         if ($this->class !== null) {
-            $return .= " class=\"$this->class\" ";
+            $return .= " class=\"{$this->class}\" ";
         }
 
         if ($this->style !== null) {
-            $return .= " style=\"$this->style\" ";
+            $return .= " style=\"{$this->style}\" ";
         }
 
         if ($this->required) {

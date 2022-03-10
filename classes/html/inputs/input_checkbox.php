@@ -84,7 +84,8 @@ class input_checkbox extends input_base {
      */
     public function to_string() {
         //$return = "<input type='hidden' name='{$this->name}' value='0'/>";
-        $return = "<input id='{$this->name}' name='{$this->name}' type='checkbox' ";
+        $input_id = preg_replace('/[\W]/', '', $this->name);
+        $return = "<input id='{$input_id}' name='{$this->name}' type='checkbox' ";
 
         if ($this->value) {
             $value = htmlentities($this->value);
