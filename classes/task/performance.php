@@ -8,7 +8,7 @@
 namespace local_kopere_dashboard\task;
 
 
-use local_kopere_dashboard\performancemonitor;
+use local_kopere_dashboard\server\performancemonitor;
 
 class performance extends \core\task\scheduled_task {
 
@@ -24,10 +24,6 @@ class performance extends \core\task\scheduled_task {
      * @throws \coding_exception
      */
     public function execute() {
-        if (!performancemonitor::CRON) {
-            return;
-        }
-
         $time = time();
         $this->add_data($time, 'cpu', performancemonitor::cpu(true));
         $this->add_data($time, 'memory', performancemonitor::memory(true));

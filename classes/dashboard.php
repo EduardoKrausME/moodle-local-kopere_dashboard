@@ -26,9 +26,9 @@ namespace local_kopere_dashboard;
 defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\report\files;
+use local_kopere_dashboard\server\performancemonitor;
 use local_kopere_dashboard\util\bytes_util;
 use local_kopere_dashboard\util\dashboard_util;
-use local_kopere_dashboard\util\title_util;
 
 /**
  * Class dashboard
@@ -41,12 +41,37 @@ class dashboard {
      * @throws \dml_exception
      */
     public function start() {
+        global $PAGE;
+
         dashboard_util::add_breadcrumb("Kopere Dashboard");
         dashboard_util::start_page();
 
         echo performancemonitor::load_monitor();
 
-        echo '<div class="element-content">
+        echo '
+            <div id="dashboard-monitor"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="element-box">
+                        <h3>' . get_string_kopere('dashboard_grade_title') . '</h3>
+                        <div id="dashboard-last_grades"></div>
+                    </div>
+                </div>
+                <div class="col-sm-6 ">
+                    <div class="element-box">
+                        <h3>' . get_string_kopere('dashboard_enrol_title') . '</h3>
+                        <div id="dashboard-last_enroll"></div>
+                    </div>
+                </div>
+            </div>';
+        dashboard_util::end_page();
+
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/dashboard', 'start');
+    }
+
+    public function monitor() {
+        echo '
+            <div class="element-content">
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="element-box color_user">
@@ -80,13 +105,6 @@ class dashboard {
                     </div>
                 </div>
             </div>';
-
-        echo '<div class="row">';
-        $this->last_grades();
-        $this->last_enroll();
-        echo '</div>';
-
-        dashboard_util::end_page();
     }
 
 
@@ -94,11 +112,8 @@ class dashboard {
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    private function last_grades() {
+    public function last_grades() {
         global $DB, $PAGE;
-        echo '<div class="col-sm-6">
-                  <div class="element-box">';
-        title_util::print_h3('dashboard_grade_title');
 
         $grade = new grade();
         $lastgrades = $grade->get_last_grades();
@@ -141,21 +156,16 @@ class dashboard {
                       </div>
                       <div class="clear"></div>
                   </div>';
-
         }
-        echo '    </div>
-              </div>';
+        die();
     }
 
     /**
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    private function last_enroll() {
+    public function last_enroll() {
         global $DB, $PAGE;
-        echo '<div class="col-sm-6 ">
-                  <div class="element-box">';
-        title_util::print_h3('dashboard_enrol_title');
 
         $enrol = new enroll();
         $lastenroll = $enrol->last_enroll();
@@ -195,8 +205,5 @@ class dashboard {
                       </div>';
             }
         }
-
-        echo '    </div>
-              </div>';
     }
 }

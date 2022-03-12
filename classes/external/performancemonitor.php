@@ -43,10 +43,14 @@ class performancemonitor extends external_api {
         ]);
     }
 
+    /**
+     * @return array
+     * @throws \Exception
+     */
     public static function disk_moodledata() {
 
         return [
-            'disk' => \local_kopere_dashboard\performancemonitor::disk_moodledata(false)
+            'disk' => \local_kopere_dashboard\server\performancemonitor::disk_moodledata(false)
         ];
     }
 }

@@ -21,11 +21,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_kopere_dashboard;
+namespace local_kopere_dashboard\server;
 
-use local_kopere_dashboard\report\files;
-use local_kopere_dashboard\util\bytes_util;
-use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\server_util;
 
 defined('MOODLE_INTERNAL') || die();
@@ -35,29 +32,6 @@ defined('MOODLE_INTERNAL') || die();
  * @package local_kopere_dashboard
  */
 class performancemonitor {
-
-    /**
-     * @var bool
-     */
-    CONST CRON = true;
-
-    /**
-     * @var int
-     */
-    private static $start_time;
-
-    /**
-     * @throws \coding_exception
-     * @throws \dml_exception
-     */
-    public function start() {
-        dashboard_util::add_breadcrumb("Performance Monitor");
-        dashboard_util::start_page();
-
-        echo self::load_monitor();
-
-        dashboard_util::end_page();
-    }
 
     /**
      * @throws \coding_exception
@@ -167,14 +141,14 @@ class performancemonitor {
     /**
      * @param $return_number
      * @return mixed|string
-     * @throws \coding_exception
+     * @throws \Exception
      */
     public static function disk_moodledata($return_number) {
         global $CFG;
 
         $cache = \cache::make('local_kopere_dashboard', 'performancemonitor');
-        if ($cache->has('disk_moodledata')) {
-            return $cache->get('disk_moodledata');
+        if ($cache->has('server')) {
+            return $cache->get('server');
         }
 
         if (!server_util::function_enable('shell_exec')) {
@@ -191,7 +165,7 @@ class performancemonitor {
         $lastLine = substr($lines, $pos);
         $bytes = explode("\t", $lastLine)[0];
 
-        $cache->set('disk_moodledata', $bytes);
+        $cache->set('server', $bytes);
 
         return $bytes;
     }
