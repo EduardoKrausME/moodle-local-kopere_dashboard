@@ -190,6 +190,12 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         $DB->delete_records('kopere_dashboard_reports', array('reportkey' => 'user-6'));
     }
 
+    if ($oldversion < 2022040400) {
+        $DB->delete_records('kopere_dashboard_reports');
+
+        upgrade_plugin_savepoint(true, 2022040400, 'local', 'kopere_dashboard');
+    }
+
 
     \local_kopere_dashboard\install\report_install::create_categores();
     \local_kopere_dashboard\install\report_install::create_reports();

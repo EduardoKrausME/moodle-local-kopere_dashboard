@@ -487,10 +487,12 @@ SELECT u.id, {$alternatenames}, u.email, u.city, u.timecreated
         $report->reportsql = "SELECT concat(u.id, p.id), u.id, {$alternatenames},
                                       c.fullname, c.shortname, p.timecompleted
                                  FROM {course_completions} p
-                                 JOIN {course} c ON p.course = c.id
-                                 JOIN {user}   u ON p.userid = u.id
+                                 JOIN {course}             c  ON p.course = c.id
+                                 JOIN {user}               u  ON p.userid = u.id
+                                 JOIN {course_completions} cc ON c.id = cc.course AND u.id = cc.userid
                                 WHERE c.enablecompletion = 1
                                   AND c.id               = :courseid
+                                  AND cc.timecompleted   > 0
                              ORDER BY u.username";
         $report->columns = array(
             $table->add_header('#', 'id', table_header_item::TYPE_INT, null, 'width:20px'),
