@@ -40,7 +40,7 @@ class export {
      * @param      $format
      * @param null $filename
      */
-    public static function header( $format, $filename = null) {
+    public static function header($format, $filename = null) {
         if ($filename == null) {
             $filename = dashboard_util::$currenttitle;
         }
@@ -48,6 +48,7 @@ class export {
         self::$format = $format;
         if (self::$format == 'xls') {
             ob_clean();
+            ob_end_flush();
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment; filename="' . $filename . '.xls"');
             header('Cache-Control: max-age=0');
@@ -62,6 +63,7 @@ class export {
                       -->
                   </head>
                   <body>";
+            ob_flush();
         }
     }
 
