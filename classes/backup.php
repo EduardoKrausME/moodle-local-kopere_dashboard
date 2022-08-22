@@ -136,6 +136,8 @@ class backup {
     public function execute_dumpsql() {
         global $DB, $CFG, $PAGE;
 
+        set_time_limit(0);
+
         dashboard_util::add_breadcrumb(get_string_kopere('backup_title'), '?classname=backup&method=dashboard');
         dashboard_util::add_breadcrumb(get_string_kopere('backup_execute_exec'));
         dashboard_util::add_breadcrumb(get_string_kopere('backup_execute_exec') . ": {$CFG->dbname}");
@@ -235,9 +237,6 @@ class backup {
         $backupfile = $this->get_backup_path() . $file;
 
         if (file_exists($backupfile)) {
-            preg_match("/backup_(\d+)-(\d+)-(\d+)-(\d+)-(\d+).tar.gz/", $file, $p);
-            $data = $p[3] . '/' . $p[2] . '/' . $p[1] . ' às ' . $p[4] . ':' . $p[5];
-
             if ($status) {
                 @unlink($backupfile);
 
@@ -266,12 +265,12 @@ class backup {
     }
 
     /**
-     * @throws \coding_exception
+     * @throws \Exception
      */
     public function download() {
         ob_clean();
-        ob_end_flush();
         session_write_close();
+        ob_end_flush();
 
         $file = optional_param('file', '', PARAM_TEXT);
 
