@@ -70,8 +70,8 @@ class course_access_grade {
         }
 
         $perPage = 10;
-        $atualPage     = optional_param ( 'page', 1, PARAM_INT );
-        $startLimit    = ( $atualPage - 1 ) * $perPage;
+        $atualPage = optional_param('page', 1, PARAM_INT);
+        $startLimit = ($atualPage - 1) * $perPage;
 
         $course = $DB->get_record('course', array('id' => $courseid));
         header::notfound_null($course, get_string_kopere('courses_notound'));
@@ -188,11 +188,12 @@ class course_access_grade {
             echo '<th bgcolor="#c5c5c5" colspan="' . $colspan . '" align="center" style="text-align: center" >
                       <a href="' . $link . '" target="_blank">' . $infos->moduleinfo->name . '</a>
                   </th>';
+            ob_flush();
         }
         echo '</tr>';
         echo '</thead>';
 
-        if ( $export == 'xls' ) {
+        if ($export == 'xls') {
             $sql = "
                SELECT DISTINCT SQL_CALC_FOUND_ROWS u.*
                  FROM {context} c
@@ -220,7 +221,7 @@ class course_access_grade {
                 'instanceid' => $courseid
             ));
 
-        $total = $DB->get_record_sql ( "SELECT FOUND_ROWS() as num_itens" );
+        $total = $DB->get_record_sql("SELECT FOUND_ROWS() as num_itens");
 
         foreach ($allusercourse as $user) {
             echo '<tr>';
@@ -294,7 +295,7 @@ class course_access_grade {
         echo '</table>';
 
         export::close();
-        pagination::create ( $atualPage, $total->num_itens, $perPage );
+        pagination::create($atualPage, $total->num_itens, $perPage);
     }
 
     /**
