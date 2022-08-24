@@ -103,7 +103,7 @@ class report_install {
     public static function create_reports() {
         global $DB, $CFG;
 
-        $alternatenames = get_all_user_name_fields(true, 'u');
+        $alternatenames = self::get_all_user_name_fields(true, 'u');
 
         $table = new report_install();
 
@@ -636,5 +636,43 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
         if (!$koperereports) {
             $DB->insert_record('kopere_dashboard_reports', $report);
         }
+    }
+
+    private static function get_all_user_name_fields($returnsql = false, $tableprefix = null) {
+        $alternatenames = [
+            // Para a função fullname()
+            'firstnamephonetic' => 'firstnamephonetic',
+            'lastnamephonetic' => 'lastnamephonetic',
+            'middlename' => 'middlename',
+            'alternatename' => 'alternatename',
+            'firstname' => 'firstname',
+            'lastname' => 'lastname',
+
+            // Para as configurações do setting
+            'institution' => 'institution',
+            'department' => 'department',
+            'phone1' => 'phone1',
+            'phone2' => 'phone2',
+            'address' => 'address',
+            'description' => 'description',
+            'city' => 'city',
+            'country' => 'country',
+            'timezone' => 'timezone',
+            'firstaccess' => 'firstaccess',
+            'lastaccess' => 'lastaccess',
+            'lastlogin' => 'lastlogin',
+            'lastip' => 'lastip',
+        ];
+
+        // Create an sql field snippet if requested.
+        if ($returnsql) {
+            if ($tableprefix) {
+                foreach ($alternatenames as $key => $altname) {
+                    $alternatenames[$key] = $tableprefix . '.' . $altname;
+                }
+            }
+            $alternatenames = implode(',', $alternatenames);
+        }
+        return $alternatenames;
     }
 }

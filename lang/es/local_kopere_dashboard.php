@@ -42,6 +42,9 @@ $string['kopere_dashboard_open_internal'] = 'Abrir interno';
 $string['kopere_dashboard_open_popup'] = 'En popup';
 $string['kopere_dashboard_open_blank'] = 'En nueva ventana';
 $string['kopere_dashboard_open_top'] = 'En la misma ventana';
+$string['add_report_user_fields'] = 'En los informes, agregue los siguientes campos de usuario';
+$cadena['add_report_user_fields_alt'] = 'Seleccione los campos de usuario que desea mostrar en los informes de Kopere.<br>
+    Mantenga presionada la tecla CTRL para seleccionar varios campos.';
 
 $string['integracaoroot'] = 'Integraciones';
 

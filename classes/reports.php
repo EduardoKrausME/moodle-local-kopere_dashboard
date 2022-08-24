@@ -130,19 +130,19 @@ class reports extends reports_admin {
      * @throws \dml_exception
      */
     public function load_report() {
-        global $DB;
+        global $DB, $CFG;
 
         $report = optional_param('report', 0, PARAM_INT);
         $courseid = optional_param('courseid', 0, PARAM_INT);
 
         /** @var kopere_dashboard_reports $koperereports */
         $koperereports = $DB->get_record('kopere_dashboard_reports',
-            array('id' => $report));
+            ['id' => $report]);
         header::notfound_null($koperereports, get_string_kopere('reports_notfound'));
 
         /** @var kopere_dashboard_reportcat $koperereportcat */
         $koperereportcat = $DB->get_record('kopere_dashboard_reportcat',
-            array('id' => $koperereports->reportcatid));
+            ['id' => $koperereports->reportcatid]);
         header::notfound_null($koperereportcat, get_string_kopere('reports_notfound'));
 
         dashboard_util::add_breadcrumb(get_string_kopere('reports_title'), '?classname=reports&method=dashboard');
@@ -175,8 +175,21 @@ class reports extends reports_admin {
                 if (!isset($columns->header)) {
                     $columns->header = array();
                 }
+
+                $report_user_fields = explode(",", $CFG->add_report_user_fields);
+                foreach ($report_user_fields as $report_user_field) {
+                    $columns->columns[] = (object)[
+                        'chave' => $report_user_field,
+                        'type' => 'text',
+                        'title' => get_string($report_user_field),
+                        'funcao' => "",
+                        'style_header' => "",
+                        'style_col' => "",
+                    ];
+                }
+
                 $table = new data_table($columns->columns, $columns->header);
-                $table->set_ajax_url('?classname=reports&method=getdata&report=' . $report . '&courseid=' . $courseid);
+                $table->set_ajax_url("?classname=reports&method=getdata&report={$report}&courseid={$courseid}");
                 $table->print_header();
                 $table->close(true,
                     array("searching" => false, "ordering" => false));
@@ -229,9 +242,9 @@ class reports extends reports_admin {
         $koperereports = $DB->get_record('kopere_dashboard_reports', array('id' => $report));
 
         if ($CFG->dbtype == 'pgsql') {
-            $sql = "{$koperereports->reportsql} LIMIT $length OFFSET $start";
+            $sql = "{$koperereports->reportsql} LIMIT {$length} OFFSET {$start}";
         } else {
-            $sql = "{$koperereports->reportsql} LIMIT $start, $length";
+            $sql = "{$koperereports->reportsql} LIMIT {$start}, {$length}";
         }
 
         if (strlen($koperereports->prerequisit) && $koperereports->prerequisit == 'listCourses') {

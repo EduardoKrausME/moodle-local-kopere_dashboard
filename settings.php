@@ -45,14 +45,14 @@ if ($hassiteconfig) {
 }
 
 if ($ADMIN->fulltree) {
-    $open_itens = array(
-        'internal' => get_string('kopere_dashboard_open_internal', 'local_kopere_dashboard'),
-        'popup' => get_string('kopere_dashboard_open_popup', 'local_kopere_dashboard'),
-        '_top' => get_string('kopere_dashboard_open_top', 'local_kopere_dashboard'),
-        '_blank' => get_string('kopere_dashboard_open_blank', 'local_kopere_dashboard'),
-    );
 
     if (method_exists($settings, "add")) {
+        $open_itens = array(
+            'internal' => get_string('kopere_dashboard_open_internal', 'local_kopere_dashboard'),
+            'popup' => get_string('kopere_dashboard_open_popup', 'local_kopere_dashboard'),
+            '_top' => get_string('kopere_dashboard_open_top', 'local_kopere_dashboard'),
+            '_blank' => get_string('kopere_dashboard_open_blank', 'local_kopere_dashboard'),
+        );
         $settings->add(
             new admin_setting_configselect('kopere_dashboard_open',
                 get_string('kopere_dashboard_open', 'local_kopere_dashboard'),
@@ -61,5 +61,26 @@ if ($ADMIN->fulltree) {
                 $open_itens
             )
         );
+
+        $fild_itens = [
+            'institution' => get_string('institution'),
+            'department' => get_string('department'),
+            'phone1' => get_string('phone1'),
+            'phone2' => get_string('phone2'),
+            'address' => get_string('address'),
+            'description' => get_string('description'),
+            'city' => get_string('city'),
+            'country' => get_string('country'),
+            'timezone' => get_string('timezone'),
+            'firstaccess' => get_string('firstsiteaccess'),
+            'lastaccess' => get_string('lastaccess'),
+            'lastlogin' => get_string('lastsiteaccess'),
+            'lastip' => get_string('lastip'),
+        ];
+        $settings->add(new admin_setting_configmultiselect('add_report_user_fields',
+            get_string('add_report_user_fields', 'local_kopere_dashboard'),
+            get_string('add_report_user_fields_alt', 'local_kopere_dashboard'),
+            [], $fild_itens));
+
     }
 }
