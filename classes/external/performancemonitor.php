@@ -29,14 +29,23 @@ use external_value;
 
 class performancemonitor extends external_api {
 
+    /**
+     * @return external_function_parameters
+     */
     public static function disk_moodledata_parameters() {
         return new external_function_parameters([]);
     }
 
+    /**
+     * @return bool
+     */
     public static function disk_moodledata_is_allowed_from_ajax() {
         return true;
     }
 
+    /**
+     * @return external_single_structure
+     */
     public static function disk_moodledata_returns() {
         return new external_single_structure([
             'disk' => new external_value(PARAM_TEXT, 'Use Disk Moodledata', VALUE_OPTIONAL),

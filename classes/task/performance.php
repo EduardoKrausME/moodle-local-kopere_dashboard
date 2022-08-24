@@ -22,6 +22,7 @@ class performance extends \core\task\scheduled_task {
 
     /**
      * @throws \coding_exception
+     * @throws \Exception
      */
     public function execute() {
         $time = time();
@@ -32,6 +33,13 @@ class performance extends \core\task\scheduled_task {
         $this->add_data($time, 'average', performancemonitor::online());
     }
 
+    /**
+     * @param $time
+     * @param $type
+     * @param $value
+     * @return bool
+     * @throws \dml_exception
+     */
     private function add_data($time, $type, $value) {
         global $DB;
 

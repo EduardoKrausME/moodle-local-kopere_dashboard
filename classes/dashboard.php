@@ -38,7 +38,6 @@ class dashboard {
 
     /**
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public function start() {
         global $PAGE;
@@ -69,6 +68,10 @@ class dashboard {
         $PAGE->requires->js_call_amd('local_kopere_dashboard/dashboard', 'start');
     }
 
+    /**
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
     public function monitor() {
         echo '
             <div class="element-content">

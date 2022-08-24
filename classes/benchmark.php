@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\report\report_benchmark;
 use local_kopere_dashboard\report\report_benchmark_test;
+use local_kopere_dashboard\server\performancemonitor;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\mensagem;
 use local_kopere_dashboard\util\title_util;
@@ -40,6 +41,7 @@ class benchmark {
 
     /**
      *
+     * @throws \coding_exception
      */
     public function test() {
         dashboard_util::add_breadcrumb(get_string_kopere('benchmark_title'));
