@@ -418,7 +418,7 @@ class notifications extends notificationsutil {
         notificationsutil::mensagem_no_smtp();
         $CFG->debugsmtp = true;
 
-        $htmlmessage = get_string_kopere('notification_testsmtp_message') . date('d/m/Y H:m');
+        $htmlmessage = get_string_kopere('notification_testsmtp_message') . date('d/m/Y H:i');
         $admin = get_admin();
         //if ($admin->id == $USER->id) {
         //  mensagem::print_danger(get_string_kopere('notification_testsmtp_error'));
@@ -433,7 +433,7 @@ class notifications extends notificationsutil {
         $eventdata->name = 'kopere_dashboard_messages';
         $eventdata->userfrom = get_admin();
         $eventdata->userto = $USER;
-        $eventdata->subject = get_string_kopere('notification_testsmtp_subject') . date('d/m/Y H:m');
+        $eventdata->subject = get_string_kopere('notification_testsmtp_subject') . date('d/m/Y H:i');
         $eventdata->fullmessage = html_to_text($htmlmessage);
         $eventdata->fullmessageformat = FORMAT_HTML;
         $eventdata->fullmessagehtml = $htmlmessage;
