@@ -53,7 +53,6 @@ class reports_admin {
         dashboard_util::add_breadcrumb(get_string_kopere('reports_settings_title'));
         dashboard_util::start_page();
 
-
         echo '<div class="element-box">';
 
         $report = optional_param('report', 0, PARAM_INT);
@@ -245,7 +244,7 @@ class reports_admin {
                 $koperereports->foreach = required_param('foreach', PARAM_TEXT);
                 $koperereports->columns = $this->columns();
 
-                $DB->update_record('report', $koperereports);
+                $DB->update_record('kopere_dashboard_reports', $koperereports);
                 mensagem::agenda_mensagem_success(get_string_kopere('reports_settings_savesuccess'));
 
                 header::location("?classname=reports&method=load_report&report={$koperereports->id}");

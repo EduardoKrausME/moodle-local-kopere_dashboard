@@ -176,16 +176,20 @@ class reports extends reports_admin {
                     $columns->header = array();
                 }
 
-                $report_user_fields = explode(",", $CFG->add_report_user_fields);
-                foreach ($report_user_fields as $report_user_field) {
-                    $columns->columns[] = (object)[
-                        'chave' => $report_user_field,
-                        'type' => 'text',
-                        'title' => get_string($report_user_field),
-                        'funcao' => "",
-                        'style_header' => "",
-                        'style_col' => "",
-                    ];
+                if (isset($CFG->add_report_user_fields [2])) {
+                    $report_user_fields = explode(",", $CFG->add_report_user_fields);
+                    foreach ($report_user_fields as $report_user_field) {
+                        if (isset($report_user_field[1])) {
+                            $columns->columns[] = (object)[
+                                'chave'        => $report_user_field,
+                                'type'         => 'text',
+                                'title'        => get_string($report_user_field),
+                                'funcao'       => "",
+                                'style_header' => "",
+                                'style_col'    => "",
+                            ];
+                        }
+                    }
                 }
 
                 $table = new data_table($columns->columns, $columns->header);
@@ -205,6 +209,7 @@ class reports extends reports_admin {
     /**
      * @param $report
      * @param $pre
+     *
      * @throws \coding_exception
      */
     private function prerequisit($report, $pre) {
@@ -310,13 +315,14 @@ class reports extends reports_admin {
 
     /**
      * @param $obj
+     *
      * @return string
      * @throws \coding_exception
      */
     private static function get_title($obj) {
         if (strpos($obj->title, '[[[') === 0) {
             return get_string(substr($obj->title, 3, -3));
-        } elseif (strpos($obj->title, '[[') === 0) {
+        } else if (strpos($obj->title, '[[') === 0) {
             return get_string_kopere(substr($obj->title, 2, -2));
         } else {
             return $obj->title;
