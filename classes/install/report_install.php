@@ -118,18 +118,16 @@ SELECT b.id, b.\"name\", b.description, b.type, b.status,
   FROM {badge} b";
         } else {
             $report->reportsql = "
-SELECT b.id, b.name, b.description, b.type, b.status,
+SELECT id, name, description, type, status,
       (SELECT COUNT(*) FROM {badge_issued} d WHERE d.badgeid = b.id )AS students
   FROM {badge} b";
         }
         $report->columns = array(
             $table->add_header('#', 'id', table_header_item::TYPE_INT, null, 'width:20px'),
             $table->add_header('[[courses_student_name]]', 'name'),
-            $table->add_header('[[reports_context]]', 'context'),
-            $table->add_header('[[userenrolment_status_active]]',
-                'statustext', table_header_item::RENDERER_STATUS),
-            $table->add_header('[[courses_enrol]]',
-                'students', table_header_item::TYPE_INT)
+            $table->add_header('[[reports_context]]', 'type'),
+            $table->add_header('[[userenrolment_status_active]]', 'statustext', table_header_item::RENDERER_STATUS),
+            $table->add_header('[[courses_enrol]]', 'students', table_header_item::TYPE_INT)
         );
         $report->foreach = 'local_kopere_dashboard\report\report_foreach::badge_status_text';
         $report->columns = json_encode(array('columns' => $report->columns));
@@ -141,7 +139,7 @@ SELECT b.id, b.name, b.description, b.type, b.status,
         $report->reportkey = 'badge-2';
         $report->title = '[[reports_report_badge-2]]';
         if ($CFG->dbtype == 'pgsql') {
-            $report->reportsql = " 
+            $report->reportsql = "
   SELECT d.id, u.id AS userid, {$alternatenames}, 
          u.lastname, b.\"name\" AS badgename, t.criteriatype, t.method, d.dateissued,
          (SELECT c.shortname FROM {course} c WHERE c.id = b.courseid) as course
@@ -236,10 +234,10 @@ ORDER BY u.username";
         $report->foreach = 'local_kopere_dashboard\report\report_foreach::userfullname';
         $report->columns = json_encode(array(
             'columns' => $report->columns,
-//            'header' => array(
-//                $table->add_info_header('[[reports_datastudents]]', 3),
-//                $table->add_info_header('[[reports_datacourses]]', 7)
-//            )
+            //            'header' => array(
+            //                $table->add_info_header('[[reports_datastudents]]', 3),
+            //                $table->add_info_header('[[reports_datacourses]]', 7)
+            //            )
         ));
         if ($CFG->dbtype != 'pgsql') {
             self::report_insert($report);

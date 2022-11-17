@@ -47,7 +47,43 @@ class report_foreach {
             $item->statustext = false;
         } else if ($item->status == 4) {
             $item->statustext = "-";
+        }else{
+            $item->statustext = "";
         }
+
+        switch ($item->type){
+            case 0:
+                $item->context = 'Função';
+                break;
+            case 1:
+                $item->context = 'Atividade';
+                break;
+            case 2:
+                $item->context = 'Duração';
+                break;
+            case 3:
+                $item->context = 'Nota';
+                break;
+            case 4:
+            case 6:
+                $item->context = 'Curso';
+                break;
+            case 5:
+                $item->context = 'Conjunto de cursos';
+                break;
+            case 7:
+                $item->context = 'Preenchimento do Emblema';
+                break;
+            case 8:
+                $item->context = 'Coorte';
+                break;
+            case 9:
+                $item->context = 'Competência';
+                break;
+            default:
+                $item->context = '...';
+        }
+
         if ($item->type == 1) {
             $item->context = 'Sistema';
         }
