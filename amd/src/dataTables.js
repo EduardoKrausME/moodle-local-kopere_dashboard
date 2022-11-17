@@ -4966,7 +4966,7 @@
             headerTrgEls, footerTrgEls,
             headerSrcEls, footerSrcEls,
             headerCopy, footerCopy,
-            headerWidths                      = [], footerWidths   = [],
+            headerWidths                      = [], footerWidths = [],
             headerContent = [], footerContent = [],
             idx, correction, sanityWidth,
             zeroOut                           = function(nSizer) {
