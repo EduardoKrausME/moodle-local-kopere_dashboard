@@ -45,7 +45,7 @@ class dashboard_util {
     public static $breadcrumb = [];
 
     /**
-     * @param $titulo
+     * @param      $titulo
      * @param null $link
      */
     public static function add_breadcrumb($titulo, $link = null) {
@@ -62,6 +62,7 @@ class dashboard_util {
      * @param $title
      * @param $settingurl
      * @param $infourl
+     *
      * @return string
      */
     public static function set_titulo($title, $settingurl, $infourl) {
@@ -172,6 +173,7 @@ class dashboard_util {
 
     /**
      * @param menu_util $menu
+     *
      * @return string
      * @throws \coding_exception
      */
@@ -227,30 +229,31 @@ class dashboard_util {
 
     /**
      * @param $filename
+     *
      * @return string
      */
     private static function get_icon($filename) {
         global $CFG;
-        $dirroot_filename = $CFG->dirroot . $filename;
-        if (file_exists($dirroot_filename)) {
-            $svg = file_get_contents($dirroot_filename);
-
-            // Caso o thema for o flixcurso, troca as cores dos icones
-            if ($CFG->theme == 'flixcurso' && OPEN_INTERNAL) {
-                $svg = str_ireplace("#3e4b5b", "#aaa", $svg);
-
-                $cores = colors::get_theme_color();
-
-                $svg = str_ireplace("#308af4", $cores['color_secundary'], $svg);
-                $svg = str_ireplace("#4c9c8d", $cores['color_primary'], $svg);
-            }
-
-            $svg64 = base64_encode($svg);
-            return "data:image/svg+xml;base64,{$svg64}";
-
-        } else {
-            return $CFG->wwwroot . $filename;
-        }
+        //$dirroot_filename = $CFG->wwwroot . $filename;
+        //if (file_exists($dirroot_filename)) {
+        //    $svg = file_get_contents($dirroot_filename);
+        //
+        //    // Caso o thema for o flixcurso, troca as cores dos icones
+        //    if ($CFG->theme == 'flixcurso' && OPEN_INTERNAL) {
+        //        $svg = str_ireplace("#3e4b5b", "#aaa", $svg);
+        //
+        //        $cores = colors::get_theme_color();
+        //
+        //        $svg = str_ireplace("#308af4", $cores['color_secundary'], $svg);
+        //        $svg = str_ireplace("#4c9c8d", $cores['color_primary'], $svg);
+        //    }
+        //
+        //    $svg64 = base64_encode($svg);
+        //    return "data:image/svg+xml;base64,{$svg64}";
+        //
+        //} else {
+        return $CFG->wwwroot . $filename;
+        //}
     }
 
     /**
