@@ -48,7 +48,7 @@ class dashboard {
         echo performancemonitor::load_monitor();
 
         echo '
-            <div id="dashboard-monitor"></div>
+            <div id="dashboard-moodleinfo"></div>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="element-box">

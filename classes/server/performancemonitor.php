@@ -43,7 +43,7 @@ class performancemonitor {
         $PAGE->requires->js_call_amd('local_kopere_dashboard/monitor', 'init');
 
         return '
-            <div class="element-content">
+            <div id="dashboard-monitor" class="element-content">
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="element-box color_cpu">

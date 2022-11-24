@@ -223,21 +223,6 @@ body.menu-w-90 {
         .content-box {
             padding: 2rem;
             //display : table-cell;
-    
-            .element-content {
-                .col-sm-4,
-                .col-sm-2,
-                .col-sm-3 {
-                    @media (max-width: 900px) {
-                        width: 50% !important;
-                        max-width: 50% !important;
-                    }
-                    @media (max-width: 600px) {
-                        width: 50% !important;
-                        max-width: 50% !important;
-                    }
-                }
-            }
             
             .element-header {
                 border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -552,3 +537,19 @@ body.menu-w-90 {
 }
 @import "css_alert";
 //@import "bootstrap";
+
+#dashboard-monitor,
+#dashboard-moodleinfo {
+    .col-sm-2,
+    .col-sm-3,
+    .col-sm-4 {
+        @media (max-width: 1000px) {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+        @media (max-width: 550px) {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+    }
+}
