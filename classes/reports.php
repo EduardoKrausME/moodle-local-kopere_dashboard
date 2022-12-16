@@ -130,7 +130,7 @@ class reports extends reports_admin {
      * @throws \dml_exception
      */
     public function load_report() {
-        global $DB, $CFG;
+        global $DB;
 
         $report = optional_param('report', 0, PARAM_INT);
         $courseid = optional_param('courseid', 0, PARAM_INT);
@@ -174,22 +174,6 @@ class reports extends reports_admin {
                 $columns = json_decode($koperereports->columns);
                 if (!isset($columns->header)) {
                     $columns->header = array();
-                }
-
-                if (isset($CFG->add_report_user_fields [2])) {
-                    $report_user_fields = explode(",", $CFG->add_report_user_fields);
-                    foreach ($report_user_fields as $report_user_field) {
-                        if (isset($report_user_field[1])) {
-                            $columns->columns[] = (object)[
-                                'chave'        => $report_user_field,
-                                'type'         => 'text',
-                                'title'        => get_string($report_user_field),
-                                'funcao'       => "",
-                                'style_header' => "",
-                                'style_col'    => "",
-                            ];
-                        }
-                    }
                 }
 
                 $table = new data_table($columns->columns, $columns->header);

@@ -61,26 +61,5 @@ if ($ADMIN->fulltree) {
                 $open_itens
             )
         );
-
-        $fild_itens = [
-            'institution' => get_string('institution'),
-            'department' => get_string('department'),
-            'phone1' => get_string('phone1'),
-            'phone2' => get_string('phone2'),
-            'address' => get_string('address'),
-            'description' => get_string('description'),
-            'city' => get_string('city'),
-            'country' => get_string('country'),
-            'timezone' => get_string('timezone'),
-            'firstaccess' => get_string('firstsiteaccess'),
-            'lastaccess' => get_string('lastaccess'),
-            'lastlogin' => get_string('lastsiteaccess'),
-            'lastip' => get_string('lastip'),
-        ];
-        $settings->add(new admin_setting_configmultiselect('add_report_user_fields',
-            get_string('add_report_user_fields', 'local_kopere_dashboard'),
-            get_string('add_report_user_fields_alt', 'local_kopere_dashboard'),
-            [], $fild_itens));
-
     }
 }
