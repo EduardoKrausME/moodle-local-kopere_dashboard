@@ -24,6 +24,7 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * @param $oldversion
+ *
  * @return bool
  * @throws Exception
  */
@@ -205,6 +206,11 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
     if ($oldversion < 2022082400) {
         $DB->delete_records('kopere_dashboard_reports');
         upgrade_plugin_savepoint(true, 2022082400, 'local', 'kopere_dashboard');
+    }
+
+    if ($oldversion < 2022122000) {
+        $DB->delete_records('kopere_dashboard_reports');
+        upgrade_plugin_savepoint(true, 2022122000, 'local', 'kopere_dashboard');
     }
 
 

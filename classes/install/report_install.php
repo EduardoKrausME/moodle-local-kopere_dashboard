@@ -103,6 +103,8 @@ class report_install {
     public static function create_reports() {
         global $DB, $CFG;
 
+        $alternatenames = self::get_all_user_name_fields(true, 'u');
+
         $table = new report_install();
 
         $report = kopere_dashboard_reports::create_by_default();
@@ -138,7 +140,7 @@ SELECT id, name, description, type, status,
         $report->title = '[[reports_report_badge-2]]';
         if ($CFG->dbtype == 'pgsql') {
             $report->reportsql = "
-  SELECT d.id, u.id AS userid,
+  SELECT d.id, u.id AS userid, {$alternatenames}, 
          u.lastname, b.\"name\" AS badgename, t.criteriatype, t.method, d.dateissued,
          (SELECT c.shortname FROM {course} c WHERE c.id = b.courseid) as course
     FROM {badge_issued}   d
@@ -149,7 +151,7 @@ SELECT id, name, description, type, status,
 ORDER BY u.username";
         } else {
             $report->reportsql = "
-  SELECT d.id, u.id AS userid,
+  SELECT d.id, u.id AS userid, {$alternatenames}, 
          u.lastname, b.name AS badgename, t.criteriatype, t.method, d.dateissued,
          (SELECT c.shortname FROM {course} c WHERE c.id = b.courseid) as course
     FROM {badge_issued}   d
@@ -178,8 +180,8 @@ ORDER BY u.username";
         $report->reportkey = 'courses-1';
         $report->title = '[[reports_report_courses-1]]';
         $report->prerequisit = 'listCourses';
-        $report->reportsql = "
-    SELECT ue.id, u.id AS userid,
+        $report->reportsql = " 
+    SELECT ue.id, u.id AS userid, {$alternatenames},
            u.email,
            ue.timecreated,
            IFNULL( MAX(cc.timecompleted), 0) AS timecompleted,
@@ -190,8 +192,8 @@ ORDER BY u.username";
       JOIN {user}                u ON u.id = ue.userid
       JOIN {enrol}               e ON e.id = ue.enrolid
       JOIN {course}              c ON c.id = e.courseid
- LEFT JOIN {course_completions} cc ON cc.timecompleted > 0
-                                  AND cc.course        = e.courseid
+ LEFT JOIN {course_completions} cc ON cc.timecompleted > 0 
+                                  AND cc.course        = e.courseid 
                                   AND cc.userid        = ue.userid
  LEFT JOIN (
           SELECT course, count(id) AS modules
@@ -210,7 +212,7 @@ ORDER BY u.username";
              AND cmc_i.completionstate   IN (1,2)
              AND cm_i.deletioninprogress = 0
         GROUP BY cm_i.course, cmc_i.userid
-      ) AS cmc ON cmc.course = c.id
+      ) AS cmc ON cmc.course = c.id 
               AND cmc.userid = ue.userid
      WHERE ue.id       > 0
        AND u.id        > 1
@@ -253,7 +255,7 @@ SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.\"name\", c.visible, 
   JOIN {groups} g ON c.id = g.courseid
  WHERE c.groupmode > 0";
         } else {
-            $report->reportsql = "
+            $report->reportsql = " 
 SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.groupmode
   FROM {course} c
   JOIN {groups} g ON c.id = g.courseid
@@ -306,8 +308,8 @@ SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.gr
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'enrol_cohort'));
         $report->reportkey = 'enrol_cohort-1';
         $report->title = '[[reports_report_enrol_cohort-1]]';
-        $report->reportsql = "
-  SELECT u.id, h.idnumber, h.name
+        $report->reportsql = " 
+  SELECT u.id, {$alternatenames}, h.idnumber, h.name
     FROM {cohort} h
     JOIN {cohort_members} hm ON h.id = hm.cohortid
     JOIN {user} u ON hm.userid = u.id
@@ -326,8 +328,8 @@ ORDER BY u.firstname";
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'enrol_guest'));
         $report->reportkey = 'enrol_guest-1';
         $report->title = '[[reports_report_enrol_guest-1]]';
-        $report->reportsql = "
-SELECT u.id, u.id AS userid, lsl.timecreated, lsl.ip
+        $report->reportsql = " 
+SELECT u.id, {$alternatenames}, u.id AS userid, lsl.timecreated, lsl.ip
   FROM {logstore_standard_log} lsl
   JOIN {user}                  u   ON u.id = lsl.userid
  WHERE lsl.action LIKE 'loggedin'
@@ -386,7 +388,7 @@ SELECT c.id, c.fullname, c.shortname, c.visible, c.timecreated,
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-1';
         $report->title = '[[reports_report_user-1]]';
-        $report->reportsql = "
+        $report->reportsql = " 
 SELECT DISTINCT c.id, c.fullname, c.shortname, ctx.id AS contextid,
        (SELECT COUNT(userid) FROM {role_assignments}
          WHERE contextid = asg.contextid GROUP BY contextid) AS alunos
@@ -409,8 +411,8 @@ SELECT DISTINCT c.id, c.fullname, c.shortname, ctx.id AS contextid,
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-2';
         $report->title = '[[reports_report_user-2]]';
-        $report->reportsql = "
-SELECT concat(u.id, p.id) AS id, u.id AS userid,
+        $report->reportsql = " 
+SELECT concat(u.id, p.id) AS id, u.id AS userid, {$alternatenames}, 
        c.fullname, c.shortname, t.timecompleted, p.module, p.moduleinstance
   FROM {course_completion_crit_compl} t
   JOIN {user}    u ON t.userid = u.id
@@ -431,8 +433,8 @@ SELECT concat(u.id, p.id) AS id, u.id AS userid,
         $report->reportcatid = $DB->get_field('kopere_dashboard_reportcat', 'id', array('type' => 'user'));
         $report->reportkey = 'user-4';
         $report->title = '[[reports_report_user-4]]';
-        $report->reportsql = "
-SELECT lsl.id, u.id AS userid,
+        $report->reportsql = " 
+SELECT lsl.id, u.id AS userid, {$alternatenames}, 
        u.email, u.city, lsl.timecreated
   FROM {logstore_standard_log}   lsl
   JOIN {user}                    u    ON u.id = lsl.userid
@@ -456,7 +458,7 @@ SELECT lsl.id, u.id AS userid,
         $report->reportkey = 'user-5';
         $report->title = '[[reports_report_user-5]]';
         $report->reportsql = " 
-SELECT u.id, u.email, u.city, u.timecreated
+SELECT u.id, {$alternatenames}, u.email, u.city, u.timecreated
   FROM {user} u
  WHERE u.deleted    = 0
    AND u.lastlogin  = 0
@@ -480,7 +482,7 @@ SELECT u.id, u.email, u.city, u.timecreated
         $report->reportkey = 'user-6';
         $report->title = '[[reports_report_user-6]]';
         $report->prerequisit = 'listCourses';
-        $report->reportsql = "SELECT concat(u.id, p.id), u.id,
+        $report->reportsql = "SELECT concat(u.id, p.id), u.id, {$alternatenames},
                                       c.fullname, c.shortname, p.timecompleted
                                  FROM {course_completions} p
                                  JOIN {course}             c  ON p.course = c.id
@@ -507,7 +509,7 @@ SELECT u.id, u.email, u.city, u.timecreated
         $report->title = '[[reports_report_user-7]]';
         if ($CFG->dbtype == 'pgsql') {
             $report->reportsql = "
-SELECT ue.id, u.id AS userid, ul.timeaccess, u.email, u.city, u.lastaccess,
+SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city, u.lastaccess,
        c.fullname, c.shortname,
        (SELECT r.\"name\"
            FROM {user_enrolments} ue2
@@ -523,7 +525,7 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, u.email, u.city, u.lastaccess,
  WHERE ul.timeaccess IS NULL";
         } else {
             $report->reportsql = "
-SELECT ue.id, u.id AS userid, ul.timeaccess, u.email, u.city, u.lastaccess,
+SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city, u.lastaccess,
        c.fullname, c.shortname,
        (SELECT r.name
            FROM {user_enrolments} ue2
@@ -632,5 +634,43 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, u.email, u.city, u.lastaccess,
         if (!$koperereports) {
             $DB->insert_record('kopere_dashboard_reports', $report);
         }
+    }
+
+    private static function get_all_user_name_fields($returnsql = false, $tableprefix = null) {
+        $alternatenames = [
+            // Para a função fullname()
+            'firstnamephonetic' => 'firstnamephonetic',
+            'lastnamephonetic' => 'lastnamephonetic',
+            'middlename' => 'middlename',
+            'alternatename' => 'alternatename',
+            'firstname' => 'firstname',
+            'lastname' => 'lastname',
+
+            // Para as configurações do setting
+            'institution' => 'institution',
+            'department' => 'department',
+            'phone1' => 'phone1',
+            'phone2' => 'phone2',
+            'address' => 'address',
+            'description' => 'description',
+            'city' => 'city',
+            'country' => 'country',
+            'timezone' => 'timezone',
+            'firstaccess' => 'firstaccess',
+            'lastaccess' => 'lastaccess',
+            'lastlogin' => 'lastlogin',
+            'lastip' => 'lastip',
+        ];
+
+        // Create an sql field snippet if requested.
+        //if ($returnsql) {
+        //    if ($tableprefix) {
+        //        foreach ($alternatenames as $key => $altname) {
+        //            $alternatenames[$key] = $tableprefix . '.' . $altname;
+        //        }
+        //    }
+        //    $alternatenames = implode(',', $alternatenames);
+        //}
+        return $alternatenames;
     }
 }
