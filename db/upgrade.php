@@ -170,47 +170,10 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2020062002, 'local', 'kopere_dashboard');
     }
 
-    if ($oldversion < 2020081000) {
-        $DB->delete_records('kopere_dashboard_reports');
+    if ($oldversion < 2023010200) {
         $DB->delete_records('kopere_dashboard_reportcat');
-
-        upgrade_plugin_savepoint(true, 2020081000, 'local', 'kopere_dashboard');
-    }
-
-    if ($oldversion < 2021062419) {
-        echo "Apagado<br>";
-        $DB->delete_records('kopere_dashboard_reports', array('reportkey' => 'courses-1'));
-
-        upgrade_plugin_savepoint(true, 2021062419, 'local', 'kopere_dashboard');
-    }
-
-    if ($oldversion < 2021071600) {
-        echo "Apagado<br>";
-        $DB->delete_records('kopere_dashboard_reports', array('reportkey' => 'courses-1'));
-
-        upgrade_plugin_savepoint(true, 2021071600, 'local', 'kopere_dashboard');
-    }
-
-    if ($oldversion < 2021072100) {
-        $DB->delete_records('kopere_dashboard_reports', array('reportkey' => 'user-6'));
-
-        upgrade_plugin_savepoint(true, 2021072100, 'local', 'kopere_dashboard');
-    }
-
-    if ($oldversion < 2022040400) {
         $DB->delete_records('kopere_dashboard_reports');
-
-        upgrade_plugin_savepoint(true, 2022040400, 'local', 'kopere_dashboard');
-    }
-
-    if ($oldversion < 2022082400) {
-        $DB->delete_records('kopere_dashboard_reports');
-        upgrade_plugin_savepoint(true, 2022082400, 'local', 'kopere_dashboard');
-    }
-
-    if ($oldversion < 2022122000) {
-        $DB->delete_records('kopere_dashboard_reports');
-        upgrade_plugin_savepoint(true, 2022122000, 'local', 'kopere_dashboard');
+        upgrade_plugin_savepoint(true, 2023010200, 'local', 'kopere_dashboard');
     }
 
 

@@ -25,6 +25,7 @@ namespace local_kopere_dashboard\install;
 defined('MOODLE_INTERNAL') || die();
 
 use local_kopere_dashboard\html\table_header_item;
+use local_kopere_dashboard\report\user_field;
 use local_kopere_dashboard\vo\kopere_dashboard_reportcat;
 use local_kopere_dashboard\vo\kopere_dashboard_reports;
 
@@ -103,7 +104,7 @@ class report_install {
     public static function create_reports() {
         global $DB, $CFG;
 
-        $alternatenames = self::get_all_user_name_fields(true, 'u');
+        $alternatenames = user_field::get_all_user_name_fields(true, 'u');
 
         $table = new report_install();
 
@@ -589,11 +590,11 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
 
     /**
      * @param        $title
-     * @param null $chave
+     * @param null   $chave
      * @param string $type
-     * @param null $funcao
-     * @param null $styleheader
-     * @param null $stylecol
+     * @param null   $funcao
+     * @param null   $styleheader
+     * @param null   $stylecol
      *
      * @return \stdClass
      */
@@ -612,6 +613,7 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
 
     /**
      * @param $reportcat
+     *
      * @throws \dml_exception
      */
     private static function report_cat_insert($reportcat) {
@@ -625,6 +627,7 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
 
     /**
      * @param $report
+     *
      * @throws \dml_exception
      */
     private static function report_insert($report) {
@@ -634,43 +637,5 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
         if (!$koperereports) {
             $DB->insert_record('kopere_dashboard_reports', $report);
         }
-    }
-
-    private static function get_all_user_name_fields($returnsql = false, $tableprefix = null) {
-        $alternatenames = [
-            // Para a função fullname()
-            'firstnamephonetic' => 'firstnamephonetic',
-            'lastnamephonetic' => 'lastnamephonetic',
-            'middlename' => 'middlename',
-            'alternatename' => 'alternatename',
-            'firstname' => 'firstname',
-            'lastname' => 'lastname',
-
-            // Para as configurações do setting
-            'institution' => 'institution',
-            'department' => 'department',
-            'phone1' => 'phone1',
-            'phone2' => 'phone2',
-            'address' => 'address',
-            'description' => 'description',
-            'city' => 'city',
-            'country' => 'country',
-            'timezone' => 'timezone',
-            'firstaccess' => 'firstaccess',
-            'lastaccess' => 'lastaccess',
-            'lastlogin' => 'lastlogin',
-            'lastip' => 'lastip',
-        ];
-
-        // Create an sql field snippet if requested.
-        //if ($returnsql) {
-        //    if ($tableprefix) {
-        //        foreach ($alternatenames as $key => $altname) {
-        //            $alternatenames[$key] = $tableprefix . '.' . $altname;
-        //        }
-        //    }
-        //    $alternatenames = implode(',', $alternatenames);
-        //}
-        return $alternatenames;
     }
 }

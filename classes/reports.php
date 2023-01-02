@@ -246,8 +246,11 @@ class reports extends reports_admin {
 
         if (strlen($koperereports->foreach)) {
             foreach ($reports as $key => $item) {
-                $item = call_user_func($koperereports->foreach, $item);
-                // eval($koperereports->foreach);
+                if ($koperereports->foreach == "userfullname") {
+                    $item->userfullname = fullname($item);
+                } else {
+                    $item = call_user_func($koperereports->foreach, $item);
+                }
                 $reports[$key] = $item;
             }
         }
