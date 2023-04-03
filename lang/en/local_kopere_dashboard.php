@@ -171,6 +171,7 @@ $string['loginusername'] = 'Time to connect with a fake user account';
 $string['loginusermoreinfo'] = 'Measuring the time to load the login page with a fake user account';
 
 // Performancemonitor.
+$string['cachedef_performancemonitor'] = 'Performance monitor cache';
 $string ['performancemonitor_cpu'] = 'CPU Usage';
 $string ['performancemonitor_memory'] = 'Memory';
 $string ['performancemonitor_hd'] = 'Moodledata';
