@@ -42,24 +42,24 @@ if ($hassiteconfig) {
             $CFG->wwwroot . '/local/kopere_dashboard/open.php?classname=dashboard&method=start'
         )
     );
-}
 
-if ($ADMIN->fulltree) {
+    if ($ADMIN->fulltree) {
 
-    if (method_exists($settings, "add")) {
-        $open_itens = array(
-            'internal' => get_string('kopere_dashboard_open_internal', 'local_kopere_dashboard'),
-            'popup' => get_string('kopere_dashboard_open_popup', 'local_kopere_dashboard'),
-            '_top' => get_string('kopere_dashboard_open_top', 'local_kopere_dashboard'),
-            '_blank' => get_string('kopere_dashboard_open_blank', 'local_kopere_dashboard'),
-        );
-        $settings->add(
-            new admin_setting_configselect('kopere_dashboard_open',
-                get_string('kopere_dashboard_open', 'local_kopere_dashboard'),
-                get_string('kopere_dashboard_open_desc', 'local_kopere_dashboard'),
-                'internal',
-                $open_itens
-            )
-        );
+        if (method_exists($settings, "add")) {
+            $open_itens = [
+                'internal' => get_string('kopere_dashboard_open_internal', 'local_kopere_dashboard'),
+                'popup' => get_string('kopere_dashboard_open_popup', 'local_kopere_dashboard'),
+                '_top' => get_string('kopere_dashboard_open_top', 'local_kopere_dashboard'),
+                '_blank' => get_string('kopere_dashboard_open_blank', 'local_kopere_dashboard'),
+            ];
+            $settings->add(
+                new admin_setting_configselect('kopere_dashboard_open',
+                    get_string('kopere_dashboard_open', 'local_kopere_dashboard'),
+                    get_string('kopere_dashboard_open_desc', 'local_kopere_dashboard'),
+                    'internal',
+                    $open_itens
+                )
+            );
+        }
     }
 }
