@@ -68,10 +68,11 @@ class mensagem {
      * @return string
      */
     public static function warning($texto) {
-        return "<div class=\"alert alert-warning\">
-            <i class=\"fa fa-exclamation-circle\"></i>
-            $texto
-        </div>";
+        return "
+            <div class='alert alert-warning'>
+                <i class='fa fa-exclamation-circle'></i>
+                {$texto}
+            </div>";
     }
 
     /**
@@ -94,10 +95,11 @@ class mensagem {
      * @return string
      */
     public static function success($texto) {
-        return "<div class=\"alert alert-success\">
-            <i class=\"fa fa-check-circle\"></i>
-            $texto
-        </div>";
+        return "
+            <div class='alert alert-success'>
+                <i class='fa fa-check-circle'></i>
+                {$texto}
+            </div>";
     }
 
     /**
@@ -121,10 +123,11 @@ class mensagem {
      * @return string
      */
     public static function info($texto, $extraclass = '') {
-        return "<div class=\"alert alert-info $extraclass\">
-            <i class=\"fa fa-info-circle\"></i>
-            $texto
-        </div>";
+        return "
+            <div class='alert alert-info {$extraclass}'>
+                <i class='fa fa-info-circle'></i>
+                {$texto}
+            </div>";
     }
 
     /**
@@ -148,10 +151,11 @@ class mensagem {
      * @return string
      */
     public static function danger($texto) {
-        return "<div class=\"alert alert-danger\">
-            <i class=\"fa fa-times-circle\"></i>
-            $texto
-        </div>";
+        return "
+            <div class='alert alert-danger'>
+                <i class='fa fa-times-circle'></i>
+                {$texto}
+            </div>";
     }
 
     /**

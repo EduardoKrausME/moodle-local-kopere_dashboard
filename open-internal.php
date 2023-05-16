@@ -33,7 +33,7 @@ require('autoload.php');
 if ($CFG->kopere_dashboard_open != 'internal') {
     $urlinternal = "{$CFG->wwwroot}/local/kopere_dashboard/open.php?" . clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
     @header("Location: {$urlinternal}");
-    echo "<meta http-equiv=\"refresh\" content=\"0; url={$urlinternal}\">";
+    echo "<meta http-equiv='refresh' content='0; url={$urlinternal}'>";
 }
 
 global $PAGE, $CFG, $OUTPUT, $USER;
@@ -45,7 +45,7 @@ if ($CFG->theme == 'smartlms') {
     @$USER->preference['sidebar-open-nav'] = false;
 }
 
-require_once($CFG->libdir . '/adminlib.php');
+require_once("{$CFG->libdir}/adminlib.php");
 
 require_login();
 require_capability('local/kopere_dashboard:view', context_system::instance());
@@ -73,7 +73,7 @@ $PAGE->requires->js('/local/kopere_dashboard/assets/bootstrap/bootstrap.js');
 $PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
 
 echo $OUTPUT->header();
-echo "<link rel=\"icon\" href=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/favicon.png\"/>";
+echo "<link rel='icon' href='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/favicon.png'/>";
 ?>
     <script>
         lang_yes = '<?php echo get_string('yes') ?>';
@@ -110,23 +110,23 @@ echo "<link rel=\"icon\" href=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/da
 
 $dashboard_menu_html_boost = \local_kopere_dashboard\output\menu::create_menu();
 $dashboard_menu_html_boost = str_replace("'", '"', $dashboard_menu_html_boost);
-$dashboard_menu_html_old = "<div id=\"inst0\" class=\"block\">
-            <div class=\"dashboard_menu_html kopere-logo\">
-                <div class=\"logo-w\">
-                    <img class=\"normal\"
-                         src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/logo-notext.svg\"
-                         alt=\"{get_string_kopere('pluginname')}\">
+$dashboard_menu_html_old = "<div id='inst0' class='block'>
+            <div class='dashboard_menu_html kopere-logo'>
+                <div class='logo-w'>
+                    <img class='normal'
+                         src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/logo-notext.svg'
+                         alt='" . get_string_kopere('pluginname')."'>
                 </div>
             </div>
-            <div class=\"content\">
+            <div class='content'>
                 " . \local_kopere_dashboard\output\menu::create_menu() . "
             </div>
         </div>";
 $dashboard_menu_html_old = str_replace("'", '"', $dashboard_menu_html_old);
 
 echo "<div id='kopere_dashboard_div'>
-         <div class=\"menu-w hidden-print dashboard_menu_html-content\">
-            <div class=\"menu-and-user\">
+         <div class='menu-w hidden-print dashboard_menu_html-content'>
+            <div class='menu-and-user'>
                 {$dashboard_menu_html_boost}
             </div>
         </div>
@@ -134,10 +134,10 @@ echo "<div id='kopere_dashboard_div'>
             {$htmlApp}
         </div>
 
-        <div class=\"modal fade kopere_dashboard_modal_item\" id=\"modal-edit\" role=\"dialog\">
-            <div class=\"kopere-modal-dialog\">
-                <div class=\"kopere-modal-content\">
-                    <div class=\"loader\"></div>
+        <div class='modal fade kopere_dashboard_modal_item' id='modal-edit' role='dialog'>
+            <div class='kopere-modal-dialog'>
+                <div class='kopere-modal-content'>
+                    <div class='loader'></div>
                 </div>
             </div>
         </div>
@@ -147,7 +147,7 @@ echo $OUTPUT->footer();
 
 $html = ob_get_contents();
 ob_clean();
-$dashboard_menu_html_old = "<style>.dashboard_menu_html-content{display:none !important}</style>" . $dashboard_menu_html_old;
+$dashboard_menu_html_old = "<style>.dashboard_menu_html-content{display:none !important}</style>{$dashboard_menu_html_old}";
 
 
 if ($CFG->theme == 'smartlms') {

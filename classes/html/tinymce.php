@@ -47,8 +47,8 @@ class tinymce {
 
         self::$issend = true;
 
-        return '<script src="' . $CFG->wwwroot . '/local/kopere_dashboard/vendor/tinymce/tinymce/tinymce.min.js"
-                        type="text/javascript"></script>';
+        return "<script src='{$CFG->wwwroot}/local/kopere_dashboard/vendor/tinymce/tinymce/tinymce.min.js'
+                        type='text/javascript'></script>";
     }
 
     /**
@@ -59,7 +59,7 @@ class tinymce {
      */
     public static function create_input_editor($seletor = '.tinymce_editor_box', $id = 0) {
         global $CFG;
-        $filemanager = $CFG->wwwroot . '/local/kopere_dashboard/vendor/responsivefilemanager/';
+        $filemanager = "{$CFG->wwwroot}/local/kopere_dashboard/vendor/responsivefilemanager/";
 
         $external_plugins = '';
         if (file_exists("{$filemanager}dialog.php")) {
@@ -74,7 +74,7 @@ class tinymce {
         $returnhtml = self::register();
 
         $returnhtml
-            .= "<script type=\"text/javascript\">
+            .= "<script type='text/javascript'>
             tinymce.init ( {
                 selector : '{$seletor}',
                 plugins  : [

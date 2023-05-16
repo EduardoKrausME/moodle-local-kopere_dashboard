@@ -124,7 +124,7 @@ class dashboard_util {
 
             foreach (self::$breadcrumb as $item) {
                 if (is_string($item)) {
-                    $return .= '<li><span>' . $item . '</span></li>';
+                    $return .= "<li><span>{$item}</span></li>";
 
                     if ($CFG->kopere_dashboard_open == 'internal') {
                         $PAGE->navbar->add($item);
@@ -185,7 +185,7 @@ class dashboard_util {
         $plugin = 'kopere_dashboard';
         preg_match("/(.*?)-/", $menu->get_classname(), $menufunctionstart);
         if (isset($menufunctionstart[1])) {
-            $plugin = "kopere_" . $menufunctionstart[1];
+            $plugin = "kopere_{$menufunctionstart[1]}";
         }
 
         $submenuhtml = '';
@@ -277,11 +277,11 @@ class dashboard_util {
      * @param $title
      */
     private static function start_popup($title) {
-        echo '<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">' . $title . '</h4>
+        echo "<div class='modal-header'>
+                <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                <h4 class='modal-title'>{$title}</h4>
               </div>
-              <div class="modal-body">';
+              <div class='modal-body'>";
     }
 
     /**

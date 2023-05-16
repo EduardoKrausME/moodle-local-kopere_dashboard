@@ -41,7 +41,7 @@ if ($menu) {
     /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
     $menu = $DB->get_record('kopere_dashboard_menu', array('link' => $menu));
 
-    $PAGE->set_url(new moodle_url("/local/kopere_dashboard/?menu=" . $menu->link));
+    $PAGE->set_url(new moodle_url("/local/kopere_dashboard/?menu={$menu->link}"));
     $PAGE->set_pagelayout(get_config('local_kopere_dashboard', 'webpages_theme'));
     $PAGE->set_title($menu->title);
     $PAGE->set_heading($menu->title);
@@ -49,7 +49,7 @@ if ($menu) {
 
     $PAGE->requires->css('/local/kopere_dashboard/assets/statics-pages.css');
 
-    $PAGE->navbar->add($menu->title, new moodle_url('/local/kopere_dashboard/?menu=' . $menu->link));
+    $PAGE->navbar->add($menu->title, new moodle_url("/local/kopere_dashboard/?menu={$menu->link}"));
 
     $pagehtml .= $OUTPUT->header();
 
@@ -70,15 +70,15 @@ if ($menu) {
     /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpages */
     foreach ($webpagess as $webpages) {
         $pagehtml
-            .= "<div class=\"coursebox clearfix odd first\" >
-                    <div class=\"info\">
-                        <h3 class=\"coursename\">
-                            <a href=\"{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}\">{$webpages->title}</a>
+            .= "<div class='coursebox clearfix odd first' >
+                    <div class='info'>
+                        <h3 class='coursename'>
+                            <a href='{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}'>{$webpages->title}</a>
                         </h3>
                     </div>
-                    <div class=\"content\">
-                        <div class=\"summary\" >
-                            <div class=\"no-overflow\">" . html::truncate_text(strip_tags($webpages->text), 300) . "</div>
+                    <div class='content'>
+                        <div class='summary' >
+                            <div class='no-overflow'>" . html::truncate_text(strip_tags($webpages->text), 300) . "</div>
                         </div>
                     </div>
                 </div>";
@@ -96,14 +96,14 @@ if ($menu) {
     /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
     $menu = $DB->get_record('kopere_dashboard_menu', array('id' => $webpages->menuid));
 
-    $PAGE->set_url(new moodle_url("/local/kopere_dashboard/?p=" . $page));
+    $PAGE->set_url(new moodle_url("/local/kopere_dashboard/?p={$page}"));
     $PAGE->set_title($webpages->title);
     $PAGE->set_heading($webpages->title);
     $PAGE->set_pagelayout($webpages->theme);
     $PAGE->set_pagetype('admin-setting');
 
-    $PAGE->navbar->add($menu->title, new moodle_url('/local/kopere_dashboard/?menu=' . $menu->link));
-    $PAGE->navbar->add($webpages->title, new moodle_url('/local/kopere_dashboard/?p=' . $webpages->link));
+    $PAGE->navbar->add($menu->title, new moodle_url("/local/kopere_dashboard/?menu={$menu->link}"));
+    $PAGE->navbar->add($webpages->title, new moodle_url("/local/kopere_dashboard/?p={$webpages->link}"));
 
     preg_match_all('/\[\[(kopere_\w+)::(\w+)(->|-&gt;)(\w+)\((.*?)\)]]/', $webpages->text, $classes);
 
@@ -144,15 +144,15 @@ if ($menu) {
     /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpages */
     foreach ($webpagess as $webpages) {
         $pagehtml
-            .= "<div class=\"coursebox clearfix odd first\" >
-                    <div class=\"info\">
-                        <h3 class=\"coursename-\">
-                            <a href=\"{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}\">{$webpages->title}</a>
+            .= "<div class='coursebox clearfix odd first' >
+                    <div class='info'>
+                        <h3 class='coursename-'>
+                            <a href='{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}'>{$webpages->title}</a>
                         </h3>
                     </div>
-                    <div class=\"content\">
-                        <div class=\"summary\">
-                            <div class=\"no-overflow\">" . html::truncate_text(strip_tags($webpages->text), 300) . "</div>
+                    <div class='content'>
+                        <div class='summary'>
+                            <div class='no-overflow'>" . html::truncate_text(strip_tags($webpages->text), 300) . "</div>
                         </div>
                     </div>
                 </div>";

@@ -33,12 +33,12 @@ require('autoload.php');
 if ($CFG->kopere_dashboard_open == 'internal') {
     $urlinternal = "{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?" . clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
     @header("Location: {$urlinternal}");
-    echo "<meta http-equiv=\"refresh\" content=\"0; url={$urlinternal}\">";
+    echo "<meta http-equiv='refresh' content='0; url={$urlinternal}'>";
 }
 
 global $PAGE, $CFG, $OUTPUT;
 
-require_once($CFG->libdir . '/adminlib.php');
+require_once("{$CFG->libdir}/adminlib.php");
 
 require_login();
 require_capability('local/kopere_dashboard:view', context_system::instance());
@@ -68,7 +68,7 @@ $PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
 $PAGE->add_body_class("kopere_dashboard_body");
 
 echo $OUTPUT->header();
-echo "<link rel=\"icon\" href=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/favicon.png\"/>";
+echo "<link rel='icon' href='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/favicon.png'/>";
 ?>
     <script>
         lang_yes = '<?php echo get_string('yes') ?>';

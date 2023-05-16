@@ -41,14 +41,14 @@ class form {
     /**
      * Form constructor.
      *
-     * @param null $formaction
+     * @param null   $formaction
      * @param string $classextra
      */
     public function __construct($formaction = null, $classextra = '') {
         $this->formaction = $formaction;
         if ($this->formaction) {
-            echo "<form method=\"post\" class=\"validate $classextra\" enctype=\"multipart/form-data\"
-                        action=\"{$this->formaction}\" >";
+            echo "<form method='post' class='validate {$classextra}' enctype='multipart/form-data'
+                        action='{$this->formaction}' >";
             echo '<div class="displayErroForm alert alert-danger" style="display: none;"><span></span></div>';
             echo '<input name="POST" type="hidden" value="true" />';
         }
@@ -62,13 +62,13 @@ class form {
      */
     public function print_row($titulo, $input, $name = '', $adicionaltext = '', $type = '') {
         if ($titulo) {
-            $titulo = '<label for="' . $name . '">' . $titulo . '</label>';
+            $titulo = "<label for='{$name}'>{$titulo}</label>";
         }
 
-        echo '<div class="form-group area_' . $name . ' type_' . $type . '">
-                  ' . $titulo . $input . '
-                  <div class="help-block form-text with-errors">' . $adicionaltext . '</div>
-              </div>';
+        echo "<div class='form-group area_{$name} type_{$type}'>
+                  {$titulo} {$input}
+                  <div class='help-block form-text with-errors'>{$adicionaltext}</div>
+              </div>";
     }
 
     /**
@@ -76,12 +76,12 @@ class form {
      * @param $panelbody
      */
     public function print_panel($titulo, $panelbody) {
-        echo '<div class="form-group">
-                  <label>' . $titulo . '</label>
-                  <div class="panel panel-default">
-                      <div class=" panel-body ">' . $panelbody . '</div>
+        echo "<div class='form-group'>
+                  <label>{$titulo}</label>
+                  <div class='panel panel-default'>
+                      <div class='panel-body'>{$panelbody}</div>
                   </div>
-              </div>';
+              </div>";
     }
 
     /**
@@ -91,25 +91,25 @@ class form {
      * @param string $adicionaltext
      */
     public function print_row_one($titulo, $input, $name = '', $adicionaltext = '') {
-        echo '<div class="form-check area_' . $name . '"">
-                  <label for="' . $name . '" class="form-check-label">
-                      ' . $input . ' ' . $titulo . '</label>
-                  <div class="help-block form-text with-errors form-control-feedback-">' . $adicionaltext . '</div>
-              </div>';
+        echo "<div class='form-check area_{$name}'>
+                  <label for='{$name}' class='form-check-label'>
+                      {$input} {$titulo}</label>
+                  <div class='help-block form-text with-errors form-control-feedback-'>{$adicionaltext}</div>
+              </div>";
     }
 
     /**
      * @param $sectiontitle
      */
     public function print_section($sectiontitle) {
-        echo "<div class=\"form-section\"><span>{$sectiontitle}</span></div>";
+        echo "<div class='form-section'><span>{$sectiontitle}</span></div>";
     }
 
     /**
      * @param $height
      */
     public function print_spacer($height) {
-        echo "<div class=\"form-group\" style=\"height: {$height}px\">&nbsp;</div>";
+        echo "<div class='form-group' style='height: {$height}px'>&nbsp;</div>";
     }
 
     /**
@@ -130,25 +130,24 @@ class form {
      * @param string $value
      */
     public function create_hidden_input($name, $value = '') {
-        echo '<input type="hidden" id="hidden_' . $name . '" name="' . $name .
-            '" id="' . $name . '" value="' . htmlspecialchars($value) . '"/>';
+        echo "<input type='hidden' id='hidden_{$name}' name='{$name}' id='{$name}' value='" . htmlspecialchars($value) . "'/>";
     }
 
     /**
      * @param string $value
      * @param string $class
      * @param string $additionaltext
+     *
      * @throws \coding_exception
      */
     public function create_submit_input($value = '', $class = '', $additionaltext = '') {
         if (AJAX_SCRIPT) {
-            echo "<div class=\"modal-footer margin-form\">
-                      <button class=\"btn btn-default\" data-dismiss=\"modal\">" . get_string('cancel') . "</button>
-                      <input type=\"submit\" class=\"btn btn-primary margin-left-15\" value=\"{$value}\">
+            echo "<div class='modal-footer margin-form'>
+                      <button class='btn btn-default' data-dismiss='modal'>" . get_string('cancel') . "</button>
+                      <input type='submit' class='btn btn-primary margin-left-15' value='{$value}'>
                   </div>";
         } else {
-            $html = '<input name="" class="btn btn-success bt-submit ' . $class .
-                '" type="submit" value="' . htmlspecialchars($value) . '" />';
+            $html = "<input name='' class='btn btn-success bt-submit {$class}' type='submit' value='" . htmlspecialchars($value) . "' />";
             $this->print_row('', $html, 'btsubmit', $additionaltext);
         }
     }
@@ -168,9 +167,9 @@ class form {
      */
     public function close_and_auto_submit_input($campo) {
         global $PAGE;
-        echo "<input id=\"submit_$campo\" name=\"\" type=\"submit\" style='display: none;' />";
+        echo "<input id='submit_{$campo}' name='' type='submit' style='display: none;' />";
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'form_close_and_auto_submit_input',array($campo));
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'form_close_and_auto_submit_input', array($campo));
 
         $this->close();
     }

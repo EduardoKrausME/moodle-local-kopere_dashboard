@@ -74,7 +74,7 @@ class useronline {
             $tablename = $table->close(false, array("order" => array(array(1, "asc"))));
         }
 
-        echo "    <div id=\"user-list-online\" data-tableid=\"{$tablename}\"></div>
+        echo "    <div id='user-list-online' data-tableid='{$tablename}'></div>
               </div>";
 
         dashboard_util::end_page();
@@ -92,7 +92,7 @@ class useronline {
             json::encode([]);
         }
 
-        $onlinestart = strtotime('-' . $time . ' minutes');
+        $onlinestart = strtotime("-{$time} minutes");
         $timefinish = time();
 
         $result = $DB->get_records_sql("
@@ -114,7 +114,7 @@ class useronline {
     public static function count($time) {
         global $DB;
 
-        $onlinestart = strtotime('-' . $time . ' minutes');
+        $onlinestart = strtotime("-{$time} minutes");
         $timefinish = time();
 
         $count = $DB->get_record_sql(

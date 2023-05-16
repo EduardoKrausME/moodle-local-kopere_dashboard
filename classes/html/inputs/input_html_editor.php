@@ -49,7 +49,7 @@ class input_html_editor extends input_textarea {
         $input_id = preg_replace('/[\W]/', '', $this->name);
 
         $return = parent::to_string();
-        $return .= tinymce::create_input_editor('#' . $input_id);
+        $return .= tinymce::create_input_editor("#{$input_id}");
 
         return $return;
     }

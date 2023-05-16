@@ -81,6 +81,7 @@ class performancemonitor {
 
     /**
      * @param $return_number
+     *
      * @return int|string
      * @throws \coding_exception
      */
@@ -140,11 +141,14 @@ class performancemonitor {
 
     /**
      * @param $return_number
+     *
      * @return mixed|string
      * @throws \Exception
      */
     public static function disk_moodledata($return_number) {
         global $CFG;
+
+        session_write_close();
 
         $cache = \cache::make('local_kopere_dashboard', 'performancemonitor');
         if ($cache->has('server')) {

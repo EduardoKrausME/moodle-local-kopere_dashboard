@@ -36,10 +36,10 @@ class header {
      */
     public static function location($url, $isdie = true) {
         ob_clean();
-        header('Location: ' . $url);
+        header("Location: {$url}");
 
         if ($isdie) {
-            end_util::end_script_show('Redirecionando para ' . $url);
+            end_util::end_script_show("Redirecionando para {$url}");
         }
     }
 
@@ -92,14 +92,14 @@ class header {
 
         // <img width="200" height="200" src="' . $CFG->wwwroot .
         // '/local/kopere_dashboard/assets/dashboard/img/404.svg">
-        echo '<div class="element-box text-center page404">
+        echo "<div class='element-box text-center page404'>
                   <h2>OOPS!</h2>
-                  <div class="text404 text-danger">' . $printtext . '</div>
+                  <div class='text404 text-danger'>{$printtext}</div>
                   <p>
-                      <a href="#" onclick="window.history.back();return false;"
-                         class="btn btn-primary">Voltar</a>
+                      <a href='#' onclick='window.history.back();return false;'
+                         class='btn btn-primary'>Voltar</a>
                   </p>
-              </div>';
+              </div>";
 
         dashboard_util::end_page();
 

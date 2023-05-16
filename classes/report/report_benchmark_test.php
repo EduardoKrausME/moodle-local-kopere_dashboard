@@ -78,14 +78,14 @@ class report_benchmark_test extends report_benchmark {
     public static function fileread() {
         global $CFG;
 
-        file_put_contents($CFG->tempdir . '/benchmark.temp', 'benchmark');
+        file_put_contents("{$CFG->tempdir}/benchmark.temp", 'benchmark');
         $i = 0;
         $pass = 2000;
         while ($i < $pass) {
             ++$i;
-            file_get_contents($CFG->tempdir . '/benchmark.temp');
+            file_get_contents("{$CFG->tempdir}/benchmark.temp");
         }
-        unlink($CFG->tempdir . '/benchmark.temp');
+        unlink("{$CFG->tempdir}/benchmark.temp");
 
         return array('limit' => .5, 'over' => .8, 'fail' => BENCHFAIL_SLOWHARDDRIVE);
 
@@ -115,9 +115,9 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         $pass = 2000;
         while ($i < $pass) {
             ++$i;
-            file_put_contents($CFG->tempdir . '/benchmark.temp', $loremipsum);
+            file_put_contents("{$CFG->tempdir}/benchmark.temp", $loremipsum);
         }
-        unlink($CFG->tempdir . '/benchmark.temp');
+        unlink("{$CFG->tempdir}/benchmark.temp");
 
         return array('limit' => 1, 'over' => 1.25, 'fail' => BENCHFAIL_SLOWHARDDRIVE);
 
@@ -154,8 +154,8 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
 
         $uniq = md5(uniqid(rand(), true));
         $newrecord = new \stdClass();
-        $newrecord->shortname = '!!!BENCH-' . $uniq;
-        $newrecord->fullname = '!!!BENCH-' . $uniq;
+        $newrecord->shortname = "!!!BENCH-{$uniq}";
+        $newrecord->fullname = "!!!BENCH-{$uniq}";
         $newrecord->format = 'site';
         $newrecord->visible = 0;
         $newrecord->sortorder = 0;
@@ -283,7 +283,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         global $CFG;
 
         $fakeuser = array('username' => 'guest', 'password' => 'guest');
-        download_file_content($CFG->wwwroot . '/login/index.php', null, $fakeuser, true);
+        download_file_content("{$CFG->wwwroot}/login/index.php", null, $fakeuser, true);
 
         return array('limit' => .3, 'over' => .8, 'fail' => BENCHFAIL_SLOWWEB);
 
@@ -312,7 +312,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
 
         // Download login page.
         $fakeuser = array('username' => $user->username, 'password' => 'benchtest');
-        download_file_content($CFG->wwwroot . '/login/index.php', null, $fakeuser, true);
+        download_file_content("{$CFG->wwwroot}/login/index.php", null, $fakeuser, true);
 
         // Delete fake user.
         $DB->delete_records('user', array('id' => $user->id));

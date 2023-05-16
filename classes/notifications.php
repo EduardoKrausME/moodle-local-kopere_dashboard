@@ -79,7 +79,7 @@ class notifications extends notificationsutil {
                 $event->event_name = "";
             }
             $event->actions
-                = "<div class=\"text-center\">
+                = "<div class='text-center'>
                     " . button::icon('edit', "?classname=notifications&method=add_segunda_etapa&id={$event->id}", false) . "&nbsp;&nbsp;&nbsp;
                     " . button::icon_popup_table('delete', "?classname=notifications&method=delete&id={$event->id}") . "
                    </div>";
@@ -351,7 +351,7 @@ class notifications extends notificationsutil {
         dashboard_util::start_page();
 
         echo "<p>" . get_string_kopere('notification_delete_yes') . "</p>";
-        button::delete(get_string('yes'), '?classname=notifications&method=delete&status=sim&id=' . $event->id, '', false);
+        button::delete(get_string('yes'), "?classname=notifications&method=delete&status=sim&id={$event->id}", '', false);
         button::add(get_string('no'), '?classname=notifications&method=dashboard', 'margin-left-10', false);
 
         dashboard_util::end_page();
@@ -384,7 +384,7 @@ class notifications extends notificationsutil {
                 ->set_values($values, 'key', 'key')
                 ->set_value_by_config('notificacao-template'));
 
-        $form->print_panel(get_string_kopere('notification_setting_preview'), "<div id=\"area-mensagem-preview\"></div>");
+        $form->print_panel(get_string_kopere('notification_setting_preview'), "<div id='area-mensagem-preview'></div>");
 
         $form->print_row(get_string_kopere('notification_setting_templatelocation'),
             "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/");

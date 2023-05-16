@@ -50,7 +50,7 @@ class export {
             ob_clean();
             ob_end_flush();
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment; filename="' . $filename . '.xls"');
+            header("Content-Disposition: attachment; filename=\"{$filename}.xls\"");
             header('Cache-Control: max-age=0');
 
             echo "<html>

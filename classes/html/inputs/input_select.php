@@ -102,20 +102,20 @@ class input_select extends input_base {
         $return = "<select ";
 
         $input_id = preg_replace('/[\W]/', '', $this->name);
-        $return .= "id=\"{$input_id}\" name=\"{$this->name}\" ";
+        $return .= "id='{$input_id}' name='{$this->name}' ";
 
         if ($this->class) {
-            $return .= "class=\"{$this->class}\" ";
+            $return .= "class='{$this->class}' ";
         }
 
         if ($this->style) {
-            $return .= "style=\"{$this->style}\" ";
+            $return .= "style='{$this->style}' ";
         }
 
         $return .= ">";
 
         if ($this->addselecione) {
-            $return .= "\n\t<option value=\"\">..::Selecione::..</option>";
+            $return .= "\n\t<option value=''>..::Selecione::..</option>";
         }
 
         foreach ($this->values as $row) {
@@ -136,7 +136,7 @@ class input_select extends input_base {
                 }
             }
 
-            $return .= "\n\t<option value=\"{$key}\"";
+            $return .= "\n\t<option value='{$key}'";
             if ($key == $this->value) {
                 $return .= ' selected="selected"';
             }

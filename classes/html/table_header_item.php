@@ -32,7 +32,8 @@ class table_header_item extends \stdClass {
     const TYPE_BYTES = 'file-size';
     const TYPE_ACTION = 'action';
 
-    const RENDERER_DATE = 'dataDatetimeRenderer';
+    const RENDERER_DATE = 'dataDateRenderer';
+    const RENDERER_DATETIME = 'dataDatetimeRenderer';
     const RENDERER_VISIBLE = 'dataVisibleRenderer';
     const RENDERER_TRUEFALSE = 'dataTrueFalseRenderer';
     const RENDERER_STATUS = 'dataStatusRenderer';

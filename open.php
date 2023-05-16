@@ -28,7 +28,7 @@ require('autoload.php');
 
 global $PAGE, $CFG, $OUTPUT;
 
-require_once($CFG->libdir . '/adminlib.php');
+require_once("{$CFG->libdir}/adminlib.php");
 
 require_login();
 require_capability('local/kopere_dashboard:view', context_system::instance());
@@ -57,7 +57,7 @@ $url = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?" . clean_para
 if ($CFG->kopere_dashboard_open == 'internal') {
     $urlinternal = "{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?" . clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
     @header("Location: {$urlinternal}");
-    echo "<meta http-equiv=\"refresh\" content=\"0; url={$urlinternal}\">";
+    echo "<meta http-equiv='refresh' content='0; url={$urlinternal}'>";
 } else if ($CFG->kopere_dashboard_open == '_blank') { ?>
     <div class="text-center kopere-dashboard" style="text-align: center;">
         <a type="button" target="_blank"

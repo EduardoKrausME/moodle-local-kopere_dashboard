@@ -40,11 +40,11 @@ class server_util {
         global $CFG;
 
         if ($create) {
-            @mkdir($CFG->dataroot . '/kopere');
-            @mkdir($CFG->dataroot . '/kopere/dashboard');
+            @mkdir("{$CFG->dataroot}/kopere");
+            @mkdir("{$CFG->dataroot}/kopere/dashboard");
         }
 
-        return $CFG->dataroot . '/kopere/dashboard/';
+        return "{$CFG->dataroot}/kopere/dashboard/";
     }
 
     /**

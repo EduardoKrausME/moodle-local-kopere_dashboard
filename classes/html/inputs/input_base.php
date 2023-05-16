@@ -253,7 +253,7 @@ class input_base implements i_input {
      */
     public function add_validator($validator) {
         if ($this->class) {
-            $this->class .= " " . $validator;
+            $this->class .= " {$validator}";
         } else {
             $this->class = $validator;
         }
@@ -268,7 +268,7 @@ class input_base implements i_input {
      */
     public function add_mask($mask) {
         if ($this->class) {
-            $this->class .= " " . $mask;
+            $this->class .= " {$mask}";
         } else {
             $this->class = $mask;
         }
@@ -286,20 +286,20 @@ class input_base implements i_input {
 
         $input_id = preg_replace('/[\W]/', '', $this->name);
 
-        $return = "<input id=\"{$input_id}\"
-                          name=\"{$this->name}\"
-                          type=\"{$this->type}\"";
+        $return = "<input id='{$input_id}'
+                          name='{$this->name}'
+                          type='{$this->type}'";
 
         if ($this->value !== null) {
-            $return .= " value=\"" . htmlentities($this->value) . "\" ";
+            $return .= " value='" . htmlentities($this->value) . "' ";
         }
 
         if ($this->class !== null) {
-            $return .= " class=\"{$this->class}\" ";
+            $return .= " class='{$this->class}' ";
         }
 
         if ($this->style !== null) {
-            $return .= " style=\"{$this->style}\" ";
+            $return .= " style='{$this->style}' ";
         }
 
         if ($this->required) {

@@ -166,14 +166,14 @@ class data_table {
             button::info(get_string_kopere('reports_export'), url_util::querystring() . "&export=xls");
         }
 
-        echo '<table id="' . $this->tableid . '" class="table table-hover" >';
+        echo "<table id='{$this->tableid}' class='table table-hover' >";
         echo '<thead>';
 
         if ($this->columninfo) {
-            echo '<tr class="' . $class . '">';
+            echo "<tr class='{$class}'>";
             /** @var table_header_item $columninfo */
             foreach ($this->columninfo as $key => $columninfo) {
-                echo "<th class=\"header-col text-center\" colspan=\"{$columninfo->cols}\">";
+                echo "<th class='header-col text-center' colspan='{$columninfo->cols}'>";
 
                 if (strpos($columninfo->title, '[[[') === 0) {
                     echo get_string(substr($columninfo->title, 3, -3));
@@ -190,10 +190,10 @@ class data_table {
             $this->columndefs[] = (object)array("visible" => false, "targets" => -1);
         }
 
-        echo '<tr class="' . $class . '">';
+        echo "<tr class='{$class}'>";
         /** @var table_header_item $column */
         foreach ($this->column as $key => $column) {
-            echo '<th class="text-center th_' . $column->chave . '" style="' . $column->style_header . '">';
+            echo "<th class='text-center th_{$column->chave}' style='{$column->style_header}'>";
             if ($column->title == '') {
                 echo "&nbsp;";
             } else {
@@ -258,7 +258,7 @@ class data_table {
                     $thisclass .= ' button-actions text-nowrap width-30';
                 }
 
-                $thisclass .= ' ' . $column->style_col;
+                $thisclass .= " {$column->style_col}";
                 if ($column->funcao != null) {
                     $funcao = $column->funcao;
                     $html = $funcao($linha, $column->chave);
@@ -285,7 +285,7 @@ class data_table {
         if ($class == '' || $class == ' ') {
             echo '<td>';
         } else {
-            echo "<td class=\"{$class}\">";
+            echo "<td class='{$class}'>";
         }
         echo $html;
         echo '</td>';

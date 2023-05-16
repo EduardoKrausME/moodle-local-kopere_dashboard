@@ -30,6 +30,21 @@ define([
                 currencyRenderer      : function(data, type, row) {
                     return '<div class="text-center" data-toggle="tooltip">R$ ' + data + '</div>';
                 },
+                dataDateRenderer  : function(data, type, row) {
+                    function twoDigit($value) {
+                        if ($value < 10) {
+                            return '0' + $value;
+                        }
+                        return $value;
+                    }
+
+                    var a = new Date(data * 1000);
+                    var year = a.getFullYear();
+                    var month = twoDigit(a.getMonth() + 1);
+                    var date = twoDigit(a.getDate());
+
+                    return date + '/' + month + '/' + year;
+                },
                 dataDatetimeRenderer  : function(data, type, row) {
                     function twoDigit($value) {
                         if ($value < 10) {

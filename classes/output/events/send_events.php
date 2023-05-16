@@ -93,7 +93,7 @@ class send_events {
         $this->message = $this->replace_date($this->message);
 
         $COURSE->wwwroot = $CFG->wwwroot;
-        $COURSE->link = "<a href=\"{$CFG->wwwroot}\" target=\"_blank\">{$CFG->wwwroot}</a>";
+        $COURSE->link = "<a href='{$CFG->wwwroot}' target='_blank'>{$CFG->wwwroot}</a>";
         $COURSE->url = $CFG->wwwroot;
 
         // Moodle: {[moodle.???]}.
@@ -122,8 +122,8 @@ class send_events {
             $course = $DB->get_record('course', array('id' => $courseid));
 
             $course->link
-                = "<a href=\"{$CFG->wwwroot}/course/view.php?id={$courseid}\"
-                                    target=\"_blank\">{$CFG->wwwroot}/course/view.php?id={$courseid}</a>";
+                = "<a href='{$CFG->wwwroot}/course/view.php?id={$courseid}'
+                      target='_blank'>{$CFG->wwwroot}/course/view.php?id={$courseid}</a>";
             $course->url = "{$CFG->wwwroot}/course/view.php?id={$courseid}";
 
             $this->subject = $this->replace_tag($this->subject, $course, 'course');
@@ -193,7 +193,7 @@ class send_events {
             $sendsubject = $this->replace_tag_user($this->subject, $userto, 'to');
             $htmlmessage = $this->replace_tag_user($this->message, $userto, 'to');
 
-            $magager = "<a href=\"{$CFG->wwwroot}/message/edit.php?id={$userto->id}\">Gerenciar mensagens</a>";
+            $magager = "<a href='{$CFG->wwwroot}/message/edit.php?id={$userto->id}'>Gerenciar mensagens</a>";
             $htmlmessage = str_replace('{[manager]}', $magager, $htmlmessage);
 
             $eventdata = new message();

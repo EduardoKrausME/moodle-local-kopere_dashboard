@@ -68,8 +68,8 @@ class course_access {
         }
 
         $perPage = 10;
-        $atualPage     = optional_param ( 'page', 1, PARAM_INT );
-        $startLimit    = ( $atualPage - 1 ) * $perPage;
+        $atualPage = optional_param('page', 1, PARAM_INT);
+        $startLimit = ($atualPage - 1) * $perPage;
 
         $course = $DB->get_record('course', array('id' => $cursosid));
         header::notfound_null($course, get_string_kopere('courses_notound'));
@@ -137,7 +137,7 @@ class course_access {
                 if (strlen($section->name)) {
                     $printsessoes .= $section->name;
                 } else {
-                    $printsessoes .= 'Sessão ' . $key;
+                    $printsessoes .= "Sessão {$key}";
                 }
                 $printsessoes .= '</th>';
             }
@@ -162,15 +162,15 @@ class course_access {
             get_string_kopere('user_table_email') . '</td>';
 
         foreach ($modinfo as $infos) {
-            $link = $CFG->wwwroot . '/course/view.php?id=' . $infos->course . '#module-' . $infos->course_modules_id;
-            echo '<th bgcolor="#c5c5c5" colspan="2" align="center" style="text-align: center" >
-              <a href="' . $link . '" target="_blank">' . $infos->moduleinfo->name . '</a>
-          </th>';
+            $link = "{$CFG->wwwroot}/course/view.php?id={$infos->course}#module-{$infos->course_modules_id}";
+            echo "<th bgcolor='#c5c5c5' colspan='2' align='center' style='text-align: center' >
+                      <a href='{$link}' target='_blank'>{$infos->moduleinfo->name}</a>
+                  </th>";
         }
         echo '</tr>';
         echo '</thead>';
 
-        if ( $export == 'xls' ) {
+        if ($export == 'xls') {
             $sql = "
                SELECT DISTINCT SQL_CALC_FOUND_ROWS u.*
                  FROM {context} c
@@ -199,12 +199,12 @@ class course_access {
                 'instanceid' => $cursosid
             ));
 
-        $total = $DB->get_record_sql ( "SELECT FOUND_ROWS() as num_itens" );
+        $total = $DB->get_record_sql("SELECT FOUND_ROWS() as num_itens");
 
         foreach ($allusercourse as $user) {
             echo '<tr>';
-            $link = $CFG->wwwroot . '/user/view.php?id=' . $user->id . '&course=' . $cursosid;
-            $this->td('<a href="' . $link . '" target="moodle">' . fullname($user) . '</a>', 'bg-info text-nowrap', '#D9EDF7');
+            $link = "{$CFG->wwwroot}/user/view.php?id={$user->id}&course={$cursosid}";
+            $this->td("<a href='{$link}' target='moodle'>" . fullname($user) . '</a>', 'bg-info text-nowrap', '#D9EDF7');
             $this->td($user->email, 'bg-info text-nowrap', '#D9EDF7');
 
             if ($groups) {
@@ -263,7 +263,7 @@ class course_access {
         echo '</table>';
 
         export::close();
-        pagination::create ( $atualPage, $total->num_itens, $perPage );
+        pagination::create($atualPage, $total->num_itens, $perPage);
     }
 
     /**
@@ -272,7 +272,7 @@ class course_access {
      * @param        $bgcolor
      */
     private function td($value, $class, $bgcolor) {
-        echo '<td class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
+        echo "<td class='{$class} ' bgcolor='{$bgcolor}'>{$value}" . '</td>';
     }
 
     /**
@@ -281,7 +281,7 @@ class course_access {
      * @param        $bgcolor
      */
     private function td2($value, $class, $bgcolor) {
-        echo '<td colspan="2" class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
+        echo "<td colspan='2' class='{$class}' bgcolor='{$bgcolor}'>{$value}" . '</td>';
     }
 
 

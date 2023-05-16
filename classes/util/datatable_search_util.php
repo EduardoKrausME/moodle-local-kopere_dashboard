@@ -133,7 +133,7 @@ class datatable_search_util {
 
         $find = str_replace("GROUP BY", "", $group);
 
-        $sqlsearch = $sql . " " . $this->where;
+        $sqlsearch = $sql . " {$this->where}";
         $sqltotal = $sql;
         if ($group) {
             $sqlsearch = str_replace('{[columns]}', "count(DISTINCT {$find}) as num", $sqlsearch);

@@ -30,95 +30,101 @@ defined('MOODLE_INTERNAL') || die();
  */
 class button {
     const BTN_PEQUENO = 'btn-xs';
-    const BTN_MEDIO = 'btn-sm';
-    const BTN_GRANDE = 'btn-lg';
+    const BTN_MEDIO   = 'btn-sm';
+    const BTN_GRANDE  = 'btn-lg';
 
     /**
      * @param $text
      */
     public static function close_popup($text) {
-        echo "<button class=\"btn btn-primary margin-left-10\" data-dismiss=\"modal\">{$text}</button>";
+        echo "<button class='btn btn-primary margin-left-10' data-dismiss='modal'>{$text}</button>";
     }
 
     /**
-     * @param $text
-     * @param $link
+     * @param        $text
+     * @param        $link
      * @param string $class
-     * @param bool $p
-     * @param bool $return
-     * @param bool $modal
+     * @param bool   $p
+     * @param bool   $return
+     * @param bool   $modal
+     *
      * @return string
      */
-    public static function add($text, $link, $class = '', $p = true, $return = false, $modal = false) {
-        $class = "btn btn-primary " . $class;
+    public static function add($text, $link, $class = '', $p = true, $return = false) {
+        $class = "btn btn-primary {$class}";
 
-        return self::create_button($text, $link, $p, $class, $return, $modal);
+        return self::create_button($text, $link, $p, $class, $return);
     }
 
     /**
-     * @param $text
-     * @param $link
+     * @param        $text
+     * @param        $link
      * @param string $class
-     * @param bool $p
-     * @param bool $return
-     * @param bool $modal
+     * @param bool   $p
+     * @param bool   $return
+     * @param bool   $modal
+     *
      * @return string
      */
-    public static function edit($text, $link, $class = '', $p = true, $return = false, $modal = false) {
-        $class = "btn btn-success " . $class;
+    public static function edit($text, $link, $class = '', $p = true, $return = false) {
+        $class = "btn btn-success {$class}";
 
-        return self::create_button($text, $link, $p, $class, $return, $modal);
+        return self::create_button($text, $link, $p, $class, $return);
     }
 
     /**
-     * @param $text
-     * @param $link
+     * @param        $text
+     * @param        $link
      * @param string $class
-     * @param bool $p
-     * @param bool $return
-     * @param bool $modal
+     * @param bool   $p
+     * @param bool   $return
+     * @param bool   $modal
+     *
      * @return string
      */
-    public static function delete($text, $link, $class = '', $p = true, $return = false, $modal = false) {
-        $class = "btn btn-danger " . $class;
+    public static function delete($text, $link, $class = '', $p = true, $return = false) {
+        $class = "btn btn-danger {$class}";
 
-        return self::create_button($text, $link, $p, $class, $return, $modal);
+        return self::create_button($text, $link, $p, $class, $return);
     }
 
     /**
-     * @param $text
-     * @param $link
+     * @param        $text
+     * @param        $link
      * @param string $class
-     * @param bool $p
-     * @param bool $return
-     * @param bool $modal
+     * @param bool   $p
+     * @param bool   $return
+     * @param bool   $modal
+     *
      * @return string
      */
-    public static function primary($text, $link, $class = '', $p = true, $return = false, $modal = false) {
-        $class = "btn btn-primary " . $class;
+    public static function primary($text, $link, $class = '', $p = true, $return = false) {
+        $class = "btn btn-primary {$class}";
 
-        return self::create_button($text, $link, $p, $class, $return, $modal);
+        return self::create_button($text, $link, $p, $class, $return);
     }
 
     /**
-     * @param $text
-     * @param $link
+     * @param        $text
+     * @param        $link
      * @param string $class
-     * @param bool $p
-     * @param bool $return
-     * @param bool $modal
+     * @param bool   $p
+     * @param bool   $return
+     * @param bool   $modal
+     *
      * @return string
      */
-    public static function info($text, $link, $class = '', $p = true, $return = false, $modal = false) {
-        $class = "btn btn-info " . $class;
+    public static function info($text, $link, $class = '', $p = true, $return = false) {
+        $class = "btn btn-info {$class}";
 
-        return self::create_button($text, $link, $p, $class, $return, $modal);
+        return self::create_button($text, $link, $p, $class, $return);
     }
 
     /**
-     * @param $infourl
+     * @param        $infourl
      * @param string $text
      * @param string $hastag
+     *
      * @return string
      */
     public static function help($infourl, $text = null, $hastag = 'wiki-wrapper') {
@@ -128,28 +134,29 @@ class button {
             $text = get_string_kopere('help_title');
         }
 
-        return "<a href=\"https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/{$infourl}#{$hastag}\"
-                   target=\"_blank\" class=\"help\">
-                  <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/help.svg\" height=\"23\" >
+        return "<a href='https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/{$infourl}#{$hastag}'
+                   target='_blank' class='help'>
+                  <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/help.svg' height='23' >
                   $text
               </a>";
     }
 
     /**
-     * @param $icon
-     * @param $link
+     * @param      $icon
+     * @param      $link
      * @param bool $ispopup
+     *
      * @return string
      */
     public static function icon($icon, $link, $ispopup = true) {
         global $CFG;
         if ($ispopup) {
             return "<a href='{$link}'>
-                        <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" width=\"19\">
+                        <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg' width='19'>
                     </a>";
         } else {
-            return "<a href=\"{$link}\">
-                        <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" width=\"19\">
+            return "<a href='{$link}'>
+                        <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg' width='19'>
                     </a>";
         }
     }
@@ -157,46 +164,36 @@ class button {
     /**
      * @param $icon
      * @param $link
+     *
      * @return string
      */
     public static function icon_popup_table($icon, $link) {
         global $CFG;
         return "<a href='{$link}'>
-                    <img src=\"{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg\" 
-                         width=\"19\" role=\"button\">
+                    <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg' 
+                         width='19' role='button'>
                  </a>";
     }
 
     /**
-     * @param $text
-     * @param $link
-     * @param $p
-     * @param $class
-     * @param $return
+     * @param      $text
+     * @param      $link
+     * @param      $p
+     * @param      $class
+     * @param      $return
      * @param bool $modal
+     *
      * @return string
      */
-    private static function create_button($text, $link, $p, $class, $return, $modal = false) {
-        $modal = false;
+    private static function create_button($text, $link, $p, $class, $return) {
         $target = '';
         if (strpos($link, 'http') === 0) {
             $target = 'target="_blank"';
         }
 
-        $bt = '';
-
-        if ($modal) {
-            $bt
-                .= '<a data-toggle="modal" data-target="#modal-edit"
-                       class="' . $class . '" ' . $target . '
-                       href="' . $link . '"
-                       data-href="load-ajax.php' . $link . '">' . $text . '</a>';
-        } else {
-            $bt .= '<a href="' . $link . '" class="' . $class . '" ' . $target . '>' . $text . '</a>';
-        }
-
+        $bt = "<a href='{$link}' class='{$class}' {$target}>{$text}</a>";
         if ($p) {
-            $bt = '<div style="width: 100%; min-height: 30px; padding: 0 0 20px;">' . $bt . '</div>';
+            $bt = "<div style='width:100%;min-height:30px;padding:0 0 20px;'>{$bt}</div>";
         }
 
         if ($return) {

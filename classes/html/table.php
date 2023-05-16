@@ -42,9 +42,7 @@ class table {
      */
     public function __construct($adicional = '') {
         $this->table_id = 'table_' . uniqid();
-        echo '<table id="' . $this->table_id . '" class="table table-hover" width="100%" ';
-        echo $adicional;
-        echo '>';
+        echo "<table id='{$this->table_id}' class='table table-hover' width='100%' {$adicional} \>";
     }
 
     /**
@@ -81,7 +79,7 @@ class table {
     public function set_click_redirect($url, $chave) {
         $this->click = array();
         $this->click['chave'] = $chave;
-        $this->click['exec'] = "document.location.href='" . $url . "'";
+        $this->click['exec'] = "document.location.href='{$url}'";
     }
 
     /**
@@ -91,7 +89,7 @@ class table {
     public function set_click_open($url, $chave) {
         $this->click = array();
         $this->click['chave'] = $chave;
-        $this->click['exec'] = "window.open( '" . $url . "' )";
+        $this->click['exec'] = "window.open( '{$url}' )";
     }
 
     /**
@@ -157,9 +155,9 @@ class table {
     public function print_header($header, $class = '') {
         $this->colunas = array();
         echo '<thead>';
-        echo '<tr class="' . $class . '">';
+        echo "<tr class='{$class}'>";
         foreach ($header as $value) {
-            echo '<th class="text-center" style="' . $value->style_header . '">';
+            echo "<th class='text-center' style='{$value->style_header}'>";
             if ($value->title == '') {
                 echo "&nbsp;";
             } else {
@@ -198,16 +196,16 @@ class table {
                 } else {
                     $valorid = $linha->$chaveid;
                 }
-                $textid = 'id="' . $valorid . '"';
+                $textid = "id='{$valorid}'";
             }
 
             if ($this->click != null) {
-                echo '<tr ' . $textid . ' onClick="' . $this->get_click($linha) . '">';
+                echo "<tr {$textid} onClick='{$this->get_click($linha)}'>";
             } else {
                 echo '<tr>';
             }
             foreach ($this->colunas as $col) {
-                $class = $class . ' ' . $col->style_col;
+                $class = $class . " {$col->style_col}";
                 if ($col->funcao != null) {
                     $funcao = $col->funcao;
                     if (is_array($linha)) {
@@ -237,7 +235,7 @@ class table {
      * @param string $class
      */
     public function print_row($html, $class = '') {
-        echo '<td class=' . $class . '>';
+        echo "<td class='{$class}'>";
         echo $html;
         echo '</td>';
     }

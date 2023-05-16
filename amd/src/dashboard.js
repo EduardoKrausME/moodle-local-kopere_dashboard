@@ -1,4 +1,4 @@
-define(["jquery"], function($, ajax, notification) {
+define(["jquery"], function($) {
     return {
         start : function() {
             $("#dashboard-moodleinfo").load("./load-ajax.php?classname=dashboard&method=monitor");

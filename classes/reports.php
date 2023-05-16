@@ -146,7 +146,7 @@ class reports extends reports_admin {
         header::notfound_null($koperereportcat, get_string_kopere('reports_notfound'));
 
         dashboard_util::add_breadcrumb(get_string_kopere('reports_title'), '?classname=reports&method=dashboard');
-        dashboard_util::add_breadcrumb(self::get_title($koperereportcat), '?classname=reports&method=dashboard&type=' . $koperereportcat->type);
+        dashboard_util::add_breadcrumb(self::get_title($koperereportcat), "?classname=reports&method=dashboard&type={$koperereportcat->type}");
         dashboard_util::add_breadcrumb(self::get_title($koperereports));
         dashboard_util::start_page();
 
@@ -209,7 +209,7 @@ class reports extends reports_admin {
                 table_header_item::TYPE_INT, null, 'width:50px;white-space:nowrap;');
 
             $table->set_ajax_url('?classname=courses&method=load_all_courses');
-            $table->set_click_redirect('?classname=reports&method=load_report&type=course&report=' . $report . '&courseid={id}', 'id');
+            $table->set_click_redirect("?classname=reports&method=load_report&type=course&report={$report}&courseid={id}", 'id');
             $table->print_header();
             $table->close();
         }

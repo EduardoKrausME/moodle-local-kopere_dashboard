@@ -36,6 +36,7 @@ class profile {
 
     /**
      * @param $user
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -46,31 +47,32 @@ class profile {
         $userpicture->size = 110;
         $profileimageurl = $userpicture->get_url($PAGE)->out(false);
 
-        echo '<div class="profile-content">
-                  <div class="table">
-                      <div class="profile">
-                          <img src="' . $profileimageurl . '" alt="' . fullname($user) . '">
-                          <span class="name">' . $user->firstname . '
-                              <span class="last">' . $user->lastname . '</span>
-                              <span class="city">' . $user->city . '</span>
+        echo "<div class='profile-content'>
+                  <div class='table'>
+                      <div class='profile'>
+                          <img src='{$profileimageurl}' alt='" . fullname($user) . "'>
+                          <span class='name'>{$user->firstname}
+                              <span class='last'>{$user->lastname}</span>
+                              <span class='city'>{$user->city}</span>
                           </span>
-                          <div class="desc">' . $user->description . '</div>
+                          <div class='desc'>{$user->description}</div>
 
                           <h2>' . get_string_kopere('profile_courses_title') . '</h2>
-                          <ul class="personalDev">
-                              ' . $this->list_courses($user->id) . '
+                          <ul class='personalDev'>
+                              {$this->list_courses($user->id)}
                           </ul>
                        </div>
 
-                       <div class="info">
-                          ' . $this->get_user_info($user) . '
+                       <div class='info'>
+                          {$this->get_user_info($user)}
                       </div>
                   </div>
-              </div>';
+              </div>";
     }
 
     /**
      * @param $user_id
+     *
      * @return string
      * @throws \coding_exception
      * @throws \dml_exception
@@ -89,7 +91,7 @@ class profile {
                          JOIN {enrol} e ON ( e.id = ue.enrolid AND e.courseid = :courseid )
                         WHERE ue.userid = :userid";
             $params = array('userid' => $user_id,
-                'courseid' => $course->id
+                            'courseid' => $course->id
             );
 
             $enrolment = $DB->get_record_sql($sql, $params);
@@ -103,7 +105,7 @@ class profile {
 
             $roleassignments = $DB->get_records('role_assignments',
                 array('contextid' => $course->ctxid,
-                    'userid' => $user_id
+                      'userid' => $user_id
                 ), '', 'DISTINCT roleid');
 
             $rolehtml = '';
@@ -118,15 +120,15 @@ class profile {
             }
 
             return
-                '<li>
-                    <h4 class="title">' . $course->fullname . '
-                        <span class="status">' . $matriculastatus . '</span>
+                "<li>
+                    <h4 class='title'>{$course->fullname}
+                        <span class='status'>{$matriculastatus}</span>
                     </h4>
-                    <div>' . get_string_kopere('profile_enrol_start') . ' <em>' .
+                    <div>" . get_string_kopere('profile_enrol_start') . ' <em>' .
                 userdate($enrolment->timestart, get_string_kopere('dateformat')) . '</em> ' . $expirationend . ' -
                         <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal-edit"
                                 data-href="load-ajax.php?classname=userenrolment&method=mathedit&courseid=' . $course->id .
-                '&ueid=' . $enrolment->id . '">' . get_string_kopere('profile_edit') . '</button>
+                "&ueid={$enrolment->id}'>" . get_string_kopere('profile_edit') . '</button>
                     </div>
                     <div class="roles">' . get_string_kopere('profile_enrol_profile') . ': ' . $rolehtml . '</div>
                 </li>';
@@ -136,29 +138,27 @@ class profile {
 
     /**
      * @param $user
+     *
      * @return string
      */
     public function get_user_info($user) {
         global $CFG;
 
-        return '
-        <h3>' . get_string_kopere('profile_access_title') . '</h3>
-        <p>' . get_string_kopere('profile_access_first') . '<br> <strong>' .
-            userdate($user->firstaccess, get_string_kopere('dateformat')) . '</strong></p>
-        <p>' . get_string_kopere('profile_access_last') . '<br>   <strong>' .
-            userdate($user->lastaccess, get_string_kopere('dateformat')) . '</strong></p>
-        <p>' . get_string_kopere('profile_access_lastlogin') . '<br>    <strong>' .
-            userdate($user->lastlogin, get_string_kopere('dateformat')) . '</strong></p>
-        <h3>' . get_string_kopere('profile_userdate_title') . '</h3>
-        <p><a href="mailto:' . $user->email . '">' . $user->email . '</a></p>
-        <p>' . $user->phone1 . '</p>
-        <p>' . $user->phone2 . '</p>
-        <h3>' . get_string_kopere('profile_link_title') . '</h3>
-        <p><a target="_blank" href="' . $CFG->wwwroot . '/user/profile.php?id=' . $user->id . '">' .
-            get_string_kopere('profile_link_profile') . '</a></p>
-        <p><a target="_blank" href="' . $CFG->wwwroot . '/user/editadvanced.php?id=' . $user->id . '">' .
-            get_string_kopere('profile_link_edit') . '</a></p>
-        <p><a target="_blank" href="' . $CFG->wwwroot . '/course/loginas.php?id=1&user=' . $user->id .
-            '&sesskey=' . sesskey() . '">' . get_string_kopere('profile_access') . '</a></p>';
+        return "
+            <h3>" . get_string_kopere("profile_access_title") . "</h3>
+            <p>" . get_string_kopere("profile_access_first") . "<br> 
+               <strong>" . userdate($user->firstaccess, get_string_kopere("dateformat")) . "</strong></p>
+            <p>" . get_string_kopere("profile_access_last") . "<br>   
+               <strong>" . userdate($user->lastaccess, get_string_kopere("dateformat")) . "</strong></p>
+            <p>" . get_string_kopere("profile_access_lastlogin") . "<br>    
+               <strong>" . userdate($user->lastlogin, get_string_kopere("dateformat")) . "</strong></p>
+            <h3>" . get_string_kopere("profile_userdate_title") . "</h3>
+            <p><a href='mailto:{$user->email}''>{$user->email}</a></p>
+            <p>{$user->phone1}</p>
+            <p>{$user->phone2}</p>
+            <h3>" . get_string_kopere("profile_link_title") . "</h3>
+            <p><a target='_blank' href='{$CFG->wwwroot}/user/profile.php?id={$user->id}'>" . get_string_kopere("profile_link_profile") . "</a></p>
+            <p><a target='_blank' href='{$CFG->wwwroot}/user/editadvanced.php?id={$user->id}'>" . get_string_kopere("profile_link_edit") . "</a></p>
+            <p><a target='_blank' href='{$CFG->wwwroot}/course/loginas.php?id=1&user={$user->id}&sesskey=" . sesskey() . "'>" . get_string_kopere("profile_access") . "</a></p>";
     }
 }

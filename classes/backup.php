@@ -73,9 +73,9 @@ class backup {
                 preg_match("/backup_(\d+)-(\d+)-(\d+)-(\d+)-(\d+)\..*/", $backup, $p);
                 $backupslista[] = array(
                     'file' => $p[0],
-                    'data' => $p[3] . '/' . $p[2] . '/' . $p[1] . ' às ' . $p[4] . ':' . $p[5],
+                    'data' => "{$p[3]}/{$p[2]}/{$p[1]} às {$p[4]}:{$p[5]}",
                     'size' => bytes_util::size_to_byte(filesize($backup)),
-                    'acoes' => "<div class=\"text-center\">
+                    'acoes' => "<div class='text-center'>
                                     " . button::icon('download', "?classname=backup&method=download&file={$p[0]}", false) . "
                                 &nbsp;&nbsp;&nbsp; " . button::icon_popup_table('delete', "?classname=backup&method=delete&file={$p[0]}") . "
                                 </div>"
@@ -248,7 +248,7 @@ class backup {
                 dashboard_util::add_breadcrumb(get_string_kopere('backup_deleting'));
                 dashboard_util::start_page();
 
-                echo "<div class=\"element-box\">
+                echo "<div class='element-box'>
                           <h3>" . get_string_kopere('backup_delete_confirm') . "</h3>
                           <p>" . get_string_kopere('backup_delete_title', $file) . "</p>
                           <div>";
@@ -279,7 +279,7 @@ class backup {
         if (file_exists($backupfile)) {
             header('Content-Type: application/octet-stream');
             header('Content-Transfer-Encoding: Binary');
-            header('Content-disposition: attachment; filename="' . $file . '"');
+            header("Content-disposition: attachment; filename=\"{$file}\"");
 
             readfile($backupfile);
             end_util::end_script_show();
@@ -296,7 +296,7 @@ class backup {
     private function get_backup_path($create = true) {
         global $CFG;
 
-        $filepath = $CFG->dataroot . '/backup/';
+        $filepath = "{$CFG->dataroot}/backup/";
         if ($create) {
             @mkdir($filepath);
         }

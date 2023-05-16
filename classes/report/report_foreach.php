@@ -100,7 +100,7 @@ class report_foreach {
      * @throws \coding_exception
      */
     public static function badge_criteria_type($item) {
-        $item->criteriatype = get_string('criteria_' . $item->criteriatype, 'badges');
+        $item->criteriatype = get_string("criteria_{$item->criteriatype}", 'badges');
         $item->name = fullname($item);
 
         return $item;

@@ -140,25 +140,24 @@ class dashboard {
             $gradetext = number_format($grade->finalgrade, 1, get_string('decsep', 'langconfig'), '') . ' ' .
                 get_string_kopere('dashboard_grade_of') . ' ' . intval($grade->rawgrademax);
 
-            echo '<div class="media dashboard-grade-list">
-                      <div class="media-left">
-                          <img title="' . fullname($user) . '" src="' . $profileimageurl . '" class="media-object" >
+            echo "<div class='media dashboard-grade-list'>
+                      <div class='media-left'>
+                          <img title='" . fullname($user) . "' src='{$profileimageurl}"  . "' class='media-object' >
                       </div>
-                      <div class="media-body">
-                          <h4 class="media-heading">
-                              <a data-toggle="modal" data-target="#modal-edit"
-                                 href="?classname=users&method=details&userid=' . $user->id . '"
-                                 data-href="load-ajax.php?classname=users&method=details&userid=' . $user->id . '">' .
-                fullname($user) . '</a>
+                      <div class='media-body'>
+                          <h4 class='media-heading'>
+                              <a data-toggle='modal' data-target='#modal-edit'
+                                 href='?classname=users&method=details&userid={$user->id}'
+                                 data-href='load-ajax.php?classname=users&method=details&userid={$user->id}'>" .
+                fullname($user) . "</a>
                           </h4>
-                          <p>' . get_string_kopere('dashboard_grade_text',
-                    ['grade' => $gradetext, 'evaluation' => $evaluation]) . '</p>
-                          <div class="date"><small>' . get_string_kopere('dashboard_grade_in') .
-                ' <i>' . userdate($grade->timemodified,
-                    get_string_kopere('dateformat')) . '</i></small></div>
+                          <p>" . get_string_kopere('dashboard_grade_text', ['grade' => $gradetext, 'evaluation' => $evaluation]) . "</p>
+                          <div class='date'><small>" . get_string_kopere('dashboard_grade_in') .
+                " <i>" . userdate($grade->timemodified,
+                    get_string_kopere('dateformat')) . "</i></small></div>
                       </div>
-                      <div class="clear"></div>
-                  </div>';
+                      <div class='clear'></div>
+                  </div>";
         }
         die();
     }
@@ -187,25 +186,25 @@ class dashboard {
                     $statusmatricula = '<span class="btn-successpadding-0-8 border-radius-5 text-nowrap">' . get_string_kopere('dashboard_enrol_active') . '</span>';
                 }
 
-                echo '<div class="media dashboard-grade-list">
-                          <div class="media-left">
-                              <img title="' . fullname($user) . '" src="' . $profileimageurl . '" class="media-object" >
+                echo "<div class='media dashboard-grade-list'>
+                          <div class='media-left'>
+                              <img title='" . fullname($user) . "' src='{$profileimageurl}' class='media-object' >
                           </div>
-                          <div class="media-body">
-                              <h4 class="media-heading">
-                                  <a data-toggle="modal" data-target="#modal-edit"
-                                     href="?classname=users&method=details&userid=' . $user->id . '"
-                                     data-href="load-ajax.php?classname=users&method=details&userid=' . $user->id . '">' .
+                          <div class='media-body'>
+                              <h4 class='media-heading'>
+                                  <a data-toggle='modal' data-target='#modal-edit'
+                                     href='?classname=users&method=details&userid={$user->id}'
+                                     data-href='load-ajax.php?classname=users&method=details&userid={$user->id}'>" .
                     fullname($user) . '</a>
                               </h4>
-                              <p>' . get_string_kopere('dashboard_enrol_text', $enrol) . '
-                                  <span class="status">' . $statusmatricula . '</span>
+                              <p>' . get_string_kopere('dashboard_enrol_text', $enrol) . "
+                                  <span class='status'>" . $statusmatricula . "</span>
                               </p>
-                              <div class="date"><small>' . get_string_kopere('dashboard_enrol_lastmodifield') . ' <i>' .
-                    userdate($enrol->timemodified, get_string_kopere('dateformat')) . '</i></small></div>
+                              <div class='date'><small>" . get_string_kopere('dashboard_enrol_lastmodifield') . " <i>" .
+                    userdate($enrol->timemodified, get_string_kopere('dateformat')) . "</i></small></div>
                           </div>
-                          <div class="clear"></div>
-                      </div>';
+                          <div class='clear'></div>
+                      </div>";
             }
         }
     }

@@ -70,7 +70,7 @@ function load_class() {
 function get_path_query() {
     $classname = optional_param('classname', '', PARAM_TEXT);
     $method = optional_param('method', '', PARAM_TEXT);
-    return $classname . '-' . $method;
+    return $classname . "-{$method}";
 }
 
 function get_string_kopere($identifier, $object = null) {

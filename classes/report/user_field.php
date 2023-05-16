@@ -39,7 +39,7 @@ class user_field {
         if ($returnsql) {
             if ($tableprefix) {
                 foreach ($alternatenames as $key => $altname) {
-                    $alternatenames[$key] = $tableprefix . '.' . $altname;
+                    $alternatenames[$key] =  "{$tableprefix}.{$altname}";
                 }
             }
             $alternatenames = implode(',', $alternatenames);

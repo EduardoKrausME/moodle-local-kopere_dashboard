@@ -117,8 +117,8 @@ class notificationsutil {
                         $tmp['crudname'] = \report_eventlist_list_generator::get_crud_string($data['crud']);
 
                         if ($data['component'] == 'core') {
-                            $components[$data['component'] . '_' . $data['target']] = $data['component'] . '_' . $data['target'];
-                            $tmp['component_full'] = $data['component'] . '_' . $data['target'];
+                            $components[  "{$data['component']}_{$data['target']}"] =  "{$data['component']}_{$data['target']}" ;
+                            $tmp['component_full'] = "{$data['component']}_{$data['target']}";
                         } else {
                             $components[$data['component']] = $data['component'];
                             $tmp['component_full'] = $data['component'];
@@ -152,8 +152,8 @@ class notificationsutil {
         $content = file_get_contents($templatefile);
 
         $linkmanager
-            = "<a href=\"{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?classname=notifications&method=dashboard\"
-                  target=\"_blank\" style=\"border-bottom:1px #777777 dotted; text-decoration:none; color:#777777;\">
+            = "<a href='{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?classname=notifications&method=dashboard'
+                  target='_blank' style='border-bottom:1px #777777 dotted; text-decoration:none; color:#777777;'>
                             " . get_string_kopere('notification_manager') . "
                         </a>";
 

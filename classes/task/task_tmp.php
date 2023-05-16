@@ -39,7 +39,7 @@ class task_tmp extends \core\task\scheduled_task {
     public function execute() {
         global $CFG;
 
-        $files = glob($CFG->dataroot . '/kopere/dashboard/tmp/*');
+        $files = glob("{$CFG->dataroot}/kopere/dashboard/tmp/*");
         $now = time();
 
         foreach ($files as $file) {

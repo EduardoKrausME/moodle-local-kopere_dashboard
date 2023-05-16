@@ -84,7 +84,7 @@ class course_last_access {
 
         $filds = '';
         foreach ($userinfofields as $userinfofield) {
-            $filds .= '<td align="center" bgcolor="#979797" style="text-align:center;">' . $userinfofield->name . '</td>';
+            $filds .= "<td align='center' bgcolor='#979797' style='text-align:center;'>{$userinfofield->name}</td>";
         }
 
         echo '<thead>
@@ -131,8 +131,8 @@ class course_last_access {
 
         foreach ($allusercourse as $user) {
             echo '<tr>';
-            $link = $CFG->wwwroot . '/user/view.php?id=' . $user->id . '&course=' . $cursosid;
-            $this->td('<a href="' . $link . '" target="moodle">' . fullname($user) . '</a>', 'bg-info text-nowrap', '#D9EDF7');
+            $link = "{$CFG->wwwroot}/user/view.php?id={$user->id}&course={$cursosid}";
+            $this->td("<a href='{$link}' target='moodle'>" . fullname($user) . '</a>', 'bg-info text-nowrap', '#D9EDF7');
             $this->td($user->email, 'bg-info text-nowrap', '#D9EDF7');
 
             foreach ($userinfofields as $userinfofield) {
@@ -204,7 +204,7 @@ class course_last_access {
      * @param        $bgcolor
      */
     private function td($value, $class, $bgcolor) {
-        echo '<td class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
+        echo "<td class='{$class}' bgcolor='{$bgcolor}'>{$value}</td>" ;
     }
 
 

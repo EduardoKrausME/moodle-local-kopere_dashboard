@@ -32,20 +32,16 @@ global $PAGE, $CFG, $OUTPUT;
 ob_clean();
 
 try {
+    require_login();
     require_capability('local/kopere_dashboard:view', context_system::instance());
     require_capability('local/kopere_dashboard:manage', context_system::instance());
-} catch (Exception $e) { ?>
-    <script>
-        location.reload();
-    </script>
-    <meta http-equiv="refresh" content="0; url=#">
-    <?php
-    die();
+} catch (Exception $e) {
+    \local_kopere_dashboard\util\json::error($e->getMessage());
 }
 
 $PAGE->set_url(new moodle_url('/local/kopere_dashboard/load-ajax.php'));
 $PAGE->set_pagetype('reports');
 $PAGE->set_context(context_system::instance());
 
-
+session_write_close();
 load_class();

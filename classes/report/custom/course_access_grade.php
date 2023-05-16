@@ -62,7 +62,7 @@ class course_access_grade {
     public function generate() {
         global $DB, $CFG;
 
-        require_once($CFG->libdir . '/gradelib.php');
+        require_once("{$CFG->libdir}/gradelib.php");
 
         $courseid = optional_param('courseid', 0, PARAM_INT);
         if ($courseid == 0) {
@@ -153,7 +153,7 @@ class course_access_grade {
                 if (strlen($section->name)) {
                     $printsessoes .= $section->name;
                 } else {
-                    $printsessoes .= 'Sessão ' . $key;
+                    $printsessoes .= "Sessão {$key}";
                 }
                 $printsessoes .= '</th>';
             }
@@ -178,16 +178,16 @@ class course_access_grade {
             get_string_kopere('user_table_email') . '</td>';
 
         foreach ($modinfo as $infos) {
-            $link = $CFG->wwwroot . '/course/view.php?id=' . $infos->course . '#module-' . $infos->course_modules_id;
+            $link = "{$CFG->wwwroot}/course/view.php?id={$infos->course}#module-{$infos->course_modules_id}";
 
             $colspan = 2;
             if ($infos->grade) {
                 $colspan = 3;
             }
 
-            echo '<th bgcolor="#c5c5c5" colspan="' . $colspan . '" align="center" style="text-align: center" >
-                      <a href="' . $link . '" target="_blank">' . $infos->moduleinfo->name . '</a>
-                  </th>';
+            echo "<th bgcolor='#c5c5c5' colspan='{$colspan}' align='center' style='text-align: center' >
+                      <a href='{$link}' target='_blank'>{$infos->moduleinfo->name}</a>
+                  </th>";
             ob_flush();
         }
         echo '</tr>';
@@ -225,8 +225,8 @@ class course_access_grade {
 
         foreach ($allusercourse as $user) {
             echo '<tr>';
-            $link = $CFG->wwwroot . '/user/view.php?id=' . $user->id . '&course=' . $courseid;
-            $this->td('<a href="' . $link . '" target="moodle">' . fullname($user) . '</a>', 'bg-info text-nowrap', '#D9EDF7');
+            $link = "{$CFG->wwwroot}/user/view.php?id={$user->id}&course={$courseid}";
+            $this->td("<a href='{$link}' target='moodle'>" . fullname($user) . "</a>", 'bg-info text-nowrap', '#D9EDF7');
             $this->td($user->email, 'bg-info text-nowrap', '#D9EDF7');
 
             if ($groups) {
@@ -304,7 +304,7 @@ class course_access_grade {
      * @param        $bgcolor
      */
     private function td($value, $class, $bgcolor) {
-        echo '<td class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
+        echo "<td class='{$class}' bgcolor='{$bgcolor}'>{$value}</td>";
     }
 
     /**
@@ -313,7 +313,7 @@ class course_access_grade {
      * @param        $bgcolor
      */
     private function td2($value, $class, $bgcolor) {
-        echo '<td colspan="2" class="' . $class . '" bgcolor="' . $bgcolor . '">' . $value . '</td>';
+        echo "<td colspan='2' class='{$class}' bgcolor='{$bgcolor}'>{$value}</td>";
     }
 
 

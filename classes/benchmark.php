@@ -76,7 +76,7 @@ class benchmark {
         dashboard_util::add_breadcrumb(get_string_kopere('benchmark_title2'));
         dashboard_util::start_page();
 
-        require_once($CFG->libdir . '/filelib.php');
+        require_once("{$CFG->libdir}/filelib.php");
 
         echo '<div class="element-box">';
 
@@ -107,12 +107,12 @@ class benchmark {
                   <tbody>';
 
         foreach ($test->get_results() as $result) {
-            echo "<tr class=\"{$result['class']}\" >
-                      <td class=\"text-center media-middle\">{$result['id']}</td>
+            echo "<tr class='{$result['class']}' >
+                      <td class='text-center media-middle'>{$result['id']}</td>
                       <td >{$result['name']}<div><small>{$result['info']}</small></div></td>
-                      <td class=\"text-center media-middle\">" . $this->format_number($result['during']) . "</td>
-                      <td class=\"text-center media-middle\">" . $this->format_number($result['limit']) . "</td>
-                      <td class=\"text-center media-middle\">" . $this->format_number($result['over']) . "</td>
+                      <td class='text-center media-middle'>{$this->format_number($result['during'])}</td>
+                      <td class='text-center media-middle'>{$this->format_number($result['limit'])}</td>
+                      <td class='text-center media-middle'>{$this->format_number($result['over'])}</td>
                   </tr>";
         }
 
@@ -133,7 +133,7 @@ class benchmark {
     public function performance() {
         global $CFG;
 
-        echo "<table class=\"table\" id=\"benchmarkresult\">
+        echo "<table class='table' id='benchmarkresult'>
                   <tr>
                       <th>" . get_string_kopere('benchmark_testconf_problem') . "</th>
                       <th>" . get_string_kopere('benchmark_testconf_status') . "</th>
@@ -154,7 +154,7 @@ class benchmark {
                       <td>{$test['title']}</td>
                       <td>{$test['resposta']}</td>
                       <td>{$test['description']}</td>
-                      <td><a target=\"_blank\" href=\"{$CFG->wwwroot}/admin/{$test['url']}\">" . get_string('edit', '') . "</a></td>
+                      <td><a target='_blank' href='{$CFG->wwwroot}/admin/{$test['url']}'>" . get_string('edit', '') . "</a></td>
                   </tr>";
         }
 

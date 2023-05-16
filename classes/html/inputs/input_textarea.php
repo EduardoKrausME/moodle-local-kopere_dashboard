@@ -52,18 +52,18 @@ class input_textarea extends input_base {
         $return = "<textarea ";
 
         $input_id = preg_replace('/[\W]/', '', $this->name);
-        $return .= "id=\"{$input_id}\" name=\"{$this->name}\" ";
+        $return .= "id='{$input_id}' name='{$this->name}' ";
 
         if ($this->type) {
-            $return .= "type=\"{$this->type}\" ";
+            $return .= "type='{$this->type}' ";
         }
 
         if ($this->class) {
-            $return .= "class=\"{$this->class}\" ";
+            $return .= "class='{$this->class}' ";
         }
 
         if ($this->style) {
-            $return .= "style=\"{$this->style}\" ";
+            $return .= "style='{$this->style}' ";
         }
 
         $return .= ">";

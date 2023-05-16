@@ -45,10 +45,10 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
                 }
                 $node = $nav->add(
                     $menu->title,
-                    new moodle_url($CFG->wwwroot . '/local/kopere_dashboard/?menu=' . $menu->link),
+                    new moodle_url("{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}"),
                     navigation_node::TYPE_CUSTOM,
                     null,
-                    'kopere_dashboard-' . $menu->id,
+                    "kopere_dashboard-{$menu->id}",
                     $icone
                 );
 
@@ -62,10 +62,10 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
                     }
                     $node->add(
                         $page->title,
-                        new moodle_url($CFG->wwwroot . '/local/kopere_dashboard/?p=' . $page->link),
+                        new moodle_url("{$CFG->wwwroot}/local/kopere_dashboard/?p={$page->link}"),
                         navigation_node::TYPE_CUSTOM,
                         null,
-                        'kopere_dashboard-page-' . $page->id,
+                        "kopere_dashboard-page-{$page->id}",
                         $icone
                     );
                 }
@@ -82,7 +82,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
 
             $node = $nav->add(
                 get_string('pluginname', 'local_kopere_dashboard'),
-                new moodle_url($CFG->wwwroot . '/local/kopere_dashboard/open.php?classname=dashboard&method=start'),
+                new moodle_url("{$CFG->wwwroot}/local/kopere_dashboard/open.php?classname=dashboard&method=start"),
                 navigation_node::TYPE_CUSTOM,
                 null,
                 'kopere_dashboard',

@@ -99,6 +99,7 @@ class courses {
 
     /**
      * @param bool $format
+     *
      * @return string
      * @throws \dml_exception
      * @throws \coding_exception
@@ -118,6 +119,7 @@ class courses {
 
     /**
      * @param bool $format
+     *
      * @return string
      * @throws \dml_exception
      * @throws \coding_exception
@@ -157,10 +159,8 @@ class courses {
 
         echo '<div class="element-box">
                   <h3>' . get_string_kopere('courses_sumary') . '
-                      ' . button::info(get_string_kopere('courses_edit'), $CFG->wwwroot . '/course/edit.php?id=' .
-                $course->id . '#id_summary_editor', button::BTN_PEQUENO, false, true) . '
-                      ' . button::primary(get_string_kopere('courses_acess'), $CFG->wwwroot . '/course/view.php?id=' .
-                $course->id, button::BTN_PEQUENO, false, true) . '
+                      ' . button::info(get_string_kopere('courses_edit'), "{$CFG->wwwroot}/course/edit.php?id={$course->id}#id_summary_editor", button::BTN_PEQUENO, false, true) . '
+                      ' . button::primary(get_string_kopere('courses_acess'), "{$CFG->wwwroot}/course/view.php?id={$course->id}", button::BTN_PEQUENO, false, true) . '
                   </h3>
                   <div class="panel panel-default">
                       <div class="panel-body">' . $course->summary . '</div>';
@@ -177,7 +177,7 @@ class courses {
         $table->add_header(get_string_kopere('courses_student_email'), 'email');
         $table->add_header(get_string_kopere('courses_student_status'), 'status', table_header_item::RENDERER_STATUS);
 
-        $table->set_ajax_url('?classname=enroll&method=ajax_dashboard&courseid=' . $courseid);
+        $table->set_ajax_url("?classname=enroll&method=ajax_dashboard&courseid={$courseid}");
         $table->set_click_redirect('?classname=users&method=details&userid={id}', 'id');
         $table->print_header();
         $table->close();
@@ -188,6 +188,7 @@ class courses {
 
     /**
      * @param $course
+     *
      * @throws \dml_exception
      * @throws \coding_exception
      */
@@ -205,7 +206,7 @@ class courses {
 
                 /** @var kopere_dashboard_webpages $webpages */
                 foreach ($webpagess as $webpages) {
-                    echo '<p><a href="?classname=webpages&method=page_details&id=' . $webpages->id . '">&nbsp;&nbsp;&nbsp;&nbsp;' .
+                    echo "<p><a href='?classname=webpages&method=page_details&id={$webpages->id}{'>&nbsp;&nbsp;&nbsp;&nbsp;}" .
                         $webpages->title . '</a></p>';
                 }
             }

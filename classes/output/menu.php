@@ -43,7 +43,7 @@ class menu {
 
         $is_admin = has_capability('moodle/site:config', \context_system::instance());
 
-        $menu = "<ul class=\"main-menu block_tree list menu-kopere main-menu\">";
+        $menu = "<ul class='main-menu block_tree list menu-kopere main-menu'>";
 
         $menu .= dashboard_util::add_menu(
             (new menu_util())->set_classname('dashboard')
