@@ -75,9 +75,7 @@ class dashboard_util {
         if ($settingurl != null) {
             $link
                 .= "<div class='setting'>
-                        <a data-toggle='modal' data-target='#modal-edit'
-                           data-href='load-ajax.php{$settingurl}'
-                           href='#'>
+                        <a href='{$settingurl}'>
                             <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg'
                                  alt='Settings' >
                         </a>
@@ -141,9 +139,7 @@ class dashboard_util {
             if ($settingurl != null) {
                 $return
                     .= "<li class='setting'>
-                            <a data-toggle='modal' data-target='#modal-edit'
-                               data-href='load-ajax.php{$settingurl}'
-                               href='#'>
+                            <a href='$settingurl'>
                                 <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg'
                                      alt='Settings' >
                             </a>

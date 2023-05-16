@@ -136,7 +136,7 @@ class button {
 
         return "<a href='https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/{$infourl}#{$hastag}'
                    target='_blank' class='help'>
-                  <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/help.svg' height='23' >
+                  <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/help.svg' style='height: 30px' >
                   $text
               </a>";
     }
