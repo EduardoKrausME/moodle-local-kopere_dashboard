@@ -136,11 +136,11 @@ class data_table {
 
     /**
      * @param        $title
-     * @param null $chave
+     * @param null   $chave
      * @param string $type
-     * @param null $funcao
-     * @param null $styleheader
-     * @param null $stylecol
+     * @param null   $funcao
+     * @param null   $styleheader
+     * @param null   $stylecol
      */
     public function add_header($title, $chave = null, $type = table_header_item::TYPE_TEXT,
                                $funcao = null, $styleheader = null, $stylecol = null) {
@@ -157,55 +157,59 @@ class data_table {
 
     /**
      * @param string $class
-     * @param bool $printbody
+     * @param bool   $printbody
      *
+     * @return string
      * @throws \coding_exception
      */
-    public function print_header($class = '', $printbody = true) {
+    public function print_header($class = '', $printbody = true, $returnHtml = false) {
+
+        $return = "";
+
         if ($this->isexport && $this->ajaxurl == null) {
             button::info(get_string_kopere('reports_export'), url_util::querystring() . "&export=xls");
         }
 
-        echo "<table id='{$this->tableid}' class='table table-hover' >";
-        echo '<thead>';
+        $return .= "<table id='{$this->tableid}' class='table table-hover' >";
+        $return .= '<thead>';
 
         if ($this->columninfo) {
-            echo "<tr class='{$class}'>";
+            $return .= "<tr class='{$class}'>";
             /** @var table_header_item $columninfo */
             foreach ($this->columninfo as $key => $columninfo) {
-                echo "<th class='header-col text-center' colspan='{$columninfo->cols}'>";
+                $return .= "<th class='header-col text-center' colspan='{$columninfo->cols}'>";
 
                 if (strpos($columninfo->title, '[[[') === 0) {
-                    echo get_string(substr($columninfo->title, 3, -3));
-                } elseif (strpos($columninfo->title, '[[') === 0) {
-                    echo get_string_kopere(substr($columninfo->title, 2, -2));
+                    $return .= get_string(substr($columninfo->title, 3, -3));
+                } else if (strpos($columninfo->title, '[[') === 0) {
+                    $return .= get_string_kopere(substr($columninfo->title, 2, -2));
                 } else {
-                    echo $columninfo->title;
+                    $return .= $columninfo->title;
                 }
 
-                echo '</th>';
+                $return .= '</th>';
             }
-            echo '</tr>';
+            $return .= '</tr>';
 
             $this->columndefs[] = (object)array("visible" => false, "targets" => -1);
         }
 
-        echo "<tr class='{$class}'>";
+        $return .= "<tr class='{$class}'>";
         /** @var table_header_item $column */
         foreach ($this->column as $key => $column) {
-            echo "<th class='text-center th_{$column->chave}' style='{$column->style_header}'>";
+            $return .= "<th class='text-center th_{$column->chave}' style='{$column->style_header}'>";
             if ($column->title == '') {
-                echo "&nbsp;";
+                $return .= "&nbsp;";
             } else {
                 if (strpos($column->title, '[[[') === 0) {
-                    echo get_string(substr($column->title, 3, -3));
-                } elseif (strpos($column->title, '[[') === 0) {
-                    echo get_string_kopere(substr($column->title, 2, -2));
+                    $return .= get_string(substr($column->title, 3, -3));
+                } else if (strpos($column->title, '[[') === 0) {
+                    $return .= get_string_kopere(substr($column->title, 2, -2));
                 } else {
-                    echo $column->title;
+                    $return .= $column->title;
                 }
             }
-            echo '</th>';
+            $return .= '</th>';
 
             $this->columndata[] = (object)array("data" => $column->chave);
 
@@ -218,6 +222,8 @@ class data_table {
             } else if ($column->type == table_header_item::TYPE_BYTES) {
                 $this->columndefs[] = (object)array("type" => "file-size", "render" => "rendererFilesize", "targets" => $key);
             } else if ($column->type == table_header_item::RENDERER_DATE) {
+                $this->columndefs[] = (object)array("type" => "date-uk", "render" => "dataDateRenderer", "targets" => $key);
+            } else if ($column->type == table_header_item::RENDERER_DATETIME) {
                 $this->columndefs[] = (object)array("type" => "date-uk", "render" => "dataDatetimeRenderer", "targets" => $key);
             } else if ($column->type == table_header_item::RENDERER_VISIBLE) {
                 $this->columndefs[] = (object)array("render" => "dataVisibleRenderer", "targets" => $key);
@@ -225,14 +231,22 @@ class data_table {
                 $this->columndefs[] = (object)array("render" => "dataStatusRenderer", "targets" => $key);
             } else if ($column->type == table_header_item::RENDERER_TRUEFALSE) {
                 $this->columndefs[] = (object)array("render" => "dataTrueFalseRenderer", "targets" => $key);
+            } else if ($column->type == table_header_item::RENDERER_USERPHOTO) {
+                $this->columndefs[] = (object)array("render" => "dataUserphotoRenderer", "targets" => $key);
             }
         }
-        echo '</tr>';
-        echo '</thead>';
-        echo "\n";
+        $return .= '</tr>';
+        $return .= '</thead>';
+        $return .= "\n";
 
         if ($this->clickredirect != null && $printbody) {
-            echo '<tbody class="hover-pointer"></tbody>';
+            $return .= '<tbody class="hover-pointer"></tbody>';
+        }
+
+        if ($returnHtml) {
+            return $return;
+        } else {
+            echo $return;
         }
     }
 
@@ -292,18 +306,16 @@ class data_table {
     }
 
     /**
-     * @param bool $processserver
+     * @param bool   $processserver
      * @param string $order
      * @param string $extras
      *
      * @return string
      */
-    public function close($processserver = false, $extras = null) {
+    public function close($processserver = false, $extras = null, $returnHtml = false) {
         global $PAGE;
 
-        echo '</table>';
-
-        export::close();
+        $return = '</table>';
 
         $init_params = array(
             "autoWidth" => false,
@@ -332,7 +344,13 @@ class data_table {
             $this->on_clickreditect();
         }
 
-        return $this->tableid;
+        if(!$returnHtml){
+            echo $return;
+        }
+
+        export::close();
+
+        return $return;
     }
 
     /**
