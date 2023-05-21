@@ -32,10 +32,11 @@ defined('MOODLE_INTERNAL') || die();
  */
 class json {
     /**
-     * @param     $data
-     * @param int $recordstotal
-     * @param int $recordsfiltered
-     * @param null $sql
+     * @param        $data
+     * @param int    $recordstotal
+     * @param int    $recordsfiltered
+     * @param string $sql
+     *
      * @throws \coding_exception
      */
     public static function encode($data, $recordstotal = -1, $recordsfiltered = 0, $sql = null) {
