@@ -83,24 +83,25 @@ echo "<link rel='icon' href='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashb
         lang_active = '<?php echo get_string_kopere('notification_status_active')?>';
         lang_inactive = '<?php echo get_string_kopere('notification_status_inactive')?>';
         dataTables_oLanguage = {
-            sEmptyTable     : "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
-            sInfo           : "<?php echo get_string_kopere('datatables_sInfo') ?>",
-            sInfoEmpty      : "<?php echo get_string_kopere('datatables_sInfoEmpty') ?>",
-            sInfoFiltered   : "<?php echo get_string_kopere('datatables_sInfoFiltered') ?>",
-            sInfoPostFix    : "<?php echo get_string_kopere('datatables_sInfoPostFix') ?>",
-            sInfoThousands  : "<?php echo get_string_kopere('datatables_sInfoThousands') ?>",
-            sLengthMenu     : "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
-            sLoadingRecords : "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
-            sProcessing     : "<?php echo get_string_kopere('datatables_sProcessing') ?>",
-            sZeroRecords    : "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
-            sSearch         : "<?php echo get_string_kopere('datatables_sSearch') ?>",
-            oPaginate       : {
+            sEmptyTable        : "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
+            sInfo              : "<?php echo get_string_kopere('datatables_sInfo') ?>",
+            sInfoEmpty         : "<?php echo get_string_kopere('datatables_sInfoEmpty') ?>",
+            sInfoFiltered      : "<?php echo get_string_kopere('datatables_sInfoFiltered') ?>",
+            sInfoPostFix       : "<?php echo get_string_kopere('datatables_sInfoPostFix') ?>",
+            sInfoThousands     : "<?php echo get_string_kopere('datatables_sInfoThousands') ?>",
+            sLengthMenu        : "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
+            sLoadingRecords    : "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
+            sProcessing        : "<?php echo get_string_kopere('datatables_sProcessing') ?>",
+            sZeroRecords       : "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
+            sSearch            : "",
+            sSearchPlaceholder : "<?php echo get_string_kopere('datatables_sSearch') ?>",
+            oPaginate          : {
                 sNext     : "<?php echo get_string_kopere('datatables_oPaginate_sNext') ?>",
                 sPrevious : "<?php echo get_string_kopere('datatables_oPaginate_sPrevious') ?>",
                 sFirst    : "<?php echo get_string_kopere('datatables_oPaginate_sFirst') ?>",
                 sLast     : "<?php echo get_string_kopere('datatables_oPaginate_sLast') ?>"
             },
-            oAria           : {
+            oAria              : {
                 sSortAscending  : "<?php echo get_string_kopere('datatables_oAria_sSortAscending') ?>",
                 sSortDescending : "<?php echo get_string_kopere('datatables_oAria_sSortDescending') ?>"
             }
@@ -115,7 +116,7 @@ $dashboard_menu_html_old = "<div id='inst0' class='block'>
                 <div class='logo-w'>
                     <img class='normal'
                          src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/logo-notext.svg'
-                         alt='" . get_string_kopere('pluginname')."'>
+                         alt='" . get_string_kopere('pluginname') . "'>
                 </div>
             </div>
             <div class='content'>
@@ -153,7 +154,7 @@ $dashboard_menu_html_old = "<style>.dashboard_menu_html-content{display:none !im
 if ($CFG->theme == 'smartlms') {
     $USER->preference['drawer-open-nav'] = $preference_drawer_open_nav;
     $USER->preference['sidebar-open-nav'] = $preference_sidebar_open_nav;
-} elseif ($CFG->theme != 'moove') {
+} else if ($CFG->theme != 'moove') {
     if (preg_match_all('/(.*)(<div.*?class="block_navigation.*)/', $html)) {
         $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html_old}$2", $html);
     } else if (preg_match_all('/(.*)(<section.*?class="(\s+)?block_navigation.*)/s', $html)) {

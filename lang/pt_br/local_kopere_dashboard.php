@@ -73,16 +73,16 @@ $string['filemanager_title'] = 'Gerenciador de Arquivos';
 
 // DataTables.
 $string['datatables_sEmptyTable'] = 'Nenhum registro encontrado';
-$string['datatables_sInfo'] = 'Mostrando de _START_ até _END_ de _TOTAL_ registros';
-$string['datatables_sInfoEmpty'] = 'Mostrando 0 até 0 de 0 registros';
+$string['datatables_sInfo'] = '_START_ até _END_ de _TOTAL_';
+$string['datatables_sInfoEmpty'] = '0 registros';
 $string['datatables_sInfoFiltered'] = '(Filtrados de _MAX_ registros)';
 $string['datatables_sInfoPostFix'] = '';
 $string['datatables_sInfoThousands'] = '.';
-$string['datatables_sLengthMenu'] = '_MENU_ resultados por página';
+$string['datatables_sLengthMenu'] = '_MENU_ por página';
 $string['datatables_sLoadingRecords'] = 'Carregando...';
 $string['datatables_sProcessing'] = 'Processando...';
 $string['datatables_sZeroRecords'] = 'Nenhum registro encontrado';
-$string['datatables_sSearch'] = 'Pesquisar: ';
+$string['datatables_sSearch'] = 'Pesquisar';
 $string['datatables_oPaginate_sNext'] = 'Próximo';
 $string['datatables_oPaginate_sPrevious'] = 'Anterior';
 $string['datatables_oPaginate_sFirst'] = 'Primeiro';

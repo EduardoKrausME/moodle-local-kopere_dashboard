@@ -78,24 +78,25 @@ echo "<link rel='icon' href='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashb
         lang_active = '<?php echo get_string_kopere('notification_status_active')?>';
         lang_inactive = '<?php echo get_string_kopere('notification_status_inactive')?>';
         dataTables_oLanguage = {
-            sEmptyTable     : "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
-            sInfo           : "<?php echo get_string_kopere('datatables_sInfo') ?>",
-            sInfoEmpty      : "<?php echo get_string_kopere('datatables_sInfoEmpty') ?>",
-            sInfoFiltered   : "<?php echo get_string_kopere('datatables_sInfoFiltered') ?>",
-            sInfoPostFix    : "<?php echo get_string_kopere('datatables_sInfoPostFix') ?>",
-            sInfoThousands  : "<?php echo get_string_kopere('datatables_sInfoThousands') ?>",
-            sLengthMenu     : "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
-            sLoadingRecords : "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
-            sProcessing     : "<?php echo get_string_kopere('datatables_sProcessing') ?>",
-            sZeroRecords    : "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
-            sSearch         : "<?php echo get_string_kopere('datatables_sSearch') ?>",
-            oPaginate       : {
+            sEmptyTable        : "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
+            sInfo              : "<?php echo get_string_kopere('datatables_sInfo') ?>",
+            sInfoEmpty         : "<?php echo get_string_kopere('datatables_sInfoEmpty') ?>",
+            sInfoFiltered      : "<?php echo get_string_kopere('datatables_sInfoFiltered') ?>",
+            sInfoPostFix       : "<?php echo get_string_kopere('datatables_sInfoPostFix') ?>",
+            sInfoThousands     : "<?php echo get_string_kopere('datatables_sInfoThousands') ?>",
+            sLengthMenu        : "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
+            sLoadingRecords    : "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
+            sProcessing        : "<?php echo get_string_kopere('datatables_sProcessing') ?>",
+            sZeroRecords       : "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
+            sSearch            : "",
+            sSearchPlaceholder : "<?php echo get_string_kopere('datatables_sSearch') ?>",
+            oPaginate          : {
                 sNext     : "<?php echo get_string_kopere('datatables_oPaginate_sNext') ?>",
                 sPrevious : "<?php echo get_string_kopere('datatables_oPaginate_sPrevious') ?>",
                 sFirst    : "<?php echo get_string_kopere('datatables_oPaginate_sFirst') ?>",
                 sLast     : "<?php echo get_string_kopere('datatables_oPaginate_sLast') ?>"
             },
-            oAria           : {
+            oAria              : {
                 sSortAscending  : "<?php echo get_string_kopere('datatables_oAria_sSortAscending') ?>",
                 sSortDescending : "<?php echo get_string_kopere('datatables_oAria_sSortDescending') ?>"
             }
