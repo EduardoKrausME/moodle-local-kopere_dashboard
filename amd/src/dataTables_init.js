@@ -8,7 +8,7 @@ define([
 ], function($, datatables) {
     return {
         init : function(selector, params) {
-            console.log(M.cfg.wwwroot);
+
             var renderer = {
                 dataVisibleRenderer   : function(data, type, row) {
                     if (data == 0) {
@@ -30,7 +30,7 @@ define([
                 currencyRenderer      : function(data, type, row) {
                     return '<div class="text-center" data-toggle="tooltip">R$ ' + data + '</div>';
                 },
-                dataDateRenderer      : function(data, type, row) {
+                dataDateRenderer  : function(data, type, row) {
                     function twoDigit($value) {
                         if ($value < 10) {
                             return '0' + $value;
@@ -92,11 +92,7 @@ define([
                         data = data / (1000 * 1000 * 1000 * 1000);
                         return data.toFixed(2) + ' Tb';
                     }
-                },
-                dataUserphotoRenderer : function(data, type, row) {
-                    console.log(M.cfg.wwwroot);
-                    return '<img class="media-object" src="' + M.cfg.wwwroot + '/local/kopere_bi/image.php?type=photo_user&id=' + data + '" />';
-                },
+                }
             };
 
             var newColumnDefs = [];
@@ -111,9 +107,6 @@ define([
                     case "rendererFilesize":
                         columnDef.render = renderer.rendererFilesize;
                         break;
-                    case "dataDateRenderer":
-                        columnDef.render = renderer.dataDateRenderer;
-                        break;
                     case "dataDatetimeRenderer":
                         columnDef.render = renderer.dataDatetimeRenderer;
                         break;
@@ -125,9 +118,6 @@ define([
                         break;
                     case "dataTrueFalseRenderer":
                         columnDef.render = renderer.dataTrueFalseRenderer;
-                        break;
-                    case "dataUserphotoRenderer":
-                        columnDef.render = renderer.dataUserphotoRenderer;
                         break;
                 }
                 newColumnDefs.push(columnDef);
