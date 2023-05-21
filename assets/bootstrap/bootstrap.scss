@@ -2261,10 +2261,19 @@ dfn.validator-error {
     display: block;
     margin-top: 0;
     margin-bottom: 10px;
-    color: #828080;
+    color: #504e4e;
     margin-left: 8px;
     font-style: italic;
     font-size: 14px;
+    p, h1, h2, h3, h4, h5, h6 {
+        margin: 0 0 5px;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+    ul, ol {
+        margin-bottom: 5px;
+    }
 }
 .form-inline {
     .form-group {
