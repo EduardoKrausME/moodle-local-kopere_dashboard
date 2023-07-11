@@ -150,7 +150,7 @@ class performancemonitor {
 
         session_write_close();
 
-        $cache = \cache::make('local_kopere_dashboard', 'performancemonitor');
+        $cache = \cache::make('local_kopere_dashboard', 'performancemonitor_cache');
         if ($cache->has('server')) {
             return $cache->get('server');
         }
