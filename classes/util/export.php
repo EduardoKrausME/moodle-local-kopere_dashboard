@@ -63,7 +63,7 @@ class export {
                       -->
                   </head>
                   <body>";
-            ob_flush();
+            @ob_flush();
         }
     }
 
