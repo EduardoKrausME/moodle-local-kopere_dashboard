@@ -164,9 +164,14 @@ class reports extends reports_admin {
             if (strpos($koperereports->reportsql, 'local_kopere_dashboard') === 0) {
                 $classname = $koperereports->reportsql;
 
+                $_GET['export'] = "xls";
+                ob_end_clean();
+
                 $class = new $classname();
                 title_util::print_h3($class->name(), false);
                 $class->generate();
+
+                die();
 
             } else {
                 title_util::print_h3(self::get_title($koperereports), false);
@@ -227,6 +232,16 @@ class reports extends reports_admin {
         $start = optional_param('start', 0, PARAM_INT);
         $length = optional_param('length', 0, PARAM_INT);
 
+
+        $cache = \cache::make('local_kopere_dashboard', 'report_getdata_cache');
+        $cache_key = "data-{$report}-{$courseid}-{$start}-{$length}";
+        if ($cache->has($cache_key)) {
+
+            $cache = $cache->get($cache_key);
+            json::encode($cache['reports'], $cache['count_recordstotal'], $cache['count_recordstotal']);
+            die();
+        }
+
         /** @var kopere_dashboard_reports $koperereports */
         $koperereports = $DB->get_record('kopere_dashboard_reports', array('id' => $report));
 
@@ -254,6 +269,11 @@ class reports extends reports_admin {
                 $reports[$key] = $item;
             }
         }
+
+        $cache->set($cache_key, [
+            'reports' => $reports,
+            'count_recordstotal' => count($recordstotal)
+        ]);
 
         json::encode($reports, count($recordstotal), count($recordstotal));
     }
