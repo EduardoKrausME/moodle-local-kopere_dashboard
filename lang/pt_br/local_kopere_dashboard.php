@@ -172,7 +172,7 @@ $string['loginusername'] = 'Tempo para se conectar com uma conta de usuário fal
 $string['loginusermoreinfo'] = 'Medindo o tempo para logar no Moodle com uma conta de usuário falsa';
 
 // Performancemonitor.
-$string['cachedef_performancemonitor'] = 'Performance monitor cache';
+$string['cachedef_performancemonitor_cache'] = 'Performance monitor cache';
 $string['performancemonitor_cpu'] = 'Uso do CPU';
 $string['performancemonitor_memory'] = 'Memória';
 $string['performancemonitor_hd'] = 'Moodledata';
@@ -200,6 +200,7 @@ $string['courses_page_title'] = 'Páginas já criadas';
 $string['courses_page_create'] = 'Criar página com base neste sumário';
 
 // Reports.
+$string['cachedef_report_getdata_cache'] = 'report getdata cache';
 $string['reports_title'] = 'Relatórios';
 $string['reports_download'] = 'Baixar estes dados';
 $string['reports_selectcourse'] = 'Selecione o curso para gerar o relatório';

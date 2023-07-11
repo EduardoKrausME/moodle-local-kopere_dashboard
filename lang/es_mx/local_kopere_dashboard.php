@@ -119,7 +119,7 @@ $string['cloadmoreinfo'] = 'Correr el archivo de configuración &laquo;config.ph
 $string['cloadname'] = 'Tiempo de carga de Moodle';
 
 // Performancemonitor.
-$string['cachedef_performancemonitor'] = 'Performance monitor cache';
+$string['cachedef_performancemonitor_cache'] = 'Performance monitor cache';
 $string['performancemonitor_cpu'] = 'Uso del CPU';
 $string['performancemonitor_memory'] = 'Memoria';
 $string['performancemonitor_hd'] = 'Moodledata';
@@ -326,6 +326,7 @@ $string['reports_reportcat_user'] = 'Reporte de Usuario';
 $string['reports_download'] = 'Descargar estos datos';
 $string['reports_selectcourse'] = 'Seleccione el curso para generar el reporte';
 $string['reports_timecreated'] = 'Registrado en';
+$string['cachedef_report_getdata_cache'] = 'report getdata cache';
 $string['reports_title'] = 'Reportes';
 $string['setting_saved'] = '¡configuraciones gruardadas!';
 $string['user_table_celphone'] = 'Mobile';

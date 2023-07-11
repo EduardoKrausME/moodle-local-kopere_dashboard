@@ -172,7 +172,7 @@ $string['loginusername'] = 'Time to connect with a fake user account';
 $string['loginusermoreinfo'] = 'Measuring the time to load the login page with a fake user account';
 
 // Performancemonitor.
-$string['cachedef_performancemonitor'] = 'Performance monitor cache';
+$string['cachedef_performancemonitor_cache'] = 'Performance monitor cache';
 $string['performancemonitor_cpu'] = 'CPU Usage';
 $string['performancemonitor_memory'] = 'Memory';
 $string['performancemonitor_hd'] = 'Moodledata';
@@ -200,6 +200,7 @@ $string['courses_page_title'] = 'Pages already created';
 $string['courses_page_create'] = 'Create page based on this summary';
 
 // Reports.
+$string['cachedef_report_getdata_cache'] = 'report getdata cache';
 $string['reports_title'] = 'Reports';
 $string['reports_download'] = 'Download this data';
 $string['reports_selectcourse'] = 'Select the course to generate the report';
