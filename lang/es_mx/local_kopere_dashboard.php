@@ -119,11 +119,12 @@ $string['cloadmoreinfo'] = 'Correr el archivo de configuración &laquo;config.ph
 $string['cloadname'] = 'Tiempo de carga de Moodle';
 
 // Performancemonitor.
-$string ['performancemonitor_cpu'] = 'Uso del CPU';
-$string ['performancemonitor_memory'] = 'Memoria';
-$string ['performancemonitor_hd'] = 'Moodledata';
-$string ['performancemonitor_performance'] = 'Rendimiento';
-$string ['performancemonitor_min'] = '{$a} min:';
+$string['cachedef_performancemonitor'] = 'Performance monitor cache';
+$string['performancemonitor_cpu'] = 'Uso del CPU';
+$string['performancemonitor_memory'] = 'Memoria';
+$string['performancemonitor_hd'] = 'Moodledata';
+$string['performancemonitor_performance'] = 'Rendimiento';
+$string['performancemonitor_min'] = '{$a} min:';
 
 $string['color_blue'] = 'Azul';
 $string['color_brown'] = 'Café';
