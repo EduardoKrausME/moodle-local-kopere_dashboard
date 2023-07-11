@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class modules
  * @package local_kopere_dashboard

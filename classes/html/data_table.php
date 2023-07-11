@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\html;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\util\export;
 use local_kopere_dashboard\util\url_util;
 
@@ -93,14 +91,14 @@ class data_table {
     /**
      * @return string
      */
-    public function get_table_id() {
+    public function get_tableid() {
         return $this->tableid;
     }
 
     /**
      * @param string $tableid
      */
-    public function set_table_id($tableid) {
+    public function set_tableid($tableid) {
         $this->tableid = $tableid;
     }
 
@@ -136,11 +134,11 @@ class data_table {
 
     /**
      * @param        $title
-     * @param null   $chave
+     * @param null $chave
      * @param string $type
-     * @param null   $funcao
-     * @param null   $styleheader
-     * @param null   $stylecol
+     * @param null $funcao
+     * @param null $styleheader
+     * @param null $stylecol
      */
     public function add_header($title, $chave = null, $type = table_header_item::TYPE_TEXT,
                                $funcao = null, $styleheader = null, $stylecol = null) {
@@ -157,12 +155,13 @@ class data_table {
 
     /**
      * @param string $class
-     * @param bool   $printbody
+     * @param bool $printbody
+     * @param bool $returnhtml
      *
      * @return string
      * @throws \coding_exception
      */
-    public function print_header($class = '', $printbody = true, $returnHtml = false) {
+    public function print_header($class = '', $printbody = true, $returnhtml = false) {
 
         $return = "";
 
@@ -176,7 +175,7 @@ class data_table {
         if ($this->columninfo) {
             $return .= "<tr class='{$class}'>";
             /** @var table_header_item $columninfo */
-            foreach ($this->columninfo as $key => $columninfo) {
+            foreach ($this->columninfo as $columninfo) {
                 $return .= "<th class='header-col text-center' colspan='{$columninfo->cols}'>";
 
                 if (strpos($columninfo->title, '[[[') === 0) {
@@ -245,7 +244,7 @@ class data_table {
             $return .= '<tbody class="hover-pointer"></tbody>';
         }
 
-        if ($returnHtml) {
+        if ($returnhtml) {
             return $return;
         } else {
             echo $return;
@@ -308,45 +307,45 @@ class data_table {
     }
 
     /**
-     * @param bool   $processserver
+     * @param bool $processserver
      * @param string $order
      * @param string $extras
      *
      * @return string
      */
-    public function close($processserver = false, $extras = null, $returnHtml = false) {
+    public function close($processserver = false, $extras = null, $returnhtml = false) {
         global $PAGE;
 
         $return = '</table>';
 
-        $init_params = array(
+        $initparams = array(
             "autoWidth" => false,
             "columns" => $this->columndata,
             "columnDefs" => $this->columndefs
         );
         if ($extras) {
-            $init_params = array_merge($init_params, $extras);
+            $initparams = array_merge($initparams, $extras);
         }
 
         if ($processserver) {
-            $init_params['processing'] = true;
-            $init_params['serverSide'] = true;
+            $initparams['processing'] = true;
+            $initparams['serverSide'] = true;
         }
 
         if ($this->ajaxurl) {
-            $init_params['ajax'] = (object)[
+            $initparams['ajax'] = (object)[
                 "url" => "load-ajax.php{$this->ajaxurl}",
                 "type" => "POST"
             ];
         }
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', array($this->tableid, $init_params));
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', array($this->tableid, $initparams));
 
         if ($this->clickredirect) {
             $this->on_clickreditect();
         }
 
-        if(!$returnHtml){
+        if (!$returnhtml) {
             echo $return;
         }
 
@@ -368,6 +367,7 @@ class data_table {
             $clickchave = [$clickchave];
         }
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'click', array($this->tableid, $clickchave, $clickurl));
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'click',
+            array($this->tableid, $clickchave, $clickurl));
     }
 }

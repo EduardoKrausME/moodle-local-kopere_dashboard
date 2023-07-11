@@ -25,8 +25,6 @@ namespace local_kopere_dashboard\html\inputs;
 
 use local_kopere_dashboard\util\config;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class input_checkbox_select
  *

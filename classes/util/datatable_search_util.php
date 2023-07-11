@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\util;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class datatable_search_util
  *
@@ -34,7 +32,7 @@ class datatable_search_util {
     /**
      * @var
      */
-    private $column_select;
+    private $columnselect;
     /**
      * @var mixed
      */
@@ -50,7 +48,7 @@ class datatable_search_util {
     /**
      * @var
      */
-    private $order_dir;
+    private $orderdir;
     /**
      * @var
      */
@@ -59,19 +57,18 @@ class datatable_search_util {
     /**
      * datatable_search_util constructor.
      *
-     * @param $column_select
+     * @param $columnselect
      *
      * @throws \coding_exception
      */
-    public function __construct($column_select) {
-        $this->column_select = $column_select;
+    public function __construct($columnselect) {
+        $this->columnselect = $columnselect;
         $this->start = optional_param('start', 0, PARAM_INT);
         $this->length = optional_param('length', 0, PARAM_INT);
 
         $this->process_where();
         $this->proccess_order();
     }
-
 
     public function process_where() {
         global $CFG;
@@ -80,28 +77,27 @@ class datatable_search_util {
 
         if ($search && isset($search['value']) && isset($search['value'][0])) {
             $like = array();
-            foreach ($this->column_select as $column) {
+            foreach ($this->columnselect as $column) {
                 $find = $search['value'];
                 $find = str_replace("'", "\'", $find);
                 $find = str_replace("--", "", $find);
                 if ($CFG->dbtype == 'pgsql') {
                     if (is_array($column)) {
-                        $like [] = " cast( {$column[0]} as text ) LIKE '%{$find}%'";
+                        $like[] = " cast( {$column[0]} as text ) LIKE '%{$find}%'";
                     } else {
-                        $like [] = "cast( {$column} as text ) LIKE '%{$find}%'";
+                        $like[] = "cast( {$column} as text ) LIKE '%{$find}%'";
                     }
                 } else {
                     if (is_array($column)) {
-                        $like [] = "{$column[0]} LIKE '%{$find}%'";
+                        $like[] = "{$column[0]} LIKE '%{$find}%'";
                     } else {
-                        $like [] = "{$column} LIKE '%{$find}%'";
+                        $like[] = "{$column} LIKE '%{$find}%'";
                     }
                 }
             }
             $this->where = 'AND (' . implode(' OR ', $like) . ')';
         }
     }
-
 
     private function proccess_order() {
 
@@ -110,12 +106,12 @@ class datatable_search_util {
 
         if ($order && $columns) {
             $column = $order[0]['column'];
-            if (is_array($this->column_select[$column])) {
-                $this->order = $this->column_select[$column][0];
+            if (is_array($this->columnselect[$column])) {
+                $this->order = $this->columnselect[$column][0];
             } else {
-                $this->order = $this->column_select[$column];
+                $this->order = $this->columnselect[$column];
             }
-            $this->order_dir = $order[0]['dir'];
+            $this->orderdir = $order[0]['dir'];
         }
     }
 
@@ -137,20 +133,20 @@ class datatable_search_util {
         $sqltotal = $sql;
         if ($group) {
             $sqlsearch = str_replace('{[columns]}', "count(DISTINCT {$find}) as num", $sqlsearch);
-            $sqltotal  = str_replace('{[columns]}', "count(DISTINCT {$find}) as num", $sqltotal);
+            $sqltotal = str_replace('{[columns]}', "count(DISTINCT {$find}) as num", $sqltotal);
         } else {
             $sqlsearch = str_replace('{[columns]}', 'count(*) as num', $sqlsearch);
-            $sqltotal  = str_replace('{[columns]}', 'count(*) as num', $sqltotal);
+            $sqltotal = str_replace('{[columns]}', 'count(*) as num', $sqltotal);
         }
 
         if ($CFG->dbtype == 'pgsql') {
-            $sqlreturn = $sql . " $this->where $group ORDER BY $this->order $this->order_dir \n
+            $sqlreturn = $sql . " $this->where $group ORDER BY $this->order $this->orderdir \n
                                 LIMIT $this->length OFFSET $this->start";
         } else {
-            $sqlreturn = $sql . " $this->where $group ORDER BY $this->order $this->order_dir \n
+            $sqlreturn = $sql . " $this->where $group ORDER BY $this->order $this->orderdir \n
                                 LIMIT $this->start, $this->length";
         }
-        $sqlreturn = str_replace('{[columns]}', implode(', ', $this->column_select), $sqlreturn);
+        $sqlreturn = str_replace('{[columns]}', implode(', ', $this->columnselect), $sqlreturn);
 
         $result = $DB->get_records_sql($sqlreturn, $params);
         $total = $DB->get_record_sql($sqltotal, $params);

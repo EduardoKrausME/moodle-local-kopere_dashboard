@@ -21,8 +21,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 function local_kopere_dashboard_extends_navigation(global_navigation $nav) {
     local_kopere_dashboard_extend_navigation($nav);
 }
@@ -72,7 +70,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
             }
         }
     } catch (Exception $e) {
-        // Se der problema, não precisa fazer nada
+        // Se der problema, não precisa fazer nada.
     }
 
     if (isloggedin()) {

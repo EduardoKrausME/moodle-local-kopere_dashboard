@@ -39,8 +39,8 @@ if ($CFG->kopere_dashboard_open != 'internal') {
 global $PAGE, $CFG, $OUTPUT, $USER;
 
 if ($CFG->theme == 'smartlms') {
-    $preference_drawer_open_nav = @$USER->preference['drawer-open-nav'];
-    $preference_sidebar_open_nav = @$USER->preference['sidebar-open-nav'];
+    $preferencedraweropennav = @$USER->preference['drawer-open-nav'];
+    $preferencesidebaropennav = @$USER->preference['sidebar-open-nav'];
     @$USER->preference['drawer-open-nav'] = false;
     @$USER->preference['sidebar-open-nav'] = false;
 }
@@ -64,7 +64,7 @@ $PAGE->requires->css('/local/kopere_dashboard/assets/all-internal.css');
 $PAGE->navbar->add(get_string_kopere('modulename'), new moodle_url('/local/kopere_dashboard/open-internal.php'));
 
 load_class();
-$htmlApp = ob_get_contents();
+$htmlapp = ob_get_contents();
 ob_clean();
 
 $PAGE->requires->jquery();
@@ -110,9 +110,9 @@ echo "<link rel='icon' href='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashb
     </script>
 <?php
 
-$dashboard_menu_html_boost = \local_kopere_dashboard\output\menu::create_menu();
-$dashboard_menu_html_boost = str_replace("'", '"', $dashboard_menu_html_boost);
-$dashboard_menu_html_old = "<div id='inst0' class='block'>
+$dashboardmenuhtmlboost = \local_kopere_dashboard\output\menu::create_menu();
+$dashboardmenuhtmlboost = str_replace("'", '"', $dashboardmenuhtmlboost);
+$dashboardmenuhtmlold = "<div id='inst0' class='block'>
             <div class='dashboard_menu_html kopere-logo'>
                 <div class='logo-w'>
                     <img class='normal'
@@ -124,16 +124,16 @@ $dashboard_menu_html_old = "<div id='inst0' class='block'>
                 " . \local_kopere_dashboard\output\menu::create_menu() . "
             </div>
         </div>";
-$dashboard_menu_html_old = str_replace("'", '"', $dashboard_menu_html_old);
+$dashboardmenuhtmlold = str_replace("'", '"', $dashboardmenuhtmlold);
 
 echo "<div id='kopere_dashboard_div'>
          <div class='menu-w hidden-print dashboard_menu_html-content'>
             <div class='menu-and-user'>
-                {$dashboard_menu_html_boost}
+                {$dashboardmenuhtmlboost}
             </div>
         </div>
         <div class='content-w'>
-            {$htmlApp}
+            {$htmlapp}
         </div>
 
         <div class='modal fade kopere_dashboard_modal_item' id='modal-edit' role='dialog'>
@@ -149,20 +149,22 @@ echo $OUTPUT->footer();
 
 $html = ob_get_contents();
 ob_clean();
-$dashboard_menu_html_old = "<style>.dashboard_menu_html-content{display:none !important}</style>{$dashboard_menu_html_old}";
+$dashboardmenuhtmlold = "<style>.dashboard_menu_html-content{display:none !important}</style>{$dashboardmenuhtmlold}";
 
 
 if ($CFG->theme == 'smartlms') {
-    $USER->preference['drawer-open-nav'] = $preference_drawer_open_nav;
-    $USER->preference['sidebar-open-nav'] = $preference_sidebar_open_nav;
+    $USER->preference['drawer-open-nav'] = $preferencedraweropennav;
+    $USER->preference['sidebar-open-nav'] = $preferencesidebaropennav;
 } else if ($CFG->theme != 'moove') {
     if (preg_match_all('/(.*)(<div.*?class="block_navigation.*)/', $html)) {
-        $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboard_menu_html_old}$2", $html);
+        $html = preg_replace('/(.*)(<div.*?class="block_navigation.*)/', "$1{$dashboardmenuhtmlold}$2", $html);
     } else if (preg_match_all('/(.*)(<section.*?class="(\s+)?block_navigation.*)/s', $html)) {
-        $html = preg_replace('/(.*)(<section.*?class="(\s+)?block_navigation.*)/s', "$1<div class='card mb-3'>{$dashboard_menu_html_old}</div>$2", $html);
+        $html = preg_replace('/(.*)(<section.*?class="(\s+)?block_navigation.*)/s',
+            "$1<div class='card mb-3'>{$dashboardmenuhtmlold}</div>$2", $html);
     } else if (strpos($html, 'data-region="drawer"')) {
         $classdiv = " class='list-group-item kopere-list-group-item' ";
-        $html = preg_replace('/(.*data-region="drawer".*?>)(.*)/', "$1<div{$classdiv}>{$dashboard_menu_html_old}</div>$2", $html);
+        $html = preg_replace('/(.*data-region="drawer".*?>)(.*)/',
+            "$1<div{$classdiv}>{$dashboardmenuhtmlold}</div>$2", $html);
     }
 }
 

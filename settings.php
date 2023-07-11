@@ -47,7 +47,7 @@ if ($hassiteconfig) {
 if ($ADMIN->fulltree) {
 
     if (method_exists($settings, "add")) {
-        $open_itens = array(
+        $openitens = array(
             'internal' => get_string('kopere_dashboard_open_internal', 'local_kopere_dashboard'),
             'popup' => get_string('kopere_dashboard_open_popup', 'local_kopere_dashboard'),
             '_top' => get_string('kopere_dashboard_open_top', 'local_kopere_dashboard'),
@@ -58,7 +58,7 @@ if ($ADMIN->fulltree) {
                 get_string('kopere_dashboard_open', 'local_kopere_dashboard'),
                 get_string('kopere_dashboard_open_desc', 'local_kopere_dashboard'),
                 'internal',
-                $open_itens
+                $openitens
             )
         );
     }

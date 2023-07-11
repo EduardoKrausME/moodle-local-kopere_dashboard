@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\util;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class export
  *
@@ -66,7 +64,6 @@ class export {
             @ob_flush();
         }
     }
-
 
     public static function close() {
         if (self::$format == 'xls') {

@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\html\inputs;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\tinymce;
 
 /**
@@ -46,10 +44,10 @@ class input_html_editor extends input_textarea {
     public function to_string() {
         $this->set_style($this->get_style() . ';height:500px');
 
-        $input_id = preg_replace('/[\W]/', '', $this->name);
+        $inputid = preg_replace('/[\W]/', '', $this->name);
 
         $return = parent::to_string();
-        $return .= tinymce::create_input_editor("#{$input_id}");
+        $return .= tinymce::create_input_editor("#{$inputid}");
 
         return $return;
     }

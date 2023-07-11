@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\report;
 
-defined('MOODLE_INTERNAL') || die();
-
 define('BENCHFAIL_SLOWSERVER', 'slowserver');
 define('BENCHFAIL_SLOWPROCESSOR', 'slowprocessor');
 define('BENCHFAIL_SLOWHARDDRIVE', 'slowharddrive');
@@ -59,6 +57,7 @@ class report_benchmark_test extends report_benchmark {
 
         $pass = 10000000;
         for ($i = 0; $i < $pass; ++$i) {
+            $a = 1;
             // Loooop muito long para teste.
         }
         $i = 0;

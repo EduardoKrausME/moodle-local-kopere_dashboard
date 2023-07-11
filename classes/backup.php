@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\table;
 use local_kopere_dashboard\util\bytes_util;
@@ -75,9 +73,10 @@ class backup {
                     'file' => $p[0],
                     'data' => "{$p[3]}/{$p[2]}/{$p[1]} às {$p[4]}:{$p[5]}",
                     'size' => bytes_util::size_to_byte(filesize($backup)),
-                    'acoes' => "<div class='text-center'>
-                                    " . button::icon('download', "?classname=backup&method=download&file={$p[0]}", false) . "
-                                &nbsp;&nbsp;&nbsp; " . button::icon_popup_table('delete', "?classname=backup&method=delete&file={$p[0]}") . "
+                    'acoes' => "<div class='text-center'>" .
+                        button::icon('download', "?classname=backup&method=download&file={$p[0]}", false) .
+                        "&nbsp;&nbsp;&nbsp; " .
+                        button::icon_popup_table('delete', "?classname=backup&method=delete&file={$p[0]}") . "
                                 </div>"
                 );
             }
@@ -183,9 +182,9 @@ class backup {
                     $colunas[] = $colum;
                 }
 
-                $listCol = implode('`, `', $colunas);
+                $listcol = implode('`, `', $colunas);
 
-                $insertHeader = "\nINSERT INTO `{$table}` (`{$listCol}`) VALUES\n";
+                $insertheader = "\nINSERT INTO `{$table}` (`{$listcol}`) VALUES\n";
 
                 $registros = 0;
                 while ($records = $DB->get_records($tablenoprefix, null, '', '*', $registros, $registros + 50)) {
@@ -202,7 +201,7 @@ class backup {
                         $sql[] = "(" . implode(", ", $parametros) . ")";
                     }
 
-                    file_put_contents($backupfile, $insertHeader . implode(",\n", $sql) . ";", FILE_APPEND);
+                    file_put_contents($backupfile, $insertheader . implode(",\n", $sql) . ";", FILE_APPEND);
 
                     $registros += 50;
                 }

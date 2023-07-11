@@ -22,8 +22,6 @@
 
 namespace local_kopere_dashboard\html;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class table
  *
@@ -33,7 +31,7 @@ class table {
     /**
      * @var string
      */
-    public $table_id;
+    public $tableid;
 
     /**
      * table constructor.
@@ -41,8 +39,8 @@ class table {
      * @param string $adicional
      */
     public function __construct($adicional = '') {
-        $this->table_id = 'table_' . uniqid();
-        echo "<table id='{$this->table_id}' class='table table-hover' width='100%' {$adicional} \>";
+        $this->tableid = 'table_' . uniqid();
+        echo "<table id='{$this->tableid}' class='table table-hover' width='100%' {$adicional} \>";
     }
 
     /**
@@ -249,14 +247,14 @@ class table {
         echo '</table>';
         if ($datatable) {
 
-            $init_params = array(
+            $initparams = array(
                 "autoWidth" => false,
             );
             if ($extras) {
-                $init_params = array_merge($init_params, $extras);
+                $initparams = array_merge($initparams, $extras);
             }
 
-            $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', array($this->table_id, $init_params));
+            $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', array($this->tableid, $initparams));
         }
     }
 }

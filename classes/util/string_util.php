@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\util;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class string_util
  *
@@ -107,7 +105,7 @@ class string_util {
         $out = array();
         if (is_array($in)) {
             foreach ($in as $key => $value) {
-                $out [$key] = self::clear_params_array($value, $type);
+                $out[$key] = self::clear_params_array($value, $type);
             }
         } else if (is_string($in)) {
             try {

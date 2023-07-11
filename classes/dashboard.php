@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\report\files;
 use local_kopere_dashboard\server\performancemonitor;
 use local_kopere_dashboard\util\bytes_util;
@@ -110,7 +108,6 @@ class dashboard {
             </div>';
     }
 
-
     /**
      * @throws \coding_exception
      * @throws \dml_exception
@@ -142,7 +139,7 @@ class dashboard {
 
             echo "<div class='media dashboard-grade-list'>
                       <div class='media-left'>
-                          <img title='" . fullname($user) . "' src='{$profileimageurl}"  . "' class='media-object' >
+                          <img title='" . fullname($user) . "' src='{$profileimageurl}" . "' class='media-object' >
                       </div>
                       <div class='media-body'>
                           <h4 class='media-heading'>
@@ -151,7 +148,8 @@ class dashboard {
                                  data-href='load-ajax.php?classname=users&method=details&userid={$user->id}'>" .
                 fullname($user) . "</a>
                           </h4>
-                          <p>" . get_string_kopere('dashboard_grade_text', ['grade' => $gradetext, 'evaluation' => $evaluation]) . "</p>
+                          <p>" .
+                get_string_kopere('dashboard_grade_text', ['grade' => $gradetext, 'evaluation' => $evaluation]) . "</p>
                           <div class='date'><small>" . get_string_kopere('dashboard_grade_in') .
                 " <i>" . userdate($grade->timemodified,
                     get_string_kopere('dateformat')) . "</i></small></div>
@@ -181,9 +179,11 @@ class dashboard {
                 $userpicture->size = 1;
                 $profileimageurl = $userpicture->get_url($PAGE)->out(false);
 
-                $statusmatricula = '<span class="btn-dangerpadding-0-8 border-radius-5 text-nowrap">' . get_string_kopere('dashboard_enrol_inactive') . '</span>';
+                $statusmatricula = '<span class="btn-dangerpadding-0-8 border-radius-5 text-nowrap">' .
+                    get_string_kopere('dashboard_enrol_inactive') . '</span>';
                 if ($enrol->status == 0) {
-                    $statusmatricula = '<span class="btn-successpadding-0-8 border-radius-5 text-nowrap">' . get_string_kopere('dashboard_enrol_active') . '</span>';
+                    $statusmatricula = '<span class="btn-successpadding-0-8 border-radius-5 text-nowrap">' .
+                        get_string_kopere('dashboard_enrol_active') . '</span>';
                 }
 
                 echo "<div class='media dashboard-grade-list'>

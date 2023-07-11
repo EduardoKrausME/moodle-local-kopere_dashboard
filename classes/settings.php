@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\mensagem;
 use local_kopere_dashboard\util\string_util;

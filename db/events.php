@@ -19,11 +19,11 @@ defined('MOODLE_INTERNAL') || die();
 $observers = array(
     array(
         'eventname' => '*',
-        'callback'  => '\local_kopere_dashboard\events\event_observers::process_event',
+        'callback' => '\local_kopere_dashboard\events\event_observers::process_event',
     ),
     array(
         'eventname' => '\core\event\dashboard_viewed',
-        'callback'  => '\local_kopere_dashboard\events\dashboard_viewed::process_event',
+        'callback' => '\local_kopere_dashboard\events\dashboard_viewed::process_event',
     )
 );
 

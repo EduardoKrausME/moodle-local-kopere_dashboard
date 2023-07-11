@@ -374,7 +374,7 @@ $string['userimport_moveuploadedfile_error'] = '¡ERROR al mover archivo!';
 $string['userimport_noterror'] = 'No se encontró error';
 $string['userimport_passcreate'] = '--Será creado--';
 
-// Acessos dos usuários
+// Acessos dos usuários.
 $string['useraccess_title'] = 'Acceso del usuario';
 
 $string['userimport_title'] = 'Importar Usuarios';

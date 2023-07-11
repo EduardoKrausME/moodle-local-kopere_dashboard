@@ -22,8 +22,6 @@
 
 namespace local_kopere_dashboard\util;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class header
  *
@@ -90,8 +88,6 @@ class header {
 
         dashboard_util::start_page();
 
-        // <img width="200" height="200" src="' . $CFG->wwwroot .
-        // '/local/kopere_dashboard/assets/dashboard/img/404.svg">
         echo "<div class='element-box text-center page404'>
                   <h2>OOPS!</h2>
                   <div class='text404 text-danger'>{$printtext}</div>

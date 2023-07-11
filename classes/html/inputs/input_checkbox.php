@@ -25,8 +25,6 @@ namespace local_kopere_dashboard\html\inputs;
 
 use local_kopere_dashboard\util\config;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class input_checkbox
  *
@@ -83,9 +81,8 @@ class input_checkbox extends input_base {
      * @return string
      */
     public function to_string() {
-        //$return = "<input type='hidden' name='{$this->name}' value='0'/>";
-        $input_id = preg_replace('/[\W]/', '', $this->name);
-        $return = "<input id='{$input_id}' name='{$this->name}' type='checkbox' ";
+        $inputid = preg_replace('/[\W]/', '', $this->name);
+        $return = "<input id='{$inputid}' name='{$this->name}' type='checkbox' ";
 
         if ($this->value) {
             $value = htmlentities($this->value);

@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\output\events;
 
-defined('MOODLE_INTERNAL') || die();
-
 use core\message\message;
 use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\release;
@@ -78,7 +76,6 @@ class send_events {
     public function set_event($event) {
         $this->event = $event;
     }
-
 
     /**
      * @throws \coding_exception
@@ -214,7 +211,6 @@ class send_events {
             message_send($eventdata);
         }
     }
-
 
     /**
      * @throws \dml_exception

@@ -43,7 +43,6 @@ $PAGE->set_heading(get_string_kopere('open_dashboard'));
 
 $PAGE->requires->jquery();
 $PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
-//$PAGE->requires->js('/local/kopere_dashboard/assets/popup.js');
 $PAGE->requires->js_call_amd('local_kopere_dashboard/popup', 'init');
 
 echo $OUTPUT->header();
@@ -69,7 +68,7 @@ if ($CFG->kopere_dashboard_open == 'internal') {
         window.open("<?php echo $url ?>", "_blank");
     </script>
     <?php
-} elseif ($CFG->kopere_dashboard_open == '_top') {
+} else if ($CFG->kopere_dashboard_open == '_top') {
     @header("Location: {$url}");
     ?>
     <div class="text-center kopere-dashboard" style="text-align: center;">

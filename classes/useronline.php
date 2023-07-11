@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;

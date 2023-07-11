@@ -22,8 +22,6 @@
 
 namespace local_kopere_dashboard\report\custom;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\util\export;
 use local_kopere_dashboard\util\header;
@@ -65,9 +63,9 @@ class course_last_access {
             header::notfound(get_string_kopere('courses_notound'));
         }
 
-        $perPage = 10;
-        $atualPage     = optional_param ( 'page', 1, PARAM_INT );
-        $startLimit    = ( $atualPage - 1 ) * $perPage;
+        $perpage = 10;
+        $atualpage = optional_param('page', 1, PARAM_INT);
+        $startlimit = ($atualpage - 1) * $perpage;
 
         $course = $DB->get_record('course', array('id' => $cursosid));
         header::notfound_null($course, get_string_kopere('courses_notound'));
@@ -99,7 +97,7 @@ class course_last_access {
                   </th>
               </thead>';
 
-        if ( $export == 'xls' ) {
+        if ($export == 'xls') {
             $sql = "
                SELECT DISTINCT SQL_CALC_FOUND_ROWS u.*
                  FROM {context} c
@@ -119,7 +117,7 @@ class course_last_access {
                 WHERE c.contextlevel = :contextlevel
 		          AND u.id      NOT IN ({$CFG->siteadmins})
                   AND c.instanceid   = :instanceid
-                LIMIT {$startLimit}, {$perPage}";
+                LIMIT {$startlimit}, {$perpage}";
         }
         $allusercourse = $DB->get_records_sql($sql,
             array(
@@ -127,7 +125,7 @@ class course_last_access {
                 'instanceid' => $cursosid
             ));
 
-        $total = $DB->get_record_sql ( "SELECT FOUND_ROWS() as num_itens" );
+        $total = $DB->get_record_sql("SELECT FOUND_ROWS() as num_itens");
 
         foreach ($allusercourse as $user) {
             echo '<tr>';
@@ -195,7 +193,7 @@ class course_last_access {
         echo '</table>';
 
         export::close();
-        pagination::create ( $atualPage, $total->num_itens, $perPage );
+        pagination::create($atualpage, $total->num_itens, $perpage);
     }
 
     /**
@@ -204,9 +202,8 @@ class course_last_access {
      * @param        $bgcolor
      */
     private function td($value, $class, $bgcolor) {
-        echo "<td class='{$class}' bgcolor='{$bgcolor}'>{$value}</td>" ;
+        echo "<td class='{$class}' bgcolor='{$bgcolor}'>{$value}</td>";
     }
-
 
     public function list_data() {
     }

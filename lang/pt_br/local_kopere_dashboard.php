@@ -37,7 +37,7 @@ $string['kopere_dashboard_open_popup'] = 'Em popup';
 $string['kopere_dashboard_open_blank'] = 'Em nova janela';
 $string['kopere_dashboard_open_top'] = 'Na mesma janela';
 $string['add_report_user_fields'] = 'Nos relatórios acrecentar os seguintes campos do usuários';
-$string['add_report_user_fields_alt'] = 'Selecione os campos do usuários que você quer mostrar nos relatórios do Kopere.<br> 
+$string['add_report_user_fields_alt'] = 'Selecione os campos do usuários que você quer mostrar nos relatórios do Kopere.<br>
     Mantenha pressionada a tecla CTRL para selecionar multiplos campos.';
 
 $string['integracaoroot'] = 'Integrações';
@@ -420,7 +420,7 @@ $string['useronline_settings_ssl'] = 'Habilitar SSL?';
 $string['useronline_settings_url'] = 'URL do servidor';
 $string['useronline_settings_port'] = 'Porta do servidor';
 
-// Acessos dos usuários
+// Acessos dos usuários.
 $string['useraccess_title'] = 'Acessos dos usuários';
 
 // UserImport.

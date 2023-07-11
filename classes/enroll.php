@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\util\json;
 use local_kopere_dashboard\util\user_util;
 
@@ -41,7 +39,7 @@ class enroll {
         global $DB;
 
         return $DB->get_records_sql("
-               SELECT DISTINCT ue.id, ra.roleid, e.courseid, c.fullname, 
+               SELECT DISTINCT ue.id, ra.roleid, e.courseid, c.fullname,
                                ue.userid, ue.timemodified, ue.timeend, ue.status, e.enrol
                  FROM {user_enrolments}  ue
                  JOIN {role_assignments} ra  ON ue.userid = ra.userid
@@ -53,7 +51,6 @@ class enroll {
              ORDER BY ue.timemodified DESC
                 LIMIT 10");
     }
-
 
     /**
      * @throws \coding_exception
@@ -70,7 +67,9 @@ class enroll {
                     LEFT JOIN {user} u ON u.id = ue.userid
                     LEFT JOIN {enrol} e ON e.id = ue.enrolid
                     LEFT JOIN {course} c ON c.id = e.courseid
-                    LEFT JOIN {course_completions} cc ON cc.timecompleted > 0 AND cc.course = e.courseid and cc.userid = ue.userid
+                    LEFT JOIN {course_completions} cc ON cc.timecompleted > 0
+                                                     AND cc.course = e.courseid
+                                                     AND cc.userid = ue.userid
 		        WHERE c.id = :id AND u.id IS NOT NULL
 		     ";
 
@@ -80,5 +79,4 @@ class enroll {
 
         json::encode($result);
     }
-
 }

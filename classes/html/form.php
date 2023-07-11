@@ -22,8 +22,6 @@
 
 namespace local_kopere_dashboard\html;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\inputs\i_input;
 
 /**
@@ -41,7 +39,7 @@ class form {
     /**
      * Form constructor.
      *
-     * @param null   $formaction
+     * @param null $formaction
      * @param string $classextra
      */
     public function __construct($formaction = null, $classextra = '') {
@@ -147,11 +145,11 @@ class form {
                       <input type='submit' class='btn btn-primary margin-left-15' value='{$value}'>
                   </div>";
         } else {
-            $html = "<input name='' class='btn btn-success bt-submit {$class}' type='submit' value='" . htmlspecialchars($value) . "' />";
+            $html = "<input name='' class='btn btn-success bt-submit {$class}' type='submit' value='" .
+                htmlspecialchars($value) . "' />";
             $this->print_row('', $html, 'btsubmit', $additionaltext);
         }
     }
-
 
     /**
      *

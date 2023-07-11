@@ -22,16 +22,14 @@
 
 namespace local_kopere_dashboard\html;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class button
  * @package local_kopere_dashboard\html
  */
 class button {
     const BTN_PEQUENO = 'btn-xs';
-    const BTN_MEDIO   = 'btn-sm';
-    const BTN_GRANDE  = 'btn-lg';
+    const BTN_MEDIO = 'btn-sm';
+    const BTN_GRANDE = 'btn-lg';
 
     /**
      * @param $text
@@ -44,9 +42,9 @@ class button {
      * @param        $text
      * @param        $link
      * @param string $class
-     * @param bool   $p
-     * @param bool   $return
-     * @param bool   $modal
+     * @param bool $p
+     * @param bool $return
+     * @param bool $modal
      *
      * @return string
      */
@@ -60,9 +58,9 @@ class button {
      * @param        $text
      * @param        $link
      * @param string $class
-     * @param bool   $p
-     * @param bool   $return
-     * @param bool   $modal
+     * @param bool $p
+     * @param bool $return
+     * @param bool $modal
      *
      * @return string
      */
@@ -76,9 +74,9 @@ class button {
      * @param        $text
      * @param        $link
      * @param string $class
-     * @param bool   $p
-     * @param bool   $return
-     * @param bool   $modal
+     * @param bool $p
+     * @param bool $return
+     * @param bool $modal
      *
      * @return string
      */
@@ -92,9 +90,9 @@ class button {
      * @param        $text
      * @param        $link
      * @param string $class
-     * @param bool   $p
-     * @param bool   $return
-     * @param bool   $modal
+     * @param bool $p
+     * @param bool $return
+     * @param bool $modal
      *
      * @return string
      */
@@ -108,9 +106,9 @@ class button {
      * @param        $text
      * @param        $link
      * @param string $class
-     * @param bool   $p
-     * @param bool   $return
-     * @param bool   $modal
+     * @param bool $p
+     * @param bool $return
+     * @param bool $modal
      *
      * @return string
      */
@@ -169,10 +167,11 @@ class button {
      */
     public static function icon_popup_table($icon, $link) {
         global $CFG;
-        return "<a href='{$link}'>
-                    <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg' 
-                         width='19' role='button'>
-                 </a>";
+        return
+            "<a href='{$link}'>" .
+            "    <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg'" .
+            "         width='19' role='button'>" .
+            "</a>";
     }
 
     /**

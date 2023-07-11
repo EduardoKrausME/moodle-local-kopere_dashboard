@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\util\dashboard_util;
@@ -63,7 +61,6 @@ class users {
         echo '</div>';
         dashboard_util::end_page();
     }
-
 
     /**
      * @throws \coding_exception
@@ -149,5 +146,4 @@ class users {
 
         return $count->num;
     }
-
 }

@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
@@ -60,7 +58,6 @@ class webpages {
         dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'));
         dashboard_util::start_page('?classname=webpages&method=settings', 'Páginas-estáticas');
 
-
         title_util::print_h3('webpages_subtitle');
         title_util::print_h6('webpages_subtitle_help');
         $menus = $DB->get_records('kopere_dashboard_menu', null, 'title ASC');
@@ -74,7 +71,8 @@ class webpages {
             foreach ($menus as $key => $menu) {
                 $menu->actions
                     = "<div class='text-center'>
-                    " . button::icon_popup_table('edit', "?classname=webpages&method=menu_edit&id={$menu->id}") . "&nbsp;&nbsp;&nbsp;
+                    " . button::icon_popup_table('edit',
+                        "?classname=webpages&method=menu_edit&id={$menu->id}") . "&nbsp;&nbsp;&nbsp;
                     " . button::icon_popup_table('delete', "?classname=webpages&method=menu_delete&id={$menu->id}") . "
                    </div>";
 
@@ -103,7 +101,8 @@ class webpages {
             foreach ($pages as $key => $page) {
                 $page->actions
                     = "<div class='text-center'>
-                    " . button::icon('details', "?classname=webpages&method=page_details&id={$page->id}", false) . "&nbsp;&nbsp;&nbsp;
+                    " . button::icon('details',
+                        "?classname=webpages&method=page_details&id={$page->id}", false) . "&nbsp;&nbsp;&nbsp;
                     " . button::icon_popup_table('delete', "?classname=webpages&method=page_delete&id={$page->id}") . "
                    </div>";
 
@@ -128,7 +127,7 @@ class webpages {
             echo '</div>';
         }
 
-        button::info(get_string_kopere('webpages_page_crash'),  "{$CFG->wwwroot}/admin/tool/replace/");
+        button::info(get_string_kopere('webpages_page_crash'), "{$CFG->wwwroot}/admin/tool/replace/");
 
         dashboard_util::end_page();
     }
@@ -153,7 +152,8 @@ class webpages {
         $linkpagina = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";
 
         button::info(get_string_kopere('webpages_page_view'), $linkpagina, '', false);
-        button::edit(get_string_kopere('webpages_page_edit'), "?classname=webpages&method=page_edit&id={$webpages->id}", 'margin-left-15', false);
+        button::edit(get_string_kopere('webpages_page_edit'),
+            "?classname=webpages&method=page_edit&id={$webpages->id}", 'margin-left-15', false);
         button::delete(get_string_kopere('webpages_page_delete'),
             "?classname=webpages&method=page_delete&id={$webpages->id}", 'margin-left-15', false, false, true);
 
@@ -361,7 +361,6 @@ class webpages {
 
         $id = optional_param('id', 0, PARAM_INT);
 
-        /** @var kopere_dashboard_menu $webpages */
         $menus = $DB->get_record('kopere_dashboard_menu', array('id' => $id));
         if (!$menus) {
             $menus = kopere_dashboard_menu::create_by_default();
@@ -378,7 +377,6 @@ class webpages {
         dashboard_util::start_page();
 
         echo '<div class="element-box">';
-
 
         $form = new form('?classname=webpages&method=menu_edit_save');
 

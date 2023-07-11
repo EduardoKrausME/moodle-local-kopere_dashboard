@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\form;
 use local_kopere_dashboard\html\inputs\input_checkbox;
 use local_kopere_dashboard\html\inputs\input_date_range;
@@ -44,7 +42,7 @@ class userenrolment {
      * @throws \dml_exception
      */
     public function mathedit() {
-        global $DB,$PAGE;
+        global $DB, $PAGE;
 
         $ueid = optional_param('ueid', 0, PARAM_INT);
         $enrolment = $DB->get_record('user_enrolments', array('id' => $ueid), '*');
@@ -110,7 +108,6 @@ class userenrolment {
         $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'userenrolment_status');
         dashboard_util::end_page();
     }
-
 
     /**
      * @throws \coding_exception

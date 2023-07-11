@@ -22,8 +22,6 @@
 
 namespace local_kopere_dashboard\util;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class navigation
  *

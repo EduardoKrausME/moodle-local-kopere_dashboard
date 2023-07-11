@@ -22,10 +22,11 @@
  */
 
 use \local_kopere_dashboard\util\html;
+
 define('OPEN_INTERNAL', true);
 
 ob_start();
-require('../../config.php');
+require_once('../../config.php');
 require('autoload.php');
 global $DB, $PAGE, $OUTPUT;
 
@@ -108,17 +109,17 @@ if ($menu) {
     preg_match_all('/\[\[(kopere_\w+)::(\w+)(->|-&gt;)(\w+)\((.*?)\)]]/', $webpages->text, $classes);
 
     foreach ($classes[0] as $key => $replace) {
-        $className = $classes[1][$key];
+        $classname = $classes[1][$key];
         $function = $classes[2][$key];
         $metodo = $classes[4][$key];
         $parametro = $classes[5][$key];
-        $class = "\\local_{$className}\\{$function}";
+        $class = "\\local_{$classname}\\{$function}";
 
         if (class_exists($class)) {
             if (method_exists($class, $metodo)) {
-                $newReplace = $class::$metodo($parametro);
+                $newreplace = $class::$metodo($parametro);
 
-                $webpages->text = str_replace($replace, $newReplace, $webpages->text);
+                $webpages->text = str_replace($replace, $newreplace, $webpages->text);
             }
         }
     }

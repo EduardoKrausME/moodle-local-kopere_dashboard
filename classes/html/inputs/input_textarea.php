@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\html\inputs;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class input_textarea
  *
@@ -51,8 +49,8 @@ class input_textarea extends input_base {
     public function to_string() {
         $return = "<textarea ";
 
-        $input_id = preg_replace('/[\W]/', '', $this->name);
-        $return .= "id='{$input_id}' name='{$this->name}' ";
+        $inputid = preg_replace('/[\W]/', '', $this->name);
+        $return .= "id='{$inputid}' name='{$this->name}' ";
 
         if ($this->type) {
             $return .= "type='{$this->type}' ";

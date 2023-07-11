@@ -25,8 +25,6 @@ namespace local_kopere_dashboard\html\inputs;
 
 use local_kopere_dashboard\util\config;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class input_base
  *
@@ -284,9 +282,9 @@ class input_base implements i_input {
 
     public function to_string() {
 
-        $input_id = preg_replace('/[\W]/', '', $this->name);
+        $inputid = preg_replace('/[\W]/', '', $this->name);
 
-        $return = "<input id='{$input_id}'
+        $return = "<input id='{$inputid}'
                           name='{$this->name}'
                           type='{$this->type}'";
 

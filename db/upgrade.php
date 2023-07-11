@@ -20,8 +20,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * @param $oldversion
  *
@@ -175,7 +173,6 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         $DB->delete_records('kopere_dashboard_reports');
         upgrade_plugin_savepoint(true, 2023010200, 'local', 'kopere_dashboard');
     }
-
 
     \local_kopere_dashboard\install\report_install::create_categores();
     \local_kopere_dashboard\install\report_install::create_reports();

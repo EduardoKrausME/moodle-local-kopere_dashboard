@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\report\report_benchmark;
 use local_kopere_dashboard\report\report_benchmark_test;
@@ -62,7 +60,6 @@ class benchmark {
 
         dashboard_util::end_page();
     }
-
 
     /**
      * @throws \coding_exception

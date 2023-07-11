@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\html\inputs;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class input_select
  *
@@ -101,8 +99,8 @@ class input_select extends input_base {
     public function to_string() {
         $return = "<select ";
 
-        $input_id = preg_replace('/[\W]/', '', $this->name);
-        $return .= "id='{$input_id}' name='{$this->name}' ";
+        $inputid = preg_replace('/[\W]/', '', $this->name);
+        $return .= "id='{$inputid}' name='{$this->name}' ";
 
         if ($this->class) {
             $return .= "class='{$this->class}' ";

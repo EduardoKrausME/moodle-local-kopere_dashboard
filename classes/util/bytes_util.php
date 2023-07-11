@@ -22,8 +22,6 @@
 
 namespace local_kopere_dashboard\util;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class bytes_util
  *
@@ -96,5 +94,4 @@ class bytes_util {
 
         return ($partes[0] * 60 * 60) + ($partes[1] * 60) + $partes[2];
     }
-
 }

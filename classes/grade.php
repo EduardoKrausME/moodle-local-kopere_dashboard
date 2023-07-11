@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class grade
  * @package local_kopere_dashboard
@@ -52,7 +50,7 @@ class grade {
                         JOIN {grade_grades}      gg ON gg.userid = u.id
                         JOIN {grade_items}       gi ON gi.id = gg.itemid
                         JOIN {course_categories} cc ON cc.id = c.category
-                       WHERE gi.courseid    = c.id 
+                       WHERE gi.courseid    = c.id
                          AND gi.itemname   != 'Attendance'
                          AND gg.finalgrade IS NOT NULL
                     $group

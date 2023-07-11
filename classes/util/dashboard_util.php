@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\util;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\button;
 use theme_flixcurso\colors;
 
@@ -85,7 +83,7 @@ class dashboard_util {
         if ($infourl == null) {
             return "<h3 class='element-header'>
                         {$title}
-                        {$link} 
+                        {$link}
                     </h3>";
         } else {
             $buttonhelp = button::help($infourl);
@@ -118,7 +116,6 @@ class dashboard_util {
                         <li>
                             <a href='?classname=dashboard&method=start'>" . get_string_kopere('dashboard') . "</a>
                         </li>";
-
 
             foreach (self::$breadcrumb as $item) {
                 if (is_string($item)) {
@@ -198,13 +195,13 @@ class dashboard_util {
                 $iconurl = self::get_icon("/local/{$plugin}/assets/dashboard/img/iconactive/{$submenu->get_icon()}.svg");
             }
 
-            $submenuhtml
-                .= "<li class='contains_branch {$classsub}'>
-                        <a href='?classname={$submenu->get_classname()}&method={$submenu->get_methodname()}{$submenu->get_urlextra()}'>
-                            <img src='{$iconurl}' class='menu-icon' alt='Icon {$submenu->get_title()}'>
-                            <span>{$submenu->get_title()}</span>
-                        </a>
-                    </li>";
+            $submenuhtml .= "
+                <li class='contains_branch {$classsub}'>
+                    <a href='?classname={$submenu->get_classname()}&method={$submenu->get_methodname()}{$submenu->get_urlextra()}'>
+                        <img src='{$iconurl}' class='menu-icon' alt='Icon {$submenu->get_title()}'>
+                        <span>{$submenu->get_title()}</span>
+                    </a>
+                </li>";
         }
         if ($submenuhtml != '') {
             $submenuhtml = "<ul class='submenu submenu-kopere'>{$submenuhtml}</ul>";
@@ -230,26 +227,7 @@ class dashboard_util {
      */
     private static function get_icon($filename) {
         global $CFG;
-        //$dirroot_filename = $CFG->wwwroot . $filename;
-        //if (file_exists($dirroot_filename)) {
-        //    $svg = file_get_contents($dirroot_filename);
-        //
-        //    // Caso o thema for o flixcurso, troca as cores dos icones
-        //    if ($CFG->theme == 'flixcurso' && OPEN_INTERNAL) {
-        //        $svg = str_ireplace("#3e4b5b", "#aaa", $svg);
-        //
-        //        $cores = colors::get_theme_color();
-        //
-        //        $svg = str_ireplace("#308af4", $cores['color_secundary'], $svg);
-        //        $svg = str_ireplace("#4c9c8d", $cores['color_primary'], $svg);
-        //    }
-        //
-        //    $svg64 = base64_encode($svg);
-        //    return "data:image/svg+xml;base64,{$svg64}";
-        //
-        //} else {
         return $CFG->wwwroot . $filename;
-        //}
     }
 
     /**
@@ -260,9 +238,9 @@ class dashboard_util {
      */
     private static function test_menu_active($classname) {
 
-        $_classname = optional_param('classname', '', PARAM_TEXT);
+        $oldclassname = optional_param('classname', '', PARAM_TEXT);
 
-        if ($classname == $_classname) {
+        if ($classname == $oldclassname) {
             return 'active';
         }
 
@@ -286,8 +264,8 @@ class dashboard_util {
     private static function end_popup() {
         echo "</div>
               <script>
-                  M.util.js_pending('local_kopere_dashboard/form_popup'); 
-                  require(['local_kopere_dashboard/form_popup'], function(amd) {amd.init(); 
+                  M.util.js_pending('local_kopere_dashboard/form_popup');
+                  require(['local_kopere_dashboard/form_popup'], function(amd) {amd.init();
                   M.util.js_complete('local_kopere_dashboard/form_popup');})
               </script>";
 

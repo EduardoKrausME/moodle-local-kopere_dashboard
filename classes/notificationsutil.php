@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use core\event\base;
 use local_kopere_dashboard\html\form;
 use local_kopere_dashboard\html\inputs\input_select;
@@ -117,7 +115,7 @@ class notificationsutil {
                         $tmp['crudname'] = \report_eventlist_list_generator::get_crud_string($data['crud']);
 
                         if ($data['component'] == 'core') {
-                            $components[  "{$data['component']}_{$data['target']}"] =  "{$data['component']}_{$data['target']}" ;
+                            $components["{$data['component']}_{$data['target']}"] = "{$data['component']}_{$data['target']}";
                             $tmp['component_full'] = "{$data['component']}_{$data['target']}";
                         } else {
                             $components[$data['component']] = $data['component'];
@@ -138,7 +136,6 @@ class notificationsutil {
 
         return $returned;
     }
-
 
     /**
      * @throws \coding_exception
@@ -228,7 +225,6 @@ class notificationsutil {
         return null;
     }
 
-
     /**
      * @throws \dml_exception
      */
@@ -246,5 +242,4 @@ class notificationsutil {
             mensagem::print_danger(get_string_kopere('notification_error_smtp', $CFG));
         }
     }
-
 }

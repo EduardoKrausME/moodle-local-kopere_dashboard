@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
@@ -70,7 +68,6 @@ class courses {
         echo '</div>';
         dashboard_util::end_page();
     }
-
 
     /**
      * @throws \dml_exception
@@ -137,7 +134,6 @@ class courses {
         return $count->num;
     }
 
-
     /**
      * @throws \coding_exception
      * @throws \dml_exception
@@ -158,9 +154,11 @@ class courses {
         dashboard_util::start_page();
 
         echo '<div class="element-box">
-                  <h3>' . get_string_kopere('courses_sumary') . '
-                      ' . button::info(get_string_kopere('courses_edit'), "{$CFG->wwwroot}/course/edit.php?id={$course->id}#id_summary_editor", button::BTN_PEQUENO, false, true) . '
-                      ' . button::primary(get_string_kopere('courses_acess'), "{$CFG->wwwroot}/course/view.php?id={$course->id}", button::BTN_PEQUENO, false, true) . '
+                  <h3>' . get_string_kopere('courses_sumary') . ' ' .
+            button::info(get_string_kopere('courses_edit'),
+                "{$CFG->wwwroot}/course/edit.php?id={$course->id}#id_summary_editor", button::BTN_PEQUENO, false, true) . ' ' .
+            button::primary(get_string_kopere('courses_acess'),
+                "{$CFG->wwwroot}/course/view.php?id={$course->id}", button::BTN_PEQUENO, false, true) . '
                   </h3>
                   <div class="panel panel-default">
                       <div class="panel-body">' . $course->summary . '</div>';
@@ -206,7 +204,8 @@ class courses {
 
                 /** @var kopere_dashboard_webpages $webpages */
                 foreach ($webpagess as $webpages) {
-                    echo "<p><a href='?classname=webpages&method=page_details&id={$webpages->id}{'>&nbsp;&nbsp;&nbsp;&nbsp;}" .
+                    echo "<p><a href='?classname=webpages&method=page_details&id={$webpages->id}" .
+                        "{'>&nbsp;&nbsp;&nbsp;&nbsp;}" .
                         $webpages->title . '</a></p>';
                 }
             }

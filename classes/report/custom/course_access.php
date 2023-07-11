@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\report\custom;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\util\export;
 use local_kopere_dashboard\util\header;
@@ -67,9 +65,9 @@ class course_access {
             header::notfound(get_string_kopere('courses_notound'));
         }
 
-        $perPage = 10;
-        $atualPage = optional_param('page', 1, PARAM_INT);
-        $startLimit = ($atualPage - 1) * $perPage;
+        $perpage = 10;
+        $atualpage = optional_param('page', 1, PARAM_INT);
+        $startlimit = ($atualpage - 1) * $perpage;
 
         $course = $DB->get_record('course', array('id' => $cursosid));
         header::notfound_null($course, get_string_kopere('courses_notound'));
@@ -190,7 +188,7 @@ class course_access {
                 WHERE c.contextlevel = :contextlevel
 		          AND u.id      NOT IN ({$CFG->siteadmins})
                   AND c.instanceid   = :instanceid
-                LIMIT {$startLimit}, {$perPage}";
+                LIMIT {$startlimit}, {$perpage}";
         }
 
         $allusercourse = $DB->get_records_sql($sql,
@@ -238,7 +236,6 @@ class course_access {
                       ORDER BY timecreated DESC
                          LIMIT 1";
 
-
                 $logresult = $DB->get_record_sql($sql,
                     array(
                         'courseid' => $cursosid,
@@ -263,7 +260,7 @@ class course_access {
         echo '</table>';
 
         export::close();
-        pagination::create($atualPage, $total->num_itens, $perPage);
+        pagination::create($atualpage, $total->num_itens, $perpage);
     }
 
     /**
@@ -283,7 +280,6 @@ class course_access {
     private function td2($value, $class, $bgcolor) {
         echo "<td colspan='2' class='{$class}' bgcolor='{$bgcolor}'>{$value}" . '</td>';
     }
-
 
     public function list_data() {
     }

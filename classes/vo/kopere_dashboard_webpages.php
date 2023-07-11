@@ -24,8 +24,6 @@ namespace local_kopere_dashboard\vo;
 
 use local_kopere_dashboard\util\html;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class kopere_dashboard_webpages
  * @package local_kopere_dashboard\vo
@@ -124,5 +122,4 @@ class kopere_dashboard_webpages extends \stdClass {
 
         return $return;
     }
-
 }

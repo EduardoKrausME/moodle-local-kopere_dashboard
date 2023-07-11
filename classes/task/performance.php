@@ -1,4 +1,19 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * User: Eduardo Kraus
  * Date: 21/03/2020
@@ -6,7 +21,6 @@
  */
 
 namespace local_kopere_dashboard\task;
-
 
 use local_kopere_dashboard\server\performancemonitor;
 
@@ -43,7 +57,7 @@ class performance extends \core\task\scheduled_task {
     private function add_data($time, $type, $value) {
         global $DB;
 
-        $kopere_dashboard_performance = (object)[
+        $dashboardperformance = (object)[
             'time' => $time,
             'type' => $type,
             'value' => $value
@@ -55,7 +69,7 @@ class performance extends \core\task\scheduled_task {
         }
 
         try {
-            $DB->insert_record("kopere_dashboard_performance", $kopere_dashboard_performance);
+            $DB->insert_record("kopere_dashboard_performance", $dashboardperformance);
             return true;
         } catch (\dml_exception $e) {
             return false;

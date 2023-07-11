@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\report;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\util\bytes_util;
 
 /**

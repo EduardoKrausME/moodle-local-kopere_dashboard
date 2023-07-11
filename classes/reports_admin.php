@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\form;
 use local_kopere_dashboard\html\inputs\input_checkbox;
 use local_kopere_dashboard\html\inputs\input_select;
@@ -86,7 +84,6 @@ class reports_admin {
                 ->set_value($koperereports->enable)
                 ->set_checked($koperereports->enable));
 
-
         $columns = json_decode($koperereports->columns);
         if ($report == -1) {
             $columns->columns[] = $this->add_header();
@@ -131,11 +128,16 @@ class reports_admin {
                     ->set_name("columns[{$id}][type]")
                     ->set_values(array(
                         array('key' => '', 'value' => get_string_kopere('reports_settings_form_none')),
-                        array('key' => table_header_item::TYPE_INT, 'value' => get_string_kopere('reports_settings_form_colunas_type_int')),
-                        array('key' => table_header_item::TYPE_DATE, 'value' => get_string_kopere('reports_settings_form_colunas_type_date')),
-                        array('key' => table_header_item::TYPE_CURRENCY, 'value' => get_string_kopere('reports_settings_form_colunas_type_currency')),
-                        array('key' => table_header_item::TYPE_TEXT, 'value' => get_string_kopere('reports_settings_form_colunas_type_text')),
-                        array('key' => table_header_item::TYPE_BYTES, 'value' => get_string_kopere('reports_settings_form_colunas_type_bytes')),
+                        array('key' => table_header_item::TYPE_INT, 'value' =>
+                            get_string_kopere('reports_settings_form_colunas_type_int')),
+                        array('key' => table_header_item::TYPE_DATE, 'value' =>
+                            get_string_kopere('reports_settings_form_colunas_type_date')),
+                        array('key' => table_header_item::TYPE_CURRENCY, 'value' =>
+                            get_string_kopere('reports_settings_form_colunas_type_currency')),
+                        array('key' => table_header_item::TYPE_TEXT, 'value' =>
+                            get_string_kopere('reports_settings_form_colunas_type_text')),
+                        array('key' => table_header_item::TYPE_BYTES, 'value' =>
+                            get_string_kopere('reports_settings_form_colunas_type_bytes')),
                     ))
                     ->set_value($colum->type));
 
@@ -170,7 +172,9 @@ class reports_admin {
                 ->set_name('prerequisit')
                 ->set_values(array(
                     array('key' => '', 'value' => get_string_kopere('reports_settings_form_none')),
-                    array('key' => 'listCourses', 'value' => get_string_kopere('reports_settings_form_prerequisit_listCourses')),
+                    array(
+                        'key' => 'listCourses',
+                        'value' => get_string_kopere('reports_settings_form_prerequisit_listCourses')),
                 ))
                 ->set_value($koperereports->prerequisit));
 
@@ -196,9 +200,8 @@ class reports_admin {
                 ->set_name('foreach')
                 ->set_values($values)
                 ->set_value($koperereports->foreach)
-                ->set_description("<a href='https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/blob/master/classes/report/report_foreach.php' 
-                                      target='_blank'>Code report_foreach.php</a>"));
-
+                ->set_description("<a href='https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/" .
+                    "blob/master/classes/report/report_foreach.php' target='_blank'>Code report_foreach.php</a>"));
 
         $form->create_submit_input(get_string_kopere('reports_settings_form_save'));
 
@@ -265,7 +268,7 @@ class reports_admin {
         ));
     }
 
-    private function add_header($add_description = false) {
+    private function add_header($adddescription = false) {
         $column = new \stdClass();
         $column->chave = "";
         $column->type = "";
@@ -273,7 +276,7 @@ class reports_admin {
         $column->funcao = "";
         $column->style_header = "";
         $column->style_col = "";
-        if ($add_description) {
+        if ($adddescription) {
             $column->description = 'reports_settings_form_colunas_extra';
         }
 

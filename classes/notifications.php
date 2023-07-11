@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use core\event\base;
 use core\message\message;
 use local_kopere_dashboard\html\button;
@@ -80,7 +78,8 @@ class notifications extends notificationsutil {
             }
             $event->actions
                 = "<div class='text-center'>
-                    " . button::icon('edit', "?classname=notifications&method=add_segunda_etapa&id={$event->id}", false) . "&nbsp;&nbsp;&nbsp;
+                    " . button::icon('edit',
+                    "?classname=notifications&method=add_segunda_etapa&id={$event->id}", false) . "&nbsp;&nbsp;&nbsp;
                     " . button::icon_popup_table('delete', "?classname=notifications&method=delete&id={$event->id}") . "
                    </div>";
 
@@ -109,7 +108,6 @@ class notifications extends notificationsutil {
         echo '</div>';
         dashboard_util::end_page();
     }
-
 
     /**
      *
@@ -152,7 +150,6 @@ class notifications extends notificationsutil {
         dashboard_util::end_page();
     }
 
-
     /**
      * @throws \coding_exception
      * @throws \dml_exception
@@ -173,13 +170,17 @@ class notifications extends notificationsutil {
             $eventclass = $evento->event;
             $module = $evento->module;
 
-            dashboard_util::add_breadcrumb(get_string_kopere('notification_title'), '?classname=notifications&method=dashboard');
-            dashboard_util::add_breadcrumb(get_string_kopere('notification_editing'));
+            dashboard_util::add_breadcrumb(
+                get_string_kopere('notification_title'), '?classname=notifications&method=dashboard');
+            dashboard_util::add_breadcrumb(
+                get_string_kopere('notification_editing'));
         } else {
             $evento = kopere_dashboard_events::create_by_default();
 
-            dashboard_util::add_breadcrumb(get_string_kopere('notification_title'), '?classname=notifications&method=dashboard');
-            dashboard_util::add_breadcrumb(get_string_kopere('notification_new'));
+            dashboard_util::add_breadcrumb(
+                get_string_kopere('notification_title'), '?classname=notifications&method=dashboard');
+            dashboard_util::add_breadcrumb(
+                get_string_kopere('notification_new'));
         }
         dashboard_util::start_page();
         echo '<div class="element-box">';
@@ -264,7 +265,8 @@ class notifications extends notificationsutil {
             $htmltext = $evento->message;
         }
 
-        $form->print_row(null, button::help('TAGS-substituídas-nas-mensagens-de-Notificações', 'Quais as TAGS substituídas nas mensagens?'));
+        $form->print_row(null,
+            button::help('TAGS-substituídas-nas-mensagens-de-Notificações', 'Quais as TAGS substituídas nas mensagens?'));
 
         $htmltextarea = '<textarea name="message" id="message" style="height:500px">' .
             htmlspecialchars($htmltext) . '</textarea>';
@@ -284,7 +286,6 @@ class notifications extends notificationsutil {
         dashboard_util::end_page();
     }
 
-
     /**
      * @throws \coding_exception
      */
@@ -294,10 +295,10 @@ class notifications extends notificationsutil {
         $event = kopere_dashboard_events::create_by_default();
 
         if ($event->id) {
-            $event_exist = $DB->record_exists_select('kopere_dashboard_events',
+            $eventexist = $DB->record_exists_select('kopere_dashboard_events',
                 'module = :module AND event = :event AND id != :id',
                 ['module' => $event->module, 'event' => $event->event, 'id' => $event->id]);
-            if ($event_exist) {
+            if ($eventexist) {
                 mensagem::agenda_mensagem_danger(get_string_kopere('notification_duplicate'));
             } else {
                 try {
@@ -310,8 +311,8 @@ class notifications extends notificationsutil {
                 }
             }
         } else {
-            $event_exist = $DB->record_exists('kopere_dashboard_events', ['module' => $event->module, 'event' => $event->event]);
-            if ($event_exist) {
+            $eventexist = $DB->record_exists('kopere_dashboard_events', ['module' => $event->module, 'event' => $event->event]);
+            if ($eventexist) {
                 mensagem::agenda_mensagem_danger(get_string_kopere('notification_duplicate'));
             } else {
                 try {
@@ -325,7 +326,6 @@ class notifications extends notificationsutil {
             }
         }
     }
-
 
     /**
      * @throws \coding_exception
@@ -356,7 +356,6 @@ class notifications extends notificationsutil {
 
         dashboard_util::end_page();
     }
-
 
     /**
      * @throws \coding_exception
@@ -399,7 +398,6 @@ class notifications extends notificationsutil {
         dashboard_util::end_page();
     }
 
-
     /**
      * @throws \coding_exception
      * @throws \dml_exception
@@ -419,10 +417,6 @@ class notifications extends notificationsutil {
         $CFG->debugsmtp = true;
 
         $htmlmessage = get_string_kopere('notification_testsmtp_message') . date('d/m/Y H:i');
-        $admin = get_admin();
-        //if ($admin->id == $USER->id) {
-        //  mensagem::print_danger(get_string_kopere('notification_testsmtp_error'));
-        //}
 
         $eventdata = new message();
         if (release::version() >= 3.2) {

@@ -22,8 +22,6 @@
 
 namespace local_kopere_dashboard\install;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
 /**

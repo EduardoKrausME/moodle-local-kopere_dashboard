@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\html\button;
@@ -50,8 +48,8 @@ class reports extends reports_admin {
     public function dashboard() {
         global $CFG, $DB;
 
-        $is_admin = has_capability('moodle/site:config', \context_system::instance());
-        $is_edit = optional_param('edit', false, PARAM_INT);
+        $isadmin = has_capability('moodle/site:config', \context_system::instance());
+        $isedit = optional_param('edit', false, PARAM_INT);
 
         dashboard_util::add_breadcrumb(get_string_kopere('reports_title'));
         dashboard_util::start_page();
@@ -60,7 +58,7 @@ class reports extends reports_admin {
 
         $type = optional_param('type', null, PARAM_TEXT);
 
-        if ($is_edit) {
+        if ($isedit) {
             $koperereportcats = $DB->get_records('kopere_dashboard_reportcat');
         } else {
             if ($type) {
@@ -89,7 +87,7 @@ class reports extends reports_admin {
             title_util::print_h3("<img src='{$icon}' alt='Icon' height='23' width='23' > " .
                 self::get_title($koperereportcat), false);
 
-            if ($is_edit) {
+            if ($isedit) {
                 $koperereportss = $DB->get_records('kopere_dashboard_reports',
                     array('reportcatid' => $koperereportcat->id));
             } else {
@@ -100,23 +98,25 @@ class reports extends reports_admin {
             /** @var kopere_dashboard_reports $koperereports */
             foreach ($koperereportss as $koperereports) {
                 $title = self::get_title($koperereports);
-                $botaoEdit = "";
-                if ($is_admin && $is_edit) {
-                    $botaoEdit = button::info("Editar", "?classname=reports&method=editar&report={$koperereports->id}", 'float-right', false, true);
+                $botaoedit = "";
+                if ($isadmin && $isedit) {
+                    $botaoedit = button::info("Editar",
+                        "?classname=reports&method=editar&report={$koperereports->id}", 'float-right', false, true);
                 }
-                $extraEnable = '';
+                $extraenable = '';
                 if (!$koperereports->enable) {
-                    $extraEnable = "Desativado: -";
+                    $extraenable = "Desativado: -";
                 }
                 echo "<h4 style='padding-left:31px;'>
-                          {$extraEnable} <a href='?classname=reports&method=load_report&report={$koperereports->id}'>{$title}</a>
-                          {$botaoEdit}
+                          {$extraenable} <a href='?classname=reports&method=load_report&report={$koperereports->id}'>{$title}</a>
+                          {$botaoedit}
                       </h4>";
             }
-            if ($is_admin && $is_edit) {
-                $botaoAdd = button::add("Novo relatório", "?classname=reports&method=editar&report=-1&reportcat={$koperereportcat->id}", 'float-right', false, true);
+            if ($isadmin && $isedit) {
+                $botaoadd = button::add("Novo relatório",
+                    "?classname=reports&method=editar&report=-1&reportcat={$koperereportcat->id}", 'float-right', false, true);
                 echo "<h4 style='padding-left: 31px;height: 20px'>
-                          {$botaoAdd}
+                          {$botaoadd}
                       </h4>";
             }
         }
@@ -146,7 +146,8 @@ class reports extends reports_admin {
         header::notfound_null($koperereportcat, get_string_kopere('reports_notfound'));
 
         dashboard_util::add_breadcrumb(get_string_kopere('reports_title'), '?classname=reports&method=dashboard');
-        dashboard_util::add_breadcrumb(self::get_title($koperereportcat), "?classname=reports&method=dashboard&type={$koperereportcat->type}");
+        dashboard_util::add_breadcrumb(self::get_title($koperereportcat),
+            "?classname=reports&method=dashboard&type={$koperereportcat->type}");
         dashboard_util::add_breadcrumb(self::get_title($koperereports));
         dashboard_util::start_page();
 
@@ -232,12 +233,11 @@ class reports extends reports_admin {
         $start = optional_param('start', 0, PARAM_INT);
         $length = optional_param('length', 0, PARAM_INT);
 
-
         $cache = \cache::make('local_kopere_dashboard', 'report_getdata_cache');
-        $cache_key = "data-{$report}-{$courseid}-{$start}-{$length}";
-        if ($cache->has($cache_key)) {
+        $cachekey = "data-{$report}-{$courseid}-{$start}-{$length}";
+        if ($cache->has($cachekey)) {
 
-            $cache = $cache->get($cache_key);
+            $cache = $cache->get($cachekey);
             json::encode($cache['reports'], $cache['count_recordstotal'], $cache['count_recordstotal']);
             die();
         }
@@ -270,7 +270,7 @@ class reports extends reports_admin {
             }
         }
 
-        $cache->set($cache_key, [
+        $cache->set($cachekey, [
             'reports' => $reports,
             'count_recordstotal' => count($recordstotal)
         ]);

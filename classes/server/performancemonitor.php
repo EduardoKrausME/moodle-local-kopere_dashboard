@@ -25,8 +25,6 @@ namespace local_kopere_dashboard\server;
 
 use local_kopere_dashboard\util\server_util;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class performancemonitor
  * @package local_kopere_dashboard
@@ -49,7 +47,7 @@ class performancemonitor {
                         <div class="element-box color_cpu">
                             <div class="label">' . get_string_kopere('performancemonitor_cpu') . '</div>
                             <div class="value"><span>
-                            ' . performancemonitor::cpu(false) . '
+                            ' . self::cpu(false) . '
                             </span></div>
                         </div>
                     </div>
@@ -57,7 +55,7 @@ class performancemonitor {
                         <div class="element-box color_memory">
                             <div class="label">' . get_string_kopere('performancemonitor_memory') . '</div>
                             <div class="value"><span>
-                                ' . performancemonitor::memory(false) . '%
+                                ' . self::memory(false) . '%
                             </span></div>
                         </div>
                     </div>
@@ -71,7 +69,7 @@ class performancemonitor {
                         <div class="element-box color_performance">
                             <div class="label">' . get_string_kopere('performancemonitor_performance') . '</div>
                             <div class="value"><span>
-                                ' . performancemonitor::load_average(false) . '
+                                ' . self::load_average(false) . '
                             </span></div>
                         </div>
                     </div>
@@ -80,20 +78,19 @@ class performancemonitor {
     }
 
     /**
-     * @param $return_number
+     * @param $returnnumber
      *
      * @return int|string
      * @throws \coding_exception
      */
-    public static function cpu($return_number) {
+    public static function cpu($returnnumber) {
 
         if (!server_util::function_enable('shell_exec')) {
-            if ($return_number) {
+            if ($returnnumber) {
                 return -1;
             }
             return "Function disabled by hosting";
         }
-
 
         $inputline = shell_exec('top -b -n 2');
 
@@ -105,7 +102,7 @@ class performancemonitor {
         $sy = $outputcpuprocess[2][1];
         $ni = $outputcpuprocess[3][1];
 
-        if ($return_number) {
+        if ($returnnumber) {
             return $us + $sy + $ni;
         }
 
@@ -116,10 +113,10 @@ class performancemonitor {
     /**
      *
      */
-    public static function memory($return_number) {
+    public static function memory($returnnumber) {
 
         if (!server_util::function_enable('shell_exec')) {
-            if ($return_number) {
+            if ($returnnumber) {
                 return -1;
             }
             return "Function disabled by hosting";
@@ -132,7 +129,7 @@ class performancemonitor {
         $free = $outputmemfreee[1];
         $all = $outputmemtotal[1];
 
-        if ($return_number) {
+        if ($returnnumber) {
             return 100 - (($free / $all) * 100);
         } else {
             return number_format(100 - (($free / $all) * 100), 1, ",", ".");
@@ -140,43 +137,43 @@ class performancemonitor {
     }
 
     /**
-     * @param $return_number
+     * @param $returnnumber
      *
      * @return mixed|string
      * @throws \Exception
      */
-    public static function disk_moodledata($return_number) {
+    public static function disk_moodledata($returnnumber) {
         global $CFG;
 
         session_write_close();
 
-        $file_cache = "{$CFG->dataroot}/disk_moodledata.txt";
-        $size = filesize($file_cache);
+        $filecache = "{$CFG->dataroot}/disk_moodledata.txt";
+        $size = filesize($filecache);
 
         $cache = \cache::make('local_kopere_dashboard', 'performancemonitor_cache');
         if ($cache->has("disk_moodledata-{$size}")) {
-            unlink($file_cache);
+            unlink($filecache);
             return $cache->get("disk_moodledata-{$size}");
         }
 
         if (!server_util::function_enable('shell_exec')) {
-            if ($return_number) {
+            if ($returnnumber) {
                 return -1;
             }
             return "Function disabled by hosting";
         }
 
-        if (file_exists($file_cache)) {
-            $lines = trim(file_get_contents($file_cache));
+        if (file_exists($filecache)) {
+            $lines = trim(file_get_contents($filecache));
             $pos = strrpos($lines, "\n");
-            $lastLine = substr($lines, $pos);
-            $bytes = explode("\t", $lastLine)[0];
+            $lastline = substr($lines, $pos);
+            $bytes = explode("\t", $lastline)[0];
 
             $cache->set("disk_moodledata-{$size}", $bytes);
 
             return $bytes;
         } else {
-            shell_exec("du -h {$CFG->dataroot} > {$file_cache} &");
+            shell_exec("du -h {$CFG->dataroot} > {$filecache} &");
         }
 
         return "...";
@@ -185,10 +182,10 @@ class performancemonitor {
     /**
      *
      */
-    public static function load_average($return_number) {
+    public static function load_average($returnnumber) {
 
         if (!server_util::function_enable('shell_exec')) {
-            if ($return_number) {
+            if ($returnnumber) {
                 return -1;
             }
             return "Function disabled by hosting";
@@ -197,7 +194,7 @@ class performancemonitor {
         $inputlines = shell_exec("uptime");
         preg_match("/average[s]?:\s*([0-9.]+),\s*([0-9.]+),\s*([0-9.]+)/", $inputlines, $outputload);
 
-        if ($return_number) {
+        if ($returnnumber) {
             return $outputload[1];
         }
 

@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\util;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class server_util
  *
@@ -55,5 +53,4 @@ class server_util {
     public static function function_enable( $function) {
         return is_callable($function) && false === stripos(ini_get('disable_functions'), $function);
     }
-
 }

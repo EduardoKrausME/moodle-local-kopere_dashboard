@@ -420,7 +420,7 @@ $string['useronline_settings_ssl'] = 'Enable SSL?';
 $string['useronline_settings_url'] = 'Server URL';
 $string['useronline_settings_port'] = 'Server port';
 
-// Acessos dos usuários
+// Acessos dos usuários.
 $string['useraccess_title'] = 'User access';
 
 // UserImport.

@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\events;
 
-defined('MOODLE_INTERNAL') || die();
-
 use local_kopere_dashboard\output\events\send_events;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 

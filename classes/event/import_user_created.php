@@ -22,8 +22,6 @@
 
 namespace local_kopere_dashboard\event;
 
-defined('MOODLE_INTERNAL') || die();
-
 use core\event\base;
 
 /**

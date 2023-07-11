@@ -41,7 +41,7 @@ class menu {
     public static function create_menu() {
         global $DB, $CFG;
 
-        $is_admin = has_capability('moodle/site:config', \context_system::instance());
+        $isadmin = has_capability('moodle/site:config', \context_system::instance());
 
         $menu = "<ul class='main-menu block_tree list menu-kopere main-menu'>";
 
@@ -107,7 +107,7 @@ class menu {
                 ->set_submenus(reports::global_menus())
         );
 
-        if ($is_admin) {
+        if ($isadmin) {
             $menu .= dashboard_util::add_menu(
                 (new menu_util())
                     ->set_classname('notifications')
@@ -130,7 +130,7 @@ class menu {
                 ->set_icon('performace')
                 ->set_name(get_string_kopere('benchmark_title')));
 
-        if ($is_admin && $CFG->dbtype == 'mysqli') {
+        if ($isadmin && $CFG->dbtype == 'mysqli') {
             $menu .= dashboard_util::add_menu(
                 (new menu_util())
                     ->set_classname('backup')

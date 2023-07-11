@@ -23,8 +23,6 @@
 
 namespace local_kopere_dashboard\html\inputs;
 
-defined('MOODLE_INTERNAL') || die();
-
 class input_date_range extends input_base {
     public function __construct() {
         $this->set_type('text');

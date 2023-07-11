@@ -22,8 +22,6 @@
 
 namespace local_kopere_dashboard\html;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class tinymce
  *
@@ -61,9 +59,9 @@ class tinymce {
         global $CFG;
         $filemanager = "{$CFG->wwwroot}/local/kopere_dashboard/vendor/responsivefilemanager/";
 
-        $external_plugins = '';
+        $externalplugins = '';
         if (file_exists("{$filemanager}dialog.php")) {
-            $external_plugins = "
+            $externalplugins = "
                 external_filemanager_path : '{$filemanager}',
                 filemanager_title         : '" . get_string_kopere('filemanager_title') . "',
                 external_plugins          : {
@@ -217,7 +215,7 @@ class tinymce {
                         'alignleft aligncenter alignright alignjustify | ' +
                         'bullist numlist outdent indent | fullscreen',
 
-                {$external_plugins}
+                {$externalplugins}
 
                 auto_focus           : 'elm1',
                 relative_urls        : false,

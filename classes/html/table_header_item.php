@@ -22,8 +22,6 @@
 
 namespace local_kopere_dashboard\html;
 
-defined('MOODLE_INTERNAL') || die();
-
 class table_header_item extends \stdClass {
     const TYPE_DATE = 'date-uk';
     const TYPE_CURRENCY = 'currency';
@@ -47,19 +45,19 @@ class table_header_item extends \stdClass {
     /**
      * @var string
      */
-    public $title       = '';
+    public $title = '';
     /**
      * @var string
      */
-    public $type        = '';
+    public $type = '';
     /**
      * @var string
      */
-    public $chave       = '';
+    public $chave = '';
     /**
      * @var string
      */
-    public $class       = '';
+    public $class = '';
     /**
      * @var string
      */

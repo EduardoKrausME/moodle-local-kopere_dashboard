@@ -22,8 +22,6 @@
 
 namespace local_kopere_dashboard\util;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class enroll_util
  *
@@ -54,7 +52,7 @@ class enroll_util {
         $enrol = $DB->get_record('enrol',
             array(
                 'courseid' => $course->id,
-                'enrol'    => 'manual'
+                'enrol' => 'manual'
             ), '*', IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
@@ -81,7 +79,7 @@ class enroll_util {
         $enrol = $DB->get_record('enrol',
             array(
                 'courseid' => $course->id,
-                'enrol'    => 'manual'
+                'enrol' => 'manual'
             ), '*', IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
@@ -89,9 +87,9 @@ class enroll_util {
 
         $testroleassignments = $DB->get_record('role_assignments',
             array(
-                'roleid'    => 5,
+                'roleid' => 5,
                 'contextid' => $context->id,
-                'userid'    => $user->id
+                'userid' => $user->id
             ), '*', IGNORE_MULTIPLE);
         if ($testroleassignments == null) {
             return false;
@@ -100,7 +98,7 @@ class enroll_util {
         $userenrolments = $DB->get_record('user_enrolments',
             array(
                 'enrolid' => $enrol->id,
-                'userid'  => $user->id
+                'userid' => $user->id
             ), '*', IGNORE_MULTIPLE);
         if ($userenrolments != null) {
             return !$userenrolments->status;
@@ -120,12 +118,12 @@ class enroll_util {
 
         $coorteid = str_replace("c", "", $coorteid);
 
-        $cohort_members = new \stdClass();
-        $cohort_members->cohortid = $coorteid;
-        $cohort_members->userid = $userid;
-        $cohort_members->timeadded = time();
+        $cohortmembers = new \stdClass();
+        $cohortmembers->cohortid = $coorteid;
+        $cohortmembers->userid = $userid;
+        $cohortmembers->timeadded = time();
 
-        $DB->insert_record('cohort_members', $cohort_members);
+        $DB->insert_record('cohort_members', $cohortmembers);
     }
 
     /**
@@ -138,11 +136,11 @@ class enroll_util {
         global $DB;
 
         $coorteid = str_replace("c", "", $coorteid);
-        $cohort_members = array(
+        $cohortmembers = array(
             "cohortid" => $coorteid,
-            "userid"   => $userid
+            "userid" => $userid
         );
-        $DB->delete_records('cohort_members', $cohort_members);
+        $DB->delete_records('cohort_members', $cohortmembers);
     }
 
     /**
@@ -167,7 +165,6 @@ class enroll_util {
     public static function enrol($course, $user, $timestart, $timeend, $status, $roleid = 5) {
         global $DB, $USER;
 
-
         // Evita erro.
         $context = \context_course::instance($course->id, IGNORE_MISSING);
         if ($context == null) {
@@ -178,7 +175,7 @@ class enroll_util {
         $enrol = $DB->get_record('enrol',
             array(
                 'courseid' => $course->id,
-                'enrol'    => 'manual'
+                'enrol' => 'manual'
             ));
         if ($enrol == null) {
             return false;
@@ -186,9 +183,9 @@ class enroll_util {
 
         $testroleassignments = $DB->get_record('role_assignments',
             array(
-                'roleid'    => $roleid,
+                'roleid' => $roleid,
                 'contextid' => $context->id,
-                'userid'    => $user->id
+                'userid' => $user->id
             ));
         if ($testroleassignments == null) {
             $roleassignments = new \stdClass();
@@ -209,7 +206,7 @@ class enroll_util {
         $userenrolments = $DB->get_record('user_enrolments',
             array(
                 'enrolid' => $enrol->id,
-                'userid'  => $user->id
+                'userid' => $user->id
             ));
         if ($userenrolments != null) {
             $userenrolments->status = $status;
@@ -252,7 +249,7 @@ class enroll_util {
         $enrol = $DB->get_record('enrol',
             array(
                 'courseid' => $course->id,
-                'enrol'    => 'manual'
+                'enrol' => 'manual'
             ));
         if ($enrol == null) {
             return false;
@@ -261,7 +258,7 @@ class enroll_util {
         $userenrolments = $DB->get_record('user_enrolments',
             array(
                 'enrolid' => $enrol->id,
-                'userid'  => $user->id
+                'userid' => $user->id
             ));
         if ($userenrolments != null) {
             $userenrolments->status = ENROL_INSTANCE_DISABLED;

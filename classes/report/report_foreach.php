@@ -23,7 +23,6 @@
 
 namespace local_kopere_dashboard\report;
 
-
 class report_foreach {
 
     /**
@@ -47,11 +46,11 @@ class report_foreach {
             $item->statustext = false;
         } else if ($item->status == 4) {
             $item->statustext = "-";
-        }else{
+        } else {
             $item->statustext = "";
         }
 
-        switch ($item->type){
+        switch ($item->type) {
             case 0:
                 $item->context = 'Função';
                 break;
@@ -122,5 +121,4 @@ class report_foreach {
 
         return $item;
     }
-
 }

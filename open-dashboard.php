@@ -57,7 +57,7 @@ $PAGE->requires->css('/local/kopere_dashboard/assets/all-frame.css');
 $PAGE->navbar->add(get_string_kopere('modulename'), new moodle_url('/local/kopere_dashboard/open-dashboard.php'));
 
 load_class();
-$htmlApp = ob_get_contents();
+$htmlapp = ob_get_contents();
 ob_clean();
 
 $PAGE->requires->jquery();

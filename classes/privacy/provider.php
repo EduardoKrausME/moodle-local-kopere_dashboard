@@ -20,7 +20,6 @@
 
 namespace local_kopere_dashboard\privacy;
 
-defined('MOODLE_INTERNAL') || die();
 /**
  * The local_kopere_dashboard module does not store any data.
  *
