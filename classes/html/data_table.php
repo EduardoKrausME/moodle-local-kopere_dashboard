@@ -233,6 +233,8 @@ class data_table {
                 $this->columndefs[] = (object)array("render" => "dataTrueFalseRenderer", "targets" => $key);
             } else if ($column->type == table_header_item::RENDERER_USERPHOTO) {
                 $this->columndefs[] = (object)array("render" => "dataUserphotoRenderer", "targets" => $key);
+            } else if ($column->type == table_header_item::RENDERER_SEGUNDOS) {
+                $this->columndefs[] = (object)array("render" => "segundosRenderer", "targets" => $key);
             }
         }
         $return .= '</tr>';

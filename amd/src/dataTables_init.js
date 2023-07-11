@@ -96,6 +96,32 @@ define([
                 dataUserphotoRenderer : function(data, type, row) {
                     return '<img class="media-object" src="' + M.cfg.wwwroot + '/local/kopere_bi/image.php?type=photo_user&id=' + data + '" />';
                 },
+                segundosRenderer      : function(data, type, row) {
+                    var tempo = parseInt(data);
+                    if (isNaN(tempo) || tempo < 1) {
+                        return '00:00:00';
+                    }
+
+                    var min = parseInt(tempo / 60);
+                    var hor = parseInt(min / 60);
+
+                    min = min % 60;
+                    if (min < 10) {
+                        min = "0" + min;
+                        min = min.substr(0, 2);
+                    }
+
+                    var seg = tempo % 60;
+                    if (seg <= 9) {
+                        seg = "0" + seg;
+                    }
+
+                    if (hor <= 9) {
+                        hor = "0" + hor;
+                    }
+
+                    return hor + ':' + min + ':' + seg;
+                }
             };
 
             var newColumnDefs = [];
@@ -127,6 +153,9 @@ define([
                         break;
                     case "dataUserphotoRenderer":
                         columnDef.render = renderer.dataUserphotoRenderer;
+                        break;
+                    case "segundosRenderer":
+                        columnDef.render = renderer.segundosRenderer;
                         break;
                 }
                 newColumnDefs.push(columnDef);

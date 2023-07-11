@@ -38,6 +38,7 @@ class table_header_item extends \stdClass {
     const RENDERER_TRUEFALSE = 'dataTrueFalseRenderer';
     const RENDERER_STATUS = 'dataStatusRenderer';
     const RENDERER_USERPHOTO = 'dataUserphotoRenderer';
+    const RENDERER_SEGUNDOS = 'segundosRenderer';
 
     /**
      * @var
