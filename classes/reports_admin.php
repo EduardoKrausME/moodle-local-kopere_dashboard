@@ -227,7 +227,7 @@ class reports_admin {
                 $koperereports->foreach = required_param('foreach', PARAM_TEXT);
                 $koperereports->columns = $this->columns();
 
-                $id = $DB->insert_record('report', $koperereports);
+                $id = $DB->insert_record('kopere_dashboard_reports', $koperereports);
 
                 mensagem::agenda_mensagem_success(get_string_kopere('reports_settings_savesuccess'));
                 header::location("?classname=reports&method=load_report&report={$id}");
