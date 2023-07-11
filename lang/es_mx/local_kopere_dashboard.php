@@ -184,6 +184,7 @@ $string['datatables_sInfoFiltered'] = '(Filtrado de _MAX_ records)';
 $string['datatables_sLengthMenu'] = '_MENU_ por página';
 $string['datatables_sLoadingRecords'] = 'Cargando ...';
 $string['datatables_sProcessing'] = 'Procesando ...';
+$string['datatables_sErrorMessage'] = '<strong>Error al cargar datos</strong><div>Intentando de nuevo en {$a} segundos</div>';
 $string['datatables_sSearch'] = 'Buscar';
 $string['datatables_sZeroRecords'] = 'Sin registros encontrados';
 $string['filemanager_title'] = 'Gestor de Archivos';

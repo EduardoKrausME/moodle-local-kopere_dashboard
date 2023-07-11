@@ -87,6 +87,7 @@ echo "<link rel='icon' href='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashb
             sLengthMenu        : "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
             sLoadingRecords    : "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
             sProcessing        : "<?php echo get_string_kopere('datatables_sProcessing') ?>",
+            sErrorMessage      : "<?php echo get_string_kopere('datatables_sErrorMessage') ?>",
             sZeroRecords       : "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
             sSearch            : "",
             sSearchPlaceholder : "<?php echo get_string_kopere('datatables_sSearch') ?>",

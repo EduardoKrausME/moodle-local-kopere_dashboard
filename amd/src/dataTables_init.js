@@ -6,7 +6,7 @@ define([
     "local_kopere_dashboard/dataTables.sorting-file-size",
     "local_kopere_dashboard/dataTables.sorting-numeric-comma"
 ], function($, datatables) {
-    return {
+    return dataTables_init = {
         init : function(selector, params) {
             console.log(M.cfg.wwwroot);
             var renderer = {
@@ -94,7 +94,6 @@ define([
                     }
                 },
                 dataUserphotoRenderer : function(data, type, row) {
-                    console.log(M.cfg.wwwroot);
                     return '<img class="media-object" src="' + M.cfg.wwwroot + '/local/kopere_bi/image.php?type=photo_user&id=' + data + '" />';
                 },
             };
@@ -135,19 +134,49 @@ define([
             params.columnDefs = newColumnDefs;
             params.oLanguage = dataTables_oLanguage;
 
+
+            var count_error = 0;
+            $.fn.dataTable.ext.errMode = function(settings, helpPage, message) {
+                console.trace("Local: " + message);
+
+                if (count_error < 20) {
+                    var _processing = $("#" + selector + "_processing");
+                    setTimeout(function() {
+                        _processing.show().html(
+                            "<div style='color:#e91e63'>" +
+                            dataTables_oLanguage.sErrorMessage.replace("{$a}", "<span class='counter'>30</span>") +
+                            "</div>");
+                    }, 500);
+
+                    var timer = 30;
+                    var _inteval = setInterval(function() {
+                        if (--timer <= 0) {
+                            _processing.html(dataTables_oLanguage.sProcessing);
+                            clearInterval(_inteval);
+                            window[selector].ajax.reload();
+                        }
+                        _processing.find(".counter").html(timer);
+                    }, 1000);
+                }
+                count_error++;
+            };
+
             window[selector] = $("#" + selector).DataTable(params);
         },
 
         click : function(selector, clickchave, clickurl) {
             $('#' + selector + ' tbody').on('click', 'tr', function() {
                 var data = window[selector].row(this).data();
-
-                $.each(clickchave, function(id, chave) {
-                    clickurl = clickurl.replace('{' + chave + '}', data[chave]);
-                });
-
-                location.href = clickurl;
+                dataTables_init._click_internal(data, clickchave, clickurl)
             });
+        },
+
+        _click_internal : function(data, clickchave, clickurl) {
+            $.each(clickchave, function(id, chave) {
+                clickurl = clickurl.replace('{' + chave + '}', data[chave]);
+            });
+
+            location.href = clickurl;
         }
     };
 });

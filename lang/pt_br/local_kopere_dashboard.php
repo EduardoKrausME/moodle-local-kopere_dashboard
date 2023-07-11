@@ -81,6 +81,7 @@ $string['datatables_sInfoThousands'] = '.';
 $string['datatables_sLengthMenu'] = '_MENU_ por página';
 $string['datatables_sLoadingRecords'] = 'Carregando...';
 $string['datatables_sProcessing'] = 'Processando...';
+$string['datatables_sErrorMessage'] = '<strong>Erro ao carregar os dados</strong><div>Tentando novamente em {$a} segundos</div>';
 $string['datatables_sZeroRecords'] = 'Nenhum registro encontrado';
 $string['datatables_sSearch'] = 'Pesquisar';
 $string['datatables_oPaginate_sNext'] = 'Próximo';
