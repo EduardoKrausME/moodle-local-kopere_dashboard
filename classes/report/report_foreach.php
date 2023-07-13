@@ -48,8 +48,7 @@ class report_foreach {
             return '';
         }
 
-        // Get all of the name fields.
-        $allnames = \core_user\fields::get_name_fields();
+        $allnames = ['firstnamephonetic', 'lastnamephonetic', 'middlename', 'alternatename', 'firstname', 'lastname'];
 
         if (!empty($SESSION->fullnamedisplay)) {
             $CFG->fullnamedisplay = $SESSION->fullnamedisplay;
