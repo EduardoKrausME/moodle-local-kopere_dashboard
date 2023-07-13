@@ -43,4 +43,51 @@ class number_util {
 
         return '';
     }
+
+    private static $divisor = 1000;
+
+    /**
+     * @param int $bytes
+     *
+     * @return string
+     */
+    public static function bytes($bytes) {
+        if ($bytes == 0) {
+            return $bytes;
+        }
+
+        $oldbytes = $bytes / self::$divisor;
+        if ($oldbytes < 1000) {
+            return self::remove_zero(number_format($oldbytes, 1, ',', '.') . ' KB', 1);
+        }
+
+        $oldbytes = $bytes / self::$divisor / self::$divisor;
+        if ($oldbytes < 1000) {
+            return self::remove_zero(number_format($oldbytes, 1, ',', '.') . ' MB', 1);
+        }
+
+        $oldbytes = $bytes / self::$divisor / self::$divisor / self::$divisor;
+        if ($oldbytes < 1000) {
+            return self::remove_zero(number_format($oldbytes, 2, ',', '.') . ' GB', 2);
+        }
+
+        $oldbytes = $bytes / self::$divisor / self::$divisor / self::$divisor / self::$divisor;
+
+        return self::remove_zero(number_format($oldbytes, 2, ',', '.') . ' TB', 2);
+    }
+
+    /**
+     * @param string $texto
+     *
+     * @return string
+     */
+    private static function remove_zero($texto, $count) {
+        if ($count == 3) {
+            return str_replace(',000', '', $texto);
+        } else if ($count == 2) {
+            return str_replace(',00', '', $texto);
+        } else {
+            return str_replace(',0', '', $texto);
+        }
+    }
 }

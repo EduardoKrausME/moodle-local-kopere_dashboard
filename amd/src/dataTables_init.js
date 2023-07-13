@@ -94,7 +94,7 @@ define([
                     }
                 },
                 dataUserphotoRenderer : function(data, type, row) {
-                    return '<img class="media-object" src="' + M.cfg.wwwroot + '/local/kopere_bi/image.php?type=photo_user&id=' + data + '" />';
+                    return '<img class="media-object" src="' + M.cfg.wwwroot + '/local/kopere_dashboard/profile-image.php?type=photo_user&id=' + data + '" />';
                 },
                 segundosRenderer      : function(data, type, row) {
                     var tempo = parseInt(data);

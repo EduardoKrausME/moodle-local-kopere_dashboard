@@ -186,7 +186,7 @@ class course_access_grade {
             echo "<th bgcolor='#c5c5c5' colspan='{$colspan}' align='center' style='text-align: center' >
                       <a href='{$link}' target='_blank'>{$infos->moduleinfo->name}</a>
                   </th>";
-            ob_flush();
+            @ob_flush();
         }
         echo '</tr>';
         echo '</thead>';

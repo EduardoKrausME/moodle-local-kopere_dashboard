@@ -34,6 +34,10 @@ class export {
      */
     private static $format;
 
+    public static function is_export() {
+        return self::$format == 'xls';
+    }
+
     /**
      * @param      $format
      * @param null $filename

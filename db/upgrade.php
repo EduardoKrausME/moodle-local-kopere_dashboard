@@ -174,6 +174,13 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023010200, 'local', 'kopere_dashboard');
     }
 
+    if ($oldversion < 2023071200) {
+        $DB->delete_records('kopere_dashboard_reports');
+        $DB->delete_records('kopere_dashboard_reportcat');
+
+        upgrade_plugin_savepoint(true, 2023071200, 'local', 'kopere_dashboard');
+    }
+
     \local_kopere_dashboard\install\report_install::create_categores();
     \local_kopere_dashboard\install\report_install::create_reports();
 

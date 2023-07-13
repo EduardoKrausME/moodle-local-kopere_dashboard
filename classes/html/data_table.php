@@ -24,6 +24,7 @@
 namespace local_kopere_dashboard\html;
 
 use local_kopere_dashboard\util\export;
+use local_kopere_dashboard\util\number_util;
 use local_kopere_dashboard\util\url_util;
 
 /**
@@ -254,8 +255,11 @@ class data_table {
     /**
      * @param        $linhas
      * @param string $class
+     * @throws \coding_exception
      */
     public function set_row($linhas, $class = '') {
+        global $CFG;
+
         if ($this->clickredirect != null) {
             echo '<tbody class="hover-pointer">';
         } else {
@@ -264,6 +268,7 @@ class data_table {
 
         foreach ($linhas as $linha) {
             echo '<tr>';
+            /** @var table_header_item $column */
             foreach ($this->column as $column) {
 
                 $thisclass = $class;
@@ -285,6 +290,44 @@ class data_table {
                         $html = $linha->$chave;
                     }
                 }
+
+                if (export::is_export()) {
+                    if ($column->type == table_header_item::TYPE_INT) {
+                    } else if ($column->type == table_header_item::TYPE_CURRENCY) {
+                        $html = "R$ {$html}";
+                    } else if ($column->type == table_header_item::TYPE_DATE) {
+                        // $this->columndefs[] = (object)array("type" => "date-uk", "targets" => $key);
+                    } else if ($column->type == table_header_item::TYPE_BYTES) {
+                        $html = number_util::bytes($html);
+                    } else if ($column->type == table_header_item::RENDERER_DATE) {
+                        $html = date("Y-m-d", $html);
+                    } else if ($column->type == table_header_item::RENDERER_DATETIME) {
+                        $html = date("Y-m-d H:i:s", $html);
+                    } else if ($column->type == table_header_item::RENDERER_VISIBLE) {
+                        if ($html == 0) {
+                            $html = get_string_kopere('courses_invisible');
+                        } else {
+                            $html = get_string_kopere('courses_visible');
+                        }
+                    } else if ($column->type == table_header_item::RENDERER_STATUS) {
+                        if ($html == 1) {
+                            $html = get_string_kopere('notification_status_inactive');
+                        } else {
+                            $html = get_string_kopere('notification_status_active');
+                        }
+                    } else if ($column->type == table_header_item::RENDERER_TRUEFALSE) {
+                        if ($html == 0 || $html == false || $html == 'false') {
+                            $html = get_string('no');
+                        } else {
+                            $html = get_string('yes');
+                        }
+                    } else if ($column->type == table_header_item::RENDERER_USERPHOTO) {
+                        $html = '<img class="media-object" src="' . $CFG->wwwroot . '/local/kopere_dashboard/profile-image.php?type=photo_user&id=' . $html . '" />';
+                    } else if ($column->type == table_header_item::RENDERER_SEGUNDOS) {
+                        // $this->columndefs[] = (object)array("render" => "segundosRenderer", "targets" => $key);
+                    }
+                }
+
                 $this->print_row($html, $thisclass);
             }
             echo '</tr>';
@@ -302,6 +345,7 @@ class data_table {
         } else {
             echo "<td class='{$class}'>";
         }
+
         echo $html;
         echo '</td>';
     }
