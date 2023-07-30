@@ -55,7 +55,6 @@
 }(function($, window, document, undefined) {
     'use strict';
 
-
     jQuery.extend(jQuery.fn.dataTableExt.oSort, {
         "date-uk-pre" : function(a) {
             if (a == null || a == "") {

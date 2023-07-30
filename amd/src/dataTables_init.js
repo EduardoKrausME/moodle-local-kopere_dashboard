@@ -4,11 +4,16 @@ define([
     "local_kopere_dashboard/dataTables.sorting-currency",
     "local_kopere_dashboard/dataTables.sorting-date-uk",
     "local_kopere_dashboard/dataTables.sorting-file-size",
-    "local_kopere_dashboard/dataTables.sorting-numeric-comma"
+    "local_kopere_dashboard/dataTables.sorting-numeric-comma",
+    "local_kopere_dashboard/dataTables.buttons",
+    "local_kopere_dashboard/dataTables.buttons.html5",
+    "local_kopere_dashboard/dataTables.buttons.print",
+    "local_kopere_dashboard/dataTables.dateTime",
+    "local_kopere_dashboard/dataTables.responsive",
+    "local_kopere_dashboard/dataTables.select",
 ], function($, datatables) {
     return dataTables_init = {
         init : function(selector, params) {
-            console.log(M.cfg.wwwroot);
             var renderer = {
                 dataVisibleRenderer   : function(data, type, row) {
                     if (data == 0) {
@@ -162,12 +167,26 @@ define([
             });
             params.columnDefs = newColumnDefs;
             params.oLanguage = dataTables_oLanguage;
-
+            params.responsive = true;
+            params.buttons = [
+                {
+                    extend : 'print',
+                    text   : dataTables_oLanguage.buttons.print_text,
+                    title  : params.export_title
+                }, {
+                    extend : 'copy',
+                    text   : dataTables_oLanguage.buttons.copy_text,
+                    title  : params.export_title
+                }, {
+                    extend : 'csv',
+                    text   : dataTables_oLanguage.buttons.csv_text,
+                    title  : params.export_title
+                }];
+            params.dom = 'lfrtipB';
+            params.select = true;
 
             var count_error = 0;
             $.fn.dataTable.ext.errMode = function(settings, helpPage, message) {
-                console.trace("Local: " + message);
-
                 if (count_error < 20) {
                     var _processing = $("#" + selector + "_processing");
                     setTimeout(function() {
@@ -191,6 +210,14 @@ define([
             };
 
             window[selector] = $("#" + selector).DataTable(params);
+
+            window[selector].on('init.dt', function() {
+                var element = $("<div class='group-controls'>");
+                var wrapper = $("#" + selector + "_wrapper");
+                wrapper.prepend(element);
+                wrapper.find(".dataTables_length").appendTo(element);
+                wrapper.find(".dataTables_filter").appendTo(element);
+            });
         },
 
         click : function(selector, clickchave, clickurl) {
@@ -209,6 +236,3 @@ define([
         }
     };
 });
-
-
-
