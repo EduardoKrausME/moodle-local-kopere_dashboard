@@ -352,12 +352,13 @@ class data_table {
 
     /**
      * @param bool $processserver
-     * @param string $order
      * @param string $extras
+     * @param bool $returnhtml
+     * @param bool $title
      *
      * @return string
      */
-    public function close($processserver = false, $extras = null, $returnhtml = false) {
+    public function close($processserver = false, $extras = null, $returnhtml = false, $title = false) {
         global $PAGE;
 
         $return = '</table>';
@@ -365,7 +366,8 @@ class data_table {
         $initparams = array(
             "autoWidth" => false,
             "columns" => $this->columndata,
-            "columnDefs" => $this->columndefs
+            "columnDefs" => $this->columndefs,
+            "export_title" => $title
         );
         if ($extras) {
             $initparams = array_merge($initparams, $extras);

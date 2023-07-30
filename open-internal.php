@@ -96,6 +96,22 @@ echo "<link rel='icon' href='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashb
             sZeroRecords       : "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
             sSearch            : "",
             sSearchPlaceholder : "<?php echo get_string_kopere('datatables_sSearch') ?>",
+            buttons            : {
+                print_text   : "<?php echo get_string_kopere('datatables_buttons_print_text') ?>",
+                copy_text    : "<?php echo get_string_kopere('datatables_buttons_copy_text') ?>",
+                csv_text     : "<?php echo get_string_kopere('datatables_buttons_csv_text') ?>",
+                copySuccess1 : "<?php echo get_string_kopere('datatables_buttons_copySuccess1') ?>",
+                copySuccess_ : "<?php echo get_string_kopere('datatables_buttons_copySuccess_') ?>",
+                copyTitle    : "<?php echo get_string_kopere('datatables_buttons_copyTitle') ?>",
+                copyKeys     : "<?php echo get_string_kopere('datatables_buttons_copyKeys') ?>",
+            },
+            select             : {
+                rows : {
+                    _ : "<?php echo get_string_kopere('datatables_buttons_select_rows_') ?>",
+                    0 : "",
+                    1 : "<?php echo get_string_kopere('datatables_buttons_select_rows1') ?>",
+                }
+            },
             oPaginate          : {
                 sNext     : "<?php echo get_string_kopere('datatables_oPaginate_sNext') ?>",
                 sPrevious : "<?php echo get_string_kopere('datatables_oPaginate_sPrevious') ?>",

@@ -28,7 +28,11 @@ $string['dashboard'] = 'Dashboard';
 $string['settings'] = 'Settings';
 $string['close'] = 'Close';
 $string['crontask_tmp'] = 'Cron clear tmp folder';
-$string['crontask_performance'] = 'Cron para guardar datos de rendimiento';
+$string['crontask_performance'] = 'Cron to save performance data';
+$string['crontask_db_report_login'] = 'Cron to store user logins in temporary table';
+
+$string['kopere_dashboard_menu'] = 'Show menu in top bar';
+$string['kopere_dashboard_menu_desc'] = 'If checked, the top menu contains a link to the Kopere Dashboard';
 
 $string['kopere_dashboard_open'] = 'Open Kopere';
 $string['kopere_dashboard_open_desc'] = 'Which way do you want to open Kopere Dashboard';
@@ -90,6 +94,16 @@ $string['datatables_oPaginate_sFirst'] = 'First';
 $string['datatables_oPaginate_sLast'] = 'Last';
 $string['datatables_oAria_sSortAscending'] = ': Sorting Columns in ascending order';
 $string['datatables_oAria_sSortDescending'] = ': Sorting columns in descending order';
+$string['datatables_buttons_print_text'] = 'Print';
+$string['datatables_buttons_copy_text'] = 'Copy data';
+$string['datatables_buttons_csv_text'] = 'Download CSV';
+$string['datatables_buttons_copySuccess1'] = 'Copied one row to clipboard';
+$string['datatables_buttons_copySuccess_'] = 'Copied %d rows to clipboard';
+$string['datatables_buttons_copyTitle'] = 'Copy to clipboard';
+$string['datatables_buttons_copyKeys'] = 'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data<br>to your system clipboard.<br><br>' .
+    'To cancel, click this message or press escape.';
+$string['datatables_buttons_select_rows_'] = '%d rows selected';
+$string['datatables_buttons_select_rows1'] = '1 row selected';
 
 // Util/navigation.
 $string['navigation_page'] = 'Page {$a->atualPage} of {$a->countPages}';

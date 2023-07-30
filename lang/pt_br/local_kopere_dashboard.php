@@ -29,6 +29,10 @@ $string['settings'] = 'Configurar';
 $string['close'] = 'Fechar';
 $string['crontask_tmp'] = 'Cron que limpa a pasta TMP';
 $string['crontask_performance'] = 'Cron para salvar os dados de desempenho';
+$string['crontask_db_report_login'] = 'Cron para guardar logins de usuários em tabela temporária';
+
+$string['kopere_dashboard_menu'] = 'Mostrar menu na barra to topo';
+$string['kopere_dashboard_menu_desc'] = 'Se marcado, o menu do topo contém um link do Kopere Dashboard';
 
 $string['kopere_dashboard_open'] = 'Abrir o Kopere';
 $string['kopere_dashboard_open_desc'] = 'Qual forma deseja abrir o Kopere Dashboard';
@@ -78,7 +82,7 @@ $string['datatables_sInfoEmpty'] = '0 registros';
 $string['datatables_sInfoFiltered'] = '(Filtrados de _MAX_ registros)';
 $string['datatables_sInfoPostFix'] = '';
 $string['datatables_sInfoThousands'] = '.';
-$string['datatables_sLengthMenu'] = '_MENU_ por página';
+$string['datatables_sLengthMenu'] = '_MENU_ <span>por página</span>';
 $string['datatables_sLoadingRecords'] = 'Carregando...';
 $string['datatables_sProcessing'] = 'Processando...';
 $string['datatables_sErrorMessage'] = '<strong>Erro ao carregar os dados</strong><div>Tentando novamente em {$a} segundos</div>';
@@ -90,6 +94,16 @@ $string['datatables_oPaginate_sFirst'] = 'Primeiro';
 $string['datatables_oPaginate_sLast'] = 'Último';
 $string['datatables_oAria_sSortAscending'] = ': Ordenar colunas de forma ascendente';
 $string['datatables_oAria_sSortDescending'] = ': Ordenar colunas de forma descendente';
+$string['datatables_buttons_print_text'] = 'Imprimir';
+$string['datatables_buttons_copy_text'] = 'Copiar dados';
+$string['datatables_buttons_csv_text'] = 'Baixar CSV';
+$string['datatables_buttons_copySuccess1'] = 'Copiou uma linha para a área de transferência';
+$string['datatables_buttons_copySuccess_'] = '%d linhas copiadas para a área de transferência';
+$string['datatables_buttons_copyTitle'] = 'Copiar para a área de transferência';
+$string['datatables_buttons_copyKeys'] = 'Pressione <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> para copiar os dados da tabela<br>para a área de transferência do sistema.<br><br>' .
+    'Para cancelar, clique nesta mensagem ou pressione escape.';
+$string['datatables_buttons_select_rows_'] = '%d linhas selecionadas';
+$string['datatables_buttons_select_rows1'] = '1 linha selecionada';
 
 // Util/navigation.
 $string['navigation_page'] = 'Página {$a->atualPage} de {$a->countPages}';

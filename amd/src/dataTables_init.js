@@ -168,22 +168,25 @@ define([
             params.columnDefs = newColumnDefs;
             params.oLanguage = dataTables_oLanguage;
             params.responsive = true;
-            params.buttons = [
-                {
-                    extend : 'print',
-                    text   : dataTables_oLanguage.buttons.print_text,
-                    title  : params.export_title
-                }, {
-                    extend : 'copy',
-                    text   : dataTables_oLanguage.buttons.copy_text,
-                    title  : params.export_title
-                }, {
-                    extend : 'csv',
-                    text   : dataTables_oLanguage.buttons.csv_text,
-                    title  : params.export_title
-                }];
-            params.dom = 'lfrtipB';
-            params.select = true;
+            
+            if (params.export_title) {
+                params.buttons = [
+                    {
+                        extend : 'print',
+                        text   : dataTables_oLanguage.buttons.print_text,
+                        title  : params.export_title
+                    }, {
+                        extend : 'copy',
+                        text   : dataTables_oLanguage.buttons.copy_text,
+                        title  : params.export_title
+                    }, {
+                        extend : 'csv',
+                        text   : dataTables_oLanguage.buttons.csv_text,
+                        title  : params.export_title
+                    }];
+                params.dom = 'lfrtipB';
+                params.select = true;
+            }
 
             var count_error = 0;
             $.fn.dataTable.ext.errMode = function(settings, helpPage, message) {

@@ -36,6 +36,9 @@ $string['close'] = 'Cerrar';
 $string['crontask_tmp'] = 'Cron limpiar carpeta tmp';
 $string['crontask_performance'] = 'Cron para guardar datos de rendimiento';
 
+$string['kopere_dashboard_menu'] = 'Mostrar menú en la barra superior';
+$string['kopere_dashboard_menu_desc'] = 'Si está marcado, el menú superior contiene un enlace al panel de control de Kopere';
+
 $string['kopere_dashboard_open'] = 'Abrir Kopere';
 $string['kopere_dashboard_open_desc'] = '¿Qué forma desea abrir el Tablero Kopere';
 $string['kopere_dashboard_open_internal'] = 'Abrir interno';
@@ -182,12 +185,23 @@ $string['datatables_sEmptyTable'] = 'Sin registros encontrados';
 $string['datatables_sInfo'] = '_START_ a _END_ of _TOTAL_';
 $string['datatables_sInfoEmpty'] = '0 registros';
 $string['datatables_sInfoFiltered'] = '(Filtrado de _MAX_ records)';
-$string['datatables_sLengthMenu'] = '_MENU_ por página';
+$string['datatables_sLengthMenu'] = '_MENU_ <span>por página</span>';
 $string['datatables_sLoadingRecords'] = 'Cargando ...';
 $string['datatables_sProcessing'] = 'Procesando ...';
 $string['datatables_sErrorMessage'] = '<strong>Error al cargar datos</strong><div>Intentando de nuevo en {$a} segundos</div>';
 $string['datatables_sSearch'] = 'Buscar';
 $string['datatables_sZeroRecords'] = 'Sin registros encontrados';
+$string['datatables_buttons_print_text'] = 'Imprimir';
+$string['datatables_buttons_copy_text'] = 'Copiar datos';
+$string['datatables_buttons_csv_text'] = 'Descargar CSV';
+$string['datatables_buttons_copySuccess1'] = 'Copiado una fila al portapapeles';
+$string['datatables_buttons_copySuccess_'] = 'Copiado %d filas al portapapeles';
+$string['datatables_buttons_copyTitle'] = 'Copiar al portapapeles';
+$string['datatables_buttons_copyKeys'] = 'Pressione <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> para copiar os dados da tabela<br>para a área de transferência do sistema.<br><br>' .
+    'Para cancelar, clique nesta mensagem ou pressione escape.';
+$string['datatables_buttons_select_rows_'] = '%d líneas seleccionadas';
+$string['datatables_buttons_select_rows1'] = '1 fila seleccionada';
+
 $string['filemanager_title'] = 'Gestor de Archivos';
 $string['filereadmoreinfo'] = 'Probar la velocidad para leer en carpeta temporal de Moodle';
 $string['filereadname'] = 'Leyendo archivos';

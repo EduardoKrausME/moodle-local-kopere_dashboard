@@ -145,10 +145,11 @@ class reports extends reports_admin {
             ['id' => $koperereports->reportcatid]);
         header::notfound_null($koperereportcat, get_string_kopere('reports_notfound'));
 
+        $titlereport = self::get_title($koperereportcat);
+
         dashboard_util::add_breadcrumb(get_string_kopere('reports_title'), '?classname=reports&method=dashboard');
-        dashboard_util::add_breadcrumb(self::get_title($koperereportcat),
-            "?classname=reports&method=dashboard&type={$koperereportcat->type}");
-        dashboard_util::add_breadcrumb(self::get_title($koperereports));
+        dashboard_util::add_breadcrumb($titlereport, "?classname=reports&method=dashboard&type={$koperereportcat->type}");
+        dashboard_util::add_breadcrumb($titlereport);
         dashboard_util::start_page();
 
         echo '<div class="element-box table-responsive">';
@@ -175,7 +176,7 @@ class reports extends reports_admin {
                 die();
 
             } else {
-                title_util::print_h3(self::get_title($koperereports), false);
+                title_util::print_h3($titlereport, false);
 
                 $columns = json_decode($koperereports->columns);
                 if (!isset($columns->header)) {
@@ -185,8 +186,8 @@ class reports extends reports_admin {
                 $table = new data_table($columns->columns, $columns->header);
                 $table->set_ajax_url("?classname=reports&method=getdata&report={$report}&courseid={$courseid}");
                 $table->print_header();
-                $table->close(true,
-                    array("searching" => false, "ordering" => false));
+                $extra = ["searching" => false, "ordering" => false];
+                $table->close(true, $extra, false, $titlereport);
 
                 button::primary(get_string_kopere('reports_download'),
                     "?classname=reports&method=download&report={$report}&courseid={$courseid}");
