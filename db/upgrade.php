@@ -181,6 +181,29 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023071200, 'local', 'kopere_dashboard');
     }
 
+    if ($oldversion < 2023072700) {
+        if (!$dbman->table_exists('kopere_dashboard_reportlogin')) {
+            $table = new xmldb_table('kopere_dashboard_reportlogin');
+
+            $table->add_field('id',          XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+            $table->add_field('userid',      XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL);
+            $table->add_field('ip',          XMLDB_TYPE_CHAR,    '32', null, XMLDB_NOTNULL);
+            $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL);
+
+            $table->add_key('primary',       XMLDB_KEY_PRIMARY, array('id'));
+
+            $dbman->create_table($table);
+        }
+        upgrade_plugin_savepoint(true, 2023072700, 'local', 'kopere_dashboard');
+    }
+
+    if ($oldversion < 2023072704) {
+        $DB->delete_records('kopere_dashboard_reports');
+        $DB->delete_records('kopere_dashboard_reportcat');
+
+        upgrade_plugin_savepoint(true, 2023072704, 'local', 'kopere_dashboard');
+    }
+
     \local_kopere_dashboard\install\report_install::create_categores();
     \local_kopere_dashboard\install\report_install::create_reports();
 

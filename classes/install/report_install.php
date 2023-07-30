@@ -328,18 +328,15 @@ ORDER BY u.firstname";
         $report->reportkey = 'enrol_guest-1';
         $report->title = '[[reports_report_enrol_guest-1]]';
         $report->reportsql = "
-SELECT u.id, {$alternatenames}, u.id AS userid, lsl.timecreated, lsl.ip
-  FROM {logstore_standard_log} lsl
-  JOIN {user}                  u   ON u.id = lsl.userid
- WHERE lsl.action LIKE 'loggedin'
-   AND u.id = 1
-   AND lsl.target LIKE 'user'";
+SELECT CONCAT(lsl.userid, lsl.timecreated), {$alternatenames}, u.id AS userid, lsl.timecreated, lsl.ip
+  FROM {kopere_dashboard_reportlogin} lsl
+  JOIN {user}                         u   ON u.id = lsl.userid
+ WHERE u.id = 1";
         $report->columns = array(
             $table->add_header('#', 'userid', table_header_item::TYPE_INT),
             $table->add_header('[[courses_student_name]]', 'userfullname'),
-            $table->add_header('[[reports_lastlogin]]',
-                'timecreated', table_header_item::RENDERER_DATE),
-            $table->add_header('IP', 'ip')
+            $table->add_header('IP', 'ip'),
+            $table->add_header('[[reports_lastlogin]]', 'timecreated', table_header_item::RENDERER_DATETIME),
         );
         $report->foreach = 'local_kopere_dashboard\report\report_foreach::userfullname';
         $report->columns = json_encode(array('columns' => $report->columns));
@@ -435,17 +432,15 @@ SELECT concat(u.id, p.id) AS id, u.id AS userid, {$alternatenames},
         $report->reportsql = "
 SELECT lsl.id, u.id AS userid, {$alternatenames},
        u.email, u.city, lsl.timecreated
-  FROM {logstore_standard_log}   lsl
-  JOIN {user}                    u    ON u.id = lsl.userid
- WHERE lsl.action LIKE 'loggedin'
-   AND lsl.target LIKE 'user'";
+  FROM {kopere_dashboard_reportlogin} lsl
+  JOIN {user}                         u    ON u.id = lsl.userid
+ WHERE u.id > 1";
         $report->columns = array(
             $table->add_header('#', 'userid', table_header_item::TYPE_INT),
             $table->add_header('[[courses_student_name]]', 'userfullname'),
             $table->add_header('[[courses_student_email]]', 'email'),
             $table->add_header('[[user_table_city]]', 'city'),
-            $table->add_header('[[reports_timecreated]]',
-                'timecreated', table_header_item::RENDERER_DATE)
+            $table->add_header('[[reports_lastlogin]]', 'timecreated', table_header_item::RENDERER_DATETIME),
         );
         $report->foreach = 'local_kopere_dashboard\report\report_foreach::userfullname';
         $report->columns = json_encode(array('columns' => $report->columns));
