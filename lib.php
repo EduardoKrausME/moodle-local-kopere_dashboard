@@ -25,6 +25,12 @@ function local_kopere_dashboard_extends_navigation(global_navigation $nav) {
     local_kopere_dashboard_extend_navigation($nav);
 }
 
+/**
+ * @param global_navigation $nav
+ * @throws coding_exception
+ * @throws dml_exception
+ * @throws moodle_exception
+ */
 function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
     global $CFG, $DB;
 
@@ -92,5 +98,15 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
 
         require_once __DIR__ . "/classes/util/node.php";
         \local_kopere_dashboard\util\node::add_admin_code();
+
+        if (@$CFG->kopere_dashboard_menu) {
+            $context = context_system::instance();
+            $hassiteconfig = has_capability('moodle/site:config', $context);
+            if ($hassiteconfig && strpos($CFG->custommenuitems, "kopere_dashboard") === false) {
+                $name = get_string('modulename', 'local_kopere_dashboard');
+                $link = "/local/kopere_dashboard/open.php?classname=dashboard&method=start";
+                $CFG->custommenuitems = "{$name}|{$link}\n{$CFG->custommenuitems}";
+            }
+        }
     }
 }
