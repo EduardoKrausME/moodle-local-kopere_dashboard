@@ -44,7 +44,7 @@ class report_foreach {
     private static function internal_userfullname($user) {
         global $CFG, $SESSION;
 
-        if (!isset($user->firstname) and !isset($user->lastname)) {
+        if (!isset($user->firstname) && !isset($user->lastname)) {
             return '';
         }
 

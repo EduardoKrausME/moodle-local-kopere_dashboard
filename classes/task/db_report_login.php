@@ -43,16 +43,16 @@ class db_report_login extends \core\task\scheduled_task {
                  WHERE lsl.action LIKE 'loggedin'
                    AND lsl.target LIKE 'user'";
 
-        $logstore_standard_logs = $DB->get_records_sql($reportsql);
+        $logstorestandardlogs = $DB->get_records_sql($reportsql);
 
         $DB->delete_records("kopere_dashboard_reportlogin");
 
-        foreach ($logstore_standard_logs as $logstore_standard_log) {
+        foreach ($logstorestandardlogs as $logstorestandardlog) {
 
             $data = (object)[
-                "userid" => $logstore_standard_log->userid,
-                "ip" => $logstore_standard_log->ip,
-                "timecreated" => $logstore_standard_log->timecreated,
+                "userid" => $logstorestandardlog->userid,
+                "ip" => $logstorestandardlog->ip,
+                "timecreated" => $logstorestandardlog->timecreated,
             ];
 
             try {
