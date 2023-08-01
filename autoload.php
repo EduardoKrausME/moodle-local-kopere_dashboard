@@ -41,9 +41,11 @@ function kopere_dashboard_autoload($classname) {
 
     preg_match("/local_(.*?)\/(.*)/", $classname, $classpartes);
 
-    $file = "{$CFG->dirroot}/local/{$classpartes[1]}/classes/{$classpartes[2]}.php";
-    if (file_exists($file)) {
-        require_once($file);
+    if (isset($classpartes[2])) {
+        $file = "{$CFG->dirroot}/local/{$classpartes[1]}/classes/{$classpartes[2]}.php";
+        if (file_exists($file)) {
+            require_once($file);
+        }
     }
 }
 
