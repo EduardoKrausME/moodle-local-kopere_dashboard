@@ -92,7 +92,7 @@ $dashboardmenuhtmlold = "<div id='inst0' class='block'>
         </div>";
 $dashboardmenuhtmlold = str_replace("'", '"', $dashboardmenuhtmlold);
 
-echo "<div id='kopere_dashboard_div'>
+echo "<div class='kopere_dashboard_div'>
          <div class='menu-w hidden-print dashboard_menu_html-content'>
             <div class='menu-and-user'>
                 {$dashboardmenuhtmlboost}

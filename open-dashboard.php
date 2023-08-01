@@ -72,7 +72,7 @@ echo "<link rel='icon' href='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashb
 
 require_once ("autoload-lang-js.php");
 ?>
-    <div class="all-wrapper ">
+    <div class="all-wrapper kopere_dashboard_div">
 
         <div class="layout-w">
 
