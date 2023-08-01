@@ -69,60 +69,10 @@ $PAGE->add_body_class("kopere_dashboard_body");
 
 echo $OUTPUT->header();
 echo "<link rel='icon' href='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/favicon.png'/>";
+
+require_once ("autoload-lang-js.php");
 ?>
-    <script>
-        lang_yes = '<?php echo get_string('yes') ?>';
-        lang_no = '<?php echo get_string('no') ?>';
-        lang_visible = '<?php echo get_string_kopere('courses_visible')?>';
-        lang_invisible = '<?php echo get_string_kopere('courses_invisible')?>';
-        lang_active = '<?php echo get_string_kopere('notification_status_active')?>';
-        lang_inactive = '<?php echo get_string_kopere('notification_status_inactive')?>';
-        dataTables_oLanguage = {
-            sEmptyTable        : "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
-            sInfo              : "<?php echo get_string_kopere('datatables_sInfo') ?>",
-            sInfoEmpty         : "<?php echo get_string_kopere('datatables_sInfoEmpty') ?>",
-            sInfoFiltered      : "<?php echo get_string_kopere('datatables_sInfoFiltered') ?>",
-            sInfoPostFix       : "<?php echo get_string_kopere('datatables_sInfoPostFix') ?>",
-            sInfoThousands     : "<?php echo get_string_kopere('datatables_sInfoThousands') ?>",
-            sLengthMenu        : "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
-            sLoadingRecords    : "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
-            sProcessing        : "<?php echo get_string_kopere('datatables_sProcessing') ?>",
-            sErrorMessage      : "<?php echo get_string_kopere('datatables_sErrorMessage') ?>",
-            sZeroRecords       : "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
-            sSearch            : "",
-            sSearchPlaceholder : "<?php echo get_string_kopere('datatables_sSearch') ?>",
-            buttons            : {
-                print_text   : "<?php echo get_string_kopere('datatables_buttons_print_text') ?>",
-                copy_text    : "<?php echo get_string_kopere('datatables_buttons_copy_text') ?>",
-                csv_text     : "<?php echo get_string_kopere('datatables_buttons_csv_text') ?>",
-                copySuccess1 : "<?php echo get_string_kopere('datatables_buttons_copySuccess1') ?>",
-                copySuccess_ : "<?php echo get_string_kopere('datatables_buttons_copySuccess_') ?>",
-                copyTitle    : "<?php echo get_string_kopere('datatables_buttons_copyTitle') ?>",
-                copyKeys     : "<?php echo get_string_kopere('datatables_buttons_copyKeys') ?>",
-            },
-            select             : {
-                rows : {
-                    _ : "<?php echo get_string_kopere('datatables_buttons_select_rows_') ?>",
-                    0 : "",
-                    1 : "<?php echo get_string_kopere('datatables_buttons_select_rows1') ?>",
-                }
-            },
-            oPaginate          : {
-                sNext     : "<?php echo get_string_kopere('datatables_oPaginate_sNext') ?>",
-                sPrevious : "<?php echo get_string_kopere('datatables_oPaginate_sPrevious') ?>",
-                sFirst    : "<?php echo get_string_kopere('datatables_oPaginate_sFirst') ?>",
-                sLast     : "<?php echo get_string_kopere('datatables_oPaginate_sLast') ?>"
-            },
-            oAria              : {
-                sSortAscending  : "<?php echo get_string_kopere('datatables_oAria_sSortAscending') ?>",
-                sSortDescending : "<?php echo get_string_kopere('datatables_oAria_sSortDescending') ?>"
-            }
-        };
-        if (window != window.top) {
-            document.body.className += " in-iframe";
-        }
-    </script>
-    <div class="all-wrapper">
+    <div class="all-wrapper ">
 
         <div class="layout-w">
 
