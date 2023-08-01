@@ -76,7 +76,8 @@ class profile {
      * @throws \dml_exception
      */
     public function list_courses($userid) {
-        global $DB;
+        global $DB, $CFG;
+
         $courses = enrol_get_all_users_courses($userid);
 
         if (!count($courses)) {
@@ -127,7 +128,7 @@ class profile {
                     <div>" . get_string_kopere('profile_enrol_start') . ' <em>' .
                 userdate($enrolment->timestart, get_string_kopere('dateformat')) . '</em> ' . $expirationend . ' -
                         <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal-edit"
-                                data-href="load-ajax.php?classname=userenrolment&method=mathedit&courseid=' . $course->id .
+                                data-href="' . $CFG->wwwroot . '/local/kopere_dashboard/load-ajax.php?classname=userenrolment&method=mathedit&courseid=' . $course->id .
                 "&ueid={$enrolment->id}'>" . get_string_kopere('profile_edit') . '</button>
                     </div>
                     <div class="roles">' . get_string_kopere('profile_enrol_profile') . ': ' . $rolehtml . '</div>

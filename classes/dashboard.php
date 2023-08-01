@@ -113,7 +113,7 @@ class dashboard {
      * @throws \dml_exception
      */
     public function last_grades() {
-        global $DB, $PAGE;
+        global $DB, $PAGE, $CFG;
 
         $grade = new grade();
         $lastgrades = $grade->get_last_grades();
@@ -145,7 +145,7 @@ class dashboard {
                           <h4 class='media-heading'>
                               <a data-toggle='modal' data-target='#modal-edit'
                                  href='?classname=users&method=details&userid={$user->id}'
-                                 data-href='load-ajax.php?classname=users&method=details&userid={$user->id}'>" .
+                                 data-href='{$CFG->wwwroot}/local/kopere_dashboard/load-ajax.php?classname=users&method=details&userid={$user->id}'>" .
                 fullname($user) . "</a>
                           </h4>
                           <p>" .
@@ -165,7 +165,7 @@ class dashboard {
      * @throws \dml_exception
      */
     public function last_enroll() {
-        global $DB, $PAGE;
+        global $DB, $PAGE, $CFG;
 
         $enrol = new enroll();
         $lastenroll = $enrol->last_enroll();
@@ -194,7 +194,7 @@ class dashboard {
                               <h4 class='media-heading'>
                                   <a data-toggle='modal' data-target='#modal-edit'
                                      href='?classname=users&method=details&userid={$user->id}'
-                                     data-href='load-ajax.php?classname=users&method=details&userid={$user->id}'>" .
+                                     data-href='{$CFG->wwwroot}/local/kopere_dashboard/load-ajax.php?classname=users&method=details&userid={$user->id}'>" .
                     fullname($user) . '</a>
                               </h4>
                               <p>' . get_string_kopere('dashboard_enrol_text', $enrol) . "

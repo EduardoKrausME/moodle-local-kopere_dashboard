@@ -322,7 +322,8 @@ class data_table {
                             $html = get_string('yes');
                         }
                     } else if ($column->type == table_header_item::RENDERER_USERPHOTO) {
-                        $html = '<img class="media-object" src="' . $CFG->wwwroot . '/local/kopere_dashboard/profile-image.php?type=photo_user&id=' . $html . '" />';
+                        $html = '<img class="media-object" src="' . $CFG->wwwroot .
+                            '/local/kopere_dashboard/profile-image.php?type=photo_user&id=' . $html . '" />';
                     } else if ($column->type == table_header_item::RENDERER_SEGUNDOS) {
                         // $this->columndefs[] = (object)array("render" => "segundosRenderer", "targets" => $key);
                     }
@@ -359,7 +360,7 @@ class data_table {
      * @return string
      */
     public function close($processserver = false, $extras = null, $returnhtml = false, $title = false) {
-        global $PAGE;
+        global $PAGE, $CFG;
 
         $return = '</table>';
 
@@ -380,7 +381,7 @@ class data_table {
 
         if ($this->ajaxurl) {
             $initparams['ajax'] = (object)[
-                "url" => "load-ajax.php{$this->ajaxurl}",
+                "url" => "{$CFG->wwwroot}/local/kopere_dashboard/load-ajax.php{$this->ajaxurl}",
                 "type" => "POST"
             ];
         }

@@ -15,7 +15,8 @@ define([
                 var data = {
                     module : $(this).val()
                 };
-                $('#restante-form').load('load-ajax.php?classname=notificationsutil&method=add_form_extra', data);
+                $('#restante-form').load(
+                    M.cfg.wwwroot + "/local/kopere_dashboard/load-ajax.php?classname=notificationsutil&method=add_form_extra", data);
             });
         },
 
@@ -26,7 +27,8 @@ define([
                 var data = {
                     template : $('#notificacao-template').val()
                 };
-                $('#area-mensagem-preview').load('load-ajax.php?classname=notifications&method=settings_load_template', data);
+                $('#area-mensagem-preview').load(
+                    M.cfg.wwwroot + "/local/kopere_dashboard/load-ajax.php?classname=notifications&method=settings_load_template", data);
             }
 
             notificacao_template_change();
@@ -96,7 +98,7 @@ define([
 
         webpages_page_ajax_get_url : function() {
             $('#title').focusout(function() {
-                var url = 'load-ajax.php?classname=webpages&method=page_ajax_get_url';
+                var url = M.cfg.wwwroot + "/local/kopere_dashboard/load-ajax.php?classname=webpages&method=page_ajax_get_url";
                 var postData = {
                     title : $(this).val(),
                     id    : $('#id').val()
@@ -110,7 +112,7 @@ define([
 
         webpages_menu_ajax_get_url : function() {
             $('#title').focusout(function() {
-                var url = 'load-ajax.php?classname=webpages&method=menu_ajax_get_url';
+                var url = M.cfg.wwwroot + "/local/kopere_dashboard/load-ajax.php?classname=webpages&method=menu_ajax_get_url";
                 var postData = {
                     title : $(this).val(),
                     id    : $('#id').val()
