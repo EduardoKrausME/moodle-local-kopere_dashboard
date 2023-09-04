@@ -70,7 +70,8 @@ $PAGE->add_body_class("kopere_dashboard_body");
 echo $OUTPUT->header();
 echo "<link rel='icon' href='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/favicon.png'/>";
 
-require_once ("autoload-lang-js.php");
+require_once(__DIR__ . "/autoload-lang-js.php");
+echo get_kopere_lang();
 ?>
     <div class="all-wrapper kopere_dashboard_div">
 

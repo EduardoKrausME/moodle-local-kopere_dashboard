@@ -18,55 +18,57 @@
  * User: Eduardo Kraus
  * Date: 31/07/2023
  * Time: 20:41
+ * @throws coding_exception
  */
 
-?>
-<script>
-    lang_yes = '<?php echo get_string('yes') ?>';
-    lang_no = '<?php echo get_string('no') ?>';
-    lang_visible = '<?php echo get_string_kopere('courses_visible')?>';
-    lang_invisible = '<?php echo get_string_kopere('courses_invisible')?>';
-    lang_active = '<?php echo get_string_kopere('notification_status_active')?>';
-    lang_inactive = '<?php echo get_string_kopere('notification_status_inactive')?>';
-    dataTables_oLanguage = {
-        sEmptyTable        : "<?php echo get_string_kopere('datatables_sEmptyTable') ?>",
-        sInfo              : "<?php echo get_string_kopere('datatables_sInfo') ?>",
-        sInfoEmpty         : "<?php echo get_string_kopere('datatables_sInfoEmpty') ?>",
-        sInfoFiltered      : "<?php echo get_string_kopere('datatables_sInfoFiltered') ?>",
-        sInfoPostFix       : "<?php echo get_string_kopere('datatables_sInfoPostFix') ?>",
-        sInfoThousands     : "<?php echo get_string_kopere('datatables_sInfoThousands') ?>",
-        sLengthMenu        : "<?php echo get_string_kopere('datatables_sLengthMenu') ?>",
-        sLoadingRecords    : "<?php echo get_string_kopere('datatables_sLoadingRecords') ?>",
-        sProcessing        : "<?php echo get_string_kopere('datatables_sProcessing') ?>",
-        sErrorMessage      : "<?php echo get_string_kopere('datatables_sErrorMessage') ?>",
-        sZeroRecords       : "<?php echo get_string_kopere('datatables_sZeroRecords') ?>",
-        sSearch            : "",
-        sSearchPlaceholder : "<?php echo get_string_kopere('datatables_sSearch') ?>",
-        buttons            : {
-            print_text   : "<?php echo get_string_kopere('datatables_buttons_print_text') ?>",
-            copy_text    : "<?php echo get_string_kopere('datatables_buttons_copy_text') ?>",
-            csv_text     : "<?php echo get_string_kopere('datatables_buttons_csv_text') ?>",
-            copySuccess1 : "<?php echo get_string_kopere('datatables_buttons_copySuccess1') ?>",
-            copySuccess_ : "<?php echo get_string_kopere('datatables_buttons_copySuccess_') ?>",
-            copyTitle    : "<?php echo get_string_kopere('datatables_buttons_copyTitle') ?>",
-            copyKeys     : "<?php echo get_string_kopere('datatables_buttons_copyKeys') ?>",
-        },
-        select             : {
-            rows : {
-                _ : "<?php echo get_string_kopere('datatables_buttons_select_rows_') ?>",
-                0 : "",
-                1 : "<?php echo get_string_kopere('datatables_buttons_select_rows1') ?>",
+function get_kopere_lang() {
+    return '<script>
+        lang_yes = "' . get_string('yes') . '";
+        lang_no = "' . get_string('no') . '";
+        lang_visible = "' . get_string('courses_visible', 'local_kopere_dashboard') . '";
+        lang_invisible = "' . get_string('courses_invisible', 'local_kopere_dashboard') . '";
+        lang_active = "' . get_string('notification_status_active', 'local_kopere_dashboard') . '";
+        lang_inactive = "' . get_string('notification_status_inactive', 'local_kopere_dashboard') . '";
+        dataTables_oLanguage = {
+            sEmptyTable        : "' . get_string('datatables_sEmptyTable', 'local_kopere_dashboard') . '",
+            sInfo              : "' . get_string('datatables_sInfo', 'local_kopere_dashboard') . '",
+            sInfoEmpty         : "' . get_string('datatables_sInfoEmpty', 'local_kopere_dashboard') . '",
+            sInfoFiltered      : "' . get_string('datatables_sInfoFiltered', 'local_kopere_dashboard') . '",
+            sInfoPostFix       : "' . get_string('datatables_sInfoPostFix', 'local_kopere_dashboard') . '",
+            sInfoThousands     : "' . get_string('datatables_sInfoThousands', 'local_kopere_dashboard') . '",
+            sLengthMenu        : "' . get_string('datatables_sLengthMenu', 'local_kopere_dashboard') . '",
+            sLoadingRecords    : "' . get_string('datatables_sLoadingRecords', 'local_kopere_dashboard') . '",
+            sProcessing        : "' . get_string('datatables_sProcessing', 'local_kopere_dashboard') . '",
+            sErrorMessage      : "' . get_string('datatables_sErrorMessage', 'local_kopere_dashboard') . '",
+            sZeroRecords       : "' . get_string('datatables_sZeroRecords', 'local_kopere_dashboard') . '",
+            sSearch            : "",
+            sSearchPlaceholder : "' . get_string('datatables_sSearch', 'local_kopere_dashboard') . '",
+            buttons            : {
+                print_text   : "' . get_string('datatables_buttons_print_text', 'local_kopere_dashboard') . '",
+                copy_text    : "' . get_string('datatables_buttons_copy_text', 'local_kopere_dashboard') . '",
+                csv_text     : "' . get_string('datatables_buttons_csv_text', 'local_kopere_dashboard') . '",
+                copySuccess1 : "' . get_string('datatables_buttons_copySuccess1', 'local_kopere_dashboard') . '",
+                copySuccess_ : "' . get_string('datatables_buttons_copySuccess_', 'local_kopere_dashboard') . '",
+                copyTitle    : "' . get_string('datatables_buttons_copyTitle', 'local_kopere_dashboard') . '",
+                copyKeys     : "' . get_string('datatables_buttons_copyKeys', 'local_kopere_dashboard') . '",
+            },
+            select             : {
+                rows : {
+                    _ : "' . get_string('datatables_buttons_select_rows_', 'local_kopere_dashboard') . '",
+                    0 : "",
+                    1 : "' . get_string('datatables_buttons_select_rows1', 'local_kopere_dashboard') . '",
+                }
+            },
+            oPaginate          : {
+                sNext     : "' . get_string('datatables_oPaginate_sNext', 'local_kopere_dashboard') . '",
+                sPrevious : "' . get_string('datatables_oPaginate_sPrevious', 'local_kopere_dashboard') . '",
+                sFirst    : "' . get_string('datatables_oPaginate_sFirst', 'local_kopere_dashboard') . '",
+                sLast     : "' . get_string('datatables_oPaginate_sLast', 'local_kopere_dashboard') . '"
+            },
+            oAria              : {
+                sSortAscending  : "' . get_string('datatables_oAria_sSortAscending', 'local_kopere_dashboard') . '",
+                sSortDescending : "' . get_string('datatables_oAria_sSortDescending', 'local_kopere_dashboard') . '"
             }
-        },
-        oPaginate          : {
-            sNext     : "<?php echo get_string_kopere('datatables_oPaginate_sNext') ?>",
-            sPrevious : "<?php echo get_string_kopere('datatables_oPaginate_sPrevious') ?>",
-            sFirst    : "<?php echo get_string_kopere('datatables_oPaginate_sFirst') ?>",
-            sLast     : "<?php echo get_string_kopere('datatables_oPaginate_sLast') ?>"
-        },
-        oAria              : {
-            sSortAscending  : "<?php echo get_string_kopere('datatables_oAria_sSortAscending') ?>",
-            sSortDescending : "<?php echo get_string_kopere('datatables_oAria_sSortDescending') ?>"
         }
-    }
-</script>
+    </script>';
+}

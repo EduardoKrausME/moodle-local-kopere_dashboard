@@ -74,7 +74,8 @@ $PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
 
 echo $OUTPUT->header();
 echo "<link rel='icon' href='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/favicon.png'/>";
-require_once ("autoload-lang-js.php");
+require_once(__DIR__ . "/autoload-lang-js.php");
+echo get_kopere_lang();
 
 $dashboardmenuhtmlboost = \local_kopere_dashboard\output\menu::create_menu();
 $dashboardmenuhtmlboost = str_replace("'", '"', $dashboardmenuhtmlboost);
