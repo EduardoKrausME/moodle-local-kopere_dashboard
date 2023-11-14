@@ -92,7 +92,12 @@ if ($menu) {
     $sql = "SELECT * FROM {kopere_dashboard_webpages} WHERE link LIKE :link";
 
     /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpages */
-    $webpages = $DB->get_record_sql($sql, array('link' => $page), MUST_EXIST);
+    $webpages = $DB->get_record_sql($sql, array('link' => $page));
+
+    if ($webpages == null) {
+        $PAGE->set_url(new moodle_url("/local/kopere_dashboard/"));
+        \local_kopere_dashboard\util\header::notfound("Página não localizada!");
+    }
 
     /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
     $menu = $DB->get_record('kopere_dashboard_menu', array('id' => $webpages->menuid));
@@ -125,7 +130,7 @@ if ($menu) {
     }
 
     $pagehtml .= $OUTPUT->header();
-    $pagehtml .= $OUTPUT->heading($webpages->title, 2);
+    // $pagehtml .= $OUTPUT->heading($webpages->title, 2);
     $pagehtml .= $webpages->text;
 
 } else {

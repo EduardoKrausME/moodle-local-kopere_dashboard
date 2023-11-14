@@ -287,7 +287,7 @@ class webpages {
 
                 $exists = $DB->record_exists_select('kopere_dashboard_webpages',
                     'link = :link AND id != :id',
-                    ['menu' => $webpages->link, 'id' => $webpages->id]);
+                    ['link' => $webpages->link, 'id' => $webpages->id]);
                 if ($exists) {
                     mensagem::agenda_mensagem_danger(get_string_kopere('webpages_menu_link_duplicate'));
                 } else {
@@ -301,7 +301,7 @@ class webpages {
                     }
                 }
             } else {
-                $exists = $DB->record_exists('kopere_dashboard_webpages', ['menu' => $webpages->link]);
+                $exists = $DB->record_exists('kopere_dashboard_webpages', ['link' => $webpages->link]);
                 if ($exists) {
                     mensagem::agenda_mensagem_danger(get_string_kopere('webpages_menu_link_duplicate'));
                 } else {
