@@ -99,9 +99,11 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
         require_once __DIR__ . "/classes/util/node.php";
         \local_kopere_dashboard\util\node::add_admin_code();
 
+
+        $CFG->custommenuitems = preg_replace('/Kopere Dashboard|.*?start\n?/', '', $CFG->custommenuitems);
         if (@$CFG->kopere_dashboard_menu) {
-            $context = context_system::instance();
-            $hassiteconfig = has_capability('moodle/site:config', $context);
+            $hassiteconfig = has_capability('moodle/site:config', context_system::instance());
+
             if ($hassiteconfig && strpos($CFG->custommenuitems, "kopere_dashboard") === false) {
                 $name = get_string('modulename', 'local_kopere_dashboard');
                 $link = "/local/kopere_dashboard/open.php?classname=dashboard&method=start";
