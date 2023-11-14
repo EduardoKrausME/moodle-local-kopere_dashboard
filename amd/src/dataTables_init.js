@@ -11,7 +11,7 @@ define([
     "local_kopere_dashboard/dataTables.dateTime",
     "local_kopere_dashboard/dataTables.responsive",
     "local_kopere_dashboard/dataTables.select",
-], function($, datatables) {
+], function($) {
     return dataTables_init = {
         init : function(selector, params) {
             var renderer = {
