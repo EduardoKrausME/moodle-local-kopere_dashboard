@@ -44,6 +44,9 @@ $string['add_report_user_fields'] = 'In reports add the following user fields';
 $string['add_report_user_fields_alt'] = 'Select the user fields you want to show in Kopere reports.<br>
      Hold down the CTRL key to select multiple fields.';
 
+$string['kopere_dashboard_monitor'] = 'Server Monitor';
+$string['kopere_dashboard_monitor_desc'] = 'Do you want to display the server monitor at the top of Kopere?';
+
 $string['integracaoroot'] = 'Integration';
 
 $string['messageprovider:kopere_dashboard_messages'] = 'Send Notifications';

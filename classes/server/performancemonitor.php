@@ -36,7 +36,13 @@ class performancemonitor {
      * @return string
      */
     public static function load_monitor() {
-        global $PAGE;
+        global $PAGE, $CFG;
+
+        if (!@$CFG->kopere_dashboard_monitor) {
+            return '
+            <div id="dashboard-monitor" class="element-content no-server-monitor">
+            </div>';
+        }
 
         $PAGE->requires->js_call_amd('local_kopere_dashboard/monitor', 'init');
 

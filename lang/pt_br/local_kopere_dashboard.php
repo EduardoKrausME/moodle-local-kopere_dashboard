@@ -44,6 +44,9 @@ $string['add_report_user_fields'] = 'Nos relatórios acrecentar os seguintes cam
 $string['add_report_user_fields_alt'] = 'Selecione os campos do usuários que você quer mostrar nos relatórios do Kopere.<br>
     Mantenha pressionada a tecla CTRL para selecionar multiplos campos.';
 
+$string['kopere_dashboard_monitor'] = 'Monitor do servidor';
+$string['kopere_dashboard_monitor_desc'] = 'Deseja mostrar o monitor do servidor no topo do Kopere?';
+
 $string['integracaoroot'] = 'Integrações';
 
 $string['messageprovider:kopere_dashboard_messages'] = 'Envia Notificações';
@@ -60,9 +63,9 @@ $string['help_title'] = 'Ajuda com esta página';
 // Html/tinymce.
 $string['blocks'] = 'Blocos';
 $string['blocks_paragraph'] = 'Parágrafo';
-$string['image_alignment'] = 'Alinhamento de imagem';
-$string['image_alignment_left'] = 'Alinhamento à esquerda';
-$string['image_alignment_right'] = 'Alinhamento à direita';
+$string['image_alignment'] = 'Alinhamento da imagem';
+$string['image_alignment_left'] = 'Alinhado à esquerda';
+$string['image_alignment_right'] = 'Alinhado à direita';
 $string['colors'] = 'Cores';
 $string['background'] = 'Cor de Fundo';
 $string['color_red'] = 'Vermelho';

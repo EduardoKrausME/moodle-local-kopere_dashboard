@@ -31,7 +31,6 @@ $settings = new admin_settingpage('kopere_dashboard', get_string('pluginname', '
 $ADMIN->add('localplugins', $settings);
 
 if ($hassiteconfig) {
-
     if (!$ADMIN->locate('integracaoroot')) {
         $ADMIN->add('root', new admin_category('integracaoroot', get_string('integracaoroot', 'local_kopere_dashboard')));
     }
@@ -48,12 +47,14 @@ if ($hassiteconfig) {
 if ($ADMIN->fulltree) {
 
     if (method_exists($settings, "add")) {
-        $settings->add(
-            new admin_setting_configcheckbox('kopere_dashboard_menu',
-                get_string('kopere_dashboard_menu', 'local_kopere_dashboard'),
-                get_string('kopere_dashboard_menu_desc', 'local_kopere_dashboard'),
-                1
-            ));
+
+        $setting = new admin_setting_configcheckbox('kopere_dashboard_menu',
+            get_string('kopere_dashboard_menu', 'local_kopere_dashboard'),
+            get_string('kopere_dashboard_menu_desc', 'local_kopere_dashboard'),
+            1
+        );
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $settings->add($setting);
 
         $openitens = [
             'internal' => get_string('kopere_dashboard_open_internal', 'local_kopere_dashboard'),
@@ -67,6 +68,13 @@ if ($ADMIN->fulltree) {
                 get_string('kopere_dashboard_open_desc', 'local_kopere_dashboard'),
                 'internal',
                 $openitens
+            ));
+
+        $settings->add(
+            new admin_setting_configcheckbox('kopere_dashboard_monitor',
+                get_string('kopere_dashboard_monitor', 'local_kopere_dashboard'),
+                get_string('kopere_dashboard_monitor_desc', 'local_kopere_dashboard'),
+                0
             ));
     }
 }

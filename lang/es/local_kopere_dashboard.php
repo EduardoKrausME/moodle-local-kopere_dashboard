@@ -49,6 +49,9 @@ $string['add_report_user_fields'] = 'En los informes, agregue los siguientes cam
 $cadena['add_report_user_fields_alt'] = 'Seleccione los campos de usuario que desea mostrar en los informes de Kopere.<br>
     Mantenga presionada la tecla CTRL para seleccionar varios campos.';
 
+$string['kopere_dashboard_monitor'] = 'Monitor del servidor';
+$string['kopere_dashboard_monitor_desc'] = '¿Desea mostrar el monitor del servidor en la parte superior de Kopere?';
+
 $string['integracaoroot'] = 'Integraciones';
 
 $string['messageprovider:kopere_dashboard_messages'] = 'Enviar Notificaciones';
