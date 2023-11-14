@@ -76,5 +76,10 @@ if ($ADMIN->fulltree) {
                 get_string('kopere_dashboard_monitor_desc', 'local_kopere_dashboard'),
                 0
             ));
+
+        $plugins = glob(__DIR__ . "/../*/settings_kopere.php");
+        foreach ($plugins as $plugin) {
+            require $plugin;
+        }
     }
 }
