@@ -26,13 +26,20 @@ namespace local_kopere_dashboard;
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
+use local_kopere_dashboard\html\inputs\input_base;
+use local_kopere_dashboard\html\inputs\input_email;
 use local_kopere_dashboard\html\inputs\input_select;
+use local_kopere_dashboard\html\inputs\input_text;
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\dashboard_util;
+use local_kopere_dashboard\util\enroll_util;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\html;
 use local_kopere_dashboard\util\json;
+use local_kopere_dashboard\util\mensagem;
+use local_kopere_dashboard\util\user_util;
+use local_kopere_dashboard\util\string_util;
 use local_kopere_dashboard\util\title_util;
 use local_kopere_dashboard\vo\kopere_dashboard_webpages;
 
@@ -139,7 +146,7 @@ class courses {
      * @throws \dml_exception
      */
     public function details() {
-        global $DB, $CFG;
+        global $DB, $CFG, $PAGE;
 
         $courseid = optional_param('courseid', 0, PARAM_INT);
         if ($courseid == 0) {
@@ -157,7 +164,7 @@ class courses {
                   <h3>' . get_string_kopere('courses_sumary') . ' ' .
             button::info(get_string_kopere('courses_edit'),
                 "{$CFG->wwwroot}/course/edit.php?id={$course->id}#id_summary_editor", button::BTN_PEQUENO, false, true) . ' ' .
-            button::primary(get_string_kopere('courses_acess'),
+            button::primary(get_string_kopere('courses_access'),
                 "{$CFG->wwwroot}/course/view.php?id={$course->id}", button::BTN_PEQUENO, false, true) . '
                   </h3>
                   <div class="panel panel-default">
@@ -166,8 +173,29 @@ class courses {
         echo '    </div>
               </div>';
 
-        echo '<div class="element-box table-responsive">';
-        title_util::print_h3('courses_titleenrol');
+
+        echo '<div class="element-box table-responsive table-new-enrol" style="display:none">';
+        title_util::print_h3("courses_enrol_new");
+        $form = new form("?classname=courses&method=enrol_new&courseid={$course->id}");
+        $form->add_input(
+            input_email::new_instance()
+                ->set_name("usuario-email")
+                ->set_title(get_string_kopere('courses_student_name'))
+                ->set_required()
+        );
+        $form->create_submit_input(get_string_kopere('courses_validate_user'));
+        $form->close();
+
+        echo '</div>';
+
+
+        echo '<div class="element-box table-responsive table-list-enrol">';
+        echo
+            '<h3>' .
+            get_string_kopere('courses_titleenrol') .
+            ' <span class="btn btn-primary bt-courses_enrol_new">' . get_string_kopere('courses_enrol_new') . '</span>' .
+            '</h3>';
+
 
         $table = new data_table();
         $table->add_header('#', 'id', table_header_item::TYPE_INT);
@@ -182,6 +210,159 @@ class courses {
 
         echo '</div>';
         dashboard_util::end_page();
+
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/course', 'courses_enrol_new');
+    }
+
+    public function enrol_new() {
+        global $DB, $CFG, $PAGE, $USER;
+
+        $courseid = optional_param('courseid', 0, PARAM_INT);
+        if ($courseid == 0) {
+            header::notfound(get_string_kopere('courses_invalid'));
+        }
+
+        $course = $DB->get_record('course', array('id' => $courseid));
+        header::notfound_null($course, get_string_kopere('courses_notound'));
+
+        dashboard_util::add_breadcrumb(get_string_kopere('courses_title'), '?classname=courses&method=dashboard');
+        dashboard_util::add_breadcrumb($course->fullname);
+        dashboard_util::add_breadcrumb(get_string_kopere('courses_enrol_new'));
+        dashboard_util::start_page();
+
+        echo '<div class="element-box table-responsive table-new-enrol">';
+
+        $userid = optional_param("userid", 0, PARAM_INT);
+        $email = optional_param("usuario-email", "", PARAM_EMAIL);
+        $user = $DB->get_record_select('user', "email = '{$email}' OR id = '{$userid}'");
+
+        if ($user) {
+            title_util::print_h3("courses_validate_user");
+
+            echo "<div class='d-flex'>";
+            echo profile::user_data($user, 50);
+            echo "</div>";
+
+            $tifirst = strtoupper(substr($user->firstname, 0, 1));
+            $tilast = strtoupper(substr($user->lastname, 0, 1));
+            $linkEnrol = "{$CFG->wwwroot}/user/index.php?id={$course->id}&tifirst={$tifirst}&tilast={$tilast}";
+            if (enroll_util::enrolled($course, $user)) {
+                mensagem::print_info(get_string_kopere("courses_student_cadastrado", $linkEnrol));
+            } else {
+
+                $matricular = optional_param("matricular", false, PARAM_INT);
+                if ($matricular) {
+                    enroll_util::enrol($course, $user, time(), 0, ENROL_INSTANCE_ENABLED);
+
+                    redirect($linkEnrol, get_string_kopere('courses_student_cadastrar_ok'));
+                }
+
+                button::add(get_string_kopere("courses_student_cadastrar"), "?classname=courses&method=enrol_new&courseid={$course->id}&userid={$user->id}&matricular=1");
+            }
+
+
+        } else {
+
+            $nome = optional_param("usuario-nome", false, PARAM_TEXT);
+            $password = optional_param("usuario-senha", string_util::generate_random_password(), PARAM_TEXT);
+            $address = optional_param("address", "", PARAM_TEXT);
+            $city = optional_param("city", "", PARAM_TEXT);
+            $phone1 = optional_param("phone1", "", PARAM_TEXT);
+
+            if ($nome) {
+
+                $newuser = new \stdClass();
+
+                $newuser->idnumber = "";
+                $newuser->firstname = $nome;
+                $newuser->lastname = null;
+                $newuser->username = strtolower($email);
+                $newuser->email = strtolower($email);
+                $newuser->password = $password;
+                $newuser->address = $address;
+                $newuser->city = $city;
+                $newuser->country = $USER->country;
+                $newuser->phone1 = $phone1;
+                $newuser->phone2 = "";
+                $newuser->auth = 'manual';
+                $newuser->confirmed = 1;
+                $newuser->mnethostid = $CFG->mnet_localhost_id;
+
+                $newuser = user_util::explode_name($newuser);
+
+                $errors = user_util::validate_new_user($newuser);
+                if ($errors) {
+                    mensagem::print_danger($errors);
+                } else {
+                    try {
+                        require_once "{$CFG->dirroot}/user/lib.php";
+                        $newuser->id = user_create_user($newuser);
+
+                        $a = (object)['login' => $newuser->username, 'senha' => $password];
+                        mensagem::agenda_mensagem_success(get_string_kopere('courses_student_ok', $a));
+                        header::location("?classname=courses&method=enrol_new&courseid={$course->id}&userid={$newuser->id}");
+                    } catch (\moodle_exception $e) {
+                        mensagem::print_danger($e->getMessage());
+                    }
+                }
+            }
+
+            title_util::print_h3("courses_enrol_new_form");
+            $form = new form("?classname=courses&method=enrol_new&courseid={$course->id}");
+
+            $form->add_input(
+                input_text::new_instance()
+                    ->set_name("usuario-nome")
+                    ->set_value($nome)
+                    ->set_title(get_string_kopere('courses_student_name'))
+                    ->set_class(input_base::VAL_NOME)
+                    ->set_required()
+            );
+            $form->add_input(
+                input_email::new_instance()
+                    ->set_name("usuario-email")
+                    ->set_title(get_string_kopere('courses_student_email'))
+                    ->set_value($email)
+                    ->set_required()
+            );
+            $form->add_input(
+                input_text::new_instance()
+                    ->set_name("usuario-senha")
+                    ->set_title(get_string_kopere('courses_student_password'))
+                    ->set_value($password)
+                    ->set_required()
+            );
+
+            echo "<div class='form-group'>
+                      <label>" . get_string('optional', 'form') . "</label>
+                      <div class='panel panel-default'>
+                          <div class='panel-body'>";
+            $form->add_input(
+                input_text::new_instance()
+                    ->set_name("address")
+                    ->set_title(get_string('address'))
+                    ->set_value($address)
+            );
+            $form->add_input(
+                input_text::new_instance()
+                    ->set_name("city")
+                    ->set_title(get_string('city'))
+                    ->set_value($city)
+            );
+            $form->add_input(
+                input_text::new_instance()
+                    ->set_name("phone1")
+                    ->set_title(get_string('phone1'))
+                    ->set_value($phone1)
+            );
+            echo "</div></div></div>";
+
+            $form->create_submit_input(get_string_kopere('courses_user_create'));
+            $form->close();
+        }
+        echo '</div>';
+
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/course', 'courses_enrol_new');
     }
 
     /**
