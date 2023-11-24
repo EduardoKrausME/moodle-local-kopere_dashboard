@@ -50,6 +50,27 @@ class string_util {
     }
 
     /**
+     * @param int $length
+     *
+     * @return string
+     */
+    public static function generate_random_password($length = 10) {
+        $characters = '123456789';
+        $characters .= 'ABCDEFGHJKMNPQRSTUVWXYZ';
+        $characters .= 'abcdefghjkmnpqrstuvwxyz';
+        $characters .= '!@#$%*()+=-{}[]:;<>?~!@#$%*()+=-{}[]:;<>?~';
+
+        $lengthstring = strlen($characters);
+        $string = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $string .= $characters[rand(0, $lengthstring - 1)];
+        }
+
+        return $string;
+    }
+
+    /**
      * @param string $id
      * @return string
      */
