@@ -79,29 +79,9 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
         // Se der problema, não precisa fazer nada.
     }
 
+    $CFG->custommenuitems = preg_replace('/Kopere Dashboard|.*?start\n?/', '', $CFG->custommenuitems);
     if (isloggedin()) {
-        $context = context_system::instance();
-        if (has_capability('local/kopere_dashboard:view', $context) ||
-            has_capability('local/kopere_dashboard:manage', $context)) {
-
-            $node = $nav->add(
-                get_string('pluginname', 'local_kopere_dashboard'),
-                new moodle_url("{$CFG->wwwroot}/local/kopere_dashboard/open.php?classname=dashboard&method=start"),
-                navigation_node::TYPE_CUSTOM,
-                null,
-                'kopere_dashboard',
-                new pix_icon('icon', get_string('pluginname', 'local_kopere_dashboard'), 'local_kopere_dashboard')
-            );
-
-            $node->showinflatnavigation = true;
-        }
-
-        require_once __DIR__ . "/classes/util/node.php";
-        \local_kopere_dashboard\util\node::add_admin_code();
-
-
-        $CFG->custommenuitems = preg_replace('/Kopere Dashboard|.*?start\n?/', '', $CFG->custommenuitems);
-        if (@$CFG->kopere_dashboard_menu) {
+        if ($CFG->branch > 400 && @$CFG->kopere_dashboard_menu) {
             $hassiteconfig = has_capability('moodle/site:config', context_system::instance());
 
             if ($hassiteconfig && strpos($CFG->custommenuitems, "kopere_dashboard") === false) {
@@ -109,6 +89,25 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
                 $link = "/local/kopere_dashboard/open.php?classname=dashboard&method=start";
                 $CFG->custommenuitems = "{$name}|{$link}\n{$CFG->custommenuitems}";
             }
+        } else {
+            $context = context_system::instance();
+            if (has_capability('local/kopere_dashboard:view', $context) ||
+                has_capability('local/kopere_dashboard:manage', $context)) {
+
+                $node = $nav->add(
+                    get_string('pluginname', 'local_kopere_dashboard'),
+                    new moodle_url("{$CFG->wwwroot}/local/kopere_dashboard/open.php?classname=dashboard&method=start"),
+                    navigation_node::TYPE_CUSTOM,
+                    null,
+                    'kopere_dashboard',
+                    new pix_icon('icon', get_string('pluginname', 'local_kopere_dashboard'), 'local_kopere_dashboard')
+                );
+
+                $node->showinflatnavigation = true;
+            }
+
+            require_once __DIR__ . "/classes/util/node.php";
+            \local_kopere_dashboard\util\node::add_admin_code();
         }
     }
 }
