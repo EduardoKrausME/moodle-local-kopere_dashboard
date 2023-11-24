@@ -197,31 +197,4 @@
         }
     });
 
-    // mackInputs()
-    $("input.mask_phone").mask("(99) 9999-9999");
-    $("input.mask_celphone").mask("(99) 9 9999-9999");
-    $("input.mask_cep").mask("99999-999");
-    $("input.mask_cpf,input.val_cpf").mask("999.999.999-99");
-    $("input.mask_cnpj").mask("99.999.999/9999-99");
-    $("input.mask_datahora").mask("99/99/9999 99:99");
-    $("input.mask_data").mask("99/99/9999");
-    $("input.mask_relatorioData").mask("9999-99");
-    $("input.mask_int").keyup(function() {
-        var text = $(this).val();
-        $(this).val(text.replace(/[^\d]/, ""));
-    });
-    $("input.mask_float").keyup(function() {
-        var text = $(this).val();
-        $(this).val(text.replace(/[^\d,]/, ""));
-    });
-    $("input.mask_valor").keyup(function() {
-        var text = $(this).val();
-        text = text.replace(/[^\d]/, "");
-        text = parseInt(text).toString();
-        if (text == "NaN")
-            text = "";
-        text = text.substr(0, text.length - 2) + "," + text.substr(text.length - 2, text.length);
-        $(this).val(text);
-    });
-
 });
