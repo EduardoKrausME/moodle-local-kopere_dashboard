@@ -180,7 +180,7 @@ class courses {
         $form->add_input(
             input_email::new_instance()
                 ->set_name("usuario-email")
-                ->set_title(get_string_kopere('courses_student_name'))
+                ->set_title(get_string_kopere('courses_student_email'))
                 ->set_required()
         );
         $form->create_submit_input(get_string_kopere('courses_validate_user'));
