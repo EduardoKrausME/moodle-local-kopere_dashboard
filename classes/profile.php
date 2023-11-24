@@ -38,34 +38,42 @@ class profile {
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public function details($user) {
+    public static function details($user) {
+        echo "<div class='profile-content'>
+                  <div class='table'>
+                      <div class='profile'>
+                          " . self::user_data($user, 110) . "
+                          <h2>" . get_string_kopere('profile_courses_title') . "</h2>
+                          <ul class='personalDev'>
+                              " . self::list_courses($user->id) . "
+                          </ul>
+                       </div>
+
+                       <div class='info'>
+                            " . self::get_user_info($user) . "
+                      </div>
+                  </div>
+              </div>";
+    }
+
+    /**
+     * @param $user
+     * @return string
+     * @throws \coding_exception
+     */
+    public static function user_data($user, $img_height){
         global $PAGE;
 
         $userpicture = new \user_picture($user);
         $userpicture->size = 110;
         $profileimageurl = $userpicture->get_url($PAGE)->out(false);
-
-        echo "<div class='profile-content'>
-                  <div class='table'>
-                      <div class='profile'>
-                          <img src='{$profileimageurl}' alt='" . fullname($user) . "'>
-                          <span class='name'>{$user->firstname}
-                              <span class='last'>{$user->lastname}</span>
-                              <span class='city'>{$user->city}</span>
-                          </span>
-                          <div class='desc'>{$user->description}</div>
-
-                          <h2>' . get_string_kopere('profile_courses_title') . '</h2>
-                          <ul class='personalDev'>
-                              {$this->list_courses($user->id)}
-                          </ul>
-                       </div>
-
-                       <div class='info'>
-                          {$this->get_user_info($user)}
-                      </div>
-                  </div>
-              </div>";
+        return "
+            <img src='{$profileimageurl}' alt='" . fullname($user) . "' height='{$img_height}'>
+            <h3 class='name'>{$user->firstname}
+                <span class='last'>{$user->lastname}</span>
+            </h3>
+            <span class='city'>{$user->city}</span>
+            <div class='desc'>{$user->description}</div>";
     }
 
     /**
@@ -75,7 +83,7 @@ class profile {
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public function list_courses($userid) {
+    public static function list_courses($userid) {
         global $DB, $CFG;
 
         $courses = enrol_get_all_users_courses($userid);
@@ -120,19 +128,21 @@ class profile {
                     get_string_kopere('profile_enrol_active') . '</span>';
             }
 
+            $url = "{$CFG->wwwroot}/local/kopere_dashboard/load-ajax.php?classname=userenrolment&method=mathedit&courseid={$course->id}&ueid={$enrolment->id}";
             return
                 "<li>
                     <h4 class='title'>{$course->fullname}
                         <span class='status'>{$matriculastatus}</span>
                     </h4>
-                    <div>" . get_string_kopere('profile_enrol_start') . ' <em>' .
-                userdate($enrolment->timestart, get_string_kopere('dateformat')) . '</em> ' . $expirationend . ' -
-                        <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal-edit"
-                                data-href="' . $CFG->wwwroot . '/local/kopere_dashboard/load-ajax.php?classname=userenrolment&method=mathedit&courseid=' . $course->id .
-                "&ueid={$enrolment->id}'>" . get_string_kopere('profile_edit') . '</button>
+                    <div>" . get_string_kopere('profile_enrol_start') . ' 
+                        <em>' . userdate($enrolment->timestart, get_string_kopere('dateformat')) . "</em> 
+                        {$expirationend} -
+                        <button class='btn btn-info btn-xs' data-toggle='modal' 
+                                data-target='#modal-edit'
+                                data-href='{$url}'>" . get_string_kopere('profile_edit') . '</button>
                     </div>
-                    <div class="roles">' . get_string_kopere('profile_enrol_profile') . ': ' . $rolehtml . '</div>
-                </li>';
+                    <div class="roles">' . get_string_kopere('profile_enrol_profile') . ": {$rolehtml}</div>
+                </li>";
         }
         return null;
     }
@@ -142,7 +152,7 @@ class profile {
      *
      * @return string
      */
-    public function get_user_info($user) {
+    public static function get_user_info($user) {
         global $CFG;
 
         return "

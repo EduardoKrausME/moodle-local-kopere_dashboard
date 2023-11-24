@@ -49,7 +49,7 @@ input {
         width: 100px;
     }
     &.single-datetimerange {
-        width: 142px;
+        width: 160px;
     }
 }
 #region-main,
@@ -401,12 +401,12 @@ body.menu-w-90 {
                     width: 100%;
                     display: block;
                 }
-                .city {
-                    color: #999;
-                    font-size: 16px;
-                    font-weight: 400;
-                    line-height: 33px;
-                }
+            }
+            .city {
+                color: #999;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 33px;
             }
             .desc {
                 width: 100%;

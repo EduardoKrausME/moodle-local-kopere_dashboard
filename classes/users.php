@@ -104,8 +104,7 @@ class users {
 
         echo '<div class="element-box">';
 
-        $profile = new profile();
-        $profile->details($user);
+        profile::details($user);
 
         echo '</div>';
         dashboard_util::end_page();
