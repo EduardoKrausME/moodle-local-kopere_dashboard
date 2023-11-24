@@ -34,6 +34,7 @@ use local_kopere_dashboard\util\end_util;
 use local_kopere_dashboard\util\enroll_util;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\mensagem;
+use local_kopere_dashboard\util\user_util;
 use local_kopere_dashboard\util\string_util;
 use local_kopere_dashboard\util\title_util;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
@@ -383,6 +384,7 @@ class userimport {
     /**
      * @throws \coding_exception
      * @throws \dml_exception
+     * @throws \Exception
      */
     public function proccess() {
         global $CFG, $DB, $USER;
@@ -515,12 +517,6 @@ class userimport {
             if (!$user) {
                 // Not search! create user.
 
-                if ($lastname == null) {
-                    $nomes = explode(' ', $firstname);
-                    $firstname = $nomes[0];
-                    array_shift($nomes);
-                    $lastname = implode(' ', $nomes);
-                }
                 if ($username == null) {
                     $username = $email;
                 }
@@ -543,6 +539,8 @@ class userimport {
                 $newuser->auth = 'manual';
                 $newuser->confirmed = 1;
                 $newuser->mnethostid = $CFG->mnet_localhost_id;
+
+                $newuser = user_util::explode_name($newuser);
 
                 if ($inserir) {
                     if (strlen($password) < 5) {
@@ -575,16 +573,8 @@ class userimport {
                 }
                 $this->add_col($country, !$inserir);
 
-                $errors = "";
-                if (!empty($newuser->password)) {
-                    $errmsg = '';
-                    if (!check_password_policy($newuser->password, $errmsg)) {
-                        $errors .= $errmsg;
-                    }
-                }
-                if (empty($newuser->username)) {
-                    $errors .= get_string('required');
-                } else if (!$user || $user->username !== $newuser->username) {
+                $errors = user_util::validate_new_user($newuser);
+                if (!$user || $user->username !== $newuser->username) {
                     if ($DB->record_exists('user', array('username' => $newuser->username,
                         'mnethostid' => $CFG->mnet_localhost_id))) {
                         $errors .= get_string('usernameexists');
@@ -598,15 +588,7 @@ class userimport {
                         }
                     }
                 }
-                if (!$user || (isset($newuser->email) && $user->email !== $newuser->email)) {
-                    if (!validate_email($newuser->email)) {
-                        $errors .= get_string('invalidemail');
-                    } else if (empty($CFG->allowaccountssameemail)
-                        && $DB->record_exists('user', array('email' => $newuser->email,
-                            'mnethostid' => $CFG->mnet_localhost_id))) {
-                        $errors .= get_string('emailexists');
-                    }
-                }
+
                 if ($errors != '') {
                     $this->add_col($errors, !$inserir);
                 } else if (!$inserir) {

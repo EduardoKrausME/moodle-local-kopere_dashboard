@@ -28,6 +28,22 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class user_util {
+
+    /**
+     * @param string $firstname
+     * @param string $lastname
+     */
+    public static function explode_name($newuser) {
+        if ($newuser->lastname == null) {
+            $nomes = explode(' ', $newuser->firstname);
+            $newuser->firstname = $nomes[0];
+            array_shift($nomes);
+            $newuser->lastname = implode(' ', $nomes);
+        }
+
+        return $newuser;
+    }
+
     /**
      * @param $result
      * @param string $colname
@@ -40,5 +56,36 @@ class user_util {
         }
 
         return $result;
+    }
+
+    /**
+     * @param $newuser
+     * @return string
+     * @throws \Exception
+     */
+    public static function validate_new_user($newuser) {
+        global $CFG, $DB;
+
+        $errors = [];
+        if (!empty($newuser->password)) {
+            $errmsg = '';
+            if (!check_password_policy($newuser->password, $errmsg)) {
+                $errors[] = $errmsg;
+            }
+        } else {
+            $errors[] = get_string('password') . ": " . get_string('required');
+        }
+        if (empty($newuser->username)) {
+            $errors[] = get_string('username') . ": " . get_string('required');
+        }
+        if (!validate_email($newuser->email)) {
+            $errors[] = get_string('invalidemail');
+        } else if (empty($CFG->allowaccountssameemail)
+            && $DB->record_exists('user', array('email' => $newuser->email,
+                'mnethostid' => $CFG->mnet_localhost_id))) {
+            $errors[] = get_string('emailexists');
+        }
+
+        return implode("<br>", $errors);
     }
 }
