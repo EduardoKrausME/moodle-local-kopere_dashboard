@@ -50,7 +50,7 @@ class userenrolment {
         header::notfound_null($enrolment, get_string_kopere('userenrolment_notfound'));
 
         ob_clean();
-        dashboard_util::add_breadcrumb(get_string_kopere('userenrolment_edit'));
+        dashboard_util::add_breadcrumb(get_string_kopere('userenrolment_detail'));
         dashboard_util::start_page();
 
         $form = new form('?classname=userenrolment&method=mathedit_save');
@@ -102,6 +102,8 @@ class userenrolment {
             userdate($enrolment->timecreated, get_string_kopere('dateformat')));
         $form->print_row(get_string_kopere('userenrolment_updated'),
             userdate($enrolment->timemodified, get_string_kopere('dateformat')));
+
+        $form->create_submit_input(get_string('savechanges'));
 
         $form->close();
 
