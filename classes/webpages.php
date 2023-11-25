@@ -263,7 +263,7 @@ class webpages {
         $form->create_submit_input(get_string_kopere('webpages_page_save'));
         $form->close();
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'webpages_page_ajax_get_url');
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', 'webpages_page_ajax_get_url');
 
         echo '</div>';
         dashboard_util::end_page();
@@ -400,7 +400,7 @@ class webpages {
         $form->create_submit_input(get_string_kopere('webpages_menu_save'));
         $form->close();
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'webpages_menu_ajax_get_url');
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', 'webpages_menu_ajax_get_url');
 
         echo '</div>';
 
