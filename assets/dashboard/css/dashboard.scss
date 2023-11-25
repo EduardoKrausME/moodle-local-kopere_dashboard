@@ -40,10 +40,6 @@ input[type="number"],
 input.val_int {
     width: 100px;
 }
-select:not([size]):not([multiple]) {
-    height: calc(2.125rem + 2px);
-    max-width: 100%;
-}
 input {
     &.single-daterange {
         width: 100px;
