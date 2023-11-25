@@ -47,7 +47,7 @@ class useronline {
      */
     public function dashboard() {
         dashboard_util::add_breadcrumb(get_string_kopere('useronline_title'));
-        dashboard_util::start_page('?classname=useronline&method=settings', 'Usuários-Online');
+        dashboard_util::start_page(null, 'Usuários-Online');
 
         echo '<div class="element-box table-responsive">';
 
@@ -177,7 +177,7 @@ class useronline {
         $form->create_submit_input(get_string('savechanges'));
         $form->close();
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'useronline_status');
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/useronline', 'useronline_status');
 
         dashboard_util::end_page();
     }
