@@ -26,6 +26,7 @@ namespace local_kopere_dashboard;
 use core\event\base;
 use local_kopere_dashboard\html\form;
 use local_kopere_dashboard\html\inputs\input_select;
+use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\end_util;
 use local_kopere_dashboard\util\mensagem;
 use local_kopere_dashboard\util\release;
@@ -75,6 +76,11 @@ class notificationsutil {
             \report_eventlist_list_generator::get_core_events_list(false),
             \report_eventlist_list_generator::get_non_core_event_list(false)
         );
+
+        //$eventclasss = \report_eventlist_list_generator::get_all_events_list();
+        //echo '<pre>';
+        //print_r($eventclasss);
+        //echo '</pre>';
 
         $components = array();
         $eventinformation = array();
@@ -149,18 +155,31 @@ class notificationsutil {
         $content = file_get_contents($templatefile);
 
         $linkmanager
-            = "<a href='{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?classname=notifications&method=dashboard'
+            = "<a href='{$CFG->wwwroot}/message/notificationpreferences.php'
                   target='_blank' style='border-bottom:1px #777777 dotted; text-decoration:none; color:#777777;'>
-                            " . get_string_kopere('notification_manager') . "
-                        </a>";
+                   " . get_string_kopere('notification_manager') . "
+               </a>";
 
-        $content = str_replace('{[moodle.fullname]}', $COURSE->fullname, $content);
-        $content = str_replace('{[moodle.shortname]}', $COURSE->shortname, $content);
-        $content = str_replace('{[message]}', "<h2>Título</h2><p>Linha 1</p><p>Linha 2</p>", $content);
-        $content = str_replace('{[date.year]}', userdate(time(), '%Y'), $content);
-        $content = str_replace('{[manager]}"', $linkmanager, $content);
+        $data = [
+            'content' => $content,
+            'tags' => [
+                'moodle_fullname' => $COURSE->fullname,
+                'moodle_shortname' => $COURSE->shortname,
+                'message' => "<h2>Título</h2><p>Linha 1</p><p>Linha 2</p>",
+                'date_year' => userdate(time(), '%Y'),
+                'manager' => $linkmanager
+            ]
+        ];
 
-        echo $content;
+        ob_clean();
+        die(json_encode($data));
+
+        //$content = str_replace('{[moodle.fullname]}', $COURSE->fullname, $content);
+        //$content = str_replace('{[moodle.shortname]}', $COURSE->shortname, $content);
+        //$content = str_replace('{[message]}', "<h2>Título</h2><p>Linha 1</p><p>Linha 2</p>", $content);
+        //$content = str_replace('{[date.year]}', userdate(time(), '%Y'), $content);
+        //$content = str_replace('{[manager]}', $linkmanager, $content);
+        //echo $content;
     }
 
     /**
@@ -241,5 +260,26 @@ class notificationsutil {
             $CFG->mail = 'outgoingmailconfig';
             mensagem::print_danger(get_string_kopere('notification_error_smtp', $CFG));
         }
+    }
+
+    /**
+     * @return string
+     */
+    public static function get_template_html() {
+        global $CFG;
+
+        $notificacao_template_html = config::get_key('notificacao-template-html');
+        if ($notificacao_template_html) {
+            return $notificacao_template_html;
+        }
+
+        $notificacao_template = config::get_key('notificacao-template');
+        if ($notificacao_template) {
+            if (file_exists("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$notificacao_template}")) {
+                return file_get_contents("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$notificacao_template}");
+            }
+        }
+
+        return file_get_contents("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/Blue.html");
     }
 }

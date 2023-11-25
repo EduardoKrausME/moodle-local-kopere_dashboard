@@ -255,6 +255,7 @@ $string['notification_notfound'] = '¡Notificación no encontrada!';
 $string['notification_notound'] = '¡Notificación no encontrada!';
 $string['notification_setting_config'] = 'Configuraciones de Email';
 $string['notification_setting_preview'] = 'Vista previa';
+$string['notification_setting_edit'] = 'Editar plantilla HTML';
 $string['notification_setting_template'] = 'Plantilla';
 $string['notification_setting_templatelocation'] = 'Plantillas están en la carpeta';
 $string['notification_status'] = 'Estatus';

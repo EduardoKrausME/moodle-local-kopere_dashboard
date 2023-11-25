@@ -30,6 +30,7 @@ use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
 use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\html\inputs\input_text;
+use local_kopere_dashboard\html\inputs\input_textarea;
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\html\tinymce;
 use local_kopere_dashboard\util\config;
@@ -144,7 +145,7 @@ class notifications extends notificationsutil {
 
         $form->close();
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'notifications_add_form_extra');
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/notifications', 'notifications_add_form_extra');
 
         echo '</div>';
         dashboard_util::end_page();
@@ -288,6 +289,7 @@ class notifications extends notificationsutil {
 
     /**
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function add_save() {
         global $DB;
@@ -383,16 +385,19 @@ class notifications extends notificationsutil {
                 ->set_values($values, 'key', 'key')
                 ->set_value_by_config('notificacao-template'));
 
-        $form->print_panel(get_string_kopere('notification_setting_preview'), "<div id='area-mensagem-preview'></div>");
 
-        $form->print_row(get_string_kopere('notification_setting_templatelocation'),
-            "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/");
+        $form->add_input(
+            input_textarea::new_instance()
+                ->set_title(get_string_kopere('notification_setting_edit'))
+                ->set_name('notificacao-template-html'));
+
+        $form->print_panel(get_string_kopere('notification_setting_preview'), "<div id='area-mensagem-preview'></div>");
 
         $form->create_submit_input(get_string('savechanges'));
 
         $form->close();
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'notifications_settings_load_template');
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/notifications', 'notifications_settings_load_template');
         echo "<style>.table-messagem{max-width:600px;}</style>";
 
         dashboard_util::end_page();

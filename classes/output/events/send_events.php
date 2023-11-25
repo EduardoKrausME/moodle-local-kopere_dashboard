@@ -24,7 +24,7 @@
 namespace local_kopere_dashboard\output\events;
 
 use core\message\message;
-use local_kopere_dashboard\util\config;
+use local_kopere_dashboard\notificationsutil;
 use local_kopere_dashboard\util\release;
 use local_kopere_dashboard\vo\kopere_dashboard_events;
 
@@ -83,6 +83,8 @@ class send_events {
      */
     public function send() {
         global $COURSE, $CFG, $DB;
+
+        require_once("{$CFG->dirrrot}/login/lib.php");
 
         $this->load_template();
 
@@ -144,6 +146,7 @@ class send_events {
 
         // Admins: {[admin.???]}.
         $admin = get_admin();
+        $admin->fullname = fullname($admin);
         $this->subject = $this->replace_tag_user($this->subject, $admin, 'admin');
         $this->message = $this->replace_tag_user($this->message, $admin, 'admin');
 
@@ -183,14 +186,15 @@ class send_events {
 
             if (isset($this->event->other['password'])) {
                 $userto->password = $this->event->other['password'];
-            } else {
-                $userto->password = '';
+            } else if (strpos($this->message, '{[to.password]}')) {
+                $new_password = $this->login_generate_password($userto);
+                $userto->password = "{$CFG->wwwroot}/login/forgot_password.php?token={$new_password}";
             }
 
             $sendsubject = $this->replace_tag_user($this->subject, $userto, 'to');
             $htmlmessage = $this->replace_tag_user($this->message, $userto, 'to');
 
-            $magager = "<a href='{$CFG->wwwroot}/message/edit.php?id={$userto->id}'>Gerenciar mensagens</a>";
+            $magager = "<a href='{$CFG->wwwroot}/message/notificationpreferences.php'>Gerenciar mensagens</a>";
             $htmlmessage = str_replace('{[manager]}', $magager, $htmlmessage);
 
             $eventdata = new message();
@@ -208,17 +212,18 @@ class send_events {
             $eventdata->fullmessagehtml = $htmlmessage;
             $eventdata->smallmessage = '';
 
+            //$CFG->debugsmtp = true;
+            //$CFG->debugdeveloper = true;
+
             message_send($eventdata);
         }
     }
 
     /**
-     * @throws \dml_exception
      */
     private function load_template() {
-        global $CFG;
-        $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" . config::get_key('notificacao-template');
-        $templatecontent = file_get_contents($template);
+
+        $templatecontent = notificationsutil::get_template_html();
 
         $this->subject = $this->kopere_dashboard_events->subject;
         $this->message = str_replace('{[message]}', $this->kopere_dashboard_events->message, $templatecontent);
@@ -305,5 +310,22 @@ class send_events {
         }
 
         return $text;
+    }
+
+    /**
+     * @param $user
+     * @return mixed
+     * @throws \dml_exception
+     */
+    private function login_generate_password($user) {
+        global $DB;
+        $resetrecord = (object)[
+            "timerequested" => strtotime('+48 hours', time()),
+            "userid" => $user->id,
+            "token" => random_string(32),
+        ];
+
+        $DB->insert_record('user_password_resets', $resetrecord);
+        return $resetrecord->token;
     }
 }

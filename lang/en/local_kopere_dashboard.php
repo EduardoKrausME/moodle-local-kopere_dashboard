@@ -365,6 +365,7 @@ $string['notification_setting_config'] = 'E-mail Settings';
 $string['notification_setting_template'] = 'Template';
 $string['notification_setting_templatelocation'] = 'Templates are in the folder';
 $string['notification_setting_preview'] = 'Preview';
+$string['notification_setting_edit'] = 'Edit template HTML';
 $string['notification_manager'] = 'Manage Messages';
 $string['notification_core_course_category'] = 'Course Category';
 $string['notification_core_course'] = 'Courses';
