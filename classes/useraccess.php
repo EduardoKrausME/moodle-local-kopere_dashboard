@@ -37,8 +37,8 @@ class useraccess {
         dashboard_util::add_breadcrumb(get_string_kopere('useraccess_title'));
         dashboard_util::start_page();
 
+        echo '<div class="element-box bloco_changue_mes">';
         $changuemes = optional_param('changue_mes', date('Y-m'), PARAM_TEXT);
-
         $form = new form("?classname=useraccess&method=dashboard");
         $form->add_input(input_select::new_instance()
             ->set_title('Selecione o Mês')
@@ -46,9 +46,10 @@ class useraccess {
             ->set_values($this->list_meses())
             ->set_value($changuemes));
         $form->close();
+        echo '</div>';
+
 
         echo '<div class="element-box">';
-
         $table = new data_table();
         $table->add_header('#', 'userid', table_header_item::TYPE_INT, null, 'width: 20px');
         $table->add_header(get_string_kopere('user_table_fullname'), 'fullname');
@@ -65,8 +66,8 @@ class useraccess {
         echo '</div>';
         dashboard_util::end_page();
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'useraccess_changue_mes');
-        echo "<style>.area_changue_mes{display:none}</style>";
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/useraccess', 'useraccess_changue_mes');
+        echo "<style>.bloco_changue_mes{display:none}</style>";
     }
 
     public function load_all_users() {
