@@ -161,7 +161,7 @@ class backup {
 
             echo "<p id='tabela-dump-$table'>" . get_string_kopere('backup_execute_table') . " <strong>$table</strong></p>";
 
-            $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'animate_scrollTop', array("#tabela-dump-$table"));
+            $PAGE->requires->js_call_amd('local_kopere_dashboard/backup', 'backup_animate_scrollTop', array("#tabela-dump-$table"));
 
             $dbstart = "\n\n\n--\n-- " . get_string_kopere('backup_execute_structure') . " `$table`\n--\n\n";
             file_put_contents($backupfile, $dbstart, FILE_APPEND);
@@ -218,7 +218,7 @@ class backup {
         button::add(get_string_kopere('backup_returnlist'), '?classname=backup&method=dashboard');
         echo '</div>';
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'animate_scrollTop', array("#end-page-to"));
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/backup', 'backup_animate_scrollTop', array("#end-page-to"));
 
         echo '</div>';
 
