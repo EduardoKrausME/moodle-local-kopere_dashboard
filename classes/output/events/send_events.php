@@ -84,7 +84,7 @@ class send_events {
     public function send() {
         global $COURSE, $CFG, $DB;
 
-        require_once("{$CFG->dirrrot}/login/lib.php");
+        require_once("{$CFG->dirroot}/login/lib.php");
 
         $this->load_template();
 
