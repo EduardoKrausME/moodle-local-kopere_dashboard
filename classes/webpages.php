@@ -58,10 +58,10 @@ class webpages {
         dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'));
         dashboard_util::start_page('?classname=webpages&method=settings', 'Páginas-estáticas');
 
-        title_util::print_h3('webpages_subtitle');
+        $botao = button::add(get_string_kopere('webpages_menu_create'), '?classname=webpages&method=menu_edit', 'ml-4', false, true);
+        title_util::print_h3(get_string_kopere('webpages_subtitle') . $botao, false);
         title_util::print_h6('webpages_subtitle_help');
         $menus = $DB->get_records('kopere_dashboard_menu', null, 'title ASC');
-        button::add(get_string_kopere('webpages_menu_create'), '?classname=webpages&method=menu_edit');
 
         echo '<div class="element-box">';
 
@@ -92,8 +92,8 @@ class webpages {
         echo '</div>';
 
         if ($menus) {
-            title_util::print_h3('webpages_title');
-            button::add(get_string_kopere('webpages_page_create'), '?classname=webpages&method=page_edit');
+            $botao = button::add(get_string_kopere('webpages_page_create'), '?classname=webpages&method=page_edit', 'ml-4', false, true);
+            title_util::print_h3(get_string_kopere('webpages_title') . $botao, false);
 
             echo '<div class="element-box">';
 
