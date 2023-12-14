@@ -170,7 +170,7 @@ define([
             params.columnDefs = newColumnDefs;
             params.oLanguage = dataTables_oLanguage;
             params.responsive = true;
-            
+
             if (params.export_title) {
                 params.buttons = [
                     {
@@ -216,13 +216,11 @@ define([
 
             window[selector] = $("#" + selector).DataTable(params);
 
-            window[selector].on('init.dt', function() {
-                var element = $("<div class='group-controls'>");
-                var wrapper = $("#" + selector + "_wrapper");
-                wrapper.prepend(element);
-                wrapper.find(".dataTables_length").appendTo(element);
-                wrapper.find(".dataTables_filter").appendTo(element);
-            });
+            var element = $("<div class='group-controls'>");
+            var wrapper = $("#" + selector + "_wrapper");
+            wrapper.prepend(element);
+            wrapper.find(".dataTables_length").appendTo(element);
+            wrapper.find(".dataTables_filter").appendTo(element);
         },
 
         click : function(selector, clickchave, clickurl) {
