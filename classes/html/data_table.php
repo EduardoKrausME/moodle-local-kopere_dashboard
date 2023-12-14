@@ -36,19 +36,19 @@ class data_table {
     /**
      * @var array
      */
-    private $column = array();
+    private $column = [];
     /**
      * @var array
      */
-    private $columninfo = array();
+    private $columninfo = [];
     /**
      * @var array
      */
-    private $columndata = array();
+    private $columndata = [];
     /**
      * @var array
      */
-    private $columndefs = array();
+    private $columndefs = [];
 
     /**
      * @var string
@@ -76,7 +76,7 @@ class data_table {
      * @param array $column
      * @param array $columninfo
      */
-    public function __construct($column = array(), $columninfo = array()) {
+    public function __construct($column = [], $columninfo = []) {
         $this->tableid = 'datatable_' . uniqid();
         $this->column = $column;
         $this->columninfo = $columninfo;
@@ -191,7 +191,7 @@ class data_table {
             }
             $return .= '</tr>';
 
-            $this->columndefs[] = (object)array("visible" => false, "targets" => -1);
+            $this->columndefs[] = (object)["visible" => false, "targets" => -1];
         }
 
         $return .= "<tr class='{$class}'>";
@@ -211,30 +211,32 @@ class data_table {
             }
             $return .= '</th>';
 
-            $this->columndata[] = (object)array("data" => $column->chave);
+            $this->columndata[] = (object)["data" => $column->chave];
 
             if ($column->type == table_header_item::TYPE_INT) {
-                $this->columndefs[] = (object)array("type" => "numeric-comma", "render" => "centerRenderer", "targets" => $key);
+                $this->columndefs[] = (object)["type" => "numeric-comma", "render" => "centerRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_CURRENCY) {
-                $this->columndefs[] = (object)array("type" => "currency", "render" => "currencyRenderer", "targets" => $key);
+                $this->columndefs[] = (object)["type" => "currency", "render" => "currencyRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_DATE) {
-                $this->columndefs[] = (object)array("type" => "date-uk", "targets" => $key);
+                $this->columndefs[] = (object)["type" => "date-uk", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_BYTES) {
-                $this->columndefs[] = (object)array("type" => "file-size", "render" => "rendererFilesize", "targets" => $key);
+                $this->columndefs[] = (object)["type" => "file-size", "render" => "rendererFilesize", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_DATE) {
-                $this->columndefs[] = (object)array("type" => "date-uk", "render" => "dataDateRenderer", "targets" => $key);
+                $this->columndefs[] = (object)["type" => "date-uk", "render" => "dataDateRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_DATETIME) {
-                $this->columndefs[] = (object)array("type" => "date-uk", "render" => "dataDatetimeRenderer", "targets" => $key);
+                $this->columndefs[] = (object)["type" => "date-uk", "render" => "dataDatetimeRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_VISIBLE) {
-                $this->columndefs[] = (object)array("render" => "dataVisibleRenderer", "targets" => $key);
+                $this->columndefs[] = (object)["render" => "dataVisibleRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_STATUS) {
-                $this->columndefs[] = (object)array("render" => "dataStatusRenderer", "targets" => $key);
+                $this->columndefs[] = (object)["render" => "dataStatusRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_TRUEFALSE) {
-                $this->columndefs[] = (object)array("render" => "dataTrueFalseRenderer", "targets" => $key);
+                $this->columndefs[] = (object)["render" => "dataTrueFalseRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_USERPHOTO) {
-                $this->columndefs[] = (object)array("render" => "dataUserphotoRenderer", "targets" => $key);
+                $this->columndefs[] = (object)["render" => "dataUserphotoRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_SEGUNDOS) {
-                $this->columndefs[] = (object)array("render" => "segundosRenderer", "targets" => $key);
+                $this->columndefs[] = (object)["render" => "segundosRenderer", "targets" => $key];
+            } else if ($column->type == table_header_item::TYPE_ACTION) {
+                $this->columndefs[] = (object)["orderable" => false, "targets" => $key];
             }
         }
         $return .= '</tr>';
@@ -275,7 +277,7 @@ class data_table {
                 if ($column->type == table_header_item::TYPE_INT) {
                     $thisclass .= ' text-center';
                 } else if ($column->type == table_header_item::TYPE_ACTION) {
-                    $thisclass .= ' button-actions text-nowrap width-30';
+                    $thisclass .= ' button-actions text-nowrap width-100';
                 }
 
                 $thisclass .= " {$column->style_col}";
@@ -296,7 +298,7 @@ class data_table {
                     } else if ($column->type == table_header_item::TYPE_CURRENCY) {
                         $html = "R$ {$html}";
                     } else if ($column->type == table_header_item::TYPE_DATE) {
-                        // $this->columndefs[] = (object)array("type" => "date-uk", "targets" => $key);
+                        // $this->columndefs[] = (object)["type" => "date-uk", "targets" => $key];
                     } else if ($column->type == table_header_item::TYPE_BYTES) {
                         $html = number_util::bytes($html);
                     } else if ($column->type == table_header_item::RENDERER_DATE) {
@@ -325,7 +327,7 @@ class data_table {
                         $html = '<img class="media-object" src="' . $CFG->wwwroot .
                             '/local/kopere_dashboard/profile-image.php?type=photo_user&id=' . $html . '" />';
                     } else if ($column->type == table_header_item::RENDERER_SEGUNDOS) {
-                        // $this->columndefs[] = (object)array("render" => "segundosRenderer", "targets" => $key);
+                        // $this->columndefs[] = (object)["render" => "segundosRenderer", "targets" => $key];
                     }
                 }
 
@@ -386,7 +388,7 @@ class data_table {
             ];
         }
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', array($this->tableid, $initparams));
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', [$this->tableid, $initparams]);
 
         if ($this->clickredirect) {
             $this->on_clickreditect();
@@ -415,6 +417,6 @@ class data_table {
         }
 
         $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'click',
-            array($this->tableid, $clickchave, $clickurl));
+            [$this->tableid, $clickchave, $clickurl]);
     }
 }
