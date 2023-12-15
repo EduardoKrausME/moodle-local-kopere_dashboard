@@ -130,19 +130,16 @@ if ($pagelink) {
         foreach ($webpagess as $webpages) {
 
             $valor = "";
-            if ($webpages->courseid) {
-                try {
-                    $kopere_pay_detalhe = $DB->get_record('kopere_pay_detalhe', array('course' => $webpages->courseid));
-                    $number = str_replace(".", "", $kopere_pay_detalhe->preco);
-                    $number = str_replace(",", ".", $number);
-                    $number = floatval("0{$number}");
+            if (file_exists(__DIR__ . "/../kopere_pay/lib.php") && $webpages->courseid) {
+                $kopere_pay_detalhe = $DB->get_record('kopere_pay_detalhe', array('course' => $webpages->courseid));
+                $number = str_replace(".", "", $kopere_pay_detalhe->preco);
+                $number = str_replace(",", ".", $number);
+                $number = floatval("0{$number}");
 
-                    if (!$number) {
-                        $valor = "<div class='preco-curso preco-curso-free'>Gratis</div>";
-                    } else {
-                        $valor = "<div class='preco-curso'>R$ {$kopere_pay_detalhe->preco}</div>";
-                    }
-                } catch (dml_exception $e) {
+                if (!$number) {
+                    $valor = "<div class='preco-curso preco-curso-free'>Gratis</div>";
+                } else {
+                    $valor = "<div class='preco-curso'>R$ {$kopere_pay_detalhe->preco}</div>";
                 }
             }
 
