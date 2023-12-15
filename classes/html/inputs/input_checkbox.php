@@ -41,7 +41,10 @@ class input_checkbox extends input_base {
      * @throws \coding_exception
      */
     public static function new_instance() {
-        return new input_checkbox();
+        $input = new input_checkbox();
+        $input->set_value(1);
+
+        return $input;
     }
 
     /**

@@ -81,7 +81,6 @@ class reports_admin {
             input_checkbox::new_instance()
                 ->set_title(get_string_kopere('reports_settings_form_enable'))
                 ->set_name('enable')
-                ->set_value($koperereports->enable)
                 ->set_checked($koperereports->enable));
 
         $columns = json_decode($koperereports->columns);
