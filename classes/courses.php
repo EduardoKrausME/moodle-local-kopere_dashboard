@@ -398,7 +398,7 @@ class courses {
             $form->create_hidden_input('link', html::link($course->fullname));
             $form->add_input(
                 input_select::new_instance()
-                    ->set_title('Menu')
+                    ->set_title(get_string_kopere('webpages_table_menutitle'))
                     ->set_name('menuid')
                     ->set_values($menus)
             );
