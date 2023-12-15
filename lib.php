@@ -111,6 +111,26 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
             require_once __DIR__ . "/classes/util/node.php";
             \local_kopere_dashboard\util\node::add_admin_code();
         }
+    } else {
+        if ($CFG->branch > 400 && @$CFG->kopere_dashboard_menu) {
+
+            $extraMenu = "";
+            $menus = $DB->get_records('kopere_dashboard_menu');
+            foreach ($menus as $menu) {
+                //$link = "/local/kopere_dashboard/?menu={$menu->link}";
+                $extraMenu .= "{$menu->title}\n";
+
+                $sql = "SELECT * FROM {kopere_dashboard_webpages} WHERE visible = 1 ORDER BY pageorder ASC";
+                $webpagess = $DB->get_records_sql($sql);
+
+                /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpages */
+                foreach ($webpagess as $webpages) {
+                    $link = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";
+                    $extraMenu .= " - {$webpages->title}|{$link}\n";
+                }
+            }
+            $CFG->custommenuitems = "{$CFG->custommenuitems}\n{$extraMenu}";
+        }
     }
 }
 
