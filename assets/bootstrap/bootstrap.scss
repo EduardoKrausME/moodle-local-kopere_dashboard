@@ -1929,6 +1929,24 @@ input[type="search"] {
             //padding-top: 28px;
         }
     }
+    &.type_file {
+        outline: 2px dashed #c5c5c5;
+        outline-offset: -10px;
+        font-size: 1.25rem;
+        background-color: #eaeaea;
+        position: relative;
+        padding: 20px 20px;
+        border-radius: 10px;
+        text-align: center;
+        input {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+    }
 }
 .inline {
     .form-group {

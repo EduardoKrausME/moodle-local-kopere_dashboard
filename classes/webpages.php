@@ -23,6 +23,7 @@
 
 namespace local_kopere_dashboard;
 
+use context_system;
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
@@ -41,6 +42,7 @@ use local_kopere_dashboard\util\server_util;
 use local_kopere_dashboard\util\title_util;
 use local_kopere_dashboard\vo\kopere_dashboard_menu;
 use local_kopere_dashboard\vo\kopere_dashboard_webpages;
+use moodle_url;
 
 /**
  * Class webpages
@@ -155,12 +157,12 @@ class webpages {
         button::edit(get_string_kopere('webpages_page_edit'),
             "?classname=webpages&method=page_edit&id={$webpages->id}", 'margin-left-15', false);
         button::delete(get_string_kopere('webpages_page_delete'),
-            "?classname=webpages&method=page_delete&id={$webpages->id}", 'margin-left-15', false, false, true);
+            "?classname=webpages&method=page_delete&id={$webpages->id}", 'margin-left-15', false, false);
 
         $form = new form();
         $form->print_panel(get_string_kopere('webpages_table_link'), "<a target='_blank' href='$linkpagina'>$linkpagina</a>");
         $form->print_panel(get_string_kopere('webpages_table_title'), $webpages->title);
-        $form->print_panel(get_string_kopere('webpages_table_link'), $webpages->link);
+        // $form->print_panel(get_string_kopere('webpages_table_link'), $webpages->link);
         if ($webpages->courseid) {
             $course = $DB->get_record('course', array('id' => $webpages->courseid));
             if ($course) {
@@ -168,9 +170,26 @@ class webpages {
                     "<a href='?classname=courses&method=page_details&courseid={$webpages->courseid}'>{$course->fullname}</a>");
             }
         }
+
+        $imagem = "";
+        $fs = get_file_storage();
+        $file = $fs->get_file(context_system::instance()->id, 'local_kopere_dashboard', 'webpage_image', $webpages->id, '/', 'webpage_image.img');
+        if ($file && isset($file->get_filename()[3])) {
+            $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
+            $imagem = "<p><a href='{$url}' target='_blank'><img src='{$url}' style='max-width:300px;max-height:300px;'></a></p>";
+        }
+        $form->print_panel(get_string_kopere('webpages_table_text'),
+            $imagem .
+            $webpages->text);
+
+        echo "<div class='row'>";
+        echo "<div class='col-md'>";
         $form->print_panel(get_string_kopere('webpages_table_theme'), $this->theme_name($webpages->theme));
-        $form->print_panel(get_string_kopere('webpages_table_text'), $webpages->text);
+        echo '</div>';
+        echo "<div class='col-md'>";
         $form->print_panel(get_string_kopere('webpages_table_visible'), $webpages->visible ? get_string('yes') : get_string('no'));
+        echo '</div>';
+        echo '</div>';
 
         echo '</div>';
         dashboard_util::end_page();
@@ -182,7 +201,7 @@ class webpages {
      * @throws \dml_exception
      */
     public function page_edit() {
-        global $DB, $PAGE;
+        global $DB, $PAGE, $CFG;
 
         $id = optional_param('id', 0, PARAM_INT);
 
@@ -220,31 +239,55 @@ class webpages {
                 ->set_required()
         );
 
+        $imagem = "";
+        $fs = get_file_storage();
+        $file = $fs->get_file(context_system::instance()->id, 'local_kopere_dashboard', 'webpage_image', $webpages->id, '/', 'webpage_image.img');
+        if ($file && isset($file->get_filename()[3])) {
+            $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
+            $imagem = "<p>Imagem atual:<br><a href='{$url}' target='_blank'><img src='{$url}' style='max-width: 100px;max-height: 100px;'></a></p>";
+        }
+
+        $form->add_input(
+            input_text::new_instance()
+                ->set_type('file')
+                ->set_title(get_string_kopere('webpages_table_image'))
+                ->set_name('imagem')
+                ->set_description($imagem)
+        );
+
         $courses1 = [(object)[
             'id' => 0,
             'fullname' => "(Nenhum curso)"]];
         $courses2 = $DB->get_records_sql('SELECT id, fullname FROM {course} WHERE id > 1 ORDER BY fullname ASC');
         $courses = array_merge($courses1, $courses2);;
 
+        echo "<div class='row'>";
+        echo "<div class='col-md'>";
         $form->add_input(
             input_select::new_instance()
                 ->set_title('Curso')
                 ->set_name('courseid')
                 ->set_value($webpages->courseid)
                 ->set_values($courses, 'id', 'fullname'));
-
+        echo "</div>";
+        echo "<div class='col-md'>";
         $form->add_input(
             input_select::new_instance()
                 ->set_title(get_string_kopere('webpages_page_menu'))
                 ->set_name('menuid')
                 ->set_values(self::list_menus())
                 ->set_value($webpages->menuid));
+        echo "</div>";
+        echo "<div class='col-md'>";
         $form->add_input(
             input_select::new_instance()
                 ->set_title(get_string_kopere('webpages_table_theme'))
                 ->set_name('theme')
                 ->set_values(self::list_themes())
                 ->set_value($webpages->theme));
+        echo "</div>";
+        echo "</div>";
+
 
         $form->add_input(
             input_html_editor::new_instance()
@@ -272,6 +315,8 @@ class webpages {
     /**
      * @throws \coding_exception
      * @throws \dml_exception
+     * @throws \file_exception
+     * @throws \stored_file_creation_exception
      */
     public function page_edit_save() {
         global $DB;
@@ -293,6 +338,9 @@ class webpages {
                 } else {
                     try {
                         $DB->update_record('kopere_dashboard_webpages', $webpages);
+
+                        $this->save_image($webpages);
+
                         self::cache_delete();
                         mensagem::agenda_mensagem_success(get_string_kopere('webpages_page_updated'));
                         header::location("?classname=webpages&method=page_details&id={$webpages->id}");
@@ -309,12 +357,56 @@ class webpages {
                         $webpages->id = $DB->insert_record('kopere_dashboard_webpages', $webpages);
                         mensagem::agenda_mensagem_success(get_string_kopere('webpages_page_created'));
 
+                        $this->save_image($webpages);
+
                         self::cache_delete();
                         header::location("?classname=webpages&method=page_details&id={$webpages->id}");
                     } catch (\dml_exception $e) {
                         mensagem::print_danger($e->getMessage());
                     }
                 }
+            }
+        }
+    }
+
+    /**
+     * @param kopere_dashboard_webpages $webpages
+     * @throws \file_exception
+     * @throws \stored_file_creation_exception
+     * @throws \dml_exception
+     * @throws \coding_exception
+     */
+    private function save_image($webpages) {
+        global $USER;
+
+        if (isset($_FILES["imagem"]) && $_FILES["imagem"]["error"] == UPLOAD_ERR_OK) {
+
+            $extensoesPermitidas = array("png", "jpg", "jpeg");
+            $extensaoArquivo = pathinfo($_FILES["imagem"]["name"], PATHINFO_EXTENSION);
+
+            if (in_array($extensaoArquivo, $extensoesPermitidas)) {
+
+                $fs = get_file_storage();
+
+                $files = $fs->get_area_files(context_system::instance()->id, 'local_kopere_dashboard', "webpage_image", $webpages->id);
+                /** @var \stored_file $file */
+                foreach ($files as $file) {
+                    $file->delete();
+                }
+
+                $filerecord = (object)[
+                    'component' => 'local_kopere_dashboard',
+                    'contextid' => context_system::instance()->id,
+                    'userid' => $USER->id,
+                    'filearea' => "webpage_image",
+                    'filepath' => '/',
+                    'itemid' => $webpages->id,
+                    'filename' => "webpage_image.img",
+                ];
+
+
+                $fs->create_file_from_pathname($filerecord, $_FILES["imagem"]["tmp_name"]);
+
             }
         }
     }
@@ -423,7 +515,7 @@ class webpages {
             if ($menu->id) {
                 $exists = $DB->record_exists_select('kopere_dashboard_menu',
                     'link = :link AND id != :id',
-                    ['menu' => $menu->link, 'id' => $menu->id]);
+                    ['link' => $menu->link, 'id' => $menu->id]);
                 if ($exists) {
                     mensagem::agenda_mensagem_danger(get_string_kopere('webpages_menu_link_duplicate'));
                 } else {
