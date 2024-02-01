@@ -24,6 +24,7 @@
 namespace local_kopere_dashboard\report\custom;
 
 use local_kopere_dashboard\html\button;
+use local_kopere_dashboard\task\db_course_access;
 use local_kopere_dashboard\util\export;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\url_util;
@@ -59,6 +60,13 @@ class course_access {
      */
     public function generate() {
         global $DB, $CFG;
+        $count = $DB->get_record_sql("SELECT COUNT(*) AS registros FROM {kopere_dashboard_courseacces}");
+        if ($count->registros == 0) {
+            session_write_close();
+            set_time_limit(0);
+
+            (new db_course_access())->execute();
+        }
 
         $cursosid = optional_param('courseid', 0, PARAM_INT);
         if ($cursosid == 0) {
@@ -227,12 +235,10 @@ class course_access {
             foreach ($modinfo as $infos) {
 
                 $sql = "SELECT COUNT(*) AS contagem, timecreated
-                          FROM {logstore_standard_log}
+                          FROM {kopere_dashboard_courseacces}
                          WHERE courseid = :courseid
-                           AND contextinstanceid = :contextinstanceid
-                           AND action = :action
-                           AND userid = :userid
-                      GROUP BY timecreated
+                           AND userid   = :userid
+                           AND context  = :contextinstanceid
                       ORDER BY timecreated DESC
                          LIMIT 1";
 
@@ -240,7 +246,6 @@ class course_access {
                     array(
                         'courseid' => $cursosid,
                         'contextinstanceid' => $infos->course_modules_id,
-                        'action' => 'viewed',
                         'userid' => $user->id
                     ));
 

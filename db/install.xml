@@ -103,5 +103,20 @@
             </KEYS>
         </TABLE>
 
+        <TABLE NAME="kopere_dashboard_courseacces">
+            <FIELDS>
+                <FIELD NAME="id"            TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
+                <FIELD NAME="userid"        TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="false" />
+                <FIELD NAME="courseid"      TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="false" />
+                <FIELD NAME="context"       TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="false" />
+                <FIELD NAME="contagem"      TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="false" />
+                <FIELD NAME="timecreated"   TYPE="int"   LENGTH="20"  NOTNULL="true"  SEQUENCE="false" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+                <KEY NAME="unique"  TYPE="unique"  FIELDS="courseid,userid,context" />
+            </KEYS>
+        </TABLE>
+
     </TABLES>
 </XMLDB>
