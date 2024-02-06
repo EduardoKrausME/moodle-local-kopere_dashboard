@@ -44,7 +44,7 @@ class webpages_util {
     /**
      * @throws \dml_exception
      */
-    function analytics() {
+   public static function analytics() {
         global $OUTPUT;
 
         $webpagesanalyticsid = get_config('local_kopere_dashboard', 'webpages_analytics_id');
