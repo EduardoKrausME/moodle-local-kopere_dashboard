@@ -103,7 +103,7 @@
             </KEYS>
         </TABLE>
 
-        <TABLE NAME="kopere_dashboard_courseacces">
+        <TABLE NAME="kopere_dashboard_courseacces" COMMENT="">
             <FIELDS>
                 <FIELD NAME="id"            TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
                 <FIELD NAME="userid"        TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="false" />
