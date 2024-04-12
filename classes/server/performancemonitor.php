@@ -95,7 +95,7 @@ class performancemonitor {
             if ($returnnumber) {
                 return -1;
             }
-            return "Function disabled by hosting";
+            return "Function 'shell_exec' disabled by hosting";
         }
 
         $inputline = shell_exec('top -b -n 2');
@@ -125,7 +125,7 @@ class performancemonitor {
             if ($returnnumber) {
                 return -1;
             }
-            return "Function disabled by hosting";
+            return "Function 'shell_exec' disabled by hosting";
         }
 
         $inputlines = shell_exec("cat /proc/meminfo");
@@ -166,7 +166,7 @@ class performancemonitor {
             if ($returnnumber) {
                 return -1;
             }
-            return "Function disabled by hosting";
+            return "Function 'shell_exec' disabled by hosting";
         }
 
         if (file_exists($filecache)) {
@@ -194,7 +194,7 @@ class performancemonitor {
             if ($returnnumber) {
                 return -1;
             }
-            return "Function disabled by hosting";
+            return "Function 'shell_exec' disabled by hosting";
         }
 
         $inputlines = shell_exec("uptime");
