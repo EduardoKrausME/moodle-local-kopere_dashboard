@@ -177,11 +177,13 @@ define([
                         extend : 'print',
                         text   : dataTables_oLanguage.buttons.print_text,
                         title  : params.export_title
-                    }, {
-                        extend : 'copy',
-                        text   : dataTables_oLanguage.buttons.copy_text,
-                        title  : params.export_title
-                    }, {
+                    },
+                    //{
+                    //     extend : 'copy',
+                    //     text   : dataTables_oLanguage.buttons.copy_text,
+                    //     title  : params.export_title
+                    //},
+                    {
                         extend : 'csv',
                         text   : dataTables_oLanguage.buttons.csv_text,
                         title  : params.export_title

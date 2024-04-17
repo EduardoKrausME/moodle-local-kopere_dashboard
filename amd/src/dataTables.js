@@ -3358,8 +3358,8 @@
                             }
 
                             /* The attribute can be in the format of "#id.class", "#id" or "class" This logic
-                     * breaks the string into parts and applies them as needed
-                     */
+                             * breaks the string into parts and applies them as needed
+                             */
                             if (sAttr.indexOf('.') != -1) {
                                 var aSplit = sAttr.split('.');
                                 nNewNode.id = aSplit[0].substr(1, aSplit[0].length - 1);
@@ -3428,7 +3428,18 @@
                         }
 
                         aanFeatures[cOption].push(featureNode);
-                        insert.append(featureNode);
+                        if (
+                            (cOption == 'i' && features.bInfo) ||
+                            (cOption == 'p' && features.bPaginate) ||
+                            (cOption == 'B')
+                        ) {
+                            if (!insert.find(".footer").length)
+                                insert.append("<div class='footer d-flex align-items-center flex-wrap'></div>");
+
+                            insert.find(".footer").append(featureNode);
+                        } else {
+                            insert.append(featureNode);
+                        }
                     }
                 }
 
@@ -4273,13 +4284,12 @@
              *  @memberof DataTable#oApi
              */
             function _fnFeatureHtmlInfo(settings) {
-                var
-                    tid   = settings.sTableId,
-                    nodes = settings.aanFeatures.i,
-                    n     = $('<div/>', {
-                        'class' : settings.oClasses.sInfo,
-                        'id'    : !nodes ? tid + '_info' : null
-                    });
+                var tid = settings.sTableId;
+                var nodes = settings.aanFeatures.i;
+                var n = $('<div/>', {
+                    'class' : settings.oClasses.sInfo,
+                    'id'    : !nodes ? tid + '_info' : null
+                });
 
                 if (!nodes) {
                     // Update display on each draw
@@ -4288,8 +4298,7 @@
                         "sName" : "information"
                     });
 
-                    n
-                        .attr('role', 'status')
+                    n.attr('role', 'status')
                         .attr('aria-live', 'polite');
 
                     // Table is described by our info div
@@ -4862,7 +4871,7 @@
                     headerTrgEls, footerTrgEls,
                     headerSrcEls, footerSrcEls,
                     headerCopy, footerCopy,
-                    headerWidths                      = [], footerWidths = [],
+                    headerWidths                      = [], footerWidths   = [],
                     headerContent = [], footerContent = [],
                     idx, correction, sanityWidth,
                     zeroOut                           = function(nSizer) {

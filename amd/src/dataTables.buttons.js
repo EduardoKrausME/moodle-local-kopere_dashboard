@@ -47,16 +47,16 @@
     'use strict';
     var DataTable = $.fn.dataTable;
 
-// Used for namespacing events added to the document by each instance, so they
-// can be removed on destroy
+    // Used for namespacing events added to the document by each instance, so they
+    // can be removed on destroy
     var _instCounter = 0;
 
-// Button namespacing counter for namespacing events on individual buttons
+    // Button namespacing counter for namespacing events on individual buttons
     var _buttonCounter = 0;
 
     var _dtButtons = DataTable.ext.buttons;
 
-// Allow for jQuery slim
+    // Allow for jQuery slim
     function _fadeIn(el, duration, fn) {
         if ($.fn.animate) {
             el.stop().fadeIn(duration, fn);
@@ -2043,7 +2043,7 @@
      * DataTables site
      */
 
-// Buttons group and individual button selector
+    // Buttons group and individual button selector
     DataTable.Api.register('buttons()', function(group, selector) {
         // Argument shifting
         if (selector === undefined) {
@@ -2071,7 +2071,7 @@
         return res;
     });
 
-// Individual button selector
+    // Individual button selector
     DataTable.Api.register('button()', function(group, selector) {
         // just run buttons() and truncate
         var buttons = this.buttons(group, selector);
@@ -2083,7 +2083,7 @@
         return buttons;
     });
 
-// Active buttons
+    // Active buttons
     DataTable.Api.registerPlural('buttons().active()', 'button().active()', function(flag) {
         if (flag === undefined) {
             return this.map(function(set) {
@@ -2096,7 +2096,7 @@
         });
     });
 
-// Get / set button action
+    // Get / set button action
     DataTable.Api.registerPlural('buttons().action()', 'button().action()', function(action) {
         if (action === undefined) {
             return this.map(function(set) {
@@ -2109,7 +2109,7 @@
         });
     });
 
-// Collection control
+    // Collection control
     DataTable.Api.registerPlural(
         'buttons().collectionRebuild()',
         'button().collectionRebuild()',
@@ -2125,21 +2125,21 @@
         }
     );
 
-// Enable / disable buttons
+    // Enable / disable buttons
     DataTable.Api.register(['buttons().enable()', 'button().enable()'], function(flag) {
         return this.each(function(set) {
             set.inst.enable(set.node, flag);
         });
     });
 
-// Disable buttons
+    // Disable buttons
     DataTable.Api.register(['buttons().disable()', 'button().disable()'], function() {
         return this.each(function(set) {
             set.inst.disable(set.node);
         });
     });
 
-// Button index
+    // Button index
     DataTable.Api.register('button().index()', function() {
         var idx = null;
 
@@ -2154,7 +2154,7 @@
         return idx;
     });
 
-// Get button nodes
+    // Get button nodes
     DataTable.Api.registerPlural('buttons().nodes()', 'button().node()', function() {
         var jq = $();
 
@@ -2168,7 +2168,7 @@
         return jq;
     });
 
-// Get / set button processing state
+    // Get / set button processing state
     DataTable.Api.registerPlural('buttons().processing()', 'button().processing()', function(flag) {
         if (flag === undefined) {
             return this.map(function(set) {
@@ -2181,7 +2181,7 @@
         });
     });
 
-// Get / set button text (i.e. the button labels)
+    // Get / set button text (i.e. the button labels)
     DataTable.Api.registerPlural('buttons().text()', 'button().text()', function(label) {
         if (label === undefined) {
             return this.map(function(set) {
@@ -2194,21 +2194,21 @@
         });
     });
 
-// Trigger a button's action
+    // Trigger a button's action
     DataTable.Api.registerPlural('buttons().trigger()', 'button().trigger()', function() {
         return this.each(function(set) {
             set.inst.node(set.node).trigger('click');
         });
     });
 
-// Button resolver to the popover
+    // Button resolver to the popover
     DataTable.Api.register('button().popover()', function(content, options) {
         return this.map(function(set) {
             return set.inst._popover(content, this.button(this[0].node), options);
         });
     });
 
-// Get the container elements
+    // Get the container elements
     DataTable.Api.register('buttons().containers()', function() {
         var jq = $();
         var groupSelector = this._groupSelector;
@@ -2233,7 +2233,7 @@
         return this.containers().eq(0);
     });
 
-// Add a new button
+    // Add a new button
     DataTable.Api.register('button().add()', function(idx, conf, draw) {
         var ctx = this.context;
 
@@ -2249,7 +2249,7 @@
         return this.button(this._groupSelector, idx);
     });
 
-// Destroy the button sets selected
+    // Destroy the button sets selected
     DataTable.Api.register('buttons().destroy()', function() {
         this.pluck('inst')
             .unique()
@@ -2260,7 +2260,7 @@
         return this;
     });
 
-// Remove a button
+    // Remove a button
     DataTable.Api.registerPlural('buttons().remove()', 'buttons().remove()', function() {
         this.each(function(set) {
             set.inst.remove(set.node);
@@ -2269,7 +2269,7 @@
         return this;
     });
 
-// Information box that can be used by buttons
+    // Information box that can be used by buttons
     var _infoTimer;
     DataTable.Api.register('buttons.info()', function(title, message, time) {
         var that = this;
@@ -2316,16 +2316,16 @@
         return this;
     });
 
-// Get data from the table for export - this is common to a number of plug-in
-// buttons so it is included in the Buttons core library
+    // Get data from the table for export - this is common to a number of plug-in
+    // buttons so it is included in the Buttons core library
     DataTable.Api.register('buttons.exportData()', function(options) {
         if (this.context.length) {
             return _exportData(new DataTable.Api(this.context[0]), options);
         }
     });
 
-// Get information about the export that is common to many of the export data
-// types (DRY)
+    // Get information about the export that is common to many of the export data
+    // types (DRY)
     DataTable.Api.register('buttons.exportInfo()', function(conf) {
         if (!conf) {
             conf = {};
@@ -2530,15 +2530,15 @@
      * DataTables interface
      */
 
-// Attach to DataTables objects for global access
+    // Attach to DataTables objects for global access
     $.fn.dataTable.Buttons = Buttons;
     $.fn.DataTable.Buttons = Buttons;
 
-// DataTables creation - check if the buttons have been defined for this table,
-// they will have been if the `B` option was used in `dom`, otherwise we should
-// create the buttons instance here so they can be inserted into the document
-// using the API. Listen for `init` for compatibility with pre 1.10.10, but to
-// be removed in future.
+    // DataTables creation - check if the buttons have been defined for this table,
+    // they will have been if the `B` option was used in `dom`, otherwise we should
+    // create the buttons instance here so they can be inserted into the document
+    // using the API. Listen for `init` for compatibility with pre 1.10.10, but to
+    // be removed in future.
     $(document).on('init.dt plugin-init.dt', function(e, settings) {
         if (e.namespace !== 'dt') {
             return;
@@ -2558,13 +2558,13 @@
         return new Buttons(api, opts).container();
     }
 
-// DataTables `dom` feature option
+    // DataTables `dom` feature option
     DataTable.ext.feature.push({
         fnInit   : _init,
         cFeature : 'B'
     });
 
-// DataTables 2 layout feature
+    // DataTables 2 layout feature
     if (DataTable.ext.features) {
         DataTable.ext.features.register('buttons', _init);
     }

@@ -845,6 +845,7 @@
 //
 // Copy to clipboard
 //
+    /*
     DataTable.ext.buttons.copyHtml5 = {
         className : 'buttons-copy buttons-html5',
 
@@ -987,7 +988,7 @@
 
         messageBottom : '*'
     };
-
+    */
 //
 // CSV export
 //
