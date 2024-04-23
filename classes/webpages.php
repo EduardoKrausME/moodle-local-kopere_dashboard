@@ -28,7 +28,6 @@ use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
 use local_kopere_dashboard\html\inputs\input_checkbox;
-use local_kopere_dashboard\html\inputs\input_html_editor;
 use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\html\inputs\input_text;
 use local_kopere_dashboard\html\table_header_item;
@@ -178,9 +177,14 @@ class webpages {
             $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
             $imagem = "<p><a href='{$url}' target='_blank'><img src='{$url}' style='max-width:300px;max-height:300px;'></a></p>";
         }
+
+
+        $href = "{$CFG->wwwroot}/local/kopere_dashboard/_editor/?page=webpages&id={$webpages->id}&link={$webpages->link}";
+        $text = get_string_kopere('webpages_table_text_edit');
+        $link = "<a class='btn btn-info' href='{$href}'>{$text}</a>";
         $form->print_panel(get_string_kopere('webpages_table_text'),
-            $imagem .
-            $webpages->text);
+            $imagem . $webpages->text . $link);
+
 
         echo "<div class='row'>";
         echo "<div class='col-md'>";
@@ -288,14 +292,15 @@ class webpages {
         echo "</div>";
         echo "</div>";
 
-
-        $form->add_input(
-            input_html_editor::new_instance()
-                ->set_title(get_string_kopere('webpages_table_text'))
-                ->set_name('text')
-                ->set_value($webpages->text)
-                ->set_required()
-        );
+        if (!$webpages->id) {
+            $text = mensagem::info(get_string_kopere('webpages_table_text_not'));
+            $form->print_row(get_string_kopere('webpages_table_text'), $text);
+        } else {
+            $href = "{$CFG->wwwroot}/local/kopere_dashboard/_editor/?page=webpages&id={$webpages->id}&link={$webpages->link}";
+            $text = get_string_kopere('webpages_table_text_edit');
+            $link = "<a class='btn btn-info' href='{$href}'>{$text}</a>";
+            $form->print_row(get_string_kopere('webpages_table_text'), $link);
+        }
 
         $form->add_input(
             input_checkbox::new_instance()
@@ -324,7 +329,7 @@ class webpages {
         $webpages = kopere_dashboard_webpages::create_by_default();
         $webpages->id = optional_param('id', 0, PARAM_INT);
 
-        if ($webpages->title == '' || $webpages->text == '') {
+        if ($webpages->title == '') {
             mensagem::agenda_mensagem_warning(get_string_kopere('webpages_page_error'));
             $this->page_edit();
         } else {
@@ -337,6 +342,7 @@ class webpages {
                     mensagem::agenda_mensagem_danger(get_string_kopere('webpages_menu_link_duplicate'));
                 } else {
                     try {
+                        unset($webpages->text);
                         $DB->update_record('kopere_dashboard_webpages', $webpages);
 
                         $this->save_image($webpages);

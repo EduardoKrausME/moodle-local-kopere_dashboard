@@ -32,7 +32,6 @@ use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\html\inputs\input_text;
 use local_kopere_dashboard\html\inputs\input_textarea;
 use local_kopere_dashboard\html\table_header_item;
-use local_kopere_dashboard\html\tinymce;
 use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\header;
@@ -262,6 +261,8 @@ class notifications extends notificationsutil {
 
             $htmltext = str_replace('{[event.name]}', $eventclass::get_name(), $htmltext);
             $htmltext = str_replace('{[module.name]}', $modulename, $htmltext);
+
+            $form->create_hidden_input('message', $htmltext);
         } else {
             $htmltext = $evento->message;
         }
@@ -269,11 +270,16 @@ class notifications extends notificationsutil {
         $form->print_row(null,
             button::help('TAGS-substituídas-nas-mensagens-de-Notificações', 'Quais as TAGS substituídas nas mensagens?'));
 
-        $htmltextarea = '<textarea name="message" id="message" style="height:500px">' .
-            htmlspecialchars($htmltext) . '</textarea>';
-        $templatecontent = str_replace('{[message]}', $htmltextarea, $templatecontent);
-        $form->print_panel(get_string_kopere('notification_message'), $templatecontent);
-        echo tinymce::create_input_editor('#message');
+        if (!$evento->id) {
+            $text = mensagem::info(get_string_kopere('notification_message_not'));
+            $form->print_row(get_string_kopere('notification_message'), $text);
+        } else {
+            $href = "{$CFG->wwwroot}/local/kopere_dashboard/_editor/?page=notification&id={$evento->id}&link=";
+            $text = get_string_kopere('notification_message_edit');
+            $link = "<a class='btn btn-info' href='{$href}'>{$text}</a>";
+            $templatecontent = str_replace('{[message]}', $htmltext . $link, $templatecontent);
+            $form->print_panel(get_string_kopere('notification_message'), $templatecontent);
+        }
 
         if ($id) {
             $form->create_submit_input(get_string_kopere('notification_update'));
@@ -304,6 +310,7 @@ class notifications extends notificationsutil {
                 mensagem::agenda_mensagem_danger(get_string_kopere('notification_duplicate'));
             } else {
                 try {
+                    unset($event->message);
                     $DB->update_record('kopere_dashboard_events', $event);
 
                     mensagem::agenda_mensagem_success(get_string_kopere('notification_created'));

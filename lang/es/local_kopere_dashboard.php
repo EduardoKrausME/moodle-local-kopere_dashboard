@@ -63,13 +63,6 @@ $string['datetime'] = '%d/%m/%Y, %H:%M';
 $string['php_datetime'] = 'm/d/Y H:i';
 $string['help_title'] = 'Ayuda con esta página';
 
-// Html/tinymce.
-$string['blocks'] = 'Bloques';
-$string['blocks_paragraph'] = 'Párrafo';
-$string['image_alignment'] = 'Alineación de imagen';
-$string['image_alignment_left'] = 'Alinear a la Izquierda';
-$string['image_alignment_right'] = 'Alinear a la Derecha';
-
 $string['about_bug'] = 'Si encontró algun PROBLEMA o si desea sugerir mejoras, abra un asunto';
 $string['about_code'] = 'Código disponible en';
 $string['about_help'] = 'Ayuda activada';
@@ -240,6 +233,8 @@ $string['notification_delete_success'] = '¡Notificación eliminada exitosamente
 $string['notification_delete_yes'] = '¿Realmente quiere eliminar esta Notificación?';
 $string['notification_editing'] = 'Editando Notificación';
 $string['notification_error_smtp'] = '<p>Para que los estudiantes reciban los mensajes, SMTP debe ser configurado.</p> <p><a href="https://moodle.eduardokraus.com/configurar-o-smtp-no-moodle" target="_blank">Leer aquí como configurar SMTP</a></p> <p><a href="{$a->wwwroot}/admin/settings.php?section={$a->mail}" target="_blank">Hacer click aquí para configurar la salida de Email</a></p>';
+$string['notification_message_not'] = 'Primero, guarde la notificación para poder crear el mensaje.';
+$string['notification_message_edit'] = 'Edite el contenido del mensaje';
 $string['notification_from'] = 'De';
 $string['notification_from_admin'] = 'Administrador del Sitio';
 $string['notification_fromdesc'] = '¿Quién será el remitente del mensaje?';
@@ -488,7 +483,9 @@ $string['webpages_page_view'] = 'Ver página';
 $string['webpages_subtitle'] = 'Menúes de Navegación';
 $string['webpages_subtitle_help'] = 'Estos menús aparecen en Navegación en "Mis cursos"';
 $string['webpages_table_order'] = 'Orden';
-$string['webpages_table_text'] = 'Texto';
+$string['webpages_table_text'] = 'Contenido de la página';
+$string['webpages_table_text_not'] = 'Primero, guarda el contenido para poder crear la página después.';
+$string['webpages_table_text_edit'] = 'Editar el contenido de la página';
 $string['webpages_table_theme'] = 'Diseño';
 $string['webpages_table_title'] = 'Título';
 $string['webpages_table_visible'] = 'Visible';

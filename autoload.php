@@ -49,6 +49,9 @@ function kopere_dashboard_autoload($classname) {
     }
 }
 
+/**
+ * @throws coding_exception
+ */
 function load_class() {
     $classname = optional_param('classname', false, PARAM_TEXT);
     $method = optional_param('method', '', PARAM_TEXT);
@@ -69,12 +72,25 @@ function load_class() {
     $instance->$method();
 }
 
+/**
+ * @return string
+ *
+ * @throws coding_exception
+ */
 function get_path_query() {
     $classname = optional_param('classname', '', PARAM_TEXT);
     $method = optional_param('method', '', PARAM_TEXT);
     return $classname . "-{$method}";
 }
 
+/**
+ * @param $identifier
+ * @param null $object
+ *
+ * @return string
+ *
+ * @throws coding_exception
+ */
 function get_string_kopere($identifier, $object = null) {
     return get_string($identifier, 'local_kopere_dashboard', $object);
 }

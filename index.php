@@ -28,8 +28,15 @@ require_once('../../config.php');
 require('autoload.php');
 global $DB, $PAGE, $OUTPUT;
 
-$menulink = optional_param('menu', 0, PARAM_TEXT);
-$pagelink = optional_param('p', 0, PARAM_TEXT);
+$menulink = optional_param('menu', false, PARAM_TEXT);
+$pagelink = optional_param('p', false, PARAM_TEXT);
+
+$htmldata = optional_param('htmldata', false, PARAM_RAW);
+$cssdata = optional_param('cssdata', false, PARAM_RAW);
+if ($htmldata && $cssdata && confirm_sesskey()) {
+    $pagelink = optional_param('link', false, PARAM_TEXT);
+}
+
 
 $PAGE->set_context(context_system::instance());
 $PAGE->requires->css('/local/kopere_dashboard/assets/statics-pages.css');
@@ -44,6 +51,10 @@ if ($pagelink) {
     if ($webpages == null) {
         $PAGE->set_url(new moodle_url("/local/kopere_dashboard/"));
         \local_kopere_dashboard\util\webpages_util::notfound("webpages_error_page");
+    }
+
+    if ($htmldata && $cssdata && confirm_sesskey()) {
+        $webpages->text = "{$htmldata}\n<style>{$cssdata}</style>";
     }
 
     $PAGE->set_url(new moodle_url("/local/kopere_dashboard/?p={$pagelink}"));

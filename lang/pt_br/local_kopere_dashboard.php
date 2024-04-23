@@ -60,12 +60,6 @@ $string['php_datetime'] = 'd/m/Y H:i';
 
 $string['help_title'] = 'Ajuda com esta página';
 
-// Html/tinymce.
-$string['blocks'] = 'Blocos';
-$string['blocks_paragraph'] = 'Parágrafo';
-$string['image_alignment'] = 'Alinhamento da imagem';
-$string['image_alignment_left'] = 'Alinhado à esquerda';
-$string['image_alignment_right'] = 'Alinhado à direita';
 $string['colors'] = 'Cores';
 $string['background'] = 'Cor de Fundo';
 $string['color_red'] = 'Vermelho';
@@ -381,6 +375,8 @@ $string['notification_error_smtp'] = '<p>Para que os alunos recebam as mensagens
                           target="_blank">Leia aqui como configurar o SMTP</a></p>
                     <p><a href="{$a->wwwroot}/admin/settings.php?section={$a->mail}"
                           target="_blank">Clique aqui para configurar a saída de e-mail</a></p>';
+$string['notification_message_not'] = 'Primeiro, salve a notificação para poder criar a mensagem.';
+$string['notification_message_edit'] = 'Edite o conteúdo da mensagem';
 
 // Profile.
 $string['profile_invalid'] = 'UserId inválido!';
@@ -536,7 +532,9 @@ $string['webpages_error_page'] = 'Página não localizada!';
 $string['webpages_error_menu'] = 'Menu não localizado!';
 $string['webpages_table_order'] = 'Ordem';
 $string['webpages_table_theme'] = 'Layout';
-$string['webpages_table_text'] = 'Texto';
+$string['webpages_table_text'] = 'Conteúdo da página';
+$string['webpages_table_text_not'] = 'Primeiro, salve o conteúdo para poder criar a página depois.';
+$string['webpages_table_text_edit'] = 'Editar o conteúdo da página';
 $string['webpages_page_title'] = 'Título';
 $string['webpages_page_menu'] = 'Menu';
 $string['webpages_page_create'] = 'Criar nova página';
