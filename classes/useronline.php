@@ -27,7 +27,7 @@ use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
 use local_kopere_dashboard\html\inputs\input_base;
-use local_kopere_dashboard\html\inputs\input_checkbox;
+use local_kopere_dashboard\html\inputs\input_checkbox_select;
 use local_kopere_dashboard\html\inputs\input_text;
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\util\dashboard_util;
@@ -148,7 +148,7 @@ class useronline {
         $form->print_row_one('', button::help('Usuários-Online'));
 
         $form->add_input(
-            input_checkbox::new_instance()
+            input_checkbox_select::new_instance()
                 ->set_title(get_string_kopere('useronline_settings_status'))
                 ->set_checked_by_config('nodejs-status'));
 
@@ -157,7 +157,7 @@ class useronline {
         $form->print_spacer(10);
 
         $form->add_input(
-            input_checkbox::new_instance()
+            input_checkbox_select::new_instance()
                 ->set_title(get_string_kopere('useronline_settings_ssl'))
                 ->set_checked_by_config('nodejs-ssl'));
 

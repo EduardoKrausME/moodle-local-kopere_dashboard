@@ -24,7 +24,7 @@
 namespace local_kopere_dashboard;
 
 use local_kopere_dashboard\html\form;
-use local_kopere_dashboard\html\inputs\input_checkbox;
+use local_kopere_dashboard\html\inputs\input_checkbox_select;
 use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\html\inputs\input_text;
 use local_kopere_dashboard\html\inputs\input_textarea;
@@ -78,7 +78,7 @@ class reports_admin {
                 ->set_value($koperereports->title));
 
         $form->add_input(
-            input_checkbox::new_instance()
+            input_checkbox_select::new_instance()
                 ->set_title(get_string_kopere('reports_settings_form_enable'))
                 ->set_name('enable')
                 ->set_checked($koperereports->enable));

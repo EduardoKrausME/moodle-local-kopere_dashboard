@@ -27,7 +27,7 @@ use context_system;
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
-use local_kopere_dashboard\html\inputs\input_checkbox;
+use local_kopere_dashboard\html\inputs\input_checkbox_select;
 use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\html\inputs\input_text;
 use local_kopere_dashboard\html\table_header_item;
@@ -303,7 +303,7 @@ class webpages {
         }
 
         $form->add_input(
-            input_checkbox::new_instance()
+            input_checkbox_select::new_instance()
                 ->set_title(get_string_kopere('webpages_table_visible'))
                 ->set_name('visible')
                 ->set_checked($webpages->visible));

@@ -24,7 +24,7 @@
 namespace local_kopere_dashboard;
 
 use local_kopere_dashboard\html\form;
-use local_kopere_dashboard\html\inputs\input_checkbox;
+use local_kopere_dashboard\html\inputs\input_checkbox_select;
 use local_kopere_dashboard\html\inputs\input_date_range;
 use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\util\dashboard_util;
@@ -80,7 +80,7 @@ class userenrolment {
         $form->print_spacer(10);
 
         $form->add_input(
-            input_checkbox::new_instance()
+            input_checkbox_select::new_instance()
                 ->set_title(get_string_kopere('userenrolment_timeendstatus'))
                 ->set_name('timeend-status')
                 ->set_checked($enrolment->timeend));
