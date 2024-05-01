@@ -53,6 +53,8 @@ if ($pagelink) {
         \local_kopere_dashboard\util\webpages_util::notfound("webpages_error_page");
     }
 
+    echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
+
     if ($htmldata && $cssdata && confirm_sesskey()) {
         $webpages->text = "{$htmldata}\n<style>{$cssdata}</style>";
     }
