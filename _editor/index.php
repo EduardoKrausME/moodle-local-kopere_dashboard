@@ -24,7 +24,7 @@ if ($htmldata) {
         $events = $DB->get_record("kopere_dashboard_events", ["id" => $id]);
         $events->message = $html;
         $DB->update_record("kopere_dashboard_events", $events);
-        
+
         redirect("{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?classname=notifications&method=add_segunda_etapa&id={$id}");
     } else if ($page == 'aceite') {
         set_config('formulario_pedir_aceite', $html, 'local_kopere_dashboard');
@@ -67,11 +67,7 @@ if ($htmldata) {
     <script src="js/plugins/grapesjs-tui-image-editor.js"></script>
     <script src="js/plugins/grapesjs-typed.js"></script>
     <script src="js/plugins/grapesjs-style-bg.js"></script>
-    <?php
-    require_once("{$CFG->dirroot}/local/kopere_dashboard/classes/fonts/font_util.php");
-    $fontList = \local_kopere_dashboard\fonts\font_util::list_fonts();
-    echo "<style>{$fontList['css']}</style>";
-    ?>
+    <script src="js/plugins/grapesjs-plugin-ckeditor.js"></script>
 </head>
 <body>
 
@@ -154,9 +150,18 @@ if ($htmldata) {
                             'name'     : '<?php echo get_string_kopere("grapsjs-stylemanager-properties-font-family") ?>',
                             'options'  : [
                                 {
-                                    'id' : "Arial", 'label' : 'Arial', 'value' : 'Arial, Helvetica, sans-serif'
+                                    'id'    : "Arial,Helvetica,sans-serif",
+                                    'label' : 'Arial',
                                 },
-                                <?php echo $fontList['editor-list'] ?>
+                                {
+                                    'id'    : "'Courier New',Courier,monospace",
+                                    'label' : 'Courier New',
+                                },
+                                {
+                                    'id'    : "Verdana,Geneva,sans-serif",
+                                    'label' : 'Verdana',
+                                },
+                                <?php echo \local_kopere_dashboard\fonts\font_util::grapsjs() ?>
                             ]
                         },
                         'font-size',
@@ -268,6 +273,7 @@ if ($htmldata) {
             'grapesjs-typed',
             'grapesjs-style-bg',
             'grapesjs-preset-webpage',
+            'grapesjs-plugin-ckeditor',
         ],
         'pluginsOpts'     : {
             'grapesjs-blocks-basic'     : {
@@ -323,6 +329,63 @@ if ($htmldata) {
             'grapesjs-blocks-table'     : {
                 'containerId' : '#gjs'
             },
+            'grapesjs-plugin-ckeditor'  : {
+                options : {
+                    baseHref            : '<?php echo $CFG->wwwroot ?>/',
+                    startupFocus        : true,
+                    extraAllowedContent : '*(*);*{*}',
+                    allowedContent      : true,
+                    enterMode           : 2,
+                    extraPlugins        : 'sharedspace,justify,colorbutton,panelbutton,font',
+                    toolbar             : "Basic",
+                    toolbarGroups       : [
+                        {name : 'clipboard', groups : ['clipboard', 'undo']},
+                        {name : 'links'},
+                        {name : 'basicstyles', groups : ['basicstyles', 'cleanup']},
+                        {name : 'colors'},
+                        '/',
+                        {name : 'styles'},
+
+                    ],
+                    font_names          : "Arial/Arial,Helvetica,sans-serif;Courier New/Courier New,Courier,monospace;Verdana/Verdana,Geneva,sans-serif;<?php echo \local_kopere_dashboard\fonts\font_util::ckeditor(); ?>",
+                    stylesSet           : [
+                        {name : 'Paragraph', element : 'p'},
+                        {name : 'Heading 1', element : 'h1'},
+                        {name : 'Heading 2', element : 'h2'},
+                        {name : 'Heading 3', element : 'h3'},
+                        {name : 'Heading 4', element : 'h4'},
+                        {name : 'Heading 5', element : 'h5'},
+                        {name : 'Heading 6', element : 'h6'},
+                        {name : 'Preformatted Text', element : 'pre'},
+                        {name : 'Address', element : 'address'},
+
+                        {name : 'Big', element : 'big'},
+                        {name : 'Small', element : 'small'},
+                        {name : 'Typewriter', element : 'tt'},
+
+                        {name : 'Computer Code', element : 'code'},
+                        {name : 'Keyboard Phrase', element : 'kbd'},
+                        {name : 'Sample Text', element : 'samp'},
+
+                        {name : 'Cited Work', element : 'cite'},
+                        {name : 'Inline Quotation', element : 'q'},
+
+                        {name : 'Styled Image (left)', element : 'img', attributes : {'class' : 'left'}},
+                        {name : 'Styled Image (right)', element : 'img', attributes : {'class' : 'right'}},
+
+                        {name : 'Square Bulleted List', element : 'ul', styles : {'list-style-type' : 'square'}},
+                    ],
+                },
+            },
+        },
+        'canvas'            : {
+            'styles'  : [
+                'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
+                '<?php echo \local_kopere_dashboard\fonts\font_util::css() ?>',
+            ],
+            'scripts' : [
+                'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
+            ],
         },
         'i18n'            : {
             'locale'         : 'en',
