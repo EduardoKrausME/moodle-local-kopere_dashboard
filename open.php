@@ -34,7 +34,7 @@ require_login();
 require_capability('local/kopere_dashboard:view', context_system::instance());
 require_capability('local/kopere_dashboard:manage', context_system::instance());
 
-$PAGE->set_url(new moodle_url('/local/kopere_dashboard/open.php?classname=dashboard&method=start'));
+$PAGE->set_url(new moodle_url(local_kopere_dashboard_makeurl("dashboard", "start")));
 $PAGE->set_context(context_system::instance());
 $PAGE->set_pagetype('admin-setting');
 $PAGE->set_pagelayout('admin');
@@ -88,13 +88,13 @@ if ($CFG->kopere_dashboard_open == 'internal') {
     </div>
 
     <div id="modalWindow" style="display:none">
-        <div id="base-popup">
-            <a href="#" id="base-popup-close" role="button">X</a>
-            <div id="operations">
-                <iframe src="<?php echo $url ?>"
-                        frameborder="0" width="100%" height="100%"></iframe>
-            </div>
+    <div id="base-popup">
+        <a href="#" id="base-popup-close" role="button">X</a>
+        <div id="operations">
+            <iframe src="<?php echo $url ?>"
+                    frameborder="0" width="100%" height="100%"></iframe>
         </div>
+    </div>
     <div class="ui-widget-overlay"></div>
     </div><?php
 }
