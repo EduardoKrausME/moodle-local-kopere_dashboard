@@ -33,6 +33,8 @@ $string['crontask_db_report_login'] = 'Cron to store user logins in temporary ta
 
 $string['kopere_dashboard_menu'] = 'Show menu in top bar';
 $string['kopere_dashboard_menu_desc'] = 'If checked, the top menu contains a link to the Kopere Dashboard';
+$string['kopere_dashboard_menuwebpages'] = 'Show static pages for logged-in users';
+$string['kopere_dashboard_menuwebpages_desc'] = 'Enable this option to display static pages in the navigation menu for logged-in users.';
 
 $string['kopere_dashboard_open'] = 'Open Kopere';
 $string['kopere_dashboard_open_desc'] = 'Which way do you want to open Kopere Dashboard';
@@ -46,6 +48,9 @@ $string['add_report_user_fields_alt'] = 'Select the user fields you want to show
 
 $string['kopere_dashboard_monitor'] = 'Server Monitor';
 $string['kopere_dashboard_monitor_desc'] = 'Do you want to display the server monitor at the top of Kopere?';
+
+$string['kopere_dashboard_pagefonts'] = 'Google Extra Fonts';
+$string['kopere_dashboard_pagefonts_desc'] = 'Add here the @import link from Google for extra fonts.<br>You can put multiple import.<br><a href="https://fonts.google.com/selection/embed" target="google">Embed code</a><br><img src="{$a}" style="max-width: 100%;width: 420px;">';
 
 $string['integracaoroot'] = 'Integration';
 
@@ -97,8 +102,7 @@ $string['datatables_buttons_csv_text'] = 'Download CSV';
 $string['datatables_buttons_copySuccess1'] = 'Copied one row to clipboard';
 $string['datatables_buttons_copySuccess_'] = 'Copied %d rows to clipboard';
 $string['datatables_buttons_copyTitle'] = 'Copy to clipboard';
-$string['datatables_buttons_copyKeys'] = 'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data<br>to your system clipboard.<br><br>' .
-    'To cancel, click this message or press escape.';
+$string['datatables_buttons_copyKeys'] = 'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data<br>to your system clipboard.<br><br>To cancel, click this message or press escape.';
 $string['datatables_buttons_select_rows_'] = '%d rows selected';
 $string['datatables_buttons_select_rows1'] = '1 row selected';
 
@@ -461,8 +465,7 @@ $string['userimport_empty'] = 'If you do not select it, it will use the default 
 $string['userimport_userdata'] = 'User Data';
 $string['userimport_userfields'] = 'Extra profile fields';
 $string['userimport_firstname'] = 'First name or full name';
-$string['userimport_firstname_desc'] = 'If you have the full name in CSV, just fill in this field Kopere will be responsible for generating both fields. ' .
-    'If your CSV has a first name and Last Name, select this and Last Name.';
+$string['userimport_firstname_desc'] = 'If you have the full name in CSV, just fill in this field Kopere will be responsible for generating both fields. If your CSV has a first name and Last Name, select this and Last Name.';
 $string['userimport_courseenrol'] = 'Enroll in a course';
 $string['userimport_courseenrol_desc'] = 'If you want the student to be enrolled in a course, select the course identifier column.';
 $string['userimport_date_desc'] = 'The system automatically detects the main date format.';
@@ -586,9 +589,7 @@ $string['notification_local_kopere_hotmoodle'] = 'Kopere HotMoodle';
 $string['notification_local_kopere_moocommerce'] = 'Kopere MooCommerce';
 $string['notification_local_kopere_pay'] = 'Kopere Pagamento';
 
-
 $string['privacy:metadata'] = 'The Kopere Dashboard plugin does not store any personal data.';
-
 
 // Editor de HTML.
 $string['grapsjs-assetmanager-addbutton'] = 'Adicionar imagem';

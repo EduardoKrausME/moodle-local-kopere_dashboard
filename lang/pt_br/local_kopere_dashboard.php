@@ -33,6 +33,8 @@ $string['crontask_db_report_login'] = 'Cron para guardar logins de usuários em 
 
 $string['kopere_dashboard_menu'] = 'Mostrar menu na barra to topo';
 $string['kopere_dashboard_menu_desc'] = 'Se marcado, o menu do topo contém um link do Kopere Dashboard';
+$string['kopere_dashboard_menuwebpages'] = 'Mostrar páginas estáticas para logados';
+$string['kopere_dashboard_menuwebpages_desc'] = 'Ative esta opção para exibir as páginas estáticas no menu de navegação para usuários logados.';
 
 $string['kopere_dashboard_open'] = 'Abrir o Kopere';
 $string['kopere_dashboard_open_desc'] = 'Qual forma deseja abrir o Kopere Dashboard';
@@ -46,6 +48,9 @@ $string['add_report_user_fields_alt'] = 'Selecione os campos do usuários que vo
 
 $string['kopere_dashboard_monitor'] = 'Monitor do servidor';
 $string['kopere_dashboard_monitor_desc'] = 'Deseja mostrar o monitor do servidor no topo do Kopere?';
+
+$string['kopere_dashboard_pagefonts'] = 'Fontes Extras do Google';
+$string['kopere_dashboard_pagefonts_desc'] = 'Adicione aqui o link do @import do Google para fontes extras.<br>Pode colocar vários import.<br><a href="https://fonts.google.com/selection/embed" target="google">Embed code</a><br><img src="{$a}" style="max-width: 100%;width: 420px;">';
 
 $string['integracaoroot'] = 'Integrações';
 
@@ -97,8 +102,7 @@ $string['datatables_buttons_csv_text'] = 'Baixar CSV';
 $string['datatables_buttons_copySuccess1'] = 'Copiou uma linha para a área de transferência';
 $string['datatables_buttons_copySuccess_'] = '%d linhas copiadas para a área de transferência';
 $string['datatables_buttons_copyTitle'] = 'Copiar para a área de transferência';
-$string['datatables_buttons_copyKeys'] = 'Pressione <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> para copiar os dados da tabela<br>para a área de transferência do sistema.<br><br>' .
-    'Para cancelar, clique nesta mensagem ou pressione escape.';
+$string['datatables_buttons_copyKeys'] = 'Pressione <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> para copiar os dados da tabela<br>para a área de transferência do sistema.<br><br>Para cancelar, clique nesta mensagem ou pressione escape.';
 $string['datatables_buttons_select_rows_'] = '%d linhas selecionadas';
 $string['datatables_buttons_select_rows1'] = '1 linha selecionada';
 
@@ -461,8 +465,7 @@ $string['userimport_empty'] = 'Se não selecionar, usará o padrão "{$a}"';
 $string['userimport_userdata'] = 'Dados de Usuário';
 $string['userimport_userfields'] = 'Campos de perfil extras';
 $string['userimport_firstname'] = 'Primeiro nome ou nome completo';
-$string['userimport_firstname_desc'] = 'Se no CSV você possuir o nome completo, preencha apenas este campo que o Kopere se encarrega de gerar os dois campos. ' .
-    'Se o seu CSV possuir primeiro nome e Sobrenome, selecione este e Sobrenome.';
+$string['userimport_firstname_desc'] = 'Se no CSV você possuir o nome completo, preencha apenas este campo que o Kopere se encarrega de gerar os dois campos. Se o seu CSV possuir primeiro nome e Sobrenome, selecione este e Sobrenome.';
 $string['userimport_courseenrol'] = 'Matrícular em um curso';
 $string['userimport_courseenrol_desc'] = 'Se você deseja que o aluno seja matrículado em um curso, selecione a coluna identificadora do curso.';
 $string['userimport_date_desc'] = 'O sistema detecta automáticamente os principais formato de data.';

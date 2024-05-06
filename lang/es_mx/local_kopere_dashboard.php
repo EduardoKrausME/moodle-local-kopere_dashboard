@@ -38,6 +38,8 @@ $string['crontask_performance'] = 'Cron para guardar datos de rendimiento';
 
 $string['kopere_dashboard_menu'] = 'Mostrar menú en la barra superior';
 $string['kopere_dashboard_menu_desc'] = 'Si está marcado, el menú superior contiene un enlace al panel de control de Kopere';
+$string['kopere_dashboard_menuwebpages'] = 'Mostrar páginas estáticas para logados';
+$string['kopere_dashboard_menuwebpages_desc'] = 'Active esta opción para mostrar las páginas estáticas en el menú de navegación para usuarios conectados.';
 
 $string['kopere_dashboard_open'] = 'Abrir Kopere';
 $string['kopere_dashboard_open_desc'] = '¿Qué forma desea abrir el Tablero Kopere';
@@ -202,8 +204,7 @@ $string['datatables_buttons_csv_text'] = 'Descargar CSV';
 $string['datatables_buttons_copySuccess1'] = 'Copiado una fila al portapapeles';
 $string['datatables_buttons_copySuccess_'] = 'Copiado %d filas al portapapeles';
 $string['datatables_buttons_copyTitle'] = 'Copiar al portapapeles';
-$string['datatables_buttons_copyKeys'] = 'Pressione <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> para copiar os dados da tabela<br>para a área de transferência do sistema.<br><br>' .
-    'Para cancelar, clique nesta mensagem ou pressione escape.';
+$string['datatables_buttons_copyKeys'] = 'Pressione <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> para copiar os dados da tabela<br>para a área de transferência do sistema.<br><br>Para cancelar, clique nesta mensagem ou pressione escape.';
 $string['datatables_buttons_select_rows_'] = '%d líneas seleccionadas';
 $string['datatables_buttons_select_rows1'] = '1 fila seleccionada';
 
