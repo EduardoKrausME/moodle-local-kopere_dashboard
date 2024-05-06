@@ -101,20 +101,25 @@ class reports extends reports_admin {
                 $botaoedit = "";
                 if ($isadmin && $isedit) {
                     $botaoedit = button::info(get_string_kopere("reports_settings_title"),
-                        local_kopere_dashboard_makeurl("reports", "editar", ["report" => $koperereports->id]), 'float-right', false, true);
+                        local_kopere_dashboard_makeurl("reports", "editar",
+                            ["report" => $koperereports->id]), 'float-right', false, true);
                 }
                 $extraenable = '';
                 if (!$koperereports->enable) {
                     $extraenable = get_string_kopere("reports_disabled");
                 }
+
+                $url = local_kopere_dashboard_makeurl("reports", "load_report", ["report" => $koperereports->id]);
                 echo "<h4 style='padding-left:31px;'>
-                          {$extraenable} <a href='" . local_kopere_dashboard_makeurl("reports", "load_report", ["report" => $koperereports->id]) . "'>{$title}</a>
+                          {$extraenable} <a href='{$url}'>{$title}</a>
                           {$botaoedit}
                       </h4>";
             }
             if ($isadmin && $isedit) {
+                $url = local_kopere_dashboard_makeurl("reports", "editar",
+                    ["report" => "-1", "reportcat" => $koperereportcat->id]);
                 $botaoadd = button::add(get_string_kopere('reports_add_new'),
-                    local_kopere_dashboard_makeurl("reports", "editar", ["report" => "-1", "reportcat" => $koperereportcat->id]), 'float-right', false, true);
+                    $url, 'float-right', false, true);
                 echo "<h4 style='padding-left: 31px;height: 20px'>
                           {$botaoadd}
                       </h4>";
@@ -147,8 +152,10 @@ class reports extends reports_admin {
 
         $titlereport = self::get_title($koperereportcat);
 
-        dashboard_util::add_breadcrumb(get_string_kopere('reports_title'), local_kopere_dashboard_makeurl("reports", "dashboard"));
-        dashboard_util::add_breadcrumb($titlereport, local_kopere_dashboard_makeurl("reports", "dashboard", ["type" => $koperereportcat->type]));
+        dashboard_util::add_breadcrumb(get_string_kopere('reports_title'),
+            local_kopere_dashboard_makeurl("reports", "dashboard"));
+        dashboard_util::add_breadcrumb($titlereport,
+            local_kopere_dashboard_makeurl("reports", "dashboard", ["type" => $koperereportcat->type]));
         dashboard_util::add_breadcrumb($titlereport);
         dashboard_util::start_page();
 
@@ -184,7 +191,8 @@ class reports extends reports_admin {
                 }
 
                 $table = new data_table($columns->columns, $columns->header);
-                $table->set_ajax_url(local_kopere_dashboard_makeurl("reports", "getdata", ["report" => $report, "courseid" => $courseid]));
+                $table->set_ajax_url(
+                    local_kopere_dashboard_makeurl("reports", "getdata", ["report" => $report, "courseid" => $courseid]));
                 $table->print_header();
                 $extra = ["searching" => false, "ordering" => false];
                 $table->close(true, $extra, false, $titlereport);
@@ -216,7 +224,9 @@ class reports extends reports_admin {
                 table_header_item::TYPE_INT, null, 'width:50px;white-space:nowrap;');
 
             $table->set_ajax_url(local_kopere_dashboard_makeurl("courses", "load_all_courses"));
-            $table->set_click_redirect(local_kopere_dashboard_makeurl("reports", "load_report", ["type" => "course", "report" => $report, "courseid" => "{id}"]), 'id');
+            $table->set_click_redirect(
+                local_kopere_dashboard_makeurl("reports", "load_report",
+                    ["type" => "course", "report" => $report, "courseid" => "{id}"]), 'id');
             $table->print_header();
             $table->close();
         }

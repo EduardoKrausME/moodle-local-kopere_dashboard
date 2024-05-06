@@ -212,9 +212,6 @@ class send_events {
             $eventdata->fullmessagehtml = $htmlmessage;
             $eventdata->smallmessage = '';
 
-            //$CFG->debugsmtp = true;
-            //$CFG->debugdeveloper = true;
-
             message_send($eventdata);
         }
     }

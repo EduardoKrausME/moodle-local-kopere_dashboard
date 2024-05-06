@@ -21,7 +21,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-ob_start();
 define('AJAX_SCRIPT', true);
 
 require('../../config.php');

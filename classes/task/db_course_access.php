@@ -39,7 +39,7 @@ class db_course_access extends \core\task\scheduled_task {
         $count = $DB->get_record_sql("SELECT COUNT(*) AS registros FROM {kopere_dashboard_courseacces}");
         if (false && $count->registros) {
             $reportsql = "
-                SELECT CONCAT(courseid,userid,contextinstanceid) AS a, COUNT(*) AS contagem, 
+                SELECT CONCAT(courseid,userid,contextinstanceid) AS a, COUNT(*) AS contagem,
                        courseid, userid, contextinstanceid, timecreated
                   FROM {logstore_standard_log}
                  WHERE action = 'viewed'
@@ -48,7 +48,7 @@ class db_course_access extends \core\task\scheduled_task {
               ORDER BY timecreated DESC";
         } else {
             $reportsql = "
-                SELECT CONCAT(courseid,userid,contextinstanceid) AS a, COUNT(*) AS contagem, 
+                SELECT CONCAT(courseid,userid,contextinstanceid) AS a, COUNT(*) AS contagem,
                        courseid, userid, contextinstanceid, timecreated
                   FROM {logstore_standard_log}
                  WHERE action = 'viewed'

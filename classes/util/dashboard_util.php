@@ -107,13 +107,14 @@ class dashboard_util {
             self::start_popup(self::$currenttitle);
             return;
         } else {
+            $url = local_kopere_dashboard_makeurl("dashboard", "start");
             $return
                 .= "<ul class='breadcrumb'>
                         <li>
                             <a target='_top' href='{$CFG->wwwroot}/'>{$SITE->fullname}</a>
                         </li>
                         <li>
-                            <a href='" . local_kopere_dashboard_makeurl("dashboard", "start") . "'>" . get_string_kopere('dashboard') . "</a>
+                            <a href='{$url}'>" . get_string_kopere('dashboard') . "</a>
                         </li>";
 
             foreach (self::$breadcrumb as $item) {
@@ -190,9 +191,10 @@ class dashboard_util {
                 $iconurl = self::get_icon("/local/{$plugin}/assets/dashboard/img/iconactive/{$submenu->get_icon()}.svg");
             }
 
+            $url = local_kopere_dashboard_makeurl($submenu->get_classname(), $submenu->get_methodname());
             $submenuhtml .= "
                 <li class='contains_branch {$classsub}'>
-                    <a href='" . local_kopere_dashboard_makeurl($submenu->get_classname(), $submenu->get_methodname()) . "{$submenu->get_urlextra()}'>
+                    <a href='{$url}{$submenu->get_urlextra()}'>
                         <img src='{$iconurl}' class='menu-icon' alt='Icon {$submenu->get_title()}'>
                         <span>{$submenu->get_title()}</span>
                     </a>

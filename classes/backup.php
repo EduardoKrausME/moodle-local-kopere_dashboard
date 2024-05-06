@@ -76,8 +76,9 @@ class backup {
                     'acoes' => "<div class='text-center'>" .
                         button::icon('download', local_kopere_dashboard_makeurl("backup", "download", ["file" => $p[0]]), false) .
                         "&nbsp;&nbsp;&nbsp; " .
-                        button::icon_popup_table('delete', local_kopere_dashboard_makeurl("backup", "delete", ["file" => $p[0]])) . "
-                                </div>"
+                        button::icon_popup_table('delete',
+                            local_kopere_dashboard_makeurl("backup", "delete", ["file" => $p[0]])) .
+                        "</div>"
                 );
             }
 
@@ -243,7 +244,8 @@ class backup {
                 header::location(local_kopere_dashboard_makeurl("backup", "dashboard"));
             } else {
 
-                dashboard_util::add_breadcrumb(get_string_kopere('backup_title'), local_kopere_dashboard_makeurl("backup", "dashboard"));
+                dashboard_util::add_breadcrumb(get_string_kopere('backup_title'),
+                    local_kopere_dashboard_makeurl("backup", "dashboard"));
                 dashboard_util::add_breadcrumb(get_string_kopere('backup_deleting'));
                 dashboard_util::start_page();
 
@@ -251,8 +253,10 @@ class backup {
                           <h3>" . get_string_kopere('backup_delete_confirm') . "</h3>
                           <p>" . get_string_kopere('backup_delete_title', $file) . "</p>
                           <div>";
-                button::delete(get_string('yes'), local_kopere_dashboard_makeurl("backup", "delete", ["file" => $file, "status" => "sim"]), '', false);
-                button::add(get_string('no'), local_kopere_dashboard_makeurl("backup", "dashboard"), 'margin-left-10', false);
+                button::delete(get_string('yes'),
+                    local_kopere_dashboard_makeurl("backup", "delete", ["file" => $file, "status" => "sim"]), '', false);
+                button::add(get_string('no'),
+                    local_kopere_dashboard_makeurl("backup", "dashboard"), 'margin-left-10', false);
                 echo "    </div>
                       </div>";
 

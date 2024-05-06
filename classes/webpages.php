@@ -75,7 +75,8 @@ class webpages {
                     = "<div class='text-center'>
                     " . button::icon_popup_table('edit',
                         local_kopere_dashboard_makeurl("webpages", "menu_edit", ["id" => $menu->id])) . "&nbsp;&nbsp;&nbsp;
-                    " . button::icon_popup_table('delete', local_kopere_dashboard_makeurl("webpages", "menu_delete", ["id" => $menu->id])) . "
+                    " . button::icon_popup_table('delete',
+                        local_kopere_dashboard_makeurl("webpages", "menu_delete", ["id" => $menu->id])) . "
                    </div>";
 
                 $menus[$key] = $menu;
@@ -105,8 +106,10 @@ class webpages {
                 $page->actions
                     = "<div class='text-center'>
                     " . button::icon('details',
-                        local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $page->id]), false) . "&nbsp;&nbsp;&nbsp;
-                    " . button::icon_popup_table('delete', local_kopere_dashboard_makeurl("webpages", "page_delete", ["id" => $page->id])) . "
+                        local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $page->id]), false) .
+                    "&nbsp;&nbsp;&nbsp;
+                    " . button::icon_popup_table('delete',
+                        local_kopere_dashboard_makeurl("webpages", "page_delete", ["id" => $page->id])) . "
                    </div>";
 
                 $page->menu = $DB->get_field('kopere_dashboard_menu', 'title', ['id' => $page->menuid]);
@@ -147,7 +150,8 @@ class webpages {
         $webpages = $DB->get_record('kopere_dashboard_webpages', array('id' => $id));
         header::notfound_null($webpages, get_string_kopere('webpages_page_notfound'));
 
-        dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'), local_kopere_dashboard_makeurl("webpages", "dashboard"));
+        dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'),
+            local_kopere_dashboard_makeurl("webpages", "dashboard"));
         dashboard_util::add_breadcrumb($webpages->title);
         dashboard_util::start_page();
         echo '<div class="element-box">';
@@ -166,8 +170,9 @@ class webpages {
         if ($webpages->courseid) {
             $course = $DB->get_record('course', array('id' => $webpages->courseid));
             if ($course) {
+                $url = local_kopere_dashboard_makeurl("courses", "page_details", ["courseid" => $webpages->courseid]);
                 $form->print_panel(get_string_kopere('webpages_page_course'),
-                    "<a href='" . local_kopere_dashboard_makeurl("courses", "page_details", ["courseid" => $webpages->courseid]) . "'>{$course->fullname}</a>");
+                    "<a href='{$url}'>{$course->fullname}</a>");
             }
         }
 
@@ -216,12 +221,15 @@ class webpages {
         if (!$webpages) {
             $webpages = kopere_dashboard_webpages::create_by_default();
             $webpages->theme = config::get_key('webpages_theme');
-            dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'), local_kopere_dashboard_makeurl("webpages", "dashboard"));
+            dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'),
+                local_kopere_dashboard_makeurl("webpages", "dashboard"));
             dashboard_util::add_breadcrumb(get_string_kopere('webpages_page_new'));
         } else {
             $webpages = kopere_dashboard_webpages::create_by_object($webpages);
-            dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'), local_kopere_dashboard_makeurl("webpages", "dashboard"));
-            dashboard_util::add_breadcrumb($webpages->title, local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]));;
+            dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'),
+                local_kopere_dashboard_makeurl("webpages", "dashboard"));
+            dashboard_util::add_breadcrumb($webpages->title,
+                local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]));;
             dashboard_util::add_breadcrumb(get_string_kopere('webpages_page_edit'));
         }
         dashboard_util::start_page();
@@ -252,7 +260,9 @@ class webpages {
         if ($file && isset($file->get_filename()[3])) {
             $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
                 $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
-            $imagem = "<p>Imagem atual:<br><a href='{$url}' target='_blank'><img src='{$url}' style='max-width: 100px;max-height: 100px;'></a></p>";
+            $imagem = "<p>Imagem atual:<br>
+                           <a href='{$url}' target='_blank'><img src='{$url}'
+                              style='max-width: 100px;max-height: 100px;'></a></p>";
         }
 
         $form->add_input(
@@ -353,7 +363,8 @@ class webpages {
 
                         self::cache_delete();
                         mensagem::agenda_mensagem_success(get_string_kopere('webpages_page_updated'));
-                        header::location(local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]));
+                        header::location(
+                            local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]));
                     } catch (\dml_exception $e) {
                         mensagem::print_danger($e->getMessage());
                     }
@@ -370,7 +381,8 @@ class webpages {
                         $this->save_image($webpages);
 
                         self::cache_delete();
-                        header::location(local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]));
+                        header::location(
+                            local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]));
                     } catch (\dml_exception $e) {
                         mensagem::print_danger($e->getMessage());
                     }
@@ -442,13 +454,16 @@ class webpages {
             header::location(local_kopere_dashboard_makeurl("webpages", "dashboard"));
         }
 
-        dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'), local_kopere_dashboard_makeurl("webpages", "dashboard"));
-        dashboard_util::add_breadcrumb($webpages->title, local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]));;
+        dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'),
+            local_kopere_dashboard_makeurl("webpages", "dashboard"));
+        dashboard_util::add_breadcrumb($webpages->title,
+            local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]));;
         dashboard_util::add_breadcrumb(get_string_kopere('webpages_page_delete'));
         dashboard_util::start_page();
 
         echo "<p>" . get_string_kopere('webpages_page_delete_confirm', $webpages) . "</p>";
-        button::delete(get_string('yes'), local_kopere_dashboard_makeurl("webpages", "page_delete", ["status" => "sim", "id" => $webpages->id]), '', false);
+        button::delete(get_string('yes'),
+            local_kopere_dashboard_makeurl("webpages", "page_delete", ["status" => "sim", "id" => $webpages->id]), '', false);
         button::close_popup(get_string('no'));
 
         dashboard_util::end_page();
@@ -468,12 +483,14 @@ class webpages {
             $menus = kopere_dashboard_menu::create_by_default();
             $menus->theme = get_config('kopere_dashboard_menu', 'webpages_theme');
 
-            dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'), local_kopere_dashboard_makeurl("webpages", "dashboard"));
+            dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'),
+                local_kopere_dashboard_makeurl("webpages", "dashboard"));
             dashboard_util::add_breadcrumb(get_string_kopere('webpages_menu_new'));
         } else {
             $menus = kopere_dashboard_menu::create_by_object($menus);
 
-            dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'), local_kopere_dashboard_makeurl("webpages", "dashboard"));
+            dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'),
+                local_kopere_dashboard_makeurl("webpages", "dashboard"));
             dashboard_util::add_breadcrumb(get_string_kopere('webpages_menu_edit'));
         }
         dashboard_util::start_page();
@@ -560,8 +577,10 @@ class webpages {
         $menu = $DB->get_record('kopere_dashboard_menu', array('id' => $id));
         header::notfound_null($menu, get_string_kopere('webpages_page_notfound'));
 
-        dashboard_util::add_breadcrumb(get_string_kopere('webpages_menu_subtitle'), local_kopere_dashboard_makeurl("webpages", "dashboard"));
-        dashboard_util::add_breadcrumb($menu->title, local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $menu->id]));
+        dashboard_util::add_breadcrumb(get_string_kopere('webpages_menu_subtitle'),
+            local_kopere_dashboard_makeurl("webpages", "dashboard"));
+        dashboard_util::add_breadcrumb($menu->title,
+            local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $menu->id]));
         dashboard_util::add_breadcrumb(get_string_kopere('webpages_menu_delete'));
         dashboard_util::start_page();
 
@@ -578,7 +597,9 @@ class webpages {
             }
 
             echo get_string_kopere('webpages_page_confirmdeletemenu', $menu->title);
-            button::delete(get_string('yes'), local_kopere_dashboard_makeurl("webpages", "menu_delete", ["status" => "sim", "id" => $menu->id]), '', false);
+            button::delete(get_string('yes'),
+                local_kopere_dashboard_makeurl("webpages", "menu_delete",
+                    ["status" => "sim", "id" => $menu->id]), '', false);
             button::close_popup(get_string('no'));
         }
 

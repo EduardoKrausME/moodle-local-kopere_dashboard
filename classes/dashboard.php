@@ -100,7 +100,8 @@ class dashboard {
                     <div class="col-sm-3">
                         <div class="element-box color_disk">
                             <div class="label">' . get_string_kopere('dashboard_title_disk') . '</div>
-                            <div class="value"><a href=' . local_kopere_dashboard_makeurl("reports", "dashboard", ["type" => "server"]) . '">
+                            <div class="value"><a href=' .
+            local_kopere_dashboard_makeurl("reports", "dashboard", ["type" => "server"]) . '">
                             ' . bytes_util::size_to_byte(files::count_all_space()) . '</a></div>
                         </div>
                     </div>

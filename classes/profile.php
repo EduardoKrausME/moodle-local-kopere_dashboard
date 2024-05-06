@@ -130,7 +130,8 @@ class profile {
                     get_string_kopere('profile_enrol_active') . '</span>';
             }
 
-            $url = local_kopere_dashboard_makeurl("userenrolment", "mathedit", ["courseid" => $course->id, "ueid" => $enrolment->id], "load-ajax");
+            $url = local_kopere_dashboard_makeurl("userenrolment", "mathedit",
+                ["courseid" => $course->id, "ueid" => $enrolment->id], "load-ajax");
             return
                 "<li>
                     <h4 class='title'>{$course->fullname}

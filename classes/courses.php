@@ -255,7 +255,8 @@ class courses {
                 }
 
                 button::add(get_string_kopere("courses_student_cadastrar"),
-                    local_kopere_dashboard_makeurl("courses", "enrol_new", ["courseid" => "{$course->id}&userid={$user->id}&matricular=1"]));
+                    local_kopere_dashboard_makeurl("courses", "enrol_new",
+                        ["courseid" => "{$course->id}&userid={$user->id}&matricular=1"]));
             }
 
         } else {
@@ -297,7 +298,9 @@ class courses {
 
                         $a = (object)['login' => $newuser->username, 'senha' => $password];
                         mensagem::agenda_mensagem_success(get_string_kopere('courses_student_ok', $a));
-                        header::location(local_kopere_dashboard_makeurl("courses", "enrol_new", ["courseid" => "{$course->id}&userid={$newuser->id}"]));
+                        header::location(
+                            local_kopere_dashboard_makeurl("courses", "enrol_new",
+                                ["courseid" => "{$course->id}&userid={$newuser->id}"]));
                     } catch (\moodle_exception $e) {
                         mensagem::print_danger($e->getMessage());
                     }

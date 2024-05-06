@@ -21,9 +21,6 @@
  * @license    http:// www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define('OPEN_INTERNAL', true);
-
-ob_start();
 require_once('../../config.php');
 require('autoload.php');
 global $DB, $PAGE, $OUTPUT;

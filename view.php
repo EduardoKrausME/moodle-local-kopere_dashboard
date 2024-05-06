@@ -92,7 +92,7 @@ echo "<div class='kopere_dashboard_div'>
         </div>
         <div class='content-w'>";
 load_class();
-echo "   
+echo "
         </div>
 
         <div class='modal fade kopere_dashboard_modal_item' id='modal-edit' role='dialog'>

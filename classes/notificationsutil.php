@@ -77,8 +77,6 @@ class notificationsutil {
             \report_eventlist_list_generator::get_non_core_event_list(false)
         );
 
-        //$eventclasss = \report_eventlist_list_generator::get_all_events_list();
-
         $components = array();
         $eventinformation = array();
 
@@ -170,13 +168,6 @@ class notificationsutil {
 
         ob_clean();
         die(json_encode($data));
-
-        //$content = str_replace('{[moodle.fullname]}', $COURSE->fullname, $content);
-        //$content = str_replace('{[moodle.shortname]}', $COURSE->shortname, $content);
-        //$content = str_replace('{[message]}', "<h2>Título</h2><p>Linha 1</p><p>Linha 2</p>", $content);
-        //$content = str_replace('{[date.year]}', userdate(time(), '%Y'), $content);
-        //$content = str_replace('{[manager]}', $linkmanager, $content);
-        //echo $content;
     }
 
     /**
