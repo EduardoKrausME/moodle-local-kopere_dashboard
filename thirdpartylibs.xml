@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<libraries>
+    <library>
+        <location>_editor</location>
+        <name>GrapsJS</name>
+        <version>0.21.10</version>
+        <license>BSD 3-Clause</license>
+    </library>
+</libraries>
