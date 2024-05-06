@@ -34,6 +34,8 @@ function local_kopere_dashboard_extends_navigation(global_navigation $nav) {
 function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
     global $CFG, $DB;
 
+    require_once(__DIR__ . "/locallib.php");
+
     if (strpos($_SERVER['REQUEST_URI'], "kopere_dashboard") === false) {
         try {
             $menus = $DB->get_records('kopere_dashboard_menu', null, 'title ASC');

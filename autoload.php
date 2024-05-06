@@ -23,6 +23,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+require_once(__DIR__ . "/locallib.php");
+
 $debug = optional_param("debug", false, PARAM_INT);
 if ($debug) {
     global $DB;
@@ -93,24 +95,4 @@ function get_path_query() {
  */
 function get_string_kopere($identifier, $object = null) {
     return get_string($identifier, 'local_kopere_dashboard', $object);
-}
-
-/**
- * make url.
- *
- * @param string $classname
- * @param string $method
- * @param array $params
- * @param string $file
- *
- * @return string
- */
-function local_kopere_dashboard_makeurl($classname, $method, $params = [], $file = "view") {
-    $query = "classname={$classname}&method={$method}";
-    foreach ($params as $key => $param) {
-        $query .= "&{$key}={$param}";
-    }
-
-    global $CFG;
-    return "{$CFG->wwwroot}/local/kopere_dashboard/{$file}.php?{$query}";
 }
