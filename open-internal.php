@@ -118,7 +118,6 @@ $html = ob_get_contents();
 ob_clean();
 $dashboardmenuhtmlold = "<style>.dashboard_menu_html-content{display:none !important}</style>{$dashboardmenuhtmlold}";
 
-
 if ($CFG->theme == 'smartlms') {
     $USER->preference['drawer-open-nav'] = $preferencedraweropennav;
     $USER->preference['sidebar-open-nav'] = $preferencesidebaropennav;

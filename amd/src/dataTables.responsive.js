@@ -24,7 +24,7 @@
                     // CommonJS environments without a window global must pass a
                     // root. This will give an error otherwise
                     root = window;
-                } 
+                }
 
                 if (!$) {
                     $ = jq(root);

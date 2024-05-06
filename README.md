@@ -34,7 +34,6 @@ Benchmark é o ato de executar um conjunto de operações, a fim de avaliar o de
 
 Esta parte é uma melhoria do plugin [report_benchmark](https://moodle.org/plugins/report_benchmark)
 
-
 ![BenchMark teste](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/blob/master/pix/prints/benchmark/Captura_01.png)
 
 [Clique aqui e veja mais sobre Performace](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/Performace)

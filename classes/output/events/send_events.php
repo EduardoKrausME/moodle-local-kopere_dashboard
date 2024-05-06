@@ -35,7 +35,7 @@ use local_kopere_dashboard\vo\kopere_dashboard_events;
  */
 class send_events {
     /** @var kopere_dashboard_events */
-    private $kopere_dashboard_events;
+    private $koperedashboardevents;
 
     /** @var \core\event\base */
     private $event;
@@ -53,14 +53,14 @@ class send_events {
      * @return kopere_dashboard_events
      */
     public function get_kopere_dashboard_events() {
-        return $this->kopere_dashboard_events;
+        return $this->koperedashboardevents;
     }
 
     /**
      * @param kopere_dashboard_events $kopereevents
      */
     public function set_kopere_dashboard_events($kopereevents) {
-        $this->kopere_dashboard_events = $kopereevents;
+        $this->koperedashboardevents = $kopereevents;
     }
 
     /**
@@ -131,7 +131,7 @@ class send_events {
 
         // De: {[from.???]}.
         $userfrom = null;
-        switch ($this->kopere_dashboard_events->userfrom) {
+        switch ($this->koperedashboardevents->userfrom) {
             case 'admin':
                 $userfrom = get_admin();
                 break;
@@ -152,7 +152,7 @@ class send_events {
 
         // Para: {[to.???]}.
         $usersto = array();
-        switch ($this->kopere_dashboard_events->userto) {
+        switch ($this->koperedashboardevents->userto) {
             case 'admin':
                 $usersto = array(get_admin());
                 break;
@@ -187,8 +187,8 @@ class send_events {
             if (isset($this->event->other['password'])) {
                 $userto->password = $this->event->other['password'];
             } else if (strpos($this->message, '{[to.password]}')) {
-                $new_password = $this->login_generate_password($userto);
-                $userto->password = "{$CFG->wwwroot}/login/forgot_password.php?token={$new_password}";
+                $newpassword = $this->login_generate_password($userto);
+                $userto->password = "{$CFG->wwwroot}/login/forgot_password.php?token={$newpassword}";
             }
 
             $sendsubject = $this->replace_tag_user($this->subject, $userto, 'to');
@@ -225,8 +225,8 @@ class send_events {
 
         $templatecontent = notificationsutil::get_template_html();
 
-        $this->subject = $this->kopere_dashboard_events->subject;
-        $this->message = str_replace('{[message]}', $this->kopere_dashboard_events->message, $templatecontent);
+        $this->subject = $this->koperedashboardevents->subject;
+        $this->message = str_replace('{[message]}', $this->koperedashboardevents->message, $templatecontent);
     }
 
     /**

@@ -1,6 +1,4 @@
-define([
-    "jquery"
-], function($) {
+define(["jquery", "jqueryui", "theme_boost/index"], function($, ui, bootstrap) {
     return {
 
         webpages_page_ajax_get_url : function() {
@@ -30,5 +28,9 @@ define([
             });
         },
 
+        jqueryui : function() {
+            $(".jquery-ui-accordion").accordion();
+            $(".jquery-ui-tabs").tabs();
+        }
     };
 });

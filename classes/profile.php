@@ -58,17 +58,19 @@ class profile {
 
     /**
      * @param $user
+     * @param $imgheight
+     *
      * @return string
      * @throws \coding_exception
      */
-    public static function user_data($user, $img_height){
+    public static function user_data($user, $imgheight) {
         global $PAGE;
 
         $userpicture = new \user_picture($user);
         $userpicture->size = 110;
         $profileimageurl = $userpicture->get_url($PAGE)->out(false);
         return "
-            <img src='{$profileimageurl}' alt='" . fullname($user) . "' height='{$img_height}'>
+            <img src='{$profileimageurl}' alt='" . fullname($user) . "' height='{$imgheight}'>
             <h3 class='name'>{$user->firstname}
                 <span class='last'>{$user->lastname}</span>
             </h3>
@@ -94,9 +96,9 @@ class profile {
         foreach ($courses as $course) {
             $sql
                 = "SELECT ue.*
-                         FROM {user_enrolments} ue
-                         JOIN {enrol} e ON ( e.id = ue.enrolid AND e.courseid = :courseid )
-                        WHERE ue.userid = :userid";
+                     FROM {user_enrolments} ue
+                     JOIN {enrol} e ON ( e.id = ue.enrolid AND e.courseid = :courseid )
+                    WHERE ue.userid = :userid";
             $params = array('userid' => $userid,
                 'courseid' => $course->id
             );
@@ -128,16 +130,17 @@ class profile {
                     get_string_kopere('profile_enrol_active') . '</span>';
             }
 
-            $url = "{$CFG->wwwroot}/local/kopere_dashboard/load-ajax.php?classname=userenrolment&method=mathedit&courseid={$course->id}&ueid={$enrolment->id}";
+            $url = "{$CFG->wwwroot}/local/kopere_dashboard/load-ajax.php?classname=userenrolment".
+                "&method=mathedit&courseid={$course->id}&ueid={$enrolment->id}";
             return
                 "<li>
                     <h4 class='title'>{$course->fullname}
                         <span class='status'>{$matriculastatus}</span>
                     </h4>
-                    <div>" . get_string_kopere('profile_enrol_start') . ' 
-                        <em>' . userdate($enrolment->timestart, get_string_kopere('dateformat')) . "</em> 
+                    <div>" . get_string_kopere('profile_enrol_start') . '
+                        <em>' . userdate($enrolment->timestart, get_string_kopere('dateformat')) . "</em>
                         {$expirationend} -
-                        <button class='btn btn-info btn-xs' data-toggle='modal' 
+                        <button class='btn btn-info btn-xs' data-toggle='modal'
                                 data-target='#modal-edit'
                                 data-href='{$url}'>" . get_string_kopere('profile_edit') . '</button>
                     </div>

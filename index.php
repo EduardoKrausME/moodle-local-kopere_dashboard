@@ -37,8 +37,9 @@ if ($htmldata && $cssdata && confirm_sesskey()) {
     $pagelink = optional_param('link', false, PARAM_TEXT);
 }
 
+$context = context_system::instance();
 
-$PAGE->set_context(context_system::instance());
+$PAGE->set_context($context);
 $PAGE->requires->css('/local/kopere_dashboard/assets/statics-pages.css');
 $PAGE->set_pagetype('my-index');
 
@@ -53,8 +54,6 @@ if ($pagelink) {
         \local_kopere_dashboard\util\webpages_util::notfound("webpages_error_page");
     }
 
-    echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
-
     if ($htmldata && $cssdata && confirm_sesskey()) {
         $webpages->text = "{$htmldata}\n<style>{$cssdata}</style>";
     }
@@ -62,7 +61,15 @@ if ($pagelink) {
     $PAGE->set_url(new moodle_url("/local/kopere_dashboard/?p={$pagelink}"));
     $PAGE->set_pagelayout($webpages->theme);
     $PAGE->set_title($webpages->title);
-    $PAGE->set_heading($webpages->title);
+
+    $edit = "";
+    $hascapability = has_capability('local/kopere_dashboard:manage', $context);
+    if ($hascapability) {
+        $href = "{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?classname=webpages&method=page_edit&id={$webpages->id}";
+        $edittext = get_string('webpages_page_edit', 'local_kopere_dashboard');
+        $edit = " - <a href='{$href}' target='_blank' style='text-decoration:underline'>{$edittext}</a>";
+    }
+    $PAGE->set_heading("{$webpages->title} {$edit}", false);
 
     /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
     $menu = $DB->get_record('kopere_dashboard_menu', array('id' => $webpages->menuid));
@@ -70,6 +77,7 @@ if ($pagelink) {
     $PAGE->navbar->add($menu->title, new moodle_url("/local/kopere_dashboard/?menu={$menu->link}"));
     $PAGE->navbar->add($webpages->title);
 
+    echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
     echo $OUTPUT->header();
 
     preg_match_all('/\[\[(kopere_\w+)::(\w+)(->|-&gt;)(\w+)\((.*?)\)]]/', $webpages->text, $classes);
@@ -163,29 +171,32 @@ if ($pagelink) {
             $webpages->link = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";
 
             if (file_exists(__DIR__ . "/../kopere_pay/lib.php") && $webpages->courseid) {
-                $kopere_pay_detalhe = $DB->get_record('kopere_pay_detalhe', array('course' => $webpages->courseid));
-                $precoInt = str_replace(".", "", $kopere_pay_detalhe->preco);
-                $precoInt = str_replace(",", ".", $precoInt);
-                $precoInt = floatval("0{$precoInt}");
+                $koperepaydetalhe = $DB->get_record('kopere_pay_detalhe', array('course' => $webpages->courseid));
+                $precoint = str_replace(".", "", $koperepaydetalhe->preco);
+                $precoint = str_replace(",", ".", $precoint);
+                $precoint = floatval("0{$precoint}");
 
-                if (!$precoInt) {
+                if (!$precoint) {
                     $webpages->cursofree = true;
                 } else {
                     $webpages->cursopago = true;
-                    $webpages->cursopreco = $kopere_pay_detalhe->preco;
+                    $webpages->cursopreco = $koperepaydetalhe->preco;
                 }
             }
 
             $fs = get_file_storage();
-            $file = $fs->get_file(context_system::instance()->id, 'local_kopere_dashboard', 'webpage_image', $webpages->id, '/', 'webpage_image.img');
+            $file = $fs->get_file($context->id, 'local_kopere_dashboard', 'webpage_image', $webpages->id, '/', 'webpage_image.img');
             if ($file && isset($file->get_filename()[3])) {
-                $webpages->imagem = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
+                $webpages->imagem = moodle_url::make_pluginfile_url($file->get_contextid(),
+                    $file->get_component(), $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
             } else {
                 $webpages->imagem = $OUTPUT->image_url("course-default", "local_kopere_dashboard")->out(false);
             }
             $webpages->text = \local_kopere_dashboard\util\html::truncate_text(strip_tags($webpages->text), 300);
 
-            if (!isset($menu->webpages)) $menu->webpages = [];
+            if (!isset($menu->webpages)) {
+                $menu->webpages = [];
+            }
             $menu->webpages[] = $webpages;
         }
         $data['menus'][] = $menu;

@@ -21,7 +21,6 @@
 
 namespace local_kopere_dashboard\task;
 
-
 class db_course_access extends \core\task\scheduled_task {
     /**
      * @return string
@@ -37,20 +36,11 @@ class db_course_access extends \core\task\scheduled_task {
     public function execute() {
         global $DB;
 
-        //$sql = "SELECT COUNT(*) AS contagem, timecreated
-        //          FROM {kopere_dashboard_courseacces}
-        //         WHERE courseid = :courseid
-        //           AND contextinstanceid = :contextinstanceid
-        //           AND action = :action
-        //           AND userid = :userid
-        //      GROUP BY timecreated
-        //      ORDER BY timecreated DESC
-        //         LIMIT 1";
-
         $count = $DB->get_record_sql("SELECT COUNT(*) AS registros FROM {kopere_dashboard_courseacces}");
         if (false && $count->registros) {
             $reportsql = "
-                SELECT CONCAT(courseid,userid,contextinstanceid) AS a, COUNT(*) AS contagem, courseid, userid, contextinstanceid, timecreated
+                SELECT CONCAT(courseid,userid,contextinstanceid) AS a, COUNT(*) AS contagem, 
+                       courseid, userid, contextinstanceid, timecreated
                   FROM {logstore_standard_log}
                  WHERE action = 'viewed'
                    AND timecreated BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -30 DAY) AND CURRENT_DATE()
@@ -58,7 +48,8 @@ class db_course_access extends \core\task\scheduled_task {
               ORDER BY timecreated DESC";
         } else {
             $reportsql = "
-                SELECT CONCAT(courseid,userid,contextinstanceid) AS a, COUNT(*) AS contagem, courseid, userid, contextinstanceid, timecreated
+                SELECT CONCAT(courseid,userid,contextinstanceid) AS a, COUNT(*) AS contagem, 
+                       courseid, userid, contextinstanceid, timecreated
                   FROM {logstore_standard_log}
                  WHERE action = 'viewed'
               GROUP BY courseid, userid, contextinstanceid
@@ -66,9 +57,6 @@ class db_course_access extends \core\task\scheduled_task {
         }
 
         $logstorestandardlogs = $DB->get_records_sql($reportsql);
-        echo '<pre>';
-        print_r($logstorestandardlogs);
-        echo '</pre>';
 
         foreach ($logstorestandardlogs as $logstorestandardlog) {
 

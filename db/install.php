@@ -29,6 +29,19 @@ function xmldb_local_kopere_dashboard_install() {
     set_config('webpages_theme', 'standard', 'local_kopere_dashboard');
     set_config('notificacao-template', 'Cinza.html', 'local_kopere_dashboard');
 
+    $fonts = "<style>\n@import url('https://fonts.googleapis.com/css2?family=Acme" .
+        "&family=Almendra:ital,wght@0,400;0,700;1,400;1,700" .
+        "&family=Bad+Script" .
+        "&family=Dancing+Script:wght@400..700" .
+        "&family=Great+Vibes" .
+        "&family=Marck+Script" .
+        "&family=Nanum+Pen+Script" .
+        "&family=Orbitron:wght@400..900" .
+        "&family=Ubuntu+Condensed" .
+        "&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700" .
+        "&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');\n</style>";
+    set_config('kopere_dashboard_pagefonts', $fonts);
+
     return true;
 }
 

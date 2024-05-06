@@ -51,7 +51,6 @@ echo $OUTPUT->heading(get_string_kopere('open_dashboard'));
 $classname = optional_param('classname', 'dashboard', PARAM_TEXT);
 $method = optional_param('method', 'start', PARAM_TEXT);
 
-
 $url = "{$CFG->wwwroot}/local/kopere_dashboard/open-dashboard.php?" . clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
 if ($CFG->kopere_dashboard_open == 'internal') {
     $urlinternal = "{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?" . clean_param($_SERVER['QUERY_STRING'], PARAM_TEXT);
@@ -80,7 +79,7 @@ if ($CFG->kopere_dashboard_open == 'internal') {
 
     <meta http-equiv="refresh" content="0; url=<?php echo $url ?>">
     <?php
-} else { // popup ?>
+} else { // Popup. ?>
     <div class="text-center kopere-dashboard" style="text-align: center;">
         <a type="button"
            class="dashboard-load-popup btn btn-lg btn-primary"

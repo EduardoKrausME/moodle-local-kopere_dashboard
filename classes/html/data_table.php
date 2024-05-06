@@ -195,6 +195,7 @@ class data_table {
         }
 
         $return .= "<tr class='{$class}'>";
+
         /** @var table_header_item $column */
         foreach ($this->column as $key => $column) {
             $return .= "<th class='text-center th_{$column->chave}' style='{$column->style_header}'>";

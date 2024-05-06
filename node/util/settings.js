@@ -13,7 +13,6 @@ exports.defaults = {
     "ssl"  : false
 };
 
-
 exports.loadSettings = function() {
     var settings_file = "settings.json";
     var user_settings = {};

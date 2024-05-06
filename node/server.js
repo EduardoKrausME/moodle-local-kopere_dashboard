@@ -11,7 +11,6 @@ var accessId = 0;
 var server, http, app, io;
 var allUsers = [];
 
-
 /**
  * Metodo HTTP
  *
@@ -62,7 +61,6 @@ if (settings.ssl) {
     server = require("http").Server(app, loadHttp);
 }
 
-
 // Starts listening socket.io
 http = server.listen(settings.port);
 io = require('socket.io')(http);
@@ -100,7 +98,6 @@ io.sockets.on('connection', function(socket) {
         socket.navigator = agent.toAgent().replace('0.0.0', '');
         socket.os = agent.os.toString().replace('0.0.0', '');
         socket.device = agent.device.toString().replace('0.0.0', '').replace('Other', '');
-
 
         // join the room
         socket.join(data.room);
@@ -140,7 +137,6 @@ io.sockets.on('connection', function(socket) {
         });
     });
 });
-
 
 function sendUserToDashboard(roomid, status, user) {
     for (var _id in io.sockets.sockets) {

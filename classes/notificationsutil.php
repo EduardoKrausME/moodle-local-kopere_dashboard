@@ -78,9 +78,6 @@ class notificationsutil {
         );
 
         //$eventclasss = \report_eventlist_list_generator::get_all_events_list();
-        //echo '<pre>';
-        //print_r($eventclasss);
-        //echo '</pre>';
 
         $components = array();
         $eventinformation = array();
@@ -268,15 +265,15 @@ class notificationsutil {
     public static function get_template_html() {
         global $CFG;
 
-        $notificacao_template_html = config::get_key('notificacao-template-html');
-        if ($notificacao_template_html) {
-            return $notificacao_template_html;
+        $notificacaotemplatehtml = config::get_key('notificacao-template-html');
+        if ($notificacaotemplatehtml) {
+            return $notificacaotemplatehtml;
         }
 
-        $notificacao_template = config::get_key('notificacao-template');
-        if ($notificacao_template) {
-            if (file_exists("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$notificacao_template}")) {
-                return file_get_contents("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$notificacao_template}");
+        $notificacaotemplate = config::get_key('notificacao-template');
+        if ($notificacaotemplate) {
+            if (file_exists("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$notificacaotemplate}")) {
+                return file_get_contents("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$notificacaotemplate}");
             }
         }
 

@@ -392,7 +392,6 @@ class notifications extends notificationsutil {
                 ->set_values($values, 'key', 'key')
                 ->set_value_by_config('notificacao-template'));
 
-
         $form->add_input(
             input_textarea::new_instance()
                 ->set_title(get_string_kopere('notification_setting_edit'))

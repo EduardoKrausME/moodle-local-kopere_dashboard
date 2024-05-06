@@ -28,7 +28,7 @@
 
                 if (!$) {
                     $ = jq(root);
-                } 
+                }
 
                 cjsRequires(root, $);
                 return factory($, root, root.document);

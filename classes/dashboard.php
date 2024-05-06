@@ -137,6 +137,7 @@ class dashboard {
             $gradetext = number_format($grade->finalgrade, 1, get_string('decsep', 'langconfig'), '') . ' ' .
                 get_string_kopere('dashboard_grade_of') . ' ' . intval($grade->rawgrademax);
 
+            $url = "{$CFG->wwwroot}/local/kopere_dashboard/load-ajax.php?classname=users&method=details&userid={$user->id}";
             echo "<div class='media dashboard-grade-list'>
                       <div class='media-left'>
                           <img title='" . fullname($user) . "' src='{$profileimageurl}" . "' class='media-object' >
@@ -145,7 +146,7 @@ class dashboard {
                           <h4 class='media-heading'>
                               <a data-toggle='modal' data-target='#modal-edit'
                                  href='?classname=users&method=details&userid={$user->id}'
-                                 data-href='{$CFG->wwwroot}/local/kopere_dashboard/load-ajax.php?classname=users&method=details&userid={$user->id}'>" .
+                                 data-href='{$url}'>" .
                 fullname($user) . "</a>
                           </h4>
                           <p>" .
@@ -186,6 +187,7 @@ class dashboard {
                         get_string_kopere('dashboard_enrol_active') . '</span>';
                 }
 
+                $url = "{$CFG->wwwroot}/local/kopere_dashboard/load-ajax.php?classname=users&method=details&userid={$user->id}";
                 echo "<div class='media dashboard-grade-list'>
                           <div class='media-left'>
                               <img title='" . fullname($user) . "' src='{$profileimageurl}' class='media-object' >
@@ -194,7 +196,7 @@ class dashboard {
                               <h4 class='media-heading'>
                                   <a data-toggle='modal' data-target='#modal-edit'
                                      href='?classname=users&method=details&userid={$user->id}'
-                                     data-href='{$CFG->wwwroot}/local/kopere_dashboard/load-ajax.php?classname=users&method=details&userid={$user->id}'>" .
+                                     data-href='{$url}'>" .
                     fullname($user) . '</a>
                               </h4>
                               <p>' . get_string_kopere('dashboard_enrol_text', $enrol) . "

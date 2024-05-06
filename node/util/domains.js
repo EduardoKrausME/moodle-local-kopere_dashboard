@@ -2,8 +2,6 @@
  * Load as existing settings in domains.txt
  * */
 
-
-
 var fs = require("fs");
 
 //defaults

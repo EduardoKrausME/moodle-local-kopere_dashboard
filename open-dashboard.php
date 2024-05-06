@@ -112,5 +112,4 @@ echo get_kopere_lang();
 
 <?php
 
-
 echo $OUTPUT->footer();

@@ -217,7 +217,7 @@ class performancemonitor {
         global $DB;
 
         $param = array(
-            'timefrom' => time() - 300, // 300 - 5 minute
+            'timefrom' => time() - 300, // 300 - 5 minute.
             'now' => time()
         );
         $sql = "SELECT COUNT( DISTINCT id) AS cont

@@ -29,12 +29,14 @@ class font_util {
      * @return array
      */
     private static function list_fonts() {
-        static $fontList;
-        if ($fontList) {
-            return $fontList;
+        global $CFG;
+
+        static $fontlist;
+        if ($fontlist) {
+            return $fontlist;
         }
 
-        $fonts = [
+        $fontsdefault = [
             "family=Alex+Brush",
             "family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900",
             "family=Bebas+Neue",
@@ -70,31 +72,36 @@ class font_util {
             "family=Source+Sans+3:ital,wght@0,200..900;1,200..900",
             "family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700",
             "family=Vibur",
-            "family=Work+Sans:ital,wght@0,100..900;1,100..900"
+            "family=Work+Sans:ital,wght@0,100..900;1,100..900",
         ];
 
-        $fontList = ['css' => [], 'grapsjs' => [], 'ckeditor' => []];
+        preg_match_all('/(family=.*?)&/', $CFG->kopere_dashboard_pagefonts, $fontsuser);
+        if (isset($fontsuser[1])) {
+            $fonts = array_merge($fontsuser[1], $fontsdefault);
+        }
+
+        $fontlist = ['css' => [], 'grapsjs' => [], 'ckeditor' => []];
         foreach ($fonts as $font) {
 
-            preg_match('/family=([A-Z,a-z\+]{2,30})/', $font, $fontInfo);
-            if ($fontInfo[1]) {
-                $fontList['css'][] = $font;
-                $fontName = urldecode($fontInfo[1]);
+            preg_match('/family=([A-Z,a-z\+]{2,30})/', $font, $fontinfo);
+            if ($fontinfo[1]) {
+                $fontlist['css'][] = $font;
+                $fontname = urldecode($fontinfo[1]);
 
-                $fontList['grapsjs'][] = "
+                $fontlist['grapsjs'][] = "
                         {
-                            'id' : \"'{$fontName}'\", 
-                            'label' : '{$fontName}', 
+                            'id' : \"'{$fontname}'\",
+                            'label' : '{$fontname}',
                         }";
-                $fontList['ckeditor'][] = "{$fontName}/{$fontName}";
+                $fontlist['ckeditor'][] = "{$fontname}/'{$fontname}'";
             }
         }
 
-        $fontList['css'] = 'https://fonts.googleapis.com/css2?' . implode('&', $fontList['css']) . '&display=swap';
-        $fontList['grapsjs'] = implode(",", $fontList['grapsjs']);
-        $fontList['ckeditor'] = implode(";", $fontList['ckeditor']);
+        $fontlist['css'] = 'https://fonts.googleapis.com/css2?' . implode('&', $fontlist['css']) . '&display=swap';
+        $fontlist['grapsjs'] = implode(",", $fontlist['grapsjs']);
+        $fontlist['ckeditor'] = implode(";", $fontlist['ckeditor']);
 
-        return $fontList;
+        return $fontlist;
     }
 
     /**
@@ -123,9 +130,17 @@ class font_util {
      */
     public static function print_only_unique() {
         static $printed = false;
-        if ($printed) return "";
+        if ($printed) {
+            return "";
+        }
         $printed = true;
 
-        return "<link rel='stylesheet' href='" . font_util::css() . "'>";
+        global $PAGE;
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', 'jqueryui');
+        $PAGE->requires->jquery();
+        $PAGE->requires->jquery_plugin("ui");
+        $PAGE->requires->jquery_plugin("ui-css");
+
+        return "<link rel='stylesheet' href='" . self::css() . "'>";
     }
 }

@@ -185,12 +185,12 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         if (!$dbman->table_exists('kopere_dashboard_reportlogin')) {
             $table = new xmldb_table('kopere_dashboard_reportlogin');
 
-            $table->add_field('id',          XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL, XMLDB_SEQUENCE);
-            $table->add_field('userid',      XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL);
-            $table->add_field('ip',          XMLDB_TYPE_CHAR,    '32', null, XMLDB_NOTNULL);
+            $table->add_field('id', XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+            $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL);
+            $table->add_field('ip', XMLDB_TYPE_CHAR, '32', null, XMLDB_NOTNULL);
             $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL);
 
-            $table->add_key('primary',       XMLDB_KEY_PRIMARY, array('id'));
+            $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
 
             $dbman->create_table($table);
         }
@@ -208,18 +208,34 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         if (!$dbman->table_exists('kopere_dashboard_courseacces')) {
             $table = new xmldb_table('kopere_dashboard_courseacces');
 
-            $table->add_field('id',          XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL, XMLDB_SEQUENCE);
-            $table->add_field('userid',      XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL);
-            $table->add_field('courseid',    XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL);
-            $table->add_field('context',     XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL);
-            $table->add_field('contagem',    XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL);
+            $table->add_field('id', XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+            $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL);
+            $table->add_field('courseid', XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL);
+            $table->add_field('context', XMLDB_TYPE_INTEGER, '10', true, XMLDB_NOTNULL);
+            $table->add_field('contagem', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL);
             $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL);
 
-            $table->add_key('primary',       XMLDB_KEY_PRIMARY, array('id'));
+            $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
 
             $dbman->create_table($table);
         }
         upgrade_plugin_savepoint(true, 2024013100, 'local', 'kopere_dashboard');
+    }
+
+    if ($oldversion < 2024050102) {
+        $fonts = "<style>\n@import url('https://fonts.googleapis.com/css2?family=Acme" .
+            "&family=Almendra:ital,wght@0,400;0,700;1,400;1,700" .
+            "&family=Bad+Script" .
+            "&family=Dancing+Script:wght@400..700" .
+            "&family=Great+Vibes" .
+            "&family=Marck+Script" .
+            "&family=Nanum+Pen+Script" .
+            "&family=Orbitron:wght@400..900" .
+            "&family=Ubuntu+Condensed" .
+            "&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700" .
+            "&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');\n</style>";
+        set_config('kopere_dashboard_pagefonts', $fonts);
+        upgrade_plugin_savepoint(true, 2024050102, 'local', 'kopere_dashboard');
     }
 
     \local_kopere_dashboard\install\report_install::create_categores();

@@ -59,7 +59,8 @@ class webpages {
         dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'));
         dashboard_util::start_page('?classname=webpages&method=settings', 'Páginas-estáticas');
 
-        $botao = button::add(get_string_kopere('webpages_menu_create'), '?classname=webpages&method=menu_edit', 'ml-4', false, true);
+        $botao = button::add(get_string_kopere('webpages_menu_create'),
+            '?classname=webpages&method=menu_edit', 'ml-4', false, true);
         title_util::print_h3(get_string_kopere('webpages_subtitle') . $botao, false);
         title_util::print_h6('webpages_subtitle_help');
         $menus = $DB->get_records('kopere_dashboard_menu', null, 'title ASC');
@@ -93,7 +94,8 @@ class webpages {
         echo '</div>';
 
         if ($menus) {
-            $botao = button::add(get_string_kopere('webpages_page_create'), '?classname=webpages&method=page_edit', 'ml-4', false, true);
+            $botao = button::add(get_string_kopere('webpages_page_create'),
+                '?classname=webpages&method=page_edit', 'ml-4', false, true);
             title_util::print_h3(get_string_kopere('webpages_title') . $botao, false);
 
             echo '<div class="element-box">';
@@ -161,7 +163,6 @@ class webpages {
         $form = new form();
         $form->print_panel(get_string_kopere('webpages_table_link'), "<a target='_blank' href='$linkpagina'>$linkpagina</a>");
         $form->print_panel(get_string_kopere('webpages_table_title'), $webpages->title);
-        // $form->print_panel(get_string_kopere('webpages_table_link'), $webpages->link);
         if ($webpages->courseid) {
             $course = $DB->get_record('course', array('id' => $webpages->courseid));
             if ($course) {
@@ -172,19 +173,21 @@ class webpages {
 
         $imagem = "";
         $fs = get_file_storage();
-        $file = $fs->get_file(context_system::instance()->id, 'local_kopere_dashboard', 'webpage_image', $webpages->id, '/', 'webpage_image.img');
+        $file = $fs->get_file(context_system::instance()->id, 'local_kopere_dashboard', 'webpage_image',
+            $webpages->id, '/', 'webpage_image.img');
         if ($file && isset($file->get_filename()[3])) {
-            $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
+            $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
+                $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
             $imagem = "<p><a href='{$url}' target='_blank'><img src='{$url}' style='max-width:300px;max-height:300px;'></a></p>";
         }
-
 
         $href = "{$CFG->wwwroot}/local/kopere_dashboard/_editor/?page=webpages&id={$webpages->id}&link={$webpages->link}";
         $text = get_string_kopere('webpages_table_text_edit');
         $link = "<a class='btn btn-info' href='{$href}'>{$text}</a>";
+
+        echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
         $form->print_panel(get_string_kopere('webpages_table_text'),
             $imagem . $webpages->text . $link);
-
 
         echo "<div class='row'>";
         echo "<div class='col-md'>";
@@ -245,9 +248,11 @@ class webpages {
 
         $imagem = "";
         $fs = get_file_storage();
-        $file = $fs->get_file(context_system::instance()->id, 'local_kopere_dashboard', 'webpage_image', $webpages->id, '/', 'webpage_image.img');
+        $file = $fs->get_file(context_system::instance()->id, 'local_kopere_dashboard',
+            'webpage_image', $webpages->id, '/', 'webpage_image.img');
         if ($file && isset($file->get_filename()[3])) {
-            $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
+            $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
+                $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
             $imagem = "<p>Imagem atual:<br><a href='{$url}' target='_blank'><img src='{$url}' style='max-width: 100px;max-height: 100px;'></a></p>";
         }
 
@@ -387,14 +392,15 @@ class webpages {
 
         if (isset($_FILES["imagem"]) && $_FILES["imagem"]["error"] == UPLOAD_ERR_OK) {
 
-            $extensoesPermitidas = array("png", "jpg", "jpeg");
-            $extensaoArquivo = pathinfo($_FILES["imagem"]["name"], PATHINFO_EXTENSION);
+            $extensoespermitidas = array("png", "jpg", "jpeg");
+            $extensaoarquivo = pathinfo($_FILES["imagem"]["name"], PATHINFO_EXTENSION);
 
-            if (in_array($extensaoArquivo, $extensoesPermitidas)) {
+            if (in_array($extensaoarquivo, $extensoespermitidas)) {
 
                 $fs = get_file_storage();
 
-                $files = $fs->get_area_files(context_system::instance()->id, 'local_kopere_dashboard', "webpage_image", $webpages->id);
+                $files = $fs->get_area_files(context_system::instance()->id, 'local_kopere_dashboard',
+                    "webpage_image", $webpages->id);
                 /** @var \stored_file $file */
                 foreach ($files as $file) {
                     $file->delete();
@@ -409,7 +415,6 @@ class webpages {
                     'itemid' => $webpages->id,
                     'filename' => "webpage_image.img",
                 ];
-
 
                 $fs->create_file_from_pathname($filerecord, $_FILES["imagem"]["tmp_name"]);
 

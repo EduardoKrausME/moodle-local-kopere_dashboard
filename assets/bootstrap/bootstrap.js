@@ -18,7 +18,6 @@ if (typeof jQuery === 'undefined') {
  * Bootstrap: transition.js v3.3.7
  * ======================================================================== */
 
-
 +function($) {
     'use strict';
 
@@ -78,7 +77,6 @@ if (typeof jQuery === 'undefined') {
  * Bootstrap: alert.js v3.3.7
  * ======================================================================== */
 
-
 +function($) {
     'use strict';
 
@@ -129,7 +127,6 @@ if (typeof jQuery === 'undefined') {
             removeElement()
     }
 
-
     // ALERT PLUGIN DEFINITION
     // =======================
 
@@ -148,7 +145,6 @@ if (typeof jQuery === 'undefined') {
     $.fn.alert = Plugin
     $.fn.alert.Constructor = Alert
 
-
     // ALERT NO CONFLICT
     // =================
 
@@ -156,7 +152,6 @@ if (typeof jQuery === 'undefined') {
         $.fn.alert = old
         return this
     }
-
 
     // ALERT DATA-API
     // ==============
@@ -168,7 +163,6 @@ if (typeof jQuery === 'undefined') {
 /* ========================================================================
  * Bootstrap: button.js v3.3.7
  * ======================================================================== */
-
 
 +function($) {
     'use strict';
@@ -234,7 +228,6 @@ if (typeof jQuery === 'undefined') {
         }
     }
 
-
     // BUTTON PLUGIN DEFINITION
     // ========================
 
@@ -256,7 +249,6 @@ if (typeof jQuery === 'undefined') {
     $.fn.button = Plugin
     $.fn.button.Constructor = Button
 
-
     // BUTTON NO CONFLICT
     // ==================
 
@@ -264,7 +256,6 @@ if (typeof jQuery === 'undefined') {
         $.fn.button = old
         return this
     }
-
 
     // BUTTON DATA-API
     // ===============
@@ -290,7 +281,6 @@ if (typeof jQuery === 'undefined') {
 /* ========================================================================
  * Bootstrap: carousel.js v3.3.7
  * ======================================================================== */
-
 
 +function($) {
     'use strict';
@@ -461,7 +451,6 @@ if (typeof jQuery === 'undefined') {
         return this
     }
 
-
     // CAROUSEL PLUGIN DEFINITION
     // ==========================
 
@@ -484,7 +473,6 @@ if (typeof jQuery === 'undefined') {
     $.fn.carousel = Plugin
     $.fn.carousel.Constructor = Carousel
 
-
     // CAROUSEL NO CONFLICT
     // ====================
 
@@ -492,7 +480,6 @@ if (typeof jQuery === 'undefined') {
         $.fn.carousel = old
         return this
     }
-
 
     // CAROUSEL DATA-API
     // =================
@@ -689,7 +676,6 @@ if (typeof jQuery === 'undefined') {
         return $(target)
     }
 
-
     // COLLAPSE PLUGIN DEFINITION
     // ==========================
 
@@ -710,7 +696,6 @@ if (typeof jQuery === 'undefined') {
     $.fn.collapse = Plugin
     $.fn.collapse.Constructor = Collapse
 
-
     // COLLAPSE NO CONFLICT
     // ====================
 
@@ -718,7 +703,6 @@ if (typeof jQuery === 'undefined') {
         $.fn.collapse = old
         return this
     }
-
 
     // COLLAPSE DATA-API
     // =================
@@ -740,7 +724,6 @@ if (typeof jQuery === 'undefined') {
 /* ========================================================================
  * Bootstrap: dropdown.js v3.3.7
  * ======================================================================== */
-
 
 +function($) {
     'use strict';
@@ -858,7 +841,6 @@ if (typeof jQuery === 'undefined') {
         $items.eq(index).trigger('focus')
     }
 
-
     // DROPDOWN PLUGIN DEFINITION
     // ==========================
 
@@ -877,7 +859,6 @@ if (typeof jQuery === 'undefined') {
     $.fn.dropdown = Plugin
     $.fn.dropdown.Constructor = Dropdown
 
-
     // DROPDOWN NO CONFLICT
     // ====================
 
@@ -885,7 +866,6 @@ if (typeof jQuery === 'undefined') {
         $.fn.dropdown = old
         return this
     }
-
 
     // APPLY TO STANDARD DROPDOWN ELEMENTS
     // ===================================
@@ -904,7 +884,6 @@ if (typeof jQuery === 'undefined') {
 /* ========================================================================
  * Bootstrap: modal.js v3.3.7
  * ======================================================================== */
-
 
 +function($) {
     'use strict';
@@ -1184,7 +1163,6 @@ if (typeof jQuery === 'undefined') {
         return scrollbarWidth
     }
 
-
     // MODAL PLUGIN DEFINITION
     // =======================
 
@@ -1212,7 +1190,6 @@ if (typeof jQuery === 'undefined') {
     $.fn.modal = Plugin
     $.fn.modal.Constructor = Modal
 
-
     // MODAL NO CONFLICT
     // =================
 
@@ -1220,7 +1197,6 @@ if (typeof jQuery === 'undefined') {
         $.fn.modal = old
         return this
     }
-
 
     // MODAL DATA-API
     // ==============
@@ -1257,14 +1233,12 @@ if (typeof jQuery === 'undefined') {
         Plugin.call($target, option, this)
     })
 
-
 }(jQuery);
 
 /* ========================================================================
  * Bootstrap: tooltip.js v3.3.7
  * Inspired by the original jQuery.tipsy by Jason Frame
  * ======================================================================== */
-
 
 +function($) {
     'use strict';
@@ -1757,7 +1731,6 @@ if (typeof jQuery === 'undefined') {
         })
     }
 
-
     // TOOLTIP PLUGIN DEFINITION
     // =========================
 
@@ -1778,7 +1751,6 @@ if (typeof jQuery === 'undefined') {
     $.fn.tooltip = Plugin
     $.fn.tooltip.Constructor = Tooltip
 
-
     // TOOLTIP NO CONFLICT
     // ===================
 
@@ -1792,7 +1764,6 @@ if (typeof jQuery === 'undefined') {
 /* ========================================================================
  * Bootstrap: popover.js v3.3.7
  * ======================================================================== */
-
 
 +function($) {
     'use strict';
@@ -1814,7 +1785,6 @@ if (typeof jQuery === 'undefined') {
         content   : '',
         template  : '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
     })
-
 
     // NOTE: POPOVER EXTENDS tooltip.js
     // ================================
@@ -1862,7 +1832,6 @@ if (typeof jQuery === 'undefined') {
         return (this.$arrow = this.$arrow || this.tip().find('.arrow'))
     }
 
-
     // POPOVER PLUGIN DEFINITION
     // =========================
 
@@ -1883,7 +1852,6 @@ if (typeof jQuery === 'undefined') {
     $.fn.popover = Plugin
     $.fn.popover.Constructor = Popover
 
-
     // POPOVER NO CONFLICT
     // ===================
 
@@ -1897,7 +1865,6 @@ if (typeof jQuery === 'undefined') {
 /* ========================================================================
  * Bootstrap: scrollspy.js v3.3.7
  * ======================================================================== */
-
 
 +function($) {
     'use strict';
@@ -2023,7 +1990,6 @@ if (typeof jQuery === 'undefined') {
             .removeClass('active')
     }
 
-
     // SCROLLSPY PLUGIN DEFINITION
     // ===========================
 
@@ -2043,7 +2009,6 @@ if (typeof jQuery === 'undefined') {
     $.fn.scrollspy = Plugin
     $.fn.scrollspy.Constructor = ScrollSpy
 
-
     // SCROLLSPY NO CONFLICT
     // =====================
 
@@ -2051,7 +2016,6 @@ if (typeof jQuery === 'undefined') {
         $.fn.scrollspy = old
         return this
     }
-
 
     // SCROLLSPY DATA-API
     // ==================
@@ -2068,7 +2032,6 @@ if (typeof jQuery === 'undefined') {
 /* ========================================================================
  * Bootstrap: tab.js v3.3.7
  * ======================================================================== */
-
 
 +function($) {
     'use strict';
@@ -2174,7 +2137,6 @@ if (typeof jQuery === 'undefined') {
         $active.removeClass('in')
     }
 
-
     // TAB PLUGIN DEFINITION
     // =====================
 
@@ -2193,7 +2155,6 @@ if (typeof jQuery === 'undefined') {
     $.fn.tab = Plugin
     $.fn.tab.Constructor = Tab
 
-
     // TAB NO CONFLICT
     // ===============
 
@@ -2201,7 +2162,6 @@ if (typeof jQuery === 'undefined') {
         $.fn.tab = old
         return this
     }
-
 
     // TAB DATA-API
     // ============
@@ -2220,7 +2180,6 @@ if (typeof jQuery === 'undefined') {
 /* ========================================================================
  * Bootstrap: affix.js v3.3.7
  * ======================================================================== */
-
 
 +function($) {
     'use strict';
@@ -2327,7 +2286,6 @@ if (typeof jQuery === 'undefined') {
         }
     }
 
-
     // AFFIX PLUGIN DEFINITION
     // =======================
 
@@ -2347,7 +2305,6 @@ if (typeof jQuery === 'undefined') {
     $.fn.affix = Plugin
     $.fn.affix.Constructor = Affix
 
-
     // AFFIX NO CONFLICT
     // =================
 
@@ -2355,7 +2312,6 @@ if (typeof jQuery === 'undefined') {
         $.fn.affix = old
         return this
     }
-
 
     // AFFIX DATA-API
     // ==============

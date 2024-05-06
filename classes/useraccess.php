@@ -48,7 +48,6 @@ class useraccess {
         $form->close();
         echo '</div>';
 
-
         echo '<div class="element-box">';
         $table = new data_table();
         $table->add_header('#', 'userid', table_header_item::TYPE_INT, null, 'width: 20px');

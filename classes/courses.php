@@ -173,7 +173,6 @@ class courses {
         echo '    </div>
               </div>';
 
-
         echo '<div class="element-box table-responsive table-new-enrol" style="display:none">';
         title_util::print_h3("courses_enrol_new");
         $form = new form("?classname=courses&method=enrol_new&courseid={$course->id}");
@@ -188,14 +187,12 @@ class courses {
 
         echo '</div>';
 
-
         echo '<div class="element-box table-responsive table-list-enrol">';
         echo
             '<h3>' .
             get_string_kopere('courses_titleenrol') .
             ' <span class="btn btn-primary bt-courses_enrol_new">' . get_string_kopere('courses_enrol_new') . '</span>' .
             '</h3>';
-
 
         $table = new data_table();
         $table->add_header('#', 'id', table_header_item::TYPE_INT);
@@ -245,21 +242,21 @@ class courses {
 
             $tifirst = strtoupper(substr($user->firstname, 0, 1));
             $tilast = strtoupper(substr($user->lastname, 0, 1));
-            $linkEnrol = "{$CFG->wwwroot}/user/index.php?id={$course->id}&tifirst={$tifirst}&tilast={$tilast}";
+            $linkenrol = "{$CFG->wwwroot}/user/index.php?id={$course->id}&tifirst={$tifirst}&tilast={$tilast}";
             if (enroll_util::enrolled($course, $user)) {
-                mensagem::print_info(get_string_kopere("courses_student_cadastrado", $linkEnrol));
+                mensagem::print_info(get_string_kopere("courses_student_cadastrado", $linkenrol));
             } else {
 
                 $matricular = optional_param("matricular", false, PARAM_INT);
                 if ($matricular) {
                     enroll_util::enrol($course, $user, time(), 0, ENROL_INSTANCE_ENABLED);
 
-                    redirect($linkEnrol, get_string_kopere('courses_student_cadastrar_ok'));
+                    redirect($linkenrol, get_string_kopere('courses_student_cadastrar_ok'));
                 }
 
-                button::add(get_string_kopere("courses_student_cadastrar"), "?classname=courses&method=enrol_new&courseid={$course->id}&userid={$user->id}&matricular=1");
+                button::add(get_string_kopere("courses_student_cadastrar"),
+                    "?classname=courses&method=enrol_new&courseid={$course->id}&userid={$user->id}&matricular=1");
             }
-
 
         } else {
 
@@ -295,7 +292,7 @@ class courses {
                     mensagem::print_danger($errors);
                 } else {
                     try {
-                        require_once "{$CFG->dirroot}/user/lib.php";
+                        require_once("{$CFG->dirroot}/user/lib.php");
                         $newuser->id = user_create_user($newuser);
 
                         $a = (object)['login' => $newuser->username, 'senha' => $password];

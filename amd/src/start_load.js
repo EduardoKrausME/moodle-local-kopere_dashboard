@@ -10,7 +10,6 @@ define([
             // iosCheckbox
             $(".ios-checkbox").iosCheckbox();
 
-
             // mackInputs()
             $("input.mask_phone").mask("(99) 9999-9999");
             $("input.mask_celphone").mask("(99) 9 9999-9999");
