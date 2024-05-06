@@ -42,11 +42,12 @@ if ($CFG->theme == 'smartlms') {
 require_once("{$CFG->libdir}/adminlib.php");
 
 require_login();
-require_capability('local/kopere_dashboard:view', context_system::instance());
-require_capability('local/kopere_dashboard:manage', context_system::instance());
+$context = context_system::instance();
+require_capability('local/kopere_dashboard:view', $context);
+require_capability('local/kopere_dashboard:manage', $context);
 
 $PAGE->set_url(new moodle_url('/local/kopere_dashboard/view.php'));
-$PAGE->set_context(context_system::instance());
+$PAGE->set_context($context);
 $PAGE->set_pagetype('admin-setting');
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title(get_string_kopere('modulename'));

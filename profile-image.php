@@ -24,8 +24,9 @@
 require('../../config.php');
 
 require_login();
-require_capability('local/kopere_dashboard:view', context_system::instance());
-require_capability('local/kopere_dashboard:manage', context_system::instance());
+$context = context_system::instance();
+require_capability('local/kopere_dashboard:view', $context);
+require_capability('local/kopere_dashboard:manage', $context);
 
 $type = required_param("type", PARAM_TEXT);
 $id = required_param("id", PARAM_TEXT);
