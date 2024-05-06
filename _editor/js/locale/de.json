@@ -1,0 +1,193 @@
+{
+  "assetManager": {
+    "addButton": "Bild hinzuf\u00fcgen",
+    "modalTitle": "Bild ausw\u00e4hlen",
+    "uploadTitle": "Dateien hier ablegen oder klicken, um hochzuladen"
+  },
+  "domComponents": {
+    "names": {
+      "": "Box",
+      "wrapper": "K\u00f6rper",
+      "text": "Text",
+      "comment": "Kommentar",
+      "image": "Bild",
+      "video": "Video",
+      "label": "Etikett",
+      "link": "Verkn\u00fcpfung",
+      "map": "Karte",
+      "tfoot": "Tabellenfu\u00dfzeile",
+      "tbody": "Tabellenk\u00f6rper",
+      "thead": "Tabellenkopf",
+      "table": "Tabelle",
+      "row": "Tabellenzeile",
+      "cell": "Tabellenzelle",
+      "section": "Abschnitt",
+      "body": "K\u00f6rper"
+    }
+  },
+  "deviceManager": {
+    "device": "Ger\u00e4t",
+    "devices": {
+      "desktop": "Desktop",
+      "tablet": "Tablet",
+      "mobileLandscape": "Handy, Querformat",
+      "mobilePortrait": "Handy, Hochformat"
+    }
+  },
+  "panels": {
+    "buttons": {
+      "titles": {
+        "preview": "Vorschau",
+        "fullscreen": "Vollbild",
+        "sw-visibility": "Komponenten anzeigen",
+        "open-sm": "Styles-Manager \u00f6ffnen",
+        "open-tm": "Einstellungen \u00f6ffnen",
+        "open-layers": "Ebenenmanager \u00f6ffnen",
+        "open-blocks": "Bl\u00f6cke \u00f6ffnen",
+        "undo": "R\u00fcckg\u00e4ngig machen",
+        "redo": "Wiederholen",
+        "clear": "Leinwand l\u00f6schen",
+        "edit_code": "Code bearbeiten"
+      }
+    }
+  },
+  "selectorManager": {
+    "label": "Klassen",
+    "selected": "Ausgew\u00e4hlt",
+    "emptyState": "- Zustand -",
+    "states": {
+      "hover": "Hover",
+      "active": "Klicken",
+      "nth-of-type(2n)": "Gerade\/Ungerade"
+    }
+  },
+  "styleManager": {
+    "empty": "W\u00e4hlen Sie ein Element aus, um den Stil-Manager zu verwenden",
+    "layer": "Ebene",
+    "fileButton": "Bilder",
+    "sectors": {
+      "general": "Allgemein",
+      "layout": "Layout",
+      "typography": "Typografie",
+      "decorations": "Dekorationen",
+      "extra": "Extra",
+      "flex": "Flex",
+      "dimension": "Dimension"
+    },
+    "properties": {
+      "float": "Schwimmen",
+      "display": "Anzeige",
+      "position": "Position",
+      "top": "Oben",
+      "right": "Rechts",
+      "left": "Links",
+      "bottom": "Unten",
+      "width": "Breite",
+      "height": "H\u00f6he",
+      "max-width": "Maximale Breite",
+      "max-height": "Maximale H\u00f6he",
+      "margin": "Rand",
+      "margin-top": "Oberer Rand",
+      "margin-right": "Rechter Rand",
+      "margin-left": "Linker Rand",
+      "margin-bottom": "Unterer Rand",
+      "padding": "Polsterung",
+      "padding-top": "Obere Polsterung",
+      "padding-left": "Linke Polsterung",
+      "padding-right": "Rechte Polsterung",
+      "padding-bottom": "Untere Polsterung",
+      "font-family": "Schriftart",
+      "font-size": "Schriftgr\u00f6\u00dfe",
+      "font-weight": "Schriftgewicht",
+      "letter-spacing": "Zeichenabstand",
+      "color": "Farbe",
+      "line-height": "Zeilenh\u00f6he",
+      "text-align": "Textausrichtung",
+      "text-shadow": "Textschatten",
+      "text-shadow-h": "Textschatten: Horizontal",
+      "text-shadow-v": "Textschatten: Vertikal",
+      "text-shadow-blur": "Textschatten: Unscharf",
+      "text-shadow-color": "Textschattenfarbe",
+      "border-top-left": "Obere linke Grenze",
+      "border-top-right": "Obere rechte Grenze",
+      "border-bottom-left": "Untere linke Grenze",
+      "border-bottom-right": "Untere rechte Grenze",
+      "border-radius-top-left": "Border Radius Oben Links",
+      "border-radius-top-right": "Border Radius Oben Rechts",
+      "border-radius-bottom-left": "Border Radius Unten Links",
+      "border-radius-bottom-right": "Border Radius Unten Rechts",
+      "border-radius": "Border Radius",
+      "border": "Grenze",
+      "border-width": "Grenzbreite",
+      "border-style": "Grenzstil",
+      "border-color": "Grenzfarbe",
+      "box-shadow": "Box Schatten",
+      "box-shadow-h": "Box Schatten: Horizontal",
+      "box-shadow-v": "Box Schatten: Vertikal",
+      "box-shadow-blur": "Box Schatten: Unscharf",
+      "box-shadow-spread": "Box Schatten: Ausdehnung",
+      "box-shadow-color": "Box Schattenfarbe",
+      "box-shadow-type": "Box Schattentyp",
+      "background": "Hintergrund",
+      "background-color": "Hintergrundfarbe",
+      "background-image": "Hintergrundbild",
+      "background-repeat": "Hintergrund wiederholen",
+      "background-position": "Hintergrundposition",
+      "background-attachment": "Hintergrundanhang",
+      "background-size": "Hintergrundgr\u00f6\u00dfe",
+      "transition": "\u00dcbergang",
+      "transition-property": "\u00dcbergangseigenschaft",
+      "transition-duration": "\u00dcbergangsdauer",
+      "transition-timing-function": "\u00dcbergangszeitfunktion",
+      "perspective": "Perspektive",
+      "transform": "Transformieren",
+      "transform-rotate-x": "Horizontal drehen",
+      "transform-rotate-y": "Vertikal drehen",
+      "transform-rotate-z": "Tiefe drehen",
+      "transform-scale-x": "Horizontal skalieren",
+      "transform-scale-y": "Vertikal skalieren",
+      "transform-scale-z": "Tiefe skalieren",
+      "flex-direction": "Flex Richtung",
+      "flex-wrap": "Flex Wickeln",
+      "justify-content": "Inhalt ausrichten",
+      "align-items": "Elemente ausrichten",
+      "align-content": "Inhalt ausrichten",
+      "order": "Reihenfolge",
+      "flex-basis": "Flex-Basis",
+      "flex-grow": "Flex-Wachstum",
+      "flex-shrink": "Flex-Schrumpfen",
+      "align-self": "Selbstausrichtung",
+      "center": "Zentrum",
+      "justify": "Ausrichten",
+      "none": "Keine",
+      "underline": "Unterstreichen",
+      "line_through": "Durchgestrichen"
+    }
+  },
+  "traitManager": {
+    "empty": "W\u00e4hlen Sie ein Element aus, um den Merkmals-Manager zu verwenden",
+    "label": "Komponenteneinstellungen",
+    "traits": {
+      "options": {
+        "target": {
+          "false": "Dieses Fenster",
+          "_blank": "Neues Fenster"
+        }
+      }
+    }
+  },
+  "preset": {
+    "webpage": {
+      "edit_code": "Code bearbeiten",
+      "edit_code_paste_here_html": "F\u00fcgen Sie hier Ihren HTML-\/CSS-Code ein und klicken Sie auf Importieren"
+    }
+  },
+  "page": {
+    "settings": "Settings",
+    "save": "Speichern",
+    "preview": "Vorschau"
+  },
+  "canvas": {
+    "clear": "M\u00f6chten Sie die Leinwand wirklich l\u00f6schen?"
+  }
+}

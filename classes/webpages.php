@@ -185,7 +185,6 @@ class webpages {
         $text = get_string_kopere('webpages_table_text_edit');
         $link = "<a class='btn btn-info' href='{$href}'>{$text}</a>";
 
-        echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
         $form->print_panel(get_string_kopere('webpages_table_text'),
             $imagem . $webpages->text . $link);
 

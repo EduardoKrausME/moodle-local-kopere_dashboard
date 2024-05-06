@@ -1,0 +1,201 @@
+{
+  "assetManager": {
+    "addButton": "Afegir imatge",
+    "inputPlh": "http:\/\/ruta\/a\/la\/imatge.jpg",
+    "modalTitle": "Escollir imatge",
+    "uploadTitle": "Arrossega els fitxers aqu\u00ed o fes clic per a pujar-ne"
+  },
+  "domComponents": {
+    "names": {
+      "": "Capsa",
+      "wrapper": "Cos",
+      "text": "Text",
+      "comment": "Comentari",
+      "image": "Imatge",
+      "video": "V\u00eddeo",
+      "label": "Etiqueta",
+      "link": "Enlla\u00e7",
+      "map": "Mapa",
+      "tfoot": "Peu de la taula",
+      "tbody": "Cos de la taula",
+      "thead": "Cap\u00e7alera de la taula",
+      "table": "Taula",
+      "row": "Fila de la taula",
+      "cell": "Cel\u00b7la de la taula",
+      "section": "Secci\u00f3",
+      "body": "Cos"
+    }
+  },
+  "deviceManager": {
+    "device": "Dispositius",
+    "devices": {
+      "desktop": "Escriptori",
+      "tablet": "Tauleta",
+      "mobileLandscape": "M\u00f2bil en horitzontal",
+      "mobilePortrait": "M\u00f2bil en vertical"
+    }
+  },
+  "panels": {
+    "buttons": {
+      "titles": {
+        "preview": "Vista pr\u00e8via",
+        "fullscreen": "Pantalla sencera",
+        "sw-visibility": "Veure components",
+        "export-template": "Veure codi",
+        "open-sm": "Obrir Administrador d'estils",
+        "open-tm": "Configuraci\u00f3",
+        "open-layers": "Obrir Aministrador de capes",
+        "open-blocks": "Obrir Blocs",
+        "undo": "Undo",
+        "redo": "Redo",
+        "clear": "Clear Canvas",
+        "edit_code": "Edit code"
+      }
+    }
+  },
+  "selectorManager": {
+    "label": "Classes",
+    "selected": "Seleccionat",
+    "emptyState": "- Estat -",
+    "states": {
+      "hover": "A sobre",
+      "active": "Clic",
+      "nth-of-type(2n)": "Parell\/Senar"
+    }
+  },
+  "styleManager": {
+    "empty": "Escull un element abans d'utilitzar l'Administrador d'estils",
+    "layer": "Capa",
+    "fileButton": "Imatges",
+    "sectors": {
+      "general": "General",
+      "layout": "Disseny",
+      "typography": "Tipografia",
+      "decorations": "Decoracions",
+      "extra": "Extres",
+      "flex": "Flex",
+      "dimension": "Tamany"
+    },
+    "properties": {
+      "float": "Flotant",
+      "display": "Vista",
+      "position": "Posici\u00f3",
+      "top": "Superior",
+      "right": "Dreta",
+      "left": "Esquerra",
+      "bottom": "Inferior",
+      "width": "Ample",
+      "height": "Alt",
+      "max-width": "Ample m\u00e0x.",
+      "max-height": "Alt m\u00e0x.",
+      "margin": "Marge",
+      "margin-top": "Marge superior",
+      "margin-right": "Marge dret",
+      "margin-left": "Marge esquerra",
+      "margin-bottom": "Marge inferior",
+      "padding": "Padding",
+      "padding-top": "Padding superior",
+      "padding-left": "Padding esquerra",
+      "padding-right": "Padding dret",
+      "padding-bottom": "Padding inferior",
+      "font-family": "Tipus de lletra",
+      "font-size": "Tamany de la font",
+      "font-weight": "Pes",
+      "letter-spacing": "Espai entre lletres",
+      "color": "Color",
+      "line-height": "Interlineat",
+      "text-align": "Alineaci\u00f3 del text",
+      "text-shadow": "Ombra del text",
+      "text-shadow-h": "Ombra del 'text': horizontal",
+      "text-shadow-v": "Ombra del 'text': vertical",
+      "text-shadow-blur": "Desenfocament de l'ombra del text",
+      "text-shadow-color": "Color de l'ombra del text",
+      "border-top-left": "Marc superior esquerra",
+      "border-top-right": "Marc superior dret",
+      "border-bottom-left": "Marc inferior esquerra",
+      "border-bottom-right": "Marc inferior dret",
+      "border-radius-top-left": "Radi del marc superior esquerra",
+      "border-radius-top-right": "Radi del marc superior dret",
+      "border-radius-bottom-left": "Radi del marc inferior esquerra",
+      "border-radius-bottom-right": "Radi del marc inferior dret",
+      "border-radius": "Radi del marc",
+      "border": "Marc",
+      "border-width": "Ample del marc",
+      "border-style": "Estil del marc",
+      "border-color": "Color del marc",
+      "box-shadow": "Ombra de la capsa",
+      "box-shadow-h": "Ombra de la 'capsa': horizontal",
+      "box-shadow-v": "Ombra de la 'capsa': vertical",
+      "box-shadow-blur": "Desenfocament de l'ombra de la capsa",
+      "box-shadow-spread": "Propagaci\u00f3 de l'ombra de la capsa",
+      "box-shadow-color": "Color de l'ombra de la capsa",
+      "box-shadow-type": "Tipus de l'ombra de la capsa",
+      "background": "Fons",
+      "background-image": "Imatge de fons",
+      "background-repeat": "Repetir fons",
+      "background-position": "Posici\u00f3 del fons",
+      "background-attachment": "Despla\u00e7ament del fons",
+      "background-size": "Tamany del fons",
+      "transition": "Transici\u00f3",
+      "transition-property": "Tipus de transici\u00f3",
+      "transition-duration": "Temps de transici\u00f3",
+      "transition-timing-function": "Funci\u00f3 de temps de la transici\u00f3n",
+      "perspective": "Perspectiva",
+      "transform": "Transformaci\u00f3",
+      "transform-rotate-x": "Rotaci\u00f3 horitzontal",
+      "transform-rotate-y": "Rotaci\u00f3 vertical",
+      "transform-rotate-z": "Rotaci\u00f3 profunditat",
+      "transform-scale-x": "Escalar horitzontalment",
+      "transform-scale-y": "Escalar verticalment",
+      "transform-scale-z": "Escalar profunditat",
+      "flex-direction": "Direcci\u00f3 flex",
+      "flex-wrap": "Distribuci\u00f3 flex",
+      "justify-content": "Justificar contingut",
+      "align-items": "Alinear elements",
+      "align-content": "Alinear contingut",
+      "order": "Ordre",
+      "flex-basis": "Base flex",
+      "flex-grow": "Creixement flex",
+      "flex-shrink": "Contracci\u00f3 flex",
+      "align-self": "Alineaci\u00f3 pr\u00f2pia",
+      "background-color": "Color de fons",
+      "center": "Center",
+      "justify": "Justify",
+      "none": "None",
+      "underline": "Underline",
+      "line_through": "Line through"
+    }
+  },
+  "traitManager": {
+    "empty": "Escull un element abans d'usar l'Administrador de caracter\u00edstiques",
+    "label": "Configuraci\u00f3 de components",
+    "traits": {
+      "labels": {
+        "id": "Identificador",
+        "alt": "T\u00edtol alternatiu",
+        "title": "T\u00edtol",
+        "href": "Enlla\u00e7"
+      },
+      "options": {
+        "target": {
+          "false": "Mateixa pestanya\/finestra",
+          "_blank": "Nova pestanya\/finestra"
+        }
+      }
+    }
+  },
+  "preset": {
+    "webpage": {
+      "edit_code": "Edit code",
+      "edit_code_paste_here_html": "Paste your HTML\/CSS here and click Import"
+    }
+  },
+  "page": {
+    "settings": "Settings",
+    "save": "Save",
+    "preview": "Preview"
+  },
+  "canvas": {
+    "clear": "Are you sure you want to clear the canvas?"
+  }
+}

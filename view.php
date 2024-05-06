@@ -62,6 +62,7 @@ $PAGE->requires->js('/local/kopere_dashboard/assets/bootstrap/bootstrap.js');
 
 $PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
 
+echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
 echo $OUTPUT->header();
 echo "<link rel='icon' href='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/favicon.png'/>";
 require_once(__DIR__ . "/autoload-lang-js.php");

@@ -1,0 +1,212 @@
+{
+  "assetManager": {
+    "addButton": "Dodaj obrazek",
+    "modalTitle": "Wybierz obrazek",
+    "uploadTitle": "Wybierz lub przeci\u0105gnij plik z dysku"
+  },
+  "domComponents": {
+    "names": {
+      "": "Blok",
+      "wrapper": "Body",
+      "text": "Tekst",
+      "comment": "Komentarz",
+      "image": "Obrazek",
+      "video": "Wideo",
+      "label": "Etykieta",
+      "link": "Odno\u015bnik",
+      "map": "Mapa",
+      "tfoot": "Stopka tabeli",
+      "tbody": "Cia\u0142o tabeli",
+      "thead": "Nag\u0142\u00f3wek tabeli",
+      "table": "Tabela",
+      "row": "Wiersz",
+      "cell": "Kom\u00f3rka",
+      "section": "Sekcja",
+      "body": "Tre\u015b\u0107"
+    }
+  },
+  "deviceManager": {
+    "device": "Urz\u0105dzenie",
+    "devices": {
+      "desktop": "Desktop",
+      "tablet": "Tablet",
+      "mobileLandscape": "Telefon Poziomo",
+      "mobilePortrait": "Telefon Pionowo"
+    }
+  },
+  "panels": {
+    "buttons": {
+      "titles": {
+        "preview": "Podgl\u0105d",
+        "fullscreen": "Pe\u0142en ekran",
+        "sw-visibility": "Poka\u017c linie",
+        "export-template": "Zobacz \u017ar\u00f3d\u0142o",
+        "open-sm": "Edytuj style i atrybuty CSS",
+        "open-tm": "Ustawienia elementu",
+        "open-layers": "Warstwy szablonu",
+        "open-blocks": "Komponenty",
+        "undo": "Undo",
+        "redo": "Redo",
+        "clear": "Clear Canvas",
+        "edit_code": "Edit code"
+      }
+    }
+  },
+  "selectorManager": {
+    "label": "Klasy CSS",
+    "selected": "Wybrane",
+    "emptyState": "- wybierz -",
+    "states": {
+      "hover": "Hover",
+      "active": "Click",
+      "nth-of-type(2n)": "Tylko parzyste"
+    }
+  },
+  "styleManager": {
+    "empty": "Wybierz element aby edytowa\u0107 jego atrybuty",
+    "layer": "Warstwa",
+    "fileButton": "Obrazki",
+    "sectors": {
+      "general": "G\u0142\u00f3wne",
+      "layout": "Szablon",
+      "typography": "Typografia",
+      "decorations": "Dekoracje",
+      "extra": "Dodatki",
+      "flex": "Flex",
+      "dimension": "Wymiary"
+    },
+    "properties": {
+      "float": "Wyr\u00f3wnanie",
+      "display": "Wy\u015bwietlanie",
+      "position": "Pozycja",
+      "top": "G\u00f3ra",
+      "right": "Prawo",
+      "bottom": "D\u00f3\u0142",
+      "left": "Lewo",
+      "width": "Szeroko\u015b\u0107",
+      "min-width": "Min. szeroko\u015b\u0107",
+      "max-width": "Maks. szeroko\u015b\u0107",
+      "height": "Wysoko\u015b\u0107",
+      "min-height": "Min. wysoko\u015b\u0107",
+      "max-height": "Maks. wysoko\u015b\u0107",
+      "margin": "Margines",
+      "margin-top": "Margines g\u00f3rny",
+      "margin-right": "Margines prawy",
+      "margin-bottom": "Margines dolny",
+      "margin-left": "Margines lewy",
+      "padding": "Odst\u0119p wewn\u0119trzny",
+      "padding-top": "Odst\u0119p g\u00f3rny",
+      "padding-right": "Odst\u0119p prawy",
+      "padding-bottom": "Odst\u0119p dolny",
+      "padding-left": "Odst\u0119p lewy",
+      "font-family": "Kr\u00f3j czcionki",
+      "font-size": "Rozmiar",
+      "font-weight": "Grubo\u015b\u0107 czcionki",
+      "letter-spacing": "Odst\u0119p liter",
+      "line-height": "Wysoko\u015b\u0107 wiersza",
+      "color": "Kolor",
+      "text-shadow": "Cie\u0144 tekstu",
+      "text-align": "Wyr\u00f3wnanie",
+      "text-shadow-h": "Przes. poziome",
+      "text-shadow-v": "Przes. pionowe",
+      "text-shadow-blur": "Rozmycie",
+      "text-shadow-color": "Kolor",
+      "border-radius": "Zaokr\u0105glenie",
+      "border-top-left-radius": "Lewy g\u00f3rny r\u00f3g",
+      "border-top-right-radius": "Prawy g\u00f3rny r\u00f3g",
+      "border-bottom-left-radius": "Lewy dolny r\u00f3g",
+      "border-bottom-right-radius": "Prawy dolny r\u00f3g",
+      "border": "Obramowanie",
+      "border-width": "Szeroko\u015b\u0107",
+      "border-style": "Styl",
+      "border-color": "Kolor",
+      "box-shadow": "Cie\u0144",
+      "box-shadow-h": "Przes. poziome",
+      "box-shadow-v": "Przes. pionowe",
+      "box-shadow-blur": "Rozmycie",
+      "box-shadow-spread": "Rozszerzanie",
+      "box-shadow-color": "Kolor",
+      "box-shadow-type": "Rodzaj",
+      "background": "T\u0142o",
+      "background-image": "Obrazek",
+      "background-repeat": "Powtarzanie",
+      "background-position": "Pozycja",
+      "background-attachment": "Przypi\u0119cie",
+      "background-size": "Rozmiar",
+      "background-color": "Kolor",
+      "transition": "Efekty przej\u015bcia",
+      "transition-property": "Dotyczy atrybutu",
+      "transition-duration": "Czas trwania",
+      "transition-timing-function": "Funkcja czasu",
+      "perspective": "Perspektywa",
+      "transform": "Transformacje",
+      "transform-rotate-x": "Obr\u00f3t osi X",
+      "transform-rotate-y": "Obr\u00f3t osi Y",
+      "transform-rotate-z": "Obr\u00f3t osi Z",
+      "transform-scale-x": "Skala osi X",
+      "transform-scale-y": "Skala osi Y",
+      "transform-scale-z": "Skala osi Z",
+      "border-top-left": "G\u00f3rny lewy brzeg",
+      "border-top-right": "G\u00f3rny prawy brzeg",
+      "border-bottom-left": "Dolny lewy brzeg",
+      "border-bottom-right": "Dolny prawy brzeg",
+      "border-radius-top-left": "Promie\u0144 g\u00f3rnego lewego rogu",
+      "border-radius-top-right": "Promie\u0144 g\u00f3rnego prawego rogu",
+      "border-radius-bottom-left": "Promie\u0144 dolnego lewego rogu",
+      "border-radius-bottom-right": "Promie\u0144 dolnego prawego rogu",
+      "flex-direction": "Kierunek flex",
+      "flex-wrap": "Zawijanie flex",
+      "justify-content": "Usytuowanie tre\u015bci",
+      "align-items": "Wyr\u00f3wnanie element\u00f3w",
+      "align-content": "Wyr\u00f3wnanie tre\u015bci",
+      "order": "Kolejno\u015b\u0107",
+      "flex-basis": "Baza flex",
+      "flex-grow": "Wzrost flex",
+      "flex-shrink": "Zmniejszenie flex",
+      "align-self": "Wyr\u00f3wnanie w\u0142asne",
+      "center": "Center",
+      "justify": "Justify",
+      "none": "None",
+      "underline": "Underline",
+      "line_through": "Line through"
+    }
+  },
+  "traitManager": {
+    "empty": "Wybierz element aby edytowa\u0107 jego ustawienia",
+    "label": "Ustawienia elementu",
+    "traits": {
+      "labels": {
+        "id": "Identyfikator",
+        "alt": "Tekst alternatywny",
+        "title": "Tytu\u0142",
+        "href": "Adres odno\u015bnika",
+        "target": "Cel"
+      },
+      "attributes": {
+        "href": {
+          "placeholder": "np. https:\/\/google.com"
+        }
+      },
+      "options": {
+        "target": {
+          "false": "Te okno",
+          "_blank": "Nowe okno"
+        }
+      }
+    }
+  },
+  "preset": {
+    "webpage": {
+      "edit_code": "Edit code",
+      "edit_code_paste_here_html": "Paste your HTML\/CSS here and click Import"
+    }
+  },
+  "page": {
+    "settings": "Settings",
+    "save": "Save",
+    "preview": "Preview"
+  },
+  "canvas": {
+    "clear": "Are you sure you want to clear the canvas?"
+  }
+}

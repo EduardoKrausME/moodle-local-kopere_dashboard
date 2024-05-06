@@ -1,0 +1,223 @@
+{
+  "assetManager": {
+    "addButton": "\u05d4\u05d5\u05e1\u05e4\u05ea \u05ea\u05de\u05d5\u05e0\u05d4",
+    "modalTitle": "\u05d1\u05d7\u05d9\u05e8\u05ea \u05ea\u05de\u05d5\u05e0\u05d4",
+    "uploadTitle": "\u05d2\u05e8\u05e8\u05d5 \u05e7\u05d1\u05e6\u05d9\u05dd \u05dc\u05db\u05d0\u05df \u05d0\u05d5 \u05dc\u05d7\u05e6\u05d5 \u05dc\u05d4\u05e2\u05dc\u05d0\u05d4"
+  },
+  "domComponents": {
+    "names": {
+      "": "\u05e7\u05d5\u05e4\u05e1\u05d4",
+      "wrapper": "\u05d2\u05d5\u05e3",
+      "text": "\u05d8\u05e7\u05e1\u05d8",
+      "comment": "\u05ea\u05d2\u05d5\u05d1\u05d4",
+      "image": "\u05ea\u05de\u05d5\u05e0\u05d4",
+      "video": "\u05d5\u05d9\u05d3\u05d9\u05d0\u05d5",
+      "label": "\u05ea\u05d5\u05d5\u05d9\u05ea",
+      "link": "\u05e7\u05d9\u05e9\u05d5\u05e8",
+      "map": "\u05de\u05e4\u05d4",
+      "tfoot": "\u05ea\u05d7\u05ea\u05d9\u05ea \u05d8\u05d1\u05dc\u05d4",
+      "tbody": "\u05d2\u05d5\u05e3 \u05d8\u05d1\u05dc\u05d4",
+      "thead": "\u05e8\u05d0\u05e9 \u05d8\u05d1\u05dc\u05d4",
+      "table": "\u05d8\u05d1\u05dc\u05d4",
+      "row": "\u05e9\u05d5\u05e8\u05ea \u05d8\u05d1\u05dc\u05d4",
+      "cell": "\u05ea\u05d0 \u05d8\u05d1\u05dc\u05d4",
+      "section": "\u05e7\u05d8\u05e2",
+      "body": "\u05d2\u05d5\u05e3"
+    }
+  },
+  "deviceManager": {
+    "device": "\u05de\u05db\u05e9\u05d9\u05e8",
+    "devices": {
+      "desktop": "\u05de\u05d7\u05e9\u05d1 \u05e9\u05d5\u05dc\u05d7\u05e0\u05d9",
+      "tablet": "\u05d8\u05d0\u05d1\u05dc\u05d8",
+      "mobileLandscape": "\u05ea\u05e6\u05d5\u05d2\u05d4 \u05e8\u05d5\u05d7\u05d1\u05d9\u05ea",
+      "mobilePortrait": "\u05ea\u05e6\u05d5\u05d2\u05d4 \u05d9\u05e9\u05e8\u05d4"
+    }
+  },
+  "panels": {
+    "buttons": {
+      "titles": {
+        "preview": "\u05ea\u05e6\u05d5\u05d2\u05d4 \u05de\u05e7\u05d3\u05d9\u05de\u05d4",
+        "fullscreen": "\u05de\u05e1\u05da \u05de\u05dc\u05d0",
+        "sw-visibility": "\u05e6\u05e4\u05d9\u05d9\u05d4 \u05d1\u05e8\u05db\u05d9\u05d1\u05d9\u05dd",
+        "export-template": "\u05e6\u05e4\u05d9\u05d9\u05d4 \u05d1\u05e7\u05d5\u05d3",
+        "open-sm": "\u05e4\u05ea\u05d9\u05d7\u05ea \u05e0\u05d9\u05d4\u05d5\u05dc \u05e1\u05d2\u05e0\u05d5\u05df",
+        "open-tm": "\u05d4\u05d2\u05d3\u05e8\u05d5\u05ea",
+        "open-layers": "\u05e4\u05ea\u05d9\u05d7\u05ea \u05de\u05e0\u05d4\u05dc \u05d4\u05e9\u05db\u05d1\u05d5\u05ea",
+        "open-blocks": "\u05e4\u05ea\u05d9\u05d7\u05ea \u05d1\u05dc\u05d5\u05e7\u05d9\u05dd",
+        "undo": "Undo",
+        "redo": "Redo",
+        "clear": "Clear Canvas",
+        "edit_code": "Edit code"
+      }
+    }
+  },
+  "selectorManager": {
+    "label": "\u05de\u05d7\u05dc\u05e7\u05d5\u05ea",
+    "selected": "\u05e0\u05d1\u05d7\u05e8\u05d5",
+    "emptyState": "- \u05de\u05e6\u05d1 -",
+    "states": {
+      "hover": "\u05de\u05e2\u05d1\u05e8 \u05e2\u05dc",
+      "active": "\u05dc\u05d7\u05d9\u05e6\u05d4",
+      "nth-of-type(2n)": "\u05d6\u05d5\u05d2\u05d9\/\u05d0\u05d9 \u05d6\u05d5\u05d2\u05d9"
+    }
+  },
+  "styleManager": {
+    "empty": "\u05d1\u05d7\u05e8\u05d5 \u05d0\u05dc\u05de\u05e0\u05d8 \u05dc\u05e4\u05e0\u05d9 \u05d4\u05e9\u05d9\u05de\u05d5\u05e9 \u05d1\u05de\u05e0\u05d4\u05dc \u05d4\u05e1\u05d2\u05e0\u05d5\u05df",
+    "layer": "\u05e9\u05db\u05d1\u05d4",
+    "fileButton": "\u05ea\u05de\u05d5\u05e0\u05d5\u05ea",
+    "sectors": {
+      "general": "\u05db\u05dc\u05dc\u05d9",
+      "layout": "\u05de\u05d1\u05e0\u05d4",
+      "typography": "\u05d8\u05d9\u05e4\u05d5\u05d2\u05e8\u05e4\u05d9\u05d4",
+      "decorations": "\u05e7\u05d9\u05e9\u05d5\u05d8\u05d9\u05dd",
+      "extra": "\u05e0\u05d5\u05e1\u05e3",
+      "flex": "\u05d2\u05de\u05d9\u05e9",
+      "dimension": "\u05de\u05d9\u05de\u05d3"
+    },
+    "properties": {
+      "text-shadow-h": "X",
+      "text-shadow-v": "Y",
+      "text-shadow-blur": "\u05de\u05d8\u05d5\u05e9\u05d8\u05e9",
+      "text-shadow-color": "\u05e6\u05d1\u05e2",
+      "box-shadow-h": "X",
+      "box-shadow-v": "Y",
+      "box-shadow-blur": "\u05de\u05d8\u05d5\u05e9\u05d8\u05e9",
+      "box-shadow-spread": "\u05e4\u05d9\u05d6\u05d5\u05e8",
+      "box-shadow-color": "\u05e6\u05d1\u05e2",
+      "box-shadow-type": "\u05e1\u05d5\u05d2",
+      "margin-top-sub": "\u05e2\u05dc\u05d9\u05d5\u05df",
+      "margin-right-sub": "\u05d9\u05de\u05d9\u05df",
+      "margin-bottom-sub": "\u05ea\u05d7\u05ea\u05d5\u05df",
+      "margin-left-sub": "\u05e9\u05de\u05d0\u05dc",
+      "padding-top-sub": "\u05e2\u05dc\u05d9\u05d5\u05df",
+      "padding-right-sub": "\u05d9\u05de\u05d9\u05df",
+      "padding-bottom-sub": "\u05ea\u05d7\u05ea\u05d5\u05df",
+      "padding-left-sub": "\u05e9\u05de\u05d0\u05dc",
+      "border-width-sub": "\u05e8\u05d5\u05d7\u05d1",
+      "border-style-sub": "\u05e1\u05d2\u05e0\u05d5\u05df",
+      "border-color-sub": "\u05e6\u05d1\u05e2",
+      "border-top-left-radius-sub": "\u05e9\u05de\u05d0\u05dc \u05e2\u05dc\u05d9\u05d5\u05df",
+      "border-top-right-radius-sub": "\u05d9\u05de\u05d9\u05df \u05e2\u05dc\u05d9\u05d5\u05df",
+      "border-bottom-right-radius-sub": "\u05d9\u05de\u05d9\u05df \u05ea\u05d7\u05ea\u05d5\u05df",
+      "border-bottom-left-radius-sub": "\u05e9\u05de\u05d0\u05dc \u05ea\u05d7\u05dc\u05d5\u05df",
+      "transform-rotate-x": "\u05e1\u05d9\u05d1\u05d5\u05d1 X",
+      "transform-rotate-y": "\u05e1\u05d9\u05d1\u05d5\u05d1 Y",
+      "transform-rotate-z": "\u05e1\u05d9\u05d1\u05d5\u05d1 Z",
+      "transform-scale-x": "\u05e7\u05e0\u05d4 \u05de\u05d9\u05d3\u05d4 X",
+      "transform-scale-y": "\u05e7\u05e0\u05d4 \u05de\u05d9\u05d3\u05d4 Y",
+      "transform-scale-z": "\u05e7\u05e0\u05d4 \u05de\u05d9\u05d3\u05d4 Z",
+      "transition-property-sub": "\u05ea\u05db\u05d5\u05e0\u05d4",
+      "transition-duration-sub": "\u05de\u05e9\u05da",
+      "transition-timing-function-sub": "\u05ea\u05d6\u05de\u05d5\u05df",
+      "background-image-sub": "\u05ea\u05de\u05d5\u05e0\u05d4",
+      "background-repeat-sub": "\u05d7\u05d6\u05e8\u05d4",
+      "background-position-sub": "\u05de\u05d9\u05e7\u05d5\u05dd",
+      "background-attachment-sub": "\u05e0\u05e1\u05e4\u05d7",
+      "background-size-sub": "\u05d2\u05d5\u05d3\u05dc",
+      "float": "\u05e6\u05e3",
+      "display": "\u05ea\u05e6\u05d5\u05d2\u05d4",
+      "position": "\u05de\u05d9\u05e7\u05d5\u05dd",
+      "top": "\u05e2\u05dc\u05d9\u05d5\u05df",
+      "right": "\u05d9\u05de\u05d9\u05df",
+      "left": "\u05e9\u05de\u05d0\u05dc",
+      "bottom": "\u05ea\u05d7\u05ea\u05d5\u05df",
+      "width": "\u05e8\u05d5\u05d7\u05d1",
+      "height": "\u05d2\u05d5\u05d1\u05d4",
+      "max-width": "\u05e8\u05d5\u05d7\u05d1 \u05de\u05e8\u05d1\u05d9",
+      "max-height": "\u05d2\u05d5\u05d1\u05d4 \u05de\u05e8\u05d1\u05d9",
+      "margin": "\u05de\u05e8\u05d5\u05d5\u05d7",
+      "margin-top": "\u05de\u05e8\u05d5\u05d5\u05d7 \u05e2\u05dc\u05d9\u05d5\u05df",
+      "margin-right": "\u05de\u05e8\u05d5\u05d5\u05d7 \u05d9\u05de\u05d9\u05df",
+      "margin-left": "\u05de\u05e8\u05d5\u05d5\u05d7 \u05e9\u05de\u05d0\u05dc",
+      "margin-bottom": "\u05de\u05e8\u05d5\u05d5\u05d7 \u05ea\u05d7\u05ea\u05d5\u05df",
+      "padding": "\u05e8\u05d9\u05e4\u05d5\u05d3",
+      "padding-top": "\u05e8\u05d9\u05e4\u05d5\u05d3 \u05e2\u05dc\u05d9\u05d5\u05df",
+      "padding-left": "\u05e8\u05d9\u05e4\u05d5\u05d3 \u05e9\u05de\u05d0\u05dc",
+      "padding-right": "\u05e8\u05d9\u05e4\u05d5\u05d3 \u05d9\u05de\u05d9\u05df",
+      "padding-bottom": "\u05e8\u05d9\u05e4\u05d5\u05d3 \u05ea\u05d7\u05ea\u05d5\u05df",
+      "font-family": "\u05d2\u05d5\u05e4\u05df",
+      "font-size": "\u05d2\u05d5\u05d3\u05dc \u05d2\u05d5\u05e4\u05df",
+      "font-weight": "\u05de\u05e9\u05e7\u05dc \u05d2\u05d5\u05e4\u05df",
+      "letter-spacing": "\u05de\u05e8\u05d5\u05d5\u05d7 \u05d1\u05d9\u05df \u05d0\u05d5\u05ea\u05d9\u05d5\u05ea",
+      "color": "\u05e6\u05d1\u05e2",
+      "line-height": "\u05d2\u05d5\u05d1\u05d4 \u05e9\u05d5\u05e8\u05d4",
+      "text-align": "\u05d9\u05d9\u05e9\u05d5\u05e8 \u05d8\u05e7\u05e1\u05d8",
+      "text-shadow": "\u05e6\u05dc \u05d8\u05e7\u05e1\u05d8",
+      "border-top-left": "\u05d2\u05d1\u05d5\u05dc \u05e2\u05dc\u05d9\u05d5\u05df \u05e9\u05de\u05d0\u05dc\u05d9",
+      "border-top-right": "\u05d2\u05d1\u05d5\u05dc \u05e2\u05dc\u05d9\u05d5\u05df \u05d9\u05de\u05e0\u05d9",
+      "border-bottom-left": "\u05d2\u05d1\u05d5\u05dc \u05ea\u05d7\u05ea\u05d5\u05df \u05e9\u05de\u05d0\u05dc\u05d9",
+      "border-bottom-right": "\u05d2\u05d1\u05d5\u05dc \u05ea\u05d7\u05ea\u05d5\u05df \u05d9\u05de\u05e0\u05d9",
+      "border-radius-top-left": "\u05e8\u05d3\u05d9\u05d5\u05e1 \u05d2\u05d1\u05d5\u05dc \u05e2\u05dc\u05d9\u05d5\u05df \u05e9\u05de\u05d0\u05dc\u05d9",
+      "border-radius-top-right": "\u05e8\u05d3\u05d9\u05d5\u05e1 \u05d2\u05d1\u05d5\u05dc \u05e2\u05dc\u05d9\u05d5\u05df \u05d9\u05de\u05e0\u05d9",
+      "border-radius-bottom-left": "\u05e8\u05d3\u05d9\u05d5\u05e1 \u05d2\u05d1\u05d5\u05dc \u05ea\u05d7\u05ea\u05d5\u05df \u05e9\u05de\u05d0\u05dc\u05d9",
+      "border-radius-bottom-right": "\u05e8\u05d3\u05d9\u05d5\u05e1 \u05d2\u05d1\u05d5\u05dc \u05ea\u05d7\u05ea\u05d5\u05df \u05d9\u05de\u05e0\u05d9",
+      "border-radius": "\u05e8\u05d3\u05d9\u05d5\u05e1 \u05d2\u05d1\u05d5\u05dc",
+      "border": "\u05d2\u05d1\u05d5\u05dc",
+      "border-width": "\u05e8\u05d5\u05d7\u05d1 \u05d2\u05d1\u05d5\u05dc",
+      "border-style": "\u05e1\u05d2\u05e0\u05d5\u05df \u05d2\u05d1\u05d5\u05dc",
+      "border-color": "\u05e6\u05d1\u05e2 \u05d2\u05d1\u05d5\u05dc",
+      "box-shadow": "\u05e6\u05dc \u05de\u05d0\u05e8\u05d6",
+      "background": "\u05e8\u05e7\u05e2",
+      "background-color": "\u05e6\u05d1\u05e2 \u05e8\u05e7\u05e2",
+      "background-image": "\u05ea\u05de\u05d5\u05e0\u05ea \u05e8\u05e7\u05e2",
+      "background-repeat": "\u05d7\u05d6\u05e8\u05d4 \u05e2\u05dc \u05e8\u05e7\u05e2",
+      "background-position": "\u05de\u05d9\u05e7\u05d5\u05dd \u05e8\u05e7\u05e2",
+      "background-attachment": "\u05e6\u05d9\u05e8\u05d5\u05e3 \u05e8\u05e7\u05e2",
+      "background-size": "\u05d2\u05d5\u05d3\u05dc \u05e8\u05e7\u05e2",
+      "transition": "\u05de\u05e2\u05d1\u05e8",
+      "transition-property": "\u05e0\u05db\u05e1 \u05de\u05e2\u05d1\u05e8",
+      "transition-duration": "\u05de\u05e9\u05da \u05de\u05e2\u05d1\u05e8",
+      "transition-timing-function": "\u05e4\u05d5\u05e0\u05e7\u05e6\u05d9\u05d9\u05ea \u05d6\u05de\u05df \u05de\u05e2\u05d1\u05e8",
+      "perspective": "\u05ea\u05d5\u05e8\u05ea \u05d4\u05e8\u05d0\u05d9\u05d9\u05d4",
+      "transform": "\u05d4\u05de\u05e8\u05d4",
+      "flex-direction": "\u05db\u05d9\u05d5\u05d5\u05df \u05d2\u05de\u05d9\u05e9",
+      "flex-wrap": "\u05e2\u05d8\u05d9\u05e4\u05ea \u05d2\u05de\u05d9\u05e9\u05d5\u05ea",
+      "justify-content": "\u05d9\u05e9\u05d5\u05d1 \u05ea\u05d5\u05db\u05df",
+      "align-items": "\u05d9\u05d9\u05e9\u05d5\u05d1 \u05e4\u05e8\u05d9\u05d8\u05d9\u05dd",
+      "align-content": "\u05d9\u05d9\u05e9\u05d5\u05d1 \u05ea\u05d5\u05db\u05df",
+      "order": "\u05e1\u05d3\u05e8",
+      "flex-basis": "\u05d1\u05e1\u05d9\u05e1 \u05d2\u05de\u05d9\u05e9\u05d5\u05ea",
+      "flex-grow": "\u05d2\u05d9\u05d3\u05d5\u05dc \u05d2\u05de\u05d9\u05e9",
+      "flex-shrink": "\u05d4\u05db\u05e0\u05e1\u05ea \u05d2\u05de\u05d9\u05e9\u05d5\u05ea",
+      "align-self": "\u05d9\u05d9\u05e9\u05d5\u05d1 \u05e2\u05e6\u05de\u05d9",
+      "center": "Center",
+      "justify": "Justify",
+      "none": "None",
+      "underline": "Underline",
+      "line_through": "Line through"
+    }
+  },
+  "traitManager": {
+    "empty": "\u05d1\u05d7\u05e8 \u05d0\u05dc\u05de\u05e0\u05d8 \u05dc\u05e4\u05e0\u05d9 \u05d4\u05e9\u05d9\u05de\u05d5\u05e9 \u05d1\u05de\u05e0\u05d4\u05dc \u05d4\u05ea\u05db\u05d5\u05e0\u05d5\u05ea",
+    "label": "\u05d4\u05d2\u05d3\u05e8\u05d5\u05ea \u05e8\u05db\u05d9\u05d1",
+    "traits": {
+      "labels": [],
+      "attributes": {
+        "href": {
+          "placeholder": "\u05d3\u05d5\u05d2. https:\/\/google.com"
+        }
+      },
+      "options": {
+        "target": {
+          "false": "\u05d7\u05dc\u05d5\u05df \u05e0\u05d5\u05db\u05d7\u05d9",
+          "_blank": "\u05d7\u05dc\u05d5\u05df \u05d7\u05d3\u05e9"
+        }
+      }
+    }
+  },
+  "preset": {
+    "webpage": {
+      "edit_code": "Edit code",
+      "edit_code_paste_here_html": "Paste your HTML\/CSS here and click Import"
+    }
+  },
+  "page": {
+    "settings": "Settings",
+    "save": "Save",
+    "preview": "Preview"
+  },
+  "canvas": {
+    "clear": "Are you sure you want to clear the canvas?"
+  }
+}

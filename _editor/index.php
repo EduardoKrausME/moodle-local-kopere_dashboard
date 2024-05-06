@@ -40,6 +40,24 @@ if ($htmldata) {
 global $plugins;
 require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
 
+$currentlang = $CFG->lang;
+if (isset($_SESSION['SESSION']->lang)) {
+    $currentlang = $_SESSION['SESSION']->lang;
+}
+$langP = explode("_", $currentlang);
+foreach ($langP as $i) {
+    $_lang = implode("_", $langP);
+    if (file_exists(__DIR__ . "/js/locale/{$_lang}.json")) {
+        $currentlang = $_lang;
+        break;
+    }
+    array_pop($langP);
+}
+if (!file_exists(__DIR__ . "/js/locale/{$currentlang}.json")) {
+    $currentlang = "en";
+}
+$langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json"));
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -118,7 +136,7 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
         'styleManager'    : {
             'sectors' : [
                 {
-                    'name'       : '<?php echo get_string_kopere("grapsjs-general") ?>',
+                    'name'       : '<?php echo $langs->styleManager->sectors->general ?>',
                     'properties' : [
                         'display',
                         {'extend' : 'position', 'type' : 'select'},
@@ -129,7 +147,7 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
                     ],
                 },
                 {
-                    'name'       : '<?php echo get_string_kopere("grapsjs-dimensions") ?>',
+                    'name'       : '<?php echo $langs->styleManager->sectors->dimension ?>',
                     'open'       : false,
                     'properties' : [
                         'width',
@@ -143,13 +161,13 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
                     ],
                 },
                 {
-                    'name'       : '<?php echo get_string_kopere("grapsjs-tipografia") ?>',
+                    'name'       : '<?php echo $langs->styleManager->sectors->typography ?>',
                     'open'       : false,
                     'properties' : [
                         {
                             'property' : 'font-family',
                             'type'     : 'select',
-                            'name'     : '<?php echo get_string_kopere("grapsjs-stylemanager-properties-font-family") ?>',
+                            'name'     : '<?php $a = 'font-family'; echo $langs->styleManager->properties->$a ?>',
                             'options'  : [
                                 {
                                     'id'    : "Arial,Helvetica,sans-serif",
@@ -176,22 +194,22 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
                             'options' : [
                                 {
                                     'id'        : 'left',
-                                    'label'     : '<?php echo get_string_kopere("grapsjs-stylemanager-properties-left") ?>',
+                                    'label'     : '<?php echo $langs->styleManager->properties->left ?>',
                                     'className' : 'fa fa-align-left'
                                 },
                                 {
                                     'id'        : 'center',
-                                    'label'     : '<?php echo get_string_kopere("grapsjs-stylemanager-properties-center") ?>',
+                                    'label'     : '<?php echo $langs->styleManager->properties->center ?>',
                                     'className' : 'fa fa-align-center'
                                 },
                                 {
                                     'id'        : 'right',
-                                    'label'     : '<?php echo get_string_kopere("grapsjs-stylemanager-properties-right") ?>',
+                                    'label'     : '<?php echo $langs->styleManager->properties->right ?>',
                                     'className' : 'fa fa-align-right'
                                 },
                                 {
                                     'id'        : 'justify',
-                                    'label'     : '<?php echo get_string_kopere("grapsjs-stylemanager-properties-justify") ?>',
+                                    'label'     : '<?php echo $langs->styleManager->properties->justify ?>',
                                     'className' : 'fa fa-align-justify'
                                 }
                             ],
@@ -203,17 +221,17 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
                             'options'  : [
                                 {
                                     'id'        : 'none',
-                                    'label'     : '<?php echo get_string_kopere("grapsjs-stylemanager-properties-none") ?>',
+                                    'label'     : '<?php echo $langs->styleManager->properties->none ?>',
                                     'className' : 'fa fa-times'
                                 },
                                 {
                                     'id'        : 'underline',
-                                    'label'     : '<?php echo get_string_kopere("grapsjs-stylemanager-properties-underline") ?>',
+                                    'label'     : '<?php echo $langs->styleManager->properties->underline ?>',
                                     'className' : 'fa fa-underline'
                                 },
                                 {
                                     'id'        : 'line-through',
-                                    'label'     : '<?php echo get_string_kopere("grapsjs-stylemanager-properties-line-through") ?>',
+                                    'label'     : '<?php echo $langs->styleManager->properties->line_through ?>',
                                     'className' : 'fa fa-strikethrough'
                                 }
                             ],
@@ -245,14 +263,14 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
                     ],
                 },
                 {
-                    'name'       : '<?php echo get_string_kopere("grapsjs-stylemanager-properties-background") ?>',
+                    'name'       : '<?php echo $langs->styleManager->properties->background ?>',
                     'open'       : false,
                     'properties' : [
                         'background',
                     ],
                 },
                 {
-                    'name'       : '<?php echo get_string_kopere("grapsjs-decoration") ?>',
+                    'name'       : '<?php echo $langs->styleManager->sectors->decorations ?>',
                     'open'       : false,
                     'properties' : [
                         'opacity',
@@ -293,11 +311,11 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
                 ],
             },
             'grapesjs-tabs'             : {
-                'tabsBlock' : {'category' : '<?php echo get_string_kopere("grapsjs-stylemanager-sectors-extra") ?>'}
+                'tabsBlock' : {'category' : '<?php echo $langs->styleManager->sectors->extra ?>'}
             },
             'grapesjs-typed'            : {
                 'block' : {
-                    'category' : '<?php echo get_string_kopere("grapsjs-stylemanager-sectors-extra") ?>',
+                    'category' : '<?php echo $langs->styleManager->sectors->extra ?>',
                     'content'  : {
                         'type'       : 'typed',
                         'type-speed' : 40,
@@ -310,8 +328,8 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
                 }
             },
             'grapesjs-preset-webpage'   : {
-                'modalImportTitle'   : '<?php echo get_string_kopere("grapsjs-edit_code") ?>',
-                'modalImportLabel'   : '<div style="margin-bottom: 10px; font-size: 13px;"><?php echo get_string_kopere("grapsjs-edit_code_paste_here_html") ?></div>',
+                'modalImportTitle'   : '<?php echo $langs->preset->webpage->edit_code ?>',
+                'modalImportLabel'   : '<div style="margin-bottom: 10px; font-size: 13px;"><?php echo $langs->preset->webpage->edit_code_paste_here_html ?></div>',
                 'modalImportContent' : function(editor) {
                     var html = editor.getHtml();
                     html = html.split(/<body.*?>/).join('');
@@ -348,7 +366,7 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
                         {'name' : 'styles'},
 
                     ],
-                    'font_names'          : "Arial/'Arial';Courier/'Courier';Verdana/'Verdana';<?php echo \local_kopere_dashboard\fonts\font_util::ckeditor(); ?>",
+                    'font_names'          : "Arial/Arial,Helvetica,sans-serif;Courier New/Courier New,Courier,monospace;Verdana/Verdana,Geneva,sans-serif;<?php echo \local_kopere_dashboard\fonts\font_util::ckeditor(); ?>",
                     'stylesSet'           : [
                         {'name' : 'Paragraph', 'element' : 'p'},
                         {'name' : 'Heading 1', 'element' : 'h1'},
@@ -396,181 +414,12 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
             'detectLocale'   : false,
             'localeFallback' : 'en',
             'messages'       : {
-                'en' : {
-                    'assetManager'    : {
-                        'addButton'   : "<?php echo get_string_kopere("grapsjs-assetmanager-addbutton") ?>",
-                        'modalTitle'  : "<?php echo get_string_kopere("grapsjs-assetmanager-modaltitle") ?>",
-                        'uploadTitle' : "<?php echo get_string_kopere("grapsjs-assetmanager-uploadtitle") ?>"
-                    },
-                    'domComponents'   : {
-                        'names' : {
-                            ""        : "<?php echo get_string_kopere("grapsjs-domcomponents-names-") ?>",
-                            'wrapper' : "<?php echo get_string_kopere("grapsjs-domcomponents-names-wrapper") ?>",
-                            'text'    : "<?php echo get_string_kopere("grapsjs-domcomponents-names-text") ?>",
-                            'comment' : "<?php echo get_string_kopere("grapsjs-domcomponents-names-comment") ?>",
-                            'image'   : "<?php echo get_string_kopere("grapsjs-domcomponents-names-image") ?>",
-                            'video'   : "<?php echo get_string_kopere("grapsjs-domcomponents-names-video") ?>",
-                            'label'   : "<?php echo get_string_kopere("grapsjs-domcomponents-names-label") ?>",
-                            'link'    : "<?php echo get_string_kopere("grapsjs-domcomponents-names-link") ?>",
-                            'map'     : "<?php echo get_string_kopere("grapsjs-domcomponents-names-map") ?>",
-                            'tfoot'   : "<?php echo get_string_kopere("grapsjs-domcomponents-names-tfoot") ?>",
-                            'tbody'   : "<?php echo get_string_kopere("grapsjs-domcomponents-names-tbody") ?>",
-                            'thead'   : "<?php echo get_string_kopere("grapsjs-domcomponents-names-thead") ?>",
-                            'table'   : "<?php echo get_string_kopere("grapsjs-domcomponents-names-table") ?>",
-                            'row'     : "<?php echo get_string_kopere("grapsjs-domcomponents-names-row") ?>",
-                            'cell'    : "<?php echo get_string_kopere("grapsjs-domcomponents-names-cell") ?>",
-                            'section' : "<?php echo get_string_kopere("grapsjs-domcomponents-names-section") ?>",
-                            'body'    : "<?php echo get_string_kopere("grapsjs-domcomponents-names-wrapper") ?>"
-                        }
-                    },
-                    'deviceManager'   : {
-                        'device'  : "<?php echo get_string_kopere("grapsjs-devicemanager-device") ?>",
-                        'devices' : {
-                            'desktop'         : "<?php echo get_string_kopere("grapsjs-devicemanager-devices-desktop") ?>",
-                            'tablet'          : "<?php echo get_string_kopere("grapsjs-devicemanager-devices-tablet") ?>",
-                            'mobileLandscape' : "<?php echo get_string_kopere("grapsjs-devicemanager-devices-mobilelandscape") ?>",
-                            'mobilePortrait'  : "<?php echo get_string_kopere("grapsjs-devicemanager-devices-mobileportrait") ?>"
-                        }
-                    },
-                    'panels'          : {
-                        'buttons' : {
-                            'titles' : {
-                                'preview'       : "<?php echo get_string_kopere("grapsjs-panels-buttons-titles-preview") ?>",
-                                'fullscreen'    : "<?php echo get_string_kopere("grapsjs-panels-buttons-titles-fullscreen") ?>",
-                                "sw-visibility" : "<?php echo get_string_kopere("grapsjs-panels-buttons-titles-sw-visibility") ?>",
-                                "open-sm"       : "<?php echo get_string_kopere("grapsjs-panels-buttons-titles-open-sm") ?>",
-                                "open-tm"       : "<?php echo get_string_kopere("grapsjs-panels-buttons-titles-open-tm") ?>",
-                                "open-layers"   : "<?php echo get_string_kopere("grapsjs-panels-buttons-titles-open-layers") ?>",
-                                "open-blocks"   : "<?php echo get_string_kopere("grapsjs-panels-buttons-titles-open-blocks") ?>"
-                            }
-                        }
-                    },
-                    'selectorManager' : {
-                        'label'      : "<?php echo get_string_kopere("grapsjs-selectormanager-label") ?>",
-                        'selected'   : "<?php echo get_string_kopere("grapsjs-selectormanager-selected") ?>",
-                        'emptyState' : "<?php echo get_string_kopere("grapsjs-selectormanager-emptystate") ?>",
-                        'states'     : {
-                            'hover'           : "<?php echo get_string_kopere("grapsjs-selectormanager-states-hover") ?>",
-                            'active'          : "<?php echo get_string_kopere("grapsjs-selectormanager-states-active") ?>",
-                            "nth-of-type(2n)" : "<?php echo get_string_kopere("grapsjs-selectormanager-states-nth-of-type-2n") ?>"
-                        }
-                    },
-                    'styleManager'    : {
-                        'empty'      : "<?php echo get_string_kopere("grapsjs-stylemanager-empty") ?>",
-                        'layer'      : "<?php echo get_string_kopere("grapsjs-stylemanager-layer") ?>",
-                        'fileButton' : "<?php echo get_string_kopere("grapsjs-stylemanager-filebutton") ?>",
-                        'sectors'    : {
-                            'general'     : "<?php echo get_string_kopere("grapsjs-stylemanager-sectors-general") ?>",
-                            'layout'      : "<?php echo get_string_kopere("grapsjs-stylemanager-sectors-layout") ?>",
-                            'typography'  : "<?php echo get_string_kopere("grapsjs-stylemanager-sectors-typography") ?>",
-                            'decorations' : "<?php echo get_string_kopere("grapsjs-stylemanager-sectors-decorations") ?>",
-                            'extra'       : "<?php echo get_string_kopere("grapsjs-stylemanager-sectors-extra") ?>",
-                            'flex'        : "<?php echo get_string_kopere("grapsjs-stylemanager-sectors-flex") ?>",
-                            'dimension'   : "<?php echo get_string_kopere("grapsjs-stylemanager-sectors-dimension") ?>"
-                        },
-                        'properties' : {
-                            'float'                      : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-float") ?>",
-                            'display'                    : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-display") ?>",
-                            'position'                   : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-position") ?>",
-                            'top'                        : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-top") ?>",
-                            'right'                      : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-right") ?>",
-                            'left'                       : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-left") ?>",
-                            'bottom'                     : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-bottom") ?>",
-                            'width'                      : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-width") ?>",
-                            'height'                     : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-height") ?>",
-                            "max-width"                  : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-max-width") ?>",
-                            "max-height"                 : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-max-height") ?>",
-                            'margin'                     : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-margin") ?>",
-                            "margin-top"                 : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-margin-top") ?>",
-                            "margin-right"               : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-margin-right") ?>",
-                            "margin-left"                : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-margin-left") ?>",
-                            "margin-bottom"              : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-margin-bottom") ?>",
-                            'padding'                    : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-padding") ?>",
-                            "padding-top"                : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-padding-top") ?>",
-                            "padding-left"               : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-padding-left") ?>",
-                            "padding-right"              : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-padding-right") ?>",
-                            "padding-bottom"             : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-padding-bottom") ?>",
-                            "font-family"                : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-font-family") ?>",
-                            "font-size"                  : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-font-size") ?>",
-                            "font-weight"                : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-font-weight") ?>",
-                            "letter-spacing"             : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-letter-spacing") ?>",
-                            'color'                      : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-color") ?>",
-                            "line-height"                : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-line-height") ?>",
-                            "text-align"                 : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-text-align") ?>",
-                            "text-shadow"                : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-text-shadow") ?>",
-                            "text-shadow-h"              : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-text-shadow-h") ?>",
-                            "text-shadow-v"              : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-text-shadow-v") ?>",
-                            "text-shadow-blur"           : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-text-shadow-blur") ?>",
-                            "text-shadow-color"          : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-text-shadow-color") ?>",
-                            "border-top-left"            : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-border-top-left") ?>",
-                            "border-top-right"           : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-border-top-right") ?>",
-                            "border-bottom-left"         : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-border-bottom-left") ?>",
-                            "border-bottom-right"        : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-border-bottom-right") ?>",
-                            "border-radius-top-left"     : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-border-radius-top-left") ?>",
-                            "border-radius-top-right"    : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-border-radius-top-right") ?>",
-                            "border-radius-bottom-left"  : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-border-radius-bottom-left") ?>",
-                            "border-radius-bottom-right" : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-border-radius-bottom-right") ?>",
-                            "border-radius"              : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-border-radius") ?>",
-                            'border'                     : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-border") ?>",
-                            "border-width"               : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-border-width") ?>",
-                            "border-style"               : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-border-style") ?>",
-                            "border-color"               : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-border-color") ?>",
-                            "box-shadow"                 : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-box-shadow") ?>",
-                            "box-shadow-h"               : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-box-shadow-h") ?>",
-                            "box-shadow-v"               : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-box-shadow-v") ?>",
-                            "box-shadow-blur"            : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-box-shadow-blur") ?>",
-                            "box-shadow-spread"          : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-box-shadow-spread") ?>",
-                            "box-shadow-color"           : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-box-shadow-color") ?>",
-                            "box-shadow-type"            : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-box-shadow-type") ?>",
-                            'background'                 : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-background") ?>",
-                            "background-color"           : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-background-color") ?>",
-                            "background-image"           : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-background-image") ?>",
-                            "background-repeat"          : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-background-repeat") ?>",
-                            "background-position"        : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-background-position") ?>",
-                            "background-attachment"      : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-background-attachment") ?>",
-                            "background-size"            : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-background-size") ?>",
-                            'transition'                 : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-transition") ?>",
-                            "transition-property"        : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-transition-property") ?>",
-                            "transition-duration"        : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-transition-duration") ?>",
-                            "transition-timing-function" : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-transition-timing-function") ?>",
-                            'perspective'                : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-perspective") ?>",
-                            'transform'                  : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-transform") ?>",
-                            "transform-rotate-x"         : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-transform-rotate-x") ?>",
-                            "transform-rotate-y"         : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-transform-rotate-y") ?>",
-                            "transform-rotate-z"         : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-transform-rotate-z") ?>",
-                            "transform-scale-x"          : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-transform-scale-x") ?>",
-                            "transform-scale-y"          : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-transform-scale-y") ?>",
-                            "transform-scale-z"          : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-transform-scale-z") ?>",
-                            "flex-direction"             : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-flex-direction") ?>",
-                            "flex-wrap"                  : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-flex-wrap") ?>",
-                            "justify-content"            : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-justify-content") ?>",
-                            "align-items"                : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-align-items") ?>",
-                            "align-content"              : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-align-content") ?>",
-                            'order'                      : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-order") ?>",
-                            "flex-basis"                 : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-flex-basis") ?>",
-                            "flex-grow"                  : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-flex-grow") ?>",
-                            "flex-shrink"                : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-flex-shrink") ?>",
-                            "align-self"                 : "<?php echo get_string_kopere("grapsjs-stylemanager-properties-align-self") ?>"
-                        }
-                    },
-                    'traitManager'    : {
-                        'empty'  : "<?php echo get_string_kopere("grapsjs-traitmanager-empty") ?>",
-                        'label'  : "<?php echo get_string_kopere("grapsjs-traitmanager-label") ?>",
-                        'traits' : {
-                            'options' : {
-                                'target' : {
-                                    'false'  : "<?php echo get_string_kopere("grapsjs-traitmanager-traits-options-target-false") ?>",
-                                    '_blank' : "<?php echo get_string_kopere("grapsjs-traitmanager-traits-options-target-_blank") ?>"
-                                }
-                            }
-                        }
-                    }
-                }
+                'en' : <?php echo json_encode($langs, JSON_PRETTY_PRINT) ?>,
             }
         }
     });
 
-    editor.getConfig().showDevices = 0;
+    // editor.getConfig().showDevices = 0;
     editor.Panels.addPanel({
         'id' : "devices-c"
     }).get("buttons").add([
@@ -578,32 +427,32 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
             'id'        : "block-save",
             'className' : "btn-salvar padding-0",
             'label'     : `<form class="form-save-preview" method="post" target="_top"
-                                 style="display:none;margin:0;">
-                               <input type="hidden" name="page"     value="<?php echo $page ?>">
-                               <input type="hidden" name="link"     value="<?php echo $link ?>">
-                               <input type="hidden" name="id"       value="<?php echo $id ?>">
-                               <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>">
-                               <input type="hidden" name="htmldata" class="form-htmldata">
-                               <input type="hidden" name="cssdata"  class="form-cssdata">
-                               <button type="submit" class="btn-salvar gjs-pn-btn gjs-pn-active gjs-four-color">
-                                   <i class='fa fa-save'></i>&nbsp;
-                                   <?php echo get_string_kopere("grapsjs-page_save") ?>
-                              </button>
-                           </form>
-                           <form class="form-save-preview form-preview" method="post" target="home-preview"
-                                 style="display:none;margin:0;"
-                                 action="<?php echo $pagePreview ?>">
-                               <input type="hidden" name="page"     value="<?php echo $page ?>">
-                               <input type="hidden" name="link"     value="<?php echo $link ?>">
-                               <input type="hidden" name="id"       value="<?php echo $id ?>">
-                               <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>">
-                               <input type="hidden" name="htmldata" class="form-htmldata">
-                               <input type="hidden" name="cssdata"  class="form-cssdata">
-                               <button type="submit" class="btn-salvar gjs-pn-btn gjs-pn-active gjs-four-color">
-                                   <i class='fa fa-eye'></i>&nbsp;
-                                   <?php echo get_string_kopere("grapsjs-page_preview") ?>
-                              </button>
-                           </form>`,
+                                     style="display:none;margin:0;">
+                                   <input type="hidden" name="page"     value="<?php echo $page ?>">
+                                   <input type="hidden" name="link"     value="<?php echo $link ?>">
+                                   <input type="hidden" name="id"       value="<?php echo $id ?>">
+                                   <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>">
+                                   <input type="hidden" name="htmldata" class="form-htmldata">
+                                   <input type="hidden" name="cssdata"  class="form-cssdata">
+                                   <button type="submit" class="btn-salvar gjs-pn-btn gjs-pn-active gjs-four-color">
+                                       <i class='fa fa-save'></i>&nbsp;
+                                       <?php echo $langs->page->save ?>
+                                  </button>
+                               </form>
+                               <form class="form-save-preview form-preview" method="post" target="home-preview"
+                                     style="display:none;margin:0;"
+                                     action="<?php echo $pagePreview ?>">
+                                   <input type="hidden" name="page"     value="<?php echo $page ?>">
+                                   <input type="hidden" name="link"     value="<?php echo $link ?>">
+                                   <input type="hidden" name="id"       value="<?php echo $id ?>">
+                                   <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>">
+                                   <input type="hidden" name="htmldata" class="form-htmldata">
+                                   <input type="hidden" name="cssdata"  class="form-cssdata">
+                                   <button type="submit" class="btn-salvar gjs-pn-btn gjs-pn-active gjs-four-color">
+                                       <i class='fa fa-eye'></i>&nbsp;
+                                       <?php echo $langs->page->preview ?>
+                                  </button>
+                               </form>`,
         }
     ]);
 
@@ -612,74 +461,74 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
         label    : 'Accordion',
         category : "jQuery UI",
         content  : `
-            <div class="jquery-ui-accordion">
-                <h3>Section 1</h3>
-                <div>
-                    <p>
-                        Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-                        ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-                        amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-                        odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-                    </p>
-                </div>
-                <h3>Section 2</h3>
-                <div>
-                    <p>
-                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-                        suscipit faucibus urna.
-                    </p>
-                </div>
-                <h3>Section 3</h3>
-                <div>
-                    <p>
-                        Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-                        Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-                        ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-                        lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-                    </p>
-                </div>
-            </div>`,
+                <div class="jquery-ui-accordion">
+                    <h3>Section 1</h3>
+                    <div>
+                        <p>
+                            Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                            ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                            amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                            odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+                        </p>
+                    </div>
+                    <h3>Section 2</h3>
+                    <div>
+                        <p>
+                            Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                            purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                            velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                            suscipit faucibus urna.
+                        </p>
+                    </div>
+                    <h3>Section 3</h3>
+                    <div>
+                        <p>
+                            Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                            Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                            ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                            lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+                        </p>
+                    </div>
+                </div>`,
         media    : `<svg class="svg-item-replace" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54">
-                        <path  d="M5.423,32.092h25.858v1.969H5.423V32.092z M5.423,28.967h34.306v1.971H5.423V28.967z M0.799,25.437v11.749
-                            h52.059V25.437H0.799z M0,15.658h54v22.686H0V15.658z M48.234,21.908L48.234,21.908l0.799-0.811l0,0l1.541-1.562l-0.799-0.405
-                            l-1.541,1.562l-1.541-1.562l-0.8,0.811l1.541,1.562L48.234,21.908z"/>
-                        <path  d="M0,2v9.78h54V2H0z M49.376,7.845l-0.798,0.811l0,0l-0.801-0.811l-1.541-1.562l0.799-0.81l1.543,1.562
-                            l1.54-1.562l0.8,0.81L49.376,7.845L49.376,7.845z"/>
-                        <path  d="M0,42.221V52h54v-9.779H0z M49.376,48.527l-0.798,0.811l0,0l-0.801-0.811l-1.541-1.562l0.799-0.811
-                            l1.543,1.562l1.54-1.562l0.8,0.811L49.376,48.527L49.376,48.527z"/>
-                    </svg>`,
+                            <path  d="M5.423,32.092h25.858v1.969H5.423V32.092z M5.423,28.967h34.306v1.971H5.423V28.967z M0.799,25.437v11.749
+                                h52.059V25.437H0.799z M0,15.658h54v22.686H0V15.658z M48.234,21.908L48.234,21.908l0.799-0.811l0,0l1.541-1.562l-0.799-0.405
+                                l-1.541,1.562l-1.541-1.562l-0.8,0.811l1.541,1.562L48.234,21.908z"/>
+                            <path  d="M0,2v9.78h54V2H0z M49.376,7.845l-0.798,0.811l0,0l-0.801-0.811l-1.541-1.562l0.799-0.81l1.543,1.562
+                                l1.54-1.562l0.8,0.81L49.376,7.845L49.376,7.845z"/>
+                            <path  d="M0,42.221V52h54v-9.779H0z M49.376,48.527l-0.798,0.811l0,0l-0.801-0.811l-1.541-1.562l0.799-0.811
+                                l1.543,1.562l1.54-1.562l0.8,0.811L49.376,48.527L49.376,48.527z"/>
+                        </svg>`,
     });
     editor.BlockManager.add('jquery-ui-tabs', {
         label    : 'Tabs',
         category : "jQuery UI",
         content  : `
-            <div class="jquery-ui-tabs">
-                <ul>
-                    <li><a href="#tabs-1">Nunc tincidunt</a></li>
-                    <li><a href="#tabs-2">Proin dolor</a></li>
-                    <li><a href="#tabs-3">Aenean lacinia</a></li>
-                </ul>
-                <div id="tabs-1">
-                    <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus.</p>
-                </div>
-                <div id="tabs-2">
-                    <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-                </div>
-                <div id="tabs-3">
-                    <p>Mauris eleifend est et turpis. Duis id erat.</p>
-                </div>
-            </div>`,
+                <div class="jquery-ui-tabs">
+                    <ul>
+                        <li><a href="#tabs-1">Nunc tincidunt</a></li>
+                        <li><a href="#tabs-2">Proin dolor</a></li>
+                        <li><a href="#tabs-3">Aenean lacinia</a></li>
+                    </ul>
+                    <div id="tabs-1">
+                        <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus.</p>
+                    </div>
+                    <div id="tabs-2">
+                        <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
+                    </div>
+                    <div id="tabs-3">
+                        <p>Mauris eleifend est et turpis. Duis id erat.</p>
+                    </div>
+                </div>`,
         media    : `<svg class="svg-item-replace" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54">
-                        <path   d="M39.791,2h12.918C53.375,2,54,2.618,54,3.196v12.071c0,0.617-0.668,1.195-1.291,1.195
-                            H39.791c-0.666,0-1.291-0.617-1.291-1.195V3.196C38.5,2.618,38.793,2,39.791,2z"/>
-                        <path   d="M20.375,2h12.916c0.666,0,1.293,0.617,1.293,1.195v12.071
-                            c0,0.617-0.668,1.195-1.293,1.195H20.375c-0.667,0-1.292-0.617-1.292-1.195V3.196C19.083,2.618,19.708,2,20.375,2z"/>
-                        <path   d="M15.424,20.087l37.285-0.108c0.668,0,1.291,0.617,1.291,1.195v29.523
-                            c0,0.617-0.666,1.193-1.291,1.193L1.292,52C0.625,52,0,51.383,0,50.805V21.283v-5.978V3.196C0,2.579,0.667,2,1.292,2h12.917
-                            C14.875,2,15.5,2.618,15.5,3.196v12.071l-0.076,0.039"/>
-                    </svg>`,
+                            <path   d="M39.791,2h12.918C53.375,2,54,2.618,54,3.196v12.071c0,0.617-0.668,1.195-1.291,1.195
+                                H39.791c-0.666,0-1.291-0.617-1.291-1.195V3.196C38.5,2.618,38.793,2,39.791,2z"/>
+                            <path   d="M20.375,2h12.916c0.666,0,1.293,0.617,1.293,1.195v12.071
+                                c0,0.617-0.668,1.195-1.293,1.195H20.375c-0.667,0-1.292-0.617-1.292-1.195V3.196C19.083,2.618,19.708,2,20.375,2z"/>
+                            <path   d="M15.424,20.087l37.285-0.108c0.668,0,1.291,0.617,1.291,1.195v29.523
+                                c0,0.617-0.666,1.193-1.291,1.193L1.292,52C0.625,52,0,51.383,0,50.805V21.283v-5.978V3.196C0,2.579,0.667,2,1.292,2h12.917
+                                C14.875,2,15.5,2.618,15.5,3.196v12.071l-0.076,0.039"/>
+                        </svg>`,
     });
 
     // Bootstrap’s custom component
@@ -721,7 +570,7 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
 
     // Update canvas-clear command
     editor.Commands.add('canvas-clear', function() {
-        if (confirm("<?php echo get_string_kopere("grapsjs-confirm_clear") ?>")) {
+        if (confirm("<?php echo $langs->canvas->clear ?>")) {
             editor.runCommand('core:canvas-clear');
             setTimeout(function() {
                 localStorage.clear()
@@ -746,25 +595,31 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
 
     // Add and beautify tooltips
     var options = [
-        ['sw-visibility', '<?php echo get_string_kopere("grapsjs-show_border") ?>'],
-        ['preview', '<?php echo get_string_kopere("grapsjs-preview") ?>'],
-        ['fullscreen', '<?php echo get_string_kopere("grapsjs-fullscreen") ?>'],
-        ['undo', '<?php echo get_string_kopere("grapsjs-undo") ?>'],
-        ['redo', '<?php echo get_string_kopere("grapsjs-redo") ?>'],
-        ['canvas-clear', '<?php echo get_string_kopere("grapsjs-clear") ?>'],
-        ['gjs-open-import-webpage', '<?php echo get_string_kopere("grapsjs-edit_code") ?>'],
+        ['sw-visibility', '<?php $a = 'sw-visibility'; echo $langs->panels->buttons->titles->$a ?>'],
+        ['preview', '<?php echo $langs->panels->buttons->titles->preview ?>'],
+        ['fullscreen', '<?php echo $langs->panels->buttons->titles->fullscreen ?>'],
+        ['undo', '<?php echo $langs->panels->buttons->titles->undo ?>'],
+        ['redo', '<?php echo $langs->panels->buttons->titles->redo ?>'],
+        ['canvas-clear', '<?php echo $langs->panels->buttons->titles->clear ?>'],
+        ['gjs-open-import-webpage', '<?php echo $langs->panels->buttons->titles->edit_code ?>'],
     ];
     options.forEach(function(item) {
-        editor.Panels.getButton('options', item[0]).set('attributes', {title : item[1], 'data-tooltip-pos' : 'bottom'});
+        editor.Panels.getButton('options', item[0]).set('attributes', {
+            'title' : item[1],
+            'data-tooltip-pos' : 'bottom',
+        });
     });
 
     var views = [
-        ['open-sm', '<?php echo get_string_kopere("grapsjs-open_sm") ?>'],
-        ['open-layers', '<?php echo get_string_kopere("grapsjs-open_layers") ?>'],
-        ['open-blocks', '<?php echo get_string_kopere("grapsjs-open_block") ?>'],
+        ['open-sm', '<?php $a = 'open-sm'; echo $langs->panels->buttons->titles->$a ?>'],
+        ['open-layers', '<?php $a = 'open-layers'; echo $langs->panels->buttons->titles->$a ?>'],
+        ['open-blocks', '<?php $a = 'open-blocks'; echo $langs->panels->buttons->titles->$a ?>'],
     ];
     views.forEach(function(item) {
-        editor.Panels.getButton('views', item[0]).set('attributes', {title : item[1], 'data-tooltip-pos' : 'bottom'});
+        editor.Panels.getButton('views', item[0]).set('attributes', {
+            'title' : item[1],
+            'data-tooltip-pos' : 'bottom',
+        });
     });
     var titles = document.querySelectorAll('*[title]');
 
@@ -822,7 +677,7 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
 
         // Add Settings Sector
         var traitsSector = $('<div class="gjs-sm-sector no-select">' +
-            '<div class="gjs-sm-sector-title"><span class="icon-settings fa fa-cog"></span> <span class="gjs-sm-sector-label"><?php echo get_string('grapsjs-settings', 'local_kopere_dashboard') ?></span></div>' +
+            '<div class="gjs-sm-sector-title"><span class="icon-settings fa fa-cog"></span> <span class="gjs-sm-sector-label"><?php echo $langs->page->settings ?></span></div>' +
             '<div class="gjs-sm-properties" style="display: none;"></div></div>');
         var traitsProps = traitsSector.find('.gjs-sm-properties');
         traitsProps.append($('.gjs-traits-cs'));
@@ -855,23 +710,23 @@ require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 250" style="height:27px;">
                 <g fill="#b9a5a6">
                     <path d="M469.779,250C493.059,250,512,231.463,512,208.682V41.319C512,18.537,493.059,0,469.779,0H42.221C18.94,0,0,18.537,0,41.319
-                            v167.363C0,231.465,18.941,250,42.221,250 M42.221,234.309c-14.438,0-26.188-11.496-26.188-25.629V41.318
-                            c0-14.133,11.748-25.629,26.188-25.629h427.556c14.439,0,26.189,11.496,26.189,25.629v167.364l0,0
-                            c0,14.131-11.748,25.629-26.188,25.629"/>
+                                v167.363C0,231.465,18.941,250,42.221,250 M42.221,234.309c-14.438,0-26.188-11.496-26.188-25.629V41.318
+                                c0-14.133,11.748-25.629,26.188-25.629h427.556c14.439,0,26.189,11.496,26.189,25.629v167.364l0,0
+                                c0,14.131-11.748,25.629-26.188,25.629"/>
                     <path id="H" d="M141.821,62.987c-4.729,0-8.563,3.752-8.563,8.381v45.251H77.311V71.368c0-4.627-3.833-8.381-8.564-8.381
-                            c-4.731,0-8.563,3.752-8.563,8.381v107.265c0,4.629,3.833,8.381,8.563,8.381c4.73,0,8.564-3.75,8.564-8.381v-45.252h55.947v45.252
-                            c0,4.629,3.834,8.381,8.563,8.381s8.564-3.75,8.564-8.381V71.368C150.384,66.739,146.551,62.987,141.821,62.987z"/>
+                                c-4.731,0-8.563,3.752-8.563,8.381v107.265c0,4.629,3.833,8.381,8.563,8.381c4.73,0,8.564-3.75,8.564-8.381v-45.252h55.947v45.252
+                                c0,4.629,3.834,8.381,8.563,8.381s8.564-3.75,8.564-8.381V71.368C150.384,66.739,146.551,62.987,141.821,62.987z"/>
                     <path id="E" d="M242.298,170.252h-54.805c-0.316,0-0.572-0.25-0.572-0.559v-36.314h37.107c4.729,0,8.564-3.75,8.564-8.379
-                            c0-4.629-3.835-8.38-8.564-8.38h-37.107V80.305c0-0.308,0.254-0.558,0.572-0.558h54.805c4.729,0,8.563-3.751,8.563-8.38
-                            c0-4.629-3.832-8.38-8.563-8.38h-54.805c-9.76,0-17.698,7.768-17.698,17.318v89.386c0,9.553,7.938,17.32,17.698,17.32h54.805
-                            c4.729,0,8.563-3.75,8.563-8.381C250.861,174.004,247.027,170.252,242.298,170.252z"/>
+                                c0-4.629-3.835-8.38-8.564-8.38h-37.107V80.305c0-0.308,0.254-0.558,0.572-0.558h54.805c4.729,0,8.563-3.751,8.563-8.38
+                                c0-4.629-3.832-8.38-8.563-8.38h-54.805c-9.76,0-17.698,7.768-17.698,17.318v89.386c0,9.553,7.938,17.32,17.698,17.32h54.805
+                                c4.729,0,8.563-3.75,8.563-8.381C250.861,174.004,247.027,170.252,242.298,170.252z"/>
                     <path id="L" d="M342.773,170.252h-54.807c-0.313,0-0.57-0.25-0.57-0.559V71.367c0-4.628-3.832-8.381-8.564-8.381
-                            c-4.729,0-8.564,3.752-8.564,8.381v98.327c0,9.549,7.941,17.32,17.697,17.32h54.807c4.729,0,8.564-3.752,8.564-8.381
-                            C351.336,174.002,347.504,170.252,342.773,170.252z"/>
+                                c-4.729,0-8.564,3.752-8.564,8.381v98.327c0,9.549,7.941,17.32,17.697,17.32h54.807c4.729,0,8.564-3.752,8.564-8.381
+                                C351.336,174.002,347.504,170.252,342.773,170.252z"/>
                     <path id="P" d="M406.715,62.986h-27.404c-9.76,0-17.697,7.769-17.697,17.319v98.328c0,4.629,3.836,8.381,8.566,8.381
-                            c4.727,0,8.562-3.752,8.562-8.381v-27.375h27.976c24.869,0,45.1-19.799,45.1-44.135C451.816,82.786,431.581,62.986,406.715,62.986z
-                             M406.715,134.496h-27.976V80.305c0-0.309,0.257-0.558,0.571-0.558h27.402c15.424,0,27.973,12.28,27.973,27.375
-                            C434.688,122.216,422.139,134.496,406.715,134.496z"/>
+                                c4.727,0,8.562-3.752,8.562-8.381v-27.375h27.976c24.869,0,45.1-19.799,45.1-44.135C451.816,82.786,431.581,62.986,406.715,62.986z
+                                 M406.715,134.496h-27.976V80.305c0-0.309,0.257-0.558,0.571-0.558h27.402c15.424,0,27.973,12.28,27.973,27.375
+                                C434.688,122.216,422.139,134.496,406.715,134.496z"/>
                 </g>
             </svg>
         </a>

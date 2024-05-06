@@ -1,0 +1,196 @@
+{
+  "assetManager": {
+    "addButton": "G\u00f6rsel Ekle",
+    "modalTitle": "G\u00f6rsel Se\u00e7in",
+    "uploadTitle": "Dosya y\u00fcklemek i\u00e7in buraya s\u00fcr\u00fckleyin veya t\u0131klay\u0131n"
+  },
+  "deviceManager": {
+    "device": "Cihaz",
+    "devices": {
+      "desktop": "Masa\u00fcst\u00fc",
+      "tablet": "Tablet",
+      "mobileLandscape": "Mobil Yatay",
+      "mobilePortrait": "Mobil Dikey"
+    }
+  },
+  "panels": {
+    "buttons": {
+      "titles": {
+        "preview": "\u00d6nizleme",
+        "fullscreen": "Tam Ekran",
+        "sw-visibility": "Bile\u015fenleri G\u00f6ster",
+        "export-template": "Kodu G\u00f6ster",
+        "open-sm": "Stil D\u00fczenleyiciyi A\u00e7",
+        "open-tm": "Ayarlar",
+        "open-layers": "Katmanlar",
+        "open-blocks": "Bloklar",
+        "undo": "Undo",
+        "redo": "Redo",
+        "clear": "Clear Canvas",
+        "edit_code": "Edit code"
+      }
+    }
+  },
+  "selectorManager": {
+    "selected": "Se\u00e7ili",
+    "emptyState": "- DURUM -",
+    "label": "S\u0131n\u0131flar",
+    "states": {
+      "hover": "\u00dczerinde",
+      "active": "T\u0131kland\u0131\u011f\u0131nda",
+      "nth-of-type(2n)": "\u00c7ift\/Tek"
+    }
+  },
+  "styleManager": {
+    "empty": "Stilini d\u00fczenlemek istedi\u011finiz \u00f6\u011feyi se\u00e7iniz",
+    "layer": "Katman",
+    "sectors": {
+      "general": "Genel",
+      "layout": "D\u00fczen",
+      "typography": "Tipografi",
+      "decorations": "Dekorasyon",
+      "extra": "Ekstra",
+      "flex": "Flex",
+      "dimension": "Boyut"
+    },
+    "properties": {
+      "float": "Kayd\u0131r",
+      "display": "G\u00f6r\u00fcn\u00fcm",
+      "position": "Pozisyon",
+      "top": "\u00dcst",
+      "right": "Sa\u011f",
+      "left": "Sol",
+      "bottom": "Alt",
+      "width": "Geni\u015flik",
+      "height": "Y\u00fckseklik",
+      "max-width": "Maks. Geni\u015flik",
+      "max-height": "Maks. Y\u00fckseklik",
+      "margin": "Margin",
+      "margin-top": "Margin \u00dcst",
+      "margin-right": "Margin Sa\u011f",
+      "margin-left": "Margin Sol",
+      "margin-bottom": "Margin Alt",
+      "padding": "Padding",
+      "padding-top": "Padding \u00dcst",
+      "padding-left": "Padding Sol",
+      "padding-right": "Padding Sa\u011f",
+      "padding-bottom": "Padding Alt",
+      "font-family": "Font Tipi",
+      "font-size": "Font Boyutu",
+      "font-weight": "Font Kal\u0131nl\u0131\u011f\u0131",
+      "letter-spacing": "Harf Bo\u015flu\u011fu",
+      "color": "Renk",
+      "line-height": "Sat\u0131r Bo\u015flu\u011fu",
+      "text-align": "Yaz\u0131 Hizalamas\u0131",
+      "text-shadow": "Yaz\u0131 G\u00f6lgesi",
+      "text-shadow-h": "Yaz\u0131 G\u00f6lgesi - Yatay",
+      "text-shadow-v": "Yaz\u0131 G\u00f6lgesi - Dikey",
+      "text-shadow-blur": "Yaz\u0131 G\u00f6lgesi Bulan\u0131kl\u0131\u011f\u0131",
+      "text-shadow-color": "Yaz\u0131 G\u00f6lgesi Rengi",
+      "border-top-left": "Kenar \u00dcst Sol",
+      "border-top-right": "Kenar \u00dcst Sa\u011f",
+      "border-bottom-left": "Kenar Alt Sol",
+      "border-bottom-right": "Kenar Alt Sa\u011f",
+      "border-radius-top-left": "K\u00f6\u015fe Yumu\u015fumas\u0131 \u00dcst Sol",
+      "border-radius-top-right": "K\u00f6\u015fe Yumu\u015fumas\u0131 \u00dcst Sa\u011f",
+      "border-radius-bottom-left": "K\u00f6\u015fe Yumu\u015fumas\u0131 Alt Sol",
+      "border-radius-bottom-right": "K\u00f6\u015fe Yumu\u015fumas\u0131 Alt Sa\u011f",
+      "border-radius": "K\u00f6\u015fe Yumu\u015famas\u0131",
+      "border": "Kenar",
+      "border-width": "Kenar Kal\u0131nl\u0131\u011f\u0131",
+      "border-style": "Kenar Stili",
+      "border-color": "Kenar Rengi",
+      "box-shadow": "Kutu G\u00f6lgesi",
+      "box-shadow-h": "Kutu G\u00f6lgesi - Yatay",
+      "box-shadow-v": "Kutu G\u00f6lgesi - Dikey",
+      "box-shadow-blur": "Kutu G\u00f6lgesi Bulan\u0131kl\u0131\u011f\u0131",
+      "box-shadow-spread": "Kutu G\u00f6lgesi Da\u011f\u0131l\u0131m\u0131",
+      "box-shadow-color": "Kutu G\u00f6lgesi Rengi",
+      "box-shadow-type": "Kutu G\u00f6lgesi Tipi",
+      "background": "Arkaplan",
+      "background-image": "Arkaplan Resmi",
+      "background-repeat": "Arkaplan Tekrar\u0131",
+      "background-position": "Arkaplan Pozisyonu",
+      "background-attachment": "Arkaplan Eklentisi",
+      "background-size": "Arkaplan Boyutu",
+      "transition": "Ge\u00e7i\u015f",
+      "transition-property": "Ge\u00e7i\u015f \u00d6zelli\u011fi",
+      "transition-duration": "Ge\u00e7i\u015f S\u00fcresi",
+      "transition-timing-function": "Ge\u00e7i\u015f Zamanlamas\u0131 Metodu",
+      "perspective": "Perspektif",
+      "transform": "Boyutlama",
+      "transform-rotate-x": "Yatay Y\u00f6nlendirme",
+      "transform-rotate-y": "Dikey Y\u00f6nlendirme",
+      "transform-rotate-z": "Hacimsel Y\u00f6nlendirme",
+      "transform-scale-x": "Dikey Oran",
+      "transform-scale-y": "Yatay Oran",
+      "transform-scale-z": "Hacimsel Oran",
+      "flex-direction": "Flex Y\u00f6n\u00fc",
+      "flex-wrap": "Flex Kesme",
+      "justify-content": "\u0130\u00e7eri\u011fi S\u0131\u011fd\u0131r",
+      "align-items": "\u00d6\u011feleri Hizala",
+      "align-content": "\u0130\u00e7eri\u011fi Hizala",
+      "order": "S\u0131ra",
+      "flex-basis": "Flex Baz\u0131",
+      "flex-grow": "Flex B\u00fcy\u00fcme",
+      "flex-shrink": "Flex K\u00fc\u00e7\u00fclme",
+      "align-self": "Kendini Hizala",
+      "background-color": "Arkaplan Rengi",
+      "center": "Center",
+      "justify": "Justify",
+      "none": "None",
+      "underline": "Underline",
+      "line_through": "Line through"
+    },
+    "fileButton": "Resimler"
+  },
+  "traitManager": {
+    "empty": "\u00d6zelliklerini d\u00fczenlemek istedi\u011finiz \u00f6\u011feyi se\u00e7iniz",
+    "label": "Bile\u015fen \u00d6zellikleri",
+    "traits": {
+      "labels": [],
+      "attributes": [],
+      "options": {
+        "target": {
+          "false": "Bu pencere",
+          "_blank": "Yeni pencere"
+        }
+      }
+    }
+  },
+  "domComponents": {
+    "names": {
+      "": "Kutu",
+      "wrapper": "G\u00f6vde",
+      "text": "Metin",
+      "comment": "Yorum",
+      "image": "Resim",
+      "video": "Video",
+      "label": "Etiket",
+      "link": "Ba\u011flant\u0131",
+      "map": "Harita",
+      "tfoot": "Tablo Alt\u0131",
+      "tbody": "Tablo G\u00f6vdesi",
+      "thead": "Tablo Ba\u015fl\u0131\u011f\u0131",
+      "table": "Tablo",
+      "row": "Tablo Sat\u0131r\u0131",
+      "cell": "Tablo H\u00fccresi",
+      "section": "B\u00f6l\u00fcm",
+      "body": "G\u00f6vde"
+    }
+  },
+  "preset": {
+    "webpage": {
+      "edit_code": "Edit code",
+      "edit_code_paste_here_html": "Paste your HTML\/CSS here and click Import"
+    }
+  },
+  "page": {
+    "settings": "Settings",
+    "save": "Save",
+    "preview": "Preview"
+  },
+  "canvas": {
+    "clear": "Are you sure you want to clear the canvas?"
+  }
+}

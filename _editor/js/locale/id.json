@@ -1,0 +1,193 @@
+{
+  "assetManager": {
+    "addButton": "Tambah Gambar",
+    "modalTitle": "Pilih Gambar",
+    "uploadTitle": "Seret file ke sini atau klik untuk mengunggah"
+  },
+  "domComponents": {
+    "names": {
+      "": "Kotak",
+      "wrapper": "Wrapper",
+      "text": "Teks",
+      "comment": "Komentar",
+      "image": "Gambar",
+      "video": "Video",
+      "label": "Label",
+      "link": "Link",
+      "map": "Peta",
+      "tfoot": "Footer Tabel",
+      "tbody": "Body Tabel",
+      "thead": "Header Tabel",
+      "table": "Tabel",
+      "row": "Baris Tabel",
+      "cell": "Sel Tabel",
+      "section": "Seksi",
+      "body": "Wrapper"
+    }
+  },
+  "deviceManager": {
+    "device": "Perangkat",
+    "devices": {
+      "desktop": "Desktop",
+      "tablet": "Tablet",
+      "mobileLandscape": "Ponsel, mode lanskap",
+      "mobilePortrait": "Ponsel, mode potret"
+    }
+  },
+  "panels": {
+    "buttons": {
+      "titles": {
+        "preview": "Pratinjau",
+        "fullscreen": "Layar Penuh",
+        "sw-visibility": "Lihat Komponen",
+        "open-sm": "Buka Pengelola Gaya",
+        "open-tm": "Pengaturan",
+        "open-layers": "Buka Pengelola Lapisan",
+        "open-blocks": "Buka Blok",
+        "undo": "Batal",
+        "redo": "Ulang",
+        "clear": "Bersihkan kanvas",
+        "edit_code": "Edit Kode"
+      }
+    }
+  },
+  "selectorManager": {
+    "label": "Kelas",
+    "selected": "Terpilih",
+    "emptyState": "- State -",
+    "states": {
+      "hover": "Hover",
+      "active": "Click",
+      "nth-of-type(2n)": "Genap\/Ganjil"
+    }
+  },
+  "styleManager": {
+    "empty": "Pilih elemen untuk menggunakan pengelola gaya",
+    "layer": "Lapisan",
+    "fileButton": "Gambar",
+    "sectors": {
+      "general": "Umum",
+      "layout": "Tata Letak",
+      "typography": "Tipografi",
+      "decorations": "Dekorasi",
+      "extra": "Ekstra",
+      "flex": "Flex",
+      "dimension": "Dimensi"
+    },
+    "properties": {
+      "float": "Float",
+      "display": "Tampilan",
+      "position": "Posisi",
+      "top": "Atas",
+      "right": "Kanan",
+      "left": "Kiri",
+      "bottom": "Bawah",
+      "width": "Lebar",
+      "height": "Tinggi",
+      "max-width": "Lebar Maks.",
+      "max-height": "Tinggi Maks.",
+      "margin": "Margin",
+      "margin-top": "Margin Atas",
+      "margin-right": "Margin Kanan",
+      "margin-left": "Margin Kiri",
+      "margin-bottom": "Margin Bawah",
+      "padding": "Padding",
+      "padding-top": "Padding Atas",
+      "padding-left": "Padding Kiri",
+      "padding-right": "Padding Kanan",
+      "padding-bottom": "Padding Bawah",
+      "font-family": "Font Family",
+      "font-size": "Ukuran Font",
+      "font-weight": "Ketebalan Font",
+      "letter-spacing": "Jarak Huruf",
+      "color": "Warna",
+      "line-height": "Tinggi Baris",
+      "text-align": "Penjajaran Teks",
+      "text-shadow": "Bayangan Teks",
+      "text-shadow-h": "Bayangan Teks: horizontal",
+      "text-shadow-v": "Bayangan Teks: vertikal",
+      "text-shadow-blur": "Blur Bayangan Teks",
+      "text-shadow-color": "Warna Bayangan Teks",
+      "border-top-left": "Batas Atas Kiri",
+      "border-top-right": "Batas Atas Kanan",
+      "border-bottom-left": "Batas Bawah Kiri",
+      "border-bottom-right": "Batas Bawah Kanan",
+      "border-radius-top-left": "Radius Batas Atas Kiri",
+      "border-radius-top-right": "Radius Batas Atas Kanan",
+      "border-radius-bottom-left": "Radius Batas Bawah Kiri",
+      "border-radius-bottom-right": "Radius Batas Bawah Kanan",
+      "border-radius": "Radius Batas",
+      "border": "Batas",
+      "border-width": "Lebar Batas",
+      "border-style": "Gaya Batas",
+      "border-color": "Warna Batas",
+      "box-shadow": "Bayangan Kotak",
+      "box-shadow-h": "Bayangan Kotak: horizontal",
+      "box-shadow-v": "Bayangan Kotak: vertikal",
+      "box-shadow-blur": "Box Shadow Blur",
+      "box-shadow-spread": "Sebaran Bayangan Kotak",
+      "box-shadow-color": "Warna Bayangan Kotak",
+      "box-shadow-type": "Tipe Bayangan Kotak",
+      "background": "Latar Belakang",
+      "background-color": "Warna Latar Belakang",
+      "background-image": "Gambar Latar Belakang",
+      "background-repeat": "Ulangi Latar Belakang",
+      "background-position": "Posisi Latar Belakang",
+      "background-attachment": "Attachment Latar Belakang",
+      "background-size": "Ukuran Latar Belakang",
+      "transition": "Transisi",
+      "transition-property": "Properti Transisi",
+      "transition-duration": "Durasi Transisi",
+      "transition-timing-function": "Fungsi Waktu Transisi",
+      "perspective": "Perspektif",
+      "transform": "Transformasi",
+      "transform-rotate-x": "Rotasi X",
+      "transform-rotate-y": "Rotasi Y",
+      "transform-rotate-z": "Rotasi Z",
+      "transform-scale-x": "Skala X",
+      "transform-scale-y": "Skala Y",
+      "transform-scale-z": "Skala Z",
+      "flex-direction": "Arah Flex",
+      "flex-wrap": "Flex Wrap",
+      "justify-content": "Penjajaran Konten",
+      "align-items": "Penjajaran Item",
+      "align-content": "Penjajaran Konten",
+      "order": "Urutan",
+      "flex-basis": "Dasar Flex",
+      "flex-grow": "Pertumbuhan Flex",
+      "flex-shrink": "Penyusutan Flex",
+      "align-self": "Penjajaran Diri",
+      "center": "Tengah",
+      "justify": "Rata",
+      "none": "Tidak ada",
+      "underline": "Garis bawah",
+      "line_through": "Coret"
+    }
+  },
+  "traitManager": {
+    "empty": "Pilih elemen untuk menggunakan pengelola ciri",
+    "label": "Pengaturan Komponen",
+    "traits": {
+      "options": {
+        "target": {
+          "false": "Jendela Ini",
+          "_blank": "Jendela Baru"
+        }
+      }
+    }
+  },
+  "preset": {
+    "webpage": {
+      "edit_code": "Edit Kode",
+      "edit_code_paste_here_html": "Tempelkan HTML\/CSS Anda di sini dan klik Impor"
+    }
+  },
+  "page": {
+    "settings": "Settings",
+    "save": "Simpan",
+    "preview": "Pratinjau"
+  },
+  "canvas": {
+    "clear": "Yakin ingin membersihkan kanvas?"
+  }
+}

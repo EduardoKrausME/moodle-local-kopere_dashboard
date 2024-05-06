@@ -1,0 +1,193 @@
+{
+  "assetManager": {
+    "addButton": "Lisa pilt",
+    "modalTitle": "Vali pilt",
+    "uploadTitle": "Lohista failid siia v\u00f5i kl\u00f5psa \u00fcles laadimiseks"
+  },
+  "domComponents": {
+    "names": {
+      "": "Kast",
+      "wrapper": "Keha",
+      "text": "Tekst",
+      "comment": "Kommentaar",
+      "image": "Pilt",
+      "video": "Video",
+      "label": "Silt",
+      "link": "Link",
+      "map": "Kaart",
+      "tfoot": "Tabeli jalus",
+      "tbody": "Tabeli keha",
+      "thead": "Tabeli p\u00e4is",
+      "table": "Tabel",
+      "row": "Tabeli rida",
+      "cell": "Tabeli lahtrid",
+      "section": "Sektsioon",
+      "body": "Keha"
+    }
+  },
+  "deviceManager": {
+    "device": "Seade",
+    "devices": {
+      "desktop": "S\u00fclearvuti",
+      "tablet": "Tahvelarvuti",
+      "mobileLandscape": "Mobiil, horisontaalne re\u017eiim",
+      "mobilePortrait": "Mobiil, vertikaalne re\u017eiim"
+    }
+  },
+  "panels": {
+    "buttons": {
+      "titles": {
+        "preview": "Eelvaade",
+        "fullscreen": "T\u00e4isekraan",
+        "sw-visibility": "Vaata komponente",
+        "open-sm": "Ava stiilide haldur",
+        "open-tm": "S\u00e4tted",
+        "open-layers": "Ava kihtide haldur",
+        "open-blocks": "Ava plokid",
+        "undo": "Undo",
+        "redo": "Redo",
+        "clear": "Clear Canvas",
+        "edit_code": "Edit code"
+      }
+    }
+  },
+  "selectorManager": {
+    "label": "Klassid",
+    "selected": "Valitud",
+    "emptyState": "- Olek -",
+    "states": {
+      "hover": "H\u00f5lju",
+      "active": "Kl\u00f5ps",
+      "nth-of-type(2n)": "Paaris\/Paaritu"
+    }
+  },
+  "styleManager": {
+    "empty": "Vali element, mida stiili halduris kasutada",
+    "layer": "Kiht",
+    "fileButton": "Pildid",
+    "sectors": {
+      "general": "\u00dcldine",
+      "layout": "Kujundus",
+      "typography": "T\u00fcpograafia",
+      "decorations": "Kaunistused",
+      "extra": "Lisad",
+      "flex": "Flex",
+      "dimension": "M\u00f5\u00f5t"
+    },
+    "properties": {
+      "float": "Ujuv",
+      "display": "Kuva",
+      "position": "Positsioon",
+      "top": "\u00dcleval",
+      "right": "Paremal",
+      "left": "Vasakul",
+      "bottom": "All",
+      "width": "Laius",
+      "height": "K\u00f5rgus",
+      "max-width": "Maksimaalne laius",
+      "max-height": "Maksimaalne k\u00f5rgus",
+      "margin": "Vahemaa",
+      "margin-top": "\u00dclemine vahemaa",
+      "margin-right": "Parem vahemaa",
+      "margin-left": "Vasak vahemaa",
+      "margin-bottom": "Alumine vahemaa",
+      "padding": "T\u00e4idis",
+      "padding-top": "\u00dclemine t\u00e4idis",
+      "padding-left": "Vasak t\u00e4idis",
+      "padding-right": "Parem t\u00e4idis",
+      "padding-bottom": "Alumine t\u00e4idis",
+      "font-family": "Fondi perekond",
+      "font-size": "Fondi suurus",
+      "font-weight": "Fondi kaal",
+      "letter-spacing": "Kirja vahedus",
+      "color": "V\u00e4rv",
+      "line-height": "Ridade k\u00f5rgus",
+      "text-align": "Teksti joondamine",
+      "text-shadow": "Teksti vari",
+      "text-shadow-h": "Teksti vari: Horisontaalne",
+      "text-shadow-v": "Teksti vari: Vertikaalne",
+      "text-shadow-blur": "Teksti vari h\u00e4gusus",
+      "text-shadow-color": "Teksti vari v\u00e4rv",
+      "border-top-left": "\u00dclemine vasak \u00e4\u00e4r",
+      "border-top-right": "\u00dclemine parem \u00e4\u00e4r",
+      "border-bottom-left": "Alumine vasak \u00e4\u00e4r",
+      "border-bottom-right": "Alumine parem \u00e4\u00e4r",
+      "border-radius-top-left": "\u00dclemine vasak raadius",
+      "border-radius-top-right": "\u00dclemine parem raadius",
+      "border-radius-bottom-left": "Alumine vasak raadius",
+      "border-radius-bottom-right": "Alumine parem raadius",
+      "border-radius": "Raadius",
+      "border": "\u00c4\u00e4r",
+      "border-width": "\u00c4\u00e4re laius",
+      "border-style": "\u00c4\u00e4re stiil",
+      "border-color": "\u00c4\u00e4re v\u00e4rv",
+      "box-shadow": "Kasti vari",
+      "box-shadow-h": "Kasti vari: Horisontaalne",
+      "box-shadow-v": "Kasti vari: Vertikaalne",
+      "box-shadow-blur": "Kasti vari h\u00e4gusus",
+      "box-shadow-spread": "Kasti vari laotus",
+      "box-shadow-color": "Kasti vari v\u00e4rv",
+      "box-shadow-type": "Kasti vari t\u00fc\u00fcp",
+      "background": "Taust",
+      "background-color": "Tausta v\u00e4rv",
+      "background-image": "Tausta pilt",
+      "background-repeat": "Tausta kordamine",
+      "background-position": "Tausta asend",
+      "background-attachment": "Tausta kinnitus",
+      "background-size": "Tausta suurus",
+      "transition": "\u00dcleminek",
+      "transition-property": "\u00dclemineku omadus",
+      "transition-duration": "\u00dclemineku kestus",
+      "transition-timing-function": "\u00dclemineku ajastusfunktsioon",
+      "perspective": "Perspektiiv",
+      "transform": "Transformeerimine",
+      "transform-rotate-x": "P\u00f6\u00f6ra X",
+      "transform-rotate-y": "P\u00f6\u00f6ra Y",
+      "transform-rotate-z": "P\u00f6\u00f6ra Z",
+      "transform-scale-x": "Skaala X",
+      "transform-scale-y": "Skaala Y",
+      "transform-scale-z": "Skaala Z",
+      "flex-direction": "Flex suund",
+      "flex-wrap": "Flex pakkimine",
+      "justify-content": "\u00d5igusta sisu",
+      "align-items": "Joonda elemendid",
+      "align-content": "Joonda sisu",
+      "order": "J\u00e4rjestus",
+      "flex-basis": "Flex alus",
+      "flex-grow": "Flex kasvamine",
+      "flex-shrink": "Flex kokkut\u00f5mbumine",
+      "align-self": "Joonda ise",
+      "center": "Center",
+      "justify": "Justify",
+      "none": "None",
+      "underline": "Underline",
+      "line_through": "Line through"
+    }
+  },
+  "traitManager": {
+    "empty": "Valige element, mida omaduste halduris kasutada",
+    "label": "Komponendi s\u00e4tted",
+    "traits": {
+      "options": {
+        "target": {
+          "false": "See aken",
+          "_blank": "Uus aken"
+        }
+      }
+    }
+  },
+  "preset": {
+    "webpage": {
+      "edit_code": "Edit code",
+      "edit_code_paste_here_html": "Paste your HTML\/CSS here and click Import"
+    }
+  },
+  "page": {
+    "settings": "Settings",
+    "save": "Save",
+    "preview": "Preview"
+  },
+  "canvas": {
+    "clear": "Are you sure you want to clear the canvas?"
+  }
+}

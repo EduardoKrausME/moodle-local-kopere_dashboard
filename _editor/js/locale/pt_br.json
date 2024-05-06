@@ -1,0 +1,193 @@
+{
+  "assetManager": {
+    "addButton": "Adicionar imagem",
+    "modalTitle": "Selecionar imagem",
+    "uploadTitle": "Solte os arquivos aqui ou clique para enviar"
+  },
+  "domComponents": {
+    "names": {
+      "": "Box",
+      "wrapper": "Corpo",
+      "text": "Texto",
+      "comment": "Coment\u00e1rio",
+      "image": "Imagem",
+      "video": "V\u00eddeo",
+      "label": "Label",
+      "link": "Link",
+      "map": "Mapa",
+      "tfoot": "Rodap\u00e9 da tabela",
+      "tbody": "Corpo da tabela",
+      "thead": "Cabe\u00e7alho da tabela",
+      "table": "Tabela",
+      "row": "Linha da tabela",
+      "cell": "C\u00e9lula da tabela",
+      "section": "Se\u00e7\u00e3o",
+      "body": "Corpo"
+    }
+  },
+  "deviceManager": {
+    "device": "Dispositivo",
+    "devices": {
+      "desktop": "Desktop",
+      "tablet": "Tablet",
+      "mobileLandscape": "Celular, modo panor\u00e2mico",
+      "mobilePortrait": "Celular, modo retrato"
+    }
+  },
+  "panels": {
+    "buttons": {
+      "titles": {
+        "preview": "Pr\u00e9-visualiza\u00e7\u00e3o",
+        "fullscreen": "Tela cheia",
+        "sw-visibility": "Ver componentes",
+        "open-sm": "Abrir gerenciador de estilos",
+        "open-tm": "Configura\u00e7\u00f5es",
+        "open-layers": "Abrir gerenciador de camadas",
+        "open-blocks": "Abrir blocos",
+        "undo": "Desfazer",
+        "redo": "Refazer",
+        "clear": "Limpar o canvas",
+        "edit_code": "Editar c\u00f3digo"
+      }
+    }
+  },
+  "selectorManager": {
+    "label": "Classes",
+    "selected": "Selecionado",
+    "emptyState": "- Estado -",
+    "states": {
+      "hover": "Hover",
+      "active": "Click",
+      "nth-of-type(2n)": "Even\/Odd"
+    }
+  },
+  "styleManager": {
+    "empty": "Selecione um elemento para usar o gerenciador de estilos",
+    "layer": "Camada",
+    "fileButton": "Imagens",
+    "sectors": {
+      "general": "Geral",
+      "layout": "Disposi\u00e7\u00e3o",
+      "typography": "Tipografia",
+      "decorations": "Decora\u00e7\u00f5es",
+      "extra": "Extra",
+      "flex": "Flex",
+      "dimension": "Dimens\u00e3o"
+    },
+    "properties": {
+      "float": "Float",
+      "display": "Exibi\u00e7\u00e3o",
+      "position": "Posi\u00e7\u00e3o",
+      "top": "Topo",
+      "right": "Direita",
+      "left": "Esquerda",
+      "bottom": "Inferior",
+      "width": "Largura",
+      "height": "Altura",
+      "max-width": "Largura Max.",
+      "max-height": "Altura Max.",
+      "margin": "Margem",
+      "margin-top": "Margem Superior",
+      "margin-right": "Margem a Direita",
+      "margin-left": "Margem a Esquerda",
+      "margin-bottom": "Margem Inferior",
+      "padding": "Padding",
+      "padding-top": "Padding Superior",
+      "padding-left": "Padding a Esquerda",
+      "padding-right": "Padding a Direita",
+      "padding-bottom": "Padding Inferior",
+      "font-family": "Font Family",
+      "font-size": "Tamanho da fonte",
+      "font-weight": "Espessura da fonte",
+      "letter-spacing": "Espa\u00e7o entre letras",
+      "color": "Cor",
+      "line-height": "Altura da linha",
+      "text-align": "Alinhamento do texto",
+      "text-shadow": "Sombra do texto",
+      "text-shadow-h": "Sombra do texto: horizontal",
+      "text-shadow-v": "Sombra do texto: vertical",
+      "text-shadow-blur": "Desfoque da sombra do texto",
+      "text-shadow-color": "Cor da sombra da fonte",
+      "border-top-left": "Borda superior a esquerda",
+      "border-top-right": "Borda superior a direita",
+      "border-bottom-left": "Borda inferior a esquerda",
+      "border-bottom-right": "Borda inferior a direita",
+      "border-radius-top-left": "Raio da borda superior esquerda",
+      "border-radius-top-right": "Raio da borda superior direita",
+      "border-radius-bottom-left": "Raio da borda inferior esquerda",
+      "border-radius-bottom-right": "Raio da borda inferior direita",
+      "border-radius": "Raio da borda",
+      "border": "Borda",
+      "border-width": "Largura da borda",
+      "border-style": "Estilo da borda",
+      "border-color": "Cor da borda",
+      "box-shadow": "Sombra da box",
+      "box-shadow-h": "Sombra da box: horizontal",
+      "box-shadow-v": "Sombra da box: vertical",
+      "box-shadow-blur": "Desfoque da sombra da box",
+      "box-shadow-spread": "Extens\u00e3o da sombra da box",
+      "box-shadow-color": "Cor da sombra da box",
+      "box-shadow-type": "Tipo de sombra da box",
+      "background": "Fundo",
+      "background-color": "Cor de fundo",
+      "background-image": "Imagem de fundo",
+      "background-repeat": "Repetir fundo",
+      "background-position": "Posi\u00e7\u00e3o do fundo",
+      "background-attachment": "Plugin de fundo",
+      "background-size": "Tamanho do fundo",
+      "transition": "Transi\u00e7\u00e3o",
+      "transition-property": "Tipo de transi\u00e7\u00e3o",
+      "transition-duration": "Tempo de transi\u00e7\u00e3o",
+      "transition-timing-function": "Fun\u00e7\u00e3o do tempo da transi\u00e7\u00e3o",
+      "perspective": "Perspectiva",
+      "transform": "Transforma\u00e7\u00e3o",
+      "transform-rotate-x": "Rotacionar horizontalmente",
+      "transform-rotate-y": "Rotacionar verticalmente",
+      "transform-rotate-z": "Rotacionar profundidade",
+      "transform-scale-x": "Escalar horizontalmente",
+      "transform-scale-y": "Escalar verticalmente",
+      "transform-scale-z": "Escalar profundidade",
+      "flex-direction": "Dire\u00e7\u00e3o Flex",
+      "flex-wrap": "Flex wrap",
+      "justify-content": "Ajustar conte\u00fado",
+      "align-items": "Alinhar elementos",
+      "align-content": "Alinhar conte\u00fado",
+      "order": "Ordem",
+      "flex-basis": "Base Flex",
+      "flex-grow": "Crescimento Flex",
+      "flex-shrink": "Contra\u00e7\u00e3o Flex",
+      "align-self": "Alinhar-se",
+      "center": "Centro",
+      "justify": "Justificar",
+      "none": "Nenhum",
+      "underline": "Sublinhado",
+      "line_through": "Riscado"
+    }
+  },
+  "traitManager": {
+    "empty": "Selecione um elemento para usar o gerenciador de caracter\u00edsticas",
+    "label": "Configura\u00e7\u00f5es do componente",
+    "traits": {
+      "options": {
+        "target": {
+          "false": "Esta janela",
+          "_blank": "Nova janela"
+        }
+      }
+    }
+  },
+  "preset": {
+    "webpage": {
+      "edit_code": "Editar c\u00f3digo",
+      "edit_code_paste_here_html": "Cole aqui seu HTML\/CSS e clique em Importar"
+    }
+  },
+  "page": {
+    "settings": "Settings",
+    "save": "Salvar",
+    "preview": "Pr\u00e9-visualizar"
+  },
+  "canvas": {
+    "clear": "Tem certeza de limpar o canvas?"
+  }
+}
