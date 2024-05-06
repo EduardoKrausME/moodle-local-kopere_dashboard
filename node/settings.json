@@ -1,8 +1,0 @@
-{
-    "port" : 4443,
-    "ssl"  : {
-        "key"  : "/etc/letsencrypt/live/eduardokraus.com/privkey.pem",
-        "cert" : "/etc/letsencrypt/live/eduardokraus.com/fullchain.pem",
-        "ca"   : "/etc/letsencrypt/live/eduardokraus.com/chain.pem"
-    }
-}

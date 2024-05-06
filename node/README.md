@@ -1,1 +1,0 @@
-Em domains.txt, se tiver "config.php", significa que o domínio acessado tem que ser igual ao domínio do Moodle.
