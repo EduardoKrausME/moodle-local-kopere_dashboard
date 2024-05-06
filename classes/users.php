@@ -53,8 +53,8 @@ class users {
         $table->add_header(get_string_kopere('user_table_celphone'), 'phone2');
         $table->add_header(get_string_kopere('user_table_city'), 'city');
 
-        $table->set_ajax_url('?classname=users&method=load_all_users');
-        $table->set_click_redirect('?classname=users&method=details&userid={id}', 'id');
+        $table->set_ajax_url(local_kopere_dashboard_makeurl("users", "load_all_users"));
+        $table->set_click_redirect(local_kopere_dashboard_makeurl("users", "details", ["userid" => "{id}"]), 'id');
         $table->print_header();
         $table->close(true, array("order" => array(array(1, "asc"))));
 
@@ -98,7 +98,7 @@ class users {
         $user = $DB->get_record('user', array('id' => $userid));
         header::notfound_null($user, get_string_kopere('profile_notfound'));
 
-        dashboard_util::add_breadcrumb(get_string_kopere('profile_title'), '?classname=users&method=dashboard');
+        dashboard_util::add_breadcrumb(get_string_kopere('profile_title'), local_kopere_dashboard_makeurl("users", "dashboard"));
         dashboard_util::add_breadcrumb(fullname($user));
         dashboard_util::start_page();
 

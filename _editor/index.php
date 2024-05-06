@@ -19,21 +19,21 @@ if ($htmldata) {
         $webpages->text = $html;
         $DB->update_record("kopere_dashboard_webpages", $webpages);
 
-        redirect("{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?classname=webpages&method=page_details&id={$id}");
+        redirect(local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $id]));
     } else if ($page == "notification") {
         $events = $DB->get_record("kopere_dashboard_events", ["id" => $id]);
         $events->message = $html;
         $DB->update_record("kopere_dashboard_events", $events);
 
-        redirect("{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?classname=notifications&method=add_segunda_etapa&id={$id}");
+        redirect(local_kopere_dashboard_makeurl("notifications", "add_segunda_etapa", ["id" => $id]));
     } else if ($page == 'aceite') {
         set_config('formulario_pedir_aceite', $html, 'local_kopere_dashboard');
 
-        redirect("{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?classname=pay-setting&method=settings");
+        redirect(local_kopere_dashboard_makeurl("pay-setting", "settings"));
     } else if ($page == 'meiodeposito') {
         set_config('kopere_pay-meiodeposito-conta', $html, 'local_kopere_dashboard');
 
-        redirect("{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?classname=pay-meio_pagamento&method=edit&meio=MeioDeposito");
+        redirect(local_kopere_dashboard_makeurl("pay-meio_pagamento", "edit", ["meio" => "MeioDeposito"]));
     }
 }
 

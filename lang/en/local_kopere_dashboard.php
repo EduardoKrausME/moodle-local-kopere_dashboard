@@ -36,12 +36,6 @@ $string['kopere_dashboard_menu_desc'] = 'If checked, the top menu contains a lin
 $string['kopere_dashboard_menuwebpages'] = 'Show static pages for logged-in users';
 $string['kopere_dashboard_menuwebpages_desc'] = 'Enable this option to display static pages in the navigation menu for logged-in users.';
 
-$string['kopere_dashboard_open'] = 'Open Kopere';
-$string['kopere_dashboard_open_desc'] = 'Which way do you want to open Kopere Dashboard';
-$string['kopere_dashboard_open_internal'] = 'Open internal';
-$string['kopere_dashboard_open_popup'] = 'In popup';
-$string['kopere_dashboard_open_blank'] = 'In new window';
-$string['kopere_dashboard_open_top'] = 'In the same window';
 $string['add_report_user_fields'] = 'In reports add the following user fields';
 $string['add_report_user_fields_alt'] = 'Select the user fields you want to show in Kopere reports.<br>
      Hold down the CTRL key to select multiple fields.';
@@ -273,6 +267,8 @@ $string['reports_context'] = 'Context';
 $string['reports_export'] = 'Export to Excel';
 $string['reports_noneaccess'] = 'No access';
 $string['reports_access_n'] = 'accessed {$a} times';
+$string['reports_disabled'] = 'Disabled: -';
+$string['reports_add_new'] = 'New report';
 
 $string['reports_settings_title'] = 'Edit report';
 $string['reports_settings_form_title'] = 'Edit report';

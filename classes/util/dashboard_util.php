@@ -24,7 +24,6 @@
 namespace local_kopere_dashboard\util;
 
 use local_kopere_dashboard\html\button;
-use theme_flixcurso\colors;
 
 /**
  * Class dashboard_util
@@ -114,22 +113,18 @@ class dashboard_util {
                             <a target='_top' href='{$CFG->wwwroot}/'>{$SITE->fullname}</a>
                         </li>
                         <li>
-                            <a href='?classname=dashboard&method=start'>" . get_string_kopere('dashboard') . "</a>
+                            <a href='" . local_kopere_dashboard_makeurl("dashboard", "start") . "'>" . get_string_kopere('dashboard') . "</a>
                         </li>";
 
             foreach (self::$breadcrumb as $item) {
                 if (is_string($item)) {
                     $return .= "<li><span>{$item}</span></li>";
 
-                    if ($CFG->kopere_dashboard_open == 'internal') {
-                        $PAGE->navbar->add($item);
-                    }
+                    $PAGE->navbar->add($item);
                 } else {
                     $return .= "<li><a href='{$item[1]}'>{$item[0]}</a></li>";
 
-                    if ($CFG->kopere_dashboard_open == 'internal') {
-                        $PAGE->navbar->add($item[0], $item[1]);
-                    }
+                    $PAGE->navbar->add($item[0], $item[1]);
                 }
             }
 
@@ -197,7 +192,7 @@ class dashboard_util {
 
             $submenuhtml .= "
                 <li class='contains_branch {$classsub}'>
-                    <a href='?classname={$submenu->get_classname()}&method={$submenu->get_methodname()}{$submenu->get_urlextra()}'>
+                    <a href='" . local_kopere_dashboard_makeurl($submenu->get_classname(), $submenu->get_methodname()) . "{$submenu->get_urlextra()}'>
                         <img src='{$iconurl}' class='menu-icon' alt='Icon {$submenu->get_title()}'>
                         <span>{$submenu->get_title()}</span>
                     </a>
@@ -210,7 +205,7 @@ class dashboard_util {
         $iconurl = self::get_icon("/local/{$plugin}/assets/dashboard/img/icon{$class}/{$menu->get_icon()}.svg");
         $retorno .= "
                 <li class='$class'>
-                    <a href='?classname={$menu->get_classname()}&method={$menu->get_methodname()}'>
+                    <a href='" . local_kopere_dashboard_makeurl($menu->get_classname(), $menu->get_methodname()) . "'>
                         <img src='{$iconurl}' class='menu-icon' alt='Icon {$menu->get_name()}'>
                         <span>{$menu->get_name()}</span>
                     </a>

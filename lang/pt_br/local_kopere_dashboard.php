@@ -36,12 +36,6 @@ $string['kopere_dashboard_menu_desc'] = 'Se marcado, o menu do topo contém um l
 $string['kopere_dashboard_menuwebpages'] = 'Mostrar páginas estáticas para logados';
 $string['kopere_dashboard_menuwebpages_desc'] = 'Ative esta opção para exibir as páginas estáticas no menu de navegação para usuários logados.';
 
-$string['kopere_dashboard_open'] = 'Abrir o Kopere';
-$string['kopere_dashboard_open_desc'] = 'Qual forma deseja abrir o Kopere Dashboard';
-$string['kopere_dashboard_open_internal'] = 'Abrir interno';
-$string['kopere_dashboard_open_popup'] = 'Em popup';
-$string['kopere_dashboard_open_blank'] = 'Em nova janela';
-$string['kopere_dashboard_open_top'] = 'Na mesma janela';
 $string['add_report_user_fields'] = 'Nos relatórios acrecentar os seguintes campos do usuários';
 $string['add_report_user_fields_alt'] = 'Selecione os campos do usuários que você quer mostrar nos relatórios do Kopere.<br>
     Mantenha pressionada a tecla CTRL para selecionar multiplos campos.';
@@ -273,6 +267,8 @@ $string['reports_context'] = 'Contexto';
 $string['reports_export'] = 'Exportar para Excel';
 $string['reports_noneaccess'] = 'Nenhum acesso';
 $string['reports_access_n'] = 'acessou {$a} vezes';
+$string['reports_disabled'] = 'Desativado: -';
+$string['reports_add_new'] = 'Novo relatório';
 
 $string['reports_settings_title'] = 'Editar relatório';
 $string['reports_settings_form_title'] = 'Editar relatório';

@@ -56,7 +56,7 @@ class userimport {
 
         echo '<div class="element-box table-responsive">';
 
-        echo '<form action="?classname=userimport&method=upload" id="dropzone" class="dropzone needsclick dz-clickable">
+        echo '<form action="' . local_kopere_dashboard_makeurl("userimport", "upload") . '" id="dropzone" class="dropzone needsclick dz-clickable">
                   <div class="dz-message needsclick">
                       ' . get_string_kopere('userimport_upload') . '
                   </div>
@@ -70,7 +70,7 @@ class userimport {
                       acceptedFiles: ".csv",
                       success: function(file, response){
                           console.log(response);
-                          location.href = "?classname=userimport&method=upload_success"+response;
+                          location.href = "' . local_kopere_dashboard_makeurl("userimport", "upload_success") . '"+response;
                       }
                   });
               </script>';
@@ -111,7 +111,7 @@ class userimport {
         $name = optional_param('name', '', PARAM_TEXT);
         $file = optional_param('file', '', PARAM_TEXT);
 
-        dashboard_util::add_breadcrumb(get_string_kopere('userimport_title'), '?classname=userimport&method=dashboard');
+        dashboard_util::add_breadcrumb(get_string_kopere('userimport_title'), local_kopere_dashboard_makeurl("userimport", "dashboard"));
         dashboard_util::add_breadcrumb($name);
         dashboard_util::add_breadcrumb(get_string_kopere('userimport_title_proccess', $name));
         dashboard_util::start_page();
@@ -172,7 +172,7 @@ class userimport {
         fclose($handle);
         echo '</table>';
 
-        echo "<p><a target='_blank' href='?classname=userimport&method=printuserimportle={$file}" .
+        echo "<p><a target='_blank' href='" . local_kopere_dashboard_makeurl("userimport", "printuserimportle") . "{$file}" .
             "&name={$name}&separator={$separator}'>" . get_string_kopere('userimport_linkall') . '</a></p>';
 
         $this->get_events();
@@ -197,11 +197,11 @@ class userimport {
         title_util::print_h3('userimport_import_course_enrol_name');
         if ($importcourseenrol) {
             if ($importcourseenrol->status == 1) {
-                $link = "<a target='_blank' href='?classname=notifications&method=add_segunda_etapa&id={$importcourseenrol->id}'>" .
+                $link = "<a target='_blank' href='" . local_kopere_dashboard_makeurl("notifications", "add_segunda_etapa", ["id" => $importcourseenrol->id]) . "'>" .
                     $importcourseenrol->subject . '</a>';
                 echo get_string_kopere('userimport_receivemessage', $link);
             } else {
-                $link = "<a target='_blank' href='?classname=notifications&method=add_segunda_etapa&id={$importcourseenrol->id}'>" .
+                $link = "<a target='_blank' href='" . local_kopere_dashboard_makeurl("notifications", "add_segunda_etapa", ["id" => $importcourseenrol->id]) . "'>" .
                     $importcourseenrol->subject . '</a>';
                 mensagem::print_info(get_string_kopere('userimport_receivemessage', $link));
             }
@@ -217,11 +217,11 @@ class userimport {
         title_util::print_h3('userimport_import_user_created_name');
         if ($importusercreated) {
             if ($importusercreated->status == 1) {
-                $link = "<a target='_blank' href='?classname=notifications&method=add_segunda_etapa&id={$importusercreated->id}'>" .
+                $link = "<a target='_blank' href='" . local_kopere_dashboard_makeurl("notifications", "add_segunda_etapa", ["id" => $importusercreated->id]) . "'>" .
                     $importusercreated->subject . '</a>';
                 echo get_string_kopere('userimport_receivemessage', $link);
             } else {
-                $link = "<a target='_blank' href='?classname=notifications&method=add_segunda_etapa&id={$importusercreated->id}'>" .
+                $link = "<a target='_blank' href='" . local_kopere_dashboard_makeurl("notifications", "add_segunda_etapa", ["id" => $importusercreated->id]) . "'>" .
                     $importusercreated->subject . '</a>';
                 mensagem::print_info(get_string_kopere('userimport_receivemessage', $link));
             }
@@ -237,13 +237,13 @@ class userimport {
         title_util::print_h3('userimport_import_user_created_and_enrol_name');
         if ($importusercreatedandenrol) {
             if ($importusercreatedandenrol->status == 1) {
-                $link = '<a target="_blank" href="?classname=notifications&method=add_segunda_etapa&id=' .
-                    $importusercreatedandenrol->id . '">' .
+                $link = '<a target="_blank" href="' .
+                    local_kopere_dashboard_makeurl("notifications", "add_segunda_etapa", ["id" => $importusercreatedandenrol->id]) . '">' .
                     $importusercreatedandenrol->subject . '</a>';
                 echo get_string_kopere('userimport_receivemessage', $link);
             } else {
-                $link = '<a target="_blank" href="?classname=notifications&method=add_segunda_etapa&id=' .
-                    $importusercreatedandenrol->id . '">' .
+                $link = '<a target="_blank" href="' .
+                    local_kopere_dashboard_makeurl("notifications", "add_segunda_etapa", ['id' => $importusercreatedandenrol->id]) . '">' .
                     $importusercreatedandenrol->subject . '</a>';
                 mensagem::print_info(get_string_kopere('userimport_receivemessage', $link));
             }
@@ -266,7 +266,7 @@ class userimport {
 
         title_util::print_h2('userimport_referencedata');
 
-        $form = new form('?classname=userimport&method=proccess');
+        $form = new form(local_kopere_dashboard_makeurl("userimport", "proccess"));
         $form->create_hidden_input('name', $name);
         $form->create_hidden_input('file', $file);
         $form->create_hidden_input('separator', $separator);
@@ -416,7 +416,7 @@ class userimport {
         $colenroltimeend = $this->get_col_param('enroltimeend');
 
         if (!$inserir) {
-            dashboard_util::add_breadcrumb(get_string_kopere('userimport_title'), '?classname=userimport&method=dashboard');
+            dashboard_util::add_breadcrumb(get_string_kopere('userimport_title'), local_kopere_dashboard_makeurl("userimport", "dashboard"));
             dashboard_util::add_breadcrumb($name);
             dashboard_util::add_breadcrumb(get_string_kopere('userimport_title_proccess', $name));
             dashboard_util::start_page();
@@ -797,7 +797,7 @@ class userimport {
 
         echo '<div>';
         echo '<div style="float:left;margin-right:14px">';
-        $form = new form('?classname=userimport&method=proccess');
+        $form = new form(local_kopere_dashboard_makeurl("userimport", "proccess"));
         $form->create_hidden_input('inserir', 1);
 
         $post = string_util::clear_all_params(null, null, PARAM_TEXT);
@@ -818,7 +818,7 @@ class userimport {
         echo '</div>';
 
         echo '<div style="float:left">';
-        $form = new form('?classname=userimport&method=upload_success');
+        $form = new form(local_kopere_dashboard_makeurl("userimport", "upload_success"));
 
         $post = string_util::clear_all_params(null, null, PARAM_TEXT);
         foreach ($post as $key => $value) {

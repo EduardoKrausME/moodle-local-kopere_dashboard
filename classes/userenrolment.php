@@ -53,7 +53,7 @@ class userenrolment {
         dashboard_util::add_breadcrumb(get_string_kopere('userenrolment_detail'));
         dashboard_util::start_page();
 
-        $form = new form('?classname=userenrolment&method=mathedit_save');
+        $form = new form(local_kopere_dashboard_makeurl("userenrolment", "mathedit_save"));
         $form->create_hidden_input('ueid', $ueid);
 
         $statusvalues = array(

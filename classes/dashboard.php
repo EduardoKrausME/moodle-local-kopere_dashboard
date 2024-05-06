@@ -77,14 +77,14 @@ class dashboard {
                     <div class="col-sm-3">
                         <div class="element-box color_user">
                             <div class="label">' . get_string_kopere('dashboard_title_user') . '</div>
-                            <div class="value"><a href="?classname=users&method=dashboard">
+                            <div class="value"><a href="' . local_kopere_dashboard_makeurl("users", "dashboard") . '">
                                 ' . users::count_all(true) . ' / ' . users::count_all_learners(true) . '</a></div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="element-box color_online">
                             <div class="label">' . get_string_kopere('dashboard_title_online') . '</div>
-                            <div class="value"><a href="?classname=useronline&method=dashboard">
+                            <div class="value"><a href="' . local_kopere_dashboard_makeurl("useronline", "dashboard") . '">
                                 <span id="user-count-online">' . useronline::count(5) . '</span>
                                 / ' . useronline::count(60) . '</a></div>
                         </div>
@@ -92,7 +92,7 @@ class dashboard {
                     <div class="col-sm-3">
                         <div class="element-box color_course">
                             <div class="label">' . get_string_kopere('dashboard_title_course') . '</div>
-                            <div class="value"><a href="?classname=courses&method=dashboard">
+                            <div class="value"><a href="' . local_kopere_dashboard_makeurl("courses", "dashboard") . '">
                             ' . courses::count_all(true) . '
                                 / ' . courses::count_all_visibles(true) . '</a></div>
                         </div>
@@ -100,7 +100,7 @@ class dashboard {
                     <div class="col-sm-3">
                         <div class="element-box color_disk">
                             <div class="label">' . get_string_kopere('dashboard_title_disk') . '</div>
-                            <div class="value"><a href="?classname=reports&method=dashboard&type=server">
+                            <div class="value"><a href=' . local_kopere_dashboard_makeurl("reports", "dashboard", ["type" => "server"]) . '">
                             ' . bytes_util::size_to_byte(files::count_all_space()) . '</a></div>
                         </div>
                     </div>
@@ -113,7 +113,7 @@ class dashboard {
      * @throws \dml_exception
      */
     public function last_grades() {
-        global $DB, $PAGE, $CFG;
+        global $DB, $PAGE;
 
         $grade = new grade();
         $lastgrades = $grade->get_last_grades();
@@ -137,7 +137,7 @@ class dashboard {
             $gradetext = number_format($grade->finalgrade, 1, get_string('decsep', 'langconfig'), '') . ' ' .
                 get_string_kopere('dashboard_grade_of') . ' ' . intval($grade->rawgrademax);
 
-            $url = "{$CFG->wwwroot}/local/kopere_dashboard/load-ajax.php?classname=users&method=details&userid={$user->id}";
+            $url = local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id], "load-ajax");
             echo "<div class='media dashboard-grade-list'>
                       <div class='media-left'>
                           <img title='" . fullname($user) . "' src='{$profileimageurl}" . "' class='media-object' >
@@ -145,7 +145,7 @@ class dashboard {
                       <div class='media-body'>
                           <h4 class='media-heading'>
                               <a data-toggle='modal' data-target='#modal-edit'
-                                 href='?classname=users&method=details&userid={$user->id}'
+                                 href='" . local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id]) . "
                                  data-href='{$url}'>" .
                 fullname($user) . "</a>
                           </h4>
@@ -187,7 +187,7 @@ class dashboard {
                         get_string_kopere('dashboard_enrol_active') . '</span>';
                 }
 
-                $url = "{$CFG->wwwroot}/local/kopere_dashboard/load-ajax.php?classname=users&method=details&userid={$user->id}";
+                $url = local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id], "load-ajax");
                 echo "<div class='media dashboard-grade-list'>
                           <div class='media-left'>
                               <img title='" . fullname($user) . "' src='{$profileimageurl}' class='media-object' >
@@ -195,7 +195,7 @@ class dashboard {
                           <div class='media-body'>
                               <h4 class='media-heading'>
                                   <a data-toggle='modal' data-target='#modal-edit'
-                                     href='?classname=users&method=details&userid={$user->id}'
+                                     href='" . local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id]) . "
                                      data-href='{$url}'>" .
                     fullname($user) . '</a>
                               </h4>

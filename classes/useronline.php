@@ -67,7 +67,7 @@ class useronline {
             $table->print_header();
             $tablename = $table->close();
         } else {
-            $table->set_ajax_url('?classname=useronline&method=load_all_users');
+            $table->set_ajax_url(local_kopere_dashboard_makeurl("useronline", "load_all_users"));
             $table->print_header();
             $tablename = $table->close(false, array("order" => array(array(1, "asc"))));
         }
@@ -143,7 +143,7 @@ class useronline {
         dashboard_util::add_breadcrumb(get_string_kopere('useronline_settings_title'));
         dashboard_util::start_page();
 
-        $form = new form("?classname=settings&method=save&redirect={$redirect}");
+        $form = new form(local_kopere_dashboard_makeurl("settings", "save", ["redirect" => $redirect]));
 
         $form->print_row_one('', button::help('Usuários-Online'));
 

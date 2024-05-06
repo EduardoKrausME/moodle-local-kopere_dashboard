@@ -65,7 +65,7 @@ if ($pagelink) {
     $edit = "";
     $hascapability = has_capability('local/kopere_dashboard:manage', $context);
     if ($hascapability) {
-        $href = "{$CFG->wwwroot}/local/kopere_dashboard/open-internal.php?classname=webpages&method=page_edit&id={$webpages->id}";
+        $href = local_kopere_dashboard_makeurl("webpages", "page_edit", ["id" => $webpages->id]);
         $edittext = get_string('webpages_page_edit', 'local_kopere_dashboard');
         $edit = " - <a href='{$href}' target='_blank' style='text-decoration:underline'>{$edittext}</a>";
     }

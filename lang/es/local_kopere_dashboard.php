@@ -41,12 +41,6 @@ $string['kopere_dashboard_menu_desc'] = 'Si está marcado, el menú superior con
 $string['kopere_dashboard_menuwebpages'] = 'Mostrar páginas estáticas para logados';
 $string['kopere_dashboard_menuwebpages_desc'] = 'Active esta opción para mostrar las páginas estáticas en el menú de navegación para usuarios conectados.';
 
-$string['kopere_dashboard_open'] = 'Abrir Kopere';
-$string['kopere_dashboard_open_desc'] = '¿Qué forma desea abrir el Tablero Kopere';
-$string['kopere_dashboard_open_internal'] = 'Abrir interno';
-$string['kopere_dashboard_open_popup'] = 'En popup';
-$string['kopere_dashboard_open_blank'] = 'En nueva ventana';
-$string['kopere_dashboard_open_top'] = 'En la misma ventana';
 $string['add_report_user_fields'] = 'En los informes, agregue los siguientes campos de usuario';
 $cadena['add_report_user_fields_alt'] = 'Seleccione los campos de usuario que desea mostrar en los informes de Kopere.<br>
     Mantenga presionada la tecla CTRL para seleccionar varios campos.';
@@ -306,6 +300,9 @@ $string['querytype1name'] = 'Solicitud compleja (n°1)';
 $string['querytype2moreinfo'] = 'Probar la velocidad de la base de datos para ejecutar una solicitud compleja';
 $string['querytype2name'] = 'Solicitud compleja (n°2)';
 $string['reports_access_n'] = 'accesada {$a} veces';
+$string['reports_disabled'] = 'Desactivado: -';
+$string['reports_add_new'] = 'Nuevo informe';
+
 $string['reports_settings_title'] = 'Editar informe';
 $string['reports_settings_form_title'] = 'Editar informe';
 $string['reports_settings_form_enable'] = '¿Habilitado?';

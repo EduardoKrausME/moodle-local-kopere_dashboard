@@ -67,8 +67,8 @@ class courses {
         $table->add_header(get_string_kopere('courses_enrol'), 'inscritos',
             table_header_item::TYPE_INT, null, 'width:50px;white-space:nowrap;');
 
-        $table->set_ajax_url('?classname=courses&method=load_all_courses');
-        $table->set_click_redirect('?classname=courses&method=details&courseid={id}', 'id');
+        $table->set_ajax_url(local_kopere_dashboard_makeurl("courses", "load_all_courses"));
+        $table->set_click_redirect(local_kopere_dashboard_makeurl("courses", "details", ["courseid" => "{id}"]), 'id');
         $table->print_header();
         $table->close();
 
@@ -156,7 +156,7 @@ class courses {
         $course = $DB->get_record('course', array('id' => $courseid));
         header::notfound_null($course, get_string_kopere('courses_notound'));
 
-        dashboard_util::add_breadcrumb(get_string_kopere('courses_title'), '?classname=courses&method=dashboard');
+        dashboard_util::add_breadcrumb(get_string_kopere('courses_title'), local_kopere_dashboard_makeurl("courses", "dashboard"));
         dashboard_util::add_breadcrumb($course->fullname);
         dashboard_util::start_page();
 
@@ -175,7 +175,7 @@ class courses {
 
         echo '<div class="element-box table-responsive table-new-enrol" style="display:none">';
         title_util::print_h3("courses_enrol_new");
-        $form = new form("?classname=courses&method=enrol_new&courseid={$course->id}");
+        $form = new form(local_kopere_dashboard_makeurl("courses", "enrol_new", ["courseid" => $course->id]));
         $form->add_input(
             input_email::new_instance()
                 ->set_name("usuario-email")
@@ -200,8 +200,8 @@ class courses {
         $table->add_header(get_string_kopere('courses_student_email'), 'email');
         $table->add_header(get_string_kopere('courses_student_status'), 'status', table_header_item::RENDERER_STATUS);
 
-        $table->set_ajax_url("?classname=enroll&method=ajax_dashboard&courseid={$courseid}");
-        $table->set_click_redirect('?classname=users&method=details&userid={id}', 'id');
+        $table->set_ajax_url(local_kopere_dashboard_makeurl("enroll", "ajax_dashboard", ["courseid" => "{$courseid}"]));
+        $table->set_click_redirect(local_kopere_dashboard_makeurl("users", "details", ["userid" => "{id}"]), 'id');
         $table->print_header();
         $table->close();
 
@@ -222,7 +222,7 @@ class courses {
         $course = $DB->get_record('course', array('id' => $courseid));
         header::notfound_null($course, get_string_kopere('courses_notound'));
 
-        dashboard_util::add_breadcrumb(get_string_kopere('courses_title'), '?classname=courses&method=dashboard');
+        dashboard_util::add_breadcrumb(get_string_kopere('courses_title'), local_kopere_dashboard_makeurl("courses", "dashboard"));
         dashboard_util::add_breadcrumb($course->fullname);
         dashboard_util::add_breadcrumb(get_string_kopere('courses_enrol_new'));
         dashboard_util::start_page();
@@ -255,7 +255,7 @@ class courses {
                 }
 
                 button::add(get_string_kopere("courses_student_cadastrar"),
-                    "?classname=courses&method=enrol_new&courseid={$course->id}&userid={$user->id}&matricular=1");
+                    local_kopere_dashboard_makeurl("courses", "enrol_new", ["courseid" => "{$course->id}&userid={$user->id}&matricular=1"]));
             }
 
         } else {
@@ -297,7 +297,7 @@ class courses {
 
                         $a = (object)['login' => $newuser->username, 'senha' => $password];
                         mensagem::agenda_mensagem_success(get_string_kopere('courses_student_ok', $a));
-                        header::location("?classname=courses&method=enrol_new&courseid={$course->id}&userid={$newuser->id}");
+                        header::location(local_kopere_dashboard_makeurl("courses", "enrol_new", ["courseid" => "{$course->id}&userid={$newuser->id}"]));
                     } catch (\moodle_exception $e) {
                         mensagem::print_danger($e->getMessage());
                     }
@@ -305,7 +305,7 @@ class courses {
             }
 
             title_util::print_h3("courses_enrol_new_form");
-            $form = new form("?classname=courses&method=enrol_new&courseid={$course->id}");
+            $form = new form(local_kopere_dashboard_makeurl("courses", "enrol_new", ["courseid" => "{$course->id}"]));
 
             $form->add_input(
                 input_text::new_instance()
@@ -382,13 +382,13 @@ class courses {
 
                 /** @var kopere_dashboard_webpages $webpages */
                 foreach ($webpagess as $webpages) {
-                    echo "<p><a href='?classname=webpages&method=page_details&id={$webpages->id}" .
+                    echo "<p><a href='" . local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]) .
                         "{'>&nbsp;&nbsp;&nbsp;&nbsp;}" .
                         $webpages->title . '</a></p>';
                 }
             }
 
-            $form = new form('?classname=webpages&method=page_edit_save', 'form-inline');
+            $form = new form(local_kopere_dashboard_makeurl("webpages", "page_edit_save"), 'form-inline');
             $form->create_hidden_input('id', 0);
             $form->create_hidden_input('courseid', $course->id);
             $form->create_hidden_input('title', $course->fullname);

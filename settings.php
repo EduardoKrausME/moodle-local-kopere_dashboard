@@ -39,7 +39,7 @@ if ($hassiteconfig) {
         new admin_externalpage(
             'local_kopere_dashboard',
             get_string('modulename', 'local_kopere_dashboard'),
-            "{$CFG->wwwroot}/local/kopere_dashboard/open.php?classname=dashboard&method=start"
+            local_kopere_dashboard_makeurl("dashboard", "start")
         )
     );
 }
@@ -61,20 +61,6 @@ if ($ADMIN->fulltree) {
         );
         $setting->set_updatedcallback('theme_reset_all_caches');
         $settings->add($setting);
-
-        $openitens = [
-            'internal' => get_string('kopere_dashboard_open_internal', 'local_kopere_dashboard'),
-            'popup' => get_string('kopere_dashboard_open_popup', 'local_kopere_dashboard'),
-            '_top' => get_string('kopere_dashboard_open_top', 'local_kopere_dashboard'),
-            '_blank' => get_string('kopere_dashboard_open_blank', 'local_kopere_dashboard'),
-        ];
-        $settings->add(
-            new admin_setting_configselect('kopere_dashboard_open',
-                get_string('kopere_dashboard_open', 'local_kopere_dashboard'),
-                get_string('kopere_dashboard_open_desc', 'local_kopere_dashboard'),
-                'internal',
-                $openitens
-            ));
 
         $settings->add(
             new admin_setting_configcheckbox('kopere_dashboard_monitor',

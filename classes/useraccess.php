@@ -39,7 +39,7 @@ class useraccess {
 
         echo '<div class="element-box bloco_changue_mes">';
         $changuemes = optional_param('changue_mes', date('Y-m'), PARAM_TEXT);
-        $form = new form("?classname=useraccess&method=dashboard");
+        $form = new form("" . local_kopere_dashboard_makeurl("useraccess", "dashboard"));
         $form->add_input(input_select::new_instance()
             ->set_title('Selecione o Mês')
             ->set_name('changue_mes')
@@ -57,8 +57,8 @@ class useraccess {
         $table->add_header(get_string_kopere('user_table_celphone'), 'phone2');
         $table->add_header(get_string_kopere('user_table_city'), 'city');
 
-        $table->set_ajax_url("?classname=useraccess&method=load_all_users&changue_mes={$changuemes}");
-        $table->set_click_redirect("?classname=users&method=details&userid={id}", 'id');
+        $table->set_ajax_url(local_kopere_dashboard_makeurl("useraccess", "load_all_users", ["changue_mes" => $changuemes]));
+        $table->set_click_redirect(local_kopere_dashboard_makeurl("users", "details", ["userid" => "{id}"]), 'id');
         $table->print_header();
         $table->close(true, array("order" => array(array(1, "asc"))));
 

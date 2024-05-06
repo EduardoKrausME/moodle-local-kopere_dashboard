@@ -57,8 +57,8 @@ class backup {
                 echo '<div style="text-align: center;">
                           <p>' . get_string_kopere('backup_sleep') . '</p>';
 
-                button::add(get_string_kopere('backup_newnow'), '?classname=backup&method=execute');
-                button::add(get_string_kopere('backup_newsqlnow'), '?classname=backup&method=execute_dumpsql');
+                button::add(get_string_kopere('backup_newnow'), local_kopere_dashboard_makeurl("backup", "execute"));
+                button::add(get_string_kopere('backup_newsqlnow'), local_kopere_dashboard_makeurl("backup", "execute_dumpsql"));
 
                 echo '</div>';
             } else {
@@ -74,9 +74,9 @@ class backup {
                     'data' => "{$p[3]}/{$p[2]}/{$p[1]} às {$p[4]}:{$p[5]}",
                     'size' => bytes_util::size_to_byte(filesize($backup)),
                     'acoes' => "<div class='text-center'>" .
-                        button::icon('download', "?classname=backup&method=download&file={$p[0]}", false) .
+                        button::icon('download', local_kopere_dashboard_makeurl("backup", "download", ["file" => $p[0]]), false) .
                         "&nbsp;&nbsp;&nbsp; " .
-                        button::icon_popup_table('delete', "?classname=backup&method=delete&file={$p[0]}") . "
+                        button::icon_popup_table('delete', local_kopere_dashboard_makeurl("backup", "delete", ["file" => $p[0]])) . "
                                 </div>"
                 );
             }
@@ -112,7 +112,7 @@ class backup {
 
         if (!server_util::function_enable('shell_exec')) {
             mensagem::agenda_mensagem_danger(get_string_kopere('backup_noshell'));
-            header::location('?classname=backup&method=dashboard');
+            header::location(local_kopere_dashboard_makeurl("backup", "dashboard"));
         }
 
         $backupfullpath = $this->get_backup_path() . 'backup_' . date('Y-m-d-H-i');
@@ -126,7 +126,7 @@ class backup {
         unlink("{$backupfullpath}.sql");
 
         mensagem::agenda_mensagem_success(get_string_kopere('backup_execute_success'));
-        header::location('?classname=backup&method=dashboard');
+        header::location(local_kopere_dashboard_makeurl("backup", "dashboard"));
     }
 
     /**
@@ -137,7 +137,7 @@ class backup {
 
         set_time_limit(0);
 
-        dashboard_util::add_breadcrumb(get_string_kopere('backup_title'), '?classname=backup&method=dashboard');
+        dashboard_util::add_breadcrumb(get_string_kopere('backup_title'), local_kopere_dashboard_makeurl("backup", "dashboard"));
         dashboard_util::add_breadcrumb(get_string_kopere('backup_execute_exec'));
         dashboard_util::add_breadcrumb(get_string_kopere('backup_execute_exec') . ": {$CFG->dbname}");
         dashboard_util::start_page();
@@ -215,7 +215,7 @@ class backup {
         mensagem::print_success(get_string_kopere('backup_execute_complete'));
 
         echo '<div id="end-page-to" style="text-align: center;">';
-        button::add(get_string_kopere('backup_returnlist'), '?classname=backup&method=dashboard');
+        button::add(get_string_kopere('backup_returnlist'), local_kopere_dashboard_makeurl("backup", "dashboard"));
         echo '</div>';
 
         $PAGE->requires->js_call_amd('local_kopere_dashboard/backup', 'backup_animate_scrollTop', array("#end-page-to"));
@@ -240,10 +240,10 @@ class backup {
                 @unlink($backupfile);
 
                 mensagem::agenda_mensagem_success(get_string_kopere('backup_deletesucessfull'));
-                header::location('?classname=backup&method=dashboard');
+                header::location(local_kopere_dashboard_makeurl("backup", "dashboard"));
             } else {
 
-                dashboard_util::add_breadcrumb(get_string_kopere('backup_title'), '?classname=backup&method=dashboard');
+                dashboard_util::add_breadcrumb(get_string_kopere('backup_title'), local_kopere_dashboard_makeurl("backup", "dashboard"));
                 dashboard_util::add_breadcrumb(get_string_kopere('backup_deleting'));
                 dashboard_util::start_page();
 
@@ -251,8 +251,8 @@ class backup {
                           <h3>" . get_string_kopere('backup_delete_confirm') . "</h3>
                           <p>" . get_string_kopere('backup_delete_title', $file) . "</p>
                           <div>";
-                button::delete(get_string('yes'), "?classname=backup&method=delete&file={$file}&status=sim", '', false);
-                button::add(get_string('no'), '?classname=backup&method=dashboard', 'margin-left-10', false);
+                button::delete(get_string('yes'), local_kopere_dashboard_makeurl("backup", "delete", ["file" => $file, "status" => "sim"]), '', false);
+                button::add(get_string('no'), local_kopere_dashboard_makeurl("backup", "dashboard"), 'margin-left-10', false);
                 echo "    </div>
                       </div>";
 

@@ -67,7 +67,7 @@ class reports_admin {
             header::notfound_null($koperereports, get_string_kopere('reports_notfound'));
         }
 
-        $form = new form("?classname=reports&method=save&report={$report}");
+        $form = new form(local_kopere_dashboard_makeurl("reports", "save", ["report" => $report]));
 
         $form->create_hidden_input('reportcatid', $koperereports->reportcatid);
 
@@ -232,7 +232,7 @@ class reports_admin {
                 $id = $DB->insert_record('kopere_dashboard_reports', $koperereports);
 
                 mensagem::agenda_mensagem_success(get_string_kopere('reports_settings_savesuccess'));
-                header::location("?classname=reports&method=load_report&report={$id}");
+                header::location(local_kopere_dashboard_makeurl("reports", "load_report", ["report" => $id]));
 
             } else {
                 /** @var kopere_dashboard_reports $koperereports */
@@ -249,7 +249,7 @@ class reports_admin {
                 $DB->update_record('kopere_dashboard_reports', $koperereports);
                 mensagem::agenda_mensagem_success(get_string_kopere('reports_settings_savesuccess'));
 
-                header::location("?classname=reports&method=load_report&report={$koperereports->id}");
+                header::location(local_kopere_dashboard_makeurl("reports", "load_report", ["report" => $koperereports->id]));
             }
         }
     }

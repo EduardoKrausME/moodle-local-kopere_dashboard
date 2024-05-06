@@ -92,7 +92,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
 
             if ($hascapability && strpos($CFG->custommenuitems, "kopere_dashboard/open.php") === false) {
                 $name = get_string('modulename', 'local_kopere_dashboard');
-                $link = "{$CFG->wwwroot}/local/kopere_dashboard/open.php?classname=dashboard&method=start";
+                $link = local_kopere_dashboard_makeurl("dashboard", "start");
                 $CFG->custommenuitems = "{$name}|{$link}\n{$CFG->custommenuitems}";
             }
             if (@$CFG->kopere_dashboard_menuwebpages) {
@@ -105,7 +105,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
 
                 $node = $nav->add(
                     get_string('pluginname', 'local_kopere_dashboard'),
-                    new moodle_url("{$CFG->wwwroot}/local/kopere_dashboard/open.php?classname=dashboard&method=start"),
+                    new moodle_url(local_kopere_dashboard_makeurl("dashboard", "start")),
                     navigation_node::TYPE_CUSTOM,
                     null,
                     'kopere_dashboard',
