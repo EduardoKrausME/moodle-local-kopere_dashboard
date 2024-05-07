@@ -39,7 +39,7 @@ if ($hassiteconfig) {
         new admin_externalpage(
             'local_kopere_dashboard',
             get_string('modulename', 'local_kopere_dashboard'),
-            local_kopere_dashboard_makeurl("dashboard", "start")
+            "{$CFG->wwwroot}/local/kopere_dashboard/view.php?classname=dashboard&method=start"
         )
     );
 }
