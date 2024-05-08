@@ -26,10 +26,10 @@ define('AJAX_SCRIPT', false);
 define('OPEN_INTERNAL', true);
 
 define('BENCHSTART', microtime(true));
-require('../../config.php');
+require_once('../../config.php');
 define('BENCHSTOP', microtime(true));
-require('autoload.php');
-require('locallib.php');
+require_once('autoload.php');
+require_once('locallib.php');
 
 global $PAGE, $CFG, $OUTPUT, $USER;
 

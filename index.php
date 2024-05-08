@@ -22,7 +22,7 @@
  */
 
 require_once('../../config.php');
-require('autoload.php');
+require_once('autoload.php');
 global $DB, $PAGE, $OUTPUT;
 
 $menulink = optional_param('menu', false, PARAM_TEXT);

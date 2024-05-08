@@ -23,7 +23,7 @@
 
 define('AJAX_SCRIPT', true);
 
-require('../../config.php');
+require_once('../../config.php');
 require_once('autoload.php');
 
 global $PAGE, $CFG, $OUTPUT;
