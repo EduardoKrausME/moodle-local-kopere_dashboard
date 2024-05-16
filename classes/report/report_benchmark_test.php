@@ -38,13 +38,13 @@ class report_benchmark_test extends report_benchmark {
      */
     public static function cload() {
 
-        return array(
+        return [
             'limit' => .5,
             'over' => .8,
             'start' => BENCHSTART,
             'stop' => BENCHSTOP,
-            'fail' => BENCHFAIL_SLOWSERVER
-        );
+            'fail' => BENCHFAIL_SLOWSERVER,
+        ];
 
     }
 
@@ -65,7 +65,7 @@ class report_benchmark_test extends report_benchmark {
             ++$i;
         }
 
-        return array('limit' => .5, 'over' => .8, 'fail' => BENCHFAIL_SLOWPROCESSOR);
+        return ['limit' => .5, 'over' => .8, 'fail' => BENCHFAIL_SLOWPROCESSOR];
 
     }
 
@@ -86,7 +86,7 @@ class report_benchmark_test extends report_benchmark {
         }
         unlink("{$CFG->tempdir}/benchmark.temp");
 
-        return array('limit' => .5, 'over' => .8, 'fail' => BENCHFAIL_SLOWHARDDRIVE);
+        return ['limit' => .5, 'over' => .8, 'fail' => BENCHFAIL_SLOWHARDDRIVE];
 
     }
 
@@ -118,7 +118,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         }
         unlink("{$CFG->tempdir}/benchmark.temp");
 
-        return array('limit' => 1, 'over' => 1.25, 'fail' => BENCHFAIL_SLOWHARDDRIVE);
+        return ['limit' => 1, 'over' => 1.25, 'fail' => BENCHFAIL_SLOWHARDDRIVE];
 
     }
 
@@ -135,10 +135,10 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         $pass = 500;
         while ($i < $pass) {
             ++$i;
-            $DB->get_record('course', array('id' => SITEID));
+            $DB->get_record('course', ['id' => SITEID]);
         }
 
-        return array('limit' => .75, 'over' => 1, 'fail' => BENCHFAIL_SLOWDATABASE);
+        return ['limit' => .75, 'over' => 1, 'fail' => BENCHFAIL_SLOWDATABASE];
 
     }
 
@@ -165,10 +165,10 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             ++$i;
             $DB->insert_record('course', $newrecord);
         }
-        $DB->delete_records('course', array('shortname' => $newrecord->shortname));
+        $DB->delete_records('course', ['shortname' => $newrecord->shortname]);
         unset($newrecord);
 
-        return array('limit' => 1, 'over' => 1.25, 'fail' => BENCHFAIL_SLOWDATABASE);
+        return ['limit' => 1, 'over' => 1.25, 'fail' => BENCHFAIL_SLOWDATABASE];
 
     }
 
@@ -232,7 +232,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             $DB->get_records_sql($sql);
         }
 
-        return array('limit' => .5, 'over' => .7, 'fail' => BENCHFAIL_SLOWDATABASE);
+        return ['limit' => .5, 'over' => .7, 'fail' => BENCHFAIL_SLOWDATABASE];
 
     }
 
@@ -269,7 +269,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             $DB->get_records_sql($sql);
         }
 
-        return array('limit' => .3, 'over' => .5, 'fail' => BENCHFAIL_SLOWDATABASE);
+        return ['limit' => .3, 'over' => .5, 'fail' => BENCHFAIL_SLOWDATABASE];
 
     }
 
@@ -281,10 +281,10 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
     public static function loginguest() {
         global $CFG;
 
-        $fakeuser = array('username' => 'guest', 'password' => 'guest');
+        $fakeuser = ['username' => 'guest', 'password' => 'guest'];
         download_file_content("{$CFG->wwwroot}/login/index.php", null, $fakeuser, true);
 
-        return array('limit' => .3, 'over' => .8, 'fail' => BENCHFAIL_SLOWWEB);
+        return ['limit' => .3, 'over' => .8, 'fail' => BENCHFAIL_SLOWWEB];
 
     }
 
@@ -310,14 +310,14 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         $user->id = $DB->insert_record('user', $user);
 
         // Download login page.
-        $fakeuser = array('username' => $user->username, 'password' => 'benchtest');
+        $fakeuser = ['username' => $user->username, 'password' => 'benchtest'];
         download_file_content("{$CFG->wwwroot}/login/index.php", null, $fakeuser, true);
 
         // Delete fake user.
-        $DB->delete_records('user', array('id' => $user->id));
+        $DB->delete_records('user', ['id' => $user->id]);
         unset($user);
 
-        return array('limit' => .3, 'over' => .8, 'fail' => BENCHFAIL_SLOWWEB);
+        return ['limit' => .3, 'over' => .8, 'fail' => BENCHFAIL_SLOWWEB];
 
     }
 
@@ -336,13 +336,13 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             $resposta = get_string('enabled', 'report_performance');
         }
 
-        return array(
+        return [
             'title' => get_string('themedesignermode', 'admin'),
             'class' => $class,
             'resposta' => $resposta,
             'description' => get_string('check_themedesignermode_comment_disable', 'report_performance'),
             'url' => 'search.php?query=themedesignermode'
-        );
+        ];
     }
 
     /**
@@ -360,13 +360,13 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             $resposta = get_string('enabled', 'report_performance');
         }
 
-        return array(
+        return [
             'title' => get_string('cachejs', 'admin'),
             'class' => $class,
             'resposta' => $resposta,
             'description' => get_string('check_cachejs_comment_enable', 'report_performance'),
-            'url' => 'search.php?query=cachejs'
-        );
+            'url' => 'search.php?query=cachejs',
+        ];
     }
 
     /**
@@ -397,13 +397,13 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             $class = 'bg-danger';
         }
 
-        return array(
+        return [
             'title' => get_string('debug', 'admin'),
             'class' => $class,
             'resposta' => $resposta,
             'description' => get_string('check_debugmsg_comment_nodeveloper', 'report_performance'),
-            'url' => 'settings.php?section=debugging'
-        );
+            'url' => 'settings.php?section=debugging',
+        ];
     }
 
     /**
@@ -426,13 +426,13 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             $resposta = get_string('autoactivemanual', 'backup');
         }
 
-        return array(
+        return [
             'title' => get_string('check_backup', 'report_performance'),
             'class' => $class,
             'resposta' => $resposta,
             'description' => get_string('check_backup_comment_disable', 'report_performance'),
-            'url' => 'search.php?query=backup_auto_active'
-        );
+            'url' => 'search.php?query=backup_auto_active',
+        ];
     }
 
     /**
@@ -450,12 +450,12 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             $resposta = get_string('enabled', 'report_performance');
         }
 
-        return array(
+        return [
             'title' => get_string('enablestats', 'admin'),
             'class' => $class,
             'resposta' => $resposta,
             'description' => get_string('check_enablestats_comment_disable', 'report_performance'),
-            'url' => 'search.php?query=enablestats'
-        );
+            'url' => 'search.php?query=enablestats',
+        ];
     }
 }

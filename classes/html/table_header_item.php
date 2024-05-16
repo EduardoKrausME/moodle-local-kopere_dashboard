@@ -42,33 +42,19 @@ class table_header_item extends \stdClass {
      * @var
      */
     public $funcao;
-    /**
-     * @var string
-     */
+    /** @var string */
     public $title = '';
-    /**
-     * @var string
-     */
+    /** @var string */
     public $type = '';
-    /**
-     * @var string
-     */
+    /** @var string */
     public $chave = '';
-    /**
-     * @var string
-     */
+    /** @var string */
     public $class = '';
-    /**
-     * @var string
-     */
+    /** @var string */
     public $styleheader = '';
-    /**
-     * @var string
-     */
+    /** @var string */
     public $stylecol = '';
 
-    /**
-     * @var int
-     */
+    /** @var int */
     public $cols = 0;
 }

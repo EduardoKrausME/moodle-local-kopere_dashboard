@@ -64,7 +64,7 @@ class report_foreach {
             return get_string('fullnamedisplay', null, $user);
         }
 
-        $requirednames = array();
+        $requirednames = [];
         // With each name, see if it is in the display name template, and add it to the required names array if it is.
         foreach ($allnames as $allname) {
             if (strpos($template, $allname) !== false) {
@@ -89,7 +89,7 @@ class report_foreach {
         // Tidy up any misc. characters (Not perfect, but gets most characters).
         // Don't remove the "u" at the end of the first expression unless you want garbled characters when combining hiragana or
         // katakana and parenthesis.
-        $patterns = array();
+        $patterns = [];
         // This regular expression replacement is to fix problems such as 'James () Kirk' Where 'Tiberius' (middlename) has not been
         // filled in by a user.
         // The special characters are Japanese brackets that are common enough to make allowances for them (not covered by :punct:).

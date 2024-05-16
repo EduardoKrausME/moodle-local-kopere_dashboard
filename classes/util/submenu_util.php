@@ -23,25 +23,15 @@
 namespace local_kopere_dashboard\util;
 
 class submenu_util {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $classname;
-    /**
-     * @var string
-     */
+    /** @var string */
     private $methodname;
-    /**
-     * @var string
-     */
+    /** @var string */
     public $urlextra;
-    /**
-     * @var string
-     */
+    /** @var string */
     private $title;
-    /**
-     * @var string
-     */
+    /** @var string */
     private $icon;
 
     /**

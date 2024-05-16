@@ -28,23 +28,21 @@ namespace local_kopere_dashboard\vo;
  */
 class kopere_dashboard_menu extends \stdClass {
 
-    /**
-     * @var int
-     */
+    /** @var int */
     public $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $link;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $title;
+
+    /** @var int */
+    public $menuid;
 
     /**
      * @param $item
+     *
      * @return kopere_dashboard_menu
      * @throws \coding_exception
      */
@@ -54,12 +52,14 @@ class kopere_dashboard_menu extends \stdClass {
         $return->id = $item->id;
         $return->link = optional_param('link', $item->link, PARAM_TEXT);
         $return->title = optional_param('title', $item->title, PARAM_TEXT);
+        $return->menuid = optional_param('menuid', $item->menuid, PARAM_INT);
 
         return $return;
     }
 
     /**
      * @return kopere_dashboard_menu
+     *
      * @throws \coding_exception
      */
     public static function create_by_default() {
@@ -68,6 +68,7 @@ class kopere_dashboard_menu extends \stdClass {
         $return->id = 0;
         $return->link = optional_param('link', '', PARAM_TEXT);
         $return->title = optional_param('title', '', PARAM_TEXT);
+        $return->menuid = optional_param('menuid', 0, PARAM_INT);
 
         return $return;
     }

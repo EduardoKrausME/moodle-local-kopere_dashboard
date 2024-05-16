@@ -60,7 +60,7 @@ $PAGE->requires->css('/local/kopere_dashboard/assets/all-internal.css');
 $PAGE->navbar->add(get_string_kopere('modulename'), new moodle_url('/local/kopere_dashboard/view.php'));
 
 $PAGE->requires->jquery();
-$PAGE->requires->js('/local/kopere_dashboard/assets/bootstrap/bootstrap.js');
+//$PAGE->requires->js('/local/kopere_dashboard/assets/bootstrap/bootstrap.js');
 
 $PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
 

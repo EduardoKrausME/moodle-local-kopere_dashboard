@@ -48,13 +48,13 @@ class notificationsutil {
         }
 
         $events = $this->list_events();
-        $eventslist = array();
+        $eventslist = [];
         foreach ($events->eventinformation as $eventinformation) {
             if ($eventinformation['component_full'] == $module) {
-                $eventslist[] = array(
+                $eventslist[] = [
                     'key' => $eventinformation['eventname'],
                     'value' => $eventinformation['fulleventname']
-                );
+                ];
             }
         }
 
@@ -77,8 +77,8 @@ class notificationsutil {
             \report_eventlist_list_generator::get_non_core_event_list(false)
         );
 
-        $components = array();
-        $eventinformation = array();
+        $components = [];
+        $eventinformation = [];
 
         /** @var base $eventclass */
         foreach ($eventclasss as $eventclass => $file) {
@@ -222,7 +222,7 @@ class notificationsutil {
                      JOIN {modules} m ON cm.module = m.id
                     WHERE m.name = :name
                       AND cm.deletioninprogress = 0";
-            $count = $DB->get_record_sql($sql, array('name' => $module));
+            $count = $DB->get_record_sql($sql, ['name' => $module]);
 
             if ($count->num || !$onlyused) {
                 return get_string('resource') . ': ' . get_string('modulename', $module);

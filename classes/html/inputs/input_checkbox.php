@@ -31,9 +31,7 @@ use local_kopere_dashboard\util\config;
  * @package local_kopere_dashboard\html\inputs
  */
 class input_checkbox extends input_base {
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $checked = false;
 
     /**

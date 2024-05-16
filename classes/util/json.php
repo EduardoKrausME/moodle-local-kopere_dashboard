@@ -41,7 +41,7 @@ class json {
         ob_clean();
         header('Content-Type: application/json; charset: utf-8');
 
-        $returnarray = array();
+        $returnarray = [];
         if ($recordstotal != -1) {
             $returnarray['draw'] = optional_param('draw', 0, PARAM_INT);
             $returnarray['recordsTotal'] = intval($recordstotal);
@@ -69,7 +69,7 @@ class json {
         ob_clean();
         header('Content-Type: application/json; charset: utf-8');
 
-        $returnarray = array();
+        $returnarray = [];
         $returnarray['error'] = $message;
 
         $json = json_encode($returnarray);

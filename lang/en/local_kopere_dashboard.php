@@ -558,6 +558,7 @@ $string['webpages_menu_new'] = 'New Menu';
 $string['webpages_menu_edit'] = 'Editing Menu';
 $string['webpages_menu_title'] = 'Menu Title';
 $string['webpages_menu_link'] = 'Menu Link';
+$string['webpages_menu_menuid']= 'Sub-menu';
 $string['webpages_menu_save'] = 'Save';
 $string['webpages_menu_error'] = 'All data must be filled in!';
 $string['webpages_menu_link_duplicate'] = '"Link" is duplicated!';

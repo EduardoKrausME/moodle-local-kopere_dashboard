@@ -40,13 +40,9 @@ class send_events {
     /** @var \core\event\base */
     private $event;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $subject;
-    /**
-     * @var string
-     */
+    /** @var string */
     private $message;
 
     /**
@@ -111,14 +107,14 @@ class send_events {
         }
 
         if ($this->event->objecttable == 'user') {
-            $usertarget = $DB->get_record('user', array('id' => $this->event->objectid));
+            $usertarget = $DB->get_record('user', ['id' => $this->event->objectid]);
 
             $this->subject = $this->replace_tag_user($this->subject, $usertarget, 'usertarget');
             $this->message = $this->replace_tag_user($this->message, $usertarget, 'usertarget');
         }
 
         if ($courseid) {
-            $course = $DB->get_record('course', array('id' => $courseid));
+            $course = $DB->get_record('course', ['id' => $courseid]);
 
             $course->link
                 = "<a href='{$CFG->wwwroot}/course/view.php?id={$courseid}'
@@ -151,10 +147,10 @@ class send_events {
         $this->message = $this->replace_tag_user($this->message, $admin, 'admin');
 
         // Para: {[to.???]}.
-        $usersto = array();
+        $usersto = [];
         switch ($this->koperedashboardevents->userto) {
             case 'admin':
-                $usersto = array(get_admin());
+                $usersto = [get_admin()];
                 break;
             case 'admins':
                 $usersto = get_admins();
@@ -171,13 +167,14 @@ class send_events {
                                  WHERE cx.contextlevel = :contextlevel
                                    AND c.id            = :courseid ";
                     $usersto = $DB->get_records_sql($sql,
-                        array('contextlevel' => CONTEXT_COURSE,
-                            'courseid' => $courseid
-                        ));
+                        [
+                            'contextlevel' => CONTEXT_COURSE,
+                            'courseid' => $courseid,
+                        ]);
                 }
                 break;
             case 'student':
-                $usersto = $DB->get_records('user', array('id' => $this->event->relateduserid));
+                $usersto = $DB->get_records('user', ['id' => $this->event->relateduserid]);
                 break;
         }
 
@@ -238,14 +235,14 @@ class send_events {
 
         preg_match_all("/\{\[date\.(\w+)\]\}/", $text, $textkeys);
 
-        $itens = array(
+        $itens = [
             'year' => 'Y',
             'month' => 'm',
             'day' => 'd',
             'hour' => 'H',
             'minute' => 'i',
             'second' => 's'
-        );
+        ];
 
         foreach ($textkeys[1] as $key => $textkey) {
 

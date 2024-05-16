@@ -66,10 +66,10 @@ class backup {
             }
 
             $backups = glob(self::get_backup_path(false) . 'backup_*');
-            $backupslista = array();
+            $backupslista = [];
             foreach ($backups as $backup) {
                 preg_match("/backup_(\d+)-(\d+)-(\d+)-(\d+)-(\d+)\..*/", $backup, $p);
-                $backupslista[] = array(
+                $backupslista[] = [
                     'file' => $p[0],
                     'data' => "{$p[3]}/{$p[2]}/{$p[1]} às {$p[4]}:{$p[5]}",
                     'size' => bytes_util::size_to_byte(filesize($backup)),
@@ -79,7 +79,7 @@ class backup {
                         button::icon_popup_table('delete',
                             local_kopere_dashboard_makeurl("backup", "delete", ["file" => $p[0]])) .
                         "</div>"
-                );
+                ];
             }
 
             if (isset($backupslista[0])) {
@@ -95,7 +95,7 @@ class backup {
                 $table->add_header(get_string_kopere('backup_list_action'), 'acoes');
 
                 $table->set_row($backupslista);
-                $table->close(true, array("order" => array(array(1, "desc"))));
+                $table->close(true, ["order" => [[1, "desc"]]]);
             } else {
                 mensagem::print_warning(get_string_kopere('backup_none'));
             }
@@ -162,7 +162,7 @@ class backup {
 
             echo "<p id='tabela-dump-$table'>" . get_string_kopere('backup_execute_table') . " <strong>$table</strong></p>";
 
-            $PAGE->requires->js_call_amd('local_kopere_dashboard/backup', 'backup_animate_scrollTop', array("#tabela-dump-$table"));
+            $PAGE->requires->js_call_amd('local_kopere_dashboard/backup', 'backup_animate_scrollTop', ["#tabela-dump-$table"]);
 
             $dbstart = "\n\n\n--\n-- " . get_string_kopere('backup_execute_structure') . " `$table`\n--\n\n";
             file_put_contents($backupfile, $dbstart, FILE_APPEND);
@@ -194,8 +194,8 @@ class backup {
                     foreach ($records as $record) {
                         $parametros = [];
                         foreach ($colunas as $coluna) {
-                            $de = array('\\', "\0", "\n", "\r", "'", '"', "\x1a");
-                            $para = array('\\\\', '\\0', '\\n', '\\r', "\\'", '\\"', '\\Z');
+                            $de = ['\\', "\0", "\n", "\r", "'", '"', "\x1a"];
+                            $para = ['\\\\', '\\0', '\\n', '\\r', "\\'", '\\"', '\\Z'];
                             $param = str_replace($de, $para, $record->$coluna);
                             $parametros[] = "'{$param}'";
                         }
@@ -219,7 +219,7 @@ class backup {
         button::add(get_string_kopere('backup_returnlist'), local_kopere_dashboard_makeurl("backup", "dashboard"));
         echo '</div>';
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/backup', 'backup_animate_scrollTop', array("#end-page-to"));
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/backup', 'backup_animate_scrollTop', ["#end-page-to"]);
 
         echo '</div>';
 

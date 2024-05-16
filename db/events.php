@@ -16,10 +16,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$observers = array(
-    array(
+$observers = [
+    [
         'eventname' => '*',
         'callback' => '\local_kopere_dashboard\events\event_observers::process_event',
-    )
-);
+    ],
+];
 

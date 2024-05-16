@@ -29,17 +29,15 @@ namespace local_kopere_dashboard\report;
  * @package local_kopere_dashboard\report
  */
 class report_benchmark {
-    /**
-     * @var array
-     */
-    private $results = array();
+    /** @var array */
+    private $results = [];
 
     /**
      * benchmark constructor.
      * @throws \coding_exception
      */
     public function __construct() {
-        $tests = array(
+        $tests = [
             'cload',
             'processor',
             'fileread',
@@ -49,9 +47,9 @@ class report_benchmark {
             'querytype1',
             'querytype2',
             'loginguest',
-            'loginuser'
-        );
-        $benchs = array();
+            'loginuser',
+        ];
+        $benchs = [];
         $idtest = 0;
 
         foreach ($tests as $name) {
@@ -72,13 +70,13 @@ class report_benchmark {
             $stop = round($overstop - $overstart, 3);
 
             // Store and merge result.
-            $benchs[$name] = array(
+            $benchs[$name] = [
                     'during' => $stop,
                     'id' => $idtest,
                     'class' => $this->get_feedback_class($stop, $result['limit'], $result['over']),
                     'name' => get_string($name . 'name', 'local_kopere_dashboard'),
                     'info' => get_string($name . 'moreinfo', 'local_kopere_dashboard'),
-                ) + $result;
+                ] + $result;
         }
 
         // Store all results.

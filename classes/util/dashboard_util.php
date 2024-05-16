@@ -31,14 +31,10 @@ use local_kopere_dashboard\html\button;
  * @package local_kopere_dashboard\util
  */
 class dashboard_util {
-    /**
-     * @var string
-     */
+    /** @var string */
     public static $currenttitle = null;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     public static $breadcrumb = [];
 
     /**

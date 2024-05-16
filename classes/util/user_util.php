@@ -81,8 +81,10 @@ class user_util {
         if (!validate_email($newuser->email)) {
             $errors[] = get_string('invalidemail');
         } else if (empty($CFG->allowaccountssameemail)
-            && $DB->record_exists('user', array('email' => $newuser->email,
-                'mnethostid' => $CFG->mnet_localhost_id))) {
+            && $DB->record_exists('user', [
+                'email' => $newuser->email,
+                'mnethostid' => $CFG->mnet_localhost_id
+            ])) {
             $errors[] = get_string('emailexists');
         }
 

@@ -63,7 +63,7 @@ class reports_admin {
         } else {
             /** @var kopere_dashboard_reports $koperereports */
             $koperereports = $DB->get_record('kopere_dashboard_reports',
-                array('id' => $report));
+                ['id' => $report]);
             header::notfound_null($koperereports, get_string_kopere('reports_notfound'));
         }
 
@@ -125,19 +125,28 @@ class reports_admin {
                 input_select::new_instance()
                     ->set_title(get_string_kopere('reports_settings_form_colunas_type'))
                     ->set_name("columns[{$id}][type]")
-                    ->set_values(array(
-                        array('key' => '', 'value' => get_string_kopere('reports_settings_form_none')),
-                        array('key' => table_header_item::TYPE_INT, 'value' =>
-                            get_string_kopere('reports_settings_form_colunas_type_int')),
-                        array('key' => table_header_item::TYPE_DATE, 'value' =>
-                            get_string_kopere('reports_settings_form_colunas_type_date')),
-                        array('key' => table_header_item::TYPE_CURRENCY, 'value' =>
-                            get_string_kopere('reports_settings_form_colunas_type_currency')),
-                        array('key' => table_header_item::TYPE_TEXT, 'value' =>
-                            get_string_kopere('reports_settings_form_colunas_type_text')),
-                        array('key' => table_header_item::TYPE_BYTES, 'value' =>
-                            get_string_kopere('reports_settings_form_colunas_type_bytes')),
-                    ))
+                    ->set_values([
+                        ['key' => '',
+                            'value' => get_string_kopere('reports_settings_form_none')],
+                        [
+                            'key' => table_header_item::TYPE_INT,
+                            'value' => get_string_kopere('reports_settings_form_colunas_type_int'),
+                        ],
+                        [
+                            'key' => table_header_item::TYPE_DATE,
+                            'value' => get_string_kopere('reports_settings_form_colunas_type_date'),
+                        ],
+                        [
+                            'key' => table_header_item::TYPE_CURRENCY,
+                            'value' => get_string_kopere('reports_settings_form_colunas_type_currency'),
+                        ],
+                        ['key' => table_header_item::TYPE_TEXT,
+                            'value' => get_string_kopere('reports_settings_form_colunas_type_text'),
+                        ],
+                        ['key' => table_header_item::TYPE_BYTES,
+                            'value' => get_string_kopere('reports_settings_form_colunas_type_bytes'),
+                        ],
+                    ])
                     ->set_value($colum->type));
 
             echo "</div></div>";
@@ -169,30 +178,38 @@ class reports_admin {
             input_select::new_instance()
                 ->set_title(get_string_kopere('reports_settings_form_prerequisit'))
                 ->set_name('prerequisit')
-                ->set_values(array(
-                    array('key' => '', 'value' => get_string_kopere('reports_settings_form_none')),
-                    array(
+                ->set_values([
+                    [
+                        'key' => '',
+                        'value' => get_string_kopere('reports_settings_form_none'),
+                    ],
+                    [
                         'key' => 'listCourses',
-                        'value' => get_string_kopere('reports_settings_form_prerequisit_listCourses')),
-                ))
+                        'value' => get_string_kopere('reports_settings_form_prerequisit_listCourses'),
+                    ],
+                ])
                 ->set_value($koperereports->prerequisit));
 
         $koperereports->foreach = str_replace('local_kopere_dashboard\report\report_foreach::', '', $koperereports->foreach);
-        $values = array(
-            array('key' => '', 'value' => get_string_kopere('reports_settings_form_none')),
+        $values = [
+            ['key' => '', 'value' => get_string_kopere('reports_settings_form_none')],
             array(
                 'key' => 'badge_status_text',
-                'value' => get_string_kopere('reports_settings_form_prerequisit_badge_status_text')),
+                'value' => get_string_kopere('reports_settings_form_prerequisit_badge_status_text'),
+            ),
             array(
                 'key' => 'badge_criteria_type',
-                'value' => get_string_kopere('reports_settings_form_prerequisit_badge_criteria_type')),
+                'value' => get_string_kopere('reports_settings_form_prerequisit_badge_criteria_type'),
+            ),
             array(
                 'key' => 'userfullname',
-                'value' => get_string_kopere('reports_settings_form_prerequisit_userfullname')),
+                'value' => get_string_kopere('reports_settings_form_prerequisit_userfullname'),
+            ),
             array(
                 'key' => 'courses_group_mode',
-                'value' => get_string_kopere('reports_settings_form_prerequisit_courses_group_mode')),
-        );
+                'value' => get_string_kopere('reports_settings_form_prerequisit_courses_group_mode'),
+            ),
+        ];
         $form->add_input(
             input_select::new_instance()
                 ->set_title(get_string_kopere('reports_settings_form_foreach'))
@@ -237,7 +254,7 @@ class reports_admin {
             } else {
                 /** @var kopere_dashboard_reports $koperereports */
                 $koperereports = $DB->get_record('kopere_dashboard_reports',
-                    array('id' => $report));
+                    ['id' => $report]);
                 header::notfound_null($koperereports, get_string_kopere('reports_notfound'));
 
                 $koperereports->title = required_param('title', PARAM_TEXT);

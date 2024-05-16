@@ -67,7 +67,7 @@ class notifications extends notificationsutil {
             local_kopere_dashboard_makeurl("notifications", "test_smtp"));
 
         $events = $DB->get_records('kopere_dashboard_events');
-        $eventslist = array();
+        $eventslist = [];
         foreach ($events as $event) {
             /** @var base $eventclass */
             $eventclass = $event->event;
@@ -128,12 +128,12 @@ class notifications extends notificationsutil {
         echo '<div class="element-box">';
 
         $events = $this->list_events();
-        $moduleslist = array();
+        $moduleslist = [];
         foreach ($events->components as $components) {
             $modulename = $this->module_name($components, true);
 
             if ($modulename != null) {
-                $moduleslist[] = array('key' => $components, 'value' => $modulename);
+                $moduleslist[] = ['key' => $components, 'value' => $modulename];
             }
         }
 
@@ -170,7 +170,7 @@ class notifications extends notificationsutil {
 
         if ($id) {
             /** @var kopere_dashboard_events $evento */
-            $evento = $DB->get_record('kopere_dashboard_events', array('id' => $id));
+            $evento = $DB->get_record('kopere_dashboard_events', ['id' => $id]);
             header::notfound_null($evento, get_string_kopere('notification_notound'));
 
             $eventclass = $evento->event;
@@ -201,10 +201,10 @@ class notifications extends notificationsutil {
             $eventclass::get_name());
 
         if ($id) {
-            $status = array(
-                array('key' => 1, 'value' => get_string_kopere('notification_status_active')),
-                array('key' => 0, 'value' => get_string_kopere('notification_status_inactive'))
-            );
+            $status = [
+                ['key' => 1, 'value' => get_string_kopere('notification_status_active')],
+                ['key' => 0, 'value' => get_string_kopere('notification_status_inactive')],
+            ];
             $form->add_input(
                 input_select::new_instance()
                     ->set_title(get_string_kopere('notification_status'))
@@ -214,9 +214,9 @@ class notifications extends notificationsutil {
                     ->set_description(get_string_kopere('notification_statusdesc')));
         }
 
-        $valuefrom = array(
-            array('key' => 'admin', 'value' => get_string_kopere('notification_from_admin'))
-        );
+        $valuefrom = [
+            ['key' => 'admin', 'value' => get_string_kopere('notification_from_admin')],
+        ];
         $form->add_input(
             input_select::new_instance()
                 ->set_title(get_string_kopere('notification_from'))
@@ -225,12 +225,12 @@ class notifications extends notificationsutil {
                 ->set_value($evento->userfrom)
                 ->set_description(get_string_kopere('notification_fromdesc')));
 
-        $valueto = array(
-            array('key' => 'admin', 'value' => get_string_kopere('notification_todesc_admin')),
-            array('key' => 'admins', 'value' => get_string_kopere('notification_todesc_admins')),
-            array('key' => 'teachers', 'value' => get_string_kopere('notification_todesc_teachers')),
-            array('key' => 'student', 'value' => get_string_kopere('notification_todesc_student')),
-        );
+        $valueto = [
+            ['key' => 'admin', 'value' => get_string_kopere('notification_todesc_admin')],
+            ['key' => 'admins', 'value' => get_string_kopere('notification_todesc_admins')],
+            ['key' => 'teachers', 'value' => get_string_kopere('notification_todesc_teachers')],
+            ['key' => 'student', 'value' => get_string_kopere('notification_todesc_student')],
+        ];
         $form->add_input(
             input_select::new_instance()
                 ->set_title(get_string_kopere('notification_to'))
@@ -352,11 +352,11 @@ class notifications extends notificationsutil {
         $status = optional_param('status', '', PARAM_TEXT);
         $id = optional_param('id', 0, PARAM_INT);
         /** @var kopere_dashboard_events $event */
-        $event = $DB->get_record('kopere_dashboard_events', array('id' => $id));
+        $event = $DB->get_record('kopere_dashboard_events', ['id' => $id]);
         header::notfound_null($event, get_string_kopere('notification_notfound'));
 
         if ($status == 'sim') {
-            $DB->delete_records('kopere_dashboard_events', array('id' => $id));
+            $DB->delete_records('kopere_dashboard_events', ['id' => $id]);
 
             mensagem::agenda_mensagem_success(get_string_kopere('notification_delete_success'));
             header::location(local_kopere_dashboard_makeurl("notifications", "dashboard"));
@@ -388,10 +388,10 @@ class notifications extends notificationsutil {
 
         $form = new form(local_kopere_dashboard_makeurl("settings", "save", ["redirect" => "{$redirect}"]));
 
-        $values = array();
+        $values = [];
         $templates = glob("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/*.html");
         foreach ($templates as $template) {
-            $values[] = array('key' => pathinfo($template, PATHINFO_BASENAME));
+            $values[] = ['key' => pathinfo($template, PATHINFO_BASENAME)];
         }
 
         $form->add_input(

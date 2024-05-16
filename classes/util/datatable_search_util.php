@@ -33,13 +33,9 @@ class datatable_search_util {
      * @var
      */
     private $columnselect;
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     private $start;
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     private $length;
     /**
      * @var
@@ -76,7 +72,7 @@ class datatable_search_util {
         $search = string_util::clear_all_params('search', false, PARAM_TEXT);
 
         if ($search && isset($search['value']) && isset($search['value'][0])) {
-            $like = array();
+            $like = [];
             foreach ($this->columnselect as $column) {
                 $find = $search['value'];
                 $find = str_replace("'", "\'", $find);

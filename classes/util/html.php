@@ -28,10 +28,8 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class html {
-    /**
-     * @var array
-     */
-    private static $acentoshtml = array(
+    /** @var array */
+    private static $acentoshtml = [
         '&aacute;', '&agrave;', '&acirc;', '&atilde;',
         '&auml;', '&eacute;', '&egrave;', '&ecirc;', '&euml;',
         '&iacute;', '&igrave;', '&icirc;', '&iuml;', '&oacute;',
@@ -42,25 +40,21 @@ class html {
         '&Icirc;', '&Iuml;', '&Oacute;', '&Ograve;', '&Ocirc;',
         '&Otilde;', '&Ouml;', '&Uacute;', '&Ugrave;', '&Ucirc;',
         '&Uuml;', '&Ccedil;', "'", '&acute;', '`', '/', '\\', '_',
-        '_', '&uml;', '&ordf;', ',', ':', ' ');
-    /**
-     * @var array
-     */
-    private static $acentosascii = array(
+        '_', '&uml;', '&ordf;', ',', ':', ' '];
+    /** @var array */
+    private static $acentosascii = [
         'á', 'à', 'â', 'ã', 'ä', 'é', 'è', 'ê', 'ë', 'í', 'ì', 'î',
         'ï', 'ó', 'ò', 'ô', 'õ', 'ö', 'ú', 'ù', 'û', 'ü', 'ç', 'Á',
         'À', 'Â', 'Ã', 'Ä', 'É', 'È', 'Ê', 'Ë', 'Í', 'Ì', 'Î', 'Ï',
         'Ó', 'Ò', 'Ô', 'Õ', 'Ö', 'Ú', 'Ù', 'Û', 'Ü', 'Ç', "'", '´',
-        '`', '/', '\\', '~', '^', '¨', 'ª', ',', ':', '_');
-    /**
-     * @var array
-     */
-    private static $semacento = array(
+        '`', '/', '\\', '~', '^', '¨', 'ª', ',', ':', '_'];
+    /** @var array */
+    private static $semacento = [
         'a', 'a', 'a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i',
         'i', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'c', 'A',
         'A', 'A', 'A', 'A', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I',
         'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'C', '_', '_',
-        '_', '/', '_', '_', '_', '_', '_', '_', '_', '_');
+        '_', '/', '_', '_', '_', '_', '_', '_', '_', '_'];
 
     /**
      * @param $html

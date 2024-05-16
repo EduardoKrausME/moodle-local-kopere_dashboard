@@ -28,9 +28,7 @@ namespace local_kopere_dashboard\html;
  * @package local_kopere_dashboard\html
  */
 class table {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $tableid;
 
     /**
@@ -43,21 +41,13 @@ class table {
         echo "<table id='{$this->tableid}' class='table table-hover' width='100%' {$adicional} \>";
     }
 
-    /**
-     * @var array
-     */
-    private $colunas = array();
-    /**
-     * @var null
-     */
+    /** @var array */
+    private $colunas = [];
+    /** @var null */
     private $click = null;
-    /**
-     * @var null
-     */
+    /** @var null */
     private $id = null;
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $isprint = false;
 
     /**
@@ -65,7 +55,7 @@ class table {
      * @param $chave
      */
     public function set_click($exec, $chave) {
-        $this->click = array();
+        $this->click = [];
         $this->click['exec'] = $exec;
         $this->click['chave'] = $chave;
     }
@@ -75,7 +65,7 @@ class table {
      * @param $chave
      */
     public function set_click_redirect($url, $chave) {
-        $this->click = array();
+        $this->click = [];
         $this->click['chave'] = $chave;
         $this->click['exec'] = "document.location.href='{$url}'";
     }
@@ -85,7 +75,7 @@ class table {
      * @param $chave
      */
     public function set_click_open($url, $chave) {
-        $this->click = array();
+        $this->click = [];
         $this->click['chave'] = $chave;
         $this->click['exec'] = "window.open( '{$url}' )";
     }
@@ -110,7 +100,7 @@ class table {
         $chaves = $this->click['chave'];
 
         if (!is_array($chaves)) {
-            $chaves = array($chaves);
+            $chaves = [$chaves];
         }
 
         $exec = $this->click['exec'];
@@ -151,7 +141,7 @@ class table {
      * @param string $class
      */
     public function print_header($header, $class = '') {
-        $this->colunas = array();
+        $this->colunas = [];
         echo '<thead>';
         echo "<tr class='{$class}'>";
         foreach ($header as $value) {
@@ -247,14 +237,14 @@ class table {
         echo '</table>';
         if ($datatable) {
 
-            $initparams = array(
+            $initparams = [
                 "autoWidth" => false,
-            );
+            ];
             if ($extras) {
                 $initparams = array_merge($initparams, $extras);
             }
 
-            $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', array($this->tableid, $initparams));
+            $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', [$this->tableid, $initparams]);
         }
     }
 }

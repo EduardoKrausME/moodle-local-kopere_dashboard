@@ -73,7 +73,7 @@ class enroll {
 		        WHERE c.id = :id AND u.id IS NOT NULL
 		     ";
 
-        $result = $DB->get_records_sql($sql, array('id' => $courseid));
+        $result = $DB->get_records_sql($sql, ['id' => $courseid]);
 
         $result = user_util::column_fullname($result, 'nome');
 

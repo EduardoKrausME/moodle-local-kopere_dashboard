@@ -42,7 +42,7 @@ class navigation {
         }
 
         echo "<span class='pagination-info'>" . get_string_kopere('navigation_page',
-                array('atualPage' => $atualpage, 'countPages' => $countpages)) . "</span>";
+                ['atualPage' => $atualpage, 'countPages' => $countpages]) . "</span>";
 
         echo "<ul class='pagination'>";
         if ($atualpage != 1) {

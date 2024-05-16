@@ -33,41 +33,25 @@ use local_kopere_dashboard\util\url_util;
  * @package local_kopere_dashboard\html
  */
 class data_table {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $column = [];
-    /**
-     * @var array
-     */
+    /** @var array */
     private $columninfo = [];
-    /**
-     * @var array
-     */
+    /** @var array */
     private $columndata = [];
-    /**
-     * @var array
-     */
+    /** @var array */
     private $columndefs = [];
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $ajaxurl = null;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $clickredirect = null;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $tableid = '';
 
-    /**
-     * @var boolean
-     */
+    /** @var boolean */
     private $isexport = false;
 
     /**
@@ -367,12 +351,12 @@ class data_table {
 
         $return = '</table>';
 
-        $initparams = array(
+        $initparams =[
             "autoWidth" => false,
             "columns" => $this->columndata,
             "columnDefs" => $this->columndefs,
             "export_title" => $title
-        );
+        ];
         if ($extras) {
             $initparams = array_merge($initparams, $extras);
         }

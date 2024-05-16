@@ -27,44 +27,28 @@ namespace local_kopere_dashboard\vo;
  * @package local_kopere_dashboard\vo
  */
 class kopere_dashboard_events extends \stdClass {
-    /**
-     * @var int
-     */
+    /** @var int */
     public $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $module;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $event;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     public $status = 1;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $userfrom;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $userto;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $subject;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message;
 
     /**

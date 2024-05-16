@@ -20,21 +20,21 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined ( 'MOODLE_INTERNAL' ) || die();
+defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
-    'local/kopere_dashboard:view' => array(
+$capabilities = [
+    'local/kopere_dashboard:view' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
-            'manager' => CAP_ALLOW
-        )
-    ),
-    'local/kopere_dashboard:manage' => array(
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+        ],
+    ],
+    'local/kopere_dashboard:manage' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
-            'manager' => CAP_ALLOW
-        )
-    )
-);
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+        ],
+    ],
+];

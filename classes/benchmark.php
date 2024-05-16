@@ -138,13 +138,13 @@ class benchmark {
                       <th>" . get_string_kopere('benchmark_testconf_action') . "</th>
                   </tr>";
 
-        $tests = array(
+        $tests = [
             report_benchmark_test::themedesignermode(),
             report_benchmark_test::cachejs(),
             report_benchmark_test::debug(),
             report_benchmark_test::backup_auto_active(),
             report_benchmark_test::enablestats()
-        );
+        ];
 
         foreach ($tests as $test) {
             echo "<tr class='{$test['class']}'>

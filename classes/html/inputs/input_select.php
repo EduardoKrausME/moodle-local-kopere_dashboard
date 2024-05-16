@@ -29,22 +29,14 @@ namespace local_kopere_dashboard\html\inputs;
  * @package local_kopere_dashboard\html\inputs
  */
 class input_select extends input_base {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $values;
-    /**
-     * @var string
-     */
+    /** @var string */
     private $valueskey;
-    /**
-     * @var string
-     */
+    /** @var string */
     private $valuesvalue;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $addselecione = false;
 
     /**

@@ -99,9 +99,10 @@ class profile {
                      FROM {user_enrolments} ue
                      JOIN {enrol} e ON ( e.id = ue.enrolid AND e.courseid = :courseid )
                     WHERE ue.userid = :userid";
-            $params = array('userid' => $userid,
+            $params = [
+                'userid' => $userid,
                 'courseid' => $course->id
-            );
+            ];
 
             $enrolment = $DB->get_record_sql($sql, $params);
 
@@ -113,13 +114,14 @@ class profile {
             }
 
             $roleassignments = $DB->get_records('role_assignments',
-                array('contextid' => $course->ctxid,
-                    'userid' => $userid
-                ), '', 'DISTINCT roleid');
+                [
+                    'contextid' => $course->ctxid,
+                    'userid' => $userid,
+                ], '', 'DISTINCT roleid');
 
             $rolehtml = '';
             foreach ($roleassignments as $roleassignment) {
-                $role = $DB->get_record('role', array('id' => $roleassignment->roleid));
+                $role = $DB->get_record('role', ['id' => $roleassignment->roleid]);
                 $rolehtml .= '<span class="btn btn-default">' . role_get_name($role) . '</span>';
             }
 

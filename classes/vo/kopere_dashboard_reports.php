@@ -28,54 +28,34 @@ namespace local_kopere_dashboard\vo;
  */
 class kopere_dashboard_reports extends \stdClass {
 
-    /**
-     * @var int
-     */
+    /** @var int */
     public $id;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     public $reportcatid;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $reportkey;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $title;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     public $enable;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $enablesql;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $reportsql;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $prerequisit;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $columns;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $foreach;
 
     /**

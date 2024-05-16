@@ -62,9 +62,9 @@ class reports extends reports_admin {
             $koperereportcats = $DB->get_records('kopere_dashboard_reportcat');
         } else {
             if ($type) {
-                $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', array('type' => $type, 'enable' => 1));
+                $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', ['type' => $type, 'enable' => 1]);
             } else {
-                $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', array('enable' => 1));
+                $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', ['enable' => 1]);
             }
         }
 
@@ -89,10 +89,10 @@ class reports extends reports_admin {
 
             if ($isedit) {
                 $koperereportss = $DB->get_records('kopere_dashboard_reports',
-                    array('reportcatid' => $koperereportcat->id));
+                    ['reportcatid' => $koperereportcat->id]);
             } else {
                 $koperereportss = $DB->get_records('kopere_dashboard_reports',
-                    array('reportcatid' => $koperereportcat->id, 'enable' => 1));
+                    ['reportcatid' => $koperereportcat->id, 'enable' => 1]);
             }
 
             /** @var kopere_dashboard_reports $koperereports */
@@ -187,7 +187,7 @@ class reports extends reports_admin {
 
                 $columns = json_decode($koperereports->columns);
                 if (!isset($columns->header)) {
-                    $columns->header = array();
+                    $columns->header = [];
                 }
 
                 $table = new data_table($columns->columns, $columns->header);
@@ -254,7 +254,7 @@ class reports extends reports_admin {
         }
 
         /** @var kopere_dashboard_reports $koperereports */
-        $koperereports = $DB->get_record('kopere_dashboard_reports', array('id' => $report));
+        $koperereports = $DB->get_record('kopere_dashboard_reports', ['id' => $report]);
 
         if ($CFG->dbtype == 'pgsql') {
             $sql = "{$koperereports->reportsql} LIMIT {$length} OFFSET {$start}";
@@ -263,8 +263,8 @@ class reports extends reports_admin {
         }
 
         if (strlen($koperereports->prerequisit) && $koperereports->prerequisit == 'listCourses') {
-            $reports = $DB->get_records_sql($sql, array('courseid' => $courseid));
-            $recordstotal = $DB->get_records_sql($koperereports->reportsql, array('courseid' => $courseid));
+            $reports = $DB->get_records_sql($sql, ['courseid' => $courseid]);
+            $recordstotal = $DB->get_records_sql($koperereports->reportsql, ['courseid' => $courseid]);
         } else {
             $reports = $DB->get_records_sql($sql);
             $recordstotal = $DB->get_records_sql($koperereports->reportsql);
@@ -301,13 +301,13 @@ class reports extends reports_admin {
 
         /** @var kopere_dashboard_reports $koperereports */
         $koperereports = $DB->get_record('kopere_dashboard_reports',
-            array('id' => $report));
+            ['id' => $report]);
         header::notfound_null($koperereports, get_string_kopere('reports_notfound'));
 
         export::header('xls', self::get_title($koperereports));
 
         if (strlen($koperereports->prerequisit) && $koperereports->prerequisit == 'listCourses') {
-            $reports = $DB->get_records_sql($koperereports->reportsql, array('courseid' => $courseid));
+            $reports = $DB->get_records_sql($koperereports->reportsql, ['courseid' => $courseid]);
         } else {
             $reports = $DB->get_records_sql($koperereports->reportsql);
         }
@@ -321,7 +321,7 @@ class reports extends reports_admin {
 
         $columns = json_decode($koperereports->columns);
         if (!isset($columns->header)) {
-            $columns->header = array();
+            $columns->header = [];
         }
         $table = new data_table($columns->columns, $columns->header);
         $table->print_header('', false);
@@ -355,9 +355,9 @@ class reports extends reports_admin {
     public static function global_menus() {
         global $DB, $CFG;
 
-        $menus = array();
+        $menus = [];
 
-        $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', array('enable' => 1));
+        $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', ['enable' => 1]);
         /** @var kopere_dashboard_reportcat $koperereportcat */
         foreach ($koperereportcats as $koperereportcat) {
             // Executa o SQL e vrifica se o SQL retorna status>0.

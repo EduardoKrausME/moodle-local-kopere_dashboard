@@ -71,16 +71,16 @@ class course_access_grade {
         $atualpage = optional_param('page', 1, PARAM_INT);
         $startlimit = ($atualpage - 1) * $perpage;
 
-        $course = $DB->get_record('course', array('id' => $courseid));
+        $course = $DB->get_record('course', ['id' => $courseid]);
         header::notfound_null($course, get_string_kopere('courses_notound'));
 
-        $groups = $DB->get_records('groups', array('courseid' => $course->id));
+        $groups = $DB->get_records('groups', ['courseid' => $course->id]);
 
         echo '<script>
                   document.body.className += " menu-w-90";
               </script>';
 
-        $sections = $DB->get_records('course_sections', array('course' => $courseid), 'section asc');
+        $sections = $DB->get_records('course_sections', ['course' => $courseid], 'section asc');
 
         button::info(get_string_kopere('reports_export'), url_util::querystring() . "&export=xls");
 
@@ -92,8 +92,8 @@ class course_access_grade {
         echo '<thead>';
         $printsessoes = '';
 
-        $courseinfo = array();
-        $modinfo = array();
+        $courseinfo = [];
+        $modinfo = [];
         foreach ($sections as $key => $section) {
             $partesmodinfo = explode(',', $section->sequence);
             $countmodinfo = 0;
@@ -104,7 +104,7 @@ class course_access_grade {
                          WHERE cm.id = :cmid
                            AND cm.deletioninprogress = 0";
 
-                $module = $DB->get_record_sql($sql, array('cmid' => intval($parte)));
+                $module = $DB->get_record_sql($sql, ['cmid' => intval($parte)]);
 
                 if ($module != null) {
 
@@ -115,7 +115,7 @@ class course_access_grade {
                         continue;
                     }
 
-                    $moduleinfo = $DB->get_record($module->name, array('id' => $module->instance));
+                    $moduleinfo = $DB->get_record($module->name, ['id' => $module->instance]);
                     $module->moduleinfo = $moduleinfo;
 
                     if (isset($courseinfo[$module->course])) {
@@ -126,12 +126,12 @@ class course_access_grade {
 
                     if ($module->instance) {
                         $module->grade = $DB->get_record('grade_items',
-                            array(
+                            [
                                 'courseid' => $courseid,
                                 'iteminstance' => $moduleinfo->id,
                                 'itemtype' => 'mod',
-                                'itemmodule' => $module->name
-                            ));
+                                'itemmodule' => $module->name,
+                            ]);
                     }
 
                     $modinfo[] = $module;
@@ -214,10 +214,10 @@ class course_access_grade {
                 LIMIT {$startlimit}, {$perpage}";
         }
         $allusercourse = $DB->get_records_sql($sql,
-            array(
+            [
                 'contextlevel' => CONTEXT_COURSE,
-                'instanceid' => $courseid
-            ));
+                'instanceid' => $courseid,
+            ]);
 
         $total = $DB->get_record_sql("SELECT FOUND_ROWS() as num_itens");
 
@@ -235,11 +235,11 @@ class course_access_grade {
                          WHERE g.courseid = :courseid
                            AND gm.userid  = :userid";
                 $groupsuser = $DB->get_records_sql($sql,
-                    array(
+                    [
                         'courseid' => $course->id,
-                        'userid' => $user->id
-                    ));
-                $groupsuserprint = array();
+                        'userid' => $user->id,
+                    ]);
+                $groupsuserprint = [];
                 foreach ($groupsuser as $groupuser) {
                     $groupsuserprint[] = $groupuser->name;
                 }
@@ -259,12 +259,12 @@ class course_access_grade {
                          LIMIT 1";
 
                 $logresult = $DB->get_record_sql($sql,
-                    array(
+                    [
                         'courseid' => $courseid,
                         'contextinstanceid' => $infos->course_modules_id,
                         'action' => 'viewed',
-                        'userid' => $user->id
-                    ));
+                        'userid' => $user->id,
+                    ]);
 
                 if ($logresult && $logresult->contagem) {
                     $this->td(get_string_kopere('reports_access_n', $logresult->contagem), 'text-nowrap bg-success', 'DFF0D8');

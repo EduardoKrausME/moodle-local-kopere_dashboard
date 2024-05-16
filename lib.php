@@ -27,65 +27,64 @@ function local_kopere_dashboard_extends_navigation(global_navigation $nav) {
 
 /**
  * @param global_navigation $nav
- * @throws coding_exception
- * @throws dml_exception
- * @throws moodle_exception
+ *
  */
 function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
     global $CFG, $DB;
 
     require_once(__DIR__ . "/locallib.php");
 
-    if (strpos($_SERVER['REQUEST_URI'], "kopere_dashboard") === false) {
-        try {
-            $menus = $DB->get_records('kopere_dashboard_menu', null, 'title ASC');
-
-            /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
-            foreach ($menus as $menu) {
-
-                $pages = $DB->get_records('kopere_dashboard_webpages', ['menuid' => $menu->id, 'visible' => 1]);
-
-                if ($pages) {
-                    $icone = new pix_icon('webpages', $menu->title, 'local_kopere_dashboard');
-                    if ($CFG->theme == 'flixcurso') {
-                        $icone = new pix_icon('webpages-dark', $menu->title, 'local_kopere_dashboard');
-                    }
-                    $node = $nav->add(
-                        $menu->title,
-                        new moodle_url("{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}"),
-                        navigation_node::TYPE_CUSTOM,
-                        null,
-                        "kopere_dashboard-{$menu->id}",
-                        $icone
-                    );
-
-                    $node->showinflatnavigation = true;
-
-                    /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $page */
-                    foreach ($pages as $page) {
-                        $icone = new pix_icon('webpages', $page->title, 'local_kopere_dashboard');
-                        if ($CFG->theme == 'flixcurso') {
-                            $icone = new pix_icon('webpages-dark', $page->title, 'local_kopere_dashboard');
-                        }
-                        $node->add(
-                            $page->title,
-                            new moodle_url("{$CFG->wwwroot}/local/kopere_dashboard/?p={$page->link}"),
-                            navigation_node::TYPE_CUSTOM,
-                            null,
-                            "kopere_dashboard-page-{$page->id}",
-                            $icone
-                        );
-                    }
-                }
-            }
-        } catch (Exception $e) {
-            // Se der problema, não precisa fazer nada.
-        }
-    }
+    //if (strpos($_SERVER['REQUEST_URI'], "kopere_dashboard") === false) {
+    //    try {
+    //        $menus = $DB->get_records('kopere_dashboard_menu', null, 'title ASC');
+    //
+    //        /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
+    //        foreach ($menus as $menu) {
+    //
+    //            $pages = $DB->get_records('kopere_dashboard_webpages', ['menuid' => $menu->id, 'visible' => 1]);
+    //
+    //            if ($pages) {
+    //                $icone = new pix_icon('webpages', $menu->title, 'local_kopere_dashboard');
+    //                if ($CFG->theme == 'flixcurso') {
+    //                    $icone = new pix_icon('webpages-dark', $menu->title, 'local_kopere_dashboard');
+    //                }
+    //                $node = $nav->add(
+    //                    $menu->title,
+    //                    new moodle_url("{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}"),
+    //                    navigation_node::TYPE_CUSTOM,
+    //                    null,
+    //                    "kopere_dashboard-{$menu->id}",
+    //                    $icone
+    //                );
+    //
+    //                $node->showinflatnavigation = true;
+    //
+    //                /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $page */
+    //                foreach ($pages as $page) {
+    //                    $icone = new pix_icon('webpages', $page->title, 'local_kopere_dashboard');
+    //                    if ($CFG->theme == 'flixcurso') {
+    //                        $icone = new pix_icon('webpages-dark', $page->title, 'local_kopere_dashboard');
+    //                    }
+    //                    $node->add(
+    //                        $page->title,
+    //                        new moodle_url("{$CFG->wwwroot}/local/kopere_dashboard/?p={$page->link}"),
+    //                        navigation_node::TYPE_CUSTOM,
+    //                        null,
+    //                        "kopere_dashboard-page-{$page->id}",
+    //                        $icone
+    //                    );
+    //                }
+    //            }
+    //        }
+    //    } catch (Exception $e) {
+    //        // Se der problema, não fazer nada.
+    //    }
+    //}
 
     $CFG->custommenuitems = trim($CFG->custommenuitems);
-    $CFG->custommenuitems = preg_replace('/.*kopere_dashboard.*/', '', $CFG->custommenuitems);
+    $CFG->custommenuitems = preg_replace('/.*kopere_dashboard.*/', "", $CFG->custommenuitems);
     $CFG->custommenuitems = trim($CFG->custommenuitems);
+
     if (isloggedin()) {
         if ($CFG->branch > 400 && @$CFG->kopere_dashboard_menu) {
             $context = context_system::instance();
@@ -127,30 +126,44 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
     }
 }
 
-/**
- * @throws dml_exception
- */
 function add_pages_custommenuitems_400() {
-    global $DB, $CFG;
+    global $CFG;
 
-    $extramenu = "";
-    $menus = $DB->get_records('kopere_dashboard_menu');
-    foreach ($menus as $menu) {
+    function get_menus($menuid, $prefix) {
+        global $DB, $CFG;
 
-        $sql = "SELECT * FROM {kopere_dashboard_webpages} WHERE visible = 1 AND menuid = {$menu->id} ORDER BY pageorder ASC";
-        $webpages = $DB->get_records_sql($sql);
+        $menus = $DB->get_records('kopere_dashboard_menu', ['menuid' => $menuid]);
 
-        if ($webpages) {
-            $extramenu .= "{$menu->title}|{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}\n";
-
-            /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpage */
-            foreach ($webpages as $webpage) {
-                $link = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpage->link}";
-                $extramenu .= " - {$webpage->title}|{$link}\n";
+        foreach ($menus as $menu) {
+            $where = ['visible' => 1, 'menuid' => $menu->id];
+            $webpages = $DB->get_records('kopere_dashboard_webpages', $where, 'pageorder ASC');
+            $CFG->extramenu .= "{$prefix} {$menu->title}|{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}\n";
+            if ($webpages) {
+                /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpage */
+                foreach ($webpages as $webpage) {
+                    $link = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpage->link}";
+                    $CFG->extramenu .= "{$prefix}- {$webpage->title}|{$link}\n";
+                }
             }
+            get_menus($menu->id, "{$prefix}-");
         }
     }
-    $CFG->custommenuitems = "{$CFG->custommenuitems}\n{$extramenu}";
+
+    $cache = \cache::make('local_kopere_dashboard', 'report_getdata_cache');
+    if ($cache->has("kopere_dashboard_menu")) {
+        $CFG->extramenu = $cache->get ("kopere_dashboard_menu");
+    } else {
+
+        try {
+            $CFG->extramenu = "";
+            get_menus(0, "");
+            $cache->set("kopere_dashboard_menu", $CFG->extramenu);
+        } catch (dml_exception $e) {
+        }
+    }
+
+
+    $CFG->custommenuitems = "{$CFG->custommenuitems}\n{$CFG->extramenu}";
 }
 
 /**

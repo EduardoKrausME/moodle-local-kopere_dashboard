@@ -60,7 +60,7 @@ class useraccess {
         $table->set_ajax_url(local_kopere_dashboard_makeurl("useraccess", "load_all_users", ["changue_mes" => $changuemes]));
         $table->set_click_redirect(local_kopere_dashboard_makeurl("users", "details", ["userid" => "{id}"]), 'id');
         $table->print_header();
-        $table->close(true, array("order" => array(array(1, "asc"))));
+        $table->close(true, ["order" => [[1, "asc"]]]);
 
         echo '</div>';
         dashboard_util::end_page();
@@ -72,7 +72,7 @@ class useraccess {
     public function load_all_users() {
         $changuemes = required_param('changue_mes', PARAM_TEXT);
 
-        $columns = array(
+        $columns = [
             'userid',
             'firstname',
             'username',
@@ -81,7 +81,7 @@ class useraccess {
             'phone2',
             'city',
             'lastname'
-        );
+        ];
         $search = new datatable_search_util($columns);
 
         $search->execute_sql_and_return("
@@ -96,14 +96,14 @@ class useraccess {
     }
 
     private function list_meses() {
-        $ultimosmeses = array();
+        $ultimosmeses = [];
         $ano = date('Y');
         $mes = date('m');
         for ($i = 0; $i < 24; $i++) {
             if ($mes < 10) {
                 $mes = "0" . intval($mes);
             }
-            $ultimosmeses[] = array('key' => "{$ano}-{$mes}", 'value' => "{$mes} / {$ano}");
+            $ultimosmeses[] = ['key' => "{$ano}-{$mes}", 'value' => "{$mes} / {$ano}"];
             $mes--;
             if ($mes == 0) {
                 $ano--;

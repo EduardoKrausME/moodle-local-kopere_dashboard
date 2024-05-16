@@ -47,10 +47,10 @@ class event_observers {
         $eventname = str_replace('\\\\', '\\', $event->eventname);
 
         $kopereeventss = $DB->get_records('kopere_dashboard_events',
-            array(
+            [
                 'event' => $eventname,
                 'status' => 1
-            ));
+            ]);
 
         /** @var kopere_dashboard_events $kopereevents */
         foreach ($kopereeventss as $kopereevents) {

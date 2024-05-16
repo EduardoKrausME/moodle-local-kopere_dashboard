@@ -30,54 +30,34 @@ use local_kopere_dashboard\util\html;
  */
 class kopere_dashboard_webpages extends \stdClass {
 
-    /**
-     * @var int
-     */
+    /** @var int */
     public $id;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     public $menuid;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     public $courseid;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $title;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $link;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $text;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $theme;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     public $visible;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     public $pageorder;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $config;
 
     /**

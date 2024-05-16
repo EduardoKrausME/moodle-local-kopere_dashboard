@@ -56,7 +56,7 @@ class users {
         $table->set_ajax_url(local_kopere_dashboard_makeurl("users", "load_all_users"));
         $table->set_click_redirect(local_kopere_dashboard_makeurl("users", "details", ["userid" => "{id}"]), 'id');
         $table->print_header();
-        $table->close(true, array("order" => array(array(1, "asc"))));
+        $table->close(true, ["order" => [[1, "asc"]]]);
 
         echo '</div>';
         dashboard_util::end_page();
@@ -67,7 +67,7 @@ class users {
      * @throws \dml_exception
      */
     public function load_all_users() {
-        $columns = array(
+        $columns = [
             'id',
             'firstname',
             'username',
@@ -76,7 +76,7 @@ class users {
             'phone2',
             'city',
             'lastname'
-        );
+        ];
         $search = new datatable_search_util($columns);
 
         $search->execute_sql_and_return("
@@ -95,7 +95,7 @@ class users {
 
         $userid = optional_param('userid', 0, PARAM_INT);
 
-        $user = $DB->get_record('user', array('id' => $userid));
+        $user = $DB->get_record('user', ['id' => $userid]);
         header::notfound_null($user, get_string_kopere('profile_notfound'));
 
         dashboard_util::add_breadcrumb(get_string_kopere('profile_title'), local_kopere_dashboard_makeurl("users", "dashboard"));

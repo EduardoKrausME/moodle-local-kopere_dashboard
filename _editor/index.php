@@ -1,5 +1,26 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Editor.
+ *
+ * @package     theme_boost_magnific
+ * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 require_once('../../../config.php');
 require_once('../lib.php');
 require_once('../autoload.php');
@@ -78,14 +99,10 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
     <script src="js/plugins/grapesjs-preset-webpage.js"></script>
     <script src="js/plugins/grapesjs-blocks-basic.js"></script>
     <script src="js/plugins/grapesjs-plugin-forms.js"></script>
-    <script src="js/plugins/grapesjs-component-countdown.js"></script>
-    <script src="js/plugins/grapesjs-tabs.js"></script>
     <script src="js/plugins/grapesjs-custom-code.js"></script>
     <script src="js/plugins/grapesjs-touch.js"></script>
     <script src="js/plugins/grapesjs-parser-postcss.js"></script>
-    <script src="js/plugins/grapesjs-tooltip.js"></script>
     <script src="js/plugins/grapesjs-tui-image-editor.js"></script>
-    <script src="js/plugins/grapesjs-typed.js"></script>
     <script src="js/plugins/grapesjs-style-bg.js"></script>
     <script src="js/plugins/grapesjs-plugin-ckeditor.js"></script>
 </head>
@@ -400,6 +417,7 @@ $langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json
         'canvas'          : {
             'styles'  : [
                 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
+                '<?php echo "{$CFG->wwwroot}/local/kopere_dashboard/_editor/styles/bootstrap.css"; ?>',
                 '<?php echo \local_kopere_dashboard\fonts\font_util::css() ?>',
                 '<?php echo "{$CFG->wwwroot}/lib/jquery/{$plugins['ui-css']['files'][0]}"; ?>',
             ],

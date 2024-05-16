@@ -67,7 +67,7 @@ class course_last_access {
         $atualpage = optional_param('page', 1, PARAM_INT);
         $startlimit = ($atualpage - 1) * $perpage;
 
-        $course = $DB->get_record('course', array('id' => $cursosid));
+        $course = $DB->get_record('course', ['id' => $cursosid]);
         header::notfound_null($course, get_string_kopere('courses_notound'));
 
         button::info(get_string_kopere('reports_export'), url_util::querystring() . "&export=xls");
@@ -120,10 +120,10 @@ class course_last_access {
                 LIMIT {$startlimit}, {$perpage}";
         }
         $allusercourse = $DB->get_records_sql($sql,
-            array(
+            [
                 'contextlevel' => CONTEXT_COURSE,
-                'instanceid' => $cursosid
-            ));
+                'instanceid' => $cursosid,
+            ]);
 
         $total = $DB->get_record_sql("SELECT FOUND_ROWS() as num_itens");
 
@@ -135,7 +135,7 @@ class course_last_access {
 
             foreach ($userinfofields as $userinfofield) {
                 $userinfodata = $DB->get_record('user_info_data',
-                    array('userid' => $user->id, 'fieldid' => $userinfofield->id));
+                    ['userid' => $user->id, 'fieldid' => $userinfofield->id]);
                 if ($userinfodata) {
                     $this->td($userinfodata->data, 'text-nowrap bg-success', 'D9EDF7');
                 } else {
@@ -153,11 +153,11 @@ class course_last_access {
                      LIMIT 1";
 
             $logresult = $DB->get_record_sql($sql,
-                array(
+                [
                     'courseid' => $cursosid,
                     'action' => 'viewed',
-                    'userid' => $user->id
-                ));
+                    'userid' => $user->id,
+                ]);
             if ($logresult && $logresult->timecreated) {
                 $this->td(userdate($logresult->timecreated, get_string('strftimedatetime')), 'text-nowrap bg-success', 'DFF0D8');
             } else {
@@ -175,11 +175,11 @@ class course_last_access {
                      LIMIT 1";
 
             $logresult = $DB->get_record_sql($sql,
-                array(
+                [
                     'courseid' => $cursosid,
                     'action' => 'viewed',
-                    'userid' => $user->id
-                ));
+                    'userid' => $user->id,
+                ]);
             if ($logresult && $logresult->timecreated) {
                 $this->td(userdate($logresult->timecreated, get_string('strftimedatetime')), 'text-nowrap bg-success', 'DFF0D8');
             } else {

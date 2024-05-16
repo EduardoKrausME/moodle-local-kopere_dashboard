@@ -29,9 +29,7 @@ namespace local_kopere_dashboard\util;
  */
 class bytes_util {
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private static $divisor = 1000;
 
     /**

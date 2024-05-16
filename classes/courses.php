@@ -153,7 +153,7 @@ class courses {
             header::notfound(get_string_kopere('courses_invalid'));
         }
 
-        $course = $DB->get_record('course', array('id' => $courseid));
+        $course = $DB->get_record('course', ['id' => $courseid]);
         header::notfound_null($course, get_string_kopere('courses_notound'));
 
         dashboard_util::add_breadcrumb(get_string_kopere('courses_title'), local_kopere_dashboard_makeurl("courses", "dashboard"));
@@ -219,7 +219,7 @@ class courses {
             header::notfound(get_string_kopere('courses_invalid'));
         }
 
-        $course = $DB->get_record('course', array('id' => $courseid));
+        $course = $DB->get_record('course', ['id' => $courseid]);
         header::notfound_null($course, get_string_kopere('courses_notound'));
 
         dashboard_util::add_breadcrumb(get_string_kopere('courses_title'), local_kopere_dashboard_makeurl("courses", "dashboard"));
@@ -378,7 +378,7 @@ class courses {
         if ($menus) {
             echo '<div class="panel-footer">';
 
-            $webpagess = $DB->get_records('kopere_dashboard_webpages', array('courseid' => $course->id));
+            $webpagess = $DB->get_records('kopere_dashboard_webpages', ['courseid' => $course->id]);
 
             if ($webpagess) {
                 title_util::print_h4('courses_page_title');

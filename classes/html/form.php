@@ -31,9 +31,7 @@ use local_kopere_dashboard\html\inputs\i_input;
  */
 class form {
 
-    /**
-     * @var null
-     */
+    /** @var null */
     private $formaction;
 
     /**
@@ -167,7 +165,7 @@ class form {
         global $PAGE;
         echo "<input id='submit_{$campo}' name='' type='submit' style='display: none;' />";
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'form_close_and_auto_submit_input', array($campo));
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'form_close_and_auto_submit_input', [$campo]);
 
         $this->close();
     }

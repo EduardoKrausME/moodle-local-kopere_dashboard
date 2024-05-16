@@ -123,7 +123,7 @@ class string_util {
      * @return array|mixed
      */
     private static function clear_params_array($in, $type) {
-        $out = array();
+        $out = [];
         if (is_array($in)) {
             foreach ($in as $key => $value) {
                 $out[$key] = self::clear_params_array($value, $type);

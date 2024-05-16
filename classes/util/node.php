@@ -46,10 +46,10 @@ class node {
 
             if (optional_param('classname', false, PARAM_TEXT) == 'useronline') {
                 $PAGE->requires->js_call_amd('local_kopere_dashboard/online_app', 'connectServer',
-                    array($id, $fullname, time(), $urlnode, 'z35admin'));
+                    [$id, $fullname, time(), $urlnode, 'z35admin']);
             } else {
                 $PAGE->requires->js_call_amd('local_kopere_dashboard/online_app', 'connectServer',
-                    array($id, $fullname, time(), $urlnode));
+                    [$id, $fullname, time(), $urlnode]);
             }
         }
     }

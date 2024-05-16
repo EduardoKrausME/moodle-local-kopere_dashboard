@@ -50,10 +50,10 @@ class enroll_util {
         }
 
         $enrol = $DB->get_record('enrol',
-            array(
+            [
                 'courseid' => $course->id,
                 'enrol' => 'manual'
-            ), '*', IGNORE_MULTIPLE);
+            ], '*', IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
         }
@@ -77,29 +77,29 @@ class enroll_util {
         }
 
         $enrol = $DB->get_record('enrol',
-            array(
+            [
                 'courseid' => $course->id,
                 'enrol' => 'manual'
-            ), '*', IGNORE_MULTIPLE);
+            ], '*', IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
         }
 
         $testroleassignments = $DB->get_record('role_assignments',
-            array(
+            [
                 'roleid' => 5,
                 'contextid' => $context->id,
                 'userid' => $user->id
-            ), '*', IGNORE_MULTIPLE);
+            ], '*', IGNORE_MULTIPLE);
         if ($testroleassignments == null) {
             return false;
         }
 
         $userenrolments = $DB->get_record('user_enrolments',
-            array(
+            [
                 'enrolid' => $enrol->id,
                 'userid' => $user->id
-            ), '*', IGNORE_MULTIPLE);
+            ], '*', IGNORE_MULTIPLE);
         if ($userenrolments != null) {
             return !$userenrolments->status;
         } else {
@@ -136,10 +136,10 @@ class enroll_util {
         global $DB;
 
         $coorteid = str_replace("c", "", $coorteid);
-        $cohortmembers = array(
+        $cohortmembers = [
             "cohortid" => $coorteid,
             "userid" => $userid
-        );
+        ];
         $DB->delete_records('cohort_members', $cohortmembers);
     }
 
@@ -173,20 +173,20 @@ class enroll_util {
 
         /** @var \stdClass $enrol */
         $enrol = $DB->get_record('enrol',
-            array(
+            [
                 'courseid' => $course->id,
                 'enrol' => 'manual'
-            ));
+            ]);
         if ($enrol == null) {
             return false;
         }
 
         $testroleassignments = $DB->get_record('role_assignments',
-            array(
+            [
                 'roleid' => $roleid,
                 'contextid' => $context->id,
                 'userid' => $user->id
-            ));
+            ]);
         if ($testroleassignments == null) {
             $roleassignments = new \stdClass();
             $roleassignments->roleid = $roleid;
@@ -204,10 +204,10 @@ class enroll_util {
         }
 
         $userenrolments = $DB->get_record('user_enrolments',
-            array(
+            [
                 'enrolid' => $enrol->id,
                 'userid' => $user->id
-            ));
+            ]);
         if ($userenrolments != null) {
             $userenrolments->status = $status;
             $userenrolments->timestart = $timestart;
@@ -247,19 +247,19 @@ class enroll_util {
 
         /** @var \stdClass $enrol */
         $enrol = $DB->get_record('enrol',
-            array(
+            [
                 'courseid' => $course->id,
-                'enrol' => 'manual'
-            ));
+                'enrol' => 'manual',
+            ]);
         if ($enrol == null) {
             return false;
         }
 
         $userenrolments = $DB->get_record('user_enrolments',
-            array(
+            [
                 'enrolid' => $enrol->id,
                 'userid' => $user->id
-            ));
+            ]);
         if ($userenrolments != null) {
             $userenrolments->status = ENROL_INSTANCE_DISABLED;
             $userenrolments->modifierid = get_admin()->id;

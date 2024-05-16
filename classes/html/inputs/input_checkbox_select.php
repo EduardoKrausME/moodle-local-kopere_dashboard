@@ -31,9 +31,7 @@ use local_kopere_dashboard\util\config;
  * @package local_kopere_dashboard\html\inputs
  */
 class input_checkbox_select extends input_select {
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $checked = false;
 
     /**
@@ -43,8 +41,8 @@ class input_checkbox_select extends input_select {
     public function __construct() {
         $this->set_value("false");
         $this->set_values(array(
-            array('key' => 0, 'value' => get_string('no')),
-            array('key' => 1, 'value' => get_string('yes')),
+             ['key' => 0, 'value' => get_string('no')],
+             ['key' => 1, 'value' => get_string('yes')],
         ));
     }
 

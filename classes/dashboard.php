@@ -121,7 +121,7 @@ class dashboard {
 
         foreach ($lastgrades as $grade) {
 
-            $user = $DB->get_record('user', array('id' => $grade->userid));
+            $user = $DB->get_record('user', ['id' => $grade->userid]);
 
             $userpicture = new \user_picture($user);
             $userpicture->size = 1;
@@ -174,7 +174,7 @@ class dashboard {
 
         foreach ($lastenroll as $enrol) {
 
-            $user = $DB->get_record('user', array('id' => $enrol->userid));
+            $user = $DB->get_record('user', ['id' => $enrol->userid]);
             if ($user) {
 
                 $userpicture = new \user_picture($user);

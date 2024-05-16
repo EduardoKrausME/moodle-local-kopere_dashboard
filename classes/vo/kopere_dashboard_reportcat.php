@@ -28,34 +28,22 @@ namespace local_kopere_dashboard\vo;
  */
 class kopere_dashboard_reportcat extends \stdClass {
 
-    /**
-     * @var int
-     */
+    /** @var int */
     public $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $title;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $type;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $image;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     public $enable;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $enablesql;
 
     /**

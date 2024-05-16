@@ -86,10 +86,10 @@ class files {
                        AND ctx.contextlevel = :contextlevel
                        AND ctx.instanceid   = :instanceid
                   GROUP BY ctx.instanceid",
-                array(
+                [
                     'contextlevel' => CONTEXT_COURSE,
                     'instanceid' => $course->id
-                ));
+                ]);
 
             $modulessize = $DB->get_record_sql("
                     SELECT SUM( f.filesize ) AS modulessize
@@ -100,10 +100,10 @@ class files {
                        AND cm.course        = :course
                        AND cm.deletioninprogress = 0
                   GROUP BY cm.course",
-                array(
+                [
                     'contextlevel' => CONTEXT_MODULE,
                     'course' => $course->id
-                ));
+                ]);
 
             $coursesizeval = isset($coursesize->coursesize) ? $coursesize->coursesize : 0;
             $modulessizeval = isset($modulessize->modulessize) ? $modulessize->modulessize : 0;

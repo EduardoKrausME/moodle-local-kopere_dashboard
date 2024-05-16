@@ -44,7 +44,7 @@ if ($pagelink) {
     $sql = "SELECT * FROM {kopere_dashboard_webpages} WHERE link LIKE :link";
 
     /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpages */
-    $webpages = $DB->get_record_sql($sql, array('link' => $pagelink));
+    $webpages = $DB->get_record_sql($sql, ['link' => $pagelink]);
 
     if ($webpages == null) {
         $PAGE->set_url(new moodle_url("/local/kopere_dashboard/"));
@@ -69,7 +69,7 @@ if ($pagelink) {
     $PAGE->set_heading("{$webpages->title} {$edit}", false);
 
     /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
-    $menu = $DB->get_record('kopere_dashboard_menu', array('id' => $webpages->menuid));
+    $menu = $DB->get_record('kopere_dashboard_menu', ['id' => $webpages->menuid]);
     $PAGE->navbar->add(get_string_kopere('webpages_allpages'), new moodle_url("/local/kopere_dashboard/"));
     $PAGE->navbar->add($menu->title, new moodle_url("/local/kopere_dashboard/?menu={$menu->link}"));
     $PAGE->navbar->add($webpages->title);
@@ -122,7 +122,7 @@ if ($pagelink) {
 
     if ($menulink) {
         /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
-        $menu = $DB->get_record('kopere_dashboard_menu', array('link' => $menulink));
+        $menu = $DB->get_record('kopere_dashboard_menu', ['link' => $menulink]);
         if ($menu == null) {
             \local_kopere_dashboard\util\webpages_util::notfound("webpages_error_menu");
         }
@@ -159,7 +159,7 @@ if ($pagelink) {
             ];
         }
 
-        $sql = "SELECT * FROM {kopere_dashboard_webpages} WHERE visible = 1 ORDER BY pageorder ASC";
+        $sql = "SELECT * FROM {kopere_dashboard_webpages} WHERE visible = 1 AND menuid = {$menu->id} ORDER BY pageorder ASC";
         $webpagess = $DB->get_records_sql($sql);
 
         /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpages */
@@ -168,7 +168,7 @@ if ($pagelink) {
             $webpages->link = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";
 
             if (file_exists(__DIR__ . "/../kopere_pay/lib.php") && $webpages->courseid) {
-                $koperepaydetalhe = $DB->get_record('kopere_pay_detalhe', array('course' => $webpages->courseid));
+                $koperepaydetalhe = $DB->get_record('kopere_pay_detalhe', ['course' => $webpages->courseid]);
                 $precoint = str_replace(".", "", $koperepaydetalhe->preco);
                 $precoint = str_replace(",", ".", $precoint);
                 $precoint = floatval("0{$precoint}");

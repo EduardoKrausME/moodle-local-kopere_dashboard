@@ -216,10 +216,10 @@ class performancemonitor {
     public static function online() {
         global $DB;
 
-        $param = array(
+        $param = [
             'timefrom' => time() - 300, // 300 - 5 minute.
-            'now' => time()
-        );
+            'now' => time(),
+        ];
         $sql = "SELECT COUNT( DISTINCT id) AS cont
                   FROM {user_lastaccess}
                  WHERE timeaccess >  :timefrom
