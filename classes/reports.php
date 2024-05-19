@@ -150,11 +150,12 @@ class reports extends reports_admin {
             ['id' => $koperereports->reportcatid]);
         header::notfound_null($koperereportcat, get_string_kopere('reports_notfound'));
 
-        $titlereport = self::get_title($koperereportcat);
+        $titlecat = self::get_title($koperereportcat);
+        $titlereport = self::get_title($koperereports);
 
         dashboard_util::add_breadcrumb(get_string_kopere('reports_title'),
             local_kopere_dashboard_makeurl("reports", "dashboard"));
-        dashboard_util::add_breadcrumb($titlereport,
+        dashboard_util::add_breadcrumb($titlecat,
             local_kopere_dashboard_makeurl("reports", "dashboard", ["type" => $koperereportcat->type]));
         dashboard_util::add_breadcrumb($titlereport);
         dashboard_util::start_page();
@@ -190,15 +191,16 @@ class reports extends reports_admin {
                     $columns->header = [];
                 }
 
+                $url = local_kopere_dashboard_makeurl("reports", "getdata", ["report" => $report, "courseid" => $courseid]);
                 $table = new data_table($columns->columns, $columns->header);
-                $table->set_ajax_url(
-                    local_kopere_dashboard_makeurl("reports", "getdata", ["report" => $report, "courseid" => $courseid]));
+
+                $table->set_ajax_url($url);
                 $table->print_header();
                 $extra = ["searching" => false, "ordering" => false];
                 $table->close(true, $extra, false, $titlereport);
 
-                button::primary(get_string_kopere('reports_download'),
-                    local_kopere_dashboard_makeurl("reports", "download", ["report" => $report, "courseid" => $courseid]));
+                $urldow = local_kopere_dashboard_makeurl("reports", "download", ["report" => $report, "courseid" => $courseid]);
+                button::primary(get_string_kopere('reports_download'), $urldow);
             }
         }
         echo '</div>';
