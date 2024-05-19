@@ -39,7 +39,7 @@ try {
     \local_kopere_dashboard\util\json::error($e->getMessage());
 }
 
-$PAGE->set_url(new moodle_url('/local/kopere_dashboard/load-ajax.php'));
+$PAGE->set_url(new moodle_url('/local/kopere_dashboard/view-ajax.php'));
 $PAGE->set_pagetype('reports');
 $PAGE->set_context(context_system::instance());
 

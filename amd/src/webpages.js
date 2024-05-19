@@ -29,7 +29,7 @@ define(["jquery", "jqueryui"], function($, ui) {
                                 "           style='height:21px;'>";
                             menu.parent().parent().after("<tr id='menuid-" + menuid + "'><td colspan='4'>" + img + "</td></tr>");
 
-                            var url = M.cfg.wwwroot + "/local/kopere_dashboard/load-ajax.php?classname=webpages&method=menu_get_itens";
+                            var url = M.cfg.wwwroot + "/local/kopere_dashboard/view-ajax.php?classname=webpages&method=menu_get_itens";
                             $.post(
                                 url, {
                                     menuid : menuid
@@ -48,7 +48,7 @@ define(["jquery", "jqueryui"], function($, ui) {
 
         webpages_page_ajax_get_url : function() {
             $('#title').focusout(function() {
-                var url = M.cfg.wwwroot + "/local/kopere_dashboard/load-ajax.php?classname=webpages&method=page_ajax_get_url";
+                var url = M.cfg.wwwroot + "/local/kopere_dashboard/view-ajax.php?classname=webpages&method=page_ajax_get_url";
                 var postData = {
                     title : $(this).val(),
                     id    : $('#id').val()
@@ -62,7 +62,7 @@ define(["jquery", "jqueryui"], function($, ui) {
 
         webpages_menu_ajax_get_url : function() {
             $('#title').focusout(function() {
-                var url = M.cfg.wwwroot + "/local/kopere_dashboard/load-ajax.php?classname=webpages&method=menu_ajax_get_url";
+                var url = M.cfg.wwwroot + "/local/kopere_dashboard/view-ajax.php?classname=webpages&method=menu_ajax_get_url";
                 var postData = {
                     title : $(this).val(),
                     id    : $('#id').val()

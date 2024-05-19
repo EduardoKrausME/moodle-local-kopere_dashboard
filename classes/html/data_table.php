@@ -351,7 +351,7 @@ class data_table {
 
         $return = '</table>';
 
-        $initparams =[
+        $initparams = [
             "autoWidth" => false,
             "columns" => $this->columndata,
             "columnDefs" => $this->columndefs,
@@ -368,7 +368,7 @@ class data_table {
 
         if ($this->ajaxurl) {
             $initparams['ajax'] = (object)[
-                "url" => "{$CFG->wwwroot}/local/kopere_dashboard/load-ajax.php{$this->ajaxurl}",
+                "url" => $this->ajaxurl = str_replace("view.php", "view-ajax.php", $this->ajaxurl),
                 "type" => "POST"
             ];
         }

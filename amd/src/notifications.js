@@ -9,7 +9,7 @@ define([
                     module : $(this).val()
                 };
 
-                var url = M.cfg.wwwroot + "/local/kopere_dashboard/load-ajax.php?classname=notificationsutil&method=add_form_extra";
+                var url = M.cfg.wwwroot + "/local/kopere_dashboard/view-ajax.php?classname=notificationsutil&method=add_form_extra";
                 $('#restante-form').load(url, data);
             });
         },
@@ -33,7 +33,7 @@ define([
 
             function notificacaotemplate_change() {
                 var template = $('#notificacaotemplate').val();
-                var url = M.cfg.wwwroot + "/local/kopere_dashboard/load-ajax.php?classname=notifications&method=settings_load_template&template=" + template;
+                var url = M.cfg.wwwroot + "/local/kopere_dashboard/view-ajax.php?classname=notifications&method=settings_load_template&template=" + template;
 
                 $.getJSON(url, function(data) {
                     loaded_data = data;
