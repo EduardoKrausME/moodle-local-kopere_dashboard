@@ -28,9 +28,12 @@ function local_kopere_dashboard_extends_navigation(global_navigation $nav) {
 /**
  * @param global_navigation $nav
  *
+ * @throws coding_exception
+ * @throws dml_exception
+ * @throws moodle_exception
  */
 function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
-    global $CFG, $DB;
+    global $CFG;
 
     require_once(__DIR__ . "/locallib.php");
 
@@ -129,26 +132,6 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
 function add_pages_custommenuitems_400() {
     global $CFG;
 
-    function get_menus($menuid, $prefix) {
-        global $DB, $CFG;
-
-        $menus = $DB->get_records('kopere_dashboard_menu', ['menuid' => $menuid]);
-
-        foreach ($menus as $menu) {
-            $where = ['visible' => 1, 'menuid' => $menu->id];
-            $webpages = $DB->get_records('kopere_dashboard_webpages', $where, 'pageorder ASC');
-            $CFG->extramenu .= "{$prefix} {$menu->title}|{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}\n";
-            if ($webpages) {
-                /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpage */
-                foreach ($webpages as $webpage) {
-                    $link = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpage->link}";
-                    $CFG->extramenu .= "{$prefix}- {$webpage->title}|{$link}\n";
-                }
-            }
-            get_menus($menu->id, "{$prefix}-");
-        }
-    }
-
     $cache = \cache::make('local_kopere_dashboard', 'report_getdata_cache');
     if ($cache->has("kopere_dashboard_menu")) {
         $CFG->extramenu = $cache->get ("kopere_dashboard_menu");
@@ -156,14 +139,39 @@ function add_pages_custommenuitems_400() {
 
         try {
             $CFG->extramenu = "";
-            get_menus(0, "");
+            local_kopere_dashboard_extend_navigation__get_menus(0, "");
             $cache->set("kopere_dashboard_menu", $CFG->extramenu);
         } catch (dml_exception $e) {
         }
     }
 
-
     $CFG->custommenuitems = "{$CFG->custommenuitems}\n{$CFG->extramenu}";
+}
+
+/**
+ * @param $menuid
+ * @param $prefix
+ *
+ * @throws dml_exception
+ */
+function local_kopere_dashboard_extend_navigation__get_menus($menuid, $prefix) {
+    global $DB, $CFG;
+
+    $menus = $DB->get_records('kopere_dashboard_menu', ['menuid' => $menuid]);
+
+    foreach ($menus as $menu) {
+        $where = ['visible' => 1, 'menuid' => $menu->id];
+        $webpages = $DB->get_records('kopere_dashboard_webpages', $where, 'pageorder ASC');
+        $CFG->extramenu .= "{$prefix} {$menu->title}|{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}\n";
+        if ($webpages) {
+            /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpage */
+            foreach ($webpages as $webpage) {
+                $link = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpage->link}";
+                $CFG->extramenu .= "{$prefix}- {$webpage->title}|{$link}\n";
+            }
+        }
+        local_kopere_dashboard_extend_navigation__get_menus($menu->id, "{$prefix}-");
+    }
 }
 
 /**
