@@ -64,7 +64,6 @@ $PAGE->requires->jquery();
 
 $PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
 
-echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
 echo $OUTPUT->header();
 echo get_kopere_lang();
 
@@ -104,4 +103,6 @@ echo "
         </div>
     </div>";
 
+
+echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
 echo $OUTPUT->footer();
