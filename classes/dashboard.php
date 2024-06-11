@@ -138,7 +138,7 @@ class dashboard {
             $gradetext = number_format($grade->finalgrade, 1, get_string('decsep', 'langconfig'), '') . ' ' .
                 get_string_kopere('dashboard_grade_of') . ' ' . intval($grade->rawgrademax);
 
-            $url = local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id], "load-ajax");
+            $url = local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id], "view-ajax");
             echo "<div class='media dashboard-grade-list'>
                       <div class='media-left'>
                           <img title='" . fullname($user) . "' src='{$profileimageurl}" . "' class='media-object' >
@@ -188,7 +188,7 @@ class dashboard {
                         get_string_kopere('dashboard_enrol_active') . '</span>';
                 }
 
-                $url = local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id], "load-ajax");
+                $url = local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id], "view-ajax");
                 echo "<div class='media dashboard-grade-list'>
                           <div class='media-left'>
                               <img title='" . fullname($user) . "' src='{$profileimageurl}' class='media-object' >
