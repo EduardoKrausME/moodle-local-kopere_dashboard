@@ -22,6 +22,8 @@
 
 namespace local_kopere_dashboard\util;
 
+use course_enrolment_manager;
+
 /**
  * Class enroll_util
  *
@@ -49,11 +51,7 @@ class enroll_util {
             return false;
         }
 
-        $enrol = $DB->get_record('enrol',
-            [
-                'courseid' => $course->id,
-                'enrol' => 'manual'
-            ], '*', IGNORE_MULTIPLE);
+        $enrol = $DB->get_record('enrol', ['courseid' => $course->id, 'enrol' => 'manual'], '*', IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
         }
@@ -77,29 +75,19 @@ class enroll_util {
         }
 
         $enrol = $DB->get_record('enrol',
-            [
-                'courseid' => $course->id,
-                'enrol' => 'manual'
-            ], '*', IGNORE_MULTIPLE);
+            ['courseid' => $course->id, 'enrol' => 'manual'], '*', IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
         }
 
         $testroleassignments = $DB->get_record('role_assignments',
-            [
-                'roleid' => 5,
-                'contextid' => $context->id,
-                'userid' => $user->id
-            ], '*', IGNORE_MULTIPLE);
+            ['roleid' => 5, 'contextid' => $context->id, 'userid' => $user->id], '*', IGNORE_MULTIPLE);
         if ($testroleassignments == null) {
             return false;
         }
 
         $userenrolments = $DB->get_record('user_enrolments',
-            [
-                'enrolid' => $enrol->id,
-                'userid' => $user->id
-            ], '*', IGNORE_MULTIPLE);
+            ['enrolid' => $enrol->id, 'userid' => $user->id], '*', IGNORE_MULTIPLE);
         if ($userenrolments != null) {
             return !$userenrolments->status;
         } else {
@@ -149,7 +137,7 @@ class enroll_util {
      * @param $timestart
      * @param $timeend
      * @param $status
-     * @param $roleid
+     * @param int $roleid
      *      1 => manager
      *      2 => coursecreator
      *      3 => editingteacher
@@ -160,78 +148,44 @@ class enroll_util {
      *      8 => frontpage
      *
      * @return bool
+     *
      * @throws \dml_exception
+     * @throws \coding_exception
      */
     public static function enrol($course, $user, $timestart, $timeend, $status, $roleid = 5) {
-        global $DB, $USER;
+        global $DB, $PAGE, $CFG;
 
-        // Evita erro.
-        $context = \context_course::instance($course->id, IGNORE_MISSING);
-        if ($context == null) {
+        $enrol = $DB->get_record('enrol', ['courseid' => $course->id, 'enrol' => 'manual']);
+        if (!$enrol) {
             return false;
         }
 
-        /** @var \stdClass $enrol */
-        $enrol = $DB->get_record('enrol',
-            [
-                'courseid' => $course->id,
-                'enrol' => 'manual'
-            ]);
-        if ($enrol == null) {
+        require_once("{$CFG->dirroot}/enrol/locallib.php");
+        $manager = new course_enrolment_manager($PAGE, $course);
+        $instances = $manager->get_enrolment_instances();
+        $plugins = $manager->get_enrolment_plugins(true); // Do not allow actions on disabled plugins.
+        if (!array_key_exists($enrol->id, $instances)) {
             return false;
+            // throw new Exception('invalidenrolinstance');
+        }
+        $instance = $instances[$enrol->id];
+        if (!isset($plugins[$instance->enrol])) {
+            return false;
+            //throw new Exception('enrolnotpermitted');
         }
 
-        $testroleassignments = $DB->get_record('role_assignments',
-            [
-                'roleid' => $roleid,
-                'contextid' => $context->id,
-                'userid' => $user->id
-            ]);
-        if ($testroleassignments == null) {
-            $roleassignments = new \stdClass();
-            $roleassignments->roleid = $roleid;
-            $roleassignments->contextid = $context->id;
-            $roleassignments->userid = $user->id;
-            $roleassignments->timemodified = time();
+        //$context = context_course::instance($course->id, MUST_EXIST);
 
-            $DB->insert_record('role_assignments', $roleassignments);
-        }
-
-        if ($USER && isset($USER->id) && $USER->id > 1) {
-            $admin = $USER;
+        /** @var \enrol_manual_plugin $plugin */
+        $plugin = $plugins[$instance->enrol];
+        if ($plugin->allow_enrol($instance)) {
+            $roleid = 5;
+            $timestart = time();
+            $timeend = 0;
+            $recovergrades = 0;
+            $plugin->enrol_user($instance, $user->id, $roleid, $timestart, $timeend, null, $recovergrades);
         } else {
-            $admin = get_admin();
-        }
-
-        $userenrolments = $DB->get_record('user_enrolments',
-            [
-                'enrolid' => $enrol->id,
-                'userid' => $user->id
-            ]);
-        if ($userenrolments != null) {
-            $userenrolments->status = $status;
-            $userenrolments->timestart = $timestart;
-            $userenrolments->timeend = $timeend;
-            $userenrolments->modifierid = $admin->id;
-            $userenrolments->timemodified = time();
-
-            $DB->update_record('user_enrolments', $userenrolments);
-
             return false;
-        } else {
-            $userenrolments = new \stdClass();
-            $userenrolments->status = $status;
-            $userenrolments->enrolid = $enrol->id;
-            $userenrolments->userid = $user->id;
-            $userenrolments->timestart = $timestart;
-            $userenrolments->timeend = $timeend;
-            $userenrolments->modifierid = $admin->id;
-            $userenrolments->timecreated = time();
-            $userenrolments->timemodified = time();
-
-            $DB->insert_record('user_enrolments', $userenrolments);
-
-            return true;
         }
     }
 
@@ -243,31 +197,17 @@ class enroll_util {
      * @throws \dml_exception
      */
     public static function unenrol($course, $user) {
-        global $DB;
+        global $DB, $PAGE, $CFG;
 
-        /** @var \stdClass $enrol */
-        $enrol = $DB->get_record('enrol',
-            [
-                'courseid' => $course->id,
-                'enrol' => 'manual',
-            ]);
-        if ($enrol == null) {
+        $enrol = $DB->get_record('enrol', ['courseid' => $course->id, 'enrol' => 'manual']);
+        if (!$enrol) {
             return false;
         }
 
-        $userenrolments = $DB->get_record('user_enrolments',
-            [
-                'enrolid' => $enrol->id,
-                'userid' => $user->id
-            ]);
-        if ($userenrolments != null) {
-            $userenrolments->status = ENROL_INSTANCE_DISABLED;
-            $userenrolments->modifierid = get_admin()->id;
-            $userenrolments->timemodified = time();
+        $userenrolment = $DB->get_record('user_enrolments', ['userid' => $user->id, 'enrolid' => $enrol->id]);
 
-            $DB->update_record('user_enrolments', $userenrolments);
-        }
-
-        return true;
+        require_once("{$CFG->dirroot}/enrol/locallib.php");
+        $manager = new course_enrolment_manager($PAGE, $course);
+        return $manager->unenrol_user($userenrolment);
     }
 }
