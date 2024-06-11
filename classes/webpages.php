@@ -349,7 +349,7 @@ class webpages {
             input_select::new_instance()
                 ->set_title(get_string_kopere('webpages_page_menu'))
                 ->set_name('menuid')
-                ->set_values(self::list_menus(0, 0, ""))
+                ->set_values(self::list_menus())
                 ->set_value($webpages->menuid));
         echo "</div>";
         echo "<div class='col-md'>";
@@ -581,7 +581,7 @@ class webpages {
                 ->set_title(get_string_kopere('webpages_menu_menuid'))
                 ->set_name('menuid')
                 ->set_values(
-                    $this->list_menus(0, $menus->id, "")
+                    self::list_menus(0, $menus->id)
                 )
                 ->set_value($menus->menuid)
                 ->set_required()
@@ -597,8 +597,6 @@ class webpages {
         dashboard_util::end_page();
     }
 
-    private $list_menus = [];
-
     /**
      * Get array menus
      *
@@ -610,22 +608,23 @@ class webpages {
      *
      * @throws \dml_exception
      */
-    private function list_menus($menuid, $not_menuid, $spaces) {
+    public static function list_menus($menuid = 0, $not_menuid = 0, $spaces = '') {
         global $DB;
 
         $menus = $DB->get_records('kopere_dashboard_menu', ['menuid' => $menuid]);
 
+        $listmenus = [];
         if ($menus) {
             /** @var kopere_dashboard_menu $menu */
             foreach ($menus as $menu) {
-                $this->list_menus[] = ['key' => $menu->id, 'value' => "{$spaces}{$menu->title}"];
+                $listmenus[] = ['key' => $menu->id, 'value' => "{$spaces}{$menu->title}"];
                 if ($not_menuid != $menu->id) {
-                    $this->list_menus($menu->id, $not_menuid, "  ");
+                    self::list_menus($menu->id, $not_menuid, "  ");
                 }
             }
         }
 
-        return $this->list_menus;
+        return $listmenus;
     }
 
     /**
