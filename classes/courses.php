@@ -83,10 +83,16 @@ class courses {
     public function load_all_courses() {
         global $DB;
 
-        $data = $DB->get_records_sql(
-            "SELECT c.id, c.fullname, c.shortname, c.visible,
+        $cache = \cache::make('local_kopere_dashboard', 'courses_all_courses');
+        $cachekey = "load_all_courses";
+        if ($cache->has($cachekey)) {
+            $cache = $cache->get($cachekey);
+        }
+
+        $data = $DB->get_records_sql( "
+            SELECT c.id, c.fullname, c.shortname, c.visible,
                      (
-                         SELECT COUNT( DISTINCT u.id )
+                         SELECT COUNT(DISTINCT ue.id)
                            FROM {user_enrolments} ue
                            JOIN {role_assignments} ra ON ue.userid = ra.userid
                            JOIN {enrol} e             ON e.id = ue.enrolid
@@ -97,6 +103,8 @@ class courses {
               FROM {course} c
              WHERE c.id > 1"
         );
+
+        $cache->set($cachekey, $data);
 
         json::encode($data);
     }
@@ -211,6 +219,12 @@ class courses {
         $PAGE->requires->js_call_amd('local_kopere_dashboard/course', 'courses_enrol_new');
     }
 
+    /**
+     * @throws \coding_exception
+     * @throws \dml_exception
+     * @throws \moodle_exception
+     * @throws \Exception
+     */
     public function enrol_new() {
         global $DB, $CFG, $PAGE, $USER;
 
