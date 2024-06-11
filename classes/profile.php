@@ -86,7 +86,7 @@ class profile {
      * @throws \dml_exception
      */
     public static function list_courses($userid) {
-        global $DB, $CFG;
+        global $DB;
 
         $courses = enrol_get_all_users_courses($userid);
 
@@ -133,7 +133,7 @@ class profile {
             }
 
             $url = local_kopere_dashboard_makeurl("userenrolment", "mathedit",
-                ["courseid" => $course->id, "ueid" => $enrolment->id], "load-ajax");
+                ["courseid" => $course->id, "ueid" => $enrolment->id], "view-ajax");
             return
                 "<li>
                     <h4 class='title'>{$course->fullname}
@@ -156,6 +156,7 @@ class profile {
      * @param $user
      *
      * @return string
+     * @throws \coding_exception
      */
     public static function get_user_info($user) {
         global $CFG;
