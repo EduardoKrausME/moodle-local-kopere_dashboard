@@ -1,0 +1,63 @@
+.jquery-ui-tabs,
+.jquery-ui-accordion {
+  background: #f6f6f6;
+  padding: 20px;
+  margin: 20px;
+  position: relative;
+}
+.jquery-ui-tabs *,
+.jquery-ui-accordion * {
+  padding: 5px;
+}
+.jquery-ui-tabs:before,
+.jquery-ui-tabs :before,
+.jquery-ui-accordion:before,
+.jquery-ui-accordion :before {
+  position: absolute;
+  top: -11px;
+  left: 0;
+  font-size: 10px;
+  color: #dc3545;
+  user-select: none;
+  background: #d3d3d3;
+  padding: 0;
+}
+
+.jquery-ui-tabs:before {
+  content: "jQuery UI Tabs";
+}
+.jquery-ui-tabs ul {
+  list-style: none;
+  margin: 0;
+  padding-top: 7px;
+}
+.jquery-ui-tabs ul li,
+.jquery-ui-tabs > div {
+  position: relative;
+  margin: 12px 0;
+  padding: 10px;
+}
+.jquery-ui-tabs ul li:before {
+  content: "Tab";
+}
+.jquery-ui-tabs > div:before {
+  content: "Content Tab";
+}
+
+.jquery-ui-accordion:before {
+  content: "jQuery UI Accordion";
+}
+.jquery-ui-accordion > h3,
+.jquery-ui-accordion > div {
+  position: relative;
+  margin: 12px 0;
+  padding: 10px;
+}
+.jquery-ui-accordion > h3:before {
+  content: "Section";
+}
+.jquery-ui-accordion > div:before {
+  content: "Content Section";
+}
+
+/*# sourceMappingURL=bootstrap.css.map */

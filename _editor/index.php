@@ -21,9 +21,12 @@
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 require_once('../../../config.php');
+require_once('./function.php');
 require_once('../lib.php');
 require_once('../autoload.php');
+$PAGE->set_context(\context_system::instance());
 
 $page = required_param('page', PARAM_TEXT);
 $id = required_param('id', PARAM_TEXT);
@@ -31,724 +34,1611 @@ $link = optional_param('link', '', PARAM_TEXT);
 require_login();
 require_capability('moodle/site:config', context_system::instance());
 
-$htmldata = optional_param('htmldata', false, PARAM_RAW);
-$cssdata = optional_param('cssdata', false, PARAM_RAW);
-if ($htmldata) {
-    $html = "{$htmldata}\n<style>{$cssdata}</style>";
-    if ($page == "webpages") {
-        $webpages = $DB->get_record("kopere_dashboard_webpages", ["id" => $id]);
-        $webpages->text = $html;
-        $DB->update_record("kopere_dashboard_webpages", $webpages);
-
-        redirect(local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $id]));
-    } else if ($page == "notification") {
-        $events = $DB->get_record("kopere_dashboard_events", ["id" => $id]);
-        $events->message = $html;
-        $DB->update_record("kopere_dashboard_events", $events);
-
-        redirect(local_kopere_dashboard_makeurl("notifications", "add_segunda_etapa", ["id" => $id]));
-    } else if ($page == 'aceite') {
-        set_config('formulario_pedir_aceite', $html, 'local_kopere_dashboard');
-
-        redirect(local_kopere_dashboard_makeurl("pay-setting", "settings"));
-    } else if ($page == 'meiodeposito') {
-        set_config('kopere_pay-meiodeposito-conta', $html, 'local_kopere_dashboard');
-
-        redirect(local_kopere_dashboard_makeurl("pay-meio_pagamento", "edit", ["meio" => "MeioDeposito"]));
-    }
+function loadsvg($file) {
+    echo file_get_contents($file);
 }
-
-global $plugins;
-require_once("{$CFG->dirroot}/lib/jquery/plugins.php");
-
-$currentlang = $CFG->lang;
-if (isset($_SESSION['SESSION']->lang)) {
-    $currentlang = $_SESSION['SESSION']->lang;
-}
-$langP = explode("_", $currentlang);
-foreach ($langP as $i) {
-    $_lang = implode("_", $langP);
-    if (file_exists(__DIR__ . "/js/locale/{$_lang}.json")) {
-        $currentlang = $_lang;
-        break;
-    }
-    array_pop($langP);
-}
-if (!file_exists(__DIR__ . "/js/locale/{$currentlang}.json")) {
-    $currentlang = "en";
-}
-$langs = json_decode(file_get_contents(__DIR__ . "/js/locale/{$currentlang}.json"));
 
 ?>
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
 <head>
     <meta charset="utf-8">
-    <title>Edit Page</title>
-    <link rel="stylesheet" href="styles/toastr.css">
-    <link rel="stylesheet" href="styles/grapes.css">
-    <link rel="stylesheet" href="styles/grapesjs-preset-webpage.css">
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/tooltip.css">
-    <link rel="stylesheet" href="styles/grapick.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script src="js/jquery.js"></script>
-    <script src="js/toastr.js"></script>
-    <script src="js/grapes.js"></script>
+    <title>VvvebJs</title>
 
-    <script src="js/plugins/grapesjs-preset-webpage.js"></script>
-    <script src="js/plugins/grapesjs-blocks-basic.js"></script>
-    <script src="js/plugins/grapesjs-plugin-forms.js"></script>
-    <script src="js/plugins/grapesjs-custom-code.js"></script>
-    <script src="js/plugins/grapesjs-touch.js"></script>
-    <script src="js/plugins/grapesjs-parser-postcss.js"></script>
-    <script src="js/plugins/grapesjs-tui-image-editor.js"></script>
-    <script src="js/plugins/grapesjs-style-bg.js"></script>
-    <script src="js/plugins/grapesjs-plugin-ckeditor.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/editor.css" rel="stylesheet">
 </head>
 <body>
 
-<div id="gjs" style="height:0; overflow:hidden">
-    <?php
-    if (file_exists(__DIR__ . "/default-{$page}.html")) {
-        $pagePreview = "";
-        if ($page == "webpages") {
-            $text = $DB->get_field("kopere_dashboard_webpages", "text", ["id" => $id]);
-            $pagePreview = "{$CFG->wwwroot}/local/kopere_dashboard/";
-        } else if ($page == "notification") {
-            $text = $DB->get_field("kopere_dashboard_events", "message", ["id" => $id]);
-        } else if ($page == "aceite") {
-            $text = get_config('local_kopere_dashboard', 'formulario_pedir_aceite');
-            $pagePreview = "{$CFG->wwwroot}/local/kopere_pay/termos.php";
-        } else if ($page == "meiodeposito") {
-            $text = get_config('local_kopere_dashboard', 'kopere_pay-meiodeposito-conta');
-        }
+<div id="vvveb-builder">
+    <div id="top-panel">
+        <img src="img/logo.png" class="float-start" id="logo">
 
-        if (!isset($text[1])) {
-            $text = file_get_contents(__DIR__ . "/default-{$page}.html");
-        }
+        <div class="btn-group float-start" role="group">
+            <button class="btn btn-light active" title="Toggle file manager" id="toggle-file-manager-btn"
+                    data-vvveb-action="toggleTreeList" data-bs-toggle="button" aria-pressed="false">
+                <img src="libs/builder/icons/file-manager-layout.svg" width="18" height="18" role="presentation">
+            </button>
 
-        $text = str_replace("{wwwroot}", $CFG->wwwroot, $text);
-        $text = str_replace("{shortname}", $SITE->shortname, $text);
-        $text = str_replace("{fullname}", $SITE->fullname, $text);
-        echo $text;
-    } else {
-        die("OPS...");
-    }
-    ?>
-</div>
+            <button class="btn btn-light active" title="Toggle left column" id="toggle-left-column-btn"
+                    data-vvveb-action="toggleLeftColumn" data-bs-toggle="button" aria-pressed="false">
+                <img src="libs/builder/icons/left-column-layout.svg" width="18" height="18" role="presentation">
+            </button>
 
-<script type="text/javascript">
-    var editor = grapesjs.init({
-        'height'          : '100%',
-        'container'       : '#gjs',
-        'fromElement'     : true,
-        'showOffsets'     : true,
-        'storageManager'  : false,
-        'assetManager'    : {
-            'embedAsBase64' : true,
-            'assets'        : [],
-        },
-        'selectorManager' : {'componentFirst' : true},
-        'styleManager'    : {
-            'sectors' : [
-                {
-                    'name'       : '<?php echo $langs->styleManager->sectors->general ?>',
-                    'properties' : [
-                        'display',
-                        {'extend' : 'position', 'type' : 'select'},
-                        'top',
-                        'right',
-                        'left',
-                        'bottom',
-                    ],
-                },
-                {
-                    'name'       : '<?php echo $langs->styleManager->sectors->dimension ?>',
-                    'open'       : false,
-                    'properties' : [
-                        'width',
-                        'height',
-                        'max-width',
-                        'min-width',
-                        'max-height',
-                        'min-height',
-                        'margin',
-                        'padding'
-                    ],
-                },
-                {
-                    'name'       : '<?php echo $langs->styleManager->sectors->typography ?>',
-                    'open'       : false,
-                    'properties' : [
-                        {
-                            'property' : 'font-family',
-                            'type'     : 'select',
-                            'name'     : '<?php $a = 'font-family'; echo $langs->styleManager->properties->$a ?>',
-                            'options'  : [
-                                {
-                                    'id'    : "Arial,Helvetica,sans-serif",
-                                    'label' : 'Arial',
-                                },
-                                {
-                                    'id'    : "'Courier New',Courier,monospace",
-                                    'label' : 'Courier New',
-                                },
-                                {
-                                    'id'    : "Verdana,Geneva,sans-serif",
-                                    'label' : 'Verdana',
-                                },
-                                <?php echo \local_kopere_dashboard\fonts\font_util::grapsjs() ?>
-                            ]
-                        },
-                        'font-size',
-                        'font-weight',
-                        'letter-spacing',
-                        'color',
-                        'line-height',
-                        {
-                            'extend'  : 'text-align',
-                            'options' : [
-                                {
-                                    'id'        : 'left',
-                                    'label'     : '<?php echo $langs->styleManager->properties->left ?>',
-                                    'className' : 'fa fa-align-left'
-                                },
-                                {
-                                    'id'        : 'center',
-                                    'label'     : '<?php echo $langs->styleManager->properties->center ?>',
-                                    'className' : 'fa fa-align-center'
-                                },
-                                {
-                                    'id'        : 'right',
-                                    'label'     : '<?php echo $langs->styleManager->properties->right ?>',
-                                    'className' : 'fa fa-align-right'
-                                },
-                                {
-                                    'id'        : 'justify',
-                                    'label'     : '<?php echo $langs->styleManager->properties->justify ?>',
-                                    'className' : 'fa fa-align-justify'
-                                }
-                            ],
-                        },
-                        {
-                            'property' : 'text-decoration',
-                            'type'     : 'radio',
-                            'default'  : 'none',
-                            'options'  : [
-                                {
-                                    'id'        : 'none',
-                                    'label'     : '<?php echo $langs->styleManager->properties->none ?>',
-                                    'className' : 'fa fa-times'
-                                },
-                                {
-                                    'id'        : 'underline',
-                                    'label'     : '<?php echo $langs->styleManager->properties->underline ?>',
-                                    'className' : 'fa fa-underline'
-                                },
-                                {
-                                    'id'        : 'line-through',
-                                    'label'     : '<?php echo $langs->styleManager->properties->line_through ?>',
-                                    'className' : 'fa fa-strikethrough'
-                                }
-                            ],
-                        },
-                        'text-shadow',
-                        {
-                            'property' : 'text-transform',
-                            'type'     : 'radio',
-                            'default'  : 'none',
-                            'options'  : [
-                                {
-                                    'id'    : 'none',
-                                    'label' : 'x'
-                                },
-                                {
-                                    'id'    : 'capitalize',
-                                    'label' : 'Tt'
-                                },
-                                {
-                                    'id'    : 'lowercase',
-                                    'label' : 'tt'
-                                },
-                                {
-                                    'id'    : 'uppercase',
-                                    'label' : 'TT'
-                                }
-                            ]
-                        }
-                    ],
-                },
-                {
-                    'name'       : '<?php echo $langs->styleManager->properties->background ?>',
-                    'open'       : false,
-                    'properties' : [
-                        'background',
-                    ],
-                },
-                {
-                    'name'       : '<?php echo $langs->styleManager->sectors->decorations ?>',
-                    'open'       : false,
-                    'properties' : [
-                        'opacity',
-                        'border-radius',
-                        'border',
-                    ],
-                },
-            ],
-        },
-        'plugins'         : [
-            'grapesjs-blocks-basic',
-            'grapesjs-plugin-forms',
-            'grapesjs-component-countdown',
-            'grapesjs-tabs',
-            'grapesjs-custom-code',
-            'grapesjs-touch',
-            'grapesjs-parser-postcss',
-            'grapesjs-tooltip',
-            'grapesjs-tui-image-editor',
-            'grapesjs-typed',
-            'grapesjs-style-bg',
-            'grapesjs-preset-webpage',
-            'grapesjs-plugin-ckeditor',
-        ],
-        'pluginsOpts'     : {
-            'grapesjs-blocks-basic'     : {
-                'flexGrid' : false,
-            },
-            'grapesjs-tui-image-editor' : {
-                'script' : [
-                    './js/tui/tui-code-snippet.js',
-                    './js/tui/tui-color-picker.js',
-                    './js/tui/tui-image-editor.js'
-                ],
-                'style'  : [
-                    './styles/tui/tui-color-picker.css',
-                    './styles/tui/tui-image-editor.css',
-                ],
-            },
-            'grapesjs-tabs'             : {
-                'tabsBlock' : {'category' : '<?php echo $langs->styleManager->sectors->extra ?>'}
-            },
-            'grapesjs-typed'            : {
-                'block' : {
-                    'category' : '<?php echo $langs->styleManager->sectors->extra ?>',
-                    'content'  : {
-                        'type'       : 'typed',
-                        'type-speed' : 40,
-                        'strings'    : [
-                            'Text row one',
-                            'Text row two',
-                            'Text row three',
-                        ],
-                    }
-                }
-            },
-            'grapesjs-preset-webpage'   : {
-                'modalImportTitle'   : '<?php echo $langs->preset->webpage->edit_code ?>',
-                'modalImportLabel'   : '<div style="margin-bottom: 10px; font-size: 13px;"><?php echo $langs->preset->webpage->edit_code_paste_here_html ?></div>',
-                'modalImportContent' : function(editor) {
-                    var html = editor.getHtml();
-                    html = html.split(/<body.*?>/).join('');
-                    html = html.split('</body>').join('');
+            <button class="btn btn-light active" title="Toggle right column" id="toggle-right-column-btn"
+                    data-vvveb-action="toggleRightColumn" data-bs-toggle="button" aria-pressed="false">
+                <img src="libs/builder/icons/right-column-layout.svg" width="18" height="18" role="presentation">
+            </button>
+        </div>
 
-                    var css = "\n" + editor.getCss();
-                    css = css.split(/\*.*?}/s).join('');
-                    css = css.split(/\nbody.*?}/s).join('');
-                    css = css.split(/:root.*?}/s).join('');
-                    css = css.split(/\[data-gjs-type="?wrapper"?]\s?>\s?#/).join('#');
-                    css = css.split(/\[data-gjs-type="?wrapper"?]\s?>\s/).join('');
+        <div class="btn-group me-3" role="group">
+            <button class="btn btn-light" title="Undo (Ctrl/Cmd + Z)" id="undo-btn" data-vvveb-action="undo"
+                    data-vvveb-shortcut="ctrl+z">
+                <?php loadsvg("img/icon-undo.svg") ?>
+            </button>
 
-                    return `${html}\n<style>\n${css}</style>`;
-                },
-            },
-            'grapesjs-blocks-table'     : {
-                'containerId' : '#gjs'
-            },
-            'grapesjs-plugin-ckeditor'  : {
-                'options' : {
-                    'baseHref'            : '<?php echo $CFG->wwwroot ?>/',
-                    'startupFocus'        : true,
-                    'extraAllowedContent' : '*(*);*{*}',
-                    'allowedContent'      : true,
-                    'enterMode'           : 2,
-                    'extraPlugins'        : 'sharedspace,justify,colorbutton,panelbutton,font',
-                    'toolbar'             : "Basic",
-                    'toolbarGroups'       : [
-                        {'name' : 'clipboard', 'groups' : ['clipboard', 'undo']},
-                        {'name' : 'links'},
-                        {'name' : 'basicstyles', 'groups' : ['basicstyles', 'cleanup']},
-                        {'name' : 'colors'},
-                        '/',
-                        {'name' : 'styles'},
+            <button class="btn btn-light" title="Redo (Ctrl/Cmd + Shift + Z)" id="redo-btn" data-vvveb-action="redo"
+                    data-vvveb-shortcut="ctrl+shift+z">
+                <?php loadsvg("img/icon-redo.svg") ?>
+            </button>
+        </div>
 
-                    ],
-                    'font_names'          : "Arial/Arial,Helvetica,sans-serif;Courier New/Courier New,Courier,monospace;Verdana/Verdana,Geneva,sans-serif;<?php echo \local_kopere_dashboard\fonts\font_util::ckeditor(); ?>",
-                    'stylesSet'           : [
-                        {'name' : 'Paragraph', 'element' : 'p'},
-                        {'name' : 'Heading 1', 'element' : 'h1'},
-                        {'name' : 'Heading 2', 'element' : 'h2'},
-                        {'name' : 'Heading 3', 'element' : 'h3'},
-                        {'name' : 'Heading 4', 'element' : 'h4'},
-                        {'name' : 'Heading 5', 'element' : 'h5'},
-                        {'name' : 'Heading 6', 'element' : 'h6'},
-                        {'name' : 'Preformatted Text', 'element' : 'pre'},
-                        {'name' : 'Address', 'element' : 'address'},
 
-                        {'name' : 'Big', 'element' : 'big'},
-                        {'name' : 'Small', 'element' : 'small'},
-                        {'name' : 'Typewriter', 'element' : 'tt'},
+        <div class="btn-group me-3" role="group">
+            <button class="btn btn-light" title="Designer Mode (Free dragging)" id="designer-mode-btn"
+                    data-bs-toggle="button" aria-pressed="false" data-vvveb-action="setDesignerMode">
+                <?php loadsvg("img/icon-hand-rock.svg") ?>
+            </button>
 
-                        {'name' : 'Computer Code', 'element' : 'code'},
-                        {'name' : 'Keyboard Phrase', 'element' : 'kbd'},
-                        {'name' : 'Sample Text', 'element' : 'samp'},
+            <button class="btn btn-light" title="Preview" id="preview-btn" type="button" data-bs-toggle="button"
+                    aria-pressed="false" data-vvveb-action="preview">
+                <?php loadsvg("img/icon-preview.svg") ?>
+            </button>
 
-                        {'name' : 'Cited Work', 'element' : 'cite'},
-                        {'name' : 'Inline Quotation', 'element' : 'q'},
+            <button class="btn btn-light" title="Fullscreen (F11)" id="fullscreen-btn" data-bs-toggle="button"
+                    aria-pressed="false" data-vvveb-action="fullscreen">
+                <?php loadsvg("img/icon-expand.svg") ?>
+            </button>
+        </div>
 
-                        {'name' : 'Styled Image (left)', 'element' : 'img', 'attributes' : {'class' : 'left'}},
-                        {'name' : 'Styled Image (right)', 'element' : 'img', 'attributes' : {'class' : 'right'}},
 
-                        {'name' : 'Square Bulleted List', 'element' : 'ul', 'styles' : {'list-style-type' : 'square'}},
-                    ],
-                },
-            },
-        },
-        'canvas'          : {
-            'styles'  : [
-                'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
-                '<?php echo "{$CFG->wwwroot}/local/kopere_dashboard/_editor/styles/bootstrap.css"; ?>',
-                '<?php echo \local_kopere_dashboard\fonts\font_util::css() ?>',
-                '<?php echo "{$CFG->wwwroot}/lib/jquery/{$plugins['ui-css']['files'][0]}"; ?>',
-            ],
-            'scripts' : [
-                '<?php echo "{$CFG->wwwroot}/lib/jquery/{$plugins['jquery']['files'][0]}"; ?>',
-                '<?php echo "{$CFG->wwwroot}/lib/jquery/{$plugins['ui']['files'][0]}"; ?>',
-                'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
-            ],
-        },
-        'i18n'            : {
-            'locale'         : 'en',
-            'detectLocale'   : false,
-            'localeFallback' : 'en',
-            'messages'       : {
-                'en' : <?php echo json_encode($langs, JSON_PRETTY_PRINT) ?>,
+        <div class="btn-group me-2 float-end" role="group">
+            <?php
+            $pagePreview = false;
+            if ($page == "webpages") {
+                $pagePreview = "{$CFG->wwwroot}/local/kopere_dashboard/";
+            } else if ($page == "aceite") {
+                $pagePreview = "{$CFG->wwwroot}/local/kopere_pay/termos.php";
             }
-        }
-    });
+            if ($pagePreview) { ?>
+            <form class="form-preview" method="post" target="editor-preview"
+                  action="<?php echo $pagePreview ?>">
+                <input type="hidden" name="page" value="<?php echo $page ?>">
+                <input type="hidden" name="link" value="<?php echo $link ?>">
+                <input type="hidden" name="id" value="<?php echo $id ?>">
+                <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>">
+                <input type="hidden" name="htmldata" id="form-htmldata">
+                <button datatype="--submit" class="btn btn-info btn-sm btn-icon preview-btn mx-2"
+                        data-vvveb-action="openPreview">
+                    <?php loadsvg("img/icon-preview.svg") ?>
+                    <span>Preview</span>
+                </button>
+                </form><?php
+            } ?>
 
-    // editor.getConfig().showDevices = 0;
-    editor.Panels.addPanel({
-        'id' : "devices-c"
-    }).get("buttons").add([
-        {
-            'id'        : "block-save",
-            'className' : "btn-salvar padding-0",
-            'label'     : `<form class="form-save-preview" method="post" target="_top"
-                                     style="display:none;margin:0;">
-                                   <input type="hidden" name="page"     value="<?php echo $page ?>">
-                                   <input type="hidden" name="link"     value="<?php echo $link ?>">
-                                   <input type="hidden" name="id"       value="<?php echo $id ?>">
-                                   <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>">
-                                   <input type="hidden" name="htmldata" class="form-htmldata">
-                                   <input type="hidden" name="cssdata"  class="form-cssdata">
-                                   <button type="submit" class="btn-salvar gjs-pn-btn gjs-pn-active gjs-four-color">
-                                       <i class='fa fa-save'></i>&nbsp;
-                                       <?php echo $langs->page->save ?>
-                                  </button>
-                               </form>
-                               <form class="form-save-preview form-preview" method="post" target="home-preview"
-                                     style="display:none;margin:0;"
-                                     action="<?php echo $pagePreview ?>">
-                                   <input type="hidden" name="page"     value="<?php echo $page ?>">
-                                   <input type="hidden" name="link"     value="<?php echo $link ?>">
-                                   <input type="hidden" name="id"       value="<?php echo $id ?>">
-                                   <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>">
-                                   <input type="hidden" name="htmldata" class="form-htmldata">
-                                   <input type="hidden" name="cssdata"  class="form-cssdata">
-                                   <button type="submit" class="btn-salvar gjs-pn-btn gjs-pn-active gjs-four-color">
-                                       <i class='fa fa-eye'></i>&nbsp;
-                                       <?php echo $langs->page->preview ?>
-                                  </button>
-                               </form>`,
-        }
-    ]);
+            <button class="btn btn-primary btn-sm btn-icon save-btn" title="Export (Ctrl + E)" id="save-btn"
+                    data-vvveb-action="saveAjax"
+                    data-vvveb-url="save.php?page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>"
+                    data-v-vvveb-shortcut="ctrl+e">
+                <span class="loading d-none">
+                    <?php loadsvg("img/icon-save.svg") ?>
+                    <span class="spinner-border spinner-border-sm align-middle" role="status" aria-hidden="true"></span>
+                    <span>Saving </span>
+                    ...
+                </span>
+                <span class="button-text">
+                    <?php loadsvg("img/icon-save.svg") ?>
+                    <span>Save</span>
+                </span>
+            </button>
+        </div>
 
-    // jQuery UI custom component
-    editor.BlockManager.add('jquery-ui-accordion', {
-        label    : 'Accordion',
-        category : "jQuery UI",
-        content  : `
-                <div class="jquery-ui-accordion">
-                    <h3>Section 1</h3>
-                    <div>
-                        <p>
-                            Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-                            ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-                            amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-                            odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-                        </p>
+        <div class="float-end me-3">
+            <div class="btn-group responsive-btns" role="group">
+                <button id="desktop-view" data-view="" class="btn btn-light active" title="Desktop view"
+                        data-vvveb-action="viewport">
+                    <i class="la la-laptop"></i>
+                </button>
+                <button id="mobile-view" data-view="mobile" class="btn btn-light" title="Mobile view"
+                        data-vvveb-action="viewport">
+                    <i class="la la-mobile"></i>
+                </button>
+                <button id="tablet-view" data-view="tablet" class="btn btn-light" title="Tablet view"
+                        data-vvveb-action="viewport">
+                    <i class="la la-tablet"></i>
+                </button>
+                <div class="percent">
+                    <input type="number" id="zoom" value="100" step="10" min="10" max="100" class="form-control"
+                           data-vvveb-action="zoomChange" data-vvveb-on="change">
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="left-panel">
+
+        <div id="tree-list">
+            <div class="header">
+                <div>Navigator</div>
+            </div>
+            <div class="tree">
+                <ol>
+                </ol>
+            </div>
+        </div>
+
+
+        <div class="drag-elements">
+
+            <div class="header">
+                <ul class="nav nav-tabs  nav-fill" id="elements-tabs" role="tablist">
+                    <li class="nav-item sections-tab">
+                        <a class="nav-link active" id="sections-tab" data-bs-toggle="tab" href="#sections" role="tab"
+                           aria-controls="sections" aria-selected="true" title="Sections">
+                            <?php loadsvg("img/icon-layers.svg") ?>
+                        </a>
+                    </li>
+                    <li class="nav-item component-tab">
+                        <a class="nav-link" id="components-tab" data-bs-toggle="tab" href="#components-tabs" role="tab"
+                           aria-controls="components" aria-selected="false" title="Components">
+                            <?php loadsvg("img/icon-cube.svg") ?>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane show active" id="sections" role="tabpanel"
+                         aria-labelledby="sections-tab">
+                        <div class="tab-pane sections show active" id="sections-list" data-section="style"
+                             role="tabpanel"
+                             aria-labelledby="style-tab">
+                            <div class="drag-elements-sidepane sidepane">
+                                <div>
+                                    <div class="sections-container p-4">
+
+                                        <div class="section-item" draggable="true">
+                                            <div class="controls">
+                                                <div class="handle"></div>
+                                                <div class="info">
+                                                    <div class="name">&nbsp;
+                                                        <div class="type">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="section-item" draggable="true">
+                                            <div class="controls">
+                                                <div class="handle"></div>
+                                                <div class="info">
+                                                    <div class="name">&nbsp;
+                                                        <div class="type">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="section-item" draggable="true">
+                                            <div class="controls">
+                                                <div class="handle"></div>
+                                                <div class="info">
+                                                    <div class="name">&nbsp;
+                                                        <div class="type">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Section 2</h3>
-                    <div>
-                        <p>
-                            Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-                            purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-                            velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-                            suscipit faucibus urna.
-                        </p>
+
+                    <div class="tab-pane show" id="components-tabs" role="tabpanel" aria-labelledby="components-tab">
+                        <ul class="nav nav-tabs nav-fill sections-tabs" role="tablist">
+                            <li class="nav-item content-tab">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#sections-new-tab" role="tab"
+                                   aria-controls="components" aria-selected="false">
+                                    <?php loadsvg("img/icon-albums.svg") ?>
+                                    <div><span>Sections</span></div>
+                                </a>
+                            </li>
+                            <li class="nav-item blocks-tab">
+                                <a class="nav-link" data-bs-toggle="tab" href="#blocks" role="tab"
+                                   aria-controls="components" aria-selected="false">
+                                    <?php loadsvg("img/icon-copy.svg") ?>
+                                    <div><span>Blocks</span></div>
+                                </a>
+                            </li>
+                            <li class="nav-item components-tab">
+                                <a class="nav-link" data-bs-toggle="tab" href="#components" role="tab"
+                                   aria-controls="components" aria-selected="true">
+                                    <?php loadsvg("img/icon-cube.svg") ?>
+                                    <div><span>Components</span></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane sections show active" id="sections-new-tab" data-section="content"
+                                 role="tabpanel" aria-labelledby="content-tab">
+                                <div class="search">
+                                    <div class="expand">
+                                        <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i
+                                                    class="la la-plus"></i></button>
+                                        <button title="Collapse all" data-vvveb-action="collapse"><i
+                                                    class="la la-minus"></i></button>
+                                    </div>
+
+                                    <input class="form-control section-search" placeholder="Search sections" type="text"
+                                           data-vvveb-action="search" data-vvveb-on="keyup">
+                                    <button class="clear-backspace" data-vvveb-action="clearSearch"
+                                            title="Clear search">
+                                        <i class="la la-times"></i>
+                                    </button>
+                                </div>
+                                <div class="drag-elements-sidepane sidepane">
+                                    <div class="block-preview"><img src="" style="display:none"></div>
+                                    <div>
+                                        <ul class="sections-list clearfix" data-type="leftpanel"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane blocks" id="blocks" data-section="content" role="tabpanel"
+                                 aria-labelledby="content-tab">
+                                <div class="search">
+                                    <div class="expand">
+                                        <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i
+                                                    class="la la-plus"></i></button>
+                                        <button title="Collapse all" data-vvveb-action="collapse"><i
+                                                    class="la la-minus"></i></button>
+                                    </div>
+
+                                    <input class="form-control block-search" placeholder="Search blocks" type="text"
+                                           data-vvveb-action="search" data-vvveb-on="keyup">
+                                    <button class="clear-backspace" data-vvveb-action="clearSearch">
+                                        <i class="la la-times"></i>
+                                    </button>
+                                </div>
+                                <div class="drag-elements-sidepane sidepane">
+                                    <div class="block-preview"><img src=""></div>
+                                    <div>
+                                        <ul class="blocks-list clearfix" data-type="leftpanel">
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane components" id="components" data-section="components" role="tabpanel"
+                                 aria-labelledby="components-tab">
+                                <div class="search">
+                                    <div class="expand">
+                                        <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i
+                                                    class="la la-plus"></i></button>
+                                        <button title="Collapse all" data-vvveb-action="collapse"><i
+                                                    class="la la-minus"></i></button>
+                                    </div>
+
+                                    <input class="form-control component-search" placeholder="Search components"
+                                           type="text" data-vvveb-action="search" data-vvveb-on="keyup">
+                                    <button class="clear-backspace" data-vvveb-action="clearSearch">
+                                        <i class="la la-times"></i>
+                                    </button>
+                                </div>
+                                <div class="drag-elements-sidepane sidepane">
+                                    <div>
+                                        <ul class="components-list clearfix" data-type="leftpanel"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Section 3</h3>
-                    <div>
-                        <p>
-                            Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-                            Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-                            ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-                            lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-                        </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="canvas">
+        <div id="iframe-wrapper">
+            <div id="iframe-layer">
+
+                <div class="loading-message active">
+                    <div class="animation-container">
+                        <div class="dot dot-1"></div>
+                        <div class="dot dot-2"></div>
+                        <div class="dot dot-3"></div>
                     </div>
-                </div>`,
-        media    : `<svg class="svg-item-replace" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54">
-                            <path  d="M5.423,32.092h25.858v1.969H5.423V32.092z M5.423,28.967h34.306v1.971H5.423V28.967z M0.799,25.437v11.749
-                                h52.059V25.437H0.799z M0,15.658h54v22.686H0V15.658z M48.234,21.908L48.234,21.908l0.799-0.811l0,0l1.541-1.562l-0.799-0.405
-                                l-1.541,1.562l-1.541-1.562l-0.8,0.811l1.541,1.562L48.234,21.908z"/>
-                            <path  d="M0,2v9.78h54V2H0z M49.376,7.845l-0.798,0.811l0,0l-0.801-0.811l-1.541-1.562l0.799-0.81l1.543,1.562
-                                l1.54-1.562l0.8,0.81L49.376,7.845L49.376,7.845z"/>
-                            <path  d="M0,42.221V52h54v-9.779H0z M49.376,48.527l-0.798,0.811l0,0l-0.801-0.811l-1.541-1.562l0.799-0.811
-                                l1.543,1.562l1.54-1.562l0.8,0.811L49.376,48.527L49.376,48.527z"/>
-                        </svg>`,
-    });
-    editor.BlockManager.add('jquery-ui-tabs', {
-        label    : 'Tabs',
-        category : "jQuery UI",
-        content  : `
-                <div class="jquery-ui-tabs">
-                    <ul>
-                        <li><a href="#tabs-1">Nunc tincidunt</a></li>
-                        <li><a href="#tabs-2">Proin dolor</a></li>
-                        <li><a href="#tabs-3">Aenean lacinia</a></li>
-                    </ul>
-                    <div id="tabs-1">
-                        <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus.</p>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <defs>
+                            <filter id="goo">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
+                                <feColorMatrix in="blur" mode="matrix"
+                                               values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -7"/>
+                            </filter>
+                        </defs>
+                    </svg>
+                    <!-- https://codepen.io/Izumenko/pen/MpWyXK -->
+                </div>
+
+                <div id="highlight-box">
+                    <div id="highlight-name">
+                        <span class="name"></span>
+                        <span class="type"></span>
                     </div>
-                    <div id="tabs-2">
-                        <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
+
+                    <div id="section-actions">
+                        <a id="add-section-btn" href="" title="Add element"><i class="la la-plus"></i></a>
                     </div>
-                    <div id="tabs-3">
-                        <p>Mauris eleifend est et turpis. Duis id erat.</p>
+                </div>
+
+                <div id="select-box">
+
+                    <div id="wysiwyg-editor" class="default-editor">
+                        <!--
+                        <a id="bold-btn" href="" title="Bold">
+                            <svg height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <path clip-rule="evenodd" d="M56 40V216H148C176.719 216 200 192.719 200 164C200 147.849 192.637 133.418 181.084 123.88C187.926 115.076 192 104.014 192 92C192 63.2812 168.719 40 140 40H56ZM88 144V184H148C159.046 184 168 175.046 168 164C168 152.954 159.046 144 148 144H88ZM88 112V72H140C151.046 72 160 80.9543 160 92C160 103.046 151.046 112 140 112H88Z" fill="#252525" fill-rule="evenodd"/>
+                            </svg>
+                        </a>
+                        <a id="italic-btn" href="" title="Italic">
+                            <svg height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M202 40H84V64H126.182L89.8182 192H54V216H172V192H129.818L166.182 64H202V40Z" fill="#252525"/>
+                            </svg>
+                        </a>
+                        <a id="underline-btn" href="" title="Underline">
+                            <svg height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <path clip-rule="evenodd" d="M88 40H60V108.004C60 145.56 90.4446 176.004 128 176.004C165.555 176.004 196 145.56 196 108.004V40H168V108C168 130.091 150.091 148 128 148C105.909 148 88 130.091 88 108V40ZM204 216V192H52V216H204Z" fill="#252525" fill-rule="evenodd"/>
+                            </svg>
+                        </a>
+                        -->
+
+                        <a id="bold-btn" class="hint" href="" title="Bold" aria-label="Bold">
+                            <svg height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6,4h8a4,4,0,0,1,4,4h0a4,4,0,0,1-4,4H6Z" fill="none" stroke="currentColor"
+                                      stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                <path d="M6,12h9a4,4,0,0,1,4,4h0a4,4,0,0,1-4,4H6Z" fill="none" stroke="currentColor"
+                                      stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                            </svg>
+                        </a>
+                        <a id="italic-btn" class="hint" href="" title="Italic" aria-label="Italic">
+                            <svg height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+                                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" x1="19" x2="10" y1="4" y2="4"/>
+                                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" x1="14" x2="5" y1="20" y2="20"/>
+                                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" x1="15" x2="9" y1="4" y2="20"/>
+                            </svg>
+                        </a>
+                        <a id="underline-btn" class="hint" href="" title="Underline" aria-label="Underline">
+                            <svg height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6,4v7a6,6,0,0,0,6,6h0a6,6,0,0,0,6-6V4" fill="none" stroke="currentColor"
+                                      stroke-linecap="round" stroke-linejoin="round" stroke-width="2" y1="2" y2="2"/>
+                                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" x1="4" x2="20" y1="22" y2="22"/>
+                            </svg>
+                        </a>
+
+
+                        <a id="strike-btn" class="hint" href="" title="Strikeout" aria-label="Strikeout">
+                            <del>S</del>
+                        </a>
+
+                        <div class="dropdown">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="hint" aria-label="Text align"><i class="la la-align-left"></i></span>
+                            </button>
+
+                            <div id="justify-btn" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#" data-value="Left"><i
+                                            class="la la-lg la-align-left"></i> Align Left</a>
+                                <a class="dropdown-item" href="#" data-value="Center"><i
+                                            class="la la-lg la-align-center"></i> Align Center</a>
+                                <a class="dropdown-item" href="#" data-value="Right"><i
+                                            class="la la-lg la-align-right"></i> Align Right</a>
+                                <a class="dropdown-item" href="#" data-value="Full"><i
+                                            class="la la-lg la-align-justify"></i> Align Justify</a>
+                            </div>
+                        </div>
+
+                        <div class="separator"></div>
+
+                        <a id="link-btn" class="hint" href="" title="Create link" aria-label="Create link">
+                            <i class="la la-link">
+                            </i></a>
+
+                        <div class="separator"></div>
+
+                        <input id="fore-color" name="color" type="color" aria-label="Text color" pattern="#[a-f0-9]{6}"
+                               class="form-control form-control-color hint">
+                        <input id="back-color" name="background-color" type="color" aria-label="Background color"
+                               pattern="#[a-f0-9]{6}" class="form-control form-control-color hint">
+
+                        <div class="separator"></div>
+
+                        <select id="font-size" class="form-select" aria-label="Font size">
+                            <option value="">- Font size -</option>
+                            <option value="8px">8 px</option>
+                            <option value="9px">9 px</option>
+                            <option value="10px">10 px</option>
+                            <option value="11px">11 px</option>
+                            <option value="12px">12 px</option>
+                            <option value="13px">13 px</option>
+                            <option value="14px">14 px</option>
+                            <option value="15px">15 px</option>
+                            <option value="16px">16 px</option>
+                            <option value="17px">17 px</option>
+                            <option value="18px">18 px</option>
+                            <option value="19px">19 px</option>
+                            <option value="20px">20 px</option>
+                            <option value="21px">21 px</option>
+                            <option value="22px">22 px</option>
+                            <option value="23px">23 px</option>
+                            <option value="24px">24 px</option>
+                            <option value="25px">25 px</option>
+                            <option value="26px">26 px</option>
+                            <option value="27px">27 px</option>
+                            <option value="28px">28 px</option>
+                        </select>
+
+                        <div class="separator"></div>
+
+                        <select id="font-family" class="form-select" title="Font family">
+                            <option value=""> - Font family -</option>
+                            <optgroup label="System default">
+                                <option value="Arial, Helvetica, sans-serif">Arial</option>
+                                <option value="'Lucida Sans Unicode', 'Lucida Grande', sans-serif">Lucida Grande
+                                </option>
+                                <option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif">Palatino Linotype
+                                </option>
+                                <option value="'Times New Roman', Times, serif">Times New Roman</option>
+                                <option value="Georgia, serif">Georgia, serif</option>
+                                <option value="Tahoma, Geneva, sans-serif">Tahoma</option>
+                                <option value="'Comic Sans MS', cursive, sans-serif">Comic Sans</option>
+                                <option value="Verdana, Geneva, sans-serif">Verdana</option>
+                                <option value="Impact, Charcoal, sans-serif">Impact</option>
+                                <option value="'Arial Black', Gadget, sans-serif">Arial Black</option>
+                                <option value="'Trebuchet MS', Helvetica, sans-serif">Trebuchet</option>
+                                <option value="'Courier New', Courier, monospace">Courier New</option>
+                                <option value="'Brush Script MT', sans-serif">Brush Script</option>
+                            </optgroup>
+                        </select>
                     </div>
-                </div>`,
-        media    : `<svg class="svg-item-replace" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54">
-                            <path   d="M39.791,2h12.918C53.375,2,54,2.618,54,3.196v12.071c0,0.617-0.668,1.195-1.291,1.195
-                                H39.791c-0.666,0-1.291-0.617-1.291-1.195V3.196C38.5,2.618,38.793,2,39.791,2z"/>
-                            <path   d="M20.375,2h12.916c0.666,0,1.293,0.617,1.293,1.195v12.071
-                                c0,0.617-0.668,1.195-1.293,1.195H20.375c-0.667,0-1.292-0.617-1.292-1.195V3.196C19.083,2.618,19.708,2,20.375,2z"/>
-                            <path   d="M15.424,20.087l37.285-0.108c0.668,0,1.291,0.617,1.291,1.195v29.523
-                                c0,0.617-0.666,1.193-1.291,1.193L1.292,52C0.625,52,0,51.383,0,50.805V21.283v-5.978V3.196C0,2.579,0.667,2,1.292,2h12.917
-                                C14.875,2,15.5,2.618,15.5,3.196v12.071l-0.076,0.039"/>
-                        </svg>`,
-    });
 
-    // Bootstrap’s custom component
-    var bootstrap_colors = [
-        {'id' : 'primary', 'name' : 'Primary', 'fill' : '#007bff', 'color' : '#FFFFFF'},
-        {'id' : 'secondary', 'name' : 'Secondary', 'fill' : '#6c757d', 'color' : '#FFFFFF'},
-        {'id' : 'success', 'name' : 'Success', 'fill' : '#28a745', 'color' : '#FFFFFF'},
-        {'id' : 'danger', 'name' : 'Danger', 'fill' : '#dc3545', 'color' : '#FFFFFF'},
-        {'id' : 'warning', 'name' : 'Warning', 'fill' : '#ffc107', 'color' : '#FFFFFF'},
-        {'id' : 'info', 'name' : 'Info', 'fill' : '#17a2b8', 'color' : '#FFFFFF'},
-        {'id' : 'light', 'name' : 'Light', 'fill' : '#f8f9fa', 'color' : '#212529'},
-        {'id' : 'dark', 'name' : 'Dark', 'fill' : '#343a40', 'color' : '#FFFFFF'},
-        {'id' : 'link', 'name' : 'Link', 'fill' : '', 'color' : '#007bff'},
-    ];
-    bootstrap_colors.forEach(function(color) {
-        editor.BlockManager.add(`Bootstrap-a-${color.id}`, {
-            label    : `${color.name}`,
-            category : "Bootstrap",
-            content  : `<a href="#" class="btn btn-${color.id}" title="button ${color.name}">${color.name}</a>`,
-            media    : `<a href="#" class="btn btn-${color.id}">${color.name}</a>`,
-        });
-        editor.BlockManager.add(`Bootstrap-a-outline-${color.id}`, {
-            label    : `out ${color.name}`,
-            category : "Bootstrap",
-            content  : `<a href="#" class="btn btn-outline-${color.id}" title="button outline ${color.name}">${color.name}</a>`,
-            media    : `<a href="#" class="btn btn-outline-${color.id}">${color.name}</a>`,
-        });
-    });
+                    <div id="select-actions">
+                        <div class="title">Double click to open editor</div>
+                        <a id="drag-btn" href="" title="Drag element"><?php loadsvg("img/icon-expand.svg") ?></a>
+                        <a id="parent-btn" href=""
+                           title="Select parent"><?php loadsvg("img/icon-level-up-alt.svg") ?></a>
 
-    bootstrap_colors.forEach(function(color) {
-        if (color.id == 'link') return;
-        editor.BlockManager.add(`Bootstrap-alert-${color.id}`, {
-            label    : `Alert ${color.name}`,
-            category : "Bootstrap",
-            content  : `<div class="alert alert-${color.id}" role="alert" title="alert ${color.name}">This is a ${color.id} alert—check it out!</div>`,
-            media    : `<div class="alert alert-${color.id}" role="alert">${color.name}</div>`,
-        });
-    });
+                        <a id="up-btn" href="" title="Move element up"><?php loadsvg("img/icon-arrow-up.svg") ?></a>
+                        <a id="down-btn" href=""
+                           title="Move element down"><?php loadsvg("img/icon-arrow-down.svg") ?></a>
+                        <a id="edit-code-btn" href=""
+                           title="Edit html code"><?php loadsvg("img/icon-code-slash.svg") ?></a>
 
-    // Update canvas-clear command
-    editor.Commands.add('canvas-clear', function() {
-        if (confirm("<?php echo $langs->canvas->clear ?>")) {
-            editor.runCommand('core:canvas-clear');
-            setTimeout(function() {
-                localStorage.clear()
-            }, 0)
-        }
-    });
+                        <a id="clone-btn" href="" title="Clone element"><?php loadsvg("img/icon-copy.svg") ?></a>
+                        <a id="delete-btn" href="" title="Remove element"><?php loadsvg("img/icon-trash.svg") ?></i></a>
+                    </div>
 
-    // Simple warn notifier
-    var origWarn = console.warn;
-    toastr.options = {
-        'closeButton'       : true,
-        'preventDuplicates' : true,
-        'showDuration'      : 250,
-        'hideDuration'      : 150
-    };
-    console.warn = function(msg) {
-        if (msg.indexOf('[undefined]') == -1) {
-            toastr.warning(msg);
-        }
-        origWarn(msg);
-    };
+                    <div class="resize">
+                        <!-- top -->
+                        <div class="top-left">
+                        </div>
+                        <div class="top-center">
+                        </div>
+                        <div class="top-right">
+                        </div>
+                        <!-- center -->
+                        <div class="center-left">
+                        </div>
+                        <div class="center-right">
+                        </div>
+                        <!-- bottom -->
+                        <div class="bottom-left">
+                        </div>
+                        <div class="bottom-center">
+                        </div>
+                        <div class="bottom-right">
+                        </div>
+                    </div>
 
-    // Add and beautify tooltips
-    var options = [
-        ['sw-visibility', '<?php $a = 'sw-visibility'; echo $langs->panels->buttons->titles->$a ?>'],
-        ['preview', '<?php echo $langs->panels->buttons->titles->preview ?>'],
-        ['fullscreen', '<?php echo $langs->panels->buttons->titles->fullscreen ?>'],
-        ['undo', '<?php echo $langs->panels->buttons->titles->undo ?>'],
-        ['redo', '<?php echo $langs->panels->buttons->titles->redo ?>'],
-        ['canvas-clear', '<?php echo $langs->panels->buttons->titles->clear ?>'],
-        ['gjs-open-import-webpage', '<?php echo $langs->panels->buttons->titles->edit_code ?>'],
-    ];
-    options.forEach(function(item) {
-        editor.Panels.getButton('options', item[0]).set('attributes', {
-            'title' : item[1],
-            'data-tooltip-pos' : 'bottom',
-        });
-    });
+                </div>
 
-    var views = [
-        ['open-sm', '<?php $a = 'open-sm'; echo $langs->panels->buttons->titles->$a ?>'],
-        ['open-layers', '<?php $a = 'open-layers'; echo $langs->panels->buttons->titles->$a ?>'],
-        ['open-blocks', '<?php $a = 'open-blocks'; echo $langs->panels->buttons->titles->$a ?>'],
-    ];
-    views.forEach(function(item) {
-        editor.Panels.getButton('views', item[0]).set('attributes', {
-            'title' : item[1],
-            'data-tooltip-pos' : 'bottom',
-        });
-    });
-    var titles = document.querySelectorAll('*[title]');
+                <!-- add section box -->
+                <div id="add-section-box" class="drag-elements">
 
-    for (var i = 0; i < titles.length; i++) {
-        var el = titles[i];
-        var title = el.getAttribute('title');
-        title = title ? title.trim() : '';
-        if (!title)
-            break;
-        el.setAttribute('data-tooltip', title);
-        el.setAttribute('title', '');
-    }
+                    <div class="header">
+                        <ul class="nav nav-tabs" id="box-elements-tabs" role="tablist">
+                            <li class="nav-item component-tab">
+                                <a class="nav-link px-3 active" id="box-components-tab" data-bs-toggle="tab"
+                                   href="#box-components" role="tab" aria-controls="components" aria-selected="true"><i
+                                            class="icon-cube-outline"></i>
+                                    <small>Components</small>
+                                </a>
+                            </li>
+                            <li class="nav-item sections-tab">
+                                <a class="nav-link px-3" id="box-sections-tab" data-bs-toggle="tab" href="#box-blocks"
+                                   role="tab" aria-controls="blocks" aria-selected="false"><i
+                                            class="icon-copy-outline"></i>
+                                    <small>Blocks</small>
+                                </a>
+                            </li>
+                        </ul>
 
-    function showButtonUpdate() {
-        var html = editor.getHtml();
-        html = html.split(/<body.*?>/).join('');
-        html = html.split('</body>').join('');
+                        <div class="section-box-actions">
 
-        var css = editor.getCss();
-        css = css.split(/\*.*?}/s).join('');
-        css = css.split(/\nbody.*?}/s).join('');
-        css = css.split(/:root.*?}/s).join('');
-        css = css.split(/\[data-gjs-type="?wrapper"?]\s?>\s?#/).join('#');
-        css = css.split(/\[data-gjs-type="?wrapper"?]\s?>\s/).join('');
+                            <div id="close-section-btn" class="btn btn-outline-secondary btn-sm border-0 float-end"><i
+                                        class="la la-times la-lg"></i></div>
 
-        $(".form-htmldata").val(html);
-        $(".form-cssdata").val(css);
-        $(".form-save-preview").show(300);
+                            <div class="me-4 float-end">
 
-        if ("<?php echo $pagePreview ?>".length < 3) {
-            $(".form-preview").hide();
-        }
-    }
+                                <div class="form-check d-inline-block small me-1">
+                                    <input type="radio" id="add-section-insert-mode-after" value="after"
+                                           checked="checked" name="add-section-insert-mode" class="form-check-input">
+                                    <label class="form-check-label" for="add-section-insert-mode-after">After</label>
+                                </div>
 
-    editor.on('update', showButtonUpdate);
+                                <div class="form-check d-inline-block small">
+                                    <input type="radio" id="add-section-insert-mode-inside" value="inside"
+                                           name="add-section-insert-mode" class="form-check-input">
+                                    <label class="form-check-label" for="add-section-insert-mode-inside">Inside</label>
+                                </div>
 
-    // Do stuff on load
-    editor.on('load', function() {
-        var $ = grapesjs.$;
+                            </div>
 
-        // Show borders by default
-        editor.Panels.getButton('options', 'sw-visibility').set({
-            'command' : 'core:component-outline',
-            'active'  : true,
-        });
+                        </div>
 
-        // Load and show settings and style manager
-        var openTmBtn = editor.Panels.getButton('views', 'open-tm');
-        openTmBtn && openTmBtn.set('active', 1);
-        var openSm = editor.Panels.getButton('views', 'open-sm');
-        openSm && openSm.set('active', 1);
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="box-components" role="tabpanel"
+                                 aria-labelledby="components-tab">
 
-        // Remove trait view
-        editor.Panels.removeButton('views', 'open-tm');
+                                <div class="search">
+                                    <div class="expand">
+                                        <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i
+                                                    class="la la-plus"></i></button>
+                                        <button title="Collapse all" data-vvveb-action="collapse"><i
+                                                    class="la la-minus"></i></button>
+                                    </div>
 
-        // Add Settings Sector
-        var traitsSector = $('<div class="gjs-sm-sector no-select">' +
-            '<div class="gjs-sm-sector-title"><span class="icon-settings fa fa-cog"></span> <span class="gjs-sm-sector-label"><?php echo $langs->page->settings ?></span></div>' +
-            '<div class="gjs-sm-properties" style="display: none;"></div></div>');
-        var traitsProps = traitsSector.find('.gjs-sm-properties');
-        traitsProps.append($('.gjs-traits-cs'));
-        $('.gjs-sm-sectors').before(traitsSector);
-        traitsSector.find('.gjs-sm-sector-title').on('click', function() {
-            var traitStyle = traitsProps.get(0).style;
-            var hidden = traitStyle.display == 'none';
-            if (hidden) {
-                traitStyle.display = 'block';
-            } else {
-                traitStyle.display = 'none';
-            }
-        });
+                                    <input class="form-control component-search" placeholder="Search components"
+                                           type="text" data-vvveb-action="search" data-vvveb-on="keyup">
+                                    <button class="clear-backspace" data-vvveb-action="clearSearch">
+                                        <i class="la la-times"></i>
+                                    </button>
+                                </div>
 
-        // Open block manager
-        var openBlocksBtn = editor.Panels.getButton('views', 'open-blocks');
-        openBlocksBtn && openBlocksBtn.set('active', 1);
+                                <div>
+                                    <div>
 
-        showButtonUpdate();
+                                        <ul class="components-list clearfix" data-type="addbox">
+                                        </ul>
 
-        // Show help button
-        var logoCont = document.querySelector('.gjs-help-icon');
-        var logoPanel = document.querySelector('.gjs-pn-commands');
-        logoPanel.appendChild(logoCont);
-    });
-</script>
-<div style="display: none">
-    <div class="gjs-help-icon">
-        <a href="https://grapesjs.com/docs/" target="_blank">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 250" style="height:27px;">
-                <g fill="#b9a5a6">
-                    <path d="M469.779,250C493.059,250,512,231.463,512,208.682V41.319C512,18.537,493.059,0,469.779,0H42.221C18.94,0,0,18.537,0,41.319
-                                v167.363C0,231.465,18.941,250,42.221,250 M42.221,234.309c-14.438,0-26.188-11.496-26.188-25.629V41.318
-                                c0-14.133,11.748-25.629,26.188-25.629h427.556c14.439,0,26.189,11.496,26.189,25.629v167.364l0,0
-                                c0,14.131-11.748,25.629-26.188,25.629"/>
-                    <path id="H" d="M141.821,62.987c-4.729,0-8.563,3.752-8.563,8.381v45.251H77.311V71.368c0-4.627-3.833-8.381-8.564-8.381
-                                c-4.731,0-8.563,3.752-8.563,8.381v107.265c0,4.629,3.833,8.381,8.563,8.381c4.73,0,8.564-3.75,8.564-8.381v-45.252h55.947v45.252
-                                c0,4.629,3.834,8.381,8.563,8.381s8.564-3.75,8.564-8.381V71.368C150.384,66.739,146.551,62.987,141.821,62.987z"/>
-                    <path id="E" d="M242.298,170.252h-54.805c-0.316,0-0.572-0.25-0.572-0.559v-36.314h37.107c4.729,0,8.564-3.75,8.564-8.379
-                                c0-4.629-3.835-8.38-8.564-8.38h-37.107V80.305c0-0.308,0.254-0.558,0.572-0.558h54.805c4.729,0,8.563-3.751,8.563-8.38
-                                c0-4.629-3.832-8.38-8.563-8.38h-54.805c-9.76,0-17.698,7.768-17.698,17.318v89.386c0,9.553,7.938,17.32,17.698,17.32h54.805
-                                c4.729,0,8.563-3.75,8.563-8.381C250.861,174.004,247.027,170.252,242.298,170.252z"/>
-                    <path id="L" d="M342.773,170.252h-54.807c-0.313,0-0.57-0.25-0.57-0.559V71.367c0-4.628-3.832-8.381-8.564-8.381
-                                c-4.729,0-8.564,3.752-8.564,8.381v98.327c0,9.549,7.941,17.32,17.697,17.32h54.807c4.729,0,8.564-3.752,8.564-8.381
-                                C351.336,174.002,347.504,170.252,342.773,170.252z"/>
-                    <path id="P" d="M406.715,62.986h-27.404c-9.76,0-17.697,7.769-17.697,17.319v98.328c0,4.629,3.836,8.381,8.566,8.381
-                                c4.727,0,8.562-3.752,8.562-8.381v-27.375h27.976c24.869,0,45.1-19.799,45.1-44.135C451.816,82.786,431.581,62.986,406.715,62.986z
-                                 M406.715,134.496h-27.976V80.305c0-0.309,0.257-0.558,0.571-0.558h27.402c15.424,0,27.973,12.28,27.973,27.375
-                                C434.688,122.216,422.139,134.496,406.715,134.496z"/>
-                </g>
-            </svg>
-        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="box-blocks" role="tabpanel" aria-labelledby="blocks-tab">
+
+                                <div class="search">
+                                    <div class="expand">
+                                        <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i
+                                                    class="la la-plus"></i></button>
+                                        <button title="Collapse all" data-vvveb-action="collapse"><i
+                                                    class="la la-minus"></i></button>
+                                    </div>
+
+                                    <input class="form-control block-search" placeholder="Search blocks" type="text"
+                                           data-vvveb-action="search" data-vvveb-on="keyup">
+                                    <button class="clear-backspace" data-vvveb-action="clearSearch">
+                                        <i class="la la-times"></i>
+                                    </button>
+                                </div>
+
+                                <div>
+                                    <div>
+
+                                        <ul class="blocks-list clearfix" data-type="addbox">
+                                        </ul>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- div class="tab-pane" id="box-properties" role="tabpanel" aria-labelledby="blocks-tab">
+                                <div class="component-properties-sidepane">
+                                    <div>
+                                        <div class="component-properties">
+                                            <div class="mt-4 text-center">Click on an element to edit.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div -->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- //add section box -->
+
+                <div id="drop-highlight-box">
+                </div>
+            </div>
+
+
+            <iframe src="" id="iframe1">
+            </iframe>
+        </div>
+
+
+    </div>
+
+    <div id="right-panel">
+        <div class="component-properties">
+
+            <ul class="nav nav-tabs nav-fill" id="properties-tabs" role="tablist">
+                <li class="nav-item content-tab">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#content-tab" role="tab"
+                       aria-controls="components" aria-selected="true">
+                        <?php loadsvg("img/icon-albums.svg") ?>
+                        <div><span>Content</span></div>
+                    </a>
+                </li>
+                <li class="nav-item style-tab">
+                    <a class="nav-link" data-bs-toggle="tab" href="#style-tab" role="tab" aria-controls="blocks"
+                       aria-selected="false">
+                        <?php loadsvg("img/icon-color-fill.svg") ?>
+                        <div><span>Style</span></div>
+                    </a>
+                </li>
+                <li class="nav-item advanced-tab">
+                    <a class="nav-link" data-bs-toggle="tab" href="#advanced-tab" role="tab" aria-controls="blocks"
+                       aria-selected="false">
+                        <?php loadsvg("img/icon-settings.svg") ?>
+                        <div><span>Advanced</span></div>
+                    </a>
+                </li>
+
+                <!--li class="nav-item vars-tab">
+                    <a class="nav-link" data-bs-toggle="tab" href="#vars-tab" role="tab"
+                       aria-controls="components" aria-selected="false">
+                        <?php loadsvg("img/icon-brush.svg") ?>
+                        <div><span>Variables</span></div>
+                    </a>
+                </li-->
+                <li class="nav-item css-tab">
+                    <a class="nav-link" data-bs-toggle="tab" href="#css-tab" role="tab" aria-controls="css"
+                       aria-selected="true">
+                        <?php loadsvg("img/icon-code-slash.svg") ?>
+                        <div><span>Css</span></div>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane show active" id="content-tab" data-section="content" role="tabpanel"
+                     aria-labelledby="content-tab">
+                    <div class="alert alert-dismissible fade show alert-light m-3" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>No selected element!</strong><br> Click on an element to edit.
+                    </div>
+                </div>
+                <div class="tab-pane show" id="style-tab" data-section="style" role="tabpanel"
+                     aria-labelledby="style-tab">
+                </div>
+                <div class="tab-pane show" id="advanced-tab" data-section="advanced" role="tabpanel"
+                     aria-labelledby="advanced-tab">
+                </div>
+
+                <div class="tab-pane show" id="css-tab" data-section="css" role="tabpanel"
+                     aria-labelledby="css-tab">
+                    <div class="drag-elements-sidepane sidepane">
+                        <div data-offset="80">
+                            <textarea id="css-editor" class="form-control" rows="24"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div id="bottom-panel">
+
+        <div>
+
+            <div class="breadcrumb-navigator px-2" style="--bs-breadcrumb-divider: '>';">
+
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">body</a></li>
+                    <li class="breadcrumb-item"><a href="#">section</a></li>
+                    <li class="breadcrumb-item"><a href="#">img</a></li>
+                </ol>
+            </div>
+
+
+            <div class="btn-group" role="group">
+
+                <div id="toggleEditorJsExecute" class="form-check mt-1" style="display:none">
+                    <input type="checkbox" class="form-check-input" id="runjs" name="runjs"
+                           data-vvveb-action="toggleEditorJsExecute">
+                    <label class="form-check-label" for="runjs">
+                        <small>Run javascript code on edit</small>
+                    </label>&ensp;
+                </div>
+
+
+                <button id="code-editor-btn" class="btn btn-sm btn-light btn-sm" title="Code editor"
+                        data-vvveb-action="toggleEditor">
+                    <i class="la la-code"></i> Code editor
+                </button>
+
+
+            </div>
+
+        </div>
+
+        <div id="vvveb-code-editor">
+            <textarea class="form-control"></textarea>
+            <div>
+            </div>
+        </div>
     </div>
 </div>
+
+
+<!-- templates -->
+
+<script id="vvveb-input-textinput" type="text/html">
+
+    <div>
+        <input name="{%=key%}" type="text" class="form-control"/>
+    </div>
+
+</script>
+<script id="vvveb-input-textareainput" type="text/html">
+
+    <div>
+        <textarea name="{%=key%}" {% if (typeof rows !== 'undefined') { %} rows="{%=rows%}" {% } else { %} rows="3" {% }
+        %} class="form-control"/>
+    </div>
+
+</script>
+<script id="vvveb-input-checkboxinput" type="text/html">
+
+    <div class="form-check{% if (typeof className !== 'undefined') { %} {%=className%}{% } %}">
+        <input name="{%=key%}" class="form-check-input" type="checkbox" id="{%=key%}_check">
+        <label class="form-check-label" for="{%=key%}_check">{% if (typeof text !== 'undefined') { %} {%=text%} {% }
+            %}</label>
+    </div>
+
+</script>
+<script id="vvveb-input-radioinput" type="text/html">
+
+    <div>
+
+        {% for ( var i = 0; i < options.length; i++ ) { %}
+
+        <label class="form-check-input  {% if (typeof inline !== 'undefined' && inline == true) { %}custom-control-inline{% } %}"
+               title="{%=options[i].title%}">
+            <input name="{%=key%}" class="form-check-input" type="radio" value="{%=options[i].value%}"
+                   id="{%=key%}{%=i%}" {%if (options[i].checked) { %}checked="{%=options[i].checked%}" {% } %}>
+            <label class="form-check-label" for="{%=key%}{%=i%}">{%=options[i].text%}</label>
+        </label>
+
+        {% } %}
+
+    </div>
+
+</script>
+<script id="vvveb-input-radiobuttoninput" type="text/html">
+
+    <div class="btn-group {%if (extraclass) { %}{%=extraclass%}{% } %} clearfix" role="group">
+        {% var namespace = 'rb-' + Math.floor(Math.random() * 100); %}
+
+        {% for ( var i = 0; i < options.length; i++ ) { %}
+
+        <input name="{%=key%}" class="btn-check" type="radio" value="{%=options[i].value%}"
+               id="{%=namespace%}{%=key%}{%=i%}" {%if (options[i].checked) { %}checked="{%=options[i].checked%}" {% } %}
+               autocomplete="off">
+        <label class="btn btn-outline-primary {%if (options[i].extraclass) { %}{%=options[i].extraclass%}{% } %}"
+               for="{%=namespace%}{%=key%}{%=i%}" title="{%=options[i].title%}">
+            {%if (options[i].icon) { %}<i class="{%=options[i].icon%}"></i>{% } %}
+            {%=options[i].text%}
+        </label>
+
+        {% } %}
+
+    </div>
+
+</script>
+<script id="vvveb-input-toggle" type="text/html">
+
+    <div class="form-check form-switch {% if (typeof className !== 'undefined') { %} {%=className%}{% } %}">
+        <input
+                type="checkbox"
+                name="{%=key%}"
+                value="{%=on%}"
+                {%if (off) { %} data-value-off="{%=off%}" {% } %}
+                {%if (on) { %} data-value-on="{%=on%}" {% } %}
+                class="form-check-input" type="checkbox" role="switch"
+                id="{%=key%}">
+        <label class="form-check-label" for="{%=key%}">
+        </label>
+    </div>
+
+</script>
+<script id="vvveb-input-header" type="text/html">
+
+    <h6 class="header">{%=header%}</h6>
+
+</script>
+<script id="vvveb-input-select" type="text/html">
+
+    <div>
+
+        <select class="form-select" name="{%=key%}">
+            {% var optgroup = false; for ( var i = 0; i < options.length; i++ ) { %}
+            {% if (options[i].optgroup) { %}
+            {% if (optgroup) { %}
+            </optgroup>
+            {% } %}
+            <optgroup label="{%=options[i].optgroup%}">
+                {% optgroup = true; } else { %}
+                <option value="{%=options[i].value%}"
+                        {%
+                        for (attr in options[i]) {
+                        if (attr !="value" && attr !="text" ) {
+                        %}
+                        {%=attr%}={%=options[i][attr]%}
+                        {% }
+                        } %}>
+                    {%=options[i].text%}
+                </option>
+                {% } } %}
+        </select>
+
+    </div>
+
+</script>
+<script id="vvveb-input-icon-select" type="text/html">
+
+    <div class="input-list-select">
+
+        <div class="elements">
+            <div class="row">
+                {% for ( var i = 0; i < options.length; i++ ) { %}
+                <div class="col">
+                    <div class="element">
+                        {%=options[i].value%}
+                        <label>{%=options[i].text%}</label>
+                    </div>
+                </div>
+                {% } %}
+            </div>
+        </div>
+    </div>
+
+</script>
+<script id="vvveb-input-html-list-select" type="text/html">
+
+    <div class="input-html-list-select">
+
+        <div class="current-element">
+        </div>
+
+        <div class="popup">
+            <select class="form-select">
+                {% var optgroup = false; for ( var i = 0; i < options.length; i++ ) { %}
+                {% if (options[i].optgroup) { %}
+                {% if (optgroup) { %}
+                </optgroup>
+                {% } %}
+                <optgroup label="{%=options[i].optgroup%}">
+                    {% optgroup = true; } else { %}
+                    <option value="{%=options[i].value%}">{%=options[i].text%}</option>
+                    {% } } %}
+            </select>
+
+            <div class="search">
+                <input class="form-control search" placeholder="Search elements" type="text">
+                <button class="clear-backspace">
+                    <i class="la la-times"></i>
+                </button>
+            </div>
+
+            <div class="elements">
+                {%=elements%}
+            </div>
+        </div>
+    </div>
+
+</script>
+<script id="vvveb-input-html-list-dropdown" type="text/html">
+
+    <div class="input-html-list-select" {% if (typeof id !== "undefined") { %} id={%=id%} {% } %}>
+
+    <div class="current-element">
+
+    </div>
+
+    <div class="popup">
+        <select class="form-select">
+            {% var optgroup = false; for ( var i = 0; i < options.length; i++ ) { %}
+            {% if (options[i].optgroup) { %}
+            {% if (optgroup) { %}
+            </optgroup>
+            {% } %}
+            <optgroup label="{%=options[i].optgroup%}">
+                {% optgroup = true; } else { %}
+                <option value="{%=options[i].value%}">{%=options[i].text%}</option>
+                {% } } %}
+        </select>
+
+        <div class="search">
+            <input class="form-control search" placeholder="Search elements" type="text">
+            <button class="clear-backspace">
+                <i class="la la-times"></i>
+            </button>
+        </div>
+
+        <div class="elements">
+            {%=elements%}
+        </div>
+    </div>
+    </div>
+
+</script>
+<script id="vvveb-input-dateinput" type="text/html">
+
+    <div>
+        <input name="{%=key%}" type="date" class="form-control"
+               {% if (typeof min_date=== 'undefined') { %} min="{%=min_date%}" {% } %} {% if (typeof max_date ===
+        'undefined') { %} max="{%=max_date%}" {% } %}
+        />
+    </div>
+
+</script>
+<script id="vvveb-input-listinput" type="text/html">
+
+    <div class="sections-container">
+
+        {% for ( var i = 0; i < options.length; i++ ) { %}
+        <div class="section-item" draggable="true">
+            <div class="controls">
+                <div class="handle"></div>
+                <div class="info">
+                    <div class="name">{%=options[i].name%}
+                        <div class="type">{%=options[i].type%}</div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <a class="delete-btn" href="" title="Remove section"><?php loadsvg("img/icon-trash.svg") ?></a>
+                </div>
+            </div>
+
+
+            <input class="header_check" type="checkbox" id="section-components-{%=options[i].suffix%}">
+
+            <label for="section-components-{%=options[i].suffix%}">
+                <div class="header-arrow"></div>
+            </label>
+
+            <div class="tree">
+                {%=options[i].name%}
+            </div>
+        </div>
+
+
+        {% } %}
+
+
+        {% if (typeof hide_remove === 'undefined') { %}
+        <div class="mt-3">
+
+            <button class="btn btn-sm btn-outline-primary btn-new">
+                <i class="la la-plus la-lg"></i> Add new
+            </button>
+
+        </div>
+        {% } %}
+
+    </div>
+
+</script>
+<script id="vvveb-input-grid" type="text/html">
+
+    <div class="row">
+        <div class="col-6">
+
+            <label>Extra small</label>
+            <select class="form-select" name="col" autocomplete="off">
+
+                <option value="">None</option>
+                {% for ( var i = 1; i <= 12; i++ ) { %}
+                <option value="{%=i%}" {% if ((typeof col !==
+                'undefined') && col == i) { %} selected {% } %}>{%=i%}</option>
+                {% } %}
+
+            </select>
+        </div>
+
+
+        <div class="col-6">
+            <label>Small</label>
+            <select class="form-select" name="col-sm" autocomplete="off">
+
+                <option value="">None</option>
+                {% for ( var i = 1; i <= 12; i++ ) { %}
+                <option value="{%=i%}" {% if ((typeof col_sm !==
+                'undefined') && col_sm == i) { %} selected {% } %}>{%=i%}</option>
+                {% } %}
+
+            </select>
+        </div>
+
+        <div class="col-6">
+            <label>Medium</label>
+            <select class="form-select" name="col-md" autocomplete="off">
+
+                <option value="">None</option>
+                {% for ( var i = 1; i <= 12; i++ ) { %}
+                <option value="{%=i%}" {% if ((typeof col_md !==
+                'undefined') && col_md == i) { %} selected {% } %}>{%=i%}</option>
+                {% } %}
+
+            </select>
+        </div>
+
+        <div class="col-6">
+            <label>Large</label>
+            <select class="form-select" name="col-lg" autocomplete="off">
+
+                <option value="">None</option>
+                {% for ( var i = 1; i <= 12; i++ ) { %}
+                <option value="{%=i%}" {% if ((typeof col_lg !==
+                'undefined') && col_lg == i) { %} selected {% } %}>{%=i%}</option>
+                {% } %}
+
+            </select>
+        </div>
+
+
+        <div class="col-6">
+            <label>Extra large </label>
+            <select class="form-select" name="col-xl" autocomplete="off">
+
+                <option value="">None</option>
+                {% for ( var i = 1; i <= 12; i++ ) { %}
+                <option value="{%=i%}" {% if ((typeof col_xl !==
+                'undefined') && col_xl == i) { %} selected {% } %}>{%=i%}</option>
+                {% } %}
+
+            </select>
+        </div>
+
+        <div class="col-6">
+            <label>Extra extra large</label>
+            <select class="form-select" name="col-xxl" autocomplete="off">
+
+                <option value="">None</option>
+                {% for ( var i = 1; i <= 12; i++ ) { %}
+                <option value="{%=i%}" {% if ((typeof col_xxl !==
+                'undefined') && col_xxl == i) { %} selected {% } %}>{%=i%}</option>
+                {% } %}
+
+            </select>
+        </div>
+
+        {% if (typeof hide_remove === 'undefined') { %}
+        <div class="col-12">
+
+            <button class="btn btn-sm btn-outline-light text-danger">
+                <i class="la la-trash la-lg"></i> Remove
+            </button>
+
+        </div>
+        {% } %}
+
+    </div>
+
+</script>
+<script id="vvveb-input-textvalue" type="text/html">
+
+    <div class="row">
+        <div class="col-6 mb-1">
+            <label>Value</label>
+            <input name="value" type="text" value="{%=value%}" class="form-control" autocomplete="off"/>
+        </div>
+
+        <div class="col-6 mb-1">
+            <label>Text</label>
+            <input name="text" type="text" value="{%=text%}" class="form-control" autocomplete="off"/>
+        </div>
+
+        {% if (typeof hide_remove === 'undefined') { %}
+        <div class="col-12">
+
+            <button class="btn btn-sm btn-outline-light text-danger">
+                <i class="la la-trash la-lg"></i> Remove
+            </button>
+
+        </div>
+        {% } %}
+
+    </div>
+
+</script>
+<script id="vvveb-input-rangeinput" type="text/html">
+
+    <div class="input-range">
+
+        <input name="{%=key%}" type="range" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-range"
+               data-input-value/>
+        <input name="{%=key%}" type="number" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-control"
+               data-input-value/>
+    </div>
+
+</script>
+<script id="vvveb-input-imageinput" type="text/html">
+
+    <div>
+        <input name="{%=key%}" type="text" class="form-control"/>
+        <input name="file" type="file" class="form-control"/>
+    </div>
+
+</script>
+<script id="vvveb-input-imageinput-gallery" type="text/html">
+
+    <div>
+        <img id="thumb-{%=key%}" class="img-thumbnail p-0" data-target-input="#input-{%=key%}"
+             data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="" width="225" height="225">
+        <input name="{%=key%}" type="text" class="form-control mt-1" id="input-{%=key%}"/>
+        <button name="button" class="btn btn-primary btn-sm btn-icon mt-2 width-100"
+                data-target-input="#input-{%=key%}"
+                data-target-thumb="#thumb-{%=key%}">
+            <i data-target-input="#input-{%=key%}"
+               data-target-thumb="#thumb-{%=key%}"
+               class="la la-image la-lg"></i>
+            <span data-target-input="#input-{%=key%}"
+                  data-target-thumb="#thumb-{%=key%}">Set image</span></button>
+    </div>
+
+</script>
+<script id="vvveb-input-videoinput-gallery" type="text/html">
+
+    <div>
+        <video id="thumb-v{%=key%}" class="img-thumbnail p-0" data-target-input="#input-v{%=key%}"
+               data-target-thumb="#thumb-v{%=key%}" style="cursor:pointer" src="" width="225" height="225" playsinline
+               loop muted controls></video>
+        <input name="v{%=key%}" type="text" class="form-control mt-1" id="input-v{%=key%}"/>
+        <button name="button" class="btn btn-primary btn-sm btn-icon mt-2" data-target-input="#vinput-v{%=key%}"
+                data-target-thumb="#thumb-v{%=key%}"><i class="la la-video la-lg"></i><span>Set video</span></button>
+    </div>
+
+</script>
+<script id="vvveb-input-colorinput" type="text/html">
+
+    <div>
+        <input name="{%=key%}" {% if (typeof palette !== 'undefined') { %} list="{%=key%}-color-palette" {% } %}
+        type="color" {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %}
+        pattern="#[a-f0-9]{6}" class="form-control form-control-color"/>
+        {% if (typeof palette !== 'undefined') { %}
+        <datalist id="{%=key%}-color-palette">
+            {% for (const color in palette) { %}
+            <option value="{%=color%}">{%=palette[color]%}</option>
+            {% } %}
+            {% } %}
+    </div>
+
+</script>
+<script id="vvveb-input-bootstrap-color-picker-input" type="text/html">
+
+    <div>
+        <div id="cp2" class="input-group" title="Using input value">
+            <input name="{%=key%}" type="text" {% if (typeof value !== 'undefined' && value != false) { %}
+            value="{%=value%}" {% } %} class="form-control"/>
+            <span class="input-group-append">
+			<span class="input-group-text colorpicker-input-addon"><i></i></span>
+		  </span>
+        </div>
+    </div>
+
+</script>
+<script id="vvveb-input-numberinput" type="text/html">
+    <div>
+        <input name="{%=key%}" type="number" value="{%=value%}"
+               {% if (typeof min !== 'undefined' && min != false) { %}min="{%=min%}"{% } %}
+        {% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %}
+        {% if (typeof step !== 'undefined' && step != false) { %}step="{%=step%}"{% } %}
+        class="form-control"/>
+    </div>
+</script>
+<script id="vvveb-input-button" type="text/html">
+    <div>
+        <button class="btn btn-sm btn-primary">
+            <i class="la  {% if (typeof icon !== 'undefined') { %} {%=icon%} {% } else { %} la-plus {% } %} la-lg"></i>
+            {%=text%}
+        </button>
+    </div>
+</script>
+<script id="vvveb-input-cssunitinput" type="text/html">
+    <div class="input-group css-unit" id="cssunit-{%=key%}">
+        <input name="number" type="number" {% if (typeof value !== 'undefined' && value != false) { %}
+        value="{%=value%}" {% } %}
+        {% if (typeof min !== 'undefined' && min != false) { %}min="{%=min%}"{% } %}
+        {% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %}
+        {% if (typeof step !== 'undefined' && step != false) { %}step="{%=step%}"{% } %}
+        class="form-control"/>
+        <select class="form-select small-arrow" name="unit">
+            <option value="em">em</option>
+            <option value="rem">rem</option>
+            <option value="px">px</option>
+            <option value="%">%</option>
+            <option value="vw">vw</option>
+            <option value="vh">vh</option>
+            <option value="ex">ex</option>
+            <option value="ch">ch</option>
+            <option value="cm">cm</option>
+            <option value="mm">mm</option>
+            <option value="in">in</option>
+            <option value="pt">pt</option>
+            <option value="auto">auto</option>
+            <option value="">-</option>
+        </select>
+    </div>
+
+</script>
+<script id="vvveb-breadcrumb-navigaton-item" type="text/html">
+    <li class="breadcrumb-item"><a href="#" {% if (typeof className !== 'undefined') { %}class="{%=className%}"{% }
+        %}>{%=name%}</a></li>
+</script>
+<script id="vvveb-input-sectioninput" type="text/html">
+    <div>
+        {% var namespace = '-' + Math.floor(Math.random() * 1000); %}
+        <label class="header" data-header="{%=key%}" for="header_{%=key%}{%=namespace%}" {% if (typeof group !==
+        'undefined' && group != null) { %}data-group="{%=group%}" {% } %}><span>{%=header%}</span>
+        <div class="header-arrow"></div>
+        </label>
+        <input class="header_check" type="checkbox" {% if (typeof expanded !== 'undefined' && expanded == false) { %} {%
+        } else { %}checked="true"{% } %} id="header_{%=key%}{%=namespace%}">
+        <div class="section row" data-message="" data-section="{%=key%}" {% if (typeof group !==
+        'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
+    </div>
+    </div>
+</script>
+<script id="vvveb-property" type="text/html">
+
+    <div class="mb-3 {% if (typeof col !== 'undefined' && col != false) { %} col-sm-{%=col%} {% } else { %}row{% } %} {% if (typeof inline !== 'undefined' && inline == true) { %}inline{% } %} "
+         data-key="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
+
+    {% if (typeof name !== 'undefined' && name != false) { %}<label
+            class="{% if (typeof inline === 'undefined' ) { %}col-sm-4{% } %} form-label"
+            for="input-model">{%=name%}</label>{% } %}
+
+    <div class="{% if (typeof inline === 'undefined') { %}col-sm-{% if (typeof name !== 'undefined' && name != false) { %}8{% } else { %}12{% } } %} input"></div>
+
+    </div>
+
+</script>
+<script id="vvveb-input-autocompletelist" type="text/html">
+
+    <div>
+        <input name="{%=key%}" type="text" class="form-control"/>
+
+        <div class="form-control autocomplete-list" style="min-height: 150px; overflow: auto;">
+        </div>
+    </div>
+
+</script>
+<script id="vvveb-input-tagsinput" type="text/html">
+
+    <div>
+        <div class="form-control tags-input" style="height:auto;">
+
+
+            <input name="{%=key%}" type="text" class="form-control" style="border:none;min-width:60px;"/>
+        </div>
+    </div>
+
+</script>
+<script id="vvveb-input-noticeinput" type="text/html">
+    <div>
+        <div class="alert alert-dismissible fade show alert-{%=type%}" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <h6><b>{%=title%}</b></h6>
+
+            {%=text%}
+        </div>
+    </div>
+</script>
+<script id="vvveb-section" type="text/html">
+    {% var suffix = Math.floor(Math.random() * 10000); %}
+
+    <div class="section-item" draggable="true">
+        <div class="controls">
+            <div class="handle"></div>
+            <div class="info">
+                <div class="name">{%=name%}
+                    <div class="type">{%=type%}</div>
+                </div>
+            </div>
+            <div class="buttons">
+                <a class="delete-btn" href="" title="Remove section"><i class="la la-trash text-danger"></i></a>
+                <!--
+                <a class="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
+                <a class="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
+                -->
+                <a class="properties-btn" href="" title="Properties"><?php loadsvg("img/icon-settings.svg") ?></a>
+            </div>
+        </div>
+
+
+        <input class="header_check" type="checkbox" id="section-components-{%=suffix%}">
+
+        <label for="section-components-{%=suffix%}">
+            <div class="header-arrow"></div>
+        </label>
+
+        <div class="tree">
+            <ol>
+                <!--
+                <li data-component="Products" class="file">
+                    <label for="idNaN" style="background-image:url(/js/vvvebjs/icons/products.svg)"><span>Products</span></label>
+                    <input type="checkbox" id="idNaN">
+                </li>
+                <li data-component="Posts" class="file">
+                    <label for="idNaN" style="background-image:url(/js/vvvebjs/icons/posts.svg)"><span>Posts</span></label>
+                    <input type="checkbox" id="idNaN">
+                </li>
+                -->
+            </ol>
+        </div>
+    </div>
+
+</script>
+<!--// end templates -->
+
+
+<!-- code editor modal -->
+<div class="modal modal-full fade" id="codeEditorModal" tabindex="-1" aria-labelledby="codeEditorModal" role="dialog"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <input type="hidden" name="file" value="">
+
+            <div class="modal-header justify-content-between">
+                <span class="modal-title"></span>
+                <div class="float-end">
+                    <button type="button" class="btn btn-light border btn-icon" data-bs-dismiss="modal">
+                        <i class="la la-times"></i>
+                        Close
+                    </button>
+
+                    <button class="btn btn-primary btn-icon save-btn" title="Save changes">
+                        <span class="loading d-none">
+                            <?php loadsvg("img/icon-save.svg") ?>
+                            <span class="spinner-border spinner-border-sm align-middle" role="status"
+                                  aria-hidden="true"></span>
+                            <span>Saving </span> ...
+                        </span>
+                        <span class="button-text">
+                            <?php loadsvg("img/icon-save.svg") ?>
+                            <span>Save changes</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="modal-body p-0">
+                <textarea class="form-control h-100"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- export html modal-->
+<div class="modal fade" id="textarea-modal" tabindex="-1" role="dialog" aria-labelledby="textarea-modal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title text-primary"><i class="la la-lg la-save"></i> Export html</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <!-- span aria-hidden="true"><small><i class="la la-times"></i></small></span -->
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <textarea rows="25" cols="150" class="form-control"></textarea>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal"><i
+                            class="la la-times"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- message modal-->
+<div class="modal fade" id="message-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title text-primary"><i class="la la-lg la-comment"></i> VvvebJs</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <!-- span aria-hidden="true"><small><i class="la la-times"></i></small></span -->
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Page was successfully saved!.</p>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-primary">Ok</button> -->
+                <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal"><i
+                            class="la la-times"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- save toast -->
+<div class="toast-container position-fixed end-0 bottom-0 me-3 mb-3" id="top-toast">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header text-white">
+            <strong class="me-auto">Page save</strong>
+            <button type="button" class="btn-close text-white px-2" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body ">
+            <div class="flex-grow-1">
+                <div class="message"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- bootstrap-->
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.js"></script>
+
+<!-- builder code-->
+<script src="libs/builder/builder.js"></script>
+<!-- undo manager-->
+<script src="libs/builder/undo.js"></script>
+<!-- inputs-->
+<script src="libs/builder/inputs.js"></script>
+
+
+<!-- media gallery -->
+<link href="libs/media/media.css" rel="stylesheet">
+<script>
+    Vvveb.uploadUrl = 'files.php?page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
+    Vvveb.themeBaseUrl = '_sections/';
+</script>
+<script src="libs/media/media.js"></script>
+
+<script src="libs/builder/plugin-media.js"></script>
+
+<!-- bootstrap colorpicker //uncomment bellow scripts to enable
+<script src="libs/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<link href="libs/bootstrap-colorpicker/css/bootstrap-colorpicker.css" rel="stylesheet">
+<script src="libs/builder/plugin-bootstrap-colorpicker.js"></script>
+-->
+
+<!-- components-->
+<script src="libs/builder/components-server.js"></script>
+<script src="libs/builder/plugin-google-fonts.js"></script>
+<script src="libs/builder/components-common.js"></script>
+<script src="libs/builder/plugin-aos.js"></script>
+<script src="libs/builder/components-html.js"></script>
+<script src="libs/builder/components-elements.js"></script>
+<script src="libs/builder/section.js"></script>
+<script src="libs/builder/components-bootstrap5.js"></script>
+<script src="libs/builder/components-widgets.js"></script>
+<script src="libs/builder/oembed.js"></script>
+<script src="libs/builder/components-embeds.js"></script>
+
+<!-- sections-->
+<script>
+    <?php
+    $pastas = glob("./_sections/*");
+    foreach ($pastas as $pasta) {
+        $files = glob("{$pasta}/*.html");
+        $groups = [];
+        foreach ($files as $file) {
+            $html = file_get_contents($file);
+            $html = str_replace("{wwwroot}", $CFG->wwwroot, $html);
+            $html = vvveb__changue_langs($html);
+            $html = vvveb__change_courses($html);
+
+            preg_match('/\/([a-z0-9\-]*)\/([a-z0-9\-]*)\.html/', $file, $info);
+            $name = ucfirst(str_replace("-", " ", $info[2]));
+            $groupname = ucfirst(str_replace("-", " ", $info[1]));;
+            $groups[] = "{$info[1]}/{$info[2]}";
+            echo "
+                Vvveb.Sections.add('{$info[1]}/{$info[2]}', {
+                    name  : '{$name}',
+                    image : '_sections/{$info[1]}/{$info[2]}.jpg',
+                    html  : `{$html}`
+                });";
+        }
+
+        if (isset($groups[0])) {
+            $group = implode("', '", $groups);
+            echo "
+                Vvveb.SectionsGroup['{$groupname}'] = [ '{$group}' ];\n\n\n";
+        }
+    }?>
+</script>
+<script src="libs/builder/sections-bootstrap4.js"></script>
+
+<!-- blocks-->
+<script src="libs/builder/blocks-bootstrap4.js"></script>
+
+
+<!-- plugins -->
+
+<!-- code mirror - code editor syntax highlight -->
+<link href="libs/codemirror/lib/codemirror.css" rel="stylesheet"/>
+<link href="libs/codemirror/theme/material.css" rel="stylesheet"/>
+<script src="libs/codemirror/lib/codemirror.js"></script>
+<script src="libs/codemirror/lib/xml.js"></script>
+<script src="libs/codemirror/lib/css.js"></script>
+<script src="libs/codemirror/lib/formatting.js"></script>
+<script src="libs/builder/plugin-codemirror.js"></script>
+
+
+<!--
+Tinymce plugin
+Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
+-->
+<script src="libs/tinymce-dist/tinymce.js"></script>
+<script src="libs/builder/plugin-tinymce.js"></script>
+
+
+<!-- autocomplete plugin used by autocomplete input
+<script src="libs/autocomplete/jquery.autocomplete.js"></script>
+-->
+<script>
+    let renameUrl = 'save.php?action=rename&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
+    let deleteUrl = 'save.php?action=delete&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
+    let oEmbedProxyUrl = 'save.php?action=oembedProxy&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
+
+    var url = "loadpage.php?page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>";
+    Vvveb.Builder.init(url, function() {
+        Vvveb.SectionList.loadSections(false);
+        Vvveb.TreeList.loadComponents();
+        Vvveb.StyleManager.init();
+    });
+
+    Vvveb.Gui.init();
+    Vvveb.SectionList.init();
+    Vvveb.TreeList.init();
+    Vvveb.Breadcrumb.init();
+    Vvveb.CssEditor.init();
+    Vvveb.Breadcrumb.init();
+</script>
 </body>
 </html>

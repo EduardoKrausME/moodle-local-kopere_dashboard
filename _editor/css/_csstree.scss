@@ -1,0 +1,158 @@
+/* CSS Tree menu styles */
+.tree
+{
+	width:100%;
+	padding:0;
+	> ol
+	{
+		padding: 0rem 0 0 0rem;
+		margin:0;
+		//width: 300px;
+		//min-width: $builder-right-panel-width + 15;
+		//margin:0 0.5rem;
+		font-size:12px;
+		color:var(--bs-body-color);
+		li
+		{ 
+			position: relative; 
+			//margin-left: -15px;
+			margin-bottom: 0.1rem;
+			list-style: none;
+			color:var(--bs-body-color);
+			overflow:hidden;
+			> label {
+				html[data-bs-theme="dark"] & { 
+					//color: #333;
+					//filter: invert(100%);
+				}
+			}
+			&:hover
+			{
+				color:#007bff;
+			}
+			&.active
+			{
+				//background-color:var(--bs-link-color);
+				//color:#fff;
+				> label > span, > a > span  
+				{
+					//color:#007bff;
+					//font-weight:500;
+				}
+			}
+		}
+		li.file
+		{
+			border:1px solid transparent;
+			&:hover, &.active {
+				//background-color:rgba(var(--bs-link-color-rgb), 0.05);
+				//color:var(--bs-link-color);
+				color:var(--bs-link-hover-color);
+			}
+			&:hover {
+				background-color:rgba(var(--bs-link-color-rgb), 0.05);
+				//border: 1px solid rgba(var(--bs-link-color), 0.1);
+				.file-actions {
+					display:block;
+				}
+			}
+			> label
+			{
+				background: url(../libs/builder/icons/file.svg);
+				background-position:8px 4px;
+				background-size:19px 19px;
+				background-repeat:no-repeat;
+				cursor: pointer;
+				display: block;
+				padding-left: 33px;
+				margin:0;
+				font-size:12px;
+				line-height:28px;
+				max-height:2rem;
+				&:hover
+				{
+					color:var(--bs-link-color);
+				}
+			}
+			.file-actions {
+				display:none;
+				position:absolute;
+				top:0px;
+				right:0px;
+				.btn {
+					padding:0rem 0.2rem;
+					font-size:0.875rem;
+					line-height:1;
+					border-radius:4px;
+					--bs-btn-border-color: rgba(var(--bs-link-color-rgb), 0.15);
+				}
+			}
+		}
+		li.folder
+		{
+			> label
+			{
+				//padding-left:38px;
+			}
+		}
+		li.page
+		{
+			> label
+			{
+				background-image: url(../libs/builder/icons/panel.svg);
+			}
+		}
+		li input
+		{
+			position: absolute;
+			left: 0;
+			margin-left: 0;
+			opacity: 0;
+			z-index: 2;
+			cursor: pointer;
+			height: 2em;
+			width: 2em;
+			top: 0;
+			 + ol
+			{
+				background: url(../libs/builder/icons/arrow-right.svg) 5px .3rem no-repeat;
+				background-size:12px 12px;
+				margin: -1.5rem 0 0 0rem;
+				padding: 2rem 0 0 2rem;
+				height: 0;
+				> li { display: none; margin-left: -14px !important; padding-left: 1px; }
+			}
+		}
+		li label
+		{
+			background: url(../libs/builder/icons/folder.svg) 24px 1px no-repeat;
+			background-size:20px 20px;
+			cursor: pointer;
+			display: block;
+			padding-left: 50px;
+			margin:0px;
+			font-size:12px;
+			line-height:24px;
+		}
+		li input:checked + ol
+		{
+			background: url(../libs/builder/icons/arrow-down.svg) 5px .6rem no-repeat;
+			background-size:12px 12px;
+			margin: -2.5em 0 0 0rem;
+			padding: 2rem 0 0 2.5rem;
+			height: auto;
+			> li { display: block; margin: 0 0 0.1em;  /* 2px */}
+			> li:last-child { margin: 0 0 0.3em; /* 1px */ }
+		}
+	}
+}
+//dark mode support for svg images
+[data-bs-theme="dark"] {
+	.tree > ol li.active label {
+		color: var(--bs-primary);
+	}
+	.tree > ol li label {
+		filter:invert(93%) hue-rotate(180deg);
+		color: var(--bs-dark);
+	}
+}

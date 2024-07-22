@@ -1,0 +1,60 @@
+.jquery-ui-tabs,
+.jquery-ui-accordion {
+    background: #f6f6f6;
+    padding: 20px;
+    margin: 20px;
+    position: relative;
+    * {
+        padding: 5px;
+    }
+    &:before,
+    :before {
+        position: absolute;
+        top: -11px;
+        left: 0;
+        font-size: 10px;
+        color: #dc3545;
+        user-select: none;
+        background: #d3d3d3;
+        padding: 0;
+    }
+}
+.jquery-ui-tabs {
+    &:before {
+        content: "jQuery UI Tabs";
+    }
+    ul {
+        list-style: none;
+        margin: 0;
+        padding-top: 7px;
+    }
+    ul li,
+    > div {
+        position: relative;
+        margin: 12px 0;
+        padding: 10px;
+    }
+    ul li:before {
+        content: "Tab";
+    }
+    > div:before {
+        content: "Content Tab";
+    }
+}
+.jquery-ui-accordion {
+    &:before {
+        content: "jQuery UI Accordion";
+    }
+    > h3,
+    > div {
+        position: relative;
+        margin: 12px 0;
+        padding: 10px;
+    }
+    > h3:before {
+        content: "Section";
+    }
+    > div:before {
+        content: "Content Section";
+    }
+}
