@@ -282,7 +282,7 @@ class notifications extends notificationsutil {
         } else {
             $href = "{$CFG->wwwroot}/local/kopere_dashboard/_editor/?page=notification&id={$evento->id}&link=";
             $text = get_string_kopere('notification_message_edit');
-            $link = "<a class='btn btn-info' href='{$href}'>{$text}</a>";
+            $link = "<a class='btn btn-info' target='editor' href='{$href}'>{$text}</a>";
             $templatecontent = str_replace('{[message]}', $htmltext . $link, $templatecontent);
             $form->print_panel(get_string_kopere('notification_message'), $templatecontent);
         }

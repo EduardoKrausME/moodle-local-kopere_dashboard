@@ -244,7 +244,7 @@ class webpages {
 
         $href = "{$CFG->wwwroot}/local/kopere_dashboard/_editor/?page=webpages&id={$webpages->id}&link={$webpages->link}";
         $text = get_string_kopere('webpages_table_text_edit');
-        $link = "<a class='btn btn-info' href='{$href}'>{$text}</a>";
+        $link = "<a class='btn btn-info' target='editor' href='{$href}'>{$text}</a>";
 
         $form->print_panel(get_string_kopere('webpages_table_text'),
             $imagem . $webpages->text . $link);
@@ -368,7 +368,7 @@ class webpages {
         } else {
             $href = "{$CFG->wwwroot}/local/kopere_dashboard/_editor/?page=webpages&id={$webpages->id}&link={$webpages->link}";
             $text = get_string_kopere('webpages_table_text_edit');
-            $link = "<a class='btn btn-info' href='{$href}'>{$text}</a>";
+            $link = "<a class='btn btn-info' target='editor' href='{$href}'>{$text}</a>";
             $form->print_row(get_string_kopere('webpages_table_text'), $link);
         }
 
