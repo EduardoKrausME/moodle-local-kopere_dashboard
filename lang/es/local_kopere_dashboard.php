@@ -500,3 +500,11 @@ $string['webpages_theme_standard'] = 'Diseño por defecto con bloques';
 $string['webpages_title'] = 'Páginas Estáticas';
 
 $string['privacy:metadata'] = 'El complemento de Kopere Dashboard no almacena ningún dato personal.';
+
+// Editor Vvveb_Js.
+$string['vvveb_home_popular_course'] = 'Cursos Populares';
+$string['vvveb_home_team_title'] = 'Conoce a Nuestro Equipo';
+$string['vvveb_home_team_subtitle'] = 'Somos un grupo de profesionales dedicados a su trabajo';
+$string['vvveb_home_access'] = 'Acceder al curso';
+$string['vvveb_home_automatically_my_course'] = 'No editar. Este bloque será reemplazado automáticamente con los cursos en los que el estudiante está inscrito.';
+$string['vvveb_home_mycourses_heading'] = 'Mis Cursos';

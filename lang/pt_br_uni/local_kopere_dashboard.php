@@ -75,3 +75,9 @@ $string['userimport_import_user_created_and_enrol_name'] = 'Usuário importado, 
 // WebPages.
 $string['webpages_subtitle_help'] = 'Estes menus aparecem em Navegação, abaixo de "Minhas disciplinas"';
 $string['webpages_page_course'] = 'Disciplina Vinculada';
+
+// Editor Vvveb_Js.
+$string['vvveb_home_popular_course'] = 'Disciplinas Populares';
+$string['vvveb_home_access'] = 'Acessar disciplina';
+$string['vvveb_home_automatically_my_course'] = 'Não edite. Este bloco será substituído automaticamente pelas disciplinas nos quais o aluno está matriculado.';
+$string['vvveb_home_mycourses_heading'] = 'Minhas disciplinas';

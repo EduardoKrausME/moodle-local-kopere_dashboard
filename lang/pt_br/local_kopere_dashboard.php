@@ -583,3 +583,11 @@ $string['webpages_theme_report'] = 'O layout da página usado para relatórios';
 $string['webpages_allpages'] = 'Todas as páginas';
 
 $string['privacy:metadata'] = 'O plugin do Kopere Dashboard não armazena nenhum dado pessoal.';
+
+// Editor Vvveb_Js.
+$string['vvveb_home_popular_course'] = 'Cursos Populares';
+$string['vvveb_home_team_title'] = 'Conheça Nossa Equipe';
+$string['vvveb_home_team_subtitle'] = 'Somos um grupo de profissionais dedicados ao seu trabalho';
+$string['vvveb_home_access'] = 'Acessar curso';
+$string['vvveb_home_automatically_my_course'] = 'Não edite. Este bloco será substituído automaticamente pelos cursos nos quais o aluno está matriculado.';
+$string['vvveb_home_mycourses_heading'] = 'Meus Cursos';
