@@ -263,7 +263,7 @@ class courses {
 
                 $matricular = optional_param("matricular", false, PARAM_INT);
                 if ($matricular) {
-                    enroll_util::enrol($course, $user, time(), 0, ENROL_INSTANCE_ENABLED);
+                    enroll_util::enrol($course, $user, time(), 0);
 
                     redirect($linkenrol, get_string_kopere('courses_student_cadastrar_ok'));
                 }

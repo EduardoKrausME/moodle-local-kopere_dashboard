@@ -22,7 +22,9 @@
 
 namespace local_kopere_dashboard\util;
 
+use context_course;
 use course_enrolment_manager;
+use Exception;
 
 /**
  * Class enroll_util
@@ -152,7 +154,7 @@ class enroll_util {
      * @throws \dml_exception
      * @throws \coding_exception
      */
-    public static function enrol($course, $user, $timestart, $timeend, $status, $roleid = 5) {
+    public static function enrol($course, $user, $timestart, $timeend, $roleid = 5) {
         global $DB, $PAGE, $CFG;
 
         $enrol = $DB->get_record('enrol', ['courseid' => $course->id, 'enrol' => 'manual']);
