@@ -68,7 +68,7 @@ class dashboard_util {
         if ($settingurl != null) {
             $link
                 .= "<div class='setting'>
-                        <a href='{$settingurl}'>
+                        <a href='{$settingurl}' class='kopere_link'>
                             <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg'
                                  alt='Settings' >
                         </a>
@@ -107,7 +107,7 @@ class dashboard_util {
             $return
                 .= "<ul class='breadcrumb'>
                         <li>
-                            <a target='_top' href='{$CFG->wwwroot}/'>{$SITE->fullname}</a>
+                            <a target='_top' href='{$CFG->wwwroot}/' class='kopere_link'>{$SITE->fullname}</a>
                         </li>
                         <li>
                             <a href='{$url}'>" . get_string_kopere('dashboard') . "</a>
@@ -119,7 +119,7 @@ class dashboard_util {
 
                     $PAGE->navbar->add($item);
                 } else {
-                    $return .= "<li><a href='{$item[1]}'>{$item[0]}</a></li>";
+                    $return .= "<li><a href='{$item[1]}' class='kopere_link'>{$item[0]}</a></li>";
 
                     $PAGE->navbar->add($item[0], $item[1]);
                 }
@@ -128,7 +128,7 @@ class dashboard_util {
             if ($settingurl != null) {
                 $return
                     .= "<li class='setting'>
-                            <a href='$settingurl'>
+                            <a href='$settingurl' class='kopere_link'>
                                 <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg'
                                      alt='Settings' >
                             </a>
@@ -190,7 +190,7 @@ class dashboard_util {
             $url = local_kopere_dashboard_makeurl($submenu->get_classname(), $submenu->get_methodname());
             $submenuhtml .= "
                 <li class='contains_branch {$classsub}'>
-                    <a href='{$url}{$submenu->get_urlextra()}'>
+                    <a href='{$url}{$submenu->get_urlextra()}' class='kopere_link'>
                         <img src='{$iconurl}' class='menu-icon' alt='Icon {$submenu->get_title()}'>
                         <span>{$submenu->get_title()}</span>
                     </a>
@@ -203,7 +203,7 @@ class dashboard_util {
         $iconurl = self::get_icon("/local/{$plugin}/assets/dashboard/img/icon{$class}/{$menu->get_icon()}.svg");
         $retorno .= "
                 <li class='$class'>
-                    <a href='" . local_kopere_dashboard_makeurl($menu->get_classname(), $menu->get_methodname()) . "'>
+                    <a href='" . local_kopere_dashboard_makeurl($menu->get_classname(), $menu->get_methodname()) . "' class='kopere_link'>
                         <img src='{$iconurl}' class='menu-icon' alt='Icon {$menu->get_name()}'>
                         <span>{$menu->get_name()}</span>
                     </a>
