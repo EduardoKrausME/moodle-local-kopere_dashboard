@@ -2,10 +2,7 @@
  * Created by kraus on 20/05/17.
  */
 
-define([
-    "jquery",
-    "local_kopere_dashboard/socket.io",
-], function($, io) {
+define(["jquery", "local_kopere_dashboard/socket.io"], function($, io) {
     return {
         connectServer : function(userid, fullname, servertime, url, privilegio) {
             var socketio;

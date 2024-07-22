@@ -1,6 +1,4 @@
-define([
-    "jquery"
-], function($) {
+define(["jquery"], function($) {
     return {
         useraccess_changue_mes : function() {
             $('.bloco_changue_mes').show(300);

@@ -1,6 +1,4 @@
-define([
-    "jquery"
-], function($) {
+define(["jquery"], function($) {
     return {
 
         backup_animate_scrollTop : function(key) {

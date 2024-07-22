@@ -1,6 +1,4 @@
-define([
-    "jquery",
-], function($) {
+define(["jquery"], function($) {
     return {
         courses_enrol_new : function() {
             $(".bt-courses_enrol_new").click(function() {

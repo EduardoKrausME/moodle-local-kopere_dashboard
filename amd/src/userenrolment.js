@@ -1,6 +1,4 @@
-define([
-    "jquery"
-], function($) {
+define(["jquery"], function($) {
     return {
 
         userenrolment_status : function() {
@@ -34,6 +32,5 @@ define([
             $('#timeend-status').change(timeend_status_change);
             $('#status').change(status_change);
         },
-
     };
 });
