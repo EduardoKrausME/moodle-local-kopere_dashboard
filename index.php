@@ -29,8 +29,7 @@ $menulink = optional_param('menu', false, PARAM_TEXT);
 $pagelink = optional_param('p', false, PARAM_TEXT);
 
 $htmldata = optional_param('htmldata', false, PARAM_RAW);
-$cssdata = optional_param('cssdata', false, PARAM_RAW);
-if ($htmldata && $cssdata && confirm_sesskey()) {
+if ($htmldata && confirm_sesskey()) {
     $pagelink = optional_param('link', false, PARAM_TEXT);
 }
 
@@ -51,8 +50,8 @@ if ($pagelink) {
         \local_kopere_dashboard\util\webpages_util::notfound("webpages_error_page");
     }
 
-    if ($htmldata && $cssdata && confirm_sesskey()) {
-        $webpages->text = "{$htmldata}\n<style>{$cssdata}</style>";
+    if ($htmldata && confirm_sesskey()) {
+        $webpages->text = $htmldata;
     }
 
     $PAGE->set_url(new moodle_url("/local/kopere_dashboard/?p={$pagelink}"));
