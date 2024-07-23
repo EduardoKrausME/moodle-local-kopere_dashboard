@@ -34,7 +34,6 @@ if ($htmldata && confirm_sesskey()) {
 }
 
 $context = context_system::instance();
-
 $PAGE->set_context($context);
 $PAGE->requires->css('/local/kopere_dashboard/assets/statics-pages.css');
 $PAGE->set_pagetype('my-index');
