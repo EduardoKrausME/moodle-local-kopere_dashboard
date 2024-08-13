@@ -64,6 +64,10 @@ $PAGE->requires->jquery();
 
 $PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
 
+$PAGE->requires->jquery();
+$PAGE->requires->jquery_plugin("ui");
+$PAGE->requires->jquery_plugin("ui-css");
+
 echo $OUTPUT->header();
 echo get_kopere_lang();
 

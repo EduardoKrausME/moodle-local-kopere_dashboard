@@ -138,12 +138,6 @@ class font_util {
         }
         $printed = true;
 
-        global $PAGE;
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', 'jqueryui');
-        $PAGE->requires->jquery();
-        $PAGE->requires->jquery_plugin("ui");
-        $PAGE->requires->jquery_plugin("ui-css");
-
         return "<link rel='stylesheet' href='" . self::css() . "'>";
     }
 }

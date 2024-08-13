@@ -1,4 +1,4 @@
-define(["jquery", "jqueryui"], function($, ui) {
+define(["jquery", "local_kopere_dashboard/bootstrap"], function($, bootstrap) {
     return {
 
         load_pages : function() {
@@ -73,9 +73,8 @@ define(["jquery", "jqueryui"], function($, ui) {
             });
         },
 
-        jqueryui : function() {
-            $(".jquery-ui-accordion").accordion();
-            $(".jquery-ui-tabs").tabs();
+        bootstrap : function() {
+
         }
     };
 });

@@ -73,6 +73,7 @@ if ($pagelink) {
     $PAGE->navbar->add($webpages->title);
 
     echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
+    $PAGE->requires->css("/local/kopere_dashboard/_editor/css/bootstrap_page.css");
     echo $OUTPUT->header();
 
     preg_match_all('/\[\[(kopere_\w+)::(\w+)(->|-&gt;)(\w+)\((.*?)\)]]/', $webpages->text, $classes);
@@ -111,6 +112,7 @@ if ($pagelink) {
         }
     }
     echo $webpages->text;
+    $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', 'bootstrap');
 
     echo '</div>';
 
