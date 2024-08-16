@@ -478,7 +478,7 @@ Vvveb.Components.add("elements/tabs", {
 		//set unique accordion id
 		node.outerHTML = node.outerHTML.replaceAll('parentId', Math.ceil(Math.random() * 1000));
 		return node;
-	},	
+	},
     properties: [{
 			//name: "List",
 			key: "list",
@@ -487,7 +487,7 @@ Vvveb.Components.add("elements/tabs", {
 				component: "elements/tab",
 				name: "html/gridcolumn",
 				classesRegex: ["col-"],
-			}],			
+			}],
 			inline:false,
 			inputtype: ListInput,
 			data: {
@@ -501,7 +501,7 @@ Vvveb.Components.add("elements/tabs", {
 			onChange: function(node, value, input, component, event) {
 				let element = node;
 				let tabsId = element.id.replace('tabs-','');
-				
+
 				let nav = node.querySelector("> nav .nav-tabs");
 				let content = node.querySelector("> .tab-content");
 
@@ -509,11 +509,11 @@ Vvveb.Components.add("elements/tabs", {
 					if (event.action == "add") {
 						let random = Math.floor(Math.random() * 100) + 1;
 						let index = nav.childElementCount + 1;
-						
+
 						nav.append(generateElements(`<button class="nav-link" id="nav-tab-${tabsId}-${index}-${random}" data-bs-toggle="tab" data-bs-target="#tab-${tabsId}-${index}-${random}" type="button" role="tab" aria-controls="tab-${index}-${random}" aria-selected="false">Tab ${index}</button>`)[0]);
-						
+
 						content.append(generateElements(`<div class="tab-pane p-4" id="tab-${tabsId}-${index}-${random}" role="tabpanel" aria-labelledby="tab-${tabsId}-${index}-${random}" tabindex="0"><p>Quisque sagittis non ex eget vestibulum</p></div>`)[0]);
-						
+
 						//temporary solution to better update list
 						Vvveb.Components.render("elements/tabs");
 					}
@@ -525,12 +525,12 @@ Vvveb.Components.add("elements/tabs", {
 						Vvveb.Builder.iframe.contentWindow.bootstrap.Tab.getOrCreateInstance(tab).show();
 					}
 				}
-				
+
 				return node;
 			},
 		}
 	]
-}); 	
+});
 
 
 //Accordion
