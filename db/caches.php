@@ -27,6 +27,10 @@ $definitions = [
     ],
     'webpage_menu_cache' => [
         'mode' => cache_store::MODE_APPLICATION,
-        'ttl' => 7 * 24 * 60 * 60, // 3d.
+        'ttl' => 3 * 24 * 60 * 60, // 3d.
+    ],
+    'courses_all_courses' => [
+        'mode' => cache_store::MODE_APPLICATION,
+        'ttl' => 1 * 24 * 60 * 60, // 1d.
     ],
 ];
