@@ -34,23 +34,30 @@ use local_kopere_dashboard\vo\kopere_dashboard_events;
 class event_observers {
     /**
      * @param \core\event\base $event
+     *
      * @throws \dml_exception
      * @throws \coding_exception
      */
     public static function process_event(\core\event\base $event) {
         global $DB;
 
+        $eventname = str_replace('\\\\', '\\', $event->eventname);
+
+        switch ($eventname) {
+            case '\core\event\course_deleted':
+            case '\core\event\course_updated':
+            case '\core\event\course_created':
+                $cache = \cache::make('local_kopere_dashboard', 'courses_all_courses');
+                $cache->delete("load_all_courses");
+        }
+
+
         if ($event->get_data()['action'] == 'viewed') {
             return;
         }
 
-        $eventname = str_replace('\\\\', '\\', $event->eventname);
-
-        $kopereeventss = $DB->get_records('kopere_dashboard_events',
-            [
-                'event' => $eventname,
-                'status' => 1
-            ]);
+        $where = ['event' => $eventname, 'status' => 1];
+        $kopereeventss = $DB->get_records('kopere_dashboard_events', $where);
 
         /** @var kopere_dashboard_events $kopereevents */
         foreach ($kopereeventss as $kopereevents) {
