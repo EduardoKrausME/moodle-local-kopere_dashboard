@@ -44,15 +44,16 @@ class db_course_access extends \core\task\scheduled_task {
                   FROM {logstore_standard_log}
                  WHERE action = 'viewed'
                    AND timecreated BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -30 DAY) AND CURRENT_DATE()
-              GROUP BY courseid, userid, contextinstanceid
+              GROUP BY courseid, userid, contextinstanceid, timecreated
               ORDER BY timecreated DESC";
         } else {
             $reportsql = "
-                SELECT CONCAT(courseid,userid,contextinstanceid) AS a, COUNT(*) AS contagem,
+                SELECT CONCAT(courseid::text, userid::text, contextinstanceid::text) AS a, COUNT(*) AS contagem,
                        courseid, userid, contextinstanceid, timecreated
                   FROM {logstore_standard_log}
                  WHERE action = 'viewed'
-              GROUP BY courseid, userid, contextinstanceid
+                   AND timecreated BETWEEN (CURRENT_DATE - INTERVAL '30 DAY') AND CURRENT_DATE
+              GROUP BY courseid, userid, contextinstanceid, timecreated
               ORDER BY timecreated DESC";
         }
 
