@@ -188,7 +188,7 @@ function local_kopere_dashboard_extend_navigation__get_menus($menuid, $prefix) {
 function local_kopere_dashboard_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
 
     $fs = get_file_storage();
-    if (!$file = $fs->get_file($context->id, 'local_kopere_dashboard', 'webpage_image', $args[0], '/', $args[1])) {
+    if (!$file = $fs->get_file($context->id, 'local_kopere_dashboard', 'editor_webpages', $args[0], '/', $args[1])) {
         return false;
     }
     send_stored_file($file, 0, 0, $forcedownload, $options);
