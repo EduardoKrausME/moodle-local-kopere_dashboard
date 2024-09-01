@@ -99,6 +99,8 @@ $string['datatables_buttons_copyTitle'] = 'Copy to clipboard';
 $string['datatables_buttons_copyKeys'] = 'Press <i>ctrl</i> or <i>\u2318</i> + <i>C</i> to copy the table data<br>to your system clipboard.<br><br>To cancel, click this message or press escape.';
 $string['datatables_buttons_select_rows_'] = '%d rows selected';
 $string['datatables_buttons_select_rows1'] = '1 row selected';
+$string['datatables_buttons_pageLength_'] = 'Show %d items';
+$string['datatables_buttons_pageLength_1'] = 'Show all';
 
 // Util/navigation.
 $string['navigation_page'] = 'Page {$a->atualPage} of {$a->countPages}';
@@ -345,6 +347,7 @@ $string['notification_status'] = 'Status';
 $string['notification_statusdesc'] = 'If you want to stop notifications, mark it as "Idle" and save!';
 $string['notification_status_active'] = 'Active';
 $string['notification_status_inactive'] = 'Inactive';
+$string['notification_status_deleted'] = 'Deleted';
 $string['notification_subject'] = 'Subject';
 $string['notification_subjectdesc'] = 'Message subject';
 $string['notification_message_html'] = '<p>Hi {[to.fullname]},</p><p>&nbsp;</p><p>Att,<br>{[from.fullname]}.</p>';;

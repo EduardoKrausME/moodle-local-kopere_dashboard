@@ -201,6 +201,8 @@ $string['datatables_buttons_copyTitle'] = 'Copiar al portapapeles';
 $string['datatables_buttons_copyKeys'] = 'Pressione <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> para copiar os dados da tabela<br>para a área de transferência do sistema.<br><br>Para cancelar, clique nesta mensagem ou pressione escape.';
 $string['datatables_buttons_select_rows_'] = '%d líneas seleccionadas';
 $string['datatables_buttons_select_rows1'] = '1 fila seleccionada';
+$string['datatables_buttons_pageLength_'] = 'Mostrar %d filas';
+$string['datatables_buttons_pageLength_1'] = 'Mostrar todo';
 
 $string['filemanager_title'] = 'Gestor de Archivos';
 $string['filereadmoreinfo'] = 'Probar la velocidad para leer en carpeta temporal de Moodle';
@@ -251,6 +253,7 @@ $string['notification_setting_templatelocation'] = 'Plantillas están en la carp
 $string['notification_status'] = 'Estatus';
 $string['notification_status_active'] = 'Activo';
 $string['notification_status_inactive'] = 'Inactivo';
+$string['notification_status_deleted'] = 'Eliminada';
 $string['notification_statusdesc'] = '¡Si Usted quier detener las notificaciones,marcar como "Idle" (ociosa) y guardar!';
 $string['notification_subject'] = 'Asunto';
 $string['notification_subjectdesc'] = 'Asunto del mensaje';

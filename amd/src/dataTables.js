@@ -3433,8 +3433,9 @@
                             (cOption == 'p' && features.bPaginate) ||
                             (cOption == 'B')
                         ) {
-                            if (!insert.find(".footer").length)
+                            if (!insert.find(".footer").length) {
                                 insert.append("<div class='footer d-flex align-items-center flex-wrap'></div>");
+                            }
 
                             insert.find(".footer").append(featureNode);
                         } else {
@@ -3443,7 +3444,6 @@
                     }
                 }
 
-                /* Built our DOM structure - replace the holding div with what we want */
                 holding.replaceWith(insert);
                 oSettings.nHolding = null;
             }
@@ -4871,7 +4871,7 @@
                     headerTrgEls, footerTrgEls,
                     headerSrcEls, footerSrcEls,
                     headerCopy, footerCopy,
-                    headerWidths                      = [], footerWidths   = [],
+                    headerWidths                      = [], footerWidths = [],
                     headerContent = [], footerContent = [],
                     idx, correction, sanityWidth,
                     zeroOut                           = function(nSizer) {

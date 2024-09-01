@@ -55,8 +55,8 @@
     'use strict';
     var DataTable = $.fn.dataTable;
 
-// Allow the constructor to pass in JSZip and PDFMake from external requires.
-// Otherwise, use globally defined variables, if they are available.
+    // Allow the constructor to pass in JSZip and PDFMake from external requires.
+    // Otherwise, use globally defined variables, if they are available.
     var useJszip;
     var usePdfmake;
 
@@ -245,14 +245,13 @@
         FS_proto.WRITING = 1;
         FS_proto.DONE = 2;
 
-        FS_proto.error =
-            FS_proto.onwritestart =
-                FS_proto.onprogress =
-                    FS_proto.onwrite =
-                        FS_proto.onabort =
-                            FS_proto.onerror =
-                                FS_proto.onwriteend =
-                                    null;
+        FS_proto.error = null;
+        FS_proto.onwritestart = null;
+        FS_proto.onprogress = null;
+        FS_proto.onwrite = null;
+        FS_proto.onabort = null;
+        FS_proto.onerror = null;
+        FS_proto.onwriteend = null;
 
         return saveAs;
     })(
@@ -261,8 +260,8 @@
         this.content
     );
 
-// Expose file saver on the DataTables API. Can't attach to `DataTables.Buttons`
-// since this file can be loaded before Button's core!
+    // Expose file saver on the DataTables API. Can't attach to `DataTables.Buttons`
+    // since this file can be loaded before Button's core!
     DataTable.fileSave = _saveAs;
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -554,7 +553,7 @@
         return max > 6 ? max : 6;
     }
 
-// Excel - Pre-defined strings to build a basic XLSX file
+    // Excel - Pre-defined strings to build a basic XLSX file
     var excelStrings = {
         '_rels/.rels' :
             '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
@@ -786,13 +785,13 @@
             '<tableStyles count="0" defaultTableStyle="TableStyleMedium9" defaultPivotStyle="PivotStyleMedium4" />' +
             '</styleSheet>'
     };
-// Note we could use 3 `for` loops for the styles, but when gzipped there is
-// virtually no difference in size, since the above can be easily compressed
+    // Note we could use 3 `for` loops for the styles, but when gzipped there is
+    // virtually no difference in size, since the above can be easily compressed
 
-// Pattern matching for special number formats. Perhaps this should be exposed
-// via an API in future?
-// Ref: section 3.8.30 - built in formatters in open spreadsheet
-//   https://www.ecma-international.org/news/TC45_current_work/Office%20Open%20XML%20Part%204%20-%20Markup%20Language%20Reference.pdf
+    // Pattern matching for special number formats. Perhaps this should be exposed
+    // via an API in future?
+    // Ref: section 3.8.30 - built in formatters in open spreadsheet
+    //   https://www.ecma-international.org/news/TC45_current_work/Office%20Open%20XML%20Part%204%20-%20Markup%20Language%20Reference.pdf
     var _excelSpecials = [
         {
             match : /^\-?\d+\.\d%$/,
@@ -842,10 +841,10 @@
      * Buttons
      */
 
-//
-// Copy to clipboard
-//
-    /*
+    //
+    // Copy to clipboard
+    //
+
     DataTable.ext.buttons.copyHtml5 = {
         className : 'buttons-copy buttons-html5',
 
@@ -911,12 +910,12 @@
 
                     if (successful) {
                         dt.buttons.info(
-                            dataTables_oLanguage.buttons.copyTitle,
+                            M.util.get_string('datatables_buttons_copy_text', 'local_kopere_dashboard'),
                             dt.i18n(
                                 'buttons.copySuccess',
                                 {
-                                    1 : dataTables_oLanguage.buttons.copySuccess1,
-                                    _ : dataTables_oLanguage.buttons.copySuccess_2
+                                    1 : M.util.get_string('datatables_buttons_copySuccess1', 'local_kopere_dashboard'),
+                                    _ : M.util.get_string('datatables_buttons_copySuccess_', 'local_kopere_dashboard'),
                                 },
                                 exportData.rows
                             ),
@@ -988,10 +987,10 @@
 
         messageBottom : '*'
     };
-    */
-//
-// CSV export
-//
+
+    //
+    // CSV export
+    //
     DataTable.ext.buttons.csvHtml5 = {
         bom : false,
 
@@ -1057,9 +1056,9 @@
         footer : false
     };
 
-//
-// Excel (xlsx) export
-//
+    //
+    // Excel (xlsx) export
+    //
     DataTable.ext.buttons.excelHtml5 = {
         className : 'buttons-excel buttons-html5',
 
@@ -1386,9 +1385,9 @@
         sheetName : ''
     };
 
-//
-// PDF export - using pdfMake - http://pdfmake.org
-//
+    //
+    // PDF export - using pdfMake - http://pdfmake.org
+    //
     DataTable.ext.buttons.pdfHtml5 = {
         className : 'buttons-pdf buttons-html5',
 

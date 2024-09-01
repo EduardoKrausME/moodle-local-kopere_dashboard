@@ -11,22 +11,31 @@ define([
     "local_kopere_dashboard/dataTables.dateTime",
     "local_kopere_dashboard/dataTables.responsive",
     "local_kopere_dashboard/dataTables.select",
+    "local_kopere_dashboard/jszip",
+    "local_kopere_dashboard/pdfmake",
 ], function($) {
     return dataTables_init = {
         init : function(selector, params) {
             var renderer = {
                 dataVisibleRenderer   : function(data, type, row) {
                     if (data == 0) {
-                        return '<div class="status-pill grey"  title="' + lang_invisible + '"  data-toggle="tooltip"></div>';
+                        return '<div class="status-pill grey"  title="' + M.util.get_string('courses_invisible', 'local_kopere_dashboard') + '"  data-toggle="tooltip"></div>';
                     } else {
-                        return '<div class="status-pill green" title="' + lang_visible + '" data-toggle="tooltip"></div>';
+                        return '<div class="status-pill green" title="' + M.util.get_string('courses_visible', 'local_kopere_dashboard') + '" data-toggle="tooltip"></div>';
                     }
                 },
                 dataStatusRenderer    : function(data, type, row) {
                     if (data == 1) {
-                        return '<div class="status-pill grey"  title="' + lang_inactive + '" data-toggle="tooltip"></div>';
+                        return '<div class="status-pill grey"  title="' + M.util.get_string('notification_status_inactive', 'local_kopere_dashboard') + '" data-toggle="tooltip"></div>';
                     } else {
-                        return '<div class="status-pill green" title="' + lang_active + '"   data-toggle="tooltip"></div>';
+                        return '<div class="status-pill green" title="' + M.util.get_string('notification_status_active', 'local_kopere_dashboard') + '"   data-toggle="tooltip"></div>';
+                    }
+                },
+                dataDeletedRenderer   : function(data, type, row) {
+                    if (data == 0) {
+                        return '<div class="status-pill grey"  title="' + M.util.get_string('notification_status_deleted', 'local_kopere_dashboard') + '" data-toggle="tooltip"></div>';
+                    } else {
+                        return '<div class="status-pill green" title="' + M.util.get_string('notification_status_active', 'local_kopere_dashboard') + '"   data-toggle="tooltip"></div>';
                     }
                 },
                 centerRenderer        : function(data, type, row) {
@@ -69,9 +78,9 @@ define([
                 },
                 dataTrueFalseRenderer : function(data, type, row) {
                     if (data == 0 || data == false || data == 'false') {
-                        return lang_no;
+                        return M.util.get_string('no');
                     } else {
-                        return lang_yes;
+                        return M.util.get_string('yes');
                     }
                 },
                 rendererFilesize      : function(data, type, row) {
@@ -155,6 +164,9 @@ define([
                     case "dataStatusRenderer":
                         columnDef.render = renderer.dataStatusRenderer;
                         break;
+                    case "dataDeletedRenderer":
+                        columnDef.render = renderer.dataDeletedRenderer;
+                        break;
                     case "dataTrueFalseRenderer":
                         columnDef.render = renderer.dataTrueFalseRenderer;
                         break;
@@ -168,27 +180,83 @@ define([
                 newColumnDefs.push(columnDef);
             });
             params.columnDefs = newColumnDefs;
-            params.oLanguage = dataTables_oLanguage;
+            params.oLanguage = {
+                sEmptyTable        : M.util.get_string('datatables_sEmptyTable', 'local_kopere_dashboard'),
+                sInfo              : M.util.get_string('datatables_sInfo', 'local_kopere_dashboard'),
+                sInfoEmpty         : M.util.get_string('datatables_sInfoEmpty', 'local_kopere_dashboard'),
+                sInfoFiltered      : M.util.get_string('datatables_sInfoFiltered', 'local_kopere_dashboard'),
+                sInfoPostFix       : M.util.get_string('datatables_sInfoPostFix', 'local_kopere_dashboard'),
+                sInfoThousands     : M.util.get_string('datatables_sInfoThousands', 'local_kopere_dashboard'),
+                sLengthMenu        : M.util.get_string('datatables_sLengthMenu', 'local_kopere_dashboard'),
+                sLoadingRecords    : M.util.get_string('datatables_sLoadingRecords', 'local_kopere_dashboard'),
+                sProcessing        : M.util.get_string('datatables_sProcessing', 'local_kopere_dashboard'),
+                sErrorMessage      : M.util.get_string('datatables_sErrorMessage', 'local_kopere_dashboard'),
+                sZeroRecords       : M.util.get_string('datatables_sZeroRecords', 'local_kopere_dashboard'),
+                sSearch            : "",
+                sSearchPlaceholder : M.util.get_string('datatables_sSearch', 'local_kopere_dashboard'),
+                buttons            : {
+                    print_text   : M.util.get_string('datatables_buttons_print_text', 'local_kopere_dashboard'),
+                    copy_text    : M.util.get_string('datatables_buttons_copy_text', 'local_kopere_dashboard'),
+                    csv_text     : M.util.get_string('datatables_buttons_csv_text', 'local_kopere_dashboard'),
+                    copySuccess1 : M.util.get_string('datatables_buttons_copySuccess1', 'local_kopere_dashboard'),
+                    copySuccess_ : M.util.get_string('datatables_buttons_copySuccess_', 'local_kopere_dashboard'),
+                    copyTitle    : M.util.get_string('datatables_buttons_copyTitle', 'local_kopere_dashboard'),
+                    copyKeys     : M.util.get_string('datatables_buttons_copyKeys', 'local_kopere_dashboard'),
+                    pageLength   : {
+                        '_'  : M.util.get_string('datatables_buttons_pageLength_', 'local_kopere_dashboard'),
+                        '-1' : M.util.get_string('datatables_buttons_pageLength_1', 'local_kopere_dashboard'),
+                    }
+                },
+                select             : {
+                    rows : {
+                        _ : M.util.get_string('datatables_buttons_select_rows_', 'local_kopere_dashboard'),
+                        0 : "",
+                        1 : M.util.get_string('datatables_buttons_select_rows1', 'local_kopere_dashboard'),
+                    }
+                },
+                oPaginate          : {
+                    sNext     : M.util.get_string('datatables_oPaginate_sNext', 'local_kopere_dashboard'),
+                    sPrevious : M.util.get_string('datatables_oPaginate_sPrevious', 'local_kopere_dashboard'),
+                    sFirst    : M.util.get_string('datatables_oPaginate_sFirst', 'local_kopere_dashboard'),
+                    sLast     : M.util.get_string('datatables_oPaginate_sLast', 'local_kopere_dashboard'),
+                },
+                oAria              : {
+                    sSortAscending  : M.util.get_string('datatables_oAria_sSortAscending', 'local_kopere_dashboard'),
+                    sSortDescending : M.util.get_string('datatables_oAria_sSortDescending', 'local_kopere_dashboard'),
+                }
+            };
             params.responsive = true;
 
             if (params.export_title) {
                 params.buttons = [
+                    'pageLength',
                     {
                         extend : 'print',
-                        text   : dataTables_oLanguage.buttons.print_text,
+                        text   : M.util.get_string('datatables_buttons_print_text', 'local_kopere_dashboard'),
                         title  : params.export_title
                     },
-                    //{
-                    //     extend : 'copy',
-                    //     text   : dataTables_oLanguage.buttons.copy_text,
-                    //     title  : params.export_title
-                    //},
+                    {
+                        extend : 'pdf',
+                        text   : "PDF",
+                        title  : params.export_title
+                    },
+                    {
+                        extend : 'excel',
+                        text   : 'Excel',
+                        title  : params.export_title
+                    },
                     {
                         extend : 'csv',
-                        text   : dataTables_oLanguage.buttons.csv_text,
+                        text   : M.util.get_string('datatables_buttons_csv_text', 'local_kopere_dashboard'),
                         title  : params.export_title
-                    }];
-                params.dom = 'lfrtipB';
+                    },
+                    {
+                        extend : 'copy',
+                        text   : "Copy",
+                        title  : params.export_title
+                    },
+                ];
+                params.dom = 'frtipB';
                 params.select = true;
             }
 
@@ -199,14 +267,14 @@ define([
                     setTimeout(function() {
                         _processing.show().html(
                             "<div style='color:#e91e63'>" +
-                            dataTables_oLanguage.sErrorMessage.replace("{$a}", "<span class='counter'>30</span>") +
+                            M.util.get_string('datatables_sErrorMessage', 'local_kopere_dashboard', "<span class='counter'>30</span>") +
                             "</div>");
                     }, 500);
 
                     var timer = 30;
                     var _inteval = setInterval(function() {
                         if (--timer <= 0) {
-                            _processing.html(dataTables_oLanguage.sProcessing);
+                            _processing.html(M.util.get_string('datatables_sProcessing', 'local_kopere_dashboard'));
                             clearInterval(_inteval);
                             window[selector].ajax.reload();
                         }
@@ -216,13 +284,25 @@ define([
                 count_error++;
             };
 
-            window[selector] = $("#" + selector).DataTable(params);
+            params.initComplete = function(settings, json) {
+                console.log(selector);
 
-            var element = $("<div class='group-controls'>");
-            var wrapper = $("#" + selector + "_wrapper");
-            wrapper.prepend(element);
-            wrapper.find(".dataTables_length").appendTo(element);
-            wrapper.find(".dataTables_filter").appendTo(element);
+                var element = $("<div class='group-controls'>");
+                var wrapper = $("#" + selector + "_wrapper");
+                wrapper.prepend(element);
+                wrapper.find(".dataTables_length").appendTo(element);
+                wrapper.find(".dataTables_filter").appendTo(element);
+
+                wrapper.find(".footer")
+                    .css({"justify-content" : "space-between"})
+                    .prepend("<div class='dataTables_navigate_area d-flex align-items-center'></div>");
+
+                var $area = wrapper.find(".dataTables_navigate_area");
+                wrapper.find(".dataTables_info").appendTo($area);
+                wrapper.find(".dataTables_paginate").appendTo($area);
+            };
+
+            window[selector] = $("#" + selector).DataTable(params);
         },
 
         click : function(selector, clickchave, clickurl) {

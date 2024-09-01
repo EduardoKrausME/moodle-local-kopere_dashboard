@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package  local_kopere_dashboard
+ * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
- * @license  http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 $string['modulename'] = 'Kopere Dashboard';
@@ -99,6 +99,8 @@ $string['datatables_buttons_copyTitle'] = 'Copiar para a área de transferência
 $string['datatables_buttons_copyKeys'] = 'Pressione <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> para copiar os dados da tabela<br>para a área de transferência do sistema.<br><br>Para cancelar, clique nesta mensagem ou pressione escape.';
 $string['datatables_buttons_select_rows_'] = '%d linhas selecionadas';
 $string['datatables_buttons_select_rows1'] = '1 linha selecionada';
+$string['datatables_buttons_pageLength_'] = 'Mostrar %d linhas';
+$string['datatables_buttons_pageLength_1'] = 'Mostrar todos';
 
 // Util/navigation.
 $string['navigation_page'] = 'Página {$a->atualPage} de {$a->countPages}';
@@ -345,6 +347,7 @@ $string['notification_status'] = 'Status';
 $string['notification_statusdesc'] = 'Se quiser interromper as notificações, marque como "Inativo" e salve!';
 $string['notification_status_active'] = 'Ativo';
 $string['notification_status_inactive'] = 'Inativo';
+$string['notification_status_deleted'] = 'Excluído';
 $string['notification_subject'] = 'Assunto';
 $string['notification_subjectdesc'] = 'Assunto da mensagem';
 $string['notification_message_html'] = '<p>Olá {[to.fullname]},</p><p>&nbsp;</p><p>Att,<br>{[from.fullname]}.</p>';

@@ -214,6 +214,8 @@ class data_table {
                 $this->columndefs[] = (object)["render" => "dataVisibleRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_STATUS) {
                 $this->columndefs[] = (object)["render" => "dataStatusRenderer", "targets" => $key];
+            } else if ($column->type == table_header_item::RENDERER_DELETED) {
+                $this->columndefs[] = (object)["render" => "dataDeletedRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_TRUEFALSE) {
                 $this->columndefs[] = (object)["render" => "dataTrueFalseRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_USERPHOTO) {
@@ -298,6 +300,12 @@ class data_table {
                         }
                     } else if ($column->type == table_header_item::RENDERER_STATUS) {
                         if ($html == 1) {
+                            $html = get_string_kopere('notification_status_inactive');
+                        } else {
+                            $html = get_string_kopere('notification_status_active');
+                        }
+                    } else if ($column->type == table_header_item::RENDERER_DELETED) {
+                        if ($html == 0) {
                             $html = get_string_kopere('notification_status_inactive');
                         } else {
                             $html = get_string_kopere('notification_status_active');
