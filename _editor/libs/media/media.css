@@ -1,12 +1,15 @@
 /*-------------------------
 	File manager
 -------------------------*/
-#MediaModal .modal-body, .filemanager {
-  position: static;
+#MediaModal {
+  z-index: 99999;
 }
-
 #MediaModal .modal-body {
   min-height: 50vh;
+}
+#MediaModal .modal-body,
+#MediaModal .filemanager {
+  position: static;
 }
 
 /*-------------------------

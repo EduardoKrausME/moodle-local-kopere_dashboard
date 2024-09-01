@@ -17,7 +17,7 @@
 /**
  * Editor.
  *
- * @package     theme_boost_magnific
+ * @package     local_kopere_dashboard
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

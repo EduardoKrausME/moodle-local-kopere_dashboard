@@ -72,8 +72,7 @@ function elt(tag, content, className, style) {
   var e = document.createElement(tag)
   if (className) { e.className = className }
   if (style) { e.style.cssText = style }
-  if (typeof content == "string") { e.appendChild(document.createTextNode(content)) }
-  else if (content) { for (var i = 0; i < content.length; ++i) { e.appendChild(content[i]) } }
+  if (typeof content == "string") { e.appendChild(document.createTextNode(content)) } else if (content) { for (var i = 0; i < content.length; ++i) { e.appendChild(content[i]) } }
   return e
 }
 // wrapper for elt, which removes the elt from the accessibility tree
@@ -288,8 +287,7 @@ function findFirst(pred, from, to) {
     if (from == to) { return from }
     var midF = (from + to) / 2, mid = dir < 0 ? Math.ceil(midF) : Math.floor(midF)
     if (mid == from) { return pred(mid) ? from : to }
-    if (pred(mid)) { to = mid }
-    else { from = mid + dir }
+    if (pred(mid)) { to = mid } else { from = mid + dir }
   }
 }
 
@@ -344,8 +342,7 @@ function Display(place, doc, input) {
   if (!webkit && !(gecko && mobile)) { d.scroller.draggable = true }
 
   if (place) {
-    if (place.appendChild) { place.appendChild(d.wrapper) }
-    else { place(d.wrapper) }
+    if (place.appendChild) { place.appendChild(d.wrapper) } else { place(d.wrapper) }
   }
 
   // Current rendered range (may be bigger than the view window).
@@ -511,9 +508,7 @@ function clipPos(doc, pos) {
 }
 function clipToLen(pos, linelen) {
   var ch = pos.ch
-  if (ch == null || ch > linelen) { return Pos(pos.line, linelen) }
-  else if (ch < 0) { return Pos(pos.line, 0) }
-  else { return pos }
+  if (ch == null || ch > linelen) { return Pos(pos.line, linelen) } else if (ch < 0) { return Pos(pos.line, 0) } else { return pos }
 }
 function clipPosArray(doc, array) {
   var out = []
@@ -615,8 +610,7 @@ function stretchSpansOverChange(doc, change) {
       var span = first[i]
       if (span.to == null) {
         var found = getMarkedSpanFor(last, span.marker)
-        if (!found) { span.to = startCh }
-        else if (sameLine) { span.to = found.to == null ? null : found.to + offset }
+        if (!found) { span.to = startCh } else if (sameLine) { span.to = found.to == null ? null : found.to + offset }
       }
     }
   }
@@ -850,14 +844,12 @@ function heightAtLine(lineObj) {
   var h = 0, chunk = lineObj.parent
   for (var i = 0; i < chunk.lines.length; ++i) {
     var line = chunk.lines[i]
-    if (line == lineObj) { break }
-    else { h += line.height }
+    if (line == lineObj) { break } else { h += line.height }
   }
   for (var p = chunk.parent; p; chunk = p, p = chunk.parent) {
     for (var i$1 = 0; i$1 < p.children.length; ++i$1) {
       var cur = p.children[i$1]
-      if (cur == chunk) { break }
-      else { h += cur.height }
+      if (cur == chunk) { break } else { h += cur.height }
     }
   }
   return h
@@ -922,12 +914,10 @@ function getBidiPartAt(order, ch, sticky) {
     var cur = order[i]
     if (cur.from < ch && cur.to > ch) { return i }
     if (cur.to == ch) {
-      if (cur.from != cur.to && sticky == "before") { found = i }
-      else { bidiOther = i }
+      if (cur.from != cur.to && sticky == "before") { found = i } else { bidiOther = i }
     }
     if (cur.from == ch) {
-      if (cur.from != cur.to && sticky != "before") { found = i }
-      else { bidiOther = i }
+      if (cur.from != cur.to && sticky != "before") { found = i } else { bidiOther = i }
     }
   }
   return found != null ? found : bidiOther
@@ -962,13 +952,7 @@ var bidiOrdering = (function() {
   // Character types for codepoints 0x600 to 0x6f9
   var arabicTypes = "nnnnnnNNr%%r,rNNmmmmmmmmmmmrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrmmmmmmmmmmmmmmmmmmmmmnnnnnnnnnn%nnrrrmrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrmmmmmmmnNmmmmmmrrmmNmmmmrr1111111111"
   function charType(code) {
-    if (code <= 0xf7) { return lowTypes.charAt(code) }
-    else if (0x590 <= code && code <= 0x5f4) { return "R" }
-    else if (0x600 <= code && code <= 0x6f9) { return arabicTypes.charAt(code - 0x600) }
-    else if (0x6ee <= code && code <= 0x8ac) { return "r" }
-    else if (0x2000 <= code && code <= 0x200b) { return "w" }
-    else if (code == 0x200c) { return "b" }
-    else { return "L" }
+    if (code <= 0xf7) { return lowTypes.charAt(code) } else if (0x590 <= code && code <= 0x5f4) { return "R" } else if (0x600 <= code && code <= 0x6f9) { return arabicTypes.charAt(code - 0x600) } else if (0x6ee <= code && code <= 0x8ac) { return "r" } else if (0x2000 <= code && code <= 0x200b) { return "w" } else if (code == 0x200c) { return "b" } else { return "L" }
   }
 
   var bidiRE = /[\u0590-\u05f4\u0600-\u06ff\u0700-\u08ac]/
@@ -993,8 +977,7 @@ var bidiOrdering = (function() {
     // get the type of sor.
     for (var i$1 = 0, prev = outerType; i$1 < len; ++i$1) {
       var type = types[i$1]
-      if (type == "m") { types[i$1] = prev }
-      else { prev = type }
+      if (type == "m") { types[i$1] = prev } else { prev = type }
     }
 
     // W2. Search backwards from each instance of a European number
@@ -1004,8 +987,7 @@ var bidiOrdering = (function() {
     // W3. Change all ALs to R.
     for (var i$2 = 0, cur = outerType; i$2 < len; ++i$2) {
       var type$1 = types[i$2]
-      if (type$1 == "1" && cur == "r") { types[i$2] = "n" }
-      else if (isStrong.test(type$1)) { cur = type$1; if (type$1 == "r") { types[i$2] = "R" } }
+      if (type$1 == "1" && cur == "r") { types[i$2] = "n" } else if (isStrong.test(type$1)) { cur = type$1; if (type$1 == "r") { types[i$2] = "R" } }
     }
 
     // W4. A single European separator between two European numbers
@@ -1013,8 +995,7 @@ var bidiOrdering = (function() {
     // two numbers of the same type changes to that type.
     for (var i$3 = 1, prev$1 = types[0]; i$3 < len - 1; ++i$3) {
       var type$2 = types[i$3]
-      if (type$2 == "+" && prev$1 == "1" && types[i$3+1] == "1") { types[i$3] = "1" }
-      else if (type$2 == "," && prev$1 == types[i$3+1] &&
+      if (type$2 == "+" && prev$1 == "1" && types[i$3+1] == "1") { types[i$3] = "1" } else if (type$2 == "," && prev$1 == types[i$3+1] &&
                (prev$1 == "1" || prev$1 == "n")) { types[i$3] = prev$1 }
       prev$1 = type$2
     }
@@ -1025,8 +1006,7 @@ var bidiOrdering = (function() {
     // Neutral.
     for (var i$4 = 0; i$4 < len; ++i$4) {
       var type$3 = types[i$4]
-      if (type$3 == ",") { types[i$4] = "N" }
-      else if (type$3 == "%") {
+      if (type$3 == ",") { types[i$4] = "N" } else if (type$3 == "%") {
         var end = (void 0)
         for (end = i$4 + 1; end < len && types[end] == "%"; ++end) {}
         var replace = (i$4 && types[i$4-1] == "!") || (end < len && types[end] == "1") ? "1" : "N"
@@ -1040,8 +1020,7 @@ var bidiOrdering = (function() {
     // found, then change the type of the European number to L.
     for (var i$5 = 0, cur$1 = outerType; i$5 < len; ++i$5) {
       var type$4 = types[i$5]
-      if (cur$1 == "L" && type$4 == "1") { types[i$5] = "L" }
-      else if (isStrong.test(type$4)) { cur$1 = type$4 }
+      if (cur$1 == "L" && type$4 == "1") { types[i$5] = "L" } else if (isStrong.test(type$4)) { cur$1 = type$4 }
     }
 
     // N1. A sequence of neutrals takes the direction of the
@@ -1189,12 +1168,10 @@ function eventMixin(ctor) {
 // compatibility wrappers are needed.
 
 function e_preventDefault(e) {
-  if (e.preventDefault) { e.preventDefault() }
-  else { e.returnValue = false }
+  if (e.preventDefault) { e.preventDefault() } else { e.returnValue = false }
 }
 function e_stopPropagation(e) {
-  if (e.stopPropagation) { e.stopPropagation() }
-  else { e.cancelBubble = true }
+  if (e.stopPropagation) { e.stopPropagation() } else { e.cancelBubble = true }
 }
 function e_defaultPrevented(e) {
   return e.defaultPrevented != null ? e.defaultPrevented : e.returnValue == false
@@ -1205,9 +1182,7 @@ function e_target(e) {return e.target || e.srcElement}
 function e_button(e) {
   var b = e.which
   if (b == null) {
-    if (e.button & 1) { b = 1 }
-    else if (e.button & 2) { b = 3 }
-    else if (e.button & 4) { b = 2 }
+    if (e.button & 1) { b = 1 } else if (e.button & 2) { b = 3 } else if (e.button & 4) { b = 2 }
   }
   if (mac && e.ctrlKey && b == 1) { b = 3 }
   return b
@@ -1325,8 +1300,7 @@ function resolveMode(spec) {
   } else if (typeof spec == "string" && /^[\w\-]+\/[\w\-]+\+json$/.test(spec)) {
     return resolveMode("application/json")
   }
-  if (typeof spec == "string") { return {name: spec} }
-  else { return spec || {name: "null"} }
+  if (typeof spec == "string") { return {name: spec} } else { return spec || {name: "null"} }
 }
 
 // Given a mode spec (anything that resolveMode accepts), find and
@@ -1413,8 +1387,7 @@ StringStream.prototype.next = function () {
 StringStream.prototype.eat = function (match) {
   var ch = this.string.charAt(this.pos)
   var ok
-  if (typeof match == "string") { ok = ch == match }
-  else { ok = ch && (match.test ? match.test(ch) : match(ch)) }
+  if (typeof match == "string") { ok = ch == match } else { ok = ch && (match.test ? match.test(ch) : match(ch)) }
   if (ok) {++this.pos; return ch}
 };
 StringStream.prototype.eatWhile = function (match) {
@@ -1514,8 +1487,7 @@ Context.prototype.nextLine = function () {
 
 Context.fromSaved = function (doc, saved, line) {
   if (saved instanceof SavedContext)
-    { return new Context(doc, copyState(doc.mode, saved.state), line, saved.lookAhead) }
-  else
+    { return new Context(doc, copyState(doc.mode, saved.state), line, saved.lookAhead) } else
     { return new Context(doc, copyState(doc.mode, saved), line) }
 };
 
@@ -1582,8 +1554,7 @@ function getLineStyles(cm, line, updateFrontier) {
     if (resetState) { context.state = resetState }
     line.stateAfter = context.save(!resetState)
     line.styles = result.styles
-    if (result.classes) { line.styleClasses = result.classes }
-    else if (line.styleClasses) { line.styleClasses = null }
+    if (result.classes) { line.styleClasses = result.classes } else if (line.styleClasses) { line.styleClasses = null }
     if (updateFrontier === cm.doc.highlightFrontier)
       { cm.doc.modeFrontier = Math.max(cm.doc.modeFrontier, ++cm.doc.highlightFrontier) }
   }
@@ -1666,8 +1637,7 @@ function extractLineClasses(type, output) {
     type = type.slice(0, lineClass.index) + type.slice(lineClass.index + lineClass[0].length)
     var prop = lineClass[1] ? "bgClass" : "textClass"
     if (output[prop] == null)
-      { output[prop] = lineClass[2] }
-    else if (!(new RegExp("(?:^|\s)" + lineClass[2] + "(?:$|\s)")).test(output[prop]))
+      { output[prop] = lineClass[2] } else if (!(new RegExp("(?:^|\s)" + lineClass[2] + "(?:$|\s)")).test(output[prop]))
       { output[prop] += " " + lineClass[2] }
   } }
   return type
@@ -1889,8 +1859,7 @@ function buildToken(builder, text, style, startStyle, endStyle, title, css) {
       var skipped = m ? m.index - pos : text.length - pos
       if (skipped) {
         var txt = document.createTextNode(displayText.slice(pos, pos + skipped))
-        if (ie && ie_version < 9) { content.appendChild(elt("span", [txt])) }
-        else { content.appendChild(txt) }
+        if (ie && ie_version < 9) { content.appendChild(elt("span", [txt])) } else { content.appendChild(txt) }
         builder.map.push(builder.pos, builder.pos + skipped, txt)
         builder.col += skipped
         builder.pos += skipped
@@ -1911,8 +1880,7 @@ function buildToken(builder, text, style, startStyle, endStyle, title, css) {
       } else {
         txt$1 = builder.cm.options.specialCharPlaceholder(m[0])
         txt$1.setAttribute("cm-text", m[0])
-        if (ie && ie_version < 9) { content.appendChild(elt("span", [txt$1])) }
-        else { content.appendChild(txt$1) }
+        if (ie && ie_version < 9) { content.appendChild(elt("span", [txt$1])) } else { content.appendChild(txt$1) }
         builder.col += 1
       }
       builder.map.push(builder.pos, builder.pos + 1, txt$1)
@@ -2159,10 +2127,7 @@ function fireOrphanDelayed() {
 function updateLineForChanges(cm, lineView, lineN, dims) {
   for (var j = 0; j < lineView.changes.length; j++) {
     var type = lineView.changes[j]
-    if (type == "text") { updateLineText(cm, lineView) }
-    else if (type == "gutter") { updateLineGutter(cm, lineView, lineN, dims) }
-    else if (type == "class") { updateLineClasses(cm, lineView) }
-    else if (type == "widget") { updateLineWidgets(cm, lineView, dims) }
+    if (type == "text") { updateLineText(cm, lineView) } else if (type == "gutter") { updateLineGutter(cm, lineView, lineN, dims) } else if (type == "class") { updateLineClasses(cm, lineView) } else if (type == "widget") { updateLineWidgets(cm, lineView, dims) }
   }
   lineView.changes = null
 }
@@ -2184,8 +2149,7 @@ function updateLineBackground(cm, lineView) {
   var cls = lineView.bgClass ? lineView.bgClass + " " + (lineView.line.bgClass || "") : lineView.line.bgClass
   if (cls) { cls += " CodeMirror-linebackground" }
   if (lineView.background) {
-    if (cls) { lineView.background.className = cls }
-    else { lineView.background.parentNode.removeChild(lineView.background); lineView.background = null }
+    if (cls) { lineView.background.className = cls } else { lineView.background.parentNode.removeChild(lineView.background); lineView.background = null }
   } else if (cls) {
     var wrap = ensureLineWrapped(lineView)
     lineView.background = wrap.insertBefore(elt("div", null, cls), wrap.firstChild)
@@ -2226,8 +2190,7 @@ function updateLineText(cm, lineView) {
 function updateLineClasses(cm, lineView) {
   updateLineBackground(cm, lineView)
   if (lineView.line.wrapClass)
-    { ensureLineWrapped(lineView).className = lineView.line.wrapClass }
-  else if (lineView.node != lineView.text)
+    { ensureLineWrapped(lineView).className = lineView.line.wrapClass } else if (lineView.node != lineView.text)
     { lineView.node.className = "" }
   var textClass = lineView.textClass ? lineView.textClass + " " + (lineView.line.textClass || "") : lineView.line.textClass
   lineView.text.className = textClass || ""
@@ -2311,8 +2274,7 @@ function insertLineWidgetsFor(cm, line, lineView, dims, allowAbove) {
     positionLineWidget(widget, node, lineView, dims)
     cm.display.input.setUneditable(node)
     if (allowAbove && widget.above)
-      { wrap.insertBefore(node, lineView.gutter || lineView.text) }
-    else
+      { wrap.insertBefore(node, lineView.gutter || lineView.text) } else
       { wrap.appendChild(node) }
     signalLater(widget, "redraw")
   }
@@ -2552,8 +2514,7 @@ function measureCharInner(cm, prepared, ch, bias) {
       while (start && isExtendingChar(prepared.line.text.charAt(place.coverStart + start))) { --start }
       while (place.coverStart + end < place.coverEnd && isExtendingChar(prepared.line.text.charAt(place.coverStart + end))) { ++end }
       if (ie && ie_version < 9 && start == 0 && end == place.coverEnd - place.coverStart)
-        { rect = node.parentNode.getBoundingClientRect() }
-      else
+        { rect = node.parentNode.getBoundingClientRect() } else
         { rect = getUsefulRect(range(node, start, end).getClientRects(), bias) }
       if (rect.left || rect.right || start == 0) { break }
       end = start
@@ -2565,15 +2526,13 @@ function measureCharInner(cm, prepared, ch, bias) {
     if (start > 0) { collapse = bias = "right" }
     var rects
     if (cm.options.lineWrapping && (rects = node.getClientRects()).length > 1)
-      { rect = rects[bias == "right" ? rects.length - 1 : 0] }
-    else
+      { rect = rects[bias == "right" ? rects.length - 1 : 0] } else
       { rect = node.getBoundingClientRect() }
   }
   if (ie && ie_version < 9 && !start && (!rect || !rect.left && !rect.right)) {
     var rSpan = node.parentNode.getClientRects()[0]
     if (rSpan)
-      { rect = {left: rSpan.left, right: rSpan.left + charWidth(cm.display), top: rSpan.top, bottom: rSpan.bottom} }
-    else
+      { rect = {left: rSpan.left, right: rSpan.left + charWidth(cm.display), top: rSpan.top, bottom: rSpan.bottom} } else
       { rect = nullRect }
   }
 
@@ -2659,8 +2618,7 @@ function intoCoordSystem(cm, lineObj, rect, context, includeWidgets) {
   if (context == "line") { return rect }
   if (!context) { context = "local" }
   var yOff = heightAtLine(lineObj)
-  if (context == "local") { yOff += paddingTop(cm.display) }
-  else { yOff -= cm.display.viewOffset }
+  if (context == "local") { yOff += paddingTop(cm.display) } else { yOff -= cm.display.viewOffset }
   if (context == "page" || context == "window") {
     var lOff = cm.display.lineSpace.getBoundingClientRect()
     yOff += lOff.top + (context == "window" ? 0 : pageScrollY())
@@ -2781,8 +2739,7 @@ function coordsChar(cm, x, y) {
     var merged = collapsedSpanAtEnd(lineObj)
     var mergedPos = merged && merged.find(0, true)
     if (merged && (found.ch > mergedPos.from.ch || found.ch == mergedPos.from.ch && found.xRel > 0))
-      { lineN = lineNo(lineObj = mergedPos.to.line) }
-    else
+      { lineN = lineNo(lineObj = mergedPos.to.line) } else
       { return found }
   }
 }
@@ -3001,8 +2958,7 @@ function estimateHeight(cm) {
     } }
 
     if (wrapping)
-      { return widgetsHeight + (Math.ceil(line.text.length / perLine) || 1) * th }
-    else
+      { return widgetsHeight + (Math.ceil(line.text.length / perLine) || 1) * th } else
       { return widgetsHeight + th }
   }
 }
@@ -3196,8 +3152,7 @@ function restartBlink(cm) {
   display.cursorDiv.style.visibility = ""
   if (cm.options.cursorBlinkRate > 0)
     { display.blinker = setInterval(function () { return display.cursorDiv.style.visibility = (on = !on) ? "" : "hidden"; },
-      cm.options.cursorBlinkRate) }
-  else if (cm.options.cursorBlinkRate < 0)
+      cm.options.cursorBlinkRate) } else if (cm.options.cursorBlinkRate < 0)
     { display.cursorDiv.style.visibility = "hidden" }
 }
 
@@ -3355,8 +3310,7 @@ function maybeScrollWindow(cm, rect) {
   if (signalDOMEvent(cm, "scrollCursorIntoView")) { return }
 
   var display = cm.display, box = display.sizer.getBoundingClientRect(), doScroll = null
-  if (rect.top + box.top < 0) { doScroll = true }
-  else if (rect.bottom + box.top > (window.innerHeight || document.documentElement.clientHeight)) { doScroll = false }
+  if (rect.top + box.top < 0) { doScroll = true } else if (rect.bottom + box.top > (window.innerHeight || document.documentElement.clientHeight)) { doScroll = false }
   if (doScroll != null && !phantom) {
     var scrollNode = elt("div", "\u200b", null, ("position: absolute;\n                         top: " + (rect.top - display.viewOffset - paddingTop(cm.display)) + "px;\n                         height: " + (rect.bottom - rect.top + scrollGap(cm) + display.barHeight) + "px;\n                         left: " + (rect.left) + "px; width: " + (Math.max(2, rect.right - rect.left)) + "px;"))
     cm.display.lineSpace.appendChild(scrollNode)
@@ -3432,10 +3386,8 @@ function calculateScrollPos(cm, rect) {
   var tooWide = rect.right - rect.left > screenw
   if (tooWide) { rect.right = rect.left + screenw }
   if (rect.left < 10)
-    { result.scrollLeft = 0 }
-  else if (rect.left < screenleft)
-    { result.scrollLeft = Math.max(0, rect.left - (tooWide ? 0 : 10)) }
-  else if (rect.right > screenw + screenleft - 3)
+    { result.scrollLeft = 0 } else if (rect.left < screenleft)
+    { result.scrollLeft = Math.max(0, rect.left - (tooWide ? 0 : 10)) } else if (rect.right > screenw + screenleft - 3)
     { result.scrollLeft = rect.right + (tooWide ? 0 : 10) - screenw }
   return result
 }
@@ -3624,8 +3576,7 @@ NativeScrollbars.prototype.enableZeroWidthBar = function (bar, delay, type) {
     var box = bar.getBoundingClientRect()
     var elt = type == "vert" ? document.elementFromPoint(box.right - 1, (box.top + box.bottom) / 2)
         : document.elementFromPoint((box.right + box.left) / 2, box.bottom - 1)
-    if (elt != bar) { bar.style.pointerEvents = "none" }
-    else { delay.set(1000, maybeDisable) }
+    if (elt != bar) { bar.style.pointerEvents = "none" } else { delay.set(1000, maybeDisable) }
   }
   delay.set(1000, maybeDisable)
 };
@@ -3694,8 +3645,7 @@ function initScrollbars(cm) {
     })
     node.setAttribute("cm-not-content", "true")
   }, function (pos, axis) {
-    if (axis == "horizontal") { setScrollLeft(cm, pos) }
-    else { updateScrollTop(cm, pos) }
+    if (axis == "horizontal") { setScrollLeft(cm, pos) } else { updateScrollTop(cm, pos) }
   }, cm)
   if (cm.display.scrollbars.addClass)
     { addClass(cm.display.wrapper, cm.display.scrollbars.addClass) }
@@ -3956,8 +3906,7 @@ function regChange(cm, from, to, lendiff) {
   var ext = display.externalMeasured
   if (ext) {
     if (to < ext.lineN)
-      { ext.lineN += lendiff }
-    else if (from < ext.lineN + ext.size)
+      { ext.lineN += lendiff } else if (from < ext.lineN + ext.size)
       { display.externalMeasured = null }
   }
 }
@@ -4018,13 +3967,11 @@ function adjustView(cm, from, to) {
     display.viewFrom = from
   } else {
     if (display.viewFrom > from)
-      { display.view = buildViewArray(cm, from, display.viewFrom).concat(display.view) }
-    else if (display.viewFrom < from)
+      { display.view = buildViewArray(cm, from, display.viewFrom).concat(display.view) } else if (display.viewFrom < from)
       { display.view = display.view.slice(findViewIndex(cm, from)) }
     display.viewFrom = from
     if (display.viewTo < to)
-      { display.view = display.view.concat(buildViewArray(cm, display.viewTo, to)) }
-    else if (display.viewTo > to)
+      { display.view = display.view.concat(buildViewArray(cm, display.viewTo, to)) } else if (display.viewTo > to)
       { display.view = display.view.slice(0, findViewIndex(cm, to)) }
   }
   display.viewTo = to
@@ -4063,8 +4010,7 @@ function highlightWorker(cm) {
       if (resetState) { context.state = resetState }
       line.styles = highlighted.styles
       var oldCls = line.styleClasses, newCls = highlighted.classes
-      if (newCls) { line.styleClasses = newCls }
-      else if (oldCls) { line.styleClasses = null }
+      if (newCls) { line.styleClasses = newCls } else if (oldCls) { line.styleClasses = null }
       var ischange = !oldStyles || oldStyles.length != line.styles.length ||
         oldCls != newCls && (!oldCls || !newCls || oldCls.bgClass != newCls.bgClass || oldCls.textClass != newCls.textClass)
       for (var i = 0; !ischange && i < oldStyles.length; ++i) { ischange = oldStyles[i] != line.styles[i] }
@@ -4289,8 +4235,7 @@ function patchDisplay(cm, updateNumbersFrom, dims) {
     var next = node.nextSibling
     // Works around a throw-scroll bug in OS X Webkit
     if (webkit && mac && cm.display.currentWheelTarget == node)
-      { node.style.display = "none" }
-    else
+      { node.style.display = "none" } else
       { node.parentNode.removeChild(node) }
     return next
   }
@@ -4378,8 +4323,7 @@ else if (safari) { wheelPixelsPerUnit = -1/3 }
 function wheelEventDelta(e) {
   var dx = e.wheelDeltaX, dy = e.wheelDeltaY
   if (dx == null && e.detail && e.axis == e.HORIZONTAL_AXIS) { dx = e.detail }
-  if (dy == null && e.detail && e.axis == e.VERTICAL_AXIS) { dy = e.detail }
-  else if (dy == null) { dy = e.wheelDelta }
+  if (dy == null && e.detail && e.axis == e.VERTICAL_AXIS) { dy = e.detail } else if (dy == null) { dy = e.wheelDelta }
   return {x: dx, y: dy}
 }
 function wheelEventPixels(e) {
@@ -4438,8 +4382,7 @@ function onScrollWheel(cm, e) {
   if (dy && wheelPixelsPerUnit != null) {
     var pixels = dy * wheelPixelsPerUnit
     var top = cm.doc.scrollTop, bot = top + display.wrapper.clientHeight
-    if (pixels < 0) { top = Math.max(0, top + pixels - 50) }
-    else { bot = Math.min(cm.doc.height, bot + pixels + 50) }
+    if (pixels < 0) { top = Math.max(0, top + pixels - 50) } else { bot = Math.min(cm.doc.height, bot + pixels + 50) }
     updateDisplaySimple(cm, {top: top, bottom: bot})
   }
 
@@ -4579,8 +4522,7 @@ function computeSelAfterChange(doc, change) {
 
 function offsetPos(pos, old, nw) {
   if (pos.line == old.line)
-    { return Pos(nw.line, pos.ch - old.ch + nw.ch) }
-  else
+    { return Pos(nw.line, pos.ch - old.ch + nw.ch) } else
     { return Pos(nw.line + (pos.line - old.line), pos.ch) }
 }
 
@@ -4753,8 +4695,7 @@ function historyChangeFromChange(doc, change) {
 function clearSelectionEvents(array) {
   while (array.length) {
     var last = lst(array)
-    if (last.ranges) { array.pop() }
-    else { break }
+    if (last.ranges) { array.pop() } else { break }
   }
 }
 
@@ -4842,8 +4783,7 @@ function addSelectionToHistory(doc, sel, opId, options) {
       (origin && hist.lastSelOrigin == origin &&
        (hist.lastModTime == hist.lastSelTime && hist.lastOrigin == origin ||
         selectionEventCanBeMerged(doc, origin, lst(hist.done), sel))))
-    { hist.done[hist.done.length - 1] = sel }
-  else
+    { hist.done[hist.done.length - 1] = sel } else
     { pushSelectionToHistory(sel, hist.done) }
 
   hist.lastSelTime = +new Date
@@ -4875,8 +4815,7 @@ function removeClearedSpans(spans) {
   if (!spans) { return null }
   var out
   for (var i = 0; i < spans.length; ++i) {
-    if (spans[i].marker.explicitlyCleared) { if (!out) { out = spans.slice(0, i) } }
-    else if (out) { out.push(spans[i]) }
+    if (spans[i].marker.explicitlyCleared) { if (!out) { out = spans.slice(0, i) } } else if (out) { out.push(spans[i]) }
   }
   return !out ? spans : out.length ? out : null
 }
@@ -5015,8 +4954,7 @@ function filterSelectionChange(doc, sel, options) {
   }
   signal(doc, "beforeSelectionChange", doc, obj)
   if (doc.cm) { signal(doc.cm, "beforeSelectionChange", doc.cm, obj) }
-  if (obj.ranges != sel.ranges) { return normalizeSelection(obj.ranges, obj.ranges.length - 1) }
-  else { return sel }
+  if (obj.ranges != sel.ranges) { return normalizeSelection(obj.ranges, obj.ranges.length - 1) } else { return sel }
 }
 
 function setSelectionReplaceHistory(doc, sel, options) {
@@ -5091,8 +5029,7 @@ function skipAtomicInner(doc, pos, oldPos, dir, mayClear) {
       if (mayClear) {
         signal(m, "beforeCursorEnter")
         if (m.explicitlyCleared) {
-          if (!line.markedSpans) { break }
-          else {--i; continue}
+          if (!line.markedSpans) { break } else {--i; continue}
         }
       }
       if (!m.atomic) { continue }
@@ -5130,11 +5067,9 @@ function skipAtomic(doc, pos, oldPos, bias, mayClear) {
 
 function movePos(doc, pos, dir, line) {
   if (dir < 0 && pos.ch == 0) {
-    if (pos.line > doc.first) { return clipPos(doc, Pos(pos.line - 1)) }
-    else { return null }
+    if (pos.line > doc.first) { return clipPos(doc, Pos(pos.line - 1)) } else { return null }
   } else if (dir > 0 && pos.ch == (line || getLine(doc, pos.line)).text.length) {
-    if (pos.line < doc.first + doc.size - 1) { return Pos(pos.line + 1, 0) }
-    else { return null }
+    if (pos.line < doc.first + doc.size - 1) { return Pos(pos.line + 1, 0) } else { return null }
   } else {
     return new Pos(pos.line, pos.ch + dir)
   }
@@ -5329,8 +5264,7 @@ function makeChangeSingleDoc(doc, change, selAfter, spans) {
   change.removed = getBetween(doc, change.from, change.to)
 
   if (!selAfter) { selAfter = computeSelAfterChange(doc, change) }
-  if (doc.cm) { makeChangeSingleDocInEditor(doc.cm, change, spans) }
-  else { updateDoc(doc, change, spans) }
+  if (doc.cm) { makeChangeSingleDocInEditor(doc.cm, change, spans) } else { updateDoc(doc, change, spans) }
   setSelectionNoUndo(doc, selAfter, sel_dontScroll)
 }
 
@@ -5374,10 +5308,8 @@ function makeChangeSingleDocInEditor(cm, change, spans) {
   var lendiff = change.text.length - (to.line - from.line) - 1
   // Remember that these lines changed, for updating the display
   if (change.full)
-    { regChange(cm) }
-  else if (from.line == to.line && change.text.length == 1 && !isWholeLineUpdate(cm.doc, change))
-    { regLineChange(cm, from.line, "text") }
-  else
+    { regChange(cm) } else if (from.line == to.line && change.text.length == 1 && !isWholeLineUpdate(cm.doc, change))
+    { regLineChange(cm, from.line, "text") } else
     { regChange(cm, from.line, to.line + 1, lendiff) }
 
   var changesHandler = hasHandler(cm, "changes"), changeHandler = hasHandler(cm, "change")
@@ -5459,8 +5391,7 @@ function rebaseHist(hist, change) {
 // changed.
 function changeLine(doc, handle, changeType, op) {
   var no = handle, line = handle
-  if (typeof handle == "number") { line = getLine(doc, clipLine(doc, handle)) }
-  else { no = lineNo(handle) }
+  if (typeof handle == "number") { line = getLine(doc, clipLine(doc, handle)) } else { no = lineNo(handle) }
   if (no == null) { return null }
   if (op(line, no) && doc.cm) { regLineChange(doc.cm, no, changeType) }
   return line
@@ -5706,8 +5637,7 @@ function addLineWidget(doc, handle, node, options) {
   if (cm && widget.noHScroll) { cm.display.alignWidgets = true }
   changeLine(doc, handle, "widget", function (line) {
     var widgets = line.widgets || (line.widgets = [])
-    if (widget.insertAt == null) { widgets.push(widget) }
-    else { widgets.splice(Math.min(widgets.length - 1, Math.max(0, widget.insertAt)), 0, widget) }
+    if (widget.insertAt == null) { widgets.push(widget) } else { widgets.splice(Math.min(widgets.length - 1, Math.max(0, widget.insertAt)), 0, widget) }
     widget.line = line
     if (cm && !lineIsHidden(doc, line)) {
       var aboveVisible = heightAtLine(line) < doc.scrollTop
@@ -5760,8 +5690,7 @@ TextMarker.prototype.clear = function () {
   for (var i = 0; i < this.lines.length; ++i) {
     var line = this$1.lines[i]
     var span = getMarkedSpanFor(line.markedSpans, this$1)
-    if (cm && !this$1.collapsed) { regLineChange(cm, lineNo(line), "text") }
-    else if (cm) {
+    if (cm && !this$1.collapsed) { regLineChange(cm, lineNo(line), "text") } else if (cm) {
       if (span.to != null) { max = lineNo(line) }
       if (span.from != null) { min = lineNo(line) }
     }
@@ -5920,8 +5849,7 @@ function markText(doc, from, to, options, type) {
     // Sync editor state
     if (updateMaxLine) { cm.curOp.updateMaxLine = true }
     if (marker.collapsed)
-      { regChange(cm, from.line, to.line + 1) }
-    else if (marker.className || marker.title || marker.startStyle || marker.endStyle || marker.css)
+      { regChange(cm, from.line, to.line + 1) } else if (marker.className || marker.title || marker.startStyle || marker.endStyle || marker.css)
       { for (var i = from.line; i <= to.line; i++) { regLineChange(cm, i, "text") } }
     if (marker.atomic) { reCheckSelection(cm.doc) }
     signalLater(cm, "markerAdded", cm, marker)
@@ -6037,8 +5965,7 @@ Doc.prototype = createObj(BranchChunk.prototype, {
   // three, it iterates over the range given by the first two (with
   // the second being non-inclusive).
   iter: function(from, to, op) {
-    if (op) { this.iterN(from - this.first, to - from, op) }
-    else { this.iterN(this.first, this.first + this.size, from) }
+    if (op) { this.iterN(from - this.first, to - from, op) } else { this.iterN(this.first, this.first + this.size, from) }
   },
 
   // Non-public interface for adding and removing lines.
@@ -6093,10 +6020,7 @@ Doc.prototype = createObj(BranchChunk.prototype, {
 
   getCursor: function(start) {
     var range = this.sel.primary(), pos
-    if (start == null || start == "head") { pos = range.head }
-    else if (start == "anchor") { pos = range.anchor }
-    else if (start == "end" || start == "to" || start === false) { pos = range.to() }
-    else { pos = range.from() }
+    if (start == null || start == "head") { pos = range.head } else if (start == "anchor") { pos = range.anchor } else if (start == "end" || start == "to" || start === false) { pos = range.to() } else { pos = range.from() }
     return pos
   },
   listSelections: function() { return this.sel.ranges },
@@ -6143,8 +6067,7 @@ Doc.prototype = createObj(BranchChunk.prototype, {
       var sel = getBetween(this$1, ranges[i].from(), ranges[i].to())
       lines = lines ? lines.concat(sel) : sel
     }
-    if (lineSep === false) { return lines }
-    else { return lines.join(lineSep || this.lineSeparator()) }
+    if (lineSep === false) { return lines } else { return lines.join(lineSep || this.lineSeparator()) }
   },
   getSelections: function(lineSep) {
     var this$1 = this;
@@ -6174,8 +6097,7 @@ Doc.prototype = createObj(BranchChunk.prototype, {
     var newSel = collapse && collapse != "end" && computeReplacedSel(this, changes, collapse)
     for (var i$1 = changes.length - 1; i$1 >= 0; i$1--)
       { makeChange(this$1, changes[i$1]) }
-    if (newSel) { setSelectionReplaceHistory(this, newSel) }
-    else if (this.cm) { ensureCursorVisible(this.cm) }
+    if (newSel) { setSelectionReplaceHistory(this, newSel) } else if (this.cm) { ensureCursorVisible(this.cm) }
   }),
   undo: docMethodOp(function() {makeChangeFromHistory(this, "undo")}),
   redo: docMethodOp(function() {makeChangeFromHistory(this, "redo")}),
@@ -6259,9 +6181,7 @@ Doc.prototype = createObj(BranchChunk.prototype, {
       var prop = where == "text" ? "textClass"
                : where == "background" ? "bgClass"
                : where == "gutter" ? "gutterClass" : "wrapClass"
-      if (!line[prop]) { line[prop] = cls }
-      else if (classTest(cls).test(line[prop])) { return false }
-      else { line[prop] += " " + cls }
+      if (!line[prop]) { line[prop] = cls } else if (classTest(cls).test(line[prop])) { return false } else { line[prop] += " " + cls }
       return true
     })
   }),
@@ -6271,9 +6191,7 @@ Doc.prototype = createObj(BranchChunk.prototype, {
                : where == "background" ? "bgClass"
                : where == "gutter" ? "gutterClass" : "wrapClass"
       var cur = line[prop]
-      if (!cur) { return false }
-      else if (cls == null) { line[prop] = null }
-      else {
+      if (!cur) { return false } else if (cls == null) { line[prop] = null } else {
         var found = cur.match(classTest(cls))
         if (!found) { return false }
         var end = found.index + found[0].length
@@ -6644,11 +6562,7 @@ function normalizeKeyName(name) {
   var alt, ctrl, shift, cmd
   for (var i = 0; i < parts.length - 1; i++) {
     var mod = parts[i]
-    if (/^(cmd|meta|m)$/i.test(mod)) { cmd = true }
-    else if (/^a(lt)?$/i.test(mod)) { alt = true }
-    else if (/^(c|ctrl|control)$/i.test(mod)) { ctrl = true }
-    else if (/^s(hift)?$/i.test(mod)) { shift = true }
-    else { throw new Error("Unrecognized modifier name: " + mod) }
+    if (/^(cmd|meta|m)$/i.test(mod)) { cmd = true } else if (/^a(lt)?$/i.test(mod)) { alt = true } else if (/^(c|ctrl|control)$/i.test(mod)) { ctrl = true } else if (/^s(hift)?$/i.test(mod)) { shift = true } else { throw new Error("Unrecognized modifier name: " + mod) }
   }
   if (alt) { name = "Alt-" + name }
   if (ctrl) { name = "Ctrl-" + name }
@@ -6680,8 +6594,7 @@ function normalizeKeyMap(keymap) {
         val = "..."
       }
       var prev = copy[name]
-      if (!prev) { copy[name] = val }
-      else if (prev != val) { throw new Error("Inconsistent bindings for " + name) }
+      if (!prev) { copy[name] = val } else if (prev != val) { throw new Error("Inconsistent bindings for " + name) }
     }
     delete keymap[keyname]
   } }
@@ -6877,8 +6790,7 @@ var commands = {
     if (range.empty()) {
       var len = getLine(cm.doc, range.head.line).text.length
       if (range.head.ch == len && range.head.line < cm.lastLine())
-        { return {from: range.head, to: Pos(range.head.line + 1, 0)} }
-      else
+        { return {from: range.head, to: Pos(range.head.line + 1, 0)} } else
         { return {from: range.head, to: Pos(range.head.line, len)} }
     } else {
       return {from: range.from(), to: range.to()}
@@ -6962,8 +6874,7 @@ var commands = {
     cm.replaceSelections(spaces)
   },
   defaultTab: function (cm) {
-    if (cm.somethingSelected()) { cm.indentSelection("add") }
-    else { cm.execCommand("insertTab") }
+    if (cm.somethingSelected()) { cm.indentSelection("add") } else { cm.execCommand("insertTab") }
   },
   // Swap the two chars left and right of each selection's head.
   // Move cursor behind the two swapped characters afterwards.
@@ -7075,8 +6986,7 @@ function dispatchKey(cm, name, e, handle) {
   if (seq) {
     if (isModifierKey(name)) { return "handled" }
     if (/\'$/.test(name))
-      { cm.state.keySeq = null }
-    else
+      { cm.state.keySeq = null } else
       { stopSeq.set(50, function () {
         if (cm.state.keySeq == seq) {
           cm.state.keySeq = null
@@ -7245,21 +7155,18 @@ function onMouseDown(e) {
   if (pos && handleMappedButton(cm, button, pos, repeat, e)) { return }
 
   if (button == 1) {
-    if (pos) { leftButtonDown(cm, pos, repeat, e) }
-    else if (e_target(e) == display.scroller) { e_preventDefault(e) }
+    if (pos) { leftButtonDown(cm, pos, repeat, e) } else if (e_target(e) == display.scroller) { e_preventDefault(e) }
   } else if (button == 2) {
     if (pos) { extendSelection(cm.doc, pos) }
     setTimeout(function () { return display.input.focus(); }, 20)
   } else if (button == 3) {
-    if (captureRightClick) { onContextMenu(cm, e) }
-    else { delayBlurEvent(cm) }
+    if (captureRightClick) { onContextMenu(cm, e) } else { delayBlurEvent(cm) }
   }
 }
 
 function handleMappedButton(cm, button, pos, repeat, event) {
   var name = "Click"
-  if (repeat == "double") { name = "Double" + name }
-  else if (repeat == "triple") { name = "Triple" + name }
+  if (repeat == "double") { name = "Double" + name } else if (repeat == "triple") { name = "Triple" + name }
   name = (button == 1 ? "Left" : button == 2 ? "Middle" : "Right") + name
 
   return dispatchKey(cm,  addModifierNames(name, event), event, function (bound) {
@@ -7290,8 +7197,7 @@ function configureMouse(cm, repeat, event) {
 }
 
 function leftButtonDown(cm, pos, repeat, event) {
-  if (ie) { setTimeout(bind(ensureFocus, cm), 0) }
-  else { cm.curOp.focus = activeElt() }
+  if (ie) { setTimeout(bind(ensureFocus, cm), 0) } else { cm.curOp.focus = activeElt() }
 
   var behavior = configureMouse(cm, repeat, event)
 
@@ -7300,8 +7206,7 @@ function leftButtonDown(cm, pos, repeat, event) {
       repeat == "single" && (contained = sel.contains(pos)) > -1 &&
       (cmp((contained = sel.ranges[contained]).from(), pos) < 0 || pos.xRel > 0) &&
       (cmp(contained.to(), pos) > 0 || pos.xRel < 0))
-    { leftButtonStartDrag(cm, event, pos, behavior) }
-  else
+    { leftButtonStartDrag(cm, event, pos, behavior) } else
     { leftButtonSelect(cm, event, pos, behavior) }
 }
 
@@ -7322,8 +7227,7 @@ function leftButtonStartDrag(cm, event, pos, behavior) {
         { extendSelection(cm.doc, pos, null, null, behavior.extend) }
       // Work around unexplainable focus problem in IE9 (#2127) and Chrome (#3081)
       if (webkit || ie && ie_version == 9)
-        { setTimeout(function () {display.wrapper.ownerDocument.body.focus(); display.input.focus()}, 20) }
-      else
+        { setTimeout(function () {display.wrapper.ownerDocument.body.focus(); display.input.focus()}, 20) } else
         { display.input.focus() }
     }
   })
@@ -7363,8 +7267,7 @@ function leftButtonSelect(cm, event, start, behavior) {
   if (behavior.addNew && !behavior.extend) {
     ourIndex = doc.sel.contains(start)
     if (ourIndex > -1)
-      { ourRange = ranges[ourIndex] }
-    else
+      { ourRange = ranges[ourIndex] } else
       { ourRange = new Range(start, start) }
   } else {
     ourRange = doc.sel.primary()
@@ -7378,8 +7281,7 @@ function leftButtonSelect(cm, event, start, behavior) {
   } else {
     var range = rangeForUnit(cm, start, behavior.unit)
     if (behavior.extend)
-      { ourRange = extendRange(ourRange, range.anchor, range.head, behavior.extend) }
-    else
+      { ourRange = extendRange(ourRange, range.anchor, range.head, behavior.extend) } else
       { ourRange = range }
   }
 
@@ -7413,8 +7315,7 @@ function leftButtonSelect(cm, event, start, behavior) {
            line <= end; line++) {
         var text = getLine(doc, line).text, leftPos = findColumn(text, left, tabSize)
         if (left == right)
-          { ranges.push(new Range(Pos(line, leftPos), Pos(line, leftPos))) }
-        else if (text.length > leftPos)
+          { ranges.push(new Range(Pos(line, leftPos), Pos(line, leftPos))) } else if (text.length > leftPos)
           { ranges.push(new Range(Pos(line, leftPos), Pos(line, findColumn(text, right, tabSize)))) }
       }
       if (!ranges.length) { ranges.push(new Range(start, start)) }
@@ -7476,8 +7377,7 @@ function leftButtonSelect(cm, event, start, behavior) {
   }
 
   var move = operation(cm, function (e) {
-    if (!e_button(e)) { done(e) }
-    else { extend(e) }
+    if (!e_button(e)) { done(e) } else { extend(e) }
   })
   var up = operation(cm, done)
   cm.state.selectingText = up
@@ -7508,8 +7408,7 @@ function bidiSimplify(cm, range) {
     var headIndex = getBidiPartAt(order, head.ch, head.sticky)
     var dir = headIndex - index || (head.ch - anchor.ch) * (part.level == 1 ? -1 : 1)
     if (headIndex == boundary - 1 || headIndex == boundary)
-      { leftSide = dir < 0 }
-    else
+      { leftSide = dir < 0 } else
       { leftSide = dir > 0 }
   }
 
@@ -7806,8 +7705,7 @@ function CodeMirror(place, options) {
   attachDoc(this, doc)
 
   if ((options.autofocus && !mobile) || this.hasFocus())
-    { setTimeout(bind(onFocus, this), 20) }
-  else
+    { setTimeout(bind(onFocus, this), 20) } else
     { onBlur(this) }
 
   for (var opt in optionHandlers) { if (optionHandlers.hasOwnProperty(opt))
@@ -7841,8 +7739,7 @@ function registerEventHandlers(cm) {
       e_preventDefault(e)
       var word = cm.findWordAt(pos)
       extendSelection(cm.doc, word.anchor, word.head)
-    })) }
-  else
+    })) } else
     { on(d.scroller, "dblclick", function (e) { return signalDOMEvent(cm, e) || e_preventDefault(e); }) }
   // Some browsers fire contextmenu *after* opening the menu, at
   // which point we can't mess with it anymore. Context menu is
@@ -7890,10 +7787,8 @@ function registerEventHandlers(cm) {
         !touch.moved && new Date - touch.start < 300) {
       var pos = cm.coordsChar(d.activeTouch, "page"), range
       if (!touch.prev || farAway(touch, touch.prev)) // Single tap
-        { range = new Range(pos, pos) }
-      else if (!touch.prev.prev || farAway(touch, touch.prev.prev)) // Double tap
-        { range = cm.findWordAt(pos) }
-      else // Triple tap
+        { range = new Range(pos, pos) } else if (!touch.prev.prev || farAway(touch, touch.prev.prev)) // Double tap
+        { range = cm.findWordAt(pos) } else // Triple tap
         { range = new Range(Pos(pos.line, 0), clipPos(cm.doc, Pos(pos.line + 1, 0))) }
       cm.setSelection(range.anchor, range.head)
       cm.focus()
@@ -7950,8 +7845,7 @@ function indentLine(cm, n, how, aggressive) {
   if (how == "smart") {
     // Fall back to "prev" when the mode doesn't have an indentation
     // method.
-    if (!doc.mode.indent) { how = "prev" }
-    else { state = getContextBefore(cm, n).state }
+    if (!doc.mode.indent) { how = "prev" } else { state = getContextBefore(cm, n).state }
   }
 
   var tabSize = cm.options.tabSize
@@ -7969,8 +7863,7 @@ function indentLine(cm, n, how, aggressive) {
     }
   }
   if (how == "prev") {
-    if (n > doc.first) { indentation = countColumn(getLine(doc, n-1).text, null, tabSize) }
-    else { indentation = 0 }
+    if (n > doc.first) { indentation = countColumn(getLine(doc, n-1).text, null, tabSize) } else { indentation = 0 }
   } else if (how == "add") {
     indentation = curSpace + cm.options.indentUnit
   } else if (how == "subtract") {
@@ -8039,10 +7932,8 @@ function applyTextInput(cm, inserted, deleted, sel, origin) {
     var from = range.from(), to = range.to()
     if (range.empty()) {
       if (deleted && deleted > 0) // Handle deletion
-        { from = Pos(from.line, from.ch - deleted) }
-      else if (cm.state.overwrite && !paste) // Handle overwrite
-        { to = Pos(to.line, Math.min(getLine(doc, to.line).text.length, to.ch + lst(textLines).length)) }
-      else if (lastCopied && lastCopied.lineWise && lastCopied.text.join("\n") == inserted)
+        { from = Pos(from.line, from.ch - deleted) } else if (cm.state.overwrite && !paste) // Handle overwrite
+        { to = Pos(to.line, Math.min(getLine(doc, to.line).text.length, to.ch + lst(textLines).length)) } else if (lastCopied && lastCopied.lineWise && lastCopied.text.join("\n") == inserted)
         { from = to = Pos(from.line, 0) }
     }
     updateInput = cm.curOp.updateInput
@@ -8118,8 +8009,7 @@ function hiddenTextarea() {
   // fact that it'll be scrolled into view on input from scrolling
   // our fake cursor out of view. On webkit, when wrap=off, paste is
   // very slow. So make the area wide instead.
-  if (webkit) { te.style.width = "1000px" }
-  else { te.setAttribute("wrap", "off") }
+  if (webkit) { te.style.width = "1000px" } else { te.setAttribute("wrap", "off") }
   // If border: 0; -- iOS fails to open keyboard (issue #1287)
   if (ios) { te.style.border = "1px solid black" }
   disableBrowserMagic(te)
@@ -8194,8 +8084,7 @@ function addEditorMethods(CodeMirror) {
 
     indentLine: methodOp(function(n, dir, aggressive) {
       if (typeof dir != "string" && typeof dir != "number") {
-        if (dir == null) { dir = this.options.smartIndent ? "smart" : "prev" }
-        else { dir = dir ? "add" : "subtract" }
+        if (dir == null) { dir = this.options.smartIndent ? "smart" : "prev" } else { dir = dir ? "add" : "subtract" }
       }
       if (isLine(this.doc, n)) { indentLine(this, n, dir, aggressive) }
     }),
@@ -8237,12 +8126,9 @@ function addEditorMethods(CodeMirror) {
       var styles = getLineStyles(this, getLine(this.doc, pos.line))
       var before = 0, after = (styles.length - 1) / 2, ch = pos.ch
       var type
-      if (ch == 0) { type = styles[2] }
-      else { for (;;) {
+      if (ch == 0) { type = styles[2] } else { for (;;) {
         var mid = (before + after) >> 1
-        if ((mid ? styles[mid * 2 - 1] : 0) >= ch) { after = mid }
-        else if (styles[mid * 2 + 1] < ch) { before = mid + 1 }
-        else { type = styles[mid * 2 + 2]; break }
+        if ((mid ? styles[mid * 2 - 1] : 0) >= ch) { after = mid } else if (styles[mid * 2 + 1] < ch) { before = mid + 1 } else { type = styles[mid * 2 + 2]; break }
       } }
       var cut = type ? type.indexOf("overlay ") : -1
       return cut < 0 ? type : cut == 0 ? null : type.slice(0, cut - 1)
@@ -8292,9 +8178,7 @@ function addEditorMethods(CodeMirror) {
 
     cursorCoords: function(start, mode) {
       var pos, range = this.doc.sel.primary()
-      if (start == null) { pos = range.head }
-      else if (typeof start == "object") { pos = clipPos(this.doc, start) }
-      else { pos = start ? range.from() : range.to() }
+      if (start == null) { pos = range.head } else if (typeof start == "object") { pos = clipPos(this.doc, start) } else { pos = start ? range.from() : range.to() }
       return cursorCoords(this, pos, mode || "page")
     },
 
@@ -8315,8 +8199,7 @@ function addEditorMethods(CodeMirror) {
       var end = false, lineObj
       if (typeof line == "number") {
         var last = this.doc.first + this.doc.size - 1
-        if (line < this.doc.first) { line = this.doc.first }
-        else if (line > last) { line = last; end = true }
+        if (line < this.doc.first) { line = this.doc.first } else if (line > last) { line = last; end = true }
         lineObj = getLine(this.doc, line)
       } else {
         lineObj = line
@@ -8345,8 +8228,7 @@ function addEditorMethods(CodeMirror) {
         hspace = Math.max(display.sizer.clientWidth, display.lineSpace.clientWidth)
         // Default to positioning above (if specified and possible); otherwise default to positioning below
         if ((vert == 'above' || pos.bottom + node.offsetHeight > vspace) && pos.top > node.offsetHeight)
-          { top = pos.top - node.offsetHeight }
-        else if (pos.bottom + node.offsetHeight <= vspace)
+          { top = pos.top - node.offsetHeight } else if (pos.bottom + node.offsetHeight <= vspace)
           { top = pos.bottom }
         if (left + node.offsetWidth > hspace)
           { left = hspace - node.offsetWidth }
@@ -8357,8 +8239,7 @@ function addEditorMethods(CodeMirror) {
         left = display.sizer.clientWidth - node.offsetWidth
         node.style.right = "0px"
       } else {
-        if (horiz == "left") { left = 0 }
-        else if (horiz == "middle") { left = (display.sizer.clientWidth - node.offsetWidth) / 2 }
+        if (horiz == "left") { left = 0 } else if (horiz == "middle") { left = (display.sizer.clientWidth - node.offsetWidth) / 2 }
         node.style.left = left + "px"
       }
       if (scroll)
@@ -8395,8 +8276,7 @@ function addEditorMethods(CodeMirror) {
 
       this.extendSelectionsBy(function (range) {
         if (this$1.display.shift || this$1.doc.extend || range.empty())
-          { return findPosH(this$1.doc, range.head, dir, unit, this$1.options.rtlMoveVisually) }
-        else
+          { return findPosH(this$1.doc, range.head, dir, unit, this$1.options.rtlMoveVisually) } else
           { return dir < 0 ? range.from() : range.to() }
       }, sel_move)
     }),
@@ -8404,8 +8284,7 @@ function addEditorMethods(CodeMirror) {
     deleteH: methodOp(function(dir, unit) {
       var sel = this.doc.sel, doc = this.doc
       if (sel.somethingSelected())
-        { doc.replaceSelection("", null, "+delete") }
-      else
+        { doc.replaceSelection("", null, "+delete") } else
         { deleteNearSelection(this, function (range) {
           var other = findPosH(doc, range.head, dir, unit, false)
           return dir < 0 ? {from: other, to: range.head} : {from: range.head, to: other}
@@ -8420,8 +8299,7 @@ function addEditorMethods(CodeMirror) {
       var cur = clipPos(this.doc, from)
       for (var i = 0; i < amount; ++i) {
         var coords = cursorCoords(this$1, cur, "div")
-        if (x == null) { x = coords.left }
-        else { coords.left = x }
+        if (x == null) { x = coords.left } else { coords.left = x }
         cur = findPosV(this$1, coords, dir, unit)
         if (cur.hitSide) { break }
       }
@@ -8469,8 +8347,7 @@ function addEditorMethods(CodeMirror) {
     toggleOverwrite: function(value) {
       if (value != null && value == this.state.overwrite) { return }
       if (this.state.overwrite = !this.state.overwrite)
-        { addClass(this.display.cursorDiv, "CodeMirror-overwrite") }
-      else
+        { addClass(this.display.cursorDiv, "CodeMirror-overwrite") } else
         { rmClass(this.display.cursorDiv, "CodeMirror-overwrite") }
 
       signal(this, "overwriteToggle", this, this.state.overwrite)
@@ -8596,8 +8473,7 @@ function findPosH(doc, pos, dir, unit, visually) {
     }
     if (next == null) {
       if (!boundToLine && findNextLine())
-        { pos = endOfLine(visually, doc.cm, lineObj, pos.line, dir) }
-      else
+        { pos = endOfLine(visually, doc.cm, lineObj, pos.line, dir) } else
         { return false }
     } else {
       pos = next
@@ -8800,8 +8676,7 @@ ContentEditableInput.prototype.showPrimarySelection = function () {
       sel.removeAllRanges()
       sel.addRange(rng)
     }
-    if (old && sel.anchorNode == null) { sel.addRange(old) }
-    else if (gecko) { this.startGracePeriod() }
+    if (old && sel.anchorNode == null) { sel.addRange(old) } else if (gecko) { this.startGracePeriod() }
   }
   this.rememberSelection()
 };
@@ -8850,8 +8725,7 @@ ContentEditableInput.prototype.supportsTouch = function () { return true };
 ContentEditableInput.prototype.receivedFocus = function () {
   var input = this
   if (this.selectionInEditor())
-    { this.pollSelection() }
-  else
+    { this.pollSelection() } else
     { runInOp(this.cm, function () { return input.cm.curOp.selectionChanged = true; }) }
 
   function poll() {
@@ -8930,9 +8804,7 @@ ContentEditableInput.prototype.pollContent = function () {
   var newText = cm.doc.splitLines(domTextBetween(cm, fromNode, toNode, fromLine, toLine))
   var oldText = getBetween(cm.doc, Pos(fromLine, 0), Pos(toLine, getLine(cm.doc, toLine).text.length))
   while (newText.length > 1 && oldText.length > 1) {
-    if (lst(newText) == lst(oldText)) { newText.pop(); oldText.pop(); toLine-- }
-    else if (newText[0] == oldText[0]) { newText.shift(); oldText.shift(); fromLine++ }
-    else { break }
+    if (lst(newText) == lst(oldText)) { newText.pop(); oldText.pop(); toLine-- } else if (newText[0] == oldText[0]) { newText.shift(); oldText.shift(); fromLine++ } else { break }
   }
 
   var cutFront = 0, cutEnd = 0
@@ -8986,8 +8858,7 @@ ContentEditableInput.prototype.readFromDOMSoon = function () {
   this.readDOMTimeout = setTimeout(function () {
     this$1.readDOMTimeout = null
     if (this$1.composing) {
-      if (this$1.composing.done) { this$1.composing = null }
-      else { return }
+      if (this$1.composing.done) { this$1.composing = null } else { return }
     }
     this$1.updateFromDOM()
   }, 80)
@@ -9152,15 +9023,13 @@ function locateNodeInLineView(lineView, node, offset) {
   for (var after = topNode.nextSibling, dist = textNode ? textNode.nodeValue.length - offset : 0; after; after = after.nextSibling) {
     found = find(after, after.firstChild, 0)
     if (found)
-      { return badPos(Pos(found.line, found.ch - dist), bad) }
-    else
+      { return badPos(Pos(found.line, found.ch - dist), bad) } else
       { dist += after.textContent.length }
   }
   for (var before = topNode.previousSibling, dist$1 = offset; before; before = before.previousSibling) {
     found = find(before, before.firstChild, -1)
     if (found)
-      { return badPos(Pos(found.line, found.ch + dist$1), bad) }
-    else
+      { return badPos(Pos(found.line, found.ch + dist$1), bad) } else
       { dist$1 += before.textContent.length }
   }
 }
@@ -9349,8 +9218,7 @@ TextareaInput.prototype.fastPoll = function () {
   input.pollingFast = true
   function p() {
     var changed = input.poll()
-    if (!changed && !missed) {missed = true; input.polling.set(60, p)}
-    else {input.pollingFast = false; input.slowPoll()}
+    if (!changed && !missed) {missed = true; input.polling.set(60, p)} else {input.pollingFast = false; input.slowPoll()}
   }
   input.polling.set(20, p)
 };
@@ -9400,8 +9268,7 @@ TextareaInput.prototype.poll = function () {
                    null, this$1.composing ? "*compose" : null)
 
     // Don't leave long text in the textarea, since it makes further polling slow
-    if (text.length > 1000 || text.indexOf("\n") > -1) { input.value = this$1.prevInput = "" }
-    else { this$1.prevInput = text }
+    if (text.length > 1000 || text.indexOf("\n") > -1) { input.value = this$1.prevInput = "" } else { this$1.prevInput = text }
 
     if (this$1.composing) {
       this$1.composing.range.clear()

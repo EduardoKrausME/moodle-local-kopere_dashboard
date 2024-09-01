@@ -2,11 +2,15 @@
 /*-------------------------
 	File manager
 -------------------------*/
-#MediaModal .modal-body, .filemanager {
-    position: static;
-}
-#MediaModal .modal-body {
-    min-height: 50vh;
+#MediaModal {
+    z-index: 99999;
+    .modal-body {
+        min-height: 50vh;
+    }
+    .modal-body,
+    .filemanager {
+        position: static;
+    }
 }
 /*-------------------------
 	Breadcrumps
@@ -207,7 +211,7 @@
     }
     .info {
         height: 118px;
-        border: 1px solid  #00000030;
+        border: 1px solid #00000030;
         //&:hover {
         //    border: 1px solid #007bff;
         //}

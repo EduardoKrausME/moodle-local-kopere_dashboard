@@ -356,8 +356,14 @@ Vvveb.Components = {
 
     render : function(type, panel = false) {
 
+        console.trace(type);
+
         let component = this._components[type];
-        if (!component) return;
+        if (!component) {
+            return;
+        }
+
+        console.log(component);
 
         if (!panel) {
             //panel = document.querySelector(this.componentPropertiesElement);
@@ -382,7 +388,12 @@ Vvveb.Components = {
         let section = componentsPanelSections[defaultSection].querySelector('.section[data-section="default"]');
 
         if (!(Vvveb.preservePropertySections && section)) {
-            let template = tmpl("vvveb-input-sectioninput", {key : "default", header : component.name});
+            let template = tmpl("vvveb-input-sectioninput",
+                {
+                    key    : "default",
+                    header : component.name
+                }
+            );
 
             componentsPanelSections[defaultSection].replaceChildren();
             componentsPanelSections[defaultSection].append(generateElements(template)[0]);
@@ -393,18 +404,27 @@ Vvveb.Components = {
         componentsPanelSections[defaultSection].querySelector('[data-header="default"] span').innerHTML = component.name;
         section.replaceChildren();
 
-        if (component.beforeInit) component.beforeInit(Vvveb.Builder.selectedEl);
+        if (component.beforeInit) {
+            component.beforeInit(Vvveb.Builder.selectedEl);
+        }
 
         let element;
+        var selectedElement;
 
         let fn = function(component, property) {
             if (property.input) {
                 property.input.addEventListener('propertyChange', (event) => {
                     element = selectedElement = Vvveb.Builder.selectedEl;
-                    let value = event.detail.value, input = event.detail.input, origEvent = event.detail.origEvent;
+                    var value = event.detail.value;
+                    var input = event.detail.input;
+                    var origEvent = event.detail.origEvent;
 
-                    if (property.child) element = element.querySelector(property.child);
-                    if (property.parent) element = element.parent(property.parent);
+                    if (property.child) {
+                        element = element.querySelector(property.child);
+                    }
+                    if (property.parent) {
+                        element = element.parent(property.parent);
+                    }
 
                     if (property.onChange) {
                         let ret = property.onChange(element, value, input, component, origEvent);
@@ -426,8 +446,7 @@ Vvveb.Components = {
                             if (value) {
                                 element.classList.add(...value.split(" "));
                             }
-                        }
-                        else if (property.htmlAttr == "style") {
+                        } else if (property.htmlAttr == "style") {
                             //keep old style for undo
                             var vvvebjs_styles = window.FrameDocument.getElementById("vvvebjs-styles");
                             if (vvvebjs_styles) {
@@ -448,23 +467,23 @@ Vvveb.Components = {
                         }
 
                         if (property.htmlAttr == "style") {
-                            mutation = {
+                            var mutation1 = {
                                 type          : 'style',
                                 target        : element,
                                 attributeName : property.htmlAttr,
                                 oldValue      : oldStyle,
                                 newValue      : window.FrameDocument.getElementById("vvvebjs-styles").textContent
                             };
-
-                            Vvveb.Undo.addMutation(mutation);
+                            Vvveb.Undo.addMutation(mutation1);
                         } else {
-                            Vvveb.Undo.addMutation({
+                            var mutation2 = {
                                 type          : 'attributes',
                                 target        : element,
                                 attributeName : property.htmlAttr,
                                 oldValue      : oldValue,
                                 newValue      : element.getAttribute(property.htmlAttr)
-                            });
+                            };
+                            Vvveb.Undo.addMutation(mutation2);
                         }
                     }
 
@@ -491,10 +510,16 @@ Vvveb.Components = {
             let property = component.properties[i];
             let element = nodeElement;
 
-            if (property.beforeInit) property.beforeInit(element);
+            if (property.beforeInit) {
+                property.beforeInit(element);
+            }
 
-            if (property.child) element = element.querySelector(property.child) ?? element;
-            if (property.parent) element = element.closest(property.parent) ?? element;
+            if (property.child) {
+                element = element.querySelector(property.child) ?? element;
+            }
+            if (property.parent) {
+                element = element.closest(property.parent) ?? element;
+            }
 
             if (property.data) {
                 property.data["key"] = property.key;
@@ -502,7 +527,9 @@ Vvveb.Components = {
                 property.data = {"key" : property.key};
             }
 
-            if (typeof property.group === 'undefined') property.group = null;
+            if (typeof property.group === 'undefined') {
+                property.group = null;
+            }
 
             property.input = property.inputtype.init(property.data, element);
 
@@ -538,6 +565,12 @@ Vvveb.Components = {
                     value = property.defaultValue;
                 }
 
+                if (value && value[0] == '/' && value.indexOf("pluginfile.php") > 0) {
+                    console.log(value);
+                    value = location.protocol + "//" + location.host + value;
+                }
+
+                console.log(value);
                 property.inputtype.setValue(value);
             } else {
                 if (!value && property.defaultValue) {
@@ -563,8 +596,7 @@ Vvveb.Components = {
                     componentsPanelSections[propertySection].append(property.input);
                     section = componentsPanelSections[propertySection].querySelector('.section[data-section="' + property.key + '"]');
                 }
-            }
-            else {
+            } else {
                 let row = generateElements(tmpl('vvveb-property', property))[0];
                 row.querySelector('.input').append(property.input);
                 section.append(row);
@@ -579,7 +611,9 @@ Vvveb.Components = {
             }
         }
 
-        if (component.init) component.init(nodeElement);
+        if (component.init) {
+            component.init(nodeElement);
+        }
     }
 };
 
@@ -1190,14 +1224,14 @@ Vvveb.Builder = {
         data = Vvveb.Components.matchNode(node);
         let component;
 
-        if (data)
+        if (data) {
             component = data.type;
-        else
+        } else {
             component = Vvveb.defaultComponent;
+        }
 
         Vvveb.component = Vvveb.Components.get(component);
         Vvveb.Components.render(component);
-
     },
 
     moveNodeUp : function(node) {
@@ -1951,11 +1985,9 @@ Vvveb.Builder = {
 
                 if (element.dataset.dragType == "component") {
                     self.component = Vvveb.Components.get(element.dataset.type);
-                }
-                else if (element.dataset.dragType == "section") {
+                } else if (element.dataset.dragType == "section") {
                     self.component = Vvveb.Sections.get(element.dataset.type);
-                }
-                else if (element.dataset.dragType == "block") {
+                } else if (element.dataset.dragType == "block") {
                     self.component = Vvveb.Blocks.get(element.dataset.type);
                 }
 
@@ -1977,8 +2009,7 @@ Vvveb.Builder = {
                     self.iconDrag = generateElements(html)[0];
                     self.iconDrag.setAttribute("id", "dragElement-clone");
                     self.iconDrag.style.position = "absolute";
-                }
-                else if (self.designerMode == false) {
+                } else if (self.designerMode == false) {
                     self.iconDrag = document.createElement("img");
                     self.iconDrag.setAttribute("id", "dragElement-clone");
                     self.iconDrag.setAttribute("src", element.style.backgroundImage.replace(/^url\(['"](.+)['"]\)/, '$1'));
@@ -2100,8 +2131,7 @@ Vvveb.Builder = {
 
         if (this.runJsOnSetHtml) {
             this.frameBody.innerHTML = getTag(html, "body");
-        }
-        else {
+        } else {
             window.FrameDocument.body.innerHTML = getTag(html, "body");
         }
 
@@ -2839,8 +2869,7 @@ function drawComponentsTree(tree) {
 								<input type="checkbox" id="id' + id + '">\
 							</li>')[0];
                 li.append(drawComponentsTreeTraverse(node.children));
-            }
-            else {
+            } else {
                 li = generateElements('<li data-component="' + node.name + '" class="file">\
 							<label for="id' + id + '" style="background-image:url(' + Vvveb.imgBaseUrl + node.image + ')"><span>' + node.name + '</span></label>\
 							<input type="checkbox" id="id' + id + '">\

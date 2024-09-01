@@ -17,7 +17,7 @@
 /**
  * Editor.
  *
- * @package     theme_boost_magnific
+ * @package     local_kopere_dashboard
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -1534,7 +1534,7 @@ function loadsvg($file) {
 <!-- media gallery -->
 <link href="libs/media/media.css" rel="stylesheet">
 <script>
-    Vvveb.uploadUrl = 'files.php?page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
+    Vvveb.uploadUrl = '<?php echo "files.php?page={$page}&id={$id}&link={$link}" ?>';
     Vvveb.themeBaseUrl = '_sections/';
 </script>
 <script src="libs/media/media.js"></script>

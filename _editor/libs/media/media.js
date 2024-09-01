@@ -243,9 +243,7 @@ class MediaModal {
 
                 // Update the hash on every key stroke
                 window.location.hash = 'search=' + value.trim();
-            }
-
-            else {
+            } else {
                 _this.filemanager.classList.remove('searching');
                 window.location.hash = encodeURIComponent(_this.currentPath);
             }
@@ -289,8 +287,7 @@ class MediaModal {
                 if (rendered.length) {
                     this.currentPath = hash[0];
                     this.render(rendered);
-                }
-                else {
+                } else {
                     this.render(rendered);
                 }
             }
@@ -303,8 +300,7 @@ class MediaModal {
                 if (rendered.length) {
                     this.currentPath = hash[0];
                     this.render(rendered);
-                }
-                else {
+                } else {
                     this.currentPath = hash[0];
                     this.render(rendered);
                 }
@@ -355,8 +351,7 @@ class MediaModal {
                     if (d.name.toLowerCase().indexOf(searchTerms) >= 0) {
                         folders.push(d);
                     }
-                }
-                else if (d.type === 'file') {
+                } else if (d.type === 'file') {
                     if (d.name.toLowerCase().indexOf(searchTerms) >= 0) {
                         files.push(d);
                     }
@@ -466,8 +461,9 @@ class MediaModal {
 
 
     render(data) {
-        let scannedFolders = [],
-            scannedFiles   = [];
+        console.trace(data);
+        let scannedFolders = [];
+        var scannedFiles = [];
 
         if (Array.isArray(data)) {
             data.forEach(function(d) {
@@ -477,13 +473,12 @@ class MediaModal {
                     scannedFiles.push(d);
                 }
             });
-        }
-        else if (typeof data === 'object') {
+        } else if (typeof data === 'object') {
             scannedFolders = data.folders;
             scannedFiles = data.files;
         }
 
-        this.fileList.replaceChildren();//.style.display = 'none';
+        this.fileList.replaceChildren(); //.style.display = 'none';
         if (!scannedFolders.length && !scannedFiles.length) {
             this.filemanager.querySelector('.nothingfound').style.display = '';
         } else {
@@ -504,15 +499,22 @@ class MediaModal {
 
                 if (itemsLength == 1) {
                     itemsLength += ' item';
-                }
-                else if (itemsLength > 1) {
+                } else if (itemsLength > 1) {
                     itemsLength += ' items';
-                }
-                else {
+                } else {
                     itemsLength = 'Empty';
                 }
 
-                let folder = generateElements('<li class="folders"><a href="' + f.path + '" title="' + f.path + '" class="folders">' + icon + '<div class="info"><span class="name">' + name + '</span> <span class="details">' + itemsLength + '</span></div></a></li>')[0];
+                let folder = generateElements(`
+                    <li class="folders">
+                        <a href="${f.path}" title="${f.path}" class="folders">
+                            ${icon}
+                            <div class="info">
+                                <span class="name">${name}</span>
+                                <span class="details">${itemsLength}</span>
+                            </div>
+                        </a>
+                    </li>`)[0];
                 _this.fileList.append(folder);
             });
         }
@@ -523,37 +525,32 @@ class MediaModal {
             });
         }
 
-
         // Generate the breadcrumbs
-
-        let url = '';
-
         if (this.filemanager.classList.contains('searching')) {
-            url = '<span>Search results: </span>';
             this.fileList.classList.remove('animated');
-        }
-        else {
+        } else {
             this.fileList.classList.add('animated');
         }
 
         this.breadcrumbs.replaceChildren();
-        this.breadcrumbs.appendChild(generateElements('<span href="/"><i class="la la-home"></i><span class="folderName">&ensp;home</span></span>')[0]);
+        this.breadcrumbs.appendChild(generateElements(`
+                <span href="/">
+                    <i class="la la-home"></i>
+                    <span class="folderName">&ensp;home</span>
+                </span>`)[0]);
 
         // Show the generated elements
-
         this.fileList.animate({'display' : 'inline-block'});
     }
 
 
     // This function escapes special html characters in names
-
     escapeHTML(text) {
         return text.replace(/\&/g, '&amp;').replace(/\</g, '&lt;').replace(/\>/g, '&gt;');
     }
 
 
     // Convert file sizes from bytes to human readable units
-
     bytesToSize(bytes) {
         let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
         if (bytes == 0) return '0 Bytes';

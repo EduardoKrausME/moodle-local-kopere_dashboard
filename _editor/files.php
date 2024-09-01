@@ -17,7 +17,7 @@
 /**
  * Editor.
  *
- * @package     theme_boost_magnific
+ * @package     local_kopere_dashboard
  * @copyright   2024 Eduardo kraus (http://eduardokraus.com)
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -29,12 +29,12 @@ require_login();
 $context = context_system::instance();
 require_capability('moodle/site:config', $context);
 
-$chave = required_param('chave', PARAM_TEXT);
+$page = required_param('page', PARAM_TEXT);
 
-$component = 'theme_boost_magnific';
+$component = 'local_kopere_dashboard';
 $contextid = $context->id;
 $adminid = get_admin()->id;
-$filearea = "editor_{$chave}";
+$filearea = "editor_{$page}";
 
 if (isset($_FILES['file']['name'])) {
 
@@ -54,7 +54,7 @@ if (isset($_FILES['file']['name'])) {
 
         $url = moodle_url::make_file_url(
             "$CFG->wwwroot/pluginfile.php",
-            "/{$contextid}/theme_boost_magnific/{$filerecord->filearea}/{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}");
+            "/{$contextid}/local_kopere_dashboard/{$filerecord->filearea}/{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}");
 
         echo json_encode([
             "name" => $_FILES['file']['name'],
@@ -78,7 +78,7 @@ $items = [];
 foreach ($files as $file) {
     $url = moodle_url::make_file_url(
         "$CFG->wwwroot/pluginfile.php",
-        "/{$contextid}/theme_boost_magnific/{$file->get_filearea()}/{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}");
+        "/{$contextid}/local_kopere_dashboard/{$file->get_filearea()}/{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}");
     $items[] = [
         "name" => $file->get_filename(),
         "type" => "file",
