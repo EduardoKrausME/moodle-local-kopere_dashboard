@@ -34,25 +34,24 @@ class db_course_access extends \core\task\scheduled_task {
      * @throws \dml_exception
      */
     public function execute() {
-        global $DB;
+        global $DB, $CFG;
 
-        $count = $DB->get_record_sql("SELECT COUNT(*) AS registros FROM {kopere_dashboard_courseacces}");
-        if (false && $count->registros) {
-            $reportsql = "
-                SELECT CONCAT(courseid,userid,contextinstanceid) AS a, COUNT(*) AS contagem,
-                       courseid, userid, contextinstanceid, timecreated
-                  FROM {logstore_standard_log}
-                 WHERE action = 'viewed'
-                   AND timecreated BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -30 DAY) AND CURRENT_DATE()
-              GROUP BY courseid, userid, contextinstanceid, timecreated
-              ORDER BY timecreated DESC";
-        } else {
+        if ($CFG->dbtype == 'pgsql') {
             $reportsql = "
                 SELECT CONCAT(courseid::text, userid::text, contextinstanceid::text) AS a, COUNT(*) AS contagem,
                        courseid, userid, contextinstanceid, timecreated
                   FROM {logstore_standard_log}
                  WHERE action = 'viewed'
                    AND timecreated BETWEEN (CURRENT_DATE - INTERVAL '30 DAY') AND CURRENT_DATE
+              GROUP BY courseid, userid, contextinstanceid, timecreated
+              ORDER BY timecreated DESC";
+        } else {
+            $reportsql = "
+                SELECT CONCAT(courseid,userid,contextinstanceid) AS a, COUNT(*) AS contagem,
+                       courseid, userid, contextinstanceid, timecreated
+                  FROM {logstore_standard_log}
+                 WHERE action = 'viewed'
+                   AND timecreated BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -30 DAY) AND CURRENT_DATE()
               GROUP BY courseid, userid, contextinstanceid, timecreated
               ORDER BY timecreated DESC";
         }
