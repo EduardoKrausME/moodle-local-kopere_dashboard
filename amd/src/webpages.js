@@ -1,4 +1,4 @@
-define(["jquery", "local_kopere_dashboard/bootstrap"], function($, bootstrap) {
+define(["jquery"], function($) {
     return {
 
         load_pages : function() {
@@ -43,7 +43,6 @@ define(["jquery", "local_kopere_dashboard/bootstrap"], function($, bootstrap) {
             }
 
             webpages_menu_open_click();
-
         },
 
         webpages_page_ajax_get_url : function() {
@@ -74,7 +73,7 @@ define(["jquery", "local_kopere_dashboard/bootstrap"], function($, bootstrap) {
         },
 
         bootstrap : function() {
-
+            $.getScript(M.cfg.wwwroot + "/local/kopere_dashboard/amd/build/bootstrap.min.js");
         }
     };
 });
