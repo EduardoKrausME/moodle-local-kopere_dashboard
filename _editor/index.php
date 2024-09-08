@@ -209,7 +209,7 @@ function loadsvg($file) {
                         <div class="tab-pane sections show active" id="sections-list" data-section="style"
                              role="tabpanel"
                              aria-labelledby="style-tab">
-                            <div class="drag-elements-sidepane sidepane">
+                            <div class="drag-elements-sidepane sidepane sidepane-1">
                                 <div>
                                     <div class="sections-container p-4">
 
@@ -291,7 +291,7 @@ function loadsvg($file) {
                                         <i class="la la-times"></i>
                                     </button>
                                 </div>
-                                <div class="drag-elements-sidepane sidepane">
+                                <div class="drag-elements-sidepane sidepane sidepane-2">
                                     <div class="block-preview"><img src="" style="display:none"></div>
                                     <div>
                                         <ul class="sections-list clearfix" data-type="leftpanel"></ul>
@@ -314,7 +314,7 @@ function loadsvg($file) {
                                         <i class="la la-times"></i>
                                     </button>
                                 </div>
-                                <div class="drag-elements-sidepane sidepane">
+                                <div class="drag-elements-sidepane sidepane sidepane-3">
                                     <div class="block-preview"><img src=""></div>
                                     <div>
                                         <ul class="blocks-list clearfix" data-type="leftpanel">
@@ -339,7 +339,7 @@ function loadsvg($file) {
                                         <i class="la la-times"></i>
                                     </button>
                                 </div>
-                                <div class="drag-elements-sidepane sidepane">
+                                <div class="drag-elements-sidepane sidepane sidepane-4">
                                     <div>
                                         <ul class="components-list clearfix" data-type="leftpanel"></ul>
                                     </div>
@@ -750,7 +750,7 @@ function loadsvg($file) {
 
                 <div class="tab-pane show" id="css-tab" data-section="css" role="tabpanel"
                      aria-labelledby="css-tab">
-                    <div class="drag-elements-sidepane sidepane">
+                    <div class="drag-elements-sidepane sidepane sidepane-5">
                         <div data-offset="80">
                             <textarea id="css-editor" class="form-control" rows="24"></textarea>
                         </div>
@@ -1212,27 +1212,41 @@ function loadsvg($file) {
     <div>
         <img id="thumb-{%=key%}" class="img-thumbnail p-0" data-target-input="#input-{%=key%}"
              data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="" width="225" height="225">
-        <input name="{%=key%}" type="text" class="form-control mt-1" id="input-{%=key%}"/>
+        <input id="input-{%=key%}" name="{%=key%}" type="text" class="form-control mt-1" />
         <button name="button" class="btn btn-primary btn-sm btn-icon mt-2 width-100"
                 data-target-input="#input-{%=key%}"
                 data-target-thumb="#thumb-{%=key%}">
-            <i data-target-input="#input-{%=key%}"
-               data-target-thumb="#thumb-{%=key%}"
-               class="la la-image la-lg"></i>
-            <span data-target-input="#input-{%=key%}"
-                  data-target-thumb="#thumb-{%=key%}">Set image</span></button>
+            <i class="la la-image la-lg"></i>
+            <span>Select image</span></button>
     </div>
 
 </script>
 <script id="vvveb-input-videoinput-gallery" type="text/html">
 
     <div>
-        <video id="thumb-v{%=key%}" class="img-thumbnail p-0" data-target-input="#input-v{%=key%}"
-               data-target-thumb="#thumb-v{%=key%}" style="cursor:pointer" src="" width="225" height="225" playsinline
+        <video id="thumb-{%=key%}" class="img-thumbnail p-0" data-target-input="#input-{%=key%}"
+               data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="" width="225" height="225" playsinline
                loop muted controls></video>
-        <input name="v{%=key%}" type="text" class="form-control mt-1" id="input-v{%=key%}"/>
-        <button name="button" class="btn btn-primary btn-sm btn-icon mt-2" data-target-input="#vinput-v{%=key%}"
-                data-target-thumb="#thumb-v{%=key%}"><i class="la la-video la-lg"></i><span>Set video</span></button>
+        <input id="input-{%=key%}" name="{%=key%}" type="text" class="form-control mt-1" />
+        <button name="button" class="btn btn-primary btn-sm btn-icon mt-2 width-100"
+                data-target-input="#input-{%=key%}"
+                data-target-thumb="#thumb-{%=key%}">
+            <i class="la la-video la-lg"></i>
+            <span>Select video</span></button>
+    </div>
+
+</script>
+<script id="vvveb-input-pdfinput-gallery" type="text/html">
+
+    <div>
+        <embed id="thumb-{%=key%}" class="img-thumbnail p-0" data-target-input="#input-{%=key%}"
+               data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="" width="225" height="225" >
+        <input id="input-{%=key%}" name="{%=key%}" type="text" class="form-control mt-1" />
+        <button name="button" class="btn btn-primary btn-sm btn-icon mt-2 width-100"
+                data-target-input="#input-{%=key%}"
+                data-target-thumb="#thumb-{%=key%}">
+            <i class="la la-file-pdf la-lg"></i>
+            <span>Select PDF</span></button>
     </div>
 
 </script>
@@ -1519,6 +1533,10 @@ function loadsvg($file) {
     </div>
 </div>
 
+<script>
+    var wwwroot = '<?php $CFG->wwwroot; ?>';
+</script>
+
 <!-- bootstrap-->
 <script src="js/popper.js"></script>
 <script src="js/bootstrap.js"></script>
@@ -1548,7 +1566,6 @@ function loadsvg($file) {
 -->
 
 <!-- components-->
-<script src="libs/builder/components-server.js"></script>
 <script src="libs/builder/plugin-google-fonts.js"></script>
 <script src="libs/builder/components-common.js"></script>
 <script src="libs/builder/plugin-aos.js"></script>
@@ -1622,9 +1639,9 @@ Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
 <script src="libs/autocomplete/jquery.autocomplete.js"></script>
 -->
 <script>
-    let renameUrl = 'save.php?action=rename&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
-    let deleteUrl = 'save.php?action=delete&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
-    let oEmbedProxyUrl = 'save.php?action=oembedProxy&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
+    var renameUrl = 'save.php?action=rename&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
+    var deleteUrl = 'save.php?action=delete&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
+    var oEmbedProxyUrl = 'save.php?action=oembedProxy&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
 
     var url = "loadpage.php?page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>";
     Vvveb.Builder.init(url, function() {

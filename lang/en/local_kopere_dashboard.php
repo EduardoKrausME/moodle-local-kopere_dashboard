@@ -598,3 +598,4 @@ $string['vvveb_home_team_subtitle'] = 'We are a group of professionals dedicated
 $string['vvveb_home_access'] = 'Access course';
 $string['vvveb_home_automatically_my_course'] = 'Do not edit. This block will be automatically replaced with the courses the student is enrolled in.';
 $string['vvveb_home_mycourses_heading'] = 'My Courses';
+$string['vvveb_footer_contact_title_default'] = 'Contact us';

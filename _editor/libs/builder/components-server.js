@@ -24,7 +24,7 @@ Vvveb.Components.add("components/product", {
     attributes: ["data-component-product"],
 
     image: "icons/map.svg",
-    html: '<iframe frameborder="0" src="https://maps.google.com/maps?&z=1&t=q&output=embed"></iframe>',
+    html: '<iframe frameborder="0" src="https://maps.google.com/maps?&z=1&t=q&output=embed" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups" allow=":encrypted-media; :picture-in-picture"></iframe>',
     
 	properties: [
 	{

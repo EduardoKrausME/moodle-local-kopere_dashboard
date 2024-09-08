@@ -17,14 +17,14 @@ https://github.com/givanz/Vvvebjs
 */
 
 Vvveb.SectionsGroup['Bootstrap'] =
-["bootstrap4/signin-split",  "bootstrap4/image-gallery", "bootstrap4/video-header", "bootstrap4/slider-header", "bootstrap4/about-team", "bootstrap4/portfolio-one-column", "bootstrap4/portfolio-two-column", "bootstrap4/portfolio-three-column", "bootstrap4/portfolio-four-column"];
+    ["bootstrap4/signin-split", "bootstrap4/image-gallery", "bootstrap4/video-header", "bootstrap4/slider-header", "bootstrap4/about-team", "bootstrap4/portfolio-one-column", "bootstrap4/portfolio-two-column", "bootstrap4/portfolio-three-column", "bootstrap4/portfolio-four-column"];
 
 
 Vvveb.Sections.add("bootstrap4/signin-split", {
-    name: "Modern Sign In Page with Split Screen Format",
-	dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/product.png">',    
-    image: "https://assets.startbootstrap.com/img/screenshots/snippets/sign-in-split.jpg",
-    html: `
+    name     : "Modern Sign In Page with Split Screen Format",
+    dragHtml : '<img src="' + Vvveb.baseUrl + 'icons/product.png">',
+    image    : "https://assets.startbootstrap.com/img/screenshots/snippets/sign-in-split.jpg",
+    html     : `
 <section data-name="sigin-split">    
 <div class="container-fluid">
   <div class="row no-gutter">
@@ -67,7 +67,7 @@ Vvveb.Sections.add("bootstrap4/signin-split", {
 }
 
 .bg-image {
-  background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200');
+  background-image: url('https://via.placeholder.com/600x1200/f28c33/fff');
   background-size: cover;
   background-position: center;
 }
@@ -146,13 +146,13 @@ Vvveb.Sections.add("bootstrap4/signin-split", {
 </div>
 </section>
 `,
-});    
+});
 
 Vvveb.Sections.add("bootstrap4/image-gallery", {
-    name: "Image gallery",
-    image: "https://assets.startbootstrap.com/img/screenshots/snippets/thumbnail-gallery.jpg",
-	dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/product.png">',    
-    html: `
+    name     : "Image gallery",
+    image    : "https://assets.startbootstrap.com/img/screenshots/snippets/thumbnail-gallery.jpg",
+    dragHtml : '<img src="' + Vvveb.baseUrl + 'icons/product.png">',
+    html     : `
 <section data-name="image-gallery">    
 <div class="container">
 
@@ -164,62 +164,22 @@ Vvveb.Sections.add("bootstrap4/image-gallery", {
 
     <div class="col-lg-3 col-md-4 col-6">
       <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/pWkk7iiCoDM/400x300" >
+            <img class="img-fluid img-thumbnail" src="https://via.placeholder.com/400x300/78c5d6/fff" >
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
       <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aob0ukAYfuI/400x300" >
+            <img class="img-fluid img-thumbnail" src="https://via.placeholder.com/400x300/459ba8/fff" >
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
       <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EUfxH-pze7s/400x300" >
+            <img class="img-fluid img-thumbnail" src="https://via.placeholder.com/400x300/79c267/fff" >
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
       <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/M185_qYH8vg/400x300" >
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/sesveuG_rNo/400x300" >
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/AvhMzHwiE_0/400x300" >
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/2gYsZUmockw/400x300" >
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EMSDtjVHdQ8/400x300" >
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/8mUEy0ABdNE/400x300" >
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/G9Rfc1qccH4/400x300" >
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aJeH0KcFkuc/400x300" >
-          </a>
-    </div>
-    <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/p2TQ-3Bh3Oo/400x300" >
+            <img class="img-fluid img-thumbnail" src="https://via.placeholder.com/400x300/c5d647/fff" >
           </a>
     </div>
   </div>
@@ -227,14 +187,14 @@ Vvveb.Sections.add("bootstrap4/image-gallery", {
 </div>
 </section>
 `,
-});    
+});
 
 Vvveb.Sections.add("bootstrap4/slider-header", {
-    name: "Image Slider Header",
-	dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/product.png">',        
-    image: "https://assets.startbootstrap.com/img/screenshots/snippets/full-slider.jpg",
-    html:`
-<header class="slider" data-name="slider">
+    name     : "Image Slider Header",
+    dragHtml : '<img src="' + Vvveb.baseUrl + 'icons/product.png">',
+    image    : "https://assets.startbootstrap.com/img/screenshots/snippets/full-slider.jpg",
+    html     : `
+<div class="slider" data-name="slider">
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-bs-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -242,22 +202,19 @@ Vvveb.Sections.add("bootstrap4/slider-header", {
       <li data-bs-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner" role="listbox">
-      <!-- Slide One - Set the background image for this slide in the line below -->
-      <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/LAaSoL0LrYs/1920x1080')">
+      <div class="carousel-item active" style="background-image: url('https://via.placeholder.com/1920x1080/e868a2/fff')">
         <div class="carousel-caption d-none d-md-block">
           <h2 class="display-4">First Slide</h2>
           <p class="lead">This is a description for the first slide.</p>
         </div>
       </div>
-      <!-- Slide Two - Set the background image for this slide in the line below -->
-      <div class="carousel-item" style="background-image: url('https://source.unsplash.com/bF2vsubyHcQ/1920x1080')">
+      <div class="carousel-item" style="background-image: url('https://via.placeholder.com/1920x1080/f28c33/fff')">
         <div class="carousel-caption d-none d-md-block">
           <h2 class="display-4">Second Slide</h2>
           <p class="lead">This is a description for the second slide.</p>
         </div>
       </div>
-      <!-- Slide Three - Set the background image for this slide in the line below -->
-      <div class="carousel-item" style="background-image: url('https://source.unsplash.com/szFUQoyvrxM/1920x1080')">
+      <div class="carousel-item" style="background-image: url('https://via.placeholder.com/1920x1080/c5d647/fff')">
         <div class="carousel-caption d-none d-md-block">
           <h2 class="display-4">Third Slide</h2>
           <p class="lead">This is a description for the third slide.</p>
@@ -285,20 +242,20 @@ Vvveb.Sections.add("bootstrap4/slider-header", {
   background-size: cover;
 }
 </style>  
-</header>
+</div>
 `,
 });
 
 
 Vvveb.Sections.add("bootstrap4/video-header", {
-    name: "Video Header",
-	dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/image.svg">',        
-    image: "https://assets.startbootstrap.com/img/screenshots/snippets/video-header.jpg",
-    html:`
-<header class="video" data-name="header-video">
+    name     : "Video Header",
+    dragHtml : '<img src="' + Vvveb.baseUrl + 'icons/image.svg">',
+    image    : "https://assets.startbootstrap.com/img/screenshots/snippets/video-header.jpg",
+    html     : `
+<div class="video header-video" data-name="header-video">
   <div class="overlay"></div>
   <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-    <source src="../../media/sample.webm" type="video/mp4">
+    <source src="${wwwroot}/local/kopere_dashboard/_editor/media/sample.webm" poster="${wwwroot}/local/kopere_dashboard/_editor/media/sample.webp" type="video/mp4" controls>
   </video>
   <div class="container h-100">
     <div class="d-flex h-100 text-center align-items-center">
@@ -320,79 +277,54 @@ Vvveb.Sections.add("bootstrap4/video-header", {
   </div>
 </div>
 <style>
-header.video {
+.header-video {
   position: relative;
   background-color: black;
-  height: 75vh;
   min-height: 25rem;
   width: 100%;
   overflow: hidden;
 }
 
-header.video video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
+.header-video video {
   width: auto;
-  height: auto;
-  z-index: 0;
-  -ms-transform: translateX(-50%) translateY(-50%);
-  -moz-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
 }
 
-header.video .container {
+.header-video .container {
   position: relative;
   z-index: 2;
 }
 
-header.video .overlay {
-  /*position: absolute;*/
+.header-video .overlay {
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: black;
-  opacity: 0.5;
   z-index: 1;
 }
-
-@media (pointer: coarse) and (hover: none) {
-  header {
-    background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
-  }
-  header video {
-    display: none;
-  }
-}
 </style>
-</header>
+</div>
 `,
 });
 
 
-
 Vvveb.Sections.add("bootstrap4/about-team", {
-    name: "About and Team Section",
-	dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/image.svg">',        
-    image: "https://assets.startbootstrap.com/img/screenshots/snippets/about-team.jpg",
-    html:`
+    name     : "About and Team Section",
+    dragHtml : '<img src="' + Vvveb.baseUrl + 'icons/image.svg">',
+    image    : "https://assets.startbootstrap.com/img/screenshots/snippets/about-team.jpg",
+    html     : `
 <section data-name="about-team">    
-<header class="bg-primary text-center py-5 mb-4">
+<div class="bg-primary text-center py-5 mb-4">
   <div class="container">
     <h1 class="font-weight-light text-white">Meet the Team</h1>
   </div>
-</header>
+</div>
 
 <div class="container">
   <div class="row">
     <!-- Team Member 1 -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-0 shadow">
-        <img src="https://source.unsplash.com/TMgQMXoglsM/500x350" class="card-img-top" alt="...">
+        <img src="https://via.placeholder.com/500x350/78c5d6/fff" class="card-img-top" alt="...">
         <div class="card-body text-center">
           <h5 class="card-title mb-0">Team Member</h5>
           <div class="card-text text-black-50">Web Developer</div>
@@ -402,7 +334,7 @@ Vvveb.Sections.add("bootstrap4/about-team", {
     <!-- Team Member 2 -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-0 shadow">
-        <img src="https://source.unsplash.com/9UVmlIb0wJU/500x350" class="card-img-top" alt="...">
+        <img src="https://via.placeholder.com/500x350/459ba8/fff" class="card-img-top" alt="...">
         <div class="card-body text-center">
           <h5 class="card-title mb-0">Team Member</h5>
           <div class="card-text text-black-50">Web Developer</div>
@@ -412,7 +344,7 @@ Vvveb.Sections.add("bootstrap4/about-team", {
     <!-- Team Member 3 -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-0 shadow">
-        <img src="https://source.unsplash.com/sNut2MqSmds/500x350" class="card-img-top" alt="...">
+        <img src="https://via.placeholder.com/500x350/79c267/fff" class="card-img-top" alt="...">
         <div class="card-body text-center">
           <h5 class="card-title mb-0">Team Member</h5>
           <div class="card-text text-black-50">Web Developer</div>
@@ -422,7 +354,7 @@ Vvveb.Sections.add("bootstrap4/about-team", {
     <!-- Team Member 4 -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-0 shadow">
-        <img src="https://source.unsplash.com/ZI6p3i9SbVU/500x350" class="card-img-top" alt="...">
+        <img src="https://via.placeholder.com/500x350/c5d647/fff" class="card-img-top" alt="...">
         <div class="card-body text-center">
           <h5 class="card-title mb-0">Team Member</h5>
           <div class="card-text text-black-50">Web Developer</div>
@@ -438,12 +370,11 @@ Vvveb.Sections.add("bootstrap4/about-team", {
 });
 
 
-
 Vvveb.Sections.add("bootstrap4/portfolio-one-column", {
-    name: "One Column Portfolio Layout",
-	dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/image.svg">',        
-    image: "https://assets.startbootstrap.com/img/screenshots/snippets/portfolio-one-column.jpg",
-    html:`
+    name     : "One Column Portfolio Layout",
+    dragHtml : '<img src="' + Vvveb.baseUrl + 'icons/image.svg">',
+    image    : "https://assets.startbootstrap.com/img/screenshots/snippets/portfolio-one-column.jpg",
+    html     : `
 <section data-name="portfolion-one-column">    
     <div class="container">
 
@@ -552,12 +483,11 @@ Vvveb.Sections.add("bootstrap4/portfolio-one-column", {
 });
 
 
-
 Vvveb.Sections.add("bootstrap4/portfolio-two-column", {
-    name: "Two Column Portfolio Layout",
-	dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/image.svg">',        
-    image: "https://assets.startbootstrap.com/img/screenshots/snippets/portfolio-one-column.jpg",
-    html:`
+    name     : "Two Column Portfolio Layout",
+    dragHtml : '<img src="' + Vvveb.baseUrl + 'icons/image.svg">',
+    image    : "https://assets.startbootstrap.com/img/screenshots/snippets/portfolio-one-column.jpg",
+    html     : `
 <section data-name="portfolio-two-column">    
 <div class="container">
 
@@ -667,10 +597,10 @@ Vvveb.Sections.add("bootstrap4/portfolio-two-column", {
 });
 
 Vvveb.Sections.add("bootstrap4/portfolio-three-column", {
-    name: "Three Column Portfolio Layout",
-	dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/image.svg">',        
-    image: "https://assets.startbootstrap.com/img/screenshots/snippets/portfolio-three-column.jpg",
-    html:`
+    name     : "Three Column Portfolio Layout",
+    dragHtml : '<img src="' + Vvveb.baseUrl + 'icons/image.svg">',
+    image    : "https://assets.startbootstrap.com/img/screenshots/snippets/portfolio-three-column.jpg",
+    html     : `
 <section data-name="portfolio-three-column">    
 <div class="container">
 
@@ -780,10 +710,10 @@ Vvveb.Sections.add("bootstrap4/portfolio-three-column", {
 
 
 Vvveb.Sections.add("bootstrap4/portfolio-four-column", {
-    name: "Four Column Portfolio Layout",
-	dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/image.svg">',        
-    image: "https://assets.startbootstrap.com/img/screenshots/snippets/portfolio-four-column.jpg",
-    html:`
+    name     : "Four Column Portfolio Layout",
+    dragHtml : '<img src="' + Vvveb.baseUrl + 'icons/image.svg">',
+    image    : "https://assets.startbootstrap.com/img/screenshots/snippets/portfolio-four-column.jpg",
+    html     : `
 <section data-name="portfolio-four-column">
 <div class="container">
 

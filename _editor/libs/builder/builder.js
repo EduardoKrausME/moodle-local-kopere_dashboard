@@ -178,7 +178,7 @@ Vvveb.preservePropertySections = true;
 //icon = use component icon when dragging | html = use component html to create draggable element
 Vvveb.dragIcon = 'icon';
 //if empty the html of the component is used to view dropping in real time but for large elements it can jump around for this you can set a html placeholder with this option
-Vvveb.dragElementStyle = "background:limegreen;width:100%;height:3px;border:1px solid limegreen;box-shadow:0px 0px 2px 1px rgba(0,0,0,0.14);overflow:hidden;";
+Vvveb.dragElementStyle = "background:limegreen;width:100%;height:200px;border:1px solid limegreen;box-shadow:0px 0px 2px 1px rgba(0,0,0,0.14);overflow:hidden;";
 Vvveb.dragHtml = '<div style="' + Vvveb.dragElementStyle + '"></div>';
 
 Vvveb.baseUrl = document.currentScript ? document.currentScript.src.replace(/[^\/]*?\.js$/, '') : '';
@@ -355,8 +355,6 @@ Vvveb.Components = {
     },
 
     render : function(type, panel = false) {
-
-        console.trace(type);
 
         let component = this._components[type];
         if (!component) {
@@ -953,14 +951,14 @@ Vvveb.Builder = {
             list.replaceChildren();
 
             for (var group in Vvveb.SectionsGroup) {
-                list.append(generateElements(
-                    `<li class="header" data-section="${group}"  data-search="">
-					<label class="header" for="${type}_sectionhead_${group}">
-						${group}<div class="header-arrow"></div>
-					</label>
-					<input class="header_check" type="checkbox" checked="true" id="${type}_sectionhead_${group}">
-					<ol></ol>
-				</li>`)[0]);
+                list.append(generateElements(`
+                     <li class="header" data-section="${group}"  data-search="">
+                         <label class="header" for="${type}_sectionhead_${group}">
+                             ${group}<div class="header-arrow"></div>
+                         </label>
+					     <input class="header_check" type="checkbox" checked="true" id="${type}_sectionhead_${group}">
+					     <ol></ol>
+				     </li>`)[0]);
 
                 let sectionsSubList = list.querySelector('li[data-section="' + group + '"]  ol');
                 sections = Vvveb.SectionsGroup[group];
@@ -1050,28 +1048,35 @@ Vvveb.Builder = {
     },
 
     adjustListsHeight : function() {
-        let left = document.querySelectorAll("#left-panel .drag-elements-sidepane > div:not(.block-preview), #left-panel .component-properties > .tab-content");
-        let right = document.querySelectorAll("#right-panel .drag-elements-sidepane > div:not(.block-preview), #right-panel .component-properties > .tab-content");
-        let wHeight = window.outerHeight;
-        let maxOffset = 0;
+        function _adjustListsHeight__exec() {
 
-        function adjust(elements) {
-            elements.forEach(function(e, i) {
-                e.style.height = "";
-                let offset = Math.floor(e.getBoundingClientRect()["top"]);
-                if (offset >= wHeight) return;
-                maxOffset = Math.max(maxOffset, offset);
-                let height = wHeight - maxOffset;
-                if (!offset) {
-                    height += parseInt(e.dataset.offset ?? 0);
-                }
-                e.style.height = height + "px";
-            });
+            console.log("aaaaa");
+            let left = document.querySelectorAll("#left-panel .drag-elements-sidepane > div:not(.block-preview), #left-panel .component-properties > .tab-content");
+            let right = document.querySelectorAll("#right-panel .drag-elements-sidepane > div:not(.block-preview), #right-panel .component-properties > .tab-content");
+
+            function adjust(elements) {
+                elements.forEach(function(e, i) {
+                    e.style.height = "";
+                    let offset = Math.floor(e.getBoundingClientRect()["top"]);
+                    let height = window.innerHeight - offset;
+                    if (!offset) {
+                        height += parseInt(e.dataset.offset ?? 0);
+                    }
+                    e.style.height = height + "px";
+                });
+            }
+
+            adjust(left);
+            adjust(right);
         }
 
-        adjust(left);
-        maxOffset = 0;
-        adjust(right);
+        _adjustListsHeight__exec();
+        window.addEventListener("resize", _adjustListsHeight__exec);
+
+        var navs = document.querySelectorAll(".header .nav-item");
+        for (var i = 0; i < navs.length; i++) {
+            navs[i].addEventListener("click", _adjustListsHeight__exec);
+        }
     },
 
 
@@ -2984,27 +2989,11 @@ Vvveb.SectionList = {
             }
         });
 
-        /*
-		document.querySelector(this.selector).addEventListener("click", ".up-btn", function (e) {
-			let section = e.target.closest(".section-item");
-			let node = section._node;
-			Vvveb.Builder.moveNodeUp(node);
-			Vvveb.Builder.moveNodeUp(section);
-
-			e.preventDefault();
-		});
-
-
-		document.querySelector(this.selector).addEventListener("click", ".down-btn", function (e) {
-			let section = e.target.closest(".section-item");
-			let node = section._node;
-			Vvveb.Builder.moveNodeDown(node);
-			Vvveb.Builder.moveNodeDown(section);
-
-			e.preventDefault();
-		});
-		*/
-
+        document.querySelector(".sections-list").addEventListener("mouseout", function(e) {
+            sectionIn = element;
+            img.setAttribute("src", "");
+            img.style.display = "none";
+        });
 
         let self = this;
         document.querySelector(".sections-list").addEventListener("click", function(e) {

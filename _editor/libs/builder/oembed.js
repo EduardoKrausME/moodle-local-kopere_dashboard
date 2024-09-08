@@ -280,7 +280,7 @@ async function getOembed(url, maxwidth = 800, maxheight = 600, silent = false) {
 					for (let i = 0; i < matches.length; i++) {
 						newUrl = newUrl.replace('$' + i, () => matches[i] ? matches[i] : '');
 					}
-					return `<iframe src="https://${newUrl}" width="${maxwidth}" height="${maxheight}" style="border:0;" loading="lazy" ></iframe>`;
+					return `<iframe src="https://${newUrl}" width="${maxwidth}" height="${maxheight}" style="border:0;" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups" allow=":encrypted-media; :picture-in-picture" ></iframe>`;
 				}
 			}
 		};

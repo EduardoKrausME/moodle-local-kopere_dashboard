@@ -48,11 +48,11 @@ $font-size-base: 1rem;
     font-weight: 500;
     text-transform: capitalize;
     margin-bottom: 0;
-    padding: .4rem 2rem;
+    text-align: center;
+    padding: .4rem 0;
     i:first-child {
         display: inline-block;
         margin-right: .3rem;
-        //font-size: 21px;
         opacity: .7;
     }
     &.btn-outline-primary {

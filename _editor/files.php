@@ -38,8 +38,15 @@ $filearea = "editor_{$page}";
 
 if (isset($_FILES['file']['name'])) {
 
+    $aloweb = [
+        'png', 'jpg', 'jpeg', 'gif', 'svg', 'webp',
+        'webm', 'mp4',
+        'mp3',
+        'pdf', 'doc', 'docx'
+    ];
+
     $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-    if (in_array($extension, ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'])) {
+    if (in_array($extension, $aloweb)) {
         $fs = get_file_storage();
         $filerecord = (object)[
             "component" => $component,

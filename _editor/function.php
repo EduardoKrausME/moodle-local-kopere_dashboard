@@ -36,6 +36,9 @@ function vvveb__add_css($html) {
 
 function vvveb__changue_langs($html) {
     global $CFG, $SITE;
+
+    $CFG->debug = false;
+
     $html = str_replace("{wwwroot}", $CFG->wwwroot, $html);
     $html = str_replace("{shortname}", $SITE->shortname, $html);
     $html = str_replace("{fullname}", $SITE->fullname, $html);

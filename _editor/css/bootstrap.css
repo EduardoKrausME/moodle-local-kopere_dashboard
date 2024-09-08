@@ -4957,7 +4957,7 @@ textarea.form-control-lg {
     filter: var(--bs-btn-close-white-filter);
 }
 .toast {
-    --bs-toast-zindex: 1090;
+    --bs-toast-zindex: 991090;
     --bs-toast-padding-x: 0.75rem;
     --bs-toast-padding-y: 0.5rem;
     --bs-toast-spacing: 1.5rem;
@@ -4989,7 +4989,7 @@ textarea.form-control-lg {
     display: none;
 }
 .toast-container {
-    --bs-toast-zindex: 1090;
+    --bs-toast-zindex: 991090;
     position: absolute;
     z-index: var(--bs-toast-zindex);
     width: max-content;

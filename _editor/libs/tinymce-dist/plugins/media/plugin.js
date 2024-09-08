@@ -531,16 +531,8 @@
             return iframeTemplateCallback(data);
         } else {
             const allowFullscreen = data.allowfullscreen ? ' allowFullscreen="1"' : '';
-            return '<iframe src="' + data.source + '" width="' + data.width + '" height="' + data.height + '"' + allowFullscreen + '></iframe>';
+            return '<iframe allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups" allow=":encrypted-media; :picture-in-picture" src="' + data.source + '" width="' + data.width + '" height="' + data.height + '"' + allowFullscreen + '></iframe>';
         }
-    };
-    const getFlashHtml = data => {
-        let html = '<object data="' + data.source + '" width="' + data.width + '" height="' + data.height + '" type="application/x-shockwave-flash">';
-        if (data.poster) {
-            html += '<img src="' + data.poster + '" width="' + data.width + '" height="' + data.height + '" />';
-        }
-        html += '</object>';
-        return html;
     };
     const getAudioHtml = (data, audioTemplateCallback) => {
         if (audioTemplateCallback) {
@@ -597,8 +589,6 @@
             });
             if (data.type === 'iframe') {
                 return getIframeHtml(data, iframeTemplateCallback);
-            } else if (data.sourcemime === 'application/x-shockwave-flash') {
-                return getFlashHtml(data);
             } else if (data.sourcemime.indexOf('audio') !== -1) {
                 return getAudioHtml(data, audioTemplateCallback);
             } else {

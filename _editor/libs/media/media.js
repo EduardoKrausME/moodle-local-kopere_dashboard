@@ -99,7 +99,9 @@ class MediaModal {
         let file = document.querySelector("#MediaModal .files input:checked").value ?? false;
         let src = file;
 
-        if (!file) return;
+        if (!file) {
+            return;
+        }
 
         if (file.indexOf("//") == -1) {
             src = file;
@@ -183,7 +185,9 @@ class MediaModal {
         this.init();
 
         let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('MediaModal'));
-        if (this.isModal) modal.show();
+        if (this.isModal) {
+            modal.show();
+        }
     }
 
     initGallery() {
@@ -423,7 +427,13 @@ class MediaModal {
         fileType = fileType[fileType.length - 1];
 
         if (fileType == "jpg" || fileType == "jpeg" || fileType == "png" || fileType == "gif" || fileType == "svg" || fileType == "webp") {
-            icon = `<img class="image" loading="lazy" src="${f.path}">`;
+            icon = `<img class="image" src="${f.path}">`;
+            isImage = true;
+        } else if (fileType == "pdf") {
+            icon = `<embed class="image" src="${f.path}">`;
+            isImage = true;
+        } else if (fileType == "mp4" || fileType == "webm" || fileType == "mp3") {
+            icon = `<video class="image" src="${f.path}" controls muted autoplay loop></video>`;
             isImage = true;
         } else {
             icon = `<span class="icon file f-${fileType}">.${fileType}</span>`;
@@ -459,9 +469,7 @@ class MediaModal {
         return file;
     }
 
-
     render(data) {
-        console.trace(data);
         let scannedFolders = [];
         var scannedFiles = [];
 
@@ -543,12 +551,10 @@ class MediaModal {
         this.fileList.animate({'display' : 'inline-block'});
     }
 
-
     // This function escapes special html characters in names
     escapeHTML(text) {
         return text.replace(/\&/g, '&amp;').replace(/\</g, '&lt;').replace(/\>/g, '&gt;');
     }
-
 
     // Convert file sizes from bytes to human readable units
     bytesToSize(bytes) {

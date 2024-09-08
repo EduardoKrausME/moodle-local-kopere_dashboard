@@ -60,7 +60,6 @@ ImageInput = {
         },
 
         init : function(data) {
-            console.trace(data);
             return this.render("imageinput-gallery", data);
         },
     }
@@ -79,6 +78,22 @@ VideoInput = {
 
         init : function(data) {
             return this.render("videoinput-gallery", data);
+        },
+    }
+};
+
+PdfInput = {
+    ...ImageInput, ...{
+        tag : "embed",
+
+        events : [
+            ["change", "onChange", "input[type=text]"],
+            ["click", "onClick", "button"],
+            ["click", "onClick", "video"],
+        ],
+
+        init : function(data) {
+            return this.render("pdfinput-gallery", data);
         },
     }
 };

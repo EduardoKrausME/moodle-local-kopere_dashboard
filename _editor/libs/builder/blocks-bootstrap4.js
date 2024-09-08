@@ -31,7 +31,7 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
     html  : `
 <div class="team pb-5">
     <div class="container">
-        <h5 class="div-title h1">OUR TEAM</h5>
+        <h5 class="div-title h1 text-center">OUR TEAM</h5>
         <div class="row">
             <!-- Team member -->
             <div class="col-xs-12 col-sm-6 col-md-4">
@@ -40,10 +40,10 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
+                                    <p><img class=" img-fluid" src="${wwwroot}/local/kopere_dashboard/_editor/img/sections/team/1.png" alt="card image"></p>
                                     <h4 class="card-title">Sunlimetech</h4>
                                     <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fab fa fa-plus"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -55,22 +55,22 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-facebook"></i>
+                                                <i class="fab fa fa-facebook"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-twitter"></i>
+                                                <i class="fab fa fa-twitter"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-skype"></i>
+                                                <i class="fab fa fa-skype"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-google"></i>
+                                                <i class="fab fa fa-google"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -88,10 +88,10 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_02.png" alt="card image"></p>
+                                    <p><img class=" img-fluid" src="${wwwroot}/local/kopere_dashboard/_editor/img/sections/team/2.png" alt="card image"></p>
                                     <h4 class="card-title">Sunlimetech</h4>
                                     <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fab fa fa-plus"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -103,22 +103,22 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-facebook"></i>
+                                                <i class="fab fa fa-facebook"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-twitter"></i>
+                                                <i class="fab fa fa-twitter"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-skype"></i>
+                                                <i class="fab fa fa-skype"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-google"></i>
+                                                <i class="fab fa fa-google"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -136,10 +136,10 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_03.png" alt="card image"></p>
+                                    <p><img class=" img-fluid" src="${wwwroot}/local/kopere_dashboard/_editor/img/sections/team/3.png" alt="card image"></p>
                                     <h4 class="card-title">Sunlimetech</h4>
                                     <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fab fa fa-plus"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -151,22 +151,22 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-facebook"></i>
+                                                <i class="fab fa fa-facebook"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-twitter"></i>
+                                                <i class="fab fa fa-twitter"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-skype"></i>
+                                                <i class="fab fa fa-skype"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-google"></i>
+                                                <i class="fab fa fa-google"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -184,10 +184,10 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_04.jpg" alt="card image"></p>
+                                    <p><img class=" img-fluid" src="${wwwroot}/local/kopere_dashboard/_editor/img/sections/team/4.png" alt="card image"></p>
                                     <h4 class="card-title">Sunlimetech</h4>
                                     <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fab fa fa-plus"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -199,22 +199,22 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-facebook"></i>
+                                                <i class="fab fa fa-facebook"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-twitter"></i>
+                                                <i class="fab fa fa-twitter"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-skype"></i>
+                                                <i class="fab fa fa-skype"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-google"></i>
+                                                <i class="fab fa fa-google"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -232,10 +232,10 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_05.png" alt="card image"></p>
+                                    <p><img class=" img-fluid" src="${wwwroot}/local/kopere_dashboard/_editor/img/sections/team/5.png" alt="card image"></p>
                                     <h4 class="card-title">Sunlimetech</h4>
                                     <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fab fa fa-plus"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -247,22 +247,22 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-facebook"></i>
+                                                <i class="fab fa fa-facebook"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-twitter"></i>
+                                                <i class="fab fa fa-twitter"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-skype"></i>
+                                                <i class="fab fa fa-skype"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-google"></i>
+                                                <i class="fab fa fa-google"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -280,10 +280,10 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_06.jpg" alt="card image"></p>
+                                    <p><img class=" img-fluid" src="${wwwroot}/local/kopere_dashboard/_editor/img/sections/team/6.png" alt="card image"></p>
                                     <h4 class="card-title">Sunlimetech</h4>
                                     <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fab fa fa-plus"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -295,22 +295,22 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-facebook"></i>
+                                                <i class="fab fa fa-facebook"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-twitter"></i>
+                                                <i class="fab fa fa-twitter"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-skype"></i>
+                                                <i class="fab fa fa-skype"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                <i class="fa fa-google"></i>
+                                                <i class="fab fa fa-google"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -327,10 +327,6 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
 
 <style>
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-.team {
-    background: #eee !important;
-}
-
 .btn-primary:hover,
 .btn-primary:focus {
     background-color: #108d6f;
@@ -361,6 +357,9 @@ section .section-title {
     background: #fff;
 }
 
+.image-flip {
+background: #eee;
+}
 .image-flip:hover .backside,
 .image-flip.hover .backside {
     -webkit-transform: rotateY(0deg);
@@ -467,7 +466,7 @@ Vvveb.Blocks.add("bootstrap4/about-team", {
     <!-- Team Member 1 -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-0 shadow">
-        <img src="https://source.unsplash.com/TMgQMXoglsM/500x350" class="card-img-top" alt="...">
+        <img src="https://via.placeholder.com/500x350/78c5d6/fff" class="card-img-top" alt="...">
         <div class="card-body text-center">
           <h5 class="card-title mb-0">Team Member</h5>
           <div class="card-text text-black-50">Web Developer</div>
@@ -477,7 +476,7 @@ Vvveb.Blocks.add("bootstrap4/about-team", {
     <!-- Team Member 2 -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-0 shadow">
-        <img src="https://source.unsplash.com/9UVmlIb0wJU/500x350" class="card-img-top" alt="...">
+        <img src="https://via.placeholder.com/500x350/459ba8/fff" class="card-img-top" alt="...">
         <div class="card-body text-center">
           <h5 class="card-title mb-0">Team Member</h5>
           <div class="card-text text-black-50">Web Developer</div>
@@ -487,7 +486,7 @@ Vvveb.Blocks.add("bootstrap4/about-team", {
     <!-- Team Member 3 -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-0 shadow">
-        <img src="https://source.unsplash.com/sNut2MqSmds/500x350" class="card-img-top" alt="...">
+        <img src="https://via.placeholder.com/500x350/79c267/fff" class="card-img-top" alt="...">
         <div class="card-body text-center">
           <h5 class="card-title mb-0">Team Member</h5>
           <div class="card-text text-black-50">Web Developer</div>
@@ -497,7 +496,7 @@ Vvveb.Blocks.add("bootstrap4/about-team", {
     <!-- Team Member 4 -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-0 shadow">
-        <img src="https://source.unsplash.com/ZI6p3i9SbVU/500x350" class="card-img-top" alt="...">
+        <img src="https://via.placeholder.com/500x350/c5d647/fff" class="card-img-top" alt="...">
         <div class="card-body text-center">
           <h5 class="card-title mb-0">Team Member</h5>
           <div class="card-text text-black-50">Web Developer</div>
@@ -523,16 +522,16 @@ Vvveb.Blocks.add("bootstrap4/pricing-1", {
 		<div class="col-md-4 text-center">
 			<div class="panel panel-danger panel-pricing">
 				<div class="panel-heading">
-					<i class="fa fa-desktop"></i>
+					<i class="fab fa fa-desktop"></i>
 					<h3>Plan 1</h3>
 				</div>
 				<div class="panel-body text-center">
 					<p><strong>$100 / Month</strong></p>
 				</div>
 				<ul class="list-group text-center">
-					<li class="list-group-item"><i class="fa fa-check"></i> Personal use</li>
-					<li class="list-group-item"><i class="fa fa-check"></i> Unlimited projects</li>
-					<li class="list-group-item"><i class="fa fa-check"></i> 27/7 support</li>
+					<li class="list-group-item"><i class="fab fa fa-check"></i> Personal use</li>
+					<li class="list-group-item"><i class="fab fa fa-check"></i> Unlimited projects</li>
+					<li class="list-group-item"><i class="fab fa fa-check"></i> 27/7 support</li>
 				</ul>
 				<div class="panel-footer">
 					<a class="btn btn-lg w-100 btn-danger" href="#">BUY NOW!</a>
@@ -545,16 +544,16 @@ Vvveb.Blocks.add("bootstrap4/pricing-1", {
 		<div class="col-md-4 text-center">
 			<div class="panel panel-warning panel-pricing">
 				<div class="panel-heading">
-					<i class="fa fa-desktop"></i>
+					<i class="fab fa fa-desktop"></i>
 					<h3>Plan 2</h3>
 				</div>
 				<div class="panel-body text-center">
 					<p><strong>$200 / Month</strong></p>
 				</div>
 				<ul class="list-group text-center">
-					<li class="list-group-item"><i class="fa fa-check"></i> Personal use</li>
-					<li class="list-group-item"><i class="fa fa-check"></i> Unlimited projects</li>
-					<li class="list-group-item"><i class="fa fa-check"></i> 27/7 support</li>
+					<li class="list-group-item"><i class="fab fa fa-check"></i> Personal use</li>
+					<li class="list-group-item"><i class="fab fa fa-check"></i> Unlimited projects</li>
+					<li class="list-group-item"><i class="fab fa fa-check"></i> 27/7 support</li>
 				</ul>
 				<div class="panel-footer">
 					<a class="btn btn-lg w-100 btn-warning" href="#">BUY NOW!</a>
@@ -567,16 +566,16 @@ Vvveb.Blocks.add("bootstrap4/pricing-1", {
 		<div class="col-md-4 text-center">
 			<div class="panel panel-success panel-pricing">
 				<div class="panel-heading">
-					<i class="fa fa-desktop"></i>
+					<i class="fab fa fa-desktop"></i>
 					<h3>Plan 3</h3>
 				</div>
 				<div class="panel-body text-center">
 					<p><strong>$300 / Month</strong></p>
 				</div>
 				<ul class="list-group text-center">
-					<li class="list-group-item"><i class="fa fa-check"></i> Personal use</li>
-					<li class="list-group-item"><i class="fa fa-check"></i> Unlimited projects</li>
-					<li class="list-group-item"><i class="fa fa-check"></i> 27/7 support</li>
+					<li class="list-group-item"><i class="fab fa fa-check"></i> Personal use</li>
+					<li class="list-group-item"><i class="fab fa fa-check"></i> Unlimited projects</li>
+					<li class="list-group-item"><i class="fab fa fa-check"></i> 27/7 support</li>
 				</ul>
 				<div class="panel-footer">
 					<a class="btn btn-lg w-100 btn-success" href="#">BUY NOW!</a>
