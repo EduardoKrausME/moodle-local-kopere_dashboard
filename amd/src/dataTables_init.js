@@ -12,7 +12,6 @@ define([
     "local_kopere_dashboard/dataTables.responsive",
     "local_kopere_dashboard/dataTables.select",
     "local_kopere_dashboard/jszip",
-    "local_kopere_dashboard/pdfmake",
 ], function($) {
     return dataTables_init = {
         init : function(selector, params) {
