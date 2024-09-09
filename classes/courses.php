@@ -45,6 +45,7 @@ use local_kopere_dashboard\vo\kopere_dashboard_webpages;
 
 /**
  * Class courses
+ *
  * @package local_kopere_dashboard
  */
 class courses {
@@ -86,25 +87,25 @@ class courses {
         $cache = \cache::make('local_kopere_dashboard', 'courses_all_courses');
         $cachekey = "load_all_courses";
         if ($cache->has($cachekey)) {
-            $cache = $cache->get($cachekey);
+            $data = $cache->get($cachekey);
+        } else {
+            $data = $DB->get_records_sql("
+                SELECT c.id, c.fullname, c.shortname, c.visible,
+                         (
+                             SELECT COUNT(DISTINCT ue.id)
+                               FROM {user_enrolments} ue
+                               JOIN {role_assignments} ra ON ue.userid = ra.userid
+                               JOIN {enrol} e             ON e.id = ue.enrolid
+                               JOIN {user} u              ON u.id = ue.userid
+                              WHERE e.courseid = c.id
+                                AND u.deleted = 0
+                         ) AS inscritos
+                  FROM {course} c
+                 WHERE c.id > 1"
+            );
+
+            $cache->set($cachekey, $data);
         }
-
-        $data = $DB->get_records_sql( "
-            SELECT c.id, c.fullname, c.shortname, c.visible,
-                     (
-                         SELECT COUNT(DISTINCT ue.id)
-                           FROM {user_enrolments} ue
-                           JOIN {role_assignments} ra ON ue.userid = ra.userid
-                           JOIN {enrol} e             ON e.id = ue.enrolid
-                           JOIN {user} u              ON u.id = ue.userid
-                          WHERE e.courseid = c.id
-                            AND u.deleted = 0
-                     ) AS inscritos
-              FROM {course} c
-             WHERE c.id > 1"
-        );
-
-        $cache->set($cachekey, $data);
 
         json::encode($data);
     }
