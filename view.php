@@ -47,7 +47,7 @@ $context = context_system::instance();
 require_capability('local/kopere_dashboard:view', $context);
 require_capability('local/kopere_dashboard:manage', $context);
 
-$PAGE->set_url(new moodle_url('/local/kopere_dashboard/view.php'));
+$PAGE->set_url(new moodle_url("/local/kopere_dashboard/view.php?{$_SERVER['QUERY_STRING']}"));
 $PAGE->set_context($context);
 $PAGE->set_pagetype('admin-setting');
 $PAGE->set_pagelayout('admin');
@@ -106,7 +106,6 @@ echo "
             </div>
         </div>
     </div>";
-
 
 echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
 echo $OUTPUT->footer();
