@@ -151,18 +151,12 @@ class enroll_util {
      *      7 => user
      *      8 => frontpage
      *
-     * @param \stdClass $course
-     * @param \stdClass $user
-     * @param int $timestart
-     * @param int $timeend
-     * @param int $roleid
-     *
      * @return bool
      *
-     * @throws \coding_exception
      * @throws \dml_exception
+     * @throws \coding_exception
      */
-    public static function enrol($course, $user, $timestart = 0, $timeend = 0, $roleid = 5) {
+    public static function enrol($course, $user, $timestart, $timeend, $roleid = 5) {
         global $DB, $PAGE, $CFG;
 
         $enrol = $DB->get_record('enrol', ['courseid' => $course->id, 'enrol' => 'manual']);
@@ -185,9 +179,9 @@ class enroll_util {
         /** @var \enrol_manual_plugin $plugin */
         $plugin = $plugins[$instance->enrol];
         if ($plugin->allow_enrol($instance)) {
-            if ($timestart == 0) {
-                $timestart = time();
-            }
+            $roleid = 5;
+            $timestart = time();
+            $timeend = 0;
             $recovergrades = 0;
             $plugin->enrol_user($instance, $user->id, $roleid, $timestart, $timeend, null, $recovergrades);
         } else {
