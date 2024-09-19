@@ -46,6 +46,8 @@ class send_events {
     private $message;
 
     /**
+     * Function get_kopere_dashboard_events
+     *
      * @return kopere_dashboard_events
      */
     public function get_kopere_dashboard_events() {
@@ -53,13 +55,17 @@ class send_events {
     }
 
     /**
-     * @param kopere_dashboard_events $kopereevents
+     * Function set_kopere_dashboard_events
+     *
+     * @param $kopereevents
      */
     public function set_kopere_dashboard_events($kopereevents) {
         $this->koperedashboardevents = $kopereevents;
     }
 
     /**
+     * Function get_event
+     *
      * @return \core\event\base
      */
     public function get_event() {
@@ -67,18 +73,22 @@ class send_events {
     }
 
     /**
-     * @param \core\event\base $event
+     * Function set_event
+     *
+     * @param $event
      */
     public function set_event($event) {
         $this->event = $event;
     }
 
     /**
+     * Function send
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
     public function send() {
-        global $COURSE, $CFG, $DB;
+        global $COURSE, $CFG, $DB, $USER;
 
         require_once("{$CFG->dirroot}/login/lib.php");
 
@@ -186,6 +196,8 @@ class send_events {
             } else if (strpos($this->message, '{[to.password]}')) {
                 $newpassword = $this->login_generate_password($userto);
                 $userto->password = "{$CFG->wwwroot}/login/forgot_password.php?token={$newpassword}";
+            }else if(isset($USER->tmp_password)){
+                $userto->password = $USER->tmp_password;
             }
 
             $sendsubject = $this->replace_tag_user($this->subject, $userto, 'to');
@@ -214,6 +226,7 @@ class send_events {
     }
 
     /**
+     * Function load_template
      */
     private function load_template() {
 
@@ -224,9 +237,11 @@ class send_events {
     }
 
     /**
-     * @param string $text
+     * Function replace_date
      *
-     * @return string
+     * @param $text
+     *
+     * @return mixed
      */
     private function replace_date($text) {
         if (strpos($text, '{[date') === false) {
@@ -257,9 +272,12 @@ class send_events {
     }
 
     /**
+     * Function replace_tag
+     *
      * @param $text
      * @param $course
      * @param $keyname
+     *
      * @return mixed
      */
     private function replace_tag($text, $course, $keyname) {
@@ -282,9 +300,12 @@ class send_events {
     }
 
     /**
+     * Function replace_tag_user
+     *
      * @param $text
      * @param $user
      * @param $keyname
+     *
      * @return mixed
      */
     private function replace_tag_user($text, $user, $keyname) {
@@ -307,7 +328,10 @@ class send_events {
     }
 
     /**
+     * Function login_generate_password
+     *
      * @param $user
+     *
      * @return mixed
      * @throws \dml_exception
      */
