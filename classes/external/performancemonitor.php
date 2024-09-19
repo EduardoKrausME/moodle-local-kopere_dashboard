@@ -27,9 +27,16 @@ use external_function_parameters;
 use external_single_structure;
 use external_value;
 
+/**
+ * Class performancemonitor
+ *
+ * @package local_kopere_dashboard\external
+ */
 class performancemonitor extends external_api {
 
     /**
+     * Function disk_moodledata_parameters
+     *
      * @return external_function_parameters
      */
     public static function disk_moodledata_parameters() {
@@ -37,6 +44,8 @@ class performancemonitor extends external_api {
     }
 
     /**
+     * Function disk_moodledata_is_allowed_from_ajax
+     *
      * @return bool
      */
     public static function disk_moodledata_is_allowed_from_ajax() {
@@ -44,6 +53,8 @@ class performancemonitor extends external_api {
     }
 
     /**
+     * Function disk_moodledata_returns
+     *
      * @return external_single_structure
      */
     public static function disk_moodledata_returns() {
@@ -53,8 +64,9 @@ class performancemonitor extends external_api {
     }
 
     /**
+     * Function disk_moodledata
+     *
      * @return array
-     * @throws \Exception
      */
     public static function disk_moodledata() {
 

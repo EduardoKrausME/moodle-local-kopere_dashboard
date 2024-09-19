@@ -740,7 +740,6 @@ let ComponentBasePadding = {
 
 Vvveb.Components.extend("_base", "_base", ComponentBasePadding);
 
-
 //Border
 Vvveb.Components.extend("_base", "_base", {
     properties : [{
@@ -794,7 +793,6 @@ Vvveb.Components.extend("_base", "_base", {
         inputtype : ColorInput,
     }]
 });
-
 
 //Border radius
 Vvveb.Components.extend("_base", "_base", {
@@ -965,7 +963,6 @@ Vvveb.Components.extend("_base", "_base", {
     }]
 });
 
-
 //Device visibility
 let ComponentDeviceVisibility = {
     properties : [{
@@ -1063,7 +1060,6 @@ let ComponentDeviceVisibility = {
 };
 
 Vvveb.Components.extend("_base", "_base", ComponentDeviceVisibility);
-
 
 Vvveb.Components.add("config/bootstrap", {
     name       : "Bootstrap Variables",

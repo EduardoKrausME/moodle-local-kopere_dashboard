@@ -37,13 +37,15 @@ use local_kopere_dashboard\util\user_util;
 
 /**
  * Class useronline
+ *
  * @package local_kopere_dashboard
  */
 class useronline {
 
     /**
+     * Function dashboard
+     *
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public function dashboard() {
         dashboard_util::add_breadcrumb(get_string_kopere('useronline_title'));
@@ -79,7 +81,10 @@ class useronline {
     }
 
     /**
+     * Function load_all_users
+     *
      * @param int $time
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -105,7 +110,10 @@ class useronline {
     }
 
     /**
+     * Function count
+     *
      * @param $time
+     *
      * @return int
      * @throws \dml_exception
      */
@@ -132,8 +140,9 @@ class useronline {
     }
 
     /**
+     * Function settings
+     *
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public function settings() {
         global $PAGE;

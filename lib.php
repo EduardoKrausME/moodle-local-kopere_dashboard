@@ -129,6 +129,10 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
     }
 }
 
+/**
+ * Function add_pages_custommenuitems_400
+ *
+ */
 function add_pages_custommenuitems_400() {
     global $CFG;
 

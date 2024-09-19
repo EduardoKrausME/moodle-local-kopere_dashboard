@@ -30,7 +30,6 @@ GoogleFontsManager = {
 	}
 }
 
-
 Vvveb.FontsManager.addProvider("google", GoogleFontsManager);
 	
 let googleFonts = {};

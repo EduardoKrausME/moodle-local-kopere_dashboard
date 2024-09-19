@@ -30,10 +30,12 @@ namespace local_kopere_dashboard\util;
  */
 class json {
     /**
-     * @param        $data
-     * @param int    $recordstotal
-     * @param int    $recordsfiltered
-     * @param string $sql
+     * Function encode
+     *
+     * @param $data
+     * @param int $recordstotal
+     * @param int $recordsfiltered
+     * @param null $sql
      *
      * @throws \coding_exception
      */
@@ -63,6 +65,8 @@ class json {
     }
 
     /**
+     * Function error
+     *
      * @param $message
      */
     public static function error($message) {

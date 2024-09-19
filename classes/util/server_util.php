@@ -30,11 +30,13 @@ namespace local_kopere_dashboard\util;
  */
 class server_util {
     /**
+     * Function get_kopere_pathath
+     *
      * @param bool $create
      *
      * @return string
      */
-    public static function get_kopere_pathath( $create = true) {
+    public static function get_kopere_pathath($create = true) {
         global $CFG;
 
         if ($create) {
@@ -46,11 +48,13 @@ class server_util {
     }
 
     /**
+     * Function function_enable
+     *
      * @param $function
      *
      * @return bool
      */
-    public static function function_enable( $function) {
+    public static function function_enable($function) {
         return is_callable($function) && false === stripos(ini_get('disable_functions'), $function);
     }
 }

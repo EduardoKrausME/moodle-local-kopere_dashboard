@@ -36,18 +36,21 @@ class input_checkbox_select extends input_select {
 
     /**
      * input_checkbox_select constructor.
+     *
      * @throws \coding_exception
      */
     public function __construct() {
         $this->set_value("false");
         $this->set_values(array(
-             ['key' => 0, 'value' => get_string('no')],
-             ['key' => 1, 'value' => get_string('yes')],
+            ['key' => 0, 'value' => get_string('no')],
+            ['key' => 1, 'value' => get_string('yes')],
         ));
     }
 
     /**
-     * @return input_checkbox_select
+     * Function new_instance
+     *
+     * @return input_checkbox_select|input_select
      * @throws \coding_exception
      */
     public static function new_instance() {
@@ -55,6 +58,8 @@ class input_checkbox_select extends input_select {
     }
 
     /**
+     * Function is_checked
+     *
      * @return bool
      */
     public function is_checked() {
@@ -62,6 +67,8 @@ class input_checkbox_select extends input_select {
     }
 
     /**
+     * Function set_checked
+     *
      * @param $checked
      *
      * @return $this
@@ -80,6 +87,8 @@ class input_checkbox_select extends input_select {
     }
 
     /**
+     * Function set_checked_by_config
+     *
      * @param $configname
      *
      * @return $this

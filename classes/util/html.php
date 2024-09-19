@@ -57,6 +57,8 @@ class html {
         '_', '/', '_', '_', '_', '_', '_', '_', '_', '_'];
 
     /**
+     * Function caracter_spacial
+     *
      * @param $html
      *
      * @return mixed
@@ -66,6 +68,8 @@ class html {
     }
 
     /**
+     * Function retira_acentos
+     *
      * @param $html
      *
      * @return mixed
@@ -78,9 +82,11 @@ class html {
     }
 
     /**
+     * Function trim
+     *
      * @param $html
      *
-     * @return mixed
+     * @return mixed|null|string|string[]
      */
     public static function trim($html) {
         for ($i = 0; $i < 10; $i++) {
@@ -95,13 +101,15 @@ class html {
     }
 
     /**
-     * @param $txt
-     *
-     * @return string
+     * Function retira_caracteres_nao_ascii
      *  ASCII  32,45,95
      *  ASCII  48-57
      *  ASCII  65-90
      *  ASCII  97-122
+     *
+     * @param $txt
+     *
+     * @return string
      */
     public static function retira_caracteres_nao_ascii($txt) {
         $txt = self::retira_acentos($txt);
@@ -122,6 +130,8 @@ class html {
     }
 
     /**
+     * Function link
+     *
      * @param $txt
      *
      * @return string
@@ -141,6 +151,8 @@ class html {
     }
 
     /**
+     * Function truncate_text
+     *
      * @param $texto
      * @param $caracteres
      *
@@ -164,9 +176,11 @@ class html {
     }
 
     /**
+     * Function makelink
+     *
      * @param $string
      *
-     * @return mixed
+     * @return null|string|string[]
      */
     public static function makelink($string) {
         /***

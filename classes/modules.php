@@ -25,10 +25,14 @@ namespace local_kopere_dashboard;
 
 /**
  * Class modules
+ *
  * @package local_kopere_dashboard
  */
 class modules {
+
     /**
+     * Function count_all
+     *
      * @return mixed
      * @throws \dml_exception
      */

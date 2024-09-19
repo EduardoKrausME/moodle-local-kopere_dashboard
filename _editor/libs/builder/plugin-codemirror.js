@@ -69,7 +69,6 @@ Vvveb.CodeEditor = {
 	}
 }
 
-
 // override modal code editor to use code mirror
 Vvveb.ModalCodeEditor.init = function (modal = false, editor = false) {
 	this.modal  = document.getElementById("codeEditorModal");
@@ -103,7 +102,6 @@ Vvveb.ModalCodeEditor.setValue = function (value) {
 Vvveb.ModalCodeEditor.getValue = function (value) {
 	return this.editor.getValue();
 };
-
 
 Vvveb.CssEditor = {
 	

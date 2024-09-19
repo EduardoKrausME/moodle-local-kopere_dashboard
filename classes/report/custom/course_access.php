@@ -37,6 +37,8 @@ use local_kopere_dashboard\util\url_util;
 class course_access {
 
     /**
+     * Function name
+     *
      * @return string
      * @throws \coding_exception
      * @throws \dml_exception
@@ -47,14 +49,17 @@ class course_access {
     }
 
     /**
-     * @return boolean
+     * Function is_enable
+     *
+     * @return bool
      */
     public function is_enable() {
         return true;
     }
 
     /**
-     * @return void
+     * Function generate
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -269,23 +274,30 @@ class course_access {
     }
 
     /**
-     * @param        $value
-     * @param string $class
-     * @param        $bgcolor
+     * Function td
+     *
+     * @param $value
+     * @param $class
+     * @param $bgcolor
      */
     private function td($value, $class, $bgcolor) {
         echo "<td class='{$class} ' bgcolor='{$bgcolor}'>{$value}" . '</td>';
     }
 
     /**
-     * @param        $value
-     * @param string $class
-     * @param        $bgcolor
+     * Function td2
+     *
+     * @param $value
+     * @param $class
+     * @param $bgcolor
      */
     private function td2($value, $class, $bgcolor) {
         echo "<td colspan='2' class='{$class}' bgcolor='{$bgcolor}'>{$value}" . '</td>';
     }
 
+    /**
+     * Function list_data
+     */
     public function list_data() {
     }
 }

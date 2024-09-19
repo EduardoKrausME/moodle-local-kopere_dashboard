@@ -52,7 +52,6 @@ Vvveb.Components.extend("_base", "html/heading", {
     }]
 });
 
-
 let linkComponentProperties = [
     /*	{
             name: "Text",
@@ -354,7 +353,6 @@ Vvveb.Components.extend("_base", "html/label", {
         inputtype : TextInput
     }]
 });
-
 
 Vvveb.Components.extend("_base", "html/textinput", {
     name       : "Input",

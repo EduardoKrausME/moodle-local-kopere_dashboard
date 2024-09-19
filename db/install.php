@@ -22,6 +22,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Function xmldb_local_kopere_dashboard_install
+ *
+ * @return bool
+ */
 function xmldb_local_kopere_dashboard_install() {
     set_config('enablegravatar', 1);
     set_config('gravatardefaulturl', 'mm');
@@ -49,3 +54,4 @@ function xmldb_local_kopere_dashboard_install() {
 \local_kopere_dashboard\install\report_install::create_reports();
 
 \local_kopere_dashboard\install\users_import_install::install_or_update();
+

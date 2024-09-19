@@ -28,10 +28,14 @@ use local_kopere_dashboard\util\user_util;
 
 /**
  * Class enroll
+ *
  * @package local_kopere_dashboard
  */
 class enroll {
+
     /**
+     * Function last_enroll
+     *
      * @return array
      * @throws \dml_exception
      */
@@ -53,6 +57,8 @@ class enroll {
     }
 
     /**
+     * Function ajax_dashboard
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */

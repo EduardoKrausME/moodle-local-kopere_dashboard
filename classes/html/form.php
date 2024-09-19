@@ -51,10 +51,13 @@ class form {
     }
 
     /**
-     * @param        $titulo
-     * @param        $input
+     * Function print_row
+     *
+     * @param $titulo
+     * @param $input
      * @param string $name
      * @param string $adicionaltext
+     * @param string $type
      */
     public function print_row($titulo, $input, $name = '', $adicionaltext = '', $type = '') {
         if ($titulo) {
@@ -68,6 +71,8 @@ class form {
     }
 
     /**
+     * Function print_panel
+     *
      * @param $titulo
      * @param $panelbody
      */
@@ -81,8 +86,10 @@ class form {
     }
 
     /**
-     * @param        $titulo
-     * @param        $input
+     * Function print_row_one
+     *
+     * @param $titulo
+     * @param $input
      * @param string $name
      * @param string $adicionaltext
      */
@@ -95,6 +102,8 @@ class form {
     }
 
     /**
+     * Function print_section
+     *
      * @param $sectiontitle
      */
     public function print_section($sectiontitle) {
@@ -102,6 +111,8 @@ class form {
     }
 
     /**
+     * Function print_spacer
+     *
      * @param $height
      */
     public function print_spacer($height) {
@@ -109,6 +120,8 @@ class form {
     }
 
     /**
+     * Function add_input
+     *
      * @param i_input $input
      */
     public function add_input(i_input $input) {
@@ -122,7 +135,9 @@ class form {
     }
 
     /**
-     * @param        $name
+     * Function create_hidden_input
+     *
+     * @param $name
      * @param string $value
      */
     public function create_hidden_input($name, $value = '') {
@@ -130,6 +145,8 @@ class form {
     }
 
     /**
+     * Function create_submit_input
+     *
      * @param string $value
      * @param string $class
      * @param string $additionaltext
@@ -150,7 +167,7 @@ class form {
     }
 
     /**
-     *
+     * Function close
      */
     public function close() {
         if ($this->formaction) {
@@ -159,6 +176,8 @@ class form {
     }
 
     /**
+     * Function close_and_auto_submit_input
+     *
      * @param $campo
      */
     public function close_and_auto_submit_input($campo) {
@@ -171,7 +190,9 @@ class form {
     }
 
     /**
-     * @return bool
+     * Function check_post
+     *
+     * @return mixed
      * @throws \coding_exception
      */
     public static function check_post() {

@@ -84,16 +84,20 @@ class input_base implements i_input {
     protected $required = false;
 
     /**
-     * @return string
+     * Function get_name
+     *
+     * @return mixed|string
      */
     public function get_name() {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * Function set_name
      *
-     * @return $this
+     * @param $name
+     *
+     * @return $this|mixed
      */
     public function set_name($name) {
         $this->name = $name;
@@ -102,16 +106,20 @@ class input_base implements i_input {
     }
 
     /**
-     * @return string
+     * Function get_type
+     *
+     * @return mixed|string
      */
     public function get_type() {
         return $this->type;
     }
 
     /**
-     * @param string $type
+     * Function set_type
      *
-     * @return $this
+     * @param $type
+     *
+     * @return $this|mixed
      */
     public function set_type($type) {
         $this->type = $type;
@@ -120,16 +128,20 @@ class input_base implements i_input {
     }
 
     /**
-     * @return string
+     * Function get_class
+     *
+     * @return mixed|string
      */
     public function get_class() {
         return $this->class;
     }
 
     /**
-     * @param string $class
+     * Function set_class
      *
-     * @return $this
+     * @param $class
+     *
+     * @return $this|mixed
      */
     public function set_class($class) {
         $this->add_validator($class);
@@ -138,16 +150,20 @@ class input_base implements i_input {
     }
 
     /**
-     * @return string
+     * Function get_style
+     *
+     * @return mixed|string
      */
     public function get_style() {
         return $this->style;
     }
 
     /**
-     * @param string $style
+     * Function set_style
      *
-     * @return $this
+     * @param $style
+     *
+     * @return $this|mixed
      */
     public function set_style($style) {
         $this->style = $style;
@@ -156,16 +172,20 @@ class input_base implements i_input {
     }
 
     /**
-     * @return string
+     * Function get_value
+     *
+     * @return mixed|string
      */
     public function get_value() {
         return $this->value;
     }
 
     /**
-     * @param mixed $value
+     * Function set_value
      *
-     * @return $this
+     * @param $value
+     *
+     * @return $this|mixed
      * @throws \coding_exception
      */
     public function set_value($value) {
@@ -179,11 +199,13 @@ class input_base implements i_input {
     }
 
     /**
-     * @param $configname
+     * Function set_value_by_config
      *
-     * @return $this
+     * @param $configname
+     * @param string $default
+     *
+     * @return $this|mixed
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public function set_value_by_config($configname, $default = '') {
         $this->set_name($configname);
@@ -199,16 +221,20 @@ class input_base implements i_input {
     }
 
     /**
-     * @return string
+     * Function get_title
+     *
+     * @return mixed|string
      */
     public function get_title() {
         return $this->title;
     }
 
     /**
-     * @param string $title
+     * Function set_title
      *
-     * @return $this
+     * @param $title
+     *
+     * @return $this|mixed
      */
     public function set_title($title) {
         $this->title = $title;
@@ -217,16 +243,20 @@ class input_base implements i_input {
     }
 
     /**
-     * @return string
+     * Function get_description
+     *
+     * @return mixed|string
      */
     public function get_description() {
         return $this->description;
     }
 
     /**
-     * @param string $description
+     * Function set_description
      *
-     * @return $this
+     * @param $description
+     *
+     * @return $this|mixed
      */
     public function set_description($description) {
         $this->description = $description;
@@ -235,7 +265,9 @@ class input_base implements i_input {
     }
 
     /**
-     * @return $this
+     * Function set_required
+     *
+     * @return $this|mixed
      */
     public function set_required() {
         $this->add_validator(self::VAL_REQUIRED);
@@ -245,9 +277,11 @@ class input_base implements i_input {
     }
 
     /**
+     * Function add_validator
+     *
      * @param $validator
      *
-     * @return $this
+     * @return $this|mixed
      */
     public function add_validator($validator) {
         if ($this->class) {
@@ -260,6 +294,8 @@ class input_base implements i_input {
     }
 
     /**
+     * Function add_mask
+     *
      * @param $mask
      *
      * @return $this
@@ -274,12 +310,24 @@ class input_base implements i_input {
         return $this;
     }
 
+    /**
+     * Function add_extras
+     *
+     * @param $extra
+     *
+     * @return $this
+     */
     public function add_extras($extra) {
         $this->extras .= " {$extra}";
 
         return $this;
     }
 
+    /**
+     * Function to_string
+     *
+     * @return mixed|string
+     */
     public function to_string() {
 
         $inputid = preg_replace('/[\W]/', '', $this->name);

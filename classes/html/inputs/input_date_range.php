@@ -23,24 +23,44 @@
 
 namespace local_kopere_dashboard\html\inputs;
 
+/**
+ * Class input_date_range
+ *
+ * @package local_kopere_dashboard\html\inputs
+ */
 class input_date_range extends input_base {
+    /**
+     * input_date_range constructor.
+     */
     public function __construct() {
         $this->set_type('text');
     }
 
     /**
+     * Function new_instance
+     *
      * @return input_date_range
      */
     public static function new_instance() {
         return new input_date_range();
     }
 
+    /**
+     * Function set_daterange
+     *
+     * @return $this
+     */
     public function set_daterange() {
         $this->add_validator('single-daterange');
 
         return $this;
     }
 
+    /**
+     * Function set_datetimerange
+     *
+     * @return $this
+     */
     public function set_datetimerange() {
         $this->add_validator('single-datetimerange');
 

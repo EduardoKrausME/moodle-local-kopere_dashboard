@@ -30,7 +30,6 @@ $page = required_param('page', PARAM_TEXT);
 $id = required_param('id', PARAM_TEXT);
 $link = optional_param('link', '', PARAM_TEXT);
 
-
 $html = "";
 if ($page == "webpages") {
     $html = $DB->get_field("kopere_dashboard_webpages", "text", ["id" => $id]);

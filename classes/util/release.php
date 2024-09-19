@@ -28,8 +28,11 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class release {
+
     /**
-     * @return string
+     * Function version
+     *
+     * @return float|int
      */
     public static function version() {
         global $CFG;

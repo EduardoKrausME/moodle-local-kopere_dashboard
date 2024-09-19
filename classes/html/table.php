@@ -51,6 +51,8 @@ class table {
     private $isprint = false;
 
     /**
+     * Function set_click
+     *
      * @param $exec
      * @param $chave
      */
@@ -61,6 +63,8 @@ class table {
     }
 
     /**
+     * Function set_click_redirect
+     *
      * @param $url
      * @param $chave
      */
@@ -71,6 +75,8 @@ class table {
     }
 
     /**
+     * Function set_click_open
+     *
      * @param $url
      * @param $chave
      */
@@ -81,6 +87,8 @@ class table {
     }
 
     /**
+     * Function set_id
+     *
      * @param $id
      */
     public function set_id($id) {
@@ -88,6 +96,8 @@ class table {
     }
 
     /**
+     * Function get_click
+     *
      * @param $linha
      *
      * @return mixed|string
@@ -119,7 +129,9 @@ class table {
     }
 
     /**
-     * @param      $title
+     * Function add_header
+     *
+     * @param $title
      * @param null $chave
      * @param null $funcao
      * @param null $styleheader
@@ -137,7 +149,9 @@ class table {
     }
 
     /**
-     * @param        $header
+     * Function print_header
+     *
+     * @param $header
      * @param string $class
      */
     public function print_header($header, $class = '') {
@@ -161,7 +175,9 @@ class table {
     }
 
     /**
-     * @param        $linhas
+     * Function set_row
+     *
+     * @param $linhas
      * @param string $class
      */
     public function set_row($linhas, $class = '') {
@@ -219,7 +235,9 @@ class table {
     }
 
     /**
-     * @param        $html
+     * Function print_row
+     *
+     * @param $html
      * @param string $class
      */
     public function print_row($html, $class = '') {
@@ -229,7 +247,10 @@ class table {
     }
 
     /**
+     * Function close
+     *
      * @param bool $datatable
+     * @param null $extras
      */
     public function close($datatable = false, $extras = null) {
         global $PAGE;

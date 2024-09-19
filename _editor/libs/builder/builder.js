@@ -16,7 +16,6 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-
 // Simple JavaScript Templating and buildParams
 // John Resig - https://johnresig.com/ - MIT Licensed
 (function() {
@@ -55,7 +54,6 @@ https://github.com/givanz/VvvebJs
         return data ? fn(data) : fn;
     };
 })();
-
 
 var rbracket = /\[\]$/;
 
@@ -140,7 +138,6 @@ function nestedFormData(a) {
     // Return the resulting serialization
     return s.join("&");
 };
-
 
 let delay = (function() {
     let timer = 0;
@@ -294,7 +291,6 @@ Vvveb.Components = {
 
         this.add(type, newData);
     },
-
 
     matchNode : function(node) {
         let component = {};
@@ -615,7 +611,6 @@ Vvveb.Components = {
     }
 };
 
-
 Vvveb.Blocks = {
 
     _blocks : {},
@@ -644,13 +639,11 @@ Vvveb.Sections = {
     },
 };
 
-
 Vvveb.WysiwygEditor = {
 
     isActive : false,
     oldValue : '',
     doc      : false,
-
 
     editorSetStyle : function(tag, style = {}, toggle = false) {
         let iframeWindow = Vvveb.Builder.iframe.contentWindow;
@@ -762,7 +755,6 @@ Vvveb.WysiwygEditor = {
             return false;
         });
 
-
         document.getElementById("back-color").addEventListener("change", function(e) {
             //doc.execCommand('hiliteColor',false,this.value);
             self.editorSetStyle(false, {"background-color" : this.value});
@@ -831,7 +823,6 @@ Vvveb.WysiwygEditor = {
 
         document.getElementById("wysiwyg-editor").style.display = "none";
         this.isActive = false;
-
 
         node = this.element;
         Vvveb.Undo.addMutation({
@@ -1037,7 +1028,6 @@ Vvveb.Builder = {
 
                             item.querySelector("img").setAttribute("src", image);
 
-
                         }
 
                         blocksSubList.append(item);
@@ -1078,7 +1068,6 @@ Vvveb.Builder = {
             navs[i].addEventListener("click", _adjustListsHeight__exec);
         }
     },
-
 
     loadUrl : function(url, callback) {
         let self = this;
@@ -1323,7 +1312,6 @@ Vvveb.Builder = {
         });
 
     },
-
 
     selectNode : function(node) {
         let SelectBox = document.getElementById("select-box");
@@ -1733,7 +1721,6 @@ Vvveb.Builder = {
                 self.isDragging = true;
                 document.querySelectorAll("#section-actions, #highlight-name, #select-box").forEach(el => el.style.display = "");
 
-
                 if (self.designerMode) {
                     self.dragElement = self.selectedEl;
                 } else {
@@ -1759,7 +1746,6 @@ Vvveb.Builder = {
                 return false;
             }
         });
-
 
         let resizeDown = function(event) {
             if (event.which == 1) {//left click
@@ -1960,7 +1946,6 @@ Vvveb.Builder = {
                 addSectionBox.style.display = "none";
             }
         });
-
 
         addSectionBox.addEventListener("click", function(event) {
             let element = event.target.closest(".sections-list li ol li");
@@ -2291,7 +2276,6 @@ Vvveb.CodeEditor = {
         this.destroy();
     }
 };
-
 
 Vvveb.CssEditor = {
 
@@ -2744,7 +2728,6 @@ Vvveb.StyleManager = {
         return this.cssContainer.innerHTML = css;
     },
 
-
     _getCssStyle : function(element, styleProp) {
         let value = "";
         let el;
@@ -2891,7 +2874,6 @@ function drawComponentsTree(tree) {
     return drawComponentsTreeTraverse(tree);
 }
 
-
 let selected = null;
 let dragover = null;
 
@@ -2924,7 +2906,6 @@ Vvveb.SectionList = {
                 node.click();
             }
         });
-
 
         document.querySelector(this.selector).addEventListener("click", function(e) {
             let element = e.target.closest("li[data-component] label");
@@ -3041,7 +3022,6 @@ Vvveb.SectionList = {
 				delay(() => node.click(), 1000);
 				*/
 
-
                 node = node;
                 Vvveb.Undo.addMutation({
                     type        : 'childList',
@@ -3049,7 +3029,6 @@ Vvveb.SectionList = {
                     addedNodes  : [node],
                     nextSibling : node.nextSibling
                 });
-
 
                 self.loadSections();
                 Vvveb.TreeList.loadComponents();
@@ -3102,7 +3081,6 @@ Vvveb.SectionList = {
         let html = drawComponentsTree(tree);
         document.querySelector("ol", sectionListItem).replaceWith(html);
     },
-
 
     addSection : function(data) {
         let section = generateElements(tmpl("vvveb-section", data))[0];
@@ -3458,7 +3436,6 @@ Vvveb.ColorPaletteManager = {
                             let name = style[k];
                             let value = style.getPropertyValue(name).trim();
                             let type = "";
-
 
                             if (name.startsWith("--")) {
                                 //ignore bootstrap rgb variables

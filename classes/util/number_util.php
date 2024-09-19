@@ -22,13 +22,32 @@
 
 namespace local_kopere_dashboard\util;
 
+/**
+ * Class number_util
+ *
+ * @package local_kopere_dashboard\util
+ */
 class number_util {
+    /**
+     * Function only_number
+     *
+     * @param $number
+     *
+     * @return null|string|string[]
+     */
     public static function only_number($number) {
         $number = preg_replace('/[^0-9]/', '', $number);
 
         return $number;
     }
 
+    /**
+     * Function phonecell_to_number
+     *
+     * @param $phone
+     *
+     * @return null|string|string[]
+     */
     public static function phonecell_to_number($phone) {
         $phone = preg_replace('/[^0-9]/', '', $phone);
 
@@ -44,12 +63,19 @@ class number_util {
         return '';
     }
 
+    /**
+     * Var divisor
+     *
+     * @var int
+     */
     private static $divisor = 1000;
 
     /**
-     * @param int $bytes
+     * Function bytes
      *
-     * @return string
+     * @param $bytes
+     *
+     * @return mixed
      */
     public static function bytes($bytes) {
         if ($bytes == 0) {
@@ -77,9 +103,12 @@ class number_util {
     }
 
     /**
-     * @param string $texto
+     * Function remove_zero
      *
-     * @return string
+     * @param $texto
+     * @param $count
+     *
+     * @return mixed
      */
     private static function remove_zero($texto, $count) {
         if ($count == 3) {

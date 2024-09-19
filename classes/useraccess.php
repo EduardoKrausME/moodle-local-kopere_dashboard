@@ -29,8 +29,18 @@ use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\datatable_search_util;
 
+/**
+ * Class useraccess
+ *
+ * @package local_kopere_dashboard
+ */
 class useraccess {
 
+    /**
+     * Function dashboard
+     *
+     * @throws \coding_exception
+     */
     public function dashboard() {
         global $PAGE;
 
@@ -69,6 +79,12 @@ class useraccess {
         echo "<style>.bloco_changue_mes{display:none}</style>";
     }
 
+    /**
+     * Function load_all_users
+     *
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
     public function load_all_users() {
         $changuemes = required_param('changue_mes', PARAM_TEXT);
 
@@ -95,6 +111,11 @@ class useraccess {
 
     }
 
+    /**
+     * Function list_meses
+     *
+     * @return array
+     */
     private function list_meses() {
         $ultimosmeses = [];
         $ano = date('Y');

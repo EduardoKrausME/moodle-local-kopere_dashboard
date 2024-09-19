@@ -37,6 +37,8 @@ class input_email extends input_base {
     }
 
     /**
+     * Function new_instance
+     *
      * @return input_email
      */
     public static function new_instance() {

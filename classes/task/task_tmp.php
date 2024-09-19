@@ -22,8 +22,16 @@
 
 namespace local_kopere_dashboard\task;
 
+/**
+ * Class task_tmp
+ *
+ * @package local_kopere_dashboard\task
+ */
 class task_tmp extends \core\task\scheduled_task {
+
     /**
+     * Function get_name
+     *
      * @return string
      * @throws \coding_exception
      */
@@ -32,7 +40,7 @@ class task_tmp extends \core\task\scheduled_task {
     }
 
     /**
-     *
+     * Function execute
      */
     public function execute() {
         global $CFG;

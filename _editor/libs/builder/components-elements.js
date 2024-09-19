@@ -109,7 +109,6 @@ Vvveb.Components.extend("_base", "elements/figure", {
     }]
 });
 
-
 //Icon
 Vvveb.Components.extend("_base", "elements/font-icon", {
     classes    : ["la", "lab"],
@@ -366,7 +365,6 @@ Vvveb.Components.extend("_base", "elements/svg-icon", {
     }]
 });
 
-
 Vvveb.Components.add("elements/svg-element", {
     nodes      : ["path", "line", "polyline", "polygon", "rect", "circle", "ellipse", "g"],
     name       : "Svg element",
@@ -530,7 +528,6 @@ Vvveb.Components.add("elements/tabs", {
     }
     ]
 });
-
 
 //Accordion
 Vvveb.Components.add("elements/accordion", {
@@ -1056,7 +1053,6 @@ Vvveb.Components.add("elements/slider", {
 	`,
     afterDrop : carouselAfterDrop,
 });
-
 
 Vvveb.Components.add("elements/icon-list", {
     nodes      : [".counter"],

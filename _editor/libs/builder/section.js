@@ -88,7 +88,6 @@ let SectionBackground = [{
                 break;
         }
 
-
         return element;
     },
     init     : function(node) {
@@ -133,7 +132,6 @@ let SectionBackground = [{
     inputtype : ImageInput
 }
 ];
-
 
 let SectionOverlay = [{
     key       : "section_overlay",
@@ -410,7 +408,6 @@ let ComponentSectionContent = [{
     ...sectionSeparatorProperties("bottom", "Bottom"),
 ];
 
-
 let ComponentSectionStyle = [];
 /*[{
         key: "Section Style",
@@ -595,7 +592,6 @@ Vvveb.Components.add("elements/header", {
     ],
     init       : componentsInit
 });
-
 
 Vvveb.Components.add("elements/footer", {
     nodes      : ["footer"],

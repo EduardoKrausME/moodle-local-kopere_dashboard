@@ -29,7 +29,10 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class string_util {
+
     /**
+     * Function generate_random_string
+     *
      * @param int $length
      *
      * @return string
@@ -50,6 +53,8 @@ class string_util {
     }
 
     /**
+     * Function generate_random_password
+     *
      * @param int $length
      *
      * @return string
@@ -71,7 +76,10 @@ class string_util {
     }
 
     /**
-     * @param string $id
+     * Function generate_uid
+     *
+     * @param null $id
+     *
      * @return string
      */
     public static function generate_uid($id = null) {
@@ -93,6 +101,8 @@ class string_util {
     }
 
     /**
+     * Function clear_all_params
+     *
      * @param $param
      * @param $default
      * @param $type
@@ -117,6 +127,8 @@ class string_util {
     }
 
     /**
+     * Function clear_params_array
+     *
      * @param $in
      * @param $type
      *

@@ -30,8 +30,9 @@ use core\event\base;
  * @package local_kopere_dashboard\event
  */
 class import_user_created extends base {
+
     /**
-     * @return void
+     * Function init
      */
     protected function init() {
         $this->data['crud'] = 'c';
@@ -41,6 +42,8 @@ class import_user_created extends base {
     }
 
     /**
+     * Function get_name
+     *
      * @return string
      * @throws \coding_exception
      */

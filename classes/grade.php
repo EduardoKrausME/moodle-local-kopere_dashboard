@@ -25,10 +25,14 @@ namespace local_kopere_dashboard;
 
 /**
  * Class grade
+ *
  * @package local_kopere_dashboard
  */
 class grade {
+
     /**
+     * Function get_last_grades
+     *
      * @return array
      * @throws \dml_exception
      */

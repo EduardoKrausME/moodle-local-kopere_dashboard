@@ -38,10 +38,14 @@ use local_kopere_dashboard\vo\kopere_dashboard_reports;
 
 /**
  * Class reports_admin
+ *
  * @package local_kopere_dashboard
  */
 class reports_admin {
+
     /**
+     * Function editar
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -226,6 +230,8 @@ class reports_admin {
     }
 
     /**
+     * Function save
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -271,6 +277,11 @@ class reports_admin {
         }
     }
 
+    /**
+     * Function columns
+     *
+     * @return false|string
+     */
     private function columns() {
         $columns = [];
         foreach ($_POST['columns'] as $colum) {
@@ -284,6 +295,13 @@ class reports_admin {
         ));
     }
 
+    /**
+     * Function add_header
+     *
+     * @param bool $adddescription
+     *
+     * @return \stdClass
+     */
     private function add_header($adddescription = false) {
         $column = new \stdClass();
         $column->chave = "";

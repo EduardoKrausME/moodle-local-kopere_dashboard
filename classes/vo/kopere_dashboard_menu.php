@@ -24,6 +24,7 @@ namespace local_kopere_dashboard\vo;
 
 /**
  * Class kopere_dashboard_menu
+ *
  * @package local_kopere_dashboard\vo
  */
 class kopere_dashboard_menu extends \stdClass {
@@ -41,6 +42,8 @@ class kopere_dashboard_menu extends \stdClass {
     public $menuid;
 
     /**
+     * Function create_by_object
+     *
      * @param $item
      *
      * @return kopere_dashboard_menu
@@ -58,8 +61,9 @@ class kopere_dashboard_menu extends \stdClass {
     }
 
     /**
-     * @return kopere_dashboard_menu
+     * Function create_by_default
      *
+     * @return kopere_dashboard_menu
      * @throws \coding_exception
      */
     public static function create_by_default() {

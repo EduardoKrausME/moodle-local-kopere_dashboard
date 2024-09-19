@@ -41,6 +41,9 @@ function local_kopere_dashboard_makeurl($classname, $method, $params = [], $file
     return "{$CFG->wwwroot}/local/kopere_dashboard/{$file}.php?{$query}";
 }
 
+/**
+ * Function get_kopere_lang
+ */
 function get_kopere_lang() {
 
     global $PAGE;

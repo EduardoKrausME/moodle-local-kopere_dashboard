@@ -49,7 +49,6 @@ ImageInput = {
             Vvveb.Builder.selectedEl.addEventListener("load", onLoad);
         },
 
-
         onClick : function(e, element) {
             if (!Vvveb.MediaModal) {
                 Vvveb.MediaModal = new MediaModal(true);
@@ -74,7 +73,6 @@ VideoInput = {
             ["click", "onClick", "button"],
             ["click", "onClick", "video"],
         ],
-
 
         init : function(data) {
             return this.render("videoinput-gallery", data);

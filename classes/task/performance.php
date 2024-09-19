@@ -24,9 +24,16 @@ namespace local_kopere_dashboard\task;
 
 use local_kopere_dashboard\server\performancemonitor;
 
+/**
+ * Class performance
+ *
+ * @package local_kopere_dashboard\task
+ */
 class performance extends \core\task\scheduled_task {
 
     /**
+     * Function get_name
+     *
      * @return string
      * @throws \coding_exception
      */
@@ -35,8 +42,10 @@ class performance extends \core\task\scheduled_task {
     }
 
     /**
+     * Function execute
+     *
      * @throws \coding_exception
-     * @throws \Exception
+     * @throws \dml_exception
      */
     public function execute() {
         $time = time();
@@ -48,9 +57,12 @@ class performance extends \core\task\scheduled_task {
     }
 
     /**
+     * Function add_data
+     *
      * @param $time
      * @param $type
      * @param $value
+     *
      * @return bool
      * @throws \dml_exception
      */

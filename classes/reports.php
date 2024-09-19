@@ -37,11 +37,14 @@ use local_kopere_dashboard\vo\kopere_dashboard_reports;
 
 /**
  * Class reports
+ *
  * @package local_kopere_dashboard
  */
 class reports extends reports_admin {
 
     /**
+     * Function dashboard
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -131,6 +134,8 @@ class reports extends reports_admin {
     }
 
     /**
+     * Function load_report
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -208,6 +213,8 @@ class reports extends reports_admin {
     }
 
     /**
+     * Function prerequisit
+     *
      * @param $report
      * @param $pre
      *
@@ -235,6 +242,8 @@ class reports extends reports_admin {
     }
 
     /**
+     * Function getdata
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -292,6 +301,8 @@ class reports extends reports_admin {
     }
 
     /**
+     * Function download
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -334,6 +345,8 @@ class reports extends reports_admin {
     }
 
     /**
+     * Function get_title
+     *
      * @param $obj
      *
      * @return string
@@ -350,9 +363,11 @@ class reports extends reports_admin {
     }
 
     /**
-     * @return array of submenu_util
-     * @throws \dml_exception
+     * Function global_menus
+     *
+     * @return array
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function global_menus() {
         global $DB, $CFG;

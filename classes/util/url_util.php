@@ -22,9 +22,17 @@
 
 namespace local_kopere_dashboard\util;
 
+/**
+ * Class url_util
+ *
+ * @package local_kopere_dashboard\util
+ */
 class url_util {
+
     /**
-     * @return mixed
+     * Function querystring
+     *
+     * @return string
      * @throws \coding_exception
      */
     public static function querystring() {

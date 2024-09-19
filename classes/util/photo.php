@@ -24,10 +24,14 @@ namespace local_kopere_dashboard\util;
 
 /**
  * Class photo
+ *
  * @package local_kopere_dashboard\util
  */
 class photo {
+
     /**
+     * Function get_photo_user
+     *
      * @param $userid
      *
      * @throws \coding_exception

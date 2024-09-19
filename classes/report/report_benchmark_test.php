@@ -29,6 +29,11 @@ define('BENCHFAIL_SLOWHARDDRIVE', 'slowharddrive');
 define('BENCHFAIL_SLOWDATABASE', 'slowdatabase');
 define('BENCHFAIL_SLOWWEB', 'slowweb');
 
+/**
+ * Class report_benchmark_test
+ *
+ * @package local_kopere_dashboard\report
+ */
 class report_benchmark_test extends report_benchmark {
 
     /**
@@ -322,6 +327,8 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
     }
 
     /**
+     * Function themedesignermode
+     *
      * @return array
      * @throws \coding_exception
      * @throws \dml_exception
@@ -346,6 +353,8 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
     }
 
     /**
+     * Function cachejs
+     *
      * @return array
      * @throws \coding_exception
      * @throws \dml_exception
@@ -370,6 +379,8 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
     }
 
     /**
+     * Function debug
+     *
      * @return array
      * @throws \coding_exception
      * @throws \dml_exception
@@ -407,6 +418,8 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
     }
 
     /**
+     * Function backup_auto_active
+     *
      * @return array
      * @throws \coding_exception
      * @throws \dml_exception
@@ -436,6 +449,8 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
     }
 
     /**
+     * Function enablestats
+     *
      * @return array
      * @throws \coding_exception
      * @throws \dml_exception

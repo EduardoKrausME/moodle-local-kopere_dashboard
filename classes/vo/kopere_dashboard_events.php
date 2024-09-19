@@ -24,6 +24,7 @@ namespace local_kopere_dashboard\vo;
 
 /**
  * Class kopere_dashboard_events
+ *
  * @package local_kopere_dashboard\vo
  */
 class kopere_dashboard_events extends \stdClass {
@@ -52,12 +53,15 @@ class kopere_dashboard_events extends \stdClass {
     public $message;
 
     /**
+     * Function create
+     *
      * @param $module
      * @param $eventname
      * @param $userfrom
      * @param $userto
      * @param $subject
      * @param null $message
+     *
      * @return kopere_dashboard_events
      */
     public static function create($module, $eventname, $userfrom, $userto, $subject, $message = null) {
@@ -74,7 +78,10 @@ class kopere_dashboard_events extends \stdClass {
     }
 
     /**
+     * Function create_by_object
+     *
      * @param $item
+     *
      * @return kopere_dashboard_events
      * @throws \coding_exception
      */
@@ -94,6 +101,8 @@ class kopere_dashboard_events extends \stdClass {
     }
 
     /**
+     * Function create_by_default
+     *
      * @return kopere_dashboard_events
      * @throws \coding_exception
      */

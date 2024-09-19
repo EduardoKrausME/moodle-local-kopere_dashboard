@@ -19,7 +19,6 @@ https://github.com/givanz/Vvvebjs
 Vvveb.SectionsGroup['Bootstrap'] =
     ["bootstrap4/signin-split", "bootstrap4/image-gallery", "bootstrap4/video-header", "bootstrap4/slider-header", "bootstrap4/about-team", "bootstrap4/portfolio-one-column", "bootstrap4/portfolio-two-column", "bootstrap4/portfolio-three-column", "bootstrap4/portfolio-four-column"];
 
-
 Vvveb.Sections.add("bootstrap4/signin-split", {
     name     : "Modern Sign In Page with Split Screen Format",
     dragHtml : '<img src="' + Vvveb.baseUrl + 'icons/product.png">',
@@ -246,7 +245,6 @@ Vvveb.Sections.add("bootstrap4/slider-header", {
 `,
 });
 
-
 Vvveb.Sections.add("bootstrap4/video-header", {
     name     : "Video Header",
     dragHtml : '<img src="' + Vvveb.baseUrl + 'icons/image.svg">',
@@ -265,7 +263,6 @@ Vvveb.Sections.add("bootstrap4/video-header", {
       </div>
     </div>
   </div>
-
 
 <div class="my-5">
   <div class="container">
@@ -305,7 +302,6 @@ Vvveb.Sections.add("bootstrap4/video-header", {
 </div>
 `,
 });
-
 
 Vvveb.Sections.add("bootstrap4/about-team", {
     name     : "About and Team Section",
@@ -368,7 +364,6 @@ Vvveb.Sections.add("bootstrap4/about-team", {
 </section>
 `,
 });
-
 
 Vvveb.Sections.add("bootstrap4/portfolio-one-column", {
     name     : "One Column Portfolio Layout",
@@ -481,7 +476,6 @@ Vvveb.Sections.add("bootstrap4/portfolio-one-column", {
 </section>    
 `,
 });
-
 
 Vvveb.Sections.add("bootstrap4/portfolio-two-column", {
     name     : "Two Column Portfolio Layout",
@@ -707,7 +701,6 @@ Vvveb.Sections.add("bootstrap4/portfolio-three-column", {
 </div>
 </section>`,
 });
-
 
 Vvveb.Sections.add("bootstrap4/portfolio-four-column", {
     name     : "Four Column Portfolio Layout",

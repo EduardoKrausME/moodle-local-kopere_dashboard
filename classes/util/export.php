@@ -34,12 +34,19 @@ class export {
      */
     private static $format;
 
+    /**
+     * Function is_export
+     *
+     * @return bool
+     */
     public static function is_export() {
         return self::$format == 'xls';
     }
 
     /**
-     * @param      $format
+     * Function header
+     *
+     * @param $format
      * @param null $filename
      */
     public static function header($format, $filename = null) {
@@ -69,6 +76,9 @@ class export {
         }
     }
 
+    /**
+     * Function close
+     */
     public static function close() {
         if (self::$format == 'xls') {
             echo '</body></html>';

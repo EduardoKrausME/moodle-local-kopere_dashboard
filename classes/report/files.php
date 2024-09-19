@@ -31,7 +31,10 @@ use local_kopere_dashboard\util\bytes_util;
  * @package local_kopere_dashboard\report
  */
 class files {
+
     /**
+     * Function count_all_space
+     *
      * @return mixed
      * @throws \dml_exception
      */
@@ -44,6 +47,8 @@ class files {
     }
 
     /**
+     * Function count_all_course_space
+     *
      * @return mixed
      * @throws \dml_exception
      */
@@ -56,6 +61,8 @@ class files {
     }
 
     /**
+     * Function count_all_user_space
+     *
      * @return mixed
      * @throws \dml_exception
      */
@@ -68,9 +75,10 @@ class files {
     }
 
     /**
+     * Function list_sizes_courses
+     *
      * @return array
      * @throws \dml_exception
-     * @throws \coding_exception
      */
     public static function list_sizes_courses() {
         global $DB;

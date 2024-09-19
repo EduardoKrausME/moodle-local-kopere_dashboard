@@ -29,110 +29,147 @@ namespace local_kopere_dashboard\html\inputs;
  * @package local_kopere_dashboard\html\inputs
  */
 interface i_input {
+
     /**
-     * @return string
+     * Function get_name
+     *
+     * @return mixed
      */
     public function get_name();
 
     /**
-     * @param string $name
+     * Function set_name
      *
-     * @return $this
+     * @param $name
+     *
+     * @return mixed
      */
     public function set_name($name);
 
     /**
-     * @return string
+     * Function get_type
+     *
+     * @return mixed
      */
     public function get_type();
 
     /**
-     * @param string $type
+     * Function set_type
      *
-     * @return $this
+     * @param $type
+     *
+     * @return mixed
      */
     public function set_type($type);
 
     /**
-     * @return string
+     * Function get_class
+     *
+     * @return mixed
      */
     public function get_class();
 
     /**
-     * @param string $class
+     * Function set_class
      *
-     * @return $this
+     * @param $class
+     *
+     * @return mixed
      */
     public function set_class($class);
 
     /**
-     * @return string
+     * Function get_style
+     *
+     * @return mixed
      */
     public function get_style();
 
     /**
-     * @param string $style
+     * Function set_style
      *
-     * @return $this
+     * @param $style
+     *
+     * @return mixed
      */
     public function set_style($style);
 
     /**
-     * @return string
+     * Function get_value
+     *
+     * @return mixed
      */
     public function get_value();
 
     /**
-     * @param string $value
+     * Function set_value
      *
-     * @return $this
+     * @param $value
+     *
+     * @return mixed
      */
     public function set_value($value);
 
     /**
+     * Function set_value_by_config
+     *
      * @param $configname
      *
-     * @return $this
+     * @return mixed
      */
     public function set_value_by_config($configname);
 
     /**
-     * @return string
+     * Function get_title
+     *
+     * @return mixed
      */
     public function get_title();
 
     /**
-     * @param string $title
+     * Function set_title
      *
-     * @return $this
+     * @param $title
+     *
+     * @return mixed
      */
     public function set_title($title);
 
     /**
-     * @return string
+     * Function get_description
+     *
+     * @return mixed
      */
     public function get_description();
 
     /**
-     * @param string $description
+     * Function set_description
      *
-     * @return $this
+     * @param $description
+     *
+     * @return mixed
      */
     public function set_description($description);
 
     /**
-     * @return $this
+     * Function set_required
+     *
+     * @return mixed
      */
     public function set_required();
 
     /**
+     * Function add_validator
+     *
      * @param $validator
      *
-     * @return $this
+     * @return mixed
      */
     public function add_validator($validator);
 
     /**
+     * Function to_string
+     *
      * @return mixed
      */
     public function to_string();

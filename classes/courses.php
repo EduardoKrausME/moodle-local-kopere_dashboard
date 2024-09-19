@@ -51,6 +51,8 @@ use local_kopere_dashboard\vo\kopere_dashboard_webpages;
 class courses {
 
     /**
+     * Function dashboard
+     *
      * @throws \coding_exception
      */
     public function dashboard() {
@@ -78,8 +80,10 @@ class courses {
     }
 
     /**
-     * @throws \dml_exception
+     * Function load_all_courses
+     *
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function load_all_courses() {
         global $DB;
@@ -111,11 +115,13 @@ class courses {
     }
 
     /**
-     * @param bool $format
+     * Function count_all
+     *
+     * @param $format
      *
      * @return string
-     * @throws \dml_exception
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function count_all($format) {
         global $DB;
@@ -131,11 +137,13 @@ class courses {
     }
 
     /**
-     * @param bool $format
+     * Function count_all_visibles
+     *
+     * @param $format
      *
      * @return string
-     * @throws \dml_exception
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function count_all_visibles($format) {
         global $DB;
@@ -151,6 +159,8 @@ class courses {
     }
 
     /**
+     * Function details
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -221,10 +231,11 @@ class courses {
     }
 
     /**
+     * Function enrol_new
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      * @throws \moodle_exception
-     * @throws \Exception
      */
     public function enrol_new() {
         global $DB, $CFG, $PAGE, $USER;
@@ -381,10 +392,12 @@ class courses {
     }
 
     /**
+     * Function create_static_page
+     *
      * @param $course
      *
-     * @throws \dml_exception
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function create_static_page($course) {
         global $DB;

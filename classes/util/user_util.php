@@ -25,13 +25,17 @@ namespace local_kopere_dashboard\util;
 
 /**
  * Class user_util
+ *
  * @package local_kopere_dashboard\util
  */
 class user_util {
 
     /**
-     * @param string $firstname
-     * @param string $lastname
+     * Function explode_name
+     *
+     * @param $newuser
+     *
+     * @return mixed
      */
     public static function explode_name($newuser) {
         if ($newuser->lastname == null) {
@@ -45,8 +49,11 @@ class user_util {
     }
 
     /**
+     * Function column_fullname
+     *
      * @param $result
      * @param string $colname
+     *
      * @return mixed
      */
     public static function column_fullname($result, $colname = 'fullname') {
@@ -59,9 +66,13 @@ class user_util {
     }
 
     /**
+     * Function validate_new_user
+     *
      * @param $newuser
+     *
      * @return string
-     * @throws \Exception
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function validate_new_user($newuser) {
         global $CFG, $DB;

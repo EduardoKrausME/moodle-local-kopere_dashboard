@@ -47,6 +47,8 @@ class input_select extends input_base {
     }
 
     /**
+     * Function new_instance
+     *
      * @return input_select
      */
     public static function new_instance() {
@@ -54,16 +56,21 @@ class input_select extends input_base {
     }
 
     /**
-     * @return mixed
+     * Function get_values
+     *
+     * @return array
      */
     public function get_values() {
         return $this->values;
     }
 
     /**
-     * @param array $values
+     * Function set_values
+     *
+     * @param $values
      * @param string $key
      * @param string $value
+     *
      * @return $this
      */
     public function set_values($values, $key = 'key', $value = 'value') {
@@ -75,6 +82,8 @@ class input_select extends input_base {
     }
 
     /**
+     * Function set_add_selecione
+     *
      * @param $addselecione
      *
      * @return $this
@@ -86,7 +95,9 @@ class input_select extends input_base {
     }
 
     /**
-     * @return string
+     * Function to_string
+     *
+     * @return mixed|string
      */
     public function to_string() {
         $return = "<select ";

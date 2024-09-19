@@ -22,6 +22,11 @@
 
 namespace local_kopere_dashboard\util;
 
+/**
+ * Class submenu_util
+ *
+ * @package local_kopere_dashboard\util
+ */
 class submenu_util {
     /** @var string */
     private $classname;
@@ -35,15 +40,20 @@ class submenu_util {
     private $icon;
 
     /**
-     * @return mixed
+     * Function get_classname
+     *
+     * @return string
      */
     public function get_classname() {
         return $this->classname;
     }
 
     /**
-     * @param mixed $classname
-     * @return submenu_util
+     * Function set_classname
+     *
+     * @param $classname
+     *
+     * @return $this
      */
     public function set_classname($classname) {
         $this->classname = $classname;
@@ -51,15 +61,20 @@ class submenu_util {
     }
 
     /**
-     * @return mixed
+     * Function get_methodname
+     *
+     * @return string
      */
     public function get_methodname() {
         return $this->methodname;
     }
 
     /**
-     * @param mixed $methodname
-     * @return submenu_util
+     * Function set_methodname
+     *
+     * @param $methodname
+     *
+     * @return $this
      */
     public function set_methodname($methodname) {
         $this->methodname = $methodname;
@@ -67,15 +82,20 @@ class submenu_util {
     }
 
     /**
-     * @return mixed
+     * Function get_urlextra
+     *
+     * @return string
      */
     public function get_urlextra() {
         return $this->urlextra;
     }
 
     /**
-     * @param mixed $urlextra
-     * @return submenu_util
+     * Function set_urlextra
+     *
+     * @param $urlextra
+     *
+     * @return $this
      */
     public function set_urlextra($urlextra) {
         $this->urlextra = $urlextra;
@@ -83,6 +103,8 @@ class submenu_util {
     }
 
     /**
+     * Function get_title
+     *
      * @return string
      */
     public function get_title() {
@@ -90,8 +112,11 @@ class submenu_util {
     }
 
     /**
-     * @param string $title
-     * @return submenu_util
+     * Function set_title
+     *
+     * @param $title
+     *
+     * @return $this
      */
     public function set_title($title) {
         $this->title = $title;
@@ -99,6 +124,8 @@ class submenu_util {
     }
 
     /**
+     * Function get_icon
+     *
      * @return string
      */
     public function get_icon() {
@@ -106,8 +133,11 @@ class submenu_util {
     }
 
     /**
-     * @param string $icon
-     * @return submenu_util
+     * Function set_icon
+     *
+     * @param $icon
+     *
+     * @return $this
      */
     public function set_icon($icon) {
         $this->icon = $icon;

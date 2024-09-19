@@ -28,7 +28,10 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class end_util {
+
     /**
+     * Function end_script_show
+     *
      * @param string $print
      */
     public static function end_script_show($print = '') {
@@ -36,6 +39,8 @@ class end_util {
     }
 
     /**
+     * Function end_script_header
+     *
      * @param $motivo
      */
     public static function end_script_header($motivo) {

@@ -16,7 +16,6 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-
 Vvveb.ComponentsGroup['Embeds'] = ["html/iframe", "embeds/pdf", "embeds/video", "embeds/audio"];
 
 Vvveb.Components.extend("_base", "html/iframe", {

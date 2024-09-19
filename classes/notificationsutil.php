@@ -33,11 +33,14 @@ use local_kopere_dashboard\util\release;
 
 /**
  * Class notificationsutil
+ *
  * @package local_kopere_dashboard
  */
 class notificationsutil {
 
     /**
+     * Function add_form_extra
+     *
      * @throws \coding_exception
      */
     public function add_form_extra() {
@@ -69,6 +72,8 @@ class notificationsutil {
     }
 
     /**
+     * Function list_events
+     *
      * @return \stdClass
      */
     public function list_events() {
@@ -139,6 +144,8 @@ class notificationsutil {
     }
 
     /**
+     * Function settings_load_template
+     *
      * @throws \coding_exception
      */
     public function settings_load_template() {
@@ -171,8 +178,11 @@ class notificationsutil {
     }
 
     /**
+     * Function module_name
+     *
      * @param $component
      * @param $onlyused
+     *
      * @return null|string
      * @throws \coding_exception
      * @throws \dml_exception
@@ -233,6 +243,9 @@ class notificationsutil {
     }
 
     /**
+     * Function mensagem_no_smtp
+     *
+     * @throws \coding_exception
      * @throws \dml_exception
      */
     public static function mensagem_no_smtp() {
@@ -251,7 +264,9 @@ class notificationsutil {
     }
 
     /**
-     * @return string
+     * Function get_template_html
+     *
+     * @return bool|mixed|string
      */
     public static function get_template_html() {
         global $CFG;

@@ -35,8 +35,7 @@ use local_kopere_dashboard\vo\kopere_dashboard_reports;
 class report_install {
 
     /**
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * Function create_categores
      */
     public static function create_categores() {
         global $CFG;
@@ -100,8 +99,9 @@ class report_install {
     }
 
     /**
+     * Function create_reports
+     *
      * @throws \dml_exception
-     * @throws \coding_exception
      */
     public static function create_reports() {
         global $DB, $CFG;
@@ -568,6 +568,8 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
     }
 
     /**
+     * Function add_info_header
+     *
      * @param $title
      * @param $cols
      *
@@ -582,7 +584,9 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
     }
 
     /**
-     * @param        $title
+     * Function add_header
+     *
+     * @param $title
      * @param null $chave
      * @param string $type
      * @param null $funcao
@@ -605,6 +609,8 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
     }
 
     /**
+     * Function report_cat_insert
+     *
      * @param $reportcat
      *
      * @throws \dml_exception
@@ -619,6 +625,8 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
     }
 
     /**
+     * Function report_insert
+     *
      * @param $report
      *
      * @throws \dml_exception

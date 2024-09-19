@@ -31,11 +31,14 @@ use local_kopere_dashboard\util\header;
 
 /**
  * Class users
+ *
  * @package local_kopere_dashboard
  */
 class users {
 
     /**
+     * Function dashboard
+     *
      * @throws \coding_exception
      */
     public function dashboard() {
@@ -63,6 +66,8 @@ class users {
     }
 
     /**
+     * Function load_all_users
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -87,6 +92,8 @@ class users {
     }
 
     /**
+     * Function details
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -111,7 +118,10 @@ class users {
     }
 
     /**
+     * Function count_all
+     *
      * @param bool $format
+     *
      * @return string
      * @throws \coding_exception
      * @throws \dml_exception
@@ -129,7 +139,10 @@ class users {
     }
 
     /**
+     * Function count_all_learners
+     *
      * @param bool $format
+     *
      * @return string
      * @throws \coding_exception
      * @throws \dml_exception

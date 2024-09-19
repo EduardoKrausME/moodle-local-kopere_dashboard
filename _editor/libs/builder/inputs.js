@@ -21,7 +21,6 @@ let Input = {
     init : function(name) {
     },
 
-
     onChange : function(event, node, input) {
         if (event && event.target) {
             const e = new CustomEvent('propertyChange', {
@@ -148,7 +147,6 @@ let SelectInput = {
             ["change", "onChange", "select"],
         ],
 
-
         setValue : function(value) {
             if (this.element[0] && value) {
                 let input = this.element[0].querySelector('select');
@@ -171,7 +169,6 @@ let IconSelectInput = {
         events : [
             ["change", "onChange", "select"],
         ],
-
 
         setValue : function(value) {
             if (this.element[0] && value) {
@@ -214,7 +211,6 @@ let HtmlListSelectInput = {
                 cancelable : true,
             }));
         },
-
 
         searchElement : function(event, element, input) {
             searchText = this.value;
@@ -622,12 +618,10 @@ let ToggleInput = {
 let GridInput = {
     ...Input, ...{
 
-
         events : [
             ["change", "onChange", "select" /*'select'*/],
             ["click", "onChange", "button" /*'select'*/],
         ],
-
 
         setValue : function(value) {
             if (this.element[0] && value) {
@@ -648,7 +642,6 @@ let GridInput = {
 
 let TextValueInput = {
     ...Input, ...{
-
 
         events : [
             ["focusout", "onChange", "input"],
@@ -671,7 +664,6 @@ let ButtonInput = {
         events : [
             ["click", "onChange", "button" /*'select'*/],
         ],
-
 
         setValue : function(value) {
             if (this.element[0] && value) {
@@ -696,7 +688,6 @@ let SectionInput = {
             //["click", "onChange", "button" /*'select'*/],
         ],
 
-
         setValue : function(value) {
             return false;
         },
@@ -716,7 +707,6 @@ let ListInput = {
             ["click", "add", ".btn-new"],
             ["click", "select", ".section-item"],
         ],
-
 
         remove : function(event, node, input) {
             let sectionItem = this.closest(".section-item");

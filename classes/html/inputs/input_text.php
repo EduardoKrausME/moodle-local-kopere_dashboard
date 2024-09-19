@@ -37,6 +37,8 @@ class input_text extends input_base {
     }
 
     /**
+     * Function new_instance
+     *
      * @return input_text
      */
     public static function new_instance() {

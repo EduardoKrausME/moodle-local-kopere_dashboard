@@ -22,10 +22,18 @@
 
 namespace local_kopere_dashboard\report\custom;
 
+/**
+ * Class pagination
+ *
+ * @package local_kopere_dashboard\report\custom
+ */
 class pagination {
+
     /**
-     * @param     $atualpage
-     * @param     $totalregisters
+     * Function create
+     *
+     * @param $atualpage
+     * @param $totalregisters
      * @param int $perpag
      */
     public static function create($atualpage, $totalregisters, $perpag = 50) {

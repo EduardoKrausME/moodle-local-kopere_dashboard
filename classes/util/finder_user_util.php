@@ -28,7 +28,10 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class finder_user_util {
+
     /**
+     * Function find
+     *
      * @param $key
      * @param $value
      *

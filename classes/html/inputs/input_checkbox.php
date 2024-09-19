@@ -35,6 +35,8 @@ class input_checkbox extends input_base {
     private $checked = false;
 
     /**
+     * Function new_instance
+     *
      * @return input_checkbox
      * @throws \coding_exception
      */
@@ -46,6 +48,8 @@ class input_checkbox extends input_base {
     }
 
     /**
+     * Function is_checked
+     *
      * @return bool
      */
     public function is_checked() {
@@ -53,6 +57,8 @@ class input_checkbox extends input_base {
     }
 
     /**
+     * Function set_checked
+     *
      * @param $checked
      *
      * @return $this
@@ -64,10 +70,11 @@ class input_checkbox extends input_base {
     }
 
     /**
+     * Function set_checked_by_config
+     *
      * @param $configname
      *
      * @return $this
-     * @throws \dml_exception
      */
     public function set_checked_by_config($configname) {
         $this->set_name($configname);
@@ -79,7 +86,9 @@ class input_checkbox extends input_base {
     }
 
     /**
-     * @return string
+     * Function to_string
+     *
+     * @return mixed|string
      */
     public function to_string() {
         $inputid = preg_replace('/[\W]/', '', $this->name);

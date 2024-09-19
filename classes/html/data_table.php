@@ -67,13 +67,17 @@ class data_table {
     }
 
     /**
-     * @param boolean $isexport
+     * Function set_is_export
+     *
+     * @param $isexport
      */
     public function set_is_export($isexport) {
         $this->isexport = $isexport;
     }
 
     /**
+     * Function get_tableid
+     *
      * @return string
      */
     public function get_tableid() {
@@ -81,13 +85,17 @@ class data_table {
     }
 
     /**
-     * @param string $tableid
+     * Function set_tableid
+     *
+     * @param $tableid
      */
     public function set_tableid($tableid) {
         $this->tableid = $tableid;
     }
 
     /**
+     * Function set_ajax_url
+     *
      * @param $ajaxurl
      */
     public function set_ajax_url($ajaxurl) {
@@ -95,6 +103,8 @@ class data_table {
     }
 
     /**
+     * Function set_click_redirect
+     *
      * @param $url
      * @param $chave
      */
@@ -106,6 +116,8 @@ class data_table {
     }
 
     /**
+     * Function add_info_header
+     *
      * @param $title
      * @param $cols
      */
@@ -118,7 +130,9 @@ class data_table {
     }
 
     /**
-     * @param        $title
+     * Function add_header
+     *
+     * @param $title
      * @param null $chave
      * @param string $type
      * @param null $funcao
@@ -139,6 +153,8 @@ class data_table {
     }
 
     /**
+     * Function print_header
+     *
      * @param string $class
      * @param bool $printbody
      * @param bool $returnhtml
@@ -222,6 +238,8 @@ class data_table {
                 $this->columndefs[] = (object)["render" => "dataUserphotoRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_SEGUNDOS) {
                 $this->columndefs[] = (object)["render" => "segundosRenderer", "targets" => $key];
+            } else if ($column->type == table_header_item::RENDERER_TIME) {
+                $this->columndefs[] = (object)["render" => "timeRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_ACTION) {
                 $this->columndefs[] = (object)["orderable" => false, "targets" => $key];
             }
@@ -242,8 +260,11 @@ class data_table {
     }
 
     /**
-     * @param        $linhas
+     * Function set_row
+     *
+     * @param $linhas
      * @param string $class
+     *
      * @throws \coding_exception
      */
     public function set_row($linhas, $class = '') {
@@ -321,6 +342,8 @@ class data_table {
                             '/local/kopere_dashboard/profile-image.php?type=photo_user&id=' . $html . '" />';
                     } else if ($column->type == table_header_item::RENDERER_SEGUNDOS) {
                         // $this->columndefs[] = (object)["render" => "segundosRenderer", "targets" => $key];
+                    } else if ($column->type == table_header_item::RENDERER_TIME) {
+                        // $this->columndefs[] = (object)["render" => "timeRenderer", "targets" => $key];
                     }
                 }
 
@@ -332,7 +355,9 @@ class data_table {
     }
 
     /**
-     * @param        $html
+     * Function print_row
+     *
+     * @param $html
      * @param string $class
      */
     public function print_row($html, $class = '') {
@@ -347,8 +372,10 @@ class data_table {
     }
 
     /**
+     * Function close
+     *
      * @param bool $processserver
-     * @param string $extras
+     * @param null $extras
      * @param bool $returnhtml
      * @param bool $title
      *
@@ -397,7 +424,7 @@ class data_table {
     }
 
     /**
-     *
+     * Function on_clickreditect
      */
     private function on_clickreditect() {
         global $PAGE;

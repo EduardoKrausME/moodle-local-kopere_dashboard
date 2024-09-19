@@ -28,9 +28,13 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class config {
+
     /**
+     * Function get_key
+     *
      * @param $key
      * @param string $default
+     *
      * @return mixed|string
      */
     public static function get_key($key, $default = '') {
@@ -48,9 +52,12 @@ class config {
     }
 
     /**
+     * Function get_key_int
+     *
      * @param $key
      * @param int $default
-     * @return int
+     *
+     * @return int|mixed
      */
     public static function get_key_int($key, $default = 0) {
         try {

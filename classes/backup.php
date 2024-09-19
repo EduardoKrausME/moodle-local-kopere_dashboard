@@ -39,7 +39,9 @@ use local_kopere_dashboard\util\title_util;
  * @package local_kopere_dashboard
  */
 class backup {
+
     /**
+     * Function dashboard
      *
      * @throws \coding_exception
      */
@@ -106,7 +108,9 @@ class backup {
     }
 
     /**
+     * Function execute
      *
+     * @throws \coding_exception
      */
     public function execute() {
         global $CFG;
@@ -131,6 +135,9 @@ class backup {
     }
 
     /**
+     * Function execute_dumpsql
+     *
+     * @throws \coding_exception
      * @throws \dml_exception
      */
     public function execute_dumpsql() {
@@ -227,6 +234,8 @@ class backup {
     }
 
     /**
+     * Function delete
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -268,7 +277,10 @@ class backup {
     }
 
     /**
-     * @throws \Exception
+     * Function download
+     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function download() {
         ob_clean();
@@ -292,6 +304,8 @@ class backup {
     }
 
     /**
+     * Function get_backup_path
+     *
      * @param bool $create
      *
      * @return string

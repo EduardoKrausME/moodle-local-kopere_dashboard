@@ -231,7 +231,6 @@ class MediaModal {
             search.focus();
         });
 
-
         // Listening for keyboard input on the search field.
         // We are using the "input" event which detects cut and paste
         // in addition to keyboard input.
@@ -339,7 +338,6 @@ class MediaModal {
         return demo;
     }
 
-
     // Recursively search through the file tree
 
     searchData(data, searchTerms) {
@@ -367,7 +365,6 @@ class MediaModal {
 
         return {folders : folders, files : files};
     }
-
 
     onUpload(event) {
         let file;

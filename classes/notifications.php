@@ -41,11 +41,14 @@ use local_kopere_dashboard\vo\kopere_dashboard_events;
 
 /**
  * Class notifications
+ *
  * @package local_kopere_dashboard
  */
 class notifications extends notificationsutil {
 
     /**
+     * Function dashboard
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -115,7 +118,9 @@ class notifications extends notificationsutil {
     }
 
     /**
+     * Function add
      *
+     * @throws \coding_exception
      */
     public function add() {
         global $PAGE;
@@ -157,6 +162,8 @@ class notifications extends notificationsutil {
     }
 
     /**
+     * Function add_segunda_etapa
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -300,6 +307,8 @@ class notifications extends notificationsutil {
     }
 
     /**
+     * Function add_save
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -343,6 +352,8 @@ class notifications extends notificationsutil {
     }
 
     /**
+     * Function delete
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -375,8 +386,9 @@ class notifications extends notificationsutil {
     }
 
     /**
+     * Function settings
+     *
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public function settings() {
         global $CFG, $PAGE;
@@ -418,8 +430,9 @@ class notifications extends notificationsutil {
     }
 
     /**
+     * Function test_smtp
+     *
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public function test_smtp() {
         global $CFG, $USER;

@@ -23,9 +23,16 @@
 
 namespace local_kopere_dashboard\fonts;
 
+/**
+ * Class font_util
+ *
+ * @package local_kopere_dashboard\fonts
+ */
 class font_util {
 
     /**
+     * Function list_fonts
+     *
      * @return array
      */
     private static function list_fonts() {
@@ -108,27 +115,35 @@ class font_util {
     }
 
     /**
-     * @return string
+     * Function css
+     *
+     * @return mixed
      */
     public static function css() {
         return self::list_fonts()['css'];
     }
 
     /**
-     * @return string
+     * Function grapsjs
+     *
+     * @return mixed
      */
     public static function grapsjs() {
         return self::list_fonts()['grapsjs'];
     }
 
     /**
-     * @return string
+     * Function ckeditor
+     *
+     * @return mixed
      */
     public static function ckeditor() {
         return self::list_fonts()['ckeditor'];
     }
 
     /**
+     * Function print_only_unique
+     *
      * @return string
      */
     public static function print_only_unique() {

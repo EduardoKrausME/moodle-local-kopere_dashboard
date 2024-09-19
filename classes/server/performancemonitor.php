@@ -27,13 +27,16 @@ use local_kopere_dashboard\util\server_util;
 
 /**
  * Class performancemonitor
+ *
  * @package local_kopere_dashboard
  */
 class performancemonitor {
 
     /**
-     * @throws \coding_exception
+     * Function load_monitor
+     *
      * @return string
+     * @throws \coding_exception
      */
     public static function load_monitor() {
         global $PAGE, $CFG;
@@ -84,6 +87,8 @@ class performancemonitor {
     }
 
     /**
+     * Function cpu
+     *
      * @param $returnnumber
      *
      * @return int|string
@@ -117,7 +122,11 @@ class performancemonitor {
     }
 
     /**
+     * Function memory
      *
+     * @param $returnnumber
+     *
+     * @return float|int|string
      */
     public static function memory($returnnumber) {
 
@@ -143,10 +152,11 @@ class performancemonitor {
     }
 
     /**
+     * Function disk_moodledata
+     *
      * @param $returnnumber
      *
-     * @return mixed|string
-     * @throws \Exception
+     * @return int|string
      */
     public static function disk_moodledata($returnnumber) {
         global $CFG;
@@ -186,7 +196,12 @@ class performancemonitor {
     }
 
     /**
+     * Function load_average
      *
+     * @param $returnnumber
+     *
+     * @return int|string
+     * @throws \coding_exception
      */
     public static function load_average($returnnumber) {
 
@@ -211,7 +226,10 @@ class performancemonitor {
     }
 
     /**
+     * Function online
      *
+     * @return mixed
+     * @throws \dml_exception
      */
     public static function online() {
         global $DB;

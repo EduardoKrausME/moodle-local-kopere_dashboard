@@ -32,7 +32,10 @@ use local_kopere_dashboard\vo\kopere_dashboard_events;
  * @package local_kopere_dashboard\events
  */
 class event_observers {
+
     /**
+     * Function process_event
+     *
      * @param \core\event\base $event
      *
      * @throws \dml_exception
@@ -50,7 +53,6 @@ class event_observers {
                 $cache = \cache::make('local_kopere_dashboard', 'courses_all_courses');
                 $cache->delete("load_all_courses");
         }
-
 
         if ($event->get_data()['action'] == 'viewed') {
             return;

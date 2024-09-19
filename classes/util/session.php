@@ -22,9 +22,18 @@
 
 namespace local_kopere_dashboard\util;
 
+/**
+ * Class session
+ *
+ * @package local_kopere_dashboard\util
+ */
 class session {
+
     /**
+     * Function get
+     *
      * @param $key
+     *
      * @return null
      */
     public static function get($key) {
@@ -36,6 +45,8 @@ class session {
     }
 
     /**
+     * Function set
+     *
      * @param $key
      * @param $value
      */

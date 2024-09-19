@@ -22,14 +22,46 @@
 
 namespace local_kopere_dashboard\util;
 
+/**
+ * Class menu_util
+ *
+ * @package local_kopere_dashboard\util
+ */
 class menu_util {
+    /**
+     * Var classname
+     *
+     * @var
+     */
     private $classname;
+    /**
+     * Var methodname
+     *
+     * @var
+     */
     private $methodname;
+    /**
+     * Var icon
+     *
+     * @var
+     */
     private $icon;
+    /**
+     * Var name
+     *
+     * @var
+     */
     private $name;
+    /**
+     * Var submenus
+     *
+     * @var array
+     */
     private $submenus = [];
 
     /**
+     * Function get_classname
+     *
      * @return mixed
      */
     public function get_classname() {
@@ -37,8 +69,11 @@ class menu_util {
     }
 
     /**
-     * @param mixed $classname
-     * @return menu_util
+     * Function set_classname
+     *
+     * @param $classname
+     *
+     * @return $this
      */
     public function set_classname($classname) {
         $this->classname = $classname;
@@ -46,6 +81,8 @@ class menu_util {
     }
 
     /**
+     * Function get_methodname
+     *
      * @return mixed
      */
     public function get_methodname() {
@@ -53,8 +90,11 @@ class menu_util {
     }
 
     /**
-     * @param mixed $methodname
-     * @return menu_util
+     * Function set_methodname
+     *
+     * @param $methodname
+     *
+     * @return $this
      */
     public function set_methodname($methodname) {
         $this->methodname = $methodname;
@@ -62,6 +102,8 @@ class menu_util {
     }
 
     /**
+     * Function get_icon
+     *
      * @return mixed
      */
     public function get_icon() {
@@ -69,8 +111,11 @@ class menu_util {
     }
 
     /**
-     * @param mixed $icon
-     * @return menu_util
+     * Function set_icon
+     *
+     * @param $icon
+     *
+     * @return $this
      */
     public function set_icon($icon) {
         $this->icon = $icon;
@@ -78,6 +123,8 @@ class menu_util {
     }
 
     /**
+     * Function get_name
+     *
      * @return mixed
      */
     public function get_name() {
@@ -85,8 +132,11 @@ class menu_util {
     }
 
     /**
-     * @param mixed $name
-     * @return menu_util
+     * Function set_name
+     *
+     * @param $name
+     *
+     * @return $this
      */
     public function set_name($name) {
         $this->name = $name;
@@ -94,15 +144,20 @@ class menu_util {
     }
 
     /**
-     * @return mixed
+     * Function get_submenus
+     *
+     * @return array
      */
     public function get_submenus() {
         return $this->submenus;
     }
 
     /**
-     * @param mixed $submenus
-     * @return menu_util
+     * Function set_submenus
+     *
+     * @param $submenus
+     *
+     * @return $this
      */
     public function set_submenus($submenus) {
         $this->submenus = $submenus;

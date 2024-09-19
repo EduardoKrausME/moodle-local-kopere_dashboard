@@ -33,9 +33,11 @@ class bytes_util {
     private static $divisor = 1000;
 
     /**
-     * @param int $bytes
+     * Function size_to_byte
      *
-     * @return string
+     * @param $bytes
+     *
+     * @return mixed
      * @throws \coding_exception
      */
     public static function size_to_byte($bytes) {
@@ -68,8 +70,11 @@ class bytes_util {
     }
 
     /**
+     * Function remove_zero
+     *
      * @param $texto
      * @param $count
+     *
      * @return mixed
      */
     private static function remove_zero($texto, $count) {
@@ -83,9 +88,11 @@ class bytes_util {
     }
 
     /**
+     * Function et_duration_segundos
+     *
      * @param $value
      *
-     * @return int
+     * @return float|int
      */
     public static function et_duration_segundos($value) {
         $partes = explode(':', $value);

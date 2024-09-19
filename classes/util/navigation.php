@@ -28,11 +28,16 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class navigation {
+
     /**
-     * @param     $atualpage
-     * @param     $totalregisters
-     * @param     $baseurl
+     * Function create
+     *
+     * @param $atualpage
+     * @param $totalregisters
+     * @param $baseurl
      * @param int $perpag
+     *
+     * @throws \coding_exception
      */
     public static function create($atualpage, $totalregisters, $baseurl, $perpag = 20) {
         $countpages = intval($totalregisters / $perpag);

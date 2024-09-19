@@ -29,7 +29,10 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class mensagem {
+
     /**
+     * Function agenda_mensagem
+     *
      * @param $mensagem
      */
     public static function agenda_mensagem($mensagem) {
@@ -42,7 +45,9 @@ class mensagem {
     }
 
     /**
-     * @return string
+     * Function get_mensagem_agendada
+     *
+     * @return null|string
      */
     public static function get_mensagem_agendada() {
         $cookie = session::get('kopere_message');
@@ -61,6 +66,8 @@ class mensagem {
     }
 
     /**
+     * Function warning
+     *
      * @param $texto
      *
      * @return string
@@ -68,12 +75,14 @@ class mensagem {
     public static function warning($texto) {
         return "
             <div class='alert alert-warning'>
-                <i class='fab fa fa-exclamation-circle'></i>
+                <i class='fa fa-exclamation-circle'></i>
                 {$texto}
             </div>";
     }
 
     /**
+     * Function print_warning
+     *
      * @param $texto
      */
     public static function print_warning($texto) {
@@ -81,6 +90,8 @@ class mensagem {
     }
 
     /**
+     * Function agenda_mensagem_warning
+     *
      * @param $texto
      */
     public static function agenda_mensagem_warning($texto) {
@@ -88,6 +99,8 @@ class mensagem {
     }
 
     /**
+     * Function success
+     *
      * @param $texto
      *
      * @return string
@@ -95,12 +108,14 @@ class mensagem {
     public static function success($texto) {
         return "
             <div class='alert alert-success'>
-                <i class='fab fa fa-check-circle'></i>
+                <i class='fa fa-check-circle'></i>
                 {$texto}
             </div>";
     }
 
     /**
+     * Function print_success
+     *
      * @param $texto
      */
     public static function print_success($texto) {
@@ -108,6 +123,8 @@ class mensagem {
     }
 
     /**
+     * Function agenda_mensagem_success
+     *
      * @param $texto
      */
     public static function agenda_mensagem_success($texto) {
@@ -115,7 +132,9 @@ class mensagem {
     }
 
     /**
-     * @param        $texto
+     * Function info
+     *
+     * @param $texto
      * @param string $extraclass
      *
      * @return string
@@ -123,13 +142,15 @@ class mensagem {
     public static function info($texto, $extraclass = '') {
         return "
             <div class='alert alert-info {$extraclass}'>
-                <i class='fab fa fa-info-circle'></i>
+                <i class='fa fa-info-circle'></i>
                 {$texto}
             </div>";
     }
 
     /**
-     * @param        $texto
+     * Function print_info
+     *
+     * @param $texto
      * @param string $extraclass
      */
     public static function print_info($texto, $extraclass = '') {
@@ -137,6 +158,8 @@ class mensagem {
     }
 
     /**
+     * Function agenda_mensagem_info
+     *
      * @param $texto
      */
     public static function agenda_mensagem_info($texto) {
@@ -144,6 +167,8 @@ class mensagem {
     }
 
     /**
+     * Function danger
+     *
      * @param $texto
      *
      * @return string
@@ -151,12 +176,14 @@ class mensagem {
     public static function danger($texto) {
         return "
             <div class='alert alert-danger'>
-                <i class='fab fa fa-times-circle'></i>
+                <i class='fa fa-times-circle'></i>
                 {$texto}
             </div>";
     }
 
     /**
+     * Function print_danger
+     *
      * @param $texto
      */
     public static function print_danger($texto) {
@@ -164,6 +191,8 @@ class mensagem {
     }
 
     /**
+     * Function agenda_mensagem_danger
+     *
      * @param $texto
      */
     public static function agenda_mensagem_danger($texto) {

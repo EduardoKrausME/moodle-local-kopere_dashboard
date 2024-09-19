@@ -22,8 +22,16 @@
 
 namespace local_kopere_dashboard\task;
 
+/**
+ * Class db_report_login
+ *
+ * @package local_kopere_dashboard\task
+ */
 class db_report_login extends \core\task\scheduled_task {
+
     /**
+     * Function get_name
+     *
      * @return string
      * @throws \coding_exception
      */
@@ -32,6 +40,8 @@ class db_report_login extends \core\task\scheduled_task {
     }
 
     /**
+     * Function execute
+     *
      * @throws \dml_exception
      */
     public function execute() {

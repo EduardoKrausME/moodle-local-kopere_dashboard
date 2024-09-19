@@ -30,9 +30,11 @@ use local_kopere_dashboard\vo\kopere_dashboard_events;
  * @package local_kopere_dashboard\install
  */
 class users_import_install {
+
     /**
+     * Function install_or_update
+     *
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public static function install_or_update() {
 
@@ -71,7 +73,10 @@ class users_import_install {
     }
 
     /**
+     * Function insert
+     *
      * @param $event
+     *
      * @throws \dml_exception
      */
     public static function insert($event) {

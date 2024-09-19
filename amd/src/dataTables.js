@@ -7319,7 +7319,6 @@
      * {node}      - TR node
      * {string}    - jQuery selector to apply to the TR elements
      * {array}     - jQuery array of nodes, or simply an array of TR nodes
-     *
      */
 
             var __row_selector = function(settings, selector, opts) {
@@ -7825,7 +7824,6 @@
      * "{integer}:visible" - alias for {integer}:visIdx  (>=0 count from left, <0 count from right)
      * "{string}:name"     - column name
      * "{string}"          - jQuery selector on column header nodes
-     *
      */
 
             // can be an array of these items, comma separated list, or an array of comma

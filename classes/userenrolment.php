@@ -33,11 +33,14 @@ use local_kopere_dashboard\util\mensagem;
 
 /**
  * Class userenrolment
+ *
  * @package local_kopere_dashboard
  */
 class userenrolment {
 
     /**
+     * Function mathedit
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -112,6 +115,8 @@ class userenrolment {
     }
 
     /**
+     * Function mathedit_save
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */

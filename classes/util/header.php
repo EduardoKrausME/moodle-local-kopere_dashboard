@@ -28,8 +28,11 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class header {
+
     /**
-     * @param      $url
+     * Function location
+     *
+     * @param $url
      * @param bool $isdie
      */
     public static function location($url, $isdie = true) {
@@ -42,8 +45,9 @@ class header {
     }
 
     /**
+     * Function reload
+     *
      * @param bool $isdie
-     * @throws \coding_exception
      */
     public static function reload($isdie = true) {
         ob_clean();
@@ -55,9 +59,10 @@ class header {
     }
 
     /**
-     * @param \stdClass $testparam
-     * @param string $printtext
-     * @throws \dml_exception
+     * Function notfound_null
+     *
+     * @param $testparam
+     * @param $printtext
      */
     public static function notfound_null($testparam, $printtext) {
         if ($testparam == null) {
@@ -66,7 +71,11 @@ class header {
     }
 
     /**
-     * @param string $printtext
+     * Function notfound
+     *
+     * @param $printtext
+     *
+     * @throws \coding_exception
      * @throws \dml_exception
      */
     public static function notfound($printtext) {

@@ -30,11 +30,14 @@ use local_kopere_dashboard\util\dashboard_util;
 
 /**
  * Class dashboard
+ *
  * @package local_kopere_dashboard
  */
 class dashboard {
 
     /**
+     * Function start
+     *
      * @throws \coding_exception
      */
     public function start() {
@@ -67,6 +70,8 @@ class dashboard {
     }
 
     /**
+     * Function monitor
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -110,6 +115,8 @@ class dashboard {
     }
 
     /**
+     * Function last_grades
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -163,6 +170,8 @@ class dashboard {
     }
 
     /**
+     * Function last_enroll
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */

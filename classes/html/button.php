@@ -24,6 +24,7 @@ namespace local_kopere_dashboard\html;
 
 /**
  * Class button
+ *
  * @package local_kopere_dashboard\html
  */
 class button {
@@ -32,6 +33,8 @@ class button {
     const BTN_GRANDE = 'btn-lg';
 
     /**
+     * Function close_popup
+     *
      * @param $text
      */
     public static function close_popup($text) {
@@ -39,12 +42,13 @@ class button {
     }
 
     /**
-     * @param        $text
-     * @param        $link
+     * Function add
+     *
+     * @param $text
+     * @param $link
      * @param string $class
      * @param bool $p
      * @param bool $return
-     * @param bool $modal
      *
      * @return string
      */
@@ -55,12 +59,13 @@ class button {
     }
 
     /**
-     * @param        $text
-     * @param        $link
+     * Function edit
+     *
+     * @param $text
+     * @param $link
      * @param string $class
      * @param bool $p
      * @param bool $return
-     * @param bool $modal
      *
      * @return string
      */
@@ -71,12 +76,13 @@ class button {
     }
 
     /**
-     * @param        $text
-     * @param        $link
+     * Function delete
+     *
+     * @param $text
+     * @param $link
      * @param string $class
      * @param bool $p
      * @param bool $return
-     * @param bool $modal
      *
      * @return string
      */
@@ -87,12 +93,13 @@ class button {
     }
 
     /**
-     * @param        $text
-     * @param        $link
+     * Function primary
+     *
+     * @param $text
+     * @param $link
      * @param string $class
      * @param bool $p
      * @param bool $return
-     * @param bool $modal
      *
      * @return string
      */
@@ -103,12 +110,13 @@ class button {
     }
 
     /**
-     * @param        $text
-     * @param        $link
+     * Function info
+     *
+     * @param $text
+     * @param $link
      * @param string $class
      * @param bool $p
      * @param bool $return
-     * @param bool $modal
      *
      * @return string
      */
@@ -119,11 +127,14 @@ class button {
     }
 
     /**
-     * @param        $infourl
-     * @param string $text
+     * Function help
+     *
+     * @param $infourl
+     * @param null $text
      * @param string $hastag
      *
      * @return string
+     * @throws \coding_exception
      */
     public static function help($infourl, $text = null, $hastag = 'wiki-wrapper') {
         global $CFG;
@@ -140,8 +151,10 @@ class button {
     }
 
     /**
-     * @param      $icon
-     * @param      $link
+     * Function icon
+     *
+     * @param $icon
+     * @param $link
      * @param bool $ispopup
      *
      * @return string
@@ -160,6 +173,8 @@ class button {
     }
 
     /**
+     * Function icon_popup_table
+     *
      * @param $icon
      * @param $link
      *
@@ -175,12 +190,13 @@ class button {
     }
 
     /**
-     * @param      $text
-     * @param      $link
-     * @param      $p
-     * @param      $class
-     * @param      $return
-     * @param bool $modal
+     * Function create_button
+     *
+     * @param $text
+     * @param $link
+     * @param $p
+     * @param $class
+     * @param $return
      *
      * @return string
      */

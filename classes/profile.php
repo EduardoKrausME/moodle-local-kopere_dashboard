@@ -33,10 +33,11 @@ use local_kopere_dashboard\util\mensagem;
 class profile {
 
     /**
+     * Function details
+     *
      * @param $user
      *
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public static function details($user) {
         echo "<div class='profile-content'>
@@ -57,6 +58,8 @@ class profile {
     }
 
     /**
+     * Function user_data
+     *
      * @param $user
      * @param $imgheight
      *
@@ -79,9 +82,11 @@ class profile {
     }
 
     /**
+     * Function list_courses
+     *
      * @param $userid
      *
-     * @return string
+     * @return null|string
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -153,6 +158,8 @@ class profile {
     }
 
     /**
+     * Function get_user_info
+     *
      * @param $user
      *
      * @return string

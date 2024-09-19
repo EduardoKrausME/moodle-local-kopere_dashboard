@@ -22,7 +22,20 @@
 
 namespace local_kopere_dashboard\report;
 
+/**
+ * Class user_field
+ *
+ * @package local_kopere_dashboard\report
+ */
 class user_field {
+    /**
+     * Function get_all_user_name_fields
+     *
+     * @param bool $returnsql
+     * @param null $tableprefix
+     *
+     * @return array|string
+     */
     public static function get_all_user_name_fields($returnsql = false, $tableprefix = null) {
         $alternatenames = [
             // Para a função fullname().

@@ -44,11 +44,14 @@ use moodle_url;
 
 /**
  * Class webpages
+ *
  * @package local_kopere_dashboard
  */
 class webpages {
 
     /**
+     * Function dashboard
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -117,6 +120,8 @@ class webpages {
     }
 
     /**
+     * Function menu_get_itens
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -195,6 +200,8 @@ class webpages {
     }
 
     /**
+     * Function page_details
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -264,6 +271,8 @@ class webpages {
     }
 
     /**
+     * Function page_edit
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -388,10 +397,10 @@ class webpages {
     }
 
     /**
+     * Function page_edit_save
+     *
      * @throws \coding_exception
      * @throws \dml_exception
-     * @throws \file_exception
-     * @throws \stored_file_creation_exception
      */
     public function page_edit_save() {
         global $DB;
@@ -450,11 +459,14 @@ class webpages {
     }
 
     /**
-     * @param kopere_dashboard_webpages $webpages
+     * Function save_image
+     *
+     * @param $webpages
+     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      * @throws \file_exception
      * @throws \stored_file_creation_exception
-     * @throws \dml_exception
-     * @throws \coding_exception
      */
     private function save_image($webpages) {
         global $USER;
@@ -492,6 +504,8 @@ class webpages {
     }
 
     /**
+     * Function page_delete
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -529,6 +543,8 @@ class webpages {
     }
 
     /**
+     * Function menu_edit
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -574,7 +590,6 @@ class webpages {
                 ->set_value($menus->link)
                 ->set_required()
         );
-
 
         $form->add_input(
             input_select::new_instance()
@@ -628,6 +643,8 @@ class webpages {
     }
 
     /**
+     * Function menu_edit_save
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -668,6 +685,8 @@ class webpages {
     }
 
     /**
+     * Function menu_delete
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -711,6 +730,8 @@ class webpages {
     }
 
     /**
+     * Function page_ajax_get_url
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -745,6 +766,8 @@ class webpages {
     }
 
     /**
+     * Function menu_ajax_get_url
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -779,7 +802,10 @@ class webpages {
     }
 
     /**
+     * Function theme_name
+     *
      * @param $themekey
+     *
      * @return string
      */
     private function theme_name($themekey) {
@@ -795,6 +821,8 @@ class webpages {
     }
 
     /**
+     * Function list_themes
+     *
      * @return array
      */
     public static function list_themes() {
@@ -829,8 +857,9 @@ class webpages {
     }
 
     /**
+     * Function settings
+     *
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public function settings() {
         ob_clean();
@@ -859,6 +888,8 @@ class webpages {
     }
 
     /**
+     * Function cache_get_dir
+     *
      * @return string
      */
     public static function cache_get_dir() {
@@ -870,7 +901,7 @@ class webpages {
     }
 
     /**
-     *
+     * Function cache_delete
      */
     private static function cache_delete() {
         $caches = glob(self::cache_get_dir() . '*');

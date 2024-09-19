@@ -27,12 +27,15 @@ use local_kopere_dashboard\util\dashboard_util;
 
 /**
  * Class about
+ *
  * @package local_kopere_dashboard
  */
 class about {
 
     /**
+     * Function dashboard
      *
+     * @throws \coding_exception
      */
     public function dashboard() {
         dashboard_util::add_breadcrumb(get_string_kopere('about_title'));

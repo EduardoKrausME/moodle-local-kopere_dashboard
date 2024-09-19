@@ -19,7 +19,6 @@ https://github.com/givanz/Vvvebjs
 Vvveb.ComponentsGroup['Bootstrap 5'] =
 ["html/container", "html/gridrow", "html/btn", "html/btn-link", "html/buttongroup", "html/buttontoolbar", "html/alert", "html/card", "html/listgroup", "html/badge", "html/progress", "html/navbar", "html/breadcrumbs", "html/pagination"];
 
-
 Vvveb.Components.extend("_base", "html/container", {
     classes: ["container", "container-fluid"],
     image: "icons/container.svg",

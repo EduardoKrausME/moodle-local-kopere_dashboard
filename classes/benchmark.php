@@ -33,11 +33,13 @@ use local_kopere_dashboard\util\title_util;
 
 /**
  * Class benchmark
+ *
  * @package local_kopere_dashboard
  */
 class benchmark {
 
     /**
+     * Function test
      *
      * @throws \coding_exception
      */
@@ -62,8 +64,9 @@ class benchmark {
     }
 
     /**
+     * Function execute
+     *
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public function execute() {
         global $CFG;
@@ -124,6 +127,8 @@ class benchmark {
     }
 
     /**
+     * Function performance
+     *
      * @throws \coding_exception
      * @throws \dml_exception
      */
@@ -159,7 +164,10 @@ class benchmark {
     }
 
     /**
+     * Function format_number
+     *
      * @param $number
+     *
      * @return mixed
      * @throws \coding_exception
      */

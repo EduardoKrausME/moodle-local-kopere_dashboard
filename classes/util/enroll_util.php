@@ -34,6 +34,8 @@ use Exception;
 class enroll_util {
 
     /**
+     * Function status_enrol_manual
+     *
      * @param $course
      *
      * @return bool
@@ -61,6 +63,8 @@ class enroll_util {
     }
 
     /**
+     * Function enrolled
+     *
      * @param $course
      * @param $user
      *
@@ -98,6 +102,8 @@ class enroll_util {
     }
 
     /**
+     * Function cohort_enrol
+     *
      * @param $coorteid
      * @param $userid
      *
@@ -117,6 +123,8 @@ class enroll_util {
     }
 
     /**
+     * Function cohort_unenrol
+     *
      * @param $coorteid
      * @param $userid
      *
@@ -134,12 +142,6 @@ class enroll_util {
     }
 
     /**
-     * @param $course
-     * @param $user
-     * @param $timestart
-     * @param $timeend
-     * @param $status
-     * @param int $roleid
      *      1 => manager
      *      2 => coursecreator
      *      3 => editingteacher
@@ -149,12 +151,18 @@ class enroll_util {
      *      7 => user
      *      8 => frontpage
      *
+     * @param \stdClass $course
+     * @param \stdClass $user
+     * @param int $timestart
+     * @param int $timeend
+     * @param int $roleid
+     *
      * @return bool
      *
-     * @throws \dml_exception
      * @throws \coding_exception
+     * @throws \dml_exception
      */
-    public static function enrol($course, $user, $timestart, $timeend, $roleid = 5) {
+    public static function enrol($course, $user, $timestart = 0, $timeend = 0, $roleid = 5) {
         global $DB, $PAGE, $CFG;
 
         $enrol = $DB->get_record('enrol', ['courseid' => $course->id, 'enrol' => 'manual']);
@@ -168,22 +176,18 @@ class enroll_util {
         $plugins = $manager->get_enrolment_plugins(true); // Do not allow actions on disabled plugins.
         if (!array_key_exists($enrol->id, $instances)) {
             return false;
-            // throw new Exception('invalidenrolinstance');
         }
         $instance = $instances[$enrol->id];
         if (!isset($plugins[$instance->enrol])) {
             return false;
-            //throw new Exception('enrolnotpermitted');
         }
-
-        //$context = context_course::instance($course->id, MUST_EXIST);
 
         /** @var \enrol_manual_plugin $plugin */
         $plugin = $plugins[$instance->enrol];
         if ($plugin->allow_enrol($instance)) {
-            $roleid = 5;
-            $timestart = time();
-            $timeend = 0;
+            if ($timestart == 0) {
+                $timestart = time();
+            }
             $recovergrades = 0;
             $plugin->enrol_user($instance, $user->id, $roleid, $timestart, $timeend, null, $recovergrades);
         } else {
@@ -192,6 +196,8 @@ class enroll_util {
     }
 
     /**
+     * Function unenrol
+     *
      * @param $course
      * @param $user
      *

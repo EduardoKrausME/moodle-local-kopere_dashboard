@@ -37,6 +37,8 @@ class input_password extends input_base {
     }
 
     /**
+     * Function new_instance
+     *
      * @return input_password
      */
     public static function new_instance() {
@@ -44,6 +46,8 @@ class input_password extends input_base {
     }
 
     /**
+     * Function to_string
+     *
      * @return mixed|string
      * @throws \coding_exception
      */

@@ -26,6 +26,7 @@ use local_kopere_dashboard\util\html;
 
 /**
  * Class kopere_dashboard_webpages
+ *
  * @package local_kopere_dashboard\vo
  */
 class kopere_dashboard_webpages extends \stdClass {
@@ -61,7 +62,10 @@ class kopere_dashboard_webpages extends \stdClass {
     public $config;
 
     /**
+     * Function create_by_object
+     *
      * @param $item
+     *
      * @return kopere_dashboard_webpages
      * @throws \coding_exception
      */
@@ -83,6 +87,8 @@ class kopere_dashboard_webpages extends \stdClass {
     }
 
     /**
+     * Function create_by_default
+     *
      * @return kopere_dashboard_webpages
      * @throws \coding_exception
      */

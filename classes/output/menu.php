@@ -30,10 +30,14 @@ use local_kopere_dashboard\util\submenu_util;
 
 /**
  * Class menu
+ *
  * @package local_kopere_dashboard\output
  */
 class menu {
+
     /**
+     * Function create_menu
+     *
      * @return string
      * @throws \coding_exception
      * @throws \dml_exception

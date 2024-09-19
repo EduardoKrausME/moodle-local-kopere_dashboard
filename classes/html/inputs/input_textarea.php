@@ -37,6 +37,8 @@ class input_textarea extends input_base {
     }
 
     /**
+     * Function new_instance
+     *
      * @return input_textarea
      */
     public static function new_instance() {
@@ -44,7 +46,9 @@ class input_textarea extends input_base {
     }
 
     /**
-     * @return string
+     * Function to_string
+     *
+     * @return mixed|string
      */
     public function to_string() {
         $return = "<textarea ";

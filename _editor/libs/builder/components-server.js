@@ -18,7 +18,6 @@ https://github.com/givanz/VvvebJs
 
 Vvveb.ComponentsGroup['Server Components'] = ["components/products", "components/product", "components/categories", "components/manufacturers", "components/search", "components/user", "components/product_gallery", "components/cart", "components/checkout", "components/filters", "components/product", "components/slider"];
 
-
 Vvveb.Components.add("components/product", {
     name: "Product",
     attributes: ["data-component-product"],
@@ -73,7 +72,6 @@ Vvveb.Components.add("components/product", {
        },
     }]
 });    
-
 
 Vvveb.Components.add("components/products", {
     name: "Products",

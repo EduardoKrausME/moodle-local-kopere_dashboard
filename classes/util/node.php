@@ -24,11 +24,14 @@ namespace local_kopere_dashboard\util;
 
 /**
  * Class node
+ *
  * @package local_kopere_dashboard\util
  */
 class node {
 
     /**
+     * Function add_admin_code
+     *
      * @throws \coding_exception
      */
     public static function add_admin_code() {
@@ -55,6 +58,8 @@ class node {
     }
 
     /**
+     * Function is_enables
+     *
      * @return bool
      */
     public static function is_enables() {
@@ -65,6 +70,8 @@ class node {
     }
 
     /**
+     * Function is_ssl
+     *
      * @return bool
      */
     public static function is_ssl() {
@@ -75,6 +82,8 @@ class node {
     }
 
     /**
+     * Function base_url
+     *
      * @return string
      */
     public static function base_url() {
@@ -88,6 +97,8 @@ class node {
     }
 
     /**
+     * Function geturl_socketio
+     *
      * @return string
      */
     public static function geturl_socketio() {

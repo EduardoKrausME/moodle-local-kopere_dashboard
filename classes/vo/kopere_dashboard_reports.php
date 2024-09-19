@@ -24,6 +24,7 @@ namespace local_kopere_dashboard\vo;
 
 /**
  * Class kopere_dashboard_reports
+ *
  * @package local_kopere_dashboard\vo
  */
 class kopere_dashboard_reports extends \stdClass {
@@ -59,7 +60,10 @@ class kopere_dashboard_reports extends \stdClass {
     public $foreach;
 
     /**
+     * Function create_by_object
+     *
      * @param $item
+     *
      * @return kopere_dashboard_reports
      * @throws \coding_exception
      */
@@ -81,6 +85,8 @@ class kopere_dashboard_reports extends \stdClass {
     }
 
     /**
+     * Function create_by_default
+     *
      * @return kopere_dashboard_reports
      * @throws \coding_exception
      */

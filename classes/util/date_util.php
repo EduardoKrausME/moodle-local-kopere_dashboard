@@ -29,6 +29,8 @@ namespace local_kopere_dashboard\util;
  */
 class date_util {
     /**
+     * Function convert_to_time
+     *
      * @param $datetime
      *
      * @return false|int

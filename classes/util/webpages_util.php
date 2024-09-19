@@ -25,11 +25,20 @@ namespace local_kopere_dashboard\util;
 
 use moodle_url;
 
+/**
+ * Class webpages_util
+ *
+ * @package local_kopere_dashboard\util
+ */
 class webpages_util {
+
     /**
+     * Function notfound
+     *
      * @param $printtext
-     * @throws \dml_exception
+     *
      * @throws \coding_exception
+     * @throws \dml_exception
      * @throws \moodle_exception
      */
     public function notfound($printtext) {
@@ -57,6 +66,8 @@ class webpages_util {
     }
 
     /**
+     * Function analytics
+     *
      * @throws \dml_exception
      */
     public static function analytics() {

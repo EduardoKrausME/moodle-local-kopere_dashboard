@@ -28,8 +28,11 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class title_util {
+
     /**
-     * @param string $title
+     * Function print_h1
+     *
+     * @param $title
      * @param bool $iskeylang
      *
      * @throws \coding_exception
@@ -43,7 +46,9 @@ class title_util {
     }
 
     /**
-     * @param string $title
+     * Function print_h2
+     *
+     * @param $title
      * @param bool $iskeylang
      *
      * @throws \coding_exception
@@ -57,7 +62,9 @@ class title_util {
     }
 
     /**
-     * @param string $title
+     * Function print_h3
+     *
+     * @param $title
      * @param bool $iskeylang
      *
      * @throws \coding_exception
@@ -71,7 +78,9 @@ class title_util {
     }
 
     /**
-     * @param string $title
+     * Function print_h4
+     *
+     * @param $title
      * @param bool $iskeylang
      *
      * @throws \coding_exception
@@ -85,7 +94,9 @@ class title_util {
     }
 
     /**
-     * @param string $title
+     * Function print_h5
+     *
+     * @param $title
      * @param bool $iskeylang
      *
      * @throws \coding_exception
@@ -99,7 +110,9 @@ class title_util {
     }
 
     /**
-     * @param string $title
+     * Function print_h6
+     *
+     * @param $title
      * @param bool $iskeylang
      *
      * @throws \coding_exception

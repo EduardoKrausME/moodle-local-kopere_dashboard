@@ -29,11 +29,14 @@ use local_kopere_dashboard\util\string_util;
 
 /**
  * Class Settings
+ *
  * @package local_kopere_dashboard
  */
 class settings {
 
     /**
+     * Function save
+     *
      * @throws \coding_exception
      */
     public function save() {

@@ -38,7 +38,9 @@ class dashboard_util {
     public static $breadcrumb = [];
 
     /**
-     * @param      $titulo
+     * Function add_breadcrumb
+     *
+     * @param $titulo
      * @param null $link
      */
     public static function add_breadcrumb($titulo, $link = null) {
@@ -52,11 +54,14 @@ class dashboard_util {
     }
 
     /**
+     * Function set_titulo
+     *
      * @param $title
      * @param $settingurl
      * @param $infourl
      *
      * @return string
+     * @throws \coding_exception
      */
     public static function set_titulo($title, $settingurl, $infourl) {
         global $CFG;
@@ -91,8 +96,12 @@ class dashboard_util {
     }
 
     /**
+     * Function start_page
+     *
      * @param null $settingurl
      * @param null $infourl
+     *
+     * @throws \coding_exception
      */
     public static function start_page($settingurl = null, $infourl = null) {
         global $CFG, $SITE, $PAGE;
@@ -147,6 +156,7 @@ class dashboard_util {
     }
 
     /**
+     * Function end_page
      */
     public static function end_page() {
         if (AJAX_SCRIPT) {
@@ -157,10 +167,11 @@ class dashboard_util {
     }
 
     /**
+     * Function add_menu
+     *
      * @param menu_util $menu
      *
      * @return string
-     * @throws \coding_exception
      */
     public static function add_menu(menu_util $menu) {
         $retorno = "";
@@ -214,6 +225,8 @@ class dashboard_util {
     }
 
     /**
+     * Function get_icon
+     *
      * @param $filename
      *
      * @return string
@@ -224,6 +237,8 @@ class dashboard_util {
     }
 
     /**
+     * Function test_menu_active
+     *
      * @param $classname
      *
      * @return string
@@ -241,6 +256,8 @@ class dashboard_util {
     }
 
     /**
+     * Function start_popup
+     *
      * @param $title
      */
     private static function start_popup($title) {
@@ -252,7 +269,7 @@ class dashboard_util {
     }
 
     /**
-     *
+     * Function end_popup
      */
     private static function end_popup() {
         echo "</div>

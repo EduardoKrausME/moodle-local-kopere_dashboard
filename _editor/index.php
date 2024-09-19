@@ -86,7 +86,6 @@ function loadsvg($file) {
             </button>
         </div>
 
-
         <div class="btn-group me-3" role="group">
             <button class="btn btn-light" title="Designer Mode (Free dragging)" id="designer-mode-btn"
                     data-bs-toggle="button" aria-pressed="false" data-vvveb-action="setDesignerMode">
@@ -103,7 +102,6 @@ function loadsvg($file) {
                 <?php loadsvg("img/icon-expand.svg") ?>
             </button>
         </div>
-
 
         <div class="btn-group me-2 float-end" role="group">
             <?php
@@ -171,7 +169,6 @@ function loadsvg($file) {
 
     </div>
 
-
     <div id="left-panel">
 
         <div id="tree-list">
@@ -183,7 +180,6 @@ function loadsvg($file) {
                 </ol>
             </div>
         </div>
-
 
         <div class="drag-elements">
 
@@ -353,7 +349,6 @@ function loadsvg($file) {
         </div>
     </div>
 
-
     <div id="canvas">
         <div id="iframe-wrapper">
             <div id="iframe-layer">
@@ -435,7 +430,6 @@ function loadsvg($file) {
                                       stroke-width="2" x1="4" x2="20" y1="22" y2="22"/>
                             </svg>
                         </a>
-
 
                         <a id="strike-btn" class="hint" href="" title="Strikeout" aria-label="Strikeout">
                             <del>S</del>
@@ -683,11 +677,9 @@ function loadsvg($file) {
                 </div>
             </div>
 
-
             <iframe src="" id="iframe1">
             </iframe>
         </div>
-
 
     </div>
 
@@ -758,7 +750,6 @@ function loadsvg($file) {
                 </div>
             </div>
 
-
         </div>
     </div>
 
@@ -775,7 +766,6 @@ function loadsvg($file) {
                 </ol>
             </div>
 
-
             <div class="btn-group" role="group">
 
                 <div id="toggleEditorJsExecute" class="form-check mt-1" style="display:none">
@@ -786,12 +776,10 @@ function loadsvg($file) {
                     </label>&ensp;
                 </div>
 
-
                 <button id="code-editor-btn" class="btn btn-sm btn-light btn-sm" title="Code editor"
                         data-vvveb-action="toggleEditor">
                     <i class="la la-code"></i> Code editor
                 </button>
-
 
             </div>
 
@@ -804,7 +792,6 @@ function loadsvg($file) {
         </div>
     </div>
 </div>
-
 
 <!-- templates -->
 
@@ -1036,7 +1023,6 @@ function loadsvg($file) {
                 </div>
             </div>
 
-
             <input class="header_check" type="checkbox" id="section-components-{%=options[i].suffix%}">
 
             <label for="section-components-{%=options[i].suffix%}">
@@ -1048,9 +1034,7 @@ function loadsvg($file) {
             </div>
         </div>
 
-
         {% } %}
-
 
         {% if (typeof hide_remove === 'undefined') { %}
         <div class="mt-3">
@@ -1081,7 +1065,6 @@ function loadsvg($file) {
 
             </select>
         </div>
-
 
         <div class="col-6">
             <label>Small</label>
@@ -1121,7 +1104,6 @@ function loadsvg($file) {
 
             </select>
         </div>
-
 
         <div class="col-6">
             <label>Extra large </label>
@@ -1369,7 +1351,6 @@ function loadsvg($file) {
     <div>
         <div class="form-control tags-input" style="height:auto;">
 
-
             <input name="{%=key%}" type="text" class="form-control" style="border:none;min-width:60px;"/>
         </div>
     </div>
@@ -1406,7 +1387,6 @@ function loadsvg($file) {
             </div>
         </div>
 
-
         <input class="header_check" type="checkbox" id="section-components-{%=suffix%}">
 
         <label for="section-components-{%=suffix%}">
@@ -1431,7 +1411,6 @@ function loadsvg($file) {
 
 </script>
 <!--// end templates -->
-
 
 <!-- code editor modal -->
 <div class="modal modal-full fade" id="codeEditorModal" tabindex="-1" aria-labelledby="codeEditorModal" role="dialog"
@@ -1548,7 +1527,6 @@ function loadsvg($file) {
 <!-- inputs-->
 <script src="libs/builder/inputs.js"></script>
 
-
 <!-- media gallery -->
 <link href="libs/media/media.css" rel="stylesheet">
 <script>
@@ -1614,7 +1592,6 @@ function loadsvg($file) {
 <!-- blocks-->
 <script src="libs/builder/blocks-bootstrap4.js"></script>
 
-
 <!-- plugins -->
 
 <!-- code mirror - code editor syntax highlight -->
@@ -1626,14 +1603,12 @@ function loadsvg($file) {
 <script src="libs/codemirror/lib/formatting.js"></script>
 <script src="libs/builder/plugin-codemirror.js"></script>
 
-
 <!--
 Tinymce plugin
 Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
 -->
 <script src="libs/tinymce-dist/tinymce.js"></script>
 <script src="libs/builder/plugin-tinymce.js"></script>
-
 
 <!-- autocomplete plugin used by autocomplete input
 <script src="libs/autocomplete/jquery.autocomplete.js"></script>

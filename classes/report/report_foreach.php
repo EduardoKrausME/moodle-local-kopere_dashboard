@@ -23,11 +23,19 @@
 
 namespace local_kopere_dashboard\report;
 
+/**
+ * Class report_foreach
+ *
+ * @package local_kopere_dashboard\report
+ */
 class report_foreach {
 
     /**
+     * Function userfullname
+     *
      * @param $item
-     * @return \stdClass
+     *
+     * @return mixed
      * @throws \coding_exception
      */
     public static function userfullname($item) {
@@ -37,8 +45,11 @@ class report_foreach {
     }
 
     /**
+     * Function internal_userfullname
+     *
      * @param $user
-     * @return string
+     *
+     * @return mixed|null|string|string[]
      * @throws \coding_exception
      */
     private static function internal_userfullname($user) {
@@ -111,7 +122,10 @@ class report_foreach {
     }
 
     /**
+     * Function badge_status_text
+     *
      * @param $item
+     *
      * @return mixed
      */
     public static function badge_status_text($item) {
@@ -169,7 +183,10 @@ class report_foreach {
     }
 
     /**
+     * Function badge_criteria_type
+     *
      * @param $item
+     *
      * @return mixed
      * @throws \coding_exception
      */
@@ -181,7 +198,10 @@ class report_foreach {
     }
 
     /**
+     * Function courses_group_mode
+     *
      * @param $item
+     *
      * @return mixed
      * @throws \coding_exception
      */

@@ -24,6 +24,7 @@ namespace local_kopere_dashboard\vo;
 
 /**
  * Class kopere_dashboard_reportcat
+ *
  * @package local_kopere_dashboard\vo
  */
 class kopere_dashboard_reportcat extends \stdClass {
@@ -47,7 +48,10 @@ class kopere_dashboard_reportcat extends \stdClass {
     public $enablesql;
 
     /**
+     * Function create_by_object
+     *
      * @param $item
+     *
      * @return kopere_dashboard_reportcat
      * @throws \coding_exception
      */
@@ -65,6 +69,8 @@ class kopere_dashboard_reportcat extends \stdClass {
     }
 
     /**
+     * Function create_by_default
+     *
      * @return kopere_dashboard_reportcat
      * @throws \coding_exception
      */

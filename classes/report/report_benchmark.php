@@ -33,7 +33,8 @@ class report_benchmark {
     private $results = [];
 
     /**
-     * benchmark constructor.
+     * report_benchmark constructor.
+     *
      * @throws \coding_exception
      */
     public function __construct() {
@@ -116,13 +117,17 @@ class report_benchmark {
     }
 
     /**
-     * @return array Get the result of all tests
+     * Function get_results
+     *
+     * @return array
      */
     public function get_results() {
         return $this->results;
     }
 
     /**
+     * Function get_total
+     *
      * @return int
      */
     public function get_total() {
