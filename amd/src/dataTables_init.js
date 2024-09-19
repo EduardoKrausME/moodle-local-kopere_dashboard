@@ -136,6 +136,32 @@ define([
                     }
 
                     return hor + ':' + min + ':' + seg;
+                },
+                timeRenderer          : function(data, type, row) {
+                    var tempo = parseInt(data);
+                    if (isNaN(tempo) || tempo < 1) {
+                        return '00:00:00';
+                    }
+
+                    var min = parseInt(tempo / 60);
+                    var hor = parseInt(min / 60);
+
+                    min = min % 60;
+                    if (min < 10) {
+                        min = "0" + min;
+                        min = min.substr(0, 2);
+                    }
+
+                    var seg = tempo % 60;
+                    if (seg <= 9) {
+                        seg = "0" + seg;
+                    }
+
+                    if (hor <= 9) {
+                        hor = "0" + hor;
+                    }
+
+                    return hor + ':' + min + ':' + seg;
                 }
             };
 
@@ -174,6 +200,9 @@ define([
                         break;
                     case "segundosRenderer":
                         columnDef.render = renderer.segundosRenderer;
+                        break;
+                    case "timeRenderer":
+                        columnDef.render = renderer.timeRenderer;
                         break;
                 }
                 newColumnDefs.push(columnDef);
