@@ -42,7 +42,7 @@ class table_header_item extends \stdClass {
     const RENDERER_STATUS = 'dataStatusRenderer';
     const RENDERER_DELETED = 'dataDeletedRenderer';
     const RENDERER_USERPHOTO = 'dataUserphotoRenderer';
-    const RENDERER_SEGUNDOS = 'segundosRenderer';
+    const RENDERER_SECONDS = 'secondsRenderer';
     const RENDERER_TIME = 'timeRenderer';
 
     /**

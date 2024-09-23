@@ -154,7 +154,10 @@ class table {
      * @param $header
      * @param string $class
      */
-    public function print_header($header, $class = '') {
+    public function print_header($header = null, $class = '') {
+        if ($header == null) {
+            $header = $this->colunas;
+        }
         $this->colunas = [];
         echo '<thead>';
         echo "<tr class='{$class}'>";

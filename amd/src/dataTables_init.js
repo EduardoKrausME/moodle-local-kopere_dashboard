@@ -17,21 +17,21 @@ define([
         init : function(selector, params) {
             var renderer = {
                 dataVisibleRenderer   : function(data, type, row) {
-                    if (data == 0) {
+                    if (!data ) {
                         return '<div class="status-pill grey"  title="' + M.util.get_string('courses_invisible', 'local_kopere_dashboard') + '"  data-toggle="tooltip"></div>';
                     } else {
                         return '<div class="status-pill green" title="' + M.util.get_string('courses_visible', 'local_kopere_dashboard') + '" data-toggle="tooltip"></div>';
                     }
                 },
                 dataStatusRenderer    : function(data, type, row) {
-                    if (data == 1) {
+                    if (data) {
                         return '<div class="status-pill grey"  title="' + M.util.get_string('notification_status_inactive', 'local_kopere_dashboard') + '" data-toggle="tooltip"></div>';
                     } else {
                         return '<div class="status-pill green" title="' + M.util.get_string('notification_status_active', 'local_kopere_dashboard') + '"   data-toggle="tooltip"></div>';
                     }
                 },
                 dataDeletedRenderer   : function(data, type, row) {
-                    if (data == 0) {
+                    if (!data ) {
                         return '<div class="status-pill grey"  title="' + M.util.get_string('notification_status_deleted', 'local_kopere_dashboard') + '" data-toggle="tooltip"></div>';
                     } else {
                         return '<div class="status-pill green" title="' + M.util.get_string('notification_status_active', 'local_kopere_dashboard') + '"   data-toggle="tooltip"></div>';
@@ -111,7 +111,7 @@ define([
                         '/local/kopere_dashboard/profile-image.php?type=photo_user&id=' + data +
                         '" style="width:35px;height:35px" />';
                 },
-                segundosRenderer      : function(data, type, row) {
+                secondsRenderer      : function(data, type, row) {
                     var tempo = parseInt(data);
                     if (isNaN(tempo) || tempo < 1) {
                         return '00:00:00';
@@ -198,8 +198,8 @@ define([
                     case "dataUserphotoRenderer":
                         columnDef.render = renderer.dataUserphotoRenderer;
                         break;
-                    case "segundosRenderer":
-                        columnDef.render = renderer.segundosRenderer;
+                    case "secondsRenderer":
+                        columnDef.render = renderer.secondsRenderer;
                         break;
                     case "timeRenderer":
                         columnDef.render = renderer.timeRenderer;

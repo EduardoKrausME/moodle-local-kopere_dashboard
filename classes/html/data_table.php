@@ -236,8 +236,8 @@ class data_table {
                 $this->columndefs[] = (object)["render" => "dataTrueFalseRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_USERPHOTO) {
                 $this->columndefs[] = (object)["render" => "dataUserphotoRenderer", "targets" => $key];
-            } else if ($column->type == table_header_item::RENDERER_SEGUNDOS) {
-                $this->columndefs[] = (object)["render" => "segundosRenderer", "targets" => $key];
+            } else if ($column->type == table_header_item::RENDERER_SECONDS) {
+                $this->columndefs[] = (object)["render" => "secondsRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_TIME) {
                 $this->columndefs[] = (object)["render" => "timeRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_ACTION) {
@@ -340,8 +340,8 @@ class data_table {
                     } else if ($column->type == table_header_item::RENDERER_USERPHOTO) {
                         $html = '<img class="media-object" src="' . $CFG->wwwroot .
                             '/local/kopere_dashboard/profile-image.php?type=photo_user&id=' . $html . '" />';
-                    } else if ($column->type == table_header_item::RENDERER_SEGUNDOS) {
-                        // $this->columndefs[] = (object)["render" => "segundosRenderer", "targets" => $key];
+                    } else if ($column->type == table_header_item::RENDERER_SECONDS) {
+                        // $this->columndefs[] = (object)["render" => "secondsRenderer", "targets" => $key];
                     } else if ($column->type == table_header_item::RENDERER_TIME) {
                         // $this->columndefs[] = (object)["render" => "timeRenderer", "targets" => $key];
                     }
@@ -382,7 +382,7 @@ class data_table {
      * @return string
      */
     public function close($processserver = false, $extras = null, $returnhtml = false, $title = false) {
-        global $PAGE, $CFG;
+        global $PAGE;
 
         $return = '</table>';
 
