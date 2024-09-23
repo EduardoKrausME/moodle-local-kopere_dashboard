@@ -1,0 +1,70 @@
+{{!
+    This file is part the Local Kopere Dashboard for Moodle
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+
+<span id="button-{{{uniqid}}}" style="display:none">
+    <img src='{{{wwwroot}}}/local/kopere_dashboard/assets/dashboard/img/actions/{{{icon}}}.svg' width='19'>
+</span>
+
+<div id="confirm-{{{uniqid}}}" class="confirm-dialog" style="display:none;"
+     title="{{confirmtitle}}">
+    <p class="text-center">{{confirmtext}}</p>
+</div>
+
+<style>
+    .confirm-dialog {
+        min-width: 400px;
+    }
+</style>
+
+{{#js}}
+    require(["jquery", "jqueryui",], function($, $ui) {
+        $("#button-{{{uniqid}}}").show().click(function() {
+            $("#confirm-{{{uniqid}}}").dialog({
+                resizable : false,
+                height    : "auto",
+                width     : "auto",
+                maxWidth  : 400,
+                modal     : true,
+                classes   : {
+                    "ui-dialog" : "kopere-dashboard-modal"
+                },
+                show      : {
+                    effect   : "blind",
+                    duration : 200
+                },
+                hide      : {
+                    duration : 300
+                },
+                buttons   : [
+                    {
+                        text  : '{{#str}}yes{{/str}}',
+                        class : "btn btn-danger",
+                        click : function() {
+                            location.href = "{{{link}}}"
+                        }
+                    },
+                    {
+                        text  : '{{#str}}no{{/str}}',
+                        click : function() {
+                            console.log($(this));
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+        });
+    });
+{{/js}}

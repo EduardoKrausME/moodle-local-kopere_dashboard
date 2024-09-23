@@ -153,23 +153,39 @@ class button {
     /**
      * Function icon
      *
-     * @param $icon
-     * @param $link
-     * @param bool $ispopup
+     * @param string $icon
+     * @param string $link
      *
      * @return string
      */
-    public static function icon($icon, $link, $ispopup = true) {
+    public static function icon($icon, $link) {
         global $CFG;
-        if ($ispopup) {
-            return "<a href='{$link}'>
-                        <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg' width='19'>
-                    </a>";
-        } else {
-            return "<a href='{$link}'>
-                        <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg' width='19'>
-                    </a>";
-        }
+        return "<a href='{$link}'>
+                    <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg' width='19'>
+                </a>";
+    }
+
+    /**
+     * Function icon confirm
+     *
+     * @param string $icon
+     * @param string $link
+     * @param string $confirmtext
+     * @param string $confirmtitle
+     *
+     * @return string
+     */
+    public static function icon_confirm($icon, $link, $confirmtext, $confirmtitle) {
+        global $OUTPUT, $CFG;
+        $data = [
+            "uniqid" => uniqid(),
+            "wwwroot" => $CFG->wwwroot,
+            "link" => $link,
+            "icon" => $icon,
+            "confirmtitle" => $confirmtext,
+            "confirmtext" => $confirmtext,
+        ];
+        return $OUTPUT->render_from_template('local_kopere_dashboard/button_icon', $data);
     }
 
     /**
