@@ -1,4 +1,4 @@
-define(["jquery"], function($) {
+define(["jquery", "jqueryui"], function($, $ui) {
     return {
 
         load_pages : function() {
@@ -72,8 +72,13 @@ define(["jquery"], function($) {
             });
         },
 
-        bootstrap : function() {
+        view_page : function() {
             $.getScript(M.cfg.wwwroot + "/local/kopere_dashboard/amd/build/bootstrap.min.js");
+
+            $(".jquery-ui-tabs").tabs();
+            $(".jquery-ui-accordion").accordion({
+                heightStyle: "content"
+            });
         }
     };
 });

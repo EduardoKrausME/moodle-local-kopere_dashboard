@@ -206,7 +206,7 @@ class webpages {
      * @throws \dml_exception
      */
     public function page_details() {
-        global $DB, $CFG;
+        global $DB, $CFG, $PAGE;
 
         $id = optional_param('id', 0, PARAM_INT);
         /** @var kopere_dashboard_webpages $webpages */
@@ -255,6 +255,7 @@ class webpages {
 
         $form->print_panel(get_string_kopere('webpages_table_text'),
             $imagem . $webpages->text . $link);
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', 'view_page');
 
         echo "<div class='row'>";
         echo "<div class='col-md'>";

@@ -111,14 +111,15 @@ if ($pagelink) {
             }
         }
     }
+
     echo $webpages->text;
-    $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', 'bootstrap');
+    $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', 'view_page');
 
     echo '</div>';
 
     \local_kopere_dashboard\util\webpages_util::analytics();
     echo $OUTPUT->footer();
-} else {
+}else {
 
     if ($menulink) {
         /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
