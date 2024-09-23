@@ -7,12 +7,10 @@ a {
     color: #2177e0;
     text-decoration: none;
 }
+.select,
 select,
 input,
 textarea {
-    width: 100%;
-    max-width: 100%;
-    //height: auto;
     padding: .5rem .7rem;
     font-size: .9rem;
     line-height: 1.25;
@@ -24,6 +22,23 @@ textarea {
     -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     font-weight: 300;
+}
+.select {
+    display: inline-block;
+    // background-image: url(data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0.001 4.501 24 15'><path fill='#5F6368' d='M12,19.501L0,7.339l2.799-2.838L12,13.825l9.199-9.324L24,7.339L12,19.501z'/></svg>);
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyNCAxNSIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDE1IiB3aWR0aD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTEyIDE1LTEyLTEyLjE2MiAyLjc5OS0yLjgzOCA5LjIwMSA5LjMyNCA5LjE5OS05LjMyNCAyLjgwMSAyLjgzOHoiIGZpbGw9IiM1ZjYzNjgiLz48L3N2Zz4=");
+    background-repeat: no-repeat;
+    background-position: center right 9px;
+    background-size: 17px;
+    padding-right: 32px;
+    cursor: pointer;
+}
+select,
+input,
+textarea {
+    width: 100%;
+    max-width: 100%;
+    //height: auto;
 }
 textarea {
     height: 200px;
