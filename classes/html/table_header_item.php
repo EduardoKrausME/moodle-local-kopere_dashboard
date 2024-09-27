@@ -35,13 +35,13 @@ class table_header_item extends \stdClass {
     const TYPE_BYTES = 'file-size';
     const TYPE_ACTION = 'action';
 
-    const RENDERER_DATE = 'dataDateRenderer';
-    const RENDERER_DATETIME = 'dataDatetimeRenderer';
-    const RENDERER_VISIBLE = 'dataVisibleRenderer';
-    const RENDERER_TRUEFALSE = 'dataTrueFalseRenderer';
-    const RENDERER_STATUS = 'dataStatusRenderer';
-    const RENDERER_DELETED = 'dataDeletedRenderer';
-    const RENDERER_USERPHOTO = 'dataUserphotoRenderer';
+    const RENDERER_DATE = 'dateRenderer';
+    const RENDERER_DATETIME = 'datetimeRenderer';
+    const RENDERER_VISIBLE = 'visibleRenderer';
+    const RENDERER_TRUEFALSE = 'trueFalseRenderer';
+    const RENDERER_STATUS = 'statusRenderer';
+    const RENDERER_DELETED = 'deletedRenderer';
+    const RENDERER_USERPHOTO = 'userphotoRenderer';
     const RENDERER_SECONDS = 'secondsRenderer';
     const RENDERER_TIME = 'timeRenderer';
 

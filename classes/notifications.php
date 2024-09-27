@@ -209,8 +209,8 @@ class notifications extends notificationsutil {
 
         if ($id) {
             $status = [
-                ['key' => 1, 'value' => get_string_kopere('notification_status_active')],
-                ['key' => 0, 'value' => get_string_kopere('notification_status_inactive')],
+                ['key' => 1, 'value' => get_string_kopere('active')],
+                ['key' => 0, 'value' => get_string_kopere('inactive')],
             ];
             $form->add_input(
                 input_select::new_instance()

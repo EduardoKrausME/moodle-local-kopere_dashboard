@@ -1,88 +1,39 @@
 define([
     "jquery",
     "local_kopere_dashboard/dataTables",
-    "local_kopere_dashboard/dataTables.sorting-currency",
-    "local_kopere_dashboard/dataTables.sorting-date-uk",
-    "local_kopere_dashboard/dataTables.sorting-file-size",
-    "local_kopere_dashboard/dataTables.sorting-numeric-comma",
     "local_kopere_dashboard/dataTables.buttons",
     "local_kopere_dashboard/dataTables.buttons.html5",
     "local_kopere_dashboard/dataTables.buttons.print",
     "local_kopere_dashboard/dataTables.dateTime",
     "local_kopere_dashboard/dataTables.responsive",
-    "local_kopere_dashboard/dataTables.select",
     "local_kopere_dashboard/jszip",
 ], function($) {
-    return dataTables_init = {
+    var dataTables_init = {
         init : function(selector, params) {
             var renderer = {
-                dataVisibleRenderer   : function(data, type, row) {
-                    if (!data ) {
-                        return '<div class="status-pill grey"  title="' + M.util.get_string('courses_invisible', 'local_kopere_dashboard') + '"  data-toggle="tooltip"></div>';
-                    } else {
-                        return '<div class="status-pill green" title="' + M.util.get_string('courses_visible', 'local_kopere_dashboard') + '" data-toggle="tooltip"></div>';
+                numberRenderer    : function(data, type, row) {
+                    console.log(type);
+                    if (data === null) {
+                        return "";
                     }
-                },
-                dataStatusRenderer    : function(data, type, row) {
-                    if (data) {
-                        return '<div class="status-pill grey"  title="' + M.util.get_string('notification_status_inactive', 'local_kopere_dashboard') + '" data-toggle="tooltip"></div>';
-                    } else {
-                        return '<div class="status-pill green" title="' + M.util.get_string('notification_status_active', 'local_kopere_dashboard') + '"   data-toggle="tooltip"></div>';
-                    }
-                },
-                dataDeletedRenderer   : function(data, type, row) {
-                    if (!data ) {
-                        return '<div class="status-pill grey"  title="' + M.util.get_string('notification_status_deleted', 'local_kopere_dashboard') + '" data-toggle="tooltip"></div>';
-                    } else {
-                        return '<div class="status-pill green" title="' + M.util.get_string('notification_status_active', 'local_kopere_dashboard') + '"   data-toggle="tooltip"></div>';
-                    }
-                },
-                centerRenderer        : function(data, type, row) {
-                    return '<div class="text-center" data-toggle="tooltip">' + data + '</div>';
-                },
-                currencyRenderer      : function(data, type, row) {
-                    return '<div class="text-center" data-toggle="tooltip">R$ ' + data + '</div>';
-                },
-                dataDateRenderer      : function(data, type, row) {
-                    function twoDigit($value) {
-                        if ($value < 10) {
-                            return '0' + $value;
-                        }
-                        return $value;
+                    if (type != 'display') {
+                        return data;
                     }
 
-                    var a = new Date(data * 1000);
-                    var year = a.getFullYear();
-                    var month = twoDigit(a.getMonth() + 1);
-                    var date = twoDigit(a.getDate());
-
-                    return date + '/' + month + '/' + year;
+                    return '<div class="text-center text-nowrap" data-toggle="tooltip data2">' + data + '</div>';
                 },
-                dataDatetimeRenderer  : function(data, type, row) {
-                    function twoDigit($value) {
-                        if ($value < 10) {
-                            return '0' + $value;
-                        }
-                        return $value;
+                currencyRenderer  : function(data, type, row) {
+                    if (type != 'display') {
+                        return data;
                     }
 
-                    var a = new Date(data * 1000);
-                    var year = a.getFullYear();
-                    var month = twoDigit(a.getMonth() + 1);
-                    var date = twoDigit(a.getDate());
-                    var hour = twoDigit(a.getHours());
-                    var min = twoDigit(a.getMinutes());
-
-                    return date + '/' + month + '/' + year + ' ' + hour + ':' + min;
+                    return '<div class="text-center text-nowrap" data-toggle="tooltip">R$ ' + data + '</div>';
                 },
-                dataTrueFalseRenderer : function(data, type, row) {
-                    if (data == 0 || data == false || data == 'false') {
-                        return M.util.get_string('no');
-                    } else {
-                        return M.util.get_string('yes');
+                filesizeRenderer  : function(data, type, row) {
+                    if (type != 'display') {
+                        return data;
                     }
-                },
-                rendererFilesize      : function(data, type, row) {
+
                     if (data == null)
                         return '0 b';
 
@@ -106,12 +57,151 @@ define([
                         return data.toFixed(2) + ' Tb';
                     }
                 },
-                dataUserphotoRenderer : function(data, type, row) {
+                dateRenderer      : function(data, type, row) {
+                    if (type != 'display') {
+                        return data;
+                    }
+
+                    if (data < 1000) {
+                        return "";
+                    }
+
+                    function twoDigit($value) {
+                        if ($value < 10) {
+                            return '0' + $value;
+                        }
+                        return $value;
+                    }
+
+                    var a = new Date(data * 1000);
+                    var year = a.getFullYear();
+                    var month = twoDigit(a.getMonth() + 1);
+                    var day = twoDigit(a.getDate());
+
+                    var result = M.util.get_string('date_renderer_format', 'local_kopere_dashboard');
+                    result = result.replace("day", day);
+                    result = result.replace("month", month);
+                    result = result.replace("year", year);
+
+                    return '<div class="text-nowrap">' + result + '</div>';
+                },
+                datetimeRenderer  : function(data, type, row) {
+                    if (type != 'display') {
+                        return data;
+                    }
+
+                    if (data < 1000) {
+                        return "";
+                    }
+
+                    function twoDigit($value) {
+                        if ($value < 10) {
+                            return '0' + $value;
+                        }
+                        return $value;
+                    }
+
+                    var a = new Date(data * 1000);
+                    var year = a.getFullYear();
+                    var month = twoDigit(a.getMonth() + 1);
+                    var day = twoDigit(a.getDate());
+                    var hour = twoDigit(a.getHours());
+                    var min = twoDigit(a.getMinutes());
+
+                    var result = M.util.get_string('datetime_renderer_format', 'local_kopere_dashboard');
+                    result = result.replace("day", day);
+                    result = result.replace("month", month);
+                    result = result.replace("year", year);
+                    result = result.replace("hour", hour);
+                    result = result.replace("min", min);
+
+                    return '<div class="text-nowrap">' + result + '</div>';
+                },
+                visibleRenderer   : function(data, type, row) {
+                    if (type != 'display') {
+                        if (type == 'filter') {
+                            if (!data) {
+                                return M.util.get_string('invisible', 'local_kopere_dashboard');
+                            } else {
+                                return M.util.get_string('visible', 'local_kopere_dashboard');
+                            }
+                        }
+                        return data;
+                    }
+
+                    if (!data) {
+                        return '<div class="status-pill grey"  title="' + M.util.get_string('invisible', 'local_kopere_dashboard') +
+                            '"  data-toggle="tooltip"></div>';
+                    } else {
+                        return '<div class="status-pill green" title="' + M.util.get_string('visible', 'local_kopere_dashboard') +
+                            '" data-toggle="tooltip"></div>';
+                    }
+                },
+                statusRenderer    : function(data, type, row) {
+                    if (type != 'display') {
+                        if (type == 'filter') {
+                            if (data) {
+                                return M.util.get_string('inactive', 'local_kopere_dashboard');
+                            } else {
+                                return M.util.get_string('active', 'local_kopere_dashboard');
+                            }
+                        }
+                        return data;
+                    }
+
+                    if (data) {
+                        return '<div class="status-pill grey"  title="' + M.util.get_string('inactive', 'local_kopere_dashboard') +
+                            '" data-toggle="tooltip"></div>';
+                    } else {
+                        return '<div class="status-pill green" title="' + M.util.get_string('active', 'local_kopere_dashboard') +
+                            '"   data-toggle="tooltip"></div>';
+                    }
+                },
+                deletedRenderer   : function(data, type, row) {
+                    if (type != 'display') {
+                        if (type == 'filter') {
+                            if (!data) {
+                                return M.util.get_string('notification_status_deleted', 'local_kopere_dashboard');
+                            } else {
+                                return M.util.get_string('active', 'local_kopere_dashboard');
+                            }
+                        }
+                        return data;
+                    }
+
+                    if (!data) {
+                        return '<div class="status-pill grey"  title="' + M.util.get_string('notification_status_deleted', 'local_kopere_dashboard') +
+                            '" data-toggle="tooltip"></div>';
+                    } else {
+                        return '<div class="status-pill green" title="' + M.util.get_string('active', 'local_kopere_dashboard') +
+                            '"   data-toggle="tooltip"></div>';
+                    }
+                },
+                trueFalseRenderer : function(data, type, row) {
+                    if (type != 'display') {
+                        return data;
+                    }
+
+                    if (data == 0 || data == false || data == 'false') {
+                        return M.util.get_string('no');
+                    } else {
+                        return M.util.get_string('yes');
+                    }
+                },
+                userphotoRenderer : function(data, type, row) {
+                    if (type != 'display') {
+                        return data;
+                    }
+
                     return '<img class="media-object" src="' + M.cfg.wwwroot +
                         '/local/kopere_dashboard/profile-image.php?type=photo_user&id=' + data +
                         '" style="width:35px;height:35px" />';
                 },
-                secondsRenderer      : function(data, type, row) {
+                secondsRenderer   : function(data, type, row) {
+                    if (type != 'display') {
+                        return data;
+                    }
+
                     var tempo = parseInt(data);
                     if (isNaN(tempo) || tempo < 1) {
                         return '00:00:00';
@@ -137,7 +227,11 @@ define([
 
                     return hor + ':' + min + ':' + seg;
                 },
-                timeRenderer          : function(data, type, row) {
+                timeRenderer      : function(data, type, row) {
+                    if (type != 'display') {
+                        return data;
+                    }
+
                     var tempo = parseInt(data);
                     if (isNaN(tempo) || tempo < 1) {
                         return '00:00:00';
@@ -162,41 +256,41 @@ define([
                     }
 
                     return hor + ':' + min + ':' + seg;
-                }
+                },
             };
 
             var newColumnDefs = [];
             $.each(params.columnDefs, function(id, columnDef) {
                 switch (columnDef.render) {
-                    case "centerRenderer":
-                        columnDef.render = renderer.centerRenderer;
+                    case "numberRenderer":
+                        columnDef.render = renderer.numberRenderer;
                         break;
                     case "currencyRenderer":
                         columnDef.render = renderer.currencyRenderer;
                         break;
-                    case "rendererFilesize":
-                        columnDef.render = renderer.rendererFilesize;
+                    case "filesizeRenderer":
+                        columnDef.render = renderer.filesizeRenderer;
                         break;
-                    case "dataDateRenderer":
-                        columnDef.render = renderer.dataDateRenderer;
+                    case "dateRenderer":
+                        columnDef.render = renderer.dateRenderer;
                         break;
-                    case "dataDatetimeRenderer":
-                        columnDef.render = renderer.dataDatetimeRenderer;
+                    case "datetimeRenderer":
+                        columnDef.render = renderer.datetimeRenderer;
                         break;
-                    case "dataVisibleRenderer":
-                        columnDef.render = renderer.dataVisibleRenderer;
+                    case "visibleRenderer":
+                        columnDef.render = renderer.visibleRenderer;
                         break;
-                    case "dataStatusRenderer":
-                        columnDef.render = renderer.dataStatusRenderer;
+                    case "statusRenderer":
+                        columnDef.render = renderer.statusRenderer;
                         break;
-                    case "dataDeletedRenderer":
-                        columnDef.render = renderer.dataDeletedRenderer;
+                    case "deletedRenderer":
+                        columnDef.render = renderer.deletedRenderer;
                         break;
-                    case "dataTrueFalseRenderer":
-                        columnDef.render = renderer.dataTrueFalseRenderer;
+                    case "trueFalseRenderer":
+                        columnDef.render = renderer.trueFalseRenderer;
                         break;
-                    case "dataUserphotoRenderer":
-                        columnDef.render = renderer.dataUserphotoRenderer;
+                    case "userphotoRenderer":
+                        columnDef.render = renderer.userphotoRenderer;
                         break;
                     case "secondsRenderer":
                         columnDef.render = renderer.secondsRenderer;
@@ -313,8 +407,6 @@ define([
             };
 
             params.initComplete = function(settings, json) {
-                console.log(selector);
-
                 var element = $("<div class='group-controls'>");
                 var wrapper = $("#" + selector + "_wrapper");
                 wrapper.prepend(element);
@@ -348,4 +440,6 @@ define([
             location.href = clickurl;
         }
     };
+
+    return dataTables_init;
 });

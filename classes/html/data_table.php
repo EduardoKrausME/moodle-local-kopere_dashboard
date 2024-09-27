@@ -215,27 +215,27 @@ class data_table {
             $this->columndata[] = (object)["data" => $column->chave];
 
             if ($column->type == table_header_item::TYPE_INT) {
-                $this->columndefs[] = (object)["type" => "numeric-comma", "render" => "centerRenderer", "targets" => $key];
+                $this->columndefs[] = (object)["render" => "numberRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_CURRENCY) {
-                $this->columndefs[] = (object)["type" => "currency", "render" => "currencyRenderer", "targets" => $key];
+                $this->columndefs[] = (object)["render" => "currencyRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_DATE) {
-                $this->columndefs[] = (object)["type" => "date-uk", "targets" => $key];
+                $this->columndefs[] = (object)["targets" => $key];
             } else if ($column->type == table_header_item::TYPE_BYTES) {
-                $this->columndefs[] = (object)["type" => "file-size", "render" => "rendererFilesize", "targets" => $key];
+                $this->columndefs[] = (object)["render" => "filesizeRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_DATE) {
-                $this->columndefs[] = (object)["type" => "date-uk", "render" => "dataDateRenderer", "targets" => $key];
+                $this->columndefs[] = (object)["render" => "dateRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_DATETIME) {
-                $this->columndefs[] = (object)["type" => "date-uk", "render" => "dataDatetimeRenderer", "targets" => $key];
+                $this->columndefs[] = (object)["render" => "datetimeRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_VISIBLE) {
-                $this->columndefs[] = (object)["render" => "dataVisibleRenderer", "targets" => $key];
+                $this->columndefs[] = (object)["render" => "visibleRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_STATUS) {
-                $this->columndefs[] = (object)["render" => "dataStatusRenderer", "targets" => $key];
+                $this->columndefs[] = (object)["render" => "statusRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_DELETED) {
-                $this->columndefs[] = (object)["render" => "dataDeletedRenderer", "targets" => $key];
+                $this->columndefs[] = (object)["render" => "deletedRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_TRUEFALSE) {
-                $this->columndefs[] = (object)["render" => "dataTrueFalseRenderer", "targets" => $key];
+                $this->columndefs[] = (object)["render" => "trueFalseRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_USERPHOTO) {
-                $this->columndefs[] = (object)["render" => "dataUserphotoRenderer", "targets" => $key];
+                $this->columndefs[] = (object)["render" => "userphotoRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_SECONDS) {
                 $this->columndefs[] = (object)["render" => "secondsRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_TIME) {
@@ -315,21 +315,21 @@ class data_table {
                         $html = date("Y-m-d H:i:s", $html);
                     } else if ($column->type == table_header_item::RENDERER_VISIBLE) {
                         if ($html == 0) {
-                            $html = get_string_kopere('courses_invisible');
+                            $html = get_string_kopere('invisible');
                         } else {
-                            $html = get_string_kopere('courses_visible');
+                            $html = get_string_kopere('visible');
                         }
                     } else if ($column->type == table_header_item::RENDERER_STATUS) {
                         if ($html == 1) {
-                            $html = get_string_kopere('notification_status_inactive');
+                            $html = get_string_kopere('inactive');
                         } else {
-                            $html = get_string_kopere('notification_status_active');
+                            $html = get_string_kopere('active');
                         }
                     } else if ($column->type == table_header_item::RENDERER_DELETED) {
                         if ($html == 0) {
-                            $html = get_string_kopere('notification_status_inactive');
+                            $html = get_string_kopere('inactive');
                         } else {
-                            $html = get_string_kopere('notification_status_active');
+                            $html = get_string_kopere('active');
                         }
                     } else if ($column->type == table_header_item::RENDERER_TRUEFALSE) {
                         if ($html == 0 || $html == false || $html == 'false') {

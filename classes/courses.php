@@ -66,7 +66,7 @@ class courses {
         $table->add_header('#', 'id', table_header_item::TYPE_INT, null, 'width: 20px');
         $table->add_header(get_string_kopere('courses_name'), 'fullname');
         $table->add_header(get_string_kopere('courses_shortname'), 'shortname');
-        $table->add_header(get_string_kopere('courses_visible'), 'visible', table_header_item::RENDERER_VISIBLE);
+        $table->add_header(get_string_kopere('visible'), 'visible', table_header_item::RENDERER_VISIBLE);
         $table->add_header(get_string_kopere('courses_enrol'), 'inscritos',
             table_header_item::TYPE_INT, null, 'width:50px;white-space:nowrap;');
 

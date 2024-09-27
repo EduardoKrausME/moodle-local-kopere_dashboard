@@ -263,7 +263,7 @@ SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.gr
         $report->columns = [
             $table->add_header('#', 'id', table_header_item::TYPE_INT, null, 'width:20px'),
             $table->add_header('[[courses_name]]', 'fullname'),
-            $table->add_header('[[courses_visible]]',
+            $table->add_header('[[visible]]',
                 'visible', table_header_item::RENDERER_VISIBLE),
             $table->add_header('[[reports_groupnode]]', 'groupname'),
             $table->add_header('[[reports_groupname]]', 'name')
@@ -369,7 +369,7 @@ SELECT c.id, c.fullname, c.shortname, c.visible, c.timecreated,
             $table->add_header('#', 'id', table_header_item::TYPE_INT, null, 'width:20px'),
             $table->add_header('[[courses_name]]', 'fullname'),
             $table->add_header('[[courses_shortname]]', 'shortname'),
-            $table->add_header('[[courses_visible]]',
+            $table->add_header('[[visible]]',
                 'visible', table_header_item::RENDERER_VISIBLE),
             $table->add_header('[[reports_coursesize]]',
                 'coursesize', table_header_item::TYPE_BYTES),
