@@ -50,10 +50,12 @@ function get_kopere_lang() {
 
     $PAGE->requires->strings_for_js(['yes', 'no'], 'moodle');
     $PAGE->requires->strings_for_js([
-        'courses_visible',
-        'courses_invisible',
-        'notification_status_active',
-        'notification_status_inactive',
+        'visible',
+        'invisible',
+        'active',
+        'inactive',
+        'date_renderer_format',
+        'datetime_renderer_format',
         'datatables_sEmptyTable',
         'datatables_sInfo',
         'datatables_sInfoEmpty',
