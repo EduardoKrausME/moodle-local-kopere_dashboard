@@ -6894,7 +6894,7 @@ table.dataTable {
   margin-bottom: 8px;
 }
 table.dataTable td, table.dataTable th {
-  padding: 11px 20px !important;
+  padding: 16px !important;
 }
 table.dataTable th {
   border-bottom: none !important;
@@ -6904,7 +6904,8 @@ table.dataTable td {
   color: #191b23 !important;
 }
 table.dataTable thead {
-  background: #f3f3f3;
+  background: #e2e8f0;
+  color: #334155;
 }
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_asc,
@@ -6927,7 +6928,7 @@ table.dataTable thead .sorting_desc {
 }
 table.dataTable thead .sorting_asc,
 table.dataTable thead .sorting_desc {
-  background-color: #ececec;
+  background-color: #d8dde5;
 }
 table.dataTable thead .sorting_asc_disabled {
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg enable-background='new 0 0 19 19' height='19' viewBox='0 0 19 19' width='19' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='m9.633 5.548 5.917 6.349-1.561 1.557-4.76-5.166-4.762 5.107-1.557-1.5 5.914-6.348z' fill='%235d6a83' opacity='.15'/%3e%3c/svg%3e");
@@ -8603,13 +8604,16 @@ body.kopere_dashboard_body textarea {
   font-size: 0.9rem;
   line-height: 1.25;
   color: #464a4c;
-  background: #fff none;
-  background-clip: padding-box;
   border: 1px solid #cecece;
   border-radius: 0.25rem;
   -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   font-weight: 300;
+}
+body.kopere_dashboard_body input,
+body.kopere_dashboard_body textarea {
+  background: #fff none;
+  background-clip: padding-box;
 }
 body.kopere_dashboard_body .select {
   display: inline-block;
@@ -8751,6 +8755,12 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li a .menu-icon
   width: 40px;
   height: 40px;
 }
+@media (max-width: 600px) {
+  body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li a .menu-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
 body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li a span {
   padding: 1rem;
   display: block;
@@ -8815,22 +8825,22 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li:last-child {
 }
 @media (max-width: 1000px) {
   body.kopere_dashboard_body .menu-w .menu-and-user {
-    padding: 0.6rem 1.3rem;
+    padding: 0.6rem 0.3rem;
   }
 }
 @media (max-width: 800px) {
   body.kopere_dashboard_body .menu-w .menu-and-user {
-    padding: 0.6rem 0;
+    padding: 0.4rem 0;
   }
 }
 @media (max-width: 1000px) {
   body.kopere_dashboard_body .menu-w {
-    width: 250px;
+    width: 200px;
   }
 }
 @media (max-width: 800px) {
   body.kopere_dashboard_body .menu-w {
-    width: 90px;
+    width: 46px;
   }
   body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu {
     padding: 0.6rem 1.3rem;
@@ -8854,15 +8864,13 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li:last-child {
   body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a span:before {
     right: 100%;
     top: 50%;
-    border: solid transparent;
+    border: 10px solid rgba(255, 255, 255, 0);
+    border-right-color: #fff;
     content: " ";
     height: 0;
     width: 0;
     position: absolute;
     pointer-events: none;
-    border-color: rgba(255, 255, 255, 0);
-    border-right-color: #fff;
-    border-width: 10px;
     margin-top: -10px;
   }
   body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a:hover .menu-icon {
@@ -8882,7 +8890,7 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li:last-child {
 }
 @media (max-width: 600px) {
   body.kopere_dashboard_body .menu-w {
-    width: 45px !important;
+    width: 40px !important;
   }
   body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu {
     padding: 0.6rem 1.3rem;
@@ -8906,15 +8914,13 @@ body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu > li:last-child {
   body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a span:before {
     right: 100%;
     top: 50%;
-    border: solid transparent;
+    border: 10px solid rgba(255, 255, 255, 0);
+    border-right-color: #fff;
     content: " ";
     height: 0;
     width: 0;
     position: absolute;
     pointer-events: none;
-    border-color: rgba(255, 255, 255, 0);
-    border-right-color: #fff;
-    border-width: 10px;
     margin-top: -10px;
   }
   body.kopere_dashboard_body .menu-w .menu-and-user ul.main-menu li a:hover .menu-icon {
@@ -8961,15 +8967,13 @@ body.kopere_dashboard_body body.menu-w-90 .menu-w .menu-and-user ul.main-menu li
 body.kopere_dashboard_body body.menu-w-90 .menu-w .menu-and-user ul.main-menu li a span:before {
   right: 100%;
   top: 50%;
-  border: solid transparent;
+  border: 10px solid rgba(255, 255, 255, 0);
+  border-right-color: #fff;
   content: " ";
   height: 0;
   width: 0;
   position: absolute;
   pointer-events: none;
-  border-color: rgba(255, 255, 255, 0);
-  border-right-color: #fff;
-  border-width: 10px;
   margin-top: -10px;
 }
 body.kopere_dashboard_body body.menu-w-90 .menu-w .menu-and-user ul.main-menu li a:hover .menu-icon {

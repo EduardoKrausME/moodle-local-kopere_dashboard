@@ -21,6 +21,10 @@ ul.main-menu {
                 transition: all 0.2s ease;
                 width: 40px;
                 height: 40px;
+                @media (max-width: 600px) {
+                    width: 30px;
+                    height: 30px;
+                }
             }
             span {
                 padding: 1rem;

@@ -4,7 +4,8 @@
 table.dataTable {
     margin-bottom: 8px;
     td, th {
-        padding: 11px 20px !important;
+        //padding: 11px 20px !important;
+        padding: 16px !important;
     }
     th {
         border-bottom: none !important;
@@ -14,7 +15,8 @@ table.dataTable {
         color: #191b23 !important;
     }
     thead {
-        background: #f3f3f3;
+        background: #e2e8f0;
+        color: #334155;
         .sorting,
         .sorting_asc,
         .sorting_desc,
@@ -39,7 +41,7 @@ table.dataTable {
         }
         .sorting_asc,
         .sorting_desc {
-            background-color: #ececec;
+            background-color: #d8dde5;
         }
         .sorting_asc_disabled {
             //background-image: url(dataTables/images/sort_asc_disabled.svg);

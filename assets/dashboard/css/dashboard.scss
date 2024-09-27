@@ -15,13 +15,16 @@ textarea {
     font-size: .9rem;
     line-height: 1.25;
     color: #464a4c;
-    background: #fff none;
-    background-clip: padding-box;
     border: 1px solid #cecece;
     border-radius: .25rem;
     -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     font-weight: 300;
+}
+input,
+textarea {
+    background: #fff none;
+    background-clip: padding-box;
 }
 .select {
     display: inline-block;
@@ -111,7 +114,6 @@ input {
             }
         }
     }
-
     .menu-and-user {
         .logged-user-w {
             text-align: center;
@@ -145,24 +147,24 @@ input {
         }
         @import "main-menu";
         @media (max-width: 1000px) {
-            padding: 0.6rem 1.3rem;
+            padding: 0.6rem .3rem;
         }
         @media (max-width: 800px) {
-            padding: 0.6rem 0;
+            padding: 0.4rem 0;
         }
     }
-
+    
     @media (max-width: 1000px) {
-        width: 250px;
+        width: 200px;
     }
-
+    
     @media (max-width: 800px) {
-        width: 90px;
+        width: 46px;
         @import "menu-w-90";
     }
-
+    
     @media (max-width: 600px) {
-        width: 45px !important;
+        width: 40px !important;
         @import "menu-w-90";
         .logo-w {
             padding: 12px 0 !important;
@@ -184,7 +186,7 @@ body.menu-w-90 {
     display: table-cell;
     vertical-align: top;
     border-radius: 0 4px 4px 0;
-
+    
     .breadcrumb {
         list-style: none;
         border-radius: .25rem;
@@ -231,7 +233,7 @@ body.menu-w-90 {
             display: none;
         }
     }
-
+    
     .content-i {
         display: table;
         width: 100%;
@@ -239,7 +241,7 @@ body.menu-w-90 {
         .content-box {
             padding: 2rem;
             //display : table-cell;
-
+            
             .element-header {
                 border-bottom: 1px solid rgba(0, 0, 0, 0.05);
                 padding-bottom: 1rem;
@@ -274,7 +276,7 @@ body.menu-w-90 {
                 box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
                 font-family: 'Nunito', sans-serif;
                 font-weight: 400;
-
+                
                 h1, h2, h3, h4, h5, h6 {
                     margin-bottom: 1rem;
                     display: block;
@@ -471,7 +473,7 @@ body.menu-w-90 {
             }
         }
     }
-
+    
     @media (max-width: 800px) {
         .table {
             display: block;

@@ -20,15 +20,13 @@
                 &:before {
                     right: 100%;
                     top: 50%;
-                    border: solid transparent;
+                    border: 10px solid rgba(255, 255, 255, 0);
+                    border-right-color: #fff;
                     content: " ";
                     height: 0;
                     width: 0;
                     position: absolute;
                     pointer-events: none;
-                    border-color: rgba(255, 255, 255, 0);
-                    border-right-color: #fff;
-                    border-width: 10px;
                     margin-top: -10px;
                 }
             }
