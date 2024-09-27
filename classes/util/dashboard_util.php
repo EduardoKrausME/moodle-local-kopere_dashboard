@@ -40,18 +40,20 @@ class dashboard_util {
     /**
      * Function add_breadcrumb
      *
-     * @param $titulo
-     * @param null $link
+     * @param string $titulo
+     * @param string $link
+     * @param string $extra
      */
-    public static function add_breadcrumb($titulo, $link = null) {
+    public static function add_breadcrumb($titulo, $link = null, $extra = "") {
         if ($link) {
             self::$breadcrumb[] = [$titulo, $link];
         } else {
             self::$breadcrumb[] = $titulo;
         }
 
-        self::$currenttitle = $titulo;
+        self::$currenttitle = "{$titulo} {$extra}";
     }
+
 
     /**
      * Function set_titulo
@@ -102,67 +104,68 @@ class dashboard_util {
      * @param null $infourl
      *
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function start_page($settingurl = null, $infourl = null) {
-        global $CFG, $SITE, $PAGE;
-
-        $return = '';
+        global $PAGE, $OUTPUT;
 
         if (AJAX_SCRIPT) {
             self::start_popup(self::$currenttitle);
-            return;
         } else {
-            $url = local_kopere_dashboard_makeurl("dashboard", "start");
-            $return
-                .= "<ul class='breadcrumb'>
-                        <li>
-                            <a target='_top' href='{$CFG->wwwroot}/' class='kopere_link'>{$SITE->fullname}</a>
-                        </li>
-                        <li>
-                            <a href='{$url}'>" . get_string_kopere('dashboard') . "</a>
-                        </li>";
-
+            $title = "";
             foreach (self::$breadcrumb as $item) {
                 if (is_string($item)) {
-                    $return .= "<li><span>{$item}</span></li>";
-
                     $PAGE->navbar->add($item);
+                    $title = $item;
                 } else {
-                    $return .= "<li><a href='{$item[1]}' class='kopere_link'>{$item[0]}</a></li>";
-
                     $PAGE->navbar->add($item[0], $item[1]);
+                    $title = $item[0];
                 }
             }
 
-            if ($settingurl != null) {
-                $return
-                    .= "<li class='setting'>
-                            <a href='$settingurl' class='kopere_link'>
-                                <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg'
-                                     alt='Settings' >
-                            </a>
-                        </li>";
-            }
+            $PAGE->set_title($title . ": " . get_string_kopere('modulename'));
+            echo $OUTPUT->header();
 
-            $return .= '</ul>';
-            $return .= '<div class="content-i"><div class="content-box">';
+            echo "
+                <div class='kopere_dashboard_div'>
+                    <div class='menu-w hidden-print dashboard_menu_html-content'>
+                        <div class='menu-and-user'>";
+            \local_kopere_dashboard\output\menu::create_menu();
+            echo "
+                        </div>
+                    </div>
+                    <div class='content-w'>
+                    <div class='content-i'>
+                        <div class='content-box'>";
 
-            $return .= self::set_titulo(self::$currenttitle, $settingurl, $infourl);
-
-            $return .= mensagem::get_mensagem_agendada();
+            echo self::set_titulo(self::$currenttitle, $settingurl, $infourl);
+            echo mensagem::get_mensagem_agendada();
         }
-
-        echo $return;
     }
 
     /**
      * Function end_page
      */
     public static function end_page() {
+        global $OUTPUT;
+
         if (AJAX_SCRIPT) {
             self::end_popup();
         } else {
-            echo '</div></div>';
+            echo "
+                        </div>
+                    </div>
+                </div>
+        
+                <div class='modal fade kopere_dashboard_modal_item' id='modal-edit' role='dialog'>
+                    <div class='kopere-modal-dialog'>
+                        <div class='kopere-modal-content'>
+                            <div class='loader'></div>
+                        </div>
+                    </div>
+                </div>";
+            echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
+            echo $OUTPUT->footer();
         }
     }
 

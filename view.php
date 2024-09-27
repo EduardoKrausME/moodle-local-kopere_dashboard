@@ -51,16 +51,13 @@ $PAGE->set_url(new moodle_url("/local/kopere_dashboard/view.php?{$_SERVER['QUERY
 $PAGE->set_context($context);
 $PAGE->set_pagetype('admin-setting');
 $PAGE->set_pagelayout('admin');
-$PAGE->set_title(get_string_kopere('modulename'));
-$PAGE->set_heading(get_string_kopere('modulename'));
+
 
 $PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
 $PAGE->requires->css('/local/kopere_dashboard/assets/all-internal.css');
 
-$PAGE->navbar->add(get_string_kopere('modulename'), new moodle_url('/local/kopere_dashboard/view.php'));
 
 $PAGE->requires->jquery();
-//$PAGE->requires->js('/local/kopere_dashboard/assets/bootstrap/bootstrap.js');
 
 $PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
 
@@ -68,44 +65,6 @@ $PAGE->requires->jquery();
 $PAGE->requires->jquery_plugin("ui");
 $PAGE->requires->jquery_plugin("ui-css");
 
-echo $OUTPUT->header();
-echo get_kopere_lang();
+get_kopere_lang();
 
-$dashboardmenuhtmlboost = \local_kopere_dashboard\output\menu::create_menu();
-$dashboardmenuhtmlboost = str_replace("'", '"', $dashboardmenuhtmlboost);
-$dashboardmenuhtmlold = "<div id='inst0' class='block'>
-            <div class='dashboard_menu_html kopere-logo'>
-                <div class='logo-w'>
-                    <img class='normal'
-                         src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/logo-notext.svg'
-                         alt='" . get_string_kopere('pluginname') . "'>
-                </div>
-            </div>
-            <div class='content'>
-                " . \local_kopere_dashboard\output\menu::create_menu() . "
-            </div>
-        </div>";
-$dashboardmenuhtmlold = str_replace("'", '"', $dashboardmenuhtmlold);
-
-echo "<div class='kopere_dashboard_div'>
-         <div class='menu-w hidden-print dashboard_menu_html-content'>
-            <div class='menu-and-user'>
-                {$dashboardmenuhtmlboost}
-            </div>
-        </div>
-        <div class='content-w'>";
 load_class();
-echo "
-        </div>
-
-        <div class='modal fade kopere_dashboard_modal_item' id='modal-edit' role='dialog'>
-            <div class='kopere-modal-dialog'>
-                <div class='kopere-modal-content'>
-                    <div class='loader'></div>
-                </div>
-            </div>
-        </div>
-    </div>";
-
-echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
-echo $OUTPUT->footer();

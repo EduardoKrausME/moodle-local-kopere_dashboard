@@ -47,15 +47,15 @@ class menu {
 
         $isadmin = has_capability('moodle/site:config', \context_system::instance());
 
-        $menu = "<ul class='main-menu block_tree list menu-kopere main-menu'>";
+        echo "<ul class='main-menu block_tree list menu-kopere main-menu'>";
 
-        $menu .= dashboard_util::add_menu(
+        echo dashboard_util::add_menu(
             (new menu_util())->set_classname('dashboard')
                 ->set_methodname('start')
                 ->set_icon('dashboard')
                 ->set_name(get_string_kopere('dashboard')));
 
-        $menu .= dashboard_util::add_menu(
+        echo dashboard_util::add_menu(
             (new menu_util())
                 ->set_classname('users')
                 ->set_methodname('dashboard')
@@ -79,7 +79,7 @@ class menu {
                         ->set_icon('users-access')
                 ]));
 
-        $menu .= dashboard_util::add_menu(
+        echo dashboard_util::add_menu(
             (new menu_util())
                 ->set_classname('courses')
                 ->set_methodname('dashboard')
@@ -96,11 +96,11 @@ class menu {
             $classname = $plugin->plugin . '\\menu';
             if (class_exists($classname)) {
                 $class = new $classname();
-                $menu .= $class->show_menu();
+                echo $class->show_menu();
             }
         }
 
-        $menu .= dashboard_util::add_menu(
+        echo dashboard_util::add_menu(
             (new menu_util())
                 ->set_classname('reports')
                 ->set_methodname('dashboard')
@@ -111,7 +111,7 @@ class menu {
 
         if ($isadmin) {
 
-            $menu .= dashboard_util::add_menu(
+            echo dashboard_util::add_menu(
                 (new menu_util())
                     ->set_classname('notifications')
                     ->set_methodname('dashboard')
@@ -130,7 +130,7 @@ class menu {
                             ->set_icon('settings')
                     ]));
 
-            $menu .= dashboard_util::add_menu(
+            echo dashboard_util::add_menu(
                 (new menu_util())
                     ->set_classname('webpages')
                     ->set_methodname('dashboard')
@@ -150,7 +150,7 @@ class menu {
                     ]));
         }
 
-        $menu .= dashboard_util::add_menu(
+        echo dashboard_util::add_menu(
             (new menu_util())
                 ->set_classname('benchmark')
                 ->set_methodname('test')
@@ -158,7 +158,7 @@ class menu {
                 ->set_name(get_string_kopere('benchmark_title')));
 
         if ($isadmin && $CFG->dbtype == 'mysqli') {
-            $menu .= dashboard_util::add_menu(
+            echo dashboard_util::add_menu(
                 (new menu_util())
                     ->set_classname('backup')
                     ->set_methodname('dashboard')
@@ -166,14 +166,12 @@ class menu {
                     ->set_name(get_string_kopere('backup_title')));
         }
 
-        $menu .= dashboard_util::add_menu(
+        echo dashboard_util::add_menu(
             (new menu_util())
                 ->set_classname('about')
                 ->set_methodname('dashboard')
                 ->set_icon('about')
                 ->set_name(get_string_kopere('about_title')));
-        $menu .= "</ul>";
-
-        return $menu;
+        echo "</ul>";
     }
 }
