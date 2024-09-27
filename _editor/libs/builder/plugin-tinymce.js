@@ -20,29 +20,27 @@ https://github.com/givanz/VvvebJs
 //use ckeditor instead that supports inline editing for iframe elements
 
 var tinyMceOptions = {
-    height   : 450,
-    inline   : false,
-    menubar  : false,
-    plugins  : 'advlist autolink charmap code image contextmenu directionality emoticons fullscreen link lists table paste visualblocks',
-    toolbar1 : 'bold italic underline strikethrough | formatselect | forecolor backcolor | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent',
-    toolbar2 : 'insertfile table image media link | fullscreen | ltr rtl | code | charmap emoticons removeformat',
-
-    relative_urls                 : false,
-    paste_text_sticky             : true,
-    paste_text_sticky_default     : true,
-    paste_auto_cleanup_on_paste   : true,
-    paste_remove_spans            : true,
-    paste_remove_styles           : true,
-    paste_retain_style_properties : false,
-
+    //selector: 'textarea',
+    target                        : false,
+    inline                        : false,//see comment above
+    toolbar_persist               : true,
+    plugins                       : 'autolink save directionality code visualblocks visualchars fullscreen image link media table charmap lists quickbars emoticons',
+    menubar                       : false,
+    toolbar                       : [
+        'undo redo | bold italic underline strikethrough | table | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist',
+        'insertfile image media link | forecolor backcolor removeformat | fullscreen | ltr rtl | code | charmap emoticons'],
+    toolbar_sticky                : true,
+    height                        : 600,
     quickbars_insert_toolbar      : 'quickmedia quicklink quicktable',
-    quickbars_selection_toolbar   : 'bold italic | fontselect fontsizeselect formatselect | quicklink h2 h3 blockquote',
+    quickbars_selection_toolbar   : 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
     quickbars_image_toolbar       : 'alignleft aligncenter alignright | rotateleft rotateright | imageoptions',
     noneditable_noneditable_class : 'mceNonEditable',
+    toolbar_mode                  : 'sliding',
     contextmenu                   : 'link image imagetools table',
-    skin                          : 'tinymce-5',
-    content_css                   : ['_default/bootstrap-vvveb.css', '_default/default-home.css'],
+    skin                          : 'oxide',
+    content_css                   : '',
     content_style                 : 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+    images_upload_url             : 'postAcceptor.php',
 
     image_advtab          : true,
     image_caption         : true,
@@ -78,7 +76,7 @@ Vvveb.WysiwygEditor = {
     edit : function(element) {
         Vvveb.WysiwygEditor.element = element;
         Vvveb.WysiwygEditor.modalHtml = `
-            <div class="modal fade modal-full" id="TinyMceModal" tabindex="-1" role="dialog" 
+            <div class="modal fade modal-full" id="TinyMceModal" tabindex="-1" role="dialog"
                  aria-labelledby="TinyMceModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document"
@@ -138,7 +136,6 @@ Vvveb.WysiwygEditor = {
     },
 
     destroy : function(element) {
-
         if (tinymce.activeEditor) {
             tinymce.activeEditor.destroy();
         }

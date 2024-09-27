@@ -49,20 +49,21 @@ ImageInput = {
             Vvveb.Builder.selectedEl.addEventListener("load", onLoad);
         },
 
+
         onClick : function(e, element) {
             if (!Vvveb.MediaModal) {
                 Vvveb.MediaModal = new MediaModal(true);
                 Vvveb.MediaModal.mediaPath = window.mediaPath;
             }
 
-            Vvveb.MediaModal.open(this);
+            Vvveb.MediaModal.open(this.closest("[data-target-input]"));
         },
 
         init : function(data) {
             return this.render("imageinput-gallery", data);
         },
     }
-};
+}
 
 VideoInput = {
     ...ImageInput, ...{
@@ -74,24 +75,9 @@ VideoInput = {
             ["click", "onClick", "video"],
         ],
 
+
         init : function(data) {
             return this.render("videoinput-gallery", data);
         },
     }
-};
-
-PdfInput = {
-    ...ImageInput, ...{
-        tag : "embed",
-
-        events : [
-            ["change", "onChange", "input[type=text]"],
-            ["click", "onClick", "button"],
-            ["click", "onClick", "video"],
-        ],
-
-        init : function(data) {
-            return this.render("pdfinput-gallery", data);
-        },
-    }
-};
+}

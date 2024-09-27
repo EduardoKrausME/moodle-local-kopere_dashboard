@@ -175,7 +175,7 @@ Vvveb.preservePropertySections = true;
 //icon = use component icon when dragging | html = use component html to create draggable element
 Vvveb.dragIcon = 'icon';
 //if empty the html of the component is used to view dropping in real time but for large elements it can jump around for this you can set a html placeholder with this option
-Vvveb.dragElementStyle = "background:limegreen;width:100%;height:200px;border:1px solid limegreen;box-shadow:0px 0px 2px 1px rgba(0,0,0,0.14);overflow:hidden;";
+Vvveb.dragElementStyle = "background:limegreen;width:100%;height:3px;border:1px solid limegreen;box-shadow:0px 0px 2px 1px rgba(0,0,0,0.14);overflow:hidden;";
 Vvveb.dragHtml = '<div style="' + Vvveb.dragElementStyle + '"></div>';
 
 Vvveb.baseUrl = document.currentScript ? document.currentScript.src.replace(/[^\/]*?\.js$/, '') : '';
@@ -183,7 +183,6 @@ Vvveb.imgBaseUrl = Vvveb.baseUrl;
 
 Vvveb.ComponentsGroup = {};
 Vvveb.SectionsGroup = {};
-Vvveb.BlocksGroup = {};
 
 Vvveb.Components = {
 
@@ -292,6 +291,7 @@ Vvveb.Components = {
         this.add(type, newData);
     },
 
+
     matchNode : function(node) {
         let component = {};
 
@@ -353,11 +353,7 @@ Vvveb.Components = {
     render : function(type, panel = false) {
 
         let component = this._components[type];
-        if (!component) {
-            return;
-        }
-
-        console.log(component);
+        if (!component) return;
 
         if (!panel) {
             //panel = document.querySelector(this.componentPropertiesElement);
@@ -382,12 +378,7 @@ Vvveb.Components = {
         let section = componentsPanelSections[defaultSection].querySelector('.section[data-section="default"]');
 
         if (!(Vvveb.preservePropertySections && section)) {
-            let template = tmpl("vvveb-input-sectioninput",
-                {
-                    key    : "default",
-                    header : component.name
-                }
-            );
+            let template = tmpl("vvveb-input-sectioninput", {key : "default", header : component.name});
 
             componentsPanelSections[defaultSection].replaceChildren();
             componentsPanelSections[defaultSection].append(generateElements(template)[0]);
@@ -398,27 +389,18 @@ Vvveb.Components = {
         componentsPanelSections[defaultSection].querySelector('[data-header="default"] span').innerHTML = component.name;
         section.replaceChildren();
 
-        if (component.beforeInit) {
-            component.beforeInit(Vvveb.Builder.selectedEl);
-        }
+        if (component.beforeInit) component.beforeInit(Vvveb.Builder.selectedEl);
 
         let element;
-        var selectedElement;
 
         let fn = function(component, property) {
             if (property.input) {
                 property.input.addEventListener('propertyChange', (event) => {
                     element = selectedElement = Vvveb.Builder.selectedEl;
-                    var value = event.detail.value;
-                    var input = event.detail.input;
-                    var origEvent = event.detail.origEvent;
+                    let value = event.detail.value, input = event.detail.input, origEvent = event.detail.origEvent;
 
-                    if (property.child) {
-                        element = element.querySelector(property.child);
-                    }
-                    if (property.parent) {
-                        element = element.parent(property.parent);
-                    }
+                    if (property.child) element = element.querySelector(property.child);
+                    if (property.parent) element = element.parent(property.parent);
 
                     if (property.onChange) {
                         let ret = property.onChange(element, value, input, component, origEvent);
@@ -440,12 +422,10 @@ Vvveb.Components = {
                             if (value) {
                                 element.classList.add(...value.split(" "));
                             }
-                        } else if (property.htmlAttr == "style") {
+                        }
+                        else if (property.htmlAttr == "style") {
                             //keep old style for undo
-                            var vvvebjs_styles = window.FrameDocument.getElementById("vvvebjs-styles");
-                            if (vvvebjs_styles) {
-                                var oldStyle = vvvebjs_styles.textContent;
-                            }
+                            oldStyle = window.FrameDocument.getElementById("vvvebjs-styles").textContent;
                             element = Vvveb.StyleManager.setStyle(element, property.key, value);
                         } else if (property.htmlAttr == "innerHTML") {
                             element = Vvveb.ContentManager.setHtml(element, value);
@@ -461,23 +441,23 @@ Vvveb.Components = {
                         }
 
                         if (property.htmlAttr == "style") {
-                            var mutation1 = {
+                            mutation = {
                                 type          : 'style',
                                 target        : element,
                                 attributeName : property.htmlAttr,
                                 oldValue      : oldStyle,
                                 newValue      : window.FrameDocument.getElementById("vvvebjs-styles").textContent
                             };
-                            Vvveb.Undo.addMutation(mutation1);
+
+                            Vvveb.Undo.addMutation(mutation);
                         } else {
-                            var mutation2 = {
+                            Vvveb.Undo.addMutation({
                                 type          : 'attributes',
                                 target        : element,
                                 attributeName : property.htmlAttr,
                                 oldValue      : oldValue,
                                 newValue      : element.getAttribute(property.htmlAttr)
-                            };
-                            Vvveb.Undo.addMutation(mutation2);
+                            });
                         }
                     }
 
@@ -504,16 +484,10 @@ Vvveb.Components = {
             let property = component.properties[i];
             let element = nodeElement;
 
-            if (property.beforeInit) {
-                property.beforeInit(element);
-            }
+            if (property.beforeInit) property.beforeInit(element);
 
-            if (property.child) {
-                element = element.querySelector(property.child) ?? element;
-            }
-            if (property.parent) {
-                element = element.closest(property.parent) ?? element;
-            }
+            if (property.child) element = element.querySelector(property.child) ?? element;
+            if (property.parent) element = element.closest(property.parent) ?? element;
 
             if (property.data) {
                 property.data["key"] = property.key;
@@ -521,9 +495,7 @@ Vvveb.Components = {
                 property.data = {"key" : property.key};
             }
 
-            if (typeof property.group === 'undefined') {
-                property.group = null;
-            }
+            if (typeof property.group === 'undefined') property.group = null;
 
             property.input = property.inputtype.init(property.data, element);
 
@@ -559,12 +531,6 @@ Vvveb.Components = {
                     value = property.defaultValue;
                 }
 
-                if (value && value[0] == '/' && value.indexOf("pluginfile.php") > 0) {
-                    console.log(value);
-                    value = location.protocol + "//" + location.host + value;
-                }
-
-                console.log(value);
                 property.inputtype.setValue(value);
             } else {
                 if (!value && property.defaultValue) {
@@ -590,7 +556,8 @@ Vvveb.Components = {
                     componentsPanelSections[propertySection].append(property.input);
                     section = componentsPanelSections[propertySection].querySelector('.section[data-section="' + property.key + '"]');
                 }
-            } else {
+            }
+            else {
                 let row = generateElements(tmpl('vvveb-property', property))[0];
                 row.querySelector('.input').append(property.input);
                 section.append(row);
@@ -605,24 +572,8 @@ Vvveb.Components = {
             }
         }
 
-        if (component.init) {
-            component.init(nodeElement);
-        }
+        if (component.init) component.init(nodeElement);
     }
-};
-
-Vvveb.Blocks = {
-
-    _blocks : {},
-
-    get : function(type) {
-        return this._blocks[type];
-    },
-
-    add : function(type, data) {
-        data.type = type;
-        this._blocks[type] = data;
-    },
 };
 
 Vvveb.Sections = {
@@ -639,11 +590,13 @@ Vvveb.Sections = {
     },
 };
 
+
 Vvveb.WysiwygEditor = {
 
     isActive : false,
     oldValue : '',
     doc      : false,
+
 
     editorSetStyle : function(tag, style = {}, toggle = false) {
         let iframeWindow = Vvveb.Builder.iframe.contentWindow;
@@ -755,6 +708,7 @@ Vvveb.WysiwygEditor = {
             return false;
         });
 
+
         document.getElementById("back-color").addEventListener("change", function(e) {
             //doc.execCommand('hiliteColor',false,this.value);
             self.editorSetStyle(false, {"background-color" : this.value});
@@ -824,6 +778,7 @@ Vvveb.WysiwygEditor = {
         document.getElementById("wysiwyg-editor").style.display = "none";
         this.isActive = false;
 
+
         node = this.element;
         Vvveb.Undo.addMutation({
             type     : 'characterData',
@@ -832,7 +787,7 @@ Vvveb.WysiwygEditor = {
             newValue : node.innerHTML
         });
     }
-};
+}
 
 Vvveb.Builder = {
 
@@ -851,7 +806,6 @@ Vvveb.Builder = {
         let self = this;
 
         self.loadControlGroups();
-        self.loadBlockGroups();
         self.loadSectionGroups();
 
         self.selectedEl = null;
@@ -872,12 +826,6 @@ Vvveb.Builder = {
         self.highlightEnabled = true;
 
         self.leftPanelWidth = document.getElementById("left-panel").clientWidth;
-
-        self.adjustListsHeight();
-
-        window.addEventListener("scroll resize", function(event) {
-            self.adjustListsHeight();
-        });
     },
 
     /* controls */
@@ -896,15 +844,15 @@ Vvveb.Builder = {
 
                 list.append(generateElements(
                     `<li class="header" data-section="${group}"  data-search="">
-					<label class="header" for="${type}_comphead_${group}${count}">
-						${group}<div class="header-arrow"></div>
-					</label>
-					<input class="header_check" type="checkbox" checked="true" id="${type}_comphead_${group}${count}">
-					<ol></ol>
-				</li>`)[0]);
+                    <label class="header" for="${type}_comphead_${group}${count}">
+                        ${group}<div class="header-arrow"></div>
+                    </label>
+                    <input class="header_check" type="checkbox" checked="true" id="${type}_comphead_${group}${count}">
+                    <ol></ol>
+                </li>`)[0]);
 
                 //list.append('<li class="header clearfix" data-section="' + group + '"  data-search=""><label class="header" for="' + type + '_comphead_' + group + count + '">' + group + '  <div class="header-arrow"></div>\
-                //				   </label><input class="header_check" type="checkbox" checked="true" id="' + type + '_comphead_' + group + count + '">  <ol></ol></li>');
+                //                   </label><input class="header_check" type="checkbox" checked="true" id="' + type + '_comphead_' + group + count + '">  <ol></ol></li>');
 
                 let componentsSubList = list.querySelector('li[data-section="' + group + '"]  ol');
 
@@ -916,8 +864,8 @@ Vvveb.Builder = {
 
                     if (component) {
                         item = generateElements(`<li data-section="${group}" data-drag-type="component" data-type="${componentType}" data-search="${component.name.toLowerCase()}">
-							<span>${component.name}</span>
-						</li>`)[0];
+                            <span>${component.name}</span>
+                        </li>`)[0];
 
                         if (component.image) {
 
@@ -941,15 +889,15 @@ Vvveb.Builder = {
             let type = list.dataset.type;
             list.replaceChildren();
 
-            for (var group in Vvveb.SectionsGroup) {
-                list.append(generateElements(`
-                     <li class="header" data-section="${group}"  data-search="">
-                         <label class="header" for="${type}_sectionhead_${group}">
-                             ${group}<div class="header-arrow"></div>
-                         </label>
-					     <input class="header_check" type="checkbox" checked="true" id="${type}_sectionhead_${group}">
-					     <ol></ol>
-				     </li>`)[0]);
+            for (group in Vvveb.SectionsGroup) {
+                list.append(generateElements(
+                    `<li class="header" data-section="${group}"  data-search="">
+                    <label class="header" for="${type}_sectionhead_${group}">
+                        ${group}<div class="header-arrow"></div>
+                    </label>
+                    <input class="header_check" type="checkbox" checked="true" id="${type}_sectionhead_${group}">
+                    <ol></ol>
+                </li>`)[0]);
 
                 let sectionsSubList = list.querySelector('li[data-section="' + group + '"]  ol');
                 sections = Vvveb.SectionsGroup[group];
@@ -959,21 +907,21 @@ Vvveb.Builder = {
                     section = Vvveb.Sections.get(sectionType);
 
                     if (section) {
-                        item = generateElements(`<li data-section="${group}" data-type="${sectionType}" data-search="${section.name.toLowerCase()}">
-									<span class="name">${section.name}</span>
-									<div class="add-section-btn" title="Add section"><i class="la la-plus"></i></div>
-									<img class="preview" src="" loading="lazy">
-								</li>`)[0];
+                        item = generateElements(`<li data-section="${group}" data-drag-type="section" data-type="${sectionType}" data-search="${section.name.toLowerCase()}">
+                                    <span class="name">${section.name}</span>
+                                    <div class="add-section-btn" title="Add section"><i class="la la-plus"></i></div>
+                                    <img class="preview" src="" loading="lazy">
+                                </li>`)[0];
 
                         if (section.image) {
 
                             let image = ((section.image.indexOf('/') == -1) ? Vvveb.imgBaseUrl : '') + section.image;
 
                             /*
-							Object.assign(item.style,{
-								//backgroundImage: "url(" + image + ")",
-								//backgroundRepeat: "no-repeat"
-							});*/
+                            Object.assign(item.style,{
+                                //backgroundImage: "url(" + image + ")",
+                                //backgroundRepeat: "no-repeat"
+                            });*/
 
                             item.querySelector("img").setAttribute("src", image);
                         }
@@ -985,97 +933,12 @@ Vvveb.Builder = {
         });
     },
 
-    loadBlockGroups : function() {
-
-        let blocksList = document.querySelectorAll(".blocks-list");
-        let item = {};
-
-        blocksList.forEach(function(list, i) {
-            let type = list.dataset.type;
-            list.replaceChildren();
-
-            for (group in Vvveb.BlocksGroup) {
-                list.append(generateElements(
-                    `<li class="header" data-section="${group}"  data-search="">
-					<label class="header" for="${type}_blockhead_${group}">
-						${group}<div class="header-arrow"></div>
-					</label>
-					<input class="header_check" type="checkbox" checked="true" id="${type}_blockhead_${group}">
-					<ol></ol>
-				</li>`)[0]);
-
-                let blocksSubList = list.querySelector('li[data-section="' + group + '"]  ol');
-                blocks = Vvveb.BlocksGroup[group];
-
-                for (i in blocks) {
-                    blockType = blocks[i];
-                    block = Vvveb.Blocks.get(blockType);
-
-                    if (block) {
-                        item = generateElements(`<li data-section="${group}" data-drag-type="block" data-type="${blockType}" data-search="${block.name.toLowerCase()}">
-									<span class="name">${block.name}</span>
-									<img class="preview" src="" loading="lazy">
-								</li>`)[0];
-
-                        if (block.image) {
-
-                            let image = ((block.image.indexOf('/') == -1) ? Vvveb.imgBaseUrl : '') + block.image;
-                            /*
-							Object.assign(item.style,{
-								//backgroundImage: "url(" + image + ")",
-								//backgroundRepeat: "no-repeat"
-							});*/
-
-                            item.querySelector("img").setAttribute("src", image);
-
-                        }
-
-                        blocksSubList.append(item);
-                    }
-                }
-            }
-        });
-    },
-
-    adjustListsHeight : function() {
-        function _adjustListsHeight__exec() {
-
-            console.log("aaaaa");
-            let left = document.querySelectorAll("#left-panel .drag-elements-sidepane > div:not(.block-preview), #left-panel .component-properties > .tab-content");
-            let right = document.querySelectorAll("#right-panel .drag-elements-sidepane > div:not(.block-preview), #right-panel .component-properties > .tab-content");
-
-            function adjust(elements) {
-                elements.forEach(function(e, i) {
-                    e.style.height = "";
-                    let offset = Math.floor(e.getBoundingClientRect()["top"]);
-                    let height = window.innerHeight - offset;
-                    if (!offset) {
-                        height += parseInt(e.dataset.offset ?? 0);
-                    }
-                    e.style.height = height + "px";
-                });
-            }
-
-            adjust(left);
-            adjust(right);
-        }
-
-        _adjustListsHeight__exec();
-        window.addEventListener("resize", _adjustListsHeight__exec);
-
-        var navs = document.querySelectorAll(".header .nav-item");
-        for (var i = 0; i < navs.length; i++) {
-            navs[i].addEventListener("click", _adjustListsHeight__exec);
-        }
-    },
-
     loadUrl : function(url, callback) {
         let self = this;
         document.getElementById("select-box").style.display = "none";
 
         self.initCallback = callback;
-        if (Vvveb.Builder.iframe.src != url)
-            Vvveb.Builder.iframe.src = url;
+        if (Vvveb.Builder.iframe.src != url) Vvveb.Builder.iframe.src = url;
     },
 
     /* iframe */
@@ -1093,6 +956,7 @@ Vvveb.Builder = {
             let SelectBox = document.getElementById("select-box");
 
             highlightBox.style.display = "none";
+
 
             window.FrameWindow.addEventListener("beforeunload", function(event) {
                 if (Vvveb.Undo.undoIndex >= 0) {
@@ -1130,7 +994,7 @@ Vvveb.Builder = {
                     SelectBox.style.width = ((target.offsetWidth ?? target.clientWidth) + self.selectPadding * 2) + "px";
                     SelectBox.style.height = ((target.offsetHeight ?? target.clientHeight) + self.selectPadding * 2) + "px";
                 }
-            };
+            }
 
             window.FrameWindow.addEventListener("scroll", selectBoxPosition);
             window.FrameWindow.addEventListener("resize", selectBoxPosition);
@@ -1143,6 +1007,7 @@ Vvveb.Builder = {
 
             return self._frameLoaded();
         });
+
     },
 
     _frameLoaded : function() {
@@ -1155,25 +1020,13 @@ Vvveb.Builder = {
         self.frameHead = window.FrameDocument.querySelector("head");
 
         //insert editor helpers like non editable areas
-        self.frameHead.append(generateElements('<link data-vvveb-helpers href="' + Vvveb.baseUrl + '../../css/editor-helpers.css" rel="stylesheet">')[0]);
+        self.frameHead.append(generateElements('<link data-vvveb-helpers href="' + Vvveb.baseUrl + '../../css/vvvebjs-editor-helpers.css" rel="stylesheet">')[0]);
 
         self._initHighlight();
 
         window.dispatchEvent(new CustomEvent("vvveb.iframe.loaded", {detail : self.frameDoc}));
 
         document.querySelector(".loading-message").classList.remove("active");
-
-        //enable save button only if changes are made
-        let setSaveButtonState = function(e) {
-            if (Vvveb.Undo.hasChanges()) {
-                document.querySelectorAll("#top-panel .save-btn").forEach(e => e.removeAttribute("disabled"));
-            } else {
-                document.querySelectorAll("#top-panel .save-btn").forEach(e => e.setAttribute("disabled", "true"));
-            }
-        };
-
-        Vvveb.Builder.frameBody.addEventListener("vvveb.undo.add", setSaveButtonState);
-        Vvveb.Builder.frameBody.addEventListener("vvveb.undo.restore", setSaveButtonState);
     },
 
     _getElementType : function(el) {
@@ -1218,14 +1071,19 @@ Vvveb.Builder = {
         data = Vvveb.Components.matchNode(node);
         let component;
 
-        if (data) {
+        if (data)
             component = data.type;
-        } else {
+        else
             component = Vvveb.defaultComponent;
-        }
 
         Vvveb.component = Vvveb.Components.get(component);
         Vvveb.Components.render(component);
+        this.selectedComponent = component;
+
+    },
+
+    reloadComponent : function() {
+        Vvveb.Components.render(this.selectedComponent);
     },
 
     moveNodeUp : function(node) {
@@ -1313,6 +1171,7 @@ Vvveb.Builder = {
 
     },
 
+
     selectNode : function(node) {
         let SelectBox = document.getElementById("select-box");
 
@@ -1363,6 +1222,7 @@ Vvveb.Builder = {
 
         document.querySelector("#highlight-name .type").innerHTML = elementType[0];
         document.querySelector("#highlight-name .name").innerHTML = elementType[1];
+
     },
 
     /* iframe highlight */
@@ -1454,9 +1314,6 @@ Vvveb.Builder = {
                     SelectBox.style.display = "block";
 
                 } else if (self.isDragging) {
-                    let parent = self.highlightEl;
-                    let parentTagName = parent.tagName.toLowerCase();
-
                     let noChildren = {
                         input    : true,
                         textarea : true,
@@ -1470,6 +1327,16 @@ Vvveb.Builder = {
                         br       : true,
                         wbr      : true
                     };
+
+                    let parent = self.highlightEl;
+
+                    if (self.dragType == "section") {
+                        parent = parent.closest("section, header, footer");
+                        noChildren.section = true;
+                    }
+
+                    let parentTagName = parent.tagName.toLowerCase();
+
 
                     try {
                         if ((pos.top < (y - halfHeight)) || (pos.left < (x - halfWidth))) {
@@ -1493,6 +1360,7 @@ Vvveb.Builder = {
 
                             prepend = false;
                         }
+                        ;
 
                         if (self.designerMode) {
                             let parentOffset = offset(self.dragElement.offsetParent);
@@ -1520,13 +1388,13 @@ Vvveb.Builder = {
                     }
 
                     document.getElementById("highlight-box").setAttribute("style",
-                        `top:${pos.top - (self.frameDoc.scrollTop ?? 0)}px; 
-						 left:${pos.left - (self.frameDoc.scrollLeft ?? 0)}px;
-						 width:${width}px; 
-						 height:${height}px;
-						 display:${event.target.hasAttribute('contenteditable') ? "none" : "block"};
-						 border:${self.isDragging ? "1px dashed #0d6efd" : ""};
-					`);
+                        `top:${pos.top - (self.frameDoc.scrollTop ?? 0)}px;
+                         left:${pos.left - (self.frameDoc.scrollLeft ?? 0)}px;
+                         width:${width}px;
+                         height:${height}px;
+                         display:${event.target.hasAttribute('contenteditable') ? "none" : "block"};
+                         border:${self.isDragging ? "1px dashed #0d6efd" : ""};
+                    `);
 
                     if (height < 50) {
                         document.getElementById("section-actions").classList.add("outside");
@@ -1541,6 +1409,7 @@ Vvveb.Builder = {
             }
 
         };
+
         self.frameBody.addEventListener("mousemove", highlightMove);
 
         let highlightUp = function(event) {
@@ -1581,6 +1450,10 @@ Vvveb.Builder = {
                     bsTab.show();
                 }
 
+                if (self.dragType == "section") {
+                    node.scrollIntoView({behavior : "smooth", block : "center", inline : "center"});
+                }
+
                 if (self.dragMoveMutation === false) {
                     Vvveb.Undo.addMutation({
                         type        : 'childList',
@@ -1597,6 +1470,7 @@ Vvveb.Builder = {
                 }
             }
         };
+
         self.frameBody.addEventListener("mouseup", highlightUp);
 
         let highlightDbClick = function(event) {
@@ -1607,33 +1481,10 @@ Vvveb.Builder = {
                     self.selectPadding = 10;
                     self.texteditEl = target = event.target;
 
-                    switch (event.target.tagName) {
-                        case 'A':
-                        case 'SPAN':
-                        case 'EM':
-                        case 'STRONG':
-                        case 'S':
-                        case 'I':
-                            switch (event.target.parentElement.tagName) {
-                                case 'P':
-                                case 'DIV':
-                                case 'H1':
-                                case 'H2':
-                                case 'H3':
-                                case 'H4':
-                                case 'H5':
-                                case 'H6':
-                                    self.texteditEl = target = event.target.parentElement;
-                                    break;
-                            }
-                            break;
-                    }
-
                     Vvveb.WysiwygEditor.edit(self.texteditEl);
 
                     _updateSelectBox = function(event) {
-                        if (!self.texteditEl)
-                            return;
+                        if (!self.texteditEl) return;
                         let pos = offset(self.selectedEl);
 
                         let SelectBox = document.getElementById("select-box");
@@ -1652,49 +1503,35 @@ Vvveb.Builder = {
                     self.texteditEl.addEventListener("input", _updateSelectBox);
                     _updateSelectBox();
 
-                    document.getElementById("select-box").classList.add("text-edit");
+                    document.getElementById("select-box").classList.add("text-edit")
                     document.getElementById("select-actions").style.display = "none";
                     document.getElementById("highlight-box").style.display = "none";
                 }
             }
         };
+
         self.frameBody.addEventListener("dblclick", highlightDbClick);
 
         let highlightClick = function(event) {
-            if (Vvveb.Builder.isPreview == false) {
-                var event_target = event.target;
-                // switch (event.target.tagName) {
-                //     case 'A':
-                //     case 'SPAN':
-                //     case 'EM':
-                //     case 'STRONG':
-                //     case 'S':
-                //     case 'I':
-                //         switch (event.target.parentElement.tagName) {
-                //             case 'P':
-                //             case 'DIV':
-                //             case 'H1':
-                //             case 'H2':
-                //             case 'H3':
-                //             case 'H4':
-                //             case 'H5':
-                //             case 'H6':
-                //                 event_target = event.target.parentElement;
-                //                 break;
-                //         }
-                //         break;
-                // }
 
-                if (event_target) {
+            if (Vvveb.Builder.isPreview == false) {
+                if (event.target) {
                     if (Vvveb.WysiwygEditor.isActive) {
-                        if (self.texteditEl && self.texteditEl.contains(event_target)) {
+                        if (self.texteditEl.contains(event.target)) {
                             return true;
                         }
                     }
+                    //if component properties is loaded in left panel tab instead of right panel show tab
+                    let componentTab = document.querySelector(".component-properties-tab a");
+                    if (componentTab.offsetParent) { //if properites tab is enabled/visible
+                        componentTab.style.display = "";
+                        const bsTab = bootstrap.Tab.getOrCreateInstance(componentTab);
+                        bsTab.show();
+                    }
 
-                    self.selectNode(event_target);
-                    Vvveb.TreeList.selectComponent(event_target);
-                    self.loadNodeComponent(event_target);
+                    self.selectNode(event.target);
+                    Vvveb.TreeList.selectComponent(event.target);
+                    self.loadNodeComponent(event.target);
 
                     if (Vvveb.component.resizable) {
                         document.getElementById("select-box").classList.add("resizable");
@@ -1708,8 +1545,11 @@ Vvveb.Builder = {
                     return false;
                 }
             }
+
         };
+
         self.frameBody.addEventListener("click", highlightClick);
+
     },
 
     _initBox : function() {
@@ -1720,6 +1560,7 @@ Vvveb.Builder = {
             if (event.which == 1) {//left click
                 self.isDragging = true;
                 document.querySelectorAll("#section-actions, #highlight-name, #select-box").forEach(el => el.style.display = "");
+
 
                 if (self.designerMode) {
                     self.dragElement = self.selectedEl;
@@ -1797,6 +1638,24 @@ Vvveb.Builder = {
             self.selectNode(node);
             self.loadNodeComponent(node);
             Vvveb.TreeList.selectComponent(node);
+
+            event.preventDefault();
+            return false;
+        });
+
+        document.getElementById("save-reusable-btn").addEventListener("click", function(event) {
+
+            node = self.selectedEl;
+
+            let type = 'block';
+            if (node.tagName.toLowerCase() == 'section') {
+                type = 'section';
+            }
+
+            let name = prompt("Enter name for new reusable " + type, '');
+            if (name) {
+                Vvveb.Builder.saveElement(node, type, name);
+            }
 
             event.preventDefault();
             return false;
@@ -1912,6 +1771,7 @@ Vvveb.Builder = {
                 node = component.afterDrop(node);
             }
 
+            node = node;
             self.selectNode(node);
             self.loadNodeComponent(node);
             Vvveb.TreeList.loadComponents();
@@ -1936,16 +1796,6 @@ Vvveb.Builder = {
             }
         });
 
-        addSectionBox.addEventListener("click", function(event) {
-            let element = event.target.closest(".blocks-list li ol li");
-            if (element) {
-                let html = Vvveb.Blocks.get(element.dataset.type);
-
-                addSectionComponent(html, (document.querySelector("[name='add-section-insert-mode']:checked").value == "after"));
-
-                addSectionBox.style.display = "none";
-            }
-        });
 
         addSectionBox.addEventListener("click", function(event) {
             let element = event.target.closest(".sections-list li ol li");
@@ -1971,14 +1821,14 @@ Vvveb.Builder = {
 
             if (element && event.which == 1) {//left click
                 document.getElementById("component-clone")?.remove();
-                document.querySelector("#section-actions, #highlight-name, #select-box").style.display = "none";
+                document.querySelectorAll("#section-actions, #highlight-name, #select-box").forEach(e => e.style.display = "none");
 
-                if (element.dataset.dragType == "component") {
+                self.dragType = element.dataset.dragType;
+                if (self.dragType == "component") {
                     self.component = Vvveb.Components.get(element.dataset.type);
-                } else if (element.dataset.dragType == "section") {
+                }
+                else if (self.dragType == "section") {
                     self.component = Vvveb.Sections.get(element.dataset.type);
-                } else if (element.dataset.dragType == "block") {
-                    self.component = Vvveb.Blocks.get(element.dataset.type);
                 }
 
                 if (self.component.dragHtml) {
@@ -1999,7 +1849,8 @@ Vvveb.Builder = {
                     self.iconDrag = generateElements(html)[0];
                     self.iconDrag.setAttribute("id", "dragElement-clone");
                     self.iconDrag.style.position = "absolute";
-                } else if (self.designerMode == false) {
+                }
+                else if (self.designerMode == false) {
                     self.iconDrag = document.createElement("img");
                     self.iconDrag.setAttribute("id", "dragElement-clone");
                     self.iconDrag.setAttribute("src", element.style.backgroundImage.replace(/^url\(['"](.+)['"]\)/, '$1'));
@@ -2040,6 +1891,19 @@ Vvveb.Builder = {
                 self.iconDrag.style.top = (y - 30) + "px";
 
                 elementMouseIsOver = document.elementFromPoint(x - 60, y - 40);
+
+                //if drag elements hovers over iframe switch to iframe mouseover handler
+                return;
+                if (elementMouseIsOver && elementMouseIsOver.tagName == 'IFRAME') {
+                    self.frameBody.dispatchEvent(new MouseEvent("mousemove", {
+                        bubbles    : true,
+                        cancelable : true,
+                    }));
+
+                    //self.frameBody.trigger("mousemove", event);
+                    event.stopPropagation();
+                    self.selectNode(false);
+                }
             }
         });
 
@@ -2121,7 +1985,8 @@ Vvveb.Builder = {
 
         if (this.runJsOnSetHtml) {
             this.frameBody.innerHTML = getTag(html, "body");
-        } else {
+        }
+        else {
             window.FrameDocument.body.innerHTML = getTag(html, "body");
         }
 
@@ -2135,6 +2000,48 @@ Vvveb.Builder = {
         }
     },
 
+    saveElement : function(element, type, name, callback) {
+        if (type == 'section') {
+            Vvveb.Sections.add('reusable/' + name, {
+                name,
+                image : "img/logo-small.png",
+                html  : element.outerHTML
+            });
+
+            if (Vvveb.SectionsGroup["Reusable"] === undefined) {
+                Vvveb.SectionsGroup["Reusable"] = [];
+            }
+
+            Vvveb.SectionsGroup["Reusable"].push('reusable/' + name);
+            Vvveb.Builder.loadSectionGroups();
+        }
+
+        let data = {type, name, html : element.outerHTML};
+
+        fetch(saveReusableUrl, {method : "POST", body : new URLSearchParams(data)})
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(response)
+                }
+                return response.text()
+            })
+            .then((data) => {
+                if (callback) callback(data);
+                let bg = "bg-success";
+                if (true || data.success || text == "success") {
+                } else {
+                    bg = "bg-danger";
+                }
+
+                displayToast(bg, "Save", data.message ?? data);
+            })
+            .catch(error => {
+                console.log(error.statusText);
+                displayToast("bg-danger", "Error", "Error saving!");
+            });
+
+    },
+
     saveAjax : function(data, saveUrl, callback, error) {
         if (!data["startTemplateUrl"]) {
             data["html"] = clearHtml();
@@ -2146,15 +2053,17 @@ Vvveb.Builder = {
             body    : nestedFormData(data)
         })
             .then((response) => {
+                console.log(response);
                 if (!response.ok) {
                     return Promise.reject(response);
                 }
                 return response.text();
             })
             .then((data) => {
-                if (callback) callback(data);
+                if (callback) {
+                    callback(data);
+                }
                 Vvveb.Undo.reset();
-                document.querySelectorAll("#top-panel .save-btn").forEach(e => e.setAttribute("disabled", "true"));
             })
             .catch((err) => {
                 if (error) error(err);
@@ -2197,10 +2106,7 @@ Vvveb.ModalCodeEditor = {
         });
 
         this.modal.querySelector('.save-btn').addEventListener("click", function(event) {
-            console.log(self.getValue());
-            window.dispatchEvent(new CustomEvent("vvveb.ModalCodeEditor.save", {
-                detail : self.getValue()
-            }));
+            window.dispatchEvent(new CustomEvent("vvveb.ModalCodeEditor.save", {detail : self.getValue()}));
             self.hide();
             return false;
         });
@@ -2222,6 +2128,7 @@ Vvveb.ModalCodeEditor = {
 
     getValue : function() {
         return this.editor.value;
+        ;
     },
 
     setValue : function(value) {
@@ -2230,14 +2137,14 @@ Vvveb.ModalCodeEditor = {
         }
         this.editor.value = value;
     },
-};
+}
 
 Vvveb.CodeEditor = {
 
     isActive : false,
     oldValue : '',
     doc      : false,
-    textarea : null,
+    textarea : false,
 
     init : function(doc) {
         this.textarea = document.querySelector("#vvveb-code-editor textarea");
@@ -2275,7 +2182,7 @@ Vvveb.CodeEditor = {
         this.isActive = false;
         this.destroy();
     }
-};
+}
 
 Vvveb.CssEditor = {
 
@@ -2285,7 +2192,7 @@ Vvveb.CssEditor = {
     textarea : false,
 
     init : function(doc) {
-        this.textarea = document.getElementById("css-editor");
+        this.textarea = document.getElementById("css-editor")
         this.textarea.value = Vvveb.StyleManager.getCss();
         let self = this;
 
@@ -2309,12 +2216,12 @@ Vvveb.CssEditor = {
 
     destroy : function() {
     }
-};
+}
 
 function displayToast(bg, title, message, id = "top-toast") {
     document.querySelector("#" + id + " .toast-body .message").innerHTML = message.replace(/(?:\r\n|\r|\n)/g, '<br>');
     let header = document.querySelector("#" + id + " .toast-header");
-    header.classList.remove("bg-danger", "bg-success");
+    header.classList.remove("bg-danger", "bg-success")
     header.classList.add(bg);
     header.querySelector("strong").innerHTML = title;
     document.querySelector("#" + id + " .toast").classList.add("show");
@@ -2361,7 +2268,7 @@ Vvveb.Gui = {
 
     //show modal with html content
     save : function() {
-        document.getElementById('textarea-modal textarea').val(clearHtml());
+        document.getElementById('textarea-modal textarea').value = clearHtml();
         document.getElementById('textarea-modal').modal();
     },
 
@@ -2375,7 +2282,6 @@ Vvveb.Gui = {
     //post html content through ajax to save to filesystem/db
     saveAjax : function() {
         let btn = this;
-        let saveUrl = this.dataset.vvvebUrl;
 
         btn.querySelector(".loading").classList.toggle("d-none");
         btn.querySelector(".button-text").classList.toggle("d-none");
@@ -2383,9 +2289,11 @@ Vvveb.Gui = {
         return Vvveb.Builder.saveAjax({}, saveUrl, (data) => {
             //use toast to show save status
 
+            data = JSON.parse(data);
+
             let bg = "bg-success";
-            if (true || data.success || data == "success") {
-                document.querySelectorAll("#top-panel .save-btn").forEach(e => e.setAttribute("disabled", "true"));
+            if (data.success) {
+                bg = "bg-success";
             } else {
                 bg = "bg-danger";
             }
@@ -2402,11 +2310,12 @@ Vvveb.Gui = {
         });
     },
 
+
     viewport : function() {
         document.getElementById("canvas").setAttribute("class", this.dataset.view);
         document.getElementById("iframe1").removeAttribute("style");
         document.querySelectorAll(".responsive-btns .active").forEach(e => e.classList.remove("active"));
-        this.classList.add("active");
+        if (this.dataset.view) this.classList.add("active");
     },
 
     toggleEditor : function() {
@@ -2466,8 +2375,6 @@ Vvveb.Gui = {
     //layout
     togglePanel : function(panel, cssVar) {
         panel = document.querySelector(panel);
-        if (!panel) return false;
-
         let body = document.querySelector("body");
         let prevValue = getComputedStyle(body).getPropertyValue(cssVar);
         let visible = false;
@@ -2484,7 +2391,6 @@ Vvveb.Gui = {
             visible = true;
         }
 
-        Vvveb.Builder.adjustListsHeight();
         return visible;
     },
 
@@ -2507,7 +2413,6 @@ Vvveb.Gui = {
             bsTab.show();
         }
 
-        Vvveb.Builder.adjustListsHeight();
     },
 
     toggleTreeList : function() {
@@ -2516,6 +2421,27 @@ Vvveb.Gui = {
         if (!treeList.offsetParent) {
             document.getElementById("toggle-tree-list").classList.remove("active");
         }
+    },
+
+    darkMode : function() {
+        let theme = document.documentElement.getAttribute("data-bs-theme");
+        let icon = document.querySelector(".btn-dark-mode i");
+
+        if (theme == "dark") {
+            theme = "light";
+            icon.classList.remove("la-moon")
+            icon.classList.add("la-sun");
+        } else if (theme == "light" || theme == "auto") {
+            theme = "dark";
+            icon.classList.remove("la-sun")
+            icon.classList.add("la-moon");
+        } else {
+            theme = "auto";
+        }
+
+        document.documentElement.setAttribute("data-bs-theme", theme);
+        localStorage.setItem('theme', theme);
+        //document.cookie = 'theme=' + theme;
     },
 
     zoomChange : function() {
@@ -2528,16 +2454,25 @@ Vvveb.Gui = {
         }
         wrapper.style.transform = scale;
         wrapper.style.height = height;
+    },
+
+    setState : function() {
+        Vvveb.StyleManager.setState(this.value);
+        Vvveb.Builder.reloadComponent();
     }
-};
+}
 
 Vvveb.StyleManager = {
 
-    styles       : {},
-    cssContainer : false,
-    mobileWidth  : '320px',
-    tabletWidth  : '768px',
-    doc          : false,
+    styles          : {},
+    cssContainer    : false,
+    mobileWidth     : '320px',
+    tabletWidth     : '768px',
+    doc             : false,
+    inlineCSS       : false,
+    currentElement  : null,
+    currentSelector : null,
+    state           : "",//hover, active etc
 
     init : function(doc) {
         if (doc) {
@@ -2558,7 +2493,7 @@ Vvveb.StyleManager = {
             //if style element does not exist create it
             if (!style) {
                 style = generateElements('<style id="vvvebjs-styles"></style>')[0];
-                doc.body.append(style);
+                doc.head.append(style);
                 return this.cssContainer = style;
             }
 
@@ -2643,6 +2578,14 @@ Vvveb.StyleManager = {
         return selector.reverse().join(" > ");
     },
 
+    setState : function(state) {
+        this.state = state;
+    },
+
+    addSelectorState : function(selector) {
+        return selector + (this.state ? ":" + this.state : "");
+    },
+
     setStyle : function(element, styleProp, value) {
         if (typeof(element) == "string") {
             selector = element;
@@ -2658,6 +2601,13 @@ Vvveb.StyleManager = {
 
             selector = this.getSelectorForElement(node);
         }
+
+        if (this.inlineCSS) {
+            element.style[styleProp] = value;
+            return element;
+        }
+
+        selector = this.addSelectorState(selector);
 
         media = document.getElementById("canvas").classList.contains("tablet") ? "tablet" : document.getElementById("canvas").classList.contains("mobile") ? "mobile" : "desktop";
 
@@ -2693,12 +2643,12 @@ Vvveb.StyleManager = {
         //let css = "";
         //for (selector in this.styles[media]) {
 
-        //	css += `${selector} {`;
-        //	for (property in this.styles[media][selector]) {
-        //		value = this.styles[media][selector][property];
-        //		css += `${property}: ${value};`;
-        //	}
-        //	css += '}';
+        //    css += `${selector} {`;
+        //    for (property in this.styles[media][selector]) {
+        //        value = this.styles[media][selector][property];
+        //        css += `${property}: ${value};`;
+        //    }
+        //    css += '}';
         //}
 
         //this.cssContainer.innerHTML = css;
@@ -2728,12 +2678,20 @@ Vvveb.StyleManager = {
         return this.cssContainer.innerHTML = css;
     },
 
+
     _getCssStyle : function(element, styleProp) {
         let value = "";
         let el;
 
         el = element;
-        selector = this.getSelectorForElement(el);
+        if (el != this.currentElement) {
+            selector = this.getSelectorForElement(el);
+            this.currentElement = el;
+            this.currentSelector = selector
+        } else {
+            selector = this.currentSelector;
+        }
+        selector = this.addSelectorState(selector);
 
         media = document.getElementById("canvas").classList.contains("tablet") ? "tablet" : document.getElementById("canvas").classList.contains("mobile") ? "mobile" : "desktop";
 
@@ -2776,11 +2734,11 @@ Vvveb.ContentManager = {
     },
 
     setText : function(element, text) {
-        return element.text(text);
+        return element.textContent = text;
     },
 
     getText : function(element) {
-        return element.text();
+        return element.textContent;
     },
 };
 
@@ -2853,15 +2811,16 @@ function drawComponentsTree(tree) {
 
             if (tree[i].children.length > 0) {
                 li = generateElements('<li data-component="' + node.name + '">\
-								<label for="id' + id + '" style="background-image:url(' + Vvveb.imgBaseUrl + node.image + ')"><span>' + node.name + '</span></label>\
-								<input type="checkbox" id="id' + id + '">\
-							</li>')[0];
+                                <label for="id' + id + '" style="background-image:url(' + Vvveb.imgBaseUrl + node.image + ')"><span>' + node.name + '</span></label>\
+                                <input type="checkbox" id="id' + id + '">\
+                            </li>')[0];
                 li.append(drawComponentsTreeTraverse(node.children));
-            } else {
+            }
+            else {
                 li = generateElements('<li data-component="' + node.name + '" class="file">\
-							<label for="id' + id + '" style="background-image:url(' + Vvveb.imgBaseUrl + node.image + ')"><span>' + node.name + '</span></label>\
-							<input type="checkbox" id="id' + id + '">\
-							</li>')[0];
+                            <label for="id' + id + '" style="background-image:url(' + Vvveb.imgBaseUrl + node.image + ')"><span>' + node.name + '</span></label>\
+                            <input type="checkbox" id="id' + id + '">\
+                            </li>')[0];
             }
 
             li._treeNode = node.node;
@@ -2906,6 +2865,7 @@ Vvveb.SectionList = {
                 node.click();
             }
         });
+
 
         document.querySelector(this.selector).addEventListener("click", function(e) {
             let element = e.target.closest("li[data-component] label");
@@ -2968,13 +2928,28 @@ Vvveb.SectionList = {
                 img.setAttribute("src", "");
                 img.style.display = "none";
             }
+        })
+
+        /*
+        document.querySelector(this.selector).addEventListener("click", ".up-btn", function (e) {
+            let section = e.target.closest(".section-item");
+            let node = section._node;
+            Vvveb.Builder.moveNodeUp(node);
+            Vvveb.Builder.moveNodeUp(section);
+
+            e.preventDefault();
         });
 
-        document.querySelector(".sections-list").addEventListener("mouseout", function(e) {
-            sectionIn = element;
-            img.setAttribute("src", "");
-            img.style.display = "none";
+        document.querySelector(this.selector).addEventListener("click", ".down-btn", function (e) {
+            let section = e.target.closest(".section-item");
+            let node = section._node;
+            Vvveb.Builder.moveNodeDown(node);
+            Vvveb.Builder.moveNodeDown(section);
+
+            e.preventDefault();
         });
+        */
+
 
         let self = this;
         document.querySelector(".sections-list").addEventListener("click", function(e) {
@@ -3015,12 +2990,13 @@ Vvveb.SectionList = {
                 Vvveb.Builder.selectNode(node);
                 Vvveb.Builder.loadNodeComponent(node);
                 /*
-				Vvveb.Builder.frameHtml.animate({
-					scrollTop: node.offset().top
-				}, 1000);
+                Vvveb.Builder.frameHtml.animate({
+                    scrollTop: node.offset().top
+                }, 1000);
 
-				delay(() => node.click(), 1000);
-				*/
+                delay(() => node.click(), 1000);
+                */
+
 
                 node = node;
                 Vvveb.Undo.addMutation({
@@ -3029,6 +3005,7 @@ Vvveb.SectionList = {
                     addedNodes  : [node],
                     nextSibling : node.nextSibling
                 });
+
 
                 self.loadSections();
                 Vvveb.TreeList.loadComponents();
@@ -3081,6 +3058,7 @@ Vvveb.SectionList = {
         let html = drawComponentsTree(tree);
         document.querySelector("ol", sectionListItem).replaceWith(html);
     },
+
 
     addSection : function(data) {
         let section = generateElements(tmpl("vvveb-section", data))[0];
@@ -3161,7 +3139,7 @@ Vvveb.SectionList = {
             selected = e.target
         }
     },
-};
+}
 
 Vvveb.TreeList = {
     selector : '#tree-list',
@@ -3180,30 +3158,30 @@ Vvveb.TreeList = {
         let offset = [0, 0];
         let self = this;
 
-        // header.addEventListener('mousedown', function(e) {
-        // 	if (e.which == 1) {//left click
-        // 		isDown = true;
-        // 		offset = [
-        // 			self.container.offsetLeft - e.clientX,
-        // 			self.container.offsetTop - e.clientY
-        // 		];
-        // 	}
-        // }, true);
-        //
-        // document.addEventListener('mouseup', function() {
-        // 	isDown = false;
-        // }, true);
-        //
-        // document.addEventListener('mousemove', function(event) {
-        // 	if (isDown) {
-        // 		event.preventDefault();
-        // 		let left = Math.max(event.clientX + offset[0], 0);
-        // 		let top = Math.max(event.clientY + offset[1], 0);
-        //
-        // 		if (left >= 0 && (left < (window.innerWidth - self.container.clientWidth))) self.container.style.left = left + "px";
-        // 		if (top >= 0 && (top < (window.innerHeight - self.container.clientHeight))) self.container.style.top  = top + "px";
-        // 	}
-        // });
+        header.addEventListener('mousedown', function(e) {
+            if (e.which == 1) {//left click
+                isDown = true;
+                offset = [
+                    self.container.offsetLeft - e.clientX,
+                    self.container.offsetTop - e.clientY
+                ];
+            }
+        }, true);
+
+        document.addEventListener('mouseup', function() {
+            isDown = false;
+        }, true);
+
+        document.addEventListener('mousemove', function(event) {
+            if (isDown) {
+                event.preventDefault();
+                let left = Math.max(event.clientX + offset[0], 0);
+                let top = Math.max(event.clientY + offset[1], 0);
+
+                if (left >= 0 && (left < (window.innerWidth - self.container.clientWidth))) self.container.style.left = left + "px";
+                if (top >= 0 && (top < (window.innerHeight - self.container.clientHeight))) self.container.style.top = top + "px";
+            }
+        });
 
         document.querySelector(this.selector).addEventListener("click", function(e) {
             let element = e.target.closest("li[data-component]");
@@ -3217,19 +3195,19 @@ Vvveb.TreeList = {
                 document.querySelector(self.selector + " .active")?.classList.remove("active");
                 element.querySelector("label").classList.add("active");
             }
-        });
+        })
 
-        // document.querySelector(this.selector).addEventListener("mousemove", function (e) {
-        // 	let element = e.target.closest("li[data-component]");
-        // 	if (element) {
-        // 		node = element._treeNode;
-        //
-        // 		node.dispatchEvent(new MouseEvent("mousemove", {
-        // 			bubbles: true,
-        // 			cancelable: true,
-        // 		}));
-        // 	}
-        // })
+        document.querySelector(this.selector).addEventListener("mousemove", function(e) {
+            let element = e.target.closest("li[data-component]");
+            if (element) {
+                node = element._treeNode;
+
+                node.dispatchEvent(new MouseEvent("mousemove", {
+                    bubbles    : true,
+                    cancelable : true,
+                }));
+            }
+        })
     },
 
     selectComponent : function(node) {
@@ -3289,7 +3267,7 @@ Vvveb.TreeList = {
         list.replaceWith(ol);
         //list.replaceWith(html);
     },
-};
+}
 
 Vvveb.Breadcrumb = {
     tree : false,
@@ -3352,12 +3330,44 @@ Vvveb.Breadcrumb = {
             currentElement = currentElement.parentElement;
         }
     }
-};
+}
 
 Vvveb.FontsManager = {
 
     activeFonts : [],
     providers   : {},//{"google":GoogleFontsManager};
+
+    addFontList : function(provider, groupName, fontList) {
+        let fonts = {};
+        let fontNames = [];
+
+        let fontSelect = generateElements("<optgroup label='" + groupName + "'></optgroup>")[0];
+        for (font in fontList) {
+            fontNames.push({"text" : font, "value" : font, "data-provider" : provider});
+            let option = new Option(font, font);
+            option.dataset.provider = provider;
+            //option.style.setProperty("font-family", font);//font preview if the fonts are loaded in editor
+            fontSelect.append(option);
+        }
+        document.getElementById("font-family").append(fontSelect);
+
+        let list = Vvveb.Components.getProperty("_base", "font-family");
+        if (list) {
+            list.onChange = function(node, value, input, component) {
+                let option = input.options[input.selectedIndex];
+                Vvveb.FontsManager.addFont(option.dataset.provider, value, node);
+                return node;
+            };
+
+            list.data.options.push({optgroup : groupName});
+            list.data.options = list.data.options.concat(fontNames);
+
+            Vvveb.Components.updateProperty("_base", "font-family", {data : list.data});
+
+            //update default font list
+            fontList = list.data.options;
+        }
+    },
 
     addProvider : function(provider, Obj) {
         this.providers[provider] = Obj;
@@ -3375,6 +3385,8 @@ Vvveb.FontsManager = {
     },
 
     removeFont : function(provider, fontFamily) {
+        if (!provider) return;
+
         let providerObj = this.providers[provider];
         if (provider != "default" && providerObj) {
             providerObj.removeFont(fontFamily);
@@ -3408,7 +3420,7 @@ Vvveb.ColorPalette = {
     remove : function(color) {
         delete this.colors[name];
     },
-};
+}
 
 function friendlyName(name) {
     name = name.replaceAll("--bs-", "").replaceAll("-", " ").trim();
@@ -3436,6 +3448,7 @@ Vvveb.ColorPaletteManager = {
                             let name = style[k];
                             let value = style.getPropertyValue(name).trim();
                             let type = "";
+
 
                             if (name.startsWith("--")) {
                                 //ignore bootstrap rgb variables
@@ -3511,7 +3524,7 @@ Vvveb.ColorPaletteManager = {
     },
 
     init : function(document) {
-        // Vvveb.Components.render("config/bootstrap", ".configuration .component-properties");
+        Vvveb.Components.render("config/bootstrap", "#configuration .component-properties");
 
         //apply current theme color palette
         //let colors = Vvveb.ColorPaletteManager.getType("color");
@@ -3538,7 +3551,7 @@ Vvveb.Config = {
 
         });
     }
-};
+}
 
 // Toggle fullscreen
 function launchFullScreen(document) {
@@ -3548,21 +3561,21 @@ function launchFullScreen(document) {
             document.exitFullScreen();
         else
             document.documentElement.requestFullScreen();
-        //mozilla
+//mozilla
     } else if (document.documentElement.mozRequestFullScreen) {
 
         if (document.mozFullScreenElement)
             document.mozCancelFullScreen();
         else
             document.documentElement.mozRequestFullScreen();
-        //webkit
+//webkit
     } else if (document.documentElement.webkitRequestFullScreen) {
 
         if (document.webkitFullscreenElement)
             document.webkitExitFullscreen();
         else
             document.documentElement.webkitRequestFullScreen();
-        //ie
+//ie
     } else if (document.documentElement.msRequestFullscreen) {
 
         if (document.msFullScreenElement)

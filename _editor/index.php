@@ -34,12 +34,7 @@ $link = optional_param('link', '', PARAM_TEXT);
 require_login();
 require_capability('moodle/site:config', context_system::instance());
 
-function loadsvg($file) {
-    echo file_get_contents($file);
-}
-
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
 <head>
     <meta charset="utf-8">
@@ -48,59 +43,58 @@ function loadsvg($file) {
 
     <title>VvvebJs</title>
 
-    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/editor.css" rel="stylesheet">
 </head>
 <body>
 
 <div id="vvveb-builder">
     <div id="top-panel">
-        <img src="img/logo.png" class="float-start" id="logo">
+        <img src="resources/logo.png" alt="Vvveb" class="float-start" id="logo">
 
         <div class="btn-group float-start" role="group">
-            <button class="btn btn-light active" title="Toggle file manager" id="toggle-file-manager-btn"
-                    data-vvveb-action="toggleTreeList" data-bs-toggle="button" aria-pressed="false">
-                <img src="libs/builder/icons/file-manager-layout.svg" width="18" height="18" role="presentation">
-            </button>
-
             <button class="btn btn-light active" title="Toggle left column" id="toggle-left-column-btn"
                     data-vvveb-action="toggleLeftColumn" data-bs-toggle="button" aria-pressed="false">
-                <img src="libs/builder/icons/left-column-layout.svg" width="18" height="18" role="presentation">
+                <img src="libs/builder/icons/left-column-layout.svg" width="18" height="18" alt="" role="presentation">
             </button>
-
-            <button class="btn btn-light active" title="Toggle right column" id="toggle-right-column-btn"
+            <button class="btn btn-light" title="Toggle right column" id="toggle-right-column-btn"
                     data-vvveb-action="toggleRightColumn" data-bs-toggle="button" aria-pressed="false">
-                <img src="libs/builder/icons/right-column-layout.svg" width="18" height="18" role="presentation">
+                <img src="libs/builder/icons/right-column-layout.svg" width="18" height="18" alt="" role="presentation">
             </button>
         </div>
 
         <div class="btn-group me-3" role="group">
             <button class="btn btn-light" title="Undo (Ctrl/Cmd + Z)" id="undo-btn" data-vvveb-action="undo"
                     data-vvveb-shortcut="ctrl+z">
-                <?php loadsvg("img/icon-undo.svg") ?>
+                <i class="la la-undo"></i>
             </button>
 
             <button class="btn btn-light" title="Redo (Ctrl/Cmd + Shift + Z)" id="redo-btn" data-vvveb-action="redo"
                     data-vvveb-shortcut="ctrl+shift+z">
-                <?php loadsvg("img/icon-redo.svg") ?>
+                <i class="la la-undo la-flip-horizontal"></i>
             </button>
         </div>
 
         <div class="btn-group me-3" role="group">
             <button class="btn btn-light" title="Designer Mode (Free dragging)" id="designer-mode-btn"
                     data-bs-toggle="button" aria-pressed="false" data-vvveb-action="setDesignerMode">
-                <?php loadsvg("img/icon-hand-rock.svg") ?>
+                <i class="la la-hand-rock"></i>
             </button>
 
             <button class="btn btn-light" title="Preview" id="preview-btn" type="button" data-bs-toggle="button"
                     aria-pressed="false" data-vvveb-action="preview">
-                <?php loadsvg("img/icon-preview.svg") ?>
+                <i class="icon-eye-outline"></i>
             </button>
 
             <button class="btn btn-light" title="Fullscreen (F11)" id="fullscreen-btn" data-bs-toggle="button"
                     aria-pressed="false" data-vvveb-action="fullscreen">
-                <?php loadsvg("img/icon-expand.svg") ?>
+                <i class="icon-expand-outline"></i>
             </button>
+
+            <button class="btn btn-light active" title="Toggle navigator" id="toggle-tree-list" data-bs-toggle="button"
+                    data-vvveb-action="toggleTreeList" aria-pressed="true">
+                <i class="icon-layers-outline"></i>
+            </button>
+
         </div>
 
         <div class="btn-group me-2 float-end" role="group">
@@ -121,43 +115,57 @@ function loadsvg($file) {
                 <input type="hidden" name="htmldata" id="form-htmldata">
                 <button datatype="--submit" class="btn btn-info btn-sm btn-icon preview-btn mx-2"
                         data-vvveb-action="openPreview">
-                    <?php loadsvg("img/icon-preview.svg") ?>
+                    <i class="icon-save-outline"></i>
                     <span>Preview</span>
                 </button>
                 </form><?php
             } ?>
-
             <button class="btn btn-primary btn-sm btn-icon save-btn" title="Export (Ctrl + E)" id="save-btn"
                     data-vvveb-action="saveAjax"
                     data-vvveb-url="save.php?page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>"
                     data-v-vvveb-shortcut="ctrl+e">
-                <span class="loading d-none">
-                    <?php loadsvg("img/icon-save.svg") ?>
+                <div class="loading d-none">
+                    <i class="icon-save-outline"></i>
                     <span class="spinner-border spinner-border-sm align-middle" role="status" aria-hidden="true"></span>
-                    <span>Saving </span>
-                    ...
-                </span>
-                <span class="button-text">
-                    <?php loadsvg("img/icon-save.svg") ?>
+                    <span>Saving </span> ...
+                </div>
+
+                <div class="button-text">
+                    <i class="icon-save-outline"></i>
                     <span>Save</span>
-                </span>
+                </div>
+
             </button>
         </div>
 
         <div class="float-end me-3">
+
+            <button class="btn btn-light border-0 btn-sm btn-dark-mode" data-vvveb-action="darkMode">
+                <!-- i class="la la-adjust la-lg"></i -->
+                <i class="la la-sun"></i>
+            </button>
+
+            <a href="#" class="btn btn-light btn-sm btn-preview-url" target="blank" title="View page">
+                <i class="la la-external-link-alt"></i>
+            </a>
+
             <div class="btn-group responsive-btns" role="group">
-                <button id="desktop-view" data-view="" class="btn btn-light active" title="Desktop view"
-                        data-vvveb-action="viewport">
-                    <i class="la la-laptop"></i>
-                </button>
+
                 <button id="mobile-view" data-view="mobile" class="btn btn-light" title="Mobile view"
                         data-vvveb-action="viewport">
                     <i class="la la-mobile"></i>
                 </button>
+
                 <button id="tablet-view" data-view="tablet" class="btn btn-light" title="Tablet view"
                         data-vvveb-action="viewport">
                     <i class="la la-tablet"></i>
                 </button>
+
+                <button id="desktop-view" data-view="" class="btn btn-light" title="Desktop view"
+                        data-vvveb-action="viewport">
+                    <i class="la la-laptop"></i>
+                </button>
+
                 <div class="percent">
                     <input type="number" id="zoom" value="100" step="10" min="10" max="100" class="form-control"
                            data-vvveb-action="zoomChange" data-vvveb-on="change">
@@ -170,182 +178,337 @@ function loadsvg($file) {
     </div>
 
     <div id="left-panel">
+        <div>
+            <div class="drag-elements">
 
-        <div id="tree-list">
-            <div class="header">
-                <div>Navigator</div>
-            </div>
-            <div class="tree">
-                <ol>
-                </ol>
-            </div>
-        </div>
+                <div class="header">
+                    <ul class="nav nav-tabs  nav-fill" id="elements-tabs" role="tablist">
+                        <li class="nav-item sections-tab">
+                            <a class="nav-link active" id="sections-tab" data-bs-toggle="tab" href="#sections"
+                               role="tab" aria-controls="sections" aria-selected="true" title="Sections">
+                                <i class="icon-layers-outline"></i>
+                                <!-- img src="../../../js/vvvebjs/icons/list_group.svg" height="23" -->
+                                <!-- div><small>Sections</small></div -->
+                            </a>
+                        </li>
+                        <li class="nav-item component-tab">
+                            <a class="nav-link" id="components-tab" data-bs-toggle="tab" href="#components-tabs"
+                               role="tab" aria-controls="components" aria-selected="false" title="Components">
+                                <i class="icon-cube-outline"></i>
+                                <!-- img src="../../../js/vvvebjs/icons/product.svg" height="23" -->
+                                <!-- div><small>Components</small></div -->
+                            </a>
+                        </li>
+                        <!-- li class="nav-item sections-tab">
+                          <a class="nav-link" id="sections-tab" data-bs-toggle="tab" href="#sections" role="tab" aria-controls="sections" aria-selected="false" title="Sections"><img src="../../../js/vvvebjs/icons/list_group.svg" width="24" height="23"> <div><small>Sections</small></div></a>
+                        </li -->
+                        <li class="nav-item component-properties-tab d-none">
+                            <a class="nav-link" id="properties-tab" data-bs-toggle="tab" href="#properties" role="tab"
+                               aria-controls="properties" aria-selected="false" title="Properties">
+                                <i class="icon-settings-outline"></i>
+                                <!-- img src="../../../js/vvvebjs/icons/filters.svg" height="23"-->
+                                <!-- div><small>Properties</small></div -->
+                            </a>
+                        </li>
+                        <li class="nav-item component-configuration-tab">
+                            <a class="nav-link" id="configuration-tab" data-bs-toggle="tab" href="#configuration"
+                               role="tab" aria-controls="configuration" aria-selected="false" title="Styles">
+                                <i class="icon-color-wand-outline"></i>
+                                <!-- img src="../../../js/vvvebjs/icons/filters.svg" height="23"-->
+                                <!-- div><small>Properties</small></div -->
+                            </a>
+                        </li>
+                    </ul>
 
-        <div class="drag-elements">
+                    <div class="tab-content">
 
-            <div class="header">
-                <ul class="nav nav-tabs  nav-fill" id="elements-tabs" role="tablist">
-                    <li class="nav-item sections-tab">
-                        <a class="nav-link active" id="sections-tab" data-bs-toggle="tab" href="#sections" role="tab"
-                           aria-controls="sections" aria-selected="true" title="Sections">
-                            <?php loadsvg("img/icon-layers.svg") ?>
-                        </a>
-                    </li>
-                    <li class="nav-item component-tab">
-                        <a class="nav-link" id="components-tab" data-bs-toggle="tab" href="#components-tabs" role="tab"
-                           aria-controls="components" aria-selected="false" title="Components">
-                            <?php loadsvg("img/icon-cube.svg") ?>
-                        </a>
-                    </li>
-                </ul>
+                        <div class="tab-pane show active sections" id="sections" role="tabpanel"
+                             aria-labelledby="sections-tab">
 
-                <div class="tab-content">
-                    <div class="tab-pane show active" id="sections" role="tabpanel"
-                         aria-labelledby="sections-tab">
-                        <div class="tab-pane sections show active" id="sections-list" data-section="style"
-                             role="tabpanel"
-                             aria-labelledby="style-tab">
-                            <div class="drag-elements-sidepane sidepane sidepane-1">
-                                <div>
-                                    <div class="sections-container p-4">
+                            <ul class="nav nav-tabs nav-fill nav-underline  sections-tabs" id="sections-tabs"
+                                role="tablist">
+                                <li class="nav-item content-tab">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#sections-new-tab" role="tab"
+                                       aria-controls="components" aria-selected="false">
+                                        <i class="icon-albums-outline"></i>
+                                        <div><span>Sections</span></div>
+                                    </a>
+                                </li>
+                                <li class="nav-item style-tab">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#sections-list" role="tab"
+                                       aria-controls="sections" aria-selected="true">
+                                        <i class="icon-document-text-outline"></i>
+                                        <div><span>Page Sections</span></div>
+                                    </a>
+                                </li>
+                            </ul>
 
-                                        <div class="section-item" draggable="true">
-                                            <div class="controls">
-                                                <div class="handle"></div>
-                                                <div class="info">
-                                                    <div class="name">&nbsp;
-                                                        <div class="type">&nbsp;</div>
+                            <div class="tab-content">
+
+                                <div class="tab-pane" id="sections-list" data-section="style" role="tabpanel"
+                                     aria-labelledby="style-tab">
+                                    <div class="drag-elements-sidepane sidepane">
+                                        <div>
+                                            <div class="sections-container p-4">
+
+                                                <div class="section-item" draggable="true">
+                                                    <div class="controls">
+                                                        <div class="handle"></div>
+                                                        <div class="info">
+                                                            <div class="name">&nbsp;
+                                                                <div class="type">&nbsp;</div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="section-item" draggable="true">
-                                            <div class="controls">
-                                                <div class="handle"></div>
-                                                <div class="info">
-                                                    <div class="name">&nbsp;
-                                                        <div class="type">&nbsp;</div>
+                                                <div class="section-item" draggable="true">
+                                                    <div class="controls">
+                                                        <div class="handle"></div>
+                                                        <div class="info">
+                                                            <div class="name">&nbsp;
+                                                                <div class="type">&nbsp;</div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="section-item" draggable="true">
-                                            <div class="controls">
-                                                <div class="handle"></div>
-                                                <div class="info">
-                                                    <div class="name">&nbsp;
-                                                        <div class="type">&nbsp;</div>
+                                                <div class="section-item" draggable="true">
+                                                    <div class="controls">
+                                                        <div class="handle"></div>
+                                                        <div class="info">
+                                                            <div class="name">&nbsp;
+                                                                <div class="type">&nbsp;</div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <!-- div class="section-item" draggable="true">
+                                                    <div class="controls">
+                                                        <div class="handle"></div>
+                                                        <div class="info">
+                                                            <div class="name">welcome area
+                                                                <div class="type">section</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="buttons"> <a class="delete-btn" href="" title="Remove section"><i class="la la-trash text-danger"></i></a>
+
+                                                            <a class="properties-btn" href="" title="Properties"><i class="icon-settings-outline"></i></a> </div>
+                                                    </div>
+                                                    <input class="header_check" type="checkbox" id="section-components-9338">
+                                                    <label for="section-components-9338">
+                                                        <div class="header-arrow"></div>
+                                                    </label>
+                                                    <div class="tree">
+                                                        <ol></ol>
+                                                    </div>
+                                                </div -->
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="tab-pane show active" id="sections-new-tab" data-section="content"
+                                     role="tabpanel" aria-labelledby="content-tab">
+
+                                    <div class="search">
+                                        <div class="expand">
+                                            <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i
+                                                        class="la la-plus"></i></button>
+                                            <button title="Collapse all" data-vvveb-action="collapse"><i
+                                                        class="la la-minus"></i></button>
+                                        </div>
+
+                                        <input class="form-control section-search" placeholder="Search sections"
+                                               type="text" data-vvveb-action="search" data-vvveb-on="keyup">
+                                        <button class="clear-backspace" data-vvveb-action="clearSearch"
+                                                title="Clear search">
+                                            <i class="la la-times"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="drag-elements-sidepane sidepane">
+                                        <div class="block-preview"><img src="" style="display:none"></div>
+                                        <div>
+
+                                            <ul class="sections-list clearfix" data-type="leftpanel">
+                                            </ul>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane show" id="components-tabs" role="tabpanel"
+                             aria-labelledby="components-tab">
+
+                            <ul class="nav nav-tabs nav-fill nav-underline  sections-tabs" role="tablist">
+                                <li class="nav-item components-tab" style="display: none">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#components" role="tab"
+                                       aria-controls="components" aria-selected="true">
+                                        <i class="icon-cube-outline"></i>
+                                        <div><span>Components</span></div>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+
+                                <div class="tab-pane show active components" id="components" data-section="components"
+                                     role="tabpanel" aria-labelledby="components-tab">
+
+                                    <div class="search">
+                                        <div class="expand">
+                                            <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i
+                                                        class="la la-plus"></i></button>
+                                            <button title="Collapse all" data-vvveb-action="collapse"><i
+                                                        class="la la-minus"></i></button>
+                                        </div>
+
+                                        <input class="form-control component-search" placeholder="Search components"
+                                               type="text" data-vvveb-action="search" data-vvveb-on="keyup">
+                                        <button class="clear-backspace" data-vvveb-action="clearSearch">
+                                            <i class="la la-times"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="drag-elements-sidepane sidepane">
+                                        <div>
+
+                                            <ul class="components-list clearfix" data-type="leftpanel">
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                    </div>
 
-                    <div class="tab-pane show" id="components-tabs" role="tabpanel" aria-labelledby="components-tab">
-                        <ul class="nav nav-tabs nav-fill sections-tabs" role="tablist">
-                            <li class="nav-item content-tab">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#sections-new-tab" role="tab"
-                                   aria-controls="components" aria-selected="false">
-                                    <?php loadsvg("img/icon-albums.svg") ?>
-                                    <div><span>Sections</span></div>
-                                </a>
-                            </li>
-                            <li class="nav-item blocks-tab">
-                                <a class="nav-link" data-bs-toggle="tab" href="#blocks" role="tab"
-                                   aria-controls="components" aria-selected="false">
-                                    <?php loadsvg("img/icon-copy.svg") ?>
-                                    <div><span>Blocks</span></div>
-                                </a>
-                            </li>
-                            <li class="nav-item components-tab">
-                                <a class="nav-link" data-bs-toggle="tab" href="#components" role="tab"
-                                   aria-controls="components" aria-selected="true">
-                                    <?php loadsvg("img/icon-cube.svg") ?>
-                                    <div><span>Components</span></div>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane sections show active" id="sections-new-tab" data-section="content"
-                                 role="tabpanel" aria-labelledby="content-tab">
-                                <div class="search">
-                                    <div class="expand">
-                                        <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i
-                                                    class="la la-plus"></i></button>
-                                        <button title="Collapse all" data-vvveb-action="collapse"><i
-                                                    class="la la-minus"></i></button>
-                                    </div>
-
-                                    <input class="form-control section-search" placeholder="Search sections" type="text"
-                                           data-vvveb-action="search" data-vvveb-on="keyup">
-                                    <button class="clear-backspace" data-vvveb-action="clearSearch"
-                                            title="Clear search">
-                                        <i class="la la-times"></i>
-                                    </button>
-                                </div>
-                                <div class="drag-elements-sidepane sidepane sidepane-2">
-                                    <div class="block-preview"><img src="" style="display:none"></div>
-                                    <div>
-                                        <ul class="sections-list clearfix" data-type="leftpanel"></ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane blocks" id="blocks" data-section="content" role="tabpanel"
-                                 aria-labelledby="content-tab">
-                                <div class="search">
-                                    <div class="expand">
-                                        <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i
-                                                    class="la la-plus"></i></button>
-                                        <button title="Collapse all" data-vvveb-action="collapse"><i
-                                                    class="la la-minus"></i></button>
-                                    </div>
-
-                                    <input class="form-control block-search" placeholder="Search blocks" type="text"
-                                           data-vvveb-action="search" data-vvveb-on="keyup">
-                                    <button class="clear-backspace" data-vvveb-action="clearSearch">
-                                        <i class="la la-times"></i>
-                                    </button>
-                                </div>
-                                <div class="drag-elements-sidepane sidepane sidepane-3">
-                                    <div class="block-preview"><img src=""></div>
-                                    <div>
-                                        <ul class="blocks-list clearfix" data-type="leftpanel">
+                        <div class="tab-pane" id="properties" role="tabpanel" aria-labelledby="properties-tab">
+                            <div class="component-properties-sidepane">
+                                <div>
+                                    <div class="component-properties">
+                                        <ul class="nav nav-tabs nav-fill nav-underline" id="properties-tabs"
+                                            role="tablist">
+                                            <li class="nav-item content-tab">
+                                                <a class="nav-link content-tab active" data-bs-toggle="tab"
+                                                   href="#content-left-panel-tab" role="tab" aria-controls="components"
+                                                   aria-selected="true">
+                                                    <i class="icon-albums-outline"></i> <span>Content</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item style-tab">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#style-left-panel-tab"
+                                                   role="tab" aria-controls="style" aria-selected="false">
+                                                    <i class="icon-color-fill-outline"></i> <span>Style</span></a>
+                                            </li>
+                                            <li class="nav-item advanced-tab">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#advanced-left-panel-tab"
+                                                   role="tab" aria-controls="advanced" aria-selected="false">
+                                                    <i class="icon-settings-outline"></i> <span>Advanced</span></a>
+                                            </li>
                                         </ul>
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane components" id="components" data-section="components" role="tabpanel"
-                                 aria-labelledby="components-tab">
-                                <div class="search">
-                                    <div class="expand">
-                                        <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i
-                                                    class="la la-plus"></i></button>
-                                        <button title="Collapse all" data-vvveb-action="collapse"><i
-                                                    class="la la-minus"></i></button>
-                                    </div>
+                                        <div class="tab-content" data-offset="20">
+                                            <div class="tab-pane show active" id="content-left-panel-tab"
+                                                 data-section="content" role="tabpanel" aria-labelledby="content-tab">
+                                                <div class="alert alert-dismissible fade show alert-light m-3"
+                                                     role="alert" style="">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                            aria-label="Close"></button>
+                                                    <strong>No selected element!</strong><br> Click on an element to
+                                                    edit.
+                                                </div>
+                                            </div>
 
-                                    <input class="form-control component-search" placeholder="Search components"
-                                           type="text" data-vvveb-action="search" data-vvveb-on="keyup">
-                                    <button class="clear-backspace" data-vvveb-action="clearSearch">
-                                        <i class="la la-times"></i>
-                                    </button>
-                                </div>
-                                <div class="drag-elements-sidepane sidepane sidepane-4">
-                                    <div>
-                                        <ul class="components-list clearfix" data-type="leftpanel"></ul>
+                                            <div class="tab-pane show" id="style-left-panel-tab" data-section="style"
+                                                 role="tabpanel" aria-labelledby="style-tab">
+                                                <div class="border-bottom pb-2 px-2">
+                                                    <div class="justify-content-end d-flex">
+                                                        <select class="form-select w-50" data-vvveb-action="setState"
+                                                                data-vvveb-on="change">
+                                                            <option value=""> - State -</option>
+                                                            <option value="hover">hover</option>
+                                                            <option value="active">active</option>
+                                                            <option value="nth-of-type(2n)">nth-of-type(2n)</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane show" id="advanced-left-panel-tab"
+                                                 data-section="advanced" role="tabpanel" aria-labelledby="advanced-tab">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="tab-pane" id="configuration" role="tabpanel" aria-labelledby="configuration-tab">
+
+                            <ul class="nav nav-tabs nav-fill nav-underline sections-tabs" id="vars-tabs" role="tablist">
+                                <li class="nav-item vars-tab">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#vars-tab" role="tab"
+                                       aria-controls="components" aria-selected="false">
+                                        <i class="icon-brush-outline"></i>
+                                        <div><span>Variables</span></div>
+                                    </a>
+                                </li>
+                                <li class="nav-item css-tab">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#css-tab" role="tab"
+                                       aria-controls="css" aria-selected="true">
+                                        <i class="icon-code-slash-outline"></i>
+                                        <div><span>Css</span></div>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+
+                                <div class="tab-pane show active" id="vars-tab" data-section="vars" role="tabpanel"
+                                     aria-labelledby="vars-tab">
+
+                                    <div class="drag-elements-sidepane sidepane">
+                                        <div data-offset="80">
+                                            <div class="component-properties">
+                                                <!-- color palette -->
+                                                <!--
+                                                <label class="header" data-header="default" for="header_pallette"><span>Global styles</span>
+                        <div class="header-arrow"></div>
+                                                </label> -->
+                                                <input class="header_check" type="checkbox" checked
+                                                       id="header_pallette">
+                                                <div class="tab-pane section px-0" data-section="content">
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" id="css-tab" data-section="css" role="tabpanel"
+                                     aria-labelledby="css-tab">
+                                    <div class="drag-elements-sidepane sidepane">
+                                        <div data-offset="80">
+                                            <textarea id="css-editor" class="form-control" rows="24"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div><!-- end configuration tab -->
+
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
 
@@ -518,19 +681,18 @@ function loadsvg($file) {
                     </div>
 
                     <div id="select-actions">
-                        <div class="title">Double click to open editor</div>
-                        <a id="drag-btn" href="" title="Drag element"><?php loadsvg("img/icon-expand.svg") ?></a>
-                        <a id="parent-btn" href=""
-                           title="Select parent"><?php loadsvg("img/icon-level-up-alt.svg") ?></a>
+                        <a id="drag-btn" href="" title="Drag element"><i class="la la-arrows-alt"></i></a>
+                        <a id="parent-btn" href="" title="Select parent" class="la-rotate-180"><i
+                                    class="la la-level-up-alt"></i></a>
 
-                        <a id="up-btn" href="" title="Move element up"><?php loadsvg("img/icon-arrow-up.svg") ?></a>
-                        <a id="down-btn" href=""
-                           title="Move element down"><?php loadsvg("img/icon-arrow-down.svg") ?></a>
-                        <a id="edit-code-btn" href=""
-                           title="Edit html code"><?php loadsvg("img/icon-code-slash.svg") ?></a>
+                        <a id="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
+                        <a id="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
+                        <a id="edit-code-btn" href="" title="Edit html code"><i class="icon-code-outline"></i></a>
 
-                        <a id="clone-btn" href="" title="Clone element"><?php loadsvg("img/icon-copy.svg") ?></a>
-                        <a id="delete-btn" href="" title="Remove element"><?php loadsvg("img/icon-trash.svg") ?></i></a>
+                        <a id="save-reusable-btn" href="" title="Save as reusable" class="mx-2"><i
+                                    class="icon-save-outline"></i></a>
+                        <a id="clone-btn" href="" title="Clone element"><i class="icon-copy-outline"></i></a>
+                        <a id="delete-btn" href="" title="Remove element"><i class="icon-trash-outline"></i></a>
                     </div>
 
                     <div class="resize">
@@ -576,14 +738,20 @@ function loadsvg($file) {
                                     <small>Blocks</small>
                                 </a>
                             </li>
+                            <!--
+                                            <li class="nav-item component-properties-tab" style="display:none">
+                                              <a class="nav-link" id="box-properties-tab" data-bs-toggle="tab" href="#box-properties" role="tab" aria-controls="properties" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
+                                            </li>
+                            -->
                         </ul>
 
                         <div class="section-box-actions">
 
-                            <div id="close-section-btn" class="btn btn-outline-secondary btn-sm border-0 float-end"><i
+                            <div id="close-section-btn"
+                                 class="btn btn-outline-secondary btn-sm mt-1 border-0 float-end"><i
                                         class="la la-times la-lg"></i></div>
 
-                            <div class="me-4 float-end">
+                            <div class="me-4 small mt-2 float-end">
 
                                 <div class="form-check d-inline-block small me-1">
                                     <input type="radio" id="add-section-insert-mode-after" value="after"
@@ -620,7 +788,7 @@ function loadsvg($file) {
                                     </button>
                                 </div>
 
-                                <div>
+                                <div class="overflow-y-auto mb-5">
                                     <div>
 
                                         <ul class="components-list clearfix" data-type="addbox">
@@ -647,7 +815,7 @@ function loadsvg($file) {
                                     </button>
                                 </div>
 
-                                <div>
+                                <div class="overflow-y-auto mb-5">
                                     <div>
 
                                         <ul class="blocks-list clearfix" data-type="addbox">
@@ -686,42 +854,21 @@ function loadsvg($file) {
     <div id="right-panel">
         <div class="component-properties">
 
-            <ul class="nav nav-tabs nav-fill" id="properties-tabs" role="tablist">
+            <ul class="nav nav-tabs nav-fill nav-underline" id="properties-tabs" role="tablist">
                 <li class="nav-item content-tab">
                     <a class="nav-link active" data-bs-toggle="tab" href="#content-tab" role="tab"
                        aria-controls="components" aria-selected="true">
-                        <?php loadsvg("img/icon-albums.svg") ?>
-                        <div><span>Content</span></div>
-                    </a>
+                        <i class="icon-albums-outline"></i> <span>Content</span></a>
                 </li>
                 <li class="nav-item style-tab">
                     <a class="nav-link" data-bs-toggle="tab" href="#style-tab" role="tab" aria-controls="blocks"
                        aria-selected="false">
-                        <?php loadsvg("img/icon-color-fill.svg") ?>
-                        <div><span>Style</span></div>
-                    </a>
+                        <i class="icon-color-fill-outline"></i> <span>Style</span></a>
                 </li>
                 <li class="nav-item advanced-tab">
                     <a class="nav-link" data-bs-toggle="tab" href="#advanced-tab" role="tab" aria-controls="blocks"
                        aria-selected="false">
-                        <?php loadsvg("img/icon-settings.svg") ?>
-                        <div><span>Advanced</span></div>
-                    </a>
-                </li>
-
-                <!--li class="nav-item vars-tab">
-                    <a class="nav-link" data-bs-toggle="tab" href="#vars-tab" role="tab"
-                       aria-controls="components" aria-selected="false">
-                        <?php loadsvg("img/icon-brush.svg") ?>
-                        <div><span>Variables</span></div>
-                    </a>
-                </li-->
-                <li class="nav-item css-tab">
-                    <a class="nav-link" data-bs-toggle="tab" href="#css-tab" role="tab" aria-controls="css"
-                       aria-selected="true">
-                        <?php loadsvg("img/icon-code-slash.svg") ?>
-                        <div><span>Css</span></div>
-                    </a>
+                        <i class="icon-settings-outline"></i> <span>Advanced</span></a>
                 </li>
             </ul>
 
@@ -733,21 +880,25 @@ function loadsvg($file) {
                         <strong>No selected element!</strong><br> Click on an element to edit.
                     </div>
                 </div>
+
                 <div class="tab-pane show" id="style-tab" data-section="style" role="tabpanel"
                      aria-labelledby="style-tab">
+                    <div class="border-bottom pb-2 px-2">
+                        <div class="justify-content-end d-flex">
+                            <select class="form-select w-50" data-vvveb-action="setState" data-vvveb-on="change">
+                                <option value=""> - State -</option>
+                                <option value="hover">hover</option>
+                                <option value="active">active</option>
+                                <option value="nth-of-type(2n)">nth-of-type(2n)</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="tab-pane show" id="advanced-tab" data-section="advanced" role="tabpanel"
                      aria-labelledby="advanced-tab">
                 </div>
 
-                <div class="tab-pane show" id="css-tab" data-section="css" role="tabpanel"
-                     aria-labelledby="css-tab">
-                    <div class="drag-elements-sidepane sidepane sidepane-5">
-                        <div data-offset="80">
-                            <textarea id="css-editor" class="form-control" rows="24"></textarea>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -796,31 +947,24 @@ function loadsvg($file) {
 <!-- templates -->
 
 <script id="vvveb-input-textinput" type="text/html">
-
     <div>
         <input name="{%=key%}" type="text" class="form-control"/>
     </div>
-
 </script>
 <script id="vvveb-input-textareainput" type="text/html">
-
     <div>
         <textarea name="{%=key%}" {% if (typeof rows !== 'undefined') { %} rows="{%=rows%}" {% } else { %} rows="3" {% }
         %} class="form-control"/>
     </div>
-
 </script>
 <script id="vvveb-input-checkboxinput" type="text/html">
-
     <div class="form-check{% if (typeof className !== 'undefined') { %} {%=className%}{% } %}">
         <input name="{%=key%}" class="form-check-input" type="checkbox" id="{%=key%}_check">
         <label class="form-check-label" for="{%=key%}_check">{% if (typeof text !== 'undefined') { %} {%=text%} {% }
             %}</label>
     </div>
-
 </script>
 <script id="vvveb-input-radioinput" type="text/html">
-
     <div>
 
         {% for ( var i = 0; i < options.length; i++ ) { %}
@@ -835,10 +979,8 @@ function loadsvg($file) {
         {% } %}
 
     </div>
-
 </script>
 <script id="vvveb-input-radiobuttoninput" type="text/html">
-
     <div class="btn-group {%if (extraclass) { %}{%=extraclass%}{% } %} clearfix" role="group">
         {% var namespace = 'rb-' + Math.floor(Math.random() * 100); %}
 
@@ -856,10 +998,8 @@ function loadsvg($file) {
         {% } %}
 
     </div>
-
 </script>
 <script id="vvveb-input-toggle" type="text/html">
-
     <div class="form-check form-switch {% if (typeof className !== 'undefined') { %} {%=className%}{% } %}">
         <input
                 type="checkbox"
@@ -872,15 +1012,11 @@ function loadsvg($file) {
         <label class="form-check-label" for="{%=key%}">
         </label>
     </div>
-
 </script>
 <script id="vvveb-input-header" type="text/html">
-
     <h6 class="header">{%=header%}</h6>
-
 </script>
 <script id="vvveb-input-select" type="text/html">
-
     <div>
 
         <select class="form-select" name="{%=key%}">
@@ -905,10 +1041,8 @@ function loadsvg($file) {
         </select>
 
     </div>
-
 </script>
 <script id="vvveb-input-icon-select" type="text/html">
-
     <div class="input-list-select">
 
         <div class="elements">
@@ -924,10 +1058,8 @@ function loadsvg($file) {
             </div>
         </div>
     </div>
-
 </script>
 <script id="vvveb-input-html-list-select" type="text/html">
-
     <div class="input-html-list-select">
 
         <div class="current-element">
@@ -958,10 +1090,8 @@ function loadsvg($file) {
             </div>
         </div>
     </div>
-
 </script>
 <script id="vvveb-input-html-list-dropdown" type="text/html">
-
     <div class="input-html-list-select" {% if (typeof id !== "undefined") { %} id={%=id%} {% } %}>
 
     <div class="current-element">
@@ -993,20 +1123,16 @@ function loadsvg($file) {
         </div>
     </div>
     </div>
-
 </script>
 <script id="vvveb-input-dateinput" type="text/html">
-
     <div>
         <input name="{%=key%}" type="date" class="form-control"
                {% if (typeof min_date=== 'undefined') { %} min="{%=min_date%}" {% } %} {% if (typeof max_date ===
         'undefined') { %} max="{%=max_date%}" {% } %}
         />
     </div>
-
 </script>
 <script id="vvveb-input-listinput" type="text/html">
-
     <div class="sections-container">
 
         {% for ( var i = 0; i < options.length; i++ ) { %}
@@ -1019,7 +1145,12 @@ function loadsvg($file) {
                     </div>
                 </div>
                 <div class="buttons">
-                    <a class="delete-btn" href="" title="Remove section"><?php loadsvg("img/icon-trash.svg") ?></a>
+                    <a class="delete-btn" href="" title="Remove section"><i class="icon-trash-outline text-danger"></i></a>
+                    <!--
+                    <a class="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
+                    <a class="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
+                    <a class="properties-btn" href="" title="Properties"><i class="icon-settings-outline"></i></a>
+                    -->
                 </div>
             </div>
 
@@ -1047,10 +1178,8 @@ function loadsvg($file) {
         {% } %}
 
     </div>
-
 </script>
 <script id="vvveb-input-grid" type="text/html">
-
     <div class="row">
         <div class="col-6">
 
@@ -1142,10 +1271,8 @@ function loadsvg($file) {
         {% } %}
 
     </div>
-
 </script>
 <script id="vvveb-input-textvalue" type="text/html">
-
     <div class="row">
         <div class="col-6 mb-1">
             <label>Value</label>
@@ -1168,10 +1295,8 @@ function loadsvg($file) {
         {% } %}
 
     </div>
-
 </script>
 <script id="vvveb-input-rangeinput" type="text/html">
-
     <div class="input-range">
 
         <input name="{%=key%}" type="range" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-range"
@@ -1179,61 +1304,35 @@ function loadsvg($file) {
         <input name="{%=key%}" type="number" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-control"
                data-input-value/>
     </div>
-
 </script>
 <script id="vvveb-input-imageinput" type="text/html">
-
     <div>
         <input name="{%=key%}" type="text" class="form-control"/>
         <input name="file" type="file" class="form-control"/>
     </div>
-
 </script>
 <script id="vvveb-input-imageinput-gallery" type="text/html">
-
     <div>
         <img id="thumb-{%=key%}" class="img-thumbnail p-0" data-target-input="#input-{%=key%}"
              data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="" width="225" height="225">
-        <input id="input-{%=key%}" name="{%=key%}" type="text" class="form-control mt-1" />
-        <button name="button" class="btn btn-primary btn-sm btn-icon mt-2 width-100"
-                data-target-input="#input-{%=key%}"
+        <input name="{%=key%}" type="text" class="form-control mt-1" id="input-{%=key%}"/>
+        <button name="button" class="btn btn-primary btn-sm btn-icon mt-2 px-2" data-target-input="#input-{%=key%}"
                 data-target-thumb="#thumb-{%=key%}">
             <i class="la la-image la-lg"></i>
-            <span>Select image</span></button>
+            <span>Change image</span></button>
     </div>
-
 </script>
 <script id="vvveb-input-videoinput-gallery" type="text/html">
-
     <div>
-        <video id="thumb-{%=key%}" class="img-thumbnail p-0" data-target-input="#input-{%=key%}"
-               data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="" width="225" height="225" playsinline
+        <video id="thumb-v{%=key%}" class="img-thumbnail p-0" data-target-input="#input-v{%=key%}"
+               data-target-thumb="#thumb-v{%=key%}" style="cursor:pointer" src="" width="225" height="225" playsinline
                loop muted controls></video>
-        <input id="input-{%=key%}" name="{%=key%}" type="text" class="form-control mt-1" />
-        <button name="button" class="btn btn-primary btn-sm btn-icon mt-2 width-100"
-                data-target-input="#input-{%=key%}"
-                data-target-thumb="#thumb-{%=key%}">
-            <i class="la la-video la-lg"></i>
-            <span>Select video</span></button>
+        <input name="v{%=key%}" type="text" class="form-control mt-1" id="input-v{%=key%}"/>
+        <button name="button" class="btn btn-primary btn-sm btn-icon mt-2" data-target-input="#vinput-v{%=key%}"
+                data-target-thumb="#thumb-v{%=key%}"><i class="la la-video la-lg"></i><span>Change video</span></button>
     </div>
-
-</script>
-<script id="vvveb-input-pdfinput-gallery" type="text/html">
-
-    <div>
-        <embed id="thumb-{%=key%}" class="img-thumbnail p-0" data-target-input="#input-{%=key%}"
-               data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="" width="225" height="225" >
-        <input id="input-{%=key%}" name="{%=key%}" type="text" class="form-control mt-1" />
-        <button name="button" class="btn btn-primary btn-sm btn-icon mt-2 width-100"
-                data-target-input="#input-{%=key%}"
-                data-target-thumb="#thumb-{%=key%}">
-            <i class="la la-file-pdf la-lg"></i>
-            <span>Select PDF</span></button>
-    </div>
-
 </script>
 <script id="vvveb-input-colorinput" type="text/html">
-
     <div>
         <input name="{%=key%}" {% if (typeof palette !== 'undefined') { %} list="{%=key%}-color-palette" {% } %}
         type="color" {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %}
@@ -1245,20 +1344,17 @@ function loadsvg($file) {
             {% } %}
             {% } %}
     </div>
-
 </script>
 <script id="vvveb-input-bootstrap-color-picker-input" type="text/html">
-
     <div>
         <div id="cp2" class="input-group" title="Using input value">
             <input name="{%=key%}" type="text" {% if (typeof value !== 'undefined' && value != false) { %}
             value="{%=value%}" {% } %} class="form-control"/>
             <span class="input-group-append">
-			<span class="input-group-text colorpicker-input-addon"><i></i></span>
-		  </span>
+            <span class="input-group-text colorpicker-input-addon"><i></i></span>
+          </span>
         </div>
     </div>
-
 </script>
 <script id="vvveb-input-numberinput" type="text/html">
     <div>
@@ -1302,7 +1398,6 @@ function loadsvg($file) {
             <option value="">-</option>
         </select>
     </div>
-
 </script>
 <script id="vvveb-breadcrumb-navigaton-item" type="text/html">
     <li class="breadcrumb-item"><a href="#" {% if (typeof className !== 'undefined') { %}class="{%=className%}"{% }
@@ -1317,13 +1412,12 @@ function loadsvg($file) {
         </label>
         <input class="header_check" type="checkbox" {% if (typeof expanded !== 'undefined' && expanded == false) { %} {%
         } else { %}checked="true"{% } %} id="header_{%=key%}{%=namespace%}">
-        <div class="section row" data-message="" data-section="{%=key%}" {% if (typeof group !==
+        <div class="section row" data-section="{%=key%}" {% if (typeof group !==
         'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
     </div>
     </div>
 </script>
 <script id="vvveb-property" type="text/html">
-
     <div class="mb-3 {% if (typeof col !== 'undefined' && col != false) { %} col-sm-{%=col%} {% } else { %}row{% } %} {% if (typeof inline !== 'undefined' && inline == true) { %}inline{% } %} "
          data-key="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
 
@@ -1334,33 +1428,28 @@ function loadsvg($file) {
     <div class="{% if (typeof inline === 'undefined') { %}col-sm-{% if (typeof name !== 'undefined' && name != false) { %}8{% } else { %}12{% } } %} input"></div>
 
     </div>
-
 </script>
 <script id="vvveb-input-autocompletelist" type="text/html">
-
     <div>
         <input name="{%=key%}" type="text" class="form-control"/>
 
         <div class="form-control autocomplete-list" style="min-height: 150px; overflow: auto;">
         </div>
     </div>
-
 </script>
 <script id="vvveb-input-tagsinput" type="text/html">
-
     <div>
         <div class="form-control tags-input" style="height:auto;">
 
             <input name="{%=key%}" type="text" class="form-control" style="border:none;min-width:60px;"/>
         </div>
     </div>
-
 </script>
 <script id="vvveb-input-noticeinput" type="text/html">
     <div>
         <div class="alert alert-dismissible fade show alert-{%=type%}" role="alert">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            <h6><b>{%=title%}</b></h6>
+            <strong class="d-block mb-1">{%=title%}</strong>
 
             {%=text%}
         </div>
@@ -1383,7 +1472,7 @@ function loadsvg($file) {
                 <a class="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
                 <a class="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
                 -->
-                <a class="properties-btn" href="" title="Properties"><?php loadsvg("img/icon-settings.svg") ?></a>
+                <a class="properties-btn" href="" title="Properties"><i class="icon-settings-outline"></i></a>
             </div>
         </div>
 
@@ -1408,9 +1497,32 @@ function loadsvg($file) {
             </ol>
         </div>
     </div>
-
 </script>
+
 <!--// end templates -->
+
+<div id="tree-list">
+    <div class="header">
+        <div>Navigator</div>
+        <button class="btn btn-sm" data-vvveb-action="toggleTreeList" aria-pressed="true">
+            <i class="icon-close"></i>
+        </button>
+    </div>
+    <div class="tree">
+        <ol>
+            <!--
+          <li data-component="Products" class="file">
+              <label for="idNaN" style="background-image:url(/js/vvvebjs/icons/products.svg)"><span>Products</span></label>
+              <input type="checkbox" id="idNaN">
+          </li>
+          <li data-component="Posts" class="file">
+              <label for="idNaN" style="background-image:url(/js/vvvebjs/icons/posts.svg)"><span>Posts</span></label>
+              <input type="checkbox" id="idNaN">
+          </li>
+          -->
+        </ol>
+    </div>
+</div>
 
 <!-- code editor modal -->
 <div class="modal modal-full fade" id="codeEditorModal" tabindex="-1" aria-labelledby="codeEditorModal" role="dialog"
@@ -1422,22 +1534,20 @@ function loadsvg($file) {
             <div class="modal-header justify-content-between">
                 <span class="modal-title"></span>
                 <div class="float-end">
-                    <button type="button" class="btn btn-light border btn-icon" data-bs-dismiss="modal">
-                        <i class="la la-times"></i>
-                        Close
+                    <button type="button" class="btn btn-light border btn-icon" data-bs-dismiss="modal"><i
+                                class="la la-times"></i>Close
                     </button>
 
                     <button class="btn btn-primary btn-icon save-btn" title="Save changes">
-                        <span class="loading d-none">
-                            <?php loadsvg("img/icon-save.svg") ?>
-                            <span class="spinner-border spinner-border-sm align-middle" role="status"
-                                  aria-hidden="true"></span>
-                            <span>Saving </span> ...
-                        </span>
+                <span class="loading d-none">
+                <i class="la la-save"></i>
+                  <span class="spinner-border spinner-border-sm align-middle" role="status" aria-hidden="true">
+                  </span>
+                  <span>Saving </span> ... </span>
+
                         <span class="button-text">
-                            <?php loadsvg("img/icon-save.svg") ?>
-                            <span>Save changes</span>
-                        </span>
+                  <i class="la la-save"></i> <span>Save changes</span>
+                </span>
                     </button>
                 </div>
             </div>
@@ -1445,6 +1555,7 @@ function loadsvg($file) {
             <div class="modal-body p-0">
                 <textarea class="form-control h-100"></textarea>
             </div>
+
         </div>
     </div>
 </div>
@@ -1502,18 +1613,25 @@ function loadsvg($file) {
     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header text-white">
             <strong class="me-auto">Page save</strong>
+            <!-- <small class="badge bg-success">status</small> -->
             <button type="button" class="btn-close text-white px-2" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body ">
             <div class="flex-grow-1">
-                <div class="message"></div>
+                <div class="message">Elements saved!
+                    <div>Template backup was saved!</div>
+                    <div>Template was saved!</div>
+                </div>
+                <!--
+                <div><a class="btn btn-success  btn-icon btn-sm w-100 mt-2" href="">View page</a></div>
+                -->
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    var wwwroot = '<?php $CFG->wwwroot; ?>';
+    wwwroot = "<?php echo $CFG->wwwroot ?>";
 </script>
 
 <!-- bootstrap-->
@@ -1529,33 +1647,35 @@ function loadsvg($file) {
 
 <!-- media gallery -->
 <link href="libs/media/media.css" rel="stylesheet">
-<script>
-    Vvveb.uploadUrl = '<?php echo "files.php?page={$page}&id={$id}&link={$link}" ?>';
-    Vvveb.themeBaseUrl = '_sections/';
-</script>
 <script src="libs/media/media.js"></script>
-
+<!--
+<script src="libs/media/openverse.js"></script>
+-->
 <script src="libs/builder/plugin-media.js"></script>
 
-<!-- bootstrap colorpicker //uncomment bellow scripts to enable
-<script src="libs/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
-<link href="libs/bootstrap-colorpicker/css/bootstrap-colorpicker.css" rel="stylesheet">
+<!-- bootstrap colorpicker //uncomment bellow scripts to enable -->
+<!--
+<script src="libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<link href="libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
 <script src="libs/builder/plugin-bootstrap-colorpicker.js"></script>
 -->
 
 <!-- components-->
+<!-- script src="libs/builder/components-server.js"></script -->
 <script src="libs/builder/plugin-google-fonts.js"></script>
 <script src="libs/builder/components-common.js"></script>
 <script src="libs/builder/plugin-aos.js"></script>
 <script src="libs/builder/components-html.js"></script>
 <script src="libs/builder/components-elements.js"></script>
 <script src="libs/builder/section.js"></script>
+<script src="libs/builder/oembed.js"></script>
 <script src="libs/builder/components-bootstrap5.js"></script>
 <script src="libs/builder/components-widgets.js"></script>
-<script src="libs/builder/oembed.js"></script>
 <script src="libs/builder/components-embeds.js"></script>
 
 <!-- sections-->
+<script src="libs/builder/sections-bootstrap4.js"></script>
+
 <script>
     <?php
     $pastas = glob("./_sections/*");
@@ -1587,10 +1707,6 @@ function loadsvg($file) {
         }
     }?>
 </script>
-<script src="libs/builder/sections-bootstrap4.js"></script>
-
-<!-- blocks-->
-<script src="libs/builder/blocks-bootstrap4.js"></script>
 
 <!-- plugins -->
 
@@ -1610,15 +1726,17 @@ Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
 <script src="libs/tinymce-dist/tinymce.js"></script>
 <script src="libs/builder/plugin-tinymce.js"></script>
 
-<!-- autocomplete plugin used by autocomplete input
+<!-- autocomplete plugin used by autocomplete input-->
+<!--
 <script src="libs/autocomplete/jquery.autocomplete.js"></script>
 -->
 <script>
-    var renameUrl = 'save.php?action=rename&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
-    var deleteUrl = 'save.php?action=delete&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
-    var oEmbedProxyUrl = 'save.php?action=oembedProxy&page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>';
+    deleteUrl = "<?php echo "save.php?action=delete&page={$page}&id={$id}&link={$link}"; ?>";
+    saveUrl = "<?php echo "save.php?action=save&page={$page}&id={$id}&link={$link}"; ?>";
+    oEmbedProxyUrl = "<?php echo "save.php?action=oembedProxy&page={$page}&id={$id}&link={$link}"; ?>";
+    mediaScanUrl = "<?php echo "files.php?page={$page}&id={$id}&link={$link}"; ?>";
 
-    var url = "loadpage.php?page=<?php echo $page ?>&id=<?php echo $id ?>&link=<?php echo $link ?>";
+    var url = "<?php echo "loadpage.php?page={$page}&id={$id}&link={$link}";?>";
     Vvveb.Builder.init(url, function() {
         Vvveb.SectionList.loadSections(false);
         Vvveb.TreeList.loadComponents();
@@ -1630,6 +1748,8 @@ Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
     Vvveb.TreeList.init();
     Vvveb.Breadcrumb.init();
     Vvveb.CssEditor.init();
+
+    Vvveb.Gui.toggleRightColumn(false);
     Vvveb.Breadcrumb.init();
 </script>
 </body>

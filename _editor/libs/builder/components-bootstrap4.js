@@ -70,6 +70,7 @@ function changeNodeName(node, newNodeName) {
 Vvveb.ComponentsGroup['Bootstrap 4'] =
     ["html/container", "html/gridrow", "html/button", "html/buttongroup", "html/buttontoolbar", "html/heading", "html/image", "html/jumbotron", "html/alert", "html/card", "html/listgroup", "html/hr", "html/taglabel", "html/badge", "html/progress", "html/navbar", "html/breadcrumbs", "html/pagination", "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/table", "html/paragraph", "html/link", "html/video", "html/button"];
 
+
 var base_sort = 100;//start sorting for base component from 100 to allow extended properties to be first
 var style_section = 'style';
 
@@ -692,6 +693,7 @@ Vvveb.Components.extend("_base", "_base", {
     }]
 });
 
+
 //Border
 Vvveb.Components.extend("_base", "_base", {
     properties : [{
@@ -745,6 +747,7 @@ Vvveb.Components.extend("_base", "_base", {
         inputtype : ColorInput,
     }]
 });
+
 
 //Border radius
 Vvveb.Components.extend("_base", "_base", {
@@ -1033,10 +1036,10 @@ Vvveb.Components.extend("_base", "html/image", {
     html       : '<img src="' + Vvveb.baseUrl + 'icons/image.svg" height="128" width="128">',
     /*
     afterDrop: function (node)
-	{
-		node.attr("src", '');
-		return node;
-	},*/
+    {
+        node.attr("src", '');
+        return node;
+    },*/
     image      : "icons/image.svg",
     properties : [{
         name      : "Image",
@@ -1227,32 +1230,32 @@ Vvveb.Components.extend("_base", "html/buttontoolbar", {
     name    : "Button Toolbar",
     image   : "icons/button_toolbar.svg",
     html    : '<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">\
-		  <div class="btn-group mr-2" role="group" aria-label="First group">\
-			<button type="button" class="btn btn-secondary">1</button>\
-			<button type="button" class="btn btn-secondary">2</button>\
-			<button type="button" class="btn btn-secondary">3</button>\
-			<button type="button" class="btn btn-secondary">4</button>\
-		  </div>\
-		  <div class="btn-group mr-2" role="group" aria-label="Second group">\
-			<button type="button" class="btn btn-secondary">5</button>\
-			<button type="button" class="btn btn-secondary">6</button>\
-			<button type="button" class="btn btn-secondary">7</button>\
-		  </div>\
-		  <div class="btn-group" role="group" aria-label="Third group">\
-			<button type="button" class="btn btn-secondary">8</button>\
-		  </div>\
-		</div>'
+          <div class="btn-group mr-2" role="group" aria-label="First group">\
+            <button type="button" class="btn btn-secondary">1</button>\
+            <button type="button" class="btn btn-secondary">2</button>\
+            <button type="button" class="btn btn-secondary">3</button>\
+            <button type="button" class="btn btn-secondary">4</button>\
+          </div>\
+          <div class="btn-group mr-2" role="group" aria-label="Second group">\
+            <button type="button" class="btn btn-secondary">5</button>\
+            <button type="button" class="btn btn-secondary">6</button>\
+            <button type="button" class="btn btn-secondary">7</button>\
+          </div>\
+          <div class="btn-group" role="group" aria-label="Third group">\
+            <button type="button" class="btn btn-secondary">8</button>\
+          </div>\
+        </div>'
 });
 Vvveb.Components.extend("_base", "html/alert", {
     classes    : ["alert"],
     name       : "Alert",
     image      : "icons/alert.svg",
     html       : '<div class="alert alert-warning alert-dismissible fade show" role="alert">\
-		  <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">\
-			<span aria-hidden="true">&times;</span>\
-		  </button>\
-		  <strong>Holy guacamole!</strong> You should check in on some of those fields below.\
-		</div>',
+          <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">\
+            <span aria-hidden="true">&times;</span>\
+          </button>\
+          <strong>Holy guacamole!</strong> You should check in on some of those fields below.\
+        </div>',
     properties : [{
         name        : "Type",
         key         : "type",
@@ -1336,13 +1339,13 @@ Vvveb.Components.extend("_base", "html/card", {
     image   : "icons/panel.svg",
     name    : "Card",
     html    : '<div class="card">\
-		  <img class="card-img-top" src="../libs/builder/icons/image.svg" alt="Card image cap" width="128" height="128">\
-		  <div class="card-body">\
-			<h4 class="card-title">Card title</h4>\
-			<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>\
-			<a href="#" class="btn btn-primary">Go somewhere</a>\
-		  </div>\
-		</div>'
+          <img class="card-img-top" src="../libs/builder/icons/image.svg" alt="Card image cap" width="128" height="128">\
+          <div class="card-body">\
+            <h4 class="card-title">Card title</h4>\
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>\
+            <a href="#" class="btn btn-primary">Go somewhere</a>\
+          </div>\
+        </div>'
 });
 Vvveb.Components.extend("_base", "html/listgroup", {
     name    : "List Group",
@@ -1360,10 +1363,10 @@ Vvveb.Components.extend("_base", "html/breadcrumbs", {
     name    : "Breadcrumbs",
     image   : "icons/breadcrumbs.svg",
     html    : '<ol class="breadcrumb">\
-		  <li class="breadcrumb-item active"><a href="#">Home</a></li>\
-		  <li class="breadcrumb-item active"><a href="#">Library</a></li>\
-		  <li class="breadcrumb-item active">Data 3</li>\
-		</ol>'
+          <li class="breadcrumb-item active"><a href="#">Home</a></li>\
+          <li class="breadcrumb-item active"><a href="#">Library</a></li>\
+          <li class="breadcrumb-item active">Data 3</li>\
+        </ol>'
 });
 Vvveb.Components.extend("_base", "html/breadcrumbitem", {
     classes    : ["breadcrumb-item"],
@@ -1386,14 +1389,14 @@ Vvveb.Components.extend("_base", "html/pagination", {
     name    : "Pagination",
     image   : "icons/pagination.svg",
     html    : '<nav aria-label="Page navigation example">\
-	  <ul class="pagination">\
-		<li class="page-item"><a class="page-link" href="#">Previous</a></li>\
-		<li class="page-item"><a class="page-link" href="#">1</a></li>\
-		<li class="page-item"><a class="page-link" href="#">2</a></li>\
-		<li class="page-item"><a class="page-link" href="#">3</a></li>\
-		<li class="page-item"><a class="page-link" href="#">Next</a></li>\
-	  </ul>\
-	</nav>',
+      <ul class="pagination">\
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>\
+        <li class="page-item"><a class="page-link" href="#">1</a></li>\
+        <li class="page-item"><a class="page-link" href="#">2</a></li>\
+        <li class="page-item"><a class="page-link" href="#">3</a></li>\
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>\
+      </ul>\
+    </nav>',
 
     properties : [{
         name        : "Size",
@@ -1535,43 +1538,43 @@ Vvveb.Components.extend("_base", "html/jumbotron", {
     image   : "icons/jumbotron.svg",
     name    : "Jumbotron",
     html    : '<div class="jumbotron">\
-		  <h1 class="display-3">Hello, world!</h1>\
-		  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>\
-		  <hr class="my-4">\
-		  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>\
-		  <p class="lead">\
-			<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>\
-		  </p>\
-		</div>'
+          <h1 class="display-3">Hello, world!</h1>\
+          <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>\
+          <hr class="my-4">\
+          <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>\
+          <p class="lead">\
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>\
+          </p>\
+        </div>'
 });
 Vvveb.Components.extend("_base", "html/navbar", {
     classes : ["navbar"],
     image   : "icons/navbar.svg",
     name    : "Nav Bar",
     html    : '<nav class="navbar navbar-expand-lg navbar-light bg-light-subtle">\
-		  <a class="navbar-brand" href="#">Navbar</a>\
-		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">\
-			<span class="navbar-toggler-icon"></span>\
-		  </button>\
-		\
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">\
-			<ul class="navbar-nav mr-auto">\
-			  <li class="nav-item active">\
-				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>\
-			  </li>\
-			  <li class="nav-item">\
-				<a class="nav-link" href="#">Link</a>\
-			  </li>\
-			  <li class="nav-item">\
-				<a class="nav-link disabled" href="#">Disabled</a>\
-			  </li>\
-			</ul>\
-			<form class="form-inline my-2 my-lg-0">\
-			  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">\
-			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>\
-			</form>\
-		  </div>\
-		</nav>',
+          <a class="navbar-brand" href="#">Navbar</a>\
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">\
+            <span class="navbar-toggler-icon"></span>\
+          </button>\
+        \
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">\
+            <ul class="navbar-nav mr-auto">\
+              <li class="nav-item active">\
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>\
+              </li>\
+              <li class="nav-item">\
+                <a class="nav-link" href="#">Link</a>\
+              </li>\
+              <li class="nav-item">\
+                <a class="nav-link disabled" href="#">Disabled</a>\
+              </li>\
+            </ul>\
+            <form class="form-inline my-2 my-lg-0">\
+              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">\
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>\
+            </form>\
+          </div>\
+        </nav>',
 
     properties : [{
         name        : "Color theme",
@@ -1902,8 +1905,8 @@ Vvveb.Components.extend("_base", "html/fileinput", {
     attributes : {"type" : "file"},
     image      : "icons/text_input.svg",
     html       : '<div class="mb-3">\
-			  <input type="file" class="form-control">\
-			</div>'
+              <input type="file" class="form-control">\
+            </div>'
 });
 Vvveb.Components.extend("_base", "html/table", {
     nodes      : ["table"],
@@ -1911,35 +1914,35 @@ Vvveb.Components.extend("_base", "html/table", {
     image      : "icons/table.svg",
     name       : "Table",
     html       : '<table class="table">\
-		  <thead>\
-			<tr>\
-			  <th>#</th>\
-			  <th>First Name</th>\
-			  <th>Last Name</th>\
-			  <th>Username</th>\
-			</tr>\
-		  </thead>\
-		  <tbody>\
-			<tr>\
-			  <th scope="row">1</th>\
-			  <td>Mark</td>\
-			  <td>Otto</td>\
-			  <td>@mdo</td>\
-			</tr>\
-			<tr>\
-			  <th scope="row">2</th>\
-			  <td>Jacob</td>\
-			  <td>Thornton</td>\
-			  <td>@fat</td>\
-			</tr>\
-			<tr>\
-			  <th scope="row">3</th>\
-			  <td>Larry</td>\
-			  <td>the Bird</td>\
-			  <td>@twitter</td>\
-			</tr>\
-		  </tbody>\
-		</table>',
+          <thead>\
+            <tr>\
+              <th>#</th>\
+              <th>First Name</th>\
+              <th>Last Name</th>\
+              <th>Username</th>\
+            </tr>\
+          </thead>\
+          <tbody>\
+            <tr>\
+              <th scope="row">1</th>\
+              <td>Mark</td>\
+              <td>Otto</td>\
+              <td>@mdo</td>\
+            </tr>\
+            <tr>\
+              <th scope="row">2</th>\
+              <td>Jacob</td>\
+              <td>Thornton</td>\
+              <td>@fat</td>\
+            </tr>\
+            <tr>\
+              <th scope="row">3</th>\
+              <td>Larry</td>\
+              <td>the Bird</td>\
+              <td>@twitter</td>\
+            </tr>\
+          </tbody>\
+        </table>',
     properties : [
         {
             name        : "Type",
@@ -2280,6 +2283,7 @@ Vvveb.Components.add("html/gridrow", {
     }]
 });
 
+
 Vvveb.Components.extend("_base", "html/paragraph", {
     nodes      : ["p"],
     name       : "Paragraph",
@@ -2326,7 +2330,7 @@ Vvveb.Components.extend("_base", "html/paragraph", {
 Vvveb.Components.extend("_base", "html/video", {
     nodes      : ["video"],
     name       : "Video",
-    html       : '<video width="320" height="240" playsinline loop autoplay><source src="' + wwwroot + '/local/kopere_dashboard/_editor/media/sample.webm" controls><video>',
+    html       : `<video width="320" height="240" playsinline loop autoplay><source src="${wwwroot}/theme/boost_magnific/_editor/media/sample.webm"><video>`,
     dragHtml   : '<img  width="320" height="240" src="' + Vvveb.baseUrl + 'icons/video.svg">',
     image      : "icons/video.svg",
     properties : [{
@@ -2372,6 +2376,7 @@ Vvveb.Components.extend("_base", "html/video", {
         inputtype : CheckboxInput
     }]
 });
+
 
 Vvveb.Components.extend("_base", "html/button", {
     nodes      : ["button"],

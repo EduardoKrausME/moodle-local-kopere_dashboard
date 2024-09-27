@@ -16,170 +16,77 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-Vvveb.ComponentsGroup['Embeds'] = ["html/iframe", "embeds/pdf", "embeds/video", "embeds/audio"];
 
-Vvveb.Components.extend("_base", "html/iframe", {
-    nodes      : ["iframe"],
-    attributes : ["data-component-iframe"],
-    name       : "Iframe",
-    image      : "icons/file.svg",
-    resizable  : true,
-    html       : `<div data-component-iframe>
-                      <iframe style="width: 100%; height: 480px;" allowfullscreen 
-                              sandbox="allow-scripts allow-same-origin allow-popups" 
-                              allow=":encrypted-media; :picture-in-picture"></iframe>
-                  </div>`,
-    properties : [
-        {
-            name      : "Src",
-            key       : "src",
-            htmlAttr  : "src",
-            child     : "iframe",
-            inputtype : TextInput
-        }, {
-            name      : "Width",
-            key       : "width",
-            child     : "iframe",
-            htmlAttr  : "style",
-            inputtype : CssUnitInput
-        }, {
-            name      : "Height",
-            key       : "height",
-            child     : "iframe",
-            htmlAttr  : "style",
-            inputtype : CssUnitInput
-        }]
+Vvveb.ComponentsGroup['Embeds'] = ["embeds/embed"];
+
+Vvveb.Components.extend("_base", "embeds/embed", {
+    name       : "Embed",
+    attributes : ["data-component-oembed"],
+    image      : "icons/code.svg",
+    //dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/maps.png">',
+    html       : `<div data-component-oembed data-url="">
+            <div class="alert alert-light  m-5" role="alert">
+                <img width="64" src="${Vvveb.baseUrl}icons/code.svg">
+                <h6>Enter url to embed</h6>
+            </div></div>`,
+
+
+    properties : [{
+        name      : "Url",
+        key       : "url",
+        htmlAttr  : "data-url",
+        inputtype : TextInput,
+        onChange  : function(node, value) {
+            node.innerHTML = `<div class="alert alert-light d-flex justify-content-center">
+                  <div class="spinner-border m-5" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>`;
+
+            getOembed(value).then(response => {
+                node.innerHTML = response.html;
+                let containerW = node.offsetWidth;
+                let iframe = node.querySelector("iframe");
+                if (iframe) {
+                    let ratio = containerW / iframe.offsetWidth;
+                    iframe.setAttribute("width", (width * ratio));
+                    iframe.setAttribute("height", (height * ratio));
+                }
+
+                let arr = node.querySelectorAll('script').forEach(script => {
+                    let newScript = Vvveb.Builder.frameDoc.createElement("script");
+                    newScript.src = script.src;
+                    script.replaceWith(newScript);
+                });
+
+            }).catch(error => console.log(error));
+
+            return node;
+        },
+    }, {
+        name      : "Width",
+        key       : "width",
+        child     : "iframe",
+        htmlAttr  : "width",
+        inputtype : CssUnitInput
+    }, {
+        name      : "Height",
+        key       : "height",
+        child     : "iframe",
+        htmlAttr  : "height",
+        inputtype : CssUnitInput
+    }]
 });
 
-Vvveb.Components.extend("_base", "embeds/pdf", {
-    nodes      : ["embed"],
-    attributes : ["data-component-pdf"],
-    name       : "PDF",
-    image      : "icons/pdf.svg",
-    resizable  : true,
-    html       : `<figure data-component-pdf>
-                      <embed class="data-component-pdf" src="" width="100%" height="240" />
-                  </figure>`,
-    properties : [
-        {
-            name      : "PDF",
-            key       : "src",
-            htmlAttr  : "src",
-            inputtype : PdfInput
-        }, {
-            name      : "Width",
-            key       : "width",
-            htmlAttr  : "style",
-            inputtype : CssUnitInput
-        }, {
-            name      : "Height",
-            key       : "height",
-            htmlAttr  : "style",
-            inputtype : CssUnitInput
-        }]
-});
-
-Vvveb.Components.extend("_base", "embeds/video", {
-    nodes      : ["video"],
-    attributes : ["data-component-video"],
-    name       : "Video",
-    image      : "icons/video.svg",
-    resizable  : true,
-    html       : `<figure data-component-video>
-                      <video style="width: 80%; margin: 0 auto;height: 480px;" 
-                             playsinline loop autoplay muted controls 
-                             src="${wwwroot}/local/kopere_dashboard/_editor/media/sample.webm"></video>
-                  </figure>`,
-    properties : [
-        {
-            name      : "Video file",
-            key       : "src",
-            htmlAttr  : "src",
-            inputtype : ImageInput
-        }, {
-            name      : "Poster file",
-            key       : "poster",
-            htmlAttr  : "poster",
-            inputtype : ImageInput
-        }, {
-            name      : "Width",
-            key       : "width",
-            htmlAttr  : "style",
-            inputtype : CssUnitInput
-        }, {
-            name      : "Height",
-            key       : "height",
-            htmlAttr  : "style",
-            inputtype : CssUnitInput
-        }, {
-            name      : "Muted",
-            key       : "muted",
-            htmlAttr  : "muted",
-            inputtype : CheckboxInput
-        }, {
-            name      : "Loop",
-            key       : "loop",
-            htmlAttr  : "loop",
-            inputtype : CheckboxInput
-        }, {
-            name      : "Autoplay",
-            key       : "autoplay",
-            htmlAttr  : "autoplay",
-            inputtype : CheckboxInput
-        }, {
-            name      : "Plays inline",
-            key       : "playsinline",
-            htmlAttr  : "playsinline",
-            inputtype : CheckboxInput
-        }, {
-            name      : "Show Controls",
-            key       : "controls",
-            htmlAttr  : "controls",
-            inputtype : CheckboxInput
-        }]
-});
-
-Vvveb.Components.extend("_base", "embeds/audio", {
-    nodes      : ["audio"],
-    attributes : ["data-component-audio"],
-    name       : "Audio",
-    image      : "icons/audio.svg",
-    resizable  : true,
-    html       : `<figure data-component-audio>
-                      <audio controls src=""></audio>
-                  </figure>`,
-    properties : [
-        {
-            name      : "Audio File",
-            key       : "src",
-            child     : "audio",
-            htmlAttr  : "src",
-            inputtype : ImageInput
-        }, {
-            name      : "Poster file",
-            key       : "poster",
-            htmlAttr  : "poster",
-            inputtype : ImageInput
-        }, {
-            key       : "audio_options",
-            inputtype : SectionInput,
-            name      : false,
-            data      : {header : "Options"},
-        }, {
-            name      : "Autoplay",
-            key       : "autoplay",
-            htmlAttr  : "autoplay",
-            child     : "audio",
-            inputtype : CheckboxInput,
-            inline    : true,
-            col       : 4,
-        }, {
-            name      : "Loop",
-            key       : "loop",
-            htmlAttr  : "loop",
-            inputtype : CheckboxInput,
-            child     : "audio",
-            inline    : true,
-            col       : 4
-        }]
-});
+for (const provider of ["youtube", "vimeo", "dailymotion", "flickr", "smugmug", "scribd", "twitter", "soundcloud", "slideshare", "spotify", "imgur", "issuu", "mixcloud", "ted", "animoto", "tumblr", "kickstarter", "reverbnation", "reddit", "speakerdeck", "screencast", "amazon", "someecards", "tiktok", "pinterest", "wolfram", "anghami"]) {
+    Vvveb.Components.add("embeds/" + provider, {
+        name  : provider,
+        image : "icons/code.svg",
+        html  : `<div data-component-oembed data-url="">
+                <div class="alert alert-light  m-5" role="alert">
+                    <img width="64" src="${Vvveb.baseUrl}icons/code.svg">
+                    <h6>Enter ${provider} url to embed</h6>
+                </div></div>`,
+    });
+    Vvveb.ComponentsGroup['Embeds'].push("embeds/" + provider);
+}

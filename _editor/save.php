@@ -108,6 +108,32 @@ if (isset($_GET['action'])) {
 if ($action) {
     //file manager actions, delete and rename
     switch ($action) {
+        case 'delete':
+            header('Content-Type: application/json');
+            echo json_encode([
+                "success" => 1,
+                "message" => "Deleted successfully",
+            ]);
+            break;
+        case 'save':
+            if ($page == "webpages") {
+                $webpages = $DB->get_record("kopere_dashboard_webpages", ["id" => $id]);
+                $webpages->text = $html;
+                $DB->update_record("kopere_dashboard_webpages", $webpages);
+            } else if ($page == "notification") {
+                $events = $DB->get_record("kopere_dashboard_events", ["id" => $id]);
+                $events->message = $html;
+                $DB->update_record("kopere_dashboard_events", $events);
+            } else if ($page == 'aceite') {
+                set_config('formulario_pedir_aceite', $html, 'local_kopere_dashboard');
+            } else if ($page == 'meiodeposito') {
+                set_config('kopere_pay-meiodeposito-conta', $html, 'local_kopere_dashboard');
+            }
+            echo json_encode([
+                "success" => 1,
+                "message" => "Saved successfully",
+            ]);
+            break;
         case 'oembedProxy':
             $url = $_GET['url'] ?? '';
             if (validOembedUrl($url)) {
@@ -128,31 +154,8 @@ if ($action) {
             showError("Invalid action '$action'!");
     }
 } else {
-    //save page
-    if ($html) {
-        if ($page == "webpages") {
-            $webpages = $DB->get_record("kopere_dashboard_webpages", ["id" => $id]);
-            $webpages->text = $html;
-            $DB->update_record("kopere_dashboard_webpages", $webpages);
-
-            //redirect(local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $id]));
-        } else if ($page == "notification") {
-            $events = $DB->get_record("kopere_dashboard_events", ["id" => $id]);
-            $events->message = $html;
-            $DB->update_record("kopere_dashboard_events", $events);
-
-            //redirect(local_kopere_dashboard_makeurl("notifications", "add_segunda_etapa", ["id" => $id]));
-        } else if ($page == 'aceite') {
-            set_config('formulario_pedir_aceite', $html, 'local_kopere_dashboard');
-
-            //redirect(local_kopere_dashboard_makeurl("pay-setting", "settings"));
-        } else if ($page == 'meiodeposito') {
-            set_config('kopere_pay-meiodeposito-conta', $html, 'local_kopere_dashboard');
-
-            //redirect(local_kopere_dashboard_makeurl("pay-meio_pagamento", "edit", ["meio" => "MeioDeposito"]));
-        }
-        echo "Saved successfully";
-    } else {
-        showError('Html content is empty!');
-    }
+    echo json_encode([
+        "success" => 0,
+        "message" => "Ops...",
+    ]);
 }

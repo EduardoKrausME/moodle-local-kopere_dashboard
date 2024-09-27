@@ -31,28 +31,36 @@ $id = required_param('id', PARAM_TEXT);
 $link = optional_param('link', '', PARAM_TEXT);
 
 $html = "";
-if ($page == "webpages") {
-    $html = $DB->get_field("kopere_dashboard_webpages", "text", ["id" => $id]);
-} else if ($page == "notification") {
-    $html = $DB->get_field("kopere_dashboard_events", "message", ["id" => $id]);
-} else if ($page == "aceite") {
-    $html = get_config('local_kopere_dashboard', 'formulario_pedir_aceite');
-} else if ($page == "meiodeposito") {
-    $html = get_config('local_kopere_dashboard', 'kopere_pay-meiodeposito-conta');
+
+if (file_exists(__DIR__ . "/_default/default-{$page}.html")) {
+    if ($page == "webpages") {
+        $html = $DB->get_field("kopere_dashboard_webpages", "text", ["id" => $id]);
+    } else if ($page == "notification") {
+        $html = $DB->get_field("kopere_dashboard_events", "message", ["id" => $id]);
+    } else if ($page == "aceite") {
+        $html = get_config('local_kopere_dashboard', 'formulario_pedir_aceite');
+    } else if ($page == "meiodeposito") {
+        $html = get_config('local_kopere_dashboard', 'kopere_pay-meiodeposito-conta');
+    }
+    if (!isset($html[40])) {
+        $html = file_get_contents(__DIR__ . "/_default/default-{$page}.html");
+        $html = vvveb__changue_langs($html);
+        $html = vvveb__change_courses($html);
+    }
 }
 
-if (isset($html[40])) {
-    $html = vvveb__add_css($html);
-    die($html);
-} else {
-    $html = "<link href=\"{wwwroot}/local/kopere_dashboard/_editor/_default/bootstrap-vvveb.css\" rel=\"stylesheet\">\n\n";
-    $html .= file_get_contents(__DIR__ . "/_default/default-{$chave}.html");
-
-    $html = vvveb__add_css($html);
-    $html = vvveb__changue_langs($html);
-    $html = vvveb__change_courses($html);
-
-    $html = str_replace("<style>", "<style id='vvvebjs-styles'>", $html);
-
-    die($html);
+if (!strpos($html, "vvvebjs-styles")) {
+    $html .= "\n<style id=\"vvvebjs-styles\">";
 }
+if (!strpos($html, "bootstrap-vvveb.css")) {
+    $html .= "\n<link href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/_default/bootstrap-vvveb.css\" rel=\"stylesheet\">";
+
+}
+if (!strpos($html, "_editor/libs/aos/aos.js")) {
+    $html .=
+        "\n<link href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/libs/aos/aos.css\" rel=\"stylesheet\">" .
+        "\n<link href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/libs/aos/aos.js\" rel=\"stylesheet\">" .
+        $html;
+}
+
+die($html);

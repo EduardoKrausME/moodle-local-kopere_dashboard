@@ -147,6 +147,7 @@ let SelectInput = {
             ["change", "onChange", "select"],
         ],
 
+
         setValue : function(value) {
             if (this.element[0] && value) {
                 let input = this.element[0].querySelector('select');
@@ -169,6 +170,7 @@ let IconSelectInput = {
         events : [
             ["change", "onChange", "select"],
         ],
+
 
         setValue : function(value) {
             if (this.element[0] && value) {
@@ -243,8 +245,8 @@ let HtmlListSelectInput = {
             let elements = element.querySelector(".elements");
 
             elements.innerHTML = `<div class="p-4"><div class="spinner-border spinner-border-sm" role="status">
-		  <span class="visually-hidden">Loading...</span>
-		</div> Loading...</div>`;
+          <span class="visually-hidden">Loading...</span>
+        </div> Loading...</div>`;
 
             //cache ajax requests
             if (input.cache[url] != undefined) {
@@ -486,12 +488,14 @@ let ImageInput = {
 
                 event.data.element.trigger('propertyChange', [image, this]);
 
+                //return;//remove this line to enable php upload
+
                 let formData = new FormData();
                 formData.append("file", file);
 
                 $.ajax({
                     type        : "POST",
-                    url         : Vvveb.uploadUrl,
+                    url         : 'upload.php',//set your server side upload script url
                     data        : formData,
                     processData : false,
                     contentType : false,
@@ -615,13 +619,54 @@ let ToggleInput = {
     }
 }
 
+let ValueTextInput = {
+    ...TextInput, ...{
+
+        events : [
+            ["focusout", "onChange", "input"],
+        ],
+
+        init : function(data) {
+            return this.render("textinput", data);
+        },
+    }
+}
+
+let GridLayoutInput = {
+    ...TextInput, ...{
+
+        events : [
+            ["focusout", "onChange", "input"],
+        ],
+
+        init : function(data) {
+            return this.render("textinput", data);
+        },
+    }
+}
+
+let ProductsInput = {
+    ...TextInput, ...{
+
+        events : [
+            ["focusout", "onChange", "input"],
+        ],
+
+        init : function(data) {
+            return this.render("textinput", data);
+        },
+    }
+}
+
 let GridInput = {
     ...Input, ...{
+
 
         events : [
             ["change", "onChange", "select" /*'select'*/],
             ["click", "onChange", "button" /*'select'*/],
         ],
+
 
         setValue : function(value) {
             if (this.element[0] && value) {
@@ -642,6 +687,7 @@ let GridInput = {
 
 let TextValueInput = {
     ...Input, ...{
+
 
         events : [
             ["focusout", "onChange", "input"],
@@ -664,6 +710,7 @@ let ButtonInput = {
         events : [
             ["click", "onChange", "button" /*'select'*/],
         ],
+
 
         setValue : function(value) {
             if (this.element[0] && value) {
@@ -688,6 +735,7 @@ let SectionInput = {
             //["click", "onChange", "button" /*'select'*/],
         ],
 
+
         setValue : function(value) {
             return false;
         },
@@ -707,6 +755,7 @@ let ListInput = {
             ["click", "add", ".btn-new"],
             ["click", "select", ".section-item"],
         ],
+
 
         remove : function(event, node, input) {
             let sectionItem = this.closest(".section-item");
@@ -780,6 +829,29 @@ let ListInput = {
     }
 }
 
+let AutocompleteInput = {
+    ...Input, ...{
+
+        events : [
+            ["autocomplete.change", "onAutocompleteChange", "input"],
+        ],
+
+        onAutocompleteChange : function(event, value, text) {
+            input.value = value;
+            return this.onChange(event, node);
+        },
+
+        init : function(data) {
+
+            this.element = this.render("textinput", data);
+
+            let autocomplete = new Autocomplete({input : this.element.querySelector("input"), url : data.url});
+
+            return this.element;
+        }
+    }
+}
+
 let AutocompleteList = {
     ...Input, ...{
 
@@ -809,6 +881,40 @@ let AutocompleteList = {
 
             let autocomplete = new Autocomplete({input : this.element.querySelector("input"), url : data.url});
             $('input', this.element).autocompleteList(data);//using default parameters
+
+            return this.element;
+        }
+    }
+}
+
+let TagsInput = {
+    ...Input, ...{
+
+        events : [
+            ["tagsinput.change", "onTagsInputChange", "input"],
+        ],
+
+        onTagsInputChange : function(event, value, text) {
+            input.value = value;
+            return this.onChange(event, node);
+        },
+
+        setValue : function(value) {
+            if (this.element[0] && value) {
+                let input = this.element[0].querySelector('select');
+
+                if (input) {
+                    input.dataset.tagsInput.setValue(value);
+
+                }
+            }
+        },
+
+        init : function(data) {
+
+            this.element = this.render("tagsinput", data);
+
+            $('input', this.element).tagsInput(data);//using default parameters
 
             return this.element;
         }

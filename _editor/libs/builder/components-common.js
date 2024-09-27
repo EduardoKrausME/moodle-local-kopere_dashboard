@@ -110,6 +110,7 @@ Vvveb.Components.extend("_base", "_base", {
         section   : style_section,
         data      : {header : "Display"},
     }, {
+        //linked styles notice message
         name      : "",
         key       : "linked_styles_check",
         sort      : base_sort++,
@@ -120,7 +121,7 @@ Vvveb.Components.extend("_base", "_base", {
         data      : {
             type  : 'warning',
             title : 'Linked styles',
-            text  : 'This element shares styles with other <a class="linked-elements-hover" href="#"><b class="elements-count">4</b> elements</a>, to apply styles <b>only for this element</b> enter a <b>unique id</b> eg: <i>marketing-heading</i> in in <br/><a class="id-input" href="#content-tab" role="tab" aria-controls="components" aria-selected="false" href="#content-tab">Content > General > Id</a>.<br/><span class="text-muted small"></span>',
+            text  : 'This element shares styles with other <a class="linked-elements-hover" href="javascript:void()"><b class="elements-count">4</b> elements</a>, to apply styles <b>only for this element</b> enter a <b>unique id</b> eg: <i>marketing-heading</i> in in <br/><a class="id-input" href="#content-tab" role="tab" aria-controls="components" aria-selected="false" href="#content-tab">Content > General > Id</a>.<br/><span class="text-muted small"></span>',
         },
         afterInit : function(node, inputElement) {
             let selector = Vvveb.StyleManager.getSelectorForElement(node);
@@ -793,6 +794,7 @@ Vvveb.Components.extend("_base", "_base", {
         inputtype : ColorInput,
     }]
 });
+
 
 //Border radius
 Vvveb.Components.extend("_base", "_base", {
