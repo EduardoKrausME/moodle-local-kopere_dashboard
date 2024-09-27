@@ -182,7 +182,7 @@ class button {
             "wwwroot" => $CFG->wwwroot,
             "link" => $link,
             "icon" => $icon,
-            "confirmtitle" => $confirmtext,
+            "confirmtitle" => $confirmtitle,
             "confirmtext" => $confirmtext,
         ];
         return $OUTPUT->render_from_template('local_kopere_dashboard/button_icon', $data);
