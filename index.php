@@ -29,7 +29,7 @@ require_once('autoload.php');
 global $DB, $PAGE, $OUTPUT;
 
 if (false) {
-    // only for PHPCS.
+    // Only for PHPCS.
     require_login();
 }
 

@@ -245,6 +245,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
             "&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700" .
             "&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');\n</style>";
         set_config('kopere_dashboard_pagefonts', $fonts);
+
         upgrade_plugin_savepoint(true, 2024050102, 'local', 'kopere_dashboard');
     }
 
@@ -257,6 +258,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         }
 
         $DB->execute("UPDATE {kopere_dashboard_menu} SET menuid = 0");
+        upgrade_plugin_savepoint(true, 2024050900, 'local', 'kopere_dashboard');
     }
 
     \local_kopere_dashboard\install\report_install::create_categores();
