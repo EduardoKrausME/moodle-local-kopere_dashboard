@@ -220,7 +220,7 @@ class data_table {
                 $this->columndefs[] = (object)["render" => "currencyRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_DATE) {
                 $this->columndefs[] = (object)["targets" => $key];
-            } else if ($column->type == table_header_item::TYPE_BYTES) {
+            } else if ($column->type == table_header_item::RENDERER_FILESIZE) {
                 $this->columndefs[] = (object)["render" => "filesizeRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_DATE) {
                 $this->columndefs[] = (object)["render" => "dateRenderer", "targets" => $key];
@@ -307,7 +307,7 @@ class data_table {
                         $html = "R$ {$html}";
                     } else if ($column->type == table_header_item::TYPE_DATE) {
                         // $this->columndefs[] = (object)["type" => "date-uk", "targets" => $key];
-                    } else if ($column->type == table_header_item::TYPE_BYTES) {
+                    } else if ($column->type == table_header_item::RENDERER_FILESIZE) {
                         $html = number_util::bytes($html);
                     } else if ($column->type == table_header_item::RENDERER_DATE) {
                         $html = date("Y-m-d", $html);

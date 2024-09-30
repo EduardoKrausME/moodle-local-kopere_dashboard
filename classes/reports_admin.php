@@ -147,7 +147,7 @@ class reports_admin {
                         ['key' => table_header_item::TYPE_TEXT,
                             'value' => get_string_kopere('reports_settings_form_colunas_type_text'),
                         ],
-                        ['key' => table_header_item::TYPE_BYTES,
+                        ['key' => table_header_item::RENDERER_FILESIZE,
                             'value' => get_string_kopere('reports_settings_form_colunas_type_bytes'),
                         ],
                     ])

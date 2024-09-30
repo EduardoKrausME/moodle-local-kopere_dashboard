@@ -32,7 +32,6 @@ class table_header_item extends \stdClass {
     const TYPE_CURRENCY = 'currency';
     const TYPE_INT = 'numeric-comma';
     const TYPE_TEXT = 'text';
-    const TYPE_BYTES = 'file-size';
     const TYPE_ACTION = 'action';
 
     const RENDERER_DATE = 'dateRenderer';
@@ -44,6 +43,7 @@ class table_header_item extends \stdClass {
     const RENDERER_USERPHOTO = 'userphotoRenderer';
     const RENDERER_SECONDS = 'secondsRenderer';
     const RENDERER_TIME = 'timeRenderer';
+    const RENDERER_FILESIZE = 'filesizeRenderer';
 
     /**
      * @var

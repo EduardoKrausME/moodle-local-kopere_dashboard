@@ -12,7 +12,6 @@ define([
         init : function(selector, params) {
             var renderer = {
                 numberRenderer    : function(data, type, row) {
-                    console.log(type);
                     if (data === null) {
                         return "";
                     }
@@ -34,26 +33,20 @@ define([
                         return data;
                     }
 
-                    if (data == null)
+                    if (data == null || data < 1) {
                         return '0 b';
-
-                    if (data < 1000)
+                    } else if (data < 1000) {
                         return data + ' b';
-
-                    if (data < 1000 * 1000) {
+                    } else if (data < 1000 * 1000) {
                         data = data / (1000);
                         return data.toFixed(2) + ' Kb';
-                    }
-                    if (data < 1000 * 1000 * 1000) {
+                    } else if (data < 1000 * 1000 * 1000) {
                         data = data / (1000 * 1000);
                         return data.toFixed(2) + ' Mb';
-                    }
-                    if (data < 1000 * 1000 * 1000 * 1000) {
+                    } else if (data < 1000 * 1000 * 1000 * 1000) {
                         data = data / (1000 * 1000 * 1000);
                         return data.toFixed(2) + ' Gb';
-                    }
-                    if (data < 1000 * 1000 * 1000 * 1000 * 1000) {
-                        data = data / (1000 * 1000 * 1000 * 1000);
+                    } else {
                         return data.toFixed(2) + ' Tb';
                     }
                 },

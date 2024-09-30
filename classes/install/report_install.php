@@ -372,9 +372,9 @@ SELECT c.id, c.fullname, c.shortname, c.visible, c.timecreated,
             $table->add_header('[[visible]]',
                 'visible', table_header_item::RENDERER_VISIBLE),
             $table->add_header('[[reports_coursesize]]',
-                'coursesize', table_header_item::TYPE_BYTES),
+                'coursesize', table_header_item::RENDERER_FILESIZE),
             $table->add_header('[[reports_modulessize]]',
-                'modulessize', table_header_item::TYPE_BYTES)
+                'modulessize', table_header_item::RENDERER_FILESIZE)
         ];
         $report->columns = json_encode(array('columns' => $report->columns));
         self::report_insert($report);
