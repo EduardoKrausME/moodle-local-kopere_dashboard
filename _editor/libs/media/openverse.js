@@ -133,8 +133,8 @@ class OpenVerseDisplay extends OpenVerse {
             let value = data['results'][key];
 
             let item =
-                    `<li class="files">                                    
-              <label class="form-check">                                    
+                    `<li class="files">
+              <label class="form-check">
                 <input type="radio" class="form-check-input" value="${val['thumbnail']}" name="file[]">
                 <span class="form-check-label">
                 </span>
@@ -159,8 +159,8 @@ class OpenVerseDisplay extends OpenVerse {
                         <a href="${val['creator_url']}" target="_blank">${val['creator']}</a><br/>
                     </span>
                   </div>
-                </div>                                    
-              </label>                                
+                </div>
+              </label>
             </li>`;
 
             items.push(item);
@@ -257,7 +257,7 @@ class OpenVerseDisplay extends OpenVerse {
                 <div class="input-group">
                     <input id="openverse" name="q" class="form-control w-50">
                     <button class="btn btn-primary px-4" id="openverse-search-btn">Search</button>
-                    
+
                     <a class="btn btn-outline-secondary btn-sm btn-icon"
                        data-bs-toggle="collapse"
                        data-bs-target="#openverse-filters"
@@ -267,9 +267,9 @@ class OpenVerseDisplay extends OpenVerse {
                         Filters
                     </a>
                 </div>
-                
-                
-            
+
+
+
                 <div id="openverse-filters" class="row collapse">
                     <div class="col-md-3">
                         <label class="w-100">Results per page

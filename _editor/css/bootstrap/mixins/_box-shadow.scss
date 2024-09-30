@@ -1,7 +1,7 @@
 @mixin box-shadow($shadow...) {
     @if $enable-shadows {
         $result: ();
-        
+
         @each $value in $shadow {
             @if $value != null {
                 $result: append($result, $value, "comma");
@@ -10,7 +10,7 @@
                 @warn "The keyword 'none' must be used as a single argument.";
             }
         }
-        
+
         @if (length($result) > 0) {
             box-shadow: $result;
         }

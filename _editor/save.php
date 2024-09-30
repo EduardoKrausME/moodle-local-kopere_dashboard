@@ -102,7 +102,7 @@ if (isset($_POST['file'])) {
 }
 
 if (isset($_GET['action'])) {
-    $action = htmlspecialchars(strip_tags($_GET['action']));
+    $action = htmlspecialchars(strip_tags($_GET['action']), ENT_COMPAT);
 }
 
 if ($action) {
@@ -137,12 +137,12 @@ if ($action) {
         case 'oembedProxy':
             $url = $_GET['url'] ?? '';
             if (validOembedUrl($url)) {
-                $options = array(
-                    'http' => array(
+                $options = [
+                    'http' => [
                         'method' => "GET",
                         'header' => 'User-Agent: ' . $_SERVER['HTTP_USER_AGENT'] . "\r\n"
-                    )
-                );
+                    ]
+                ];
                 $context = stream_context_create($options);
                 header('Content-Type: application/json');
                 echo file_get_contents($url, false, $context);

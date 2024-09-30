@@ -32,7 +32,7 @@ $custom-select-padding-y: .4rem;
 //$blue:#495ffb;
 
 #logo {
-    
+
     html[data-bs-theme="dark"] & {
         filter: brightness(3);
     }
@@ -60,56 +60,56 @@ $font-size-base: 1rem;
     text-transform: capitalize;
     margin-bottom: 0;
     //padding:0.4rem 2rem;
-    
+
     i:first-child {
         display: inline-block;
         margin-right: 0.3rem;
         //font-size: 21px;
         opacity: 0.7;
     }
-    
+
     &.btn-outline-primary {
         border-width: 0;
         box-shadow: 0 0 1px 0 #3478f2;
         background-color: var(--bs-body-bg);
-        
+
         &:hover {
             color: var(--bs-link-color-rgb);
             background: $gray-100;
         }
-        
+
         i {
             //border-right:1px solid rgba(var(--bs-body-color-rgb), 0.1);
             background: transparent;
         }
     }
-    
+
     &.btn-outline-secondary {
         box-shadow: 0 0 2px 1px rgba(var(--bs-body-color-rgb), 0.07), -1px 1px 2px 0 rgba(var(--bs-body-bg-rgb), 0.15) inset;
         box-shadow: 1px 1px 1px 0 rgba(var(--bs-body-color-rgb), 0.07);
     }
-    
+
     &.btn-gray {
         i {
         }
     }
-    
+
     &.btn-secondary {
         box-shadow: -1px 1px 2px 1px rgba(var(--bs-body-color-rgb), 0.07), -1px 1px 2px 0 rgba(var(--bs-body-bg-rgb), 0.15) inset;
-        
+
         i {
             background: transparent;
         }
     }
-    
+
     &.btn-primary {
         box-shadow: -1px 1px 2px 1px rgba(var(--bs-body-color-rgb), 0.07), -1px 1px 2px 0 rgba(var(--bs-body-bg-rgb), 0.15) inset;
-        
+
         i {
             /*background: rgba(var(--bs-body-bg-rgb), 0.1);*/
         }
     }
-    
+
     &.btn-sm {
         i {
             //padding: 0.5rem 0.5rem;

@@ -22,6 +22,14 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+
+/**
+ * Function vvveb__add_css
+ *
+ * @param $html
+ *
+ * @return string
+ */
 function vvveb__add_css($html) {
     global $CFG;
 
@@ -34,6 +42,14 @@ function vvveb__add_css($html) {
     return "{$css}\n\n{$html}";
 }
 
+/**
+ * Function vvveb__changue_langs
+ *
+ * @param $html
+ *
+ * @return mixed
+ * @throws coding_exception
+ */
 function vvveb__changue_langs($html) {
     global $CFG, $SITE;
 
@@ -58,6 +74,14 @@ function vvveb__changue_langs($html) {
     return $html;
 }
 
+/**
+ * Function vvveb__change_courses
+ *
+ * @param $html
+ *
+ * @return mixed
+ * @throws dml_exception
+ */
 function vvveb__change_courses($html) {
 
     if (strpos($html, "{course-itens}") === false) {
@@ -86,10 +110,13 @@ function vvveb__change_courses($html) {
     return str_replace("{course-itens}", $courseshtml, $html);
 }
 
+
 /**
- * @param \core_course_list_element $course
+ * Function couse_image
  *
- * @return string
+ * @param $course
+ *
+ * @return bool|string
  */
 function couse_image($course) {
     global $CFG, $OUTPUT;

@@ -4,11 +4,11 @@
         background-color: rgba(var(--bs-body-bg-rgb), 0.1);
         -webkit-box-shadow: none;
     }
-    
+
     &::-webkit-scrollbar-track {
         -webkit-box-shadow: inset 0 0 1px rgba(var(--bs-body-color-rgb), 0.05);
     }
-    
+
     &::-webkit-scrollbar-thumb {
         background-color: rgba(var(--bs-body-color-rgb), 0.15);
         outline: 1px solid slategrey;
@@ -17,7 +17,7 @@
 @mixin disabled-element() {
     pointer-events: none;
     position: relative;
-    
+
     &::after {
         content: "Non-editable area";
         position: absolute;
@@ -47,7 +47,7 @@ body {
 }
 //disable edit on all content except on edit-exception
 [data-vvveb-disabled-area] {
-    
+
     & *:not([data-vvveb-edit-exception]) {
         @include disabled-element();
     }
@@ -67,7 +67,7 @@ Prevents iframe mouse events that prevents clicking on the component
 }
 [contenteditable="true"] {
     outline: none;
-    
+
     &:focus-visible {
         outline: none;
     }
@@ -91,7 +91,7 @@ Prevents iframe mouse events that prevents clicking on the component
     display: none !important;;
 }
 @mixin col-empty-highlight {
-    
+
     > [class*="col-"],
     > .col {
         &:empty {
@@ -101,7 +101,7 @@ Prevents iframe mouse events that prevents clicking on the component
             outline-offset: -0.5rem;
             margin: 0.5rem;
             display: flex;
-            
+
             &:after {
                 content: 'Drag elements here';
                 font-size: 85%;
@@ -114,10 +114,10 @@ Prevents iframe mouse events that prevents clicking on the component
             }
         }
     }
-    
+
 }
 @mixin col-hover {
-    
+
     > [class*="col-"],
     > .col {
         outline: 1px dashed rgba(var(--bs-success-rgb), 0.35);

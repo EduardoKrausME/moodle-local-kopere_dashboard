@@ -10,7 +10,7 @@
 @if $enable-grid-classes {
     .row {
         @include make-row();
-        
+
         > * {
             @include make-col-ready();
         }
@@ -22,7 +22,7 @@
         grid-template-rows: repeat(var(--#{$prefix}rows, 1), 1fr);
         grid-template-columns: repeat(var(--#{$prefix}columns, #{$grid-columns}), 1fr);
         gap: var(--#{$prefix}gap, #{$grid-gutter-width});
-        
+
         @include make-cssgrid();
     }
 }

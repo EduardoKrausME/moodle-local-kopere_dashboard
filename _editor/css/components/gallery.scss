@@ -10,18 +10,18 @@
             flex: 1 0 21%;
         }
     }
-    
+
     &.has-shadow {
         .item img {
             box-shadow: 2px 2px 4px 0 #ccc;
         }
     }
-    
+
     &.masonry {
         margin: 0px;
         padding: 0;
     }
-    
+
     .item {
         margin-bottom: 20px;
         width: 100%;

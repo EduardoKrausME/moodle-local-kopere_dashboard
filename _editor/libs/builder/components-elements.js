@@ -850,7 +850,7 @@ Vvveb.Components.add("elements/flip-box", {
                     </div>
                 </div>
             </div>
-        
+
             <div class="flip-box-back">
                 <div class="d-flex align-items-center flex-column">
                     <div class="flex-shrink-0">
@@ -861,7 +861,7 @@ Vvveb.Components.add("elements/flip-box", {
                             This is some content from a media component. You can replace this with any content and adjust it as
                             needed.
                         </p>
-        
+
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
@@ -1069,7 +1069,7 @@ function carouselAfterDrop(node) {
                     params[i] = param;
                 }
                 swiper.push(new Swiper(el, params))
-                //swiper.push(new Swiper(el, { ...{autoplay:{delay: 500}}, ...el.dataset}))        
+                //swiper.push(new Swiper(el, { ...{autoplay:{delay: 500}}, ...el.dataset}))
             });
         }
 
@@ -1110,12 +1110,12 @@ Vvveb.Components.add("elements/carousel", {
                     <p>Slide 4</p></div>
             </div>
             <div class="swiper-pagination"></div>
-        
+
             <!--
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
             -->
-        
+
             <!-- <div class="swiper-scrollbar"></div> -->
         </div>`,
     afterDrop : carouselAfterDrop,
@@ -1322,10 +1322,10 @@ Vvveb.Components.add("elements/slider", {
                     <p>Slider 4</p></div>
             </div>
             <div class="swiper-pagination"></div>
-        
+
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
-        
+
             <!-- <div class="swiper-scrollbar"></div> -->
         </div>`,
     afterDrop : carouselAfterDrop,

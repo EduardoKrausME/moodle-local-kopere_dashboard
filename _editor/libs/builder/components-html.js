@@ -888,7 +888,7 @@ Vvveb.Components.extend("_base", "html/blockquote", {
                 <p>Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil.</p>
                 <cite class="small">
                     <a href="https://en.wikipedia.org/wiki/Marcus_Aurelius" class="text-decoration-none" target="blank">Marcus Aurelius</a>
-                </cite>    
+                </cite>
             </blockquote>`,
     properties : [{
         name      : "Cite",

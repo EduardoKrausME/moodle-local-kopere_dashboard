@@ -566,7 +566,7 @@ Vvveb.Components.extend("_base", "widgets/facebookpage", {
              data-adapt-container-width="true"
              data-hide-cover="false"
              data-show-facepile="true">
-            
+
                 <blockquote cite="https://www.facebook.com/facebook" class="fb-xfbml-parse-ignore">
                     <a href="https://www.facebook.com/facebook">Facebook</a>
                 </blockquote>
@@ -766,8 +766,8 @@ function lottieAfterDrop(node) {
         let lottie = [];
         function initLottie(onlyNew = false) {
             if (typeof bodymovin == "undefined") return;
-            
-            
+
+
             let list = document.querySelectorAll('.lottie' + (onlyNew ? ":not(.lottie-initialized)" : "") );
             list.forEach(el => {
                 el.replaceChildren();
@@ -778,7 +778,7 @@ function lottieAfterDrop(node) {
                   autoplay: (el.dataset.autoplay == "true" ? true : false),
                   path: el.dataset.path
                 });
-                
+
             });
         }
 
@@ -807,7 +807,7 @@ Vvveb.Components.add("widgets/lottie", {
     attributes : ["data-component-lottie"],
     html       : `
       <div class="lottie" data-component-lottie data-path="https://labs.nearpod.com/bodymovin/demo/markus/isometric/markus2.json" data-loop="true" data-autoplay="true">
-      </div>    
+      </div>
     `,
     afterDrop  : lottieAfterDrop,
 
