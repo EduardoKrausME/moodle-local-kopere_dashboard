@@ -93,8 +93,6 @@ class header {
             $PAGE->set_pagelayout('standard');
             $PAGE->set_title('Erro');
             $PAGE->set_heading('Erro');
-
-            echo $OUTPUT->header();
         }
 
         dashboard_util::start_page();
