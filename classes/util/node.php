@@ -15,9 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * User: Eduardo Kraus
- * Date: 21/03/2020
- * Time: 12:49
+ * Introduced  21/03/2020 12:49
+ *
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\util;

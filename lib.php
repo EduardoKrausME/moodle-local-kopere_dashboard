@@ -15,17 +15,31 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    23/05/17 17:59
+ * Lib file
+ *
+ * introduced   23/05/17 17:59
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * Function local_kopere_dashboard_extends_navigation
+ *
+ * @param global_navigation $nav
+ *
+ * @throws coding_exception
+ * @throws dml_exception
+ * @throws moodle_exception
+ */
 function local_kopere_dashboard_extends_navigation(global_navigation $nav) {
     local_kopere_dashboard_extend_navigation($nav);
 }
 
+
 /**
+ * Function local_kopere_dashboard_extend_navigation
+ *
  * @param global_navigation $nav
  *
  * @throws coding_exception
@@ -36,53 +50,6 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
     global $CFG;
 
     require_once(__DIR__ . "/locallib.php");
-
-    //if (strpos($_SERVER['REQUEST_URI'], "kopere_dashboard") === false) {
-    //    try {
-    //        $menus = $DB->get_records('kopere_dashboard_menu', null, 'title ASC');
-    //
-    //        /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
-    //        foreach ($menus as $menu) {
-    //
-    //            $pages = $DB->get_records('kopere_dashboard_webpages', ['menuid' => $menu->id, 'visible' => 1]);
-    //
-    //            if ($pages) {
-    //                $icone = new pix_icon('webpages', $menu->title, 'local_kopere_dashboard');
-    //                if ($CFG->theme == 'flixcurso') {
-    //                    $icone = new pix_icon('webpages-dark', $menu->title, 'local_kopere_dashboard');
-    //                }
-    //                $node = $nav->add(
-    //                    $menu->title,
-    //                    new moodle_url("{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}"),
-    //                    navigation_node::TYPE_CUSTOM,
-    //                    null,
-    //                    "kopere_dashboard-{$menu->id}",
-    //                    $icone
-    //                );
-    //
-    //                $node->showinflatnavigation = true;
-    //
-    //                /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $page */
-    //                foreach ($pages as $page) {
-    //                    $icone = new pix_icon('webpages', $page->title, 'local_kopere_dashboard');
-    //                    if ($CFG->theme == 'flixcurso') {
-    //                        $icone = new pix_icon('webpages-dark', $page->title, 'local_kopere_dashboard');
-    //                    }
-    //                    $node->add(
-    //                        $page->title,
-    //                        new moodle_url("{$CFG->wwwroot}/local/kopere_dashboard/?p={$page->link}"),
-    //                        navigation_node::TYPE_CUSTOM,
-    //                        null,
-    //                        "kopere_dashboard-page-{$page->id}",
-    //                        $icone
-    //                    );
-    //                }
-    //            }
-    //        }
-    //    } catch (Exception $e) {
-    //        // Se der problema, não fazer nada.
-    //    }
-    //}
 
     $CFG->custommenuitems = trim($CFG->custommenuitems);
     $CFG->custommenuitems = preg_replace('/.*kopere_dashboard.*/', "", $CFG->custommenuitems);
@@ -131,7 +98,6 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
 
 /**
  * Function add_pages_custommenuitems_400
- *
  */
 function add_pages_custommenuitems_400() {
     global $CFG;
@@ -145,14 +111,17 @@ function add_pages_custommenuitems_400() {
             $CFG->extramenu = "";
             local_kopere_dashboard_extend_navigation__get_menus(0, "");
             $cache->set("kopere_dashboard_menu", $CFG->extramenu);
-        } catch (dml_exception $e) {
+        } catch (dml_exception $e) { // phpcs:disable
         }
     }
 
     $CFG->custommenuitems = "{$CFG->custommenuitems}\n{$CFG->extramenu}";
 }
 
+
 /**
+ * Function local_kopere_dashboard_extend_navigation__get_menus
+ *
  * @param $menuid
  * @param $prefix
  *
@@ -179,6 +148,8 @@ function local_kopere_dashboard_extend_navigation__get_menus($menuid, $prefix) {
 }
 
 /**
+ * Function local_kopere_dashboard_pluginfile
+ *
  * @param $course
  * @param $cm
  * @param $context
@@ -186,6 +157,7 @@ function local_kopere_dashboard_extend_navigation__get_menus($menuid, $prefix) {
  * @param $args
  * @param $forcedownload
  * @param array $options
+ *
  * @return bool
  * @throws coding_exception
  */

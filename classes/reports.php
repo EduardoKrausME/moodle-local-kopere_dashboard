@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    13/05/17 13:29
+ * reoprts file
+ *
+ * introduced   13/05/17 13:29
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -167,10 +169,6 @@ class reports extends reports_admin {
 
         echo '<div class="element-box table-responsive">';
 
-        echo '<pre>';
-        print_r($koperereports);
-        echo '</pre>';
-
         if (strlen($koperereports->prerequisit) && $courseid == 0) {
             try {
                 ini_set('max_execution_time', 0);
@@ -298,7 +296,7 @@ class reports extends reports_admin {
 
         $cache->set($cachekey, [
             'reports' => $reports,
-            'count_recordstotal' => count($recordstotal)
+            'count_recordstotal' => count($recordstotal),
         ]);
 
         json::encode($reports, count($recordstotal), count($recordstotal));

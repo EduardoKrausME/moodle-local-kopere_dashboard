@@ -15,9 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * User: Eduardo Kraus
- * Date: 11/07/17
- * Time: 11:13
+ * Introduced  11/07/17 11:13
+ *
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\util;
@@ -136,7 +138,7 @@ class enroll_util {
         $coorteid = str_replace("c", "", $coorteid);
         $cohortmembers = [
             "cohortid" => $coorteid,
-            "userid" => $userid
+            "userid" => $userid,
         ];
         $DB->delete_records('cohort_members', $cohortmembers);
     }

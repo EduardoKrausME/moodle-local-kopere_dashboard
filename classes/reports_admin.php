@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    13/05/17 13:29
- * @package    local_kopere_dashboard
- * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * reports_admin file
+ *
+ * introduced   13/05/17 13:29
+ * @package     local_kopere_dashboard
+ * @copyright   2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard;
@@ -197,22 +199,22 @@ class reports_admin {
         $koperereports->foreach = str_replace('local_kopere_dashboard\report\report_foreach::', '', $koperereports->foreach);
         $values = [
             ['key' => '', 'value' => get_string_kopere('reports_settings_form_none')],
-            array(
+            [
                 'key' => 'badge_status_text',
                 'value' => get_string_kopere('reports_settings_form_prerequisit_badge_status_text'),
-            ),
-            array(
+            ],
+            [
                 'key' => 'badge_criteria_type',
                 'value' => get_string_kopere('reports_settings_form_prerequisit_badge_criteria_type'),
-            ),
-            array(
+            ],
+            [
                 'key' => 'userfullname',
                 'value' => get_string_kopere('reports_settings_form_prerequisit_userfullname'),
-            ),
-            array(
+            ],
+            [
                 'key' => 'courses_group_mode',
                 'value' => get_string_kopere('reports_settings_form_prerequisit_courses_group_mode'),
-            ),
+            ],
         ];
         $form->add_input(
             input_select::new_instance()
@@ -289,10 +291,10 @@ class reports_admin {
                 $columns[] = $colum;
             }
         }
-        return json_encode(array(
+        return json_encode([
             'columns' => $columns,
-            'header' => $_POST['header']
-        ));
+            'header' => $_POST['header'],
+        ]);
     }
 
     /**

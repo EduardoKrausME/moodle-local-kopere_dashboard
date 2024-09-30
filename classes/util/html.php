@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * html file
+ *
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -39,14 +41,14 @@ class html {
         '&Egrave;', '&Ecirc;', '&Euml;', '&Iacute;', '&Igrave;',
         '&Icirc;', '&Iuml;', '&Oacute;', '&Ograve;', '&Ocirc;',
         '&Otilde;', '&Ouml;', '&Uacute;', '&Ugrave;', '&Ucirc;',
-        '&Uuml;', '&Ccedil;', "'", '&acute;', '`', '/', '\\', '_',
+        '&Uuml;', '&Ccedil;', "'", '&acute;', '`', '/', '\\', '_', // phpcs:disable
         '_', '&uml;', '&ordf;', ',', ':', ' '];
     /** @var array */
     private static $acentosascii = [
         'á', 'à', 'â', 'ã', 'ä', 'é', 'è', 'ê', 'ë', 'í', 'ì', 'î',
         'ï', 'ó', 'ò', 'ô', 'õ', 'ö', 'ú', 'ù', 'û', 'ü', 'ç', 'Á',
         'À', 'Â', 'Ã', 'Ä', 'É', 'È', 'Ê', 'Ë', 'Í', 'Ì', 'Î', 'Ï',
-        'Ó', 'Ò', 'Ô', 'Õ', 'Ö', 'Ú', 'Ù', 'Û', 'Ü', 'Ç', "'", '´',
+        'Ó', 'Ò', 'Ô', 'Õ', 'Ö', 'Ú', 'Ù', 'Û', 'Ü', 'Ç', "'", '´',  // phpcs:disable
         '`', '/', '\\', '~', '^', '¨', 'ª', ',', ':', '_'];
     /** @var array */
     private static $semacento = [

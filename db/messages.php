@@ -14,14 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/***************************
- * User: kraus
- * Date: 19/08/2016
- * Time: 16:10
- ***************************/
+/**
+ * messages file
+ *
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 defined('MOODLE_INTERNAL') || die();
 
-$messageproviders = array (
+$messageproviders = [
     'kopere_dashboard_messages' => [],
-);
+];

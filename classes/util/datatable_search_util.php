@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    18/05/17 04:58
+ * datatable_search_util file
+ *
+ * introduced   18/05/17 04:58
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -29,29 +31,21 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class datatable_search_util {
-    /**
-     * @var
-     */
+    /** @var string */
     private $columnselect;
     /** @var mixed */
     private $start;
     /** @var mixed */
     private $length;
-    /**
-     * @var
-     */
+    /** @var string */
     private $order;
-    /**
-     * @var
-     */
+    /** @var string */
     private $orderdir;
-    /**
-     * @var
-     */
+    /** @var string */
     private $where;
 
     /**
-     * datatable_search_util constructor.
+     * Datatable_search_util constructor.
      *
      * @param $columnselect
      *

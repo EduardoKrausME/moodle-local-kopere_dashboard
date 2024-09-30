@@ -15,13 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    16/11/18 02:01
+ * View File
+ * introduced   16/11/18 02:01
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-ob_start();
 define('AJAX_SCRIPT', false);
 define('OPEN_INTERNAL', true);
 

@@ -15,9 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * User: Eduardo Kraus
- * Date: 21/03/2020
- * Time: 10:17
+ * Introduced  21/03/2020 10:17
+ *
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\task;
@@ -72,7 +74,7 @@ class performance extends \core\task\scheduled_task {
         $dashboardperformance = (object)[
             'time' => $time,
             'type' => $type,
-            'value' => $value
+            'value' => $value,
         ];
 
         $exists = $DB->record_exists('kopere_dashboard_performance', ['time' => $time, 'type' => $type]);

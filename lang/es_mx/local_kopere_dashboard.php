@@ -15,58 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Local language pack from http://localhost
+ * translate es_mx file
  *
- * @package    local
- * @subpackage kopere_dashboard
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   local_kopere_dashboard
+ * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  * Muchas gracias a Germán Valero https://github.com/germanvaleroelizondo
  */
-
-defined('MOODLE_INTERNAL') || die();
-
-$string['modulename'] = 'Tablero Kopere';
-$string['pluginname'] = 'Tablero Kopere';
-$string['kopere_dashboard:view'] = 'Ver Tablero Kopere';
-$string['kopere_dashboard:manage'] = 'Mánager Tablero Kopere';
-$string['dashboard'] = 'Tablero';
-$string['settings'] = 'Configuraciones';
-$string['close'] = 'Cerrar';
-$string['crontask_tmp'] = 'Cron limpiar carpeta tmp';
-$string['crontask_performance'] = 'Cron para guardar datos de rendimiento';
-
-$string['kopere_dashboard_menu'] = 'Mostrar menú en la barra superior';
-$string['kopere_dashboard_menu_desc'] = 'Si está marcado, el menú superior contiene un enlace al panel de control de Kopere';
-$string['kopere_dashboard_menuwebpages'] = 'Mostrar páginas estáticas para logados';
-$string['kopere_dashboard_menuwebpages_desc'] = 'Active esta opción para mostrar las páginas estáticas en el menú de navegación para usuarios conectados.';
-
-$string['add_report_user_fields'] = 'En los informes, agregue los siguientes campos de usuario';
-$cadena['add_report_user_fields_alt'] = 'Seleccione los campos de usuario que desea mostrar en los informes de Kopere.<br>
-    Mantenga presionada la tecla CTRL para seleccionar varios campos.';
-
-$string['kopere_dashboard_monitor'] = 'Monitor del servidor';
-$string['kopere_dashboard_monitor_desc'] = '¿Desea mostrar el monitor del servidor en la parte superior de Kopere?';
-
-$string['integracaoroot'] = 'Integraciones';
-
-$string['messageprovider:kopere_dashboard_messages'] = 'Enviar Notificaciones';
-$string['kopere_dashboard:emailconfirmsubmission'] = 'Enviar Notificaciones';
-
-$string['open_dashboard'] = 'Abrir Tablero';
-$string['dateformat'] = '%d %B %Y, %I:%M %p';
-$string['datetime'] = '%d/%m/%Y, %H:%M';
-$string['php_datetime'] = 'd/m/Y H:i';
-$string['date_renderer_format'] = 'day/month/year';
-$string['datetime_renderer_format'] = 'day/month/year hour:min';
-
-$string['help_title'] = 'Ayuda con esta página';
 
 $string['about_bug'] = 'Si encontró algun PROBLEMA o si desea sugerir mejoras, abra un asunto';
 $string['about_code'] = 'Código disponible en';
 $string['about_help'] = 'Ayuda activada';
 $string['about_project'] = 'Proyecto de Código Abierto desarrollado y mantenido por';
 $string['about_title'] = 'Acerca de';
+$string['active'] = 'Activo';
+$string['add_report_user_fields'] = 'En los informes, agregue los siguientes campos de usuario';
 $string['background'] = 'Fondo';
 $string['backup_delete_confirm'] = 'Eliminación de Respaldo';
 $string['backup_delete_title'] = '¿Realmente desea eliminar el respaldo <strong>{$a}</strong>';
@@ -113,17 +77,11 @@ $string['benchmark_timesec'] = 'Tiempo, en segundos';
 $string['benchmark_timetotal'] = 'Tiempo total:';
 $string['benchmark_title'] = 'Prueba de desempeño';
 $string['benchmark_title2'] = 'Alojando prueba de desempeño';
+$string['cachedef_performancemonitor_cache'] = 'Performance monitor cache';
+$string['cachedef_report_getdata_cache'] = 'report getdata cache';
 $string['cloadmoreinfo'] = 'Correr el archivo de configuración &laquo;config.php&raquo;';
 $string['cloadname'] = 'Tiempo de carga de Moodle';
-
-// Performancemonitor.
-$string['cachedef_performancemonitor_cache'] = 'Performance monitor cache';
-$string['performancemonitor_cpu'] = 'Uso del CPU';
-$string['performancemonitor_memory'] = 'Memoria';
-$string['performancemonitor_hd'] = 'Moodledata';
-$string['performancemonitor_performance'] = 'Rendimiento';
-$string['performancemonitor_min'] = '{$a} min:';
-
+$string['close'] = 'Cerrar';
 $string['color_blue'] = 'Azul';
 $string['color_brown'] = 'Café';
 $string['color_green'] = 'Verde';
@@ -138,32 +96,33 @@ $string['coursereadname'] = 'Leyendo curso';
 $string['courses_access'] = 'Acceso';
 $string['courses_edit'] = 'Editar';
 $string['courses_enrol'] = 'Nº de estudiantes inscritos';
+$string['courses_enrol_new'] = 'Registrar nuevo estudiante y inscribirse';
+$string['courses_enrol_new_form'] = 'Registrar nuevo estudiante antes de inscribirse';
 $string['courses_invalid'] = '¡ID de Curso Inválida!';
-$string['invisible'] = 'Oculto';
 $string['courses_name'] = 'Nombre del Curso';
 $string['courses_notound'] = '¡Curso no encontrado!';
 $string['courses_page_create'] = 'Crear página basada en este resumen';
 $string['courses_page_title'] = 'Páginas ya creadas';
 $string['courses_shortname'] = 'Nombre Corto';
-$string['courses_student_email'] = 'E-mail';
-$string['courses_student_name'] = 'Nombre';
-$string['courses_student_password'] = 'Sugerencia de contraseña para el estudiante';
-$string['courses_student_ok'] = 'Usuario creado exitosamente:<br><strong>Ingreso:</strong> {$a->login}<br><strong>Contraseña:</strong> {$a->senha}';
 $string['courses_student_cadastrado'] = 'El usuario ya está registrado en el curso. <a href="{$a}">Haz clic aquí</a> para verificar';
 $string['courses_student_cadastrar'] = 'Inscribir al estudiante en este curso';
 $string['courses_student_cadastrar_ok'] = 'Usuario inscrito exitosamente';
+$string['courses_student_email'] = 'E-mail';
+$string['courses_student_name'] = 'Nombre';
+$string['courses_student_ok'] = 'Usuario creado exitosamente:<br><strong>Ingreso:</strong> {$a->login}<br><strong>Contraseña:</strong> {$a->senha}';
+$string['courses_student_password'] = 'Sugerencia de contraseña para el estudiante';
 $string['courses_student_status'] = 'Estatus del registro';
 $string['courses_sumary'] = 'Resumen';
 $string['courses_title'] = 'Cursos';
 $string['courses_title1'] = 'Lista de Cursos';
 $string['courses_titleenrol'] = 'Estudiantes inscritos';
-$string['courses_enrol_new'] = 'Registrar nuevo estudiante y inscribirse';
-$string['courses_enrol_new_form'] = 'Registrar nuevo estudiante antes de inscribirse';
 $string['courses_user_create'] = 'Registrar nuevo estudiante';
 $string['courses_validate_user'] = 'Verificar si el estudiante existe o registrarlo';
-$string['visible'] = 'Visible';
 $string['coursewritemoreinfo'] = 'Probal la velocidad de la base de datos para escribir un curso';
 $string['coursewritename'] = 'Escribiendo curso';
+$string['crontask_performance'] = 'Cron para guardar datos de rendimiento';
+$string['crontask_tmp'] = 'Cron limpiar carpeta tmp';
+$string['dashboard'] = 'Tablero';
 $string['dashboard_enrol_active'] = 'el registro está activo';
 $string['dashboard_enrol_inactive'] = 'el registro está inactivo';
 $string['dashboard_enrol_lastmodifield'] = 'Úlltimo cambio en';
@@ -179,6 +138,17 @@ $string['dashboard_title_course'] = 'Cursos / Visible';
 $string['dashboard_title_disk'] = 'Uso de Disco';
 $string['dashboard_title_online'] = 'En-línea / Última hora';
 $string['dashboard_title_user'] = 'Usuarios / Bienes';
+$string['datatables_buttons_copyKeys'] = 'Pressione <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> para copiar os dados da tabela<br>para a área de transferência do sistema.<br><br>Para cancelar, clique nesta mensagem ou pressione escape.';
+$string['datatables_buttons_copySuccess1'] = 'Copiado una fila al portapapeles';
+$string['datatables_buttons_copySuccess_'] = 'Copiado %d filas al portapapeles';
+$string['datatables_buttons_copyTitle'] = 'Copiar al portapapeles';
+$string['datatables_buttons_copy_text'] = 'Copiar datos';
+$string['datatables_buttons_csv_text'] = 'Descargar CSV';
+$string['datatables_buttons_pageLength_'] = 'Mostrar %d filas';
+$string['datatables_buttons_pageLength_1'] = 'Mostrar todo';
+$string['datatables_buttons_print_text'] = 'Imprimir';
+$string['datatables_buttons_select_rows1'] = '1 fila seleccionada';
+$string['datatables_buttons_select_rows_'] = '%d líneas seleccionadas';
 $string['datatables_oAria_sSortAscending'] = ': Ordenar Columnas Ascendente';
 $string['datatables_oAria_sSortDescending'] = ': Ordenar Columnas en orden Descendiente';
 $string['datatables_oPaginate_sFirst'] = 'Primero';
@@ -186,36 +156,43 @@ $string['datatables_oPaginate_sLast'] = 'Último';
 $string['datatables_oPaginate_sNext'] = 'Siguiente';
 $string['datatables_oPaginate_sPrevious'] = 'Anterior';
 $string['datatables_sEmptyTable'] = 'Sin registros encontrados';
+$string['datatables_sErrorMessage'] = '<strong>Error al cargar datos</strong><div>Intentando de nuevo en {$a} segundos</div>';
 $string['datatables_sInfo'] = '_START_ a _END_ of _TOTAL_';
 $string['datatables_sInfoEmpty'] = '0 registros';
 $string['datatables_sInfoFiltered'] = '(Filtrado de _MAX_ records)';
 $string['datatables_sLengthMenu'] = '_MENU_ <span>por página</span>';
 $string['datatables_sLoadingRecords'] = 'Cargando ...';
 $string['datatables_sProcessing'] = 'Procesando ...';
-$string['datatables_sErrorMessage'] = '<strong>Error al cargar datos</strong><div>Intentando de nuevo en {$a} segundos</div>';
 $string['datatables_sSearch'] = 'Buscar';
 $string['datatables_sZeroRecords'] = 'Sin registros encontrados';
-$string['datatables_buttons_print_text'] = 'Imprimir';
-$string['datatables_buttons_copy_text'] = 'Copiar datos';
-$string['datatables_buttons_csv_text'] = 'Descargar CSV';
-$string['datatables_buttons_copySuccess1'] = 'Copiado una fila al portapapeles';
-$string['datatables_buttons_copySuccess_'] = 'Copiado %d filas al portapapeles';
-$string['datatables_buttons_copyTitle'] = 'Copiar al portapapeles';
-$string['datatables_buttons_copyKeys'] = 'Pressione <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> para copiar os dados da tabela<br>para a área de transferência do sistema.<br><br>Para cancelar, clique nesta mensagem ou pressione escape.';
-$string['datatables_buttons_select_rows_'] = '%d líneas seleccionadas';
-$string['datatables_buttons_select_rows1'] = '1 fila seleccionada';
-$string['datatables_buttons_pageLength_'] = 'Mostrar %d filas';
-$string['datatables_buttons_pageLength_1'] = 'Mostrar todo';
-
+$string['date_renderer_format'] = 'day/month/year';
+$string['dateformat'] = '%d %B %Y, %I:%M %p';
+$string['datetime'] = '%d/%m/%Y, %H:%M';
+$string['datetime_renderer_format'] = 'day/month/year hour:min';
 $string['filemanager_title'] = 'Gestor de Archivos';
 $string['filereadmoreinfo'] = 'Probar la velocidad para leer en carpeta temporal de Moodle';
 $string['filereadname'] = 'Leyendo archivos';
 $string['filewritemoreinfo'] = 'Probar la velocidad para escribir en carpeta temporal de Moodle';
 $string['filewritename'] = 'Creando archivos';
+$string['help_title'] = 'Ayuda con esta página';
+$string['inactive'] = 'Inactivo';
+$string['integracaoroot'] = 'Integraciones';
+$string['invisible'] = 'Oculto';
+$string['kopere_dashboard:emailconfirmsubmission'] = 'Enviar Notificaciones';
+$string['kopere_dashboard:manage'] = 'Mánager Tablero Kopere';
+$string['kopere_dashboard:view'] = 'Ver Tablero Kopere';
+$string['kopere_dashboard_menu'] = 'Mostrar menú en la barra superior';
+$string['kopere_dashboard_menu_desc'] = 'Si está marcado, el menú superior contiene un enlace al panel de control de Kopere';
+$string['kopere_dashboard_menuwebpages'] = 'Mostrar páginas estáticas para logados';
+$string['kopere_dashboard_menuwebpages_desc'] = 'Active esta opción para mostrar las páginas estáticas en el menú de navegación para usuarios conectados.';
+$string['kopere_dashboard_monitor'] = 'Monitor del servidor';
+$string['kopere_dashboard_monitor_desc'] = '¿Desea mostrar el monitor del servidor en la parte superior de Kopere?';
 $string['loginguestmoreinfo'] = 'Midiendo el tiempo para cargar la página de ingreso con la cuenta de invitado';
 $string['loginguestname'] = 'Tiempo para conectar con la cuenta de invitado';
 $string['loginusermoreinfo'] = 'Midiendo el tiempo para cargar la página de ingreso con una cuenta falsa de usuario';
 $string['loginusername'] = 'Tiempo para conectar con una cuenta falsa de usuario';
+$string['messageprovider:kopere_dashboard_messages'] = 'Enviar Notificaciones';
+$string['modulename'] = 'Tablero Kopere';
 $string['navigation_page'] = 'Página {$a->atualPage} de {$a->countPages}';
 $string['notification_add_action'] = '¿De qué acción desea Usted recibir notificaciones?';
 $string['notification_add_create'] = 'Crear notificación';
@@ -226,36 +203,34 @@ $string['notification_core_course'] = 'Cursos';
 $string['notification_core_course_category'] = 'Categoría de Curso';
 $string['notification_core_user'] = 'Usuarios';
 $string['notification_core_user_enrolment'] = 'Registro de Usuario';
-$string['notification_duplicate'] = '¡Esta combinación de módulo y evento ya tiene un oyente!';
 $string['notification_create'] = 'Crear alerta';
 $string['notification_created'] = '¡Notificación creada!';
 $string['notification_delete_success'] = '¡Notificación eliminada exitosamente!';
 $string['notification_delete_yes'] = '¿Realmente quiere eliminar esta Notificación?';
+$string['notification_duplicate'] = '¡Esta combinación de módulo y evento ya tiene un oyente!';
 $string['notification_editing'] = 'Editando Notificación';
 $string['notification_error_smtp'] = '<p>Para que los estudiantes reciban los mensajes, SMTP debe ser configurado.</p> <p><a href="https://moodle.eduardokraus.com/configurar-o-smtp-no-moodle" target="_blank">Leer aquí como configurar SMTP</a></p> <p><a href="{$a->wwwroot}/admin/settings.php?section={$a->mail}" target="_blank">Hacer click aquí para configurar la salida de Email</a></p>';
-$string['notification_message_not'] = 'Primero, guarde la notificación para poder crear el mensaje.';
-$string['notification_message_edit'] = 'Edite el contenido del mensaje';
 $string['notification_from'] = 'De';
 $string['notification_from_admin'] = 'Administrador del Sitio';
 $string['notification_fromdesc'] = '¿Quién será el remitente del mensaje?';
 $string['notification_local_kopere_dashboard'] = 'Tablero Kopere';
+$string['notification_local_kopere_dashboard_payment'] = 'Pago Kopere';
 $string['notification_local_kopere_hotmoodle'] = 'HotMoodle Kopere';
 $string['notification_local_kopere_moocommerce'] = 'MooCommerce Kopere';
-$string['notification_local_kopere_dashboard_payment'] = 'Pago Kopere';
 $string['notification_manager'] = 'Gestionar Mensajes';
 $string['notification_message'] = 'Mensaje';
+$string['notification_message_edit'] = 'Edite el contenido del mensaje';
 $string['notification_message_html'] = '<p>Hola {[to.fullname]},</p><p>&nbsp;</p><p>Att,<br>{[from.fullname]}.</p>';
+$string['notification_message_not'] = 'Primero, guarde la notificación para poder crear el mensaje.';
 $string['notification_new'] = 'Nueva notificación';
 $string['notification_notfound'] = '¡Notificación no encontrada!';
 $string['notification_notound'] = '¡Notificación no encontrada!';
 $string['notification_setting_config'] = 'Configuraciones de Email';
-$string['notification_setting_preview'] = 'Vista previa';
 $string['notification_setting_edit'] = 'Editar plantilla HTML';
+$string['notification_setting_preview'] = 'Vista previa';
 $string['notification_setting_template'] = 'Plantilla';
 $string['notification_setting_templatelocation'] = 'Plantillas están en la carpeta';
 $string['notification_status'] = 'Estatus';
-$string['active'] = 'Activo';
-$string['inactive'] = 'Inactivo';
 $string['notification_status_deleted'] = 'Eliminada';
 $string['notification_statusdesc'] = '¡Si Usted quier detener las notificaciones, marcar como "Idle" (ociosa) y guardar!';
 $string['notification_subject'] = 'Asunto';
@@ -275,6 +250,15 @@ $string['notification_todesc_admins'] = 'Administradores del sitio (Todos los Ad
 $string['notification_todesc_student'] = 'El estudiante (Enviar al estudiante que hizo la acción)';
 $string['notification_todesc_teachers'] = 'Profesores del curso (Solamente si es dentro de un curso)';
 $string['notification_update'] = 'Actualizar alerta';
+$string['open_dashboard'] = 'Abrir Tablero';
+$string['performancemonitor_cpu'] = 'Uso del CPU';
+$string['performancemonitor_hd'] = 'Moodledata';
+$string['performancemonitor_memory'] = 'Memoria';
+$string['performancemonitor_min'] = '{$a} min:';
+$string['performancemonitor_performance'] = 'Rendimiento';
+$string['php_datetime'] = 'd/m/Y H:i';
+$string['pluginname'] = 'Tablero Kopere';
+$string['privacy:metadata'] = 'El complemento de Kopere Dashboard no almacena ningún dato personal.';
 $string['processormoreinfo'] = 'Una función es llamada en un bucle para probar la velocidad del procesador';
 $string['processorname'] = 'Función llamada muchas veces';
 $string['profile_access'] = 'Acceder como';
@@ -303,11 +287,9 @@ $string['querytype1name'] = 'Solicitud compleja (n°1)';
 $string['querytype2moreinfo'] = 'Probar la velocidad de la base de datos para ejecutar una solicitud compleja';
 $string['querytype2name'] = 'Solicitud compleja (n°2)';
 $string['reports_access_n'] = 'accesada {$a} veces';
-$string['reports_disabled'] = 'Desactivado: -';
-$string['reports_add_new'] = 'Nuevo informe';
-
 $string['reports_activitiesassigned'] = 'Actividades Asignadas';
 $string['reports_activitiescomplete'] = 'Actividades Completadas';
+$string['reports_add_new'] = 'Nuevo informe';
 $string['reports_badgename'] = 'Insignia';
 $string['reports_cohort'] = 'Nombre de Cohortes';
 $string['reports_context'] = 'Contexto';
@@ -318,6 +300,8 @@ $string['reports_criteriatype'] = 'Criterios';
 $string['reports_datacourses'] = 'Datos del Curso';
 $string['reports_datastudents'] = 'Datos del Estudiante';
 $string['reports_dateissued'] = 'En';
+$string['reports_disabled'] = 'Desactivado: -';
+$string['reports_download'] = 'Descargar estos datos';
 $string['reports_export'] = 'Exportar a Excel';
 $string['reports_groupname'] = 'Nombre del Grupo';
 $string['reports_groupnode'] = 'Modo de Grupo';
@@ -349,12 +333,11 @@ $string['reports_reportcat_enrol_cohort'] = 'Reporte de Cohorte';
 $string['reports_reportcat_enrol_guest'] = 'Reporte de Visitantes';
 $string['reports_reportcat_server'] = 'Reporte del Sistema';
 $string['reports_reportcat_user'] = 'Reporte de Usuario';
-$string['reports_download'] = 'Descargar estos datos';
 $string['reports_selectcourse'] = 'Seleccione el curso para generar el reporte';
 $string['reports_timecreated'] = 'Registrado en';
-$string['cachedef_report_getdata_cache'] = 'report getdata cache';
 $string['reports_title'] = 'Reportes';
 $string['setting_saved'] = '¡configuraciones gruardadas!';
+$string['settings'] = 'Configuraciones';
 $string['user_table_celphone'] = 'Mobile';
 $string['user_table_city'] = 'Ciudad';
 $string['user_table_email'] = 'E-mail';
@@ -362,9 +345,10 @@ $string['user_table_fullname'] = 'Nombre';
 $string['user_table_phone'] = 'Teléfono fijo';
 $string['user_table_username'] = 'Nombre_de_usuario';
 $string['user_title'] = 'Usuarios';
+$string['useraccess_title'] = 'Acceso del usuario';
 $string['userenrolment_created'] = 'Inscripción creada en';
-$string['userenrolment_edit'] = 'Editar fecha de inscripción';
 $string['userenrolment_detail'] = 'Detalles de registro';
+$string['userenrolment_edit'] = 'Editar fecha de inscripción';
 $string['userenrolment_notfound'] = '¡Inscripción de usuario no encontrada!';
 $string['userenrolment_status'] = 'La inscripción está';
 $string['userenrolment_status_active'] = 'Activa';
@@ -400,10 +384,6 @@ $string['userimport_messages'] = 'Mensajes que los estudiantes recibirán durant
 $string['userimport_moveuploadedfile_error'] = '¡ERROR al mover archivo!';
 $string['userimport_noterror'] = 'No se encontró error';
 $string['userimport_passcreate'] = '--Será creado--';
-
-// Acessos dos usuários.
-$string['useraccess_title'] = 'Acceso del usuario';
-
 $string['userimport_title'] = 'Importar Usuarios';
 $string['userimport_title_proccess'] = 'Procesando archivo "{$a}"';
 $string['userimport_upload'] = 'Arrastrar aquí archivos CSV o hacer click para abrir la caja de búsqueda.';
@@ -423,22 +403,32 @@ $string['useronline_table_navigator'] = 'Navegador';
 $string['useronline_table_os'] = 'Sistema Operativo';
 $string['useronline_table_page'] = 'Página';
 $string['useronline_title'] = 'Usuarios En línea';
+$string['visible'] = 'Visible';
+$string['vvveb_home_access'] = 'Acceder al curso';
+$string['vvveb_home_automatically_my_course'] = 'No editar. Este bloque será reemplazado automáticamente con los cursos en los que el estudiante está inscrito.';
+$string['vvveb_home_mycourses_heading'] = 'Mis Cursos';
+$string['vvveb_home_popular_course'] = 'Cursos Populares';
+$string['vvveb_home_team_subtitle'] = 'Somos un grupo de profesionales dedicados a su trabajo';
+$string['vvveb_home_team_title'] = 'Conoce a Nuestro Equipo';
 $string['webpages_allpages'] = 'Todas las páginas';
+$string['webpages_error_menu'] = '¡Menú no encontrado!';
+$string['webpages_error_page'] = '¡Página no encontrada!';
 $string['webpages_menu_create'] = 'Crear nuevo Menú';
 $string['webpages_menu_created'] = '¡Menú creado!';
 $string['webpages_menu_delete'] = 'Excluyendo menú';
-$string['webpages_menu_nodelete'] = 'No se puede eliminar un menú que tiene páginas registradas!';
 $string['webpages_menu_deleted'] = '¡Menú eliminado exitosamente!';
 $string['webpages_menu_edit'] = 'Editando Menú';
 $string['webpages_menu_error'] = '¡Deben llenarse todos los datos!';
-$string['webpages_menu_link_duplicate'] = '¡El "enlace" está duplicado!';
 $string['webpages_menu_help'] = 'Ayuda con Menúes';
+$string['webpages_menu_link'] = 'Enlace del Menú';
+$string['webpages_menu_link_duplicate'] = '¡El "enlace" está duplicado!';
 $string['webpages_menu_new'] = 'Nuevo Menú';
+$string['webpages_menu_nodelete'] = 'No se puede eliminar un menú que tiene páginas registradas!';
 $string['webpages_menu_save'] = 'Guardar';
 $string['webpages_menu_subtitle'] = 'Menú Estático';
 $string['webpages_menu_title'] = 'Título del Menú';
-$string['webpages_menu_link'] = 'Enlace del Menú';
 $string['webpages_menu_updated'] = '¡Menú actualizado!';
+$string['webpages_page_confirmdeletemenu'] = '<p>¿Desea realmente eliminar el menú <strong>{$a}</strong>?</p>';
 $string['webpages_page_course'] = 'Curso Enlazado';
 $string['webpages_page_crash'] = 'Si Usted cambia la URL de Moodle y la imagen le da un CRASH (se cae), haga click aquí';
 $string['webpages_page_create'] = 'Crear nueva página';
@@ -448,25 +438,22 @@ $string['webpages_page_deleted'] = '¡Página eliminada exitosamente!';
 $string['webpages_page_edit'] = 'Editar a página';
 $string['webpages_page_menu'] = 'Menú';
 $string['webpages_page_new'] = 'Nueva página';
-$string['webpages_page_notfound'] = '¡Página no encontrada!';
 $string['webpages_page_nomenudelete'] = '<p>Este menú tiene páginas internas y no se puede borrar!</p>';
-$string['webpages_page_confirmdeletemenu'] = '<p>¿Desea realmente eliminar el menú <strong>{$a}</strong>?</p>';
+$string['webpages_page_notfound'] = '¡Página no encontrada!';
 $string['webpages_page_save'] = 'Guardar página';
 $string['webpages_page_settigs'] = 'Configuraciones de Páginas Estáticas';
 $string['webpages_page_title'] = 'Título';
 $string['webpages_page_updated'] = '¡Página actualizada!';
 $string['webpages_page_view'] = 'Ver página';
 $string['webpages_subtitle'] = 'Menúes de Navegación';
+$string['webpages_table_image'] = 'Seleccione una imagen o arrástrela aquí.';
 $string['webpages_table_order'] = 'Orden';
 $string['webpages_table_text'] = 'Contenido de la página';
-$string['webpages_table_text_not'] = 'Primero, guarda el contenido para poder crear la página después.';
 $string['webpages_table_text_edit'] = 'Editar el contenido de la página';
+$string['webpages_table_text_not'] = 'Primero, guarda el contenido para poder crear la página después.';
 $string['webpages_table_theme'] = 'Diseño';
 $string['webpages_table_title'] = 'Título';
 $string['webpages_table_visible'] = 'Visible';
-$string['webpages_table_image'] = 'Seleccione una imagen o arrástrela aquí.';
-$string['webpages_error_page'] = '¡Página no encontrada!';
-$string['webpages_error_menu'] = '¡Menú no encontrado!';
 $string['webpages_theme_base'] = 'El diseño sin los bloques';
 $string['webpages_theme_frametop'] = 'Sin bloques y pié de página mínimo';
 $string['webpages_theme_frontpage'] = 'Diseño de la página inicial del sitio.';
@@ -475,13 +462,3 @@ $string['webpages_theme_print'] = 'Solamente debe mostrar contenido y encabezado
 $string['webpages_theme_report'] = 'El diseño de la página usada para reportes';
 $string['webpages_theme_standard'] = 'Diseño por defecto con bloques';
 $string['webpages_title'] = 'Páginas Estáticas';
-
-$string['privacy:metadata'] = 'El complemento de Kopere Dashboard no almacena ningún dato personal.';
-
-// Editor Vvveb_Js.
-$string['vvveb_home_popular_course'] = 'Cursos Populares';
-$string['vvveb_home_team_title'] = 'Conoce a Nuestro Equipo';
-$string['vvveb_home_team_subtitle'] = 'Somos un grupo de profesionales dedicados a su trabajo';
-$string['vvveb_home_access'] = 'Acceder al curso';
-$string['vvveb_home_automatically_my_course'] = 'No editar. Este bloque será reemplazado automáticamente con los cursos en los que el estudiante está inscrito.';
-$string['vvveb_home_mycourses_heading'] = 'Mis Cursos';

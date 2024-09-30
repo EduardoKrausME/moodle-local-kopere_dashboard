@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    15/05/17 23:50
+ * Files file
+ *
+ * introduced   15/05/17 23:50
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -96,7 +98,7 @@ class files {
                   GROUP BY ctx.instanceid",
                 [
                     'contextlevel' => CONTEXT_COURSE,
-                    'instanceid' => $course->id
+                    'instanceid' => $course->id,
                 ]);
 
             $modulessize = $DB->get_record_sql("
@@ -110,7 +112,7 @@ class files {
                   GROUP BY cm.course",
                 [
                     'contextlevel' => CONTEXT_MODULE,
-                    'course' => $course->id
+                    'course' => $course->id,
                 ]);
 
             $coursesizeval = isset($coursesize->coursesize) ? $coursesize->coursesize : 0;

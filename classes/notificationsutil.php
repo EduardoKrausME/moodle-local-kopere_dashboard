@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    11/06/17 02:25
+ * Notificationutil file
+ *
+ * introduced   11/06/17 02:25
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -56,7 +58,7 @@ class notificationsutil {
             if ($eventinformation['component_full'] == $module) {
                 $eventslist[] = [
                     'key' => $eventinformation['eventname'],
-                    'value' => $eventinformation['fulleventname']
+                    'value' => $eventinformation['fulleventname'],
                 ];
             }
         }
@@ -169,8 +171,8 @@ class notificationsutil {
                 'moodle_shortname' => $COURSE->shortname,
                 'message' => "<h2>Título</h2><p>Linha 1</p><p>Linha 2</p>",
                 'date_year' => userdate(time(), '%Y'),
-                'manager' => $linkmanager
-            ]
+                'manager' => $linkmanager,
+            ],
         ];
 
         ob_clean();

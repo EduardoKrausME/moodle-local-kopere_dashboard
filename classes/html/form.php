@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * form file
+ *
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -141,7 +143,8 @@ class form {
      * @param string $value
      */
     public function create_hidden_input($name, $value = '') {
-        echo "<input type='hidden' id='hidden_{$name}' name='{$name}' id='{$name}' value='" . htmlspecialchars($value) . "'/>";
+        echo "<input type='hidden' id='hidden_{$name}' name='{$name}' id='{$name}' value='" .
+            htmlspecialchars($value, ENT_COMPAT) . "'/>";
     }
 
     /**
@@ -161,7 +164,7 @@ class form {
                   </div>";
         } else {
             $html = "<input name='' class='btn btn-success bt-submit {$class}' type='submit' value='" .
-                htmlspecialchars($value) . "' />";
+                htmlspecialchars($value, ENT_COMPAT) . "' />";
             $this->print_row('', $html, 'btsubmit', $additionaltext);
         }
     }

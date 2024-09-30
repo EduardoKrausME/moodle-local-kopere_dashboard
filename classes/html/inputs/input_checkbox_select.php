@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    10/06/17 23:33
- * @package    local_kopere_dashboard
- * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * input_checkbox_select file
+ *
+ * introduced   10/06/17 23:33
+ * @package     local_kopere_dashboard
+ * @copyright   2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\html\inputs;
@@ -41,10 +43,10 @@ class input_checkbox_select extends input_select {
      */
     public function __construct() {
         $this->set_value("false");
-        $this->set_values(array(
+        $this->set_values([
             ['key' => 0, 'value' => get_string('no')],
             ['key' => 1, 'value' => get_string('yes')],
-        ));
+        ]);
     }
 
     /**

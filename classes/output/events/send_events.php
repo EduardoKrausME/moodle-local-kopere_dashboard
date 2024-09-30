@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    14/06/17 05:21
+ * send_events file
+ *
+ * introduced   14/06/17 05:21
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -82,6 +84,7 @@ class send_events {
     }
 
     /**
+     * phpcs:disable
      * Function send
      *
      * @throws \coding_exception
@@ -256,7 +259,7 @@ class send_events {
             'day' => 'd',
             'hour' => 'H',
             'minute' => 'i',
-            'second' => 's'
+            'second' => 's',
         ];
 
         foreach ($textkeys[1] as $key => $textkey) {

@@ -15,7 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    13/05/17 13:28
+ * backup file
+ *
+ * introduced   13/05/17 13:28
+ *
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -44,6 +47,7 @@ class backup {
      * Function dashboard
      *
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function dashboard() {
         dashboard_util::add_breadcrumb(get_string_kopere('backup_title'));
@@ -75,12 +79,12 @@ class backup {
                     'file' => $p[0],
                     'data' => "{$p[3]}/{$p[2]}/{$p[1]} às {$p[4]}:{$p[5]}",
                     'size' => bytes_util::size_to_byte(filesize($backup)),
-                    'acoes' => "<div class='text-center'>" .
+                    'acoes' =>
+                        "<div class='text-center'>" .
                         button::icon('download', local_kopere_dashboard_makeurl("backup", "download", ["file" => $p[0]]), false) .
                         "&nbsp;&nbsp;&nbsp; " .
-                        button::icon_popup_table('delete',
-                            local_kopere_dashboard_makeurl("backup", "delete", ["file" => $p[0]])) .
-                        "</div>"
+                        button::icon_popup_table('delete', local_kopere_dashboard_makeurl("backup", "delete", ["file" => $p[0]])) .
+                        "</div>",
                 ];
             }
 
@@ -190,7 +194,7 @@ class backup {
                     $colunas[] = $colum;
                 }
 
-                $listcol = implode('`, `', $colunas);
+                $listcol = implode('`, `', $colunas); // phpcs:disable
 
                 $insertheader = "\nINSERT INTO `{$table}` (`{$listcol}`) VALUES\n";
 

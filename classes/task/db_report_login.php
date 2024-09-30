@@ -15,9 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * User: Eduardo Kraus
- * Date: 27/07/2023
- * Time: 17:03
+ * Introduced  27/07/2023 17:03
+ *
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\task;
@@ -67,7 +69,7 @@ class db_report_login extends \core\task\scheduled_task {
 
             try {
                 $DB->insert_record("kopere_dashboard_reportlogin", $data);
-            } catch (\dml_exception $e) {
+            } catch (\dml_exception $e) { // phpcs:disable
             }
         }
     }

@@ -16,16 +16,16 @@
 
 /**
  * Privacy Subsystem implementation for local_kopere_dashboard.
+ *
+ * @package   local_kopere_dashboard
+ * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\privacy;
 
 /**
  * The local_kopere_dashboard module does not store any data.
- *
- * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider {
     /**

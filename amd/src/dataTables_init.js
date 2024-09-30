@@ -4,7 +4,6 @@ define([
     "local_kopere_dashboard/dataTables.buttons",
     "local_kopere_dashboard/dataTables.buttons.html5",
     "local_kopere_dashboard/dataTables.buttons.print",
-    "local_kopere_dashboard/dataTables.dateTime",
     "local_kopere_dashboard/dataTables.responsive",
     "local_kopere_dashboard/jszip",
 ], function($) {

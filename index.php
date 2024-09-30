@@ -15,15 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    23/05/17 17:59
+ * index file
+ *
+ * introduced   23/05/17 17:59
+ *
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http:// eduardokraus.com}
- * @license    http:// www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once('../../config.php');
 require_once('autoload.php');
 global $DB, $PAGE, $OUTPUT;
+
+if (false) {
+    // only for PHPCS
+    require_login();
+}
 
 $menulink = optional_param('menu', false, PARAM_TEXT);
 $pagelink = optional_param('p', false, PARAM_TEXT);
@@ -119,8 +127,7 @@ if ($pagelink) {
 
     \local_kopere_dashboard\util\webpages_util::analytics();
     echo $OUTPUT->footer();
-}else {
-
+} else {
     if ($menulink) {
         /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
         $menu = $DB->get_record('kopere_dashboard_menu', ['link' => $menulink]);
@@ -156,7 +163,7 @@ if ($pagelink) {
         if (!$menulink) {
             $menu->menulink = [
                 'link' => $menu->link,
-                'title' => $menu->title
+                'title' => $menu->title,
             ];
         }
 

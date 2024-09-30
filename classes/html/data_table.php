@@ -15,10 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    14/05/17 22:54
- * @package    local_kopere_dashboard
- * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * data_table file
+ *
+ * introduced   14/05/17 22:54
+ *
+ * @package     local_kopere_dashboard
+ * @copyright   2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\html;
@@ -51,11 +54,11 @@ class data_table {
     /** @var string */
     private $tableid = '';
 
-    /** @var boolean */
+    /** @var bool */
     private $isexport = false;
 
     /**
-     * data_table constructor.
+     * Data_table constructor.
      *
      * @param array $column
      * @param array $columninfo
@@ -111,7 +114,7 @@ class data_table {
     public function set_click_redirect($url, $chave) {
         $this->clickredirect = [
             'chave' => $chave,
-            'url' => $url
+            'url' => $url,
         ];
     }
 
@@ -153,6 +156,7 @@ class data_table {
     }
 
     /**
+     * phpcs:disable
      * Function print_header
      *
      * @param string $class
@@ -302,10 +306,10 @@ class data_table {
                 }
 
                 if (export::is_export()) {
-                    if ($column->type == table_header_item::TYPE_INT) {
+                    if ($column->type == table_header_item::TYPE_INT) { // phpcs:disable
                     } else if ($column->type == table_header_item::TYPE_CURRENCY) {
                         $html = "R$ {$html}";
-                    } else if ($column->type == table_header_item::TYPE_DATE) {
+                    } else if ($column->type == table_header_item::TYPE_DATE) { // phpcs:disable
                         // $this->columndefs[] = (object)["type" => "date-uk", "targets" => $key];
                     } else if ($column->type == table_header_item::RENDERER_FILESIZE) {
                         $html = number_util::bytes($html);
@@ -340,9 +344,9 @@ class data_table {
                     } else if ($column->type == table_header_item::RENDERER_USERPHOTO) {
                         $html = '<img class="media-object" src="' . $CFG->wwwroot .
                             '/local/kopere_dashboard/profile-image.php?type=photo_user&id=' . $html . '" />';
-                    } else if ($column->type == table_header_item::RENDERER_SECONDS) {
+                    } else if ($column->type == table_header_item::RENDERER_SECONDS) {// phpcs:disable
                         // $this->columndefs[] = (object)["render" => "secondsRenderer", "targets" => $key];
-                    } else if ($column->type == table_header_item::RENDERER_TIME) {
+                    } else if ($column->type == table_header_item::RENDERER_TIME) {// phpcs:disable
                         // $this->columndefs[] = (object)["render" => "timeRenderer", "targets" => $key];
                     }
                 }
@@ -390,7 +394,7 @@ class data_table {
             "autoWidth" => false,
             "columns" => $this->columndata,
             "columnDefs" => $this->columndefs,
-            "export_title" => $title
+            "export_title" => $title,
         ];
         if ($extras) {
             $initparams = array_merge($initparams, $extras);
@@ -404,7 +408,7 @@ class data_table {
         if ($this->ajaxurl) {
             $initparams['ajax'] = (object)[
                 "url" => $this->ajaxurl = str_replace("view.php", "view-ajax.php", $this->ajaxurl),
-                "type" => "POST"
+                "type" => "POST",
             ];
         }
 

@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    10/06/17 20:42
+ * input_select file
+ *
+ * introduced   10/06/17 20:42
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -144,7 +146,7 @@ class input_select extends input_base {
 
             $return .= $extra . '>';
 
-            $return .= htmlentities($value) . '</option>';
+            $return .= htmlentities($value, ENT_COMPAT) . '</option>';
         }
 
         $return .= "\n</select>";

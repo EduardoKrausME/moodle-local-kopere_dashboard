@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    12/05/17 06:09
+ * dashboard_util file
+ *
+ * introduced   12/05/17 06:09
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -156,7 +158,6 @@ class dashboard_util {
                         </div>
                     </div>
                 </div>
-        
                 <div class='modal fade kopere_dashboard_modal_item' id='modal-edit' role='dialog'>
                     <div class='kopere-modal-dialog'>
                         <div class='kopere-modal-content'>
@@ -175,6 +176,7 @@ class dashboard_util {
      * @param menu_util $menu
      *
      * @return string
+     * @throws \coding_exception
      */
     public static function add_menu(menu_util $menu) {
         $retorno = "";
@@ -215,9 +217,10 @@ class dashboard_util {
         }
 
         $iconurl = self::get_icon("/local/{$plugin}/assets/dashboard/img/icon{$class}/{$menu->get_icon()}.svg");
+        $url = local_kopere_dashboard_makeurl($menu->get_classname(), $menu->get_methodname());
         $retorno .= "
                 <li class='$class'>
-                    <a href='" . local_kopere_dashboard_makeurl($menu->get_classname(), $menu->get_methodname()) . "' class='kopere_link'>
+                    <a href='{$url}' class='kopere_link'>
                         <img src='{$iconurl}' class='menu-icon' alt='Icon {$menu->get_name()}'>
                         <span>{$menu->get_name()}</span>
                     </a>

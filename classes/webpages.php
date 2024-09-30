@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    13/05/17 13:28
+ * webpages file
+ *
+ * introduced   13/05/17 13:28
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -69,22 +71,23 @@ class webpages {
         $menus = $DB->get_records('kopere_dashboard_menu', ['menuid' => 0], 'title ASC');
 
         echo '<div class="element-box">';
-        // https://live.datatables.net/mukirowi/897/edit
 
-        $details_open = $OUTPUT->image_url("details_open", "local_kopere_dashboard")->out(false);
-        $details_close = $OUTPUT->image_url("details_close", "local_kopere_dashboard")->out(false);
+        $detailsopen = $OUTPUT->image_url("details_open", "local_kopere_dashboard")->out(false);
+        $detailsclose = $OUTPUT->image_url("details_close", "local_kopere_dashboard")->out(false);
 
         if (!$menus) {
             button::help('webpages', get_string_kopere('webpages_menu_help'), 'Páginas-estáticas');
         } else {
             foreach ($menus as $key => $menu) {
 
-                $bt1 = button::icon_popup_table('edit', local_kopere_dashboard_makeurl("webpages", "menu_edit", ["id" => $menu->id]));
-                $bt2 = button::icon_popup_table('delete', local_kopere_dashboard_makeurl("webpages", "menu_delete", ["id" => $menu->id]));
+                $bt1 = button::icon_popup_table('edit',
+                    local_kopere_dashboard_makeurl("webpages", "menu_edit", ["id" => $menu->id]));
+                $bt2 = button::icon_popup_table('delete',
+                    local_kopere_dashboard_makeurl("webpages", "menu_delete", ["id" => $menu->id]));
                 $menu->htmlid = "
-                    <img src='{$details_open}'
-                         src-open='{$details_close}'
-                         src-close='{$details_close}'
+                    <img src='{$detailsopen}'
+                         src-open='{$detailsclose}'
+                         src-close='{$detailsclose}'
                          data-id='{$menu->id}'
                          class='webpages_menu_open mr-4'
                          style='cursor:pointer;display:none;'>";
@@ -94,7 +97,8 @@ class webpages {
                         &nbsp;&nbsp;&nbsp;
                         {$bt2}
                     </div>";
-                $menu->link = "<a href='{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}' target='_blank'>{$menu->link}</a>";
+                $menu->link = "<a href='{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}'
+                                  target='_blank'>{$menu->link}</a>";
                 $menu->visible = get_string("yes");
 
                 $menus[$key] = $menu;
@@ -135,30 +139,33 @@ class webpages {
         echo button::add(get_string_kopere('webpages_menu_create'),
             local_kopere_dashboard_makeurl("webpages", "menu_edit", ['menuid' => $menuid]), 'ml-4', false, true);
 
-        $details_open = $OUTPUT->image_url("details_open", "local_kopere_dashboard")->out(false);
-        $details_close = $OUTPUT->image_url("details_close", "local_kopere_dashboard")->out(false);
+        $detailsopen = $OUTPUT->image_url("details_open", "local_kopere_dashboard")->out(false);
+        $detailsclose = $OUTPUT->image_url("details_close", "local_kopere_dashboard")->out(false);
 
         $itens = [];
 
         $menus = $DB->get_records('kopere_dashboard_menu', ['menuid' => $menuid], 'title ASC');
         foreach ($menus as $key => $menu) {
             $menu->htmlid = "
-                <img src='{$details_open}'
-                     src-open='{$details_open}'
-                     src-close='{$details_close}'
+                <img src='{$detailsopen}'
+                     src-open='{$detailsopen}'
+                     src-close='{$detailsclose}'
                      data-id='{$menu->id}'
                      class='webpages_menu_open mr-4'
                      style='cursor:pointer;'>";
 
-            $bt1 = button::icon_popup_table('edit', local_kopere_dashboard_makeurl("webpages", "menu_edit", ["id" => $menu->id]));
-            $bt2 = button::icon_popup_table('delete', local_kopere_dashboard_makeurl("webpages", "menu_delete", ["id" => $menu->id]));
+            $bt1 = button::icon_popup_table('edit',
+                local_kopere_dashboard_makeurl("webpages", "menu_edit", ["id" => $menu->id]));
+            $bt2 = button::icon_popup_table('delete',
+                local_kopere_dashboard_makeurl("webpages", "menu_delete", ["id" => $menu->id]));
             $menu->actions = "
                 <div class='text-center'>
                     {$bt1}
                     &nbsp;&nbsp;&nbsp;
                     {$bt2}
                 </div>";
-            $menu->link = "<a href='{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}' target='_blank'>{$menu->link}</a>";
+            $menu->link = "<a href='{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}'
+                              target='_blank'>{$menu->link}</a>";
             $menu->visible = get_string("yes");
 
             $itens[] = $menu;
@@ -168,8 +175,10 @@ class webpages {
         foreach ($pages as $key => $page) {
             $page->htmlid = "{$page->id}";
 
-            $bt1 = button::icon('details', local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $page->id]), false);
-            $bt2 = button::icon_popup_table('delete', local_kopere_dashboard_makeurl("webpages", "page_delete", ["id" => $page->id]));
+            $bt1 = button::icon('details',
+                local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $page->id]), false);
+            $bt2 = button::icon_popup_table('delete',
+                local_kopere_dashboard_makeurl("webpages", "page_delete", ["id" => $page->id]));
             $page->actions = "
                 <div class='text-center'>
                     {$bt1}
@@ -178,7 +187,8 @@ class webpages {
                 </div>";
 
             $page->menu = $DB->get_field('kopere_dashboard_menu', 'title', ['id' => $page->menuid]);
-            $page->link = "<a href='{$CFG->wwwroot}/local/kopere_dashboard/?p={$page->link}' target='_blank'>{$page->link}</a>";
+            $page->link = "<a href='{$CFG->wwwroot}/local/kopere_dashboard/?p={$page->link}'
+                              target='_blank'>{$page->link}</a>";
             $page->visible = $page->visible ? get_string("yes") : get_string("no");
 
             $itens[] = $page;
@@ -223,17 +233,21 @@ class webpages {
 
         button::info(get_string_kopere('webpages_page_view'), $linkpagina, '', false);
         button::edit(get_string_kopere('webpages_page_edit'),
-            local_kopere_dashboard_makeurl("webpages", "page_edit", ["id" => $webpages->id]), 'margin-left-15', false);
+            local_kopere_dashboard_makeurl("webpages", "page_edit",
+                ["id" => $webpages->id]), 'margin-left-15', false);
         button::delete(get_string_kopere('webpages_page_delete'),
-            local_kopere_dashboard_makeurl("webpages", "page_delete", ["id" => $webpages->id]), 'margin-left-15', false, false);
+            local_kopere_dashboard_makeurl("webpages", "page_delete",
+                ["id" => $webpages->id]), 'margin-left-15', false, false);
 
         $form = new form();
-        $form->print_panel(get_string_kopere('webpages_table_link'), "<a target='_blank' href='$linkpagina'>$linkpagina</a>");
+        $form->print_panel(get_string_kopere('webpages_table_link'),
+            "<a target='_blank' href='$linkpagina'>$linkpagina</a>");
         $form->print_panel(get_string_kopere('webpages_table_title'), $webpages->title);
         if ($webpages->courseid) {
             $course = $DB->get_record('course', ['id' => $webpages->courseid]);
             if ($course) {
-                $url = local_kopere_dashboard_makeurl("courses", "page_details", ["courseid" => $webpages->courseid]);
+                $url = local_kopere_dashboard_makeurl("courses", "page_details",
+                    ["courseid" => $webpages->courseid]);
                 $form->print_panel(get_string_kopere('webpages_page_course'),
                     "<a href='{$url}'>{$course->fullname}</a>");
             }
@@ -246,7 +260,8 @@ class webpages {
         if ($file && isset($file->get_filename()[3])) {
             $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
                 $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
-            $imagem = "<p><a href='{$url}' target='_blank'><img src='{$url}' style='max-width:300px;max-height:300px;'></a></p>";
+            $imagem = "<p><a href='{$url}' target='_blank'><img src='{$url}'
+                             style='max-width:300px;max-height:300px;'></a></p>";
         }
 
         $href = "{$CFG->wwwroot}/local/kopere_dashboard/_editor/?page=webpages&id={$webpages->id}&link={$webpages->link}";
@@ -262,7 +277,8 @@ class webpages {
         $form->print_panel(get_string_kopere('webpages_table_theme'), $this->theme_name($webpages->theme));
         echo '</div>';
         echo "<div class='col-md'>";
-        $form->print_panel(get_string_kopere('webpages_table_visible'), $webpages->visible ? get_string('yes') : get_string('no'));
+        $form->print_panel(get_string_kopere('webpages_table_visible'),
+            $webpages->visible ? get_string('yes') : get_string('no'));
         echo '</div>';
         echo '</div>';
 
@@ -617,14 +633,14 @@ class webpages {
      * Get array menus
      *
      * @param int $menuid
-     * @param int $not_menuid
+     * @param int $notmenuid
      * @param string $spaces
      *
      * @return array
      *
      * @throws \dml_exception
      */
-    public static function list_menus($menuid = 0, $not_menuid = 0, $spaces = '') {
+    public static function list_menus($menuid = 0, $notmenuid = 0, $spaces = '') {
         global $DB;
 
         $menus = $DB->get_records('kopere_dashboard_menu', ['menuid' => $menuid]);
@@ -634,8 +650,8 @@ class webpages {
             /** @var kopere_dashboard_menu $menu */
             foreach ($menus as $menu) {
                 $listmenus[] = ['key' => $menu->id, 'value' => "{$spaces}{$menu->title}"];
-                if ($not_menuid != $menu->id) {
-                    self::list_menus($menu->id, $not_menuid, "  ");
+                if ($notmenuid != $menu->id) {
+                    self::list_menus($menu->id, $notmenuid, "  ");
                 }
             }
         }
@@ -830,28 +846,28 @@ class webpages {
         $layouts = [
             [
                 'key' => 'base',
-                'value' => 'theme_base'
+                'value' => 'theme_base',
             ],
             [
                 'key' => 'standard',
-                'value' => 'theme_standard'
+                'value' => 'theme_standard',
             ],
             [
                 'key' => 'popup',
-                'value' => 'theme_popup'
+                'value' => 'theme_popup',
             ],
             [
                 'key' => 'frametop',
-                'value' => 'theme_frametop'
+                'value' => 'theme_frametop',
             ],
             [
                 'key' => 'print',
-                'value' => 'theme_print'
+                'value' => 'theme_print',
             ],
             [
                 'key' => 'report',
-                'value' => 'theme_report'
-            ]
+                'value' => 'theme_report',
+            ],
         ];
 
         return $layouts;
@@ -861,6 +877,7 @@ class webpages {
      * Function settings
      *
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function settings() {
         ob_clean();

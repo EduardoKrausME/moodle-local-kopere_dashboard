@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    15/12/2023 12:43
+ * webpages_util file
+ *
+ * introduced   15/12/2023 12:43
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -77,7 +79,7 @@ class webpages_util {
         if (strlen($webpagesanalyticsid) > 5 && strlen($webpagesanalyticsid) < 15) {
 
             $data = [
-                'webpagesanalyticsid' => $webpagesanalyticsid
+                'webpagesanalyticsid' => $webpagesanalyticsid,
             ];
             echo $OUTPUT->render_from_template('local_kopere_dashboard/google_analytics', $data);
         }

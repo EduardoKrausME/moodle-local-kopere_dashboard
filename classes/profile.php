@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    15/05/17 03:13
+ * profile file
+ *
+ * introduced   15/05/17 03:13
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -106,7 +108,7 @@ class profile {
                     WHERE ue.userid = :userid";
             $params = [
                 'userid' => $userid,
-                'courseid' => $course->id
+                'courseid' => $course->id,
             ];
 
             $enrolment = $DB->get_record_sql($sql, $params);

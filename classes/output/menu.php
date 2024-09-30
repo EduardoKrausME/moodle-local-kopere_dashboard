@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    17/11/2018 12:37
+ * menu file
+ *
+ * introduced  17/11/2018 12:37
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -76,7 +78,7 @@ class menu {
                         ->set_classname('useraccess')
                         ->set_methodname('dashboard')
                         ->set_title(get_string_kopere('useraccess_title'))
-                        ->set_icon('users-access')
+                        ->set_icon('users-access'),
                 ]));
 
         echo dashboard_util::add_menu(
@@ -127,7 +129,7 @@ class menu {
                             ->set_classname('notifications')
                             ->set_methodname('settings')
                             ->set_title(get_string_kopere('settings'))
-                            ->set_icon('settings')
+                            ->set_icon('settings'),
                     ]));
 
             echo dashboard_util::add_menu(
@@ -146,7 +148,7 @@ class menu {
                             ->set_classname('webpages')
                             ->set_methodname('settings')
                             ->set_title(get_string_kopere('settings'))
-                            ->set_icon('settings')
+                            ->set_icon('settings'),
                     ]));
         }
 

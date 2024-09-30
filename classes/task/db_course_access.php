@@ -13,10 +13,13 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * User: Eduardo Kraus
- * Date: 31/01/2024
- * Time: 09:18
+ * Introduced  31/01/2024 09:18
+ *
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\task;
@@ -80,7 +83,7 @@ class db_course_access extends \core\task\scheduled_task {
 
             try {
                 $DB->insert_record("kopere_dashboard_courseacces", $data);
-            } catch (\dml_exception $e) {
+            } catch (\dml_exception $e) { // phpcs:disable
             }
         }
     }

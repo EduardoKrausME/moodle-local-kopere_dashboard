@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    22/05/17 05:32
+ * export file
+ *
+ * introduced   22/05/17 05:32
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -29,9 +31,7 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class export {
-    /**
-     * @var
-     */
+    /** @var string */
     private static $format;
 
     /**

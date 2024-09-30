@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * performancemonitor file
+ *
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -71,7 +73,7 @@ class performancemonitor extends external_api {
     public static function disk_moodledata() {
 
         return [
-            'disk' => \local_kopere_dashboard\server\performancemonitor::disk_moodledata(false)
+            'disk' => \local_kopere_dashboard\server\performancemonitor::disk_moodledata(false),
         ];
     }
 }

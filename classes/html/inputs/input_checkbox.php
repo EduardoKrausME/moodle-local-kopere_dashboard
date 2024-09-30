@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    10/06/17 23:33
- * @package    local_kopere_dashboard
- * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * input_checkbox file
+ *
+ * introduced   10/06/17 23:33
+ * @package     local_kopere_dashboard
+ * @copyright   2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\html\inputs;
@@ -95,7 +97,7 @@ class input_checkbox extends input_base {
         $return = "<input id='{$inputid}' name='{$this->name}' type='checkbox' ";
 
         if ($this->value) {
-            $value = htmlentities($this->value);
+            $value = htmlentities($this->value, ENT_COMPAT);
             $return .= "value='{$value}' ";
         }
         if ($this->style) {

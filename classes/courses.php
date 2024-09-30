@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    31/01/17 05:32
+ * couses file
+ *
+ * introduced   31/01/17 05:32
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -54,6 +56,7 @@ class courses {
      * Function dashboard
      *
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function dashboard() {
         dashboard_util::add_breadcrumb(get_string_kopere('courses_title'));

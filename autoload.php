@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    23/05/17 17:59
+ * Autoload file
+ *
+ * introduced   23/05/17 17:59
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -32,6 +34,11 @@ if ($debug) {
 }
 
 spl_autoload_register("kopere_dashboard_autoload");
+/**
+ * Function kopere_dashboard_autoload
+ *
+ * @param $classname
+ */
 function kopere_dashboard_autoload($classname) {
     global $CFG;
 
@@ -52,6 +59,8 @@ function kopere_dashboard_autoload($classname) {
 }
 
 /**
+ * Function load_class
+ *
  * @throws coding_exception
  */
 function load_class() {
@@ -75,8 +84,9 @@ function load_class() {
 }
 
 /**
- * @return string
+ * Function get_path_query
  *
+ * @return string
  * @throws coding_exception
  */
 function get_path_query() {
@@ -86,11 +96,12 @@ function get_path_query() {
 }
 
 /**
+ * Function get_string_kopere
+ *
  * @param $identifier
  * @param null $object
  *
  * @return string
- *
  * @throws coding_exception
  */
 function get_string_kopere($identifier, $object = null) {

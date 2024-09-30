@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * button file
+ *
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -28,8 +30,17 @@ namespace local_kopere_dashboard\html;
  * @package local_kopere_dashboard\html
  */
 class button {
+    /**
+     * btn size
+     */
     const BTN_PEQUENO = 'btn-xs';
+    /**
+     * btn size
+     */
     const BTN_MEDIO = 'btn-sm';
+    /**
+     * btn size
+     */
     const BTN_GRANDE = 'btn-lg';
 
     /**
@@ -218,9 +229,6 @@ class button {
      */
     private static function create_button($text, $link, $p, $class, $return) {
         $target = '';
-        // if (strpos($link, 'http') === 0) {
-        //      $target = 'target="_blank"';
-        // }
 
         $bt = "<a href='{$link}' class='{$class}' {$target}>{$text}</a>";
         if ($p) {

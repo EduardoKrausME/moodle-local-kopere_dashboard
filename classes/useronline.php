@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    21/05/17 04:39
+ * useronline file
+ *
+ * introduced   21/05/17 04:39
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -46,6 +48,7 @@ class useronline {
      * Function dashboard
      *
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function dashboard() {
         dashboard_util::add_breadcrumb(get_string_kopere('useronline_title'));

@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * table_header_item file
+ *
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -28,26 +30,39 @@ namespace local_kopere_dashboard\html;
  * @package local_kopere_dashboard\html
  */
 class table_header_item extends \stdClass {
+    /** @var string */
     const TYPE_DATE = 'date-uk';
+    /** @var string */
     const TYPE_CURRENCY = 'currency';
+    /** @var string */
     const TYPE_INT = 'numeric-comma';
+    /** @var string */
     const TYPE_TEXT = 'text';
+    /** @var string */
     const TYPE_ACTION = 'action';
 
+    /** @var string */
     const RENDERER_DATE = 'dateRenderer';
+    /** @var string */
     const RENDERER_DATETIME = 'datetimeRenderer';
+    /** @var string */
     const RENDERER_VISIBLE = 'visibleRenderer';
+    /** @var string */
     const RENDERER_TRUEFALSE = 'trueFalseRenderer';
+    /** @var string */
     const RENDERER_STATUS = 'statusRenderer';
+    /** @var string */
     const RENDERER_DELETED = 'deletedRenderer';
+    /** @var string */
     const RENDERER_USERPHOTO = 'userphotoRenderer';
+    /** @var string */
     const RENDERER_SECONDS = 'secondsRenderer';
+    /** @var string */
     const RENDERER_TIME = 'timeRenderer';
+    /** @var string */
     const RENDERER_FILESIZE = 'filesizeRenderer';
 
-    /**
-     * @var
-     */
+    /** @var string */
     public $funcao;
     /** @var string */
     public $title = '';

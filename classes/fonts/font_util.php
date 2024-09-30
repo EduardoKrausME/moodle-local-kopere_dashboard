@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * font_util file
+ *
  * @package     local_kopere_dashboard
  * @copyright   2024 Eduardo Kraus https://eduardokraus.com/
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @date        10/01/2024 17:58
+ * introduced   10/01/2024 17:58
  */
 
 namespace local_kopere_dashboard\fonts;

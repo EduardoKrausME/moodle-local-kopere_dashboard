@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    28/05/17 03:21
+ * user_util file
+ *
+ * introduced   28/05/17 03:21
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -94,7 +96,7 @@ class user_util {
         } else if (empty($CFG->allowaccountssameemail)
             && $DB->record_exists('user', [
                 'email' => $newuser->email,
-                'mnethostid' => $CFG->mnet_localhost_id
+                'mnethostid' => $CFG->mnet_localhost_id,
             ])) {
             $errors[] = get_string('emailexists');
         }
