@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @created    23/05/17 17:59
+ * version File
+ * 
+ * introduced   23/05/17 17:59
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -23,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2024092700; //.
+$plugin->version = 2024092700;
 $plugin->requires = 2015111610;
 $plugin->release = '2.6.18';
 $plugin->maturity = MATURITY_RC;
