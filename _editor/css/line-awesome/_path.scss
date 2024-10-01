@@ -9,8 +9,7 @@ $line-height: var(--bs-body-line-height);
     src: url("#{$la-font-path}/la-brands-400.eot?#iefix") format("embedded-opentype"),
     url("#{$la-font-path}/la-brands-400.woff2") format("woff2"),
     url("#{$la-font-path}/la-brands-400.woff") format("woff"),
-    url("#{$la-font-path}/la-brands-400.ttf") format("truetype"),
-    url("#{$la-font-path}/la-brands-400.svg#lineawesome") format("svg");
+    url("#{$la-font-path}/la-brands-400.ttf") format("truetype");
 }
 .#{$la-css-prefix-lab} {
     font-family: $la-font-name-lab, monospace;
@@ -26,8 +25,7 @@ $line-height: var(--bs-body-line-height);
     src: url("#{$la-font-path}/la-regular-400.eot?#iefix") format("embedded-opentype"),
     url("#{$la-font-path}/la-regular-400.woff2") format("woff2"),
     url("#{$la-font-path}/la-regular-400.woff") format("woff"),
-    url("#{$la-font-path}/la-regular-400.ttf") format("truetype"),
-    url("#{$la-font-path}/la-regular-400.svg#lineawesome") format("svg");
+    url("#{$la-font-path}/la-regular-400.ttf") format("truetype");
 }
 .#{$la-css-prefix-lar} {
     font-family: $la-font-name-lar, monospace;
@@ -43,8 +41,7 @@ $line-height: var(--bs-body-line-height);
     src: url("#{$la-font-path}/la-solid-900.eot?#iefix") format("embedded-opentype"),
     url("#{$la-font-path}/la-solid-900.woff2") format("woff2"),
     url("#{$la-font-path}/la-solid-900.woff") format("woff"),
-    url("#{$la-font-path}/la-solid-900.ttf") format("truetype"),
-    url("#{$la-font-path}/la-solid-900.svg#lineawesome") format("svg");
+    url("#{$la-font-path}/la-solid-900.ttf") format("truetype");
 }
 .#{$la-css-prefix-las}, .la {
     font-family: $la-font-name-las, monospace;

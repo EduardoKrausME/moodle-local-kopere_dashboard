@@ -2216,12 +2216,12 @@ Vvveb.CssEditor = {
 
     destroy : function() {
     }
-}
+};
 
 function displayToast(bg, title, message, id = "top-toast") {
     document.querySelector("#" + id + " .toast-body .message").innerHTML = message.replace(/(?:\r\n|\r|\n)/g, '<br>');
     let header = document.querySelector("#" + id + " .toast-header");
-    header.classList.remove("bg-danger", "bg-success")
+    header.classList.remove("bg-danger", "bg-success");
     header.classList.add(bg);
     header.querySelector("strong").innerHTML = title;
     document.querySelector("#" + id + " .toast").classList.add("show");

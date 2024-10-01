@@ -258,38 +258,6 @@ function sectionSeparatorProperties(name, title) {
             }
         }
     }, {
-        name      : "Icon",
-        key       : "icon",
-        inline    : true,
-        group     : `${name}_separator`,
-        child     : `.separator.${name} > svg`,
-        inputtype : HtmlListSelectInput,
-        onChange  : function(element, value, input, component) {
-            let newElement = generateElements(value)[0];
-            let attributes = element.attributes;
-
-            //keep old svg size and colors
-            for (let i = 0; i < attributes.length; i++) {
-                let attr = attributes[i];
-                if (attr.name && attr.name != "viewBox") {
-                    newElement.setAttribute(attr.name, attr.value);
-                }
-            }
-
-            element.replaceWith(newElement);
-            return newElement;
-        },
-        data      : {
-            url           : Vvveb.baseUrl + "../../resources/svg/separators/{value}/index.html",
-            clickElement  : "li",
-            insertElement : "svg",
-            elements      : 'Loading ...',
-            options       : [{
-                value : "digital-red-panther",
-                text  : "Red panther"
-            }]
-        },
-    }, {
         name      : "Width",
         key       : "width",
         htmlAttr  : "width",

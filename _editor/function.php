@@ -35,7 +35,7 @@ function vvveb__add_css($html) {
 
     $css = [];
     if (strpos($html, "bootstrap-vvveb.css") === false) {
-        $css[] = "<link href='{$CFG->wwwroot}/local/kopere_dashboard/_editor/_default/bootstrap-vvveb.css' rel='stylesheet'>";
+        $css[] = "<link href='{$CFG->wwwroot}/local/kopere_dashboard/_editor/css/bootstrap-vvveb.css' rel='stylesheet'>";
     }
 
     $css = implode("\n", $css);

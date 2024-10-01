@@ -1,9 +1,0 @@
-ul.svg-list li svg {
-    max-width: 100%;
-    max-height: 100%;
-    fill: #fff;
-    color: #000;
-}
-ul.svg-list li:hover svg {
-    fill: #fff;
-}

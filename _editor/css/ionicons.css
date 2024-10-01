@@ -1,8 +1,7 @@
 @font-face {
     font-family: 'ionicons';
     src: url('../fonts/ionicons/ionicons.ttf?76q473') format('truetype'),
-    url('../fonts/ionicons/ionicons.woff?76q473') format('woff'),
-    url('../fonts/ionicons/ionicons.svg?76q473#ionicons') format('svg');
+    url('../fonts/ionicons/ionicons.woff?76q473') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: block;
