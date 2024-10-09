@@ -256,7 +256,7 @@ class webpages {
         $imagem = "";
         $fs = get_file_storage();
         $file = $fs->get_file(context_system::instance()->id, 'local_kopere_dashboard', 'webpage_image',
-            $webpages->id, '/', 'webpage_image.img');
+            $webpages->id, '/', 'webpage_image.svg');
         if ($file && isset($file->get_filename()[3])) {
             $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
                 $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
@@ -338,7 +338,7 @@ class webpages {
         $imagem = "";
         $fs = get_file_storage();
         $file = $fs->get_file(context_system::instance()->id, 'local_kopere_dashboard',
-            'webpage_image', $webpages->id, '/', 'webpage_image.img');
+            'webpage_image', $webpages->id, '/', 'webpage_image.svg');
         if ($file && isset($file->get_filename()[3])) {
             $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
                 $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
@@ -511,7 +511,7 @@ class webpages {
                     'filearea' => "webpage_image",
                     'filepath' => '/',
                     'itemid' => $webpages->id,
-                    'filename' => "webpage_image.img",
+                    'filename' => "webpage_image.svg",
                 ];
 
                 $fs->create_file_from_pathname($filerecord, $_FILES["imagem"]["tmp_name"]);

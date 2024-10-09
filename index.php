@@ -190,7 +190,7 @@ if ($pagelink) {
             }
 
             $fs = get_file_storage();
-            $file = $fs->get_file($context->id, 'local_kopere_dashboard', 'webpage_image', $webpages->id, '/', 'webpage_image.img');
+            $file = $fs->get_file($context->id, 'local_kopere_dashboard', 'webpage_image', $webpages->id, '/', 'webpage_image.svg');
             if ($file && isset($file->get_filename()[3])) {
                 $webpages->imagem = moodle_url::make_pluginfile_url($file->get_contextid(),
                     $file->get_component(), $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
