@@ -206,8 +206,7 @@
             if (navigator.userAgent.match(/Trident\/\d.\d/)) {
                 // IE needs to call this without a setTimeout
                 autoPrint();
-            }
-            else {
+            } else {
                 win.setTimeout(autoPrint, 1000);
             }
         },
