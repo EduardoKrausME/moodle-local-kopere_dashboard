@@ -70,6 +70,8 @@ class input_textarea extends input_base {
             $return .= "style='{$this->style}' ";
         }
 
+        $return .= $this->extras;
+
         $return .= ">";
 
         if ($this->value) {
