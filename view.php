@@ -94,7 +94,7 @@ if ($html = optional_param("html-pdf", false, PARAM_RAW)) {
     $pdf->writeHTML("{$style}<h1>{$title}</h1>{$html}", true, false, true, false, '');
 
     // Saída do PDF para o navegador.
-    $pdf->Output("{$title}.pdf", 'I');  // 'I' para exibir no navegador, 'D' para download.
+    $pdf->Output("{$title}.pdf", 'I');
 
     die();
 }
