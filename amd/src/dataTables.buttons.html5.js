@@ -9,11 +9,11 @@
 (function(factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD
-        define(['jquery', "local_kopere_dashboard/dataTables", "local_kopere_dashboard/dataTables.buttons"], function($) {
-            return factory($, window, document);
+        define(["jquery", "local_kopere_dashboard/jszip", "local_kopere_dashboard/dataTables", "local_kopere_dashboard/dataTables.buttons"], function($, jszip) {
+            window.JSZip = jszip;
+            return factory($, window, document, jszip);
         });
-    }
-    else if (typeof exports === 'object') {
+    } else if (typeof exports === 'object') {
         // CommonJS
         var jq = require('jquery');
         var cjsRequires = function(root, $) {
@@ -46,12 +46,14 @@
             cjsRequires(window, jq);
             module.exports = factory(jq, window, window.document);
         }
-    }
-    else {
+    } else {
         // Browser
-        factory(jQuery, window, document);
+        factory(jQuery, window, document,jszip, pdfmake);
     }
-}(function($, window, document, jszip, pdfmake, undefined) {
+}
+(function($, window, document, jszip, pdfmake, undefined) {
+    console.trace(jszip);
+
     'use strict';
     var DataTable = $.fn.dataTable;
 
@@ -239,8 +241,7 @@
             };
         }
 
-        FS_proto.abort = function() {
-        };
+        FS_proto.abort = function() {};
         FS_proto.readyState = FS_proto.INIT = 0;
         FS_proto.WRITING = 1;
         FS_proto.DONE = 2;
@@ -1550,4 +1551,5 @@
     };
 
     return DataTable;
-}));
+}
+));
