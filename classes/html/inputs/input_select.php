@@ -115,6 +115,8 @@ class input_select extends input_base {
             $return .= "style='{$this->style}' ";
         }
 
+        $return .= $this->extras;
+
         $return .= ">";
 
         if ($this->addselecione) {
