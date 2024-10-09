@@ -107,6 +107,8 @@ class input_checkbox extends input_base {
             $return .= 'checked="checked" ';
         }
 
+        $return .= $this->extras;
+
         $return .= "class='ios-checkbox {$this->class}'>";
 
         return $return;
