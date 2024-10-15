@@ -143,7 +143,7 @@ class form {
      * @param string $value
      */
     public function create_hidden_input($name, $value = '') {
-        echo "<input type='hidden' id='hidden_{$name}' name='{$name}' id='{$name}' value='" .
+        echo "<input type='hidden' name='{$name}' id='{$name}' value='" .
             htmlspecialchars($value, ENT_COMPAT) . "'/>";
     }
 
