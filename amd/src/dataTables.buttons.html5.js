@@ -53,8 +53,6 @@
     }
 }
 (function($, window, document, jszip, pdfmake, undefined) {
-        console.trace(jszip);
-
         'use strict';
         var DataTable = $.fn.dataTable;
 
@@ -899,17 +897,6 @@
                     try {
                         var successful = document.execCommand('copy');
                         hiddenDiv.remove();
-
-                        console.log(successful);
-                        console.log(dt.i18n('buttons.copyTitle', 'Copy to clipboard'));
-                        console.log(dt.i18n(
-                            'buttons.copySuccess',
-                            {
-                                1 : 'Copied one row to clipboard',
-                                _ : 'Copied %d rows to clipboard'
-                            },
-                            exportData.rows
-                        ));
 
                         if (successful) {
                             dt.buttons.info(
