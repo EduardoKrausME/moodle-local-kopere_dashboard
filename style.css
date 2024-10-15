@@ -8905,35 +8905,35 @@
   }
 }
 .kopere_dashboard_div .content-w .content-i .content-box .element-box.color_user {
-  background: #e24d4d url(dashboard/img/dashboard/users.svg) no-repeat right bottom;
+  background: #e24d4d url(assets/dashboard/img/dashboard/users.svg) no-repeat right bottom;
   background-size: 60px;
 }
 .kopere_dashboard_div .content-w .content-i .content-box .element-box.color_online {
-  background: #ffb74d url(dashboard/img/dashboard/users-online.svg) no-repeat right bottom;
+  background: #ffb74d url(assets/dashboard/img/dashboard/users-online.svg) no-repeat right bottom;
   background-size: 60px;
 }
 .kopere_dashboard_div .content-w .content-i .content-box .element-box.color_course {
-  background: #64b5f6 url(dashboard/img/dashboard/course.svg) no-repeat right bottom;
+  background: #64b5f6 url(assets/dashboard/img/dashboard/course.svg) no-repeat right bottom;
   background-size: 60px;
 }
 .kopere_dashboard_div .content-w .content-i .content-box .element-box.color_disk {
-  background: #81c784 url(dashboard/img/dashboard/data.svg) no-repeat right bottom;
+  background: #81c784 url(assets/dashboard/img/dashboard/data.svg) no-repeat right bottom;
   background-size: 60px;
 }
 .kopere_dashboard_div .content-w .content-i .content-box .element-box.color_cpu {
-  background: #a992e2 url(dashboard/img/dashboard/cpu.svg) no-repeat right bottom;
+  background: #a992e2 url(assets/dashboard/img/dashboard/cpu.svg) no-repeat right bottom;
   background-size: 60px;
 }
 .kopere_dashboard_div .content-w .content-i .content-box .element-box.color_memory {
-  background: #55badf url(dashboard/img/dashboard/memory.svg) no-repeat right bottom;
+  background: #55badf url(assets/dashboard/img/dashboard/memory.svg) no-repeat right bottom;
   background-size: 60px;
 }
 .kopere_dashboard_div .content-w .content-i .content-box .element-box.color_hd {
-  background: #ec6f5a url(dashboard/img/dashboard/hd.svg) no-repeat right bottom;
+  background: #ec6f5a url(assets/dashboard/img/dashboard/hd.svg) no-repeat right bottom;
   background-size: 60px;
 }
 .kopere_dashboard_div .content-w .content-i .content-box .element-box.color_performance {
-  background: #f7c65f url(dashboard/img/dashboard/performance.svg) no-repeat right bottom;
+  background: #f7c65f url(assets/dashboard/img/dashboard/performance.svg) no-repeat right bottom;
   background-size: 60px;
 }
 @media print {
