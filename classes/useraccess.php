@@ -76,10 +76,11 @@ class useraccess {
         $table->close(true, ["order" => [[1, "asc"]]]);
 
         echo '</div>';
-        dashboard_util::end_page();
 
         $PAGE->requires->js_call_amd('local_kopere_dashboard/useraccess', 'useraccess_changue_mes');
         echo "<style>.bloco_changue_mes{display:none}</style>";
+
+        dashboard_util::end_page();
     }
 
     /**

@@ -228,9 +228,9 @@ class courses {
         $table->close();
 
         echo '</div>';
-        dashboard_util::end_page();
-
         $PAGE->requires->js_call_amd('local_kopere_dashboard/course', 'courses_enrol_new');
+
+        dashboard_util::end_page();
     }
 
     /**

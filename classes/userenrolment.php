@@ -113,6 +113,7 @@ class userenrolment {
         $form->close();
 
         $PAGE->requires->js_call_amd('local_kopere_dashboard/userenrolment', 'userenrolment_status');
+
         dashboard_util::end_page();
     }
 

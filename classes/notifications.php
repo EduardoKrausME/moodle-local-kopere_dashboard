@@ -391,6 +391,7 @@ class notifications extends notificationsutil {
      * Function settings
      *
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function settings() {
         global $CFG, $PAGE;
@@ -435,6 +436,7 @@ class notifications extends notificationsutil {
      * Function test_smtp
      *
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function test_smtp() {
         global $CFG, $USER;
@@ -469,6 +471,7 @@ class notifications extends notificationsutil {
         $eventdata->smallmessage = '';
 
         message_send($eventdata);
+
         dashboard_util::end_page();
     }
 }

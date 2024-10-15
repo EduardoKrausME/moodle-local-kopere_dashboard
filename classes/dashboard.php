@@ -66,9 +66,9 @@ class dashboard {
                     </div>
                 </div>
             </div>';
-        dashboard_util::end_page();
 
         $PAGE->requires->js_call_amd('local_kopere_dashboard/dashboard', 'start');
+        dashboard_util::end_page();
     }
 
     /**

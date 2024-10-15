@@ -283,6 +283,7 @@ class webpages {
         echo '</div>';
 
         echo '</div>';
+
         dashboard_util::end_page();
 
     }
@@ -410,6 +411,7 @@ class webpages {
         $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', 'webpages_page_ajax_get_url');
 
         echo '</div>';
+
         dashboard_util::end_page();
     }
 
@@ -418,6 +420,8 @@ class webpages {
      *
      * @throws \coding_exception
      * @throws \dml_exception
+     * @throws \file_exception
+     * @throws \stored_file_creation_exception
      */
     public function page_edit_save() {
         global $DB;

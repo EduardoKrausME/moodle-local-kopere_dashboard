@@ -50,6 +50,8 @@ class header {
      * Function reload
      *
      * @param bool $isdie
+     *
+     * @throws \coding_exception
      */
     public static function reload($isdie = true) {
         ob_clean();
@@ -65,6 +67,9 @@ class header {
      *
      * @param $testparam
      * @param $printtext
+     *
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function notfound_null($testparam, $printtext) {
         if ($testparam == null) {
@@ -106,9 +111,10 @@ class header {
                   </p>
               </div>";
 
-        dashboard_util::end_page();
 
         echo $OUTPUT->footer();
         end_util::end_script_show();
+
+        dashboard_util::end_page();
     }
 }

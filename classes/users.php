@@ -65,6 +65,7 @@ class users {
         $table->close(true, ["order" => [[1, "asc"]]]);
 
         echo '</div>';
+
         dashboard_util::end_page();
     }
 
@@ -117,6 +118,7 @@ class users {
         profile::details($user);
 
         echo '</div>';
+
         dashboard_util::end_page();
     }
 
