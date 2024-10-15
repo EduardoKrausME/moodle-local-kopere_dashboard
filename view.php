@@ -112,8 +112,7 @@ $PAGE->set_pagetype('admin-setting');
 $PAGE->set_pagelayout('admin');
 
 
-$PAGE->requires->css('/local/kopere_dashboard/assets/style.css');
-$PAGE->requires->css('/local/kopere_dashboard/assets/all-internal.css');
+$PAGE->requires->css('/local/kopere_dashboard/style.css');
 
 
 $PAGE->requires->jquery();

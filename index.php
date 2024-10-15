@@ -43,7 +43,8 @@ if ($htmldata && confirm_sesskey()) {
 
 $context = context_system::instance();
 $PAGE->set_context($context);
-$PAGE->requires->css('/local/kopere_dashboard/assets/statics-pages.css');
+$PAGE->add_body_class("kopere-dashboard-pages");
+$PAGE->requires->css('/local/kopere_dashboard/style.css');
 $PAGE->set_pagetype('my-index');
 
 if ($pagelink) {
@@ -81,7 +82,6 @@ if ($pagelink) {
     $PAGE->navbar->add($webpages->title);
 
     echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
-    $PAGE->requires->css("/local/kopere_dashboard/_editor/css/bootstrap_page.css");
     echo $OUTPUT->header();
 
     preg_match_all('/\[\[(kopere_\w+)::(\w+)(->|-&gt;)(\w+)\((.*?)\)]]/', $webpages->text, $classes);
