@@ -178,7 +178,7 @@ class dashboard {
      * @throws \dml_exception
      */
     public function last_enroll() {
-        global $DB, $PAGE, $CFG;
+        global $DB, $PAGE;
 
         $enrol = new enroll();
         $lastenroll = $enrol->last_enroll();
