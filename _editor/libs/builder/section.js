@@ -1,5 +1,5 @@
-let bgVideoTemplate = `<video playsinline loop muted autoplay src="${wwwroot}/theme/boost_magnific/_editor/media/sample.webm" poster="${wwwroot}/theme/boost_magnific/_editor/media/sample.webp"><video>`;
-let bgImageTemplate = `<img src="${wwwroot}/theme/boost_magnific/_editor/media/4.jpg">`;
+let bgVideoTemplate = `<video playsinline loop muted autoplay src="https://github.com/user-attachments/assets/6893853e-fc76-497d-83d2-d87c7395be57" poster="https://github.com/user-attachments/assets/98f7e6c3-d352-4d07-ae5d-857fad97ff2d"><video>`;
+let bgImageTemplate = `<img src="https://github.com/user-attachments/assets/2198065a-5e8b-4096-ab22-beb35740d9b5">`;
 let defaultSeparatorSvg = '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 41" width="100%" height="300" fill="var(--bs-body-bg)" preserveAspectRatio="none"><defs><style>.cls-1{fill:inherit}</style></defs><title>rough-edges-bottom</title><path class="cls-1" d="M0,185l125-26,33,17,58-12s54,19,55,19,50-11,50-11l56,6,60-8,63,15v15H0Z" transform="translate(0 -159)"/></svg>';
 
 let SectionBackground = [{

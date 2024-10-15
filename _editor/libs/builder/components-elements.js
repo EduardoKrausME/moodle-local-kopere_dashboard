@@ -232,37 +232,37 @@ Vvveb.Components.add("elements/gallery", {
         <div class="gallery masonry has-shadow" data-component-gallery>
             <div class="item">
                 <a>
-                    <img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/1.jpg">
+                    <img src="https://dummyimage.com/450x339/9a9458/333">
                 </a>
             </div>
             <div class="item">
                 <a>
-                    <img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/2.jpg">
+                    <img src="https://dummyimage.com/450x339/9a9458/333">
                 </a>
             </div>
             <div class="item">
                 <a>
-                    <img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/3.jpg">
+                    <img src="https://dummyimage.com/450x339/9a9458/333">
                 </a>
             </div>
             <div class="item">
                 <a>
-                    <img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/4.jpg">
+                    <img src="https://dummyimage.com/450x339/9a9458/333">
                 </a>
             </div>
             <div class="item">
                 <a>
-                    <img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/5.jpg">
+                    <img src="https://dummyimage.com/450x339/9a9458/333">
                 </a>
             </div>
             <div class="item">
                 <a>
-                    <img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/6.jpg">
+                    <img src="https://dummyimage.com/450x339/9a9458/333">
                 </a>
             </div>
             <div class="item">
                 <a>
-                    <img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/7.jpg">
+                    <img src="https://dummyimage.com/450x339/9a9458/333">
                 </a>
             </div>
         </div>`,
@@ -359,7 +359,7 @@ Vvveb.Components.add("elements/gallery", {
         inputtype : ButtonInput,
         data      : {text : "Add image", icon : "la la-plus"},
         onChange  : function(node) {
-            node.append(generateElements(`<div class="item"><a><img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/1.jpg"></a></div>`)[0]);
+            node.append(generateElements(`<div class="item"><a><img src="https://github.com/user-attachments/assets/d5b0db9f-afb1-4900-a5bc-0882c5ce3492"></a></div>`)[0]);
 
             //render component properties again to include the new image
             //Vvveb.Components.render("ellements/gallery");
@@ -650,7 +650,7 @@ Vvveb.Components.add("elements/flip-box", {
         <div class="flip-box-inner">
             <div class="flip-box-front">
                 <div class="card">
-                    <img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/1.jpg" class="card-img-top" alt="Post">
+                    <img src="https://github.com/user-attachments/assets/d5b0db9f-afb1-4900-a5bc-0882c5ce3492" class="card-img-top" alt="Post">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
@@ -663,7 +663,7 @@ Vvveb.Components.add("elements/flip-box", {
             <div class="flip-box-back">
                 <div class="d-flex align-items-center flex-column">
                     <div class="flex-shrink-0">
-                        <img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/2.jpg" alt="Post">
+                        <img src="https://github.com/user-attachments/assets/2880443c-4958-4dc4-9a66-9e0113a66549" alt="Post">
                     </div>
                     <div class="flex-grow-1 ms-3">
                         <p>
@@ -909,13 +909,13 @@ Vvveb.Components.add("elements/carousel", {
     html      : `
         <div class="swiper" data-slides-per-view="3" data-draggable="true">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="${wwwroot}/theme/boost_magnific/_editor/media/4.jpg" class="img-fluid">
+                <div class="swiper-slide"><img src="https://github.com/user-attachments/assets/2198065a-5e8b-4096-ab22-beb35740d9b5" class="img-fluid">
                     <p>Slide 1</p></div>
-                <div class="swiper-slide"><img src="${wwwroot}/theme/boost_magnific/_editor/media/2.jpg" class="img-fluid">
+                <div class="swiper-slide"><img src="https://github.com/user-attachments/assets/11ed8332-1535-4839-9395-37700970a52f" class="img-fluid">
                     <p>Slide 2</p></div>
-                <div class="swiper-slide"><img src="${wwwroot}/theme/boost_magnific/_editor/media/5.jpg" class="img-fluid">
+                <div class="swiper-slide"><img src="https://github.com/user-attachments/assets/f31f5c43-4e79-49b9-8f1c-2d9377ca92e0" class="img-fluid">
                     <p>Slide 3</p></div>
-                <div class="swiper-slide"><img src="${wwwroot}/theme/boost_magnific/_editor/media/7.jpg" class="img-fluid">
+                <div class="swiper-slide"><img src="https://github.com/user-attachments/assets/1d0d8383-b51a-4eb5-b6e5-283ad580b420" class="img-fluid">
                     <p>Slide 4</p></div>
             </div>
             <div class="swiper-pagination"></div>
@@ -964,7 +964,11 @@ Vvveb.Components.add("elements/carousel", {
                 if (event.action == "add") {
                     let random = Math.floor(Math.random() * 6) + 1;
                     let index = element.swiper.slides.length + 1;
-                    element.swiper.appendSlide(generateElements(`<div class="swiper-slide"><img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/${random}.jpg" class="img-fluid"><p>Slide ${index}</p></div>`)[0]);
+                    element.swiper.appendSlide(generateElements(
+                        `<div class="swiper-slide">
+                             <img src="https://dummyimage.com/450x339/9a9458/333" class="img-fluid">
+                             <p>Slide ${index}</p>
+                         </div>`)[0]);
                     element.swiper.slideTo(index);
                     //temporary solution to better update list
                     Vvveb.Components.render("elements/carousel");
@@ -1118,17 +1122,17 @@ Vvveb.Components.add("elements/slider", {
              data-navigation='{"nextEl": ".swiper-button-next","prevEl": ".swiper-button-prev"}'>
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/1.jpg" class="img-fluid">
-                    <p>Slider 1</p></div>
+                    <img src="https://github.com/user-attachments/assets/d5b0db9f-afb1-4900-a5bc-0882c5ce3492" class="img-fluid">
+                    <p>Slider 1</p>
+                </div>
                 <div class="swiper-slide">
-                    <img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/2.jpg" class="img-fluid">
-                    <p>Slider 2</p></div>
+                    <img src="https://github.com/user-attachments/assets/2880443c-4958-4dc4-9a66-9e0113a66549" class="img-fluid">
+                    <p>Slider 2</p>
+                </div>
                 <div class="swiper-slide">
-                    <img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/3.jpg" class="img-fluid">
-                    <p>Slider 3</p></div>
-                <div class="swiper-slide">
-                    <img src="${wwwroot}/theme/boost_magnific/_editor/media/posts/4.jpg" class="img-fluid">
-                    <p>Slider 4</p></div>
+                    <img src="https://github.com/user-attachments/assets/ab3d0cf9-f0d7-41c4-abc1-c6031d15fbff" class="img-fluid">
+                    <p>Slider 3</p>
+                </div>
             </div>
             <div class="swiper-pagination"></div>
 

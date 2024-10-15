@@ -2330,7 +2330,7 @@ Vvveb.Components.extend("_base", "html/paragraph", {
 Vvveb.Components.extend("_base", "html/video", {
     nodes      : ["video"],
     name       : "Video",
-    html       : `<video width="320" height="240" playsinline loop autoplay><source src="${wwwroot}/theme/boost_magnific/_editor/media/sample.webm"><video>`,
+    html       : `<video width="320" height="240" playsinline loop autoplay><source src="https://github.com/user-attachments/assets/6893853e-fc76-497d-83d2-d87c7395be57"><video>`,
     dragHtml   : '<img  width="320" height="240" src="' + Vvveb.baseUrl + 'icons/video.svg">',
     image      : "icons/video.svg",
     properties : [{
