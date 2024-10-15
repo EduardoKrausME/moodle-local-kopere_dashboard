@@ -246,6 +246,8 @@ class data_table {
                 $this->columndefs[] = (object)["render" => "timeRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_ACTION) {
                 $this->columndefs[] = (object)["orderable" => false, "targets" => $key];
+            } else {
+                $this->columndefs[] = (object)["render" => "default", "targets" => $key];
             }
         }
         $return .= '</tr>';
@@ -412,7 +414,14 @@ class data_table {
             ];
         }
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', [$this->tableid, $initparams]);
+        $json = json_encode($initparams);
+        if (isset($json[800])) {
+            $json = htmlspecialchars($json, ENT_COMPAT);
+            $return .= "\n<input type='hidden' id='tableparams_{$this->tableid}' value='{$json}'/>\n";
+            $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', [$this->tableid, null]);
+        } else {
+            $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', [$this->tableid, $initparams]);
+        }
 
         if ($this->clickredirect) {
             $this->on_clickreditect();
