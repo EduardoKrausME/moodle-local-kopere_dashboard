@@ -37,7 +37,7 @@
  * @throws upgrade_exception
  */
 function xmldb_local_kopere_dashboard_upgrade($oldversion) {
-    global $DB;
+    global $DB, $CFG;
 
     $dbman = $DB->get_manager();
 
@@ -259,6 +259,13 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
 
         $DB->execute("UPDATE {kopere_dashboard_menu} SET menuid = 0");
         upgrade_plugin_savepoint(true, 2024050900, 'local', 'kopere_dashboard');
+    }
+
+    if ($oldversion < 2024101400) {
+        set_config("menu", $CFG->kopere_dashboard_menu, "local_kopere_dashboard");
+        set_config("menuwebpages", $CFG->kopere_dashboard_menuwebpages, "local_kopere_dashboard");
+        set_config("monitor", $CFG->kopere_dashboard_monitor, "local_kopere_dashboard");
+        set_config("pagefonts", $CFG->kopere_dashboard_pagefonts, "local_kopere_dashboard");
     }
 
     \local_kopere_dashboard\install\report_install::create_categores();

@@ -573,7 +573,7 @@ class webpages {
         $menus = $DB->get_record('kopere_dashboard_menu', ['id' => $id]);
         if (!$menus) {
             $menus = kopere_dashboard_menu::create_by_default();
-            $menus->theme = get_config('kopere_dashboard_menu', 'webpages_theme');
+            $menus->theme = get_config('local_kopere_dashboard', 'webpages_theme');
 
             dashboard_util::add_breadcrumb(get_string_kopere('webpages_title'),
                 local_kopere_dashboard_makeurl("webpages", "dashboard"));

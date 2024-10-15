@@ -87,7 +87,7 @@ class font_util {
             "family=Work+Sans:ital,wght@0,100..900;1,100..900",
         ];
 
-        preg_match_all('/(family=.*?)&/', $CFG->kopere_dashboard_pagefonts, $fontsuser);
+        preg_match_all('/(family=.*?)&/', get_config("local_kopere_dashboard", "pagefonts"), $fontsuser);
         if (isset($fontsuser[1])) {
             $fonts = array_merge($fontsuser[1], $fontsdefault);
         }

@@ -56,7 +56,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
     $CFG->custommenuitems = trim($CFG->custommenuitems);
 
     if (isloggedin()) {
-        if ($CFG->branch > 400 && @$CFG->kopere_dashboard_menu) {
+        if ($CFG->branch > 400 && @get_config("local_kopere_dashboard", "menu")) {
             $context = context_system::instance();
             $hascapability = has_capability('local/kopere_dashboard:view', $context) ||
                 has_capability('local/kopere_dashboard:manage', $context);
@@ -66,7 +66,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
                 $link = local_kopere_dashboard_makeurl("dashboard", "start");
                 $CFG->custommenuitems = "{$name}|{$link}\n{$CFG->custommenuitems}";
             }
-            if (@$CFG->kopere_dashboard_menuwebpages) {
+            if (@get_config("local_kopere_dashboard", "menuwebpages")) {
                 add_pages_custommenuitems_400();
             }
         } else {
@@ -90,7 +90,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
             \local_kopere_dashboard\util\node::add_admin_code();
         }
     } else {
-        if ($CFG->branch > 400 && @$CFG->kopere_dashboard_menu) {
+        if ($CFG->branch > 400 && @get_config("local_kopere_dashboard", "menu")) {
             add_pages_custommenuitems_400();
         }
     }

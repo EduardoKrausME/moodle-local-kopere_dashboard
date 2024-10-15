@@ -27,4 +27,7 @@
  *
  */
 function xmldb_local_kopere_dashboard_uninstall() {
+    global $CFG;
+    $CFG->custommenuitems = preg_replace("/.*kopere_dashboard.*/", "", $CFG->custommenuitems);
+    set_config("custommenuitems", $CFG->custommenuitems);
 }

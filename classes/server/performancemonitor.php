@@ -43,7 +43,7 @@ class performancemonitor {
     public static function load_monitor() {
         global $PAGE, $CFG;
 
-        if (!@$CFG->kopere_dashboard_monitor) {
+        if (!@get_config("local_kopere_dashboard", "monitor")) {
             return '
             <div id="dashboard-monitor" class="element-content no-server-monitor">
             </div>';
