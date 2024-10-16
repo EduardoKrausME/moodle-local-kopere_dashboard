@@ -15,26 +15,22 @@ define([
                 params = JSON.parse(params_json);
             }
 
-            function render_mustache(data, data_default, type, row, info) {
-                var columns = info.settings.aoColumns;
-                var col = info.col;
-                var column = columns[col];
-                var columnname = column.data;
-
-                if(row[`${columnname}_mustache`]){
-                   return row[`${columnname}_mustache`];
-                } else {
-                    return data_default;
-                }
-            }
-
             var renderer = {
                 mustacheRenderer  : function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
 
-                    return render_mustache(data, data, type, row, info);
+                    var columns = info.settings.aoColumns;
+                    var col = info.col;
+                    var column = columns[col];
+                    var columnname = column.data;
+
+                    if (row[`${columnname}_mustache`]) {
+                        return row[`${columnname}_mustache`];
+                    } else {
+                        return data;
+                    }
                 },
                 numberRenderer    : function(data, type, row, info) {
                     if (data === null) {
@@ -44,41 +40,36 @@ define([
                         return data;
                     }
 
-                    var data_default = '<div class="text-center text-nowrap" data-toggle="tooltip data2">' + data + '</div>';
-                    return render_mustache(data, data_default, type, row, info);
+                    return '<div class="text-center text-nowrap" data-toggle="tooltip data2">' + data + '</div>';
                 },
                 currencyRenderer  : function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
 
-                    var data_default = '<div class="text-center text-nowrap" data-toggle="tooltip">R$ ' + data + '</div>';
-                    return render_mustache(data_default, data_default, type, row, info);
+                    return '<div class="text-center text-nowrap" data-toggle="tooltip">R$ ' + data + '</div>';
                 },
                 filesizeRenderer  : function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
 
-                    var data_default = "";
                     if (data == null || data < 1) {
-                        data_default = '0 b';
+                        return '0 b';
                     } else if (data < 1000) {
-                        data_default = data + ' b';
+                        return data + ' b';
                     } else if (data < 1000 * 1000) {
                         data = data / (1000);
-                        data_default = data.toFixed(2) + ' Kb';
+                        return data.toFixed(2) + ' Kb';
                     } else if (data < 1000 * 1000 * 1000) {
                         data = data / (1000 * 1000);
-                        data_default = data.toFixed(2) + ' Mb';
+                        return data.toFixed(2) + ' Mb';
                     } else if (data < 1000 * 1000 * 1000 * 1000) {
                         data = data / (1000 * 1000 * 1000);
-                        data_default = data.toFixed(2) + ' Gb';
+                        return data.toFixed(2) + ' Gb';
                     } else {
-                        data_default = data.toFixed(2) + ' Tb';
+                        return data.toFixed(2) + ' Tb';
                     }
-
-                    return render_mustache(data_default, data_default, type, row, info);
                 },
                 dateRenderer      : function(data, type, row, info) {
                     if (type != 'display') {
@@ -106,8 +97,7 @@ define([
                     result = result.replace("month", month);
                     result = result.replace("year", year);
 
-                    var data_default = '<div class="text-nowrap">' + result + '</div>';
-                    return render_mustache(data_default, data_default, type, row, info);
+                    return '<div class="text-nowrap">' + result + '</div>';
                 },
                 datetimeRenderer  : function(data, type, row, info) {
                     if (type != 'display') {
@@ -139,8 +129,7 @@ define([
                     result = result.replace("hour", hour);
                     result = result.replace("min", min);
 
-                    var data_default = '<div class="text-nowrap">' + result + '</div>';
-                    return render_mustache(data_default, data_default, type, row, info);
+                    return '<div class="text-nowrap">' + result + '</div>';
                 },
                 visibleRenderer   : function(data, type, row, info) {
                     if (type != 'display') {
@@ -154,16 +143,14 @@ define([
                         return data;
                     }
 
-                    var data_default = "";
                     if (!data) {
-                        data_default = '<div class="status-pill grey"  title="' + M.util.get_string('invisible', 'local_kopere_dashboard') +
+                        return '<div class="status-pill grey"  title="' +
+                            M.util.get_string('invisible', 'local_kopere_dashboard') +
                             '"  data-toggle="tooltip"></div>';
                     } else {
-                        data_default = '<div class="status-pill green" title="' + M.util.get_string('visible', 'local_kopere_dashboard') +
+                        return '<div class="status-pill green" title="' + M.util.get_string('visible', 'local_kopere_dashboard') +
                             '" data-toggle="tooltip"></div>';
                     }
-
-                    return render_mustache(data_default, data_default, type, row, info);
                 },
                 statusRenderer    : function(data, type, row, info) {
                     if (type != 'display') {
@@ -177,16 +164,15 @@ define([
                         return data;
                     }
 
-                    var data_default = "";
                     if (data) {
-                        data_default = '<div class="status-pill grey"  title="' + M.util.get_string('inactive', 'local_kopere_dashboard') +
+                        return '<div class="status-pill grey"  title="' +
+                            M.util.get_string('inactive', 'local_kopere_dashboard') +
                             '" data-toggle="tooltip"></div>';
                     } else {
-                        data_default = '<div class="status-pill green" title="' + M.util.get_string('active', 'local_kopere_dashboard') +
+                        return '<div class="status-pill green" title="' +
+                            M.util.get_string('active', 'local_kopere_dashboard') +
                             '"   data-toggle="tooltip"></div>';
                     }
-
-                    return render_mustache(data_default, data_default, type, row, info);
                 },
                 deletedRenderer   : function(data, type, row, info) {
                     if (type != 'display') {
@@ -200,44 +186,35 @@ define([
                         return data;
                     }
 
-                    var data_default = "";
                     if (!data) {
-                        data_default = `<div class="status-pill grey"
-                                             title="${M.util.get_string('notification_status_deleted', 'local_kopere_dashboard')}"
-                                             data-toggle="tooltip"></div>`;
+                        return `<div class="status-pill grey"
+                                     title="${M.util.get_string('notification_status_deleted', 'local_kopere_dashboard')}"
+                                     data-toggle="tooltip"></div>`;
                     } else {
-                        data_default = `<div class="status-pill green"
-                                             title="${M.util.get_string('active', 'local_kopere_dashboard')}"
-                                             data-toggle="tooltip"></div>`;
+                        return `<div class="status-pill green"
+                                     title="${M.util.get_string('active', 'local_kopere_dashboard')}"
+                                     data-toggle="tooltip"></div>`;
                     }
-
-                    return render_mustache(data_default, data_default, type, row, info);
                 },
                 trueFalseRenderer : function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
 
-                    var data_default = "";
                     if (data == 0 || data == false || data == 'false') {
-                        data_default = M.util.get_string('no');
+                        return M.util.get_string('no');
                     } else {
-                        data_default = M.util.get_string('yes');
+                        return M.util.get_string('yes');
                     }
-
-                    return render_mustache(data_default, data_default, type, row, info);
                 },
                 userphotoRenderer : function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
 
-                    var data_default = `
-                        <img class="media-object"
-                             src="${M.cfg.wwwroot}/local/kopere_dashboard/profile-image.php?type=photo_user&id=${data}"
-                             style="width:35px;height:35px" />`;
-
-                    return render_mustache(data_default, data_default, type, row, info);
+                    return `<img class="media-object"
+                                 src="${M.cfg.wwwroot}/local/kopere_dashboard/profile-image.php?type=photo_user&id=${data}"
+                                 style="width:35px;height:35px" />`;
                 },
                 secondsRenderer   : function(data, type, row, info) {
                     if (type != 'display') {
@@ -246,8 +223,7 @@ define([
 
                     var tempo = parseInt(data);
                     if (isNaN(tempo) || tempo < 1) {
-                        var data_default0 = '00:00:00';
-                        return render_mustache(data_default0, data_default0, type, row, info);
+                        return '00:00:00';
                     }
 
                     var min = parseInt(tempo / 60);
@@ -268,8 +244,7 @@ define([
                         hor = "0" + hor;
                     }
 
-                    var data_default = `${hor}:${min}:${seg}`;
-                    return render_mustache(data_default, data_default, type, row, info);
+                    return `${hor}:${min}:${seg}`;
                 },
                 timeRenderer      : function(data, type, row, info) {
                     if (type != 'display') {
@@ -278,8 +253,7 @@ define([
 
                     var tempo = parseInt(data);
                     if (isNaN(tempo) || tempo < 1) {
-                        var data_default0 = '00:00:00';
-                        return render_mustache(data_default0, data_default0, type, row, info);
+                        return '00:00:00';
                     }
 
                     var min = parseInt(tempo / 60);
@@ -300,8 +274,7 @@ define([
                         hor = "0" + hor;
                     }
 
-                    var data_default = `${hor}:${min}:${seg}`;
-                    return render_mustache(data_default, data_default, type, row, info);
+                    return `${hor}:${min}:${seg}`;
                 },
             };
 
@@ -352,8 +325,6 @@ define([
                 newColumnDefs.push(columnDef);
             });
             $.when(iterate).done(function() {
-
-                console.trace(newColumnDefs);
 
                 params.columnDefs = newColumnDefs;
                 params.oLanguage = {
