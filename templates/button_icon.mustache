@@ -33,32 +33,32 @@
     require(["jquery", "jqueryui",], function($, $ui) {
         $("#button-{{{uniqid}}}").show().click(function() {
             $("#confirm-{{{uniqid}}}").dialog({
-                resizable : false,
-                height    : "auto",
-                width     : "auto",
-                maxWidth  : 400,
-                modal     : true,
-                classes   : {
-                    "ui-dialog" : "kopere-dashboard-modal"
+                resizable: false,
+                height: "auto",
+                width: "auto",
+                maxWidth: 400,
+                modal: true,
+                classes: {
+                    "ui-dialog": "kopere-dashboard-modal"
                 },
-                show      : {
-                    effect   : "blind",
-                    duration : 200
+                show: {
+                    effect: "blind",
+                    duration: 200
                 },
-                hide      : {
-                    duration : 300
+                hide: {
+                    duration: 300
                 },
-                buttons   : [
+                buttons: [
                     {
-                        text  : '{{#str}}yes{{/str}}',
-                        class : "btn btn-danger",
-                        click : function() {
+                        text: '{{#str}}yes{{/str}}',
+                        class: "btn btn-danger",
+                        click: function() {
                             location.href = "{{{link}}}"
                         }
                     },
                     {
-                        text  : '{{#str}}no{{/str}}',
-                        click : function() {
+                        text: '{{#str}}no{{/str}}',
+                        click: function() {
                             console.log($(this));
                             $(this).dialog("close");
                         }

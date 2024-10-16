@@ -111,7 +111,6 @@ class header {
                   </p>
               </div>";
 
-
         echo $OUTPUT->footer();
         end_util::end_script_show();
 

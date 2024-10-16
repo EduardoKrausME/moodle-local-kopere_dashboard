@@ -271,11 +271,11 @@ class table {
             }
 
             $json = json_encode($initparams);
-            if(isset($json[800])) {
+            if (isset($json[800])) {
                 $json = htmlspecialchars($json, ENT_COMPAT);
                 echo "\n<input type='hidden' id='tableparams_{$this->tableid}' value='{$json}'/>\n";
                 $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', [$this->tableid, null]);
-            }else{
+            } else {
                 $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', [$this->tableid, $initparams]);
             }
         }
