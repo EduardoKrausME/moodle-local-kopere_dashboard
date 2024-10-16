@@ -30,7 +30,7 @@
 </style>
 
 {{#js}}
-    require(["jquery", "jqueryui",], function($, $ui) {
+    require(["jquery", "jqueryui",], function($) {
         $("#button-{{{uniqid}}}").show().click(function() {
             $("#confirm-{{{uniqid}}}").dialog({
                 resizable: false,
@@ -50,16 +50,15 @@
                 },
                 buttons: [
                     {
-                        text: '{{#str}}yes{{/str}}',
-                        class: "btn btn-danger",
-                        click: function() {
-                            location.href = "{{{link}}}"
+                        "text": '{{#str}}yes{{/str}}',
+                        "class": "btn btn-danger",
+                        "click": function() {
+                            location.href = "{{{link}}}";
                         }
                     },
                     {
                         text: '{{#str}}no{{/str}}',
                         click: function() {
-                            console.log($(this));
                             $(this).dialog("close");
                         }
                     }
