@@ -25,6 +25,7 @@
 namespace local_kopere_dashboard\html;
 
 use local_kopere_dashboard\html\inputs\i_input;
+use local_kopere_dashboard\util\html;
 
 /**
  * Class form
@@ -66,7 +67,8 @@ class form {
             $titulo = "<label for='{$name}'>{$titulo}</label>";
         }
 
-        echo "<div class='form-group area_{$name} type_{$type}'>
+        $id = html::retira_caracteres_nao_ascii($name);
+        echo "<div id='area_{$id}' class='form-group area_{$name} type_{$type}'>
                   {$titulo} {$input}
                   <div class='help-block form-text with-errors'>{$adicionaltext}</div>
               </div>";
