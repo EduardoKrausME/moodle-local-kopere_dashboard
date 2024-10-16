@@ -21,17 +21,8 @@ define([
                 var column = columns[col];
                 var columnname = column.data;
 
-                var mustachehtml = $(`#mustache_${columnname}`).val();
-                if (mustachehtml) {
-                    if (row['u_fullname']) {
-                        mustachehtml = mustachehtml.split(`[[u_fullname]]`).join(row['u_fullname']);
-                    }
-                    for (let i = 0; i < columns.length; i++) {
-                        var key = columns[i].data;
-                        mustachehtml = mustachehtml.split(`[[${key}]]`).join(row[key]);
-                    }
-                    return mustachehtml;
-
+                if(row[`${columnname}_mustache`]){
+                   return row[`${columnname}_mustache`];
                 } else {
                     return data_default;
                 }
