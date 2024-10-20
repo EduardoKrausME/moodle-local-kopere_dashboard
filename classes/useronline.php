@@ -124,7 +124,6 @@ class useronline {
         global $DB;
 
         $onlinestart = strtotime("-{$time} minutes");
-        $timefinish = time();
 
         $count = $DB->get_record_sql(
             "SELECT count(u.id) AS num
