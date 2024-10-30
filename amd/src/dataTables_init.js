@@ -40,14 +40,14 @@ define([
                         return data;
                     }
 
-                    return '<div class="text-center text-nowrap" data-toggle="tooltip data2">' + data + '</div>';
+                    return '<div class="text-center text-nowrap">' + data + '</div>';
                 },
                 currencyRenderer  : function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
 
-                    return '<div class="text-center text-nowrap" data-toggle="tooltip">R$ ' + data + '</div>';
+                    return '<div class="text-center text-nowrap">R$ ' + data + '</div>';
                 },
                 filesizeRenderer  : function(data, type, row, info) {
                     if (type != 'display') {
@@ -146,10 +146,10 @@ define([
                     if (!data) {
                         return '<div class="status-pill grey"  title="' +
                             M.util.get_string('invisible', 'local_kopere_dashboard') +
-                            '"  data-toggle="tooltip"></div>';
+                            '"></div>';
                     } else {
                         return '<div class="status-pill green" title="' + M.util.get_string('visible', 'local_kopere_dashboard') +
-                            '" data-toggle="tooltip"></div>';
+                            '"></div>';
                     }
                 },
                 statusRenderer    : function(data, type, row, info) {
@@ -167,11 +167,11 @@ define([
                     if (data) {
                         return '<div class="status-pill grey"  title="' +
                             M.util.get_string('inactive', 'local_kopere_dashboard') +
-                            '" data-toggle="tooltip"></div>';
+                            '"></div>';
                     } else {
                         return '<div class="status-pill green" title="' +
                             M.util.get_string('active', 'local_kopere_dashboard') +
-                            '"   data-toggle="tooltip"></div>';
+                            '"></div>';
                     }
                 },
                 deletedRenderer   : function(data, type, row, info) {
@@ -188,12 +188,10 @@ define([
 
                     if (!data) {
                         return `<div class="status-pill grey"
-                                     title="${M.util.get_string('notification_status_deleted', 'local_kopere_dashboard')}"
-                                     data-toggle="tooltip"></div>`;
+                                     title="${M.util.get_string('notification_status_deleted', 'local_kopere_dashboard')}"></div>`;
                     } else {
                         return `<div class="status-pill green"
-                                     title="${M.util.get_string('active', 'local_kopere_dashboard')}"
-                                     data-toggle="tooltip"></div>`;
+                                     title="${M.util.get_string('active', 'local_kopere_dashboard')}"></div>`;
                     }
                 },
                 trueFalseRenderer : function(data, type, row, info) {
