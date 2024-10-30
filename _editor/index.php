@@ -43,13 +43,13 @@ require_capability('moodle/site:config', context_system::instance());
 
     <title>VvvebJs</title>
 
+    <link href="css/bootstrap-vvveb.css" rel="stylesheet">
     <link href="css/editor.css" rel="stylesheet">
 </head>
 <body>
 
 <div id="vvveb-builder">
     <div id="top-panel">
-        <img src="resources/logo.png" alt="Vvveb" class="float-start" id="logo">
 
         <div class="btn-group float-start" role="group">
             <button class="btn btn-light active" title="Toggle left column" id="toggle-left-column-btn"
@@ -1328,7 +1328,7 @@ require_capability('moodle/site:config', context_system::instance());
                data-target-thumb="#thumb-v{%=key%}" style="cursor:pointer" src="" width="225" height="225" playsinline
                loop muted controls></video>
         <input name="v{%=key%}" type="text" class="form-control mt-1" id="input-v{%=key%}"/>
-        <button name="button" class="btn btn-primary btn-sm btn-icon mt-2" data-target-input="#vinput-v{%=key%}"
+        <button name="button" class="btn btn-primary btn-sm btn-icon mt-2" data-target-input="#input-v{%=key%}"
                 data-target-thumb="#thumb-v{%=key%}"><i class="la la-video la-lg"></i><span>Change video</span></button>
     </div>
 </script>

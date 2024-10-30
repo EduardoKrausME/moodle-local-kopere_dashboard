@@ -68,6 +68,9 @@
     position: relative;
     visibility: inherit !important;
     height: 100% !important;
+    min-width: 700px !important;
+    min-height: 500px !important;
+    padding: 0 !important;
 }
 .tox.tox-tinymce-inline {
     border: none;

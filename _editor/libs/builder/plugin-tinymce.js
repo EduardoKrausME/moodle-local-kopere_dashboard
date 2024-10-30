@@ -91,108 +91,16 @@ Vvveb.WysiwygEditor = {
         console.trace(element);
         if (tinymce && tinymce.activeEditor) {
             tinymce.activeEditor.destroy();
+            Vvveb.Builder.highlightEnabled = true;
+            this.isActive = false;
+
+            node = this.element;
+            Vvveb.Undo.addMutation({
+                type     : 'characterData',
+                target   : node,
+                oldValue : this.oldValue,
+                newValue : node.innerHTML
+            });
         }
-        Vvveb.Builder.highlightEnabled = true;
-        this.isActive = false;
-
-        node = this.element;
-        Vvveb.Undo.addMutation({
-            type     : 'characterData',
-            target   : node,
-            oldValue : this.oldValue,
-            newValue : node.innerHTML
-        });
-    }
-};
-
-
-Vvveb.WysiwygEditor_old = {
-
-    isActive : false,
-    oldValue : '',
-    doc      : false,
-    editor   : false,
-
-    init : function(doc) {
-        Vvveb.WysiwygEditor.doc = doc;
-    },
-
-    edit : function(element) {
-        Vvveb.WysiwygEditor.element = element;
-        Vvveb.WysiwygEditor.modalHtml = `
-            <div class="modal fade modal-full" id="TinyMceModal" tabindex="-1" role="dialog"
-                 aria-labelledby="TinyMceModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document"
-                     style="max-height: 586px">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="TinyMceModalLabel">Editor</h5>
-                            <button type="button" class="btn btn-sm" id="btn-tiny-iconclose" aria-label="Close">
-                                <span aria-hidden="true"><i class="la la-times la-lg"></i></span>
-                            </button>
-                        </div>
-                        <div class="modal-body" style="padding: 0">
-                            <div id="TinyMceModal-editor">${element.outerHTML}</div>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="align-right">
-                                <button type="button" class="btn btn-secondary" id="btn-tiny-buttonclose">Close</button>
-                                <button type="button" class="btn btn-primary save-btn">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-        document.body.append(generateElements(Vvveb.WysiwygEditor.modalHtml)[0]);
-        let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('TinyMceModal'));
-        modal.show();
-
-        document.querySelector("#TinyMceModal .save-btn").addEventListener("click", Vvveb.WysiwygEditor.save);
-        document.querySelector("#btn-tiny-iconclose").addEventListener("click", Vvveb.WysiwygEditor.destroy);
-        document.querySelector("#btn-tiny-buttonclose").addEventListener("click", Vvveb.WysiwygEditor.destroy);
-
-        Vvveb.WysiwygEditor.isActive = true;
-        Vvveb.WysiwygEditor.oldValue = element.innerHTML;
-        Vvveb.Builder.selectPadding = 0;
-        Vvveb.Builder.highlightEnabled = false;
-
-        tinyMceOptions.target = document.getElementById('TinyMceModal-editor');
-        Vvveb.WysiwygEditor.editor = tinymce.init(tinyMceOptions);
-
-        setTimeout(function() {
-            document.getElementById("select-box").style.display = "none";
-        }, 500);
-    },
-
-    save : function() {
-        console.log(Vvveb.WysiwygEditor.element);
-        Vvveb.WysiwygEditor.element.outerHTML = tinymce.activeEditor.getContent();
-
-        Vvveb.Undo.addMutation({
-            type     : 'characterData',
-            target   : Vvveb.WysiwygEditor.element,
-            oldValue : Vvveb.WysiwygEditor.oldValue,
-            newValue : Vvveb.WysiwygEditor.element.innerHTML
-        });
-
-        Vvveb.WysiwygEditor.destroy();
-    },
-
-    destroy : function(element) {
-        if (tinymce.activeEditor) {
-            tinymce.activeEditor.destroy();
-        }
-
-        let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('TinyMceModal'));
-        modal.hide();
-
-        var TinyMceModal = document.getElementById('TinyMceModal');
-        TinyMceModal.parentElement.removeChild(TinyMceModal);
-        Vvveb.WysiwygEditor.isActive = false;
-
-        Vvveb.Builder.highlightEnabled = false;
-        // enable double click editor
-        Vvveb.Builder.texteditEl = null;
     }
 };

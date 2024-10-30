@@ -851,9 +851,6 @@ Vvveb.Builder = {
                     <ol></ol>
                 </li>`)[0]);
 
-                //list.append('<li class="header clearfix" data-section="' + group + '"  data-search=""><label class="header" for="' + type + '_comphead_' + group + count + '">' + group + '  <div class="header-arrow"></div>\
-                //                   </label><input class="header_check" type="checkbox" checked="true" id="' + type + '_comphead_' + group + count + '">  <ol></ol></li>');
-
                 let componentsSubList = list.querySelector('li[data-section="' + group + '"]  ol');
 
                 components = Vvveb.ComponentsGroup[group];
