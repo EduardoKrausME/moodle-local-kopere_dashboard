@@ -44,7 +44,6 @@ if ($htmldata && confirm_sesskey()) {
 $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->add_body_class("kopere-dashboard-pages");
-$PAGE->requires->css('/local/kopere_dashboard/style.css');
 $PAGE->set_pagetype('my-index');
 
 if ($pagelink) {
