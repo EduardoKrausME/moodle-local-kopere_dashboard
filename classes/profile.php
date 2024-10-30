@@ -18,6 +18,7 @@
  * profile file
  *
  * introduced   15/05/17 03:13
+ *
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -100,6 +101,8 @@ class profile {
         if (!count($courses)) {
             return mensagem::warning(get_string_kopere('profile_notenrol'));
         }
+
+        $html = "";
         foreach ($courses as $course) {
             $sql
                 = "SELECT ue.*
@@ -141,7 +144,7 @@ class profile {
 
             $url = local_kopere_dashboard_makeurl("userenrolment", "mathedit",
                 ["courseid" => $course->id, "ueid" => $enrolment->id], "view-ajax");
-            return
+            $html .=
                 "<li>
                     <h4 class='title'>{$course->fullname}
                         <span class='status'>{$matriculastatus}</span>
@@ -149,14 +152,13 @@ class profile {
                     <div>" . get_string_kopere('profile_enrol_start') . '
                         <em>' . userdate($enrolment->timestart, get_string_kopere('dateformat')) . "</em>
                         {$expirationend} -
-                        <button class='btn btn-info btn-xs' data-toggle='modal'
-                                data-target='#modal-edit'
-                                data-href='{$url}'>" . get_string_kopere('profile_edit') . '</button>
+                        <a class='btn btn-info btn-xs' 
+                           href='{$url}'>" . get_string_kopere('profile_edit') . '</a>
                     </div>
                     <div class="roles">' . get_string_kopere('profile_enrol_profile') . ": {$rolehtml}</div>
                 </li>";
         }
-        return null;
+        return $html;
     }
 
     /**
