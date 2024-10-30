@@ -35,32 +35,36 @@
         });
     };
     const save = editor => {
-        const formObj = global$1.DOM.getParent(editor.id, 'form');
-        if (enableWhenDirty(editor) && !editor.isDirty()) {
-            return;
-        }
-        editor.save();
-        const onSaveCallback = getOnSaveCallback(editor);
-        if (isFunction(onSaveCallback)) {
-            onSaveCallback.call(editor, editor);
-            editor.nodeChanged();
-            return;
-        }
-        if (formObj) {
-            editor.setDirty(false);
-            if (!formObj.onsubmit || formObj.onsubmit()) {
-                if (typeof formObj.submit === 'function') {
-                    formObj.submit();
-                } else {
-                    displayErrorMessage(editor, 'Error: Form submit field collision.');
-                }
-            }
-            editor.nodeChanged();
-        } else {
-            displayErrorMessage(editor, 'Error: No form element found.');
-        }
+        Vvveb.WysiwygEditor.destroy();
+
+        // const formObj = global$1.DOM.getParent(editor.id, 'form');
+        // if (enableWhenDirty(editor) && !editor.isDirty()) {
+        //     return;
+        // }
+        // editor.save();
+        // const onSaveCallback = getOnSaveCallback(editor);
+        // if (isFunction(onSaveCallback)) {
+        //     onSaveCallback.call(editor, editor);
+        //     editor.nodeChanged();
+        //     return;
+        // }
+        // if (formObj) {
+        //     editor.setDirty(false);
+        //     if (!formObj.onsubmit || formObj.onsubmit()) {
+        //         if (typeof formObj.submit === 'function') {
+        //             formObj.submit();
+        //         } else {
+        //             displayErrorMessage(editor, 'Error: Form submit field collision.');
+        //         }
+        //     }
+        //     editor.nodeChanged();
+        // } else {
+        //     displayErrorMessage(editor, 'Error: No form element found.');
+        // }
     };
     const cancel = editor => {
+       // Vvveb.WysiwygEditor.destroy();
+
         const h = global.trim(editor.startContent);
         const onCancelCallback = getOnCancelCallback(editor);
         if (isFunction(onCancelCallback)) {
@@ -81,7 +85,8 @@
 
     const stateToggle = editor => api => {
         const handler = () => {
-            api.setEnabled(!enableWhenDirty(editor) || editor.isDirty());
+            api.setEnabled(true);
+            //api.setEnabled(!enableWhenDirty(editor) || editor.isDirty());
         };
         handler();
         editor.on('NodeChange dirty', handler);

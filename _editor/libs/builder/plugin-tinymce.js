@@ -20,22 +20,23 @@ https://github.com/givanz/VvvebJs
 //use ckeditor instead that supports inline editing for iframe elements
 
 var tinyMceOptions = {
-    //selector: 'textarea',
     target                        : false,
-    inline                        : false,//see comment above
+    inline                        : false,  //see comment above
+    // toolbar_mode                  : 'sliding',
     toolbar_persist               : true,
     plugins                       : 'autolink save directionality code visualblocks visualchars fullscreen image link media table charmap lists quickbars emoticons',
     menubar                       : false,
     toolbar                       : [
         'undo redo | bold italic underline strikethrough | table | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist',
-        'insertfile image media link | forecolor backcolor removeformat | fullscreen | ltr rtl | code | charmap emoticons'],
+        'insertfile image media link | forecolor backcolor removeformat | fullscreen | ltr rtl | code | charmap emoticons ',
+        'cancel save'
+    ],
     toolbar_sticky                : true,
-    height                        : 600,
+    height                        : 200,
     quickbars_insert_toolbar      : 'quickmedia quicklink quicktable',
     quickbars_selection_toolbar   : 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
     quickbars_image_toolbar       : 'alignleft aligncenter alignright | rotateleft rotateright | imageoptions',
     noneditable_noneditable_class : 'mceNonEditable',
-    toolbar_mode                  : 'sliding',
     contextmenu                   : 'link image imagetools table',
     skin                          : 'oxide',
     content_css                   : '',
@@ -62,7 +63,48 @@ var tinyMceOptions = {
     branding : false,
 };
 
+
 Vvveb.WysiwygEditor = {
+    isActive : false,
+    oldValue : '',
+    doc      : false,
+    editor   : false,
+
+    init : function(doc) {
+        this.doc = doc;
+    },
+
+    edit    : function(element) {
+        this.element = element;
+        this.isActive = true;
+        this.oldValue = element.innerHTML;
+        Vvveb.Builder.selectPadding = 0;
+        Vvveb.Builder.highlightEnabled = false;
+        tinyMceOptions.target = element;
+        this.editor = tinymce.init(tinyMceOptions);
+
+        setTimeout(function() {
+            document.getElementById("select-box").style.display = "none";
+        }, 1000);
+    },
+    destroy : function(element) {
+        console.trace(element);
+        tinymce.activeEditor.destroy();
+        Vvveb.Builder.highlightEnabled = true;
+        this.isActive = false;
+
+        node = this.element;
+        Vvveb.Undo.addMutation({
+            type     : 'characterData',
+            target   : node,
+            oldValue : this.oldValue,
+            newValue : node.innerHTML
+        });
+    }
+};
+
+
+Vvveb.WysiwygEditor_old = {
 
     isActive : false,
     oldValue : '',

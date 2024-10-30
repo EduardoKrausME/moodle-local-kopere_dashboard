@@ -57,7 +57,7 @@
     text-align: right;
 }
 .tox-tinymce {
-    border: 2px solid #eee;
+    border: 6px solid #607d8b;
     border-radius: 10px;
     box-shadow: none;
     box-sizing: border-box;
@@ -3264,10 +3264,11 @@ body.tox-dialog__disable-scroll {
     fill: #222f3e;
 }
 .tox .tox-statusbar__resize-handle {
+    display: none;
+    /*display: flex;*/
     align-items: flex-end;
     align-self: stretch;
     cursor: nwse-resize;
-    display: flex;
     flex: 0 0 auto;
     justify-content: flex-end;
     margin-bottom: 3px;
@@ -3356,6 +3357,11 @@ body.tox-dialog__disable-scroll {
     padding: 0;
     text-transform: none;
     width: 34px;
+}
+[data-mce-name="save"],
+[data-mce-name="cancel"] {
+    width: fit-content !important;
+    margin-right: 5px !important;
 }
 @media (forced-colors: active) {
     .tox .tox-tbtn:hover,

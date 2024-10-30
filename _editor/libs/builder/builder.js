@@ -2043,6 +2043,8 @@ Vvveb.Builder = {
     },
 
     saveAjax : function(data, saveUrl, callback, error) {
+        Vvveb.WysiwygEditor.destroy();
+
         if (!data["startTemplateUrl"]) {
             data["html"] = clearHtml();
         }
@@ -2273,6 +2275,8 @@ Vvveb.Gui = {
     },
 
     openPreview : function() {
+        Vvveb.WysiwygEditor.destroy();
+
         var html = clearHtml();
 
         console.log(html);

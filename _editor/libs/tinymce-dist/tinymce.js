@@ -2414,6 +2414,11 @@
         }));
         const load = url => new Promise((success, failure) => {
             let link;
+
+           // if (url.slice(-3) != "css") {
+           //     return;
+           // }
+
             const urlWithSuffix = Tools._addCacheSuffix(url);
             const state = getOrCreateState(urlWithSuffix);
             loadedStates[urlWithSuffix] = state;
@@ -10434,7 +10439,7 @@
     };
     const split = rng => {
         let startContainer = rng.startContainer, startOffset = rng.startOffset, endContainer = rng.endContainer,
-            endOffset = rng.endOffset;
+            endOffset                                                                        = rng.endOffset;
         if (startContainer === endContainer && isText$b(startContainer)) {
             if (startOffset > 0 && startOffset < startContainer.data.length) {
                 endContainer = splitText(startContainer, startOffset);
@@ -28463,7 +28468,7 @@
     const Quirks = editor => {
         const each = Tools.each;
         const BACKSPACE = VK.BACKSPACE, DELETE = VK.DELETE, dom = editor.dom, selection = editor.selection,
-              parser = editor.parser;
+              parser                                                                    = editor.parser;
         const browser = Env.browser;
         const isGecko = browser.isFirefox();
         const isWebKit = browser.isChromium() || browser.isSafari();
