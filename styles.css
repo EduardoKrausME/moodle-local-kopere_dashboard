@@ -4408,18 +4408,6 @@
 .kopere-dashboard-bootstrap_page .btn-group-justified > .btn-group .dropdown-menu {
   left: auto;
 }
-.kopere_dashboard_div [data-toggle=buttons] > .btn input[type=radio],
-.kopere_dashboard_div [data-toggle=buttons] > .btn-group > .btn input[type=radio],
-.kopere_dashboard_div [data-toggle=buttons] > .btn input[type=checkbox],
-.kopere_dashboard_div [data-toggle=buttons] > .btn-group > .btn input[type=checkbox],
-.kopere-dashboard-bootstrap_page [data-toggle=buttons] > .btn input[type=radio],
-.kopere-dashboard-bootstrap_page [data-toggle=buttons] > .btn-group > .btn input[type=radio],
-.kopere-dashboard-bootstrap_page [data-toggle=buttons] > .btn input[type=checkbox],
-.kopere-dashboard-bootstrap_page [data-toggle=buttons] > .btn-group > .btn input[type=checkbox] {
-  position: absolute;
-  clip: rect(0, 0, 0, 0);
-  pointer-events: none;
-}
 .kopere_dashboard_div .input-group,
 .kopere-dashboard-bootstrap_page .input-group {
   position: relative;
@@ -8261,9 +8249,9 @@
 }
 .kopere_dashboard_div .status-pill,
 .kopere-dashboard-bootstrap_page .status-pill {
-  width: 12px;
-  height: 12px;
-  border-radius: 30px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
   margin: 0 auto;
 }
 .kopere_dashboard_div .status-pill.green,

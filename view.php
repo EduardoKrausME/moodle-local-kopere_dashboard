@@ -111,17 +111,11 @@ $PAGE->set_context($context);
 $PAGE->set_pagetype('admin-setting');
 $PAGE->set_pagelayout('admin');
 
-
-$PAGE->requires->css('/local/kopere_dashboard/style.css');
-
-
-$PAGE->requires->jquery();
-
-$PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
-
 $PAGE->requires->jquery();
 $PAGE->requires->jquery_plugin("ui");
 $PAGE->requires->jquery_plugin("ui-css");
+
+$PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
 
 get_kopere_lang();
 

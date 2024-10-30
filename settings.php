@@ -25,10 +25,6 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-if (!$PAGE->requires->is_head_done()) {
-    $PAGE->requires->css('/local/kopere_dashboard/style.css');
-}
-
 $settings = new admin_settingpage('kopere_dashboard', get_string('pluginname', 'local_kopere_dashboard'));
 $ADMIN->add('localplugins', $settings);
 
