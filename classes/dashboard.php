@@ -154,8 +154,7 @@ class dashboard {
                       </div>
                       <div class='media-body'>
                           <h4 class='media-heading'>
-                              <a data-toggle='modal' data-target='#modal-edit'
-                                 href='" . local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id]) . "
+                              <a href='" . local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id]) . "
                                  data-href='{$url}'>" .
                 fullname($user) . "</a>
                           </h4>
@@ -206,9 +205,7 @@ class dashboard {
                           </div>
                           <div class='media-body'>
                               <h4 class='media-heading'>
-                                  <a data-toggle='modal' data-target='#modal-edit'
-                                     href='" . local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id]) . "
-                                     data-href='{$url}'>" .
+                                  <a href='" . local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id]) . ">" .
                     fullname($user) . '</a>
                               </h4>
                               <p>' . get_string_kopere('dashboard_enrol_text', $enrol) . "
