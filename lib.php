@@ -61,7 +61,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
             $hascapability = has_capability('local/kopere_dashboard:view', $context) ||
                 has_capability('local/kopere_dashboard:manage', $context);
 
-            if ($hascapability && strpos($CFG->custommenuitems, "kopere_dashboard/open.php") === false) {
+            if ($hascapability && strpos($CFG->custommenuitems, "kopere_dashboard/view.php") === false) {
                 $name = get_string('modulename', 'local_kopere_dashboard');
                 $link = local_kopere_dashboard_makeurl("dashboard", "start");
                 $CFG->custommenuitems = "{$name}|{$link}\n{$CFG->custommenuitems}";
