@@ -41,6 +41,7 @@ class profile {
      * @param $user
      *
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function details($user) {
         echo "<div class='profile-content'>
@@ -152,7 +153,7 @@ class profile {
                     <div>" . get_string_kopere('profile_enrol_start') . '
                         <em>' . userdate($enrolment->timestart, get_string_kopere('dateformat')) . "</em>
                         {$expirationend} -
-                        <a class='btn btn-info btn-xs' 
+                        <a class='btn btn-info btn-xs'
                            href='{$url}'>" . get_string_kopere('profile_edit') . '</a>
                     </div>
                     <div class="roles">' . get_string_kopere('profile_enrol_profile') . ": {$rolehtml}</div>
