@@ -99,7 +99,7 @@ class OpenVerseDisplay extends OpenVerse {
         let html = "";
         for (name in this.filters) {
             let values = this.filters[name];
-            html += "<div class='col-md-3'>";
+            html += "<div class='col-sm-6 col-md-4 col-lg-3'>";
             html += "<label>" + ucFirst(name.replaceAll("_", " ")) + "</label>";
             html += "<select class='form-select' name=" + name + "><option value=''>All</option>";
             for (let i = 0; i < values.length; i++) {
@@ -271,12 +271,12 @@ class OpenVerseDisplay extends OpenVerse {
 
 
                 <div id="openverse-filters" class="row collapse">
-                    <div class="col-md-3">
+                    <div class="col-sm-6 col-md-4 col-lg-3">
                         <label class="w-100">Results per page
                             <input name="page_size" type="number" value="20" step="10" class="form-control">
                         </label>
                     </div>
-                    <div class="col-md-3 d-flex flex-column-reverse">
+                    <div class="col-sm-6 col-md-4 col-lg-3 d-flex flex-column-reverse">
                         <label class="form-check-label">
                             <input name="mature" type="checkbox" value="false" class="form-check-input">
                             Mature content
