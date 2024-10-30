@@ -89,7 +89,9 @@ Vvveb.WysiwygEditor = {
     },
     destroy : function(element) {
         console.trace(element);
-        tinymce.activeEditor.destroy();
+        if (tinymce && tinymce.activeEditor) {
+            tinymce.activeEditor.destroy();
+        }
         Vvveb.Builder.highlightEnabled = true;
         this.isActive = false;
 
