@@ -8415,11 +8415,6 @@
 .kopere_dashboard_div input.single-datetimerange {
   width: 160px;
 }
-.kopere_dashboard_div #region-main,
-.kopere_dashboard_div .card,
-.kopere_dashboard_div .card-body {
-  visibility: hidden;
-}
 .kopere_dashboard_div .all-wrapper {
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
   max-width: 1500px;
@@ -10736,8 +10731,8 @@
 .kopere_dashboard_div .ios-ui-select {
   border-color: #d1d1d1;
   opacity: 1;
-  -webkit-box-shadow: inset 0 0 0 2px #d6e0e6;
-  box-shadow: inset 0 0 0 2px #d6e0e6;
+  -webkit-box-shadow: inset 0 0 0 2px #94b1c8;
+  box-shadow: inset 0 0 0 2px #94b1c8;
   width: 22px;
   z-index: 2;
   text-align: center;
@@ -11690,30 +11685,22 @@ body.remove-overflow {
   background-position: top center;
   background-size: cover;
 }
-.kopere-dashboard-pages .box-page .thumbnail .preco-curso {
-  position: absolute;
-  right: 20px;
-  top: 10px;
-  width: 70px;
-  height: 70px;
-  background: #fff;
-  box-shadow: 0 10px 28.2px 1.8px rgba(0, 0, 0, 0.07);
-  color: #000;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  border-radius: 50%;
-  line-height: 19px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.kopere-dashboard-pages .box-page .thumbnail .preco-curso.preco-curso-free {
-  background: #26a69a;
-  color: #fff;
-}
 .kopere-dashboard-pages .box-page:hover .thumbnail a img {
   transform: scale(1.1);
+}
+.kopere-dashboard-pages .box-page .content .title a {
+  color: #192336;
+  font-size: 22px;
+  font-weight: 700;
+}
+.kopere-dashboard-pages .box-page .content .price .current-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #6b7386;
+}
+.kopere-dashboard-pages .box-page .content .price .current-price.preco-curso-free {
+  background: #26a69a;
+  color: #fff;
 }
 
 @media print {
