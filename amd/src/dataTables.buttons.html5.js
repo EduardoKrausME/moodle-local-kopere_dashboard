@@ -900,12 +900,12 @@
 
                         if (successful) {
                             dt.buttons.info(
-                                M.util.get_string('datatables_buttons_copy_text', 'local_kopere_dashboard'),
+                                M.util.get_string('datatables_buttons_copy_text', "local_kopere_dashboard"),
                                 dt.i18n(
                                     'buttons.copySuccess',
                                     {
-                                        1 : M.util.get_string('datatables_buttons_copySuccess1', 'local_kopere_dashboard'),
-                                        _ : M.util.get_string('datatables_buttons_copySuccess_', 'local_kopere_dashboard'),
+                                        1 : M.util.get_string('datatables_buttons_copySuccess1', "local_kopere_dashboard"),
+                                        _ : M.util.get_string('datatables_buttons_copySuccess_', "local_kopere_dashboard"),
                                     },
                                     exportData.rows
                                 ),
