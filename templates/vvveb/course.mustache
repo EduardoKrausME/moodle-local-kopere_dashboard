@@ -23,33 +23,27 @@
 }}
 
 {{#couses}}
-    <div class="col-md-3" data-v-course="">
-        <article class="single-course-wrapper">
 
-            <div class="product-course-image">
-                <a href="{{{config.wwwroot}}}/course/view.php?id={{id}}" data-v-course-url="">
-                <img src="{{{courseimage}}}"
-                     data-v-course-alt="" data-v-size="thumb" data-v-course-image="">
+    <div class="col-lg-3 col-md-4 col-6 mb-4">
+        <a href="{{accesslink}}"
+           class="d-block mb-1">
+            <img src="{{{courseimage}}}"
+                 class="img-fluid img-thumbnail">
+        </a>
+
+        <h6 data-v-course-name="">
+            {{{fullname}}}
+        </h6>
+
+        <div class="hover-content">
+            <div class="add-to-cart-btn">
+                <a href="{{accesslink}}"
+                    class="btn btn-primary w-100"
+                    data-id="{{id}}">
+                    {{#str}}vvveb_home_access, local_kopere_dashboard{{/str}}
                 </a>
             </div>
-
-            <div class="product-course-content">
-                <h6 data-v-course-name="">
-                    {{{fullname}}}
-                </h6>
-
-                <!--<p class="product-course-price" data-v-course-price_tax_formatted="">100.0000</p>-->
-
-                <div class="hover-content">
-                    <div class="add-to-cart-btn">
-                        <a href="{{{config.wwwroot}}}/course/view.php?id={{id}}"
-                            class="btn btn-primary w-100"
-                            data-id="{{id}}">
-                            {{#str}}vvveb_home_access, local_kopere_dashboard{{/str}}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </article>
+        </div>
     </div>
+
 {{/couses}}
