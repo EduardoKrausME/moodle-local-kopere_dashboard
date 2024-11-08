@@ -53,7 +53,6 @@ class enroll {
                  JOIN {context}          ctx ON ctx.instanceid = e.courseid
                  JOIN {course}           c   ON c.id = e.courseid
                 WHERE ra.contextid = ctx.id
-             --  GROUP BY e.courseid, ue.userid
              ORDER BY ue.timemodified DESC
                 LIMIT 10");
     }
@@ -67,7 +66,7 @@ class enroll {
     public function ajax_dashboard() {
         global $DB;
 
-        $courseid = optional_param('courseid', 0, PARAM_INT);
+        $courseid = optional_param("courseid", 0, PARAM_INT);
 
         $sql
             = "SELECT DISTINCT ue.userid AS id, firstname, lastname, u.email, ue.status
@@ -81,9 +80,9 @@ class enroll {
 		        WHERE c.id = :id AND u.id IS NOT NULL
 		     ";
 
-        $result = $DB->get_records_sql($sql, ['id' => $courseid]);
+        $result = $DB->get_records_sql($sql, ["id" => $courseid]);
 
-        $result = user_util::column_fullname($result, 'nome');
+        $result = user_util::column_fullname($result, "nome");
 
         json::encode($result);
     }

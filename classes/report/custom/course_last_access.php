@@ -44,7 +44,7 @@ class course_last_access {
      * @throws \dml_exception
      */
     public function name() {
-        $cursosid = optional_param('courseid', 0, PARAM_INT);
+        $cursosid = optional_param("courseid", 0, PARAM_INT);
         return get_string_kopere('reports_report_courses-3') . ' ' . get_course($cursosid)->fullname;
     }
 
@@ -66,46 +66,46 @@ class course_last_access {
     public function generate() {
         global $DB, $CFG;
 
-        $cursosid = optional_param('courseid', 0, PARAM_INT);
+        $cursosid = optional_param("courseid", 0, PARAM_INT);
         if ($cursosid == 0) {
-            header::notfound(get_string_kopere('courses_notound'));
+            header::notfound(get_string_kopere("courses_notound"));
         }
 
         $perpage = 10;
-        $atualpage = optional_param('page', 1, PARAM_INT);
+        $atualpage = optional_param("page", 1, PARAM_INT);
         $startlimit = ($atualpage - 1) * $perpage;
 
-        $course = $DB->get_record('course', ['id' => $cursosid]);
-        header::notfound_null($course, get_string_kopere('courses_notound'));
+        $course = $DB->get_record("course", ["id" => $cursosid]);
+        header::notfound_null($course, get_string_kopere("courses_notound"));
 
-        button::info(get_string_kopere('reports_export'), url_util::querystring() . "&export=xls");
+        button::info(get_string_kopere("reports_export"), url_util::querystring() . "&export=xls");
 
         session_write_close();
-        $export = optional_param('export', '', PARAM_TEXT);
+        $export = optional_param("export", '', PARAM_TEXT);
         export::header($export, $course->fullname);
 
         echo '<table id="list-course-access" class="table table-bordered table-hover" border="1">';
 
-        $userinfofields = $DB->get_records('user_info_field', null, 'sortorder asc');
+        $userinfofields = $DB->get_records("user_info_field", null, 'sortorder asc');
 
         $filds = '';
         foreach ($userinfofields as $userinfofield) {
-            $filds .= "<td align='center' bgcolor='#979797' style='text-align:center;'>{$userinfofield->name}</td>";
+            $filds .= "<td align=\"center\" bgcolor='#979797' style='text-align:center;'>{$userinfofield->name}</td>";
         }
 
         echo '<thead>
                   <tr bgcolor="#C5C5C5" style="background-color: #c5c5c5;" >
                       <td align="center" bgcolor="#979797" style="text-align:center;">' .
-            get_string_kopere('user_table_fullname') . '</td>
+            get_string_kopere("user_table_fullname") . '</td>
                       <td align="center" bgcolor="#979797" style="text-align:center;">' .
-            get_string_kopere('user_table_email') . '</td>
+            get_string_kopere("user_table_email") . '</td>
                       ' . $filds . '
                       <td align="center" bgcolor="#979797" style="text-align:center;">Primeiro acesso</td>
                       <td align="center" bgcolor="#979797" style="text-align:center;">Último acesso</td>
                   </th>
               </thead>';
 
-        if ($export == 'xls') {
+        if ($export == "xls") {
             $sql = "
                SELECT DISTINCT SQL_CALC_FOUND_ROWS u.*
                  FROM {context} c
@@ -129,8 +129,8 @@ class course_last_access {
         }
         $allusercourse = $DB->get_records_sql($sql,
             [
-                'contextlevel' => CONTEXT_COURSE,
-                'instanceid' => $cursosid,
+                "contextlevel" => CONTEXT_COURSE,
+                "instanceid" => $cursosid,
             ]);
 
         $total = $DB->get_record_sql("SELECT FOUND_ROWS() as num_itens");
@@ -138,16 +138,16 @@ class course_last_access {
         foreach ($allusercourse as $user) {
             echo '<tr>';
             $link = "{$CFG->wwwroot}/user/view.php?id={$user->id}&course={$cursosid}";
-            $this->td("<a href='{$link}' target='moodle'>" . fullname($user) . '</a>', 'bg-info text-nowrap', '#D9EDF7');
+            $this->td("<a href='{$link}' target=\"moodle\">" . fullname($user) . '</a>', 'bg-info text-nowrap', '#D9EDF7');
             $this->td($user->email, 'bg-info text-nowrap', '#D9EDF7');
 
             foreach ($userinfofields as $userinfofield) {
-                $userinfodata = $DB->get_record('user_info_data',
-                    ['userid' => $user->id, 'fieldid' => $userinfofield->id]);
+                $userinfodata = $DB->get_record("user_info_data",
+                    ["userid" => $user->id, "fieldid" => $userinfofield->id]);
                 if ($userinfodata) {
-                    $this->td($userinfodata->data, 'text-nowrap bg-success', 'D9EDF7');
+                    $this->td($userinfodata->data, 'text-nowrap bg-success', "D9EDF7");
                 } else {
-                    $this->td('', 'text-nowrap bg-success', 'D9EDF7');
+                    $this->td('', 'text-nowrap bg-success', "D9EDF7");
                 }
             }
 
@@ -162,14 +162,14 @@ class course_last_access {
 
             $logresult = $DB->get_record_sql($sql,
                 [
-                    'courseid' => $cursosid,
-                    'action' => 'viewed',
-                    'userid' => $user->id,
+                    "courseid" => $cursosid,
+                    "action" => "viewed",
+                    "userid" => $user->id,
                 ]);
             if ($logresult && $logresult->timecreated) {
-                $this->td(userdate($logresult->timecreated, get_string('strftimedatetime')), 'text-nowrap bg-success', 'DFF0D8');
+                $this->td(userdate($logresult->timecreated, get_string("strftimedatetime")), 'text-nowrap bg-success', "DFF0D8");
             } else {
-                $this->td('<span style="color: #282828">' . get_string_kopere('reports_noneaccess') .
+                $this->td('<span style="color: #282828">' . get_string_kopere("reports_noneaccess") .
                     '</span>', 'bg-warning text-nowrap', '#FCF8E3');
             }
 
@@ -184,14 +184,14 @@ class course_last_access {
 
             $logresult = $DB->get_record_sql($sql,
                 [
-                    'courseid' => $cursosid,
-                    'action' => 'viewed',
-                    'userid' => $user->id,
+                    "courseid" => $cursosid,
+                    "action" => "viewed",
+                    "userid" => $user->id,
                 ]);
             if ($logresult && $logresult->timecreated) {
-                $this->td(userdate($logresult->timecreated, get_string('strftimedatetime')), 'text-nowrap bg-success', 'DFF0D8');
+                $this->td(userdate($logresult->timecreated, get_string("strftimedatetime")), 'text-nowrap bg-success', "DFF0D8");
             } else {
-                $this->td('<span style="color: #282828">' . get_string_kopere('reports_noneaccess') .
+                $this->td('<span style="color: #282828">' . get_string_kopere("reports_noneaccess") .
                     '</span>', 'bg-warning text-nowrap', '#FCF8E3');
             }
 

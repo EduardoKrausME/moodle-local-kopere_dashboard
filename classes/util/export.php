@@ -40,7 +40,7 @@ class export {
      * @return bool
      */
     public static function is_export() {
-        return self::$format == 'xls';
+        return self::$format == "xls";
     }
 
     /**
@@ -55,7 +55,7 @@ class export {
         }
 
         self::$format = $format;
-        if (self::$format == 'xls') {
+        if (self::$format == "xls") {
             ob_clean();
             ob_end_flush();
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -65,7 +65,7 @@ class export {
             echo "<html>
                   <head>
                       <meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\">
-                      <title>$filename</title>
+                      <title>{$filename}</title>
                       <!--table
                           {mso-displayed-decimal-separator:\"\,\";
                           mso-displayed-thousand-separator:\"\.\";}
@@ -80,7 +80,7 @@ class export {
      * Function close
      */
     public static function close() {
-        if (self::$format == 'xls') {
+        if (self::$format == "xls") {
             echo '</body></html>';
             end_util::end_script_show();
         }

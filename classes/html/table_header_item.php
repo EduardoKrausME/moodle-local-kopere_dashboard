@@ -33,34 +33,34 @@ class table_header_item extends \stdClass {
     /** @var string */
     const TYPE_DATE = 'date-uk';
     /** @var string */
-    const TYPE_CURRENCY = 'currency';
+    const TYPE_CURRENCY = "currency";
     /** @var string */
     const TYPE_INT = 'numeric-comma';
     /** @var string */
-    const TYPE_TEXT = 'text';
+    const TYPE_TEXT = "text";
     /** @var string */
-    const TYPE_ACTION = 'action';
+    const TYPE_ACTION = "action";
 
     /** @var string */
-    const RENDERER_DATE = 'dateRenderer';
+    const RENDERER_DATE = "dateRenderer";
     /** @var string */
-    const RENDERER_DATETIME = 'datetimeRenderer';
+    const RENDERER_DATETIME = "datetimeRenderer";
     /** @var string */
-    const RENDERER_VISIBLE = 'visibleRenderer';
+    const RENDERER_VISIBLE = "visibleRenderer";
     /** @var string */
-    const RENDERER_TRUEFALSE = 'trueFalseRenderer';
+    const RENDERER_TRUEFALSE = "trueFalseRenderer";
     /** @var string */
-    const RENDERER_STATUS = 'statusRenderer';
+    const RENDERER_STATUS = "statusRenderer";
     /** @var string */
-    const RENDERER_DELETED = 'deletedRenderer';
+    const RENDERER_DELETED = "deletedRenderer";
     /** @var string */
-    const RENDERER_USERPHOTO = 'userphotoRenderer';
+    const RENDERER_USERPHOTO = "userphotoRenderer";
     /** @var string */
-    const RENDERER_SECONDS = 'secondsRenderer';
+    const RENDERER_SECONDS = "secondsRenderer";
     /** @var string */
-    const RENDERER_TIME = 'timeRenderer';
+    const RENDERER_TIME = "timeRenderer";
     /** @var string */
-    const RENDERER_FILESIZE = 'filesizeRenderer';
+    const RENDERER_FILESIZE = "filesizeRenderer";
 
     /** @var string */
     public $funcao;

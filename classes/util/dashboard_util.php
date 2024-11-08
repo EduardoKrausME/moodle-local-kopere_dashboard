@@ -76,10 +76,10 @@ class dashboard_util {
 
         if ($settingurl != null) {
             $link
-                .= "<div class='setting'>
-                        <a href='{$settingurl}' class='kopere_link'>
+                .= "<div class=\"setting\">
+                        <a href='{$settingurl}' class=\"kopere_link\">
                             <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/top-settings.svg'
-                                 alt='Settings' >
+                                 alt=\"Settings\" >
                         </a>
                     </div>";
         }
@@ -125,11 +125,11 @@ class dashboard_util {
                 }
             }
 
-            $PAGE->set_title($title . ": " . get_string_kopere('modulename'));
+            $PAGE->set_title($title . ": " . get_string_kopere("modulename"));
             echo $OUTPUT->header();
 
             echo "
-                <div class='kopere_dashboard_div'>
+                <div class=\"kopere_dashboard_div\">
                     <div class='menu-w hidden-print dashboard_menu_html-content'>
                         <div class='menu-and-user'>";
             \local_kopere_dashboard\output\menu::create_menu();
@@ -147,6 +147,8 @@ class dashboard_util {
 
     /**
      * Function end_page
+     *
+     * @throws \dml_exception
      */
     public static function end_page() {
         global $OUTPUT;
@@ -158,10 +160,10 @@ class dashboard_util {
                         </div>
                     </div>
                 </div>
-                <div class='modal fade kopere_dashboard_modal_item' id='modal-edit' role='dialog'>
+                <div class='modal fade kopere_dashboard_modal_item' id='modal-edit' role=\"dialog\">
                     <div class='kopere-modal-dialog'>
                         <div class='kopere-modal-content'>
-                            <div class='loader'></div>
+                            <div class=\"loader\"></div>
                         </div>
                     </div>
                 </div>";
@@ -183,7 +185,7 @@ class dashboard_util {
 
         $class = self::test_menu_active($menu->get_classname());
 
-        $plugin = 'kopere_dashboard';
+        $plugin = "kopere_dashboard";
         preg_match("/(.*?)-/", $menu->get_classname(), $menufunctionstart);
         if (isset($menufunctionstart[1])) {
             $plugin = "kopere_{$menufunctionstart[1]}";
@@ -197,7 +199,7 @@ class dashboard_util {
                 $class = $classsub;
             }
 
-            if (strpos($submenu->get_icon(), 'http') === 0) {
+            if (strpos($submenu->get_icon(), "http") === 0) {
                 $iconurl = $submenu->get_icon();
             } else {
                 $iconurl = self::get_icon("/local/{$plugin}/assets/dashboard/img/iconactive/{$submenu->get_icon()}.svg");
@@ -206,7 +208,7 @@ class dashboard_util {
             $url = local_kopere_dashboard_makeurl($submenu->get_classname(), $submenu->get_methodname());
             $submenuhtml .= "
                 <li class='contains_branch {$classsub}'>
-                    <a href='{$url}{$submenu->get_urlextra()}' class='kopere_link'>
+                    <a href='{$url}{$submenu->get_urlextra()}' class=\"kopere_link\">
                         <img src='{$iconurl}' class='menu-icon' alt='Icon {$submenu->get_title()}'>
                         <span>{$submenu->get_title()}</span>
                     </a>
@@ -220,7 +222,7 @@ class dashboard_util {
         $url = local_kopere_dashboard_makeurl($menu->get_classname(), $menu->get_methodname());
         $retorno .= "
                 <li class='$class'>
-                    <a href='{$url}' class='kopere_link'>
+                    <a href='{$url}' class=\"kopere_link\">
                         <img src='{$iconurl}' class='menu-icon' alt='Icon {$menu->get_name()}'>
                         <span>{$menu->get_name()}</span>
                     </a>
@@ -252,10 +254,10 @@ class dashboard_util {
      */
     private static function test_menu_active($classname) {
 
-        $oldclassname = optional_param('classname', '', PARAM_TEXT);
+        $oldclassname = optional_param("classname", '', PARAM_TEXT);
 
         if ($classname == $oldclassname) {
-            return 'active';
+            return "active";
         }
 
         return '';
@@ -268,7 +270,7 @@ class dashboard_util {
      */
     private static function start_popup($title) {
         echo "<div class='modal-header'>
-                <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>
                 <h4 class='modal-title'>{$title}</h4>
               </div>
               <div class='modal-body'>";

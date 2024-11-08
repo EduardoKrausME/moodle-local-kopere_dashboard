@@ -41,7 +41,7 @@ class config {
      */
     public static function get_key($key, $default = '') {
         try {
-            $value = get_config('local_kopere_dashboard', $key);
+            $value = get_config("local_kopere_dashboard", $key);
         } catch (\dml_exception $e) {
             return $default;
         }
@@ -63,7 +63,7 @@ class config {
      */
     public static function get_key_int($key, $default = 0) {
         try {
-            $value = get_config('local_kopere_dashboard', $key);
+            $value = get_config("local_kopere_dashboard", $key);
         } catch (\dml_exception $e) {
             return intval($default);
         }

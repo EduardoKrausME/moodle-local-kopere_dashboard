@@ -42,7 +42,7 @@ class grade {
         global $DB, $CFG;
 
         $group = '';
-        if ($CFG->dbtype == 'mysqli') {
+        if ($CFG->dbtype == "mysqli") {
             $group = 'GROUP BY gg.id';
         }
         $data = $DB->get_records_sql("

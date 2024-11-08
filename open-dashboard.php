@@ -24,4 +24,4 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-header("Location: view.php?" . $_SERVER['QUERY_STRING']);
+header("Location: view.php?" . $_SERVER["QUERY_STRING"]);

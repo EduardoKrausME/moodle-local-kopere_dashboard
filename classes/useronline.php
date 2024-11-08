@@ -51,23 +51,23 @@ class useronline {
      * @throws \dml_exception
      */
     public function dashboard() {
-        dashboard_util::add_breadcrumb(get_string_kopere('useronline_title'));
+        dashboard_util::add_breadcrumb(get_string_kopere("useronline_title"));
         dashboard_util::start_page(null, 'Usuários-Online');
 
         echo '<div class="element-box table-responsive">';
 
         $table = new data_table();
-        $table->add_header('#', 'userid', table_header_item::TYPE_INT);
-        $table->add_header(get_string_kopere('useronline_table_fullname'), 'fullname');
-        $table->add_header(get_string_kopere('useronline_table_date'), 'servertime', table_header_item::RENDERER_DATE);
+        $table->add_header('#', "userid", table_header_item::TYPE_INT);
+        $table->add_header(get_string_kopere("useronline_table_fullname"), "fullname");
+        $table->add_header(get_string_kopere("useronline_table_date"), "servertime", table_header_item::RENDERER_DATE);
 
         if (node::is_enables()) {
-            $table->add_header(get_string_kopere('useronline_table_page'), 'page');
-            $table->add_header(get_string_kopere('useronline_table_focus'), 'focus', table_header_item::RENDERER_TRUEFALSE);
-            $table->add_header(get_string_kopere('useronline_table_screen'), 'screen');
-            $table->add_header(get_string_kopere('useronline_table_navigator'), 'navigator');
-            $table->add_header(get_string_kopere('useronline_table_os'), 'os');
-            $table->add_header(get_string_kopere('useronline_table_device'), 'device');
+            $table->add_header(get_string_kopere("useronline_table_page"), "page");
+            $table->add_header(get_string_kopere("useronline_table_focus"), "focus", table_header_item::RENDERER_TRUEFALSE);
+            $table->add_header(get_string_kopere("useronline_table_screen"), "screen");
+            $table->add_header(get_string_kopere("useronline_table_navigator"), "navigator");
+            $table->add_header(get_string_kopere("useronline_table_os"), "os");
+            $table->add_header(get_string_kopere("useronline_table_device"), "device");
 
             $table->print_header();
             $tablename = $table->close();
@@ -108,7 +108,7 @@ class useronline {
                  WHERE u.lastaccess BETWEEN $onlinestart AND $timefinish
               ORDER BY u.timecreated DESC");
 
-        $result = user_util::column_fullname($result, 'fullname');
+        $result = user_util::column_fullname($result, "fullname");
         json::encode($result);
     }
 
@@ -132,7 +132,7 @@ class useronline {
            GROUP BY u.id
            ORDER BY u.timecreated DESC
               LIMIT 1",
-            ['onlinestart' => $onlinestart]);
+            ["onlinestart" => $onlinestart]);
 
         if ($count) {
             return $count->num;
@@ -145,13 +145,14 @@ class useronline {
      * Function settings
      *
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public function settings() {
         global $PAGE;
 
         ob_clean();
         $redirect = urlencode("classname=useronline&method=dashboard");
-        dashboard_util::add_breadcrumb(get_string_kopere('useronline_settings_title'));
+        dashboard_util::add_breadcrumb(get_string_kopere("useronline_settings_title"));
         dashboard_util::start_page();
 
         $form = new form(local_kopere_dashboard_makeurl("settings", "save", ["redirect" => $redirect]));
@@ -160,7 +161,7 @@ class useronline {
 
         $form->add_input(
             input_checkbox_select::new_instance()
-                ->set_title(get_string_kopere('useronline_settings_status'))
+                ->set_title(get_string_kopere("useronline_settings_status"))
                 ->set_checked_by_config('nodejs-status'));
 
         echo '<div class="area-status-nodejs">';
@@ -169,26 +170,26 @@ class useronline {
 
         $form->add_input(
             input_checkbox_select::new_instance()
-                ->set_title(get_string_kopere('useronline_settings_ssl'))
+                ->set_title(get_string_kopere("useronline_settings_ssl"))
                 ->set_checked_by_config('nodejs-ssl'));
 
         $form->add_input(
             input_text::new_instance()
-                ->set_title(get_string_kopere('useronline_settings_url'))
+                ->set_title(get_string_kopere("useronline_settings_url"))
                 ->set_value_by_config('nodejs-url'));
 
         $form->add_input(
             input_text::new_instance()
-                ->set_title(get_string_kopere('useronline_settings_port'))
+                ->set_title(get_string_kopere("useronline_settings_port"))
                 ->set_value_by_config('nodejs-port')
                 ->add_validator(input_base::VAL_INT));
 
         echo '</div>';
 
-        $form->create_submit_input(get_string('savechanges'));
+        $form->create_submit_input(get_string("savechanges"));
         $form->close();
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/useronline', 'useronline_status');
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/useronline', "useronline_status");
 
         dashboard_util::end_page();
     }

@@ -41,22 +41,22 @@ class html {
         '&Egrave;', '&Ecirc;', '&Euml;', '&Iacute;', '&Igrave;',
         '&Icirc;', '&Iuml;', '&Oacute;', '&Ograve;', '&Ocirc;',
         '&Otilde;', '&Ouml;', '&Uacute;', '&Ugrave;', '&Ucirc;',
-        '&Uuml;', '&Ccedil;', "'", '&acute;', '`', '/', '\\', '_', // phpcs:disable
-        '_', '&uml;', '&ordf;', ',', ':', ' '];
+        '&Uuml;', '&Ccedil;', "'", '&acute;', '`', '/', '\\', "_", // phpcs:disable
+        "_", '&uml;', '&ordf;', ',', ':', ' '];
     /** @var array */
     private static $acentosascii = [
         'á', 'à', 'â', 'ã', 'ä', 'é', 'è', 'ê', 'ë', 'í', 'ì', 'î',
         'ï', 'ó', 'ò', 'ô', 'õ', 'ö', 'ú', 'ù', 'û', 'ü', 'ç', 'Á',
         'À', 'Â', 'Ã', 'Ä', 'É', 'È', 'Ê', 'Ë', 'Í', 'Ì', 'Î', 'Ï',
         'Ó', 'Ò', 'Ô', 'Õ', 'Ö', 'Ú', 'Ù', 'Û', 'Ü', 'Ç', "'", '´',  // phpcs:disable
-        '`', '/', '\\', '~', '^', '¨', 'ª', ',', ':', '_'];
+        '`', '/', '\\', '~', '^', '¨', 'ª', ',', ':', "_"];
     /** @var array */
     private static $semacento = [
-        'a', 'a', 'a', 'a', 'a', 'e', 'e', 'e', 'e', 'i', 'i', 'i',
-        'i', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'c', 'A',
-        'A', 'A', 'A', 'A', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I',
-        'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'C', '_', '_',
-        '_', '/', '_', '_', '_', '_', '_', '_', '_', '_'];
+        "a", "a", "a", "a", "a", "e", "e", "e", "e", "i", "i", "i",
+        "i", "o", "o", "o", "o", "o", "u", "u", "u", "u", "c", "A",
+        "A", "A", "A", "A", "E", "E", "E", "E", "I", "I", "I", "I",
+        "O", "O", "O", "O", "O", "U", "U", "U", "U", "C", "_", "_",
+        "_", '/', "_", "_", "_", "_", "_", "_", "_", "_"];
 
     /**
      * Function caracter_spacial
@@ -140,7 +140,7 @@ class html {
      */
     public static function link($txt) {
         $txt = str_replace('-', ' ', trim($txt));
-        $txt = str_replace('_', ' ', $txt);
+        $txt = str_replace("_", ' ', $txt);
         $txt = preg_replace("/\s+/", " ", $txt);
         $txt = self::retira_caracteres_nao_ascii($txt);
         $txt = str_replace(' ', '-', $txt);

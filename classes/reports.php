@@ -54,22 +54,22 @@ class reports extends reports_admin {
         global $CFG, $DB;
 
         $isadmin = has_capability('moodle/site:config', \context_system::instance());
-        $isedit = optional_param('edit', false, PARAM_INT);
+        $isedit = optional_param("edit", false, PARAM_INT);
 
-        dashboard_util::add_breadcrumb(get_string_kopere('reports_title'));
+        dashboard_util::add_breadcrumb(get_string_kopere("reports_title"));
         dashboard_util::start_page();
 
         echo '<div class="element-box">';
 
-        $type = optional_param('type', null, PARAM_TEXT);
+        $type = optional_param("type", null, PARAM_TEXT);
 
         if ($isedit) {
-            $koperereportcats = $DB->get_records('kopere_dashboard_reportcat');
+            $koperereportcats = $DB->get_records("kopere_dashboard_reportcat");
         } else {
             if ($type) {
-                $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', ['type' => $type, 'enable' => 1]);
+                $koperereportcats = $DB->get_records("kopere_dashboard_reportcat", ["type" => $type, "enable" => 1]);
             } else {
-                $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', ['enable' => 1]);
+                $koperereportcats = $DB->get_records("kopere_dashboard_reportcat", ["enable" => 1]);
             }
         }
 
@@ -89,15 +89,15 @@ class reports extends reports_admin {
                 $icon = "{$CFG->wwwroot}/{$koperereportcat->image}";
             }
 
-            title_util::print_h3("<img src='{$icon}' alt='Icon' height='23' width='23' > " .
+            title_util::print_h3("<img src='{$icon}' alt=\"Icon\" height=\"23\" width=\"23\" > " .
                 self::get_title($koperereportcat), false);
 
             if ($isedit) {
-                $koperereportss = $DB->get_records('kopere_dashboard_reports',
-                    ['reportcatid' => $koperereportcat->id]);
+                $koperereportss = $DB->get_records("kopere_dashboard_reports",
+                    ["reportcatid" => $koperereportcat->id]);
             } else {
-                $koperereportss = $DB->get_records('kopere_dashboard_reports',
-                    ['reportcatid' => $koperereportcat->id, 'enable' => 1]);
+                $koperereportss = $DB->get_records("kopere_dashboard_reports",
+                    ["reportcatid" => $koperereportcat->id, "enable" => 1]);
             }
 
             /** @var kopere_dashboard_reports $koperereports */
@@ -123,7 +123,7 @@ class reports extends reports_admin {
             if ($isadmin && $isedit) {
                 $url = local_kopere_dashboard_makeurl("reports", "editar",
                     ["report" => "-1", "reportcat" => $koperereportcat->id]);
-                $botaoadd = button::add(get_string_kopere('reports_add_new'),
+                $botaoadd = button::add(get_string_kopere("reports_add_new"),
                     $url, 'float-right', false, true);
                 echo "<h4 style='padding-left: 31px;height: 20px'>
                           {$botaoadd}
@@ -144,23 +144,23 @@ class reports extends reports_admin {
     public function load_report() {
         global $DB;
 
-        $report = optional_param('report', 0, PARAM_INT);
-        $courseid = optional_param('courseid', 0, PARAM_INT);
+        $report = optional_param("report", 0, PARAM_INT);
+        $courseid = optional_param("courseid", 0, PARAM_INT);
 
         /** @var kopere_dashboard_reports $koperereports */
-        $koperereports = $DB->get_record('kopere_dashboard_reports',
-            ['id' => $report]);
-        header::notfound_null($koperereports, get_string_kopere('reports_notfound'));
+        $koperereports = $DB->get_record("kopere_dashboard_reports",
+            ["id" => $report]);
+        header::notfound_null($koperereports, get_string_kopere("reports_notfound"));
 
         /** @var kopere_dashboard_reportcat $koperereportcat */
-        $koperereportcat = $DB->get_record('kopere_dashboard_reportcat',
-            ['id' => $koperereports->reportcatid]);
-        header::notfound_null($koperereportcat, get_string_kopere('reports_notfound'));
+        $koperereportcat = $DB->get_record("kopere_dashboard_reportcat",
+            ["id" => $koperereports->reportcatid]);
+        header::notfound_null($koperereportcat, get_string_kopere("reports_notfound"));
 
         $titlecat = self::get_title($koperereportcat);
         $titlereport = self::get_title($koperereports);
 
-        dashboard_util::add_breadcrumb(get_string_kopere('reports_title'),
+        dashboard_util::add_breadcrumb(get_string_kopere("reports_title"),
             local_kopere_dashboard_makeurl("reports", "dashboard"));
         dashboard_util::add_breadcrumb($titlecat,
             local_kopere_dashboard_makeurl("reports", "dashboard", ["type" => $koperereportcat->type]));
@@ -171,17 +171,17 @@ class reports extends reports_admin {
 
         if (strlen($koperereports->prerequisit) && $courseid == 0) {
             try {
-                ini_set('max_execution_time', 0);
+                ini_set("max_execution_time", 0);
             } catch (\Exception $e) {
                 debugging($e->getMessage());
             }
             $this->prerequisit($report, $koperereports->prerequisit);
         } else {
 
-            if (strpos($koperereports->reportsql, 'local_kopere_dashboard') === 0) {
+            if (strpos($koperereports->reportsql, "local_kopere_dashboard") === 0) {
                 $classname = $koperereports->reportsql;
 
-                $_GET['export'] = "xls";
+                $_GET["export"] = "xls";
                 ob_end_clean();
 
                 $class = new $classname();
@@ -207,7 +207,7 @@ class reports extends reports_admin {
                 $table->close(true, $extra, false, $titlereport);
 
                 $urldow = local_kopere_dashboard_makeurl("reports", "download", ["report" => $report, "courseid" => $courseid]);
-                button::primary(get_string_kopere('reports_download'), $urldow);
+                button::primary(get_string_kopere("reports_download"), $urldow);
             }
         }
         echo '</div>';
@@ -223,21 +223,21 @@ class reports extends reports_admin {
      * @throws \coding_exception
      */
     private function prerequisit($report, $pre) {
-        if ($pre == 'listCourses') {
-            title_util::print_h3('reports_selectcourse');
+        if ($pre == "listCourses") {
+            title_util::print_h3("reports_selectcourse");
 
             $table = new data_table();
-            $table->add_header('#', 'id', table_header_item::TYPE_INT, null, 'width: 20px');
-            $table->add_header(get_string_kopere('courses_name'), 'fullname');
-            $table->add_header(get_string_kopere('courses_shortname'), 'shortname');
-            $table->add_header(get_string_kopere('visible'), 'visible', table_header_item::RENDERER_VISIBLE);
-            $table->add_header(get_string_kopere('courses_enrol'), 'inscritos',
+            $table->add_header('#', "id", table_header_item::TYPE_INT, null, 'width: 20px');
+            $table->add_header(get_string_kopere("courses_name"), "fullname");
+            $table->add_header(get_string_kopere("courses_shortname"), "shortname");
+            $table->add_header(get_string_kopere("visible"), "visible", table_header_item::RENDERER_VISIBLE);
+            $table->add_header(get_string_kopere("courses_enrol"), "inscritos",
                 table_header_item::TYPE_INT, null, 'width:50px;white-space:nowrap;');
 
             $table->set_ajax_url(local_kopere_dashboard_makeurl("courses", "load_all_courses"));
             $table->set_click_redirect(
                 local_kopere_dashboard_makeurl("reports", "load_report",
-                    ["type" => "course", "report" => $report, "courseid" => "{id}"]), 'id');
+                    ["type" => "course", "report" => $report, "courseid" => "{id}"]), "id");
             $table->print_header();
             $table->close();
         }
@@ -252,32 +252,32 @@ class reports extends reports_admin {
     public function getdata() {
         global $DB, $CFG;
 
-        $report = optional_param('report', 0, PARAM_INT);
-        $courseid = optional_param('courseid', 0, PARAM_INT);
-        $start = optional_param('start', 0, PARAM_INT);
-        $length = optional_param('length', 0, PARAM_INT);
+        $report = optional_param("report", 0, PARAM_INT);
+        $courseid = optional_param("courseid", 0, PARAM_INT);
+        $start = optional_param("start", 0, PARAM_INT);
+        $length = optional_param("length", 0, PARAM_INT);
 
-        $cache = \cache::make('local_kopere_dashboard', 'report_getdata_cache');
+        $cache = \cache::make("local_kopere_dashboard", "report_getdata_cache");
         $cachekey = "data-{$report}-{$courseid}-{$start}-{$length}";
         if ($cache->has($cachekey)) {
 
             $cache = $cache->get($cachekey);
-            json::encode($cache['reports'], $cache['count_recordstotal'], $cache['count_recordstotal']);
+            json::encode($cache["reports"], $cache["count_recordstotal"], $cache["count_recordstotal"]);
             die();
         }
 
         /** @var kopere_dashboard_reports $koperereports */
-        $koperereports = $DB->get_record('kopere_dashboard_reports', ['id' => $report]);
+        $koperereports = $DB->get_record("kopere_dashboard_reports", ["id" => $report]);
 
-        if ($CFG->dbtype == 'pgsql') {
+        if ($CFG->dbtype == "pgsql") {
             $sql = "{$koperereports->reportsql} LIMIT {$length} OFFSET {$start}";
         } else {
             $sql = "{$koperereports->reportsql} LIMIT {$start}, {$length}";
         }
 
-        if (strlen($koperereports->prerequisit) && $koperereports->prerequisit == 'listCourses') {
-            $reports = $DB->get_records_sql($sql, ['courseid' => $courseid]);
-            $recordstotal = $DB->get_records_sql($koperereports->reportsql, ['courseid' => $courseid]);
+        if (strlen($koperereports->prerequisit) && $koperereports->prerequisit == "listCourses") {
+            $reports = $DB->get_records_sql($sql, ["courseid" => $courseid]);
+            $recordstotal = $DB->get_records_sql($koperereports->reportsql, ["courseid" => $courseid]);
         } else {
             $reports = $DB->get_records_sql($sql);
             $recordstotal = $DB->get_records_sql($koperereports->reportsql);
@@ -295,8 +295,8 @@ class reports extends reports_admin {
         }
 
         $cache->set($cachekey, [
-            'reports' => $reports,
-            'count_recordstotal' => count($recordstotal),
+            "reports" => $reports,
+            "count_recordstotal" => count($recordstotal),
         ]);
 
         json::encode($reports, count($recordstotal), count($recordstotal));
@@ -311,18 +311,18 @@ class reports extends reports_admin {
     public function download() {
         global $DB;
 
-        $report = optional_param('report', 0, PARAM_INT);
-        $courseid = optional_param('courseid', 0, PARAM_INT);
+        $report = optional_param("report", 0, PARAM_INT);
+        $courseid = optional_param("courseid", 0, PARAM_INT);
 
         /** @var kopere_dashboard_reports $koperereports */
-        $koperereports = $DB->get_record('kopere_dashboard_reports',
-            ['id' => $report]);
-        header::notfound_null($koperereports, get_string_kopere('reports_notfound'));
+        $koperereports = $DB->get_record("kopere_dashboard_reports",
+            ["id" => $report]);
+        header::notfound_null($koperereports, get_string_kopere("reports_notfound"));
 
-        export::header('xls', self::get_title($koperereports));
+        export::header("xls", self::get_title($koperereports));
 
-        if (strlen($koperereports->prerequisit) && $koperereports->prerequisit == 'listCourses') {
-            $reports = $DB->get_records_sql($koperereports->reportsql, ['courseid' => $courseid]);
+        if (strlen($koperereports->prerequisit) && $koperereports->prerequisit == "listCourses") {
+            $reports = $DB->get_records_sql($koperereports->reportsql, ["courseid" => $courseid]);
         } else {
             $reports = $DB->get_records_sql($koperereports->reportsql);
         }
@@ -376,7 +376,7 @@ class reports extends reports_admin {
 
         $menus = [];
 
-        $koperereportcats = $DB->get_records('kopere_dashboard_reportcat', ['enable' => 1]);
+        $koperereportcats = $DB->get_records("kopere_dashboard_reportcat", ["enable" => 1]);
         /** @var kopere_dashboard_reportcat $koperereportcat */
         foreach ($koperereportcats as $koperereportcat) {
             // Executa o SQL e vrifica se o SQL retorna status>0.
@@ -394,8 +394,8 @@ class reports extends reports_admin {
             }
 
             $menus[] = (new submenu_util())
-                ->set_classname('reports')
-                ->set_methodname('dashboard')
+                ->set_classname("reports")
+                ->set_methodname("dashboard")
                 ->set_urlextra("&type={$koperereportcat->type}")
                 ->set_title(self::get_title($koperereportcat))
                 ->set_icon($icon);
@@ -403,8 +403,8 @@ class reports extends reports_admin {
 
         if (has_capability('moodle/site:config', \context_system::instance())) {
             $menus[] = (new submenu_util())
-                ->set_classname('reports')
-                ->set_methodname('dashboard')
+                ->set_classname("reports")
+                ->set_methodname("dashboard")
                 ->set_urlextra("&edit=1")
                 ->set_title(get_string_kopere("reports_settings_title"))
                 ->set_icon("settings");

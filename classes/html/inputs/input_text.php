@@ -35,7 +35,7 @@ class input_text extends input_base {
      * input_text constructor.
      */
     public function __construct() {
-        $this->set_type('text');
+        $this->set_type("text");
     }
 
     /**

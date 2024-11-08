@@ -52,16 +52,16 @@ class event_observers {
             case '\core\event\course_deleted':
             case '\core\event\course_updated':
             case '\core\event\course_created':
-                $cache = \cache::make('local_kopere_dashboard', 'courses_all_courses');
+                $cache = \cache::make("local_kopere_dashboard", "courses_all_courses");
                 $cache->delete("load_all_courses");
         }
 
-        if ($event->get_data()['action'] == 'viewed') {
+        if ($event->get_data()["action"] == "viewed") {
             return;
         }
 
-        $where = ['event' => $eventname, 'status' => 1];
-        $kopereeventss = $DB->get_records('kopere_dashboard_events', $where);
+        $where = ["event" => $eventname, "status" => 1];
+        $kopereeventss = $DB->get_records("kopere_dashboard_events", $where);
 
         /** @var kopere_dashboard_events $kopereevents */
         foreach ($kopereeventss as $kopereevents) {

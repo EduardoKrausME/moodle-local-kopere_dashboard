@@ -62,7 +62,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
                 has_capability('local/kopere_dashboard:manage', $context);
 
             if ($hascapability && strpos($CFG->custommenuitems, "kopere_dashboard/view.php") === false) {
-                $name = get_string('modulename', 'local_kopere_dashboard');
+                $name = get_string("modulename", "local_kopere_dashboard");
                 $link = local_kopere_dashboard_makeurl("dashboard", "start");
                 $CFG->custommenuitems = "{$name}|{$link}\n{$CFG->custommenuitems}";
             }
@@ -75,12 +75,12 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
                 has_capability('local/kopere_dashboard:manage', $context)) {
 
                 $node = $nav->add(
-                    get_string('pluginname', 'local_kopere_dashboard'),
+                    get_string("pluginname", "local_kopere_dashboard"),
                     new moodle_url(local_kopere_dashboard_makeurl("dashboard", "start")),
                     navigation_node::TYPE_CUSTOM,
                     null,
-                    'kopere_dashboard',
-                    new pix_icon('icon', get_string('pluginname', 'local_kopere_dashboard'), 'local_kopere_dashboard')
+                    "kopere_dashboard",
+                    new pix_icon("icon", get_string("pluginname", "local_kopere_dashboard"), "local_kopere_dashboard")
                 );
 
                 $node->showinflatnavigation = true;
@@ -102,7 +102,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
 function add_pages_custommenuitems_400() {
     global $CFG;
 
-    $cache = \cache::make('local_kopere_dashboard', 'report_getdata_cache');
+    $cache = \cache::make("local_kopere_dashboard", "report_getdata_cache");
     if ($cache->has("kopere_dashboard_menu")) {
         $CFG->extramenu = $cache->get ("kopere_dashboard_menu");
     } else {
@@ -130,11 +130,11 @@ function add_pages_custommenuitems_400() {
 function local_kopere_dashboard_extend_navigation__get_menus($menuid, $prefix) {
     global $DB, $CFG;
 
-    $menus = $DB->get_records('kopere_dashboard_menu', ['menuid' => $menuid]);
+    $menus = $DB->get_records("kopere_dashboard_menu", ["menuid" => $menuid]);
 
     foreach ($menus as $menu) {
-        $where = ['visible' => 1, 'menuid' => $menu->id];
-        $webpages = $DB->get_records('kopere_dashboard_webpages', $where, 'pageorder ASC');
+        $where = ["visible" => 1, "menuid" => $menu->id];
+        $webpages = $DB->get_records("kopere_dashboard_webpages", $where, 'pageorder ASC');
         $CFG->extramenu .= "{$prefix} {$menu->title}|{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}\n";
         if ($webpages) {
             /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpage */
@@ -164,7 +164,7 @@ function local_kopere_dashboard_extend_navigation__get_menus($menuid, $prefix) {
 function local_kopere_dashboard_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
 
     $fs = get_file_storage();
-    if (!$file = $fs->get_file($context->id, 'local_kopere_dashboard', 'editor_webpages', $args[0], '/', $args[1])) {
+    if (!$file = $fs->get_file($context->id, "local_kopere_dashboard", "editor_webpages", $args[0], '/', $args[1])) {
         return false;
     }
     send_stored_file($file, 0, 0, $forcedownload, $options);

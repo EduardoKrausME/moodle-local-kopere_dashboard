@@ -50,25 +50,25 @@ class backup {
      * @throws \dml_exception
      */
     public function dashboard() {
-        dashboard_util::add_breadcrumb(get_string_kopere('backup_title'));
+        dashboard_util::add_breadcrumb(get_string_kopere("backup_title"));
         dashboard_util::start_page();
 
         echo '<div class="element-box">';
 
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            mensagem::print_warning(get_string_kopere('backup_windows'));
+        if (strtoupper(substr(PHP_OS, 0, 3)) === "WIN") {
+            mensagem::print_warning(get_string_kopere("backup_windows"));
         } else {
-            if (server_util::function_enable('shell_exec')) {
-                mensagem::print_info(get_string_kopere('backup_hours'));
+            if (server_util::function_enable("shell_exec")) {
+                mensagem::print_info(get_string_kopere("backup_hours"));
                 echo '<div style="text-align: center;">
-                          <p>' . get_string_kopere('backup_sleep') . '</p>';
+                          <p>' . get_string_kopere("backup_sleep") . '</p>';
 
-                button::add(get_string_kopere('backup_newnow'), local_kopere_dashboard_makeurl("backup", "execute"));
-                button::add(get_string_kopere('backup_newsqlnow'), local_kopere_dashboard_makeurl("backup", "execute_dumpsql"));
+                button::add(get_string_kopere("backup_newnow"), local_kopere_dashboard_makeurl("backup", "execute"));
+                button::add(get_string_kopere("backup_newsqlnow"), local_kopere_dashboard_makeurl("backup", "execute_dumpsql"));
 
                 echo '</div>';
             } else {
-                mensagem::print_danger(get_string_kopere('backup_noshell'));
+                mensagem::print_danger(get_string_kopere("backup_noshell"));
             }
 
             $backups = glob(self::get_backup_path(false) . 'backup_*');
@@ -76,14 +76,14 @@ class backup {
             foreach ($backups as $backup) {
                 preg_match("/backup_(\d+)-(\d+)-(\d+)-(\d+)-(\d+)\..*/", $backup, $p);
                 $backupslista[] = [
-                    'file' => $p[0],
-                    'data' => "{$p[3]}/{$p[2]}/{$p[1]} às {$p[4]}:{$p[5]}",
-                    'size' => bytes_util::size_to_byte(filesize($backup)),
-                    'acoes' =>
+                    "file" => $p[0],
+                    "data" => "{$p[3]}/{$p[2]}/{$p[1]} às {$p[4]}:{$p[5]}",
+                    "size" => bytes_util::size_to_byte(filesize($backup)),
+                    "acoes" =>
                         "<div class='text-center'>" .
-                        button::icon('download', local_kopere_dashboard_makeurl("backup", "download", ["file" => $p[0]]), false) .
+                        button::icon("download", local_kopere_dashboard_makeurl("backup", "download", ["file" => $p[0]])) .
                         "&nbsp;&nbsp;&nbsp; " .
-                        button::icon_popup_table('delete', local_kopere_dashboard_makeurl("backup", "delete", ["file" => $p[0]])) .
+                        button::icon_popup_table("delete", local_kopere_dashboard_makeurl("backup", "delete", ["file" => $p[0]])) .
                         "</div>",
                 ];
             }
@@ -91,19 +91,19 @@ class backup {
             if (isset($backupslista[0])) {
 
                 echo '</div>';
-                title_util::print_h3('backup_list');
+                title_util::print_h3("backup_list");
                 echo '<div class="element-box">';
 
                 $table = new table();
-                $table->add_header(get_string_kopere('backup_list_file'), 'file');
-                $table->add_header(get_string_kopere('backup_list_created'), 'data');
-                $table->add_header(get_string_kopere('backup_list_size'), 'size');
-                $table->add_header(get_string_kopere('backup_list_action'), 'acoes');
+                $table->add_header(get_string_kopere("backup_list_file"), "file");
+                $table->add_header(get_string_kopere("backup_list_created"), "data");
+                $table->add_header(get_string_kopere("backup_list_size"), "size");
+                $table->add_header(get_string_kopere("backup_list_action"), "acoes");
 
                 $table->set_row($backupslista);
                 $table->close(true, ["order" => [[1, "desc"]]]);
             } else {
-                mensagem::print_warning(get_string_kopere('backup_none'));
+                mensagem::print_warning(get_string_kopere("backup_none"));
             }
         }
         echo '</div>';
@@ -119,12 +119,12 @@ class backup {
     public function execute() {
         global $CFG;
 
-        if (!server_util::function_enable('shell_exec')) {
-            mensagem::agenda_mensagem_danger(get_string_kopere('backup_noshell'));
+        if (!server_util::function_enable("shell_exec")) {
+            mensagem::agenda_mensagem_danger(get_string_kopere("backup_noshell"));
             header::location(local_kopere_dashboard_makeurl("backup", "dashboard"));
         }
 
-        $backupfullpath = $this->get_backup_path() . 'backup_' . date('Y-m-d-H-i');
+        $backupfullpath = $this->get_backup_path() . "backup_" . date('Y-m-d-H-i');
 
         $comando = "/usr/bin/mysqldump -h {$CFG->dbhost} -u {$CFG->dbuser} -p{$CFG->dbpass} {$CFG->dbname} > {$backupfullpath}.sql";
         shell_exec($comando);
@@ -134,7 +134,7 @@ class backup {
 
         unlink("{$backupfullpath}.sql");
 
-        mensagem::agenda_mensagem_success(get_string_kopere('backup_execute_success'));
+        mensagem::agenda_mensagem_success(get_string_kopere("backup_execute_success"));
         header::location(local_kopere_dashboard_makeurl("backup", "dashboard"));
     }
 
@@ -149,21 +149,21 @@ class backup {
 
         set_time_limit(0);
 
-        dashboard_util::add_breadcrumb(get_string_kopere('backup_title'), local_kopere_dashboard_makeurl("backup", "dashboard"));
-        dashboard_util::add_breadcrumb(get_string_kopere('backup_execute_exec'));
-        dashboard_util::add_breadcrumb(get_string_kopere('backup_execute_exec') . ": {$CFG->dbname}");
+        dashboard_util::add_breadcrumb(get_string_kopere("backup_title"), local_kopere_dashboard_makeurl("backup", "dashboard"));
+        dashboard_util::add_breadcrumb(get_string_kopere("backup_execute_exec"));
+        dashboard_util::add_breadcrumb(get_string_kopere("backup_execute_exec") . ": {$CFG->dbname}");
         dashboard_util::start_page();
 
         echo '<div class="element-box">';
 
-        $backupfullpath = $this->get_backup_path() . 'backup_' . date('Y-m-d-H-i');
+        $backupfullpath = $this->get_backup_path() . "backup_" . date('Y-m-d-H-i');
         $backupfile = "{$backupfullpath}.sql";
 
-        $dumpstart = "--" . get_string_kopere('pluginname') . " SQL Dump\n-- Host: {$CFG->dbhost}\n-- " .
-            get_string_kopere('backup_execute_date') . " " . date('d/m/Y \à\s H-i') . "\n\n";
+        $dumpstart = "--" . get_string_kopere("pluginname") . " SQL Dump\n-- Host: {$CFG->dbhost}\n-- " .
+            get_string_kopere("backup_execute_date") . " " . date('d/m/Y \à\s H-i') . "\n\n";
         file_put_contents($backupfile, $dumpstart);
 
-        $dbname = "--\n-- " . get_string_kopere('backup_execute_database') .
+        $dbname = "--\n-- " . get_string_kopere("backup_execute_database") .
             " `{$CFG->dbname}`\n--";
         file_put_contents($backupfile, $dbname, FILE_APPEND);
 
@@ -171,11 +171,11 @@ class backup {
 
         foreach ($tables as $table => $val) {
 
-            echo "<p id='tabela-dump-$table'>" . get_string_kopere('backup_execute_table') . " <strong>$table</strong></p>";
+            echo "<p id='tabela-dump-$table'>" . get_string_kopere("backup_execute_table") . " <strong>$table</strong></p>";
 
-            $PAGE->requires->js_call_amd('local_kopere_dashboard/backup', 'backup_animate_scrollTop', ["#tabela-dump-$table"]);
+            $PAGE->requires->js_call_amd('local_kopere_dashboard/backup', "backup_animate_scrollTop", ["#tabela-dump-$table"]);
 
-            $dbstart = "\n\n\n--\n-- " . get_string_kopere('backup_execute_structure') . " `$table`\n--\n\n";
+            $dbstart = "\n\n\n--\n-- " . get_string_kopere("backup_execute_structure") . " `$table`\n--\n\n";
             file_put_contents($backupfile, $dbstart, FILE_APPEND);
 
             $schema = $DB->get_record_sql("SHOW CREATE TABLE `{$table}`");
@@ -183,7 +183,7 @@ class backup {
                 $tablesql = $schema->{'create table'} . ";\n\n";
                 file_put_contents($backupfile, $tablesql, FILE_APPEND);
 
-                $dbdumpstart = "--\n-- " . get_string_kopere('backup_execute_dump') . " `$table`\n--\n";
+                $dbdumpstart = "--\n-- " . get_string_kopere("backup_execute_dump") . " `$table`\n--\n";
                 file_put_contents($backupfile, $dbdumpstart, FILE_APPEND);
 
                 $tablenoprefix = str_replace($CFG->prefix, "", $table);
@@ -219,18 +219,18 @@ class backup {
                 }
 
             } else {
-                $tablesql = "-- " . get_string_kopere('backup_execute_dump_error') . "\n\n";
+                $tablesql = "-- " . get_string_kopere("backup_execute_dump_error") . "\n\n";
                 file_put_contents($backupfile, $tablesql, FILE_APPEND);
             }
         }
 
-        mensagem::print_success(get_string_kopere('backup_execute_complete'));
+        mensagem::print_success(get_string_kopere("backup_execute_complete"));
 
         echo '<div id="end-page-to" style="text-align: center;">';
-        button::add(get_string_kopere('backup_returnlist'), local_kopere_dashboard_makeurl("backup", "dashboard"));
+        button::add(get_string_kopere("backup_returnlist"), local_kopere_dashboard_makeurl("backup", "dashboard"));
         echo '</div>';
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/backup', 'backup_animate_scrollTop', ["#end-page-to"]);
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/backup', "backup_animate_scrollTop", ["#end-page-to"]);
 
         echo '</div>';
 
@@ -244,8 +244,8 @@ class backup {
      * @throws \dml_exception
      */
     public function delete() {
-        $file = optional_param('file', '', PARAM_TEXT);
-        $status = optional_param('status', false, PARAM_TEXT);
+        $file = optional_param("file", '', PARAM_TEXT);
+        $status = optional_param("status", false, PARAM_TEXT);
 
         $backupfile = $this->get_backup_path() . $file;
 
@@ -253,22 +253,22 @@ class backup {
             if ($status) {
                 @unlink($backupfile);
 
-                mensagem::agenda_mensagem_success(get_string_kopere('backup_deletesucessfull'));
+                mensagem::agenda_mensagem_success(get_string_kopere("backup_deletesucessfull"));
                 header::location(local_kopere_dashboard_makeurl("backup", "dashboard"));
             } else {
 
-                dashboard_util::add_breadcrumb(get_string_kopere('backup_title'),
+                dashboard_util::add_breadcrumb(get_string_kopere("backup_title"),
                     local_kopere_dashboard_makeurl("backup", "dashboard"));
-                dashboard_util::add_breadcrumb(get_string_kopere('backup_deleting'));
+                dashboard_util::add_breadcrumb(get_string_kopere("backup_deleting"));
                 dashboard_util::start_page();
 
                 echo "<div class='element-box'>
-                          <h3>" . get_string_kopere('backup_delete_confirm') . "</h3>
-                          <p>" . get_string_kopere('backup_delete_title', $file) . "</p>
+                          <h3>" . get_string_kopere("backup_delete_confirm") . "</h3>
+                          <p>" . get_string_kopere("backup_delete_title", $file) . "</p>
                           <div>";
-                button::delete(get_string('yes'),
+                button::delete(get_string("yes"),
                     local_kopere_dashboard_makeurl("backup", "delete", ["file" => $file, "status" => "sim"]), '', false);
-                button::add(get_string('no'),
+                button::add(get_string("no"),
                     local_kopere_dashboard_makeurl("backup", "dashboard"), 'margin-left-10', false);
                 echo "    </div>
                       </div>";
@@ -276,7 +276,7 @@ class backup {
                 dashboard_util::end_page();
             }
         } else {
-            header::notfound(get_string_kopere('backup_notound'));
+            header::notfound(get_string_kopere("backup_notound"));
         }
     }
 
@@ -291,7 +291,7 @@ class backup {
         session_write_close();
         ob_end_flush();
 
-        $file = optional_param('file', '', PARAM_TEXT);
+        $file = optional_param("file", '', PARAM_TEXT);
 
         $backupfile = $this->get_backup_path() . $file;
 
@@ -303,7 +303,7 @@ class backup {
             readfile($backupfile);
             end_util::end_script_show();
         } else {
-            header::notfound(get_string_kopere('backup_notound'));
+            header::notfound(get_string_kopere("backup_notound"));
         }
     }
 

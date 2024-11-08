@@ -47,14 +47,14 @@ class json {
 
         $returnarray = [];
         if ($recordstotal != -1) {
-            $returnarray['draw'] = optional_param('draw', 0, PARAM_INT);
-            $returnarray['recordsTotal'] = intval($recordstotal);
-            $returnarray['recordsFiltered'] = intval($recordsfiltered);
+            $returnarray["draw"] = optional_param("draw", 0, PARAM_INT);
+            $returnarray["recordsTotal"] = intval($recordstotal);
+            $returnarray["recordsFiltered"] = intval($recordsfiltered);
         }
-        $returnarray['data'] = $data;
+        $returnarray["data"] = $data;
 
         if ($sql) {
-            $returnarray['sql'] = $sql;
+            $returnarray["sql"] = $sql;
         }
 
         $json = json_encode($returnarray);
@@ -76,7 +76,7 @@ class json {
         header('Content-Type: application/json; charset: utf-8');
 
         $returnarray = [];
-        $returnarray['error'] = $message;
+        $returnarray["error"] = $message;
 
         $json = json_encode($returnarray);
 

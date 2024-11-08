@@ -39,9 +39,10 @@ class performancemonitor {
      *
      * @return string
      * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function load_monitor() {
-        global $PAGE, $CFG;
+        global $PAGE;
 
         if (!@get_config("local_kopere_dashboard", "monitor")) {
             return '
@@ -49,14 +50,14 @@ class performancemonitor {
             </div>';
         }
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/monitor', 'init');
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/monitor', "init");
 
         return '
             <div id="dashboard-monitor" class="element-content">
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="element-box color_cpu">
-                            <div class="label">' . get_string_kopere('performancemonitor_cpu') . '</div>
+                            <div class="label">' . get_string_kopere("performancemonitor_cpu") . '</div>
                             <div class="value"><span>
                             ' . self::cpu(false) . '
                             </span></div>
@@ -64,7 +65,7 @@ class performancemonitor {
                     </div>
                     <div class="col-sm-2">
                         <div class="element-box color_memory">
-                            <div class="label">' . get_string_kopere('performancemonitor_memory') . '</div>
+                            <div class="label">' . get_string_kopere("performancemonitor_memory") . '</div>
                             <div class="value"><span>
                                 ' . self::memory(false) . '%
                             </span></div>
@@ -72,13 +73,13 @@ class performancemonitor {
                     </div>
                     <div class="col-sm-2">
                         <div class="element-box color_hd">
-                            <div class="label">' . get_string_kopere('performancemonitor_hd') . '</div>
+                            <div class="label">' . get_string_kopere("performancemonitor_hd") . '</div>
                             <div class="value"><span id="load_monitor-performancemonitor_hd"></span></div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="element-box color_performance">
-                            <div class="label">' . get_string_kopere('performancemonitor_performance') . '</div>
+                            <div class="label">' . get_string_kopere("performancemonitor_performance") . '</div>
                             <div class="value"><span>
                                 ' . self::load_average(false) . '
                             </span></div>
@@ -98,11 +99,11 @@ class performancemonitor {
      */
     public static function cpu($returnnumber) {
 
-        if (!server_util::function_enable('shell_exec')) {
+        if (!server_util::function_enable("shell_exec")) {
             if ($returnnumber) {
                 return -1;
             }
-            return "Function 'shell_exec' disabled by hosting";
+            return "Function \"shell_exec\" disabled by hosting";
         }
 
         $inputline = shell_exec('top -b -n 2');
@@ -119,8 +120,8 @@ class performancemonitor {
             return $us + $sy + $ni;
         }
 
-        return ' us: ' . number_format($us, 1, get_string('decsep', 'langconfig'), '') . '%, sys: ' .
-            number_format($ni, 1, get_string('decsep', 'langconfig'), '') . '%';
+        return ' us: ' . number_format($us, 1, get_string("decsep", "langconfig"), '') . '%, sys: ' .
+            number_format($ni, 1, get_string("decsep", "langconfig"), '') . '%';
     }
 
     /**
@@ -132,11 +133,11 @@ class performancemonitor {
      */
     public static function memory($returnnumber) {
 
-        if (!server_util::function_enable('shell_exec')) {
+        if (!server_util::function_enable("shell_exec")) {
             if ($returnnumber) {
                 return -1;
             }
-            return "Function 'shell_exec' disabled by hosting";
+            return "Function \"shell_exec\" disabled by hosting";
         }
 
         $inputlines = shell_exec("cat /proc/meminfo");
@@ -168,17 +169,17 @@ class performancemonitor {
         $filecache = "{$CFG->dataroot}/disk_moodledata.txt";
         $size = filesize($filecache);
 
-        $cache = \cache::make('local_kopere_dashboard', 'performancemonitor_cache');
+        $cache = \cache::make("local_kopere_dashboard", "performancemonitor_cache");
         if ($cache->has("disk_moodledata-{$size}")) {
             unlink($filecache);
             return $cache->get("disk_moodledata-{$size}");
         }
 
-        if (!server_util::function_enable('shell_exec')) {
+        if (!server_util::function_enable("shell_exec")) {
             if ($returnnumber) {
                 return -1;
             }
-            return "Function 'shell_exec' disabled by hosting";
+            return "Function \"shell_exec\" disabled by hosting";
         }
 
         if (file_exists($filecache)) {
@@ -207,11 +208,11 @@ class performancemonitor {
      */
     public static function load_average($returnnumber) {
 
-        if (!server_util::function_enable('shell_exec')) {
+        if (!server_util::function_enable("shell_exec")) {
             if ($returnnumber) {
                 return -1;
             }
-            return "Function 'shell_exec' disabled by hosting";
+            return "Function \"shell_exec\" disabled by hosting";
         }
 
         $inputlines = shell_exec("uptime");
@@ -221,8 +222,8 @@ class performancemonitor {
             return $outputload[1];
         }
 
-        $return = get_string_kopere('performancemonitor_min', 1) . $outputload[1] . '%, ';
-        $return .= get_string_kopere('performancemonitor_min', 5) . $outputload[3] . '%';
+        $return = get_string_kopere("performancemonitor_min", 1) . $outputload[1] . '%, ';
+        $return .= get_string_kopere("performancemonitor_min", 5) . $outputload[3] . '%';
 
         return $return;
     }
@@ -237,8 +238,8 @@ class performancemonitor {
         global $DB;
 
         $param = [
-            'timefrom' => time() - 300, // 300 - 5 minute.
-            'now' => time(),
+            "timefrom" => time() - 300, // 300 - 5 minute.
+            "now" => time(),
         ];
         $sql = "SELECT COUNT( DISTINCT id) AS cont
                   FROM {user_lastaccess}

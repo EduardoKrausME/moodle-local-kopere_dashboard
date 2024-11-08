@@ -57,6 +57,6 @@ class server_util {
      * @return bool
      */
     public static function function_enable($function) {
-        return is_callable($function) && false === stripos(ini_get('disable_functions'), $function);
+        return is_callable($function) && false === stripos(ini_get("disable_functions"), $function);
     }
 }

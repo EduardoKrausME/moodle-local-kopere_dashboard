@@ -45,22 +45,22 @@ class settings {
 
         $post = string_util::clear_all_params(null, null, PARAM_RAW);
         foreach ($post as $keyname => $value) {
-            if ($keyname == 'POST') {
+            if ($keyname == "POST") {
                 continue;
             }
-            if ($keyname == 'action') {
+            if ($keyname == "action") {
                 continue;
             }
-            if ($keyname == 'redirect') {
+            if ($keyname == "redirect") {
                 continue;
             }
 
-            set_config($keyname, $value, 'local_kopere_dashboard');
+            set_config($keyname, $value, "local_kopere_dashboard");
         }
 
-        mensagem::agenda_mensagem_success(get_string_kopere('setting_saved'));
+        mensagem::agenda_mensagem_success(get_string_kopere("setting_saved"));
 
-        $redirect = optional_param('redirect', false, PARAM_TEXT);
+        $redirect = optional_param("redirect", false, PARAM_TEXT);
         if ($redirect) {
             header::location("?{$redirect}");
         }

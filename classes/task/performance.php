@@ -40,7 +40,7 @@ class performance extends \core\task\scheduled_task {
      * @throws \coding_exception
      */
     public function get_name() {
-        return get_string('crontask_performance', 'local_kopere_dashboard');
+        return get_string("crontask_performance", "local_kopere_dashboard");
     }
 
     /**
@@ -51,11 +51,11 @@ class performance extends \core\task\scheduled_task {
      */
     public function execute() {
         $time = time();
-        $this->add_data($time, 'cpu', performancemonitor::cpu(true));
-        $this->add_data($time, 'memory', performancemonitor::memory(true));
-        $this->add_data($time, 'disk', performancemonitor::disk_moodledata(true));
-        $this->add_data($time, 'average', performancemonitor::load_average(true));
-        $this->add_data($time, 'average', performancemonitor::online());
+        $this->add_data($time, "cpu", performancemonitor::cpu(true));
+        $this->add_data($time, "memory", performancemonitor::memory(true));
+        $this->add_data($time, "disk", performancemonitor::disk_moodledata(true));
+        $this->add_data($time, "average", performancemonitor::load_average(true));
+        $this->add_data($time, "average", performancemonitor::online());
     }
 
     /**
@@ -72,12 +72,12 @@ class performance extends \core\task\scheduled_task {
         global $DB;
 
         $dashboardperformance = (object)[
-            'time' => $time,
-            'type' => $type,
-            'value' => $value,
+            "time" => $time,
+            "type" => $type,
+            "value" => $value,
         ];
 
-        $exists = $DB->record_exists('kopere_dashboard_performance', ['time' => $time, 'type' => $type]);
+        $exists = $DB->record_exists("kopere_dashboard_performance", ["time" => $time, "type" => $type]);
         if ($exists) {
             return false;
         }

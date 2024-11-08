@@ -49,26 +49,26 @@ class userenrolment {
     public function mathedit() {
         global $DB, $PAGE;
 
-        $ueid = optional_param('ueid', 0, PARAM_INT);
-        $enrolment = $DB->get_record('user_enrolments', ['id' => $ueid], '*');
+        $ueid = optional_param("ueid", 0, PARAM_INT);
+        $enrolment = $DB->get_record("user_enrolments", ["id" => $ueid], '*');
 
-        header::notfound_null($enrolment, get_string_kopere('userenrolment_notfound'));
+        header::notfound_null($enrolment, get_string_kopere("userenrolment_notfound"));
 
         ob_clean();
-        dashboard_util::add_breadcrumb(get_string_kopere('userenrolment_detail'));
+        dashboard_util::add_breadcrumb(get_string_kopere("userenrolment_detail"));
         dashboard_util::start_page();
 
         $form = new form(local_kopere_dashboard_makeurl("userenrolment", "mathedit_save"));
-        $form->create_hidden_input('ueid', $ueid);
+        $form->create_hidden_input("ueid", $ueid);
 
         $statusvalues = [
-            ['key' => 0, 'value' => get_string_kopere('userenrolment_status_active')],
-            ['key' => 1, 'value' => get_string_kopere('userenrolment_status_inactive')],
+            ["key" => 0, "value" => get_string_kopere("userenrolment_status_active")],
+            ["key" => 1, "value" => get_string_kopere("userenrolment_status_inactive")],
         ];
         $form->add_input(
             input_select::new_instance()
-                ->set_title(get_string_kopere('userenrolment_status'))
-                ->set_name('status')
+                ->set_title(get_string_kopere("userenrolment_status"))
+                ->set_name("status")
                 ->set_values($statusvalues)
                 ->set_value($enrolment->status));
 
@@ -76,9 +76,9 @@ class userenrolment {
 
         $form->add_input(
             input_date_range::new_instance()
-                ->set_title(get_string_kopere('userenrolment_timestart'))
-                ->set_name('timestart')
-                ->set_value(userdate($enrolment->timestart, get_string_kopere('datetime')))
+                ->set_title(get_string_kopere("userenrolment_timestart"))
+                ->set_name("timestart")
+                ->set_value(userdate($enrolment->timestart, get_string_kopere("datetime")))
                 ->set_datetimerange()
                 ->set_required());
 
@@ -86,7 +86,7 @@ class userenrolment {
 
         $form->add_input(
             input_checkbox_select::new_instance()
-                ->set_title(get_string_kopere('userenrolment_timeendstatus'))
+                ->set_title(get_string_kopere("userenrolment_timeendstatus"))
                 ->set_name('timeend-status')
                 ->set_checked($enrolment->timeend));
 
@@ -94,25 +94,25 @@ class userenrolment {
 
         $form->add_input(
             input_date_range::new_instance()
-                ->set_title(get_string_kopere('userenrolment_timeend'))
-                ->set_name('timeend')
-                ->set_value(userdate($enrolment->timeend ? $enrolment->timeend : time(), get_string_kopere('datetime')))
+                ->set_title(get_string_kopere("userenrolment_timeend"))
+                ->set_name("timeend")
+                ->set_value(userdate($enrolment->timeend ? $enrolment->timeend : time(), get_string_kopere("datetime")))
                 ->set_datetimerange()
                 ->set_required());
 
         echo '</div>';
 
         $form->print_spacer(10);
-        $form->print_row(get_string_kopere('userenrolment_created'),
-            userdate($enrolment->timecreated, get_string_kopere('dateformat')));
-        $form->print_row(get_string_kopere('userenrolment_updated'),
-            userdate($enrolment->timemodified, get_string_kopere('dateformat')));
+        $form->print_row(get_string_kopere("userenrolment_created"),
+            userdate($enrolment->timecreated, get_string_kopere("dateformat")));
+        $form->print_row(get_string_kopere("userenrolment_updated"),
+            userdate($enrolment->timemodified, get_string_kopere("dateformat")));
 
-        $form->create_submit_input(get_string('savechanges'));
+        $form->create_submit_input(get_string("savechanges"));
 
         $form->close();
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/userenrolment', 'userenrolment_status');
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/userenrolment', "userenrolment_status");
 
         dashboard_util::end_page();
     }
@@ -126,25 +126,25 @@ class userenrolment {
     public function mathedit_save() {
         global $DB;
 
-        $ueid = optional_param('ueid', 0, PARAM_INT);
-        $status = optional_param('status', 0, PARAM_INT);
-        $timestart = optional_param('timestart', '', PARAM_TEXT);
+        $ueid = optional_param("ueid", 0, PARAM_INT);
+        $status = optional_param("status", 0, PARAM_INT);
+        $timestart = optional_param("timestart", '', PARAM_TEXT);
         $timeendstatus = optional_param('timeend-status', 0, PARAM_INT);
-        $timeend = optional_param('timeend', '', PARAM_TEXT);
+        $timeend = optional_param("timeend", '', PARAM_TEXT);
 
-        $enrolment = $DB->get_record('user_enrolments', ['id' => $ueid], '*');
+        $enrolment = $DB->get_record("user_enrolments", ["id" => $ueid], '*');
 
         $enrolment->status = $status;
-        $enrolment->timestart = \DateTime::createFromFormat(get_string_kopere('php_datetime'), $timestart)->format('U');
+        $enrolment->timestart = \DateTime::createFromFormat(get_string_kopere("php_datetime"), $timestart)->format("U");
         if ($timeendstatus) {
-            $enrolment->timeend = \DateTime::createFromFormat(get_string_kopere('php_datetime'), $timeend)->format('U');
+            $enrolment->timeend = \DateTime::createFromFormat(get_string_kopere("php_datetime"), $timeend)->format("U");
         } else {
             $enrolment->timeend = 0;
         }
 
-        $DB->update_record('user_enrolments', $enrolment);
+        $DB->update_record("user_enrolments", $enrolment);
 
-        mensagem::agenda_mensagem_success(get_string_kopere('userenrolment_updatesuccess'));
+        mensagem::agenda_mensagem_success(get_string_kopere("userenrolment_updatesuccess"));
         header::reload();
     }
 }

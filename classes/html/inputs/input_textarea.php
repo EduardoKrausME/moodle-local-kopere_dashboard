@@ -35,7 +35,7 @@ class input_textarea extends input_base {
      * input_textarea constructor.
      */
     public function __construct() {
-        $this->set_type('textarea');
+        $this->set_type("textarea");
     }
 
     /**

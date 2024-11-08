@@ -41,16 +41,16 @@ class report_benchmark {
      */
     public function __construct() {
         $tests = [
-            'cload',
-            'processor',
-            'fileread',
-            'filewrite',
-            'courseread',
-            'coursewrite',
-            'querytype1',
-            'querytype2',
-            'loginguest',
-            'loginuser',
+            "cload",
+            "processor",
+            "fileread",
+            "filewrite",
+            "courseread",
+            "coursewrite",
+            "querytype1",
+            "querytype2",
+            "loginguest",
+            "loginuser",
         ];
         $benchs = [];
         $idtest = 0;
@@ -64,21 +64,21 @@ class report_benchmark {
             $result = $this->start_test($name);
 
             // Populate if empty result.
-            empty($result['limit']) ? $result['limit'] = 0 : null;
-            empty($result['over']) ? $result['over'] = 0 : null;
+            empty($result["limit"]) ? $result["limit"] = 0 : null;
+            empty($result["over"]) ? $result["over"] = 0 : null;
 
             // Overwrite the result if start/stop if defined.
-            $overstart = isset($result['start']) ? $result['start'] : $start;
-            $overstop = isset($result['stop']) ? $result['stop'] : microtime(true);
+            $overstart = isset($result["start"]) ? $result["start"] : $start;
+            $overstop = isset($result["stop"]) ? $result["stop"] : microtime(true);
             $stop = round($overstop - $overstart, 3);
 
             // Store and merge result.
             $benchs[$name] = [
-                    'during' => $stop,
-                    'id' => $idtest,
-                    'class' => $this->get_feedback_class($stop, $result['limit'], $result['over']),
-                    'name' => get_string($name . 'name', 'local_kopere_dashboard'),
-                    'info' => get_string($name . 'moreinfo', 'local_kopere_dashboard'),
+                    "during" => $stop,
+                    "id" => $idtest,
+                    "class" => $this->get_feedback_class($stop, $result["limit"], $result["over"]),
+                    "name" => get_string($name . "name", "local_kopere_dashboard"),
+                    "info" => get_string($name . "moreinfo", "local_kopere_dashboard"),
                 ] + $result;
         }
 
@@ -136,7 +136,7 @@ class report_benchmark {
         $total = 0;
 
         foreach ($this->results as $result) {
-            $total += $result['during'];
+            $total += $result["during"];
         }
 
         return $total;

@@ -49,11 +49,11 @@ class node {
                 $fullname = "Visitante";
             }
 
-            if (optional_param('classname', false, PARAM_TEXT) == 'useronline') {
-                $PAGE->requires->js_call_amd('local_kopere_dashboard/online_app', 'connectServer',
-                    [$id, $fullname, time(), $urlnode, 'z35admin']);
+            if (optional_param("classname", false, PARAM_TEXT) == "useronline") {
+                $PAGE->requires->js_call_amd('local_kopere_dashboard/online_app', "connectServer",
+                    [$id, $fullname, time(), $urlnode, "z35admin"]);
             } else {
-                $PAGE->requires->js_call_amd('local_kopere_dashboard/online_app', 'connectServer',
+                $PAGE->requires->js_call_amd('local_kopere_dashboard/online_app', "connectServer",
                     [$id, $fullname, time(), $urlnode]);
             }
         }

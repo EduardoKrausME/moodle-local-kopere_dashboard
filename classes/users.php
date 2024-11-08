@@ -45,22 +45,22 @@ class users {
      * @throws \dml_exception
      */
     public function dashboard() {
-        dashboard_util::add_breadcrumb(get_string_kopere('user_title'));
+        dashboard_util::add_breadcrumb(get_string_kopere("user_title"));
         dashboard_util::start_page();
 
         echo '<div class="element-box table-responsive">';
 
         $table = new data_table();
-        $table->add_header('#', 'id', table_header_item::TYPE_INT);
-        $table->add_header(get_string_kopere('user_table_fullname'), 'fullname');
-        $table->add_header(get_string_kopere('user_table_username'), 'username');
-        $table->add_header(get_string_kopere('user_table_email'), 'email');
-        $table->add_header(get_string_kopere('user_table_phone'), 'phone1');
-        $table->add_header(get_string_kopere('user_table_celphone'), 'phone2');
-        $table->add_header(get_string_kopere('user_table_city'), 'city');
+        $table->add_header('#', "id", table_header_item::TYPE_INT);
+        $table->add_header(get_string_kopere("user_table_fullname"), "fullname");
+        $table->add_header(get_string_kopere("user_table_username"), "username");
+        $table->add_header(get_string_kopere("user_table_email"), "email");
+        $table->add_header(get_string_kopere("user_table_phone"), "phone1");
+        $table->add_header(get_string_kopere("user_table_celphone"), "phone2");
+        $table->add_header(get_string_kopere("user_table_city"), "city");
 
         $table->set_ajax_url(local_kopere_dashboard_makeurl("users", "load_all_users"));
-        $table->set_click_redirect(local_kopere_dashboard_makeurl("users", "details", ["userid" => "{id}"]), 'id');
+        $table->set_click_redirect(local_kopere_dashboard_makeurl("users", "details", ["userid" => "{id}"]), "id");
         $table->print_header();
         $table->close(true, ["order" => [[1, "asc"]]]);
 
@@ -77,14 +77,14 @@ class users {
      */
     public function load_all_users() {
         $columns = [
-            'id',
-            'firstname',
-            'username',
-            'email',
-            'phone1',
-            'phone2',
-            'city',
-            'lastname',
+            "id",
+            "firstname",
+            "username",
+            "email",
+            "phone1",
+            "phone2",
+            "city",
+            "lastname",
         ];
         $search = new datatable_search_util($columns);
 
@@ -104,12 +104,12 @@ class users {
     public function details() {
         global $DB;
 
-        $userid = optional_param('userid', 0, PARAM_INT);
+        $userid = optional_param("userid", 0, PARAM_INT);
 
-        $user = $DB->get_record('user', ['id' => $userid]);
-        header::notfound_null($user, get_string_kopere('profile_notfound'));
+        $user = $DB->get_record("user", ["id" => $userid]);
+        header::notfound_null($user, get_string_kopere("profile_notfound"));
 
-        dashboard_util::add_breadcrumb(get_string_kopere('profile_title'), local_kopere_dashboard_makeurl("users", "dashboard"));
+        dashboard_util::add_breadcrumb(get_string_kopere("profile_title"), local_kopere_dashboard_makeurl("users", "dashboard"));
         dashboard_util::add_breadcrumb(fullname($user));
         dashboard_util::start_page();
 
@@ -137,7 +137,7 @@ class users {
         $count = $DB->get_record_sql('SELECT count(*) AS num FROM {user} WHERE id > 1 AND deleted = 0');
 
         if ($format) {
-            return number_format($count->num, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig'));
+            return number_format($count->num, 0, get_string("decsep", "langconfig"), get_string("thousandssep", "langconfig"));
         }
 
         return $count->num;
@@ -158,7 +158,7 @@ class users {
         $count = $DB->get_record_sql('SELECT count(*) AS num FROM {user} WHERE id > 1 AND deleted = 0 AND lastaccess > 0');
 
         if ($format) {
-            return number_format($count->num, 0, get_string('decsep', 'langconfig'), get_string('thousandssep', 'langconfig'));
+            return number_format($count->num, 0, get_string("decsep", "langconfig"), get_string("thousandssep", "langconfig"));
         }
 
         return $count->num;

@@ -22,12 +22,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define('AJAX_SCRIPT', false);
-define('OPEN_INTERNAL', true);
+define("AJAX_SCRIPT", false);
+define("OPEN_INTERNAL", true);
 
-define('BENCHSTART', microtime(true));
+define("BENCHSTART", microtime(true));
 require_once('../../config.php');
-define('BENCHSTOP', microtime(true));
+define("BENCHSTOP", microtime(true));
 require_once('autoload.php');
 require_once('locallib.php');
 
@@ -62,7 +62,7 @@ if ($html = optional_param("html-pdf", false, PARAM_RAW)) {
     $pdf->SetMargins(10, 10, 10);
 
     // Adicione uma página ao PDF.
-    $pdf->AddPage('L');
+    $pdf->AddPage("L");
 
     $style = "
         <style>
@@ -94,28 +94,28 @@ if ($html = optional_param("html-pdf", false, PARAM_RAW)) {
     $pdf->writeHTML("{$style}<h1>{$title}</h1>{$html}", true, false, true, false, '');
 
     // Saída do PDF para o navegador.
-    $pdf->Output("{$title}.pdf", 'I');
+    $pdf->Output("{$title}.pdf", "I");
 
     die();
 }
 
-if ($CFG->theme == 'smartlms') {
+if ($CFG->theme == "smartlms") {
     $preferencedraweropennav = @$USER->preference['drawer-open-nav'];
     $preferencesidebaropennav = @$USER->preference['sidebar-open-nav'];
     @$USER->preference['drawer-open-nav'] = false;
     @$USER->preference['sidebar-open-nav'] = false;
 }
 
-$PAGE->set_url(new moodle_url("/local/kopere_dashboard/view.php?{$_SERVER['QUERY_STRING']}"));
+$PAGE->set_url(new moodle_url("/local/kopere_dashboard/view.php?{$_SERVER["QUERY_STRING"]}"));
 $PAGE->set_context($context);
 $PAGE->set_pagetype('admin-setting');
-$PAGE->set_pagelayout('admin');
+$PAGE->set_pagelayout("admin");
 
 $PAGE->requires->jquery();
 $PAGE->requires->jquery_plugin("ui");
 $PAGE->requires->jquery_plugin("ui-css");
 
-$PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', 'init');
+$PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', "init");
 
 get_kopere_lang();
 

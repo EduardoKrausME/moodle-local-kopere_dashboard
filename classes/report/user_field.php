@@ -41,27 +41,27 @@ class user_field {
     public static function get_all_user_name_fields($returnsql = false, $tableprefix = null) {
         $alternatenames = [
             // Para a função fullname().
-            'firstnamephonetic' => 'firstnamephonetic',
-            'lastnamephonetic' => 'lastnamephonetic',
-            'middlename' => 'middlename',
-            'alternatename' => 'alternatename',
-            'firstname' => 'firstname',
-            'lastname' => 'lastname',
+            "firstnamephonetic" => "firstnamephonetic",
+            "lastnamephonetic" => "lastnamephonetic",
+            "middlename" => "middlename",
+            "alternatename" => "alternatename",
+            "firstname" => "firstname",
+            "lastname" => "lastname",
 
             // Para as configurações do setting.
-            'institution' => 'institution',
-            'department' => 'department',
-            'phone1' => 'phone1',
-            'phone2' => 'phone2',
-            'address' => 'address',
-            'description' => 'description',
-            'city' => 'city',
-            'country' => 'country',
-            'timezone' => 'timezone',
-            'firstaccess' => 'firstaccess',
-            'lastaccess' => 'lastaccess',
-            'lastlogin' => 'lastlogin',
-            'lastip' => 'lastip',
+            "institution" => "institution",
+            "department" => "department",
+            "phone1" => "phone1",
+            "phone2" => "phone2",
+            "address" => "address",
+            "description" => "description",
+            "city" => "city",
+            "country" => "country",
+            "timezone" => "timezone",
+            "firstaccess" => "firstaccess",
+            "lastaccess" => "lastaccess",
+            "lastlogin" => "lastlogin",
+            "lastip" => "lastip",
         ];
 
         // Create an sql field snippet if requested.

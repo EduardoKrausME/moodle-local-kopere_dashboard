@@ -64,7 +64,7 @@ class data_table {
      * @param array $columninfo
      */
     public function __construct($column = [], $columninfo = []) {
-        $this->tableid = 'datatable_' . uniqid();
+        $this->tableid = "datatable_" . uniqid();
         $this->column = $column;
         $this->columninfo = $columninfo;
     }
@@ -113,8 +113,8 @@ class data_table {
      */
     public function set_click_redirect($url, $chave) {
         $this->clickredirect = [
-            'chave' => $chave,
-            'url' => $url,
+            "chave" => $chave,
+            "url" => $url,
         ];
     }
 
@@ -171,7 +171,7 @@ class data_table {
         $return = "";
 
         if ($this->isexport && $this->ajaxurl == null) {
-            button::info(get_string_kopere('reports_export'), url_util::querystring() . "&export=xls");
+            button::info(get_string_kopere("reports_export"), url_util::querystring() . "&export=xls");
         }
 
         $return .= "<table id='{$this->tableid}' class='table table-hover' >";
@@ -262,6 +262,7 @@ class data_table {
             return $return;
         } else {
             echo $return;
+            return "";
         }
     }
 
@@ -321,27 +322,27 @@ class data_table {
                         $html = date("Y-m-d H:i:s", $html);
                     } else if ($column->type == table_header_item::RENDERER_VISIBLE) {
                         if ($html == 0) {
-                            $html = get_string_kopere('invisible');
+                            $html = get_string_kopere("invisible");
                         } else {
-                            $html = get_string_kopere('visible');
+                            $html = get_string_kopere("visible");
                         }
                     } else if ($column->type == table_header_item::RENDERER_STATUS) {
                         if ($html == 1) {
-                            $html = get_string_kopere('inactive');
+                            $html = get_string_kopere("inactive");
                         } else {
-                            $html = get_string_kopere('active');
+                            $html = get_string_kopere("active");
                         }
                     } else if ($column->type == table_header_item::RENDERER_DELETED) {
                         if ($html == 0) {
-                            $html = get_string_kopere('inactive');
+                            $html = get_string_kopere("inactive");
                         } else {
-                            $html = get_string_kopere('active');
+                            $html = get_string_kopere("active");
                         }
                     } else if ($column->type == table_header_item::RENDERER_TRUEFALSE) {
-                        if ($html == 0 || $html == false || $html == 'false') {
-                            $html = get_string('no');
+                        if ($html == 0 || $html == false || $html == "false") {
+                            $html = get_string("no");
                         } else {
-                            $html = get_string('yes');
+                            $html = get_string("yes");
                         }
                     } else if ($column->type == table_header_item::RENDERER_USERPHOTO) {
                         $html = '<img class="media-object" src="' . $CFG->wwwroot .
@@ -403,12 +404,12 @@ class data_table {
         }
 
         if ($processserver) {
-            $initparams['processing'] = true;
-            $initparams['serverSide'] = true;
+            $initparams["processing"] = true;
+            $initparams["serverSide"] = true;
         }
 
         if ($this->ajaxurl) {
-            $initparams['ajax'] = (object)[
+            $initparams["ajax"] = (object)[
                 "url" => $this->ajaxurl = str_replace("view.php", "view-ajax.php", $this->ajaxurl),
                 "type" => "POST",
             ];
@@ -417,10 +418,10 @@ class data_table {
         $json = json_encode($initparams);
         if (isset($json[800])) {
             $json = htmlspecialchars($json, ENT_COMPAT);
-            $return .= "\n<input type='hidden' id='tableparams_{$this->tableid}' value='{$json}'/>\n";
-            $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', [$this->tableid, null]);
+            $return .= "\n<input type=\"hidden\" id='tableparams_{$this->tableid}' value='{$json}'/>\n";
+            $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', "init", [$this->tableid, null]);
         } else {
-            $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', [$this->tableid, $initparams]);
+            $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', "init", [$this->tableid, $initparams]);
         }
 
         if ($this->clickredirect) {
@@ -442,14 +443,14 @@ class data_table {
     private function on_clickreditect() {
         global $PAGE;
 
-        $clickurl = $this->clickredirect['url'];
-        $clickchave = $this->clickredirect['chave'];
+        $clickurl = $this->clickredirect["url"];
+        $clickchave = $this->clickredirect["chave"];
 
         if (is_string($clickchave)) {
             $clickchave = [$clickchave];
         }
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'click',
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', "click",
             [$this->tableid, $clickchave, $clickurl]);
     }
 }

@@ -38,7 +38,7 @@ class task_tmp extends \core\task\scheduled_task {
      * @throws \coding_exception
      */
     public function get_name() {
-        return get_string('crontask_tmp', 'local_kopere_dashboard');
+        return get_string("crontask_tmp", "local_kopere_dashboard");
     }
 
     /**

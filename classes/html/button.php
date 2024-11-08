@@ -49,7 +49,7 @@ class button {
      * @param $text
      */
     public static function close_popup($text) {
-        echo "<button class='btn btn-primary margin-left-10' data-dismiss='modal'>{$text}</button>";
+        echo "<button class=\"btn btn-primary margin-left-10\" data-dismiss=\"modal\">{$text}</button>";
     }
 
     /**
@@ -151,11 +151,11 @@ class button {
         global $CFG;
 
         if ($text == null) {
-            $text = get_string_kopere('help_title');
+            $text = get_string_kopere("help_title");
         }
 
         return "<a href='https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/{$infourl}#{$hastag}'
-                   target='_blank' class='help'>
+                   target=\"_blank\" class=\"help\">
                   <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/help.svg' style='height: 30px' >
                   $text
               </a>";
@@ -172,7 +172,7 @@ class button {
     public static function icon($icon, $link) {
         global $CFG;
         return "<a href='{$link}'>
-                    <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg' width='19'>
+                    <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg' width=\"19\">
                 </a>";
     }
 
@@ -212,7 +212,7 @@ class button {
         return
             "<a href='{$link}'>" .
             "    <img src='{$CFG->wwwroot}/local/kopere_dashboard/assets/dashboard/img/actions/{$icon}.svg'" .
-            "         width='19' role='button'>" .
+            "         width=\"19\" role=\"button\">" .
             "</a>";
     }
 

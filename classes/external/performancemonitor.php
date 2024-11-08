@@ -61,7 +61,7 @@ class performancemonitor extends external_api {
      */
     public static function disk_moodledata_returns() {
         return new external_single_structure([
-            'disk' => new external_value(PARAM_TEXT, 'Use Disk Moodledata', VALUE_OPTIONAL),
+            "disk" => new external_value(PARAM_TEXT, 'Use Disk Moodledata', VALUE_OPTIONAL),
         ]);
     }
 
@@ -73,7 +73,7 @@ class performancemonitor extends external_api {
     public static function disk_moodledata() {
 
         return [
-            'disk' => \local_kopere_dashboard\server\performancemonitor::disk_moodledata(false),
+            "disk" => \local_kopere_dashboard\server\performancemonitor::disk_moodledata(false),
         ];
     }
 }

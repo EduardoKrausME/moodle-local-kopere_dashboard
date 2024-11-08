@@ -46,19 +46,19 @@ class notificationsutil {
      * @throws \coding_exception
      */
     public function add_form_extra() {
-        $module = optional_param('module', '', PARAM_TEXT);
+        $module = optional_param("module", '', PARAM_TEXT);
 
         if (!isset($module[1])) {
-            end_util::end_script_show(get_string_kopere('notification_add_selectmodule'));
+            end_util::end_script_show(get_string_kopere("notification_add_selectmodule"));
         }
 
         $events = $this->list_events();
         $eventslist = [];
         foreach ($events->eventinformation as $eventinformation) {
-            if ($eventinformation['component_full'] == $module) {
+            if ($eventinformation["component_full"] == $module) {
                 $eventslist[] = [
-                    'key' => $eventinformation['eventname'],
-                    'value' => $eventinformation['fulleventname'],
+                    "key" => $eventinformation["eventname"],
+                    "value" => $eventinformation["fulleventname"],
                 ];
             }
         }
@@ -66,11 +66,11 @@ class notificationsutil {
         $form = new form();
         $form->add_input(
             input_select::new_instance()
-                ->set_title(get_string_kopere('notification_add_action'))
-                ->set_name('event')
+                ->set_title(get_string_kopere("notification_add_action"))
+                ->set_name("event")
                 ->set_values($eventslist)
                 ->set_add_selecione(true));
-        $form->create_submit_input(get_string_kopere('notification_add_create'));
+        $form->create_submit_input(get_string_kopere("notification_add_create"));
     }
 
     /**
@@ -89,7 +89,7 @@ class notificationsutil {
 
         /** @var base $eventclass */
         foreach ($eventclasss as $eventclass => $file) {
-            if ($file == 'base' || $file == 'legacy_logged' || $file === 'manager' || strpos($file, 'tool_') === 0) {
+            if ($file == "base" || $file == "legacy_logged" || $file === "manager" || strpos($file, "tool_") === 0) {
                 continue;
             }
 
@@ -99,11 +99,11 @@ class notificationsutil {
 
                     $data = $eventclass::get_static_info();
 
-                    if ($data['component'] == 'core') {
+                    if ($data["component"] == "core") {
                         $continue = true;
-                        if (strpos($data['target'], 'course') === 0) {
+                        if (strpos($data["target"], "course") === 0) {
                             $continue = false;
-                        } else if (strpos($data['target'], 'user') === 0) {
+                        } else if (strpos($data["target"], "user") === 0) {
                             $continue = false;
                         }
 
@@ -112,22 +112,22 @@ class notificationsutil {
                         }
                     }
 
-                    if ($data['component'] == 'mod_lesson') {
+                    if ($data["component"] == "mod_lesson") {
                         continue;
                     }
 
-                    $crud = $data['crud'];
-                    if ($crud == 'c' || $crud == 'u' || $crud == 'd') {
+                    $crud = $data["crud"];
+                    if ($crud == "c" || $crud == "u" || $crud == "d") {
                         $tmp = $data;
-                        $tmp['fulleventname'] = $eventclass::get_name();
-                        $tmp['crudname'] = \report_eventlist_list_generator::get_crud_string($data['crud']);
+                        $tmp["fulleventname"] = $eventclass::get_name();
+                        $tmp["crudname"] = \report_eventlist_list_generator::get_crud_string($data["crud"]);
 
-                        if ($data['component'] == 'core') {
-                            $components["{$data['component']}_{$data['target']}"] = "{$data['component']}_{$data['target']}";
-                            $tmp['component_full'] = "{$data['component']}_{$data['target']}";
+                        if ($data["component"] == "core") {
+                            $components["{$data["component"]}_{$data["target"]}"] = "{$data["component"]}_{$data["target"]}";
+                            $tmp["component_full"] = "{$data["component"]}_{$data["target"]}";
                         } else {
-                            $components[$data['component']] = $data['component'];
-                            $tmp['component_full'] = $data['component'];
+                            $components[$data["component"]] = $data["component"];
+                            $tmp["component_full"] = $data["component"];
                         }
 
                         $eventinformation[] = $tmp;
@@ -153,25 +153,25 @@ class notificationsutil {
     public function settings_load_template() {
         global $CFG, $COURSE;
 
-        $template = optional_param('template', 'blue.html', PARAM_RAW);
+        $template = optional_param("template", 'blue.html', PARAM_RAW);
         $templatefile = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$template}";
 
         $content = file_get_contents($templatefile);
 
         $linkmanager
             = "<a href='{$CFG->wwwroot}/message/notificationpreferences.php'
-                  target='_blank' style='border-bottom:1px #777777 dotted; text-decoration:none; color:#777777;'>
-                   " . get_string_kopere('notification_manager') . "
+                  target=\"_blank\" style='border-bottom:1px #777777 dotted; text-decoration:none; color:#777777;'>
+                   " . get_string_kopere("notification_manager") . "
                </a>";
 
         $data = [
-            'content' => $content,
-            'tags' => [
-                'moodle_fullname' => $COURSE->fullname,
-                'moodle_shortname' => $COURSE->shortname,
-                'message' => "<h2>Título</h2><p>Linha 1</p><p>Linha 2</p>",
-                'date_year' => userdate(time(), '%Y'),
-                'manager' => $linkmanager,
+            "content" => $content,
+            "tags" => [
+                "moodle_fullname" => $COURSE->fullname,
+                "moodle_shortname" => $COURSE->shortname,
+                "message" => "<h2>Título</h2><p>Linha 1</p><p>Linha 2</p>",
+                "date_year" => userdate(time(), '%Y'),
+                "manager" => $linkmanager,
             ],
         ];
 
@@ -193,39 +193,39 @@ class notificationsutil {
         global $DB;
 
         switch ($component) {
-            case 'core_course_category':
-                return get_string_kopere('notification_core_course_category');
-            case 'core_course':
-                return get_string_kopere('notification_core_course');
-            case 'core_course_completion':
+            case "core_course_category":
+                return get_string_kopere("notification_core_course_category");
+            case "core_course":
+                return get_string_kopere("notification_core_course");
+            case "core_course_completion":
                 return 'Conclusão de Cursos';
-            case 'course_module_created':
+            case "course_module_created":
                 return 'Criação de novo Módulo em Curso';
-            case 'core_course_content':
+            case "core_course_content":
                 return 'Conteúdo de Cursos';
-            case 'core_course_module':
+            case "core_course_module":
                 return 'Módulo de cursos';
-            case 'core_course_section':
+            case "core_course_section":
                 return 'Sessões de cursos';
 
-            case 'core_user':
-                return get_string_kopere('notification_core_user');
-            case 'core_user_enrolment':
-                return get_string_kopere('notification_core_user_enrolment');
-            case 'core_user_password':
-                return 'Senhas';
+            case "core_user":
+                return get_string_kopere("notification_core_user");
+            case "core_user_enrolment":
+                return get_string_kopere("notification_core_user_enrolment");
+            case "core_user_password":
+                return "Senhas";
 
-            case 'local_kopere_dashboard':
-                return get_string_kopere('notification_local_kopere_dashboard');
-            case 'local_kopere_hotmoodle':
-                return get_string_kopere('notification_local_kopere_hotmoodle');
-            case 'local_kopere_moocommerce':
-                return get_string_kopere('notification_local_kopere_moocommerce');
-            case 'local_kopere_pay':
-                return get_string_kopere('notification_local_kopere_pay');
+            case "local_kopere_dashboard":
+                return get_string_kopere("notification_local_kopere_dashboard");
+            case "local_kopere_hotmoodle":
+                return get_string_kopere("notification_local_kopere_hotmoodle");
+            case "local_kopere_moocommerce":
+                return get_string_kopere("notification_local_kopere_moocommerce");
+            case "local_kopere_pay":
+                return get_string_kopere("notification_local_kopere_pay");
         }
 
-        if (strpos($component, 'mod_') === 0) {
+        if (strpos($component, "mod_") === 0) {
             $module = substr($component, 4);
 
             $sql
@@ -234,10 +234,10 @@ class notificationsutil {
                      JOIN {modules} m ON cm.module = m.id
                     WHERE m.name = :name
                       AND cm.deletioninprogress = 0";
-            $count = $DB->get_record_sql($sql, ['name' => $module]);
+            $count = $DB->get_record_sql($sql, ["name" => $module]);
 
             if ($count->num || !$onlyused) {
-                return get_string('resource') . ': ' . get_string('modulename', $module);
+                return get_string("resource") . ': ' . get_string("modulename", $module);
             }
         }
 
@@ -252,16 +252,16 @@ class notificationsutil {
      */
     public static function mensagem_no_smtp() {
         global $CFG;
-        if (strlen(get_config('moodle', 'smtphosts')) > 5) {
+        if (strlen(get_config("moodle", "smtphosts")) > 5) {
             return;
         }
 
         if (release::version() < 3.2) {
-            $CFG->mail = 'messagesettingemail';
-            mensagem::print_danger(get_string_kopere('notification_error_smtp', $CFG));
+            $CFG->mail = "messagesettingemail";
+            mensagem::print_danger(get_string_kopere("notification_error_smtp", $CFG));
         } else {
-            $CFG->mail = 'outgoingmailconfig';
-            mensagem::print_danger(get_string_kopere('notification_error_smtp', $CFG));
+            $CFG->mail = "outgoingmailconfig";
+            mensagem::print_danger(get_string_kopere("notification_error_smtp", $CFG));
         }
     }
 

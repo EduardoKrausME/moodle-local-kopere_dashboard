@@ -81,6 +81,7 @@ class files {
      *
      * @return array
      * @throws \dml_exception
+     * @throws \coding_exception
      */
     public static function list_sizes_courses() {
         global $DB;
@@ -97,8 +98,8 @@ class files {
                        AND ctx.instanceid   = :instanceid
                   GROUP BY ctx.instanceid",
                 [
-                    'contextlevel' => CONTEXT_COURSE,
-                    'instanceid' => $course->id,
+                    "contextlevel" => CONTEXT_COURSE,
+                    "instanceid" => $course->id,
                 ]);
 
             $modulessize = $DB->get_record_sql("
@@ -111,8 +112,8 @@ class files {
                        AND cm.deletioninprogress = 0
                   GROUP BY cm.course",
                 [
-                    'contextlevel' => CONTEXT_MODULE,
-                    'course' => $course->id,
+                    "contextlevel" => CONTEXT_MODULE,
+                    "course" => $course->id,
                 ]);
 
             $coursesizeval = isset($coursesize->coursesize) ? $coursesize->coursesize : 0;

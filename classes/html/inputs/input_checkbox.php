@@ -94,14 +94,14 @@ class input_checkbox extends input_base {
      */
     public function to_string() {
         $inputid = preg_replace('/[\W]/', '', $this->name);
-        $return = "<input id='{$inputid}' name='{$this->name}' type='checkbox' ";
+        $return = "<input id=\"{$inputid}\" name=\"{$this->name}\" type=\"checkbox\" ";
 
         if ($this->value) {
             $value = htmlentities($this->value, ENT_COMPAT);
-            $return .= "value='{$value}' ";
+            $return .= "value=\"{$value}\" ";
         }
         if ($this->style) {
-            $return .= "style='{$this->style}' ";
+            $return .= "style=\"{$this->style}\" ";
         }
         if ($this->checked) {
             $return .= 'checked="checked" ';
@@ -109,7 +109,7 @@ class input_checkbox extends input_base {
 
         $return .= $this->extras;
 
-        $return .= "class='ios-checkbox {$this->class}'>";
+        $return .= "class=\"ios-checkbox {$this->class}\">";
 
         return $return;
     }

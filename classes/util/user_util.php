@@ -58,7 +58,7 @@ class user_util {
      *
      * @return mixed
      */
-    public static function column_fullname($result, $colname = 'fullname') {
+    public static function column_fullname($result, $colname = "fullname") {
         foreach ($result as $key => $row) {
             $row->$colname = fullname($row);
             $result[$key] = $row;
@@ -86,19 +86,19 @@ class user_util {
                 $errors[] = $errmsg;
             }
         } else {
-            $errors[] = get_string('password') . ": " . get_string('required');
+            $errors[] = get_string("password") . ": " . get_string("required");
         }
         if (empty($newuser->username)) {
-            $errors[] = get_string('username') . ": " . get_string('required');
+            $errors[] = get_string("username") . ": " . get_string("required");
         }
         if (!validate_email($newuser->email)) {
-            $errors[] = get_string('invalidemail');
+            $errors[] = get_string("invalidemail");
         } else if (empty($CFG->allowaccountssameemail)
-            && $DB->record_exists('user', [
-                'email' => $newuser->email,
-                'mnethostid' => $CFG->mnet_localhost_id,
+            && $DB->record_exists("user", [
+                "email" => $newuser->email,
+                "mnethostid" => $CFG->mnet_localhost_id,
             ])) {
-            $errors[] = get_string('emailexists');
+            $errors[] = get_string("emailexists");
         }
 
         return implode("<br>", $errors);

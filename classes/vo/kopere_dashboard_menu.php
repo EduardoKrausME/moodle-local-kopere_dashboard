@@ -55,9 +55,9 @@ class kopere_dashboard_menu extends \stdClass {
         $return = new kopere_dashboard_menu();
 
         $return->id = $item->id;
-        $return->link = optional_param('link', $item->link, PARAM_TEXT);
-        $return->title = optional_param('title', $item->title, PARAM_TEXT);
-        $return->menuid = optional_param('menuid', $item->menuid, PARAM_INT);
+        $return->link = optional_param("link", $item->link, PARAM_TEXT);
+        $return->title = optional_param("title", $item->title, PARAM_TEXT);
+        $return->menuid = optional_param("menuid", $item->menuid, PARAM_INT);
 
         return $return;
     }
@@ -72,9 +72,9 @@ class kopere_dashboard_menu extends \stdClass {
         $return = new kopere_dashboard_menu();
 
         $return->id = 0;
-        $return->link = optional_param('link', '', PARAM_TEXT);
-        $return->title = optional_param('title', '', PARAM_TEXT);
-        $return->menuid = optional_param('menuid', 0, PARAM_INT);
+        $return->link = optional_param("link", '', PARAM_TEXT);
+        $return->title = optional_param("title", '', PARAM_TEXT);
+        $return->menuid = optional_param("menuid", 0, PARAM_INT);
 
         return $return;
     }

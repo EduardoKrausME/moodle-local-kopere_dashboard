@@ -48,10 +48,10 @@ class navigation {
             $countpages += 1;
         }
 
-        echo "<span class='pagination-info'>" . get_string_kopere('navigation_page',
-                ['atualPage' => $atualpage, 'countPages' => $countpages]) . "</span>";
+        echo "<span class='pagination-info'>" . get_string_kopere("navigation_page",
+                ["atualPage" => $atualpage, "countPages" => $countpages]) . "</span>";
 
-        echo "<ul class='pagination'>";
+        echo "<ul class=\"pagination\">";
         if ($atualpage != 1) {
             echo "<li><a href='{$baseurl}1' >«</a></li>";
         }
@@ -66,7 +66,7 @@ class navigation {
         $loop = 0;
         for (; $i <= $countpages; $i++) {
             if ($i == $atualpage) {
-                echo "<li class='active'><span>{$i}</span></li>";
+                echo "<li class=\"active\"><span>{$i}</span></li>";
             } else {
                 echo "<li><a href='{$baseurl}{$i}'>{$i}</a></li>";
             }

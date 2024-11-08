@@ -35,50 +35,50 @@ use local_kopere_dashboard\util\config;
 class input_base implements i_input {
 
     /** @var string */
-    const VAL_REQUIRED = 'required';
+    const VAL_REQUIRED = "required";
     /** @var string */
-    const VAL_INT = 'val_int';
+    const VAL_INT = "val_int";
     /** @var string */
-    const VAL_VALOR = 'val_valor';
+    const VAL_VALOR = "val_valor";
     /** @var string */
-    const VAL_PHONE = 'val_phone';
+    const VAL_PHONE = "val_phone";
     /** @var string */
-    const VAL_CELPHONE = 'val_celphone';
+    const VAL_CELPHONE = "val_celphone";
     /** @var string */
-    const VAL_CEP = 'val_cep';
+    const VAL_CEP = "val_cep";
     /** @var string */
-    const VAL_CPF = 'val_cpf';
+    const VAL_CPF = "val_cpf";
     /** @var string */
-    const VAL_CNPJ = 'val_cnpj';
+    const VAL_CNPJ = "val_cnpj";
     /** @var string */
-    const VAL_NOME = 'val_nome';
+    const VAL_NOME = "val_nome";
     /** @var string */
-    const VAL_URL = 'val_url';
+    const VAL_URL = "val_url";
     /** @var string */
-    const VAL_EMAIL = 'val_email';
+    const VAL_EMAIL = "val_email";
     /** @var string */
-    const VAL_PASSWORD = 'val_password';
+    const VAL_PASSWORD = "val_password";
 
     /** @var string */
-    const MASK_PHONE = 'mask_phone';
+    const MASK_PHONE = "mask_phone";
     /** @var string */
-    const MASK_CELULAR = 'mask_celphone';
+    const MASK_CELULAR = "mask_celphone";
     /** @var string */
-    const MASK_CEP = 'mask_cep';
+    const MASK_CEP = "mask_cep";
     /** @var string */
-    const MASK_CPF = 'mask_cpf';
+    const MASK_CPF = "mask_cpf";
     /** @var string */
-    const MASK_CNPJ = 'mask_cnpj';
+    const MASK_CNPJ = "mask_cnpj";
     /** @var string */
-    const MASK_DATAHORA = 'mask_datahora';
+    const MASK_DATAHORA = "mask_datahora";
     /** @var string */
-    const MASK_DATA = 'mask_data';
+    const MASK_DATA = "mask_data";
     /** @var string */
-    const MASK_INT = 'mask_int';
+    const MASK_INT = "mask_int";
     /** @var string */
-    const MASK_VALOR = 'mask_valor';
+    const MASK_VALOR = "mask_valor";
     /** @var string */
-    const MASK_FLOAT = 'mask_float';
+    const MASK_FLOAT = "mask_float";
 
     /** @var  string */
     protected $name = null;

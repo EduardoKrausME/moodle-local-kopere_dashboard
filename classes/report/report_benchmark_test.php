@@ -25,11 +25,11 @@
 
 namespace local_kopere_dashboard\report;
 
-define('BENCHFAIL_SLOWSERVER', 'slowserver');
-define('BENCHFAIL_SLOWPROCESSOR', 'slowprocessor');
-define('BENCHFAIL_SLOWHARDDRIVE', 'slowharddrive');
-define('BENCHFAIL_SLOWDATABASE', 'slowdatabase');
-define('BENCHFAIL_SLOWWEB', 'slowweb');
+define("BENCHFAIL_SLOWSERVER", "slowserver");
+define("BENCHFAIL_SLOWPROCESSOR", "slowprocessor");
+define("BENCHFAIL_SLOWHARDDRIVE", "slowharddrive");
+define("BENCHFAIL_SLOWDATABASE", "slowdatabase");
+define("BENCHFAIL_SLOWWEB", "slowweb");
 
 /**
  * Class report_benchmark_test
@@ -46,11 +46,11 @@ class report_benchmark_test extends report_benchmark {
     public static function cload() {
 
         return [
-            'limit' => .5,
-            'over' => .8,
-            'start' => BENCHSTART,
-            'stop' => BENCHSTOP,
-            'fail' => BENCHFAIL_SLOWSERVER,
+            "limit" => .5,
+            "over" => .8,
+            "start" => BENCHSTART,
+            "stop" => BENCHSTOP,
+            "fail" => BENCHFAIL_SLOWSERVER,
         ];
 
     }
@@ -72,7 +72,7 @@ class report_benchmark_test extends report_benchmark {
             ++$i;
         }
 
-        return ['limit' => .5, 'over' => .8, 'fail' => BENCHFAIL_SLOWPROCESSOR];
+        return ["limit" => .5, "over" => .8, "fail" => BENCHFAIL_SLOWPROCESSOR];
 
     }
 
@@ -84,7 +84,7 @@ class report_benchmark_test extends report_benchmark {
     public static function fileread() {
         global $CFG;
 
-        file_put_contents("{$CFG->tempdir}/benchmark.temp", 'benchmark');
+        file_put_contents("{$CFG->tempdir}/benchmark.temp", "benchmark");
         $i = 0;
         $pass = 2000;
         while ($i < $pass) {
@@ -93,7 +93,7 @@ class report_benchmark_test extends report_benchmark {
         }
         unlink("{$CFG->tempdir}/benchmark.temp");
 
-        return ['limit' => .5, 'over' => .8, 'fail' => BENCHFAIL_SLOWHARDDRIVE];
+        return ["limit" => .5, "over" => .8, "fail" => BENCHFAIL_SLOWHARDDRIVE];
 
     }
 
@@ -125,7 +125,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         }
         unlink("{$CFG->tempdir}/benchmark.temp");
 
-        return ['limit' => 1, 'over' => 1.25, 'fail' => BENCHFAIL_SLOWHARDDRIVE];
+        return ["limit" => 1, "over" => 1.25, "fail" => BENCHFAIL_SLOWHARDDRIVE];
 
     }
 
@@ -142,10 +142,10 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         $pass = 500;
         while ($i < $pass) {
             ++$i;
-            $DB->get_record('course', ['id' => SITEID]);
+            $DB->get_record("course", ["id" => SITEID]);
         }
 
-        return ['limit' => .75, 'over' => 1, 'fail' => BENCHFAIL_SLOWDATABASE];
+        return ["limit" => .75, "over" => 1, "fail" => BENCHFAIL_SLOWDATABASE];
 
     }
 
@@ -162,7 +162,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         $newrecord = new \stdClass();
         $newrecord->shortname = "!!!BENCH-{$uniq}";
         $newrecord->fullname = "!!!BENCH-{$uniq}";
-        $newrecord->format = 'site';
+        $newrecord->format = "site";
         $newrecord->visible = 0;
         $newrecord->sortorder = 0;
 
@@ -170,12 +170,12 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         $pass = 25;
         while ($i < $pass) {
             ++$i;
-            $DB->insert_record('course', $newrecord);
+            $DB->insert_record("course", $newrecord);
         }
-        $DB->delete_records('course', ['shortname' => $newrecord->shortname]);
+        $DB->delete_records("course", ["shortname" => $newrecord->shortname]);
         unset($newrecord);
 
-        return ['limit' => 1, 'over' => 1.25, 'fail' => BENCHFAIL_SLOWDATABASE];
+        return ["limit" => 1, "over" => 1.25, "fail" => BENCHFAIL_SLOWDATABASE];
 
     }
 
@@ -239,7 +239,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             $DB->get_records_sql($sql);
         }
 
-        return ['limit' => .5, 'over' => .7, 'fail' => BENCHFAIL_SLOWDATABASE];
+        return ["limit" => .5, "over" => .7, "fail" => BENCHFAIL_SLOWDATABASE];
 
     }
 
@@ -276,7 +276,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             $DB->get_records_sql($sql);
         }
 
-        return ['limit' => .3, 'over' => .5, 'fail' => BENCHFAIL_SLOWDATABASE];
+        return ["limit" => .3, "over" => .5, "fail" => BENCHFAIL_SLOWDATABASE];
 
     }
 
@@ -288,10 +288,10 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
     public static function loginguest() {
         global $CFG;
 
-        $fakeuser = ['username' => 'guest', 'password' => 'guest'];
+        $fakeuser = ["username" => "guest", "password" => "guest"];
         download_file_content("{$CFG->wwwroot}/login/index.php", null, $fakeuser, true);
 
-        return ['limit' => .3, 'over' => .8, 'fail' => BENCHFAIL_SLOWWEB];
+        return ["limit" => .3, "over" => .8, "fail" => BENCHFAIL_SLOWWEB];
 
     }
 
@@ -306,25 +306,25 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
 
         // Create a fake user.
         $user = new \stdClass();
-        $user->auth = 'manual';
+        $user->auth = "manual";
         $user->confirmed = 1;
         $user->mnethostid = 1;
         $user->email = 'benchtest@benchtest.com';
-        $user->username = 'benchtest';
-        $user->password = md5('benchtest');
-        $user->lastname = 'benchtest';
-        $user->firstname = 'benchtest';
-        $user->id = $DB->insert_record('user', $user);
+        $user->username = "benchtest";
+        $user->password = md5("benchtest");
+        $user->lastname = "benchtest";
+        $user->firstname = "benchtest";
+        $user->id = $DB->insert_record("user", $user);
 
         // Download login page.
-        $fakeuser = ['username' => $user->username, 'password' => 'benchtest'];
+        $fakeuser = ["username" => $user->username, "password" => "benchtest"];
         download_file_content("{$CFG->wwwroot}/login/index.php", null, $fakeuser, true);
 
         // Delete fake user.
-        $DB->delete_records('user', ['id' => $user->id]);
+        $DB->delete_records("user", ["id" => $user->id]);
         unset($user);
 
-        return ['limit' => .3, 'over' => .8, 'fail' => BENCHFAIL_SLOWWEB];
+        return ["limit" => .3, "over" => .8, "fail" => BENCHFAIL_SLOWWEB];
 
     }
 
@@ -336,21 +336,21 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * @throws \dml_exception
      */
     public static function themedesignermode() {
-        $config = get_config('moodle', 'themedesignermode');
+        $config = get_config("moodle", "themedesignermode");
         if (!$config) {
             $class = 'bg-success';
-            $resposta = get_string('disabled', 'report_performance');
+            $resposta = get_string("disabled", "report_performance");
         } else {
             $class = 'bg-danger';
-            $resposta = get_string('enabled', 'report_performance');
+            $resposta = get_string("enabled", "report_performance");
         }
 
         return [
-            'title' => get_string('themedesignermode', 'admin'),
-            'class' => $class,
-            'resposta' => $resposta,
-            'description' => get_string('check_themedesignermode_comment_disable', 'report_performance'),
-            'url' => 'search.php?query=themedesignermode',
+            "title" => get_string("themedesignermode", "admin"),
+            "class" => $class,
+            "resposta" => $resposta,
+            "description" => get_string("check_themedesignermode_comment_disable", "report_performance"),
+            "url" => 'search.php?query=themedesignermode',
         ];
     }
 
@@ -362,21 +362,21 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * @throws \dml_exception
      */
     public static function cachejs() {
-        $config = get_config('moodle', 'cachejs');
+        $config = get_config("moodle", "cachejs");
         if (!$config) {
             $class = 'bg-danger';
-            $resposta = get_string('disabled', 'report_performance');
+            $resposta = get_string("disabled", "report_performance");
         } else {
             $class = 'bg-success';
-            $resposta = get_string('enabled', 'report_performance');
+            $resposta = get_string("enabled", "report_performance");
         }
 
         return [
-            'title' => get_string('cachejs', 'admin'),
-            'class' => $class,
-            'resposta' => $resposta,
-            'description' => get_string('check_cachejs_comment_enable', 'report_performance'),
-            'url' => 'search.php?query=cachejs',
+            "title" => get_string("cachejs", "admin"),
+            "class" => $class,
+            "resposta" => $resposta,
+            "description" => get_string("check_cachejs_comment_enable", "report_performance"),
+            "url" => 'search.php?query=cachejs',
         ];
     }
 
@@ -388,7 +388,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * @throws \dml_exception
      */
     public static function debug() {
-        $config = get_config('moodle', 'debug');
+        $config = get_config("moodle", "debug");
         if ($config == 0) {
             $class = 'bg-success';
         } else {
@@ -397,25 +397,25 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
 
         $resposta = '';
         if ($config == 0) {
-            $resposta = get_string('debugnone', 'admin');
+            $resposta = get_string("debugnone", "admin");
         } else if ($config <= 5) {
-            $resposta = get_string('debugminimal', 'admin');
+            $resposta = get_string("debugminimal", "admin");
         } else if ($config <= 15) {
-            $resposta = get_string('debugnormal', 'admin');
+            $resposta = get_string("debugnormal", "admin");
         } else if ($config <= 30719) {
-            $resposta = get_string('debugall', 'admin');
+            $resposta = get_string("debugall", "admin");
             $class = 'bg-danger';
         } else if ($config <= 32767) {
-            $resposta = get_string('debugdeveloper', 'admin');
+            $resposta = get_string("debugdeveloper", "admin");
             $class = 'bg-danger';
         }
 
         return [
-            'title' => get_string('debug', 'admin'),
-            'class' => $class,
-            'resposta' => $resposta,
-            'description' => get_string('check_debugmsg_comment_nodeveloper', 'report_performance'),
-            'url' => 'settings.php?section=debugging',
+            "title" => get_string("debug", "admin"),
+            "class" => $class,
+            "resposta" => $resposta,
+            "description" => get_string("check_debugmsg_comment_nodeveloper", "report_performance"),
+            "url" => 'settings.php?section=debugging',
         ];
     }
 
@@ -427,26 +427,26 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * @throws \dml_exception
      */
     public static function backup_auto_active() {
-        $config = get_config('backup', 'backup_auto_active');
+        $config = get_config("backup", "backup_auto_active");
 
         $class = $resposta = '';
         if ($config == 0) {
             $class = 'bg-success';
-            $resposta = get_string('autoactivedisabled', 'backup');
+            $resposta = get_string("autoactivedisabled", "backup");
         } else if ($config == 1) {
             $class = 'bg-danger';
-            $resposta = get_string('autoactiveenabled', 'backup');
+            $resposta = get_string("autoactiveenabled", "backup");
         } else if ($config == 2) {
             $class = 'bg-warning';
-            $resposta = get_string('autoactivemanual', 'backup');
+            $resposta = get_string("autoactivemanual", "backup");
         }
 
         return [
-            'title' => get_string('check_backup', 'report_performance'),
-            'class' => $class,
-            'resposta' => $resposta,
-            'description' => get_string('check_backup_comment_disable', 'report_performance'),
-            'url' => 'search.php?query=backup_auto_active',
+            "title" => get_string("check_backup", "report_performance"),
+            "class" => $class,
+            "resposta" => $resposta,
+            "description" => get_string("check_backup_comment_disable", "report_performance"),
+            "url" => 'search.php?query=backup_auto_active',
         ];
     }
 
@@ -458,21 +458,21 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * @throws \dml_exception
      */
     public static function enablestats() {
-        $config = get_config('backup', 'enablestats');
+        $config = get_config("backup", "enablestats");
         if (!$config == 1) {
             $class = 'bg-success';
-            $resposta = get_string('disabled', 'report_performance');
+            $resposta = get_string("disabled", "report_performance");
         } else {
             $class = 'bg-danger';
-            $resposta = get_string('enabled', 'report_performance');
+            $resposta = get_string("enabled", "report_performance");
         }
 
         return [
-            'title' => get_string('enablestats', 'admin'),
-            'class' => $class,
-            'resposta' => $resposta,
-            'description' => get_string('check_enablestats_comment_disable', 'report_performance'),
-            'url' => 'search.php?query=enablestats',
+            "title" => get_string("enablestats", "admin"),
+            "class" => $class,
+            "resposta" => $resposta,
+            "description" => get_string("check_enablestats_comment_disable", "report_performance"),
+            "url" => 'search.php?query=enablestats',
         ];
     }
 }

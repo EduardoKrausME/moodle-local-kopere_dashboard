@@ -35,7 +35,7 @@ class input_date_range extends input_base {
      * input_date_range constructor.
      */
     public function __construct() {
-        $this->set_type('text');
+        $this->set_type("text");
     }
 
     /**

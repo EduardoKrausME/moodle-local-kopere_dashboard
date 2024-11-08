@@ -38,7 +38,7 @@ class db_course_access extends \core\task\scheduled_task {
      * @throws \coding_exception
      */
     public function get_name() {
-        return get_string('crontask_db_report_login', 'local_kopere_dashboard');
+        return get_string("crontask_db_report_login", "local_kopere_dashboard");
     }
 
     /**
@@ -49,7 +49,7 @@ class db_course_access extends \core\task\scheduled_task {
     public function execute() {
         global $DB, $CFG;
 
-        if ($CFG->dbtype == 'pgsql') {
+        if ($CFG->dbtype == "pgsql") {
             $reportsql = "
                 SELECT CONCAT(courseid::text, userid::text, contextinstanceid::text) AS a, COUNT(*) AS contagem,
                        courseid, userid, contextinstanceid, timecreated

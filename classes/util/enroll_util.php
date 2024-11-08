@@ -57,7 +57,7 @@ class enroll_util {
             return false;
         }
 
-        $enrol = $DB->get_record('enrol', ['courseid' => $course->id, 'enrol' => 'manual'], '*', IGNORE_MULTIPLE);
+        $enrol = $DB->get_record("enrol", ["courseid" => $course->id, "enrol" => "manual"], '*', IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
         }
@@ -82,20 +82,20 @@ class enroll_util {
             return false;
         }
 
-        $enrol = $DB->get_record('enrol',
-            ['courseid' => $course->id, 'enrol' => 'manual'], '*', IGNORE_MULTIPLE);
+        $enrol = $DB->get_record("enrol",
+            ["courseid" => $course->id, "enrol" => "manual"], '*', IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
         }
 
-        $testroleassignments = $DB->get_record('role_assignments',
-            ['roleid' => 5, 'contextid' => $context->id, 'userid' => $user->id], '*', IGNORE_MULTIPLE);
+        $testroleassignments = $DB->get_record("role_assignments",
+            ["roleid" => 5, "contextid" => $context->id, "userid" => $user->id], '*', IGNORE_MULTIPLE);
         if ($testroleassignments == null) {
             return false;
         }
 
-        $userenrolments = $DB->get_record('user_enrolments',
-            ['enrolid' => $enrol->id, 'userid' => $user->id], '*', IGNORE_MULTIPLE);
+        $userenrolments = $DB->get_record("user_enrolments",
+            ["enrolid" => $enrol->id, "userid" => $user->id], '*', IGNORE_MULTIPLE);
         if ($userenrolments != null) {
             return !$userenrolments->status;
         } else {
@@ -121,7 +121,7 @@ class enroll_util {
         $cohortmembers->userid = $userid;
         $cohortmembers->timeadded = time();
 
-        $DB->insert_record('cohort_members', $cohortmembers);
+        $DB->insert_record("cohort_members", $cohortmembers);
     }
 
     /**
@@ -140,7 +140,7 @@ class enroll_util {
             "cohortid" => $coorteid,
             "userid" => $userid,
         ];
-        $DB->delete_records('cohort_members', $cohortmembers);
+        $DB->delete_records("cohort_members", $cohortmembers);
     }
 
     /**
@@ -167,7 +167,7 @@ class enroll_util {
     public static function enrol($course, $user, $timestart = 0, $timeend = 0, $roleid = 5) {
         global $DB, $PAGE, $CFG;
 
-        $enrol = $DB->get_record('enrol', ['courseid' => $course->id, 'enrol' => 'manual']);
+        $enrol = $DB->get_record("enrol", ["courseid" => $course->id, "enrol" => "manual"]);
         if (!$enrol) {
             return false;
         }
@@ -195,6 +195,8 @@ class enroll_util {
         } else {
             return false;
         }
+
+        return false;
     }
 
     /**
@@ -209,12 +211,12 @@ class enroll_util {
     public static function unenrol($course, $user) {
         global $DB, $PAGE, $CFG;
 
-        $enrol = $DB->get_record('enrol', ['courseid' => $course->id, 'enrol' => 'manual']);
+        $enrol = $DB->get_record("enrol", ["courseid" => $course->id, "enrol" => "manual"]);
         if (!$enrol) {
             return false;
         }
 
-        $userenrolment = $DB->get_record('user_enrolments', ['userid' => $user->id, 'enrolid' => $enrol->id]);
+        $userenrolment = $DB->get_record("user_enrolments", ["userid" => $user->id, "enrolid" => $enrol->id]);
 
         require_once("{$CFG->dirroot}/enrol/locallib.php");
         $manager = new course_enrolment_manager($PAGE, $course);

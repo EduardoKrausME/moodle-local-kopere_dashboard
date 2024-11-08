@@ -35,7 +35,7 @@ class input_email extends input_base {
      * input_email constructor.
      */
     public function __construct() {
-        $this->set_type('email');
+        $this->set_type("email");
     }
 
     /**

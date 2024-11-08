@@ -61,7 +61,7 @@ class report_foreach {
             return '';
         }
 
-        $allnames = ['firstnamephonetic', 'lastnamephonetic', 'middlename', 'alternatename', 'firstname', 'lastname'];
+        $allnames = ["firstnamephonetic", "lastnamephonetic", "middlename", "alternatename", "firstname", "lastname"];
 
         if (!empty($SESSION->fullnamedisplay)) {
             $CFG->fullnamedisplay = $SESSION->fullnamedisplay;
@@ -73,8 +73,8 @@ class report_foreach {
             $template = $CFG->fullnamedisplay;
         }
         // If the template is empty, or set to language, return the language string.
-        if ((empty($template) || $template == 'language')) {
-            return get_string('fullnamedisplay', null, $user);
+        if ((empty($template) || $template == "language")) {
+            return get_string("fullnamedisplay", null, $user);
         }
 
         $requirednames = [];
@@ -91,19 +91,19 @@ class report_foreach {
             if (isset($user->$altname)) {
                 // Using empty() on the below if statement causes breakages.
                 if ((string)$user->$altname == '') {
-                    $displayname = str_replace($altname, 'EMPTY', $displayname);
+                    $displayname = str_replace($altname, "EMPTY", $displayname);
                 } else {
                     $displayname = str_replace($altname, $user->$altname, $displayname);
                 }
             } else {
-                $displayname = str_replace($altname, 'EMPTY', $displayname);
+                $displayname = str_replace($altname, "EMPTY", $displayname);
             }
         }
         // Tidy up any misc. characters (Not perfect, but gets most characters).
         // Don't remove the "u" at the end of the first expression unless you want garbled characters when combining hiragana or
         // katakana and parenthesis.
         $patterns = [];
-        // This regular expression replacement is to fix problems such as 'James () Kirk' Where 'Tiberius' (middlename) has not been
+        // This regular expression replacement is to fix problems such as 'James () Kirk' Where "Tiberius" (middlename) has not been
         // filled in by a user.
         // The special characters are Japanese brackets that are common enough to make allowances for them (not covered by :punct:).
         $patterns[] = '/[[:punct:]「」]*EMPTY[[:punct:]「」]*/u';
@@ -146,17 +146,17 @@ class report_foreach {
                 $item->context = 'Função';
                 break;
             case 1:
-                $item->context = 'Atividade';
+                $item->context = "Atividade";
                 break;
             case 2:
                 $item->context = 'Duração';
                 break;
             case 3:
-                $item->context = 'Nota';
+                $item->context = "Nota";
                 break;
             case 4:
             case 6:
-                $item->context = 'Curso';
+                $item->context = "Curso";
                 break;
             case 5:
                 $item->context = 'Conjunto de cursos';
@@ -165,7 +165,7 @@ class report_foreach {
                 $item->context = 'Preenchimento do Emblema';
                 break;
             case 8:
-                $item->context = 'Coorte';
+                $item->context = "Coorte";
                 break;
             case 9:
                 $item->context = 'Competência';
@@ -175,10 +175,10 @@ class report_foreach {
         }
 
         if ($item->type == 1) {
-            $item->context = 'Sistema';
+            $item->context = "Sistema";
         }
         if ($item->type == 1) {
-            $item->context = 'Curso';
+            $item->context = "Curso";
         }
 
         return $item;
@@ -193,7 +193,7 @@ class report_foreach {
      * @throws \coding_exception
      */
     public static function badge_criteria_type($item) {
-        $item->criteriatype = get_string("criteria_{$item->criteriatype}", 'badges');
+        $item->criteriatype = get_string("criteria_{$item->criteriatype}", "badges");
         $item->name = fullname($item);
 
         return $item;
@@ -209,11 +209,11 @@ class report_foreach {
      */
     public static function courses_group_mode($item) {
         if ($item->groupmode == 0) {
-            $item->groupname = get_string('groupsnone', 'group');
+            $item->groupname = get_string("groupsnone", "group");
         } else if ($item->groupmode == 1) {
-            $item->groupname = get_string('groupsseparate', 'group');
+            $item->groupname = get_string("groupsseparate", "group");
         } else if ($item->groupmode == 2) {
-            $item->groupname = get_string('groupsvisible', 'group');
+            $item->groupname = get_string("groupsvisible", "group");
         }
 
         return $item;

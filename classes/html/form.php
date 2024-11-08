@@ -46,7 +46,7 @@ class form {
     public function __construct($formaction = null, $classextra = '') {
         $this->formaction = $formaction;
         if ($this->formaction) {
-            echo "<form method='post' class='validate {$classextra}' enctype='multipart/form-data'
+            echo "<form method=\"post\" class='validate {$classextra}' enctype='multipart/form-data'
                         action='{$this->formaction}' >";
             echo '<div class="displayErroForm alert alert-danger" style="display: none;"><span></span></div>';
             echo '<input name="POST" type="hidden" value="true" />';
@@ -145,7 +145,7 @@ class form {
      * @param string $value
      */
     public function create_hidden_input($name, $value = '') {
-        echo "<input type='hidden' name='{$name}' id='{$name}' value='" .
+        echo "<input type=\"hidden\" name='{$name}' id='{$name}' value='" .
             htmlspecialchars($value, ENT_COMPAT) . "'/>";
     }
 
@@ -161,13 +161,13 @@ class form {
     public function create_submit_input($value = '', $class = '', $additionaltext = '') {
         if (AJAX_SCRIPT) {
             echo "<div class='modal-footer margin-form'>
-                      <button class='btn btn-default' data-dismiss='modal'>" . get_string('cancel') . "</button>
-                      <input type='submit' class='btn btn-primary margin-left-15' value='{$value}'>
+                      <button class='btn btn-default' data-dismiss=\"modal\">" . get_string("cancel") . "</button>
+                      <input type=\"submit\" class='btn btn-primary margin-left-15' value='{$value}'>
                   </div>";
         } else {
-            $html = "<input name='' class='btn btn-success bt-submit {$class}' type='submit' value='" .
+            $html = "<input name='' class='btn btn-success bt-submit {$class}' type=\"submit\" value='" .
                 htmlspecialchars($value, ENT_COMPAT) . "' />";
-            $this->print_row('', $html, 'btsubmit', $additionaltext);
+            $this->print_row('', $html, "btsubmit", $additionaltext);
         }
     }
 
@@ -187,9 +187,9 @@ class form {
      */
     public function close_and_auto_submit_input($campo) {
         global $PAGE;
-        echo "<input id='submit_{$campo}' name='' type='submit' style='display: none;' />";
+        echo "<input id='submit_{$campo}' name='' type=\"submit\" style='display: none;' />";
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', 'form_close_and_auto_submit_input', [$campo]);
+        $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', "form_close_and_auto_submit_input", [$campo]);
 
         $this->close();
     }
@@ -201,7 +201,7 @@ class form {
      * @throws \coding_exception
      */
     public static function check_post() {
-        return optional_param('POST', false, PARAM_TEXT);
+        return optional_param("POST", false, PARAM_TEXT);
 
     }
 }

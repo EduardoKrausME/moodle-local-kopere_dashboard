@@ -101,47 +101,47 @@ class send_events {
         $this->message = $this->replace_date($this->message);
 
         $COURSE->wwwroot = $CFG->wwwroot;
-        $COURSE->link = "<a href='{$CFG->wwwroot}' target='_blank'>{$CFG->wwwroot}</a>";
+        $COURSE->link = "<a href='{$CFG->wwwroot}' target=\"_blank\">{$CFG->wwwroot}</a>";
         $COURSE->url = $CFG->wwwroot;
 
         // Moodle: {[moodle.???]}.
-        $this->subject = $this->replace_tag($this->subject, $COURSE, 'moodle');
-        $this->message = $this->replace_tag($this->message, $COURSE, 'moodle');
+        $this->subject = $this->replace_tag($this->subject, $COURSE, "moodle");
+        $this->message = $this->replace_tag($this->message, $COURSE, "moodle");
 
         // Events: {[event.???]}.
-        $this->subject = $this->replace_tag($this->subject, $this->event, 'event');
-        $this->message = $this->replace_tag($this->message, $this->event, 'event');
+        $this->subject = $this->replace_tag($this->subject, $this->event, "event");
+        $this->message = $this->replace_tag($this->message, $this->event, "event");
 
         $courseid = 0;
-        if ($this->event->objecttable == 'course') {
+        if ($this->event->objecttable == "course") {
             $courseid = $this->event->objectid;
-        } else if (isset($this->event->other) && isset($this->event->other['courseid'])) {
-            $courseid = $this->event->other['courseid'];
+        } else if (isset($this->event->other) && isset($this->event->other["courseid"])) {
+            $courseid = $this->event->other["courseid"];
         }
 
-        if ($this->event->objecttable == 'user') {
-            $usertarget = $DB->get_record('user', ['id' => $this->event->objectid]);
+        if ($this->event->objecttable == "user") {
+            $usertarget = $DB->get_record("user", ["id" => $this->event->objectid]);
 
-            $this->subject = $this->replace_tag_user($this->subject, $usertarget, 'usertarget');
-            $this->message = $this->replace_tag_user($this->message, $usertarget, 'usertarget');
+            $this->subject = $this->replace_tag_user($this->subject, $usertarget, "usertarget");
+            $this->message = $this->replace_tag_user($this->message, $usertarget, "usertarget");
         }
 
         if ($courseid) {
-            $course = $DB->get_record('course', ['id' => $courseid]);
+            $course = $DB->get_record("course", ["id" => $courseid]);
 
             $course->link
                 = "<a href='{$CFG->wwwroot}/course/view.php?id={$courseid}'
-                      target='_blank'>{$CFG->wwwroot}/course/view.php?id={$courseid}</a>";
+                      target=\"_blank\">{$CFG->wwwroot}/course/view.php?id={$courseid}</a>";
             $course->url = "{$CFG->wwwroot}/course/view.php?id={$courseid}";
 
-            $this->subject = $this->replace_tag($this->subject, $course, 'course');
-            $this->message = $this->replace_tag($this->message, $course, 'course');
+            $this->subject = $this->replace_tag($this->subject, $course, "course");
+            $this->message = $this->replace_tag($this->message, $course, "course");
         }
 
         // De: {[from.???]}.
         $userfrom = null;
         switch ($this->koperedashboardevents->userfrom) {
-            case 'admin':
+            case "admin":
                 $userfrom = get_admin();
                 break;
         }
@@ -150,25 +150,25 @@ class send_events {
         }
 
         $userfrom->fullname = fullname($userfrom);
-        $this->subject = $this->replace_tag_user($this->subject, $userfrom, 'from');
-        $this->message = $this->replace_tag_user($this->message, $userfrom, 'from');
+        $this->subject = $this->replace_tag_user($this->subject, $userfrom, "from");
+        $this->message = $this->replace_tag_user($this->message, $userfrom, "from");
 
         // Admins: {[admin.???]}.
         $admin = get_admin();
         $admin->fullname = fullname($admin);
-        $this->subject = $this->replace_tag_user($this->subject, $admin, 'admin');
-        $this->message = $this->replace_tag_user($this->message, $admin, 'admin');
+        $this->subject = $this->replace_tag_user($this->subject, $admin, "admin");
+        $this->message = $this->replace_tag_user($this->message, $admin, "admin");
 
         // Para: {[to.???]}.
         $usersto = [];
         switch ($this->koperedashboardevents->userto) {
-            case 'admin':
+            case "admin":
                 $usersto = [get_admin()];
                 break;
-            case 'admins':
+            case "admins":
                 $usersto = get_admins();
                 break;
-            case 'teachers':
+            case "teachers":
                 if ($courseid) {
                     $sql
                         = "SELECT u.*
@@ -181,21 +181,21 @@ class send_events {
                                    AND c.id            = :courseid ";
                     $usersto = $DB->get_records_sql($sql,
                         [
-                            'contextlevel' => CONTEXT_COURSE,
-                            'courseid' => $courseid,
+                            "contextlevel" => CONTEXT_COURSE,
+                            "courseid" => $courseid,
                         ]);
                 }
                 break;
-            case 'student':
-                $usersto = $DB->get_records('user', ['id' => $this->event->relateduserid]);
+            case "student":
+                $usersto = $DB->get_records("user", ["id" => $this->event->relateduserid]);
                 break;
         }
 
         foreach ($usersto as $userto) {
             $userto->fullname = fullname($userto);
 
-            if (isset($this->event->other['password'])) {
-                $userto->password = $this->event->other['password'];
+            if (isset($this->event->other["password"])) {
+                $userto->password = $this->event->other["password"];
             } else if (strpos($this->message, '{[to.password]}')) {
                 $newpassword = $this->login_generate_password($userto);
                 $userto->password = "{$CFG->wwwroot}/login/forgot_password.php?token={$newpassword}";
@@ -203,8 +203,8 @@ class send_events {
                 $userto->password = $USER->tmp_password;
             }
 
-            $sendsubject = $this->replace_tag_user($this->subject, $userto, 'to');
-            $htmlmessage = $this->replace_tag_user($this->message, $userto, 'to');
+            $sendsubject = $this->replace_tag_user($this->subject, $userto, "to");
+            $htmlmessage = $this->replace_tag_user($this->message, $userto, "to");
 
             $magager = "<a href='{$CFG->wwwroot}/message/notificationpreferences.php'>Gerenciar mensagens</a>";
             $htmlmessage = str_replace('{[manager]}', $magager, $htmlmessage);
@@ -212,10 +212,10 @@ class send_events {
             $eventdata = new message();
             if (release::version() >= 3.2) {
                 $eventdata->courseid = SITEID;
-                $eventdata->modulename = 'moodle';
+                $eventdata->modulename = "moodle";
             }
-            $eventdata->component = 'local_kopere_dashboard';
-            $eventdata->name = 'kopere_dashboard_messages';
+            $eventdata->component = "local_kopere_dashboard";
+            $eventdata->name = "kopere_dashboard_messages";
             $eventdata->userfrom = $userfrom;
             $eventdata->userto = $userto;
             $eventdata->subject = $sendsubject;
@@ -254,12 +254,12 @@ class send_events {
         preg_match_all("/\{\[date\.(\w+)\]\}/", $text, $textkeys);
 
         $itens = [
-            'year' => 'Y',
-            'month' => 'm',
-            'day' => 'd',
-            'hour' => 'H',
-            'minute' => 'i',
-            'second' => 's',
+            "year" => "Y",
+            "month" => "m",
+            "day" => "d",
+            "hour" => "H",
+            "minute" => "i",
+            "second" => "s",
         ];
 
         foreach ($textkeys[1] as $key => $textkey) {
@@ -346,7 +346,7 @@ class send_events {
             "token" => random_string(32),
         ];
 
-        $DB->insert_record('user_password_resets', $resetrecord);
+        $DB->insert_record("user_password_resets", $resetrecord);
         return $resetrecord->token;
     }
 }

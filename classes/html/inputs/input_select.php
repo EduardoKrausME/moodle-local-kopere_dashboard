@@ -45,7 +45,7 @@ class input_select extends input_base {
      * input_select constructor.
      */
     public function __construct() {
-        $this->set_type('select');
+        $this->set_type("select");
     }
 
     /**
@@ -75,7 +75,7 @@ class input_select extends input_base {
      *
      * @return $this
      */
-    public function set_values($values, $key = 'key', $value = 'value') {
+    public function set_values($values, $key = "key", $value = "value") {
         $this->values = $values;
         $this->valueskey = $key;
         $this->valuesvalue = $value;
@@ -129,7 +129,7 @@ class input_select extends input_base {
                 $key = $row[$this->valueskey];
                 $value = $row[$this->valuesvalue];
 
-                if (isset($row['disableselect']) && $row['disableselect']) {
+                if (isset($row["disableselect"]) && $row["disableselect"]) {
                     $extra = ' disabled="disabled"';
                 }
             } else {

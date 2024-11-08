@@ -40,9 +40,9 @@ class string_util {
      * @return string
      */
     public static function generate_random_string($length = 10) {
-        $characters = '123456789';
-        $characters .= 'ABCDEFGHJKMNPQRSTUVWXYZ';
-        $characters .= 'abcdefghjkmnpqrstuvwxyz';
+        $characters = "123456789";
+        $characters .= "ABCDEFGHJKMNPQRSTUVWXYZ";
+        $characters .= "abcdefghjkmnpqrstuvwxyz";
 
         $lengthstring = strlen($characters);
         $string = '';
@@ -62,9 +62,9 @@ class string_util {
      * @return string
      */
     public static function generate_random_password($length = 10) {
-        $characters = '123456789';
-        $characters .= 'ABCDEFGHJKMNPQRSTUVWXYZ';
-        $characters .= 'abcdefghjkmnpqrstuvwxyz';
+        $characters = "123456789";
+        $characters .= "ABCDEFGHJKMNPQRSTUVWXYZ";
+        $characters .= "abcdefghjkmnpqrstuvwxyz";
         $characters .= '!@#$%*()+=-{}[]:;<>?~!@#$%*()+=-{}[]:;<>?~';
 
         $lengthstring = strlen($characters);

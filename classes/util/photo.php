@@ -41,7 +41,7 @@ class photo {
      */
     public static function get_photo_user($userid) {
         global $DB, $PAGE;
-        $user = $DB->get_record('user', ['id' => $userid]);
+        $user = $DB->get_record("user", ["id" => $userid]);
 
         $userpicture = new \user_picture($user);
         $userpicture->size = 1;

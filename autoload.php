@@ -42,7 +42,7 @@ spl_autoload_register("kopere_dashboard_autoload");
 function kopere_dashboard_autoload($classname) {
     global $CFG;
 
-    if (strpos($classname, 'kopere') === false) {
+    if (strpos($classname, "kopere") === false) {
         return;
     }
 
@@ -64,15 +64,15 @@ function kopere_dashboard_autoload($classname) {
  * @throws coding_exception
  */
 function load_class() {
-    $classname = optional_param('classname', false, PARAM_TEXT);
-    $method = optional_param('method', '', PARAM_TEXT);
+    $classname = optional_param("classname", false, PARAM_TEXT);
+    $method = optional_param("method", '', PARAM_TEXT);
     if (!$classname) {
-        $classname = 'dashboard';
-        $method = 'start';
+        $classname = "dashboard";
+        $method = "start";
     }
 
     if (strpos($classname, '-')) {
-        $class = 'local_kopere_' . str_replace('-', '\\', $classname);
+        $class = "local_kopere_" . str_replace('-', '\\', $classname);
     } else {
         $class = 'local_kopere_dashboard\\' . $classname;
     }
@@ -90,8 +90,8 @@ function load_class() {
  * @throws coding_exception
  */
 function get_path_query() {
-    $classname = optional_param('classname', '', PARAM_TEXT);
-    $method = optional_param('method', '', PARAM_TEXT);
+    $classname = optional_param("classname", '', PARAM_TEXT);
+    $method = optional_param("method", '', PARAM_TEXT);
     return $classname . "-{$method}";
 }
 
@@ -105,5 +105,5 @@ function get_path_query() {
  * @throws coding_exception
  */
 function get_string_kopere($identifier, $object = null) {
-    return get_string($identifier, 'local_kopere_dashboard', $object);
+    return get_string($identifier, "local_kopere_dashboard", $object);
 }

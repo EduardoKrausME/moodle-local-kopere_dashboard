@@ -54,39 +54,39 @@ class reports_admin {
     public function editar() {
         global $DB;
 
-        dashboard_util::add_breadcrumb(get_string_kopere('reports_settings_title'));
+        dashboard_util::add_breadcrumb(get_string_kopere("reports_settings_title"));
         dashboard_util::start_page();
 
         echo '<div class="element-box">';
 
-        $report = optional_param('report', 0, PARAM_INT);
+        $report = optional_param("report", 0, PARAM_INT);
         if ($report == -1) {
-            $reportcat = optional_param('reportcat', 0, PARAM_INT);
+            $reportcat = optional_param("reportcat", 0, PARAM_INT);
 
             $koperereports = new kopere_dashboard_reports();
             $koperereports->reportcatid = $reportcat;
 
         } else {
             /** @var kopere_dashboard_reports $koperereports */
-            $koperereports = $DB->get_record('kopere_dashboard_reports',
-                ['id' => $report]);
-            header::notfound_null($koperereports, get_string_kopere('reports_notfound'));
+            $koperereports = $DB->get_record("kopere_dashboard_reports",
+                ["id" => $report]);
+            header::notfound_null($koperereports, get_string_kopere("reports_notfound"));
         }
 
         $form = new form(local_kopere_dashboard_makeurl("reports", "save", ["report" => $report]));
 
-        $form->create_hidden_input('reportcatid', $koperereports->reportcatid);
+        $form->create_hidden_input("reportcatid", $koperereports->reportcatid);
 
         $form->add_input(
             input_text::new_instance()
-                ->set_title(get_string_kopere('reports_settings_form_title'))
-                ->set_name('title')
+                ->set_title(get_string_kopere("reports_settings_form_title"))
+                ->set_name("title")
                 ->set_value($koperereports->title));
 
         $form->add_input(
             input_checkbox_select::new_instance()
-                ->set_title(get_string_kopere('reports_settings_form_enable'))
-                ->set_name('enable')
+                ->set_title(get_string_kopere("reports_settings_form_enable"))
+                ->set_name("enable")
                 ->set_checked($koperereports->enable));
 
         $columns = json_decode($koperereports->columns);
@@ -110,10 +110,10 @@ class reports_admin {
             if (isset($colum->description)) {
                 mensagem::print_info(get_string_kopere($colum->description));
             }
-            echo "<div class='row'><div class='col-5'>";
+            echo "<div class=\"row\"><div class='col-5'>";
             $form->add_input(
                 input_text::new_instance()
-                    ->set_title(get_string_kopere('reports_settings_form_colunas_title'))
+                    ->set_title(get_string_kopere("reports_settings_form_colunas_title"))
                     ->set_name("columns[{$id}][title]")
                     ->set_value($colum->title));
 
@@ -121,7 +121,7 @@ class reports_admin {
 
             $form->add_input(
                 input_text::new_instance()
-                    ->set_title(get_string_kopere('reports_settings_form_colunas_chave'))
+                    ->set_title(get_string_kopere("reports_settings_form_colunas_chave"))
                     ->set_name("columns[{$id}][chave]")
                     ->set_value($colum->chave));
 
@@ -129,28 +129,28 @@ class reports_admin {
 
             $form->add_input(
                 input_select::new_instance()
-                    ->set_title(get_string_kopere('reports_settings_form_colunas_type'))
+                    ->set_title(get_string_kopere("reports_settings_form_colunas_type"))
                     ->set_name("columns[{$id}][type]")
                     ->set_values([
-                        ['key' => '',
-                            'value' => get_string_kopere('reports_settings_form_none')],
+                        ["key" => '',
+                            "value" => get_string_kopere("reports_settings_form_none")],
                         [
-                            'key' => table_header_item::TYPE_INT,
-                            'value' => get_string_kopere('reports_settings_form_colunas_type_int'),
-                        ],
-                        [
-                            'key' => table_header_item::TYPE_DATE,
-                            'value' => get_string_kopere('reports_settings_form_colunas_type_date'),
+                            "key" => table_header_item::TYPE_INT,
+                            "value" => get_string_kopere("reports_settings_form_colunas_type_int"),
                         ],
                         [
-                            'key' => table_header_item::TYPE_CURRENCY,
-                            'value' => get_string_kopere('reports_settings_form_colunas_type_currency'),
+                            "key" => table_header_item::TYPE_DATE,
+                            "value" => get_string_kopere("reports_settings_form_colunas_type_date"),
                         ],
-                        ['key' => table_header_item::TYPE_TEXT,
-                            'value' => get_string_kopere('reports_settings_form_colunas_type_text'),
+                        [
+                            "key" => table_header_item::TYPE_CURRENCY,
+                            "value" => get_string_kopere("reports_settings_form_colunas_type_currency"),
                         ],
-                        ['key' => table_header_item::RENDERER_FILESIZE,
-                            'value' => get_string_kopere('reports_settings_form_colunas_type_bytes'),
+                        ["key" => table_header_item::TYPE_TEXT,
+                            "value" => get_string_kopere("reports_settings_form_colunas_type_text"),
+                        ],
+                        ["key" => table_header_item::RENDERER_FILESIZE,
+                            "value" => get_string_kopere("reports_settings_form_colunas_type_bytes"),
                         ],
                     ])
                     ->set_value($colum->type));
@@ -176,56 +176,56 @@ class reports_admin {
 
         $form->add_input(
             input_textarea::new_instance()
-                ->set_title(get_string_kopere('reports_settings_form_reportsql'))
-                ->set_name('reportsql')
+                ->set_title(get_string_kopere("reports_settings_form_reportsql"))
+                ->set_name("reportsql")
                 ->set_value($koperereports->reportsql));
 
         $form->add_input(
             input_select::new_instance()
-                ->set_title(get_string_kopere('reports_settings_form_prerequisit'))
-                ->set_name('prerequisit')
+                ->set_title(get_string_kopere("reports_settings_form_prerequisit"))
+                ->set_name("prerequisit")
                 ->set_values([
                     [
-                        'key' => '',
-                        'value' => get_string_kopere('reports_settings_form_none'),
+                        "key" => '',
+                        "value" => get_string_kopere("reports_settings_form_none"),
                     ],
                     [
-                        'key' => 'listCourses',
-                        'value' => get_string_kopere('reports_settings_form_prerequisit_listCourses'),
+                        "key" => "listCourses",
+                        "value" => get_string_kopere("reports_settings_form_prerequisit_listCourses"),
                     ],
                 ])
                 ->set_value($koperereports->prerequisit));
 
         $koperereports->foreach = str_replace('local_kopere_dashboard\report\report_foreach::', '', $koperereports->foreach);
         $values = [
-            ['key' => '', 'value' => get_string_kopere('reports_settings_form_none')],
+            ["key" => '', "value" => get_string_kopere("reports_settings_form_none")],
             [
-                'key' => 'badge_status_text',
-                'value' => get_string_kopere('reports_settings_form_prerequisit_badge_status_text'),
+                "key" => "badge_status_text",
+                "value" => get_string_kopere("reports_settings_form_prerequisit_badge_status_text"),
             ],
             [
-                'key' => 'badge_criteria_type',
-                'value' => get_string_kopere('reports_settings_form_prerequisit_badge_criteria_type'),
+                "key" => "badge_criteria_type",
+                "value" => get_string_kopere("reports_settings_form_prerequisit_badge_criteria_type"),
             ],
             [
-                'key' => 'userfullname',
-                'value' => get_string_kopere('reports_settings_form_prerequisit_userfullname'),
+                "key" => "userfullname",
+                "value" => get_string_kopere("reports_settings_form_prerequisit_userfullname"),
             ],
             [
-                'key' => 'courses_group_mode',
-                'value' => get_string_kopere('reports_settings_form_prerequisit_courses_group_mode'),
+                "key" => "courses_group_mode",
+                "value" => get_string_kopere("reports_settings_form_prerequisit_courses_group_mode"),
             ],
         ];
         $form->add_input(
             input_select::new_instance()
-                ->set_title(get_string_kopere('reports_settings_form_foreach'))
-                ->set_name('foreach')
+                ->set_title(get_string_kopere("reports_settings_form_foreach"))
+                ->set_name("foreach")
                 ->set_values($values)
                 ->set_value($koperereports->foreach)
                 ->set_description("<a href='https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/" .
-                    "blob/master/classes/report/report_foreach.php' target='_blank'>Code report_foreach.php</a>"));
+                    "blob/master/classes/report/report_foreach.php' target=\"_blank\">Code report_foreach.php</a>"));
 
-        $form->create_submit_input(get_string_kopere('reports_settings_form_save'));
+        $form->create_submit_input(get_string_kopere("reports_settings_form_save"));
 
         echo '</div>';
         dashboard_util::end_page();
@@ -242,37 +242,37 @@ class reports_admin {
 
         if (form::check_post()) {
 
-            $report = optional_param('report', 0, PARAM_INT);
+            $report = optional_param("report", 0, PARAM_INT);
             if ($report == -1) {
 
                 $koperereports = new kopere_dashboard_reports();
-                $koperereports->reportcatid = optional_param('reportcat', 0, PARAM_INT);
+                $koperereports->reportcatid = optional_param("reportcat", 0, PARAM_INT);
                 $koperereports->reportkey = string_util::generate_random_string(12);
-                $koperereports->title = required_param('title', PARAM_TEXT);
-                $koperereports->reportsql = required_param('reportsql', PARAM_TEXT);
-                $koperereports->prerequisit = required_param('prerequisit', PARAM_TEXT);
-                $koperereports->foreach = required_param('foreach', PARAM_TEXT);
+                $koperereports->title = required_param("title", PARAM_TEXT);
+                $koperereports->reportsql = required_param("reportsql", PARAM_TEXT);
+                $koperereports->prerequisit = required_param("prerequisit", PARAM_TEXT);
+                $koperereports->foreach = required_param("foreach", PARAM_TEXT);
                 $koperereports->columns = $this->columns();
 
-                $id = $DB->insert_record('kopere_dashboard_reports', $koperereports);
+                $id = $DB->insert_record("kopere_dashboard_reports", $koperereports);
 
-                mensagem::agenda_mensagem_success(get_string_kopere('reports_settings_savesuccess'));
+                mensagem::agenda_mensagem_success(get_string_kopere("reports_settings_savesuccess"));
                 header::location(local_kopere_dashboard_makeurl("reports", "load_report", ["report" => $id]));
 
             } else {
                 /** @var kopere_dashboard_reports $koperereports */
-                $koperereports = $DB->get_record('kopere_dashboard_reports',
-                    ['id' => $report]);
-                header::notfound_null($koperereports, get_string_kopere('reports_notfound'));
+                $koperereports = $DB->get_record("kopere_dashboard_reports",
+                    ["id" => $report]);
+                header::notfound_null($koperereports, get_string_kopere("reports_notfound"));
 
-                $koperereports->title = required_param('title', PARAM_TEXT);
-                $koperereports->reportsql = required_param('reportsql', PARAM_TEXT);
-                $koperereports->prerequisit = required_param('prerequisit', PARAM_TEXT);
-                $koperereports->foreach = required_param('foreach', PARAM_TEXT);
+                $koperereports->title = required_param("title", PARAM_TEXT);
+                $koperereports->reportsql = required_param("reportsql", PARAM_TEXT);
+                $koperereports->prerequisit = required_param("prerequisit", PARAM_TEXT);
+                $koperereports->foreach = required_param("foreach", PARAM_TEXT);
                 $koperereports->columns = $this->columns();
 
-                $DB->update_record('kopere_dashboard_reports', $koperereports);
-                mensagem::agenda_mensagem_success(get_string_kopere('reports_settings_savesuccess'));
+                $DB->update_record("kopere_dashboard_reports", $koperereports);
+                mensagem::agenda_mensagem_success(get_string_kopere("reports_settings_savesuccess"));
 
                 header::location(local_kopere_dashboard_makeurl("reports", "load_report", ["report" => $koperereports->id]));
             }
@@ -286,14 +286,14 @@ class reports_admin {
      */
     private function columns() {
         $columns = [];
-        foreach ($_POST['columns'] as $colum) {
-            if (isset($colum['title'][1])) {
+        foreach ($_POST["columns"] as $colum) {
+            if (isset($colum["title"][1])) {
                 $columns[] = $colum;
             }
         }
         return json_encode([
-            'columns' => $columns,
-            'header' => $_POST['header'],
+            "columns" => $columns,
+            "header" => $_POST["header"],
         ]);
     }
 
@@ -313,7 +313,7 @@ class reports_admin {
         $column->style_header = "";
         $column->style_col = "";
         if ($adddescription) {
-            $column->description = 'reports_settings_form_colunas_extra';
+            $column->description = "reports_settings_form_colunas_extra";
         }
 
         return $column;

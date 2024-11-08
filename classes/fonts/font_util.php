@@ -36,10 +36,9 @@ class font_util {
      * Function list_fonts
      *
      * @return array
+     * @throws \dml_exception
      */
     private static function list_fonts() {
-        global $CFG;
-
         static $fontlist;
         if ($fontlist) {
             return $fontlist;
@@ -90,28 +89,28 @@ class font_util {
         preg_match_all('/(family=.*?)&/', get_config("local_kopere_dashboard", "pagefonts"), $fontsuser);
         if (isset($fontsuser[1])) {
             $fonts = array_merge($fontsuser[1], $fontsdefault);
-        }
 
-        $fontlist = ['css' => [], 'grapsjs' => [], 'ckeditor' => []];
-        foreach ($fonts as $font) {
+            $fontlist = ["css" => [], "grapsjs" => [], "ckeditor" => []];
+            foreach ($fonts as $font) {
 
-            preg_match('/family=([A-Z,a-z\+]{2,30})/', $font, $fontinfo);
-            if ($fontinfo[1]) {
-                $fontlist['css'][] = $font;
-                $fontname = urldecode($fontinfo[1]);
+                preg_match('/family=([A-Z,a-z\+]{2,30})/', $font, $fontinfo);
+                if ($fontinfo[1]) {
+                    $fontlist["css"][] = $font;
+                    $fontname = urldecode($fontinfo[1]);
 
-                $fontlist['grapsjs'][] = "
+                    $fontlist["grapsjs"][] = "
                         {
-                            'id' : \"'{$fontname}'\",
+                            'id'    : \"'{$fontname}'\",
                             'label' : '{$fontname}',
                         }";
-                $fontlist['ckeditor'][] = "{$fontname}/'{$fontname}'";
+                    $fontlist["ckeditor"][] = "{$fontname}/'{$fontname}'";
+                }
             }
         }
 
-        $fontlist['css'] = 'https://fonts.googleapis.com/css2?' . implode('&', $fontlist['css']) . '&display=swap';
-        $fontlist['grapsjs'] = implode(",", $fontlist['grapsjs']);
-        $fontlist['ckeditor'] = implode(";", $fontlist['ckeditor']);
+        $fontlist["css"] = 'https://fonts.googleapis.com/css2?' . implode('&', $fontlist["css"]) . '&display=swap';
+        $fontlist["grapsjs"] = implode(",", $fontlist["grapsjs"]);
+        $fontlist["ckeditor"] = implode(";", $fontlist["ckeditor"]);
 
         return $fontlist;
     }
@@ -120,33 +119,37 @@ class font_util {
      * Function css
      *
      * @return mixed
+     * @throws \dml_exception
      */
     public static function css() {
-        return self::list_fonts()['css'];
+        return self::list_fonts()["css"];
     }
 
     /**
      * Function grapsjs
      *
      * @return mixed
+     * @throws \dml_exception
      */
     public static function grapsjs() {
-        return self::list_fonts()['grapsjs'];
+        return self::list_fonts()["grapsjs"];
     }
 
     /**
      * Function ckeditor
      *
      * @return mixed
+     * @throws \dml_exception
      */
     public static function ckeditor() {
-        return self::list_fonts()['ckeditor'];
+        return self::list_fonts()["ckeditor"];
     }
 
     /**
      * Function print_only_unique
      *
      * @return string
+     * @throws \dml_exception
      */
     public static function print_only_unique() {
         static $printed = false;
@@ -155,6 +158,6 @@ class font_util {
         }
         $printed = true;
 
-        return "<link rel='stylesheet' href='" . self::css() . "'>";
+        return "<link rel=\"stylesheet\" href='" . self::css() . "'>";
     }
 }

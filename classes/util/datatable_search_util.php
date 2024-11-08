@@ -53,8 +53,8 @@ class datatable_search_util {
      */
     public function __construct($columnselect) {
         $this->columnselect = $columnselect;
-        $this->start = optional_param('start', 0, PARAM_INT);
-        $this->length = optional_param('length', 0, PARAM_INT);
+        $this->start = optional_param("start", 0, PARAM_INT);
+        $this->length = optional_param("length", 0, PARAM_INT);
 
         $this->process_where();
         $this->proccess_order();
@@ -66,15 +66,15 @@ class datatable_search_util {
     public function process_where() {
         global $CFG;
 
-        $search = string_util::clear_all_params('search', false, PARAM_TEXT);
+        $search = string_util::clear_all_params("search", false, PARAM_TEXT);
 
-        if ($search && isset($search['value']) && isset($search['value'][0])) {
+        if ($search && isset($search["value"]) && isset($search["value"][0])) {
             $like = [];
             foreach ($this->columnselect as $column) {
-                $find = $search['value'];
+                $find = $search["value"];
                 $find = str_replace("'", "\'", $find);
                 $find = str_replace("--", "", $find);
-                if ($CFG->dbtype == 'pgsql') {
+                if ($CFG->dbtype == "pgsql") {
                     if (is_array($column)) {
                         $like[] = " cast( {$column[0]} as text ) LIKE '%{$find}%'";
                     } else {
@@ -97,17 +97,17 @@ class datatable_search_util {
      */
     private function proccess_order() {
 
-        $order = string_util::clear_all_params('order', [], PARAM_TEXT);
-        $columns = string_util::clear_all_params('columns', [], PARAM_TEXT);
+        $order = string_util::clear_all_params("order", [], PARAM_TEXT);
+        $columns = string_util::clear_all_params("columns", [], PARAM_TEXT);
 
         if ($order && $columns) {
-            $column = $order[0]['column'];
+            $column = $order[0]["column"];
             if (is_array($this->columnselect[$column])) {
                 $this->order = $this->columnselect[$column][0];
             } else {
                 $this->order = $this->columnselect[$column];
             }
-            $this->orderdir = $order[0]['dir'];
+            $this->orderdir = $order[0]["dir"];
         }
     }
 
@@ -120,6 +120,7 @@ class datatable_search_util {
      * @param null $functionbeforereturn
      *
      * @throws \dml_exception
+     * @throws \coding_exception
      */
     public function execute_sql_and_return($sql, $group = null, $params = null, $functionbeforereturn = null) {
         global $DB, $CFG;
@@ -136,7 +137,7 @@ class datatable_search_util {
             $sqltotal = str_replace('{[columns]}', 'count(*) as num', $sqltotal);
         }
 
-        if ($CFG->dbtype == 'pgsql') {
+        if ($CFG->dbtype == "pgsql") {
             $sqlreturn = $sql . " $this->where $group ORDER BY $this->order $this->orderdir \n
                                 LIMIT $this->length OFFSET $this->start";
         } else {

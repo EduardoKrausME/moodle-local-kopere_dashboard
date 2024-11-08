@@ -44,8 +44,8 @@ class input_checkbox_select extends input_select {
     public function __construct() {
         $this->set_value("false");
         $this->set_values([
-            ['key' => 0, 'value' => get_string('no')],
-            ['key' => 1, 'value' => get_string('yes')],
+            ["key" => 0, "value" => get_string("no")],
+            ["key" => 1, "value" => get_string("yes")],
         ]);
     }
 

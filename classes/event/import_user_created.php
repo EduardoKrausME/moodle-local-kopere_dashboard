@@ -38,10 +38,10 @@ class import_user_created extends base {
      * Function init
      */
     protected function init() {
-        $this->data['crud'] = 'c';
-        $this->data['action'] = 'created';
-        $this->data['edulevel'] = self::LEVEL_OTHER;
-        $this->data['objecttable'] = 'user';
+        $this->data["crud"] = "c";
+        $this->data["action"] = "created";
+        $this->data["edulevel"] = self::LEVEL_OTHER;
+        $this->data["objecttable"] = "user";
     }
 
     /**
@@ -51,6 +51,6 @@ class import_user_created extends base {
      * @throws \coding_exception
      */
     public static function get_name() {
-        return get_string('userimport_import_user_created_name', 'local_kopere_dashboard');
+        return get_string("userimport_import_user_created_name", "local_kopere_dashboard");
     }
 }

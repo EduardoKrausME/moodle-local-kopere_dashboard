@@ -40,7 +40,7 @@ class pagination {
      */
     public static function create($atualpage, $totalregisters, $perpag = 50) {
         $countpages = intval($totalregisters / $perpag);
-        $baseurl = preg_replace('/&page=\d+/', '', $_SERVER['QUERY_STRING']);
+        $baseurl = preg_replace('/&page=\d+/', '', $_SERVER["QUERY_STRING"]);
         $baseurl = "?{$baseurl}&page=";
 
         if (($totalregisters % $perpag) != 0) {
@@ -50,7 +50,7 @@ class pagination {
         echo "<div class='pagination-group'>";
         echo "<span class='pagination-info'>Página {$atualpage} de {$countpages}</span>";
 
-        echo "<ul class='pagination'>";
+        echo "<ul class=\"pagination\">";
         if ($atualpage != 1) {
             echo "<li><a href='{$baseurl}1' >«</a></li>";
         }
@@ -65,7 +65,7 @@ class pagination {
         $loop = 0;
         for (; $i <= $countpages; $i++) {
             if ($i == $atualpage) {
-                echo "<li class='active'><span>{$i}</span></li>";
+                echo "<li class=\"active\"><span>{$i}</span></li>";
             } else {
                 echo "<li><a href='{$baseurl}{$i}'>{$i}</a></li>";
             }
