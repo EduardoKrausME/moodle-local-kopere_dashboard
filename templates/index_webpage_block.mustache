@@ -25,21 +25,25 @@
 <div class='col-lg-4 col-md-6 col-sm-12'>
     <div class='box-page'>
         <div class='thumbnail'>
-            <a href='{{{config.wwwroot}}}/local/kopere_dashboard/?p={{{link}}}'>
+            <a href='{{{link}}}'>
                 <span style='background-image:url({{{imagem}}})'></span>
             </a>
-            {{#cursofree}}
-                <div class='preco-curso preco-curso-free'>Gratis</div>
-            {{/cursofree}}
-            {{#cursopago}}
-                <div class='preco-curso'>R$ {{{cursopreco}}}</div>
-            {{/cursopago}}
         </div>
         <div class='content'>
             <h5 class='title'>
                 <a href='{{{link}}}'>{{{title}}}</a>
             </h5>
             <p>{{{text}}}</p>
+            {{#cursofree}}
+                <div class="price">
+                    <div class="current-price">Gratis</div>
+                </div>
+            {{/cursofree}}
+            {{#cursopago}}
+                <div class="price">
+                    <a href='{{{link}}}' class="current-price">R$ {{{cursopreco}}}</a>
+                </div>
+            {{/cursopago}}
         </div>
     </div>
 </div>
