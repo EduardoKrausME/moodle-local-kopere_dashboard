@@ -22,26 +22,6 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
-/**
- * Function vvveb__add_css
- *
- * @param $html
- *
- * @return string
- */
-function vvveb__add_css($html) {
-    global $CFG;
-
-    $css = [];
-    if (strpos($html, "bootstrap-vvveb.css") === false) {
-        $css[] = "<link href='{$CFG->wwwroot}/local/kopere_dashboard/_editor/css/bootstrap-vvveb.css' rel='stylesheet'>";
-    }
-
-    $css = implode("\n", $css);
-    return "{$css}\n\n{$html}";
-}
-
 /**
  * Function vvveb__changue_langs
  *
@@ -50,7 +30,7 @@ function vvveb__add_css($html) {
  * @return mixed
  * @throws coding_exception
  */
-function vvveb__changue_langs($html) {
+function vvveb__changue_langs($html, $component) {
     global $CFG, $SITE;
 
     $CFG->debug = false;
@@ -65,7 +45,7 @@ function vvveb__changue_langs($html) {
             list($identifier, $component) = explode("|", $identifier);
             $text = get_string($identifier, $component);
         } else {
-            $text = get_string($identifier, "local_kopere_dashboard");
+            $text = get_string($identifier, $component);
         }
 
         $html = str_replace($lags[0][$key], $text, $html);
@@ -82,13 +62,13 @@ function vvveb__changue_langs($html) {
  * @return mixed
  * @throws dml_exception
  */
-function vvveb__change_courses($html) {
+function vvveb__change_courses($html, $component) {
 
     if (strpos($html, "{course-itens}") === false) {
         return $html;
     }
 
-    global $OUTPUT, $DB;
+    global $OUTPUT, $DB, $CFG;
     $sql = "
         SELECT c.*,
                COUNT(ue.id) AS enrolments
@@ -97,19 +77,24 @@ function vvveb__change_courses($html) {
           JOIN {user_enrolments} AS ue ON ue.enrolid = e.id
       GROUP BY c.id
       ORDER BY enrolments DESC
-         LIMIT 8";
+         LIMIT 12";
     $courses = $DB->get_records_sql($sql);
 
     $data = [];
     foreach ($courses as $course) {
         $course->courseimage = couse_image(new core_course_list_element($course));
+
+        $course->accesslink = "{$CFG->wwwroot}/course/view.php?id={$course->id}";
+        if (file_exists("{$CFG->dirroot}/local/kopere_pay/view.php")) {
+            $course->accesslink = "{$CFG->wwwroot}/local/kopere_pay/view.php?id={$course->id}";
+        }
+
         $data[] = $course;
     }
-    $courseshtml = $OUTPUT->render_from_template('local_kopere_dashboard/vvveb/course', ['couses' => $data]);
+    $courseshtml = $OUTPUT->render_from_template("{$component}/vvveb/course", ["couses" => $data]);
 
     return str_replace("{course-itens}", $courseshtml, $html);
 }
-
 
 /**
  * Function couse_image
@@ -135,7 +120,7 @@ function couse_image($course) {
     }
 
     if (empty($courseimage)) {
-        $courseimage = $OUTPUT->image_url('curso-no-photo', 'theme')->out();
+        $courseimage = $OUTPUT->image_url('curso-no-photo', "theme")->out();
     }
 
     return $courseimage;

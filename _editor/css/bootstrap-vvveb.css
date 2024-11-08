@@ -373,6 +373,9 @@ img,
 svg {
     vertical-align: middle;
 }
+img {
+    max-width: 100%;
+}
 table {
     caption-side: bottom;
     border-collapse: collapse;
@@ -4452,12 +4455,100 @@ textarea.form-control-lg {
     vertical-align: baseline;
     border-radius: var(--bs-badge-border-radius);
 }
+.badge p {
+    padding: 0;
+    margin: 0;
+}
 .badge:empty {
     display: none;
 }
 .btn .badge {
     position: relative;
     top: -1px;
+}
+.badge-secondary {
+    color: #1d2125;
+    background-color: #ced4da;
+}
+a.badge-secondary:hover, a.badge-secondary:focus {
+    color: #1d2125;
+    background-color: #b1bbc4;
+}
+a.badge-secondary:focus, a.badge-secondary.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(206, 212, 218, 0.5);
+}
+.badge-success {
+    color: #fff;
+    background-color: #357a32;
+}
+a.badge-success:hover, a.badge-success:focus {
+    color: #fff;
+    background-color: #255623;
+}
+a.badge-success:focus, a.badge-success.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(53, 122, 50, 0.5);
+}
+.badge-info {
+    color: #fff;
+    background-color: #008196;
+}
+a.badge-info:hover, a.badge-info:focus {
+    color: #fff;
+    background-color: #005563;
+}
+a.badge-info:focus, a.badge-info.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 129, 150, 0.5);
+}
+.badge-warning {
+    color: #1d2125;
+    background-color: #f0ad4e;
+}
+a.badge-warning:hover, a.badge-warning:focus {
+    color: #1d2125;
+    background-color: #ec971f;
+}
+a.badge-warning:focus, a.badge-warning.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(240, 173, 78, 0.5);
+}
+.badge-danger {
+    color: #fff;
+    background-color: #ca3120;
+}
+a.badge-danger:hover, a.badge-danger:focus {
+    color: #fff;
+    background-color: #9e2619;
+}
+a.badge-danger:focus, a.badge-danger.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(202, 49, 32, 0.5);
+}
+.badge-light {
+    color: #1d2125;
+    background-color: #f8f9fa;
+}
+a.badge-light:hover, a.badge-light:focus {
+    color: #1d2125;
+    background-color: #dae0e5;
+}
+a.badge-light:focus, a.badge-light.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5);
+}
+.badge-dark {
+    color: #fff;
+    background-color: #343a40;
+}
+a.badge-dark:hover, a.badge-dark:focus {
+    color: #fff;
+    background-color: #1d2124;
+}
+a.badge-dark:focus, a.badge-dark.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
 }
 .alert {
     --bs-alert-bg: transparent;

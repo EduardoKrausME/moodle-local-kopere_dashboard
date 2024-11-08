@@ -35,7 +35,7 @@
         });
     };
     const save = editor => {
-        Vvveb.WysiwygEditor.destroy();
+        Vvveb.WysiwygEditor.saveandclose();
 
         // const formObj = global$1.DOM.getParent(editor.id, 'form');
         // if (enableWhenDirty(editor) && !editor.isDirty()) {
@@ -63,8 +63,6 @@
         // }
     };
     const cancel = editor => {
-       // Vvveb.WysiwygEditor.destroy();
-
         const h = global.trim(editor.startContent);
         const onCancelCallback = getOnCancelCallback(editor);
         if (isFunction(onCancelCallback)) {

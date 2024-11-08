@@ -495,7 +495,7 @@ let ImageInput = {
 
                 $.ajax({
                     type        : "POST",
-                    url         : 'upload.php',//set your server side upload script url
+                    url         : mediaServerUrl,//set your server side upload script url
                     data        : formData,
                     processData : false,
                     contentType : false,

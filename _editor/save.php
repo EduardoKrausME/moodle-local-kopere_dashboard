@@ -22,13 +22,13 @@ require_once('../../../config.php');
 require_login();
 require_capability('moodle/site:config', context_system::instance());
 
-$page = required_param('page', PARAM_TEXT);
-$id = required_param('id', PARAM_TEXT);
-$link = optional_param('link', '', PARAM_TEXT);
+$page = required_param("page", PARAM_TEXT);
+$id = required_param("id", PARAM_TEXT);
+$link = optional_param("link", '', PARAM_TEXT);
 
-define('MAX_FILE_LIMIT', 1024 * 1024 * 2);//2 Megabytes max html file size
-define('ALLOW_PHP', false);//check if saved html contains php tag and don't save if not allowed
-define('ALLOWED_OEMBED_DOMAINS', [
+define("MAX_FILE_LIMIT", 1024 * 1024 * 2);//2 Megabytes max html file size
+define("ALLOW_PHP", false);//check if saved html contains php tag and don't save if not allowed
+define("ALLOWED_OEMBED_DOMAINS", [
     'https://www.youtube.com/',
     'https://www.vimeo.com/',
     'https://www.x.com/',
@@ -38,9 +38,9 @@ define('ALLOWED_OEMBED_DOMAINS', [
     'https://www.reddit.com/',
 ]);//load urls only from allowed websites for oembed
 
-function sanitizeFileName($file, $allowedExtension = 'html') {
+function sanitizeFileName($file, $allowedExtension = "html") {
     $basename = basename($file);
-    $disallow = ['.htaccess', 'passwd'];
+    $disallow = ['.htaccess', "passwd"];
     if (in_array($basename, $disallow)) {
         showError('Filename not allowed!');
         return '';
@@ -63,7 +63,7 @@ function sanitizeFileName($file, $allowedExtension = 'html') {
 }
 
 function showError($error) {
-    header($_SERVER['SERVER_PROTOCOL'] . ' 404', true, 500);
+    header($_SERVER["SERVER_PROTOCOL"] . ' 404', true, 500);
     die($error);
 }
 
@@ -81,41 +81,43 @@ $html = '';
 $file = '';
 $action = '';
 
-if (isset($_POST['startTemplateUrl']) && !empty($_POST['startTemplateUrl'])) {
-    $startTemplateUrl = sanitizeFileName($_POST['startTemplateUrl']);
+if (isset($_POST["startTemplateUrl"]) && !empty($_POST["startTemplateUrl"])) {
+    $startTemplateUrl = sanitizeFileName($_POST["startTemplateUrl"]);
     $html = '';
     if ($startTemplateUrl) {
         $html = file_get_contents($startTemplateUrl);
     }
-} else if (isset($_POST['html'])) {
-    $html = substr($_POST['html'], 0, MAX_FILE_LIMIT);
+}
+else if (isset($_POST["html"])) {
+    $html = substr($_POST["html"], 0, MAX_FILE_LIMIT);
     if (!ALLOW_PHP) {
         //if (strpos($html, '<?php') !== false) {
         if (preg_match('@<\?php|<\? |<\?=|<\s*script\s*language\s*=\s*"\s*php\s*"\s*>@', $html)) {
             showError('PHP not allowed!');
         }
     }
+    $html = str_replace("body >", "", $html);
 }
 
-if (isset($_POST['file'])) {
-    $file = sanitizeFileName($_POST['file']);
+if (isset($_POST["file"])) {
+    $file = sanitizeFileName($_POST["file"]);
 }
 
-if (isset($_GET['action'])) {
-    $action = htmlspecialchars(strip_tags($_GET['action']), ENT_COMPAT);
+if (isset($_GET["action"])) {
+    $action = htmlspecialchars(strip_tags($_GET["action"]), ENT_COMPAT);
 }
 
 if ($action) {
     //file manager actions, delete and rename
     switch ($action) {
-        case 'delete':
+        case "delete":
             header('Content-Type: application/json');
             echo json_encode([
                 "success" => 1,
                 "message" => "Deleted successfully",
             ]);
             break;
-        case 'save':
+        case "save":
             if ($page == "webpages") {
                 $webpages = $DB->get_record("kopere_dashboard_webpages", ["id" => $id]);
                 $webpages->text = $html;
@@ -124,23 +126,21 @@ if ($action) {
                 $events = $DB->get_record("kopere_dashboard_events", ["id" => $id]);
                 $events->message = $html;
                 $DB->update_record("kopere_dashboard_events", $events);
-            } else if ($page == 'aceite') {
-                set_config('formulario_pedir_aceite', $html, 'local_kopere_dashboard');
-            } else if ($page == 'meiodeposito') {
-                set_config('kopere_pay-meiodeposito-conta', $html, 'local_kopere_dashboard');
+            } else {
+                set_config($page, $html, "local_kopere_dashboard");
             }
             echo json_encode([
                 "success" => 1,
                 "message" => "Saved successfully",
             ]);
             break;
-        case 'oembedProxy':
-            $url = $_GET['url'] ?? '';
+        case "oembedProxy":
+            $url = $_GET["url"] ?? '';
             if (validOembedUrl($url)) {
                 $options = [
-                    'http' => [
-                        'method' => "GET",
-                        'header' => 'User-Agent: ' . $_SERVER['HTTP_USER_AGENT'] . "\r\n"
+                    "http" => [
+                        "method" => "GET",
+                        "header" => 'User-Agent: ' . $_SERVER["HTTP_USER_AGENT"] . "\r\n"
                     ]
                 ];
                 $context = stream_context_create($options);

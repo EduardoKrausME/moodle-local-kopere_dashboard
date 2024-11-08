@@ -1018,6 +1018,7 @@ Vvveb.Builder = {
 
         //insert editor helpers like non editable areas
         self.frameHead.append(generateElements('<link data-vvveb-helpers href="' + Vvveb.baseUrl + '../../css/vvvebjs-editor-helpers.css" rel="stylesheet">')[0]);
+        self.frameHead.append(generateElements('<link data-vvveb-helpers href="' + Vvveb.baseUrl + '../../css/bootstrap-vvveb.css" rel="stylesheet">')[0]);
 
         self._initHighlight();
 
@@ -1213,7 +1214,7 @@ Vvveb.Builder = {
             Vvveb.Breadcrumb.loadBreadcrumb(target);
 
         } catch (err) {
-            console.log(err);
+            //console.log(err);
             return false;
         }
 
@@ -1367,7 +1368,7 @@ Vvveb.Builder = {
                         }
 
                     } catch (err) {
-                        console.log(err);
+                        //console.log(err);
                         return false;
                     }
 
@@ -2033,14 +2034,14 @@ Vvveb.Builder = {
                 displayToast(bg, "Save", data.message ?? data);
             })
             .catch(error => {
-                console.log(error.statusText);
+                //console.log(error.statusText);
                 displayToast("bg-danger", "Error", "Error saving!");
             });
 
     },
 
     saveAjax : function(data, saveUrl, callback, error) {
-        Vvveb.WysiwygEditor.destroy();
+        Vvveb.WysiwygEditor.saveandclose();
 
         if (!data["startTemplateUrl"]) {
             data["html"] = clearHtml();
@@ -2052,7 +2053,7 @@ Vvveb.Builder = {
             body    : nestedFormData(data)
         })
             .then((response) => {
-                console.log(response);
+                //console.log(response);
                 if (!response.ok) {
                     return Promise.reject(response);
                 }
@@ -2229,11 +2230,11 @@ function displayToast(bg, title, message, id = "top-toast") {
 
 function clearHtml() {
     var html = Vvveb.Builder.getHtml();
-    html = html.replace(/<link.*?bootstrap-vvveb.css".*?>/, "");
-    html = html.split(/<html>|<html.*?>|<head>|<body>|<body.*?>|<\/html>|<\/head>|<\/body>/).join("");
+    html = html.replace(/<link.*?vvveb-remove".*?>/s, "");
+    html = html.split(/<html>|<html.*?>|<head>|<body>|<body.*?>|<\/html>|<\/head>|<\/body>/s).join("");
 
-    html = html.replace(/<script.*?jquery.*?<\/script>/, "");
-    html = html.replace(/<script.*?data:.*?base64.*?<\/script>/, "");
+    html = html.replace(/<script.*?jquery.*?<\/script>/s, "");
+    html = html.replace(/<script.*?data:.*?base64.*?<\/script>/s, "");
 
     return html;
 }
@@ -2272,11 +2273,10 @@ Vvveb.Gui = {
     },
 
     openPreview : function() {
-        Vvveb.WysiwygEditor.destroy();
+        Vvveb.WysiwygEditor.saveandclose();
 
         var html = clearHtml();
 
-        console.log(html);
         document.getElementById("form-htmldata").value = html;
     },
 

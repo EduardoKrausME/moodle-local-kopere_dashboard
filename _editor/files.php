@@ -29,23 +29,23 @@ require_login();
 $context = context_system::instance();
 require_capability('moodle/site:config', $context);
 
-$page = required_param('page', PARAM_TEXT);
+$page = required_param("page", PARAM_TEXT);
 
-$component = 'local_kopere_dashboard';
+$component = "local_kopere_dashboard";
 $contextid = $context->id;
 $adminid = get_admin()->id;
 $filearea = "editor_{$page}";
 
-if (isset($_FILES['file']['name'])) {
+if (isset($_FILES["file"]["name"])) {
 
     $aloweb = [
-        'png', 'jpg', 'jpeg', 'gif', 'svg', 'webp',
-        'webm', 'mp4',
-        'mp3',
-        'pdf', 'doc', 'docx'
+        "png", "jpg", "jpeg", "gif", "svg", "webp",
+        "webm", "mp4",
+        "mp3",
+        "pdf", "doc", "docx"
     ];
 
-    $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+    $extension = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
     if (in_array($extension, $aloweb)) {
         $fs = get_file_storage();
         $filerecord = (object)[
@@ -55,24 +55,24 @@ if (isset($_FILES['file']['name'])) {
             "filearea" => $filearea,
             "filepath" => '/',
             "itemid" => time() - 1714787612,
-            "filename" => $_FILES['file']['name'],
+            "filename" => $_FILES["file"]["name"],
         ];
-        $fs->create_file_from_pathname($filerecord, $_FILES['file']['tmp_name']);
+        $fs->create_file_from_pathname($filerecord, $_FILES["file"]["tmp_name"]);
 
         $url = moodle_url::make_file_url(
             "$CFG->wwwroot/pluginfile.php",
             "/{$contextid}/local_kopere_dashboard/{$filerecord->filearea}/{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}");
 
         echo json_encode([
-            "name" => $_FILES['file']['name'],
+            "name" => $_FILES["file"]["name"],
             "type" => "file",
             "path" => $url->out(false),
-            "size" => filesize($_FILES['file']['tmp_name']),
+            "size" => filesize($_FILES["file"]["tmp_name"]),
         ]);
 
         die();
     } else {
-        // header($_SERVER['SERVER_PROTOCOL'] . ' 404', true, 500);
+        // header($_SERVER["SERVER_PROTOCOL"] . ' 404', true, 500);
         die("File type {$extension} not allowed!");
     }
 }

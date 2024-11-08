@@ -23,14 +23,14 @@
  */
 
 require_once('../../../config.php');
-require_once('./function.php');
 require_once('../lib.php');
 require_once('../autoload.php');
+require_once('./function.php');
 $PAGE->set_context(\context_system::instance());
 
-$page = required_param('page', PARAM_TEXT);
-$id = required_param('id', PARAM_TEXT);
-$link = optional_param('link', '', PARAM_TEXT);
+$page = required_param("page", PARAM_TEXT);
+$id = required_param("id", PARAM_TEXT);
+$link = optional_param("link", '', PARAM_TEXT);
 require_login();
 require_capability('moodle/site:config', context_system::instance());
 
@@ -102,7 +102,7 @@ require_capability('moodle/site:config', context_system::instance());
             $pagePreview = false;
             if ($page == "webpages") {
                 $pagePreview = "{$CFG->wwwroot}/local/kopere_dashboard/";
-            } else if ($page == "aceite") {
+            } else if ($page == "formulario_pedir_aceite") {
                 $pagePreview = "{$CFG->wwwroot}/local/kopere_pay/termos.php";
             }
             if ($pagePreview) { ?>
@@ -953,14 +953,14 @@ require_capability('moodle/site:config', context_system::instance());
 </script>
 <script id="vvveb-input-textareainput" type="text/html">
     <div>
-        <textarea name="{%=key%}" {% if (typeof rows !== 'undefined') { %} rows="{%=rows%}" {% } else { %} rows="3" {% }
+        <textarea name="{%=key%}" {% if (typeof rows !== "undefined") { %} rows="{%=rows%}" {% } else { %} rows="3" {% }
         %} class="form-control"/>
     </div>
 </script>
 <script id="vvveb-input-checkboxinput" type="text/html">
-    <div class="form-check{% if (typeof className !== 'undefined') { %} {%=className%}{% } %}">
+    <div class="form-check{% if (typeof className !== "undefined") { %} {%=className%}{% } %}">
         <input name="{%=key%}" class="form-check-input" type="checkbox" id="{%=key%}_check">
-        <label class="form-check-label" for="{%=key%}_check">{% if (typeof text !== 'undefined') { %} {%=text%} {% }
+        <label class="form-check-label" for="{%=key%}_check">{% if (typeof text !== "undefined") { %} {%=text%} {% }
             %}</label>
     </div>
 </script>
@@ -969,7 +969,7 @@ require_capability('moodle/site:config', context_system::instance());
 
         {% for ( var i = 0; i < options.length; i++ ) { %}
 
-        <label class="form-check-input  {% if (typeof inline !== 'undefined' && inline == true) { %}custom-control-inline{% } %}"
+        <label class="form-check-input  {% if (typeof inline !== "undefined" && inline == true) { %}custom-control-inline{% } %}"
                title="{%=options[i].title%}">
             <input name="{%=key%}" class="form-check-input" type="radio" value="{%=options[i].value%}"
                    id="{%=key%}{%=i%}" {%if (options[i].checked) { %}checked="{%=options[i].checked%}" {% } %}>
@@ -1000,7 +1000,7 @@ require_capability('moodle/site:config', context_system::instance());
     </div>
 </script>
 <script id="vvveb-input-toggle" type="text/html">
-    <div class="form-check form-switch {% if (typeof className !== 'undefined') { %} {%=className%}{% } %}">
+    <div class="form-check form-switch {% if (typeof className !== "undefined") { %} {%=className%}{% } %}">
         <input
                 type="checkbox"
                 name="{%=key%}"
@@ -1127,8 +1127,8 @@ require_capability('moodle/site:config', context_system::instance());
 <script id="vvveb-input-dateinput" type="text/html">
     <div>
         <input name="{%=key%}" type="date" class="form-control"
-               {% if (typeof min_date=== 'undefined') { %} min="{%=min_date%}" {% } %} {% if (typeof max_date ===
-        'undefined') { %} max="{%=max_date%}" {% } %}
+               {% if (typeof min_date=== "undefined") { %} min="{%=min_date%}" {% } %} {% if (typeof max_date ===
+        "undefined") { %} max="{%=max_date%}" {% } %}
         />
     </div>
 </script>
@@ -1167,7 +1167,7 @@ require_capability('moodle/site:config', context_system::instance());
 
         {% } %}
 
-        {% if (typeof hide_remove === 'undefined') { %}
+        {% if (typeof hide_remove === "undefined") { %}
         <div class="mt-3">
 
             <button class="btn btn-sm btn-outline-primary btn-new">
@@ -1189,7 +1189,7 @@ require_capability('moodle/site:config', context_system::instance());
                 <option value="">None</option>
                 {% for ( var i = 1; i <= 12; i++ ) { %}
                 <option value="{%=i%}" {% if ((typeof col !==
-                'undefined') && col == i) { %} selected {% } %}>{%=i%}</option>
+                "undefined") && col == i) { %} selected {% } %}>{%=i%}</option>
                 {% } %}
 
             </select>
@@ -1202,7 +1202,7 @@ require_capability('moodle/site:config', context_system::instance());
                 <option value="">None</option>
                 {% for ( var i = 1; i <= 12; i++ ) { %}
                 <option value="{%=i%}" {% if ((typeof col_sm !==
-                'undefined') && col_sm == i) { %} selected {% } %}>{%=i%}</option>
+                "undefined") && col_sm == i) { %} selected {% } %}>{%=i%}</option>
                 {% } %}
 
             </select>
@@ -1215,7 +1215,7 @@ require_capability('moodle/site:config', context_system::instance());
                 <option value="">None</option>
                 {% for ( var i = 1; i <= 12; i++ ) { %}
                 <option value="{%=i%}" {% if ((typeof col_md !==
-                'undefined') && col_md == i) { %} selected {% } %}>{%=i%}</option>
+                "undefined") && col_md == i) { %} selected {% } %}>{%=i%}</option>
                 {% } %}
 
             </select>
@@ -1228,7 +1228,7 @@ require_capability('moodle/site:config', context_system::instance());
                 <option value="">None</option>
                 {% for ( var i = 1; i <= 12; i++ ) { %}
                 <option value="{%=i%}" {% if ((typeof col_lg !==
-                'undefined') && col_lg == i) { %} selected {% } %}>{%=i%}</option>
+                "undefined") && col_lg == i) { %} selected {% } %}>{%=i%}</option>
                 {% } %}
 
             </select>
@@ -1241,7 +1241,7 @@ require_capability('moodle/site:config', context_system::instance());
                 <option value="">None</option>
                 {% for ( var i = 1; i <= 12; i++ ) { %}
                 <option value="{%=i%}" {% if ((typeof col_xl !==
-                'undefined') && col_xl == i) { %} selected {% } %}>{%=i%}</option>
+                "undefined") && col_xl == i) { %} selected {% } %}>{%=i%}</option>
                 {% } %}
 
             </select>
@@ -1254,13 +1254,13 @@ require_capability('moodle/site:config', context_system::instance());
                 <option value="">None</option>
                 {% for ( var i = 1; i <= 12; i++ ) { %}
                 <option value="{%=i%}" {% if ((typeof col_xxl !==
-                'undefined') && col_xxl == i) { %} selected {% } %}>{%=i%}</option>
+                "undefined") && col_xxl == i) { %} selected {% } %}>{%=i%}</option>
                 {% } %}
 
             </select>
         </div>
 
-        {% if (typeof hide_remove === 'undefined') { %}
+        {% if (typeof hide_remove === "undefined") { %}
         <div class="col-12">
 
             <button class="btn btn-sm btn-outline-light text-danger">
@@ -1284,7 +1284,7 @@ require_capability('moodle/site:config', context_system::instance());
             <input name="text" type="text" value="{%=text%}" class="form-control" autocomplete="off"/>
         </div>
 
-        {% if (typeof hide_remove === 'undefined') { %}
+        {% if (typeof hide_remove === "undefined") { %}
         <div class="col-12">
 
             <button class="btn btn-sm btn-outline-light text-danger">
@@ -1334,10 +1334,10 @@ require_capability('moodle/site:config', context_system::instance());
 </script>
 <script id="vvveb-input-colorinput" type="text/html">
     <div>
-        <input name="{%=key%}" {% if (typeof palette !== 'undefined') { %} list="{%=key%}-color-palette" {% } %}
-        type="color" {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %}
+        <input name="{%=key%}" {% if (typeof palette !== "undefined") { %} list="{%=key%}-color-palette" {% } %}
+        type="color" {% if (typeof value !== "undefined" && value != false) { %} value="{%=value%}" {% } %}
         pattern="#[a-f0-9]{6}" class="form-control form-control-color"/>
-        {% if (typeof palette !== 'undefined') { %}
+        {% if (typeof palette !== "undefined") { %}
         <datalist id="{%=key%}-color-palette">
             {% for (const color in palette) { %}
             <option value="{%=color%}">{%=palette[color]%}</option>
@@ -1348,7 +1348,7 @@ require_capability('moodle/site:config', context_system::instance());
 <script id="vvveb-input-bootstrap-color-picker-input" type="text/html">
     <div>
         <div id="cp2" class="input-group" title="Using input value">
-            <input name="{%=key%}" type="text" {% if (typeof value !== 'undefined' && value != false) { %}
+            <input name="{%=key%}" type="text" {% if (typeof value !== "undefined" && value != false) { %}
             value="{%=value%}" {% } %} class="form-control"/>
             <span class="input-group-append">
             <span class="input-group-text colorpicker-input-addon"><i></i></span>
@@ -1359,27 +1359,27 @@ require_capability('moodle/site:config', context_system::instance());
 <script id="vvveb-input-numberinput" type="text/html">
     <div>
         <input name="{%=key%}" type="number" value="{%=value%}"
-               {% if (typeof min !== 'undefined' && min != false) { %}min="{%=min%}"{% } %}
-        {% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %}
-        {% if (typeof step !== 'undefined' && step != false) { %}step="{%=step%}"{% } %}
+               {% if (typeof min !== "undefined" && min != false) { %}min="{%=min%}"{% } %}
+        {% if (typeof max !== "undefined" && max != false) { %}max="{%=max%}"{% } %}
+        {% if (typeof step !== "undefined" && step != false) { %}step="{%=step%}"{% } %}
         class="form-control"/>
     </div>
 </script>
 <script id="vvveb-input-button" type="text/html">
     <div>
         <button class="btn btn-sm btn-primary">
-            <i class="la  {% if (typeof icon !== 'undefined') { %} {%=icon%} {% } else { %} la-plus {% } %} la-lg"></i>
+            <i class="la  {% if (typeof icon !== "undefined") { %} {%=icon%} {% } else { %} la-plus {% } %} la-lg"></i>
             {%=text%}
         </button>
     </div>
 </script>
 <script id="vvveb-input-cssunitinput" type="text/html">
     <div class="input-group css-unit" id="cssunit-{%=key%}">
-        <input name="number" type="number" {% if (typeof value !== 'undefined' && value != false) { %}
+        <input name="number" type="number" {% if (typeof value !== "undefined" && value != false) { %}
         value="{%=value%}" {% } %}
-        {% if (typeof min !== 'undefined' && min != false) { %}min="{%=min%}"{% } %}
-        {% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %}
-        {% if (typeof step !== 'undefined' && step != false) { %}step="{%=step%}"{% } %}
+        {% if (typeof min !== "undefined" && min != false) { %}min="{%=min%}"{% } %}
+        {% if (typeof max !== "undefined" && max != false) { %}max="{%=max%}"{% } %}
+        {% if (typeof step !== "undefined" && step != false) { %}step="{%=step%}"{% } %}
         class="form-control"/>
         <select class="form-select small-arrow" name="unit">
             <option value="em">em</option>
@@ -1400,32 +1400,32 @@ require_capability('moodle/site:config', context_system::instance());
     </div>
 </script>
 <script id="vvveb-breadcrumb-navigaton-item" type="text/html">
-    <li class="breadcrumb-item"><a href="#" {% if (typeof className !== 'undefined') { %}class="{%=className%}"{% }
+    <li class="breadcrumb-item"><a href="#" {% if (typeof className !== "undefined") { %}class="{%=className%}"{% }
         %}>{%=name%}</a></li>
 </script>
 <script id="vvveb-input-sectioninput" type="text/html">
     <div>
         {% var namespace = '-' + Math.floor(Math.random() * 1000); %}
         <label class="header" data-header="{%=key%}" for="header_{%=key%}{%=namespace%}" {% if (typeof group !==
-        'undefined' && group != null) { %}data-group="{%=group%}" {% } %}><span>{%=header%}</span>
+        "undefined" && group != null) { %}data-group="{%=group%}" {% } %}><span>{%=header%}</span>
         <div class="header-arrow"></div>
         </label>
-        <input class="header_check" type="checkbox" {% if (typeof expanded !== 'undefined' && expanded == false) { %} {%
+        <input class="header_check" type="checkbox" {% if (typeof expanded !== "undefined" && expanded == false) { %} {%
         } else { %}checked="true"{% } %} id="header_{%=key%}{%=namespace%}">
         <div class="section row" data-section="{%=key%}" {% if (typeof group !==
-        'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
+        "undefined" && group != null) { %}data-group="{%=group%}" {% } %}>
     </div>
     </div>
 </script>
 <script id="vvveb-property" type="text/html">
-    <div class="mb-3 {% if (typeof col !== 'undefined' && col != false) { %} col-sm-{%=col%} {% } else { %}row{% } %} {% if (typeof inline !== 'undefined' && inline == true) { %}inline{% } %} "
-         data-key="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
+    <div class="mb-3 {% if (typeof col !== "undefined" && col != false) { %} col-sm-{%=col%} {% } else { %}row{% } %} {% if (typeof inline !== "undefined" && inline == true) { %}inline{% } %} "
+         data-key="{%=key%}" {% if (typeof group !== "undefined" && group != null) { %}data-group="{%=group%}" {% } %}>
 
-    {% if (typeof name !== 'undefined' && name != false) { %}<label
-            class="{% if (typeof inline === 'undefined' ) { %}col-sm-4{% } %} form-label"
+    {% if (typeof name !== "undefined" && name != false) { %}<label
+            class="{% if (typeof inline === "undefined" ) { %}col-sm-4{% } %} form-label"
             for="input-model">{%=name%}</label>{% } %}
 
-    <div class="{% if (typeof inline === 'undefined') { %}col-sm-{% if (typeof name !== 'undefined' && name != false) { %}8{% } else { %}12{% } } %} input"></div>
+    <div class="{% if (typeof inline === "undefined") { %}col-sm-{% if (typeof name !== "undefined" && name != false) { %}8{% } else { %}12{% } } %} input"></div>
 
     </div>
 </script>
@@ -1685,8 +1685,8 @@ require_capability('moodle/site:config', context_system::instance());
         foreach ($files as $file) {
             $html = file_get_contents($file);
             $html = str_replace("{wwwroot}", $CFG->wwwroot, $html);
-            $html = vvveb__changue_langs($html);
-            $html = vvveb__change_courses($html);
+            $html = vvveb__changue_langs($html, "local_kopere_dashboard");
+            $html = vvveb__change_courses($html, "local_kopere_dashboard");
 
             preg_match('/\/([a-z0-9\-]*)\/([a-z0-9\-]*)\.html/', $file, $info);
             $name = ucfirst(str_replace("-", " ", $info[2]));
@@ -1734,7 +1734,7 @@ Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
     deleteUrl = "<?php echo "save.php?action=delete&page={$page}&id={$id}&link={$link}"; ?>";
     saveUrl = "<?php echo "save.php?action=save&page={$page}&id={$id}&link={$link}"; ?>";
     oEmbedProxyUrl = "<?php echo "save.php?action=oembedProxy&page={$page}&id={$id}&link={$link}"; ?>";
-    mediaScanUrl = "<?php echo "files.php?page={$page}&id={$id}&link={$link}"; ?>";
+    mediaServerUrl = "<?php echo "files.php?page={$page}&id={$id}&link={$link}"; ?>";
 
     var url = "<?php echo "loadpage.php?page={$page}&id={$id}&link={$link}";?>";
     Vvveb.Builder.init(url, function() {

@@ -202,7 +202,7 @@ class MediaModal {
         let _this = this;
 
         // Start by fetching the file data from files.php with an AJAX request
-        fetch(mediaScanUrl)
+        fetch(mediaServerUrl)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(response)
@@ -495,13 +495,13 @@ class MediaModal {
             formData.append("onlyFilename", true);
 
 
-            fetch('upload.php', {method : "POST", body : formData})
+            fetch(mediaServerUrl, {method : "POST", body : formData})
                 .then((response) => {
                     console.log(response);
                     if (!response.ok) {
                         throw new Error(response)
                     }
-                    return response.text()
+                    return response.json()
                 })
                 .then((data) => {
                     let fileElement = Vvveb.MediaModal.addFile({

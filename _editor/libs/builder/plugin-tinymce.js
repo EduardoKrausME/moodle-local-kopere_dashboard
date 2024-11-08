@@ -42,6 +42,7 @@ var tinyMceOptions = {
     content_css                   : '',
     content_style                 : 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
     images_upload_url             : 'postAcceptor.php',
+    relative_urls                 : false,
 
     image_advtab          : true,
     image_caption         : true,
@@ -74,7 +75,11 @@ Vvveb.WysiwygEditor = {
         this.doc = doc;
     },
 
-    edit    : function(element) {
+    edit : function(element) {
+        if(element.tagName =="BODY"){
+            alert("The <body> component cannot be edited.");
+            return;
+        }
         this.element = element;
         this.isActive = true;
         this.oldValue = element.innerHTML;
@@ -87,8 +92,8 @@ Vvveb.WysiwygEditor = {
             document.getElementById("select-box").style.display = "none";
         }, 1000);
     },
-    destroy : function(element) {
-        console.trace(element);
+
+    saveandclose : function() {
         if (tinymce && tinymce.activeEditor) {
             tinymce.activeEditor.destroy();
             Vvveb.Builder.highlightEnabled = true;
@@ -102,5 +107,22 @@ Vvveb.WysiwygEditor = {
                 newValue : node.innerHTML
             });
         }
+    },
+
+    destroy : function(element) {
+        // console.trace(element);
+        // if (tinymce && tinymce.activeEditor) {
+        //     tinymce.activeEditor.destroy();
+        //     Vvveb.Builder.highlightEnabled = true;
+        //     this.isActive = false;
+        //
+        //     node = this.element;
+        //     Vvveb.Undo.addMutation({
+        //         type     : 'characterData',
+        //         target   : node,
+        //         oldValue : this.oldValue,
+        //         newValue : node.innerHTML
+        //     });
+        // }
     }
 };

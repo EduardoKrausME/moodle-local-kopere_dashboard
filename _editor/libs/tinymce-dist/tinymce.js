@@ -1195,6 +1195,9 @@
     const isTag = tag => e => isElement$7(e) && name(e) === tag;
 
     const rawSet = (dom, key, value) => {
+        if(value.charAt(value.length - 1)=="/"){
+            return;
+        }
         if (isString(value) || isBoolean(value) || isNumber(value)) {
             dom.setAttribute(key, value + '');
         } else {
@@ -28863,7 +28866,7 @@
         const licenseKey = getLicenseKey(editor);
         const hasApiKey = isString(getApiKey(editor));
         if (!hasApiKey && (isUndefined(licenseKey) || validateLicenseKey(licenseKey) === 'INVALID')) {
-            console.warn(`TinyMCE is running in evaluation mode. Provide a valid license key or add license_key: 'gpl' to the init config to agree to the open source license terms. Read more at https://www.tiny.cloud/license-key/`);
+        // console.warn(`TinyMCE is running in evaluation mode. Provide a valid license key or add license_key: 'gpl' to the init config to agree to the open source license terms. Read more at https://www.tiny.cloud/license-key/`);
         }
     };
 
