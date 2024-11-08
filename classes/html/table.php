@@ -39,7 +39,7 @@ class table {
      * @param string $adicional
      */
     public function __construct($adicional = '') {
-        $this->tableid = 'table_' . uniqid();
+        $this->tableid = "table_" . uniqid();
         echo "<table id='{$this->tableid}' class='table table-hover' width='100%' {$adicional} \>";
     }
 
@@ -60,8 +60,8 @@ class table {
      */
     public function set_click($exec, $chave) {
         $this->click = [];
-        $this->click['exec'] = $exec;
-        $this->click['chave'] = $chave;
+        $this->click["exec"] = $exec;
+        $this->click["chave"] = $chave;
     }
 
     /**
@@ -72,8 +72,8 @@ class table {
      */
     public function set_click_redirect($url, $chave) {
         $this->click = [];
-        $this->click['chave'] = $chave;
-        $this->click['exec'] = "document.location.href='{$url}'";
+        $this->click["chave"] = $chave;
+        $this->click["exec"] = "document.location.href='{$url}'";
     }
 
     /**
@@ -84,8 +84,8 @@ class table {
      */
     public function set_click_open($url, $chave) {
         $this->click = [];
-        $this->click['chave'] = $chave;
-        $this->click['exec'] = "window.open( '{$url}' )";
+        $this->click["chave"] = $chave;
+        $this->click["exec"] = "window.open( '{$url}' )";
     }
 
     /**
@@ -109,13 +109,13 @@ class table {
             return '';
         }
 
-        $chaves = $this->click['chave'];
+        $chaves = $this->click["chave"];
 
         if (!is_array($chaves)) {
             $chaves = [$chaves];
         }
 
-        $exec = $this->click['exec'];
+        $exec = $this->click["exec"];
         foreach ($chaves as $chave) {
 
             if (is_array($linha)) {
@@ -273,10 +273,10 @@ class table {
             $json = json_encode($initparams);
             if (isset($json[800])) {
                 $json = htmlspecialchars($json, ENT_COMPAT);
-                echo "\n<input type='hidden' id='tableparams_{$this->tableid}' value='{$json}'/>\n";
-                $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', [$this->tableid, null]);
+                echo "\n<input type=\"hidden\" id='tableparams_{$this->tableid}' value='{$json}'/>\n";
+                $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', "init", [$this->tableid, null]);
             } else {
-                $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', 'init', [$this->tableid, $initparams]);
+                $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', "init", [$this->tableid, $initparams]);
             }
         }
     }
