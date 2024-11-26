@@ -53,7 +53,7 @@ class reports extends reports_admin {
     public function dashboard() {
         global $CFG, $DB;
 
-        $isadmin = has_capability('moodle/site:config', \context_system::instance());
+        $isadmin = has_capability('local/kopere_dashboard:manage', \context_system::instance());
         $isedit = optional_param("edit", false, PARAM_INT);
 
         dashboard_util::add_breadcrumb(get_string_kopere("reports_title"));
@@ -401,7 +401,7 @@ class reports extends reports_admin {
                 ->set_icon($icon);
         }
 
-        if (has_capability('moodle/site:config', \context_system::instance())) {
+        if (has_capability('local/kopere_dashboard:manage', \context_system::instance())) {
             $menus[] = (new submenu_util())
                 ->set_classname("reports")
                 ->set_methodname("dashboard")

@@ -46,7 +46,7 @@ class menu {
     public static function create_menu() {
         global $DB, $CFG;
 
-        $isadmin = has_capability('moodle/site:config', \context_system::instance());
+        $isadmin = has_capability('local/kopere_dashboard:manage', \context_system::instance());
 
         echo "<ul class='main-menu block_tree list menu-kopere main-menu'>";
 
