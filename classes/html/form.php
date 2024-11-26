@@ -165,7 +165,7 @@ class form {
                       <input type=\"submit\" class='btn btn-primary margin-left-15' value='{$value}'>
                   </div>";
         } else {
-            $html = "<input name='' class='btn btn-success bt-submit {$class}' type=\"submit\" value='" .
+            $html = "<input class='btn btn-success bt-submit {$class}' type=\"submit\" value='" .
                 htmlspecialchars($value, ENT_COMPAT) . "' />";
             $this->print_row('', $html, "btsubmit", $additionaltext);
         }
