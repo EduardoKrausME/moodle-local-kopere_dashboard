@@ -55,48 +55,6 @@ function vvveb__changue_langs($html, $component) {
 }
 
 /**
- * Function vvveb__change_courses
- *
- * @param $html
- *
- * @return mixed
- * @throws dml_exception
- */
-function vvveb__change_courses($html, $component) {
-
-    if (strpos($html, "{course-itens}") === false) {
-        return $html;
-    }
-
-    global $OUTPUT, $DB, $CFG;
-    $sql = "
-        SELECT c.*,
-               COUNT(ue.id) AS enrolments
-          FROM {course}          AS  c
-          JOIN {enrol}           AS  e ON e.courseid = c.id
-          JOIN {user_enrolments} AS ue ON ue.enrolid = e.id
-      GROUP BY c.id
-      ORDER BY enrolments DESC
-         LIMIT 12";
-    $courses = $DB->get_records_sql($sql);
-
-    $data = [];
-    foreach ($courses as $course) {
-        $course->courseimage = couse_image(new core_course_list_element($course));
-
-        $course->accesslink = "{$CFG->wwwroot}/course/view.php?id={$course->id}";
-        if (file_exists("{$CFG->dirroot}/local/kopere_pay/view.php")) {
-            $course->accesslink = "{$CFG->wwwroot}/local/kopere_pay/view.php?id={$course->id}";
-        }
-
-        $data[] = $course;
-    }
-    $courseshtml = $OUTPUT->render_from_template("{$component}/vvveb/course", ["couses" => $data]);
-
-    return str_replace("{course-itens}", $courseshtml, $html);
-}
-
-/**
  * Function couse_image
  *
  * @param $course
