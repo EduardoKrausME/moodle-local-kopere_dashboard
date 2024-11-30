@@ -173,6 +173,7 @@ if ($pagelink) {
         foreach ($webpagess as $webpages) {
 
             $webpages->link = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";
+            $webpages->access = get_string_kopere("webpages_access");
 
             if (file_exists(__DIR__ . "/../kopere_pay/lib.php") && $webpages->courseid) {
                 $koperepaydetalhe = $DB->get_record("kopere_pay_detalhe", ["course" => $webpages->courseid]);
@@ -181,10 +182,9 @@ if ($pagelink) {
                 $precoint = floatval("0{$precoint}");
 
                 if (!$precoint) {
-                    $webpages->cursofree = true;
+                    $webpages->cursopreco = get_string_kopere("webpages_free");
                 } else {
-                    $webpages->cursopago = true;
-                    $webpages->cursopreco = $koperepaydetalhe->preco;
+                    $webpages->cursopreco = "R$ " . $koperepaydetalhe->preco;
                 }
             }
 
