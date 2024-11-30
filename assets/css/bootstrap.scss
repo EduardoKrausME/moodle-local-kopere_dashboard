@@ -519,32 +519,32 @@ a.bg-primary:focus {
     background-color: #286090;
 }
 .bg-success {
-    background-color: #dff0d8;
+    background-color: #dff0d8 !important;
 }
 a.bg-success:hover,
 a.bg-success:focus {
-    background-color: #c1e2b3;
+    background-color: #c1e2b3 !important;
 }
 .bg-info {
-    background-color: #d9edf7;
+    background-color: #d9edf7  !important;
 }
 a.bg-info:hover,
 a.bg-info:focus {
-    background-color: #afd9ee;
+    background-color: #afd9ee !important;
 }
 .bg-warning {
-    background-color: #fcf8e3;
+    background-color: #fcf8e3 !important;
 }
 a.bg-warning:hover,
 a.bg-warning:focus {
-    background-color: #f7ecb5;
+    background-color: #f7ecb5 !important;
 }
 .bg-danger {
-    background-color: #f2dede;
+    background-color: #f2dede !important;
 }
 a.bg-danger:hover,
 a.bg-danger:focus {
-    background-color: #e4b9b9;
+    background-color: #e4b9b9 !important;
 }
 .page-header {
     padding-bottom: 9px;

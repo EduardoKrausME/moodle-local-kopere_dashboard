@@ -738,43 +738,43 @@
 }
 .kopere_dashboard_div .bg-success,
 .kopere-dashboard-bootstrap_page .bg-success {
-  background-color: #dff0d8;
+  background-color: #dff0d8 !important;
 }
 .kopere_dashboard_div a.bg-success:hover,
 .kopere_dashboard_div a.bg-success:focus,
 .kopere-dashboard-bootstrap_page a.bg-success:hover,
 .kopere-dashboard-bootstrap_page a.bg-success:focus {
-  background-color: #c1e2b3;
+  background-color: #c1e2b3 !important;
 }
 .kopere_dashboard_div .bg-info,
 .kopere-dashboard-bootstrap_page .bg-info {
-  background-color: #d9edf7;
+  background-color: #d9edf7 !important;
 }
 .kopere_dashboard_div a.bg-info:hover,
 .kopere_dashboard_div a.bg-info:focus,
 .kopere-dashboard-bootstrap_page a.bg-info:hover,
 .kopere-dashboard-bootstrap_page a.bg-info:focus {
-  background-color: #afd9ee;
+  background-color: #afd9ee !important;
 }
 .kopere_dashboard_div .bg-warning,
 .kopere-dashboard-bootstrap_page .bg-warning {
-  background-color: #fcf8e3;
+  background-color: #fcf8e3 !important;
 }
 .kopere_dashboard_div a.bg-warning:hover,
 .kopere_dashboard_div a.bg-warning:focus,
 .kopere-dashboard-bootstrap_page a.bg-warning:hover,
 .kopere-dashboard-bootstrap_page a.bg-warning:focus {
-  background-color: #f7ecb5;
+  background-color: #f7ecb5 !important;
 }
 .kopere_dashboard_div .bg-danger,
 .kopere-dashboard-bootstrap_page .bg-danger {
-  background-color: #f2dede;
+  background-color: #f2dede !important;
 }
 .kopere_dashboard_div a.bg-danger:hover,
 .kopere_dashboard_div a.bg-danger:focus,
 .kopere-dashboard-bootstrap_page a.bg-danger:hover,
 .kopere-dashboard-bootstrap_page a.bg-danger:focus {
-  background-color: #e4b9b9;
+  background-color: #e4b9b9 !important;
 }
 .kopere_dashboard_div .page-header,
 .kopere-dashboard-bootstrap_page .page-header {
