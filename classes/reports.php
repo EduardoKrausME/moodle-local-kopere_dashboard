@@ -18,6 +18,7 @@
  * reoprts file
  *
  * introduced 13/05/17 13:29
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -43,7 +44,7 @@ use local_kopere_dashboard\vo\kopere_dashboard_reports;
  *
  * @package local_kopere_dashboard
  */
-class reports extends reports_admin {
+class reports {
 
     /**
      * Function dashboard
@@ -54,9 +55,6 @@ class reports extends reports_admin {
     public function dashboard() {
         global $CFG, $DB;
 
-        $isadmin = has_capability('local/kopere_dashboard:manage', \context_system::instance());
-        $isedit = optional_param("edit", false, PARAM_INT);
-
         dashboard_util::add_breadcrumb(get_string_kopere("reports_title"));
         dashboard_util::start_page();
 
@@ -64,15 +62,7 @@ class reports extends reports_admin {
 
         $type = optional_param("type", null, PARAM_TEXT);
 
-        if ($isedit) {
-            $koperereportcats = $DB->get_records("kopere_dashboard_reportcat");
-        } else {
-            if ($type) {
-                $koperereportcats = $DB->get_records("kopere_dashboard_reportcat", ["type" => $type, "enable" => 1]);
-            } else {
-                $koperereportcats = $DB->get_records("kopere_dashboard_reportcat", ["enable" => 1]);
-            }
-        }
+        $koperereportcats = $DB->get_records("kopere_dashboard_reportcat");
 
         /** @var kopere_dashboard_reportcat $koperereportcat */
         foreach ($koperereportcats as $koperereportcat) {
@@ -93,23 +83,12 @@ class reports extends reports_admin {
             title_util::print_h3("<img src='{$icon}' alt=\"Icon\" height=\"23\" width=\"23\" > " .
                 self::get_title($koperereportcat), false);
 
-            if ($isedit) {
-                $koperereportss = $DB->get_records("kopere_dashboard_reports",
-                    ["reportcatid" => $koperereportcat->id]);
-            } else {
-                $koperereportss = $DB->get_records("kopere_dashboard_reports",
-                    ["reportcatid" => $koperereportcat->id, "enable" => 1]);
-            }
+            $koperereportss = $DB->get_records("kopere_dashboard_reports",
+                ["reportcatid" => $koperereportcat->id]);
 
             /** @var kopere_dashboard_reports $koperereports */
             foreach ($koperereportss as $koperereports) {
                 $title = self::get_title($koperereports);
-                $botaoedit = "";
-                if ($isadmin && $isedit) {
-                    $botaoedit = button::info(get_string_kopere("reports_settings_title"),
-                        local_kopere_dashboard_makeurl("reports", "editar",
-                            ["report" => $koperereports->id]), 'float-right', false, true);
-                }
                 $extraenable = '';
                 if (!$koperereports->enable) {
                     $extraenable = get_string_kopere("reports_disabled");
@@ -118,16 +97,6 @@ class reports extends reports_admin {
                 $url = local_kopere_dashboard_makeurl("reports", "load_report", ["report" => $koperereports->id]);
                 echo "<h4 style='padding-left:31px;'>
                           {$extraenable} <a href='{$url}'>{$title}</a>
-                          {$botaoedit}
-                      </h4>";
-            }
-            if ($isadmin && $isedit) {
-                $url = local_kopere_dashboard_makeurl("reports", "editar",
-                    ["report" => "-1", "reportcat" => $koperereportcat->id]);
-                $botaoadd = button::add(get_string_kopere("reports_add_new"),
-                    $url, 'float-right', false, true);
-                echo "<h4 style='padding-left: 31px;height: 20px'>
-                          {$botaoadd}
                       </h4>";
             }
         }
@@ -400,15 +369,6 @@ class reports extends reports_admin {
                 ->set_urlextra("&type={$koperereportcat->type}")
                 ->set_title(self::get_title($koperereportcat))
                 ->set_icon($icon);
-        }
-
-        if (has_capability('local/kopere_dashboard:manage', \context_system::instance())) {
-            $menus[] = (new submenu_util())
-                ->set_classname("reports")
-                ->set_methodname("dashboard")
-                ->set_urlextra("&edit=1")
-                ->set_title(get_string_kopere("reports_settings_title"))
-                ->set_icon("settings");
         }
 
         return $menus;
