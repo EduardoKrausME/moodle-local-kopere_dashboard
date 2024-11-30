@@ -28,6 +28,7 @@ namespace local_kopere_dashboard;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\html\button;
+use local_kopere_dashboard\report\custom\course_access;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\json;
@@ -181,11 +182,11 @@ class reports extends reports_admin {
             if (strpos($koperereports->reportsql, "local_kopere_dashboard") === 0) {
                 $classname = $koperereports->reportsql;
 
-                $_GET["export"] = "xls";
+                // Hack for download.
                 ob_end_clean();
 
+                /** @var course_access $class */
                 $class = new $classname();
-                title_util::print_h3($class->name(), false);
                 $class->generate();
 
                 die();

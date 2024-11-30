@@ -18,6 +18,7 @@
  * course_access file
  *
  * introduced 25/05/17 18:31
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -47,7 +48,7 @@ class course_access {
      */
     public function name() {
         $cursosid = optional_param("courseid", 0, PARAM_INT);
-        return get_string_kopere('reports_report_courses-3') . ' ' . get_course($cursosid)->fullname;
+        return get_string_kopere("reports_report_courses-3") . " " . get_course($cursosid)->fullname;
     }
 
     /**
@@ -93,22 +94,22 @@ class course_access {
                   document.body.className += " menu-w-90";
               </script>';
 
-        $sections = $DB->get_records("course_sections", ["course" => $cursosid], 'section asc');
+        $sections = $DB->get_records("course_sections", ["course" => $cursosid], "section asc");
 
         button::info(get_string_kopere("reports_export"), url_util::querystring() . "&export=xls");
 
         session_write_close();
-        $export = optional_param("export", '', PARAM_TEXT);
+        $export = optional_param("export", "xls", PARAM_TEXT);
         export::header($export, $course->fullname);
 
         echo '<table id="list-course-access" class="table table-bordered table-hover" border="1">';
-        echo '<thead>';
-        $printsessoes = '';
+        echo "<thead>";
+        $printsessoes = "";
 
         $courseinfo = [];
         $modinfo = [];
         foreach ($sections as $key => $section) {
-            $partesmodinfo = explode(',', $section->sequence);
+            $partesmodinfo = explode(",", $section->sequence);
             $countmodinfo = 0;
             foreach ($partesmodinfo as $parte) {
                 $sql = "SELECT cm.*, cm.id AS course_modules_id, m.*, m.id AS modules_id
@@ -152,11 +153,11 @@ class course_access {
                 } else {
                     $printsessoes .= "Sessão {$key}";
                 }
-                $printsessoes .= '</th>';
+                $printsessoes .= "</th>";
             }
         }
 
-        $groupscols = '';
+        $groupscols = "";
         if ($groups) {
             $groupscols = '<th rowspan="2" align="center" bgcolor="#979797" style="text-align:center;" >' .
                 get_string_kopere("reports_groupname") . '</th>';

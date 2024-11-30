@@ -81,7 +81,7 @@ class course_last_access {
         button::info(get_string_kopere("reports_export"), url_util::querystring() . "&export=xls");
 
         session_write_close();
-        $export = optional_param("export", '', PARAM_TEXT);
+        $export = optional_param("export", "xls", PARAM_TEXT);
         export::header($export, $course->fullname);
 
         echo '<table id="list-course-access" class="table table-bordered table-hover" border="1">';
