@@ -32,14 +32,15 @@ use editor_tiny\manager;
  *
  * @package local_kopere_dashboard\html\inputs
  */
-class input_textarea extends input_base {
+class input_htmleditor extends input_textarea {
+
     /**
      * Function new_instance
      *
      * @return input_textarea
      */
     public static function new_instance() {
-        return new input_textarea();
+        return new input_htmleditor();
     }
 
     /**
@@ -48,27 +49,21 @@ class input_textarea extends input_base {
      * @return mixed|string
      */
     public function to_string() {
-        $return = "<textarea ";
+        global $PAGE;
 
-        $return .= "id='{$this->input_id}' name='{$this->name}' ";
+        $return = parent::to_string();
 
-        if ($this->class) {
-            $return .= "class='{$this->class}' ";
-        }
+        $config = $this->tyni_editor_config();
 
-        if ($this->style) {
-            $return .= "style='{$this->style}' ";
-        }
-
-        $return .= $this->extras;
-
-        $return .= ">";
-
-        if ($this->value) {
-            $return .= htmlentities($this->value, ENT_COMPAT);
-        }
-
-        $return .= "</textarea>";
+        $PAGE->requires->js_amd_inline("
+            M.util.js_pending( 'editor_tiny/editor' );
+            require( [ 'editor_tiny/editor' ], ( tiny ) => {
+                tiny.setupForElementId( {
+                    elementId : '{$this->input_id}',
+                    options   : {$config},
+                } );
+                M.util.js_complete( 'editor_tiny/editor' );
+            } );");
 
         return $return;
     }
