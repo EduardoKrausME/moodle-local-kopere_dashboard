@@ -18,6 +18,7 @@
  * Dashboard file
  *
  * introduced 30/01/17 09:39
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -124,7 +125,7 @@ class dashboard {
      * @throws \dml_exception
      */
     public function last_grades() {
-        global $DB, $PAGE;
+        global $DB, $PAGE,$OUTPUT;
 
         $grade = new grade();
         $lastgrades = $grade->get_last_grades();
@@ -148,25 +149,15 @@ class dashboard {
             $gradetext = number_format($grade->finalgrade, 1, get_string("decsep", "langconfig"), '') . ' ' .
                 get_string_kopere("dashboard_grade_of") . ' ' . intval($grade->rawgrademax);
 
-            $url = local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id], "view-ajax");
-            echo "<div class='media dashboard-grade-list'>
-                      <div class='media-left'>
-                          <img title='" . fullname($user) . "' src='{$profileimageurl}" . "' class='media-object' >
-                      </div>
-                      <div class='media-body'>
-                          <h4 class='media-heading'>
-                              <a href='" . local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id]) . "
-                                 data-href='{$url}'>" .
-                fullname($user) . "</a>
-                          </h4>
-                          <p>" .
-                get_string_kopere("dashboard_grade_text", ["grade" => $gradetext, "evaluation" => $evaluation]) . "</p>
-                          <div class=\"date\"><small>" . get_string_kopere("dashboard_grade_in") .
-                " <i>" . userdate($grade->timemodified,
-                    get_string_kopere("dateformat")) . "</i></small></div>
-                      </div>
-                      <div class=\"clear\"></div>
-                  </div>";
+            $data = [
+                "user_fullname" => fullname($user),
+                "profileimageurl" => $profileimageurl,
+                "users_details" => local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id]),
+                "users_details_ajax" => local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id], "view-ajax"),
+                "dashboard_grade_text" => get_string_kopere("dashboard_grade_text", ["grade" => $gradetext, "evaluation" => $evaluation]) ,
+                "grade_date" => userdate($grade->timemodified, get_string_kopere("dateformat")),
+            ];
+            echo $OUTPUT->render_from_template('local_kopere_dashboard/last_grades', $data);
         }
         die();
     }
@@ -178,7 +169,7 @@ class dashboard {
      * @throws \dml_exception
      */
     public function last_enroll() {
-        global $DB, $PAGE;
+        global $DB, $PAGE, $OUTPUT;
 
         $enrol = new enroll();
         $lastenroll = $enrol->last_enroll();
@@ -199,23 +190,15 @@ class dashboard {
                         get_string_kopere("dashboard_enrol_active") . '</span>';
                 }
 
-                echo "<div class='media dashboard-grade-list'>
-                          <div class='media-left'>
-                              <img title='" . fullname($user) . "' src='{$profileimageurl}' class='media-object' >
-                          </div>
-                          <div class='media-body'>
-                              <h4 class='media-heading'>
-                                  <a href='" . local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id]) . ">" .
-                    fullname($user) . '</a>
-                              </h4>
-                              <p>' . get_string_kopere("dashboard_enrol_text", $enrol) . "
-                                  <span class=\"status\">" . $statusmatricula . "</span>
-                              </p>
-                              <div class=\"date\"><small>" . get_string_kopere("dashboard_enrol_lastmodifield") . " <i>" .
-                    userdate($enrol->timemodified, get_string_kopere("dateformat")) . "</i></small></div>
-                          </div>
-                          <div class=\"clear\"></div>
-                      </div>";
+                $data = [
+                    "user_fullname" => fullname($user),
+                    "profileimageurl" => $profileimageurl,
+                    "users_details" => local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id]),
+                    "dashboard_enrol_text" => get_string_kopere("dashboard_enrol_text", $enrol),
+                    "matricula_status" => $statusmatricula,
+                    "matricula_date" => userdate($enrol->timemodified, get_string_kopere("dateformat")),
+                ];
+                echo $OUTPUT->render_from_template('local_kopere_dashboard/last_enroll', $data);
             }
         }
     }

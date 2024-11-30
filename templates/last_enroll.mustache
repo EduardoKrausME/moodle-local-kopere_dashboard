@@ -1,0 +1,51 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_kopere_dashboard/last_enroll
+
+    Example context (json):
+    {
+        "user_fullname": "Eduardo Kraus",
+        "profileimageurl": "https://example.com/path/to/profileimage.jpg",
+        "users_details": "https://example.com/user/details/123",
+        "dashboard_enrol_text": "Inscrição realizada com sucesso.",
+        "matricula_status": "Ativa",
+        "matricula_date": "2024-11-30"
+    }
+}}
+
+
+<div class="media dashboard-grade-list">
+    <div class="media-left">
+        <img title="{{user_fullname}}" src="{{profileimageurl}}" class="media-object">
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">
+            <a href="{{users_details}}">{{user_fullname}}</a>
+        </h4>
+        <p>{{{dashboard_enrol_text}}}
+            <span class="status">{{{matricula_status}}}</span>
+        </p>
+        <div class="date">
+            <small>
+                {{#str}}dashboard_enrol_lastmodifield,local_kopere_dashboard{{/str}}
+                <i>{{matricula_date}}</i>
+            </small>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
