@@ -275,7 +275,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2024101500, "local", "kopere_dashboard");
     }
 
-    if ($oldversion < 2024113000) {
+    if ($oldversion < 2024113001) {
         $table = new xmldb_table("kopere_dashboard_menu");
         if ($dbman->table_exists($table)) {
             $dbman->rename_table($table, "local_kopere_dashboard_menu");
@@ -284,6 +284,11 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         $table = new xmldb_table("kopere_dashboard_webpages");
         if ($dbman->table_exists($table)) {
             $dbman->rename_table($table, "local_kopere_dashboard_pages");
+        }
+
+        $table = new xmldb_table("kopere_dashboard_events");
+        if ($dbman->table_exists($table)) {
+            $dbman->rename_table($table, "local_kopere_dashboard_event");
         }
 
         $table = new xmldb_table("kopere_dashboard_reportcat");
@@ -317,7 +322,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
             $dbman->drop_table($table);
         }
 
-        upgrade_plugin_savepoint(true, 2024113000, "local", "kopere_dashboard");
+        upgrade_plugin_savepoint(true, 2024113001, "local", "kopere_dashboard");
     }
 
     return true;
