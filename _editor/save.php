@@ -81,15 +81,15 @@ $html = '';
 $file = '';
 $action = '';
 
-if (isset($_POST["startTemplateUrl"]) && !empty($_POST["startTemplateUrl"])) {
-    $startTemplateUrl = sanitizeFileName($_POST["startTemplateUrl"]);
+if (optional_param("startTemplateUrl", false, PARAM_RAW)) {
+    $startTemplateUrl = sanitizeFileName(optional_param("startTemplateUrl", false, PARAM_RAW));
     $html = '';
     if ($startTemplateUrl) {
         $html = file_get_contents($startTemplateUrl);
     }
 }
-else if (isset($_POST["html"])) {
-    $html = substr($_POST["html"], 0, MAX_FILE_LIMIT);
+else if (optional_param("html", false, PARAM_RAW)) {
+    $html = substr(optional_param("html", false, PARAM_RAW), 0, MAX_FILE_LIMIT);
     if (!ALLOW_PHP) {
         //if (strpos($html, '<?php') !== false) {
         if (preg_match('@<\?php|<\? |<\?=|<\s*script\s*language\s*=\s*"\s*php\s*"\s*>@', $html)) {
@@ -99,12 +99,12 @@ else if (isset($_POST["html"])) {
     $html = str_replace("body >", "", $html);
 }
 
-if (isset($_POST["file"])) {
-    $file = sanitizeFileName($_POST["file"]);
+if (optional_param("file", false, PARAM_RAW)) {
+    $file = sanitizeFileName(optional_param("file", false, PARAM_RAW));
 }
 
-if (isset($_GET["action"])) {
-    $action = htmlspecialchars(strip_tags($_GET["action"]), ENT_COMPAT);
+if (optional_param("action", false, PARAM_RAW)) {
+    $action = htmlspecialchars(strip_tags(optional_param("action", false, PARAM_RAW)), ENT_COMPAT);
 }
 
 if ($action) {
@@ -135,7 +135,7 @@ if ($action) {
             ]);
             break;
         case "oembedProxy":
-            $url = $_GET["url"] ?? '';
+            $url = optional_param("url", false, PARAM_RAW) ?? '';
             if (validOembedUrl($url)) {
                 $options = [
                     "http" => [
