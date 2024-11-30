@@ -39,8 +39,8 @@ class session {
      * @return null
      */
     public static function get($key) {
-        if (isset($_SESSION[$key])) {
-            return $_SESSION[$key];
+        if (isset($_SESSION["kopere-dashboard-{$key}"])) {
+            return $_SESSION["kopere-dashboard-{$key}"];
         } else {
             return null;
         }
@@ -53,6 +53,6 @@ class session {
      * @param $value
      */
     public static function set($key, $value) {
-        $_SESSION[$key] = $value;
+        $_SESSION["kopere-dashboard-{$key}"] = $value;
     }
 }
