@@ -42,7 +42,7 @@ if (isset($_FILES["file"]["name"])) {
         "png", "jpg", "jpeg", "gif", "svg", "webp",
         "webm", "mp4",
         "mp3",
-        "pdf", "doc", "docx"
+        "pdf"
     ];
 
     $extension = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
