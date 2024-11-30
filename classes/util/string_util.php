@@ -18,6 +18,7 @@
  * string_util file
  *
  * introduced   23/05/17 18:24
+ *
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -153,5 +154,29 @@ class string_util {
         }
 
         return $out;
+    }
+
+    /**
+     * Function trunc
+     *
+     * @param $string
+     * @param $maxlength
+     *
+     * @return string
+     * @throws \coding_exception
+     */
+    public static function trunc($string, $maxlength) {
+        $stringarray = preg_split('/\s+/', strip_tags($string));
+
+        $stringreturn = "";
+        foreach ($stringarray as $palavra) {
+            $stringreturn .= " {$palavra}";
+
+            if (strlen($stringreturn) >= $maxlength) {
+                return trim($stringreturn) . "...";
+            }
+        }
+
+        return $stringreturn;
     }
 }
