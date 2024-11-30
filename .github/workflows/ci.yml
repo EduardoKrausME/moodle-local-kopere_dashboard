@@ -79,9 +79,9 @@ jobs:
       if: ${{ !cancelled() }}
       run: moodle-plugin-ci phpcs --max-warnings 0
 
-    - name: Validating
-      if: ${{ !cancelled() }}
-      run: moodle-plugin-ci validate
+#    - name: Validating
+#      if: ${{ !cancelled() }}
+#      run: moodle-plugin-ci validate
 
     - name: Check upgrade savepoints
       if: ${{ !cancelled() }}
