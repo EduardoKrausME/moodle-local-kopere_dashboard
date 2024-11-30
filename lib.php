@@ -103,14 +103,14 @@ function add_pages_custommenuitems_400() {
     global $CFG;
 
     $cache = \cache::make("local_kopere_dashboard", "report_getdata_cache");
-    if ($cache->has("kopere_dashboard_menu")) {
-        $CFG->extramenu = $cache->get("kopere_dashboard_menu");
+    if ($cache->has("local_kopere_dashboard_menu")) {
+        $CFG->extramenu = $cache->get("local_kopere_dashboard_menu");
     } else {
 
         try {
             $CFG->extramenu = "";
             local_kopere_dashboard_extend_navigation__get_menus(0, "");
-            $cache->set("kopere_dashboard_menu", $CFG->extramenu);
+            $cache->set("local_kopere_dashboard_menu", $CFG->extramenu);
         } catch (dml_exception $e) { // phpcs:disable
         }
     }
@@ -129,14 +129,14 @@ function add_pages_custommenuitems_400() {
 function local_kopere_dashboard_extend_navigation__get_menus($menuid, $prefix) {
     global $DB, $CFG;
 
-    $menus = $DB->get_records("kopere_dashboard_menu", ["menuid" => $menuid]);
+    $menus = $DB->get_records("local_kopere_dashboard_menu", ["menuid" => $menuid]);
 
     foreach ($menus as $menu) {
         $where = ["visible" => 1, "menuid" => $menu->id];
-        $webpages = $DB->get_records("kopere_dashboard_webpages", $where, 'pageorder ASC');
+        $webpages = $DB->get_records("local_kopere_dashboard_pages", $where, 'pageorder ASC');
         $CFG->extramenu .= "{$prefix} {$menu->title}|{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}\n";
         if ($webpages) {
-            /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpage */
+            /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_pages $webpage */
             foreach ($webpages as $webpage) {
                 $link = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpage->link}";
                 $CFG->extramenu .= "{$prefix}- {$webpage->title}|{$link}\n";

@@ -57,7 +57,7 @@ class db_report_login extends \core\task\scheduled_task {
 
         $logstorestandardlogs = $DB->get_records_sql($reportsql);
 
-        $DB->delete_records("kopere_dashboard_reportlogin");
+        $DB->delete_records("local_kopere_dashboard_login");
 
         foreach ($logstorestandardlogs as $logstorestandardlog) {
 
@@ -68,7 +68,7 @@ class db_report_login extends \core\task\scheduled_task {
             ];
 
             try {
-                $DB->insert_record("kopere_dashboard_reportlogin", $data);
+                $DB->insert_record("local_kopere_dashboard_login", $data);
             } catch (\dml_exception $e) { // phpcs:disable
             }
         }

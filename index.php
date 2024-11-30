@@ -47,9 +47,9 @@ $PAGE->add_body_class("kopere-dashboard-pages");
 $PAGE->set_pagetype('my-index');
 
 if ($pagelink) {
-    $sql = "SELECT * FROM {kopere_dashboard_webpages} WHERE link LIKE :link";
+    $sql = "SELECT * FROM {local_kopere_dashboard_pages} WHERE link LIKE :link";
 
-    /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpages */
+    /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_pages $webpages */
     $webpages = $DB->get_record_sql($sql, ["link" => $pagelink]);
 
     if ($webpages == null) {
@@ -74,8 +74,8 @@ if ($pagelink) {
     }
     $PAGE->set_heading("{$webpages->title} {$edit}", false);
 
-    /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
-    $menu = $DB->get_record("kopere_dashboard_menu", ["id" => $webpages->menuid]);
+    /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_menu $menu */
+    $menu = $DB->get_record("local_kopere_dashboard_menu", ["id" => $webpages->menuid]);
     $PAGE->navbar->add(get_string_kopere("webpages_allpages"), new moodle_url("/local/kopere_dashboard/"));
     $PAGE->navbar->add($menu->title, new moodle_url("/local/kopere_dashboard/?menu={$menu->link}"));
     $PAGE->navbar->add($webpages->title);
@@ -128,8 +128,8 @@ if ($pagelink) {
     echo $OUTPUT->footer();
 } else {
     if ($menulink) {
-        /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
-        $menu = $DB->get_record("kopere_dashboard_menu", ["link" => $menulink]);
+        /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_menu $menu */
+        $menu = $DB->get_record("local_kopere_dashboard_menu", ["link" => $menulink]);
         if ($menu == null) {
             \local_kopere_dashboard\util\webpages_util::notfound("webpages_error_menu");
         }
@@ -151,13 +151,13 @@ if ($pagelink) {
 
         $PAGE->navbar->add(get_string_kopere("webpages_allpages"), new moodle_url("/local/kopere_dashboard/"));
 
-        $menus = $DB->get_records("kopere_dashboard_menu");
+        $menus = $DB->get_records("local_kopere_dashboard_menu");
     }
     echo $OUTPUT->header();
 
     $data = ["menus" => []];
 
-    /** @var \local_kopere_dashboard\vo\kopere_dashboard_menu $menu */
+    /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_menu $menu */
     foreach ($menus as $menu) {
         if (!$menulink) {
             $menu->menulink = [
@@ -166,10 +166,10 @@ if ($pagelink) {
             ];
         }
 
-        $sql = "SELECT * FROM {kopere_dashboard_webpages} WHERE visible = 1 AND menuid = {$menu->id} ORDER BY pageorder ASC";
+        $sql = "SELECT * FROM {local_kopere_dashboard_pages} WHERE visible = 1 AND menuid = {$menu->id} ORDER BY pageorder ASC";
         $webpagess = $DB->get_records_sql($sql);
 
-        /** @var \local_kopere_dashboard\vo\kopere_dashboard_webpages $webpages */
+        /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_pages $webpages */
         foreach ($webpagess as $webpages) {
 
             $webpages->link = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";

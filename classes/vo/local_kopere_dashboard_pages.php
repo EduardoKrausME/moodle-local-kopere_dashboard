@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * kopere_dashboard_webpages file
+ * local_kopere_dashboard_pages file
  *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
@@ -27,11 +27,11 @@ namespace local_kopere_dashboard\vo;
 use local_kopere_dashboard\util\html;
 
 /**
- * Class kopere_dashboard_webpages
+ * Class local_kopere_dashboard_pages
  *
  * @package local_kopere_dashboard\vo
  */
-class kopere_dashboard_webpages extends \stdClass {
+class local_kopere_dashboard_pages extends \stdClass {
 
     /** @var int */
     public $id;
@@ -68,11 +68,11 @@ class kopere_dashboard_webpages extends \stdClass {
      *
      * @param $item
      *
-     * @return kopere_dashboard_webpages
+     * @return local_kopere_dashboard_pages
      * @throws \coding_exception
      */
     public static function create_by_object($item) {
-        $return = new kopere_dashboard_webpages();
+        $return = new local_kopere_dashboard_pages();
 
         $return->id = $item->id;
         $return->menuid = optional_param("menuid", $item->menuid, PARAM_INT);
@@ -91,11 +91,11 @@ class kopere_dashboard_webpages extends \stdClass {
     /**
      * Function create_by_default
      *
-     * @return kopere_dashboard_webpages
+     * @return local_kopere_dashboard_pages
      * @throws \coding_exception
      */
     public static function create_by_default() {
-        $return = new kopere_dashboard_webpages();
+        $return = new local_kopere_dashboard_pages();
 
         $return->id = 0;
         $return->menuid = optional_param("menuid", 0, PARAM_INT);

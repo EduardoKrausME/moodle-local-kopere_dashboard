@@ -36,8 +36,8 @@ use local_kopere_dashboard\util\json;
 use local_kopere_dashboard\util\submenu_util;
 use local_kopere_dashboard\util\title_util;
 use local_kopere_dashboard\util\export;
-use local_kopere_dashboard\vo\kopere_dashboard_reportcat;
-use local_kopere_dashboard\vo\kopere_dashboard_reports;
+use local_kopere_dashboard\vo\local_kopere_dashboard_rcat;
+use local_kopere_dashboard\vo\local_kopere_dashboard_reprt;
 
 /**
  * Class reports
@@ -62,9 +62,9 @@ class reports {
 
         $type = optional_param("type", null, PARAM_TEXT);
 
-        $koperereportcats = $DB->get_records("kopere_dashboard_reportcat");
+        $koperereportcats = $DB->get_records("local_kopere_dashboard_rcat");
 
-        /** @var kopere_dashboard_reportcat $koperereportcat */
+        /** @var local_kopere_dashboard_rcat $koperereportcat */
         foreach ($koperereportcats as $koperereportcat) {
             // Executa o SQL e vrifica se o SQL retorna status>0.
             if (strlen($koperereportcat->enablesql)) {
@@ -83,10 +83,10 @@ class reports {
             title_util::print_h3("<img src='{$icon}' alt=\"Icon\" height=\"23\" width=\"23\" > " .
                 self::get_title($koperereportcat), false);
 
-            $koperereportss = $DB->get_records("kopere_dashboard_reports",
+            $koperereportss = $DB->get_records("local_kopere_dashboard_reprt",
                 ["reportcatid" => $koperereportcat->id]);
 
-            /** @var kopere_dashboard_reports $koperereports */
+            /** @var local_kopere_dashboard_reprt $koperereports */
             foreach ($koperereportss as $koperereports) {
                 $title = self::get_title($koperereports);
                 $extraenable = '';
@@ -117,13 +117,13 @@ class reports {
         $report = optional_param("report", 0, PARAM_INT);
         $courseid = optional_param("courseid", 0, PARAM_INT);
 
-        /** @var kopere_dashboard_reports $koperereports */
-        $koperereports = $DB->get_record("kopere_dashboard_reports",
+        /** @var local_kopere_dashboard_reprt $koperereports */
+        $koperereports = $DB->get_record("local_kopere_dashboard_reprt",
             ["id" => $report]);
         header::notfound_null($koperereports, get_string_kopere("reports_notfound"));
 
-        /** @var kopere_dashboard_reportcat $koperereportcat */
-        $koperereportcat = $DB->get_record("kopere_dashboard_reportcat",
+        /** @var local_kopere_dashboard_rcat $koperereportcat */
+        $koperereportcat = $DB->get_record("local_kopere_dashboard_rcat",
             ["id" => $koperereports->reportcatid]);
         header::notfound_null($koperereportcat, get_string_kopere("reports_notfound"));
 
@@ -236,8 +236,8 @@ class reports {
             die();
         }
 
-        /** @var kopere_dashboard_reports $koperereports */
-        $koperereports = $DB->get_record("kopere_dashboard_reports", ["id" => $report]);
+        /** @var local_kopere_dashboard_reprt $koperereports */
+        $koperereports = $DB->get_record("local_kopere_dashboard_reprt", ["id" => $report]);
 
         if ($CFG->dbtype == "pgsql") {
             $sql = "{$koperereports->reportsql} LIMIT {$length} OFFSET {$start}";
@@ -284,8 +284,8 @@ class reports {
         $report = optional_param("report", 0, PARAM_INT);
         $courseid = optional_param("courseid", 0, PARAM_INT);
 
-        /** @var kopere_dashboard_reports $koperereports */
-        $koperereports = $DB->get_record("kopere_dashboard_reports",
+        /** @var local_kopere_dashboard_reprt $koperereports */
+        $koperereports = $DB->get_record("local_kopere_dashboard_reprt",
             ["id" => $report]);
         header::notfound_null($koperereports, get_string_kopere("reports_notfound"));
 
@@ -346,8 +346,8 @@ class reports {
 
         $menus = [];
 
-        $koperereportcats = $DB->get_records("kopere_dashboard_reportcat", ["enable" => 1]);
-        /** @var kopere_dashboard_reportcat $koperereportcat */
+        $koperereportcats = $DB->get_records("local_kopere_dashboard_rcat", ["enable" => 1]);
+        /** @var local_kopere_dashboard_rcat $koperereportcat */
         foreach ($koperereportcats as $koperereportcat) {
             // Executa o SQL e vrifica se o SQL retorna status>0.
             if (strlen($koperereportcat->enablesql)) {

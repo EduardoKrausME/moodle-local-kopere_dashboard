@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * kopere_dashboard_menu file
+ * local_kopere_dashboard_menu file
  *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
@@ -25,11 +25,11 @@
 namespace local_kopere_dashboard\vo;
 
 /**
- * Class kopere_dashboard_menu
+ * Class local_kopere_dashboard_menu
  *
  * @package local_kopere_dashboard\vo
  */
-class kopere_dashboard_menu extends \stdClass {
+class local_kopere_dashboard_menu extends \stdClass {
 
     /** @var int */
     public $id;
@@ -48,11 +48,11 @@ class kopere_dashboard_menu extends \stdClass {
      *
      * @param $item
      *
-     * @return kopere_dashboard_menu
+     * @return local_kopere_dashboard_menu
      * @throws \coding_exception
      */
     public static function create_by_object($item) {
-        $return = new kopere_dashboard_menu();
+        $return = new local_kopere_dashboard_menu();
 
         $return->id = $item->id;
         $return->link = optional_param("link", $item->link, PARAM_TEXT);
@@ -65,11 +65,11 @@ class kopere_dashboard_menu extends \stdClass {
     /**
      * Function create_by_default
      *
-     * @return kopere_dashboard_menu
+     * @return local_kopere_dashboard_menu
      * @throws \coding_exception
      */
     public static function create_by_default() {
-        $return = new kopere_dashboard_menu();
+        $return = new local_kopere_dashboard_menu();
 
         $return->id = 0;
         $return->link = optional_param("link", '', PARAM_TEXT);

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * kopere_dashboard_events file
+ * local_kopere_dashboard_event file
  *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
@@ -25,11 +25,11 @@
 namespace local_kopere_dashboard\vo;
 
 /**
- * Class kopere_dashboard_events
+ * Class local_kopere_dashboard_event
  *
  * @package local_kopere_dashboard\vo
  */
-class kopere_dashboard_events extends \stdClass {
+class local_kopere_dashboard_event extends \stdClass {
     /** @var int */
     public $id;
 
@@ -64,10 +64,10 @@ class kopere_dashboard_events extends \stdClass {
      * @param $subject
      * @param null $message
      *
-     * @return kopere_dashboard_events
+     * @return local_kopere_dashboard_event
      */
     public static function create($module, $eventname, $userfrom, $userto, $subject, $message = null) {
-        $event = new kopere_dashboard_events();
+        $event = new local_kopere_dashboard_event();
         $event->module = $module;
         $event->event = $eventname;
         $event->userfrom = $userfrom;
@@ -84,11 +84,11 @@ class kopere_dashboard_events extends \stdClass {
      *
      * @param $item
      *
-     * @return kopere_dashboard_events
+     * @return local_kopere_dashboard_event
      * @throws \coding_exception
      */
     public static function create_by_object($item) {
-        $return = new kopere_dashboard_events();
+        $return = new local_kopere_dashboard_event();
 
         $return->id = $item->id;
         $return->module = optional_param("module", $item->module, PARAM_TEXT);
@@ -105,11 +105,11 @@ class kopere_dashboard_events extends \stdClass {
     /**
      * Function create_by_default
      *
-     * @return kopere_dashboard_events
+     * @return local_kopere_dashboard_event
      * @throws \coding_exception
      */
     public static function create_by_default() {
-        $return = new kopere_dashboard_events();
+        $return = new local_kopere_dashboard_event();
 
         $return->id = optional_param("id", 0, PARAM_INT);
         $return->module = optional_param("module", '', PARAM_TEXT);

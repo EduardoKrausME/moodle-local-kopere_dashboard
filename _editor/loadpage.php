@@ -34,9 +34,9 @@ $html = "";
 
 if (file_exists(__DIR__ . "/_default/default-{$page}.html")) {
     if ($page == "webpages") {
-        $html = $DB->get_field("kopere_dashboard_webpages", "text", ["id" => $id]);
+        $html = $DB->get_field("local_kopere_dashboard_pages", "text", ["id" => $id]);
     } else if ($page == "notification") {
-        $html = $DB->get_field("kopere_dashboard_events", "message", ["id" => $id]);
+        $html = $DB->get_field("local_kopere_dashboard_event", "message", ["id" => $id]);
     }
 
     if (!isset($html[40])) {

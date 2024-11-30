@@ -26,7 +26,7 @@
 namespace local_kopere_dashboard\events;
 
 use local_kopere_dashboard\output\events\send_events;
-use local_kopere_dashboard\vo\kopere_dashboard_events;
+use local_kopere_dashboard\vo\local_kopere_dashboard_event;
 
 /**
  * Class event_observers
@@ -61,13 +61,13 @@ class event_observers {
         }
 
         $where = ["event" => $eventname, "status" => 1];
-        $kopereeventss = $DB->get_records("kopere_dashboard_events", $where);
+        $kopereeventss = $DB->get_records("local_kopere_dashboard_event", $where);
 
-        /** @var kopere_dashboard_events $kopereevents */
+        /** @var local_kopere_dashboard_event $kopereevents */
         foreach ($kopereeventss as $kopereevents) {
             $sendevents = new send_events();
             $sendevents->set_event($event);
-            $sendevents->set_kopere_dashboard_events($kopereevents);
+            $sendevents->set_local_kopere_dashboard_event($kopereevents);
 
             $sendevents->send();
         }

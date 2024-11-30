@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * kopere_dashboard_reports file
+ * local_kopere_dashboard_rcat file
  *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
@@ -25,23 +25,23 @@
 namespace local_kopere_dashboard\vo;
 
 /**
- * Class kopere_dashboard_reports
+ * Class local_kopere_dashboard_rcat
  *
  * @package local_kopere_dashboard\vo
  */
-class kopere_dashboard_reports extends \stdClass {
+class local_kopere_dashboard_rcat extends \stdClass {
 
     /** @var int */
     public $id;
 
-    /** @var int */
-    public $reportcatid;
-
-    /** @var string */
-    public $reportkey;
-
     /** @var string */
     public $title;
+
+    /** @var string */
+    public $type;
+
+    /** @var string */
+    public $image;
 
     /** @var int */
     public $enable;
@@ -49,39 +49,23 @@ class kopere_dashboard_reports extends \stdClass {
     /** @var string */
     public $enablesql;
 
-    /** @var string */
-    public $reportsql;
-
-    /** @var string */
-    public $prerequisit;
-
-    /** @var string */
-    public $columns;
-
-    /** @var string */
-    public $foreach;
-
     /**
      * Function create_by_object
      *
      * @param $item
      *
-     * @return kopere_dashboard_reports
+     * @return local_kopere_dashboard_rcat
      * @throws \coding_exception
      */
     public static function create_by_object($item) {
-        $return = new kopere_dashboard_reports();
+        $return = new local_kopere_dashboard_rcat();
 
         $return->id = $item->id;
-        $return->reportcatid = optional_param("reportcatid", $item->reportcatid, PARAM_INT);
-        $return->reportkey = optional_param("reportkey", $item->reportkey, PARAM_TEXT);
         $return->title = optional_param("title", $item->title, PARAM_TEXT);
+        $return->type = optional_param("type", $item->type, PARAM_TEXT);
+        $return->image = optional_param("image", $item->image, PARAM_TEXT);
         $return->enable = optional_param("enable", $item->enable, PARAM_INT);
         $return->enablesql = optional_param("enablesql", $item->enablesql, PARAM_TEXT);
-        $return->reportsql = optional_param("reportsql", $item->reportsql, PARAM_TEXT);
-        $return->prerequisit = optional_param("prerequisit", $item->prerequisit, PARAM_TEXT);
-        $return->columns = optional_param("columns", $item->columns, PARAM_TEXT);
-        $return->foreach = optional_param("foreach", $item->foreach, PARAM_TEXT);
 
         return $return;
     }
@@ -89,22 +73,18 @@ class kopere_dashboard_reports extends \stdClass {
     /**
      * Function create_by_default
      *
-     * @return kopere_dashboard_reports
+     * @return local_kopere_dashboard_rcat
      * @throws \coding_exception
      */
     public static function create_by_default() {
-        $return = new kopere_dashboard_reports();
+        $return = new local_kopere_dashboard_rcat();
 
         $return->id = optional_param("id", 0, PARAM_INT);
-        $return->reportcatid = optional_param("reportcatid", 0, PARAM_INT);
-        $return->reportkey = optional_param("reportkey", '', PARAM_TEXT);
         $return->title = optional_param("title", '', PARAM_TEXT);
+        $return->type = optional_param("type", '', PARAM_TEXT);
+        $return->image = optional_param("image", '', PARAM_TEXT);
         $return->enable = optional_param("enable", 1, PARAM_INT);
         $return->enablesql = optional_param("enablesql", '', PARAM_TEXT);
-        $return->reportsql = optional_param("reportsql", '', PARAM_TEXT);
-        $return->prerequisit = optional_param("prerequisit", '', PARAM_TEXT);
-        $return->columns = optional_param("columns", '', PARAM_TEXT);
-        $return->foreach = optional_param("foreach", '', PARAM_TEXT);
 
         return $return;
     }

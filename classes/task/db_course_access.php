@@ -82,7 +82,7 @@ class db_course_access extends \core\task\scheduled_task {
             ];
 
             try {
-                $DB->insert_record("kopere_dashboard_courseacces", $data);
+                $DB->insert_record("local_kopere_dashboard_acess", $data);
             } catch (\dml_exception $e) { // phpcs:disable
             }
         }

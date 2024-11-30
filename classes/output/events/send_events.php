@@ -28,7 +28,7 @@ namespace local_kopere_dashboard\output\events;
 use core\message\message;
 use local_kopere_dashboard\notificationsutil;
 use local_kopere_dashboard\util\release;
-use local_kopere_dashboard\vo\kopere_dashboard_events;
+use local_kopere_dashboard\vo\local_kopere_dashboard_event;
 
 /**
  * Class send_events
@@ -36,7 +36,7 @@ use local_kopere_dashboard\vo\kopere_dashboard_events;
  * @package local_kopere_dashboard\output\events
  */
 class send_events {
-    /** @var kopere_dashboard_events */
+    /** @var local_kopere_dashboard_event */
     private $koperedashboardevents;
 
     /** @var \core\event\base */
@@ -48,20 +48,20 @@ class send_events {
     private $message;
 
     /**
-     * Function get_kopere_dashboard_events
+     * Function get_local_kopere_dashboard_event
      *
-     * @return kopere_dashboard_events
+     * @return local_kopere_dashboard_event
      */
-    public function get_kopere_dashboard_events() {
+    public function get_local_kopere_dashboard_event() {
         return $this->koperedashboardevents;
     }
 
     /**
-     * Function set_kopere_dashboard_events
+     * Function set_local_kopere_dashboard_event
      *
      * @param $kopereevents
      */
-    public function set_kopere_dashboard_events($kopereevents) {
+    public function set_local_kopere_dashboard_event($kopereevents) {
         $this->koperedashboardevents = $kopereevents;
     }
 

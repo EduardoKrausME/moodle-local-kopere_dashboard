@@ -68,7 +68,7 @@ class course_access {
      */
     public function generate() {
         global $DB, $CFG;
-        $count = $DB->get_record_sql("SELECT COUNT(*) AS registros FROM {kopere_dashboard_courseacces}");
+        $count = $DB->get_record_sql("SELECT COUNT(*) AS registros FROM {local_kopere_dashboard_acess}");
         if ($count->registros == 0) {
             session_write_close();
             set_time_limit(0);
@@ -243,7 +243,7 @@ class course_access {
             foreach ($modinfo as $infos) {
 
                 $sql = "SELECT COUNT(*) AS contagem, timecreated
-                          FROM {kopere_dashboard_courseacces}
+                          FROM {local_kopere_dashboard_acess}
                          WHERE courseid = :courseid
                            AND userid   = :userid
                            AND context  = :contextinstanceid

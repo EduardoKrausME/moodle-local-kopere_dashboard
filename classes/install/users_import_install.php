@@ -24,7 +24,7 @@
 
 namespace local_kopere_dashboard\install;
 
-use local_kopere_dashboard\vo\kopere_dashboard_events;
+use local_kopere_dashboard\vo\local_kopere_dashboard_event;
 
 /**
  * Class users_import_install
@@ -41,7 +41,7 @@ class users_import_install {
      */
     public static function install_or_update() {
 
-        $event = kopere_dashboard_events::create(
+        $event = local_kopere_dashboard_event::create(
             "local_kopere_dashboard",
             '\\local_kopere_dashboard\\event\\import_course_enrol',
             "admin",
@@ -52,7 +52,7 @@ class users_import_install {
         $event->status = 0;
         self::insert($event);
 
-        $event = kopere_dashboard_events::create(
+        $event = local_kopere_dashboard_event::create(
             "local_kopere_dashboard",
             '\\local_kopere_dashboard\\event\\import_user_created',
             "admin",
@@ -63,7 +63,7 @@ class users_import_install {
         $event->status = 0;
         self::insert($event);
 
-        $event = kopere_dashboard_events::create(
+        $event = local_kopere_dashboard_event::create(
             "local_kopere_dashboard",
             '\\local_kopere_dashboard\\event\\import_user_created_and_enrol',
             "admin",
@@ -85,9 +85,9 @@ class users_import_install {
     public static function insert($event) {
         global $DB;
 
-        $evento = $DB->record_exists("kopere_dashboard_events", ["module" => $event->module, "event" => $event->event]);
+        $evento = $DB->record_exists("local_kopere_dashboard_event", ["module" => $event->module, "event" => $event->event]);
         if (!$evento) {
-            $DB->insert_record("kopere_dashboard_events", $event);
+            $DB->insert_record("local_kopere_dashboard_event", $event);
         }
     }
 }

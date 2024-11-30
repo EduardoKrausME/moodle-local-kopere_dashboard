@@ -119,13 +119,13 @@ if ($action) {
             break;
         case "save":
             if ($page == "webpages") {
-                $webpages = $DB->get_record("kopere_dashboard_webpages", ["id" => $id]);
+                $webpages = $DB->get_record("local_kopere_dashboard_pages", ["id" => $id]);
                 $webpages->text = $html;
-                $DB->update_record("kopere_dashboard_webpages", $webpages);
+                $DB->update_record("local_kopere_dashboard_pages", $webpages);
             } else if ($page == "notification") {
-                $events = $DB->get_record("kopere_dashboard_events", ["id" => $id]);
+                $events = $DB->get_record("local_kopere_dashboard_event", ["id" => $id]);
                 $events->message = $html;
-                $DB->update_record("kopere_dashboard_events", $events);
+                $DB->update_record("local_kopere_dashboard_event", $events);
             } else {
                 set_config($page, $html, "local_kopere_dashboard");
             }

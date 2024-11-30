@@ -39,7 +39,7 @@ use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\mensagem;
 use local_kopere_dashboard\util\release;
-use local_kopere_dashboard\vo\kopere_dashboard_events;
+use local_kopere_dashboard\vo\local_kopere_dashboard_event;
 
 /**
  * Class notifications
@@ -71,7 +71,7 @@ class notifications extends notificationsutil {
         button::info(get_string_kopere("notification_testsmtp"),
             local_kopere_dashboard_makeurl("notifications", "test_smtp"));
 
-        $events = $DB->get_records("kopere_dashboard_events");
+        $events = $DB->get_records("local_kopere_dashboard_event");
         $eventslist = [];
         foreach ($events as $event) {
             /** @var base $eventclass */
@@ -179,8 +179,8 @@ class notifications extends notificationsutil {
         $id = optional_param("id", 0, PARAM_INT);
 
         if ($id) {
-            /** @var kopere_dashboard_events $evento */
-            $evento = $DB->get_record("kopere_dashboard_events", ["id" => $id]);
+            /** @var local_kopere_dashboard_event $evento */
+            $evento = $DB->get_record("local_kopere_dashboard_event", ["id" => $id]);
             header::notfound_null($evento, get_string_kopere("notification_notound"));
 
             $eventclass = $evento->event;
@@ -191,7 +191,7 @@ class notifications extends notificationsutil {
             dashboard_util::add_breadcrumb(
                 get_string_kopere("notification_editing"));
         } else {
-            $evento = kopere_dashboard_events::create_by_default();
+            $evento = local_kopere_dashboard_event::create_by_default();
 
             dashboard_util::add_breadcrumb(
                 get_string_kopere("notification_title"), local_kopere_dashboard_makeurl("notifications", "dashboard"));
@@ -318,10 +318,10 @@ class notifications extends notificationsutil {
     public function add_save() {
         global $DB;
 
-        $event = kopere_dashboard_events::create_by_default();
+        $event = local_kopere_dashboard_event::create_by_default();
 
         if ($event->id) {
-            $eventexist = $DB->record_exists_select("kopere_dashboard_events",
+            $eventexist = $DB->record_exists_select("local_kopere_dashboard_event",
                 'module = :module AND event = :event AND id != :id',
                 ["module" => $event->module, "event" => $event->event, "id" => $event->id]);
             if ($eventexist) {
@@ -329,7 +329,7 @@ class notifications extends notificationsutil {
             } else {
                 try {
                     unset($event->message);
-                    $DB->update_record("kopere_dashboard_events", $event);
+                    $DB->update_record("local_kopere_dashboard_event", $event);
 
                     mensagem::agenda_mensagem_success(get_string_kopere("notification_created"));
                     header::location(local_kopere_dashboard_makeurl("notifications", "dashboard"));
@@ -338,12 +338,12 @@ class notifications extends notificationsutil {
                 }
             }
         } else {
-            $eventexist = $DB->record_exists("kopere_dashboard_events", ["module" => $event->module, "event" => $event->event]);
+            $eventexist = $DB->record_exists("local_kopere_dashboard_event", ["module" => $event->module, "event" => $event->event]);
             if ($eventexist) {
                 mensagem::agenda_mensagem_danger(get_string_kopere("notification_duplicate"));
             } else {
                 try {
-                    $DB->insert_record("kopere_dashboard_events", $event);
+                    $DB->insert_record("local_kopere_dashboard_event", $event);
 
                     mensagem::agenda_mensagem_success(get_string_kopere("notification_created"));
                     header::location(local_kopere_dashboard_makeurl("notifications", "dashboard"));
@@ -365,12 +365,12 @@ class notifications extends notificationsutil {
 
         $status = optional_param("status", '', PARAM_TEXT);
         $id = optional_param("id", 0, PARAM_INT);
-        /** @var kopere_dashboard_events $event */
-        $event = $DB->get_record("kopere_dashboard_events", ["id" => $id]);
+        /** @var local_kopere_dashboard_event $event */
+        $event = $DB->get_record("local_kopere_dashboard_event", ["id" => $id]);
         header::notfound_null($event, get_string_kopere("notification_notfound"));
 
         if ($status == "sim") {
-            $DB->delete_records("kopere_dashboard_events", ["id" => $id]);
+            $DB->delete_records("local_kopere_dashboard_event", ["id" => $id]);
 
             mensagem::agenda_mensagem_success(get_string_kopere("notification_delete_success"));
             header::location(local_kopere_dashboard_makeurl("notifications", "dashboard"));

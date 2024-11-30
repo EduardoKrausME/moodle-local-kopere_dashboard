@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
     <TABLES>
-        <TABLE NAME="kopere_dashboard_menu" COMMENT="">
+        <TABLE NAME="local_kopere_dashboard_menu" COMMENT="">
             <FIELDS>
                 <FIELD NAME="id"            TYPE="int"  LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
                 <FIELD NAME="menuid"        TYPE="int"  LENGTH="10"  NOTNULL="false" SEQUENCE="false" />
@@ -15,7 +15,7 @@
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
             </KEYS>
         </TABLE>
-        <TABLE NAME="kopere_dashboard_webpages" COMMENT="">
+        <TABLE NAME="local_kopere_dashboard_pages" COMMENT="">
             <FIELDS>
                 <FIELD NAME="id"            TYPE="int"  LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
                 <FIELD NAME="menuid"        TYPE="int"  LENGTH="10"  NOTNULL="false" SEQUENCE="false" />
@@ -32,7 +32,7 @@
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
             </KEYS>
         </TABLE>
-        <TABLE NAME="kopere_dashboard_events" COMMENT="">
+        <TABLE NAME="local_kopere_dashboard_event" COMMENT="">
             <FIELDS>
                 <FIELD NAME="id"            TYPE="int"  LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
                 <FIELD NAME="module"        TYPE="char" LENGTH="60"  NOTNULL="false" SEQUENCE="false" />
@@ -48,7 +48,7 @@
             </KEYS>
         </TABLE>
 
-        <TABLE NAME="kopere_dashboard_reportcat" COMMENT="">
+        <TABLE NAME="local_kopere_dashboard_rcat" COMMENT="">
             <FIELDS>
                 <FIELD NAME="id"            TYPE="int"  LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
                 <FIELD NAME="title"         TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
@@ -61,7 +61,7 @@
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
             </KEYS>
         </TABLE>
-        <TABLE NAME="kopere_dashboard_reports" COMMENT="">
+        <TABLE NAME="local_kopere_dashboard_reprt" COMMENT="">
             <FIELDS>
                 <FIELD NAME="id"            TYPE="int"  LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
                 <FIELD NAME="reportcatid"   TYPE="int"  LENGTH="10"  NOTNULL="true"  SEQUENCE="false" />
@@ -79,20 +79,7 @@
             </KEYS>
         </TABLE>
 
-        <TABLE NAME="kopere_dashboard_performance" COMMENT="">
-            <FIELDS>
-                <FIELD NAME="id"            TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
-                <FIELD NAME="time"          TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="false" />
-                <FIELD NAME="type"          TYPE="char"  LENGTH="7"   NOTNULL="true"  SEQUENCE="false" />
-                <FIELD NAME="value"         TYPE="float" LENGTH="5"   NOTNULL="true"  SEQUENCE="false" DECIMALS="3" />
-            </FIELDS>
-            <KEYS>
-                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
-                <KEY NAME="unique"  TYPE="unique"  FIELDS="time,type" />
-            </KEYS>
-        </TABLE>
-
-        <TABLE NAME="kopere_dashboard_reportlogin" COMMENT="">
+        <TABLE NAME="local_kopere_dashboard_login" COMMENT="">
             <FIELDS>
                 <FIELD NAME="id"            TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
                 <FIELD NAME="userid"        TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="false" />
@@ -104,7 +91,7 @@
             </KEYS>
         </TABLE>
 
-        <TABLE NAME="kopere_dashboard_courseacces" COMMENT="">
+        <TABLE NAME="local_kopere_dashboard_acess" COMMENT="">
             <FIELDS>
                 <FIELD NAME="id"            TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="true" />
                 <FIELD NAME="userid"        TYPE="int"   LENGTH="10"  NOTNULL="true"  SEQUENCE="false" />

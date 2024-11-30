@@ -17,9 +17,9 @@
 /**
  * upgrade file
  *
- * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    local_kopere_dashboard
+ * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
@@ -267,13 +267,58 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         set_config("monitor", $CFG->kopere_dashboard_monitor, "local_kopere_dashboard");
         set_config("pagefonts", $CFG->kopere_dashboard_pagefonts, "local_kopere_dashboard");
 
+        \local_kopere_dashboard\install\report_install::create_categores();
+        \local_kopere_dashboard\install\report_install::create_reports();
+
+        \local_kopere_dashboard\install\users_import_install::install_or_update();
+
         upgrade_plugin_savepoint(true, 2024101500, "local", "kopere_dashboard");
     }
 
-    \local_kopere_dashboard\install\report_install::create_categores();
-    \local_kopere_dashboard\install\report_install::create_reports();
+    if ($oldversion < 2024113000) {
+        $table = new xmldb_table("kopere_dashboard_menu");
+        if ($dbman->table_exists($table)) {
+            $dbman->rename_table($table, "local_kopere_dashboard_menu");
+        }
 
-    \local_kopere_dashboard\install\users_import_install::install_or_update();
+        $table = new xmldb_table("kopere_dashboard_webpages");
+        if ($dbman->table_exists($table)) {
+            $dbman->rename_table($table, "local_kopere_dashboard_pages");
+        }
+
+        $table = new xmldb_table("kopere_dashboard_reportcat");
+        if ($dbman->table_exists($table)) {
+            $dbman->rename_table($table, "local_kopere_dashboard_rcat");
+        }
+
+        $table = new xmldb_table("kopere_dashboard_reports");
+        if ($dbman->table_exists($table)) {
+            $dbman->rename_table($table, "local_kopere_dashboard_reprt");
+        }
+
+        $table = new xmldb_table("kopere_dashboard_reportlogin");
+        if ($dbman->table_exists($table)) {
+            $dbman->rename_table($table, "local_kopere_dashboard_login");
+        }
+
+        $table = new xmldb_table("local_kopere_dashboard_acess");
+        if ($dbman->table_exists($table)) {
+            $dbman->rename_table($table, "local_kopere_dashboard_login");
+        }
+
+        $table = new xmldb_table("kopere_dashboard_courseacces");
+        if ($dbman->table_exists($table)) {
+            $dbman->rename_table($table, "local_kopere_dashboard_acess");
+        }
+
+        // delete
+        $table = new xmldb_table("kopere_dashboard_performance");
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        upgrade_plugin_savepoint(true, 2024113000, "local", "kopere_dashboard");
+    }
 
     return true;
 }

@@ -43,7 +43,7 @@ use local_kopere_dashboard\util\mensagem;
 use local_kopere_dashboard\util\user_util;
 use local_kopere_dashboard\util\string_util;
 use local_kopere_dashboard\util\title_util;
-use local_kopere_dashboard\vo\kopere_dashboard_webpages;
+use local_kopere_dashboard\vo\local_kopere_dashboard_pages;
 
 /**
  * Class courses
@@ -409,12 +409,12 @@ class courses {
         if ($menus) {
             echo '<div class="panel-footer">';
 
-            $webpagess = $DB->get_records("kopere_dashboard_webpages", ["courseid" => $course->id]);
+            $webpagess = $DB->get_records("local_kopere_dashboard_pages", ["courseid" => $course->id]);
 
             if ($webpagess) {
                 title_util::print_h4("courses_page_title");
 
-                /** @var kopere_dashboard_webpages $webpages */
+                /** @var local_kopere_dashboard_pages $webpages */
                 foreach ($webpagess as $webpages) {
                     echo "<p><a href='" . local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]) .
                         "{'>&nbsp;&nbsp;&nbsp;&nbsp;}" .

@@ -31,8 +31,8 @@ namespace local_kopere_dashboard\install;
 
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\report\user_field;
-use local_kopere_dashboard\vo\kopere_dashboard_reportcat;
-use local_kopere_dashboard\vo\kopere_dashboard_reports;
+use local_kopere_dashboard\vo\local_kopere_dashboard_rcat;
+use local_kopere_dashboard\vo\local_kopere_dashboard_reprt;
 
 /**
  * Class report_install
@@ -51,7 +51,7 @@ class report_install {
     public static function create_categores() {
         global $CFG;
 
-        $reportcat = kopere_dashboard_reportcat::create_by_default();
+        $reportcat = local_kopere_dashboard_rcat::create_by_default();
         $reportcat->title = '[[reports_reportcat_badge]]';
         $reportcat->type = "badge";
         $reportcat->image = 'assets/reports/badge.svg';
@@ -59,14 +59,14 @@ class report_install {
         $reportcat->enablesql = "SELECT id AS status FROM {badge} LIMIT 1";
         self::report_cat_insert($reportcat);
 
-        $reportcat = kopere_dashboard_reportcat::create_by_default();
+        $reportcat = local_kopere_dashboard_rcat::create_by_default();
         $reportcat->title = '[[reports_reportcat_courses]]';
         $reportcat->type = "courses";
         $reportcat->image = 'assets/reports/courses.svg';
         $reportcat->enable = 1;
         self::report_cat_insert($reportcat);
 
-        $reportcat = kopere_dashboard_reportcat::create_by_default();
+        $reportcat = local_kopere_dashboard_rcat::create_by_default();
         $reportcat->title = '[[reports_reportcat_enrol_cohort]]';
         $reportcat->type = "enrol_cohort";
         $reportcat->image = 'assets/reports/enrol_cohort.svg';
@@ -80,7 +80,7 @@ class report_install {
         }
         self::report_cat_insert($reportcat);
 
-        $reportcat = kopere_dashboard_reportcat::create_by_default();
+        $reportcat = local_kopere_dashboard_rcat::create_by_default();
         $reportcat->title = '[[reports_reportcat_enrol_guest]]';
         $reportcat->type = "enrol_guest";
         $reportcat->image = 'assets/reports/enrol_guest.svg';
@@ -94,14 +94,14 @@ class report_install {
         }
         self::report_cat_insert($reportcat);
 
-        $reportcat = kopere_dashboard_reportcat::create_by_default();
+        $reportcat = local_kopere_dashboard_rcat::create_by_default();
         $reportcat->title = '[[reports_reportcat_server]]';
         $reportcat->type = "server";
         $reportcat->image = 'assets/reports/server.svg';
         $reportcat->enable = 1;
         self::report_cat_insert($reportcat);
 
-        $reportcat = kopere_dashboard_reportcat::create_by_default();
+        $reportcat = local_kopere_dashboard_rcat::create_by_default();
         $reportcat->title = '[[reports_reportcat_user]]';
         $reportcat->type = "user";
         $reportcat->image = 'assets/reports/user.svg';
@@ -123,8 +123,8 @@ class report_install {
 
         $table = new report_install();
 
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "badge"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "badge"]);
         $report->reportkey = 'badge-1';
         $report->title = '[[reports_report_badge-1]]';
         if ($CFG->dbtype == "pgsql") {
@@ -150,8 +150,8 @@ SELECT id, name, description, type, status,
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "badge"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "badge"]);
         $report->reportkey = 'badge-2';
         $report->title = '[[reports_report_badge-2]]';
         if ($CFG->dbtype == "pgsql") {
@@ -190,8 +190,8 @@ ORDER BY u.username";
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "courses"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "courses"]);
         $report->reportkey = 'courses-1';
         $report->title = '[[reports_report_courses-1]]';
         $report->prerequisit = "listCourses";
@@ -253,8 +253,8 @@ ORDER BY u.username";
         }
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "courses"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "courses"]);
         $report->reportkey = 'courses-2';
         $report->title = '[[reports_report_courses-2]]';
         if ($CFG->dbtype == "pgsql") {
@@ -283,8 +283,8 @@ SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.gr
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "courses"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "courses"]);
         $report->reportkey = 'courses-3';
         $report->title = '[[reports_report_courses-3]]';
         $report->prerequisit = "listCourses";
@@ -293,8 +293,8 @@ SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.gr
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "courses"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "courses"]);
         $report->reportkey = 'courses-4';
         $report->title = '[[reports_report_courses-4]]';
         $report->prerequisit = "listCourses";
@@ -303,8 +303,8 @@ SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.gr
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "courses"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "courses"]);
         $report->reportkey = 'courses-5';
         $report->title = '[[reports_report_courses-5]]';
         $report->prerequisit = "listCourses";
@@ -313,8 +313,8 @@ SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.gr
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "enrol_cohort"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "enrol_cohort"]);
         $report->reportkey = 'enrol_cohort-1';
         $report->title = '[[reports_report_enrol_cohort-1]]';
         $report->reportsql = "
@@ -333,13 +333,13 @@ ORDER BY u.firstname";
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "enrol_guest"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "enrol_guest"]);
         $report->reportkey = 'enrol_guest-1';
         $report->title = '[[reports_report_enrol_guest-1]]';
         $report->reportsql = "
 SELECT CONCAT(lsl.userid, lsl.timecreated), {$alternatenames}, u.id AS userid, lsl.timecreated, lsl.ip
-  FROM {kopere_dashboard_reportlogin} lsl
+  FROM {local_kopere_dashboard_login} lsl
   JOIN {user}                         u   ON u.id = lsl.userid
  WHERE u.id = 1";
         $report->columns = [
@@ -353,8 +353,8 @@ SELECT CONCAT(lsl.userid, lsl.timecreated), {$alternatenames}, u.id AS userid, l
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "server"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "server"]);
         $report->reportkey = 'server-1';
         $report->title = '[[reports_report_server-1]]';
         $report->reportsql = "
@@ -387,8 +387,8 @@ SELECT c.id, c.fullname, c.shortname, c.visible, c.timecreated,
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "user"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "user"]);
         $report->reportkey = 'user-1';
         $report->title = '[[reports_report_user-1]]';
         $report->reportsql = "
@@ -410,8 +410,8 @@ SELECT DISTINCT c.id, c.fullname, c.shortname, ctx.id AS contextid,
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "user"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "user"]);
         $report->reportkey = 'user-2';
         $report->title = '[[reports_report_user-2]]';
         $report->reportsql = "
@@ -432,14 +432,14 @@ SELECT concat(u.id, p.id) AS id, u.id AS userid, {$alternatenames},
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "user"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "user"]);
         $report->reportkey = 'user-4';
         $report->title = '[[reports_report_user-4]]';
         $report->reportsql = "
 SELECT lsl.id, u.id AS userid, {$alternatenames},
        u.email, u.city, lsl.timecreated
-  FROM {kopere_dashboard_reportlogin} lsl
+  FROM {local_kopere_dashboard_login} lsl
   JOIN {user}                         u    ON u.id = lsl.userid
  WHERE u.id > 1";
         $report->columns = [
@@ -454,8 +454,8 @@ SELECT lsl.id, u.id AS userid, {$alternatenames},
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "user"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "user"]);
         $report->reportkey = 'user-5';
         $report->title = '[[reports_report_user-5]]';
         $report->reportsql = "
@@ -477,8 +477,8 @@ SELECT u.id, {$alternatenames}, u.email, u.city, u.timecreated
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "user"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "user"]);
         $report->reportkey = 'user-6';
         $report->title = '[[reports_report_user-6]]';
         $report->prerequisit = "listCourses";
@@ -503,8 +503,8 @@ SELECT u.id, {$alternatenames}, u.email, u.city, u.timecreated
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "user"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "user"]);
         $report->reportkey = 'user-7';
         $report->title = '[[reports_report_user-7]]';
         if ($CFG->dbtype == "pgsql") {
@@ -552,8 +552,8 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
         self::report_insert($report);
 
         // Novo report.
-        $report = kopere_dashboard_reports::create_by_default();
-        $report->reportcatid = $DB->get_field("kopere_dashboard_reportcat", "id", ["type" => "user"]);
+        $report = local_kopere_dashboard_reprt::create_by_default();
+        $report->reportcatid = $DB->get_field("local_kopere_dashboard_rcat", "id", ["type" => "user"]);
         $report->reportkey = 'user-8';
         $report->title = '[[reports_report_user-8]]';
         $report->reportsql = "SELECT id, confirmed, username, firstname, lastname, email, phone1, phone2, city, country " .
@@ -624,9 +624,9 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
     private static function report_cat_insert($reportcat) {
         global $DB;
 
-        $koperereportcatexist = $DB->record_exists("kopere_dashboard_reportcat", ["type" => $reportcat->type]);
+        $koperereportcatexist = $DB->record_exists("local_kopere_dashboard_rcat", ["type" => $reportcat->type]);
         if (!$koperereportcatexist) {
-            $DB->insert_record("kopere_dashboard_reportcat", $reportcat);
+            $DB->insert_record("local_kopere_dashboard_rcat", $reportcat);
         }
     }
 
@@ -640,9 +640,9 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
     private static function report_insert($report) {
         global $DB;
 
-        $koperereports = $DB->get_record("kopere_dashboard_reports", ["reportkey" => $report->reportkey]);
+        $koperereports = $DB->get_record("local_kopere_dashboard_reprt", ["reportkey" => $report->reportkey]);
         if (!$koperereports) {
-            $DB->insert_record("kopere_dashboard_reports", $report);
+            $DB->insert_record("local_kopere_dashboard_reprt", $report);
         }
     }
 }

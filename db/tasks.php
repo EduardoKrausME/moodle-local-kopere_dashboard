@@ -33,15 +33,8 @@ $tasks = [
         "day" => '*',
         "dayofweek" => '*',
         "month" => '*',
-    ], [
-        "classname" => 'local_kopere_dashboard\task\performance',
-        "blocking" => 0,
-        "minute" => '*/15',
-        "hour" => '*',
-        "day" => '*',
-        "dayofweek" => '*',
-        "month" => '*',
-    ], [
+    ],
+    [
         "classname" => 'local_kopere_dashboard\task\db_report_login',
         "blocking" => 1,
         "minute" => "0",
@@ -49,7 +42,8 @@ $tasks = [
         "day" => '*',
         "dayofweek" => '*',
         "month" => '*',
-    ], [
+    ],
+    [
         "classname" => 'local_kopere_dashboard\task\db_course_access',
         "blocking" => 1,
         "minute" => "0",
