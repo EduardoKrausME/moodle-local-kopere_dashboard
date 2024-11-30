@@ -26,7 +26,7 @@ use core_course_list_element;
 /**
  * Class course
  *
- * @package local_kopere_dashboard\util
+ * @package local_kopere_dashboard
  */
 class course {
     /**

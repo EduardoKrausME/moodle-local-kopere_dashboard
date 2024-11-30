@@ -17,10 +17,10 @@
 /**
  * font_util file
  *
- * @package     local_kopere_dashboard
- * @copyright   2024 Eduardo Kraus https://eduardokraus.com/
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * introduced   10/01/2024 17:58
+ * @package   local_kopere_dashboard
+ * @copyright 2024 Eduardo Kraus https://eduardokraus.com/
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * introduced 10/01/2024 17:58
  */
 
 namespace local_kopere_dashboard\fonts;

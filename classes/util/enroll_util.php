@@ -17,9 +17,9 @@
 /**
  * Introduced  11/07/17 11:13
  *
- * @package    local_kopere_dashboard
- * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   local_kopere_dashboard
+ * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\util;
@@ -32,7 +32,7 @@ use course_enrolment_manager;
  * @package local_kopere_dashboard\util
  */
 class enroll_util {
-
+ 
     /**
      * Function status_enrol_manual
      *
