@@ -19,12 +19,16 @@
 
     Example context (json):
     {
+        "icon": "delete",
+        "confirmtitle": "Are you sure?",
+        "confirmtext": "Do you really want to delete this item? This action cannot be undone.",
+        "link": "https://example.com/confirm-action"
     }
 }}
 
 
-<span id="button-{{{uniqid}}}" style="display:none">
-    <img src='{{{wwwroot}}}/local/kopere_dashboard/assets/dashboard/img/actions/{{{icon}}}.svg' width='19'>
+<span id="btn-{{uniqid}}" style="display:none">
+    <img src="{{{config.wwwroot}}}/local/kopere_dashboard/assets/dashboard/img/actions/{{{icon}}}.svg" width="19">
 </span>
 
 <div id="confirm-{{{uniqid}}}" class="confirm-dialog" style="display:none;"
@@ -40,7 +44,7 @@
 
 {{#js}}
     require(["jquery", "jqueryui",], function($) {
-        $("#button-{{{uniqid}}}").show().click(function() {
+        $("#btn-{{uniqid}}").show().click(function() {
             $("#confirm-{{{uniqid}}}").dialog({
                 resizable: false,
                 height: "auto",
@@ -59,14 +63,14 @@
                 },
                 buttons: [
                     {
-                        "text": '{{#str}}yes{{/str}}',
+                        "text": "{{#str}}yes{{/str}}",
                         "class": "btn btn-danger",
                         "click": function() {
                             location.href = "{{{link}}}";
                         }
                     },
                     {
-                        text: '{{#str}}no{{/str}}',
+                        text: "{{#str}}no{{/str}}",
                         click: function() {
                             $(this).dialog("close");
                         }

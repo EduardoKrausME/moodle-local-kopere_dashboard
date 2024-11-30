@@ -19,13 +19,27 @@
 
     Example context (json):
     {
+        "menus": [
+            {
+                "menulink": true,
+                "title": "Menu Principal",
+                "link": "mainmenu",
+                "webpages": [
+                    {
+                        "title": "Página 1",
+                        "description": "Descrição da página 1",
+                        "url": "https://example.com/page1"
+                    }
+                ]
+            }
+        ]
     }
 }}
 
 <div class="container">
     {{#menus}}
         {{#menulink}}
-            <h3><a href='{{{config.wwwroot}}}/local/kopere_dashboard/?menu={{{link}}}'>{{{title}}}</a></h3>
+            <h3><a href="{{{config.wwwroot}}}/local/kopere_dashboard/?menu={{{link}}}">{{{title}}}</a></h3>
         {{/menulink}}
         <div class="row">
             {{#webpages}}

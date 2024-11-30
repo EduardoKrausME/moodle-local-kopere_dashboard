@@ -187,10 +187,8 @@ class button {
      * @return string
      */
     public static function icon_confirm($icon, $link, $confirmtext, $confirmtitle) {
-        global $OUTPUT, $CFG;
+        global $OUTPUT;
         $data = [
-            "uniqid" => uniqid(),
-            "wwwroot" => $CFG->wwwroot,
             "link" => $link,
             "icon" => $icon,
             "confirmtitle" => $confirmtitle,
