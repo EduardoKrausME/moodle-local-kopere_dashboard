@@ -56,7 +56,6 @@ class dashboard_util {
         self::$currenttitle = "{$titulo} {$extra}";
     }
 
-
     /**
      * Function set_titulo
      *
