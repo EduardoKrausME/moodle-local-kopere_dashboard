@@ -24,9 +24,7 @@
 
 namespace local_kopere_dashboard\util;
 
-use context_course;
 use course_enrolment_manager;
-use Exception;
 
 /**
  * Class enroll_util
