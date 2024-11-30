@@ -11702,6 +11702,11 @@ body.remove-overflow {
   background: #26a69a;
   color: #fff;
 }
+.kopere-dashboard-pages .box-page .content .price .off-price {
+  text-decoration: line-through;
+  opacity: 0.4;
+  margin-left: 7px;
+}
 
 @media print {
   #nav-drawer,

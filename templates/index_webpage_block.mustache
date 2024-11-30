@@ -22,28 +22,26 @@
     }
 }}
 
-<div class='col-lg-4 col-md-6 col-sm-12'>
-    <div class='box-page'>
-        <div class='thumbnail'>
-            <a href='{{{link}}}'>
-                <span style='background-image:url({{{imagem}}})'></span>
+<div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="box-page">
+        <div class="thumbnail">
+            <a href="{{{link}}}">
+                <span style="background-image:url({{{imagem}}})"></span>
             </a>
         </div>
-        <div class='content'>
-            <h5 class='title'>
-                <a href='{{{link}}}'>{{{title}}}</a>
-            </h5>
-            <p>{{{text}}}</p>
-            {{#cursofree}}
-                <div class="price">
-                    <div class="current-price">Gratis</div>
-                </div>
-            {{/cursofree}}
-            {{#cursopago}}
-                <div class="price">
-                    <a href='{{{link}}}' class="current-price">R$ {{{cursopreco}}}</a>
-                </div>
-            {{/cursopago}}
+        <div class="content" >
+            <h5 class="title"><a href="{{{link}}}">{{{title}}}</a></h5>
+            {{#text}}
+                <p>{{{text}}}</p>
+            {{/text}}
+
+            <div class="price" >
+                <span class="current-price">{{{cursopreco}}}</span>
+                {{#offprice}}
+                    <span class="off-price">{{{offprice}}}</span>
+                {{/offprice}}
+            </div>
+            <a href="{{{link}}}" class="btn btn-primary">{{{access}}}</a>
         </div>
     </div>
 </div>
