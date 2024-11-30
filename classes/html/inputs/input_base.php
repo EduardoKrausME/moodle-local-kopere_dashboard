@@ -108,6 +108,7 @@ class input_base implements i_input {
     /** @var bool */
     protected $required = false;
 
+    /** @var string */
     protected $inputid = null;
 
     /**
