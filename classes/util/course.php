@@ -56,10 +56,9 @@ class course {
                 }
             }
         }
-        // https://todraw.com.br/moodle/pluginfile.php/5407/local_kopere_dashboard/overviewfiles/f7dee36e-5ddd-4837-a60c-bd0b310cc2bf.png
 
         if (empty($courseimage)) {
-            $courseimage = $OUTPUT->image_url('course-default', 'theme')->out();
+            $courseimage = $OUTPUT->image_url("course-default", "local_kopere_dashboard")->out();
         }
 
         return $courseimage;
