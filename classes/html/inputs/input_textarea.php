@@ -50,7 +50,7 @@ class input_textarea extends input_base {
     public function to_string() {
         $return = "<textarea ";
 
-        $return .= "id='{$this->input_id}' name='{$this->name}' ";
+        $return .= "id='{$this->inputid}' name='{$this->name}' ";
 
         if ($this->class) {
             $return .= "class='{$this->class}' ";
@@ -71,44 +71,5 @@ class input_textarea extends input_base {
         $return .= "</textarea>";
 
         return $return;
-    }
-
-    /**
-     * Use this editor for given element.
-     *
-     * @return string
-     * @throws \dml_exception
-     */
-    private function tyni_editor_config() {
-        global $PAGE;
-
-        $options = ['noclean' => true];
-        $context = $PAGE->context;
-        if (isset($options['context']) && ($options['context'] instanceof \context)) {
-            $context = $options['context'];
-        }
-        $config = (object)[
-            'css' => $PAGE->theme->editor_css_url()->out(false),
-            'context' => $context->id,
-            'filepicker' => [],
-            'currentLanguage' => current_language(),
-            'branding' => false,
-            'language' => [
-                'currentlang' => current_language(),
-                'installed' => get_string_manager()->get_list_of_translations(true),
-                'available' => get_string_manager()->get_list_of_languages()
-            ],
-
-            'placeholderSelectors' => [],
-            'plugins' => (new manager())->get_plugin_configuration($context, $options, [], null),
-            'nestedmenu' => true,
-        ];
-
-        if (defined('BEHAT_SITE_RUNNING') && BEHAT_SITE_RUNNING) {
-            $config->placeholderSelectors = ['.behat-tinymce-placeholder'];
-        }
-
-        $config = convert_to_array($config);
-        return json_encode($config);
     }
 }

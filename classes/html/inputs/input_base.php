@@ -108,7 +108,7 @@ class input_base implements i_input {
     /** @var bool */
     protected $required = false;
 
-    protected $input_id = null;
+    protected $inputid = null;
 
     /**
      * Function get_name
@@ -129,7 +129,7 @@ class input_base implements i_input {
     public function set_name($name) {
         $this->name = $name;
 
-        $this->input_id = preg_replace('/[\W]/', '', $this->name);
+        $this->inputid = preg_replace('/[\W]/', '', $this->name);
 
         return $this;
     }

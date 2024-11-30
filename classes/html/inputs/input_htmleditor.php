@@ -59,7 +59,7 @@ class input_htmleditor extends input_textarea {
             M.util.js_pending( 'editor_tiny/editor' );
             require( [ 'editor_tiny/editor' ], ( tiny ) => {
                 tiny.setupForElementId( {
-                    elementId : '{$this->input_id}',
+                    elementId : '{$this->inputid}',
                     options   : {$config},
                 } );
                 M.util.js_complete( 'editor_tiny/editor' );
@@ -91,7 +91,7 @@ class input_htmleditor extends input_textarea {
             'language' => [
                 'currentlang' => current_language(),
                 'installed' => get_string_manager()->get_list_of_translations(true),
-                'available' => get_string_manager()->get_list_of_languages()
+                'available' => get_string_manager()->get_list_of_languages(),
             ],
 
             'placeholderSelectors' => [],
