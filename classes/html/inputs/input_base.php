@@ -387,6 +387,8 @@ class input_base implements i_input {
     }
 
     /**
+     * Function get_inputid
+     *
      * @return string
      */
     public function get_inputid(): string {
