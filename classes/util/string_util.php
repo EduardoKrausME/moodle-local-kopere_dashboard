@@ -104,7 +104,8 @@ class string_util {
     }
 
     /**
-     * Function clear_all_params
+     * Unfortunately, optional_param_array does not clean recursively.
+     * Therefore, I created this function to address this limitation.
      *
      * @param $param
      * @param $default
