@@ -337,26 +337,6 @@ class webpages {
                 ->set_required()
         );
 
-        $imagem = "";
-        $fs = get_file_storage();
-        $file = $fs->get_file(context_system::instance()->id, "local_kopere_dashboard",
-            "webpage_image", $webpages->id, '/', 'webpage_image.svg');
-        if ($file && isset($file->get_filename()[3])) {
-            $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
-                $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
-            $imagem = "<p>Imagem atual:<br>
-                           <a href='{$url}' target=\"_blank\"><img src='{$url}'
-                              style='max-width: 100px;max-height: 100px;'></a></p>";
-        }
-
-        $form->add_input(
-            input_text::new_instance()
-                ->set_type("file")
-                ->set_title(get_string_kopere("webpages_table_image"))
-                ->set_name("imagem")
-                ->set_description($imagem)
-        );
-
         $courses1 = [(object)[
             "id" => 0,
             "fullname" => "(Nenhum curso)"]];
@@ -447,8 +427,6 @@ class webpages {
                         $DB->update_record("kopere_dashboard_webpages", $webpages);
                         (\cache::make("local_kopere_dashboard", "report_getdata_cache"))->delete("kopere_dashboard_menu");
 
-                        $this->save_image($webpages);
-
                         self::cache_delete();
                         mensagem::agenda_mensagem_success(get_string_kopere("webpages_page_updated"));
                         header::location(
@@ -467,8 +445,6 @@ class webpages {
                         mensagem::agenda_mensagem_success(get_string_kopere("webpages_page_created"));
                         (\cache::make("local_kopere_dashboard", "report_getdata_cache"))->delete("kopere_dashboard_menu");
 
-                        $this->save_image($webpages);
-
                         self::cache_delete();
                         header::location(
                             local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]));
@@ -476,51 +452,6 @@ class webpages {
                         mensagem::print_danger($e->getMessage());
                     }
                 }
-            }
-        }
-    }
-
-    /**
-     * Function save_image
-     *
-     * @param $webpages
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
-     * @throws \file_exception
-     * @throws \stored_file_creation_exception
-     */
-    private function save_image($webpages) {
-        global $USER;
-
-        if (isset($_FILES["imagem"]) && $_FILES["imagem"]["error"] == UPLOAD_ERR_OK) {
-
-            $extensoespermitidas = ["png", "jpg", "jpeg"];
-            $extensaoarquivo = pathinfo($_FILES["imagem"]["name"], PATHINFO_EXTENSION);
-
-            if (in_array($extensaoarquivo, $extensoespermitidas)) {
-
-                $fs = get_file_storage();
-
-                $files = $fs->get_area_files(context_system::instance()->id, "local_kopere_dashboard",
-                    "webpage_image", $webpages->id);
-                /** @var \stored_file $file */
-                foreach ($files as $file) {
-                    $file->delete();
-                }
-
-                $filerecord = (object)[
-                    "component" => "local_kopere_dashboard",
-                    "contextid" => context_system::instance()->id,
-                    "userid" => $USER->id,
-                    "filearea" => "webpage_image",
-                    "filepath" => '/',
-                    "itemid" => $webpages->id,
-                    "filename" => "webpage_image.svg",
-                ];
-
-                $fs->create_file_from_pathname($filerecord, $_FILES["imagem"]["tmp_name"]);
-
             }
         }
     }
