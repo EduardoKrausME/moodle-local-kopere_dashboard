@@ -53,33 +53,3 @@ function vvveb__changue_langs($html, $component) {
 
     return $html;
 }
-
-/**
- * Function couse_image
- *
- * @param $course
- *
- * @return bool|string
- */
-function couse_image($course) {
-    global $CFG, $OUTPUT;
-
-    $courseimage = false;
-
-    /** @var \stored_file $file */
-    foreach ($course->get_course_overviewfiles() as $file) {
-        $isimage = $file->is_valid_image();
-        if ($isimage) {
-            $courseimage = file_encode_url("{$CFG->wwwroot}/pluginfile.php",
-                "/{$file->get_contextid()}/{$file->get_component()}/" .
-                "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}", !$isimage);
-
-        }
-    }
-
-    if (empty($courseimage)) {
-        $courseimage = $OUTPUT->image_url('curso-no-photo', "theme")->out();
-    }
-
-    return $courseimage;
-}
