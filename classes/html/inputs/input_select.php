@@ -102,10 +102,7 @@ class input_select extends input_base {
      * @return mixed|string
      */
     public function to_string() {
-        $return = "<select ";
-
-        $inputid = preg_replace('/[\W]/', '', $this->name);
-        $return .= "id='{$inputid}' name='{$this->name}' ";
+        $return = "<select id='{$this->inputid}' name='{$this->name}' ";
 
         if ($this->class) {
             $return .= "class='{$this->class}' ";

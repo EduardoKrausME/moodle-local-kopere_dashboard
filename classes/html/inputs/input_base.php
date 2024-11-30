@@ -359,10 +359,7 @@ class input_base implements i_input {
      * @return mixed|string
      */
     public function to_string() {
-
-        $inputid = preg_replace('/[\W]/', '', $this->name);
-
-        $return = "<input id='{$inputid}'
+        $return = "<input id='{$this->inputid}'
                           name='{$this->name}'
                           type='{$this->type}'";
 
@@ -387,5 +384,12 @@ class input_base implements i_input {
         $return .= ">";
 
         return $return;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInputid(): string {
+        return $this->inputid;
     }
 }

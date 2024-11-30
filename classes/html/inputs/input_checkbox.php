@@ -93,8 +93,7 @@ class input_checkbox extends input_base {
      * @return mixed|string
      */
     public function to_string() {
-        $inputid = preg_replace('/[\W]/', '', $this->name);
-        $return = "<input id=\"{$inputid}\" name=\"{$this->name}\" type=\"checkbox\" ";
+        $return = "<input id=\"{$this->inputid}\" name=\"{$this->name}\" type=\"checkbox\" ";
 
         if ($this->value) {
             $value = htmlentities($this->value, ENT_COMPAT);
