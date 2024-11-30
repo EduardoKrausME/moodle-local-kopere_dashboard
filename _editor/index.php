@@ -102,8 +102,6 @@ require_capability('moodle/site:config', context_system::instance());
             $pagePreview = false;
             if ($page == "webpages") {
                 $pagePreview = "{$CFG->wwwroot}/local/kopere_dashboard/";
-            } else if ($page == "formulario_pedir_aceite") {
-                $pagePreview = "{$CFG->wwwroot}/local/kopere_pay/termos.php";
             }
             if ($pagePreview) { ?>
             <form class="form-preview" method="post" target="editor-preview"

@@ -37,10 +37,6 @@ if (file_exists(__DIR__ . "/_default/default-{$page}.html")) {
         $html = $DB->get_field("kopere_dashboard_webpages", "text", ["id" => $id]);
     } else if ($page == "notification") {
         $html = $DB->get_field("kopere_dashboard_events", "message", ["id" => $id]);
-    } else if ($page == "formulario_pedir_aceite") {
-        $html = get_config("local_kopere_dashboard", "formulario_pedir_aceite");
-    } else if ($page == "meiodeposito") {
-        $html = get_config("local_kopere_dashboard", 'kopere_pay-meiodeposito-conta');
     }
 
     if (!isset($html[40])) {
