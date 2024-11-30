@@ -18,6 +18,7 @@
  * input_base file
  *
  * introduced   10/06/17 20:31
+ *
  * @package     local_kopere_dashboard
  * @copyright   2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -107,6 +108,8 @@ class input_base implements i_input {
     /** @var bool */
     protected $required = false;
 
+    protected $input_id = null;
+
     /**
      * Function get_name
      *
@@ -125,6 +128,8 @@ class input_base implements i_input {
      */
     public function set_name($name) {
         $this->name = $name;
+
+        $this->input_id = preg_replace('/[\W]/', '', $this->name);
 
         return $this;
     }
