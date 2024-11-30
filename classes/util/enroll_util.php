@@ -74,14 +74,18 @@ class enroll_util {
     public static function enrolled($course, $user) {
         global $DB;
 
+        if (is_object($course)) {
+            $course = $course->id;
+        }
+
         // Evita erro.
-        $context = \context_course::instance($course->id, IGNORE_MISSING);
+        $context = \context_course::instance($course, IGNORE_MISSING);
         if ($context == null) {
             return false;
         }
 
         $enrol = $DB->get_record("enrol",
-            ["courseid" => $course->id, "enrol" => "manual"], '*', IGNORE_MULTIPLE);
+            ["courseid" => $course, "enrol" => "manual"], '*', IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
         }
@@ -104,41 +108,33 @@ class enroll_util {
     /**
      * Function cohort_enrol
      *
-     * @param $coorteid
+     * @param $cohortid
      * @param $userid
      *
      * @throws \dml_exception
      */
-    public static function cohort_enrol($coorteid, $userid) {
-        global $DB;
+    public static function cohort_enrol($cohortid, $userid) {
+        global $CFG;
 
-        $coorteid = str_replace("c", "", $coorteid);
+        require_once "{$CFG->dirroot}/cohort/lib.php";
 
-        $cohortmembers = new \stdClass();
-        $cohortmembers->cohortid = $coorteid;
-        $cohortmembers->userid = $userid;
-        $cohortmembers->timeadded = time();
-
-        $DB->insert_record("cohort_members", $cohortmembers);
+        cohort_add_member($cohortid, $userid);
     }
 
     /**
      * Function cohort_unenrol
      *
-     * @param $coorteid
+     * @param $cohortid
      * @param $userid
      *
      * @throws \dml_exception
      */
-    public static function cohort_unenrol($coorteid, $userid) {
-        global $DB;
+    public static function cohort_unenrol($cohortid, $userid) {
+        global $CFG;
 
-        $coorteid = str_replace("c", "", $coorteid);
-        $cohortmembers = [
-            "cohortid" => $coorteid,
-            "userid" => $userid,
-        ];
-        $DB->delete_records("cohort_members", $cohortmembers);
+        require_once "{$CFG->dirroot}/cohort/lib.php";
+
+        cohort_remove_member($cohortid, $userid) ;
     }
 
     /**
