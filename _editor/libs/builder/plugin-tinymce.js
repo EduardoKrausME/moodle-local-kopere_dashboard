@@ -56,7 +56,7 @@ var tinyMceOptions = {
     file_picker_callback  : function(callback, value, meta) {
         if (!Vvveb.MediaModal) {
             Vvveb.MediaModal = new MediaModal(true);
-            Vvveb.MediaModal.mediaPath = mediaPath;
+            // Vvveb.MediaModal.mediaPath = mediaPath;
         }
         Vvveb.MediaModal.open(null, callback);
     },

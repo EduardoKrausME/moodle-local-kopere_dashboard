@@ -53,7 +53,7 @@ ImageInput = {
         onClick : function(e, element) {
             if (!Vvveb.MediaModal) {
                 Vvveb.MediaModal = new MediaModal(true);
-                Vvveb.MediaModal.mediaPath = window.mediaPath;
+                //Vvveb.MediaModal.mediaPath = window.mediaPath;
             }
 
             Vvveb.MediaModal.open(this.closest("[data-target-input]"));

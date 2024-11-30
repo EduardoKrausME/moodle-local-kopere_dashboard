@@ -1,5 +1,5 @@
 /**
- * TinyMCE version 7.3.0 (2024-08-07)
+ * TinyMCE version 7.5.1 (TBD)
  */
 
 (function() {
@@ -1053,6 +1053,18 @@
         };
     };
 
+    const removeFromStart = (str, numChars) => {
+        return str.substring(numChars);
+    };
+
+    const checkRange = (str, substr, start) => substr === '' || str.length >= substr.length && str.substr(start, start + substr.length) === substr;
+    const removeLeading = (str, prefix) => {
+        return startsWith(str, prefix) ? removeFromStart(str, prefix.length) : str;
+    };
+    const startsWith = (str, prefix) => {
+        return checkRange(str, prefix, 0);
+    };
+
     var global = tinymce.util.Tools.resolve('tinymce.util.VK');
 
     const appendClickRemove = (link, evt) => {
@@ -1080,7 +1092,7 @@
         if (a) {
             const href = getHref(a);
             if (/^#/.test(href)) {
-                const targetEl = editor.dom.select(href);
+                const targetEl = editor.dom.select(`${ href },[name="${ removeLeading(href, '#') }"]`);
                 if (targetEl.length) {
                     editor.selection.scrollIntoView(targetEl[0], true);
                 }
@@ -1227,7 +1239,7 @@
         };
         const onSetupLink = buttonApi => {
             const node = editor.selection.getNode();
-            buttonApi.setEnabled(isInAnchor(editor, node));
+            buttonApi.setEnabled(isInAnchor(editor, node) && editor.selection.isEditable());
             return noop;
         };
         const getLinkText = value => {
