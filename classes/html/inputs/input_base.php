@@ -389,7 +389,7 @@ class input_base implements i_input {
     /**
      * @return string
      */
-    public function getInputid(): string {
+    public function get_inputid(): string {
         return $this->inputid;
     }
 }

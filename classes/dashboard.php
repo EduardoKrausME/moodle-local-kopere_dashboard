@@ -125,7 +125,7 @@ class dashboard {
      * @throws \dml_exception
      */
     public function last_grades() {
-        global $DB, $PAGE,$OUTPUT;
+        global $DB, $PAGE, $OUTPUT;
 
         $grade = new grade();
         $lastgrades = $grade->get_last_grades();
@@ -154,7 +154,9 @@ class dashboard {
                 "profileimageurl" => $profileimageurl,
                 "users_details" => local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id]),
                 "users_details_ajax" => local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id], "view-ajax"),
-                "dashboard_grade_text" => get_string_kopere("dashboard_grade_text", ["grade" => $gradetext, "evaluation" => $evaluation]) ,
+                "dashboard_grade_text" =>
+                    get_string_kopere("dashboard_grade_text",
+                        ["grade" => $gradetext, "evaluation" => $evaluation]),
                 "grade_date" => userdate($grade->timemodified, get_string_kopere("dateformat")),
             ];
             echo $OUTPUT->render_from_template('local_kopere_dashboard/last_grades', $data);

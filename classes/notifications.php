@@ -338,7 +338,8 @@ class notifications extends notificationsutil {
                 }
             }
         } else {
-            $eventexist = $DB->record_exists("local_kopere_dashboard_event", ["module" => $event->module, "event" => $event->event]);
+            $eventexist = $DB->record_exists("local_kopere_dashboard_event",
+                ["module" => $event->module, "event" => $event->event]);
             if ($eventexist) {
                 mensagem::agenda_mensagem_danger(get_string_kopere("notification_duplicate"));
             } else {

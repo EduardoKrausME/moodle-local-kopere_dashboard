@@ -32,7 +32,6 @@ use course_enrolment_manager;
  * @package local_kopere_dashboard\util
  */
 class enroll_util {
- 
     /**
      * Function status_enrol_manual
      *
@@ -116,7 +115,7 @@ class enroll_util {
     public static function cohort_enrol($cohortid, $userid) {
         global $CFG;
 
-        require_once "{$CFG->dirroot}/cohort/lib.php";
+        require_once("{$CFG->dirroot}/cohort/lib.php");
 
         cohort_add_member($cohortid, $userid);
     }
@@ -132,9 +131,9 @@ class enroll_util {
     public static function cohort_unenrol($cohortid, $userid) {
         global $CFG;
 
-        require_once "{$CFG->dirroot}/cohort/lib.php";
+        require_once("{$CFG->dirroot}/cohort/lib.php");
 
-        cohort_remove_member($cohortid, $userid) ;
+        cohort_remove_member($cohortid, $userid);
     }
 
     /**

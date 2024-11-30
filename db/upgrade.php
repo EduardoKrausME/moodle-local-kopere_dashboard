@@ -311,7 +311,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
             $dbman->rename_table($table, "local_kopere_dashboard_acess");
         }
 
-        // delete
+        // Delete.
         $table = new xmldb_table("kopere_dashboard_performance");
         if ($dbman->table_exists($table)) {
             $dbman->drop_table($table);
