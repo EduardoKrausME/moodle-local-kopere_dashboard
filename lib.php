@@ -18,6 +18,7 @@
  * Lib file
  *
  * introduced   23/05/17 17:59
+ *
  * @package    local_kopere_dashboard
  * @copyright  2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -35,7 +36,6 @@
 function local_kopere_dashboard_extends_navigation(global_navigation $nav) {
     local_kopere_dashboard_extend_navigation($nav);
 }
-
 
 /**
  * Function local_kopere_dashboard_extend_navigation
@@ -104,7 +104,7 @@ function add_pages_custommenuitems_400() {
 
     $cache = \cache::make("local_kopere_dashboard", "report_getdata_cache");
     if ($cache->has("kopere_dashboard_menu")) {
-        $CFG->extramenu = $cache->get ("kopere_dashboard_menu");
+        $CFG->extramenu = $cache->get("kopere_dashboard_menu");
     } else {
 
         try {
@@ -117,7 +117,6 @@ function add_pages_custommenuitems_400() {
 
     $CFG->custommenuitems = "{$CFG->custommenuitems}\n{$CFG->extramenu}";
 }
-
 
 /**
  * Function local_kopere_dashboard_extend_navigation__get_menus
@@ -162,6 +161,18 @@ function local_kopere_dashboard_extend_navigation__get_menus($menuid, $prefix) {
  * @throws coding_exception
  */
 function local_kopere_dashboard_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
+
+    if ($filearea == "overviewfiles") {
+        $filename = array_pop($args);
+        $filepath = $args ? '/' . implode('/', $args) . '/' : '/';
+        $fs = get_file_storage();
+        $file = $fs->get_file($context->id, 'course', $filearea, 0, $filepath, $filename);
+        if (!$file || $file->is_directory()) {
+            die("ops...");
+        }
+
+        send_stored_file($file, 0, 0, $forcedownload, $options);
+    }
 
     $fs = get_file_storage();
     if (!$file = $fs->get_file($context->id, "local_kopere_dashboard", "editor_webpages", $args[0], '/', $args[1])) {
