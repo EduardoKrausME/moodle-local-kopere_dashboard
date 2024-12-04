@@ -1,0 +1,84 @@
+@mixin local_kopere_dashboard_darkmodecode {
+    .kopere-dashboard-bootstrap_page,
+    .kopere_dashboard_div {
+        color: #d7d4d4;
+        label {
+            color: #f5f5f5;
+        }
+        .help-block {
+            color: #9c9a9a;
+        }
+        .content-w {
+            background: #0000;
+            .content-i {
+                .content-box {
+                    .element-header {
+                        color: #f5f5f5;
+                    }
+                    .element-box {
+                        background-color: #fff1;
+                    }
+                }
+            }
+        }
+        .menu-w {
+            background-color: #313131;
+            .menu-and-user {
+                ul.main-menu > li {
+                    a {
+                        color: #f5f5f5;
+                    }
+                    &.active {
+                        .menu-icon {
+                            filter: invert(1);
+                        }
+                    }
+                    ul.submenu li a span {
+                        color: #c1c9d3;
+                    }
+                }
+            }
+        }
+        
+        .table {
+            background: #fff0;
+        }
+        table.dataTable {
+            th {
+                color: #becce8;
+            }
+            td {
+                color: #e5e8f6 !important;
+            }
+        }
+        .dataTables_wrapper {
+            .dataTables_length,
+            .dataTables_filter,
+            .dataTables_info,
+            .dataTables_processing,
+            .dataTables_paginate {
+                color: #d7d4d4;
+            }
+        }
+    
+        fieldset {
+            legend {
+                color: #d7d4d4;
+            }
+        }
+    }
+         .kopere-dashboard-pages {
+             .box-page {
+                 background: #fff1;
+                 .content .title a {
+                     color: #98b6d9;
+                 }
+             }
+         }
+}
+@media (prefers-color-scheme: dark) {
+    @include local_kopere_dashboard_darkmodecode;
+}
+[data-bs-theme=dark] {
+    @include local_kopere_dashboard_darkmodecode;
+}
