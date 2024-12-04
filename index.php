@@ -24,6 +24,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_kopere_dashboard\util\config;
+
 require_once('../../config.php');
 require_once('autoload.php');
 global $DB, $PAGE, $OUTPUT;
@@ -185,6 +187,11 @@ if ($pagelink) {
                     $webpages->cursopreco = get_string_kopere("webpages_free");
                 } else {
                     $webpages->cursopreco = "R$ " . $koperepaydetalhe->preco;
+                }
+
+                $offprice = config::get_key("builder_offprice_{$kopere_pay_detalhe->course}");
+                if ($offprice) {
+                    $data["offprice"] = get_string_koperepay('pedido_resumo_moeda',preg_replace('/[^0-9]/', '', $offprice) );
                 }
             }
 
