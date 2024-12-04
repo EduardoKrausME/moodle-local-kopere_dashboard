@@ -267,10 +267,14 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         set_config("monitor", $CFG->kopere_dashboard_monitor, "local_kopere_dashboard");
         set_config("pagefonts", $CFG->kopere_dashboard_pagefonts, "local_kopere_dashboard");
 
-        \local_kopere_dashboard\install\report_install::create_categores();
-        \local_kopere_dashboard\install\report_install::create_reports();
+        try {
+            \local_kopere_dashboard\install\report_install::create_categores();
+            \local_kopere_dashboard\install\report_install::create_reports();
 
-        \local_kopere_dashboard\install\users_import_install::install_or_update();
+            \local_kopere_dashboard\install\users_import_install::install_or_update();
+        } catch (Exception $e) {
+            echo "ignored..";
+        }
 
         upgrade_plugin_savepoint(true, 2024101500, "local", "kopere_dashboard");
     }
