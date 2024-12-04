@@ -189,9 +189,9 @@ if ($pagelink) {
                     $webpages->cursopreco = "R$ " . $koperepaydetalhe->preco;
                 }
 
-                $offprice = config::get_key("builder_offprice_{$kopere_pay_detalhe->course}");
+                $offprice = config::get_key("builder_offprice_{$koperepaydetalhe->course}");
                 if ($offprice) {
-                    $data["offprice"] = get_string_koperepay('pedido_resumo_moeda',preg_replace('/[^0-9]/', '', $offprice) );
+                    $data["offprice"] = get_string_koperepay('pedido_resumo_moeda', preg_replace('/[^0-9]/', '', $offprice));
                 }
             }
 
