@@ -29,9 +29,7 @@
  *
  * @param global_navigation $nav
  *
- * @throws coding_exception
- * @throws dml_exception
- * @throws moodle_exception
+ * @throws Exception
  */
 function local_kopere_dashboard_extends_navigation(global_navigation $nav) {
     local_kopere_dashboard_extend_navigation($nav);
@@ -42,12 +40,10 @@ function local_kopere_dashboard_extends_navigation(global_navigation $nav) {
  *
  * @param global_navigation $nav
  *
- * @throws coding_exception
- * @throws dml_exception
- * @throws moodle_exception
+ * @throws Exception
  */
 function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
-    global $CFG;
+    global $CFG, $PAGE;
 
     require_once(__DIR__ . "/locallib.php");
 
@@ -58,21 +54,22 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
     if (isloggedin()) {
         if ($CFG->branch > 400 && @get_config("local_kopere_dashboard", "menu")) {
             $context = context_system::instance();
-            $hascapability = has_capability('local/kopere_dashboard:view', $context) ||
-                has_capability('local/kopere_dashboard:manage', $context);
+            $hascapability = has_capability("local/kopere_dashboard:view", $context) ||
+                has_capability("local/kopere_dashboard:manage", $context);
 
-            if ($hascapability && strpos($CFG->custommenuitems, "kopere_dashboard/view.php") === false) {
+            if ($hascapability) {
                 $name = get_string("modulename", "local_kopere_dashboard");
                 $link = local_kopere_dashboard_makeurl("dashboard", "start");
-                $CFG->custommenuitems = "{$name}|{$link}\n{$CFG->custommenuitems}";
+                $PAGE->requires->js_call_amd("local_kopere_dashboard/start_load",
+                    "moremenu", [$name, $link]);
             }
             if (@get_config("local_kopere_dashboard", "menuwebpages")) {
                 add_pages_custommenuitems_400();
             }
         } else {
             $context = context_system::instance();
-            if (has_capability('local/kopere_dashboard:view', $context) ||
-                has_capability('local/kopere_dashboard:manage', $context)) {
+            if (has_capability("local/kopere_dashboard:view", $context) ||
+                has_capability("local/kopere_dashboard:manage", $context)) {
 
                 $node = $nav->add(
                     get_string("pluginname", "local_kopere_dashboard"),
@@ -133,7 +130,7 @@ function local_kopere_dashboard_extend_navigation__get_menus($menuid, $prefix) {
 
     foreach ($menus as $menu) {
         $where = ["visible" => 1, "menuid" => $menu->id];
-        $webpages = $DB->get_records("local_kopere_dashboard_pages", $where, 'pageorder ASC');
+        $webpages = $DB->get_records("local_kopere_dashboard_pages", $where, "pageorder ASC");
         $CFG->extramenu .= "{$prefix} {$menu->title}|{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}\n";
         if ($webpages) {
             /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_pages $webpage */
@@ -164,9 +161,9 @@ function local_kopere_dashboard_pluginfile($course, $cm, $context, $filearea, $a
 
     if ($filearea == "overviewfiles") {
         $filename = array_pop($args);
-        $filepath = $args ? '/' . implode('/', $args) . '/' : '/';
+        $filepath = $args ? "/" . implode("/", $args) . "/" : "/";
         $fs = get_file_storage();
-        $file = $fs->get_file($context->id, 'course', $filearea, 0, $filepath, $filename);
+        $file = $fs->get_file($context->id, "course", $filearea, 0, $filepath, $filename);
         if (!$file || $file->is_directory()) {
             die("ops...");
         }
@@ -175,7 +172,7 @@ function local_kopere_dashboard_pluginfile($course, $cm, $context, $filearea, $a
     }
 
     $fs = get_file_storage();
-    if (!$file = $fs->get_file($context->id, "local_kopere_dashboard", "editor_webpages", $args[0], '/', $args[1])) {
+    if (!$file = $fs->get_file($context->id, "local_kopere_dashboard", "editor_webpages", $args[0], "/", $args[1])) {
         return false;
     }
     send_stored_file($file, 0, 0, $forcedownload, $options);

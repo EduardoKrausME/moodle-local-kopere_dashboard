@@ -160,6 +160,34 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
                 };
                 loadValidateAll();
 
+            },
+
+            moremenu : function(name, href) {
+                var link = `<li class="nav-item">
+                                <a class="nav-link" href="${href}">${name}</a>
+                            </li>`;
+
+                var $menu = $("#header .primary-navigation .custom-menu > ul");
+                if ($menu.length) {
+                    $menu.prepend(link);
+                    return;
+                }
+                $menu = $("#header .primary-navigation .moremenu > ul");
+                if ($menu.length) {
+                    $menu.prepend(link);
+                    return;
+                }
+
+                $menu = $(".navbar .primary-navigation .custom-menu > ul");
+                if ($menu.length) {
+                    $menu.append(link);
+                    return;
+                }
+                $menu = $(".navbar .primary-navigation .moremenu > ul");
+                if ($menu.length) {
+                    $menu.append(link);
+                    return;
+                }
             }
         };
     });
