@@ -279,7 +279,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2024101500, "local", "kopere_dashboard");
     }
 
-    if ($oldversion < 2024113001) {
+    if ($oldversion < 2024121100) {
         $table = new xmldb_table("kopere_dashboard_menu");
         if ($dbman->table_exists($table)) {
             $dbman->rename_table($table, "local_kopere_dashboard_menu");
@@ -310,7 +310,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
             $dbman->rename_table($table, "local_kopere_dashboard_login");
         }
 
-        $table = new xmldb_table("local_kopere_dashboard_acess");
+        $table = new xmldb_table("kopere_dashboard_reportlogin");
         if ($dbman->table_exists($table)) {
             $dbman->rename_table($table, "local_kopere_dashboard_login");
         }
@@ -326,7 +326,22 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
             $dbman->drop_table($table);
         }
 
-        upgrade_plugin_savepoint(true, 2024113001, "local", "kopere_dashboard");
+        if (!$dbman->table_exists("local_kopere_dashboard_acess")) {
+            $table = new xmldb_table("local_kopere_dashboard_acess");
+
+            $table->add_field("id", XMLDB_TYPE_INTEGER, "10", true, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+            $table->add_field("userid", XMLDB_TYPE_INTEGER, "10", true, XMLDB_NOTNULL);
+            $table->add_field("courseid", XMLDB_TYPE_INTEGER, "10", true, XMLDB_NOTNULL);
+            $table->add_field("context", XMLDB_TYPE_INTEGER, "10", true, XMLDB_NOTNULL);
+            $table->add_field("contagem", XMLDB_TYPE_INTEGER, "10", null, XMLDB_NOTNULL);
+            $table->add_field("timecreated", XMLDB_TYPE_INTEGER, "20", null, XMLDB_NOTNULL);
+
+            $table->add_key("primary", XMLDB_KEY_PRIMARY, ["id"]);
+
+            $dbman->create_table($table);
+        }
+
+        upgrade_plugin_savepoint(true, 2024121100, "local", "kopere_dashboard");
     }
 
     return true;
