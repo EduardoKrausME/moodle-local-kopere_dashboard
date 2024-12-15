@@ -58,7 +58,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
                 has_capability("local/kopere_dashboard:manage", $context);
 
             if ($hascapability) {
-                $name = get_string_kopere("modulename");
+                $name = get_string("modulename", "local_kopere_dashboard");
                 $link = local_kopere_dashboard_makeurl("dashboard", "start");
                 $PAGE->requires->js_call_amd("local_kopere_dashboard/start_load",
                     "moremenu", [$name, $link]);

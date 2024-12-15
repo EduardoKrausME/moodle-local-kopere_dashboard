@@ -26,18 +26,18 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$settings = new admin_settingpage("kopere_dashboard", get_string_kopere("pluginname"));
+$settings = new admin_settingpage("kopere_dashboard", get_string("pluginname", "local_kopere_dashboard"));
 $ADMIN->add("localplugins", $settings);
 
 if ($hassiteconfig) {
     if (!$ADMIN->locate("integracaoroot")) {
-        $ADMIN->add("root", new admin_category("integracaoroot", get_string_kopere("integracaoroot")));
+        $ADMIN->add("root", new admin_category("integracaoroot", get_string("integracaoroot", "local_kopere_dashboard")));
     }
 
     $ADMIN->add("integracaoroot",
         new admin_externalpage(
             "local_kopere_dashboard",
-            get_string_kopere("modulename"),
+            get_string("modulename", "local_kopere_dashboard"),
             "{$CFG->wwwroot}/local/kopere_dashboard/view.php?classname=dashboard&method=start"
         )
     );
@@ -48,30 +48,30 @@ if ($ADMIN->fulltree) {
     if (method_exists($settings, "add")) {
 
         $setting = new admin_setting_configcheckbox("local_kopere_dashboard/menu",
-            get_string_kopere("kopere_dashboard_menu"),
-            get_string_kopere("kopere_dashboard_menu_desc"), 1
+            get_string("kopere_dashboard_menu", "local_kopere_dashboard"),
+            get_string("kopere_dashboard_menu_desc", "local_kopere_dashboard"), 1
         );
         $setting->set_updatedcallback("theme_reset_all_caches");
         $settings->add($setting);
 
         $setting = new admin_setting_configcheckbox("local_kopere_dashboard/menuwebpages",
-            get_string_kopere("kopere_dashboard_menuwebpages"),
-            get_string_kopere("kopere_dashboard_menuwebpages_desc"), 1
+            get_string("kopere_dashboard_menuwebpages", "local_kopere_dashboard"),
+            get_string("kopere_dashboard_menuwebpages_desc", "local_kopere_dashboard"), 1
         );
         $setting->set_updatedcallback("theme_reset_all_caches");
         $settings->add($setting);
 
         $settings->add(
             new admin_setting_configcheckbox("local_kopere_dashboard/monitor",
-                get_string_kopere("kopere_dashboard_monitor"),
-                get_string_kopere("kopere_dashboard_monitor_desc"),
+                get_string("kopere_dashboard_monitor", "local_kopere_dashboard"),
+                get_string("kopere_dashboard_monitor_desc", "local_kopere_dashboard"),
                 0
             ));
 
         $icon = $OUTPUT->image_url("google-fonts", "local_kopere_dashboard")->out(false);
         $settings->add(
             new admin_setting_configtextarea("kopere_dashboard_pagefonts",
-                get_string_kopere("kopere_dashboard_pagefonts"),
+                get_string("kopere_dashboard_pagefonts", "local_kopere_dashboard"),
                 get_string("kopere_dashboard_pagefonts_desc", "local_kopere_dashboard", $icon), ""
             ));
 
