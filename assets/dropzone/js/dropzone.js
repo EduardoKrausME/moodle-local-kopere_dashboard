@@ -127,48 +127,48 @@
         Dropzone.prototype.events = ["drop", "dragstart", "dragend", "dragenter", "dragover", "dragleave", "addedfile", "addedfiles", "removedfile", "thumbnail", "error", "errormultiple", "processing", "processingmultiple", "uploadprogress", "totaluploadprogress", "sending", "sendingmultiple", "success", "successmultiple", "canceled", "canceledmultiple", "complete", "completemultiple", "reset", "maxfilesexceeded", "maxfilesreached", "queuecomplete"];
 
         Dropzone.prototype.defaultOptions = {
-            url                          : null,
-            method                       : "post",
-            withCredentials              : false,
-            parallelUploads              : 2,
-            uploadMultiple               : false,
-            maxFilesize                  : 256,
-            paramName                    : "file",
-            createImageThumbnails        : true,
-            maxThumbnailFilesize         : 10,
-            thumbnailWidth               : 120,
-            thumbnailHeight              : 120,
-            filesizeBase                 : 1000,
-            maxFiles                     : null,
-            params                       : {},
-            clickable                    : true,
-            ignoreHiddenFiles            : true,
-            acceptedFiles                : null,
-            acceptedMimeTypes            : null,
-            autoProcessQueue             : true,
-            autoQueue                    : true,
-            addRemoveLinks               : false,
-            previewsContainer            : null,
-            capture                      : null,
-            dictDefaultMessage           : "Drop files here to upload",
-            dictFallbackMessage          : "Your browser does not support drag'n'drop file uploads.",
-            dictFallbackText             : "Please use the fallback form below to upload your files like in the olden days.",
-            dictFileTooBig               : "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",
-            dictInvalidFileType          : "You can't upload files of this type.",
-            dictResponseError            : "Server responded with {{statusCode}} code.",
-            dictCancelUpload             : "Cancel upload",
-            dictCancelUploadConfirmation : "Are you sure you want to cancel this upload?",
-            dictRemoveFile               : "Remove file",
-            dictRemoveFileConfirmation   : null,
-            dictMaxFilesExceeded         : "You can not upload any more files.",
-            accept                       : function(file, done) {
+            url: null,
+            method: "post",
+            withCredentials: false,
+            parallelUploads: 2,
+            uploadMultiple: false,
+            maxFilesize: 256,
+            paramName: "file",
+            createImageThumbnails: true,
+            maxThumbnailFilesize: 10,
+            thumbnailWidth: 120,
+            thumbnailHeight: 120,
+            filesizeBase: 1000,
+            maxFiles: null,
+            params: {},
+            clickable: true,
+            ignoreHiddenFiles: true,
+            acceptedFiles: null,
+            acceptedMimeTypes: null,
+            autoProcessQueue: true,
+            autoQueue: true,
+            addRemoveLinks: false,
+            previewsContainer: null,
+            capture: null,
+            dictDefaultMessage: "Drop files here to upload",
+            dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
+            dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
+            dictFileTooBig: "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",
+            dictInvalidFileType: "You can't upload files of this type.",
+            dictResponseError: "Server responded with {{statusCode}} code.",
+            dictCancelUpload: "Cancel upload",
+            dictCancelUploadConfirmation: "Are you sure you want to cancel this upload?",
+            dictRemoveFile: "Remove file",
+            dictRemoveFileConfirmation: null,
+            dictMaxFilesExceeded: "You can not upload any more files.",
+            accept: function(file, done) {
                 return done();
             },
-            init                         : function() {
+            init: function() {
                 return noop;
             },
-            forceFallback                : false,
-            fallback                     : function() {
+            forceFallback: false,
+            fallback: function() {
                 var child, messageElement, span, _i, _len, _ref;
                 this.element.className = "" + this.element.className + " dz-browser-not-supported";
                 _ref = this.element.getElementsByTagName("div");
@@ -194,13 +194,13 @@
                 }
                 return this.element.appendChild(this.getFallbackForm());
             },
-            resize                       : function(file) {
+            resize: function(file) {
                 var info, srcRatio, trgRatio;
                 info = {
-                    srcX      : 0,
-                    srcY      : 0,
-                    srcWidth  : file.width,
-                    srcHeight : file.height
+                    srcX: 0,
+                    srcY: 0,
+                    srcWidth: file.width,
+                    srcHeight: file.height
                 };
                 srcRatio = file.width / file.height;
                 info.optWidth = this.options.thumbnailWidth;
@@ -239,27 +239,27 @@
             want to add an additional event handler, register it on the dropzone object
             and don't overwrite those options.
              */
-            drop                : function(e) {
+            drop: function(e) {
                 return this.element.classList.remove("dz-drag-hover");
             },
-            dragstart           : noop,
-            dragend             : function(e) {
+            dragstart: noop,
+            dragend: function(e) {
                 return this.element.classList.remove("dz-drag-hover");
             },
-            dragenter           : function(e) {
+            dragenter: function(e) {
                 return this.element.classList.add("dz-drag-hover");
             },
-            dragover            : function(e) {
+            dragover: function(e) {
                 return this.element.classList.add("dz-drag-hover");
             },
-            dragleave           : function(e) {
+            dragleave: function(e) {
                 return this.element.classList.remove("dz-drag-hover");
             },
-            paste               : noop,
-            reset               : function() {
+            paste: noop,
+            reset: function() {
                 return this.element.classList.remove("dz-started");
             },
-            addedfile           : function(file) {
+            addedfile: function(file) {
                 var node, removeFileEvent, removeLink, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, _results;
                 if (this.element === this.previewsContainer) {
                     this.element.classList.add("dz-started");
@@ -310,7 +310,7 @@
                     return _results;
                 }
             },
-            removedfile         : function(file) {
+            removedfile: function(file) {
                 var _ref;
                 if (file.previewElement) {
                     if ((_ref = file.previewElement) != null) {
@@ -319,7 +319,7 @@
                 }
                 return this._updateMaxFilesReachedClass();
             },
-            thumbnail           : function(file, dataUrl) {
+            thumbnail: function(file, dataUrl) {
                 var thumbnailElement, _i, _len, _ref;
                 if (file.previewElement) {
                     file.previewElement.classList.remove("dz-file-preview");
@@ -336,7 +336,7 @@
                     })(this)), 1);
                 }
             },
-            error               : function(file, message) {
+            error: function(file, message) {
                 var node, _i, _len, _ref, _results;
                 if (file.previewElement) {
                     file.previewElement.classList.add("dz-error");
@@ -352,8 +352,8 @@
                     return _results;
                 }
             },
-            errormultiple       : noop,
-            processing          : function(file) {
+            errormultiple: noop,
+            processing: function(file) {
                 if (file.previewElement) {
                     file.previewElement.classList.add("dz-processing");
                     if (file._removeLink) {
@@ -361,8 +361,8 @@
                     }
                 }
             },
-            processingmultiple  : noop,
-            uploadprogress      : function(file, progress, bytesSent) {
+            processingmultiple: noop,
+            uploadprogress: function(file, progress, bytesSent) {
                 var node, _i, _len, _ref, _results;
                 if (file.previewElement) {
                     _ref = file.previewElement.querySelectorAll("[data-dz-uploadprogress]");
@@ -378,20 +378,20 @@
                     return _results;
                 }
             },
-            totaluploadprogress : noop,
-            sending             : noop,
-            sendingmultiple     : noop,
-            success             : function(file) {
+            totaluploadprogress: noop,
+            sending: noop,
+            sendingmultiple: noop,
+            success: function(file) {
                 if (file.previewElement) {
                     return file.previewElement.classList.add("dz-success");
                 }
             },
-            successmultiple     : noop,
-            canceled            : function(file) {
+            successmultiple: noop,
+            canceled: function(file) {
                 return this.emit("error", file, "Upload canceled.");
             },
-            canceledmultiple    : noop,
-            complete            : function(file) {
+            canceledmultiple: noop,
+            complete: function(file) {
                 if (file._removeLink) {
                     file._removeLink.textContent = this.options.dictRemoveFile;
                 }
@@ -399,12 +399,12 @@
                     return file.previewElement.classList.add("dz-complete");
                 }
             },
-            completemultiple    : noop,
-            maxfilesexceeded    : noop,
-            maxfilesreached     : noop,
-            queuecomplete       : noop,
-            addedfiles          : noop,
-            previewTemplate     :
+            completemultiple: noop,
+            maxfilesexceeded: noop,
+            maxfilesreached: noop,
+            queuecomplete: noop,
+            addedfiles: noop,
+            previewTemplate:
                 "<div class='dz-preview dz-file-preview'>" +
                 "  <div class='dz-image'><img data-dz-thumbnail /></div>" +
                 "  <div class='dz-details'>" +
@@ -660,20 +660,20 @@
             };
             this.listeners = [
                 {
-                    element : this.element,
-                    events  : {
-                        "dragstart" : (function(_this) {
+                    element: this.element,
+                    events: {
+                        "dragstart": (function(_this) {
                             return function(e) {
                                 return _this.emit("dragstart", e);
                             };
                         })(this),
-                        "dragenter" : (function(_this) {
+                        "dragenter": (function(_this) {
                             return function(e) {
                                 noPropagation(e);
                                 return _this.emit("dragenter", e);
                             };
                         })(this),
-                        "dragover"  : (function(_this) {
+                        "dragover": (function(_this) {
                             return function(e) {
                                 var efct;
                                 try {
@@ -685,18 +685,18 @@
                                 return _this.emit("dragover", e);
                             };
                         })(this),
-                        "dragleave" : (function(_this) {
+                        "dragleave": (function(_this) {
                             return function(e) {
                                 return _this.emit("dragleave", e);
                             };
                         })(this),
-                        "drop"      : (function(_this) {
+                        "drop": (function(_this) {
                             return function(e) {
                                 noPropagation(e);
                                 return _this.drop(e);
                             };
                         })(this),
-                        "dragend"   : (function(_this) {
+                        "dragend": (function(_this) {
                             return function(e) {
                                 return _this.emit("dragend", e);
                             };
@@ -707,9 +707,9 @@
             this.clickableElements.forEach((function(_this) {
                 return function(clickableElement) {
                     return _this.listeners.push({
-                        element : clickableElement,
-                        events  : {
-                            "click" : function(evt) {
+                        element: clickableElement,
+                        events: {
+                            "click": function(evt) {
                                 if ((clickableElement !== _this.element) || (evt.target === _this.element || Dropzone.elementInside(evt.target, _this.element.querySelector(".dz-message")))) {
                                     _this.hiddenFileInput.click();
                                 }
@@ -993,9 +993,9 @@
 
         Dropzone.prototype.addFile = function(file) {
             file.upload = {
-                progress  : 0,
-                total     : file.size,
-                bytesSent : 0
+                progress: 0,
+                total: file.size,
+                bytesSent: 0
             };
             this.files.push(file);
             file.status = Dropzone.ADDED;
@@ -1279,9 +1279,9 @@
                         for (_j = 0, _len1 = files.length; _j < _len1; _j++) {
                             file = files[_j];
                             file.upload = {
-                                progress  : progress,
-                                total     : e.total,
-                                bytesSent : e.loaded
+                                progress: progress,
+                                total: e.total,
+                                bytesSent: e.loaded
                             };
                         }
                     } else {
@@ -1344,9 +1344,9 @@
             progressObj = (_ref = xhr.upload) != null ? _ref : xhr;
             progressObj.onprogress = updateProgress;
             headers = {
-                "Accept"           : "application/json",
-                "Cache-Control"    : "no-cache",
-                "X-Requested-With" : "XMLHttpRequest"
+                "Accept": "application/json",
+                "Cache-Control": "no-cache",
+                "X-Requested-With": "XMLHttpRequest"
             };
             if (this.options.headers) {
                 extend(headers, this.options.headers);
