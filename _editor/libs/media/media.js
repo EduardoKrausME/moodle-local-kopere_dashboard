@@ -136,7 +136,7 @@ class MediaModal {
         if (this.targetInput) {
             let input = document.querySelector(this.targetInput);
             input.value = file;
-            const e = new Event("change", {bubbles : true});
+            const e = new Event("change", {bubbles: true});
             input.dispatchEvent(e);
             //$(this.targetInput).val(file).trigger("change");
         }
@@ -162,11 +162,11 @@ class MediaModal {
             });
 
             const event = new CustomEvent("mediaModal:init", {
-                detail : {
-                    type        : this.type,
-                    targetInput : this.targetInput,
-                    targetThumb : this.targetThumb,
-                    callback    : this.callback
+                detail: {
+                    type: this.type,
+                    targetInput: this.targetInput,
+                    targetThumb: this.targetThumb,
+                    callback: this.callback
                 }
             });
             window.dispatchEvent(event);
@@ -205,7 +205,7 @@ class MediaModal {
         fetch(mediaServerUrl)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error(response)
+                    throw new Error("error load");
                 }
                 return response.json();
             })
@@ -217,7 +217,7 @@ class MediaModal {
                 window.dispatchEvent(new HashChangeEvent("hashchange"));
             })
             .catch(error => {
-                console.log(error.statusText);
+                console.trace(error.statusText);
                 displayToast("bg-danger", "Error", "Error loading media!");
             });
 
@@ -471,7 +471,7 @@ class MediaModal {
 
         _searchData(data, searchTerms);
 
-        return {folders : folders, files : files};
+        return {folders: folders, files: files};
     }
 
     onUpload(event) {
@@ -495,28 +495,30 @@ class MediaModal {
             formData.append("onlyFilename", true);
 
 
-            fetch(mediaServerUrl, {method : "POST", body : formData})
+            fetch(mediaServerUrl, {method: "POST", body: formData})
                 .then((response) => {
                     console.log(response);
                     if (!response.ok) {
-                        throw new Error(response)
+                        throw new Error("Error load")
                     }
                     return response.json()
                 })
                 .then((data) => {
+                    console.log(data);
+                    console.log(data);
                     let fileElement = Vvveb.MediaModal.addFile({
-                        name : data,
-                        type : "file",
-                        path : Vvveb.MediaModal.currentPath + "/" + data,
-                        size : 1
+                        name: data.name,
+                        type: data.type,
+                        path: data.path,
+                        size: data.size,
                     }, true);
 
-                    fileElement.scrollIntoView({behavior : "smooth", block : "center", inline : "center"});
+                    fileElement.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
 
                     Vvveb.MediaModal.hideUploadLoading();
                 })
                 .catch(error => {
-                    console.log(error);
+                    console.trace(error);
                     Vvveb.MediaModal.hideUploadLoading();
                     displayToast("bg-danger", "Error", "Error uploading!");
                 });
@@ -526,32 +528,29 @@ class MediaModal {
     deleteFile(el) {
         let parent = el.closest("li");
         let file = parent.querySelector('input[type ="hidden"]').value;
-        if (confirm(`Are you sure you want to delete "${file}"template?`)) {
+        if (confirm(`Are you sure you want to delete "${file}"?`)) {
 
-            fetch(deleteUrl, {method : "POST", body : {file}})
+            console.log(file);
+
+            fetch(deleteUrl, {method: "POST", body: JSON.stringify({file: file})})
                 .then((response) => {
                     console.log(response);
                     if (!response.ok) {
-                        throw new Error(response)
+                        throw new Error("Error load");
                     }
-                    return response.text()
+                    return response.json()
                 })
                 .then((data) => {
-                    let bg = "bg-success";
                     if (data.success) {
+                        displayToast("bg-success", "Success", "Success deleting file!");
                     } else {
-                        //bg = "bg-danger";
+                        displayToast("bg-danger", "Error", "Error deleting file!");
                     }
-
-                    document.querySelectorAll("#top-toast .toast-body").html(data);
-                    document.querySelectorAll("#top-toast .toast-header").classList.remove(["bg-danger", "bg-success"]).classList.add(bg);
-                    document.querySelectorAll("#top-toast .toast").classList.add("show");
-                    delay(() => document.querySelectorAll("#top-toast .toast").classList.remove("show"), 5000);
 
                     parent.remove();
                 })
                 .catch(error => {
-                    console.log(error);
+                    console.trace(error);
                     displayToast("bg-danger", "Error", "Error deleting file!");
                 });
         }
@@ -590,8 +589,8 @@ class MediaModal {
                     </a>`;
 
         const event = new CustomEvent("mediaModal:fileActions", {
-            detail : {
-                file : f.path,
+            detail: {
+                file: f.path,
                 name,
                 fileSize,
                 isImage,
@@ -720,7 +719,7 @@ class MediaModal {
         this.breadcrumbs.appendChild(generateElements('<a href="/"><i class="la la-home"></i><span class="folderName">&ensp;home</span></a>')[0]);
 
         // Show the generated elements
-        this.fileList.animate({'display' : 'inline-block'});
+        this.fileList.animate({'display': 'inline-block'});
 
     }
 

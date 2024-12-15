@@ -87,8 +87,7 @@ if (optional_param("startTemplateUrl", false, PARAM_RAW)) {
     if ($startTemplateUrl) {
         $html = file_get_contents($startTemplateUrl);
     }
-}
-else if (optional_param("html", false, PARAM_RAW)) {
+} else if (optional_param("html", false, PARAM_RAW)) {
     $html = substr(optional_param("html", false, PARAM_RAW), 0, MAX_FILE_LIMIT);
     if (!ALLOW_PHP) {
         //if (strpos($html, '<?php') !== false) {
@@ -111,6 +110,21 @@ if ($action) {
     //file manager actions, delete and rename
     switch ($action) {
         case "delete":
+            $json = file_get_contents('php://input');
+            $data = json_decode($json);
+            preg_match('/pluginfile.php\/(\d+)\/local_kopere_dashboard\/(\w+)\/(\d+)\/(.*)/', $data->file, $filePartes);
+
+            if (isset($filePartes[4])) {
+                $contextid = $filePartes[1];
+                $component = "local_kopere_dashboard";
+                $filearea = $filePartes[2];
+                $itemid = $filePartes[3];
+                $filename = $filePartes[4];
+
+                $fs = get_file_storage();
+                $fs->delete_area_files($contextid, $component, $filearea, $itemid);
+            }
+
             header('Content-Type: application/json');
             echo json_encode([
                 "success" => 1,
