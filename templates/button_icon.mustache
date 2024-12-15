@@ -26,57 +26,12 @@
     }
 }}
 
-
-<span id="btn-{{uniqid}}" style="display:none">
+<span id="btn-{{button_id}}" style="display:none">
     <img src="{{{config.wwwroot}}}/local/kopere_dashboard/assets/dashboard/img/actions/{{{icon}}}.svg" width="19">
 </span>
 
-<div id="confirm-{{{uniqid}}}" class="confirm-dialog" style="display:none;"
+<div id="confirm-{{{button_id}}}" class="confirm-dialog"
+     style="display:none;min-width: 400px;"
      title="{{confirmtitle}}">
     <p class="text-center">{{confirmtext}}</p>
 </div>
-
-<style>
-    .confirm-dialog {
-        min-width: 400px;
-    }
-</style>
-
-{{#js}}
-    require(["jquery", "jqueryui",], function($) {
-        $("#btn-{{uniqid}}").show().click(function() {
-            $("#confirm-{{{uniqid}}}").dialog({
-                resizable: false,
-                height: "auto",
-                width: "auto",
-                maxWidth: 400,
-                modal: true,
-                classes: {
-                    "ui-dialog": "kopere-dashboard-modal"
-                },
-                show: {
-                    effect: "blind",
-                    duration: 200
-                },
-                hide: {
-                    duration: 300
-                },
-                buttons: [
-                    {
-                        "text": "{{#str}}yes{{/str}}",
-                        "class": "btn btn-danger",
-                        "click": function() {
-                            location.href = "{{{link}}}";
-                        }
-                    },
-                    {
-                        text: "{{#str}}no{{/str}}",
-                        click: function() {
-                            $(this).dialog("close");
-                        }
-                    }
-                ]
-            });
-        });
-    });
-{{/js}}
