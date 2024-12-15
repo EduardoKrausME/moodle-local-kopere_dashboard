@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// phpcs:ignoreFile moodle.Files.LangFilesOrdering.IncorrectOrder
+
 $string['about_bug'] = 'If you found some BUG or would like to suggest improvements open one issue';
 $string['about_code'] = 'Code available in';
 $string['about_help'] = 'Help is on';

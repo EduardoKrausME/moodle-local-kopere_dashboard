@@ -182,7 +182,6 @@ class report_foreach {
             $item->context = get_string_kopere("contextcourse");
         }
 
-
         return $item;
     }
 
