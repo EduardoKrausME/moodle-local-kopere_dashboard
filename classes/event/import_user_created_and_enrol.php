@@ -18,6 +18,7 @@
  * import_user_created_and_enrol file
  *
  * introduced  18/08/17 12:21
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -51,6 +52,6 @@ class import_user_created_and_enrol extends base {
      * @throws \coding_exception
      */
     public static function get_name() {
-        return get_string("userimport_import_user_created_and_enrol_name", "local_kopere_dashboard");
+        return get_string_kopere("userimport_import_user_created_and_enrol_name");
     }
 }

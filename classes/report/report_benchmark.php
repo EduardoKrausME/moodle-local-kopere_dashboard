@@ -18,6 +18,7 @@
  * report_benchmark file
  *
  * introduced 31/01/17 06:30
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -77,8 +78,8 @@ class report_benchmark {
                     "during" => $stop,
                     "id" => $idtest,
                     "class" => $this->get_feedback_class($stop, $result["limit"], $result["over"]),
-                    "name" => get_string($name . "name", "local_kopere_dashboard"),
-                    "info" => get_string($name . "moreinfo", "local_kopere_dashboard"),
+                    "name" => get_string_kopere("{$name}name"),
+                    "info" => get_string_kopere("{$name}moreinfo"),
                 ] + $result;
         }
 

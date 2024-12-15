@@ -58,7 +58,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
                 has_capability("local/kopere_dashboard:manage", $context);
 
             if ($hascapability) {
-                $name = get_string("modulename", "local_kopere_dashboard");
+                $name = get_string_kopere("modulename");
                 $link = local_kopere_dashboard_makeurl("dashboard", "start");
                 $PAGE->requires->js_call_amd("local_kopere_dashboard/start_load",
                     "moremenu", [$name, $link]);
@@ -72,12 +72,12 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
                 has_capability("local/kopere_dashboard:manage", $context)) {
 
                 $node = $nav->add(
-                    get_string("pluginname", "local_kopere_dashboard"),
+                    get_string_kopere("pluginname"),
                     new moodle_url(local_kopere_dashboard_makeurl("dashboard", "start")),
                     navigation_node::TYPE_CUSTOM,
                     null,
                     "kopere_dashboard",
-                    new pix_icon("icon", get_string("pluginname", "local_kopere_dashboard"), "local_kopere_dashboard")
+                    new pix_icon("icon", get_string_kopere("pluginname"), "local_kopere_dashboard")
                 );
 
                 $node->showinflatnavigation = true;
