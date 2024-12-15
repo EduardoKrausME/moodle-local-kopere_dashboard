@@ -33,15 +33,15 @@ class button {
     /**
      * btn size
      */
-    const BTN_PEQUENO = 'btn-xs';
+    const BTN_PEQUENO = "btn-xs";
     /**
      * btn size
      */
-    const BTN_MEDIO = 'btn-sm';
+    const BTN_MEDIO = "btn-sm";
     /**
      * btn size
      */
-    const BTN_GRANDE = 'btn-lg';
+    const BTN_GRANDE = "btn-lg";
 
     /**
      * Function close_popup
@@ -63,7 +63,7 @@ class button {
      *
      * @return string
      */
-    public static function add($text, $link, $class = '', $p = true, $return = false) {
+    public static function add($text, $link, $class = "", $p = true, $return = false) {
         $class = "btn btn-primary {$class}";
 
         return self::create_button($text, $link, $p, $class, $return);
@@ -80,7 +80,7 @@ class button {
      *
      * @return string
      */
-    public static function edit($text, $link, $class = '', $p = true, $return = false) {
+    public static function edit($text, $link, $class = "", $p = true, $return = false) {
         $class = "btn btn-success {$class}";
 
         return self::create_button($text, $link, $p, $class, $return);
@@ -97,7 +97,7 @@ class button {
      *
      * @return string
      */
-    public static function delete($text, $link, $class = '', $p = true, $return = false) {
+    public static function delete($text, $link, $class = "", $p = true, $return = false) {
         $class = "btn btn-danger {$class}";
 
         return self::create_button($text, $link, $p, $class, $return);
@@ -114,7 +114,7 @@ class button {
      *
      * @return string
      */
-    public static function primary($text, $link, $class = '', $p = true, $return = false) {
+    public static function primary($text, $link, $class = "", $p = true, $return = false) {
         $class = "btn btn-primary {$class}";
 
         return self::create_button($text, $link, $p, $class, $return);
@@ -131,7 +131,7 @@ class button {
      *
      * @return string
      */
-    public static function info($text, $link, $class = '', $p = true, $return = false) {
+    public static function info($text, $link, $class = "", $p = true, $return = false) {
         $class = "btn btn-info {$class}";
 
         return self::create_button($text, $link, $p, $class, $return);
@@ -147,7 +147,7 @@ class button {
      * @return string
      * @throws \coding_exception
      */
-    public static function help($infourl, $text = null, $hastag = 'wiki-wrapper') {
+    public static function help($infourl, $text = null, $hastag = "wiki-wrapper") {
         global $CFG;
 
         if ($text == null) {
@@ -187,14 +187,18 @@ class button {
      * @return string
      */
     public static function icon_confirm($icon, $link, $confirmtext, $confirmtitle) {
-        global $OUTPUT;
+        global $OUTPUT, $PAGE;
+
         $data = [
+            "button_id" => uniqid(),
             "link" => $link,
             "icon" => $icon,
             "confirmtitle" => $confirmtitle,
             "confirmtext" => $confirmtext,
         ];
-        return $OUTPUT->render_from_template('local_kopere_dashboard/button_icon', $data);
+        $PAGE->requires->js_call_amd("local_kopere_dashboard/button_icon", "action",
+            [$data["button_id"], $data["link"]]);
+        return $OUTPUT->render_from_template("local_kopere_dashboard/button_icon", $data);
     }
 
     /**
@@ -226,7 +230,7 @@ class button {
      * @return string
      */
     private static function create_button($text, $link, $p, $class, $return) {
-        $target = '';
+        $target = "";
 
         $bt = "<a href='{$link}' class='{$class}' {$target}>{$text}</a>";
         if ($p) {
@@ -237,7 +241,7 @@ class button {
             return $bt;
         } else {
             echo $bt;
-            return '';
+            return "";
         }
     }
 }
