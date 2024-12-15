@@ -92,7 +92,7 @@ class users {
                SELECT {[columns]}
                  FROM {user} u
                 WHERE id > 1 AND deleted = 0 ", "", null,
-            'local_kopere_dashboard\util\user_util::column_fullname');
+            "\\local_kopere_dashboard\\util\\user_util::column_fullname");
     }
 
     /**

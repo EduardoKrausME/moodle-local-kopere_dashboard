@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $tasks = [
     [
-        "classname" => "local_kopere_dashboard\task\task_tmp",
+        "classname" => "\\local_kopere_dashboard\\task\\task_tmp",
         "blocking" => 0,
         "minute" => "0",
         "hour" => "0",
@@ -35,7 +35,7 @@ $tasks = [
         "month" => "*",
     ],
     [
-        "classname" => "local_kopere_dashboard\task\db_report_login",
+        "classname" => "\\local_kopere_dashboard\\task\\db_report_login",
         "blocking" => 1,
         "minute" => "0",
         "hour" => "0",
@@ -44,7 +44,7 @@ $tasks = [
         "month" => "*",
     ],
     [
-        "classname" => "local_kopere_dashboard\task\db_course_access",
+        "classname" => "\\local_kopere_dashboard\\task\\db_course_access",
         "blocking" => 1,
         "minute" => "0",
         "hour" => "0",

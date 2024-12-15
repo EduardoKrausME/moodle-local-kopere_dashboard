@@ -111,7 +111,7 @@ class useraccess {
                 WHERE action LIKE 'loggedin'
                   AND date_format( from_unixtime(l.timecreated), '%Y-%m' ) LIKE '{$changuemes}'
             ", 'GROUP BY l.userid', null,
-            'local_kopere_dashboard\util\user_util::column_fullname');
+            "\\local_kopere_dashboard\\util\\user_util::column_fullname");
 
     }
 

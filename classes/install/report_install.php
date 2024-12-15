@@ -145,7 +145,7 @@ SELECT id, name, description, type, status,
             $table->add_header("[[userenrolment_status_active]]", "statustext", table_header_item::RENDERER_STATUS),
             $table->add_header("[[courses_enrol]]", "students", table_header_item::TYPE_INT),
         ];
-        $report->foreach = 'local_kopere_dashboard\report\report_foreach::badge_status_text';
+        $report->foreach = "\\local_kopere_dashboard\\report\\report_foreach::badge_status_text";
         $report->columns = json_encode(["columns" => $report->columns]);
         self::report_insert($report);
 
@@ -185,7 +185,7 @@ ORDER BY u.username";
             $table->add_header("[[courses_name]]", "course"),
             $table->add_header("[[reports_dateissued]]", "dateissued", table_header_item::RENDERER_DATE),
         ];
-        $report->foreach = 'local_kopere_dashboard\report\report_foreach::badge_criteria_type';
+        $report->foreach = "\\local_kopere_dashboard\\report\\report_foreach::badge_criteria_type";
         $report->columns = json_encode(["columns" => $report->columns]);
         self::report_insert($report);
 
@@ -246,7 +246,7 @@ ORDER BY u.username";
             $table->add_header("[[reports_activitiesassigned]]", "activities_assigned", table_header_item::TYPE_INT),
             $table->add_header("[[reports_coursecompleted]]", "course_completed"),
         ];
-        $report->foreach = 'local_kopere_dashboard\report\report_foreach::userfullname';
+        $report->foreach = "\\local_kopere_dashboard\\report\\report_foreach::userfullname";
         $report->columns = json_encode(["columns" => $report->columns]);
         if ($CFG->dbtype != "pgsql") {
             self::report_insert($report);
@@ -278,7 +278,7 @@ SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.gr
             $table->add_header("[[reports_groupnode]]", "groupname"),
             $table->add_header("[[reports_groupname]]", "name"),
         ];
-        $report->foreach = 'local_kopere_dashboard\report\report_foreach::courses_group_mode';
+        $report->foreach = "\\local_kopere_dashboard\\report\\report_foreach::courses_group_mode";
         $report->columns = json_encode(["columns" => $report->columns]);
         self::report_insert($report);
 
@@ -288,7 +288,7 @@ SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.gr
         $report->reportkey = "courses-3";
         $report->title = "[[reports_report_courses-3]]";
         $report->prerequisit = "listCourses";
-        $report->reportsql = 'local_kopere_dashboard\\report\\custom\\course_access';
+        $report->reportsql = '\\local_kopere_dashboard\\report\\custom\\course_access';
         $report->columns = "";
         self::report_insert($report);
 
@@ -298,7 +298,7 @@ SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.gr
         $report->reportkey = "courses-4";
         $report->title = "[[reports_report_courses-4]]";
         $report->prerequisit = "listCourses";
-        $report->reportsql = 'local_kopere_dashboard\\report\\custom\\course_access_grade';
+        $report->reportsql = '\\local_kopere_dashboard\\report\\custom\\course_access_grade';
         $report->columns = "";
         self::report_insert($report);
 
@@ -308,7 +308,7 @@ SELECT concat(c.id,g.id), c.id, c.fullname, c.shortname, g.name, c.visible, c.gr
         $report->reportkey = "courses-5";
         $report->title = "[[reports_report_courses-5]]";
         $report->prerequisit = "listCourses";
-        $report->reportsql = 'local_kopere_dashboard\\report\\custom\\course_last_access';
+        $report->reportsql = '\\local_kopere_dashboard\\report\\custom\\course_last_access';
         $report->columns = "";
         self::report_insert($report);
 
@@ -328,7 +328,7 @@ ORDER BY u.firstname";
             $table->add_header("[[courses_student_name]]", "userfullname"),
             $table->add_header("[[reports_cohort]]", "name"),
         ];
-        $report->foreach = 'local_kopere_dashboard\report\report_foreach::userfullname';
+        $report->foreach = "\\local_kopere_dashboard\\report\\report_foreach::userfullname";
         $report->columns = json_encode(["columns" => $report->columns]);
         self::report_insert($report);
 
@@ -348,7 +348,7 @@ SELECT CONCAT(lsl.userid, lsl.timecreated), {$alternatenames}, u.id AS userid, l
             $table->add_header("IP", "ip"),
             $table->add_header("[[reports_lastlogin]]", "timecreated", table_header_item::RENDERER_DATETIME),
         ];
-        $report->foreach = 'local_kopere_dashboard\report\report_foreach::userfullname';
+        $report->foreach = "\\local_kopere_dashboard\\report\\report_foreach::userfullname";
         $report->columns = json_encode(["columns" => $report->columns]);
         self::report_insert($report);
 
@@ -427,7 +427,7 @@ SELECT concat(u.id, p.id) AS id, u.id AS userid, {$alternatenames},
             $table->add_header("[[courses_name]]", "fullname"),
             $table->add_header("[[courses_shortname]]", "shortname"),
         ];
-        $report->foreach = 'local_kopere_dashboard\report\report_foreach::userfullname';
+        $report->foreach = "\\local_kopere_dashboard\\report\\report_foreach::userfullname";
         $report->columns = json_encode(["columns" => $report->columns]);
         self::report_insert($report);
 
@@ -449,7 +449,7 @@ SELECT lsl.id, u.id AS userid, {$alternatenames},
             $table->add_header("[[user_table_city]]", "city"),
             $table->add_header("[[reports_lastlogin]]", "timecreated", table_header_item::RENDERER_DATETIME),
         ];
-        $report->foreach = 'local_kopere_dashboard\report\report_foreach::userfullname';
+        $report->foreach = "\\local_kopere_dashboard\\report\\report_foreach::userfullname";
         $report->columns = json_encode(["columns" => $report->columns]);
         self::report_insert($report);
 
@@ -472,7 +472,7 @@ SELECT u.id, {$alternatenames}, u.email, u.city, u.timecreated
             $table->add_header("[[user_table_city]]", "city"),
             $table->add_header("[[reports_timecreated]]", "timecreated", table_header_item::RENDERER_DATE),
         ];
-        $report->foreach = 'local_kopere_dashboard\report\report_foreach::userfullname';
+        $report->foreach = "\\local_kopere_dashboard\\report\\report_foreach::userfullname";
         $report->columns = json_encode(["columns" => $report->columns]);
         self::report_insert($report);
 
@@ -498,7 +498,7 @@ SELECT u.id, {$alternatenames}, u.email, u.city, u.timecreated
             $table->add_header("[[courses_name]]", "fullname"),
             $table->add_header("[[courses_shortname]]", "shortname"),
         ];
-        $report->foreach = 'local_kopere_dashboard\report\report_foreach::userfullname';
+        $report->foreach = "\\local_kopere_dashboard\\report\\report_foreach::userfullname";
         $report->columns = json_encode(["columns" => $report->columns]);
         self::report_insert($report);
 
@@ -547,7 +547,7 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
             $table->add_header("[[courses_shortname]]", "shortname"),
             $table->add_header("rolename", "rolename"),
         ];
-        $report->foreach = 'local_kopere_dashboard\report\report_foreach::userfullname';
+        $report->foreach = "\\local_kopere_dashboard\\report\\report_foreach::userfullname";
         $report->columns = json_encode(["columns" => $report->columns]);
         self::report_insert($report);
 
@@ -558,7 +558,7 @@ SELECT ue.id, u.id AS userid, ul.timeaccess, {$alternatenames}, u.email, u.city,
         $report->title = "[[reports_report_user-8]]";
         $report->reportsql = "SELECT id, confirmed, username, firstname, lastname, email, phone1, phone2, city, country " .
             "FROM {user} WHERE deleted = 0";
-        $report->foreach = 'local_kopere_dashboard\report\report_foreach::userfullname';
+        $report->foreach = "\\local_kopere_dashboard\\report\\report_foreach::userfullname";
         $report->columns = [
             $table->add_header("#", "id", table_header_item::TYPE_INT, null, "width:20px"),
             $table->add_header("[[[confirmed]]]", "confirmed", table_header_item::RENDERER_TRUEFALSE, null, "width:20px"),
