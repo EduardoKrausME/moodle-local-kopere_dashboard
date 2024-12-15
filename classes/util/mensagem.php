@@ -18,6 +18,7 @@
  * mensagem file
  *
  * introduced 31/01/17 06:01
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

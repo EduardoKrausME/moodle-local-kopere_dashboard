@@ -18,6 +18,7 @@
  * course_access_grade file
  *
  * introduced 25/05/17 18:31
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

@@ -18,6 +18,7 @@
  * event_observers file
  *
  * introduced 17/05/17 21:02
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

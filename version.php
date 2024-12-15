@@ -18,6 +18,7 @@
  * Version File
  *
  * introduced 23/05/17 17:59
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
