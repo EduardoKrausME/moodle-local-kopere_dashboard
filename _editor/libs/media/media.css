@@ -203,7 +203,7 @@
     padding: 0;
 }
 .filemanager .data li label.form-check:has(input:checked) {
-    background-color: blue;
+    background-color: #ccc;
 }
 .filemanager .data li label.form-check .form-check-input {
     border-color: #ddd;
