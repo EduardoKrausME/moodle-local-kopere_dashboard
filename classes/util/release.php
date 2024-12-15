@@ -38,7 +38,7 @@ class release {
      */
     public static function version() {
         global $CFG;
-        $releases = explode('.', $CFG->release);
+        $releases = explode(".", $CFG->release);
 
         return intval($releases[0]) + (intval($releases[1]) * 0.1);
     }

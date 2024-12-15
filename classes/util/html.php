@@ -32,31 +32,31 @@ namespace local_kopere_dashboard\util;
 class html {
     /** @var array */
     private static $acentoshtml = [
-        '&aacute;', '&agrave;', '&acirc;', '&atilde;',
-        '&auml;', '&eacute;', '&egrave;', '&ecirc;', '&euml;',
-        '&iacute;', '&igrave;', '&icirc;', '&iuml;', '&oacute;',
-        '&ograve;', '&ocirc;', '&otilde;', '&ouml;', '&uacute;',
-        '&ugrave;', '&ucirc;', '&uuml;', '&ccedil;', '&Aacute;',
-        '&Agrave;', '&Acirc;', '&Atilde;', '&Auml;', '&Eacute;',
-        '&Egrave;', '&Ecirc;', '&Euml;', '&Iacute;', '&Igrave;',
-        '&Icirc;', '&Iuml;', '&Oacute;', '&Ograve;', '&Ocirc;',
-        '&Otilde;', '&Ouml;', '&Uacute;', '&Ugrave;', '&Ucirc;',
-        '&Uuml;', '&Ccedil;', "'", '&acute;', '`', '/', '\\', "_", // phpcs:disable
-        "_", '&uml;', '&ordf;', ',', ':', ' '];
+        "&aacute;", "&agrave;", "&acirc;", "&atilde;",
+        "&auml;", "&eacute;", "&egrave;", "&ecirc;", "&euml;",
+        "&iacute;", "&igrave;", "&icirc;", "&iuml;", "&oacute;",
+        "&ograve;", "&ocirc;", "&otilde;", "&ouml;", "&uacute;",
+        "&ugrave;", "&ucirc;", "&uuml;", "&ccedil;", "&Aacute;",
+        "&Agrave;", "&Acirc;", "&Atilde;", "&Auml;", "&Eacute;",
+        "&Egrave;", "&Ecirc;", "&Euml;", "&Iacute;", "&Igrave;",
+        "&Icirc;", "&Iuml;", "&Oacute;", "&Ograve;", "&Ocirc;",
+        "&Otilde;", "&Ouml;", "&Uacute;", "&Ugrave;", "&Ucirc;",
+        "&Uuml;", "&Ccedil;", "'", '&acute;', '`', '/', '\\', "_", // phpcs:disable
+        "_", "&uml;", "&ordf;", ",", ":", " "];
     /** @var array */
     private static $acentosascii = [
-        'á', 'à', 'â', 'ã', 'ä', 'é', 'è', 'ê', 'ë', 'í', 'ì', 'î',
-        'ï', 'ó', 'ò', 'ô', 'õ', 'ö', 'ú', 'ù', 'û', 'ü', 'ç', 'Á',
-        'À', 'Â', 'Ã', 'Ä', 'É', 'È', 'Ê', 'Ë', 'Í', 'Ì', 'Î', 'Ï',
-        'Ó', 'Ò', 'Ô', 'Õ', 'Ö', 'Ú', 'Ù', 'Û', 'Ü', 'Ç', "'", '´',  // phpcs:disable
-        '`', '/', '\\', '~', '^', '¨', 'ª', ',', ':', "_"];
+        "á", "à", "â", "ã", "ä", "é", "è", "ê", "ë", "í", "ì", "î",
+        "ï", "ó", "ò", "ô", "õ", "ö", "ú", "ù", "û", "ü", "ç", "Á",
+        "À", "Â", "Ã", "Ä", "É", "È", "Ê", "Ë", "Í", "Ì", "Î", "Ï",
+        "Ó", "Ò", "Ô", "Õ", "Ö", "Ú", "Ù", "Û", "Ü", "Ç", "'", '´',  // phpcs:disable
+        "`", "/", "\\", "~", "^", "¨", "ª", ",", ":", "_"];
     /** @var array */
     private static $semacento = [
         "a", "a", "a", "a", "a", "e", "e", "e", "e", "i", "i", "i",
         "i", "o", "o", "o", "o", "o", "u", "u", "u", "u", "c", "A",
         "A", "A", "A", "A", "E", "E", "E", "E", "I", "I", "I", "I",
         "O", "O", "O", "O", "O", "U", "U", "U", "U", "C", "_", "_",
-        "_", '/', "_", "_", "_", "_", "_", "_", "_", "_"];
+        "_", "/", "_", "_", "_", "_", "_", "_", "_", "_"];
 
     /**
      * Function caracter_spacial
@@ -92,13 +92,13 @@ class html {
      */
     public static function trim($html) {
         for ($i = 0; $i < 10; $i++) {
-            $html = str_replace("  ", ' ', $html);
+            $html = str_replace("  ", " ", $html);
         }
-        $html = str_replace("\r", ' ', $html);
-        $html = str_replace("\n", ' ', $html);
-        $html = str_replace("\t", ' ', $html); // TAB.
-        $html = str_replace("\x0B", ' ', $html); // Tabulação vertical.
-        $html = preg_replace('/\s/', ' ', $html); // Escessos de espaços.
+        $html = str_replace("\r", " ", $html);
+        $html = str_replace("\n", " ", $html);
+        $html = str_replace("\t", " ", $html); // TAB.
+        $html = str_replace("\x0B", " ", $html); // Tabulação vertical.
+        $html = preg_replace('/\s/', " ", $html); // Escessos de espaços.
         return $html;
     }
 
@@ -116,7 +116,7 @@ class html {
     public static function retira_caracteres_nao_ascii($txt) {
         $txt = self::retira_acentos($txt);
         $len = strlen($txt);
-        $chr = '';
+        $chr = "";
         for ($i = 0; $i < $len; $i++) {
             $id = ord($txt[$i]);
             if ($id == 32 || $id == 45 || $id == 95 || // Espaço traço e underline.
@@ -139,14 +139,14 @@ class html {
      * @return string
      */
     public static function link($txt) {
-        $txt = str_replace('-', ' ', trim($txt));
-        $txt = str_replace("_", ' ', $txt);
+        $txt = str_replace("-", " ", trim($txt));
+        $txt = str_replace("_", " ", $txt);
         $txt = preg_replace("/\s+/", " ", $txt);
         $txt = self::retira_caracteres_nao_ascii($txt);
-        $txt = str_replace(' ', '-', $txt);
+        $txt = str_replace(" ", "-", $txt);
 
         for ($i = 0; $i < 10; $i++) {
-            $txt = str_replace('--', '-', $txt);
+            $txt = str_replace("--", "-", $txt);
         }
 
         return strtolower($txt);
@@ -162,11 +162,11 @@ class html {
      */
     public static function truncate_text($texto, $caracteres) {
         if (strlen($texto) > $caracteres) {
-            $a = explode(' ', $texto);
+            $a = explode(" ", $texto);
             if (count($a) > 1) {
                 array_pop($a);
-                $texto = implode(' ', $a);
-                $texto .= '...';
+                $texto = implode(" ", $a);
+                $texto .= "...";
 
                 return self::truncate_text($texto, $caracteres);
             } else {

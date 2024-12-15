@@ -44,17 +44,17 @@ class date_util {
             }
         }
 
-        $date = \DateTime::createFromFormat('Y-m-d H:i', $datetime);
+        $date = \DateTime::createFromFormat("Y-m-d H:i", $datetime);
         if ($date) {
             return $date->getTimestamp();
         }
 
-        $date = \DateTime::createFromFormat('Y-m-d', $datetime);
+        $date = \DateTime::createFromFormat("Y-m-d", $datetime);
         if ($date) {
             return $date->getTimestamp();
         }
 
-        $date = \DateTime::createFromFormat('d/m/Y H:i', $datetime);
+        $date = \DateTime::createFromFormat("d/m/Y H:i", $datetime);
         if ($date) {
             return $date->getTimestamp();
         }

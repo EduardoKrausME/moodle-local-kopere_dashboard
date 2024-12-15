@@ -22,17 +22,17 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once('../../../config.php');
-require_once('../lib.php');
-require_once('../autoload.php');
-require_once('./function.php');
+require_once("../../../config.php");
+require_once("../lib.php");
+require_once("../autoload.php");
+require_once("./function.php");
 $PAGE->set_context(\context_system::instance());
 
 $page = required_param("page", PARAM_TEXT);
 $id = required_param("id", PARAM_TEXT);
-$link = optional_param("link", '', PARAM_TEXT);
+$link = optional_param("link", "", PARAM_TEXT);
 require_login();
-require_capability('moodle/site:config', context_system::instance());
+require_capability("moodle/site:config", context_system::instance());
 
 ?><!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">

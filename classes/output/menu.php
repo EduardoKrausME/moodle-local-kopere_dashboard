@@ -46,7 +46,7 @@ class menu {
     public static function create_menu() {
         global $DB, $CFG;
 
-        $isadmin = has_capability('local/kopere_dashboard:manage', \context_system::instance());
+        $isadmin = has_capability("local/kopere_dashboard:manage", \context_system::instance());
 
         echo "<ul class='main-menu block_tree list menu-kopere main-menu'>";
 
@@ -67,17 +67,17 @@ class menu {
                         ->set_classname("useronline")
                         ->set_methodname("dashboard")
                         ->set_title(get_string_kopere("useronline_title"))
-                        ->set_icon('users-online'),
+                        ->set_icon("users-online"),
                     (new submenu_util())
                         ->set_classname("userimport")
                         ->set_methodname("dashboard")
                         ->set_title(get_string_kopere("userimport_title"))
-                        ->set_icon('users-import'),
+                        ->set_icon("users-import"),
                     (new submenu_util())
                         ->set_classname("useraccess")
                         ->set_methodname("dashboard")
                         ->set_title(get_string_kopere("useraccess_title"))
-                        ->set_icon('users-access'),
+                        ->set_icon("users-access"),
                 ]));
 
         echo dashboard_util::add_menu(

@@ -17,53 +17,53 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-require_once('../../../config.php');
+require_once("../../../config.php");
 
 require_login();
-require_capability('moodle/site:config', context_system::instance());
+require_capability("moodle/site:config", context_system::instance());
 
 $page = required_param("page", PARAM_TEXT);
 $id = required_param("id", PARAM_TEXT);
-$link = optional_param("link", '', PARAM_TEXT);
+$link = optional_param("link", "", PARAM_TEXT);
 
 define("MAX_FILE_LIMIT", 1024 * 1024 * 2);//2 Megabytes max html file size
 define("ALLOW_PHP", false);//check if saved html contains php tag and don't save if not allowed
 define("ALLOWED_OEMBED_DOMAINS", [
-    'https://www.youtube.com/',
-    'https://www.vimeo.com/',
-    'https://www.x.com/',
-    'https://x.com/',
-    'https://publish.twitter.com/',
-    'https://www.twitter.com/',
-    'https://www.reddit.com/',
+    "https://www.youtube.com/",
+    "https://www.vimeo.com/",
+    "https://www.x.com/",
+    "https://x.com/",
+    "https://publish.twitter.com/",
+    "https://www.twitter.com/",
+    "https://www.reddit.com/",
 ]);//load urls only from allowed websites for oembed
 
 function sanitizeFileName($file, $allowedExtension = "html") {
     $basename = basename($file);
-    $disallow = ['.htaccess', "passwd"];
+    $disallow = [".htaccess", "passwd"];
     if (in_array($basename, $disallow)) {
-        showError('Filename not allowed!');
-        return '';
+        showError("Filename not allowed!");
+        return "";
     }
 
     //sanitize, remove double dot .. and remove get parameters if any
-    $file = preg_replace('@\?.*$@', '', preg_replace('@\.{2,}@', '', preg_replace('@[^\/\\a-zA-Z0-9\-\._]@', '', $file)));
+    $file = preg_replace('@\?.*$@', "", preg_replace('@\.{2,}@', "", preg_replace('@[^\/\\a-zA-Z0-9\-\._]@', "", $file)));
 
     if ($file) {
         $file = __DIR__ . DIRECTORY_SEPARATOR . $file;
     } else {
-        return '';
+        return "";
     }
 
     //allow only .html extension
     if ($allowedExtension) {
-        $file = preg_replace('/\.[^.]+$/', '', $file) . ".$allowedExtension";
+        $file = preg_replace('/\.[^.]+$/', "", $file) . ".$allowedExtension";
     }
     return $file;
 }
 
 function showError($error) {
-    header($_SERVER["SERVER_PROTOCOL"] . ' 404', true, 500);
+    header($_SERVER["SERVER_PROTOCOL"] . " 404", true, 500);
     die($error);
 }
 
@@ -77,13 +77,13 @@ function validOembedUrl($url) {
     return false;
 }
 
-$html = '';
-$file = '';
-$action = '';
+$html = "";
+$file = "";
+$action = "";
 
 if (optional_param("startTemplateUrl", false, PARAM_RAW)) {
     $startTemplateUrl = sanitizeFileName(optional_param("startTemplateUrl", false, PARAM_RAW));
-    $html = '';
+    $html = "";
     if ($startTemplateUrl) {
         $html = file_get_contents($startTemplateUrl);
     }
@@ -92,7 +92,7 @@ if (optional_param("startTemplateUrl", false, PARAM_RAW)) {
     if (!ALLOW_PHP) {
         //if (strpos($html, '<?php') !== false) {
         if (preg_match('@<\?php|<\? |<\?=|<\s*script\s*language\s*=\s*"\s*php\s*"\s*>@', $html)) {
-            showError('PHP not allowed!');
+            showError("PHP not allowed!");
         }
     }
     $html = str_replace("body >", "", $html);
@@ -110,7 +110,7 @@ if ($action) {
     //file manager actions, delete and rename
     switch ($action) {
         case "delete":
-            $json = file_get_contents('php://input');
+            $json = file_get_contents("php://input");
             $data = json_decode($json);
             preg_match('/pluginfile.php\/(\d+)\/local_kopere_dashboard\/(\w+)\/(\d+)\/(.*)/', $data->file, $filePartes);
 
@@ -125,7 +125,7 @@ if ($action) {
                 $fs->delete_area_files($contextid, $component, $filearea, $itemid);
             }
 
-            header('Content-Type: application/json');
+            header("Content-Type: application/json");
             echo json_encode([
                 "success" => 1,
                 "message" => "Deleted successfully",
@@ -149,19 +149,19 @@ if ($action) {
             ]);
             break;
         case "oembedProxy":
-            $url = optional_param("url", false, PARAM_RAW) ?? '';
+            $url = optional_param("url", false, PARAM_RAW) ?? "";
             if (validOembedUrl($url)) {
                 $options = [
                     "http" => [
                         "method" => "GET",
-                        "header" => 'User-Agent: ' . $_SERVER["HTTP_USER_AGENT"] . "\r\n"
+                        "header" => "User-Agent: " . $_SERVER["HTTP_USER_AGENT"] . "\r\n"
                     ]
                 ];
                 $context = stream_context_create($options);
-                header('Content-Type: application/json');
+                header("Content-Type: application/json");
                 echo file_get_contents($url, false, $context);
             } else {
-                showError('Invalid url!');
+                showError("Invalid url!");
             }
             break;
         default:

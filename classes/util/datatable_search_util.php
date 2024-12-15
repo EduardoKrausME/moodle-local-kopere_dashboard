@@ -88,7 +88,7 @@ class datatable_search_util {
                     }
                 }
             }
-            $this->where = 'AND (' . implode(' OR ', $like) . ')';
+            $this->where = "AND (" . implode(" OR ", $like) . ")";
         }
     }
 
@@ -130,11 +130,11 @@ class datatable_search_util {
         $sqlsearch = $sql . " {$this->where}";
         $sqltotal = $sql;
         if ($group) {
-            $sqlsearch = str_replace('{[columns]}', "count(DISTINCT {$find}) as num", $sqlsearch);
-            $sqltotal = str_replace('{[columns]}', "count(DISTINCT {$find}) as num", $sqltotal);
+            $sqlsearch = str_replace("{[columns]}", "count(DISTINCT {$find}) as num", $sqlsearch);
+            $sqltotal = str_replace("{[columns]}", "count(DISTINCT {$find}) as num", $sqltotal);
         } else {
-            $sqlsearch = str_replace('{[columns]}', 'count(*) as num', $sqlsearch);
-            $sqltotal = str_replace('{[columns]}', 'count(*) as num', $sqltotal);
+            $sqlsearch = str_replace("{[columns]}", "count(*) as num", $sqlsearch);
+            $sqltotal = str_replace("{[columns]}", "count(*) as num", $sqltotal);
         }
 
         if ($CFG->dbtype == "pgsql") {
@@ -144,7 +144,7 @@ class datatable_search_util {
             $sqlreturn = $sql . " $this->where $group ORDER BY $this->order $this->orderdir \n
                                 LIMIT $this->start, $this->length";
         }
-        $sqlreturn = str_replace('{[columns]}', implode(', ', $this->columnselect), $sqlreturn);
+        $sqlreturn = str_replace("{[columns]}", implode(", ", $this->columnselect), $sqlreturn);
 
         $result = $DB->get_records_sql($sqlreturn, $params);
         $total = $DB->get_record_sql($sqltotal, $params);

@@ -309,7 +309,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         $user->auth = "manual";
         $user->confirmed = 1;
         $user->mnethostid = 1;
-        $user->email = 'benchtest@benchtest.com';
+        $user->email = "benchtest@benchtest.com";
         $user->username = "benchtest";
         $user->password = md5("benchtest");
         $user->lastname = "benchtest";
@@ -338,10 +338,10 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
     public static function themedesignermode() {
         $config = get_config("moodle", "themedesignermode");
         if (!$config) {
-            $class = 'bg-success';
+            $class = "bg-success";
             $resposta = get_string("disabled", "report_performance");
         } else {
-            $class = 'bg-danger';
+            $class = "bg-danger";
             $resposta = get_string("enabled", "report_performance");
         }
 
@@ -350,7 +350,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             "class" => $class,
             "resposta" => $resposta,
             "description" => get_string("check_themedesignermode_comment_disable", "report_performance"),
-            "url" => 'search.php?query=themedesignermode',
+            "url" => "search.php?query=themedesignermode",
         ];
     }
 
@@ -364,10 +364,10 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
     public static function cachejs() {
         $config = get_config("moodle", "cachejs");
         if (!$config) {
-            $class = 'bg-danger';
+            $class = "bg-danger";
             $resposta = get_string("disabled", "report_performance");
         } else {
-            $class = 'bg-success';
+            $class = "bg-success";
             $resposta = get_string("enabled", "report_performance");
         }
 
@@ -376,7 +376,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             "class" => $class,
             "resposta" => $resposta,
             "description" => get_string("check_cachejs_comment_enable", "report_performance"),
-            "url" => 'search.php?query=cachejs',
+            "url" => "search.php?query=cachejs",
         ];
     }
 
@@ -390,12 +390,12 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
     public static function debug() {
         $config = get_config("moodle", "debug");
         if ($config == 0) {
-            $class = 'bg-success';
+            $class = "bg-success";
         } else {
-            $class = 'bg-warning';
+            $class = "bg-warning";
         }
 
-        $resposta = '';
+        $resposta = "";
         if ($config == 0) {
             $resposta = get_string("debugnone", "admin");
         } else if ($config <= 5) {
@@ -404,10 +404,10 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             $resposta = get_string("debugnormal", "admin");
         } else if ($config <= 30719) {
             $resposta = get_string("debugall", "admin");
-            $class = 'bg-danger';
+            $class = "bg-danger";
         } else if ($config <= 32767) {
             $resposta = get_string("debugdeveloper", "admin");
-            $class = 'bg-danger';
+            $class = "bg-danger";
         }
 
         return [
@@ -415,7 +415,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             "class" => $class,
             "resposta" => $resposta,
             "description" => get_string("check_debugmsg_comment_nodeveloper", "report_performance"),
-            "url" => 'settings.php?section=debugging',
+            "url" => "settings.php?section=debugging",
         ];
     }
 
@@ -429,15 +429,15 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
     public static function backup_auto_active() {
         $config = get_config("backup", "backup_auto_active");
 
-        $class = $resposta = '';
+        $class = $resposta = "";
         if ($config == 0) {
-            $class = 'bg-success';
+            $class = "bg-success";
             $resposta = get_string("autoactivedisabled", "backup");
         } else if ($config == 1) {
-            $class = 'bg-danger';
+            $class = "bg-danger";
             $resposta = get_string("autoactiveenabled", "backup");
         } else if ($config == 2) {
-            $class = 'bg-warning';
+            $class = "bg-warning";
             $resposta = get_string("autoactivemanual", "backup");
         }
 
@@ -446,7 +446,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             "class" => $class,
             "resposta" => $resposta,
             "description" => get_string("check_backup_comment_disable", "report_performance"),
-            "url" => 'search.php?query=backup_auto_active',
+            "url" => "search.php?query=backup_auto_active",
         ];
     }
 
@@ -460,10 +460,10 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
     public static function enablestats() {
         $config = get_config("backup", "enablestats");
         if (!$config == 1) {
-            $class = 'bg-success';
+            $class = "bg-success";
             $resposta = get_string("disabled", "report_performance");
         } else {
-            $class = 'bg-danger';
+            $class = "bg-danger";
             $resposta = get_string("enabled", "report_performance");
         }
 
@@ -472,7 +472,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             "class" => $class,
             "resposta" => $resposta,
             "description" => get_string("check_enablestats_comment_disable", "report_performance"),
-            "url" => 'search.php?query=enablestats',
+            "url" => "search.php?query=enablestats",
         ];
     }
 }

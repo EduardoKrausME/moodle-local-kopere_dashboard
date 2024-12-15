@@ -52,12 +52,12 @@ class useronline {
      */
     public function dashboard() {
         dashboard_util::add_breadcrumb(get_string_kopere("useronline_title"));
-        dashboard_util::start_page(null, 'Usuários-Online');
+        dashboard_util::start_page(null, "Usuários-Online");
 
         echo '<div class="element-box table-responsive">';
 
         $table = new data_table();
-        $table->add_header('#', "userid", table_header_item::TYPE_INT);
+        $table->add_header("#", "userid", table_header_item::TYPE_INT);
         $table->add_header(get_string_kopere("useronline_table_fullname"), "fullname");
         $table->add_header(get_string_kopere("useronline_table_date"), "servertime", table_header_item::RENDERER_DATE);
 
@@ -157,12 +157,12 @@ class useronline {
 
         $form = new form(local_kopere_dashboard_makeurl("settings", "save", ["redirect" => $redirect]));
 
-        $form->print_row_one('', button::help('Usuários-Online'));
+        $form->print_row_one("", button::help("Usuários-Online"));
 
         $form->add_input(
             input_checkbox_select::new_instance()
                 ->set_title(get_string_kopere("useronline_settings_status"))
-                ->set_checked_by_config('nodejs-status'));
+                ->set_checked_by_config("nodejs-status"));
 
         echo '<div class="area-status-nodejs">';
 
@@ -171,25 +171,25 @@ class useronline {
         $form->add_input(
             input_checkbox_select::new_instance()
                 ->set_title(get_string_kopere("useronline_settings_ssl"))
-                ->set_checked_by_config('nodejs-ssl'));
+                ->set_checked_by_config("nodejs-ssl"));
 
         $form->add_input(
             input_text::new_instance()
                 ->set_title(get_string_kopere("useronline_settings_url"))
-                ->set_value_by_config('nodejs-url'));
+                ->set_value_by_config("nodejs-url"));
 
         $form->add_input(
             input_text::new_instance()
                 ->set_title(get_string_kopere("useronline_settings_port"))
-                ->set_value_by_config('nodejs-port')
+                ->set_value_by_config("nodejs-port")
                 ->add_validator(input_base::VAL_INT));
 
-        echo '</div>';
+        echo "</div>";
 
         $form->create_submit_input(get_string("savechanges"));
         $form->close();
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/useronline', "useronline_status");
+        $PAGE->requires->js_call_amd("local_kopere_dashboard/useronline", "useronline_status");
 
         dashboard_util::end_page();
     }

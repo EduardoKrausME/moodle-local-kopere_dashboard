@@ -129,7 +129,7 @@ $daterangepicker-ranges-active-border-radius: $daterangepicker-border-radius !de
         position: absolute;
         display: inline-block;
         border-bottom-color: rgba(0, 0, 0, 0.2);
-        content: '';
+        content: "";
     }
     &:before {
         top: -$arrow-prefix-size;

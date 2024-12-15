@@ -41,7 +41,7 @@ class modules {
     public function count_all() {
         global $DB;
 
-        $count = $DB->get_record_sql('SELECT count(*) as num FROM {course_modules} WHERE deletioninprogress = 0');
+        $count = $DB->get_record_sql("SELECT count(*) as num FROM {course_modules} WHERE deletioninprogress = 0");
 
         return $count->num;
     }

@@ -26,8 +26,8 @@
 
 use local_kopere_dashboard\util\config;
 
-require_once('../../config.php');
-require_once('autoload.php');
+require_once("../../config.php");
+require_once("autoload.php");
 global $DB, $PAGE, $OUTPUT;
 
 if (false) {
@@ -46,7 +46,7 @@ if ($htmldata && confirm_sesskey()) {
 $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->add_body_class("kopere-dashboard-pages");
-$PAGE->set_pagetype('my-index');
+$PAGE->set_pagetype("my-index");
 
 if ($pagelink) {
     $sql = "SELECT * FROM {local_kopere_dashboard_pages} WHERE link LIKE :link";
@@ -68,7 +68,7 @@ if ($pagelink) {
     $PAGE->set_title($webpages->title);
 
     $edit = "";
-    $hascapability = has_capability('local/kopere_dashboard:manage', $context);
+    $hascapability = has_capability("local/kopere_dashboard:manage", $context);
     if ($hascapability) {
         $href = local_kopere_dashboard_makeurl("webpages", "page_edit", ["id" => $webpages->id]);
         $edittext = get_string("webpages_page_edit", "local_kopere_dashboard");
@@ -122,9 +122,9 @@ if ($pagelink) {
     }
 
     echo $webpages->text;
-    $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', "view_page");
+    $PAGE->requires->js_call_amd("local_kopere_dashboard/webpages", "view_page");
 
-    echo '</div>';
+    echo "</div>";
 
     \local_kopere_dashboard\util\webpages_util::analytics();
     echo $OUTPUT->footer();
@@ -191,7 +191,7 @@ if ($pagelink) {
 
                 $offprice = config::get_key("builder_offprice_{$koperepaydetalhe->course}");
                 if ($offprice) {
-                    $data["offprice"] = get_string_koperepay('pedido_resumo_moeda', preg_replace('/[^0-9]/', '', $offprice));
+                    $data["offprice"] = get_string_koperepay("pedido_resumo_moeda", preg_replace('/[^0-9]/', "", $offprice));
                 }
             }
 
@@ -206,7 +206,7 @@ if ($pagelink) {
         $data["menus"][] = $menu;
     }
 
-    echo $OUTPUT->render_from_template('local_kopere_dashboard/index_webpages', $data);
+    echo $OUTPUT->render_from_template("local_kopere_dashboard/index_webpages", $data);
 
     \local_kopere_dashboard\util\webpages_util::analytics();
     echo $OUTPUT->footer();

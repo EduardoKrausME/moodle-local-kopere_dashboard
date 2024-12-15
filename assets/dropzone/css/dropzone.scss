@@ -329,7 +329,7 @@
             color: white;
             // The triangle pointing up
             &:after {
-                content: '';
+                content: "";
                 position: absolute;
                 top: -6px;
                 left: $width / 2 - 6px;

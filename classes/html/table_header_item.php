@@ -31,11 +31,11 @@ namespace local_kopere_dashboard\html;
  */
 class table_header_item extends \stdClass {
     /** @var string */
-    const TYPE_DATE = 'date-uk';
+    const TYPE_DATE = "date-uk";
     /** @var string */
     const TYPE_CURRENCY = "currency";
     /** @var string */
-    const TYPE_INT = 'numeric-comma';
+    const TYPE_INT = "numeric-comma";
     /** @var string */
     const TYPE_TEXT = "text";
     /** @var string */
@@ -65,17 +65,17 @@ class table_header_item extends \stdClass {
     /** @var string */
     public $funcao;
     /** @var string */
-    public $title = '';
+    public $title = "";
     /** @var string */
-    public $type = '';
+    public $type = "";
     /** @var string */
-    public $chave = '';
+    public $chave = "";
     /** @var string */
-    public $class = '';
+    public $class = "";
     /** @var string */
-    public $styleheader = '';
+    public $styleheader = "";
     /** @var string */
-    public $stylecol = '';
+    public $stylecol = "";
 
     /** @var int */
     public $cols = 0;

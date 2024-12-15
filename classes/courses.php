@@ -66,19 +66,19 @@ class courses {
         echo '<div class="element-box">';
 
         $table = new data_table();
-        $table->add_header('#', "id", table_header_item::TYPE_INT, null, 'width: 20px');
+        $table->add_header("#", "id", table_header_item::TYPE_INT, null, "width: 20px");
         $table->add_header(get_string_kopere("courses_name"), "fullname");
         $table->add_header(get_string_kopere("courses_shortname"), "shortname");
         $table->add_header(get_string_kopere("visible"), "visible", table_header_item::RENDERER_VISIBLE);
         $table->add_header(get_string_kopere("courses_enrol"), "inscritos",
-            table_header_item::TYPE_INT, null, 'width:50px;white-space:nowrap;');
+            table_header_item::TYPE_INT, null, "width:50px;white-space:nowrap;");
 
         $table->set_ajax_url(local_kopere_dashboard_makeurl("courses", "load_all_courses"));
         $table->set_click_redirect(local_kopere_dashboard_makeurl("courses", "details", ["courseid" => "{id}"]), "id");
         $table->print_header();
         $table->close();
 
-        echo '</div>';
+        echo "</div>";
         dashboard_util::end_page();
     }
 
@@ -129,7 +129,7 @@ class courses {
     public static function count_all($format) {
         global $DB;
 
-        $count = $DB->get_record_sql('SELECT count(*) as num FROM {course} WHERE id > 1');
+        $count = $DB->get_record_sql("SELECT count(*) as num FROM {course} WHERE id > 1");
 
         if ($format) {
             return number_format($count->num, 0, get_string("decsep", "langconfig"),
@@ -151,7 +151,7 @@ class courses {
     public static function count_all_visibles($format) {
         global $DB;
 
-        $count = $DB->get_record_sql('SELECT count(*) as num FROM {course} WHERE id > 1 AND visible = 1');
+        $count = $DB->get_record_sql("SELECT count(*) as num FROM {course} WHERE id > 1 AND visible = 1");
 
         if ($format) {
             return number_format($count->num, 0, get_string("decsep", "langconfig"),
@@ -207,17 +207,17 @@ class courses {
         $form->create_submit_input(get_string_kopere("courses_validate_user"));
         $form->close();
 
-        echo '</div>';
+        echo "</div>";
 
         echo '<div class="element-box table-responsive table-list-enrol">';
         echo
-            '<h3>' .
+            "<h3>" .
             get_string_kopere("courses_titleenrol") .
-            ' <span class="btn btn-primary bt-courses_enrol_new">' . get_string_kopere("courses_enrol_new") . '</span>' .
-            '</h3>';
+            ' <span class="btn btn-primary bt-courses_enrol_new">' . get_string_kopere("courses_enrol_new") . "</span>" .
+            "</h3>";
 
         $table = new data_table();
-        $table->add_header('#', "id", table_header_item::TYPE_INT);
+        $table->add_header("#", "id", table_header_item::TYPE_INT);
         $table->add_header(get_string_kopere("courses_student_name"), "nome");
         $table->add_header(get_string_kopere("courses_student_email"), "email");
         $table->add_header(get_string_kopere("courses_student_status"), "status", table_header_item::RENDERER_STATUS);
@@ -227,8 +227,8 @@ class courses {
         $table->print_header();
         $table->close();
 
-        echo '</div>';
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/course', "courses_enrol_new");
+        echo "</div>";
+        $PAGE->requires->js_call_amd("local_kopere_dashboard/course", "courses_enrol_new");
 
         dashboard_util::end_page();
     }
@@ -389,9 +389,9 @@ class courses {
             $form->create_submit_input(get_string_kopere("courses_user_create"));
             $form->close();
         }
-        echo '</div>';
+        echo "</div>";
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/course', "courses_enrol_new");
+        $PAGE->requires->js_call_amd("local_kopere_dashboard/course", "courses_enrol_new");
     }
 
     /**
@@ -418,11 +418,11 @@ class courses {
                 foreach ($webpagess as $webpages) {
                     echo "<p><a href='" . local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]) .
                         "{'>&nbsp;&nbsp;&nbsp;&nbsp;}" .
-                        $webpages->title . '</a></p>';
+                        $webpages->title . "</a></p>";
                 }
             }
 
-            $form = new form(local_kopere_dashboard_makeurl("webpages", "page_edit_save"), 'form-inline');
+            $form = new form(local_kopere_dashboard_makeurl("webpages", "page_edit_save"), "form-inline");
             $form->create_hidden_input("id", 0);
             $form->create_hidden_input("courseid", $course->id);
             $form->create_hidden_input("title", $course->fullname);
@@ -436,9 +436,9 @@ class courses {
             $form->create_hidden_input("theme", config::get_key("webpages_theme"));
             $form->create_hidden_input("text", $course->summary);
             $form->create_hidden_input("visible", 1);
-            $form->create_submit_input(get_string_kopere("courses_page_create"), 'margin-left-15');
+            $form->create_submit_input(get_string_kopere("courses_page_create"), "margin-left-15");
             $form->close();
-            echo '</div>';
+            echo "</div>";
         }
     }
 }

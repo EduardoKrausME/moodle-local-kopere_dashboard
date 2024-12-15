@@ -40,7 +40,7 @@ class pagination {
      */
     public static function create($atualpage, $totalregisters, $perpag = 50) {
         $countpages = intval($totalregisters / $perpag);
-        $baseurl = preg_replace('/&page=\d+/', '', $_SERVER["QUERY_STRING"]);
+        $baseurl = preg_replace('/&page=\d+/', "", $_SERVER["QUERY_STRING"]);
         $baseurl = "?{$baseurl}&page=";
 
         if (($totalregisters % $perpag) != 0) {

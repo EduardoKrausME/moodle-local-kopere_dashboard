@@ -34,7 +34,7 @@ function xmldb_local_kopere_dashboard_install() {
     set_config("gravatardefaulturl", "mm");
 
     set_config("webpages_theme", "standard", "local_kopere_dashboard");
-    set_config('notificacao-template', 'Cinza.html', "local_kopere_dashboard");
+    set_config("notificacao-template", "Cinza.html", "local_kopere_dashboard");
 
     $fonts = "<style>\n@import url('https://fonts.googleapis.com/css2?family=Acme" .
         "&family=Almendra:ital,wght@0,400;0,700;1,400;1,700" .

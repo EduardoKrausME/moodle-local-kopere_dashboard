@@ -80,11 +80,11 @@ class local_kopere_dashboard_rcat extends \stdClass {
         $return = new local_kopere_dashboard_rcat();
 
         $return->id = optional_param("id", 0, PARAM_INT);
-        $return->title = optional_param("title", '', PARAM_TEXT);
-        $return->type = optional_param("type", '', PARAM_TEXT);
-        $return->image = optional_param("image", '', PARAM_TEXT);
+        $return->title = optional_param("title", "", PARAM_TEXT);
+        $return->type = optional_param("type", "", PARAM_TEXT);
+        $return->image = optional_param("image", "", PARAM_TEXT);
         $return->enable = optional_param("enable", 1, PARAM_INT);
-        $return->enablesql = optional_param("enablesql", '', PARAM_TEXT);
+        $return->enablesql = optional_param("enablesql", "", PARAM_TEXT);
 
         return $return;
     }

@@ -26,10 +26,10 @@ define("AJAX_SCRIPT", false);
 define("OPEN_INTERNAL", true);
 
 define("BENCHSTART", microtime(true));
-require_once('../../config.php');
+require_once("../../config.php");
 define("BENCHSTOP", microtime(true));
-require_once('autoload.php');
-require_once('locallib.php');
+require_once("autoload.php");
+require_once("locallib.php");
 
 global $PAGE, $CFG, $OUTPUT, $USER;
 
@@ -37,11 +37,11 @@ require_once("{$CFG->libdir}/adminlib.php");
 
 require_login();
 $context = context_system::instance();
-require_capability('local/kopere_dashboard:view', $context);
-require_capability('local/kopere_dashboard:manage', $context);
+require_capability("local/kopere_dashboard:view", $context);
+require_capability("local/kopere_dashboard:manage", $context);
 
 if ($html = optional_param("html-pdf", false, PARAM_RAW)) {
-    require_once($CFG->libdir . '/tcpdf/tcpdf.php');
+    require_once($CFG->libdir . "/tcpdf/tcpdf.php");
     $title = optional_param("title", false, PARAM_RAW);
 
     // Crie uma nova instância de TCPDF.
@@ -52,7 +52,7 @@ if ($html = optional_param("html-pdf", false, PARAM_RAW)) {
     $pdf->SetAuthor(fullname($USER));
     $pdf->SetTitle($title);
     $pdf->SetSubject($title);
-    $pdf->SetKeywords('Kopere BI');
+    $pdf->SetKeywords("Kopere BI");
 
     // Remova o cabeçalho e o rodapé padrão.
     $pdf->setPrintHeader(false);
@@ -91,7 +91,7 @@ if ($html = optional_param("html-pdf", false, PARAM_RAW)) {
         </style>";
 
     // Converta o HTML para PDF.
-    $pdf->writeHTML("{$style}<h1>{$title}</h1>{$html}", true, false, true, false, '');
+    $pdf->writeHTML("{$style}<h1>{$title}</h1>{$html}", true, false, true, false, "");
 
     // Saída do PDF para o navegador.
     $pdf->Output("{$title}.pdf", "I");
@@ -100,22 +100,22 @@ if ($html = optional_param("html-pdf", false, PARAM_RAW)) {
 }
 
 if ($CFG->theme == "smartlms") {
-    $preferencedraweropennav = @$USER->preference['drawer-open-nav'];
-    $preferencesidebaropennav = @$USER->preference['sidebar-open-nav'];
-    @$USER->preference['drawer-open-nav'] = false;
-    @$USER->preference['sidebar-open-nav'] = false;
+    $preferencedraweropennav = @$USER->preference["drawer-open-nav"];
+    $preferencesidebaropennav = @$USER->preference["sidebar-open-nav"];
+    @$USER->preference["drawer-open-nav"] = false;
+    @$USER->preference["sidebar-open-nav"] = false;
 }
 
 $PAGE->set_url(new moodle_url("/local/kopere_dashboard/view.php?{$_SERVER["QUERY_STRING"]}"));
 $PAGE->set_context($context);
-$PAGE->set_pagetype('admin-setting');
+$PAGE->set_pagetype("admin-setting");
 $PAGE->set_pagelayout("admin");
 
 $PAGE->requires->jquery();
 $PAGE->requires->jquery_plugin("ui");
 $PAGE->requires->jquery_plugin("ui-css");
 
-$PAGE->requires->js_call_amd('local_kopere_dashboard/start_load', "init");
+$PAGE->requires->js_call_amd("local_kopere_dashboard/start_load", "init");
 
 get_kopere_lang();
 

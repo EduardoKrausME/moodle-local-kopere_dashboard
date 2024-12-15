@@ -146,8 +146,8 @@ class dashboard {
                 continue;
             }
 
-            $gradetext = number_format($grade->finalgrade, 1, get_string("decsep", "langconfig"), '') . ' ' .
-                get_string_kopere("dashboard_grade_of") . ' ' . intval($grade->rawgrademax);
+            $gradetext = number_format($grade->finalgrade, 1, get_string("decsep", "langconfig"), "") . " " .
+                get_string_kopere("dashboard_grade_of") . " " . intval($grade->rawgrademax);
 
             $data = [
                 "user_fullname" => fullname($user),
@@ -159,7 +159,7 @@ class dashboard {
                         ["grade" => $gradetext, "evaluation" => $evaluation]),
                 "grade_date" => userdate($grade->timemodified, get_string_kopere("dateformat")),
             ];
-            echo $OUTPUT->render_from_template('local_kopere_dashboard/last_grades', $data);
+            echo $OUTPUT->render_from_template("local_kopere_dashboard/last_grades", $data);
         }
         die();
     }
@@ -186,10 +186,10 @@ class dashboard {
                 $profileimageurl = $userpicture->get_url($PAGE)->out(false);
 
                 $statusmatricula = '<span class="btn-dangerpadding-0-8 border-radius-5 text-nowrap">' .
-                    get_string_kopere("dashboard_enrol_inactive") . '</span>';
+                    get_string_kopere("dashboard_enrol_inactive") . "</span>";
                 if ($enrol->status == 0) {
                     $statusmatricula = '<span class="btn-successpadding-0-8 border-radius-5 text-nowrap">' .
-                        get_string_kopere("dashboard_enrol_active") . '</span>';
+                        get_string_kopere("dashboard_enrol_active") . "</span>";
                 }
 
                 $data = [
@@ -200,7 +200,7 @@ class dashboard {
                     "matricula_status" => $statusmatricula,
                     "matricula_date" => userdate($enrol->timemodified, get_string_kopere("dateformat")),
                 ];
-                echo $OUTPUT->render_from_template('local_kopere_dashboard/last_enroll', $data);
+                echo $OUTPUT->render_from_template("local_kopere_dashboard/last_enroll", $data);
             }
         }
     }

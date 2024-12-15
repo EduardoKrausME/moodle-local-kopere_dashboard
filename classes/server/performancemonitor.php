@@ -106,7 +106,7 @@ class performancemonitor {
             return "Function \"shell_exec\" disabled by hosting";
         }
 
-        $inputline = shell_exec('top -b -n 2');
+        $inputline = shell_exec("top -b -n 2");
 
         preg_match_all(
             "/Cpu.*?([0-9.]+).*?us.*?([0-9.]+).*?sy.*?([0-9.]+).*?ni/",
@@ -120,8 +120,8 @@ class performancemonitor {
             return $us + $sy + $ni;
         }
 
-        return ' us: ' . number_format($us, 1, get_string("decsep", "langconfig"), '') . '%, sys: ' .
-            number_format($ni, 1, get_string("decsep", "langconfig"), '') . '%';
+        return " us: " . number_format($us, 1, get_string("decsep", "langconfig"), "") . "%, sys: " .
+            number_format($ni, 1, get_string("decsep", "langconfig"), "") . "%";
     }
 
     /**
@@ -222,8 +222,8 @@ class performancemonitor {
             return $outputload[1];
         }
 
-        $return = get_string_kopere("performancemonitor_min", 1) . $outputload[1] . '%, ';
-        $return .= get_string_kopere("performancemonitor_min", 5) . $outputload[3] . '%';
+        $return = get_string_kopere("performancemonitor_min", 1) . $outputload[1] . "%, ";
+        $return .= get_string_kopere("performancemonitor_min", 5) . $outputload[3] . "%";
 
         return $return;
     }

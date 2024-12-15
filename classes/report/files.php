@@ -43,7 +43,7 @@ class files {
     public static function count_all_space() {
         global $DB;
 
-        $count = $DB->get_record_sql('SELECT SUM(filesize) as space FROM {files}');
+        $count = $DB->get_record_sql("SELECT SUM(filesize) as space FROM {files}");
 
         return $count->space;
     }
@@ -86,7 +86,7 @@ class files {
     public static function list_sizes_courses() {
         global $DB;
 
-        $courses = $DB->get_records_sql('SELECT id, fullname, shortname, visible, timecreated FROM {course} WHERE id > 1');
+        $courses = $DB->get_records_sql("SELECT id, fullname, shortname, visible, timecreated FROM {course} WHERE id > 1");
 
         foreach ($courses as $course) {
 

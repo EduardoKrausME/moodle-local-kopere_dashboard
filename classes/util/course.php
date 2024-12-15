@@ -43,7 +43,7 @@ class course {
         global $CFG, $OUTPUT;
 
         $courseimage = false;
-        if ($courseid[0] != 'c') {
+        if ($courseid[0] != "c") {
             $course = new core_course_list_element(get_course($courseid));
 
             /** @var \stored_file $file */

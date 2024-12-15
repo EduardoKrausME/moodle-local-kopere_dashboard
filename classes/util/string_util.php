@@ -46,7 +46,7 @@ class string_util {
         $characters .= "abcdefghjkmnpqrstuvwxyz";
 
         $lengthstring = strlen($characters);
-        $string = '';
+        $string = "";
 
         for ($i = 0; $i < $length; $i++) {
             $string .= $characters[rand(0, $lengthstring - 1)];
@@ -69,7 +69,7 @@ class string_util {
         $characters .= '!@#$%*()+=-{}[]:;<>?~!@#$%*()+=-{}[]:;<>?~';
 
         $lengthstring = strlen($characters);
-        $string = '';
+        $string = "";
 
         for ($i = 0; $i < $length; $i++) {
             $string .= $characters[rand(0, $lengthstring - 1)];
@@ -88,16 +88,16 @@ class string_util {
     public static function generate_uid($id = null) {
         if ($id) {
             return strtolower(
-                substr($id, 0, 8) . '-' .
-                substr($id, 8, 4) . '-' .
-                substr($id, 12, 4) . '-' .
+                substr($id, 0, 8) . "-" .
+                substr($id, 8, 4) . "-" .
+                substr($id, 12, 4) . "-" .
                 substr($id, 24, 12)
             );
         } else {
             return strtolower(
-                self::generate_random_string(8) . '-' .
-                self::generate_random_string(4) . '-' .
-                self::generate_random_string(4) . '-' .
+                self::generate_random_string(8) . "-" .
+                self::generate_random_string(4) . "-" .
+                self::generate_random_string(4) . "-" .
                 self::generate_random_string(12)
             );
         }

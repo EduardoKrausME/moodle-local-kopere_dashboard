@@ -38,7 +38,7 @@ class number_util {
      * @return null|string|string[]
      */
     public static function only_number($number) {
-        $number = preg_replace('/[^0-9]/', '', $number);
+        $number = preg_replace('/[^0-9]/', "", $number);
 
         return $number;
     }
@@ -51,18 +51,18 @@ class number_util {
      * @return null|string|string[]
      */
     public static function phonecell_to_number($phone) {
-        $phone = preg_replace('/[^0-9]/', '', $phone);
+        $phone = preg_replace('/[^0-9]/', "", $phone);
 
-        if (preg_replace('/\d{2}[6-9]\d{7}/', '', $phone) == '') {
+        if (preg_replace('/\d{2}[6-9]\d{7}/', "", $phone) == "") {
             return preg_replace('/(\d{2})(\d{8})/', '($1) 9$2', $phone);
         }
 
         // Já baseado na regra futura da 404/05.
-        if (preg_replace('/\d{2}[6-9]{2}\d{7}/', '', $phone) == '') {
+        if (preg_replace('/\d{2}[6-9]{2}\d{7}/', "", $phone) == "") {
             return preg_replace('/(\d{2})(\d{9})/', '($1) $2', $phone);
         }
 
-        return '';
+        return "";
     }
 
     /**
@@ -86,22 +86,22 @@ class number_util {
 
         $oldbytes = $bytes / self::$divisor;
         if ($oldbytes < 1000) {
-            return self::remove_zero(number_format($oldbytes, 1, ',', '.') . ' KB', 1);
+            return self::remove_zero(number_format($oldbytes, 1, ",", ".") . " KB", 1);
         }
 
         $oldbytes = $bytes / self::$divisor / self::$divisor;
         if ($oldbytes < 1000) {
-            return self::remove_zero(number_format($oldbytes, 1, ',', '.') . ' MB', 1);
+            return self::remove_zero(number_format($oldbytes, 1, ",", ".") . " MB", 1);
         }
 
         $oldbytes = $bytes / self::$divisor / self::$divisor / self::$divisor;
         if ($oldbytes < 1000) {
-            return self::remove_zero(number_format($oldbytes, 2, ',', '.') . ' GB', 2);
+            return self::remove_zero(number_format($oldbytes, 2, ",", ".") . " GB", 2);
         }
 
         $oldbytes = $bytes / self::$divisor / self::$divisor / self::$divisor / self::$divisor;
 
-        return self::remove_zero(number_format($oldbytes, 2, ',', '.') . ' TB', 2);
+        return self::remove_zero(number_format($oldbytes, 2, ",", ".") . " TB", 2);
     }
 
     /**
@@ -114,11 +114,11 @@ class number_util {
      */
     private static function remove_zero($texto, $count) {
         if ($count == 3) {
-            return str_replace(',000', '', $texto);
+            return str_replace(",000", "", $texto);
         } else if ($count == 2) {
-            return str_replace(',00', '', $texto);
+            return str_replace(",00", "", $texto);
         } else {
-            return str_replace(',0', '', $texto);
+            return str_replace(",0", "", $texto);
         }
     }
 }

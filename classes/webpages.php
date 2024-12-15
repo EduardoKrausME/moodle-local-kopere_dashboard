@@ -62,14 +62,14 @@ class webpages {
         global $DB, $CFG, $PAGE, $OUTPUT;
 
         dashboard_util::add_breadcrumb(get_string_kopere("webpages_title"));
-        dashboard_util::start_page(local_kopere_dashboard_makeurl("webpages", "settings"), 'Páginas-estáticas');
+        dashboard_util::start_page(local_kopere_dashboard_makeurl("webpages", "settings"), "Páginas-estáticas");
 
         $botao = button::add(get_string_kopere("webpages_menu_create"),
-            local_kopere_dashboard_makeurl("webpages", "menu_edit"), 'ml-4', false, true);
+            local_kopere_dashboard_makeurl("webpages", "menu_edit"), "ml-4", false, true);
         title_util::print_h3(get_string_kopere("webpages_subtitle") . $botao, false);
         title_util::print_h6("webpages_subtitle_help");
 
-        $menus = $DB->get_records("local_kopere_dashboard_menu", ["menuid" => 0], 'title ASC');
+        $menus = $DB->get_records("local_kopere_dashboard_menu", ["menuid" => 0], "title ASC");
 
         echo '<div class="element-box">';
 
@@ -77,7 +77,7 @@ class webpages {
         $detailsclose = $OUTPUT->image_url("details_close", "local_kopere_dashboard")->out(false);
 
         if (!$menus) {
-            button::help("webpages", get_string_kopere("webpages_menu_help"), 'Páginas-estáticas');
+            button::help("webpages", get_string_kopere("webpages_menu_help"), "Páginas-estáticas");
         } else {
             foreach ($menus as $key => $menu) {
 
@@ -106,8 +106,8 @@ class webpages {
             }
 
             $table = new table();
-            $table->add_header('#', "htmlid", null, 'width:50px');
-            $table->add_header('', "actions", null, 'width:100px');
+            $table->add_header("#", "htmlid", null, "width:50px");
+            $table->add_header("", "actions", null, "width:100px");
             $table->add_header(get_string_kopere("webpages_table_title"), "title");
             $table->add_header(get_string_kopere("webpages_table_link"), "link");
             $table->add_header(get_string_kopere("webpages_table_visible"), "visible");
@@ -115,9 +115,9 @@ class webpages {
             $table->set_row($menus);
             $table->close(true, ["ordering" => false]);
 
-            $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', "load_pages");
+            $PAGE->requires->js_call_amd("local_kopere_dashboard/webpages", "load_pages");
         }
-        echo '</div>';
+        echo "</div>";
 
         button::info(get_string_kopere("webpages_page_crash"), "{$CFG->wwwroot}/admin/tool/replace/");
 
@@ -136,16 +136,16 @@ class webpages {
         $menuid = required_param("menuid", PARAM_INT);
 
         echo button::add(get_string_kopere("webpages_page_create"),
-            local_kopere_dashboard_makeurl("webpages", "page_edit", ["menuid" => $menuid]), '', false, true);
+            local_kopere_dashboard_makeurl("webpages", "page_edit", ["menuid" => $menuid]), "", false, true);
         echo button::add(get_string_kopere("webpages_menu_create"),
-            local_kopere_dashboard_makeurl("webpages", "menu_edit", ["menuid" => $menuid]), 'ml-4', false, true);
+            local_kopere_dashboard_makeurl("webpages", "menu_edit", ["menuid" => $menuid]), "ml-4", false, true);
 
         $detailsopen = $OUTPUT->image_url("details_open", "local_kopere_dashboard")->out(false);
         $detailsclose = $OUTPUT->image_url("details_close", "local_kopere_dashboard")->out(false);
 
         $itens = [];
 
-        $menus = $DB->get_records("local_kopere_dashboard_menu", ["menuid" => $menuid], 'title ASC');
+        $menus = $DB->get_records("local_kopere_dashboard_menu", ["menuid" => $menuid], "title ASC");
         foreach ($menus as $key => $menu) {
             $menu->htmlid = "
                 <img src='{$detailsopen}'
@@ -172,7 +172,7 @@ class webpages {
             $itens[] = $menu;
         }
 
-        $pages = $DB->get_records("local_kopere_dashboard_pages", ["menuid" => $menuid], 'pageorder ASC');
+        $pages = $DB->get_records("local_kopere_dashboard_pages", ["menuid" => $menuid], "pageorder ASC");
         foreach ($pages as $key => $page) {
             $page->htmlid = "{$page->id}";
 
@@ -196,10 +196,10 @@ class webpages {
         }
 
         $table = new table();
-        $table->add_header('', "htmlid", null, '', 'width:50px');
-        $table->add_header('', "actions", null, '', 'width:100px');
-        $table->add_header('', "title");
-        $table->add_header('', "link");
+        $table->add_header("", "htmlid", null, "", "width:50px");
+        $table->add_header("", "actions", null, "", "width:100px");
+        $table->add_header("", "title");
+        $table->add_header("", "link");
 
         $table->set_row($itens);
         $table->close(true, ["ordering" => false]);
@@ -232,17 +232,17 @@ class webpages {
 
         $linkpagina = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";
 
-        button::info(get_string_kopere("webpages_page_view"), $linkpagina, '', false);
+        button::info(get_string_kopere("webpages_page_view"), $linkpagina, "", false);
         button::edit(get_string_kopere("webpages_page_edit"),
             local_kopere_dashboard_makeurl("webpages", "page_edit",
-                ["id" => $webpages->id]), 'margin-left-15', false);
+                ["id" => $webpages->id]), "margin-left-15", false);
         button::delete(get_string_kopere("webpages_page_delete"),
             local_kopere_dashboard_makeurl("webpages", "page_delete",
-                ["id" => $webpages->id]), 'margin-left-15', false, false);
+                ["id" => $webpages->id]), "margin-left-15", false, false);
 
         $form = new form();
         $form->print_panel(get_string_kopere("webpages_table_link"),
-            "<a target=\"_blank\" href='$linkpagina'>$linkpagina</a>");
+            "<a target=\"_blank\" href='{$linkpagina}'>$linkpagina</a>");
         $form->print_panel(get_string_kopere("webpages_table_title"), $webpages->title);
         if ($webpages->courseid) {
             $course = $DB->get_record("course", ["id" => $webpages->courseid]);
@@ -257,7 +257,7 @@ class webpages {
         $imagem = "";
         $fs = get_file_storage();
         $file = $fs->get_file(context_system::instance()->id, "local_kopere_dashboard", "webpage_image",
-            $webpages->id, '/', 'webpage_image.svg');
+            $webpages->id, "/", "webpage_image.svg");
         if ($file && isset($file->get_filename()[3])) {
             $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
                 $file->get_filearea(), $file->get_itemid(), "/", $file->get_filename());
@@ -271,19 +271,19 @@ class webpages {
 
         $form->print_panel(get_string_kopere("webpages_table_text"),
             $imagem . $webpages->text . $link);
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', "view_page");
+        $PAGE->requires->js_call_amd("local_kopere_dashboard/webpages", "view_page");
 
         echo "<div class=\"row\">";
         echo "<div class='col-md'>";
         $form->print_panel(get_string_kopere("webpages_table_theme"), $this->theme_name($webpages->theme));
-        echo '</div>';
+        echo "</div>";
         echo "<div class='col-md'>";
         $form->print_panel(get_string_kopere("webpages_table_visible"),
             $webpages->visible ? get_string("yes") : get_string("no"));
-        echo '</div>';
-        echo '</div>';
+        echo "</div>";
+        echo "</div>";
 
-        echo '</div>';
+        echo "</div>";
 
         dashboard_util::end_page();
 
@@ -340,7 +340,7 @@ class webpages {
         $courses1 = [(object)[
             "id" => 0,
             "fullname" => "(Nenhum curso)"]];
-        $courses2 = $DB->get_records_sql('SELECT id, fullname FROM {course} WHERE id > 1 ORDER BY fullname ASC');
+        $courses2 = $DB->get_records_sql("SELECT id, fullname FROM {course} WHERE id > 1 ORDER BY fullname ASC");
         $courses = array_merge($courses1, $courses2);;
 
         echo "<div class=\"row\">";
@@ -391,7 +391,7 @@ class webpages {
 
         $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', "webpages_page_ajax_get_url");
 
-        echo '</div>';
+        echo "</div>";
 
         dashboard_util::end_page();
     }
@@ -410,14 +410,14 @@ class webpages {
         $webpages = local_kopere_dashboard_pages::create_by_default();
         $webpages->id = optional_param("id", 0, PARAM_INT);
 
-        if ($webpages->title == '') {
+        if ($webpages->title == "") {
             mensagem::agenda_mensagem_warning(get_string_kopere("webpages_page_error"));
             $this->page_edit();
         } else {
             if ($webpages->id) {
 
                 $exists = $DB->record_exists_select("local_kopere_dashboard_pages",
-                    'link = :link AND id != :id',
+                    "link = :link AND id != :id",
                     ["link" => $webpages->link, "id" => $webpages->id]);
                 if ($exists) {
                     mensagem::agenda_mensagem_danger(get_string_kopere("webpages_menu_link_duplicate"));
@@ -465,7 +465,7 @@ class webpages {
     public function page_delete() {
         global $DB;
 
-        $status = optional_param("status", '', PARAM_TEXT);
+        $status = optional_param("status", "", PARAM_TEXT);
         $id = optional_param("id", 0, PARAM_INT);
         /** @var local_kopere_dashboard_pages $webpages */
         $webpages = $DB->get_record("local_kopere_dashboard_pages", ["id" => $id]);
@@ -489,7 +489,7 @@ class webpages {
 
         echo "<p>" . get_string_kopere("webpages_page_delete_confirm", $webpages) . "</p>";
         button::delete(get_string("yes"),
-            local_kopere_dashboard_makeurl("webpages", "page_delete", ["status" => "sim", "id" => $webpages->id]), '', false);
+            local_kopere_dashboard_makeurl("webpages", "page_delete", ["status" => "sim", "id" => $webpages->id]), "", false);
         button::close_popup(get_string("no"));
 
         dashboard_util::end_page();
@@ -558,9 +558,9 @@ class webpages {
         $form->create_submit_input(get_string_kopere("webpages_menu_save"));
         $form->close();
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/webpages', "webpages_menu_ajax_get_url");
+        $PAGE->requires->js_call_amd("local_kopere_dashboard/webpages", "webpages_menu_ajax_get_url");
 
-        echo '</div>';
+        echo "</div>";
 
         dashboard_util::end_page();
     }
@@ -576,7 +576,7 @@ class webpages {
      *
      * @throws \dml_exception
      */
-    public static function list_menus($menuid = 0, $notmenuid = 0, $spaces = '') {
+    public static function list_menus($menuid = 0, $notmenuid = 0, $spaces = "") {
         global $DB;
 
         $menus = $DB->get_records("local_kopere_dashboard_menu", ["menuid" => $menuid]);
@@ -607,12 +607,12 @@ class webpages {
         $menu = local_kopere_dashboard_menu::create_by_default();
         $menu->id = optional_param("id", 0, PARAM_INT);
 
-        if ($menu->title == '') {
+        if ($menu->title == "") {
             mensagem::agenda_mensagem_warning(get_string_kopere("webpages_menu_error"));
         } else {
             if ($menu->id) {
                 $exists = $DB->record_exists_select("local_kopere_dashboard_menu",
-                    'link = :link AND id != :id',
+                    "link = :link AND id != :id",
                     ["link" => $menu->link, "id" => $menu->id]);
                 if ($exists) {
                     mensagem::agenda_mensagem_danger(get_string_kopere("webpages_menu_link_duplicate"));
@@ -646,7 +646,7 @@ class webpages {
     public function menu_delete() {
         global $DB;
 
-        $status = optional_param("status", '', PARAM_TEXT);
+        $status = optional_param("status", "", PARAM_TEXT);
         $id = optional_param("id", 0, PARAM_INT);
         /** @var local_kopere_dashboard_menu $menu */
         $menu = $DB->get_record("local_kopere_dashboard_menu", ["id" => $id]);
@@ -675,7 +675,7 @@ class webpages {
             echo get_string_kopere("webpages_page_confirmdeletemenu", $menu->title);
             button::delete(get_string("yes"),
                 local_kopere_dashboard_makeurl("webpages", "menu_delete",
-                    ["status" => "sim", "id" => $menu->id]), '', false);
+                    ["status" => "sim", "id" => $menu->id]), "", false);
             button::close_popup(get_string("no"));
         }
 
@@ -691,11 +691,11 @@ class webpages {
     public function page_ajax_get_url() {
         global $DB;
 
-        $title = optional_param("title", '', PARAM_TEXT);
+        $title = optional_param("title", "", PARAM_TEXT);
         $id = optional_param("id", 0, PARAM_INT);
 
-        if ($title == '') {
-            end_util::end_script_show('');
+        if ($title == "") {
+            end_util::end_script_show("");
         }
 
         $title = html::link($title);
@@ -712,7 +712,7 @@ class webpages {
                 "title" => $title,
             ]);
         if ($webpages) {
-            end_util::end_script_show($title . '-2');
+            end_util::end_script_show($title . "-2");
         } else {
             end_util::end_script_show($title);
         }
@@ -727,10 +727,10 @@ class webpages {
     public function menu_ajax_get_url() {
         global $DB;
 
-        $title = optional_param("title", '', PARAM_TEXT);
+        $title = optional_param("title", "", PARAM_TEXT);
         $id = optional_param("id", 0, PARAM_INT);
 
-        if ($title == '') {
+        if ($title == "") {
             end_util::end_script_show();
         }
 
@@ -748,7 +748,7 @@ class webpages {
                 "title" => $title,
             ]);
         if ($webpages) {
-            end_util::end_script_show($title . '-2');
+            end_util::end_script_show($title . "-2");
         } else {
             end_util::end_script_show($title);
         }
@@ -770,7 +770,7 @@ class webpages {
             }
         }
 
-        return '-';
+        return "-";
     }
 
     /**
@@ -846,14 +846,14 @@ class webpages {
 
         @mkdir($path);
 
-        return $path . '/';
+        return $path . "/";
     }
 
     /**
      * Function cache_delete
      */
     private static function cache_delete() {
-        $caches = glob(self::cache_get_dir() . '*');
+        $caches = glob(self::cache_get_dir() . "*");
         foreach ($caches as $cache) {
             unlink($cache);
         }

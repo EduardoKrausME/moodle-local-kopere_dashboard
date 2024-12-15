@@ -43,7 +43,7 @@ class json {
      */
     public static function encode($data, $recordstotal = -1, $recordsfiltered = 0, $sql = null) {
         ob_clean();
-        header('Content-Type: application/json; charset: utf-8');
+        header("Content-Type: application/json; charset: utf-8");
 
         $returnarray = [];
         if ($recordstotal != -1) {
@@ -60,7 +60,7 @@ class json {
         $json = json_encode($returnarray);
 
         $json = str_replace('"data":{', '"data":[', $json);
-        $json = str_replace('}}}', '}]}', $json);
+        $json = str_replace("}}}", "}]}", $json);
         $json = preg_replace("/\"\d+\":{/", "{", $json);
 
         end_util::end_script_show($json);
@@ -73,7 +73,7 @@ class json {
      */
     public static function error($message) {
         ob_clean();
-        header('Content-Type: application/json; charset: utf-8');
+        header("Content-Type: application/json; charset: utf-8");
 
         $returnarray = [];
         $returnarray["error"] = $message;

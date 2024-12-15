@@ -173,7 +173,7 @@ class course_access {
                 <td align="center" bgcolor="#979797" style="text-align:center;">' .
             get_string_kopere("user_table_fullname") . '</td>
                 <td align="center" bgcolor="#979797" style="text-align:center;">' .
-            get_string_kopere("user_table_email") . '</td>';
+            get_string_kopere("user_table_email") . "</td>";
 
         foreach ($modinfo as $infos) {
             $link = "{$CFG->wwwroot}/course/view.php?id={$infos->course}#module-{$infos->course_modules_id}";
@@ -181,8 +181,8 @@ class course_access {
                       <a href='{$link}' target=\"_blank\">{$infos->moduleinfo->name}</a>
                   </th>";
         }
-        echo '</tr>';
-        echo '</thead>';
+        echo "</tr>";
+        echo "</thead>";
 
         if ($export == "xls") {
             $sql = "
@@ -216,10 +216,10 @@ class course_access {
         $total = $DB->get_record_sql("SELECT FOUND_ROWS() as num_itens");
 
         foreach ($allusercourse as $user) {
-            echo '<tr>';
+            echo "<tr>";
             $link = "{$CFG->wwwroot}/user/view.php?id={$user->id}&course={$cursosid}";
             $this->td("<a href='{$link}' target=\"moodle\">" . fullname($user) . '</a>', 'bg-info text-nowrap', '#D9EDF7');
-            $this->td($user->email, 'bg-info text-nowrap', '#D9EDF7');
+            $this->td($user->email, "bg-info text-nowrap", "#D9EDF7");
 
             if ($groups) {
 
@@ -237,7 +237,7 @@ class course_access {
                 foreach ($groupsuser as $groupuser) {
                     $groupsuserprint[] = $groupuser->name;
                 }
-                $this->td(implode('<br>', $groupsuserprint), 'bg-info text-nowrap', '#D9EDF7');
+                $this->td(implode("<br>", $groupsuserprint), "bg-info text-nowrap", "#D9EDF7");
             }
 
             foreach ($modinfo as $infos) {
@@ -259,18 +259,18 @@ class course_access {
 
                 if ($logresult && $logresult->contagem) {
                     $this->td(get_string_kopere("reports_access_n", $logresult->contagem),
-                        'text-nowrap bg-success', "DFF0D8");
+                        "text-nowrap bg-success", "DFF0D8");
                     $this->td(userdate($logresult->timecreated, get_string("strftimedatetime")),
-                        'text-nowrap bg-success', '#DFF0D8');
+                        "text-nowrap bg-success", "#DFF0D8");
                 } else {
                     $this->td2('<span style="color: #282828">' . get_string_kopere("reports_noneaccess") .
-                        '</span>', 'bg-warning text-nowrap', '#FCF8E3');
+                        "</span>", "bg-warning text-nowrap", "#FCF8E3");
                 }
             }
-            echo '</tr>';
+            echo "</tr>";
         }
 
-        echo '</table>';
+        echo "</table>";
 
         export::close();
         pagination::create($atualpage, $total->num_itens, $perpage);

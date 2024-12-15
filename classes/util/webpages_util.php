@@ -46,7 +46,7 @@ class webpages_util {
     public function notfound($printtext) {
         global $PAGE, $OUTPUT, $CFG;
 
-        header('HTTP/1.0 404 Not Found');
+        header("HTTP/1.0 404 Not Found");
         $PAGE->set_context(\context_system::instance());
         $PAGE->set_pagelayout(get_config("local_kopere_dashboard", "webpages_theme"));
         $PAGE->set_title(get_string("error"));

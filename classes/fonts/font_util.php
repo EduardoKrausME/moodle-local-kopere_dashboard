@@ -108,7 +108,7 @@ class font_util {
             }
         }
 
-        $fontlist["css"] = 'https://fonts.googleapis.com/css2?' . implode('&', $fontlist["css"]) . '&display=swap';
+        $fontlist["css"] = "https://fonts.googleapis.com/css2?" . implode("&", $fontlist["css"]) . "&display=swap";
         $fontlist["grapsjs"] = implode(",", $fontlist["grapsjs"]);
         $fontlist["ckeditor"] = implode(";", $fontlist["ckeditor"]);
 

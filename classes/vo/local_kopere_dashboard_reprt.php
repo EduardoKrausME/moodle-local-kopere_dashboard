@@ -97,14 +97,14 @@ class local_kopere_dashboard_reprt extends \stdClass {
 
         $return->id = optional_param("id", 0, PARAM_INT);
         $return->reportcatid = optional_param("reportcatid", 0, PARAM_INT);
-        $return->reportkey = optional_param("reportkey", '', PARAM_TEXT);
-        $return->title = optional_param("title", '', PARAM_TEXT);
+        $return->reportkey = optional_param("reportkey", "", PARAM_TEXT);
+        $return->title = optional_param("title", "", PARAM_TEXT);
         $return->enable = optional_param("enable", 1, PARAM_INT);
-        $return->enablesql = optional_param("enablesql", '', PARAM_TEXT);
-        $return->reportsql = optional_param("reportsql", '', PARAM_TEXT);
-        $return->prerequisit = optional_param("prerequisit", '', PARAM_TEXT);
-        $return->columns = optional_param("columns", '', PARAM_TEXT);
-        $return->foreach = optional_param("foreach", '', PARAM_TEXT);
+        $return->enablesql = optional_param("enablesql", "", PARAM_TEXT);
+        $return->reportsql = optional_param("reportsql", "", PARAM_TEXT);
+        $return->prerequisit = optional_param("prerequisit", "", PARAM_TEXT);
+        $return->columns = optional_param("columns", "", PARAM_TEXT);
+        $return->foreach = optional_param("foreach", "", PARAM_TEXT);
 
         return $return;
     }

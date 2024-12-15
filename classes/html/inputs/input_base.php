@@ -130,7 +130,7 @@ class input_base implements i_input {
     public function set_name($name) {
         $this->name = $name;
 
-        $this->inputid = preg_replace('/[\W]/', '', $this->name);
+        $this->inputid = preg_replace('/[\W]/', "", $this->name);
 
         return $this;
     }
@@ -237,7 +237,7 @@ class input_base implements i_input {
      * @return $this|mixed
      * @throws \coding_exception
      */
-    public function set_value_by_config($configname, $default = '') {
+    public function set_value_by_config($configname, $default = "") {
         $this->set_name($configname);
 
         $value = config::get_key($configname);

@@ -74,7 +74,7 @@ class reports {
                 }
             }
 
-            if (strpos($koperereportcat->image, 'assets/') === 0) {
+            if (strpos($koperereportcat->image, "assets/") === 0) {
                 $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$koperereportcat->image}";
             } else {
                 $icon = "{$CFG->wwwroot}/{$koperereportcat->image}";
@@ -89,7 +89,7 @@ class reports {
             /** @var local_kopere_dashboard_reprt $koperereports */
             foreach ($koperereportss as $koperereports) {
                 $title = self::get_title($koperereports);
-                $extraenable = '';
+                $extraenable = "";
                 if (!$koperereports->enable) {
                     $extraenable = get_string_kopere("reports_disabled");
                 }
@@ -101,7 +101,7 @@ class reports {
             }
         }
 
-        echo '</div>';
+        echo "</div>";
         dashboard_util::end_page();
     }
 
@@ -180,7 +180,7 @@ class reports {
                 button::primary(get_string_kopere("reports_download"), $urldow);
             }
         }
-        echo '</div>';
+        echo "</div>";
         dashboard_util::end_page();
     }
 
@@ -197,12 +197,12 @@ class reports {
             title_util::print_h3("reports_selectcourse");
 
             $table = new data_table();
-            $table->add_header('#', "id", table_header_item::TYPE_INT, null, 'width: 20px');
+            $table->add_header("#", "id", table_header_item::TYPE_INT, null, "width: 20px");
             $table->add_header(get_string_kopere("courses_name"), "fullname");
             $table->add_header(get_string_kopere("courses_shortname"), "shortname");
             $table->add_header(get_string_kopere("visible"), "visible", table_header_item::RENDERER_VISIBLE);
             $table->add_header(get_string_kopere("courses_enrol"), "inscritos",
-                table_header_item::TYPE_INT, null, 'width:50px;white-space:nowrap;');
+                table_header_item::TYPE_INT, null, "width:50px;white-space:nowrap;");
 
             $table->set_ajax_url(local_kopere_dashboard_makeurl("courses", "load_all_courses"));
             $table->set_click_redirect(
@@ -309,9 +309,9 @@ class reports {
             $columns->header = [];
         }
         $table = new data_table($columns->columns, $columns->header);
-        $table->print_header('', false);
+        $table->print_header("", false);
         $table->set_row($reports);
-        echo '</table>';
+        echo "</table>";
 
         export::close();
     }
@@ -325,9 +325,9 @@ class reports {
      * @throws \coding_exception
      */
     private static function get_title($obj) {
-        if (strpos($obj->title, '[[[') === 0) {
+        if (strpos($obj->title, "[[[") === 0) {
             return get_string(substr($obj->title, 3, -3));
-        } else if (strpos($obj->title, '[[') === 0) {
+        } else if (strpos($obj->title, "[[") === 0) {
             return get_string_kopere(substr($obj->title, 2, -2));
         } else {
             return $obj->title;
@@ -357,7 +357,7 @@ class reports {
                 }
             }
 
-            if (strpos($koperereportcat->image, 'assets/') === 0) {
+            if (strpos($koperereportcat->image, "assets/") === 0) {
                 $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$koperereportcat->image}";
             } else {
                 $icon = "{$CFG->wwwroot}/{$koperereportcat->image}";

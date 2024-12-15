@@ -196,7 +196,7 @@ class send_events {
 
             if (isset($this->event->other["password"])) {
                 $userto->password = $this->event->other["password"];
-            } else if (strpos($this->message, '{[to.password]}')) {
+            } else if (strpos($this->message, "{[to.password]}")) {
                 $newpassword = $this->login_generate_password($userto);
                 $userto->password = "{$CFG->wwwroot}/login/forgot_password.php?token={$newpassword}";
             }else if(isset($USER->tmp_password)){
@@ -207,7 +207,7 @@ class send_events {
             $htmlmessage = $this->replace_tag_user($this->message, $userto, "to");
 
             $magager = "<a href='{$CFG->wwwroot}/message/notificationpreferences.php'>Gerenciar mensagens</a>";
-            $htmlmessage = str_replace('{[manager]}', $magager, $htmlmessage);
+            $htmlmessage = str_replace("{[manager]}", $magager, $htmlmessage);
 
             $eventdata = new message();
             if (release::version() >= 3.2) {
@@ -222,7 +222,7 @@ class send_events {
             $eventdata->fullmessage = html_to_text($htmlmessage);
             $eventdata->fullmessageformat = FORMAT_HTML;
             $eventdata->fullmessagehtml = $htmlmessage;
-            $eventdata->smallmessage = '';
+            $eventdata->smallmessage = "";
 
             message_send($eventdata);
         }
@@ -236,7 +236,7 @@ class send_events {
         $templatecontent = notificationsutil::get_template_html();
 
         $this->subject = $this->koperedashboardevents->subject;
-        $this->message = str_replace('{[message]}', $this->koperedashboardevents->message, $templatecontent);
+        $this->message = str_replace("{[message]}", $this->koperedashboardevents->message, $templatecontent);
     }
 
     /**
@@ -247,7 +247,7 @@ class send_events {
      * @return mixed
      */
     private function replace_date($text) {
-        if (strpos($text, '{[date') === false) {
+        if (strpos($text, "{[date") === false) {
             return $text;
         }
 
@@ -341,7 +341,7 @@ class send_events {
     private function login_generate_password($user) {
         global $DB;
         $resetrecord = (object)[
-            "timerequested" => strtotime('+48 hours', time()),
+            "timerequested" => strtotime("+48 hours", time()),
             "userid" => $user->id,
             "token" => random_string(32),
         ];

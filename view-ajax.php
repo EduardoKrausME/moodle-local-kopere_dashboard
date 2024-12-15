@@ -25,8 +25,8 @@
 
 define("AJAX_SCRIPT", true);
 
-require_once('../../config.php');
-require_once('autoload.php');
+require_once("../../config.php");
+require_once("autoload.php");
 
 global $PAGE, $CFG, $OUTPUT;
 
@@ -35,13 +35,13 @@ ob_clean();
 try {
     require_login();
     $context = context_system::instance();
-    require_capability('local/kopere_dashboard:view', $context);
-    require_capability('local/kopere_dashboard:manage', $context);
+    require_capability("local/kopere_dashboard:view", $context);
+    require_capability("local/kopere_dashboard:manage", $context);
 } catch (Exception $e) {
     \local_kopere_dashboard\util\json::error($e->getMessage());
 }
 
-$PAGE->set_url(new moodle_url('/local/kopere_dashboard/view-ajax.php'));
+$PAGE->set_url(new moodle_url("/local/kopere_dashboard/view-ajax.php"));
 $PAGE->set_pagetype("reports");
 $PAGE->set_context(context_system::instance());
 

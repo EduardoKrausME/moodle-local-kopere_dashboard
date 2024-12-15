@@ -108,11 +108,11 @@ class report_benchmark {
      */
     private function get_feedback_class($during, $limit, $over) {
         if ($during >= $over) {
-            $class = 'bg-danger';
+            $class = "bg-danger";
         } else if ($during >= $limit) {
-            $class = 'bg-warning';
+            $class = "bg-warning";
         } else {
-            $class = 'bg-success';
+            $class = "bg-success";
         }
 
         return $class;

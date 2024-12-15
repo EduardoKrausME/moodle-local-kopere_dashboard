@@ -51,7 +51,7 @@ class users {
         echo '<div class="element-box table-responsive">';
 
         $table = new data_table();
-        $table->add_header('#', "id", table_header_item::TYPE_INT);
+        $table->add_header("#", "id", table_header_item::TYPE_INT);
         $table->add_header(get_string_kopere("user_table_fullname"), "fullname");
         $table->add_header(get_string_kopere("user_table_username"), "username");
         $table->add_header(get_string_kopere("user_table_email"), "email");
@@ -64,7 +64,7 @@ class users {
         $table->print_header();
         $table->close(true, ["order" => [[1, "asc"]]]);
 
-        echo '</div>';
+        echo "</div>";
 
         dashboard_util::end_page();
     }
@@ -91,7 +91,7 @@ class users {
         $search->execute_sql_and_return("
                SELECT {[columns]}
                  FROM {user} u
-                WHERE id > 1 AND deleted = 0 ", '', null,
+                WHERE id > 1 AND deleted = 0 ", "", null,
             'local_kopere_dashboard\util\user_util::column_fullname');
     }
 
@@ -117,7 +117,7 @@ class users {
 
         profile::details($user);
 
-        echo '</div>';
+        echo "</div>";
 
         dashboard_util::end_page();
     }
@@ -134,7 +134,7 @@ class users {
     public static function count_all($format = false) {
         global $DB;
 
-        $count = $DB->get_record_sql('SELECT count(*) AS num FROM {user} WHERE id > 1 AND deleted = 0');
+        $count = $DB->get_record_sql("SELECT count(*) AS num FROM {user} WHERE id > 1 AND deleted = 0");
 
         if ($format) {
             return number_format($count->num, 0, get_string("decsep", "langconfig"), get_string("thousandssep", "langconfig"));
@@ -155,7 +155,7 @@ class users {
     public static function count_all_learners($format = false) {
         global $DB;
 
-        $count = $DB->get_record_sql('SELECT count(*) AS num FROM {user} WHERE id > 1 AND deleted = 0 AND lastaccess > 0');
+        $count = $DB->get_record_sql("SELECT count(*) AS num FROM {user} WHERE id > 1 AND deleted = 0 AND lastaccess > 0");
 
         if ($format) {
             return number_format($count->num, 0, get_string("decsep", "langconfig"), get_string("thousandssep", "langconfig"));

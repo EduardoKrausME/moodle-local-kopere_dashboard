@@ -120,31 +120,31 @@ class profile {
             if ($enrolment->timeend == 0) {
                 $expirationend = get_string_kopere("profile_enrol_notexpires");
             } else {
-                $expirationend = '<br>' . get_string_kopere("profile_enrol_expires") . ' <em>' .
-                    userdate($enrolment->timeend, get_string_kopere("dateformat")) . '</em>';
+                $expirationend = "<br>" . get_string_kopere("profile_enrol_expires") . " <em>" .
+                    userdate($enrolment->timeend, get_string_kopere("dateformat")) . "</em>";
             }
 
             $roleassignments = $DB->get_records("role_assignments",
                 [
                     "contextid" => $course->ctxid,
                     "userid" => $userid,
-                ], '', 'DISTINCT roleid');
+                ], "", "DISTINCT roleid");
 
-            $rolehtml = '';
+            $rolehtml = "";
             foreach ($roleassignments as $roleassignment) {
                 $role = $DB->get_record("role", ["id" => $roleassignment->roleid]);
-                $rolehtml .= '<span class="btn btn-default">' . role_get_name($role) . '</span>';
+                $rolehtml .= '<span class="btn btn-default">' . role_get_name($role) . "</span>";
             }
 
             $matriculastatus = '<span class="btn-dangerpadding-0-8 border-radius-5 text-nowrap">' .
-                get_string_kopere("profile_enrol_inactive") . '</span>';
+                get_string_kopere("profile_enrol_inactive") . "</span>";
             if ($enrolment->status == 0) {
                 $matriculastatus = '<span class="btn-successpadding-0-8 border-radius-5 text-nowrap">' .
-                    get_string_kopere("profile_enrol_active") . '</span>';
+                    get_string_kopere("profile_enrol_active") . "</span>";
             }
 
             $url = local_kopere_dashboard_makeurl("userenrolment", "mathedit",
-                ["courseid" => $course->id, "ueid" => $enrolment->id], "view-ajax");
+                ["courseid" => $course->id, "ueid" => $enrolment->id], "view");
             $html .=
                 "<li>
                     <h4 class=\"title\">{$course->fullname}

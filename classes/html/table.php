@@ -38,7 +38,7 @@ class table {
      *
      * @param string $adicional
      */
-    public function __construct($adicional = '') {
+    public function __construct($adicional = "") {
         $this->tableid = "table_" . uniqid();
         echo "<table id='{$this->tableid}' class='table table-hover' width='100%' {$adicional} \>";
     }
@@ -106,7 +106,7 @@ class table {
      */
     protected function get_click($linha) {
         if ($this->click == null) {
-            return '';
+            return "";
         }
 
         $chaves = $this->click["chave"];
@@ -156,25 +156,25 @@ class table {
      * @param $header
      * @param string $class
      */
-    public function print_header($header = null, $class = '') {
+    public function print_header($header = null, $class = "") {
         if ($header == null) {
             $header = $this->colunas;
         }
         $this->colunas = [];
-        echo '<thead>';
+        echo "<thead>";
         echo "<tr class='{$class}'>";
         foreach ($header as $value) {
             echo "<th class='text-center' style='{$value->style_header}'>";
-            if ($value->title == '') {
+            if ($value->title == "") {
                 echo "&nbsp;";
             } else {
                 echo $value->title;
             }
             $this->colunas[] = $value;
-            echo '</th>';
+            echo "</th>";
         }
-        echo '</tr>';
-        echo '</thead>';
+        echo "</tr>";
+        echo "</thead>";
         echo "\n";
         $this->isprint = true;
     }
@@ -185,7 +185,7 @@ class table {
      * @param $linhas
      * @param string $class
      */
-    public function set_row($linhas, $class = '') {
+    public function set_row($linhas, $class = "") {
         if (!$this->isprint && count($this->colunas)) {
             $this->print_header($this->colunas);
         }
@@ -193,7 +193,7 @@ class table {
         if ($this->click != null) {
             echo '<tbody class="hover-pointer">';
         } else {
-            echo '<tbody>';
+            echo "<tbody>";
         }
         foreach ($linhas as $linha) {
 
@@ -211,7 +211,7 @@ class table {
             if ($this->click != null) {
                 echo "<tr {$textid} onClick='{$this->get_click($linha)}'>";
             } else {
-                echo '<tr>';
+                echo "<tr>";
             }
             foreach ($this->colunas as $col) {
                 $class = $class . " {$col->style_col}";
@@ -234,9 +234,9 @@ class table {
                 }
 
             }
-            echo '</tr>';
+            echo "</tr>";
         }
-        echo '</tbody>';
+        echo "</tbody>";
     }
 
     /**
@@ -245,10 +245,10 @@ class table {
      * @param $html
      * @param string $class
      */
-    public function print_row($html, $class = '') {
+    public function print_row($html, $class = "") {
         echo "<td class='{$class}'>";
         echo $html;
-        echo '</td>';
+        echo "</td>";
     }
 
     /**
@@ -260,7 +260,7 @@ class table {
     public function close($datatable = false, $extras = null) {
         global $PAGE;
 
-        echo '</table>';
+        echo "</table>";
         if ($datatable) {
 
             $initparams = [
@@ -274,9 +274,9 @@ class table {
             if (isset($json[800])) {
                 $json = htmlspecialchars($json, ENT_COMPAT);
                 echo "\n<input type=\"hidden\" id='tableparams_{$this->tableid}' value='{$json}'/>\n";
-                $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', "init", [$this->tableid, null]);
+                $PAGE->requires->js_call_amd("local_kopere_dashboard/dataTables_init", "init", [$this->tableid, null]);
             } else {
-                $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', "init", [$this->tableid, $initparams]);
+                $PAGE->requires->js_call_amd("local_kopere_dashboard/dataTables_init", "init", [$this->tableid, $initparams]);
             }
         }
     }

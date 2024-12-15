@@ -141,7 +141,7 @@ class mensagem {
      *
      * @return string
      */
-    public static function info($texto, $extraclass = '') {
+    public static function info($texto, $extraclass = "") {
         return "
             <div class='alert alert-info {$extraclass}'>
                 <i class='fa fa-info-circle'></i>
@@ -155,7 +155,7 @@ class mensagem {
      * @param $texto
      * @param string $extraclass
      */
-    public static function print_info($texto, $extraclass = '') {
+    public static function print_info($texto, $extraclass = "") {
         echo self::info($texto, $extraclass);
     }
 

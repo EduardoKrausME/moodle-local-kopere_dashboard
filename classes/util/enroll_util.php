@@ -54,7 +54,7 @@ class enroll_util {
             return false;
         }
 
-        $enrol = $DB->get_record("enrol", ["courseid" => $course->id, "enrol" => "manual"], '*', IGNORE_MULTIPLE);
+        $enrol = $DB->get_record("enrol", ["courseid" => $course->id, "enrol" => "manual"], "*", IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
         }
@@ -84,19 +84,19 @@ class enroll_util {
         }
 
         $enrol = $DB->get_record("enrol",
-            ["courseid" => $course, "enrol" => "manual"], '*', IGNORE_MULTIPLE);
+            ["courseid" => $course, "enrol" => "manual"], "*", IGNORE_MULTIPLE);
         if ($enrol == null) {
             return false;
         }
 
         $testroleassignments = $DB->get_record("role_assignments",
-            ["roleid" => 5, "contextid" => $context->id, "userid" => $user->id], '*', IGNORE_MULTIPLE);
+            ["roleid" => 5, "contextid" => $context->id, "userid" => $user->id], "*", IGNORE_MULTIPLE);
         if ($testroleassignments == null) {
             return false;
         }
 
         $userenrolments = $DB->get_record("user_enrolments",
-            ["enrolid" => $enrol->id, "userid" => $user->id], '*', IGNORE_MULTIPLE);
+            ["enrolid" => $enrol->id, "userid" => $user->id], "*", IGNORE_MULTIPLE);
         if ($userenrolments != null) {
             return !$userenrolments->status;
         } else {

@@ -46,14 +46,14 @@ if ($ADMIN->fulltree) {
 
     if (method_exists($settings, "add")) {
 
-        $setting = new admin_setting_configcheckbox('local_kopere_dashboard/menu',
+        $setting = new admin_setting_configcheckbox("local_kopere_dashboard/menu",
             get_string("kopere_dashboard_menu", "local_kopere_dashboard"),
             get_string("kopere_dashboard_menu_desc", "local_kopere_dashboard"), 1
         );
         $setting->set_updatedcallback("theme_reset_all_caches");
         $settings->add($setting);
 
-        $setting = new admin_setting_configcheckbox('local_kopere_dashboard/menuwebpages',
+        $setting = new admin_setting_configcheckbox("local_kopere_dashboard/menuwebpages",
             get_string("kopere_dashboard_menuwebpages", "local_kopere_dashboard"),
             get_string("kopere_dashboard_menuwebpages_desc", "local_kopere_dashboard"), 1
         );
@@ -61,7 +61,7 @@ if ($ADMIN->fulltree) {
         $settings->add($setting);
 
         $settings->add(
-            new admin_setting_configcheckbox('local_kopere_dashboard/monitor',
+            new admin_setting_configcheckbox("local_kopere_dashboard/monitor",
                 get_string("kopere_dashboard_monitor", "local_kopere_dashboard"),
                 get_string("kopere_dashboard_monitor_desc", "local_kopere_dashboard"),
                 0

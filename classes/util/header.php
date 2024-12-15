@@ -99,7 +99,7 @@ class header {
 
         if (!$PAGE->requires->is_head_done()) {
             $PAGE->set_context(\context_system::instance());
-            $PAGE->set_pagetype('admin-setting');
+            $PAGE->set_pagetype("admin-setting");
             $PAGE->set_pagelayout("standard");
             $PAGE->set_title("Erro");
             $PAGE->set_heading("Erro");

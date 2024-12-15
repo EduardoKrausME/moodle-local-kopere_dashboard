@@ -60,12 +60,12 @@ class provider implements
     public static function get_metadata(collection $collection): collection {
 
         $collection->add_database_table(
-            'local_kopere_dashboard_request',
+            "local_kopere_dashboard_request",
             [
-                'user_id' => 'privacy:metadata:user_id',
-                'ip' => 'privacy:metadata:ip',
+                "user_id" => "privacy:metadata:user_id",
+                "ip" => "privacy:metadata:ip",
             ],
-            'privacy:metadata'
+            "privacy:metadata"
         );
         return $collection;
     }
@@ -85,8 +85,8 @@ class provider implements
                        AND contextlevel = :contextlevel";
 
         $contextlist = new contextlist();
-        $contextlist->set_component('local_kopere_dashboard');
-        $contextlist->add_from_sql($sql, ['userid' => $userid, 'contextlevel' => CONTEXT_USER]);
+        $contextlist->set_component("local_kopere_dashboard");
+        $contextlist->add_from_sql($sql, ["userid" => $userid, "contextlevel" => CONTEXT_USER]);
         return $contextlist;
     }
 
@@ -104,8 +104,8 @@ class provider implements
         }
 
         $params = [
-            'contextlevel' => CONTEXT_USER,
-            'contextid' => $context->id,
+            "contextlevel" => CONTEXT_USER,
+            "contextid" => $context->id,
         ];
 
         $sql = "SELECT instanceid AS userid
@@ -113,7 +113,7 @@ class provider implements
                  WHERE id = :contextid
                        AND contextlevel = :contextlevel";
 
-        $userlist->add_from_sql('userid', $sql, $params);
+        $userlist->add_from_sql("userid", $sql, $params);
     }
 
     /**
@@ -164,8 +164,8 @@ class provider implements
 
         // User context / Privacy and policies / Data requests.
         $subcontext = [
-            get_string('privacyandpolicies', 'admin'),
-            get_string('datarequests', 'tool_dataprivacy'),
+            get_string("privacyandpolicies", "admin"),
+            get_string("datarequests", "tool_dataprivacy"),
         ];
         writer::with_context($context)->export_data($subcontext, (object)$contextdatatowrite);
 
@@ -187,9 +187,9 @@ class provider implements
             return;
         }
 
-        $where = ['userid' => $context->instanceid];
-        $DB->delete_records_select('local_kopere_dashboard_login', 'userid = :userid', $where);
-        $DB->delete_records_select('local_kopere_dashboard_acess', 'userid = :userid', $where);
+        $where = ["userid" => $context->instanceid];
+        $DB->delete_records_select("local_kopere_dashboard_login", "userid = :userid", $where);
+        $DB->delete_records_select("local_kopere_dashboard_acess", "userid = :userid", $where);
     }
 
     /**
@@ -208,10 +208,10 @@ class provider implements
             return;
         }
 
-        $where = ['userid' => $context->instanceid];
+        $where = ["userid" => $context->instanceid];
 
-        $DB->delete_records_select('local_kopere_dashboard_login', 'userid = :userid', $where);
-        $DB->delete_records_select('local_kopere_dashboard_acess', 'userid = :userid', $where);
+        $DB->delete_records_select("local_kopere_dashboard_login", "userid = :userid", $where);
+        $DB->delete_records_select("local_kopere_dashboard_acess", "userid = :userid", $where);
     }
 
     /**
@@ -230,9 +230,9 @@ class provider implements
             return;
         }
 
-        $where = ['userid' => $context->instanceid];
-        $DB->delete_records_select('local_kopere_dashboard_login', 'userid = :userid', $where);
-        $DB->delete_records_select('local_kopere_dashboard_acess', 'userid = :userid', $where);
+        $where = ["userid" => $context->instanceid];
+        $DB->delete_records_select("local_kopere_dashboard_login", "userid = :userid", $where);
+        $DB->delete_records_select("local_kopere_dashboard_acess", "userid = :userid", $where);
     }
 }
 

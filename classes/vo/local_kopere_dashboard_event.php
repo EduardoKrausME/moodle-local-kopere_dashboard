@@ -112,13 +112,13 @@ class local_kopere_dashboard_event extends \stdClass {
         $return = new local_kopere_dashboard_event();
 
         $return->id = optional_param("id", 0, PARAM_INT);
-        $return->module = optional_param("module", '', PARAM_TEXT);
-        $return->event = optional_param("event", '', PARAM_TEXT);
+        $return->module = optional_param("module", "", PARAM_TEXT);
+        $return->event = optional_param("event", "", PARAM_TEXT);
         $return->status = optional_param("status", 1, PARAM_INT);
-        $return->userfrom = optional_param("userfrom", '', PARAM_TEXT);
-        $return->userto = optional_param("userto", '', PARAM_TEXT);
-        $return->subject = optional_param("subject", '', PARAM_TEXT);
-        $return->message = optional_param("message", '', PARAM_RAW);
+        $return->userfrom = optional_param("userfrom", "", PARAM_TEXT);
+        $return->userto = optional_param("userto", "", PARAM_TEXT);
+        $return->subject = optional_param("subject", "", PARAM_TEXT);
+        $return->message = optional_param("message", "", PARAM_RAW);
 
         return $return;
     }

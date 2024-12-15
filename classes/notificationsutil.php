@@ -26,6 +26,7 @@
 namespace local_kopere_dashboard;
 
 use core\event\base;
+use core_table\external\dynamic\get;
 use local_kopere_dashboard\html\form;
 use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\util\config;
@@ -46,7 +47,7 @@ class notificationsutil {
      * @throws \coding_exception
      */
     public function add_form_extra() {
-        $module = optional_param("module", '', PARAM_TEXT);
+        $module = optional_param("module", "", PARAM_TEXT);
 
         if (!isset($module[1])) {
             end_util::end_script_show(get_string_kopere("notification_add_selectmodule"));
@@ -79,10 +80,17 @@ class notificationsutil {
      * @return \stdClass
      */
     public function list_events() {
-        $eventclasss = array_merge(
-            \report_eventlist_list_generator::get_core_events_list(false),
-            \report_eventlist_list_generator::get_non_core_event_list(false)
-        );
+        if (release::version() >= 4) {
+            $eventclasss = array_merge(
+                \report_eventlist_list_generator::get_all_events_list(false),
+                \report_eventlist_list_generator::get_all_events_list(false)
+            );
+        }else {
+            $eventclasss = array_merge(
+                \report_eventlist_list_generator::get_core_events_list(false),
+                \report_eventlist_list_generator::get_non_core_event_list(false)
+            );
+        }
 
         $components = [];
         $eventinformation = [];
@@ -153,7 +161,7 @@ class notificationsutil {
     public function settings_load_template() {
         global $CFG, $COURSE;
 
-        $template = optional_param("template", 'blue.html', PARAM_RAW);
+        $template = optional_param("template", "blue.html", PARAM_RAW);
         $templatefile = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$template}";
 
         $content = file_get_contents($templatefile);
@@ -169,8 +177,8 @@ class notificationsutil {
             "tags" => [
                 "moodle_fullname" => $COURSE->fullname,
                 "moodle_shortname" => $COURSE->shortname,
-                "message" => "<h2>Título</h2><p>Linha 1</p><p>Linha 2</p>",
-                "date_year" => userdate(time(), '%Y'),
+                "message" => get_string_kopere("tags_message"),
+                "date_year" => userdate(time(), "%Y"),
                 "manager" => $linkmanager,
             ],
         ];
@@ -198,22 +206,22 @@ class notificationsutil {
             case "core_course":
                 return get_string_kopere("notification_core_course");
             case "core_course_completion":
-                return 'Conclusão de Cursos';
+                return get_string_kopere("notification_core_course_completion");
             case "course_module_created":
-                return 'Criação de novo Módulo em Curso';
+                return get_string_kopere("notification_course_module_created");
             case "core_course_content":
-                return 'Conteúdo de Cursos';
+                return get_string_kopere("notification_core_course_content");
             case "core_course_module":
-                return 'Módulo de cursos';
+                return get_string_kopere("notification_core_course_module");
             case "core_course_section":
-                return 'Sessões de cursos';
+                return get_string_kopere("notification_core_course_section");
 
             case "core_user":
                 return get_string_kopere("notification_core_user");
             case "core_user_enrolment":
                 return get_string_kopere("notification_core_user_enrolment");
             case "core_user_password":
-                return "Senhas";
+                return get_string_kopere("notification_core_user_password");
 
             case "local_kopere_dashboard":
                 return get_string_kopere("notification_local_kopere_dashboard");
@@ -237,7 +245,7 @@ class notificationsutil {
             $count = $DB->get_record_sql($sql, ["name" => $module]);
 
             if ($count->num || !$onlyused) {
-                return get_string("resource") . ': ' . get_string("modulename", $module);
+                return get_string("resource") . ": " . get_string("modulename", $module);
             }
         }
 
@@ -273,12 +281,12 @@ class notificationsutil {
     public static function get_template_html() {
         global $CFG;
 
-        $notificacaotemplatehtml = config::get_key('notificacao-template-html');
+        $notificacaotemplatehtml = config::get_key("notificacao-template-html");
         if ($notificacaotemplatehtml) {
             return $notificacaotemplatehtml;
         }
 
-        $notificacaotemplate = config::get_key('notificacao-template');
+        $notificacaotemplate = config::get_key("notificacao-template");
         if ($notificacaotemplate) {
             if (file_exists("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$notificacaotemplate}")) {
                 return file_get_contents("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$notificacaotemplate}");

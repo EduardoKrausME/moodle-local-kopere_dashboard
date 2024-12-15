@@ -121,7 +121,7 @@ class input_select extends input_base {
         }
 
         foreach ($this->values as $row) {
-            $extra = '';
+            $extra = "";
             if (is_array($row)) {
                 $key = $row[$this->valueskey];
                 $value = $row[$this->valuesvalue];
@@ -143,7 +143,7 @@ class input_select extends input_base {
                 $return .= ' selected="selected"';
             }
 
-            $return .= $extra . '>';
+            $return .= $extra . ">";
 
             $return .= htmlentities($value, ENT_COMPAT) . '</option>';
         }

@@ -72,8 +72,8 @@ class local_kopere_dashboard_menu extends \stdClass {
         $return = new local_kopere_dashboard_menu();
 
         $return->id = 0;
-        $return->link = optional_param("link", '', PARAM_TEXT);
-        $return->title = optional_param("title", '', PARAM_TEXT);
+        $return->link = optional_param("link", "", PARAM_TEXT);
+        $return->title = optional_param("title", "", PARAM_TEXT);
         $return->menuid = optional_param("menuid", 0, PARAM_INT);
 
         return $return;

@@ -46,7 +46,7 @@ class course_access_grade {
      */
     public function name() {
         $cursosid = optional_param("courseid", 0, PARAM_INT);
-        return get_string_kopere('reports_report_courses-4') . ' ' . get_course($cursosid)->fullname;
+        return get_string_kopere("reports_report_courses-4") . " " . get_course($cursosid)->fullname;
     }
 
     /**
@@ -87,7 +87,7 @@ class course_access_grade {
                   document.body.className += " menu-w-90";
               </script>';
 
-        $sections = $DB->get_records("course_sections", ["course" => $courseid], 'section asc');
+        $sections = $DB->get_records("course_sections", ["course" => $courseid], "section asc");
 
         button::info(get_string_kopere("reports_export"), url_util::querystring() . "&export=xls");
 
@@ -96,13 +96,13 @@ class course_access_grade {
         export::header($export, $course->fullname);
 
         echo '<table id="list-course-access" class="table table-bordered table-hover" border="1">';
-        echo '<thead>';
-        $printsessoes = '';
+        echo "<thead>";
+        $printsessoes = "";
 
         $courseinfo = [];
         $modinfo = [];
         foreach ($sections as $key => $section) {
-            $partesmodinfo = explode(',', $section->sequence);
+            $partesmodinfo = explode(",", $section->sequence);
             $countmodinfo = 0;
             foreach ($partesmodinfo as $parte) {
                 $sql = "SELECT cm.*, cm.id AS course_modules_id, m.*, m.id AS modules_id, cm.instance
@@ -160,14 +160,14 @@ class course_access_grade {
                 } else {
                     $printsessoes .= "Sessão {$key}";
                 }
-                $printsessoes .= '</th>';
+                $printsessoes .= "</th>";
             }
         }
 
-        $groupscols = '';
+        $groupscols = "";
         if ($groups) {
             $groupscols = '<th rowspan="2" align="center" bgcolor="#979797" style="text-align:center;" >' .
-                get_string_kopere("reports_groupname") . '</th>';
+                get_string_kopere("reports_groupname") . "</th>";
         }
 
         echo '<tr bgcolor="#979797" style="background-color: #979797;">
@@ -180,7 +180,7 @@ class course_access_grade {
                 <td align="center" bgcolor="#979797" style="text-align:center;">' .
             get_string_kopere("user_table_fullname") . '</td>
                 <td align="center" bgcolor="#979797" style="text-align:center;">' .
-            get_string_kopere("user_table_email") . '</td>';
+            get_string_kopere("user_table_email") . "</td>";
 
         foreach ($modinfo as $infos) {
             $link = "{$CFG->wwwroot}/course/view.php?id={$infos->course}#module-{$infos->course_modules_id}";
@@ -195,8 +195,8 @@ class course_access_grade {
                   </th>";
             @ob_flush();
         }
-        echo '</tr>';
-        echo '</thead>';
+        echo "</tr>";
+        echo "</thead>";
 
         if ($export == "xls") {
             $sql = "
@@ -229,10 +229,10 @@ class course_access_grade {
         $total = $DB->get_record_sql("SELECT FOUND_ROWS() as num_itens");
 
         foreach ($allusercourse as $user) {
-            echo '<tr>';
+            echo "<tr>";
             $link = "{$CFG->wwwroot}/user/view.php?id={$user->id}&course={$courseid}";
             $this->td("<a href='{$link}' target=\"moodle\">" . fullname($user) . "</a>", 'bg-info text-nowrap', '#D9EDF7');
-            $this->td($user->email, 'bg-info text-nowrap', '#D9EDF7');
+            $this->td($user->email, "bg-info text-nowrap", "#D9EDF7");
 
             if ($groups) {
 
@@ -250,7 +250,7 @@ class course_access_grade {
                 foreach ($groupsuser as $groupuser) {
                     $groupsuserprint[] = $groupuser->name;
                 }
-                $this->td(implode('<br>', $groupsuserprint), 'bg-info text-nowrap', '#D9EDF7');
+                $this->td(implode("<br>", $groupsuserprint), "bg-info text-nowrap", "#D9EDF7");
             }
 
             foreach ($modinfo as $infos) {
@@ -274,30 +274,30 @@ class course_access_grade {
                     ]);
 
                 if ($logresult && $logresult->contagem) {
-                    $this->td(get_string_kopere("reports_access_n", $logresult->contagem), 'text-nowrap bg-success', "DFF0D8");
+                    $this->td(get_string_kopere("reports_access_n", $logresult->contagem), "text-nowrap bg-success", "DFF0D8");
                     $this->td(userdate($logresult->timecreated, get_string("strftimedatetime")),
-                        'text-nowrap bg-success', '#DFF0D8');
+                        "text-nowrap bg-success", "#DFF0D8");
 
                     if ($infos->grade) {
                         $gradinginfo = grade_get_grades($courseid, "mod", $infos->name, $infos->instance, $user->id);
                         foreach ($gradinginfo->items[0]->grades as $grade) {
-                            $this->td($grade->str_grade, 'text-nowrap bg-success', '#D000D8');
+                            $this->td($grade->str_grade, "text-nowrap bg-success", "#D000D8");
                             break;
                         }
                     }
                 } else {
                     $this->td2('<span style="color: #282828">' . get_string_kopere("reports_noneaccess") .
-                        '</span>', 'bg-warning text-nowrap', '#FCF8E3');
+                        "</span>", "bg-warning text-nowrap", "#FCF8E3");
 
                     if ($infos->grade) {
-                        $this->td('--', 'text-nowrap bg-success', '#D000D8');
+                        $this->td("--", "text-nowrap bg-success", "#D000D8");
                     }
                 }
             }
-            echo '</tr>';
+            echo "</tr>";
         }
 
-        echo '</table>';
+        echo "</table>";
 
         export::close();
         pagination::create($atualpage, $total->num_itens, $perpage);

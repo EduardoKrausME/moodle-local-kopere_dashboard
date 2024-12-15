@@ -29,9 +29,9 @@ $functions = [
         "classname" => '\local_kopere_dashboard\external\performancemonitor',
         "methodname" => "disk_moodledata",
         "classpath" => 'local/kopere_dashboard/classes/external/performancemonitor.php',
-        "description" => 'Disk Moodledata',
+        "description" => "Disk Moodledata",
         "type" => "read",
         "ajax" => true,
-        "capabilities" => 'local/kopere_dashboard:view',
+        "capabilities" => "local/kopere_dashboard:view",
         ],
 ];

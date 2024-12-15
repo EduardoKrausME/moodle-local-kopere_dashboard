@@ -43,7 +43,7 @@ class form {
      * @param null $formaction
      * @param string $classextra
      */
-    public function __construct($formaction = null, $classextra = '') {
+    public function __construct($formaction = null, $classextra = "") {
         $this->formaction = $formaction;
         if ($this->formaction) {
             echo "<form method=\"post\" class='validate {$classextra}' enctype='multipart/form-data'
@@ -62,7 +62,7 @@ class form {
      * @param string $adicionaltext
      * @param string $type
      */
-    public function print_row($titulo, $input, $name = '', $adicionaltext = '', $type = '') {
+    public function print_row($titulo, $input, $name = "", $adicionaltext = "", $type = "") {
         if ($titulo) {
             $titulo = "<label for='{$name}'>{$titulo}</label>";
         }
@@ -97,7 +97,7 @@ class form {
      * @param string $name
      * @param string $adicionaltext
      */
-    public function print_row_one($titulo, $input, $name = '', $adicionaltext = '') {
+    public function print_row_one($titulo, $input, $name = "", $adicionaltext = "") {
         echo "<div class='form-check area_{$name}'>
                   <label for='{$name}' class='form-check-label'>
                       {$input} {$titulo}</label>
@@ -144,7 +144,7 @@ class form {
      * @param $name
      * @param string $value
      */
-    public function create_hidden_input($name, $value = '') {
+    public function create_hidden_input($name, $value = "") {
         echo "<input type=\"hidden\" name='{$name}' id='{$name}' value='" .
             htmlspecialchars($value, ENT_COMPAT) . "'/>";
     }
@@ -158,7 +158,7 @@ class form {
      *
      * @throws \coding_exception
      */
-    public function create_submit_input($value = '', $class = '', $additionaltext = '') {
+    public function create_submit_input($value = "", $class = "", $additionaltext = "") {
         if (AJAX_SCRIPT) {
             echo "<div class='modal-footer margin-form'>
                       <button class='btn btn-default' data-dismiss=\"modal\">" . get_string("cancel") . "</button>
@@ -167,7 +167,7 @@ class form {
         } else {
             $html = "<input class='btn btn-success bt-submit {$class}' type=\"submit\" value='" .
                 htmlspecialchars($value, ENT_COMPAT) . "' />";
-            $this->print_row('', $html, "btsubmit", $additionaltext);
+            $this->print_row("", $html, "btsubmit", $additionaltext);
         }
     }
 
@@ -176,7 +176,7 @@ class form {
      */
     public function close() {
         if ($this->formaction) {
-            echo '</form>';
+            echo "</form>";
         }
     }
 
@@ -187,7 +187,7 @@ class form {
      */
     public function close_and_auto_submit_input($campo) {
         global $PAGE;
-        echo "<input id='submit_{$campo}' name='' type=\"submit\" style='display: none;' />";
+        echo "<input id='submit_{$campo}' type=\"submit\" style='display: none;' />";
 
         $PAGE->requires->js_call_amd('local_kopere_dashboard/form_exec', "form_close_and_auto_submit_input", [$campo]);
 

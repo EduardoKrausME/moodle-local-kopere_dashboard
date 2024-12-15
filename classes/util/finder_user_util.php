@@ -47,7 +47,7 @@ class finder_user_util {
             return null;
         }
 
-        $user = $DB->get_record("user", [$key => $value, "deleted" => 0], '*', IGNORE_MULTIPLE);
+        $user = $DB->get_record("user", [$key => $value, "deleted" => 0], "*", IGNORE_MULTIPLE);
 
         return $user;
     }

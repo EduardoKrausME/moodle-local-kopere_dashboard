@@ -41,10 +41,10 @@ class user_util {
      */
     public static function explode_name($newuser) {
         if ($newuser->lastname == null) {
-            $nomes = explode(' ', $newuser->firstname);
+            $nomes = explode(" ", $newuser->firstname);
             $newuser->firstname = $nomes[0];
             array_shift($nomes);
-            $newuser->lastname = implode(' ', $nomes);
+            $newuser->lastname = implode(" ", $nomes);
         }
 
         return $newuser;
@@ -81,7 +81,7 @@ class user_util {
 
         $errors = [];
         if (!empty($newuser->password)) {
-            $errmsg = '';
+            $errmsg = "";
             if (!check_password_policy($newuser->password, $errmsg)) {
                 $errors[] = $errmsg;
             }

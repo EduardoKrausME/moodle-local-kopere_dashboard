@@ -23,12 +23,12 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once('../../config.php');
+require_once("../../config.php");
 
 require_login();
 $context = context_system::instance();
-require_capability('local/kopere_dashboard:view', $context);
-require_capability('local/kopere_dashboard:manage', $context);
+require_capability("local/kopere_dashboard:view", $context);
+require_capability("local/kopere_dashboard:manage", $context);
 
 $type = required_param("type", PARAM_TEXT);
 $id = required_param("id", PARAM_TEXT);

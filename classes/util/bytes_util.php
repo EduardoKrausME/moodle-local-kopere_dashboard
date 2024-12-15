@@ -51,24 +51,24 @@ class bytes_util {
         $bytes = $bytes / self::$divisor;
         if ($bytes < 1000) {
             return self::remove_zero(number_format($bytes, 0, get_string("decsep", "langconfig"),
-                    get_string("thousandssep", "langconfig")) . ' KB', 0);
+                    get_string("thousandssep", "langconfig")) . " KB", 0);
         }
 
         $bytes = $bytes / self::$divisor;
         if ($bytes < 1000) {
             return self::remove_zero(number_format($bytes, 0, get_string("decsep", "langconfig"),
-                    get_string("thousandssep", "langconfig")) . ' MB', 0);
+                    get_string("thousandssep", "langconfig")) . " MB", 0);
         }
 
         $bytes = $bytes / self::$divisor;
         if ($bytes < 1000) {
             return self::remove_zero(number_format($bytes, 1, get_string("decsep", "langconfig"),
-                    get_string("thousandssep", "langconfig")) . ' GB', 1);
+                    get_string("thousandssep", "langconfig")) . " GB", 1);
         }
 
         $bytes = $bytes / self::$divisor;
         return self::remove_zero(number_format($bytes, 2, get_string("decsep", "langconfig"),
-                get_string("thousandssep", "langconfig")) . ' TB', 2);
+                get_string("thousandssep", "langconfig")) . " TB", 2);
     }
 
     /**
@@ -81,11 +81,11 @@ class bytes_util {
      */
     private static function remove_zero($texto, $count) {
         if ($count == 3) {
-            return str_replace(',000', '', $texto);
+            return str_replace(",000", "", $texto);
         } else if ($count == 2) {
-            return str_replace(',00', '', $texto);
+            return str_replace(",00", "", $texto);
         } else {
-            return str_replace(',0', '', $texto);
+            return str_replace(",0", "", $texto);
         }
     }
 
@@ -97,7 +97,7 @@ class bytes_util {
      * @return float|int
      */
     public static function et_duration_segundos($value) {
-        $partes = explode(':', $value);
+        $partes = explode(":", $value);
 
         return ($partes[0] * 60 * 60) + ($partes[1] * 60) + $partes[2];
     }

@@ -60,9 +60,9 @@ class benchmark {
 
         echo '<div style="text-align: center;">' . get_string_kopere("benchmark_info");
         button::add(get_string_kopere("benchmark_execute"), local_kopere_dashboard_makeurl("benchmark", "execute"));
-        echo '</div>';
+        echo "</div>";
 
-        echo '</div>';
+        echo "</div>";
 
         dashboard_util::end_page();
     }
@@ -89,13 +89,13 @@ class benchmark {
 
         $score = $test->get_total();
         if ($score < 4) {
-            mensagem::print_info('<strong>' . get_string_kopere("benchmark_timetotal") . '</strong>
+            mensagem::print_info("<strong>" . get_string_kopere("benchmark_timetotal") . '</strong>
                 ' . $this->format_number($score) . ' ' . get_string_kopere("benchmark_seconds"));
         } else if ($score < 8) {
-            mensagem::print_warning('<strong>' . get_string_kopere("benchmark_timetotal") . '</strong>
+            mensagem::print_warning("<strong>" . get_string_kopere("benchmark_timetotal") . '</strong>
                 ' . $this->format_number($score) . ' ' . get_string_kopere("benchmark_seconds"));
         } else {
-            mensagem::print_danger('<strong>' . get_string_kopere("benchmark_timetotal") . '</strong>
+            mensagem::print_danger("<strong>" . get_string_kopere("benchmark_timetotal") . '</strong>
                 ' . $this->format_number($score) . ' ' . get_string_kopere("benchmark_seconds"));
         }
 
@@ -121,12 +121,12 @@ class benchmark {
                   </tr>";
         }
 
-        echo '</tbody></table>';
+        echo "</tbody></table>";
 
         title_util::print_h3("benchmark_testconf");
         $this->performance();
 
-        echo '</div>';
+        echo "</div>";
 
         dashboard_util::end_page();
     }
@@ -161,11 +161,11 @@ class benchmark {
                       <td>{$test["title"]}</td>
                       <td>{$test["resposta"]}</td>
                       <td>{$test["description"]}</td>
-                      <td><a target=\"_blank\" href='{$CFG->wwwroot}/admin/{$test["url"]}'>" . get_string("edit", '') . "</a></td>
+                      <td><a target=\"_blank\" href='{$CFG->wwwroot}/admin/{$test["url"]}'>" . get_string("edit") . "</a></td>
                   </tr>";
         }
 
-        echo '</tbody></table>';
+        echo "</tbody></table>";
     }
 
     /**
@@ -177,6 +177,6 @@ class benchmark {
      * @throws \coding_exception
      */
     private function format_number($number) {
-        return str_replace('.', get_string("decsep", "langconfig"), $number);
+        return str_replace(".", get_string("decsep", "langconfig"), $number);
     }
 }

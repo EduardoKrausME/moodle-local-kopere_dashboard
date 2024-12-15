@@ -100,13 +100,13 @@ class local_kopere_dashboard_pages extends \stdClass {
         $return->id = 0;
         $return->menuid = optional_param("menuid", 0, PARAM_INT);
         $return->courseid = optional_param("courseid", 0, PARAM_INT);
-        $return->title = optional_param("title", '', PARAM_TEXT);
-        $return->link = html::link(optional_param("link", '', PARAM_TEXT));
-        $return->text = optional_param("text", '', PARAM_RAW);
-        $return->theme = optional_param("theme", '', PARAM_TEXT);
+        $return->title = optional_param("title", "", PARAM_TEXT);
+        $return->link = html::link(optional_param("link", "", PARAM_TEXT));
+        $return->text = optional_param("text", "", PARAM_RAW);
+        $return->theme = optional_param("theme", "", PARAM_TEXT);
         $return->visible = optional_param("visible", 1, PARAM_INT);
         $return->pageorder = optional_param("pageorder", 0, PARAM_INT);
-        $return->config = optional_param("config", '', PARAM_TEXT);
+        $return->config = optional_param("config", "", PARAM_TEXT);
 
         return $return;
     }

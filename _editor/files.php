@@ -22,12 +22,12 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once('../../../config.php');
-require_once('../lib.php');
+require_once("../../../config.php");
+require_once("../lib.php");
 
 require_login();
 $context = context_system::instance();
-require_capability('moodle/site:config', $context);
+require_capability("moodle/site:config", $context);
 
 $page = required_param("page", PARAM_TEXT);
 
@@ -53,7 +53,7 @@ if (isset($_FILES["file"]["name"])) {
             "contextid" => $contextid,
             "userid" => $adminid,
             "filearea" => $filearea,
-            "filepath" => '/',
+            "filepath" => "/",
             "itemid" => time() - 1714787612,
             "filename" => $_FILES["file"]["name"],
         ];
@@ -72,7 +72,7 @@ if (isset($_FILES["file"]["name"])) {
 
         die();
     } else {
-        // header($_SERVER["SERVER_PROTOCOL"] . ' 404', true, 500);
+        // header($_SERVER["SERVER_PROTOCOL"] . " 404", true, 500);
         die("File type {$extension} not allowed!");
     }
 }

@@ -71,7 +71,7 @@ class dashboard_util {
 
         self::$currenttitle = $title;
 
-        $link = '';
+        $link = "";
 
         if ($settingurl != null) {
             $link
@@ -190,7 +190,7 @@ class dashboard_util {
             $plugin = "kopere_{$menufunctionstart[1]}";
         }
 
-        $submenuhtml = '';
+        $submenuhtml = "";
         /** @var submenu_util $submenu */
         foreach ($menu->get_submenus() as $submenu) {
             $classsub = self::test_menu_active($submenu->get_classname());
@@ -213,7 +213,7 @@ class dashboard_util {
                     </a>
                 </li>";
         }
-        if ($submenuhtml != '') {
+        if ($submenuhtml != "") {
             $submenuhtml = "<ul class='submenu submenu-kopere'>{$submenuhtml}</ul>";
         }
 
@@ -253,13 +253,13 @@ class dashboard_util {
      */
     private static function test_menu_active($classname) {
 
-        $oldclassname = optional_param("classname", '', PARAM_TEXT);
+        $oldclassname = optional_param("classname", "", PARAM_TEXT);
 
         if ($classname == $oldclassname) {
             return "active";
         }
 
-        return '';
+        return "";
     }
 
     /**

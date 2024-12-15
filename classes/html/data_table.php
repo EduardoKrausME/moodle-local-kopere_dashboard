@@ -52,7 +52,7 @@ class data_table {
     private $clickredirect = null;
 
     /** @var string */
-    private $tableid = '';
+    private $tableid = "";
 
     /** @var bool */
     private $isexport = false;
@@ -166,7 +166,7 @@ class data_table {
      * @return string
      * @throws \coding_exception
      */
-    public function print_header($class = '', $printbody = true, $returnhtml = false) {
+    public function print_header($class = "", $printbody = true, $returnhtml = false) {
 
         $return = "";
 
@@ -175,7 +175,7 @@ class data_table {
         }
 
         $return .= "<table id='{$this->tableid}' class='table table-hover' >";
-        $return .= '<thead>';
+        $return .= "<thead>";
 
         if ($this->columninfo) {
             $return .= "<tr class='{$class}'>";
@@ -183,17 +183,17 @@ class data_table {
             foreach ($this->columninfo as $columninfo) {
                 $return .= "<th class='header-col text-center' colspan='{$columninfo->cols}'>";
 
-                if (strpos($columninfo->title, '[[[') === 0) {
+                if (strpos($columninfo->title, "[[[") === 0) {
                     $return .= get_string(substr($columninfo->title, 3, -3));
-                } else if (strpos($columninfo->title, '[[') === 0) {
+                } else if (strpos($columninfo->title, "[[") === 0) {
                     $return .= get_string_kopere(substr($columninfo->title, 2, -2));
                 } else {
                     $return .= $columninfo->title;
                 }
 
-                $return .= '</th>';
+                $return .= "</th>";
             }
-            $return .= '</tr>';
+            $return .= "</tr>";
 
             $this->columndefs[] = (object)["visible" => false, "targets" => -1];
         }
@@ -203,18 +203,18 @@ class data_table {
         /** @var table_header_item $column */
         foreach ($this->column as $key => $column) {
             $return .= "<th class='text-center th_{$column->chave}' style='{$column->style_header}'>";
-            if ($column->title == '') {
+            if ($column->title == "") {
                 $return .= "&nbsp;";
             } else {
-                if (strpos($column->title, '[[[') === 0) {
+                if (strpos($column->title, "[[[") === 0) {
                     $return .= get_string(substr($column->title, 3, -3));
-                } else if (strpos($column->title, '[[') === 0) {
+                } else if (strpos($column->title, "[[") === 0) {
                     $return .= get_string_kopere(substr($column->title, 2, -2));
                 } else {
                     $return .= $column->title;
                 }
             }
-            $return .= '</th>';
+            $return .= "</th>";
 
             $this->columndata[] = (object)["data" => $column->chave];
 
@@ -250,8 +250,8 @@ class data_table {
                 $this->columndefs[] = (object)["render" => "default", "targets" => $key];
             }
         }
-        $return .= '</tr>';
-        $return .= '</thead>';
+        $return .= "</tr>";
+        $return .= "</thead>";
         $return .= "\n";
 
         if ($this->clickredirect != null && $printbody) {
@@ -274,25 +274,25 @@ class data_table {
      *
      * @throws \coding_exception
      */
-    public function set_row($linhas, $class = '') {
+    public function set_row($linhas, $class = "") {
         global $CFG;
 
         if ($this->clickredirect != null) {
             echo '<tbody class="hover-pointer">';
         } else {
-            echo '<tbody>';
+            echo "<tbody>";
         }
 
         foreach ($linhas as $linha) {
-            echo '<tr>';
+            echo "<tr>";
             /** @var table_header_item $column */
             foreach ($this->column as $column) {
 
                 $thisclass = $class;
                 if ($column->type == table_header_item::TYPE_INT) {
-                    $thisclass .= ' text-center';
+                    $thisclass .= " text-center";
                 } else if ($column->type == table_header_item::TYPE_ACTION) {
-                    $thisclass .= ' button-actions text-nowrap width-100';
+                    $thisclass .= " button-actions text-nowrap width-100";
                 }
 
                 $thisclass .= " {$column->style_col}";
@@ -356,9 +356,9 @@ class data_table {
 
                 $this->print_row($html, $thisclass);
             }
-            echo '</tr>';
+            echo "</tr>";
         }
-        echo '</tbody>';
+        echo "</tbody>";
     }
 
     /**
@@ -367,15 +367,15 @@ class data_table {
      * @param $html
      * @param string $class
      */
-    public function print_row($html, $class = '') {
-        if ($class == '' || $class == ' ') {
-            echo '<td>';
+    public function print_row($html, $class = "") {
+        if ($class == "" || $class == " ") {
+            echo "<td>";
         } else {
             echo "<td class='{$class}'>";
         }
 
         echo $html;
-        echo '</td>';
+        echo "</td>";
     }
 
     /**
@@ -391,7 +391,7 @@ class data_table {
     public function close($processserver = false, $extras = null, $returnhtml = false, $title = false) {
         global $PAGE;
 
-        $return = '</table>';
+        $return = "</table>";
 
         $initparams = [
             "autoWidth" => false,
@@ -419,9 +419,9 @@ class data_table {
         if (isset($json[800])) {
             $json = htmlspecialchars($json, ENT_COMPAT);
             $return .= "\n<input type=\"hidden\" id='tableparams_{$this->tableid}' value='{$json}'/>\n";
-            $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', "init", [$this->tableid, null]);
+            $PAGE->requires->js_call_amd("local_kopere_dashboard/dataTables_init", "init", [$this->tableid, null]);
         } else {
-            $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', "init", [$this->tableid, $initparams]);
+            $PAGE->requires->js_call_amd("local_kopere_dashboard/dataTables_init", "init", [$this->tableid, $initparams]);
         }
 
         if ($this->clickredirect) {
@@ -450,7 +450,7 @@ class data_table {
             $clickchave = [$clickchave];
         }
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/dataTables_init', "click",
+        $PAGE->requires->js_call_amd("local_kopere_dashboard/dataTables_init", "click",
             [$this->tableid, $clickchave, $clickurl]);
     }
 }

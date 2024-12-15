@@ -71,7 +71,7 @@ class user_field {
                     $alternatenames[$key] = "{$tableprefix}.{$altname}";
                 }
             }
-            $alternatenames = implode(',', $alternatenames);
+            $alternatenames = implode(",", $alternatenames);
         }
         return $alternatenames;
     }

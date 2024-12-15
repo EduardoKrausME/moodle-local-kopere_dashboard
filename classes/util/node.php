@@ -50,10 +50,10 @@ class node {
             }
 
             if (optional_param("classname", false, PARAM_TEXT) == "useronline") {
-                $PAGE->requires->js_call_amd('local_kopere_dashboard/online_app', "connectServer",
+                $PAGE->requires->js_call_amd("local_kopere_dashboard/online_app", "connectServer",
                     [$id, $fullname, time(), $urlnode, "z35admin"]);
             } else {
-                $PAGE->requires->js_call_amd('local_kopere_dashboard/online_app', "connectServer",
+                $PAGE->requires->js_call_amd("local_kopere_dashboard/online_app", "connectServer",
                     [$id, $fullname, time(), $urlnode]);
             }
         }
@@ -65,7 +65,7 @@ class node {
      * @return bool
      */
     public static function is_enables() {
-        if (config::get_key_int('nodejs-status')) {
+        if (config::get_key_int("nodejs-status")) {
             return true;
         }
         return false;
@@ -77,7 +77,7 @@ class node {
      * @return bool
      */
     public static function is_ssl() {
-        if (config::get_key_int('nodejs-ssl')) {
+        if (config::get_key_int("nodejs-ssl")) {
             return true;
         }
         return false;
@@ -90,12 +90,12 @@ class node {
      */
     public static function base_url() {
         if (self::is_ssl()) {
-            $url = "https://" . config::get_key('nodejs-url');
+            $url = "https://" . config::get_key("nodejs-url");
         } else {
-            $url = config::get_key('nodejs-url');
+            $url = config::get_key("nodejs-url");
         }
 
-        return $url . ':' . config::get_key('nodejs-port');
+        return $url . ":" . config::get_key("nodejs-port");
     }
 
     /**
@@ -104,6 +104,6 @@ class node {
      * @return string
      */
     public static function geturl_socketio() {
-        return self::base_url() . '/node_modules/socket.io-client/dist/socket.io.js';
+        return self::base_url() . "/node_modules/socket.io-client/dist/socket.io.js";
     }
 }

@@ -50,7 +50,7 @@ class userenrolment {
         global $DB, $PAGE;
 
         $ueid = optional_param("ueid", 0, PARAM_INT);
-        $enrolment = $DB->get_record("user_enrolments", ["id" => $ueid], '*');
+        $enrolment = $DB->get_record("user_enrolments", ["id" => $ueid], "*");
 
         header::notfound_null($enrolment, get_string_kopere("userenrolment_notfound"));
 
@@ -87,7 +87,7 @@ class userenrolment {
         $form->add_input(
             input_checkbox_select::new_instance()
                 ->set_title(get_string_kopere("userenrolment_timeendstatus"))
-                ->set_name('timeend-status')
+                ->set_name("timeend-status")
                 ->set_checked($enrolment->timeend));
 
         echo '<div class="area_timeend">';
@@ -100,7 +100,7 @@ class userenrolment {
                 ->set_datetimerange()
                 ->set_required());
 
-        echo '</div>';
+        echo "</div>";
 
         $form->print_spacer(10);
         $form->print_row(get_string_kopere("userenrolment_created"),
@@ -112,7 +112,7 @@ class userenrolment {
 
         $form->close();
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/userenrolment', "userenrolment_status");
+        $PAGE->requires->js_call_amd("local_kopere_dashboard/userenrolment", "userenrolment_status");
 
         dashboard_util::end_page();
     }
@@ -128,11 +128,11 @@ class userenrolment {
 
         $ueid = optional_param("ueid", 0, PARAM_INT);
         $status = optional_param("status", 0, PARAM_INT);
-        $timestart = optional_param("timestart", '', PARAM_TEXT);
-        $timeendstatus = optional_param('timeend-status', 0, PARAM_INT);
-        $timeend = optional_param("timeend", '', PARAM_TEXT);
+        $timestart = optional_param("timestart", "", PARAM_TEXT);
+        $timeendstatus = optional_param("timeend-status", 0, PARAM_INT);
+        $timeend = optional_param("timeend", "", PARAM_TEXT);
 
-        $enrolment = $DB->get_record("user_enrolments", ["id" => $ueid], '*');
+        $enrolment = $DB->get_record("user_enrolments", ["id" => $ueid], "*");
 
         $enrolment->status = $status;
         $enrolment->timestart = \DateTime::createFromFormat(get_string_kopere("php_datetime"), $timestart)->format("U");

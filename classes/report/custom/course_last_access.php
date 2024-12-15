@@ -45,7 +45,7 @@ class course_last_access {
      */
     public function name() {
         $cursosid = optional_param("courseid", 0, PARAM_INT);
-        return get_string_kopere('reports_report_courses-3') . ' ' . get_course($cursosid)->fullname;
+        return get_string_kopere("reports_report_courses-3") . " " . get_course($cursosid)->fullname;
     }
 
     /**
@@ -86,9 +86,9 @@ class course_last_access {
 
         echo '<table id="list-course-access" class="table table-bordered table-hover" border="1">';
 
-        $userinfofields = $DB->get_records("user_info_field", null, 'sortorder asc');
+        $userinfofields = $DB->get_records("user_info_field", null, "sortorder asc");
 
-        $filds = '';
+        $filds = "";
         foreach ($userinfofields as $userinfofield) {
             $filds .= "<td align=\"center\" bgcolor='#979797' style='text-align:center;'>{$userinfofield->name}</td>";
         }
@@ -136,18 +136,18 @@ class course_last_access {
         $total = $DB->get_record_sql("SELECT FOUND_ROWS() as num_itens");
 
         foreach ($allusercourse as $user) {
-            echo '<tr>';
+            echo "<tr>";
             $link = "{$CFG->wwwroot}/user/view.php?id={$user->id}&course={$cursosid}";
-            $this->td("<a href='{$link}' target=\"moodle\">" . fullname($user) . '</a>', 'bg-info text-nowrap', '#D9EDF7');
-            $this->td($user->email, 'bg-info text-nowrap', '#D9EDF7');
+            $this->td("<a href='{$link}' target=\"moodle\">" . fullname($user) . "</a>", "bg-info text-nowrap", "#D9EDF7");
+            $this->td($user->email, "bg-info text-nowrap", "#D9EDF7");
 
             foreach ($userinfofields as $userinfofield) {
                 $userinfodata = $DB->get_record("user_info_data",
                     ["userid" => $user->id, "fieldid" => $userinfofield->id]);
                 if ($userinfodata) {
-                    $this->td($userinfodata->data, 'text-nowrap bg-success', "D9EDF7");
+                    $this->td($userinfodata->data, "text-nowrap bg-success", "D9EDF7");
                 } else {
-                    $this->td('', 'text-nowrap bg-success', "D9EDF7");
+                    $this->td("", "text-nowrap bg-success", "D9EDF7");
                 }
             }
 
@@ -167,10 +167,10 @@ class course_last_access {
                     "userid" => $user->id,
                 ]);
             if ($logresult && $logresult->timecreated) {
-                $this->td(userdate($logresult->timecreated, get_string("strftimedatetime")), 'text-nowrap bg-success', "DFF0D8");
+                $this->td(userdate($logresult->timecreated, get_string("strftimedatetime")), "text-nowrap bg-success", "DFF0D8");
             } else {
                 $this->td('<span style="color: #282828">' . get_string_kopere("reports_noneaccess") .
-                    '</span>', 'bg-warning text-nowrap', '#FCF8E3');
+                    "</span>", "bg-warning text-nowrap", "#FCF8E3");
             }
 
             $sql
@@ -189,16 +189,16 @@ class course_last_access {
                     "userid" => $user->id,
                 ]);
             if ($logresult && $logresult->timecreated) {
-                $this->td(userdate($logresult->timecreated, get_string("strftimedatetime")), 'text-nowrap bg-success', "DFF0D8");
+                $this->td(userdate($logresult->timecreated, get_string("strftimedatetime")), "text-nowrap bg-success", "DFF0D8");
             } else {
                 $this->td('<span style="color: #282828">' . get_string_kopere("reports_noneaccess") .
-                    '</span>', 'bg-warning text-nowrap', '#FCF8E3');
+                    "</span>", "bg-warning text-nowrap", "#FCF8E3");
             }
 
-            echo '</tr>';
+            echo "</tr>";
         }
 
-        echo '</table>';
+        echo "</table>";
 
         export::close();
         pagination::create($atualpage, $total->num_itens, $perpage);
