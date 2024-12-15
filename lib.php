@@ -176,4 +176,5 @@ function local_kopere_dashboard_pluginfile($course, $cm, $context, $filearea, $a
         return false;
     }
     send_stored_file($file, 0, 0, $forcedownload, $options);
+    return true;
 }

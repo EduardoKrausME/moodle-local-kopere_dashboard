@@ -47,9 +47,7 @@ function kopere_dashboard_autoload($classname) {
     }
 
     $classname = str_replace('\\', '/', $classname);
-
     preg_match("/local_(.*?)\/(.*)/", $classname, $classpartes);
-
     if (isset($classpartes[2])) {
         $file = "{$CFG->dirroot}/local/{$classpartes[1]}/classes/{$classpartes[2]}.php";
         if (file_exists($file)) {
