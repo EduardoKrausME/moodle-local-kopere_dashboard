@@ -544,3 +544,24 @@ $string['webpages_theme_print'] = 'Deve exibir apenas o conteúdo e os cabeçalh
 $string['webpages_theme_report'] = 'O layout da página usado para relatórios';
 $string['webpages_theme_standard'] = 'Layout padrão com blocos';
 $string['webpages_title'] = 'Páginas estáticas';
+
+$string['select_month'] = 'Selecione o Mês';
+$string['tags_message'] = '<h2>Título</h2><p>Linha 1</p><p>Linha 2</p>';
+$string['notification_core_course_completion'] = 'Conclusão de Cursos';
+$string['notification_course_module_created'] = 'Criação de novo Módulo em Curso';
+$string['notification_core_course_content'] = 'Conteúdo de Cursos';
+$string['notification_core_course_module'] = 'Módulo de cursos';
+$string['notification_core_course_section'] = 'Sessões de cursos';
+$string['notification_core_user_password'] = 'Senhas';
+
+$string['contextfunction'] = 'Função';
+$string['contextactivity'] = 'Atividade';
+$string['contextduration'] = 'Duração';
+$string['contextgrade'] = 'Nota';
+$string['contextcourse'] = 'Curso';
+$string['contextcoursegroup'] = 'Conjunto de cursos';
+$string['contextbadgecompletion'] = 'Preenchimento do Emblema';
+$string['contextcohort'] = 'Coorte';
+$string['contextcompetency'] = 'Competência';
+$string['contextdefault'] = '...';
+$string['contextsystem'] = 'Sistema';
