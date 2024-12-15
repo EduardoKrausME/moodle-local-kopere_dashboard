@@ -154,7 +154,7 @@ if ($action) {
                 $options = [
                     "http" => [
                         "method" => "GET",
-                        "header" => "User-Agent: " . $_SERVER["HTTP_USER_AGENT"] . "\r\n"
+                        "header" => "User-Agent: {$_SERVER["HTTP_USER_AGENT"]}\r\n"
                     ]
                 ];
                 $context = stream_context_create($options);
