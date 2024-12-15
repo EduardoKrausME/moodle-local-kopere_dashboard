@@ -4,7 +4,7 @@ define([
     "local_kopere_dashboard/validate",
 ], function($, validator) {
     return {
-        init : function() {
+        init: function() {
 
             if ($(".kopere-modal-content form.validate").length) {
                 $(".kopere-modal-content form.validate").validator();

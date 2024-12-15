@@ -4,7 +4,7 @@
 
 define(["jquery", "local_kopere_dashboard/socket.io"], function($, io) {
     return {
-        connectServer : function(userid, fullname, servertime, url, privilegio) {
+        connectServer: function(userid, fullname, servertime, url, privilegio) {
             var socketio;
             var isFocus = true;
             var isConnected = false;
@@ -21,8 +21,8 @@ define(["jquery", "local_kopere_dashboard/socket.io"], function($, io) {
                 if (isConnected && privilegio == undefined) {
                     console.log("send isFocus = " + isFocus);
                     socketio.emit("isFocus", {
-                        userid : userid,
-                        focus  : isFocus + ""
+                        userid: userid,
+                        focus: isFocus + ""
                     });
                 }
             }
@@ -41,16 +41,16 @@ define(["jquery", "local_kopere_dashboard/socket.io"], function($, io) {
                 console.log('connect OK');
 
                 socketio.emit("login", {
-                    atualurl   : location.href,
-                    title      : document.title,
-                    userAgent  : navigator.userAgent,
-                    userid     : userid,
-                    fullname   : fullname,
-                    servertime : servertime,
-                    focus      : isFocus + "",
-                    privilegio : privilegio,
-                    screen     : screen.width + "x" + screen.height,
-                    room       : 'dashboard-' + location.hostname
+                    atualurl: location.href,
+                    title: document.title,
+                    userAgent: navigator.userAgent,
+                    userid: userid,
+                    fullname: fullname,
+                    servertime: servertime,
+                    focus: isFocus + "",
+                    privilegio: privilegio,
+                    screen: screen.width + "x" + screen.height,
+                    room: 'dashboard-' + location.hostname
                 });
 
             });

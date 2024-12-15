@@ -1,7 +1,7 @@
 define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/validate", "local_kopere_dashboard/iosCheckbox",],
     function($, maskedinput, validate, iosCheckbox) {
         return {
-            init : function() {
+            init: function() {
 
                 // iosCheckbox
                 $(".ios-checkbox").iosCheckbox();
@@ -35,7 +35,7 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
 
                 function loadValidateAll() {
                     $("form.validate").validate({
-                        invalidHandler : function(e, validator) {
+                        invalidHandler: function(e, validator) {
                             var errors = validator.numberOfInvalids();
                             if (errors) {
                                 var message = 'você tem ' + errors + ' items obrigatórios.';
@@ -57,7 +57,7 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
                         return true;
 
                     }, "Telefone em formáto inválido!");
-                    $.validator.classRuleSettings.val_phone = {phoneVal : true};
+                    $.validator.classRuleSettings.val_phone = {phoneVal: true};
 
                     $.validator.addMethod("celphoneVal", function(value, element) {
                         if ($(element).hasClass('required')) {
@@ -66,7 +66,7 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
                         return true;
 
                     }, "Celular em formáto inválido!");
-                    $.validator.classRuleSettings.val_celphone = {celphoneVal : true};
+                    $.validator.classRuleSettings.val_celphone = {celphoneVal: true};
 
                     $.validator.addMethod("cepVal", function(value, element) {
                         if ($(element).hasClass('required')) {
@@ -74,7 +74,7 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
                         }
                         return true;
                     }, "CEP em formáto inválido! Somente aceito formato 99999-999");
-                    $.validator.classRuleSettings.val_cep = {cepVal : true};
+                    $.validator.classRuleSettings.val_cep = {cepVal: true};
 
                     $.validator.addMethod("cpfVal", function(value, element) {
                         if ($(element).hasClass('required')) {
@@ -82,7 +82,7 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
                         }
                         return true;
                     }, "CPF em formáto inválido!");
-                    $.validator.classRuleSettings.val_cpf = {cpfVal : true};
+                    $.validator.classRuleSettings.val_cpf = {cpfVal: true};
 
                     $.validator.addMethod("emailVal", function(value, element) {
                         if ($(element).hasClass('required')) {
@@ -90,7 +90,7 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
                         }
                         return true;
                     }, "E-mail em formáto inválido!");
-                    $.validator.classRuleSettings.val_email = {emailVal : true};
+                    $.validator.classRuleSettings.val_email = {emailVal: true};
 
                     $.validator.addMethod("passwordVal", function(value, element) {
                         if ($(element).hasClass('required')) {
@@ -103,7 +103,7 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
                         }
                         return true;
                     }, "Senha no mínimo 6 caracteres e não pode ser 123456!");
-                    $.validator.classRuleSettings.val_password = {passwordVal : true};
+                    $.validator.classRuleSettings.val_password = {passwordVal: true};
 
                     $.validator.addMethod("nomeVal", function(value, element) {
                         if ($(element).hasClass('required')) {
@@ -116,7 +116,7 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
                         }
                         return true;
                     }, "Insira seu nome completo!");
-                    $.validator.classRuleSettings.val_nome = {nomeVal : true};
+                    $.validator.classRuleSettings.val_nome = {nomeVal: true};
 
                     $.validator.addMethod("cnpjVal", function(value, element) {
                         if ($(element).hasClass('required')) {
@@ -124,7 +124,7 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
                         }
                         return true;
                     }, "CNPJ em formáto inválido!");
-                    $.validator.classRuleSettings.val_cnpj = {cnpjVal : true};
+                    $.validator.classRuleSettings.val_cnpj = {cnpjVal: true};
 
                     /*
                      * phone
@@ -150,7 +150,7 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
 
             },
 
-            moremenu : function(name, href) {
+            moremenu: function(name, href) {
                 var link = `<li class="nav-item">
                                 <a class="nav-link" href="${href}">${name}</a>
                             </li>`;

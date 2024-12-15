@@ -8,7 +8,7 @@ define([
     "local_kopere_dashboard/jszip",
 ], function($) {
     var dataTables_init = {
-        init : function(tableid, params) {
+        init: function(tableid, params) {
 
             if (!params) {
                 var params_json = $(`#tableparams_${tableid}`).val();
@@ -16,7 +16,7 @@ define([
             }
 
             var renderer = {
-                mustacheRenderer  : function(data, type, row, info) {
+                mustacheRenderer: function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
@@ -32,7 +32,7 @@ define([
                         return data;
                     }
                 },
-                numberRenderer    : function(data, type, row, info) {
+                numberRenderer: function(data, type, row, info) {
                     if (data === null) {
                         return "";
                     }
@@ -42,14 +42,14 @@ define([
 
                     return '<div class="text-center text-nowrap">' + data + '</div>';
                 },
-                currencyRenderer  : function(data, type, row, info) {
+                currencyRenderer: function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
 
                     return '<div class="text-center text-nowrap">R$ ' + data + '</div>';
                 },
-                filesizeRenderer  : function(data, type, row, info) {
+                filesizeRenderer: function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
@@ -71,7 +71,7 @@ define([
                         return data.toFixed(2) + ' Tb';
                     }
                 },
-                dateRenderer      : function(data, type, row, info) {
+                dateRenderer: function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
@@ -99,7 +99,7 @@ define([
 
                     return '<div class="text-nowrap">' + result + '</div>';
                 },
-                datetimeRenderer  : function(data, type, row, info) {
+                datetimeRenderer: function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
@@ -131,7 +131,7 @@ define([
 
                     return '<div class="text-nowrap">' + result + '</div>';
                 },
-                visibleRenderer   : function(data, type, row, info) {
+                visibleRenderer: function(data, type, row, info) {
                     if (type != 'display') {
                         if (type == 'filter') {
                             if (!data) {
@@ -152,7 +152,7 @@ define([
                             '"></div>';
                     }
                 },
-                statusRenderer    : function(data, type, row, info) {
+                statusRenderer: function(data, type, row, info) {
                     if (type != 'display') {
                         if (type == 'filter') {
                             if (data) {
@@ -174,7 +174,7 @@ define([
                             '"></div>';
                     }
                 },
-                deletedRenderer   : function(data, type, row, info) {
+                deletedRenderer: function(data, type, row, info) {
                     if (type != 'display') {
                         if (type == 'filter') {
                             if (!data) {
@@ -194,7 +194,7 @@ define([
                                      title="${M.util.get_string('active', "local_kopere_dashboard")}"></div>`;
                     }
                 },
-                trueFalseRenderer : function(data, type, row, info) {
+                trueFalseRenderer: function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
@@ -205,7 +205,7 @@ define([
                         return M.util.get_string('yes');
                     }
                 },
-                userphotoRenderer : function(data, type, row, info) {
+                userphotoRenderer: function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
@@ -214,7 +214,7 @@ define([
                                  src="${M.cfg.wwwroot}/local/kopere_dashboard/profile-image.php?type=photo_user&id=${data}"
                                  style="width:35px;height:35px" />`;
                 },
-                secondsRenderer   : function(data, type, row, info) {
+                secondsRenderer: function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
@@ -244,7 +244,7 @@ define([
 
                     return `${hor}:${min}:${seg}`;
                 },
-                timeRenderer      : function(data, type, row, info) {
+                timeRenderer: function(data, type, row, info) {
                     if (type != 'display') {
                         return data;
                     }
@@ -326,48 +326,48 @@ define([
 
                 params.columnDefs = newColumnDefs;
                 params.oLanguage = {
-                    sEmptyTable        : M.util.get_string('datatables_sEmptyTable', "local_kopere_dashboard"),
-                    sInfo              : M.util.get_string('datatables_sInfo', "local_kopere_dashboard"),
-                    sInfoEmpty         : M.util.get_string('datatables_sInfoEmpty', "local_kopere_dashboard"),
-                    sInfoFiltered      : M.util.get_string('datatables_sInfoFiltered', "local_kopere_dashboard"),
-                    sInfoPostFix       : M.util.get_string('datatables_sInfoPostFix', "local_kopere_dashboard"),
-                    sInfoThousands     : M.util.get_string('datatables_sInfoThousands', "local_kopere_dashboard"),
-                    sLengthMenu        : M.util.get_string('datatables_sLengthMenu', "local_kopere_dashboard"),
-                    sLoadingRecords    : M.util.get_string('datatables_sLoadingRecords', "local_kopere_dashboard"),
-                    sProcessing        : M.util.get_string('datatables_sProcessing', "local_kopere_dashboard"),
-                    sErrorMessage      : M.util.get_string('datatables_sErrorMessage', "local_kopere_dashboard"),
-                    sZeroRecords       : M.util.get_string('datatables_sZeroRecords', "local_kopere_dashboard"),
-                    sSearch            : "",
-                    sSearchPlaceholder : M.util.get_string('datatables_sSearch', "local_kopere_dashboard"),
-                    buttons            : {
-                        print_text   : M.util.get_string('datatables_buttons_print_text', "local_kopere_dashboard"),
-                        copy_text    : M.util.get_string('datatables_buttons_copy_text', "local_kopere_dashboard"),
-                        csv_text     : M.util.get_string('datatables_buttons_csv_text', "local_kopere_dashboard"),
-                        copySuccess1 : M.util.get_string('datatables_buttons_copySuccess1', "local_kopere_dashboard"),
-                        copySuccess_ : M.util.get_string('datatables_buttons_copySuccess_', "local_kopere_dashboard"),
-                        copyTitle    : M.util.get_string('datatables_buttons_copyTitle', "local_kopere_dashboard"),
-                        copyKeys     : M.util.get_string('datatables_buttons_copyKeys', "local_kopere_dashboard"),
-                        pageLength   : {
-                            '_'  : M.util.get_string('datatables_buttons_pageLength_', "local_kopere_dashboard"),
-                            '-1' : M.util.get_string('datatables_buttons_pageLength_1', "local_kopere_dashboard"),
+                    sEmptyTable: M.util.get_string('datatables_sEmptyTable', "local_kopere_dashboard"),
+                    sInfo: M.util.get_string('datatables_sInfo', "local_kopere_dashboard"),
+                    sInfoEmpty: M.util.get_string('datatables_sInfoEmpty', "local_kopere_dashboard"),
+                    sInfoFiltered: M.util.get_string('datatables_sInfoFiltered', "local_kopere_dashboard"),
+                    sInfoPostFix: M.util.get_string('datatables_sInfoPostFix', "local_kopere_dashboard"),
+                    sInfoThousands: M.util.get_string('datatables_sInfoThousands', "local_kopere_dashboard"),
+                    sLengthMenu: M.util.get_string('datatables_sLengthMenu', "local_kopere_dashboard"),
+                    sLoadingRecords: M.util.get_string('datatables_sLoadingRecords', "local_kopere_dashboard"),
+                    sProcessing: M.util.get_string('datatables_sProcessing', "local_kopere_dashboard"),
+                    sErrorMessage: M.util.get_string('datatables_sErrorMessage', "local_kopere_dashboard"),
+                    sZeroRecords: M.util.get_string('datatables_sZeroRecords', "local_kopere_dashboard"),
+                    sSearch: "",
+                    sSearchPlaceholder: M.util.get_string('datatables_sSearch', "local_kopere_dashboard"),
+                    buttons: {
+                        print_text: M.util.get_string('datatables_buttons_print_text', "local_kopere_dashboard"),
+                        copy_text: M.util.get_string('datatables_buttons_copy_text', "local_kopere_dashboard"),
+                        csv_text: M.util.get_string('datatables_buttons_csv_text', "local_kopere_dashboard"),
+                        copySuccess1: M.util.get_string('datatables_buttons_copySuccess1', "local_kopere_dashboard"),
+                        copySuccess_: M.util.get_string('datatables_buttons_copySuccess_', "local_kopere_dashboard"),
+                        copyTitle: M.util.get_string('datatables_buttons_copyTitle', "local_kopere_dashboard"),
+                        copyKeys: M.util.get_string('datatables_buttons_copyKeys', "local_kopere_dashboard"),
+                        pageLength: {
+                            '_': M.util.get_string('datatables_buttons_pageLength_', "local_kopere_dashboard"),
+                            '-1': M.util.get_string('datatables_buttons_pageLength_1', "local_kopere_dashboard"),
                         }
                     },
-                    select             : {
-                        rows : {
-                            _ : M.util.get_string('datatables_buttons_select_rows_', "local_kopere_dashboard"),
-                            0 : "",
-                            1 : M.util.get_string('datatables_buttons_select_rows1', "local_kopere_dashboard"),
+                    select: {
+                        rows: {
+                            _: M.util.get_string('datatables_buttons_select_rows_', "local_kopere_dashboard"),
+                            0: "",
+                            1: M.util.get_string('datatables_buttons_select_rows1', "local_kopere_dashboard"),
                         }
                     },
-                    oPaginate          : {
-                        sNext     : M.util.get_string('datatables_oPaginate_sNext', "local_kopere_dashboard"),
-                        sPrevious : M.util.get_string('datatables_oPaginate_sPrevious', "local_kopere_dashboard"),
-                        sFirst    : M.util.get_string('datatables_oPaginate_sFirst', "local_kopere_dashboard"),
-                        sLast     : M.util.get_string('datatables_oPaginate_sLast', "local_kopere_dashboard"),
+                    oPaginate: {
+                        sNext: M.util.get_string('datatables_oPaginate_sNext', "local_kopere_dashboard"),
+                        sPrevious: M.util.get_string('datatables_oPaginate_sPrevious', "local_kopere_dashboard"),
+                        sFirst: M.util.get_string('datatables_oPaginate_sFirst', "local_kopere_dashboard"),
+                        sLast: M.util.get_string('datatables_oPaginate_sLast', "local_kopere_dashboard"),
                     },
-                    oAria              : {
-                        sSortAscending  : M.util.get_string('datatables_oAria_sSortAscending', "local_kopere_dashboard"),
-                        sSortDescending : M.util.get_string('datatables_oAria_sSortDescending', "local_kopere_dashboard"),
+                    oAria: {
+                        sSortAscending: M.util.get_string('datatables_oAria_sSortAscending', "local_kopere_dashboard"),
+                        sSortDescending: M.util.get_string('datatables_oAria_sSortDescending', "local_kopere_dashboard"),
                     }
                 };
                 params.responsive = true;
@@ -376,25 +376,25 @@ define([
                     params.buttons = [
                         'pageLength',
                         {
-                            extend : 'print',
-                            text   : M.util.get_string('datatables_buttons_print_text', "local_kopere_dashboard"),
-                            title  : params.export_title
+                            extend: 'print',
+                            text: M.util.get_string('datatables_buttons_print_text', "local_kopere_dashboard"),
+                            title: params.export_title
                         }, {
-                            extend : 'pdf',
-                            text   : "PDF",
-                            title  : params.export_title
+                            extend: 'pdf',
+                            text: "PDF",
+                            title: params.export_title
                         }, {
-                            extend : 'excel',
-                            text   : 'Excel',
-                            title  : params.export_title
+                            extend: 'excel',
+                            text: 'Excel',
+                            title: params.export_title
                         }, {
-                            extend : 'csv',
-                            text   : M.util.get_string('datatables_buttons_csv_text', "local_kopere_dashboard"),
-                            title  : params.export_title
+                            extend: 'csv',
+                            text: M.util.get_string('datatables_buttons_csv_text', "local_kopere_dashboard"),
+                            title: params.export_title
                         }, {
-                            extend : 'copy',
-                            text   : "Copy",
-                            title  : params.export_title
+                            extend: 'copy',
+                            text: "Copy",
+                            title: params.export_title
                         },
                     ];
                     params.dom = 'frtipB';
@@ -433,7 +433,7 @@ define([
                     wrapper.find(".dataTables_filter").appendTo(element);
 
                     wrapper.find(".footer")
-                        .css({"justify-content" : "space-between"})
+                        .css({"justify-content": "space-between"})
                         .prepend("<div class='dataTables_navigate_area d-flex align-items-center'></div>");
 
                     var $area = wrapper.find(".dataTables_navigate_area");
@@ -445,14 +445,14 @@ define([
             });
         },
 
-        click : function(tableid, clickchave, clickurl) {
+        click: function(tableid, clickchave, clickurl) {
             $('#' + tableid + ' tbody').on('click', 'tr', function() {
                 var data = window[tableid].row(this).data();
                 dataTables_init._click_internal(data, clickchave, clickurl)
             });
         },
 
-        _click_internal : function(data, clickchave, clickurl) {
+        _click_internal: function(data, clickchave, clickurl) {
             $.each(clickchave, function(id, chave) {
                 clickurl = clickurl.replace('{' + chave + '}', data[chave]);
             });

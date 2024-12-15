@@ -13,16 +13,16 @@
         chrome  = /chrome/i.test(ua),
         android = /android/i.test(ua);
     $.mask = {
-        definitions : {
-            "9" : "[0-9]",
-            a   : "[A-Za-z]",
-            "*" : "[A-Za-z0-9]"
+        definitions: {
+            "9": "[0-9]",
+            a: "[A-Za-z]",
+            "*": "[A-Za-z0-9]"
         },
-        autoclear   : !0,
-        dataName    : "rawMaskFn",
-        placeholder : "_"
+        autoclear: !0,
+        dataName: "rawMaskFn",
+        placeholder: "_"
     }, $.fn.extend({
-        caret  : function(begin, end) {
+        caret: function(begin, end) {
             var range;
             if (0 !== this.length && !this.is(":hidden")) return "number" == typeof begin ? (end = "number" == typeof end ? end : begin,
                 this.each(function() {
@@ -32,14 +32,14 @@
                 })) : (this[0].setSelectionRange ? (begin = this[0].selectionStart, end = this[0].selectionEnd) : document.selection && document.selection.createRange && (range = document.selection.createRange(),
                 begin = 0 - range.duplicate().moveStart("character", -1e5), end = begin + range.text.length),
                 {
-                    begin : begin,
-                    end   : end
+                    begin: begin,
+                    end: end
                 });
         },
-        unmask : function() {
+        unmask: function() {
             return this.trigger("unmask");
         },
-        mask   : function(mask, settings) {
+        mask: function(mask, settings) {
             var input, defs, tests, partialPosition, firstNonMaskPos, lastRequiredNonMaskPos, len, oldVal;
             if (!mask && this.length > 0) {
                 input = $(this[0]);
@@ -47,9 +47,9 @@
                 return fn ? fn() : void 0;
             }
             return settings = $.extend({
-                autoclear   : $.mask.autoclear,
-                placeholder : $.mask.placeholder,
-                completed   : null
+                autoclear: $.mask.autoclear,
+                placeholder: $.mask.placeholder,
+                completed: null
             }, settings), defs = $.mask.definitions, tests = [], partialPosition = len = mask.length,
                 firstNonMaskPos = null, $.each(mask.split(""), function(i, c) {
                 "?" == c ? (len--, partialPosition = i) : defs[c] ? (tests.push(new RegExp(defs[c])),

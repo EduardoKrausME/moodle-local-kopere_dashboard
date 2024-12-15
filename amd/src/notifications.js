@@ -1,10 +1,10 @@
 define(["jquery"], function($) {
     return {
 
-        notifications_add_form_extra : function() {
+        notifications_add_form_extra: function() {
             $('#module').change(function() {
                 var data = {
-                    module : $(this).val()
+                    module: $(this).val()
                 };
 
                 var url = M.cfg.wwwroot + "/local/kopere_dashboard/view-ajax.php?classname=notificationsutil&method=add_form_extra";
@@ -12,9 +12,9 @@ define(["jquery"], function($) {
             });
         },
 
-        notifications_settings_load_template : function() {
+        notifications_settings_load_template: function() {
 
-            var loaded_data = {tags : {}};
+            var loaded_data = {tags: {}};
 
             function replace_tags(content) {
 

@@ -9,7 +9,7 @@
 (function(factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD
-        define(["jquery", "local_kopere_dashboard/jszip",  "local_kopere_dashboard/dataTables", "local_kopere_dashboard/dataTables.buttons"],
+        define(["jquery", "local_kopere_dashboard/jszip", "local_kopere_dashboard/dataTables", "local_kopere_dashboard/dataTables.buttons"],
             function($, jszip,) {
                 window.JSZip = jszip;
                 return factory($, window, document, jszip);
@@ -154,7 +154,7 @@
                             blob.type
                         )
                     ) {
-                        return new Blob([String.fromCharCode(0xfeff), blob], {type : blob.type});
+                        return new Blob([String.fromCharCode(0xfeff), blob], {type: blob.type});
                     }
                     return blob;
                 },
@@ -336,8 +336,8 @@
             }
 
             return {
-                str  : header + body.join(newLine) + footer,
-                rows : body.length
+                str: header + body.join(newLine) + footer,
+                rows: body.length
             };
         };
 
@@ -434,7 +434,7 @@
                             var attrValue = worksheet.attributes[i].nodeValue;
 
                             if (attrName.indexOf(':') !== -1) {
-                                attrs.push({name : attrName, value : attrValue});
+                                attrs.push({name: attrName, value: attrValue});
 
                                 worksheet.removeAttribute(attrName);
                             }
@@ -556,20 +556,20 @@
 
         // Excel - Pre-defined strings to build a basic XLSX file
         var excelStrings = {
-            '_rels/.rels' :
+            '_rels/.rels':
                 '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
                 '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
                 '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>' +
                 '</Relationships>',
 
-            'xl/_rels/workbook.xml.rels' :
+            'xl/_rels/workbook.xml.rels':
                 '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
                 '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
                 '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>' +
                 '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>' +
                 '</Relationships>',
 
-            '[Content_Types].xml' :
+            '[Content_Types].xml':
                 '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
                 '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
                 '<Default Extension="xml" ContentType="application/xml" />' +
@@ -580,7 +580,7 @@
                 '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml" />' +
                 '</Types>',
 
-            'xl/workbook.xml' :
+            'xl/workbook.xml':
                 '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
                 '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">' +
                 '<fileVersion appName="xl" lastEdited="5" lowestEdited="5" rupBuild="24816"/>' +
@@ -594,14 +594,14 @@
                 '<definedNames/>' +
                 '</workbook>',
 
-            'xl/worksheets/sheet1.xml' :
+            'xl/worksheets/sheet1.xml':
                 '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
                 '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="x14ac" xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac">' +
                 '<sheetData/>' +
                 '<mergeCells count="0"/>' +
                 '</worksheet>',
 
-            'xl/styles.xml' :
+            'xl/styles.xml':
                 '<?xml version="1.0" encoding="UTF-8"?>' +
                 '<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="x14ac" xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac">' +
                 '<numFmts count="6">' +
@@ -795,44 +795,44 @@
         //   https://www.ecma-international.org/news/TC45_current_work/Office%20Open%20XML%20Part%204%20-%20Markup%20Language%20Reference.pdf
         var _excelSpecials = [
             {
-                match : /^\-?\d+\.\d%$/,
-                style : 60,
-                fmt   : function(d) {
+                match: /^\-?\d+\.\d%$/,
+                style: 60,
+                fmt: function(d) {
                     return d / 100;
                 }
             }, // Percent with d.p.
             {
-                match : /^\-?\d+\.?\d*%$/,
-                style : 56,
-                fmt   : function(d) {
+                match: /^\-?\d+\.?\d*%$/,
+                style: 56,
+                fmt: function(d) {
                     return d / 100;
                 }
             }, // Percent
-            {match : /^\-?\$[\d,]+.?\d*$/, style : 57}, // Dollars
-            {match : /^\-?£[\d,]+.?\d*$/, style : 58}, // Pounds
-            {match : /^\-?€[\d,]+.?\d*$/, style : 59}, // Euros
-            {match : /^\-?\d+$/, style : 65}, // Numbers without thousand separators
-            {match : /^\-?\d+\.\d{2}$/, style : 66}, // Numbers 2 d.p. without thousands separators
+            {match: /^\-?\$[\d,]+.?\d*$/, style: 57}, // Dollars
+            {match: /^\-?£[\d,]+.?\d*$/, style: 58}, // Pounds
+            {match: /^\-?€[\d,]+.?\d*$/, style: 59}, // Euros
+            {match: /^\-?\d+$/, style: 65}, // Numbers without thousand separators
+            {match: /^\-?\d+\.\d{2}$/, style: 66}, // Numbers 2 d.p. without thousands separators
             {
-                match : /^\([\d,]+\)$/,
-                style : 61,
-                fmt   : function(d) {
+                match: /^\([\d,]+\)$/,
+                style: 61,
+                fmt: function(d) {
                     return -1 * d.replace(/[\(\)]/g, '');
                 }
             }, // Negative numbers indicated by brackets
             {
-                match : /^\([\d,]+\.\d{2}\)$/,
-                style : 62,
-                fmt   : function(d) {
+                match: /^\([\d,]+\.\d{2}\)$/,
+                style: 62,
+                fmt: function(d) {
                     return -1 * d.replace(/[\(\)]/g, '');
                 }
             }, // Negative numbers indicated by brackets - 2d.p.
-            {match : /^\-?[\d,]+$/, style : 63}, // Numbers with thousand separators
-            {match : /^\-?[\d,]+\.\d{2}$/, style : 64},
+            {match: /^\-?[\d,]+$/, style: 63}, // Numbers with thousand separators
+            {match: /^\-?[\d,]+\.\d{2}$/, style: 64},
             {
-                match : /^[\d]{4}\-[01][\d]\-[0123][\d]$/,
-                style : 67,
-                fmt   : function(d) {
+                match: /^[\d]{4}\-[01][\d]\-[0123][\d]$/,
+                style: 67,
+                fmt: function(d) {
                     return Math.round(25569 + Date.parse(d) / (86400 * 1000));
                 }
             } //Date yyyy-mm-dd
@@ -847,13 +847,13 @@
         //
 
         DataTable.ext.buttons.copyHtml5 = {
-            className : 'buttons-copy buttons-html5',
+            className: 'buttons-copy buttons-html5',
 
-            text : function(dt) {
+            text: function(dt) {
                 return dt.i18n('buttons.copy', 'Copy');
             },
 
-            action : function(e, dt, button, config) {
+            action: function(e, dt, button, config) {
                 this.processing(true);
 
                 var that = this;
@@ -862,12 +862,12 @@
                 var newline = _newLine(config);
                 var output = exportData.str;
                 var hiddenDiv = $('<div/>').css({
-                    height   : 1,
-                    width    : 1,
-                    overflow : 'hidden',
-                    position : 'fixed',
-                    top      : 0,
-                    left     : 0
+                    height: 1,
+                    width: 1,
+                    overflow: 'hidden',
+                    position: 'fixed',
+                    top: 0,
+                    left: 0
                 });
 
                 if (info.title) {
@@ -904,8 +904,8 @@
                                 dt.i18n(
                                     'buttons.copySuccess',
                                     {
-                                        1 : M.util.get_string('datatables_buttons_copySuccess1', "local_kopere_dashboard"),
-                                        _ : M.util.get_string('datatables_buttons_copySuccess_', "local_kopere_dashboard"),
+                                        1: M.util.get_string('datatables_buttons_copySuccess1', "local_kopere_dashboard"),
+                                        _: M.util.get_string('datatables_buttons_copySuccess_', "local_kopere_dashboard"),
                                     },
                                     exportData.rows
                                 ),
@@ -961,40 +961,40 @@
                     });
             },
 
-            exportOptions : {},
+            exportOptions: {},
 
-            fieldSeparator : '\t',
+            fieldSeparator: '\t',
 
-            fieldBoundary : '',
+            fieldBoundary: '',
 
-            header : true,
+            header: true,
 
-            footer : false,
+            footer: false,
 
-            title : '*',
+            title: '*',
 
-            messageTop : '*',
+            messageTop: '*',
 
-            messageBottom : '*'
+            messageBottom: '*'
         };
 
         //
         // CSV export
         //
         DataTable.ext.buttons.csvHtml5 = {
-            bom : false,
+            bom: false,
 
-            className : 'buttons-csv buttons-html5',
+            className: 'buttons-csv buttons-html5',
 
-            available : function() {
+            available: function() {
                 return window.FileReader !== undefined && window.Blob;
             },
 
-            text : function(dt) {
+            text: function(dt) {
                 return dt.i18n('buttons.csv', 'CSV');
             },
 
-            action : function(e, dt, button, config) {
+            action: function(e, dt, button, config) {
                 this.processing(true);
 
                 // Set the text
@@ -1022,37 +1022,37 @@
                     output = String.fromCharCode(0xfeff) + output;
                 }
 
-                _saveAs(new Blob([output], {type : 'text/csv' + charset}), info.filename, true);
+                _saveAs(new Blob([output], {type: 'text/csv' + charset}), info.filename, true);
 
                 this.processing(false);
             },
 
-            filename : '*',
+            filename: '*',
 
-            extension : '.csv',
+            extension: '.csv',
 
-            exportOptions : {},
+            exportOptions: {},
 
-            fieldSeparator : ',',
+            fieldSeparator: ',',
 
-            fieldBoundary : '"',
+            fieldBoundary: '"',
 
-            escapeChar : '"',
+            escapeChar: '"',
 
-            charset : null,
+            charset: null,
 
-            header : true,
+            header: true,
 
-            footer : false
+            footer: false
         };
 
         //
         // Excel (xlsx) export
         //
         DataTable.ext.buttons.excelHtml5 = {
-            className : 'buttons-excel buttons-html5',
+            className: 'buttons-excel buttons-html5',
 
-            available : function() {
+            available: function() {
                 return (
                     window.FileReader !== undefined &&
                     _jsZip() !== undefined &&
@@ -1061,11 +1061,11 @@
                 );
             },
 
-            text : function(dt) {
+            text: function(dt) {
                 return dt.i18n('buttons.excel', 'Excel');
             },
 
-            action : function(e, dt, button, config) {
+            action: function(e, dt, button, config) {
                 this.processing(true);
 
                 var that = this;
@@ -1082,27 +1082,27 @@
                 var relsGet = rels.getElementsByTagName('sheetData')[0];
 
                 var xlsx = {
-                    _rels                 : {
-                        '.rels' : getXml('_rels/.rels')
+                    _rels: {
+                        '.rels': getXml('_rels/.rels')
                     },
-                    xl                    : {
-                        _rels          : {
-                            'workbook.xml.rels' : getXml('xl/_rels/workbook.xml.rels')
+                    xl: {
+                        _rels: {
+                            'workbook.xml.rels': getXml('xl/_rels/workbook.xml.rels')
                         },
-                        'workbook.xml' : getXml('xl/workbook.xml'),
-                        'styles.xml'   : getXml('xl/styles.xml'),
-                        worksheets     : {
-                            'sheet1.xml' : rels
+                        'workbook.xml': getXml('xl/workbook.xml'),
+                        'styles.xml': getXml('xl/styles.xml'),
+                        worksheets: {
+                            'sheet1.xml': rels
                         }
                     },
-                    '[Content_Types].xml' : getXml('[Content_Types].xml')
+                    '[Content_Types].xml': getXml('[Content_Types].xml')
                 };
 
                 var data = dt.buttons.exportData(config.exportOptions);
                 var currentRow, rowNode;
                 var addRow = function(row) {
                     currentRow = rowPos + 1;
-                    rowNode = _createNode(rels, 'row', {attr : {r : currentRow}});
+                    rowNode = _createNode(rels, 'row', {attr: {r: currentRow}});
 
                     for (var i = 0, ien = row.length; i < ien; i++) {
                         // Concat both the Cell Columns as a letter and the Row of the cell.
@@ -1137,11 +1137,11 @@
                                 }
 
                                 cell = _createNode(rels, 'c', {
-                                    attr     : {
-                                        r : cellId,
-                                        s : special.style
+                                    attr: {
+                                        r: cellId,
+                                        s: special.style
                                     },
-                                    children : [_createNode(rels, 'v', {text : val})]
+                                    children: [_createNode(rels, 'v', {text: val})]
                                 });
 
                                 break;
@@ -1158,11 +1158,11 @@
                                 // Detect numbers - don't match numbers with leading zeros
                                 // or a negative anywhere but the start
                                 cell = _createNode(rels, 'c', {
-                                    attr     : {
-                                        t : 'n',
-                                        r : cellId
+                                    attr: {
+                                        t: 'n',
+                                        r: cellId
                                     },
-                                    children : [_createNode(rels, 'v', {text : row[i]})]
+                                    children: [_createNode(rels, 'v', {text: row[i]})]
                                 });
                             }
                             else {
@@ -1172,17 +1172,17 @@
                                     : originalContent.replace(/[\x00-\x09\x0B\x0C\x0E-\x1F\x7F-\x9F]/g, '');
 
                                 cell = _createNode(rels, 'c', {
-                                    attr     : {
-                                        t : 'inlineStr',
-                                        r : cellId
+                                    attr: {
+                                        t: 'inlineStr',
+                                        r: cellId
                                     },
-                                    children : {
-                                        row : _createNode(rels, 'is', {
-                                            children : {
-                                                row : _createNode(rels, 't', {
-                                                    text : text,
-                                                    attr : {
-                                                        'xml:space' : 'preserve'
+                                    children: {
+                                        row: _createNode(rels, 'is', {
+                                            children: {
+                                                row: _createNode(rels, 't', {
+                                                    text: text,
+                                                    attr: {
+                                                        'xml:space': 'preserve'
                                                     }
                                                 })
                                             }
@@ -1208,8 +1208,8 @@
 
                     mergeCells[0].appendChild(
                         _createNode(rels, 'mergeCell', {
-                            attr : {
-                                ref : 'A' + row + ':' + createCellPos(colspan) + row
+                            attr: {
+                                ref: 'A' + row + ':' + createCellPos(colspan) + row
                             }
                         })
                     );
@@ -1261,11 +1261,11 @@
                 for (var i = 0, ien = data.header.length; i < ien; i++) {
                     cols.appendChild(
                         _createNode(rels, 'col', {
-                            attr : {
-                                min         : i + 1,
-                                max         : i + 1,
-                                width       : _excelColWidth(data, i),
-                                customWidth : 1
+                            attr: {
+                                min: i + 1,
+                                max: i + 1,
+                                width: _excelColWidth(data, i),
+                                customWidth: 1
                             }
                         })
                     );
@@ -1280,8 +1280,8 @@
                 if (config.autoFilter) {
                     $('mergeCells', rels).before(
                         _createNode(rels, 'autoFilter', {
-                            attr : {
-                                ref :
+                            attr: {
+                                ref:
                                     'A' +
                                     dataStartRow +
                                     ':' +
@@ -1293,12 +1293,12 @@
 
                     $('definedNames', workbook).append(
                         _createNode(workbook, 'definedName', {
-                            attr : {
-                                name         : '_xlnm._FilterDatabase',
-                                localSheetId : '0',
-                                hidden       : 1
+                            attr: {
+                                name: '_xlnm._FilterDatabase',
+                                localSheetId: '0',
+                                hidden: 1
                             },
-                            text :
+                            text:
                                 _sheetname(config) +
                                 '!$A$' +
                                 dataStartRow +
@@ -1322,9 +1322,9 @@
                 var jszip = _jsZip();
                 var zip = new jszip();
                 var zipConfig = {
-                    compression : 'DEFLATE',
-                    type        : 'blob',
-                    mimeType    : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                    compression: 'DEFLATE',
+                    type: 'blob',
+                    mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
                 };
 
                 _addToZip(zip, xlsx);
@@ -1352,44 +1352,44 @@
                 }
             },
 
-            filename : '*',
+            filename: '*',
 
-            extension : '.xlsx',
+            extension: '.xlsx',
 
-            exportOptions : {},
+            exportOptions: {},
 
-            header : true,
+            header: true,
 
-            footer : false,
+            footer: false,
 
-            title : '*',
+            title: '*',
 
-            messageTop : '*',
+            messageTop: '*',
 
-            messageBottom : '*',
+            messageBottom: '*',
 
-            createEmptyCells : false,
+            createEmptyCells: false,
 
-            autoFilter : false,
+            autoFilter: false,
 
-            sheetName : ''
+            sheetName: ''
         };
 
         //
         // PDF export - using pdfMake - http://pdfmake.org
         //
         DataTable.ext.buttons.pdfHtml5 = {
-            className : 'buttons-pdf buttons-html5',
+            className: 'buttons-pdf buttons-html5',
 
-            available : function() {
+            available: function() {
                 return true;// window.FileReader !== undefined && _pdfMake();
             },
 
-            text : function(dt) {
+            text: function(dt) {
                 return dt.i18n('buttons.pdf', 'PDF');
             },
 
-            action : function(e, dt, button, config) {
+            action: function(e, dt, button, config) {
                 var _link = document.createElement('a');
 
                 var _styleToAbs = function(el) {
@@ -1420,7 +1420,7 @@
 
 
                 var data = dt.buttons.exportData(
-                    $.extend({decodeEntities : false}, config.exportOptions) // XSS protection
+                    $.extend({decodeEntities: false}, config.exportOptions) // XSS protection
                 );
                 var exportInfo = dt.buttons.exportInfo(config);
                 var columnClasses = dt
@@ -1490,13 +1490,13 @@
 
             },
 
-            title : '*',
-            messageTop : '*',
-            messageBottom : '*',
-            exportOptions : {},
-            header : true,
-            footer : false,
-            customize : null
+            title: '*',
+            messageTop: '*',
+            messageBottom: '*',
+            exportOptions: {},
+            header: true,
+            footer: false,
+            customize: null
         };
 
         return DataTable;

@@ -1,7 +1,7 @@
 define(["jquery"], function($) {
     return {
 
-        useronline_status : function() {
+        useronline_status: function() {
             function timeend_status_change(delay) {
                 if (delay != 0) {
                     delay = 400;

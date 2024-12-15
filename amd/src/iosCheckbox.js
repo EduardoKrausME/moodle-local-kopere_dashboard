@@ -13,7 +13,7 @@
     }
 }(function($) {
     $.fn.extend({
-        iosCheckbox : function() {
+        iosCheckbox: function() {
             this.destroy = function() {
                 $(this).each(function() {
                     $(this).next('.ios-ui-select').remove();
@@ -35,16 +35,16 @@
                  * iOS checkbox div
                  */
                 var ios_checkbox = jQuery("<div>", {
-                    class : 'ios-ui-select'
+                    class: 'ios-ui-select'
                 }).append(jQuery("<div>", {
-                    class : 'inner'
+                    class: 'inner'
                 }));
 
                 if (org_checkbox.is(":checked")) {
                     ios_checkbox.addClass("checked");
                 }
 
-                org_checkbox.css({opacity : 0})
+                org_checkbox.css({opacity: 0})
                     .after(ios_checkbox);
 
                 if (org_checkbox.is(":disabled")) {

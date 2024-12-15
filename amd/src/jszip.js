@@ -40,7 +40,7 @@
                     var f = new Error("Cannot find module '" + o + "'");
                     throw f.code = "MODULE_NOT_FOUND", f
                 }
-                var l = n[o] = {exports : {}};
+                var l = n[o] = {exports: {}};
                 t[o][0].call(l.exports, function(e) {
                     var n = t[o][1][e];
                     return s(n ? n : e)
@@ -53,7 +53,7 @@
         for (var o = 0; o < r.length; o++) s(r[o]);
         return s
     })({
-        1  : [function(require, module, exports) {
+        1: [function(require, module, exports) {
             "use strict";
             var utils = require("./utils");
             var support = require("./support");
@@ -160,8 +160,8 @@
                 return output;
             };
 
-        }, {"./support" : 30, "./utils" : 32}],
-        2  : [function(require, module, exports) {
+        }, {"./support": 30, "./utils": 32}],
+        2: [function(require, module, exports) {
             "use strict";
 
             var external = require("./external");
@@ -191,7 +191,7 @@
                  * Create a worker to get the uncompressed content.
                  * @return {GenericWorker} the worker.
                  */
-                getContentWorker    : function() {
+                getContentWorker: function() {
                     var worker = new DataWorker(external.Promise.resolve(this.compressedContent))
                         .pipe(this.compression.uncompressWorker())
                         .pipe(new DataLengthProbe("data_length"));
@@ -208,7 +208,7 @@
                  * Create a worker to get the compressed content.
                  * @return {GenericWorker} the worker.
                  */
-                getCompressedWorker : function() {
+                getCompressedWorker: function() {
                     return new DataWorker(external.Promise.resolve(this.compressedContent))
                         .withStreamInfo("compressedSize", this.compressedSize)
                         .withStreamInfo("uncompressedSize", this.uncompressedSize)
@@ -237,25 +237,25 @@
 
             module.exports = CompressedObject;
 
-        }, {"./external" : 6, "./stream/Crc32Probe" : 25, "./stream/DataLengthProbe" : 26, "./stream/DataWorker" : 27}],
-        3  : [function(require, module, exports) {
+        }, {"./external": 6, "./stream/Crc32Probe": 25, "./stream/DataLengthProbe": 26, "./stream/DataWorker": 27}],
+        3: [function(require, module, exports) {
             "use strict";
 
             var GenericWorker = require("./stream/GenericWorker");
 
             exports.STORE = {
-                magic            : "\x00\x00",
-                compressWorker   : function() {
+                magic: "\x00\x00",
+                compressWorker: function() {
                     return new GenericWorker("STORE compression");
                 },
-                uncompressWorker : function() {
+                uncompressWorker: function() {
                     return new GenericWorker("STORE decompression");
                 }
             };
             exports.DEFLATE = require("./flate");
 
-        }, {"./flate" : 7, "./stream/GenericWorker" : 28}],
-        4  : [function(require, module, exports) {
+        }, {"./flate": 7, "./stream/GenericWorker": 28}],
+        4: [function(require, module, exports) {
             "use strict";
 
             var utils = require("./utils");
@@ -333,8 +333,8 @@
                 }
             };
 
-        }, {"./utils" : 32}],
-        5  : [function(require, module, exports) {
+        }, {"./utils": 32}],
+        5: [function(require, module, exports) {
             "use strict";
             exports.base64 = false;
             exports.binary = false;
@@ -348,7 +348,7 @@
             exports.dosPermissions = null;
 
         }, {}],
-        6  : [function(require, module, exports) {
+        6: [function(require, module, exports) {
             "use strict";
 
             // load the global object first:
@@ -365,11 +365,11 @@
              * Let the user use/change some implementations.
              */
             module.exports = {
-                Promise : ES6Promise
+                Promise: ES6Promise
             };
 
-        }, {"lie" : 37}],
-        7  : [function(require, module, exports) {
+        }, {"lie": 37}],
+        7: [function(require, module, exports) {
             "use strict";
             var USE_TYPEDARRAY = (typeof Uint8Array !== "undefined") && (typeof Uint16Array !== "undefined") && (typeof Uint32Array !== "undefined");
 
@@ -437,14 +437,14 @@
              */
             FlateWorker.prototype._createPako = function() {
                 this._pako = new pako[this._pakoAction]({
-                    raw   : true,
-                    level : this._pakoOptions.level || -1 // default compression
+                    raw: true,
+                    level: this._pakoOptions.level || -1 // default compression
                 });
                 var self = this;
                 this._pako.onData = function(data) {
                     self.push({
-                        data : data,
-                        meta : self.meta
+                        data: data,
+                        meta: self.meta
                     });
                 };
             };
@@ -456,8 +456,8 @@
                 return new FlateWorker("Inflate", {});
             };
 
-        }, {"./stream/GenericWorker" : 28, "./utils" : 32, "pako" : 38}],
-        8  : [function(require, module, exports) {
+        }, {"./stream/GenericWorker": 28, "./utils": 32, "pako": 38}],
+        8: [function(require, module, exports) {
             "use strict";
 
             var utils = require("../utils");
@@ -557,9 +557,9 @@
                     date                     = file.date;
 
                 var dataInfo = {
-                    crc32            : 0,
-                    compressedSize   : 0,
-                    uncompressedSize : 0
+                    crc32: 0,
+                    compressedSize: 0,
+                    uncompressedSize: 0
                 };
 
                 // if the content is streamed, the sizes/crc32 are only available AFTER
@@ -707,8 +707,8 @@
                     encodedComment;
 
                 return {
-                    fileRecord : fileRecord,
-                    dirRecord  : dirRecord
+                    fileRecord: fileRecord,
+                    dirRecord: dirRecord
                 };
             };
 
@@ -823,10 +823,10 @@
                     this.bytesWritten += chunk.data.length;
 
                     GenericWorker.prototype.push.call(this, {
-                        data : chunk.data,
-                        meta : {
-                            currentFile : this.currentFile,
-                            percent     : entriesCount ? (currentFilePercent + 100 * (entriesCount - remainingFiles - 1)) / entriesCount : 100
+                        data: chunk.data,
+                        meta: {
+                            currentFile: this.currentFile,
+                            percent: entriesCount ? (currentFilePercent + 100 * (entriesCount - remainingFiles - 1)) / entriesCount : 100
                         }
                     });
                 }
@@ -846,8 +846,8 @@
                 if (streamedContent) {
                     var record = generateZipParts(streamInfo, streamedContent, false, this.currentSourceOffset, this.zipPlatform, this.encodeFileName);
                     this.push({
-                        data : record.fileRecord,
-                        meta : {percent : 0}
+                        data: record.fileRecord,
+                        meta: {percent: 0}
                     });
                 } else {
                     // we need to wait for the whole file before pushing anything
@@ -868,15 +868,15 @@
                 if (streamedContent) {
                     // after the streamed file, we put data descriptors
                     this.push({
-                        data : generateDataDescriptors(streamInfo),
-                        meta : {percent : 100}
+                        data: generateDataDescriptors(streamInfo),
+                        meta: {percent: 100}
                     });
                 } else {
                     // the content wasn't streamed, we need to push everything now
                     // first the file record, then the content
                     this.push({
-                        data : record.fileRecord,
-                        meta : {percent : 0}
+                        data: record.fileRecord,
+                        meta: {percent: 0}
                     });
                     while (this.contentBuffer.length) {
                         this.push(this.contentBuffer.shift());
@@ -893,8 +893,8 @@
                 var localDirLength = this.bytesWritten;
                 for (var i = 0; i < this.dirRecords.length; i++) {
                     this.push({
-                        data : this.dirRecords[i],
-                        meta : {percent : 100}
+                        data: this.dirRecords[i],
+                        meta: {percent: 100}
                     });
                 }
                 var centralDirLength = this.bytesWritten - localDirLength;
@@ -902,8 +902,8 @@
                 var dirEnd = generateCentralDirectoryEnd(this.dirRecords.length, centralDirLength, localDirLength, this.zipComment, this.encodeFileName);
 
                 this.push({
-                    data : dirEnd,
-                    meta : {percent : 100}
+                    data: dirEnd,
+                    meta: {percent: 100}
                 });
             };
 
@@ -993,8 +993,8 @@
 
             module.exports = ZipFileWorker;
 
-        }, {"../crc32" : 4, "../signature" : 23, "../stream/GenericWorker" : 28, "../utf8" : 31, "../utils" : 32}],
-        9  : [function(require, module, exports) {
+        }, {"../crc32": 4, "../signature": 23, "../stream/GenericWorker": 28, "../utf8": 31, "../utils": 32}],
+        9: [function(require, module, exports) {
             "use strict";
 
             var compressions = require("../compressions");
@@ -1036,12 +1036,12 @@
 
                         file._compressWorker(compression, compressionOptions)
                             .withStreamInfo("file", {
-                                name            : relativePath,
-                                dir             : dir,
-                                date            : date,
-                                comment         : file.comment || "",
-                                unixPermissions : file.unixPermissions,
-                                dosPermissions  : file.dosPermissions
+                                name: relativePath,
+                                dir: dir,
+                                date: date,
+                                comment: file.comment || "",
+                                unixPermissions: file.unixPermissions,
+                                dosPermissions: file.dosPermissions
                             })
                             .pipe(zipFileWorker);
                     });
@@ -1053,8 +1053,8 @@
                 return zipFileWorker;
             };
 
-        }, {"../compressions" : 3, "./ZipFileWorker" : 8}],
-        10 : [function(require, module, exports) {
+        }, {"../compressions": 3, "./ZipFileWorker": 8}],
+        10: [function(require, module, exports) {
             "use strict";
 
             /**
@@ -1112,8 +1112,8 @@
             JSZip.external = require("./external");
             module.exports = JSZip;
 
-        }, {"./defaults" : 5, "./external" : 6, "./load" : 11, "./object" : 15, "./support" : 30}],
-        11 : [function(require, module, exports) {
+        }, {"./defaults": 5, "./external": 6, "./load": 11, "./object": 15, "./support": 30}],
+        11: [function(require, module, exports) {
             "use strict";
             var utils = require("./utils");
             var external = require("./external");
@@ -1147,11 +1147,11 @@
             module.exports = function(data, options) {
                 var zip = this;
                 options = utils.extend(options || {}, {
-                    base64                : false,
-                    checkCRC32            : false,
-                    optimizedBinaryString : false,
-                    createFolders         : false,
-                    decodeFileName        : utf8.utf8decode
+                    base64: false,
+                    checkCRC32: false,
+                    optimizedBinaryString: false,
+                    createFolders: false,
+                    decodeFileName: utf8.utf8decode
                 });
 
                 if (nodejsUtils.isNode && nodejsUtils.isStream(data)) {
@@ -1182,14 +1182,14 @@
                             var safeName = utils.resolve(input.fileNameStr);
 
                             zip.file(safeName, input.decompressed, {
-                                binary                : true,
-                                optimizedBinaryString : true,
-                                date                  : input.date,
-                                dir                   : input.dir,
-                                comment               : input.fileCommentStr.length ? input.fileCommentStr : null,
-                                unixPermissions       : input.unixPermissions,
-                                dosPermissions        : input.dosPermissions,
-                                createFolders         : options.createFolders
+                                binary: true,
+                                optimizedBinaryString: true,
+                                date: input.date,
+                                dir: input.dir,
+                                comment: input.fileCommentStr.length ? input.fileCommentStr : null,
+                                unixPermissions: input.unixPermissions,
+                                dosPermissions: input.dosPermissions,
+                                createFolders: options.createFolders
                             });
                             if (!input.dir) {
                                 zip.file(safeName).unsafeOriginalName = unsafeName;
@@ -1204,14 +1204,14 @@
             };
 
         }, {
-            "./external"          : 6,
-            "./nodejsUtils"       : 14,
-            "./stream/Crc32Probe" : 25,
-            "./utf8"              : 31,
-            "./utils"             : 32,
-            "./zipEntries"        : 33
+            "./external": 6,
+            "./nodejsUtils": 14,
+            "./stream/Crc32Probe": 25,
+            "./utf8": 31,
+            "./utils": 32,
+            "./zipEntries": 33
         }],
-        12 : [function(require, module, exports) {
+        12: [function(require, module, exports) {
             "use strict";
 
             var utils = require("../utils");
@@ -1243,9 +1243,9 @@
                 stream
                     .on("data", function(chunk) {
                         self.push({
-                            data : chunk,
-                            meta : {
-                                percent : 0
+                            data: chunk,
+                            meta: {
+                                percent: 0
                             }
                         });
                     })
@@ -1287,8 +1287,8 @@
 
             module.exports = NodejsStreamInputAdapter;
 
-        }, {"../stream/GenericWorker" : 28, "../utils" : 32}],
-        13 : [function(require, module, exports) {
+        }, {"../stream/GenericWorker": 28, "../utils": 32}],
+        13: [function(require, module, exports) {
             "use strict";
 
             var Readable = require("readable-stream").Readable;
@@ -1331,8 +1331,8 @@
 
             module.exports = NodejsStreamOutputAdapter;
 
-        }, {"../utils" : 32, "readable-stream" : 16}],
-        14 : [function(require, module, exports) {
+        }, {"../utils": 32, "readable-stream": 16}],
+        14: [function(require, module, exports) {
             "use strict";
 
             module.exports = {
@@ -1341,14 +1341,14 @@
                  * In a browser, browserify won't include this file and the whole module
                  * will be resolved an empty object.
                  */
-                isNode        : typeof Buffer !== "undefined",
+                isNode: typeof Buffer !== "undefined",
                 /**
                  * Create a new nodejs Buffer from an existing content.
                  * @param {Object} data the data to pass to the constructor.
                  * @param {String} encoding the encoding to use.
                  * @return {Buffer} a new Buffer.
                  */
-                newBufferFrom : function(data, encoding) {
+                newBufferFrom: function(data, encoding) {
                     if (Buffer.from && Buffer.from !== Uint8Array.from) {
                         return Buffer.from(data, encoding);
                     } else {
@@ -1365,7 +1365,7 @@
                  * @param {Integer} size the size of the buffer.
                  * @return {Buffer} a new Buffer.
                  */
-                allocBuffer   : function(size) {
+                allocBuffer: function(size) {
                     if (Buffer.alloc) {
                         return Buffer.alloc(size);
                     } else {
@@ -1379,11 +1379,11 @@
                  * @param {Object} b the object to test.
                  * @return {Boolean} true if the object is a Buffer, false otherwise.
                  */
-                isBuffer      : function(b) {
+                isBuffer: function(b) {
                     return Buffer.isBuffer(b);
                 },
 
-                isStream : function(obj) {
+                isStream: function(obj) {
                     return obj &&
                         typeof obj.on === "function" &&
                         typeof obj.pause === "function" &&
@@ -1392,7 +1392,7 @@
             };
 
         }, {}],
-        15 : [function(require, module, exports) {
+        15: [function(require, module, exports) {
             "use strict";
             var utf8 = require("./utf8");
             var utils = require("./utils");
@@ -1536,8 +1536,8 @@
                 // Does this folder already exist?
                 if (!this.files[name]) {
                     fileAdd.call(this, name, null, {
-                        dir           : true,
-                        createFolders : createFolders
+                        dir: true,
+                        createFolders: createFolders
                     });
                 }
                 return this.files[name];
@@ -1558,7 +1558,7 @@
                 /**
                  * @see loadAsync
                  */
-                load : function() {
+                load: function() {
                     throw new Error("This method has been removed in JSZip 3.0, please check the upgrade guide.");
                 },
 
@@ -1568,7 +1568,7 @@
                  * function (relativePath, file) {...}
                  * It takes 2 arguments : the relative path and the file.
                  */
-                forEach : function(cb) {
+                forEach: function(cb) {
                     var filename, relativePath, file;
                     // ignore warning about unwanted properties because this.files is a null prototype object
                     /* eslint-disable-next-line guard-for-in */
@@ -1588,7 +1588,7 @@
                  * It takes 2 arguments : the relative path and the file.
                  * @return {Array} An array of matching elements.
                  */
-                filter : function(search) {
+                filter: function(search) {
                     var result = [];
                     this.forEach(function(relativePath, entry) {
                         if (search(relativePath, entry)) { // the file matches the function
@@ -1608,7 +1608,7 @@
                  * @return  {JSZip|Object|Array} this JSZip object (when adding a file),
                  * a file (when searching by string) or an array of files (when searching by regex).
                  */
-                file : function(name, data, o) {
+                file: function(name, data, o) {
                     if (arguments.length === 1) {
                         if (isRegExp(name)) {
                             var regexp = name;
@@ -1637,7 +1637,7 @@
                  * @param   {String|RegExp} arg The name of the directory to add, or a regex to search folders.
                  * @return  {JSZip} an object with the new directory as the root, or an array containing matching folders.
                  */
-                folder : function(arg) {
+                folder: function(arg) {
                     if (!arg) {
                         return this;
                     }
@@ -1663,7 +1663,7 @@
                  * @param {string} name the name of the file to delete
                  * @return {JSZip} this JSZip object
                  */
-                remove : function(name) {
+                remove: function(name) {
                     name = this.root + name;
                     var file = this.files[name];
                     if (!file) {
@@ -1693,7 +1693,7 @@
                 /**
                  * @deprecated This method has been removed in JSZip 3.0, please check the upgrade guide.
                  */
-                generate : function() {
+                generate: function() {
                     throw new Error("This method has been removed in JSZip 3.0, please check the upgrade guide.");
                 },
 
@@ -1704,18 +1704,18 @@
                  * - type, "base64" by default. Values are : string, base64, uint8array, arraybuffer, blob.
                  * @return {StreamHelper} the streamed zip file.
                  */
-                generateInternalStream : function(options) {
+                generateInternalStream: function(options) {
                     var worker, opts = {};
                     try {
                         opts = utils.extend(options || {}, {
-                            streamFiles        : false,
-                            compression        : "STORE",
-                            compressionOptions : null,
-                            type               : "",
-                            platform           : "DOS",
-                            comment            : null,
-                            mimeType           : "application/zip",
-                            encodeFileName     : utf8.utf8encode
+                            streamFiles: false,
+                            compression: "STORE",
+                            compressionOptions: null,
+                            type: "",
+                            platform: "DOS",
+                            comment: null,
+                            mimeType: "application/zip",
+                            encodeFileName: utf8.utf8encode
                         });
 
                         opts.type = opts.type.toLowerCase();
@@ -1757,14 +1757,14 @@
                  * Generate the complete zip file asynchronously.
                  * @see generateInternalStream
                  */
-                generateAsync          : function(options, onUpdate) {
+                generateAsync: function(options, onUpdate) {
                     return this.generateInternalStream(options).accumulate(onUpdate);
                 },
                 /**
                  * Generate the complete zip file asynchronously.
                  * @see generateInternalStream
                  */
-                generateNodeStream     : function(options, onUpdate) {
+                generateNodeStream: function(options, onUpdate) {
                     options = options || {};
                     if (!options.type) {
                         options.type = "nodebuffer";
@@ -1775,18 +1775,18 @@
             module.exports = out;
 
         }, {
-            "./compressedObject"                : 2,
-            "./defaults"                        : 5,
-            "./generate"                        : 9,
-            "./nodejs/NodejsStreamInputAdapter" : 12,
-            "./nodejsUtils"                     : 14,
-            "./stream/GenericWorker"            : 28,
-            "./stream/StreamHelper"             : 29,
-            "./utf8"                            : 31,
-            "./utils"                           : 32,
-            "./zipObject"                       : 35
+            "./compressedObject": 2,
+            "./defaults": 5,
+            "./generate": 9,
+            "./nodejs/NodejsStreamInputAdapter": 12,
+            "./nodejsUtils": 14,
+            "./stream/GenericWorker": 28,
+            "./stream/StreamHelper": 29,
+            "./utf8": 31,
+            "./utils": 32,
+            "./zipObject": 35
         }],
-        16 : [function(require, module, exports) {
+        16: [function(require, module, exports) {
             "use strict";
             /*
      * This file is used by module bundlers (browserify/webpack/etc) when
@@ -1798,8 +1798,8 @@
      */
             module.exports = require("stream");
 
-        }, {"stream" : undefined}],
-        17 : [function(require, module, exports) {
+        }, {"stream": undefined}],
+        17: [function(require, module, exports) {
             "use strict";
             var DataReader = require("./DataReader");
             var utils = require("../utils");
@@ -1859,8 +1859,8 @@
             };
             module.exports = ArrayReader;
 
-        }, {"../utils" : 32, "./DataReader" : 18}],
-        18 : [function(require, module, exports) {
+        }, {"../utils": 32, "./DataReader": 18}],
+        18: [function(require, module, exports) {
             "use strict";
             var utils = require("../utils");
 
@@ -1877,7 +1877,7 @@
                  * @param {string} offset the additional offset to check.
                  * @throws {Error} an Error if the offset is out of bounds.
                  */
-                checkOffset           : function(offset) {
+                checkOffset: function(offset) {
                     this.checkIndex(this.index + offset);
                 },
                 /**
@@ -1885,7 +1885,7 @@
                  * @param {string} newIndex the index to check.
                  * @throws {Error} an Error if the index is out of bounds.
                  */
-                checkIndex            : function(newIndex) {
+                checkIndex: function(newIndex) {
                     if (this.length < this.zero + newIndex || newIndex < 0) {
                         throw new Error("End of data reached (data length = " + this.length + ", asked index = " + (newIndex) + "). Corrupted zip ?");
                     }
@@ -1895,7 +1895,7 @@
                  * @param {number} newIndex The new index.
                  * @throws {Error} if the new index is out of the data.
                  */
-                setIndex              : function(newIndex) {
+                setIndex: function(newIndex) {
                     this.checkIndex(newIndex);
                     this.index = newIndex;
                 },
@@ -1904,7 +1904,7 @@
                  * @param {number} n the number of bytes to skip.
                  * @throws {Error} if the new index is out of the data.
                  */
-                skip                  : function(n) {
+                skip: function(n) {
                     this.setIndex(this.index + n);
                 },
                 /**
@@ -1912,7 +1912,7 @@
                  * @param {number} i the index to use.
                  * @return {number} a byte.
                  */
-                byteAt                : function() {
+                byteAt: function() {
                     // see implementations
                 },
                 /**
@@ -1920,7 +1920,7 @@
                  * @param {number} size the number of bytes to read.
                  * @return {number} the corresponding number.
                  */
-                readInt               : function(size) {
+                readInt: function(size) {
                     var result = 0,
                         i;
                     this.checkOffset(size);
@@ -1935,7 +1935,7 @@
                  * @param {number} size the number of bytes to read.
                  * @return {string} the corresponding string.
                  */
-                readString            : function(size) {
+                readString: function(size) {
                     return utils.transformTo("string", this.readData(size));
                 },
                 /**
@@ -1943,7 +1943,7 @@
                  * @param {number} size the number of bytes to read.
                  * @return {Object} the raw data, implementation specific.
                  */
-                readData              : function() {
+                readData: function() {
                     // see implementations
                 },
                 /**
@@ -1951,7 +1951,7 @@
                  * @param {string} sig the signature to find.
                  * @return {number} the index of the last occurrence, -1 if not found.
                  */
-                lastIndexOfSignature  : function() {
+                lastIndexOfSignature: function() {
                     // see implementations
                 },
                 /**
@@ -1959,14 +1959,14 @@
                  * @param {string} sig the expected signature
                  * @return {boolean} true if the signature matches, false otherwise.
                  */
-                readAndCheckSignature : function() {
+                readAndCheckSignature: function() {
                     // see implementations
                 },
                 /**
                  * Get the next date.
                  * @return {Date} the date.
                  */
-                readDate              : function() {
+                readDate: function() {
                     var dostime = this.readInt(4);
                     return new Date(Date.UTC(
                         ((dostime >> 25) & 0x7f) + 1980, // year
@@ -1979,8 +1979,8 @@
             };
             module.exports = DataReader;
 
-        }, {"../utils" : 32}],
-        19 : [function(require, module, exports) {
+        }, {"../utils": 32}],
+        19: [function(require, module, exports) {
             "use strict";
             var Uint8ArrayReader = require("./Uint8ArrayReader");
             var utils = require("../utils");
@@ -2002,8 +2002,8 @@
             };
             module.exports = NodeBufferReader;
 
-        }, {"../utils" : 32, "./Uint8ArrayReader" : 21}],
-        20 : [function(require, module, exports) {
+        }, {"../utils": 32, "./Uint8ArrayReader": 21}],
+        20: [function(require, module, exports) {
             "use strict";
             var DataReader = require("./DataReader");
             var utils = require("../utils");
@@ -2044,8 +2044,8 @@
             };
             module.exports = StringReader;
 
-        }, {"../utils" : 32, "./DataReader" : 18}],
-        21 : [function(require, module, exports) {
+        }, {"../utils": 32, "./DataReader": 18}],
+        21: [function(require, module, exports) {
             "use strict";
             var ArrayReader = require("./ArrayReader");
             var utils = require("../utils");
@@ -2070,8 +2070,8 @@
             };
             module.exports = Uint8ArrayReader;
 
-        }, {"../utils" : 32, "./ArrayReader" : 17}],
-        22 : [function(require, module, exports) {
+        }, {"../utils": 32, "./ArrayReader": 17}],
+        22: [function(require, module, exports) {
             "use strict";
 
             var utils = require("../utils");
@@ -2102,14 +2102,14 @@
             };
 
         }, {
-            "../support"         : 30,
-            "../utils"           : 32,
-            "./ArrayReader"      : 17,
-            "./NodeBufferReader" : 19,
-            "./StringReader"     : 20,
-            "./Uint8ArrayReader" : 21
+            "../support": 30,
+            "../utils": 32,
+            "./ArrayReader": 17,
+            "./NodeBufferReader": 19,
+            "./StringReader": 20,
+            "./Uint8ArrayReader": 21
         }],
-        23 : [function(require, module, exports) {
+        23: [function(require, module, exports) {
             "use strict";
             exports.LOCAL_FILE_HEADER = "PK\x03\x04";
             exports.CENTRAL_FILE_HEADER = "PK\x01\x02";
@@ -2119,7 +2119,7 @@
             exports.DATA_DESCRIPTOR = "PK\x07\x08";
 
         }, {}],
-        24 : [function(require, module, exports) {
+        24: [function(require, module, exports) {
             "use strict";
 
             var GenericWorker = require("./GenericWorker");
@@ -2142,14 +2142,14 @@
              */
             ConvertWorker.prototype.processChunk = function(chunk) {
                 this.push({
-                    data : utils.transformTo(this.destType, chunk.data),
-                    meta : chunk.meta
+                    data: utils.transformTo(this.destType, chunk.data),
+                    meta: chunk.meta
                 });
             };
             module.exports = ConvertWorker;
 
-        }, {"../utils" : 32, "./GenericWorker" : 28}],
-        25 : [function(require, module, exports) {
+        }, {"../utils": 32, "./GenericWorker": 28}],
+        25: [function(require, module, exports) {
             "use strict";
 
             var GenericWorker = require("./GenericWorker");
@@ -2176,8 +2176,8 @@
             };
             module.exports = Crc32Probe;
 
-        }, {"../crc32" : 4, "../utils" : 32, "./GenericWorker" : 28}],
-        26 : [function(require, module, exports) {
+        }, {"../crc32": 4, "../utils": 32, "./GenericWorker": 28}],
+        26: [function(require, module, exports) {
             "use strict";
 
             var utils = require("../utils");
@@ -2208,8 +2208,8 @@
             };
             module.exports = DataLengthProbe;
 
-        }, {"../utils" : 32, "./GenericWorker" : 28}],
-        27 : [function(require, module, exports) {
+        }, {"../utils": 32, "./GenericWorker": 28}],
+        27: [function(require, module, exports) {
             "use strict";
 
             var utils = require("../utils");
@@ -2317,9 +2317,9 @@
                     }
                     this.index = nextIndex;
                     return this.push({
-                        data : data,
-                        meta : {
-                            percent : this.max ? this.index / this.max * 100 : 0
+                        data: data,
+                        meta: {
+                            percent: this.max ? this.index / this.max * 100 : 0
                         }
                     });
                 }
@@ -2327,8 +2327,8 @@
 
             module.exports = DataWorker;
 
-        }, {"../utils" : 32, "./GenericWorker" : 28}],
-        28 : [function(require, module, exports) {
+        }, {"../utils": 32, "./GenericWorker": 28}],
+        28: [function(require, module, exports) {
             "use strict";
 
             /**
@@ -2362,9 +2362,9 @@
                 this.isLocked = false;
                 // the event listeners
                 this._listeners = {
-                    "data"  : [],
-                    "end"   : [],
-                    "error" : []
+                    "data": [],
+                    "end": [],
+                    "error": []
                 };
                 // the previous worker, if any
                 this.previous = null;
@@ -2375,14 +2375,14 @@
                  * Push a chunk to the next workers.
                  * @param {Object} chunk the chunk to push
                  */
-                push             : function(chunk) {
+                push: function(chunk) {
                     this.emit("data", chunk);
                 },
                 /**
                  * End the stream.
                  * @return {Boolean} true if this call ended the worker, false otherwise.
                  */
-                end              : function() {
+                end: function() {
                     if (this.isFinished) {
                         return false;
                     }
@@ -2402,7 +2402,7 @@
                  * @param {Error} e the error which caused the premature end.
                  * @return {Boolean} true if this call ended the worker with an error, false otherwise.
                  */
-                error            : function(e) {
+                error: function(e) {
                     if (this.isFinished) {
                         return false;
                     }
@@ -2431,14 +2431,14 @@
                  * @param {Function} listener the function to call when the event is triggered
                  * @return {GenericWorker} the current object for chainability
                  */
-                on               : function(name, listener) {
+                on: function(name, listener) {
                     this._listeners[name].push(listener);
                     return this;
                 },
                 /**
                  * Clean any references when a worker is ending.
                  */
-                cleanUp          : function() {
+                cleanUp: function() {
                     this.streamInfo = this.generatedError = this.extraStreamInfo = null;
                     this._listeners = [];
                 },
@@ -2447,7 +2447,7 @@
                  * @param {String} name the name of the event (data, end, error)
                  * @param {Object} arg the argument to call the callback with.
                  */
-                emit             : function(name, arg) {
+                emit: function(name, arg) {
                     if (this._listeners[name]) {
                         for (var i = 0; i < this._listeners[name].length; i++) {
                             this._listeners[name][i].call(this, arg);
@@ -2459,7 +2459,7 @@
                  * @param {Worker} next the worker receiving events from the current one.
                  * @return {worker} the next worker for chainability
                  */
-                pipe             : function(next) {
+                pipe: function(next) {
                     return next.registerPrevious(this);
                 },
                 /**
@@ -2470,7 +2470,7 @@
                  * @param {Worker} previous the previous worker, sending events to this one
                  * @return {Worker} the current worker for chainability
                  */
-                registerPrevious : function(previous) {
+                registerPrevious: function(previous) {
                     if (this.isLocked) {
                         throw new Error("The stream '" + this + "' has already been used.");
                     }
@@ -2496,7 +2496,7 @@
                  * Pause the stream so it doesn't send events anymore.
                  * @return {Boolean} true if this call paused the worker, false otherwise.
                  */
-                pause            : function() {
+                pause: function() {
                     if (this.isPaused || this.isFinished) {
                         return false;
                     }
@@ -2511,7 +2511,7 @@
                  * Resume a paused stream.
                  * @return {Boolean} true if this call resumed the worker, false otherwise.
                  */
-                resume           : function() {
+                resume: function() {
                     if (!this.isPaused || this.isFinished) {
                         return false;
                     }
@@ -2532,13 +2532,13 @@
                 /**
                  * Flush any remaining bytes as the stream is ending.
                  */
-                flush            : function() {
+                flush: function() {
                 },
                 /**
                  * Process a chunk. This is usually the method overridden.
                  * @param {Object} chunk the chunk to process.
                  */
-                processChunk     : function(chunk) {
+                processChunk: function(chunk) {
                     this.push(chunk);
                 },
                 /**
@@ -2547,7 +2547,7 @@
                  * @param {Object} value the associated value
                  * @return {Worker} the current worker for chainability
                  */
-                withStreamInfo   : function(key, value) {
+                withStreamInfo: function(key, value) {
                     this.extraStreamInfo[key] = value;
                     this.mergeStreamInfo();
                     return this;
@@ -2555,7 +2555,7 @@
                 /**
                  * Merge this worker's streamInfo into the chain's streamInfo.
                  */
-                mergeStreamInfo  : function() {
+                mergeStreamInfo: function() {
                     for (var key in this.extraStreamInfo) {
                         if (!Object.prototype.hasOwnProperty.call(this.extraStreamInfo, key)) {
                             continue;
@@ -2568,7 +2568,7 @@
                  * Lock the stream to prevent further updates on the workers chain.
                  * After calling this method, all calls to pipe will fail.
                  */
-                lock : function() {
+                lock: function() {
                     if (this.isLocked) {
                         throw new Error("The stream '" + this + "' has already been used.");
                     }
@@ -2582,7 +2582,7 @@
                  *
                  * Pretty print the workers chain.
                  */
-                toString : function() {
+                toString: function() {
                     var me = "Worker " + this.name;
                     if (this.previous) {
                         return this.previous + " -> " + me;
@@ -2595,7 +2595,7 @@
             module.exports = GenericWorker;
 
         }, {}],
-        29 : [function(require, module, exports) {
+        29: [function(require, module, exports) {
             "use strict";
 
             var utils = require("../utils");
@@ -2748,7 +2748,7 @@
                  * @param {Function} updateCb the update callback.
                  * @return Promise the promise for the accumulation.
                  */
-                accumulate     : function(updateCb) {
+                accumulate: function(updateCb) {
                     return accumulate(this, updateCb);
                 },
                 /**
@@ -2757,7 +2757,7 @@
                  * @param {Function} fn the listener
                  * @return {StreamHelper} the current helper.
                  */
-                on             : function(evt, fn) {
+                on: function(evt, fn) {
                     var self = this;
 
                     if (evt === "data") {
@@ -2775,7 +2775,7 @@
                  * Resume the flow of chunks.
                  * @return {StreamHelper} the current helper.
                  */
-                resume         : function() {
+                resume: function() {
                     utils.delay(this._worker.resume, [], this._worker);
                     return this;
                 },
@@ -2783,7 +2783,7 @@
                  * Pause the flow of chunks.
                  * @return {StreamHelper} the current helper.
                  */
-                pause          : function() {
+                pause: function() {
                     this._worker.pause();
                     return this;
                 },
@@ -2792,7 +2792,7 @@
                  * @param {Function} updateCb the update callback.
                  * @return {NodejsStreamOutputAdapter} the nodejs stream.
                  */
-                toNodejsStream : function(updateCb) {
+                toNodejsStream: function(updateCb) {
                     utils.checkSupport("nodestream");
                     if (this._outputType !== "nodebuffer") {
                         // an object stream containing blob/arraybuffer/uint8array/string
@@ -2803,7 +2803,7 @@
                     }
 
                     return new NodejsStreamOutputAdapter(this, {
-                        objectMode : this._outputType !== "nodebuffer"
+                        objectMode: this._outputType !== "nodebuffer"
                     }, updateCb);
                 }
             };
@@ -2811,15 +2811,15 @@
             module.exports = StreamHelper;
 
         }, {
-            "../base64"                           : 1,
-            "../external"                         : 6,
-            "../nodejs/NodejsStreamOutputAdapter" : 13,
-            "../support"                          : 30,
-            "../utils"                            : 32,
-            "./ConvertWorker"                     : 24,
-            "./GenericWorker"                     : 28
+            "../base64": 1,
+            "../external": 6,
+            "../nodejs/NodejsStreamOutputAdapter": 13,
+            "../support": 30,
+            "../utils": 32,
+            "./ConvertWorker": 24,
+            "./GenericWorker": 28
         }],
-        30 : [function(require, module, exports) {
+        30: [function(require, module, exports) {
             "use strict";
 
             exports.base64 = true;
@@ -2837,7 +2837,7 @@
                 var buffer = new ArrayBuffer(0);
                 try {
                     exports.blob = new Blob([buffer], {
-                        type : "application/zip"
+                        type: "application/zip"
                     }).size === 0;
                 }
                 catch (e) {
@@ -2859,8 +2859,8 @@
                 exports.nodestream = false;
             }
 
-        }, {"readable-stream" : 16}],
-        31 : [function(require, module, exports) {
+        }, {"readable-stream": 16}],
+        31: [function(require, module, exports) {
             "use strict";
 
             var utils = require("./utils");
@@ -3114,8 +3114,8 @@
                 }
 
                 this.push({
-                    data : exports.utf8decode(usableData),
-                    meta : chunk.meta
+                    data: exports.utf8decode(usableData),
+                    meta: chunk.meta
                 });
             };
 
@@ -3125,8 +3125,8 @@
             Utf8DecodeWorker.prototype.flush = function() {
                 if (this.leftOver && this.leftOver.length) {
                     this.push({
-                        data : exports.utf8decode(this.leftOver),
-                        meta : {}
+                        data: exports.utf8decode(this.leftOver),
+                        meta: {}
                     });
                     this.leftOver = null;
                 }
@@ -3148,14 +3148,14 @@
              */
             Utf8EncodeWorker.prototype.processChunk = function(chunk) {
                 this.push({
-                    data : exports.utf8encode(chunk.data),
-                    meta : chunk.meta
+                    data: exports.utf8encode(chunk.data),
+                    meta: chunk.meta
                 });
             };
             exports.Utf8EncodeWorker = Utf8EncodeWorker;
 
-        }, {"./nodejsUtils" : 14, "./stream/GenericWorker" : 28, "./support" : 30, "./utils" : 32}],
-        32 : [function(require, module, exports) {
+        }, {"./nodejsUtils": 14, "./stream/GenericWorker": 28, "./support": 30, "./utils": 32}],
+        32: [function(require, module, exports) {
             "use strict";
 
             var support = require("./support");
@@ -3200,7 +3200,7 @@
                 try {
                     // Blob constructor
                     return new Blob([part], {
-                        type : type
+                        type: type
                     });
                 }
                 catch (e) {
@@ -3258,7 +3258,7 @@
                  * @return {String} the resulting string.
                  * @throws Error if the chunk is too big for the stack.
                  */
-                stringifyByChunk : function(array, type, chunk) {
+                stringifyByChunk: function(array, type, chunk) {
                     var result = [], k = 0, len = array.length;
                     // shortcut
                     if (len <= chunk) {
@@ -3282,18 +3282,18 @@
                  * @param {Array|ArrayBuffer|Uint8Array|Buffer} array the array to transform.
                  * @return {String} the result.
                  */
-                stringifyByChar  : function(array) {
+                stringifyByChar: function(array) {
                     var resultStr = "";
                     for (var i = 0; i < array.length; i++) {
                         resultStr += String.fromCharCode(array[i]);
                     }
                     return resultStr;
                 },
-                applyCanBeUsed   : {
+                applyCanBeUsed: {
                     /**
                      * true if the browser accepts to use String.fromCharCode on Uint8Array
                      */
-                    uint8array : (function() {
+                    uint8array: (function() {
                         try {
                             return support.uint8array && String.fromCharCode.apply(null, new Uint8Array(1)).length === 1;
                         } catch (e) {
@@ -3303,7 +3303,7 @@
                     /**
                      * true if the browser accepts to use String.fromCharCode on nodejs Buffer.
                      */
-                    nodebuffer : (function() {
+                    nodebuffer: (function() {
                         try {
                             return support.nodebuffer && String.fromCharCode.apply(null, nodejsUtils.allocBuffer(1)).length === 1;
                         } catch (e) {
@@ -3373,81 +3373,81 @@
 
             // string to ?
             transform["string"] = {
-                "string"      : identity,
-                "array"       : function(input) {
+                "string": identity,
+                "array": function(input) {
                     return stringToArrayLike(input, new Array(input.length));
                 },
-                "arraybuffer" : function(input) {
+                "arraybuffer": function(input) {
                     return transform["string"]["uint8array"](input).buffer;
                 },
-                "uint8array"  : function(input) {
+                "uint8array": function(input) {
                     return stringToArrayLike(input, new Uint8Array(input.length));
                 },
-                "nodebuffer"  : function(input) {
+                "nodebuffer": function(input) {
                     return stringToArrayLike(input, nodejsUtils.allocBuffer(input.length));
                 }
             };
 
             // array to ?
             transform["array"] = {
-                "string"      : arrayLikeToString,
-                "array"       : identity,
-                "arraybuffer" : function(input) {
+                "string": arrayLikeToString,
+                "array": identity,
+                "arraybuffer": function(input) {
                     return (new Uint8Array(input)).buffer;
                 },
-                "uint8array"  : function(input) {
+                "uint8array": function(input) {
                     return new Uint8Array(input);
                 },
-                "nodebuffer"  : function(input) {
+                "nodebuffer": function(input) {
                     return nodejsUtils.newBufferFrom(input);
                 }
             };
 
             // arraybuffer to ?
             transform["arraybuffer"] = {
-                "string"      : function(input) {
+                "string": function(input) {
                     return arrayLikeToString(new Uint8Array(input));
                 },
-                "array"       : function(input) {
+                "array": function(input) {
                     return arrayLikeToArrayLike(new Uint8Array(input), new Array(input.byteLength));
                 },
-                "arraybuffer" : identity,
-                "uint8array"  : function(input) {
+                "arraybuffer": identity,
+                "uint8array": function(input) {
                     return new Uint8Array(input);
                 },
-                "nodebuffer"  : function(input) {
+                "nodebuffer": function(input) {
                     return nodejsUtils.newBufferFrom(new Uint8Array(input));
                 }
             };
 
             // uint8array to ?
             transform["uint8array"] = {
-                "string"      : arrayLikeToString,
-                "array"       : function(input) {
+                "string": arrayLikeToString,
+                "array": function(input) {
                     return arrayLikeToArrayLike(input, new Array(input.length));
                 },
-                "arraybuffer" : function(input) {
+                "arraybuffer": function(input) {
                     return input.buffer;
                 },
-                "uint8array"  : identity,
-                "nodebuffer"  : function(input) {
+                "uint8array": identity,
+                "nodebuffer": function(input) {
                     return nodejsUtils.newBufferFrom(input);
                 }
             };
 
             // nodebuffer to ?
             transform["nodebuffer"] = {
-                "string"      : arrayLikeToString,
-                "array"       : function(input) {
+                "string": arrayLikeToString,
+                "array": function(input) {
                     return arrayLikeToArrayLike(input, new Array(input.length));
                 },
-                "arraybuffer" : function(input) {
+                "arraybuffer": function(input) {
                     return transform["nodebuffer"]["uint8array"](input).buffer;
                 },
-                "uint8array"  : function(input) {
+                "uint8array": function(input) {
                     return arrayLikeToArrayLike(input, new Uint8Array(input.length));
                 },
-                "nodebuffer"  : identity
+                "nodebuffer": identity
             };
 
             /**
@@ -3656,8 +3656,8 @@
                 });
             };
 
-        }, {"./base64" : 1, "./external" : 6, "./nodejsUtils" : 14, "./support" : 30, "setimmediate" : 54}],
-        33 : [function(require, module, exports) {
+        }, {"./base64": 1, "./external": 6, "./nodejsUtils": 14, "./support": 30, "setimmediate": 54}],
+        33: [function(require, module, exports) {
             "use strict";
             var readerFor = require("./reader/readerFor");
             var utils = require("./utils");
@@ -3682,7 +3682,7 @@
                  * @param {string} expectedSignature the expected signature.
                  * @throws {Error} if it is an other signature.
                  */
-                checkSignature                    : function(expectedSignature) {
+                checkSignature: function(expectedSignature) {
                     if (!this.reader.readAndCheckSignature(expectedSignature)) {
                         this.reader.index -= 4;
                         var signature = this.reader.readString(4);
@@ -3695,7 +3695,7 @@
                  * @param {string} expectedSignature the signature to expect.
                  * @return {boolean} true if the signature is here, false otherwise.
                  */
-                isSignature                       : function(askedIndex, expectedSignature) {
+                isSignature: function(askedIndex, expectedSignature) {
                     var currentIndex = this.reader.index;
                     this.reader.setIndex(askedIndex);
                     var signature = this.reader.readString(4);
@@ -3706,7 +3706,7 @@
                 /**
                  * Read the end of the central directory.
                  */
-                readBlockEndOfCentral             : function() {
+                readBlockEndOfCentral: function() {
                     this.diskNumber = this.reader.readInt(2);
                     this.diskWithCentralDirStart = this.reader.readInt(2);
                     this.centralDirRecordsOnThisDisk = this.reader.readInt(2);
@@ -3731,7 +3731,7 @@
                  * The end of central can coexist with its Zip64 brother,
                  * I don't want to read the wrong number of bytes !
                  */
-                readBlockZip64EndOfCentral        : function() {
+                readBlockZip64EndOfCentral: function() {
                     this.zip64EndOfCentralSize = this.reader.readInt(8);
                     this.reader.skip(4);
                     // this.versionMadeBy = this.reader.readString(2);
@@ -3754,16 +3754,16 @@
                         extraFieldLength = this.reader.readInt(4);
                         extraFieldValue = this.reader.readData(extraFieldLength);
                         this.zip64ExtensibleData[extraFieldId] = {
-                            id     : extraFieldId,
-                            length : extraFieldLength,
-                            value  : extraFieldValue
+                            id: extraFieldId,
+                            length: extraFieldLength,
+                            value: extraFieldValue
                         };
                     }
                 },
                 /**
                  * Read the end of the Zip 64 central directory locator.
                  */
-                readBlockZip64EndOfCentralLocator : function() {
+                readBlockZip64EndOfCentralLocator: function() {
                     this.diskWithZip64CentralDirStart = this.reader.readInt(4);
                     this.relativeOffsetEndOfZip64CentralDir = this.reader.readInt(8);
                     this.disksCount = this.reader.readInt(4);
@@ -3774,7 +3774,7 @@
                 /**
                  * Read the local files, based on the offset read in the central part.
                  */
-                readLocalFiles                    : function() {
+                readLocalFiles: function() {
                     var i, file;
                     for (i = 0; i < this.files.length; i++) {
                         file = this.files[i];
@@ -3788,13 +3788,13 @@
                 /**
                  * Read the central directory.
                  */
-                readCentralDir                    : function() {
+                readCentralDir: function() {
                     var file;
 
                     this.reader.setIndex(this.centralDirOffset);
                     while (this.reader.readAndCheckSignature(sig.CENTRAL_FILE_HEADER)) {
                         file = new ZipEntry({
-                            zip64 : this.zip64
+                            zip64: this.zip64
                         }, this.loadOptions);
                         file.readCentralPart(this.reader);
                         this.files.push(file);
@@ -3815,7 +3815,7 @@
                 /**
                  * Read the end of central directory.
                  */
-                readEndOfCentral                  : function() {
+                readEndOfCentral: function() {
                     var offset = this.reader.lastIndexOfSignature(sig.CENTRAL_DIRECTORY_END);
                     if (offset < 0) {
                         // Check if the content is a truncated zip or complete garbage.
@@ -3904,14 +3904,14 @@
                         throw new Error("Corrupted zip: missing " + Math.abs(extraBytes) + " bytes.");
                     }
                 },
-                prepareReader                     : function(data) {
+                prepareReader: function(data) {
                     this.reader = readerFor(data);
                 },
                 /**
                  * Read a zip file and create ZipEntries.
                  * @param {String|ArrayBuffer|Uint8Array|Buffer} data the binary string representing a zip file.
                  */
-                load                              : function(data) {
+                load: function(data) {
                     this.prepareReader(data);
                     this.readEndOfCentral();
                     this.readCentralDir();
@@ -3921,8 +3921,8 @@
             // }}} end of ZipEntries
             module.exports = ZipEntries;
 
-        }, {"./reader/readerFor" : 22, "./signature" : 23, "./support" : 30, "./utils" : 32, "./zipEntry" : 34}],
-        34 : [function(require, module, exports) {
+        }, {"./reader/readerFor": 22, "./signature": 23, "./support": 30, "./utils": 32, "./zipEntry": 34}],
+        34: [function(require, module, exports) {
             "use strict";
             var readerFor = require("./reader/readerFor");
             var utils = require("./utils");
@@ -3969,7 +3969,7 @@
                  * say if the file is encrypted.
                  * @return {boolean} true if the file is encrypted, false otherwise.
                  */
-                isEncrypted   : function() {
+                isEncrypted: function() {
                     // bit 1 is set
                     return (this.bitFlag & 0x0001) === 0x0001;
                 },
@@ -3977,7 +3977,7 @@
                  * say if the file has utf-8 filename/comment.
                  * @return {boolean} true if the filename/comment is in utf-8, false otherwise.
                  */
-                useUTF8       : function() {
+                useUTF8: function() {
                     // bit 11 is set
                     return (this.bitFlag & 0x0800) === 0x0800;
                 },
@@ -3985,7 +3985,7 @@
                  * Read the local part of a zip file and add the info in this object.
                  * @param {DataReader} reader the reader to use.
                  */
-                readLocalPart : function(reader) {
+                readLocalPart: function(reader) {
                     var compression, localExtraFieldsLength;
 
                     // we already know everything from the central dir !
@@ -4026,7 +4026,7 @@
                  * Read the central part of a zip file and add the info in this object.
                  * @param {DataReader} reader the reader to use.
                  */
-                readCentralPart : function(reader) {
+                readCentralPart: function(reader) {
                     this.versionMadeBy = reader.readInt(2);
                     reader.skip(2);
                     // this.versionNeeded = reader.readInt(2);
@@ -4058,7 +4058,7 @@
                 /**
                  * Parse the external file attributes and get the unix/dos permissions.
                  */
-                processAttributes : function() {
+                processAttributes: function() {
                     this.unixPermissions = null;
                     this.dosPermissions = null;
                     var madeBy = this.versionMadeBy >> 8;
@@ -4088,7 +4088,7 @@
                  * Parse the ZIP64 extra field and merge the info in the current ZipEntry.
                  * @param {DataReader} reader the reader to use.
                  */
-                parseZIP64ExtraField : function() {
+                parseZIP64ExtraField: function() {
                     if (!this.extraFields[0x0001]) {
                         return;
                     }
@@ -4115,7 +4115,7 @@
                  * Read the central part of a zip file and add the info in this object.
                  * @param {DataReader} reader the reader to use.
                  */
-                readExtraFields      : function(reader) {
+                readExtraFields: function(reader) {
                     var end = reader.index + this.extraFieldsLength,
                         extraFieldId,
                         extraFieldLength,
@@ -4131,9 +4131,9 @@
                         extraFieldValue = reader.readData(extraFieldLength);
 
                         this.extraFields[extraFieldId] = {
-                            id     : extraFieldId,
-                            length : extraFieldLength,
-                            value  : extraFieldValue
+                            id: extraFieldId,
+                            length: extraFieldLength,
+                            value: extraFieldValue
                         };
                     }
 
@@ -4142,7 +4142,7 @@
                 /**
                  * Apply an UTF8 transformation if needed.
                  */
-                handleUTF8           : function() {
+                handleUTF8: function() {
                     var decodeParamType = support.uint8array ? "uint8array" : "array";
                     if (this.useUTF8()) {
                         this.fileNameStr = utf8.utf8decode(this.fileName);
@@ -4172,7 +4172,7 @@
                  * Find the unicode path declared in the extra field, if any.
                  * @return {String} the unicode path, null otherwise.
                  */
-                findExtraFieldUnicodePath : function() {
+                findExtraFieldUnicodePath: function() {
                     var upathField = this.extraFields[0x7075];
                     if (upathField) {
                         var extraReader = readerFor(upathField.value);
@@ -4196,7 +4196,7 @@
                  * Find the unicode comment declared in the extra field, if any.
                  * @return {String} the unicode comment, null otherwise.
                  */
-                findExtraFieldUnicodeComment : function() {
+                findExtraFieldUnicodeComment: function() {
                     var ucommentField = this.extraFields[0x6375];
                     if (ucommentField) {
                         var extraReader = readerFor(ucommentField.value);
@@ -4219,15 +4219,15 @@
             module.exports = ZipEntry;
 
         }, {
-            "./compressedObject" : 2,
-            "./compressions"     : 3,
-            "./crc32"            : 4,
-            "./reader/readerFor" : 22,
-            "./support"          : 30,
-            "./utf8"             : 31,
-            "./utils"            : 32
+            "./compressedObject": 2,
+            "./compressions": 3,
+            "./crc32": 4,
+            "./reader/readerFor": 22,
+            "./support": 30,
+            "./utf8": 31,
+            "./utils": 32
         }],
-        35 : [function(require, module, exports) {
+        35: [function(require, module, exports) {
             "use strict";
 
             var StreamHelper = require("./stream/StreamHelper");
@@ -4255,8 +4255,8 @@
                 this._dataBinary = options.binary;
                 // keep only the compression
                 this.options = {
-                    compression        : options.compression,
-                    compressionOptions : options.compressionOptions
+                    compression: options.compression,
+                    compressionOptions: options.compressionOptions
                 };
             };
 
@@ -4266,7 +4266,7 @@
                  * @param {String} type the type of each chunk.
                  * @return StreamHelper the stream.
                  */
-                internalStream : function(type) {
+                internalStream: function(type) {
                     var result = null, outputType = "string";
                     try {
                         if (!type) {
@@ -4301,7 +4301,7 @@
                  * @param {Function} onUpdate a function to call on each internal update.
                  * @return Promise the promise of the result.
                  */
-                async : function(type, onUpdate) {
+                async: function(type, onUpdate) {
                     return this.internalStream(type).accumulate(onUpdate);
                 },
 
@@ -4311,7 +4311,7 @@
                  * @param {Function} onUpdate a function to call on each internal update.
                  * @return Stream the stream.
                  */
-                nodeStream : function(type, onUpdate) {
+                nodeStream: function(type, onUpdate) {
                     return this.internalStream(type || "nodebuffer").toNodejsStream(onUpdate);
                 },
 
@@ -4322,7 +4322,7 @@
                  * @param {Object} compressionOptions the options to use when compressing.
                  * @return Worker the worker.
                  */
-                _compressWorker   : function(compression, compressionOptions) {
+                _compressWorker: function(compression, compressionOptions) {
                     if (
                         this._data instanceof CompressedObject &&
                         this._data.compression.magic === compression.magic
@@ -4341,7 +4341,7 @@
                  * @private
                  * @return Worker the worker.
                  */
-                _decompressWorker : function() {
+                _decompressWorker: function() {
                     if (this._data instanceof CompressedObject) {
                         return this._data.getContentWorker();
                     } else if (this._data instanceof GenericWorker) {
@@ -4363,13 +4363,13 @@
             module.exports = ZipObject;
 
         }, {
-            "./compressedObject"     : 2,
-            "./stream/DataWorker"    : 27,
-            "./stream/GenericWorker" : 28,
-            "./stream/StreamHelper"  : 29,
-            "./utf8"                 : 31
+            "./compressedObject": 2,
+            "./stream/DataWorker": 27,
+            "./stream/GenericWorker": 28,
+            "./stream/StreamHelper": 29,
+            "./utf8": 31
         }],
-        36 : [function(require, module, exports) {
+        36: [function(require, module, exports) {
             (function(global) {
                 'use strict';
                 var Mutation = global.MutationObserver || global.WebKitMutationObserver;
@@ -4382,7 +4382,7 @@
                         var observer = new Mutation(nextTick);
                         var element = global.document.createTextNode('');
                         observer.observe(element, {
-                            characterData : true
+                            characterData: true
                         });
                         scheduleDrain = function() {
                             element.data = (called = ++called % 2);
@@ -4445,7 +4445,7 @@
 
             }).call(this, typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
         }, {}],
-        37 : [function(require, module, exports) {
+        37: [function(require, module, exports) {
             'use strict';
             var immediate = require('immediate');
 
@@ -4734,8 +4734,8 @@
                 }
             }
 
-        }, {"immediate" : 36}],
-        38 : [function(require, module, exports) {
+        }, {"immediate": 36}],
+        38: [function(require, module, exports) {
             // Top level file is just a mixin of submodules & constants
             'use strict';
 
@@ -4751,8 +4751,8 @@
 
             module.exports = pako;
 
-        }, {"./lib/deflate" : 39, "./lib/inflate" : 40, "./lib/utils/common" : 41, "./lib/zlib/constants" : 44}],
-        39 : [function(require, module, exports) {
+        }, {"./lib/deflate": 39, "./lib/inflate": 40, "./lib/utils/common": 41, "./lib/zlib/constants": 44}],
+        39: [function(require, module, exports) {
             'use strict';
 
             var zlib_deflate = require('./zlib/deflate');
@@ -4873,13 +4873,13 @@
                 if (!(this instanceof Deflate)) return new Deflate(options);
 
                 this.options = utils.assign({
-                    level      : Z_DEFAULT_COMPRESSION,
-                    method     : Z_DEFLATED,
-                    chunkSize  : 16384,
-                    windowBits : 15,
-                    memLevel   : 8,
-                    strategy   : Z_DEFAULT_STRATEGY,
-                    to         : ''
+                    level: Z_DEFAULT_COMPRESSION,
+                    method: Z_DEFLATED,
+                    chunkSize: 16384,
+                    windowBits: 15,
+                    memLevel: 8,
+                    strategy: Z_DEFAULT_STRATEGY,
+                    to: ''
                 }, options || {});
 
                 var opt = this.options;
@@ -5151,13 +5151,13 @@
             exports.gzip = gzip;
 
         }, {
-            "./utils/common"  : 41,
-            "./utils/strings" : 42,
-            "./zlib/deflate"  : 46,
-            "./zlib/messages" : 51,
-            "./zlib/zstream"  : 53
+            "./utils/common": 41,
+            "./utils/strings": 42,
+            "./zlib/deflate": 46,
+            "./zlib/messages": 51,
+            "./zlib/zstream": 53
         }],
-        40 : [function(require, module, exports) {
+        40: [function(require, module, exports) {
             'use strict';
 
             var zlib_inflate = require('./zlib/inflate');
@@ -5252,9 +5252,9 @@
                 if (!(this instanceof Inflate)) return new Inflate(options);
 
                 this.options = utils.assign({
-                    chunkSize  : 16384,
-                    windowBits : 0,
-                    to         : ''
+                    chunkSize: 16384,
+                    windowBits: 0,
+                    to: ''
                 }, options || {});
 
                 var opt = this.options;
@@ -5579,15 +5579,15 @@
             exports.ungzip = inflate;
 
         }, {
-            "./utils/common"   : 41,
-            "./utils/strings"  : 42,
-            "./zlib/constants" : 44,
-            "./zlib/gzheader"  : 47,
-            "./zlib/inflate"   : 49,
-            "./zlib/messages"  : 51,
-            "./zlib/zstream"   : 53
+            "./utils/common": 41,
+            "./utils/strings": 42,
+            "./zlib/constants": 44,
+            "./zlib/gzheader": 47,
+            "./zlib/inflate": 49,
+            "./zlib/messages": 51,
+            "./zlib/zstream": 53
         }],
-        41 : [function(require, module, exports) {
+        41: [function(require, module, exports) {
             'use strict';
 
             var TYPED_OK = (typeof Uint8Array !== 'undefined') &&
@@ -5629,7 +5629,7 @@
             };
 
             var fnTyped = {
-                arraySet      : function(dest, src, src_offs, len, dest_offs) {
+                arraySet: function(dest, src, src_offs, len, dest_offs) {
                     if (src.subarray && dest.subarray) {
                         dest.set(src.subarray(src_offs, src_offs + len), dest_offs);
                         return;
@@ -5640,7 +5640,7 @@
                     }
                 },
                 // Join array of chunks to single array.
-                flattenChunks : function(chunks) {
+                flattenChunks: function(chunks) {
                     var i, l, len, pos, chunk, result;
 
                     // calculate data length
@@ -5663,13 +5663,13 @@
             };
 
             var fnUntyped = {
-                arraySet      : function(dest, src, src_offs, len, dest_offs) {
+                arraySet: function(dest, src, src_offs, len, dest_offs) {
                     for (var i = 0; i < len; i++) {
                         dest[dest_offs + i] = src[src_offs + i];
                     }
                 },
                 // Join array of chunks to single array.
-                flattenChunks : function(chunks) {
+                flattenChunks: function(chunks) {
                     return [].concat.apply([], chunks);
                 }
             };
@@ -5693,7 +5693,7 @@
             exports.setTyped(TYPED_OK);
 
         }, {}],
-        42 : [function(require, module, exports) {
+        42: [function(require, module, exports) {
             // String encode/decode helpers
             'use strict';
 
@@ -5898,8 +5898,8 @@
                 return (pos + _utf8len[buf[pos]] > max) ? pos : max;
             };
 
-        }, {"./common" : 41}],
-        43 : [function(require, module, exports) {
+        }, {"./common": 41}],
+        43: [function(require, module, exports) {
             'use strict';
 
             // Note: adler32 takes 12% for level 0 and 2% for level 6.
@@ -5952,7 +5952,7 @@
             module.exports = adler32;
 
         }, {}],
-        44 : [function(require, module, exports) {
+        44: [function(require, module, exports) {
             'use strict';
 
             // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -5977,52 +5977,52 @@
             module.exports = {
 
                 /* Allowed flush values; see deflate() and inflate() below for details */
-                Z_NO_FLUSH      : 0,
-                Z_PARTIAL_FLUSH : 1,
-                Z_SYNC_FLUSH    : 2,
-                Z_FULL_FLUSH    : 3,
-                Z_FINISH        : 4,
-                Z_BLOCK         : 5,
-                Z_TREES         : 6,
+                Z_NO_FLUSH: 0,
+                Z_PARTIAL_FLUSH: 1,
+                Z_SYNC_FLUSH: 2,
+                Z_FULL_FLUSH: 3,
+                Z_FINISH: 4,
+                Z_BLOCK: 5,
+                Z_TREES: 6,
 
                 /* Return codes for the compression/decompression functions. Negative values
       * are errors, positive values are used for special but normal events.
       */
-                Z_OK           : 0,
-                Z_STREAM_END   : 1,
-                Z_NEED_DICT    : 2,
-                Z_ERRNO        : -1,
-                Z_STREAM_ERROR : -2,
-                Z_DATA_ERROR   : -3,
+                Z_OK: 0,
+                Z_STREAM_END: 1,
+                Z_NEED_DICT: 2,
+                Z_ERRNO: -1,
+                Z_STREAM_ERROR: -2,
+                Z_DATA_ERROR: -3,
                 //Z_MEM_ERROR:     -4,
-                Z_BUF_ERROR    : -5,
+                Z_BUF_ERROR: -5,
                 //Z_VERSION_ERROR: -6,
 
                 /* compression levels */
-                Z_NO_COMPRESSION      : 0,
-                Z_BEST_SPEED          : 1,
-                Z_BEST_COMPRESSION    : 9,
-                Z_DEFAULT_COMPRESSION : -1,
+                Z_NO_COMPRESSION: 0,
+                Z_BEST_SPEED: 1,
+                Z_BEST_COMPRESSION: 9,
+                Z_DEFAULT_COMPRESSION: -1,
 
-                Z_FILTERED         : 1,
-                Z_HUFFMAN_ONLY     : 2,
-                Z_RLE              : 3,
-                Z_FIXED            : 4,
-                Z_DEFAULT_STRATEGY : 0,
+                Z_FILTERED: 1,
+                Z_HUFFMAN_ONLY: 2,
+                Z_RLE: 3,
+                Z_FIXED: 4,
+                Z_DEFAULT_STRATEGY: 0,
 
                 /* Possible values of the data_type field (though see inflate()) */
-                Z_BINARY  : 0,
-                Z_TEXT    : 1,
+                Z_BINARY: 0,
+                Z_TEXT: 1,
                 //Z_ASCII:                1, // = Z_TEXT (deprecated)
-                Z_UNKNOWN : 2,
+                Z_UNKNOWN: 2,
 
                 /* The deflate compression method */
-                Z_DEFLATED : 8
+                Z_DEFLATED: 8
                 //Z_NULL:                 null // Use -1 or null inline, depending on var type
             };
 
         }, {}],
-        45 : [function(require, module, exports) {
+        45: [function(require, module, exports) {
             'use strict';
 
             // Note: we can't get significant speed boost here.
@@ -6082,7 +6082,7 @@
             module.exports = crc32;
 
         }, {}],
-        46 : [function(require, module, exports) {
+        46: [function(require, module, exports) {
             'use strict';
 
             // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -8028,8 +8028,8 @@
     exports.deflateTune = deflateTune;
     */
 
-        }, {"../utils/common" : 41, "./adler32" : 43, "./crc32" : 45, "./messages" : 51, "./trees" : 52}],
-        47 : [function(require, module, exports) {
+        }, {"../utils/common": 41, "./adler32": 43, "./crc32": 45, "./messages": 51, "./trees": 52}],
+        47: [function(require, module, exports) {
             'use strict';
 
             // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -8090,7 +8090,7 @@
             module.exports = GZheader;
 
         }, {}],
-        48 : [function(require, module, exports) {
+        48: [function(require, module, exports) {
             'use strict';
 
             // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -8467,7 +8467,7 @@
             };
 
         }, {}],
-        49 : [function(require, module, exports) {
+        49: [function(require, module, exports) {
             'use strict';
 
             // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -8848,7 +8848,7 @@
                         state.lens[sym++] = 8;
                     }
 
-                    inflate_table(LENS, state.lens, 0, 288, lenfix, 0, state.work, {bits : 9});
+                    inflate_table(LENS, state.lens, 0, 288, lenfix, 0, state.work, {bits: 9});
 
                     /* distance table */
                     sym = 0;
@@ -8856,7 +8856,7 @@
                         state.lens[sym++] = 5;
                     }
 
-                    inflate_table(DISTS, state.lens, 0, 32, distfix, 0, state.work, {bits : 5});
+                    inflate_table(DISTS, state.lens, 0, 32, distfix, 0, state.work, {bits: 5});
 
                     /* do this just once */
                     virgin = false;
@@ -9542,7 +9542,7 @@
                                 state.lencode = state.lendyn;
                                 state.lenbits = 7;
 
-                                opts = {bits : state.lenbits};
+                                opts = {bits: state.lenbits};
                                 ret = inflate_table(CODES, state.lens, 0, 19, state.lencode, 0, state.work, opts);
                                 state.lenbits = opts.bits;
 
@@ -9686,7 +9686,7 @@
              concerning the ENOUGH constants, which depend on those values */
                                 state.lenbits = 9;
 
-                                opts = {bits : state.lenbits};
+                                opts = {bits: state.lenbits};
                                 ret = inflate_table(LENS, state.lens, 0, state.nlen, state.lencode, 0, state.work, opts);
                                 // We have separate tables & no pointers. 2 commented lines below not needed.
                                 // state.next_index = opts.table_index;
@@ -9703,7 +9703,7 @@
                                 //state.distcode.copy(state.codes);
                                 // Switch to use dynamic table
                                 state.distcode = state.distdyn;
-                                opts = {bits : state.distbits};
+                                opts = {bits: state.distbits};
                                 ret = inflate_table(DISTS, state.lens, state.nlen, state.ndist, state.distcode, 0, state.work, opts);
                                 // We have separate tables & no pointers. 2 commented lines below not needed.
                                 // state.next_index = opts.table_index;
@@ -10222,8 +10222,8 @@
     exports.inflateUndermine = inflateUndermine;
     */
 
-        }, {"../utils/common" : 41, "./adler32" : 43, "./crc32" : 45, "./inffast" : 48, "./inftrees" : 50}],
-        50 : [function(require, module, exports) {
+        }, {"../utils/common": 41, "./adler32": 43, "./crc32": 45, "./inffast": 48, "./inftrees": 50}],
+        50: [function(require, module, exports) {
             'use strict';
 
             // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -10606,8 +10606,8 @@
                 return 0;
             };
 
-        }, {"../utils/common" : 41}],
-        51 : [function(require, module, exports) {
+        }, {"../utils/common": 41}],
+        51: [function(require, module, exports) {
             'use strict';
 
             // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -10630,19 +10630,19 @@
             // 3. This notice may not be removed or altered from any source distribution.
 
             module.exports = {
-                2    : 'need dictionary', /* Z_NEED_DICT       2  */
-                1    : 'stream end', /* Z_STREAM_END      1  */
-                0    : '', /* Z_OK              0  */
-                '-1' : 'file error', /* Z_ERRNO         (-1) */
-                '-2' : 'stream error', /* Z_STREAM_ERROR  (-2) */
-                '-3' : 'data error', /* Z_DATA_ERROR    (-3) */
-                '-4' : 'insufficient memory', /* Z_MEM_ERROR     (-4) */
-                '-5' : 'buffer error', /* Z_BUF_ERROR     (-5) */
-                '-6' : 'incompatible version' /* Z_VERSION_ERROR (-6) */
+                2: 'need dictionary', /* Z_NEED_DICT       2  */
+                1: 'stream end', /* Z_STREAM_END      1  */
+                0: '', /* Z_OK              0  */
+                '-1': 'file error', /* Z_ERRNO         (-1) */
+                '-2': 'stream error', /* Z_STREAM_ERROR  (-2) */
+                '-3': 'data error', /* Z_DATA_ERROR    (-3) */
+                '-4': 'insufficient memory', /* Z_MEM_ERROR     (-4) */
+                '-5': 'buffer error', /* Z_BUF_ERROR     (-5) */
+                '-6': 'incompatible version' /* Z_VERSION_ERROR (-6) */
             };
 
         }, {}],
-        52 : [function(require, module, exports) {
+        52: [function(require, module, exports) {
             'use strict';
 
             // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -11943,8 +11943,8 @@
             exports._tr_tally = _tr_tally;
             exports._tr_align = _tr_align;
 
-        }, {"../utils/common" : 41}],
-        53 : [function(require, module, exports) {
+        }, {"../utils/common": 41}],
+        53: [function(require, module, exports) {
             'use strict';
 
             // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -11994,7 +11994,7 @@
             module.exports = ZStream;
 
         }, {}],
-        54 : [function(require, module, exports) {
+        54: [function(require, module, exports) {
             (function(global) {
                 (function(global, undefined) {
                     "use strict";
@@ -12020,7 +12020,7 @@
                             args[i] = arguments[i + 1];
                         }
                         // Store and register the task
-                        var task = {callback : callback, args : args};
+                        var task = {callback: callback, args: args};
                         tasksByHandle[nextHandle] = task;
                         registerImmediate(nextHandle);
                         return nextHandle++;

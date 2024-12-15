@@ -1,6 +1,6 @@
 define(["jquery"], function($) {
     return {
-        init : function() {
+        init: function() {
 
             $('#open-startup').click(function(event) {
                 event.preventDefault();
@@ -40,7 +40,7 @@ function closeModal() {
     $('body').removeClass('remove-overflow');
 
     $('#modalWindow').hide(400, function() {
-        $('#base-popup').css({bottom : 'initial'});
+        $('#base-popup').css({bottom: 'initial'});
     });
 }
 
@@ -59,9 +59,9 @@ function resizeModal() {
     var newTop = $(window).height() - newHeight;
 
     $('#base-popup').css({
-        width  : newWidth + 'px',
-        left   : '-' + ((newWidth + 20) / 2) + 'px',
-        height : newHeight + 'px',
-        top    : ((newTop - 16) / 2) + 'px'
+        width: newWidth + 'px',
+        left: '-' + ((newWidth + 20) / 2) + 'px',
+        height: newHeight + 'px',
+        top: ((newTop - 16) / 2) + 'px'
     });
 }

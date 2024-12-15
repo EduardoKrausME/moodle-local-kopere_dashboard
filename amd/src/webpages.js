@@ -1,7 +1,7 @@
 define(["jquery", "jqueryui"], function($, $ui) {
     return {
 
-        load_pages : function() {
+        load_pages: function() {
 
             function webpages_menu_open_click() {
 
@@ -32,7 +32,7 @@ define(["jquery", "jqueryui"], function($, $ui) {
                             var url = M.cfg.wwwroot + "/local/kopere_dashboard/view-ajax.php?classname=webpages&method=menu_get_itens";
                             $.post(
                                 url, {
-                                    menuid : menuid
+                                    menuid: menuid
                                 }, function(data) {
                                     $("#menuid-" + menuid + " td").html(data);
 
@@ -45,12 +45,12 @@ define(["jquery", "jqueryui"], function($, $ui) {
             webpages_menu_open_click();
         },
 
-        webpages_page_ajax_get_url : function() {
+        webpages_page_ajax_get_url: function() {
             $('#title').focusout(function() {
                 var url = M.cfg.wwwroot + "/local/kopere_dashboard/view-ajax.php?classname=webpages&method=page_ajax_get_url";
                 var postData = {
-                    title : $(this).val(),
-                    id    : $('#id').val()
+                    title: $(this).val(),
+                    id: $('#id').val()
                 };
                 $.post(url, postData, function(data) {
                     $('#link').val(data);
@@ -59,12 +59,12 @@ define(["jquery", "jqueryui"], function($, $ui) {
             });
         },
 
-        webpages_menu_ajax_get_url : function() {
+        webpages_menu_ajax_get_url: function() {
             $('#title').focusout(function() {
                 var url = M.cfg.wwwroot + "/local/kopere_dashboard/view-ajax.php?classname=webpages&method=menu_ajax_get_url";
                 var postData = {
-                    title : $(this).val(),
-                    id    : $('#id').val()
+                    title: $(this).val(),
+                    id: $('#id').val()
                 };
                 $.post(url, postData, function(data) {
                     $('#link').val(data).focus();
@@ -72,7 +72,7 @@ define(["jquery", "jqueryui"], function($, $ui) {
             });
         },
 
-        view_page : function() {
+        view_page: function() {
             $.getScript(M.cfg.wwwroot + "/local/kopere_dashboard/amd/build/bootstrap.min.js");
 
             $(".jquery-ui-tabs").tabs();

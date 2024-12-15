@@ -1,6 +1,6 @@
 define(["jquery"], function($) {
     return {
-        start : function() {
+        start: function() {
             $("#dashboard-moodleinfo").load(
                 M.cfg.wwwroot + "/local/kopere_dashboard/view-ajax.php?classname=dashboard&method=monitor");
             $("#dashboard-last_grades").load(

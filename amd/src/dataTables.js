@@ -895,9 +895,9 @@
 
                     /* Create the settings object for this table and set some of the default parameters */
                     var oSettings = $.extend(true, {}, DataTable.models.oSettings, {
-                        "sDestroyWidth" : $this[0].style.width,
-                        "sInstance"     : sId,
-                        "sTableId"      : sId
+                        "sDestroyWidth": $this[0].style.width,
+                        "sInstance": sId,
+                        "sTableId": sId
                     });
                     oSettings.nTable = this;
                     oSettings.oApi = _that.internal;
@@ -1042,15 +1042,15 @@
                  * _fnInitialise will be fired by the returned Ajax handler, rather than the constructor
                  */
                         $.ajax({
-                            dataType : 'json',
-                            url      : oLanguage.sUrl,
-                            success  : function(json) {
+                            dataType: 'json',
+                            url: oLanguage.sUrl,
+                            success: function(json) {
                                 _fnLanguageCompat(json);
                                 _fnCamelToHungarian(defaults.oLanguage, json);
                                 $.extend(true, oLanguage, json);
                                 _fnInitialise(oSettings);
                             },
-                            error    : function() {
+                            error: function() {
                                 // Error occurred loading language file, continue on as best we can
                                 _fnInitialise(oSettings);
                             }
@@ -1128,10 +1128,10 @@
 
                                 if (sort !== null || filter !== null) {
                                     col.mData = {
-                                        _      : i + '.display',
-                                        sort   : sort !== null ? i + '.@data-' + sort : undefined,
-                                        type   : sort !== null ? i + '.@data-' + sort : undefined,
-                                        filter : filter !== null ? i + '.@data-' + filter : undefined
+                                        _: i + '.display',
+                                        sort: sort !== null ? i + '.@data-' + sort : undefined,
+                                        type: sort !== null ? i + '.@data-' + sort : undefined,
+                                        filter: filter !== null ? i + '.@data-' + filter : undefined
                                     };
 
                                     _fnColumnOptions(oSettings, i);
@@ -1535,7 +1535,7 @@
                  * @param {integer} freq Call frequency in mS
                  * @return {function} Wrapped function
                  */
-                throttle : function(fn, freq) {
+                throttle: function(fn, freq) {
                     var
                         frequency = freq !== undefined ? freq : 200,
                         last,
@@ -1568,7 +1568,7 @@
                  *  @param {string} val string to escape
                  *  @returns {string} escaped string
                  */
-                escapeRegex : function(val) {
+                escapeRegex: function(val) {
                     return val.replace(_re_escape_regex, '\\$1');
                 }
             };
@@ -1764,27 +1764,27 @@
                     // Scrolling feature / quirks detection
                     var n = $('<div/>')
                         .css({
-                            position : 'fixed',
-                            top      : 0,
-                            left     : $(window).scrollLeft() * -1, // allow for scrolling
-                            height   : 1,
-                            width    : 1,
-                            overflow : 'hidden'
+                            position: 'fixed',
+                            top: 0,
+                            left: $(window).scrollLeft() * -1, // allow for scrolling
+                            height: 1,
+                            width: 1,
+                            overflow: 'hidden'
                         })
                         .append(
                             $('<div/>')
                                 .css({
-                                    position : 'absolute',
-                                    top      : 1,
-                                    left     : 1,
-                                    width    : 100,
-                                    overflow : 'scroll'
+                                    position: 'absolute',
+                                    top: 1,
+                                    left: 1,
+                                    width: 100,
+                                    overflow: 'scroll'
                                 })
                                 .append(
                                     $('<div/>')
                                         .css({
-                                            width  : '100%',
-                                            height : 10
+                                            width: '100%',
+                                            height: 10
                                         })
                                 )
                         )
@@ -1869,11 +1869,11 @@
                 var oDefaults = DataTable.defaults.column;
                 var iCol = oSettings.aoColumns.length;
                 var oCol = $.extend({}, DataTable.models.oColumn, oDefaults, {
-                    "nTh"       : nTh ? nTh : document.createElement('th'),
-                    "sTitle"    : oDefaults.sTitle ? oDefaults.sTitle : nTh ? nTh.innerHTML : '',
-                    "aDataSort" : oDefaults.aDataSort ? oDefaults.aDataSort : [iCol],
-                    "mData"     : oDefaults.mData ? oDefaults.mData : iCol,
-                    idx         : iCol
+                    "nTh": nTh ? nTh : document.createElement('th'),
+                    "sTitle": oDefaults.sTitle ? oDefaults.sTitle : nTh ? nTh.innerHTML : '',
+                    "aDataSort": oDefaults.aDataSort ? oDefaults.aDataSort : [iCol],
+                    "mData": oDefaults.mData ? oDefaults.mData : iCol,
+                    idx: iCol
                 });
                 oSettings.aoColumns.push(oCol);
 
@@ -2244,8 +2244,8 @@
                 /* Create the object for storing information about this new row */
                 var iRow = oSettings.aoData.length;
                 var oData = $.extend(true, {}, DataTable.models.oRow, {
-                    src : nTr ? 'dom' : 'data',
-                    idx : iRow
+                    src: nTr ? 'dom' : 'data',
+                    idx: iRow
                 });
 
                 oData._aData = aDataIn;
@@ -2338,9 +2338,9 @@
                 var rowData = settings.aoData[rowIdx]._aData;
                 var defaultContent = col.sDefaultContent;
                 var cellData = col.fnGetData(rowData, type, {
-                    settings : settings,
-                    row      : rowIdx,
-                    col      : colIdx
+                    settings: settings,
+                    row: rowIdx,
+                    col: colIdx
                 });
 
                 if (cellData === undefined) {
@@ -2383,9 +2383,9 @@
                 var rowData = settings.aoData[rowIdx]._aData;
 
                 col.fnSetData(rowData, val, {
-                    settings : settings,
-                    row      : rowIdx,
-                    col      : colIdx
+                    settings: settings,
+                    row: rowIdx,
+                    col: colIdx
                 });
             }
 
@@ -2854,8 +2854,8 @@
                 }
 
                 return {
-                    data  : d,
-                    cells : tds
+                    data: d,
+                    cells: tds
                 };
             }
 
@@ -2897,8 +2897,8 @@
 
                         nTd = nTrIn ? anTds[i] : document.createElement(oCol.sCellType);
                         nTd._DT_CellIndex = {
-                            row    : iRow,
-                            column : i
+                            row: iRow,
+                            column: i
                         };
 
                         cells.push(nTd);
@@ -3240,11 +3240,11 @@
                         sZero = oLang.sEmptyTable;
                     }
 
-                    anRows[0] = $('<tr/>', {'class' : iStripes ? asStripeClasses[0] : ''})
+                    anRows[0] = $('<tr/>', {'class': iStripes ? asStripeClasses[0] : ''})
                         .append($('<td />', {
-                            'valign'  : 'top',
-                            'colSpan' : _fnVisbleColumns(oSettings),
-                            'class'   : oSettings.oClasses.sRowEmpty
+                            'valign': 'top',
+                            'colSpan': _fnVisbleColumns(oSettings),
+                            'class': oSettings.oClasses.sRowEmpty
                         }).html(sZero))[0];
                 }
 
@@ -3320,8 +3320,8 @@
 
                 // All DataTables are wrapped in a div
                 var insert = $('<div/>', {
-                    id      : oSettings.sTableId + '_wrapper',
-                    'class' : classes.sWrapper + (oSettings.nTFoot ? '' : ' ' + classes.sNoFooter)
+                    id: oSettings.sTableId + '_wrapper',
+                    'class': classes.sWrapper + (oSettings.nTFoot ? '' : ' ' + classes.sNoFooter)
                 });
 
                 oSettings.nHolding = holding[0];
@@ -3505,8 +3505,8 @@
                             for (l = 0; l < iColspan; l++) {
                                 for (k = 0; k < iRowspan; k++) {
                                     aLayout[i + k][iColShifted + l] = {
-                                        "cell"   : nCell,
-                                        "unique" : bUnique
+                                        "cell": nCell,
+                                        "unique": bUnique
                                     };
                                     aLayout[i + k].nTr = nTr;
                                 }
@@ -3611,8 +3611,8 @@
                 }
 
                 var baseAjax = {
-                    "data"     : data,
-                    "success"  : function(json) {
+                    "data": data,
+                    "success": function(json) {
                         var error = json.error || json.sError;
                         if (error) {
                             _fnLog(oSettings, 0, error);
@@ -3621,10 +3621,10 @@
                         oSettings.json = json;
                         callback(json);
                     },
-                    "dataType" : "json",
-                    "cache"    : false,
-                    "type"     : oSettings.sServerMethod,
-                    "error"    : function(xhr, error, thrown) {
+                    "dataType": "json",
+                    "cache": false,
+                    "type": oSettings.sServerMethod,
+                    "error": function(xhr, error, thrown) {
                         var ret = _fnCallbackFire(oSettings, null, 'xhr', [oSettings, null, oSettings.jqXHR]);
 
                         if ($.inArray(true, ret) === -1) {
@@ -3651,7 +3651,7 @@
                     oSettings.fnServerData.call(instance,
                         oSettings.sAjaxSource,
                         $.map(data, function(val, key) { // Need to convert back to 1.9 trad format
-                            return {name : key, value : val};
+                            return {name: key, value: val};
                         }),
                         callback,
                         oSettings
@@ -3660,7 +3660,7 @@
                 else if (oSettings.sAjaxSource || typeof ajax === 'string') {
                     // DataTables 1.9- compatibility
                     oSettings.jqXHR = $.ajax($.extend(baseAjax, {
-                        url : ajax || oSettings.sAjaxSource
+                        url: ajax || oSettings.sAjaxSource
                     }));
                 }
                 else if ($.isFunction(ajax)) {
@@ -3726,7 +3726,7 @@
                         -1;
 
                 var param = function(name, value) {
-                    data.push({'name' : name, 'value' : value});
+                    data.push({'name': name, 'value': value});
                 };
 
                 // DataTables 1.9- compatible method
@@ -3738,14 +3738,14 @@
 
                 // DataTables 1.10+ method
                 var d = {
-                    draw    : settings.iDraw,
-                    columns : [],
-                    order   : [],
-                    start   : displayStart,
-                    length  : displayLength,
-                    search  : {
-                        value : preSearch.sSearch,
-                        regex : preSearch.bRegex
+                    draw: settings.iDraw,
+                    columns: [],
+                    order: [],
+                    start: displayStart,
+                    length: displayLength,
+                    search: {
+                        value: preSearch.sSearch,
+                        regex: preSearch.bRegex
                     }
                 };
 
@@ -3755,13 +3755,13 @@
                     dataProp = typeof column.mData == "function" ? 'function' : column.mData;
 
                     d.columns.push({
-                        data       : dataProp,
-                        name       : column.sName,
-                        searchable : column.bSearchable,
-                        orderable  : column.bSortable,
-                        search     : {
-                            value : columnSearch.sSearch,
-                            regex : columnSearch.bRegex
+                        data: dataProp,
+                        name: column.sName,
+                        searchable: column.bSearchable,
+                        orderable: column.bSortable,
+                        search: {
+                            value: columnSearch.sSearch,
+                            regex: columnSearch.bRegex
                         }
                     });
 
@@ -3785,7 +3785,7 @@
 
                 if (features.bSort) {
                     $.each(sort, function(i, val) {
-                        d.order.push({column : val.col, dir : val.dir});
+                        d.order.push({column: val.col, dir: val.dir});
 
                         param('iSortCol_' + i, val.col);
                         param('sSortDir_' + i, val.dir);
@@ -3901,8 +3901,8 @@
                     str + input;
 
                 var filter = $('<div/>', {
-                    'id'    : !features.f ? tableId + '_filter' : null,
-                    'class' : classes.sFilter
+                    'id': !features.f ? tableId + '_filter' : null,
+                    'class': classes.sFilter
                 })
                     .append($('<label/>').append(str));
 
@@ -3914,10 +3914,10 @@
                     /* Now do the filter */
                     if (val != previousSearch.sSearch) {
                         _fnFilterComplete(settings, {
-                            "sSearch"          : val,
-                            "bRegex"           : previousSearch.bRegex,
-                            "bSmart"           : previousSearch.bSmart,
-                            "bCaseInsensitive" : previousSearch.bCaseInsensitive
+                            "sSearch": val,
+                            "bRegex": previousSearch.bRegex,
+                            "bSmart": previousSearch.bSmart,
+                            "bCaseInsensitive": previousSearch.bCaseInsensitive
                         });
 
                         // Need to redraw, without resorting
@@ -4254,10 +4254,10 @@
              */
             function _fnSearchToCamel(obj) {
                 return {
-                    search          : obj.sSearch,
-                    smart           : obj.bSmart,
-                    regex           : obj.bRegex,
-                    caseInsensitive : obj.bCaseInsensitive
+                    search: obj.sSearch,
+                    smart: obj.bSmart,
+                    regex: obj.bRegex,
+                    caseInsensitive: obj.bCaseInsensitive
                 };
             }
 
@@ -4270,10 +4270,10 @@
              */
             function _fnSearchToHung(obj) {
                 return {
-                    sSearch          : obj.search,
-                    bSmart           : obj.smart,
-                    bRegex           : obj.regex,
-                    bCaseInsensitive : obj.caseInsensitive
+                    sSearch: obj.search,
+                    bSmart: obj.smart,
+                    bRegex: obj.regex,
+                    bCaseInsensitive: obj.caseInsensitive
                 };
             }
 
@@ -4287,15 +4287,15 @@
                 var tid = settings.sTableId;
                 var nodes = settings.aanFeatures.i;
                 var n = $('<div/>', {
-                    'class' : settings.oClasses.sInfo,
-                    'id'    : !nodes ? tid + '_info' : null
+                    'class': settings.oClasses.sInfo,
+                    'id': !nodes ? tid + '_info' : null
                 });
 
                 if (!nodes) {
                     // Update display on each draw
                     settings.aoDrawCallback.push({
-                        "fn"    : _fnUpdateInfo,
-                        "sName" : "information"
+                        "fn": _fnUpdateInfo,
+                        "sName": "information"
                     });
 
                     n.attr('role', 'status')
@@ -4490,9 +4490,9 @@
                     language = d2 ? menu[1] : menu;
 
                 var select = $('<select/>', {
-                    'name'          : tableId + '_length',
-                    'aria-controls' : tableId,
-                    'class'         : classes.sLengthSelect
+                    'name': tableId + '_length',
+                    'aria-controls': tableId,
+                    'class': classes.sLengthSelect
                 });
 
                 for (var i = 0, ien = lengths.length; i < ien; i++) {
@@ -4558,7 +4558,7 @@
                     node.id = settings.sTableId + '_paginate';
 
                     settings.aoDrawCallback.push({
-                        "fn"    : function(settings) {
+                        "fn": function(settings) {
                             if (modern) {
                                 var
                                     start      = settings._iDisplayStart,
@@ -4580,7 +4580,7 @@
                                 plugin.fnUpdate(settings, redraw);
                             }
                         },
-                        "sName" : "pagination"
+                        "sName": "pagination"
                     });
                 }
 
@@ -4658,8 +4658,8 @@
              */
             function _fnFeatureHtmlProcessing(settings) {
                 return $('<div/>', {
-                    'id'    : !settings.aanFeatures.r ? settings.sTableId + '_processing' : null,
-                    'class' : settings.oClasses.sProcessing
+                    'id': !settings.aanFeatures.r ? settings.sTableId + '_processing' : null,
+                    'class': settings.oClasses.sProcessing
                 })
                     .html(settings.oLanguage.sProcessing)
                     .insertBefore(settings.nTable)[0];
@@ -4731,20 +4731,20 @@
          *        table - scroll foot table
          *          tfoot - tfoot
          */
-                var scroller = $(_div, {'class' : classes.sScrollWrapper})
+                var scroller = $(_div, {'class': classes.sScrollWrapper})
                     .append(
-                        $(_div, {'class' : classes.sScrollHead})
+                        $(_div, {'class': classes.sScrollHead})
                             .css({
-                                overflow : 'hidden',
-                                position : 'relative',
-                                border   : 0,
-                                width    : scrollX ? size(scrollX) : '100%'
+                                overflow: 'hidden',
+                                position: 'relative',
+                                border: 0,
+                                width: scrollX ? size(scrollX) : '100%'
                             })
                             .append(
-                                $(_div, {'class' : classes.sScrollHeadInner})
+                                $(_div, {'class': classes.sScrollHeadInner})
                                     .css({
-                                        'box-sizing' : 'content-box',
-                                        width        : scroll.sXInner || '100%'
+                                        'box-sizing': 'content-box',
+                                        width: scroll.sXInner || '100%'
                                     })
                                     .append(
                                         headerClone
@@ -4758,25 +4758,25 @@
                             )
                     )
                     .append(
-                        $(_div, {'class' : classes.sScrollBody})
+                        $(_div, {'class': classes.sScrollBody})
                             .css({
-                                position : 'relative',
-                                overflow : 'auto',
-                                width    : size(scrollX)
+                                position: 'relative',
+                                overflow: 'auto',
+                                width: size(scrollX)
                             })
                             .append(table)
                     );
 
                 if (footer) {
                     scroller.append(
-                        $(_div, {'class' : classes.sScrollFoot})
+                        $(_div, {'class': classes.sScrollFoot})
                             .css({
-                                overflow : 'hidden',
-                                border   : 0,
-                                width    : scrollX ? size(scrollX) : '100%'
+                                overflow: 'hidden',
+                                border: 0,
+                                width: scrollX ? size(scrollX) : '100%'
                             })
                             .append(
-                                $(_div, {'class' : classes.sScrollFootInner})
+                                $(_div, {'class': classes.sScrollFootInner})
                                     .append(
                                         footerClone
                                             .removeAttr('id')
@@ -4819,8 +4819,8 @@
 
                 // On redraw - align columns
                 settings.aoDrawCallback.push({
-                    "fn"    : _fnScrollDraw,
-                    "sName" : "scrolling"
+                    "fn": _fnScrollDraw,
+                    "sName": "scrolling"
                 });
 
                 return scroller[0];
@@ -4871,7 +4871,7 @@
                     headerTrgEls, footerTrgEls,
                     headerSrcEls, footerSrcEls,
                     headerCopy, footerCopy,
-                    headerWidths                      = [], footerWidths = [],
+                    headerWidths                      = [], footerWidths   = [],
                     headerContent = [], footerContent = [],
                     idx, correction, sanityWidth,
                     zeroOut                           = function(nSizer) {
@@ -5233,11 +5233,11 @@
                         // width the column requires, then it will have no effect
                         if (column.sWidthOrig && scrollX) {
                             $(headerCells[i]).append($('<div/>').css({
-                                width   : column.sWidthOrig,
-                                margin  : 0,
-                                padding : 0,
-                                border  : 0,
-                                height  : 1
+                                width: column.sWidthOrig,
+                                margin: 0,
+                                padding: 0,
+                                border: 0,
+                                height: 1
                             }));
                         }
                     }
@@ -5266,12 +5266,12 @@
                     // needed
                     var holder = $('<div/>').css(scrollX || scrollY ?
                         {
-                            position : 'absolute',
-                            top      : 0,
-                            left     : 0,
-                            height   : 1,
-                            right    : 0,
-                            overflow : 'hidden'
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            height: 1,
+                            right: 0,
+                            overflow: 'hidden'
                         } :
                         {}
                         )
@@ -5508,12 +5508,12 @@
                         }
 
                         aSort.push({
-                            src       : srcCol,
-                            col       : iCol,
-                            dir       : nestedSort[i][1],
-                            index     : nestedSort[i]._idx,
-                            type      : sType,
-                            formatter : DataTable.ext.type.order[sType + "-pre"]
+                            src: srcCol,
+                            col: iCol,
+                            dir: nestedSort[i][1],
+                            index: nestedSort[i]._idx,
+                            type: sType,
+                            formatter: DataTable.ext.type.order[sType + "-pre"]
                         });
                     }
                 }
@@ -5898,15 +5898,15 @@
 
                 /* Store the interesting variables */
                 var state = {
-                    time    : +new Date(),
-                    start   : settings._iDisplayStart,
-                    length  : settings._iDisplayLength,
-                    order   : $.extend(true, [], settings.aaSorting),
-                    search  : _fnSearchToCamel(settings.oPreviousSearch),
-                    columns : $.map(settings.aoColumns, function(col, i) {
+                    time: +new Date(),
+                    start: settings._iDisplayStart,
+                    length: settings._iDisplayLength,
+                    order: $.extend(true, [], settings.aaSorting),
+                    search: _fnSearchToCamel(settings.oPreviousSearch),
+                    columns: $.map(settings.aoColumns, function(col, i) {
                         return {
-                            visible : col.bVisible,
-                            search  : _fnSearchToCamel(settings.aoPreSearchCols[i])
+                            visible: col.bVisible,
+                            search: _fnSearchToCamel(settings.aoPreSearchCols[i])
                         };
                     })
                 };
@@ -6185,8 +6185,8 @@
             function _fnCallbackReg(oSettings, sStore, fn, sName) {
                 if (fn) {
                     oSettings[sStore].push({
-                        "fn"    : fn,
-                        "sName" : sName
+                        "fn": fn,
+                        "sName": sName
                     });
                 }
             }
@@ -6474,9 +6474,9 @@
 
                 // selector
                 this.selector = {
-                    rows : null,
-                    cols : null,
-                    opts : null
+                    rows: null,
+                    cols: null,
+                    opts: null
                 };
 
                 _Api.extend(this, this, __apiStruct);
@@ -6487,19 +6487,19 @@
             // Don't destroy the existing prototype, just extend it. Required for jQuery 2's
             // isPlainObject.
             $.extend(_Api.prototype, {
-                any : function() {
+                any: function() {
                     return this.count() !== 0;
                 },
 
-                concat : __arrayProto.concat,
+                concat: __arrayProto.concat,
 
-                context : [], // array of table settings objects
+                context: [], // array of table settings objects
 
-                count : function() {
+                count: function() {
                     return this.flatten().length;
                 },
 
-                each : function(fn) {
+                each: function(fn) {
                     for (var i = 0, ien = this.length; i < ien; i++) {
                         fn.call(this, this[i], i, this);
                     }
@@ -6507,7 +6507,7 @@
                     return this;
                 },
 
-                eq : function(idx) {
+                eq: function(idx) {
                     var ctx = this.context;
 
                     return ctx.length > idx ?
@@ -6515,7 +6515,7 @@
                         null;
                 },
 
-                filter : function(fn) {
+                filter: function(fn) {
                     var a = [];
 
                     if (__arrayProto.filter) {
@@ -6533,14 +6533,14 @@
                     return new _Api(this.context, a);
                 },
 
-                flatten : function() {
+                flatten: function() {
                     var a = [];
                     return new _Api(this.context, a.concat.apply(a, this.toArray()));
                 },
 
-                join : __arrayProto.join,
+                join: __arrayProto.join,
 
-                indexOf : __arrayProto.indexOf || function(obj, start) {
+                indexOf: __arrayProto.indexOf || function(obj, start) {
                     for (var i = (start || 0), ien = this.length; i < ien; i++) {
                         if (this[i] === obj) {
                             return i;
@@ -6549,7 +6549,7 @@
                     return -1;
                 },
 
-                iterator : function(flatten, type, fn, alwaysNew) {
+                iterator: function(flatten, type, fn, alwaysNew) {
                     var
                         a        = [], ret,
                         i, ien, j, jen,
@@ -6620,14 +6620,14 @@
                     return this;
                 },
 
-                lastIndexOf : __arrayProto.lastIndexOf || function(obj, start) {
+                lastIndexOf: __arrayProto.lastIndexOf || function(obj, start) {
                     // Bit cheeky...
                     return this.indexOf.apply(this.toArray.reverse(), arguments);
                 },
 
-                length : 0,
+                length: 0,
 
-                map : function(fn) {
+                map: function(fn) {
                     var a = [];
 
                     if (__arrayProto.map) {
@@ -6643,57 +6643,57 @@
                     return new _Api(this.context, a);
                 },
 
-                pluck : function(prop) {
+                pluck: function(prop) {
                     return this.map(function(el) {
                         return el[prop];
                     });
                 },
 
-                pop : __arrayProto.pop,
+                pop: __arrayProto.pop,
 
-                push : __arrayProto.push,
+                push: __arrayProto.push,
 
                 // Does not return an API instance
-                reduce : __arrayProto.reduce || function(fn, init) {
+                reduce: __arrayProto.reduce || function(fn, init) {
                     return _fnReduce(this, fn, init, 0, this.length, 1);
                 },
 
-                reduceRight : __arrayProto.reduceRight || function(fn, init) {
+                reduceRight: __arrayProto.reduceRight || function(fn, init) {
                     return _fnReduce(this, fn, init, this.length - 1, -1, -1);
                 },
 
-                reverse : __arrayProto.reverse,
+                reverse: __arrayProto.reverse,
 
                 // Object with rows, columns and opts
-                selector : null,
+                selector: null,
 
-                shift : __arrayProto.shift,
+                shift: __arrayProto.shift,
 
-                slice : function() {
+                slice: function() {
                     return new _Api(this.context, this);
                 },
 
-                sort : __arrayProto.sort, // ? name - order?
+                sort: __arrayProto.sort, // ? name - order?
 
-                splice : __arrayProto.splice,
+                splice: __arrayProto.splice,
 
-                toArray : function() {
+                toArray: function() {
                     return __arrayProto.slice.call(this);
                 },
 
-                to$ : function() {
+                to$: function() {
                     return $(this);
                 },
 
-                toJQuery : function() {
+                toJQuery: function() {
                     return $(this);
                 },
 
-                unique : function() {
+                unique: function() {
                     return new _Api(this.context, _unique(this));
                 },
 
-                unshift : __arrayProto.unshift
+                unshift: __arrayProto.unshift
             });
 
             _Api.extend = function(scope, obj, ext) {
@@ -6783,10 +6783,10 @@
                     var src = find(struct, key);
                     if (!src) {
                         src = {
-                            name      : key,
-                            val       : {},
-                            methodExt : [],
-                            propExt   : []
+                            name: key,
+                            val: {},
+                            methodExt: [],
+                            propExt: []
                         };
                         struct.push(src);
                     }
@@ -6997,14 +6997,14 @@
                     all        = len === -1;
 
                 return {
-                    "page"           : all ? 0 : Math.floor(start / len),
-                    "pages"          : all ? 1 : Math.ceil(visRecords / len),
-                    "start"          : start,
-                    "end"            : settings.fnDisplayEnd(),
-                    "length"         : len,
-                    "recordsTotal"   : settings.fnRecordsTotal(),
-                    "recordsDisplay" : visRecords,
-                    "serverSide"     : _fnDataSource(settings) === 'ssp'
+                    "page": all ? 0 : Math.floor(start / len),
+                    "pages": all ? 1 : Math.ceil(visRecords / len),
+                    "start": start,
+                    "end": settings.fnDisplayEnd(),
+                    "length": len,
+                    "recordsTotal": settings.fnRecordsTotal(),
+                    "recordsDisplay": visRecords,
+                    "serverSide": _fnDataSource(settings) === 'ssp'
                 };
             });
 
@@ -7229,9 +7229,9 @@
                 }
 
                 return $.extend({
-                    search : 'none',
-                    order  : 'current',
-                    page   : 'all'
+                    search: 'none',
+                    order: 'current',
+                    page: 'all'
                 }, opts);
             };
 
@@ -7704,7 +7704,7 @@
                             return;
                         }
 
-                        api.rows({page : 'current'}).eq(0).each(function(idx) {
+                        api.rows({page: 'current'}).eq(0).each(function(idx) {
                             // Internal data grab
                             var row = data[idx];
 
@@ -8116,8 +8116,8 @@
 
                             for (j = 0; j < columns; j++) {
                                 o = {
-                                    row    : row,
-                                    column : j
+                                    row: row,
+                                    column: j
                                 };
 
                                 if (fnSelector) {
@@ -8148,8 +8148,8 @@
                         .filter(s)
                         .map(function(i, el) {
                             return { // use a new object, in case someone changes the values
-                                row    : el._DT_CellIndex.row,
-                                column : el._DT_CellIndex.column
+                                row: el._DT_CellIndex.row,
+                                column: el._DT_CellIndex.column
                             };
                         })
                         .toArray();
@@ -8164,8 +8164,8 @@
                     host = $(s).closest('*[data-dt-row]');
                     return host.length ?
                         [{
-                            row    : host.data('dt-row'),
-                            column : host.data('dt-column')
+                            row: host.data('dt-row'),
+                            column: host.data('dt-column')
                         }] :
                         [];
                 };
@@ -8211,8 +8211,8 @@
                     for (i = 0, ien = rows[idx].length; i < ien; i++) {
                         for (j = 0, jen = columns[idx].length; j < jen; j++) {
                             a.push({
-                                row    : rows[idx][i],
-                                column : columns[idx][j]
+                                row: rows[idx][i],
+                                column: columns[idx][j]
                             });
                         }
                     }
@@ -8221,9 +8221,9 @@
                 }, 1);
 
                 $.extend(cells.selector, {
-                    cols : columnSelector,
-                    rows : rowSelector,
-                    opts : opts
+                    cols: columnSelector,
+                    rows: rowSelector,
+                    opts: opts
                 });
 
                 return cells;
@@ -8262,9 +8262,9 @@
             _api_registerPlural('cells().indexes()', 'cell().index()', function() {
                 return this.iterator('cell', function(settings, row, column) {
                     return {
-                        row           : row,
-                        column        : column,
-                        columnVisible : _fnColumnIndexToVisible(settings, column)
+                        row: row,
+                        column: column,
+                        columnVisible: _fnColumnIndexToVisible(settings, column)
                     };
                 }, 1);
             });
@@ -8378,7 +8378,7 @@
                         undefined;
 
                     return $.isArray(fixed) ?
-                        {pre : fixed} :
+                        {pre: fixed} :
                         fixed;
                 }
 
@@ -8422,10 +8422,10 @@
                     }
 
                     _fnFilterComplete(settings, $.extend({}, settings.oPreviousSearch, {
-                        "sSearch"          : input + "",
-                        "bRegex"           : regex === null ? false : regex,
-                        "bSmart"           : smart === null ? true : smart,
-                        "bCaseInsensitive" : caseInsen === null ? true : caseInsen
+                        "sSearch": input + "",
+                        "bRegex": regex === null ? false : regex,
+                        "bSmart": smart === null ? true : smart,
+                        "bCaseInsensitive": caseInsen === null ? true : caseInsen
                     }), 1);
                 });
             });
@@ -8448,10 +8448,10 @@
                         }
 
                         $.extend(preSearch[column], {
-                            "sSearch"          : input + "",
-                            "bRegex"           : regex === null ? false : regex,
-                            "bSmart"           : smart === null ? true : smart,
-                            "bCaseInsensitive" : caseInsen === null ? true : caseInsen
+                            "sSearch": input + "",
+                            "bRegex": regex === null ? false : regex,
+                            "bSmart": smart === null ? true : smart,
+                            "bCaseInsensitive": caseInsen === null ? true : caseInsen
                         });
 
                         _fnFilterComplete(settings, settings.oPreviousSearch, 1);
@@ -8856,14 +8856,14 @@
                  *  @type boolean
                  *  @default true
                  */
-                "bCaseInsensitive" : true,
+                "bCaseInsensitive": true,
 
                 /**
                  * Applied search term
                  *  @type string
                  *  @default <i>Empty string</i>
                  */
-                "sSearch" : "",
+                "sSearch": "",
 
                 /**
                  * Flag to indicate if the search term should be interpreted as a
@@ -8872,14 +8872,14 @@
                  *  @type boolean
                  *  @default false
                  */
-                "bRegex" : false,
+                "bRegex": false,
 
                 /**
                  * Flag to indicate if DataTables is to use its smart filtering or not.
                  *  @type boolean
                  *  @default true
                  */
-                "bSmart" : true
+                "bSmart": true
             };
 
             /**
@@ -8894,7 +8894,7 @@
                  *  @type node
                  *  @default null
                  */
-                "nTr" : null,
+                "nTr": null,
 
                 /**
                  * Array of TD elements for each row. This is null until the row has been
@@ -8902,7 +8902,7 @@
                  *  @type array nodes
                  *  @default []
                  */
-                "anCells" : null,
+                "anCells": null,
 
                 /**
                  * Data object from the original data source for the row. This is either
@@ -8913,7 +8913,7 @@
                  *  @type array|object
                  *  @default []
                  */
-                "_aData" : [],
+                "_aData": [],
 
                 /**
                  * Sorting data cache - this array is ostensibly the same length as the
@@ -8927,7 +8927,7 @@
                  *  @default null
                  *  @private
                  */
-                "_aSortData" : null,
+                "_aSortData": null,
 
                 /**
                  * Per cell filtering data cache. As per the sort data cache, used to
@@ -8936,7 +8936,7 @@
                  *  @default null
                  *  @private
                  */
-                "_aFilterData" : null,
+                "_aFilterData": null,
 
                 /**
                  * Filtering data cache. This is the same as the cell filtering cache, but
@@ -8947,7 +8947,7 @@
                  *  @default null
                  *  @private
                  */
-                "_sFilterRow" : null,
+                "_sFilterRow": null,
 
                 /**
                  * Cache of the class name that DataTables has applied to the row, so we
@@ -8957,7 +8957,7 @@
                  *  @default <i>Empty string</i>
                  *  @private
                  */
-                "_sRowStripe" : "",
+                "_sRowStripe": "",
 
                 /**
                  * Denote if the original data source was from the DOM, or the data source
@@ -8968,7 +8968,7 @@
                  *  @default null
                  *  @private
                  */
-                "src" : null,
+                "src": null,
 
                 /**
                  * Index in the aoData array. This saves an indexOf lookup when we have the
@@ -8977,7 +8977,7 @@
                  *  @default -1
                  *  @private
                  */
-                "idx" : -1
+                "idx": -1
             };
 
             /**
@@ -8998,7 +8998,7 @@
                  *  @type integer
                  *  @default null
                  */
-                "idx" : null,
+                "idx": null,
 
                 /**
                  * A list of the columns that sorting should occur on when this column
@@ -9009,7 +9009,7 @@
                  * at itself, but that doesn't need to be the case).
                  *  @type array
                  */
-                "aDataSort" : null,
+                "aDataSort": null,
 
                 /**
                  * Define the sorting directions that are applied to the column, in sequence
@@ -9019,26 +9019,26 @@
                  * Repeat until loop.
                  *  @type array
                  */
-                "asSorting" : null,
+                "asSorting": null,
 
                 /**
                  * Flag to indicate if the column is searchable, and thus should be included
                  * in the filtering or not.
                  *  @type boolean
                  */
-                "bSearchable" : null,
+                "bSearchable": null,
 
                 /**
                  * Flag to indicate if the column is sortable or not.
                  *  @type boolean
                  */
-                "bSortable" : null,
+                "bSortable": null,
 
                 /**
                  * Flag to indicate if the column is currently visible in the table or not
                  *  @type boolean
                  */
-                "bVisible" : null,
+                "bVisible": null,
 
                 /**
                  * Store for manual type assignment using the `column.type` option. This
@@ -9047,7 +9047,7 @@
                  *  @default null
                  *  @private
                  */
-                "_sManualType" : null,
+                "_sManualType": null,
 
                 /**
                  * Flag to indicate if HTML5 data attributes should be used as the data
@@ -9056,7 +9056,7 @@
                  *  @default false
                  *  @private
                  */
-                "_bAttrSrc" : false,
+                "_bAttrSrc": false,
 
                 /**
                  * Developer definable function that is called whenever a cell is created (Ajax source,
@@ -9070,7 +9070,7 @@
                  *  @param {int} iRow The row index for the aoData data store
                  *  @default null
                  */
-                "fnCreatedCell" : null,
+                "fnCreatedCell": null,
 
                 /**
                  * Function to get data from a cell in a column. You should <b>never</b>
@@ -9086,7 +9086,7 @@
                  *  @returns {*} The data for the cell from the given row's data
                  *  @default null
                  */
-                "fnGetData" : null,
+                "fnGetData": null,
 
                 /**
                  * Function to set data for a cell in the column. You should <b>never</b>
@@ -9099,7 +9099,7 @@
                  *  @param {*} sValue Value to set
                  *  @default null
                  */
-                "fnSetData" : null,
+                "fnSetData": null,
 
                 /**
                  * Property to read the value for the cells in the column from the data
@@ -9108,7 +9108,7 @@
                  *  @type function|int|string|null
                  *  @default null
                  */
-                "mData" : null,
+                "mData": null,
 
                 /**
                  * Partner property to mData which is used (only when defined) to get
@@ -9118,7 +9118,7 @@
                  *  @type function|int|string|null
                  *  @default null
                  */
-                "mRender" : null,
+                "mRender": null,
 
                 /**
                  * Unique header TH/TD element for this column - this is what the sorting
@@ -9126,7 +9126,7 @@
                  *  @type node
                  *  @default null
                  */
-                "nTh" : null,
+                "nTh": null,
 
                 /**
                  * Unique footer TH/TD element for this column (if there is one). Not used
@@ -9135,14 +9135,14 @@
                  *  @type node
                  *  @default null
                  */
-                "nTf" : null,
+                "nTf": null,
 
                 /**
                  * The class to apply to all TD elements in the table's TBODY for the column
                  *  @type string
                  *  @default null
                  */
-                "sClass" : null,
+                "sClass": null,
 
                 /**
                  * When DataTables calculates the column widths to assign to each column,
@@ -9155,7 +9155,7 @@
                  * text that is found to be the longest string for the column - i.e. padding.
                  *  @type string
                  */
-                "sContentPadding" : null,
+                "sContentPadding": null,
 
                 /**
                  * Allows a default value to be given for a column's data, and will be used
@@ -9164,14 +9164,14 @@
                  *  @type string
                  *  @default null
                  */
-                "sDefaultContent" : null,
+                "sDefaultContent": null,
 
                 /**
                  * Name for the column, allowing reference to the column by name as well as
                  * by index (needs a lookup to work by name).
                  *  @type string
                  */
-                "sName" : null,
+                "sName": null,
 
                 /**
                  * Custom sorting data type - defines which of the available plug-ins in
@@ -9179,14 +9179,14 @@
                  *  @type string
                  *  @default std
                  */
-                "sSortDataType" : 'std',
+                "sSortDataType": 'std',
 
                 /**
                  * Class to be applied to the header element when sorting on this column
                  *  @type string
                  *  @default null
                  */
-                "sSortingClass" : null,
+                "sSortingClass": null,
 
                 /**
                  * Class to be applied to the header element when sorting on this column -
@@ -9194,34 +9194,34 @@
                  *  @type string
                  *  @default null
                  */
-                "sSortingClassJUI" : null,
+                "sSortingClassJUI": null,
 
                 /**
                  * Title of the column - what is seen in the TH element (nTh).
                  *  @type string
                  */
-                "sTitle" : null,
+                "sTitle": null,
 
                 /**
                  * Column sorting and filtering type
                  *  @type string
                  *  @default null
                  */
-                "sType" : null,
+                "sType": null,
 
                 /**
                  * Width of the column
                  *  @type string
                  *  @default null
                  */
-                "sWidth" : null,
+                "sWidth": null,
 
                 /**
                  * Width of the column when it was first "encountered"
                  *  @type string
                  *  @default null
                  */
-                "sWidthOrig" : null
+                "sWidthOrig": null
             };
 
             /*
@@ -9305,7 +9305,7 @@
                  *      } );
                  *    } );
                  */
-                "aaData" : null,
+                "aaData": null,
 
                 /**
                  * If ordering is enabled, then DataTables will perform a first pass sort on
@@ -9334,7 +9334,7 @@
                  *      } );
                  *    } );
                  */
-                "aaSorting" : [[0, 'asc']],
+                "aaSorting": [[0, 'asc']],
 
                 /**
                  * This parameter is basically identical to the `sorting` parameter, but
@@ -9356,7 +9356,7 @@
                  *      } );
                  *    } )
                  */
-                "aaSortingFixed" : [],
+                "aaSortingFixed": [],
 
                 /**
                  * DataTables can be instructed to load data to display in the table from a
@@ -9512,7 +9512,7 @@
                  *     }
                  *   } );
                  */
-                "ajax" : null,
+                "ajax": null,
 
                 /**
                  * This parameter allows you to readily specify the entries in the length drop
@@ -9537,7 +9537,7 @@
                  *      } );
                  *    } );
                  */
-                "aLengthMenu" : [10, 25, 50, 100],
+                "aLengthMenu": [10, 25, 50, 100],
 
                 /**
                  * The `columns` option in the initialisation parameter allows you to define
@@ -9551,7 +9551,7 @@
                  *
                  *  @name DataTable.defaults.column
                  */
-                "aoColumns" : null,
+                "aoColumns": null,
 
                 /**
                  * Very similar to `columns`, `columnDefs` allows you to target a specific
@@ -9572,7 +9572,7 @@
                  *
                  *  @name DataTable.defaults.columnDefs
                  */
-                "aoColumnDefs" : null,
+                "aoColumnDefs": null,
 
                 /**
                  * Basically the same as `search`, this parameter defines the individual column
@@ -9598,7 +9598,7 @@
                  *      } );
                  *    } )
                  */
-                "aoSearchCols" : [],
+                "aoSearchCols": [],
 
                 /**
                  * An array of CSS classes that should be applied to displayed rows. This
@@ -9618,7 +9618,7 @@
                  *      } );
                  *    } )
                  */
-                "asStripeClasses" : null,
+                "asStripeClasses": null,
 
                 /**
                  * Enable or disable automatic column width calculation. This can be disabled
@@ -9637,7 +9637,7 @@
                  *      } );
                  *    } );
                  */
-                "bAutoWidth" : true,
+                "bAutoWidth": true,
 
                 /**
                  * Deferred rendering can provide DataTables with a huge speed boost when you
@@ -9659,7 +9659,7 @@
                  *      } );
                  *    } );
                  */
-                "bDeferRender" : false,
+                "bDeferRender": false,
 
                 /**
                  * Replace a DataTable which matches the given selector and replace it with
@@ -9686,7 +9686,7 @@
                  *      } );
                  *    } );
                  */
-                "bDestroy" : false,
+                "bDestroy": false,
 
                 /**
                  * Enable or disable filtering of data. Filtering in DataTables is "smart" in
@@ -9709,7 +9709,7 @@
                  *      } );
                  *    } );
                  */
-                "bFilter" : true,
+                "bFilter": true,
 
                 /**
                  * Enable or disable the table information display. This shows information
@@ -9728,7 +9728,7 @@
                  *      } );
                  *    } );
                  */
-                "bInfo" : true,
+                "bInfo": true,
 
                 /**
                  * Enable jQuery UI ThemeRoller support (required as ThemeRoller requires some
@@ -9747,7 +9747,7 @@
                  *      } );
                  *    } );
                  */
-                "bJQueryUI" : false,
+                "bJQueryUI": false,
 
                 /**
                  * Allows the end user to select the size of a formatted page from a select
@@ -9765,7 +9765,7 @@
                  *      } );
                  *    } );
                  */
-                "bLengthChange" : true,
+                "bLengthChange": true,
 
                 /**
                  * Enable or disable pagination.
@@ -9782,7 +9782,7 @@
                  *      } );
                  *    } );
                  */
-                "bPaginate" : true,
+                "bPaginate": true,
 
                 /**
                  * Enable or disable the display of a 'processing' indicator when the table is
@@ -9802,7 +9802,7 @@
                  *      } );
                  *    } );
                  */
-                "bProcessing" : false,
+                "bProcessing": false,
 
                 /**
                  * Retrieve the DataTables object for the given selector. Note that if the
@@ -9839,7 +9839,7 @@
                  *      // perform API operations with oTable
                  *    }
                  */
-                "bRetrieve" : false,
+                "bRetrieve": false,
 
                 /**
                  * When vertical (y) scrolling is enabled, DataTables will force the height of
@@ -9862,7 +9862,7 @@
                  *      } );
                  *    } );
                  */
-                "bScrollCollapse" : false,
+                "bScrollCollapse": false,
 
                 /**
                  * Configure DataTables to use server-side processing. Note that the
@@ -9883,7 +9883,7 @@
                  *      } );
                  *    } );
                  */
-                "bServerSide" : false,
+                "bServerSide": false,
 
                 /**
                  * Enable or disable sorting of columns. Sorting of individual columns can be
@@ -9901,7 +9901,7 @@
                  *      } );
                  *    } );
                  */
-                "bSort" : true,
+                "bSort": true,
 
                 /**
                  * Enable or display DataTables' ability to sort multiple columns at the
@@ -9920,7 +9920,7 @@
                  *      } );
                  *    } );
                  */
-                "bSortMulti" : true,
+                "bSortMulti": true,
 
                 /**
                  * Allows control over whether DataTables should use the top (true) unique
@@ -9939,7 +9939,7 @@
                  *      } );
                  *    } );
                  */
-                "bSortCellsTop" : false,
+                "bSortCellsTop": false,
 
                 /**
                  * Enable or disable the addition of the classes `sorting\_1`, `sorting\_2` and
@@ -9960,7 +9960,7 @@
                  *      } );
                  *    } );
                  */
-                "bSortClasses" : true,
+                "bSortClasses": true,
 
                 /**
                  * Enable or disable state saving. When enabled HTML5 `localStorage` will be
@@ -9984,7 +9984,7 @@
                  *      } );
                  *    } );
                  */
-                "bStateSave" : false,
+                "bStateSave": false,
 
                 /**
                  * This function is called when a TR element is created (and all TD child
@@ -10011,7 +10011,7 @@
                  *      } );
                  *    } );
                  */
-                "fnCreatedRow" : null,
+                "fnCreatedRow": null,
 
                 /**
                  * This function is called on every 'draw' event, and allows you to
@@ -10031,7 +10031,7 @@
                  *      } );
                  *    } );
                  */
-                "fnDrawCallback" : null,
+                "fnDrawCallback": null,
 
                 /**
                  * Identical to fnHeaderCallback() but for the table footer this function
@@ -10058,7 +10058,7 @@
                  *      } );
                  *    } )
                  */
-                "fnFooterCallback" : null,
+                "fnFooterCallback": null,
 
                 /**
                  * When rendering large numbers in the information element for the table
@@ -10087,7 +10087,7 @@
                  *      } );
                  *    } );
                  */
-                "fnFormatNumber" : function(toFormat) {
+                "fnFormatNumber": function(toFormat) {
                     return toFormat.toString().replace(
                         /\B(?=(\d{3})+(?!\d))/g,
                         this.oLanguage.sThousands
@@ -10120,7 +10120,7 @@
                  *      } );
                  *    } )
                  */
-                "fnHeaderCallback" : null,
+                "fnHeaderCallback": null,
 
                 /**
                  * The information element can be used to convey information about the current
@@ -10149,7 +10149,7 @@
                  *      }
                  *    } );
                  */
-                "fnInfoCallback" : null,
+                "fnInfoCallback": null,
 
                 /**
                  * Called when the table has been initialised. Normally DataTables will
@@ -10173,7 +10173,7 @@
                  *      } );
                  *    } )
                  */
-                "fnInitComplete" : null,
+                "fnInitComplete": null,
 
                 /**
                  * Called at the very start of each table draw and can be used to cancel the
@@ -10198,7 +10198,7 @@
                  *      } );
                  *    } );
                  */
-                "fnPreDrawCallback" : null,
+                "fnPreDrawCallback": null,
 
                 /**
                  * This function allows you to 'post process' each row after it have been
@@ -10226,7 +10226,7 @@
                  *      } );
                  *    } );
                  */
-                "fnRowCallback" : null,
+                "fnRowCallback": null,
 
                 /**
                  * __Deprecated__ The functionality provided by this parameter has now been
@@ -10251,7 +10251,7 @@
                  *
                  *  @deprecated 1.10. Please use `ajax` for this functionality now.
                  */
-                "fnServerData" : null,
+                "fnServerData": null,
 
                 /**
                  * __Deprecated__ The functionality provided by this parameter has now been
@@ -10277,7 +10277,7 @@
                  *
                  *  @deprecated 1.10. Please use `ajax` for this functionality now.
                  */
-                "fnServerParams" : null,
+                "fnServerParams": null,
 
                 /**
                  * Load the table state. With this function you can define from where, and how, the
@@ -10309,7 +10309,7 @@
                  *      } );
                  *    } );
                  */
-                "fnStateLoadCallback" : function(settings) {
+                "fnStateLoadCallback": function(settings) {
                     try {
                         return JSON.parse(
                             (settings.iStateDuration === -1 ? sessionStorage : localStorage).getItem(
@@ -10355,7 +10355,7 @@
                  *      } );
                  *    } );
                  */
-                "fnStateLoadParams" : null,
+                "fnStateLoadParams": null,
 
                 /**
                  * Callback that is called when the state has been loaded from the state saving method
@@ -10378,7 +10378,7 @@
                  *      } );
                  *    } );
                  */
-                "fnStateLoaded" : null,
+                "fnStateLoaded": null,
 
                 /**
                  * Save the table state. This function allows you to define where and how the state
@@ -10409,7 +10409,7 @@
                  *      } );
                  *    } );
                  */
-                "fnStateSaveCallback" : function(settings, data) {
+                "fnStateSaveCallback": function(settings, data) {
                     try {
                         (settings.iStateDuration === -1 ? sessionStorage : localStorage).setItem(
                             'DataTables_' + settings.sInstance + '_' + location.pathname,
@@ -10443,7 +10443,7 @@
                  *      } );
                  *    } );
                  */
-                "fnStateSaveParams" : null,
+                "fnStateSaveParams": null,
 
                 /**
                  * Duration for which the saved state information is considered valid. After this period
@@ -10462,7 +10462,7 @@
                  *      } );
                  *    } )
                  */
-                "iStateDuration" : 7200,
+                "iStateDuration": 7200,
 
                 /**
                  * When enabled DataTables will not make a request to the server for the first
@@ -10505,7 +10505,7 @@
                  *      } );
                  *    } );
                  */
-                "iDeferLoading" : null,
+                "iDeferLoading": null,
 
                 /**
                  * Number of rows to display on a single page when using pagination. If
@@ -10524,7 +10524,7 @@
                  *      } );
                  *    } )
                  */
-                "iDisplayLength" : 10,
+                "iDisplayLength": 10,
 
                 /**
                  * Define the starting point for data display when using DataTables with
@@ -10544,7 +10544,7 @@
                  *      } );
                  *    } )
                  */
-                "iDisplayStart" : 0,
+                "iDisplayStart": 0,
 
                 /**
                  * By default DataTables allows keyboard navigation of the table (sorting, paging,
@@ -10566,7 +10566,7 @@
                  *      } );
                  *    } );
                  */
-                "iTabIndex" : 0,
+                "iTabIndex": 0,
 
                 /**
                  * Classes that DataTables assigns to the various components and features
@@ -10576,7 +10576,7 @@
                  *  @namespace
                  *  @name DataTable.defaults.classes
                  */
-                "oClasses" : {},
+                "oClasses": {},
 
                 /**
                  * All strings that DataTables uses in the user interface that it creates
@@ -10585,27 +10585,27 @@
                  *  @namespace
                  *  @name DataTable.defaults.language
                  */
-                "oLanguage" : {
-                    "sEmptyTable"     : "Nenhum registro encontrado",
-                    "sInfo"           : "_START_ até _END_ de _TOTAL_",
-                    "sInfoEmpty"      : "0 registros",
-                    "sInfoFiltered"   : "(Filtrados de _MAX_ registros)",
-                    "sInfoPostFix"    : "",
-                    "sInfoThousands"  : ".",
-                    "sLengthMenu"     : "_MENU_ <span>por página</span>",
-                    "sLoadingRecords" : "Carregando...",
-                    "sProcessing"     : "Processando...",
-                    "sZeroRecords"    : "Nenhum registro encontrado",
-                    "sSearch"         : "Pesquisar: ",
-                    "oPaginate"       : {
-                        "sNext"     : "Próximo",
-                        "sPrevious" : "Anterior",
-                        "sFirst"    : "Primeiro",
-                        "sLast"     : "Último"
+                "oLanguage": {
+                    "sEmptyTable": "Nenhum registro encontrado",
+                    "sInfo": "_START_ até _END_ de _TOTAL_",
+                    "sInfoEmpty": "0 registros",
+                    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "_MENU_ <span>por página</span>",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+                    "sSearch": "Pesquisar: ",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
                     },
-                    "oAria"           : {
-                        "sSortAscending"  : ": Ordenar colunas de forma ascendente",
-                        "sSortDescending" : ": Ordenar colunas de forma descendente"
+                    "oAria": {
+                        "sSortAscending": ": Ordenar colunas de forma ascendente",
+                        "sSortDescending": ": Ordenar colunas de forma descendente"
                     }
                 },
 
@@ -10630,7 +10630,7 @@
                  *      } );
                  *    } )
                  */
-                "oSearch" : $.extend({}, DataTable.models.oSearch),
+                "oSearch": $.extend({}, DataTable.models.oSearch),
 
                 /**
                  * __Deprecated__ The functionality provided by this parameter has now been
@@ -10650,7 +10650,7 @@
                  *
                  *  @deprecated 1.10. Please use `ajax` for this functionality now.
                  */
-                "sAjaxDataProp" : "data",
+                "sAjaxDataProp": "data",
 
                 /**
                  * __Deprecated__ The functionality provided by this parameter has now been
@@ -10668,7 +10668,7 @@
                  *
                  *  @deprecated 1.10. Please use `ajax` for this functionality now.
                  */
-                "sAjaxSource" : null,
+                "sAjaxSource": null,
 
                 /**
                  * This initialisation variable allows you to specify exactly where in the
@@ -10723,7 +10723,7 @@
                  *      } );
                  *    } );
                  */
-                "sDom" : "lfrtip",
+                "sDom": "lfrtip",
 
                 /**
                  * Search delay option. This will throttle full table searches that use the
@@ -10742,7 +10742,7 @@
                  *      } );
                  *    } )
                  */
-                "searchDelay" : null,
+                "searchDelay": null,
 
                 /**
                  * DataTables features six different built-in options for the buttons to
@@ -10769,7 +10769,7 @@
                  *      } );
                  *    } )
                  */
-                "sPaginationType" : "simple_numbers",
+                "sPaginationType": "simple_numbers",
 
                 /**
                  * Enable horizontal scrolling. When a table is too wide to fit into a
@@ -10793,7 +10793,7 @@
                  *      } );
                  *    } );
                  */
-                "sScrollX" : "",
+                "sScrollX": "",
 
                 /**
                  * This property can be used to force a DataTable to use more width than it
@@ -10816,7 +10816,7 @@
                  *      } );
                  *    } );
                  */
-                "sScrollXInner" : "",
+                "sScrollXInner": "",
 
                 /**
                  * Enable vertical scrolling. Vertical scrolling will constrain the DataTable
@@ -10839,7 +10839,7 @@
                  *      } );
                  *    } );
                  */
-                "sScrollY" : "",
+                "sScrollY": "",
 
                 /**
                  * __Deprecated__ The functionality provided by this parameter has now been
@@ -10856,7 +10856,7 @@
                  *
                  *  @deprecated 1.10. Please use `ajax` for this functionality now.
                  */
-                "sServerMethod" : "GET",
+                "sServerMethod": "GET",
 
                 /**
                  * DataTables makes use of renderers when displaying HTML elements for
@@ -10873,7 +10873,7 @@
                  *  @name DataTable.defaults.renderer
                  *
                  */
-                "renderer" : null,
+                "renderer": null,
 
                 /**
                  * Set the data property name that DataTables should use to get a row's id
@@ -10883,7 +10883,7 @@
                  *
                  *  @name DataTable.defaults.rowId
                  */
-                "rowId" : "DT_RowId"
+                "rowId": "DT_RowId"
             };
 
             _fnHungarianMap(DataTable.defaults);
@@ -10936,8 +10936,8 @@
                  *      } );
                  *    } );
                  */
-                "aDataSort" : null,
-                "iDataSort" : -1,
+                "aDataSort": null,
+                "iDataSort": -1,
 
                 /**
                  * You can control the default ordering direction, and even alter the
@@ -10975,7 +10975,7 @@
                  *      } );
                  *    } );
                  */
-                "asSorting" : ['asc', 'desc'],
+                "asSorting": ['asc', 'desc'],
 
                 /**
                  * Enable or disable filtering on the data in this column.
@@ -11007,7 +11007,7 @@
                  *        ] } );
                  *    } );
                  */
-                "bSearchable" : true,
+                "bSearchable": true,
 
                 /**
                  * Enable or disable ordering on this column.
@@ -11039,7 +11039,7 @@
                  *        ] } );
                  *    } );
                  */
-                "bSortable" : true,
+                "bSortable": true,
 
                 /**
                  * Enable or disable the display of this column.
@@ -11071,7 +11071,7 @@
                  *        ] } );
                  *    } );
                  */
-                "bVisible" : true,
+                "bVisible": true,
 
                 /**
                  * Developer definable function that is called whenever a cell is created (Ajax source,
@@ -11102,7 +11102,7 @@
                  *      });
                  *    } );
                  */
-                "fnCreatedCell" : null,
+                "fnCreatedCell": null,
 
                 /**
                  * This parameter has been replaced by `data` in DataTables to ensure naming
@@ -11281,7 +11281,7 @@
                  *    } );
                  *
                  */
-                "mData" : null,
+                "mData": null,
 
                 /**
                  * This property is the rendering partner to `data` and it is suggested that
@@ -11402,7 +11402,7 @@
                  *      } );
                  *    } );
                  */
-                "mRender" : null,
+                "mRender": null,
 
                 /**
                  * Change the cell type created for the column - either TD cells or TH cells. This
@@ -11425,7 +11425,7 @@
                  *      } );
                  *    } );
                  */
-                "sCellType" : "td",
+                "sCellType": "td",
 
                 /**
                  * Class to give to each cell in this column.
@@ -11459,7 +11459,7 @@
                  *      } );
                  *    } );
                  */
-                "sClass" : "",
+                "sClass": "",
 
                 /**
                  * When DataTables calculates the column widths to assign to each column,
@@ -11492,7 +11492,7 @@
                  *      } );
                  *    } );
                  */
-                "sContentPadding" : "",
+                "sContentPadding": "",
 
                 /**
                  * Allows a default value to be given for a column's data, and will be used
@@ -11534,7 +11534,7 @@
                  *      } );
                  *    } );
                  */
-                "sDefaultContent" : null,
+                "sDefaultContent": null,
 
                 /**
                  * This parameter is only used in DataTables' server-side processing. It can
@@ -11577,7 +11577,7 @@
                  *      } );
                  *    } );
                  */
-                "sName" : "",
+                "sName": "",
 
                 /**
                  * Defines a data source type for the ordering which can be used to read
@@ -11618,7 +11618,7 @@
                  *      } );
                  *    } );
                  */
-                "sSortDataType" : "std",
+                "sSortDataType": "std",
 
                 /**
                  * The title of this column.
@@ -11653,7 +11653,7 @@
                  *      } );
                  *    } );
                  */
-                "sTitle" : null,
+                "sTitle": null,
 
                 /**
                  * The type allows you to specify how the data for this column will be
@@ -11693,7 +11693,7 @@
                  *      } );
                  *    } );
                  */
-                "sType" : null,
+                "sType": null,
 
                 /**
                  * Defining the width of the column, this parameter may take any CSS value
@@ -11730,7 +11730,7 @@
                  *      } );
                  *    } );
                  */
-                "sWidth" : null
+                "sWidth": null
             };
 
             _fnHungarianMap(DataTable.defaults.column);
@@ -11762,7 +11762,7 @@
                  * Primary features of DataTables and their enablement state.
                  *  @namespace
                  */
-                "oFeatures" : {
+                "oFeatures": {
 
                     /**
                      * Flag to say if DataTables should automatically try to calculate the
@@ -11771,7 +11771,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type boolean
                      */
-                    "bAutoWidth" : null,
+                    "bAutoWidth": null,
 
                     /**
                      * Delay the creation of TR and TD elements until they are actually
@@ -11782,7 +11782,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type boolean
                      */
-                    "bDeferRender" : null,
+                    "bDeferRender": null,
 
                     /**
                      * Enable filtering on the table or not. Note that if this is disabled
@@ -11792,7 +11792,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type boolean
                      */
-                    "bFilter" : null,
+                    "bFilter": null,
 
                     /**
                      * Table information element (the 'Showing x of y records' div) enable
@@ -11801,7 +11801,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type boolean
                      */
-                    "bInfo" : null,
+                    "bInfo": null,
 
                     /**
                      * Present a user control allowing the end user to change the page size
@@ -11810,7 +11810,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type boolean
                      */
-                    "bLengthChange" : null,
+                    "bLengthChange": null,
 
                     /**
                      * Pagination enabled or not. Note that if this is disabled then length
@@ -11819,7 +11819,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type boolean
                      */
-                    "bPaginate" : null,
+                    "bPaginate": null,
 
                     /**
                      * Processing indicator enable flag whenever DataTables is enacting a
@@ -11828,7 +11828,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type boolean
                      */
-                    "bProcessing" : null,
+                    "bProcessing": null,
 
                     /**
                      * Server-side processing enabled flag - when enabled DataTables will
@@ -11838,7 +11838,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type boolean
                      */
-                    "bServerSide" : null,
+                    "bServerSide": null,
 
                     /**
                      * Sorting enablement flag.
@@ -11846,7 +11846,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type boolean
                      */
-                    "bSort" : null,
+                    "bSort": null,
 
                     /**
                      * Multi-column sorting
@@ -11854,7 +11854,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type boolean
                      */
-                    "bSortMulti" : null,
+                    "bSortMulti": null,
 
                     /**
                      * Apply a class to the columns which are being sorted to provide a
@@ -11864,7 +11864,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type boolean
                      */
-                    "bSortClasses" : null,
+                    "bSortClasses": null,
 
                     /**
                      * State saving enablement flag.
@@ -11872,14 +11872,14 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type boolean
                      */
-                    "bStateSave" : null
+                    "bStateSave": null
                 },
 
                 /**
                  * Scrolling settings for a table.
                  *  @namespace
                  */
-                "oScroll" : {
+                "oScroll": {
                     /**
                      * When the table is shorter in height than sScrollY, collapse the
                      * table container down to the height of the table (when true).
@@ -11887,7 +11887,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type boolean
                      */
-                    "bCollapse" : null,
+                    "bCollapse": null,
 
                     /**
                      * Width of the scrollbar for the web-browser's platform. Calculated
@@ -11895,7 +11895,7 @@
                      *  @type int
                      *  @default 0
                      */
-                    "iBarWidth" : 0,
+                    "iBarWidth": 0,
 
                     /**
                      * Viewport width for horizontal scrolling. Horizontal scrolling is
@@ -11904,7 +11904,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type string
                      */
-                    "sX" : null,
+                    "sX": null,
 
                     /**
                      * Width to expand the table to when using x-scrolling. Typically you
@@ -11914,7 +11914,7 @@
                      *  @type string
                      *  @deprecated
                      */
-                    "sXInner" : null,
+                    "sXInner": null,
 
                     /**
                      * Viewport height for vertical scrolling. Vertical scrolling is disabled
@@ -11923,7 +11923,7 @@
                      * set a default use {@link DataTable.defaults}.
                      *  @type string
                      */
-                    "sY" : null
+                    "sY": null
                 },
 
                 /**
@@ -11931,28 +11931,28 @@
                  *  @namespace
                  *  @extends DataTable.defaults.oLanguage
                  */
-                "oLanguage" : {
+                "oLanguage": {
                     /**
                      * Information callback function. See
                      * {@link DataTable.defaults.fnInfoCallback}
                      *  @type function
                      *  @default null
                      */
-                    "fnInfoCallback" : null
+                    "fnInfoCallback": null
                 },
 
                 /**
                  * Browser support parameters
                  *  @namespace
                  */
-                "oBrowser" : {
+                "oBrowser": {
                     /**
                      * Indicate if the browser incorrectly calculates width:100% inside a
                      * scrolling element (IE6/7)
                      *  @type boolean
                      *  @default false
                      */
-                    "bScrollOversize" : false,
+                    "bScrollOversize": false,
 
                     /**
                      * Determine if the vertical scrollbar is on the right or left of the
@@ -11961,24 +11961,24 @@
                      *  @type boolean
                      *  @default false
                      */
-                    "bScrollbarLeft" : false,
+                    "bScrollbarLeft": false,
 
                     /**
                      * Flag for if `getBoundingClientRect` is fully supported or not
                      *  @type boolean
                      *  @default false
                      */
-                    "bBounding" : false,
+                    "bBounding": false,
 
                     /**
                      * Browser scrollbar width
                      *  @type integer
                      *  @default 0
                      */
-                    "barWidth" : 0
+                    "barWidth": 0
                 },
 
-                "ajax" : null,
+                "ajax": null,
 
                 /**
                  * Array referencing the nodes which are used for the features. The
@@ -11994,7 +11994,7 @@
                  *  @type array
                  *  @default []
                  */
-                "aanFeatures" : [],
+                "aanFeatures": [],
 
                 /**
                  * Store data information - see {@link DataTable.models.oRow} for detailed
@@ -12002,49 +12002,49 @@
                  *  @type array
                  *  @default []
                  */
-                "aoData" : [],
+                "aoData": [],
 
                 /**
                  * Array of indexes which are in the current display (after filtering etc)
                  *  @type array
                  *  @default []
                  */
-                "aiDisplay" : [],
+                "aiDisplay": [],
 
                 /**
                  * Array of indexes for display - no filtering
                  *  @type array
                  *  @default []
                  */
-                "aiDisplayMaster" : [],
+                "aiDisplayMaster": [],
 
                 /**
                  * Map of row ids to data indexes
                  *  @type object
                  *  @default {}
                  */
-                "aIds" : {},
+                "aIds": {},
 
                 /**
                  * Store information about each column that is in use
                  *  @type array
                  *  @default []
                  */
-                "aoColumns" : [],
+                "aoColumns": [],
 
                 /**
                  * Store information about the table's header
                  *  @type array
                  *  @default []
                  */
-                "aoHeader" : [],
+                "aoHeader": [],
 
                 /**
                  * Store information about the table's footer
                  *  @type array
                  *  @default []
                  */
-                "aoFooter" : [],
+                "aoFooter": [],
 
                 /**
                  * Store the applied global search information in case we want to force a
@@ -12054,7 +12054,7 @@
                  *  @namespace
                  *  @extends DataTable.models.oSearch
                  */
-                "oPreviousSearch" : {},
+                "oPreviousSearch": {},
 
                 /**
                  * Store the applied search for each column - see
@@ -12063,7 +12063,7 @@
                  *  @type array
                  *  @default []
                  */
-                "aoPreSearchCols" : [],
+                "aoPreSearchCols": [],
 
                 /**
                  * Sorting that is applied to the table. Note that the inner arrays are
@@ -12077,7 +12077,7 @@
                  *  @type array
                  *  @todo These inner arrays should really be objects
                  */
-                "aaSorting" : null,
+                "aaSorting": null,
 
                 /**
                  * Sorting that is always applied to the table (i.e. prefixed in front of
@@ -12087,7 +12087,7 @@
                  *  @type array
                  *  @default []
                  */
-                "aaSortingFixed" : [],
+                "aaSortingFixed": [],
 
                 /**
                  * Classes to use for the striping of a table.
@@ -12096,56 +12096,56 @@
                  *  @type array
                  *  @default []
                  */
-                "asStripeClasses" : null,
+                "asStripeClasses": null,
 
                 /**
                  * If restoring a table - we should restore its striping classes as well
                  *  @type array
                  *  @default []
                  */
-                "asDestroyStripes" : [],
+                "asDestroyStripes": [],
 
                 /**
                  * If restoring a table - we should restore its width
                  *  @type int
                  *  @default 0
                  */
-                "sDestroyWidth" : 0,
+                "sDestroyWidth": 0,
 
                 /**
                  * Callback functions array for every time a row is inserted (i.e. on a draw).
                  *  @type array
                  *  @default []
                  */
-                "aoRowCallback" : [],
+                "aoRowCallback": [],
 
                 /**
                  * Callback functions for the header on each draw.
                  *  @type array
                  *  @default []
                  */
-                "aoHeaderCallback" : [],
+                "aoHeaderCallback": [],
 
                 /**
                  * Callback function for the footer on each draw.
                  *  @type array
                  *  @default []
                  */
-                "aoFooterCallback" : [],
+                "aoFooterCallback": [],
 
                 /**
                  * Array of callback functions for draw callback functions
                  *  @type array
                  *  @default []
                  */
-                "aoDrawCallback" : [],
+                "aoDrawCallback": [],
 
                 /**
                  * Array of callback functions for row created function
                  *  @type array
                  *  @default []
                  */
-                "aoRowCreatedCallback" : [],
+                "aoRowCreatedCallback": [],
 
                 /**
                  * Callback functions for just before the table is redrawn. A return of
@@ -12153,14 +12153,14 @@
                  *  @type array
                  *  @default []
                  */
-                "aoPreDrawCallback" : [],
+                "aoPreDrawCallback": [],
 
                 /**
                  * Callback functions for when the table has been initialised.
                  *  @type array
                  *  @default []
                  */
-                "aoInitComplete" : [],
+                "aoInitComplete": [],
 
                 /**
                  * Callbacks for modifying the settings to be stored for state saving, prior to
@@ -12168,7 +12168,7 @@
                  *  @type array
                  *  @default []
                  */
-                "aoStateSaveParams" : [],
+                "aoStateSaveParams": [],
 
                 /**
                  * Callbacks for modifying the settings that have been stored for state saving
@@ -12176,7 +12176,7 @@
                  *  @type array
                  *  @default []
                  */
-                "aoStateLoadParams" : [],
+                "aoStateLoadParams": [],
 
                 /**
                  * Callbacks for operating on the settings object once the saved state has been
@@ -12184,49 +12184,49 @@
                  *  @type array
                  *  @default []
                  */
-                "aoStateLoaded" : [],
+                "aoStateLoaded": [],
 
                 /**
                  * Cache the table ID for quick access
                  *  @type string
                  *  @default <i>Empty string</i>
                  */
-                "sTableId" : "",
+                "sTableId": "",
 
                 /**
                  * The TABLE node for the main table
                  *  @type node
                  *  @default null
                  */
-                "nTable" : null,
+                "nTable": null,
 
                 /**
                  * Permanent ref to the thead element
                  *  @type node
                  *  @default null
                  */
-                "nTHead" : null,
+                "nTHead": null,
 
                 /**
                  * Permanent ref to the tfoot element - if it exists
                  *  @type node
                  *  @default null
                  */
-                "nTFoot" : null,
+                "nTFoot": null,
 
                 /**
                  * Permanent ref to the tbody element
                  *  @type node
                  *  @default null
                  */
-                "nTBody" : null,
+                "nTBody": null,
 
                 /**
                  * Cache the wrapper node (contains all DataTables controlled elements)
                  *  @type node
                  *  @default null
                  */
-                "nTableWrapper" : null,
+                "nTableWrapper": null,
 
                 /**
                  * Indicate if when using server-side processing the loading of data
@@ -12236,14 +12236,14 @@
                  *  @type boolean
                  *  @default false
                  */
-                "bDeferLoading" : false,
+                "bDeferLoading": false,
 
                 /**
                  * Indicate if all required information has been read in
                  *  @type boolean
                  *  @default false
                  */
-                "bInitialised" : false,
+                "bInitialised": false,
 
                 /**
                  * Information about open rows. Each object in the array has the parameters
@@ -12251,7 +12251,7 @@
                  *  @type array
                  *  @default []
                  */
-                "aoOpenRows" : [],
+                "aoOpenRows": [],
 
                 /**
                  * Dictate the positioning of DataTables' control elements - see
@@ -12261,14 +12261,14 @@
                  *  @type string
                  *  @default null
                  */
-                "sDom" : null,
+                "sDom": null,
 
                 /**
                  * Search delay (in mS)
                  *  @type integer
                  *  @default null
                  */
-                "searchDelay" : null,
+                "searchDelay": null,
 
                 /**
                  * Which type of pagination should be used.
@@ -12277,7 +12277,7 @@
                  *  @type string
                  *  @default two_button
                  */
-                "sPaginationType" : "two_button",
+                "sPaginationType": "two_button",
 
                 /**
                  * The state duration (for `stateSave`) in seconds.
@@ -12286,7 +12286,7 @@
                  *  @type int
                  *  @default 0
                  */
-                "iStateDuration" : 0,
+                "iStateDuration": 0,
 
                 /**
                  * Array of callback functions for state saving. Each array element is an
@@ -12301,7 +12301,7 @@
                  *  @type array
                  *  @default []
                  */
-                "aoStateSave" : [],
+                "aoStateSave": [],
 
                 /**
                  * Array of callback functions for state loading. Each array element is an
@@ -12314,21 +12314,21 @@
                  *  @type array
                  *  @default []
                  */
-                "aoStateLoad" : [],
+                "aoStateLoad": [],
 
                 /**
                  * State that was saved. Useful for back reference
                  *  @type object
                  *  @default null
                  */
-                "oSavedState" : null,
+                "oSavedState": null,
 
                 /**
                  * State that was loaded. Useful for back reference
                  *  @type object
                  *  @default null
                  */
-                "oLoadedState" : null,
+                "oLoadedState": null,
 
                 /**
                  * Source url for AJAX data for the table.
@@ -12337,7 +12337,7 @@
                  *  @type string
                  *  @default null
                  */
-                "sAjaxSource" : null,
+                "sAjaxSource": null,
 
                 /**
                  * Property from a given object from which to read the table data from. This
@@ -12347,14 +12347,14 @@
                  * set a default use {@link DataTable.defaults}.
                  *  @type string
                  */
-                "sAjaxDataProp" : null,
+                "sAjaxDataProp": null,
 
                 /**
                  * Note if draw should be blocked while getting data
                  *  @type boolean
                  *  @default true
                  */
-                "bAjaxDataGet" : true,
+                "bAjaxDataGet": true,
 
                 /**
                  * The last jQuery XHR object that was used for server-side data gathering.
@@ -12363,21 +12363,21 @@
                  *  @type object
                  *  @default null
                  */
-                "jqXHR" : null,
+                "jqXHR": null,
 
                 /**
                  * JSON returned from the server in the last Ajax request
                  *  @type object
                  *  @default undefined
                  */
-                "json" : undefined,
+                "json": undefined,
 
                 /**
                  * Data submitted as part of the last Ajax request
                  *  @type object
                  *  @default undefined
                  */
-                "oAjaxData" : undefined,
+                "oAjaxData": undefined,
 
                 /**
                  * Function to get the server-side data.
@@ -12385,7 +12385,7 @@
                  * set a default use {@link DataTable.defaults}.
                  *  @type function
                  */
-                "fnServerData" : null,
+                "fnServerData": null,
 
                 /**
                  * Functions which are called prior to sending an Ajax request so extra
@@ -12393,7 +12393,7 @@
                  *  @type array
                  *  @default []
                  */
-                "aoServerParams" : [],
+                "aoServerParams": [],
 
                 /**
                  * Send the XHR HTTP method - GET or POST (could be PUT or DELETE if
@@ -12402,7 +12402,7 @@
                  * set a default use {@link DataTable.defaults}.
                  *  @type string
                  */
-                "sServerMethod" : null,
+                "sServerMethod": null,
 
                 /**
                  * Format numbers for display.
@@ -12410,7 +12410,7 @@
                  * set a default use {@link DataTable.defaults}.
                  *  @type function
                  */
-                "fnFormatNumber" : null,
+                "fnFormatNumber": null,
 
                 /**
                  * List of options that can be used for the user selectable length menu.
@@ -12419,7 +12419,7 @@
                  *  @type array
                  *  @default []
                  */
-                "aLengthMenu" : null,
+                "aLengthMenu": null,
 
                 /**
                  * Counter for the draws that the table does. Also used as a tracker for
@@ -12427,35 +12427,35 @@
                  *  @type int
                  *  @default 0
                  */
-                "iDraw" : 0,
+                "iDraw": 0,
 
                 /**
                  * Indicate if a redraw is being done - useful for Ajax
                  *  @type boolean
                  *  @default false
                  */
-                "bDrawing" : false,
+                "bDrawing": false,
 
                 /**
                  * Draw index (iDraw) of the last error when parsing the returned data
                  *  @type int
                  *  @default -1
                  */
-                "iDrawError" : -1,
+                "iDrawError": -1,
 
                 /**
                  * Paging display length
                  *  @type int
                  *  @default 10
                  */
-                "_iDisplayLength" : 10,
+                "_iDisplayLength": 10,
 
                 /**
                  * Paging start point - aiDisplay index
                  *  @type int
                  *  @default 0
                  */
-                "_iDisplayStart" : 0,
+                "_iDisplayStart": 0,
 
                 /**
                  * Server-side processing - number of records in the result set
@@ -12466,7 +12466,7 @@
                  *  @default 0
                  *  @private
                  */
-                "_iRecordsTotal" : 0,
+                "_iRecordsTotal": 0,
 
                 /**
                  * Server-side processing - number of records in the current display set
@@ -12477,7 +12477,7 @@
                  *  @default 0
                  *  @private
                  */
-                "_iRecordsDisplay" : 0,
+                "_iRecordsDisplay": 0,
 
                 /**
                  * Flag to indicate if jQuery UI marking and classes should be used.
@@ -12485,14 +12485,14 @@
                  * set a default use {@link DataTable.defaults}.
                  *  @type boolean
                  */
-                "bJUI" : null,
+                "bJUI": null,
 
                 /**
                  * The classes to use for the table
                  *  @type object
                  *  @default {}
                  */
-                "oClasses" : {},
+                "oClasses": {},
 
                 /**
                  * Flag attached to the settings object so you can check in the draw
@@ -12502,7 +12502,7 @@
                  *  @default false
                  *  @deprecated
                  */
-                "bFiltered" : false,
+                "bFiltered": false,
 
                 /**
                  * Flag attached to the settings object so you can check in the draw
@@ -12512,7 +12512,7 @@
                  *  @default false
                  *  @deprecated
                  */
-                "bSorted" : false,
+                "bSorted": false,
 
                 /**
                  * Indicate that if multiple rows are in the header and there is more than
@@ -12522,14 +12522,14 @@
                  * set a default use {@link DataTable.defaults}.
                  *  @type boolean
                  */
-                "bSortCellsTop" : null,
+                "bSortCellsTop": null,
 
                 /**
                  * Initialisation object that is used for the table
                  *  @type object
                  *  @default null
                  */
-                "oInit" : null,
+                "oInit": null,
 
                 /**
                  * Destroy callback functions - for plug-ins to attach themselves to the
@@ -12537,13 +12537,13 @@
                  *  @type array
                  *  @default []
                  */
-                "aoDestroyCallback" : [],
+                "aoDestroyCallback": [],
 
                 /**
                  * Get the number of records in the current record set, before filtering
                  *  @type function
                  */
-                "fnRecordsTotal" : function() {
+                "fnRecordsTotal": function() {
                     return _fnDataSource(this) == 'ssp' ?
                         this._iRecordsTotal * 1 :
                         this.aiDisplayMaster.length;
@@ -12553,7 +12553,7 @@
                  * Get the number of records in the current record set, after filtering
                  *  @type function
                  */
-                "fnRecordsDisplay" : function() {
+                "fnRecordsDisplay": function() {
                     return _fnDataSource(this) == 'ssp' ?
                         this._iRecordsDisplay * 1 :
                         this.aiDisplay.length;
@@ -12563,7 +12563,7 @@
                  * Get the display end point - aiDisplay index
                  *  @type function
                  */
-                "fnDisplayEnd" : function() {
+                "fnDisplayEnd": function() {
                     var
                         len      = this._iDisplayLength,
                         start    = this._iDisplayStart,
@@ -12589,7 +12589,7 @@
                  *  @type object
                  *  @default null
                  */
-                "oInstance" : null,
+                "oInstance": null,
 
                 /**
                  * Unique identifier for each instance of the DataTables object. If there
@@ -12598,51 +12598,51 @@
                  *  @type string
                  *  @default null
                  */
-                "sInstance" : null,
+                "sInstance": null,
 
                 /**
                  * tabindex attribute value that is added to DataTables control elements, allowing
                  * keyboard navigation of the table and its controls.
                  */
-                "iTabIndex" : 0,
+                "iTabIndex": 0,
 
                 /**
                  * DIV container for the footer scrolling table if scrolling
                  */
-                "nScrollHead" : null,
+                "nScrollHead": null,
 
                 /**
                  * DIV container for the footer scrolling table if scrolling
                  */
-                "nScrollFoot" : null,
+                "nScrollFoot": null,
 
                 /**
                  * Last applied sort
                  *  @type array
                  *  @default []
                  */
-                "aLastSort" : [],
+                "aLastSort": [],
 
                 /**
                  * Stored plug-in instances
                  *  @type object
                  *  @default {}
                  */
-                "oPlugins" : {},
+                "oPlugins": {},
 
                 /**
                  * Function used to get a row's id from the row's data
                  *  @type function
                  *  @default null
                  */
-                "rowIdFn" : null,
+                "rowIdFn": null,
 
                 /**
                  * Data location where to store a row's id
                  *  @type string
                  *  @default null
                  */
-                "rowId" : null
+                "rowId": null
             };
 
             /**
@@ -12678,7 +12678,7 @@
                  *  @type object
                  *  @default {}
                  */
-                buttons : {},
+                buttons: {},
 
                 /**
                  * Element class names
@@ -12686,14 +12686,14 @@
                  *  @type object
                  *  @default {}
                  */
-                classes : {},
+                classes: {},
 
                 /**
                  * DataTables build type (expanded by the download builder)
                  *
                  *  @type string
                  */
-                builder : "-source-",
+                builder: "-source-",
 
                 /**
                  * Error reporting.
@@ -12704,7 +12704,7 @@
                  *  @type string|function
                  *  @default alert
                  */
-                errMode : "alert",
+                errMode: "alert",
 
                 /**
                  * Feature plug-ins.
@@ -12743,7 +12743,7 @@
                  *      "cFeature": "T"
                  *    } );
                  */
-                feature : [],
+                feature: [],
 
                 /**
                  * Row searching.
@@ -12803,7 +12803,7 @@
                  *      }
                  *    );
                  */
-                search : [],
+                search: [],
 
                 /**
                  * Selector extensions
@@ -12829,10 +12829,10 @@
                  *
                  *  @type object
                  */
-                selector : {
-                    cell   : [],
-                    column : [],
-                    row    : []
+                selector: {
+                    cell: [],
+                    column: [],
+                    row: []
                 },
 
                 /**
@@ -12845,7 +12845,7 @@
                  *  @type object
                  *  @default {}
                  */
-                internal : {},
+                internal: {},
 
                 /**
                  * Legacy configuration options. Enable and disable legacy options that
@@ -12853,7 +12853,7 @@
                  *
                  *  @type object
                  */
-                legacy : {
+                legacy: {
                     /**
                      * Enable / disable DataTables 1.9 compatible server-side processing
                      * requests
@@ -12861,7 +12861,7 @@
                      *  @type boolean
                      *  @default null
                      */
-                    ajax : null
+                    ajax: null
                 },
 
                 /**
@@ -12909,11 +12909,11 @@
                  *      return [ 'previous', page, 'next' ];
                  *    };
                  */
-                pager : {},
+                pager: {},
 
-                renderer : {
-                    pageButton : {},
-                    header     : {}
+                renderer: {
+                    pageButton: {},
+                    header: {}
                 },
 
                 /**
@@ -12956,7 +12956,7 @@
                  *      } );
                  *    }
                  */
-                order : {},
+                order: {},
 
                 /**
                  * Type based plug-ins.
@@ -12968,7 +12968,7 @@
                  *
                  * @namespace
                  */
-                type : {
+                type: {
                     /**
                      * Type detection functions.
                      *
@@ -13009,7 +13009,7 @@
                      *      }
                      *    );
                      */
-                    detect : [],
+                    detect: [],
 
                     /**
                      * Type based search formatting.
@@ -13047,7 +13047,7 @@
                      *      return d.replace(/\n/g," ").replace( /<.*?>/g, "" );
                      *    }
                      */
-                    search : {},
+                    search: {},
 
                     /**
                      * Type based ordering.
@@ -13113,7 +13113,7 @@
                      *      }
                      *    } );
                      */
-                    order : {}
+                    order: {}
                 },
 
                 /**
@@ -13122,7 +13122,7 @@
                  * @type int
                  * @private
                  */
-                _unique : 0,
+                _unique: 0,
 
                 //
                 // Depreciated
@@ -13136,106 +13136,106 @@
                  *  @type function
                  *  @depreciated Since 1.10
                  */
-                fnVersionCheck : DataTable.fnVersionCheck,
+                fnVersionCheck: DataTable.fnVersionCheck,
 
                 /**
                  * Index for what 'this' index API functions should use
                  *  @type int
                  *  @deprecated Since v1.10
                  */
-                iApiIndex : 0,
+                iApiIndex: 0,
 
                 /**
                  * jQuery UI class container
                  *  @type object
                  *  @deprecated Since v1.10
                  */
-                oJUIClasses : {},
+                oJUIClasses: {},
 
                 /**
                  * Software version
                  *  @type string
                  *  @deprecated Since v1.10
                  */
-                sVersion : DataTable.version
+                sVersion: DataTable.version
             };
 
             //
             // Backwards compatibility. Alias to pre 1.10 Hungarian notation counter parts
             //
             $.extend(_ext, {
-                afnFiltering : _ext.search,
-                aTypes       : _ext.type.detect,
-                ofnSearch    : _ext.type.search,
-                oSort        : _ext.type.order,
-                afnSortData  : _ext.order,
-                aoFeatures   : _ext.feature,
-                oApi         : _ext.internal,
-                oStdClasses  : _ext.classes,
-                oPagination  : _ext.pager
+                afnFiltering: _ext.search,
+                aTypes: _ext.type.detect,
+                ofnSearch: _ext.type.search,
+                oSort: _ext.type.order,
+                afnSortData: _ext.order,
+                aoFeatures: _ext.feature,
+                oApi: _ext.internal,
+                oStdClasses: _ext.classes,
+                oPagination: _ext.pager
             });
 
             $.extend(DataTable.ext.classes, {
-                "sTable"    : "dataTable",
-                "sNoFooter" : "no-footer",
+                "sTable": "dataTable",
+                "sNoFooter": "no-footer",
 
                 /* Paging buttons */
-                "sPageButton"         : "paginate_button",
-                "sPageButtonActive"   : "current",
-                "sPageButtonDisabled" : "disabled",
+                "sPageButton": "paginate_button",
+                "sPageButtonActive": "current",
+                "sPageButtonDisabled": "disabled",
 
                 /* Striping classes */
-                "sStripeOdd"  : "odd",
-                "sStripeEven" : "even",
+                "sStripeOdd": "odd",
+                "sStripeEven": "even",
 
                 /* Empty row */
-                "sRowEmpty" : "dataTables_empty",
+                "sRowEmpty": "dataTables_empty",
 
                 /* Features */
-                "sWrapper"    : "dataTables_wrapper",
-                "sFilter"     : "dataTables_filter",
-                "sInfo"       : "dataTables_info",
-                "sPaging"     : "dataTables_paginate paging_", /* Note that the type is postfixed */
-                "sLength"     : "dataTables_length",
-                "sProcessing" : "dataTables_processing",
+                "sWrapper": "dataTables_wrapper",
+                "sFilter": "dataTables_filter",
+                "sInfo": "dataTables_info",
+                "sPaging": "dataTables_paginate paging_", /* Note that the type is postfixed */
+                "sLength": "dataTables_length",
+                "sProcessing": "dataTables_processing",
 
                 /* Sorting */
-                "sSortAsc"      : "sorting_asc",
-                "sSortDesc"     : "sorting_desc",
-                "sSortable"     : "sorting", /* Sortable in both directions */
-                "sSortableAsc"  : "sorting_asc_disabled",
-                "sSortableDesc" : "sorting_desc_disabled",
-                "sSortableNone" : "sorting_disabled",
-                "sSortColumn"   : "sorting_", /* Note that an int is postfixed for the sorting order */
+                "sSortAsc": "sorting_asc",
+                "sSortDesc": "sorting_desc",
+                "sSortable": "sorting", /* Sortable in both directions */
+                "sSortableAsc": "sorting_asc_disabled",
+                "sSortableDesc": "sorting_desc_disabled",
+                "sSortableNone": "sorting_disabled",
+                "sSortColumn": "sorting_", /* Note that an int is postfixed for the sorting order */
 
                 /* Filtering */
-                "sFilterInput" : "",
+                "sFilterInput": "",
 
                 /* Page length */
-                "sLengthSelect" : "",
+                "sLengthSelect": "",
 
                 /* Scrolling */
-                "sScrollWrapper"   : "dataTables_scroll",
-                "sScrollHead"      : "dataTables_scrollHead",
-                "sScrollHeadInner" : "dataTables_scrollHeadInner",
-                "sScrollBody"      : "dataTables_scrollBody",
-                "sScrollFoot"      : "dataTables_scrollFoot",
-                "sScrollFootInner" : "dataTables_scrollFootInner",
+                "sScrollWrapper": "dataTables_scroll",
+                "sScrollHead": "dataTables_scrollHead",
+                "sScrollHeadInner": "dataTables_scrollHeadInner",
+                "sScrollBody": "dataTables_scrollBody",
+                "sScrollFoot": "dataTables_scrollFoot",
+                "sScrollFootInner": "dataTables_scrollFootInner",
 
                 /* Misc */
-                "sHeaderTH" : "",
-                "sFooterTH" : "",
+                "sHeaderTH": "",
+                "sFooterTH": "",
 
                 // Deprecated
-                "sSortJUIAsc"         : "",
-                "sSortJUIDesc"        : "",
-                "sSortJUI"            : "",
-                "sSortJUIAscAllowed"  : "",
-                "sSortJUIDescAllowed" : "",
-                "sSortJUIWrapper"     : "",
-                "sSortIcon"           : "",
-                "sJUIHeader"          : "",
-                "sJUIFooter"          : ""
+                "sSortJUIAsc": "",
+                "sSortJUIDesc": "",
+                "sSortJUI": "",
+                "sSortJUIAscAllowed": "",
+                "sSortJUIDescAllowed": "",
+                "sSortJUIWrapper": "",
+                "sSortIcon": "",
+                "sJUIHeader": "",
+                "sJUIFooter": ""
             });
 
             (function() {
@@ -13253,38 +13253,38 @@
 
                 $.extend(DataTable.ext.oJUIClasses, DataTable.ext.classes, {
                     /* Full numbers paging buttons */
-                    "sPageButton"         : "fg-button ui-button " + _stateDefault,
-                    "sPageButtonActive"   : "ui-state-disabled",
-                    "sPageButtonDisabled" : "ui-state-disabled",
+                    "sPageButton": "fg-button ui-button " + _stateDefault,
+                    "sPageButtonActive": "ui-state-disabled",
+                    "sPageButtonDisabled": "ui-state-disabled",
 
                     /* Features */
-                    "sPaging" : "dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi " +
+                    "sPaging": "dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi " +
                         "ui-buttonset-multi paging_", /* Note that the type is postfixed */
 
                     /* Sorting */
-                    "sSortAsc"            : _stateDefault + " sorting_asc",
-                    "sSortDesc"           : _stateDefault + " sorting_desc",
-                    "sSortable"           : _stateDefault + " sorting",
-                    "sSortableAsc"        : _stateDefault + " sorting_asc_disabled",
-                    "sSortableDesc"       : _stateDefault + " sorting_desc_disabled",
-                    "sSortableNone"       : _stateDefault + " sorting_disabled",
-                    "sSortJUIAsc"         : _sortIcon + "triangle-1-n",
-                    "sSortJUIDesc"        : _sortIcon + "triangle-1-s",
-                    "sSortJUI"            : _sortIcon + "carat-2-n-s",
-                    "sSortJUIAscAllowed"  : _sortIcon + "carat-1-n",
-                    "sSortJUIDescAllowed" : _sortIcon + "carat-1-s",
-                    "sSortJUIWrapper"     : "DataTables_sort_wrapper",
-                    "sSortIcon"           : "DataTables_sort_icon",
+                    "sSortAsc": _stateDefault + " sorting_asc",
+                    "sSortDesc": _stateDefault + " sorting_desc",
+                    "sSortable": _stateDefault + " sorting",
+                    "sSortableAsc": _stateDefault + " sorting_asc_disabled",
+                    "sSortableDesc": _stateDefault + " sorting_desc_disabled",
+                    "sSortableNone": _stateDefault + " sorting_disabled",
+                    "sSortJUIAsc": _sortIcon + "triangle-1-n",
+                    "sSortJUIDesc": _sortIcon + "triangle-1-s",
+                    "sSortJUI": _sortIcon + "carat-2-n-s",
+                    "sSortJUIAscAllowed": _sortIcon + "carat-1-n",
+                    "sSortJUIDescAllowed": _sortIcon + "carat-1-s",
+                    "sSortJUIWrapper": "DataTables_sort_wrapper",
+                    "sSortIcon": "DataTables_sort_icon",
 
                     /* Scrolling */
-                    "sScrollHead" : "dataTables_scrollHead " + _stateDefault,
-                    "sScrollFoot" : "dataTables_scrollFoot " + _stateDefault,
+                    "sScrollHead": "dataTables_scrollHead " + _stateDefault,
+                    "sScrollFoot": "dataTables_scrollFoot " + _stateDefault,
 
                     /* Misc */
-                    "sHeaderTH"  : _stateDefault,
-                    "sFooterTH"  : _stateDefault,
-                    "sJUIHeader" : _headerFooter + " ui-corner-tl ui-corner-tr",
-                    "sJUIFooter" : _headerFooter + " ui-corner-bl ui-corner-br"
+                    "sHeaderTH": _stateDefault,
+                    "sFooterTH": _stateDefault,
+                    "sJUIHeader": _headerFooter + " ui-corner-tl ui-corner-tr",
+                    "sJUIFooter": _headerFooter + " ui-corner-bl ui-corner-br"
                 });
 
             }());
@@ -13324,40 +13324,40 @@
             }
 
             $.extend(extPagination, {
-                simple : function(page, pages) {
+                simple: function(page, pages) {
                     return ['previous', 'next'];
                 },
 
-                full : function(page, pages) {
+                full: function(page, pages) {
                     return ['first', 'previous', 'next', 'last'];
                 },
 
-                numbers : function(page, pages) {
+                numbers: function(page, pages) {
                     return [_numbers(page, pages)];
                 },
 
-                simple_numbers : function(page, pages) {
+                simple_numbers: function(page, pages) {
                     return ['previous', _numbers(page, pages), 'next'];
                 },
 
-                full_numbers : function(page, pages) {
+                full_numbers: function(page, pages) {
                     return ['first', 'previous', _numbers(page, pages), 'next', 'last'];
                 },
 
-                first_last_numbers : function(page, pages) {
+                first_last_numbers: function(page, pages) {
                     return ['first', _numbers(page, pages), 'last'];
                 },
 
                 // For testing and plug-ins to use
-                _numbers : _numbers,
+                _numbers: _numbers,
 
                 // Number of number buttons (including ellipsis) to show. _Must be odd!_
-                numbers_length : 7
+                numbers_length: 7
             });
 
             $.extend(true, DataTable.ext.renderer, {
-                pageButton : {
-                    _ : function(settings, host, idx, buttons, page, pages) {
+                pageButton: {
+                    _: function(settings, host, idx, buttons, page, pages) {
                         var classes = settings.oClasses;
                         var lang = settings.oLanguage.oPaginate;
                         var aria = settings.oLanguage.oAria.paginate || {};
@@ -13419,12 +13419,12 @@
 
                                     if (btnDisplay !== null) {
                                         node = $('<a>', {
-                                            'class'         : classes.sPageButton + ' ' + btnClass,
-                                            'aria-controls' : settings.sTableId,
-                                            'aria-label'    : aria[button],
-                                            'data-dt-idx'   : counter,
-                                            'tabindex'      : settings.iTabIndex,
-                                            'id'            : idx === 0 && typeof button === 'string' ?
+                                            'class': classes.sPageButton + ' ' + btnClass,
+                                            'aria-controls': settings.sTableId,
+                                            'aria-label': aria[button],
+                                            'data-dt-idx': counter,
+                                            'tabindex': settings.iTabIndex,
+                                            'id': idx === 0 && typeof button === 'string' ?
                                                 settings.sTableId + '_' + button :
                                                 null
                                         })
@@ -13432,7 +13432,7 @@
                                             .appendTo(container);
 
                                         _fnBindAction(
-                                            node, {action : button}, clickHandler
+                                            node, {action: button}, clickHandler
                                         );
 
                                         counter++;
@@ -13520,7 +13520,7 @@
             // place is
 
             $.extend(DataTable.ext.type.search, {
-                html : function(data) {
+                html: function(data) {
                     return _empty(data) ?
                         data :
                         typeof data === 'string' ?
@@ -13530,7 +13530,7 @@
                             '';
                 },
 
-                string : function(data) {
+                string: function(data) {
                     return _empty(data) ?
                         data :
                         typeof data === 'string' ?
@@ -13571,22 +13571,22 @@
                 $.each(
                     {
                         // Plain numbers
-                        "num" : function(d) {
+                        "num": function(d) {
                             return __numericReplace(d, decimalPlace);
                         },
 
                         // Formatted numbers
-                        "num-fmt" : function(d) {
+                        "num-fmt": function(d) {
                             return __numericReplace(d, decimalPlace, _re_formatted_numeric);
                         },
 
                         // HTML numeric
-                        "html-num" : function(d) {
+                        "html-num": function(d) {
                             return __numericReplace(d, decimalPlace, _re_html);
                         },
 
                         // HTML numeric, formatted
-                        "html-num-fmt" : function(d) {
+                        "html-num-fmt": function(d) {
                             return __numericReplace(d, decimalPlace, _re_html, _re_formatted_numeric);
                         }
                     },
@@ -13605,12 +13605,12 @@
             // Default sort methods
             $.extend(_ext.type.order, {
                 // Dates
-                "date-pre" : function(d) {
+                "date-pre": function(d) {
                     return Date.parse(d) || -Infinity;
                 },
 
                 // html
-                "html-pre" : function(a) {
+                "html-pre": function(a) {
                     return _empty(a) ?
                         '' :
                         a.replace ?
@@ -13619,7 +13619,7 @@
                 },
 
                 // string
-                "string-pre" : function(a) {
+                "string-pre": function(a) {
                     // This is a little complex, but faster than always calling toString,
                     // http://jsperf.com/tostring-v-check
                     return _empty(a) ?
@@ -13633,11 +13633,11 @@
 
                 // string-asc and -desc are retained only for compatibility with the old
                 // sort methods
-                "string-asc" : function(x, y) {
+                "string-asc": function(x, y) {
                     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                 },
 
-                "string-desc" : function(x, y) {
+                "string-desc": function(x, y) {
                     return ((x < y) ? 1 : ((x > y) ? -1 : 0));
                 }
             });
@@ -13646,8 +13646,8 @@
             _addNumericSort('');
 
             $.extend(true, DataTable.ext.renderer, {
-                header : {
-                    _ : function(settings, cell, column, classes) {
+                header: {
+                    _: function(settings, cell, column, classes) {
                         // No additional mark-up required
                         // Attach a sort listener to update on sort - note that using the
                         // `DT` namespace will allow the event to be removed automatically
@@ -13674,7 +13674,7 @@
                         });
                     },
 
-                    jqueryui : function(settings, cell, column, classes) {
+                    jqueryui: function(settings, cell, column, classes) {
                         $('<div/>')
                             .addClass(classes.sSortJUIWrapper)
                             .append(cell.contents())
@@ -13758,9 +13758,9 @@
              * @namespace
              */
             DataTable.render = {
-                number : function(thousands, decimal, precision, prefix, postfix) {
+                number: function(thousands, decimal, precision, prefix, postfix) {
                     return {
-                        display : function(d) {
+                        display: function(d) {
                             if (typeof d !== 'number' && typeof d !== 'string') {
                                 return d;
                             }
@@ -13793,9 +13793,9 @@
                     };
                 },
 
-                text : function() {
+                text: function() {
                     return {
-                        display : __htmlEscapeEntities
+                        display: __htmlEscapeEntities
                     };
                 }
             };
@@ -13828,95 +13828,95 @@
              *  @namespace
              */
             $.extend(DataTable.ext.internal, {
-                _fnExternApiFunc         : _fnExternApiFunc,
-                _fnBuildAjax             : _fnBuildAjax,
-                _fnAjaxUpdate            : _fnAjaxUpdate,
-                _fnAjaxParameters        : _fnAjaxParameters,
-                _fnAjaxUpdateDraw        : _fnAjaxUpdateDraw,
-                _fnAjaxDataSrc           : _fnAjaxDataSrc,
-                _fnAddColumn             : _fnAddColumn,
-                _fnColumnOptions         : _fnColumnOptions,
-                _fnAdjustColumnSizing    : _fnAdjustColumnSizing,
-                _fnVisibleToColumnIndex  : _fnVisibleToColumnIndex,
-                _fnColumnIndexToVisible  : _fnColumnIndexToVisible,
-                _fnVisbleColumns         : _fnVisbleColumns,
-                _fnGetColumns            : _fnGetColumns,
-                _fnColumnTypes           : _fnColumnTypes,
-                _fnApplyColumnDefs       : _fnApplyColumnDefs,
-                _fnHungarianMap          : _fnHungarianMap,
-                _fnCamelToHungarian      : _fnCamelToHungarian,
-                _fnLanguageCompat        : _fnLanguageCompat,
-                _fnBrowserDetect         : _fnBrowserDetect,
-                _fnAddData               : _fnAddData,
-                _fnAddTr                 : _fnAddTr,
-                _fnNodeToDataIndex       : _fnNodeToDataIndex,
-                _fnNodeToColumnIndex     : _fnNodeToColumnIndex,
-                _fnGetCellData           : _fnGetCellData,
-                _fnSetCellData           : _fnSetCellData,
-                _fnSplitObjNotation      : _fnSplitObjNotation,
-                _fnGetObjectDataFn       : _fnGetObjectDataFn,
-                _fnSetObjectDataFn       : _fnSetObjectDataFn,
-                _fnGetDataMaster         : _fnGetDataMaster,
-                _fnClearTable            : _fnClearTable,
-                _fnDeleteIndex           : _fnDeleteIndex,
-                _fnInvalidate            : _fnInvalidate,
-                _fnGetRowElements        : _fnGetRowElements,
-                _fnCreateTr              : _fnCreateTr,
-                _fnBuildHead             : _fnBuildHead,
-                _fnDrawHead              : _fnDrawHead,
-                _fnDraw                  : _fnDraw,
-                _fnReDraw                : _fnReDraw,
-                _fnAddOptionsHtml        : _fnAddOptionsHtml,
-                _fnDetectHeader          : _fnDetectHeader,
-                _fnGetUniqueThs          : _fnGetUniqueThs,
-                _fnFeatureHtmlFilter     : _fnFeatureHtmlFilter,
-                _fnFilterComplete        : _fnFilterComplete,
-                _fnFilterCustom          : _fnFilterCustom,
-                _fnFilterColumn          : _fnFilterColumn,
-                _fnFilter                : _fnFilter,
-                _fnFilterCreateSearch    : _fnFilterCreateSearch,
-                _fnEscapeRegex           : _fnEscapeRegex,
-                _fnFilterData            : _fnFilterData,
-                _fnFeatureHtmlInfo       : _fnFeatureHtmlInfo,
-                _fnUpdateInfo            : _fnUpdateInfo,
-                _fnInfoMacros            : _fnInfoMacros,
-                _fnInitialise            : _fnInitialise,
-                _fnInitComplete          : _fnInitComplete,
-                _fnLengthChange          : _fnLengthChange,
-                _fnFeatureHtmlLength     : _fnFeatureHtmlLength,
-                _fnFeatureHtmlPaginate   : _fnFeatureHtmlPaginate,
-                _fnPageChange            : _fnPageChange,
-                _fnFeatureHtmlProcessing : _fnFeatureHtmlProcessing,
-                _fnProcessingDisplay     : _fnProcessingDisplay,
-                _fnFeatureHtmlTable      : _fnFeatureHtmlTable,
-                _fnScrollDraw            : _fnScrollDraw,
-                _fnApplyToChildren       : _fnApplyToChildren,
-                _fnCalculateColumnWidths : _fnCalculateColumnWidths,
-                _fnThrottle              : _fnThrottle,
-                _fnConvertToWidth        : _fnConvertToWidth,
-                _fnGetWidestNode         : _fnGetWidestNode,
-                _fnGetMaxLenString       : _fnGetMaxLenString,
-                _fnStringToCss           : _fnStringToCss,
-                _fnSortFlatten           : _fnSortFlatten,
-                _fnSort                  : _fnSort,
-                _fnSortAria              : _fnSortAria,
-                _fnSortListener          : _fnSortListener,
-                _fnSortAttachListener    : _fnSortAttachListener,
-                _fnSortingClasses        : _fnSortingClasses,
-                _fnSortData              : _fnSortData,
-                _fnSaveState             : _fnSaveState,
-                _fnLoadState             : _fnLoadState,
-                _fnSettingsFromNode      : _fnSettingsFromNode,
-                _fnLog                   : _fnLog,
-                _fnMap                   : _fnMap,
-                _fnBindAction            : _fnBindAction,
-                _fnCallbackReg           : _fnCallbackReg,
-                _fnCallbackFire          : _fnCallbackFire,
-                _fnLengthOverflow        : _fnLengthOverflow,
-                _fnRenderer              : _fnRenderer,
-                _fnDataSource            : _fnDataSource,
-                _fnRowAttributes         : _fnRowAttributes,
-                _fnCalculateEnd          : function() {
+                _fnExternApiFunc: _fnExternApiFunc,
+                _fnBuildAjax: _fnBuildAjax,
+                _fnAjaxUpdate: _fnAjaxUpdate,
+                _fnAjaxParameters: _fnAjaxParameters,
+                _fnAjaxUpdateDraw: _fnAjaxUpdateDraw,
+                _fnAjaxDataSrc: _fnAjaxDataSrc,
+                _fnAddColumn: _fnAddColumn,
+                _fnColumnOptions: _fnColumnOptions,
+                _fnAdjustColumnSizing: _fnAdjustColumnSizing,
+                _fnVisibleToColumnIndex: _fnVisibleToColumnIndex,
+                _fnColumnIndexToVisible: _fnColumnIndexToVisible,
+                _fnVisbleColumns: _fnVisbleColumns,
+                _fnGetColumns: _fnGetColumns,
+                _fnColumnTypes: _fnColumnTypes,
+                _fnApplyColumnDefs: _fnApplyColumnDefs,
+                _fnHungarianMap: _fnHungarianMap,
+                _fnCamelToHungarian: _fnCamelToHungarian,
+                _fnLanguageCompat: _fnLanguageCompat,
+                _fnBrowserDetect: _fnBrowserDetect,
+                _fnAddData: _fnAddData,
+                _fnAddTr: _fnAddTr,
+                _fnNodeToDataIndex: _fnNodeToDataIndex,
+                _fnNodeToColumnIndex: _fnNodeToColumnIndex,
+                _fnGetCellData: _fnGetCellData,
+                _fnSetCellData: _fnSetCellData,
+                _fnSplitObjNotation: _fnSplitObjNotation,
+                _fnGetObjectDataFn: _fnGetObjectDataFn,
+                _fnSetObjectDataFn: _fnSetObjectDataFn,
+                _fnGetDataMaster: _fnGetDataMaster,
+                _fnClearTable: _fnClearTable,
+                _fnDeleteIndex: _fnDeleteIndex,
+                _fnInvalidate: _fnInvalidate,
+                _fnGetRowElements: _fnGetRowElements,
+                _fnCreateTr: _fnCreateTr,
+                _fnBuildHead: _fnBuildHead,
+                _fnDrawHead: _fnDrawHead,
+                _fnDraw: _fnDraw,
+                _fnReDraw: _fnReDraw,
+                _fnAddOptionsHtml: _fnAddOptionsHtml,
+                _fnDetectHeader: _fnDetectHeader,
+                _fnGetUniqueThs: _fnGetUniqueThs,
+                _fnFeatureHtmlFilter: _fnFeatureHtmlFilter,
+                _fnFilterComplete: _fnFilterComplete,
+                _fnFilterCustom: _fnFilterCustom,
+                _fnFilterColumn: _fnFilterColumn,
+                _fnFilter: _fnFilter,
+                _fnFilterCreateSearch: _fnFilterCreateSearch,
+                _fnEscapeRegex: _fnEscapeRegex,
+                _fnFilterData: _fnFilterData,
+                _fnFeatureHtmlInfo: _fnFeatureHtmlInfo,
+                _fnUpdateInfo: _fnUpdateInfo,
+                _fnInfoMacros: _fnInfoMacros,
+                _fnInitialise: _fnInitialise,
+                _fnInitComplete: _fnInitComplete,
+                _fnLengthChange: _fnLengthChange,
+                _fnFeatureHtmlLength: _fnFeatureHtmlLength,
+                _fnFeatureHtmlPaginate: _fnFeatureHtmlPaginate,
+                _fnPageChange: _fnPageChange,
+                _fnFeatureHtmlProcessing: _fnFeatureHtmlProcessing,
+                _fnProcessingDisplay: _fnProcessingDisplay,
+                _fnFeatureHtmlTable: _fnFeatureHtmlTable,
+                _fnScrollDraw: _fnScrollDraw,
+                _fnApplyToChildren: _fnApplyToChildren,
+                _fnCalculateColumnWidths: _fnCalculateColumnWidths,
+                _fnThrottle: _fnThrottle,
+                _fnConvertToWidth: _fnConvertToWidth,
+                _fnGetWidestNode: _fnGetWidestNode,
+                _fnGetMaxLenString: _fnGetMaxLenString,
+                _fnStringToCss: _fnStringToCss,
+                _fnSortFlatten: _fnSortFlatten,
+                _fnSort: _fnSort,
+                _fnSortAria: _fnSortAria,
+                _fnSortListener: _fnSortListener,
+                _fnSortAttachListener: _fnSortAttachListener,
+                _fnSortingClasses: _fnSortingClasses,
+                _fnSortData: _fnSortData,
+                _fnSaveState: _fnSaveState,
+                _fnLoadState: _fnLoadState,
+                _fnSettingsFromNode: _fnSettingsFromNode,
+                _fnLog: _fnLog,
+                _fnMap: _fnMap,
+                _fnBindAction: _fnBindAction,
+                _fnCallbackReg: _fnCallbackReg,
+                _fnCallbackFire: _fnCallbackFire,
+                _fnLengthOverflow: _fnLengthOverflow,
+                _fnRenderer: _fnRenderer,
+                _fnDataSource: _fnDataSource,
+                _fnRowAttributes: _fnRowAttributes,
+                _fnCalculateEnd: function() {
                 } // Used by a lot of plug-ins, but redundant
                   // in 1.10, so this dead-end function is
                   // added to prevent errors
