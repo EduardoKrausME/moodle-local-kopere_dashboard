@@ -71,7 +71,7 @@ if ($pagelink) {
     $hascapability = has_capability("local/kopere_dashboard:manage", $context);
     if ($hascapability) {
         $href = local_kopere_dashboard_makeurl("webpages", "page_edit", ["id" => $webpages->id]);
-        $edittext = get_string("webpages_page_edit", "local_kopere_dashboard");
+        $edittext = get_string_kopere("webpages_page_edit");
         $edit = " - <a href='{$href}' target=\"_blank\" style='text-decoration:underline'>{$edittext}</a>";
     }
     $PAGE->set_heading("{$webpages->title} {$edit}", false);
@@ -186,7 +186,7 @@ if ($pagelink) {
                 if (!$precoint) {
                     $webpages->cursopreco = get_string_kopere("webpages_free");
                 } else {
-                    $webpages->cursopreco = "R$ " . $koperepaydetalhe->preco;
+                    $webpages->cursopreco = "R$ {$koperepaydetalhe->preco}";
                 }
 
                 $offprice = config::get_key("builder_offprice_{$koperepaydetalhe->course}");

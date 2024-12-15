@@ -18,6 +18,7 @@
  * send_events file
  *
  * introduced 14/06/17 05:21
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -199,7 +200,7 @@ class send_events {
             } else if (strpos($this->message, "{[to.password]}")) {
                 $newpassword = $this->login_generate_password($userto);
                 $userto->password = "{$CFG->wwwroot}/login/forgot_password.php?token={$newpassword}";
-            }else if(isset($USER->tmp_password)){
+            } else if (isset($USER->tmp_password)) {
                 $userto->password = $USER->tmp_password;
             }
 

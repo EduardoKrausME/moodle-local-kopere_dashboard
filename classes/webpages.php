@@ -712,7 +712,7 @@ class webpages {
                 "title" => $title,
             ]);
         if ($webpages) {
-            end_util::end_script_show($title . "-2");
+            end_util::end_script_show("{$title}-2");
         } else {
             end_util::end_script_show($title);
         }
@@ -748,7 +748,7 @@ class webpages {
                 "title" => $title,
             ]);
         if ($webpages) {
-            end_util::end_script_show($title . "-2");
+            end_util::end_script_show("{$title}-2");
         } else {
             end_util::end_script_show($title);
         }
@@ -846,7 +846,7 @@ class webpages {
 
         @mkdir($path);
 
-        return $path . "/";
+        return "{$path}/";
     }
 
     /**

@@ -18,6 +18,7 @@
  * datatable_search_util file
  *
  * introduced 18/05/17 04:58
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -127,7 +128,7 @@ class datatable_search_util {
 
         $find = str_replace("GROUP BY", "", $group);
 
-        $sqlsearch = $sql . " {$this->where}";
+        $sqlsearch = "{$sql} {$this->where}";
         $sqltotal = $sql;
         if ($group) {
             $sqlsearch = str_replace("{[columns]}", "count(DISTINCT {$find}) as num", $sqlsearch);
@@ -138,10 +139,10 @@ class datatable_search_util {
         }
 
         if ($CFG->dbtype == "pgsql") {
-            $sqlreturn = $sql . " $this->where $group ORDER BY $this->order $this->orderdir \n
+            $sqlreturn = "{$sql} $this->where $group ORDER BY $this->order $this->orderdir \n
                                 LIMIT $this->length OFFSET $this->start";
         } else {
-            $sqlreturn = $sql . " $this->where $group ORDER BY $this->order $this->orderdir \n
+            $sqlreturn = "{$sql} $this->where $group ORDER BY $this->order $this->orderdir \n
                                 LIMIT $this->start, $this->length";
         }
         $sqlreturn = str_replace("{[columns]}", implode(", ", $this->columnselect), $sqlreturn);

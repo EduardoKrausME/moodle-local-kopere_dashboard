@@ -21,6 +21,7 @@
  * @copyright 2024 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace local_kopere_dashboard\util;
 
 use core_course_list_element;
@@ -52,8 +53,8 @@ class course {
                 if ($isimage) {
                     $courseimage =
                         file_encode_url("{$CFG->wwwroot}/pluginfile.php",
-                        "/{$file->get_contextid()}/local_kopere_dashboard/" .
-                        "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}", !$isimage);
+                            "/{$file->get_contextid()}/local_kopere_dashboard/" .
+                            "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}", !$isimage);
 
                 }
             }

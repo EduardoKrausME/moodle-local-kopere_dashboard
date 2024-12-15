@@ -18,6 +18,7 @@
  * Notificationutil file
  *
  * introduced 11/06/17 02:25
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -85,7 +86,7 @@ class notificationsutil {
                 \report_eventlist_list_generator::get_all_events_list(false),
                 \report_eventlist_list_generator::get_all_events_list(false)
             );
-        }else {
+        } else {
             $eventclasss = array_merge(
                 \report_eventlist_list_generator::get_core_events_list(false),
                 \report_eventlist_list_generator::get_non_core_event_list(false)

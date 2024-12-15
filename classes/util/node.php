@@ -95,7 +95,7 @@ class node {
             $url = config::get_key("nodejs-url");
         }
 
-        return $url . ":" . config::get_key("nodejs-port");
+        return "{$url}:" . config::get_key("nodejs-port");
     }
 
     /**

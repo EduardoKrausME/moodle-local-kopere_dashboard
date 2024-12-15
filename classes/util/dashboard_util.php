@@ -18,6 +18,7 @@
  * dashboard_util file
  *
  * introduced 12/05/17 06:09
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -124,7 +125,7 @@ class dashboard_util {
                 }
             }
 
-            $PAGE->set_title($title . ": " . get_string_kopere("modulename"));
+            $PAGE->set_title("{$title}: " . get_string_kopere("modulename"));
             echo $OUTPUT->header();
 
             echo "

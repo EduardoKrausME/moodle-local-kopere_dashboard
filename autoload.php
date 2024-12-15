@@ -18,6 +18,7 @@
  * Autoload file
  *
  * introduced 23/05/17 17:59
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -72,7 +73,7 @@ function load_class() {
     if (strpos($classname, "-")) {
         $class = "\\local_kopere_" . str_replace("-", '\\', $classname);
     } else {
-        $class = "\\local_kopere_dashboard\\" . $classname;
+        $class = "\\local_kopere_dashboard\\{$classname}";
     }
 
     $class = str_replace("?", "", $class);
@@ -90,7 +91,7 @@ function load_class() {
 function get_path_query() {
     $classname = optional_param("classname", "", PARAM_TEXT);
     $method = optional_param("method", "", PARAM_TEXT);
-    return $classname . "-{$method}";
+    return "{$classname}-{$method}";
 }
 
 /**

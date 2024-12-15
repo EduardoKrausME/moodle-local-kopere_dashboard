@@ -214,7 +214,7 @@ class table {
                 echo "<tr>";
             }
             foreach ($this->colunas as $col) {
-                $class = $class . " {$col->style_col}";
+                $class = "{$class} {$col->style_col}";
                 if ($col->funcao != null) {
                     $funcao = $col->funcao;
                     if (is_array($linha)) {
