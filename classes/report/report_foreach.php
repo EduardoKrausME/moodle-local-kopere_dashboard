@@ -18,6 +18,7 @@
  * report_foreach foreach
  *
  * introduced 31/01/17 06:35
+ *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -58,7 +59,7 @@ class report_foreach {
         global $CFG, $SESSION;
 
         if (!isset($user->firstname) && !isset($user->lastname)) {
-            return '';
+            return "";
         }
 
         $allnames = ["firstnamephonetic", "lastnamephonetic", "middlename", "alternatename", "firstname", "lastname"];
@@ -90,7 +91,7 @@ class report_foreach {
         foreach ($requirednames as $altname) {
             if (isset($user->$altname)) {
                 // Using empty() on the below if statement causes breakages.
-                if ((string)$user->$altname == '') {
+                if ((string)$user->$altname == "") {
                     $displayname = str_replace($altname, "EMPTY", $displayname);
                 } else {
                     $displayname = str_replace($altname, $user->$altname, $displayname);
@@ -110,7 +111,7 @@ class report_foreach {
         // This regular expression is to remove any double spaces in the display name.
         $patterns[] = '/\s{2,}/u';
         foreach ($patterns as $pattern) {
-            $displayname = preg_replace($pattern, ' ', $displayname);
+            $displayname = preg_replace($pattern, " ", $displayname);
         }
 
         // Trimming $displayname will help the next check to ensure that we don't have a display name with spaces.
@@ -143,43 +144,44 @@ class report_foreach {
 
         switch ($item->type) {
             case 0:
-                $item->context = 'Função';
+                $item->context = get_string_kopere("contextfunction");
                 break;
             case 1:
-                $item->context = "Atividade";
+                $item->context = get_string_kopere("contextactivity");
                 break;
             case 2:
-                $item->context = 'Duração';
+                $item->context = get_string_kopere("contextduration");
                 break;
             case 3:
-                $item->context = "Nota";
+                $item->context = get_string_kopere("contextgrade");
                 break;
             case 4:
             case 6:
-                $item->context = "Curso";
+                $item->context = get_string_kopere("contextcourse");
                 break;
             case 5:
-                $item->context = 'Conjunto de cursos';
+                $item->context = get_string_kopere("contextcoursegroup");
                 break;
             case 7:
-                $item->context = 'Preenchimento do Emblema';
+                $item->context = get_string_kopere("contextbadgecompletion");
                 break;
             case 8:
-                $item->context = "Coorte";
+                $item->context = get_string_kopere("contextcohort");
                 break;
             case 9:
-                $item->context = 'Competência';
+                $item->context = get_string_kopere("contextcompetency");
                 break;
             default:
-                $item->context = '...';
+                $item->context = get_string_kopere("contextdefault");
         }
 
         if ($item->type == 1) {
-            $item->context = "Sistema";
+            $item->context = get_string_kopere("contextsystem");
         }
         if ($item->type == 1) {
-            $item->context = "Curso";
+            $item->context = get_string_kopere("contextcourse");
         }
+
 
         return $item;
     }
