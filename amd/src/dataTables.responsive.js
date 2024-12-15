@@ -33,13 +33,11 @@
                 cjsRequires(root, $);
                 return factory($, root, root.document);
             };
-        }
-        else {
+        } else {
             cjsRequires(window, jq);
             module.exports = factory(jq, window, window.document);
         }
-    }
-    else {
+    } else {
         // Browser
         factory(jQuery, window, document);
     }
@@ -116,10 +114,10 @@
         }
 
         this.s = {
-            childNodeStore : {},
-            columns        : [],
-            current        : [],
-            dt             : new DataTable.Api(settings)
+            childNodeStore: {},
+            columns: [],
+            current: [],
+            dt: new DataTable.Api(settings)
         };
 
         // Check if responsive has already been initialised on this table
@@ -130,13 +128,11 @@
         // details is an object, but for simplicity the user can give it as a string
         // or a boolean
         if (opts && typeof opts.details === 'string') {
-            opts.details = {type : opts.details};
-        }
-        else if (opts && opts.details === false) {
-            opts.details = {type : false};
-        }
-        else if (opts && opts.details === true) {
-            opts.details = {type : 'inline'};
+            opts.details = {type: opts.details};
+        } else if (opts && opts.details === false) {
+            opts.details = {type: false};
+        } else if (opts && opts.details === true) {
+            opts.details = {type: 'inline'};
         }
 
         this.c = $.extend(true, {}, Responsive.defaults, DataTable.defaults.responsive, opts);
@@ -154,7 +150,7 @@
          *
          * @private
          */
-        _constructor : function() {
+        _constructor: function() {
             var that = this;
             var dt = this.s.dt;
             var dtPrivateSettings = dt.settings()[0];
@@ -333,7 +329,7 @@
          * @param {*} row Row index
          * @param {*} col Column index
          */
-        _childNodes : function(dt, row, col) {
+        _childNodes: function(dt, row, col) {
             var name = row + '-' + col;
 
             if (this.s.childNodeStore[name]) {
@@ -359,7 +355,7 @@
          * @param {*} row Row index
          * @param {*} col Column index
          */
-        _childNodesRestore : function(dt, row, col) {
+        _childNodesRestore: function(dt, row, col) {
             var name = row + '-' + col;
 
             if (!this.s.childNodeStore[name]) {
@@ -395,7 +391,7 @@
          *   column.
          *  @private
          */
-        _columnsVisiblity : function(breakpoint) {
+        _columnsVisiblity: function(breakpoint) {
             var dt = this.s.dt;
             var columns = this.s.columns;
             var i, ien;
@@ -406,8 +402,8 @@
             var order = columns
                 .map(function(col, idx) {
                     return {
-                        columnIdx : idx,
-                        priority  : col.priority
+                        columnIdx: idx,
+                        priority: col.priority
                     };
                 })
                 .sort(function(a, b) {
@@ -525,7 +521,7 @@
          *
          * @private
          */
-        _classLogic : function() {
+        _classLogic: function() {
             var that = this;
             var calc = {};
             var breakpoints = this.c.breakpoints;
@@ -547,12 +543,12 @@
                     }
 
                     return {
-                        className : className,
-                        includeIn : [],
-                        auto      : false,
-                        control   : false,
-                        never     : className.match(/\b(dtr\-)?never\b/) ? true : false,
-                        priority  : priority
+                        className: className,
+                        includeIn: [],
+                        auto: false,
+                        control: false,
+                        never: className.match(/\b(dtr\-)?never\b/) ? true : false,
+                        priority: priority
                     };
                 });
 
@@ -669,7 +665,7 @@
          * Update the cells to show the correct control class / button
          * @private
          */
-        _controlClass : function() {
+        _controlClass: function() {
             if (this.c.details.type === 'inline') {
                 var dt = this.s.dt;
                 var columnsVis = this.s.current;
@@ -681,14 +677,14 @@
                     function(idx) {
                         return idx !== firstVisible;
                     },
-                    {page : 'current'}
+                    {page: 'current'}
                     )
                     .nodes()
                     .to$()
                     .filter('.dtr-control')
                     .removeClass('dtr-control');
 
-                dt.cells(null, firstVisible, {page : 'current'}).nodes().to$().addClass('dtr-control');
+                dt.cells(null, firstVisible, {page: 'current'}).nodes().to$().addClass('dtr-control');
             }
         },
 
@@ -699,7 +695,7 @@
          * @param  {boolean}        update Update flag
          * @private
          */
-        _detailsDisplay : function(row, update) {
+        _detailsDisplay: function(row, update) {
             var that = this;
             var dt = this.s.dt;
             var details = this.c.details;
@@ -736,7 +732,7 @@
          *
          * @private
          */
-        _detailsInit : function() {
+        _detailsInit: function() {
             var that = this;
             var dt = this.s.dt;
             var details = this.c.details;
@@ -813,7 +809,7 @@
          * @param  {int} rowIdx Row index
          * @private
          */
-        _detailsObj : function(rowIdx) {
+        _detailsObj: function(rowIdx) {
             var that = this;
             var dt = this.s.dt;
 
@@ -826,12 +822,12 @@
                 var dtCol = dt.settings()[0].aoColumns[i];
 
                 return {
-                    className   : dtCol.sClass,
-                    columnIndex : i,
-                    data        : dt.cell(rowIdx, i).render(that.c.orthogonal),
-                    hidden      : dt.column(i).visible() && !that.s.current[i],
-                    rowIndex    : rowIdx,
-                    title       : dtCol.sTitle !== null ? dtCol.sTitle : $(dt.column(i).header()).text()
+                    className: dtCol.sClass,
+                    columnIndex: i,
+                    data: dt.cell(rowIdx, i).render(that.c.orthogonal),
+                    hidden: dt.column(i).visible() && !that.s.current[i],
+                    rowIndex: rowIdx,
+                    title: dtCol.sTitle !== null ? dtCol.sTitle : $(dt.column(i).header()).text()
                 };
             });
         },
@@ -843,7 +839,7 @@
          * @return {object}      Breakpoint description object
          * @private
          */
-        _find : function(name) {
+        _find: function(name) {
             var breakpoints = this.c.breakpoints;
 
             for (var i = 0, ien = breakpoints.length; i < ien; i++) {
@@ -859,11 +855,11 @@
          *
          * @private
          */
-        _redrawChildren : function() {
+        _redrawChildren: function() {
             var that = this;
             var dt = this.s.dt;
 
-            dt.rows({page : 'current'}).iterator('row', function(settings, idx) {
+            dt.rows({page: 'current'}).iterator('row', function(settings, idx) {
                 that._detailsDisplay(dt.row(idx), true);
             });
         },
@@ -876,7 +872,7 @@
          * @param  {boolean} forceRedraw Force a redraw
          * @private
          */
-        _resize : function(forceRedraw) {
+        _resize: function(forceRedraw) {
             var that = this;
             var dt = this.s.dt;
             var width = $(window).innerWidth();
@@ -958,7 +954,7 @@
          *
          * @private
          */
-        _resizeAuto : function() {
+        _resizeAuto: function() {
             var dt = this.s.dt;
             var columns = this.s.columns;
             var that = this;
@@ -1015,7 +1011,7 @@
             // Body rows - we don't need to take account of DataTables' column
             // visibility since we implement our own here (hence the `display` set)
             $(clonedBody)
-                .append($(dt.rows({page : 'current'}).nodes()).clone(false))
+                .append($(dt.rows({page: 'current'}).nodes()).clone(false))
                 .find('th, td')
                 .css('display', '');
 
@@ -1056,10 +1052,10 @@
 
             var inserted = $('<div/>')
                 .css({
-                    width    : 1,
-                    height   : 1,
-                    overflow : 'hidden',
-                    clear    : 'both'
+                    width: 1,
+                    height: 1,
+                    overflow: 'hidden',
+                    clear: 'both'
                 })
                 .append(clonedTable);
 
@@ -1077,7 +1073,7 @@
         /**
          * Get the state of the current hidden columns - controlled by Responsive only
          */
-        _responsiveOnlyHidden : function() {
+        _responsiveOnlyHidden: function() {
             var dt = this.s.dt;
 
             return $.map(this.s.current, function(v, i) {
@@ -1102,7 +1098,7 @@
          * @param {boolean} showHide Show or hide (true or false)
          * @private
          */
-        _setColumnVis : function(col, showHide) {
+        _setColumnVis: function(col, showHide) {
             var that = this;
             var dt = this.s.dt;
             var display = showHide ? '' : 'none'; // empty string will remove the attr
@@ -1132,16 +1128,16 @@
          *
          * @private
          */
-        _tabIndexes : function() {
+        _tabIndexes: function() {
             var dt = this.s.dt;
-            var cells = dt.cells({page : 'current'}).nodes().to$();
+            var cells = dt.cells({page: 'current'}).nodes().to$();
             var ctx = dt.settings()[0];
             var target = this.c.details.target;
 
             cells.filter('[data-dtr-keyboard]').removeData('[data-dtr-keyboard]');
 
             if (typeof target === 'number') {
-                dt.cells(null, target, {page : 'current'})
+                dt.cells(null, target, {page: 'current'})
                     .nodes()
                     .to$()
                     .attr('tabIndex', ctx.iTabIndex)
@@ -1154,7 +1150,7 @@
                     target = '>td:first-child, >th:first-child';
                 }
 
-                $(target, dt.rows({page : 'current'}).nodes())
+                $(target, dt.rows({page: 'current'}).nodes())
                     .attr('tabIndex', ctx.iTabIndex)
                     .data('dtr-keyboard', 1);
             }
@@ -1172,11 +1168,11 @@
      * @static
      */
     Responsive.breakpoints = [
-        {name : 'desktop', width : Infinity},
-        {name : 'tablet-l', width : 1024},
-        {name : 'tablet-p', width : 768},
-        {name : 'mobile-l', width : 480},
-        {name : 'mobile-p', width : 320}
+        {name: 'desktop', width: Infinity},
+        {name: 'tablet-l', width: 1024},
+        {name: 'tablet-p', width: 768},
+        {name: 'mobile-l', width: 480},
+        {name: 'mobile-p', width: 320}
     ];
 
     /**
@@ -1188,7 +1184,7 @@
      * @static
      */
     Responsive.display = {
-        childRow : function(row, update, render) {
+        childRow: function(row, update, render) {
             if (update) {
                 if ($(row.node()).hasClass('parent')) {
                     row.child(render(), 'child').show();
@@ -1210,7 +1206,7 @@
             }
         },
 
-        childRowImmediate : function(row, update, render) {
+        childRowImmediate: function(row, update, render) {
             if ((!update && row.child.isShown()) || !row.responsive.hasHidden()) {
                 // User interaction and the row is show, or nothing to show
                 row.child(false);
@@ -1228,7 +1224,7 @@
         // This is a wrapper so the modal options for Bootstrap and jQuery UI can
         // have options passed into them. This specific one doesn't need to be a
         // function but it is for consistency in the `modal` name
-        modal : function(options) {
+        modal: function(options) {
             return function(row, update, render, closeCallback) {
                 if (!update) {
                     // Show a modal
@@ -1301,7 +1297,7 @@
      * @static
      */
     Responsive.renderer = {
-        listHiddenNodes : function() {
+        listHiddenNodes: function() {
             return function(api, rowIdx, columns) {
                 var that = this;
                 var ul = $('<ul data-dtr-index="' + rowIdx + '" class="dtr-details"/>');
@@ -1341,7 +1337,7 @@
             };
         },
 
-        listHidden : function() {
+        listHidden: function() {
             return function(api, rowIdx, columns) {
                 var data = $.map(columns, function(col) {
                     var klass = col.className ? 'class="' + col.className + '"' : '';
@@ -1372,10 +1368,10 @@
             };
         },
 
-        tableAll : function(options) {
+        tableAll: function(options) {
             options = $.extend(
                 {
-                    tableClass : ''
+                    tableClass: ''
                 },
                 options
             );
@@ -1426,7 +1422,7 @@
          * @type {Array}
          * @default Takes the value of `Responsive.breakpoints`
          */
-        breakpoints : Responsive.breakpoints,
+        breakpoints: Responsive.breakpoints,
 
         /**
          * Enable / disable auto hiding calculations. It can help to increase
@@ -1436,7 +1432,7 @@
          * @type {Boolean}
          * @default  `true`
          */
-        auto : true,
+        auto: true,
 
         /**
          * Details control. If given as a string value, the `type` property of the
@@ -1455,14 +1451,14 @@
          *
          * @type {Object|string}
          */
-        details : {
-            display : Responsive.display.childRow,
+        details: {
+            display: Responsive.display.childRow,
 
-            renderer : Responsive.renderer.listHidden(),
+            renderer: Responsive.renderer.listHidden(),
 
-            target : 0,
+            target: 0,
 
-            type : 'inline'
+            type: 'inline'
         },
 
         /**
@@ -1471,7 +1467,7 @@
          *
          * @type {String}
          */
-        orthogonal : 'display'
+        orthogonal: 'display'
     };
 
     /*
@@ -1488,8 +1484,8 @@
         li = $(li);
 
         return {
-            column : li.data('dtr-index'),
-            row    : li.parent().data('dtr-index')
+            column: li.data('dtr-index'),
+            row: li.parent().data('dtr-index')
         };
     });
 

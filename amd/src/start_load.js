@@ -126,18 +126,6 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
                     }, "CNPJ em formáto inválido!");
                     $.validator.classRuleSettings.val_cnpj = {cnpjVal : true};
 
-                    // $.validator.addMethod("caracteres", function(value, element, params) {
-                    //     if ($(element).hasClass('required')) {
-                    //         if ($(element).attr('caracteres') == $(element).val().length) {
-                    //             return true;
-                    //         } else {
-                    //             return false;
-                    //         }
-                    //     }
-                    //     return true;
-                    // }, $.validator.format("Você deve adicionar {0} caracteres!"));
-                    //$.validator.classRuleSettings.val_caracteres = { caracteresVal:true };
-
                     /*
                      * phone
                      * ^\([1-9][0-9]\)\ [0-9][0-9][0-9][0-9]\-[0-9][0-9][0-9][0-9]$

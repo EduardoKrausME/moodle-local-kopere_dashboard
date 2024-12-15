@@ -7,4 +7,3 @@ define(["jquery"], function($) {
 
     };
 });
-

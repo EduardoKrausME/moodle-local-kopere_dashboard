@@ -33,13 +33,11 @@
                 cjsRequires(root, $);
                 return factory($, root, root.document);
             };
-        }
-        else {
+        } else {
             cjsRequires(window, jq);
             module.exports = factory(jq, window, window.document);
         }
-    }
-    else {
+    } else {
         // Browser
         factory(jQuery, window, document);
     }
@@ -137,27 +135,27 @@
              *  @type     object
              *  @default  Passed in as first parameter to constructor
              */
-            dt : dtApi.settings()[0],
+            dt: dtApi.settings()[0],
 
             /**
              * DataTables API instance
              *  @type     DataTable.Api
              */
-            dtApi : dtApi,
+            dtApi: dtApi,
 
             /**
              * Pixel location of the top of the drawn table in the viewport
              *  @type     int
              *  @default  0
              */
-            tableTop : 0,
+            tableTop: 0,
 
             /**
              * Pixel location of the bottom of the drawn table in the viewport
              *  @type     int
              *  @default  0
              */
-            tableBottom : 0,
+            tableBottom: 0,
 
             /**
              * Pixel location of the boundary for when the next data set should be loaded and drawn
@@ -166,7 +164,7 @@
              *  @default  0
              *  @private
              */
-            redrawTop : 0,
+            redrawTop: 0,
 
             /**
              * Pixel location of the boundary for when the next data set should be loaded and drawn
@@ -176,21 +174,21 @@
              *  @default  0
              *  @private
              */
-            redrawBottom : 0,
+            redrawBottom: 0,
 
             /**
              * Auto row height or not indicator
              *  @type     bool
              *  @default  0
              */
-            autoHeight : true,
+            autoHeight: true,
 
             /**
              * Number of rows calculated as visible in the visible viewport
              *  @type     int
              *  @default  0
              */
-            viewportRows : 0,
+            viewportRows: 0,
 
             /**
              * setTimeout reference for state saving, used when state saving is enabled in the DataTable
@@ -199,9 +197,9 @@
              *  @type     int
              *  @default  0
              */
-            stateTO : null,
+            stateTO: null,
 
-            stateSaveThrottle : function() {
+            stateSaveThrottle: function() {
             },
 
             /**
@@ -210,39 +208,39 @@
              *  @type     int
              *  @default  null
              */
-            drawTO : null,
+            drawTO: null,
 
-            heights : {
-                jump    : null,
-                page    : null,
-                virtual : null,
-                scroll  : null,
+            heights: {
+                jump: null,
+                page: null,
+                virtual: null,
+                scroll: null,
 
                 /**
                  * Height of rows in the table
                  *  @type     int
                  *  @default  0
                  */
-                row : null,
+                row: null,
 
                 /**
                  * Pixel height of the viewport
                  *  @type     int
                  *  @default  0
                  */
-                viewport    : null,
-                labelHeight : 0,
-                xbar        : 0
+                viewport: null,
+                labelHeight: 0,
+                xbar: 0
             },
 
-            topRowFloat     : 0,
-            scrollDrawDiff  : null,
-            loaderVisible   : false,
-            forceReposition : false,
-            baseRowTop      : 0,
-            baseScrollTop   : 0,
-            mousedown       : false,
-            lastScrollTop   : 0
+            topRowFloat: 0,
+            scrollDrawDiff: null,
+            loaderVisible: false,
+            forceReposition: false,
+            baseRowTop: 0,
+            baseScrollTop: 0,
+            mousedown: false,
+            lastScrollTop: 0
         };
 
         // @todo The defaults should extend a `c` property and the internal settings
@@ -259,11 +257,11 @@
          *
          */
         this.dom = {
-            force    : document.createElement('div'),
-            label    : $('<div class="dts_label">0</div>'),
-            scroller : null,
-            table    : null,
-            loader   : null
+            force: document.createElement('div'),
+            label: $('<div class="dts_label">0</div>'),
+            scroller: null,
+            table: null,
+            loader: null
         };
 
         // Attach the instance to the DataTables instance so it can be accessed in
@@ -292,7 +290,7 @@
          *    the new dimensions forming the basis for the draw.
          *  @returns {void}
          */
-        measure : function(redraw) {
+        measure: function(redraw) {
             if (this.s.autoHeight) {
                 this._calcRowHeight();
             }
@@ -326,7 +324,7 @@
          *      end:   {int}, // the 0-indexed record at the bottom of the viewport
          *  }
          */
-        pageInfo : function() {
+        pageInfo: function() {
             var dt           = this.s.dt,
                 iScrollTop   = this.dom.scroller.scrollTop,
                 iTotal       = dt.fnRecordsDisplay(),
@@ -335,8 +333,8 @@
                 );
 
             return {
-                start : Math.floor(this.pixelsToRow(iScrollTop, false, this.s.ani)),
-                end   : iTotal < iPossibleEnd ? iTotal - 1 : iPossibleEnd - 1
+                start: Math.floor(this.pixelsToRow(iScrollTop, false, this.s.ani)),
+                end: iTotal < iPossibleEnd ? iTotal - 1 : iPossibleEnd - 1
             };
         },
 
@@ -353,7 +351,7 @@
          *  @param {int} [virtual=false] Perform the calculations in the virtual domain
          *  @returns {int} Row index
          */
-        pixelsToRow : function(pixels, intParse, virtual) {
+        pixelsToRow: function(pixels, intParse, virtual) {
             var diff = pixels - this.s.baseScrollTop;
             var row = virtual
                 ? (this._domain('physicalToVirtual', this.s.baseScrollTop) + diff) / this.s.heights.row
@@ -368,7 +366,7 @@
          *  @param {int} iRow Row number to calculate the position of
          *  @returns {int} Pixels
          */
-        rowToPixels : function(rowIdx, intParse, virtual) {
+        rowToPixels: function(rowIdx, intParse, virtual) {
             var pixels;
             var diff = rowIdx - this.s.baseRowTop;
 
@@ -390,7 +388,7 @@
          *  @param {bool} [animate=true] Animate the transition or not
          *  @returns {void}
          */
-        scrollToRow : function(row, animate) {
+        scrollToRow: function(row, animate) {
             var that = this;
             var ani = false;
             var px = this.rowToPixels(row);
@@ -426,7 +424,7 @@
                 this.s.ani = ani;
                 $(this.dom.scroller).animate(
                     {
-                        scrollTop : px
+                        scrollTop: px
                     },
                     function() {
                         // This needs to happen after the animation has completed and
@@ -451,7 +449,7 @@
          *  @returns {void}
          *  @private
          */
-        construct : function() {
+        construct: function() {
             var that = this;
             var dt = this.s.dtApi;
 
@@ -544,10 +542,10 @@
                 else {
                     // Need to used the saved position on init
                     data.scroller = {
-                        topRow        : that.s.topRowFloat,
-                        baseScrollTop : that.s.baseScrollTop,
-                        baseRowTop    : that.s.baseRowTop,
-                        scrollTop     : that.s.lastScrollTop
+                        topRow: that.s.topRowFloat,
+                        baseScrollTop: that.s.baseScrollTop,
+                        baseRowTop: that.s.baseRowTop,
+                        scrollTop: that.s.lastScrollTop
                     };
                 }
             });
@@ -617,7 +615,7 @@
          *  @returns {void}
          *  @private
          */
-        _calcRowHeight : function() {
+        _calcRowHeight: function() {
             var dt = this.s.dt;
             var origTable = dt.nTable;
             var nTable = origTable.cloneNode(false);
@@ -676,7 +674,7 @@
          *  @returns {void}
          *  @private
          */
-        _draw : function() {
+        _draw: function() {
             var that         = this,
                 heights      = this.s.heights,
                 iScrollTop   = this.dom.scroller.scrollTop,
@@ -809,7 +807,7 @@
          *  @returns {number} Calculated transform
          *  @private
          */
-        _domain : function(dir, val) {
+        _domain: function(dir, val) {
             var heights = this.s.heights;
             var diff;
             var magic = 10000; // the point at which the non-linear calculations start to happen
@@ -856,7 +854,7 @@
          *  @returns {void}
          *  @private
          */
-        _info : function() {
+        _info: function() {
             if (!this.s.dt.oFeatures.bInfo) {
                 return;
             }
@@ -937,7 +935,7 @@
          *  @returns {number} height
          *  @private
          */
-        _parseHeight : function(cssHeight) {
+        _parseHeight: function(cssHeight) {
             var height;
             var matches = /^([+-]?(?:\d+(?:\.\d+)?|\.\d+))(px|em|rem|vh)$/.exec(cssHeight);
 
@@ -973,7 +971,7 @@
          *  @returns {void}
          *  @private
          */
-        _scroll : function() {
+        _scroll: function() {
             var that       = this,
                 heights    = this.s.heights,
                 iScrollTop = this.dom.scroller.scrollTop,
@@ -1119,7 +1117,7 @@
          *  @returns {void}
          *  @private
          */
-        _scrollForce : function() {
+        _scrollForce: function() {
             var heights = this.s.heights;
             var max = 1000000;
 
@@ -1159,7 +1157,7 @@
          *  @default  0.5
          *  @static
          */
-        boundaryScale : 0.5,
+        boundaryScale: 0.5,
 
         /**
          * The display buffer is what Scroller uses to calculate how many rows it should pre-fetch
@@ -1175,7 +1173,7 @@
          *  @default  7
          *  @static
          */
-        displayBuffer : 9,
+        displayBuffer: 9,
 
         /**
          * Show (or not) the loading element in the background of the table. Note that you should
@@ -1184,7 +1182,7 @@
          *  @default  false
          *  @static
          */
-        loadingIndicator : false,
+        loadingIndicator: false,
 
         /**
          * Scroller will attempt to automatically calculate the height of rows for it's internal
@@ -1193,7 +1191,7 @@
          *  @default  auto
          *  @static
          */
-        rowHeight : 'auto',
+        rowHeight: 'auto',
 
         /**
          * When using server-side processing, Scroller will wait a small amount of time to allow
@@ -1203,7 +1201,7 @@
          *  @default  200
          *  @static
          */
-        serverWait : 200
+        serverWait: 200
     };
 
     Scroller.oDefaults = Scroller.defaults;
@@ -1292,7 +1290,7 @@
         this.iterator('row', function(ctx, rowIdx) {
             if (ctx.oScroller) {
                 var displayIdx = that
-                    .rows({order : 'applied', search : 'applied'})
+                    .rows({order: 'applied', search: 'applied'})
                     .indexes()
                     .indexOf(rowIdx);
 

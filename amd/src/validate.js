@@ -1534,5 +1534,4 @@
             return ajax.apply(this, arguments);
         };
     }
-
 }));

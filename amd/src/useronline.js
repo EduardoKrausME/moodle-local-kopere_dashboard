@@ -30,6 +30,5 @@ define(["jquery"], function($) {
             $('#timeend-status').change(timeend_status_change);
             $('#status').change(status_change);
         },
-
     };
 });

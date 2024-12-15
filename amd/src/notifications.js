@@ -50,6 +50,5 @@ define(["jquery"], function($) {
                     $('#area-mensagem-preview').html(replace_tags($('#notificacaotemplatehtml').val()));
                 });
         },
-
     };
 });

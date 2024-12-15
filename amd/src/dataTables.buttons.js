@@ -33,13 +33,11 @@
                 cjsRequires(root, $);
                 return factory($, root, root.document);
             };
-        }
-        else {
+        } else {
             cjsRequires(window, jq);
             module.exports = factory(jq, window, window.document);
         }
-    }
-    else {
+    } else {
         // Browser
         factory(jQuery, window, document);
     }
@@ -60,8 +58,7 @@
     function _fadeIn(el, duration, fn) {
         if ($.fn.animate) {
             el.stop().fadeIn(duration, fn);
-        }
-        else {
+        } else {
             el.css('display', 'block');
 
             if (fn) {
@@ -110,7 +107,7 @@
 
         // For easy configuration of buttons an array can be given
         if (Array.isArray(config)) {
-            config = {buttons : config};
+            config = {buttons: config};
         }
 
         this.c = $.extend(true, {}, Buttons.defaults, config);
@@ -121,14 +118,14 @@
         }
 
         this.s = {
-            dt         : new DataTable.Api(dt),
-            buttons    : [],
-            listenKeys : '',
-            namespace  : 'dtb' + _instCounter++
+            dt: new DataTable.Api(dt),
+            buttons: [],
+            listenKeys: '',
+            namespace: 'dtb' + _instCounter++
         };
 
         this.dom = {
-            container : $('<' + this.c.dom.container.tag + '/>').addClass(this.c.dom.container.className)
+            container: $('<' + this.c.dom.container.tag + '/>').addClass(this.c.dom.container.className)
         };
 
         this._constructor();
@@ -149,7 +146,7 @@
          * @param  {function} action Function to set
          * @return {Buttons} Self for chaining
          */
-        action : function(node, action) {
+        action: function(node, action) {
             var button = this._nodeToButton(node);
 
             if (action === undefined) {
@@ -168,7 +165,7 @@
          * @param  {boolean} [flag] Enable / disable flag
          * @return {Buttons} Self for chaining or boolean for getter
          */
-        active : function(node, flag) {
+        active: function(node, flag) {
             var button = this._nodeToButton(node);
             var klass = this.c.dom.button.active;
             var jqNode = $(button.node);
@@ -198,7 +195,7 @@
          *   lots of buttons, until the last button.
          * @return {Buttons} Self for chaining
          */
-        add : function(config, idx, draw) {
+        add: function(config, idx, draw) {
             var buttons = this.s.buttons;
 
             if (typeof idx === 'string') {
@@ -233,7 +230,7 @@
         /**
          * Clear buttons from a collection and then insert new buttons
          */
-        collectionRebuild : function(node, newButtons) {
+        collectionRebuild: function(node, newButtons) {
             var button = this._nodeToButton(node);
 
             if (newButtons !== undefined) {
@@ -276,7 +273,7 @@
          * Get the container node for the buttons
          * @return {jQuery} Buttons node
          */
-        container : function() {
+        container: function() {
             return this.dom.container;
         },
 
@@ -285,7 +282,7 @@
          * @param  {node} node Button node
          * @return {Buttons} Self for chaining
          */
-        disable : function(node) {
+        disable: function(node) {
             var button = this._nodeToButton(node);
 
             $(button.node).addClass(this.c.dom.button.disabled).prop('disabled', true);
@@ -298,7 +295,7 @@
          * elements
          * @return {Buttons} Self for chaining
          */
-        destroy : function() {
+        destroy: function() {
             // Key event listener
             $('body').off('keyup.' + this.s.namespace);
 
@@ -333,7 +330,7 @@
          * @param  {boolean} [flag=true] Enable / disable flag
          * @return {Buttons} Self for chaining
          */
-        enable : function(node, flag) {
+        enable: function(node, flag) {
             if (flag === false) {
                 return this.disable(node);
             }
@@ -351,7 +348,7 @@
          * @param {element} node Button to get the index of
          * @return {string} Button index
          */
-        index : function(node, nested, buttons) {
+        index: function(node, nested, buttons) {
             if (!nested) {
                 nested = '';
                 buttons = this.s.buttons;
@@ -380,7 +377,7 @@
          * Get the instance name for the button set selector
          * @return {string} Instance name
          */
-        name : function() {
+        name: function() {
             return this.c.name;
         },
 
@@ -389,7 +386,7 @@
          * @param  {node} [node] Button node
          * @return {jQuery} Button element, or container
          */
-        node : function(node) {
+        node: function(node) {
             if (!node) {
                 return this.dom.container;
             }
@@ -404,7 +401,7 @@
          * @param  {boolean} flag true to add, false to remove, undefined to get
          * @return {boolean|Buttons} Getter value or this if a setter.
          */
-        processing : function(node, flag) {
+        processing: function(node, flag) {
             var dt = this.s.dt;
             var button = this._nodeToButton(node);
 
@@ -430,7 +427,7 @@
          * @param  {node} node Button node
          * @return {Buttons} Self for chaining
          */
-        remove : function(node) {
+        remove: function(node) {
             var button = this._nodeToButton(node);
             var host = this._nodeToHost(node);
             var dt = this.s.dt;
@@ -469,7 +466,7 @@
          * @param  {string} label Text
          * @return {Buttons} Self for chaining
          */
-        text : function(node, label) {
+        text: function(node, label) {
             var button = this._nodeToButton(node);
             var textNode = button.textNode;
             var dt = this.s.dt;
@@ -496,7 +493,7 @@
          * Buttons constructor
          * @private
          */
-        _constructor : function() {
+        _constructor: function() {
             var that = this;
             var dt = this.s.dt;
             var dtSettings = dt.settings()[0];
@@ -507,8 +504,8 @@
             }
 
             dtSettings._buttons.push({
-                inst : this,
-                name : this.c.name
+                inst: this,
+                name: this.c.name
             });
 
             for (var i = 0, ien = buttons.length; i < ien; i++) {
@@ -544,7 +541,7 @@
          * @param {object} conf Resolved button configuration object
          * @private
          */
-        _addKey : function(conf) {
+        _addKey: function(conf) {
             if (conf.key) {
                 this.s.listenKeys += $.isPlainObject(conf.key) ? conf.key.key : conf.key;
             }
@@ -556,7 +553,7 @@
          * @param  {array} [buttons] Recursive only - Buttons array
          * @private
          */
-        _draw : function(container, buttons) {
+        _draw: function(container, buttons) {
             if (!container) {
                 container = this.dom.container;
                 buttons = this.s.buttons;
@@ -581,7 +578,7 @@
          * @param  {boolean} inCollection true if the button is in a collection
          * @private
          */
-        _expandButton : function(
+        _expandButton: function(
             attachTo,
             button,
             split,
@@ -713,7 +710,7 @@
          * @return {object} Completed button description object
          * @private
          */
-        _buildButton : function(config, inCollection, isSplit, inSplit) {
+        _buildButton: function(config, inCollection, isSplit, inSplit) {
             var configDom = this.c.dom;
             var textNode;
             var dt = this.s.dt;
@@ -743,14 +740,14 @@
                     .html(text(config.text));
 
                 return {
-                    conf         : config,
-                    node         : spacer,
-                    inserter     : spacer,
-                    buttons      : [],
-                    inCollection : inCollection,
-                    isSplit      : isSplit,
-                    collection   : null,
-                    textNode     : spacer
+                    conf: config,
+                    node: spacer,
+                    inserter: spacer,
+                    buttons: [],
+                    inCollection: inCollection,
+                    isSplit: isSplit,
+                    collection: null,
+                    textNode: spacer
                 };
             }
 
@@ -890,15 +887,15 @@
                     .append(button);
 
                 var dropButtonConfig = $.extend(config, {
-                    align           : dropdownConf.dropdown.align,
-                    attr            : {
-                        'aria-haspopup' : 'dialog',
-                        'aria-expanded' : false
+                    align: dropdownConf.dropdown.align,
+                    attr: {
+                        'aria-haspopup': 'dialog',
+                        'aria-expanded': false
                     },
-                    className       : dropdownConf.dropdown.className,
-                    closeButton     : false,
-                    splitAlignClass : dropdownConf.dropdown.splitAlignClass,
-                    text            : dropdownConf.dropdown.text
+                    className: dropdownConf.dropdown.className,
+                    closeButton: false,
+                    splitAlignClass: dropdownConf.dropdown.splitAlignClass,
+                    text: dropdownConf.dropdown.text
                 });
 
                 this._addKey(dropButtonConfig);
@@ -948,15 +945,15 @@
             }
 
             return {
-                conf         : config,
-                node         : isSplit ? splitDiv.get(0) : button.get(0),
-                inserter     : isSplit ? splitDiv : inserter,
-                buttons      : [],
-                inCollection : inCollection,
-                isSplit      : isSplit,
-                inSplit      : inSplit,
-                collection   : null,
-                textNode     : textNode
+                conf: config,
+                node: isSplit ? splitDiv.get(0) : button.get(0),
+                inserter: isSplit ? splitDiv : inserter,
+                buttons: [],
+                inCollection: inCollection,
+                isSplit: isSplit,
+                inSplit: inSplit,
+                collection: null,
+                textNode: textNode
             };
         },
 
@@ -967,7 +964,7 @@
          * @return {object} Button object
          * @private
          */
-        _nodeToButton : function(node, buttons) {
+        _nodeToButton: function(node, buttons) {
             if (!buttons) {
                 buttons = this.s.buttons;
             }
@@ -994,7 +991,7 @@
          * @return {array} Button's host array
          * @private
          */
-        _nodeToHost : function(node, buttons) {
+        _nodeToHost: function(node, buttons) {
             if (!buttons) {
                 buttons = this.s.buttons;
             }
@@ -1021,7 +1018,7 @@
          * @param  {object} e Key event that triggered this call
          * @private
          */
-        _keypress : function(character, e) {
+        _keypress: function(character, e) {
             // Check if this button press already activated on another instance of Buttons
             if (e._buttonsHandled) {
                 return;
@@ -1082,7 +1079,7 @@
          * @param  {object} conf Button configuration
          * @private
          */
-        _removeKey : function(conf) {
+        _removeKey: function(conf) {
             if (conf.key) {
                 var character = $.isPlainObject(conf.key) ? conf.key.key : conf.key;
 
@@ -1101,7 +1098,7 @@
          * @return {object} Button configuration
          * @private
          */
-        _resolveExtends : function(conf) {
+        _resolveExtends: function(conf) {
             var that = this;
             var dt = this.s.dt;
             var i, ien;
@@ -1125,7 +1122,7 @@
                     }
                     else if (typeof base === 'string') {
                         if (!_dtButtons[base]) {
-                            return {html : base};
+                            return {html: base};
                         }
 
                         base = _dtButtons[base];
@@ -1216,26 +1213,26 @@
          * @param {DataTable.Api} hostButton DT API instance of the button
          * @param {object} inOpts Options (see object below for all options)
          */
-        _popover : function(content, hostButton, inOpts, e) {
+        _popover: function(content, hostButton, inOpts, e) {
             var dt = hostButton;
             var c = this.c;
             var closed = false;
             var options = $.extend(
                 {
-                    align               : 'button-left', // button-right, dt-container, split-left, split-right
-                    autoClose           : false,
-                    background          : true,
-                    backgroundClassName : 'dt-button-background',
-                    closeButton         : true,
-                    containerClassName  : c.dom.collection.container.className,
-                    contentClassName    : c.dom.collection.container.content.className,
-                    collectionLayout    : '',
-                    collectionTitle     : '',
-                    dropup              : false,
-                    fade                : 400,
-                    popoverTitle        : '',
-                    rightAlignClassName : 'dt-button-right',
-                    tag                 : c.dom.collection.container.tag
+                    align: 'button-left', // button-right, dt-container, split-left, split-right
+                    autoClose: false,
+                    background: true,
+                    backgroundClassName: 'dt-button-background',
+                    closeButton: true,
+                    containerClassName: c.dom.collection.container.className,
+                    contentClassName: c.dom.collection.container.content.className,
+                    collectionLayout: '',
+                    collectionTitle: '',
+                    dropup: false,
+                    fade: 400,
+                    popoverTitle: '',
+                    rightAlignClassName: 'dt-button-right',
+                    tag: c.dom.collection.container.tag
                 },
                 inOpts
             );
@@ -1302,8 +1299,8 @@
                 .addClass(mod)
                 .css('display', 'none')
                 .attr({
-                    'aria-modal' : true,
-                    role         : 'dialog'
+                    'aria-modal': true,
+                    role: 'dialog'
                 });
 
             content = $(content)
@@ -1365,8 +1362,8 @@
                 var left = buttonPosition.left;
 
                 display.css({
-                    top  : top,
-                    left : left
+                    top: top,
+                    left: left
                 });
 
                 // Get the popover position
@@ -1434,8 +1431,8 @@
 
                 // Calculations all done - now set it
                 display.css({
-                    top  : top,
-                    left : left
+                    top: top,
+                    left: left
                 });
             }
             else {
@@ -1663,9 +1660,9 @@
                     idx = baseIdx !== undefined ? baseIdx + i : i + '';
 
                     a.push({
-                        node : button.node,
-                        name : button.conf.name,
-                        idx  : idx
+                        node: button.node,
+                        name: button.conf.name,
+                        idx: idx
                     });
 
                     if (button.buttons) {
@@ -1695,8 +1692,8 @@
                 // Select all
                 for (i = 0, ien = buttons.length; i < ien; i++) {
                     ret.push({
-                        inst : inst,
-                        node : buttons[i].node
+                        inst: inst,
+                        node: buttons[i].node
                     });
                 }
             }
@@ -1704,8 +1701,8 @@
                 // Main button index selector
                 if (inst.s.buttons[selector]) {
                     ret.push({
-                        inst : inst,
-                        node : inst.s.buttons[selector].node
+                        inst: inst,
+                        node: inst.s.buttons[selector].node
                     });
                 }
             }
@@ -1725,8 +1722,8 @@
                     });
 
                     ret.push({
-                        inst : inst,
-                        node : buttons[$.inArray(selector, indexes)].node
+                        inst: inst,
+                        node: buttons[$.inArray(selector, indexes)].node
                     });
                 }
                 else if (selector.indexOf(':name') !== -1) {
@@ -1736,8 +1733,8 @@
                     for (i = 0, ien = buttons.length; i < ien; i++) {
                         if (buttons[i].name === name) {
                             ret.push({
-                                inst : inst,
-                                node : buttons[i].node
+                                inst: inst,
+                                node: buttons[i].node
                             });
                         }
                     }
@@ -1748,8 +1745,8 @@
                         .filter(selector)
                         .each(function() {
                             ret.push({
-                                inst : inst,
-                                node : this
+                                inst: inst,
+                                node: this
                             });
                         });
                 }
@@ -1760,8 +1757,8 @@
 
                 if (idx !== -1) {
                     ret.push({
-                        inst : inst,
-                        node : nodes[idx]
+                        inst: inst,
+                        node: nodes[idx]
                     });
                 }
             }
@@ -1818,64 +1815,64 @@
      * @static
      */
     Buttons.defaults = {
-        buttons  : ['copy', 'excel', 'csv', 'pdf', 'print'],
-        name     : 'main',
-        tabIndex : 0,
-        dom      : {
-            container  : {
-                tag       : 'div',
-                className : 'dt-buttons'
+        buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
+        name: 'main',
+        tabIndex: 0,
+        dom: {
+            container: {
+                tag: 'div',
+                className: 'dt-buttons'
             },
-            collection : {
-                action    : {
+            collection: {
+                action: {
                     // action button
-                    dropHtml : '<span class="dt-button-down-arrow">&#x25BC;</span>'
+                    dropHtml: '<span class="dt-button-down-arrow">&#x25BC;</span>'
                 },
-                container : {
+                container: {
                     // The element used for the dropdown
-                    className : 'dt-button-collection',
-                    content   : {
-                        className : '',
-                        tag       : 'div'
+                    className: 'dt-button-collection',
+                    content: {
+                        className: '',
+                        tag: 'div'
                     },
-                    tag       : 'div'
+                    tag: 'div'
                 }
                 // optionally
                 // , button: IButton - buttons inside the collection container
                 // , split: ISplit - splits inside the collection container
             },
-            button     : {
-                tag       : 'button',
-                className : 'dt-button',
-                active    : 'dt-button-active', // class name
-                disabled  : 'disabled', // class name
-                spacer    : {
-                    className : 'dt-button-spacer',
-                    tag       : 'span'
+            button: {
+                tag: 'button',
+                className: 'dt-button',
+                active: 'dt-button-active', // class name
+                disabled: 'disabled', // class name
+                spacer: {
+                    className: 'dt-button-spacer',
+                    tag: 'span'
                 },
-                liner     : {
-                    tag       : 'span',
-                    className : ''
+                liner: {
+                    tag: 'span',
+                    className: ''
                 }
             },
-            split      : {
-                action   : {
+            split: {
+                action: {
                     // action button
-                    className : 'dt-button-split-drop-button dt-button',
-                    tag       : 'button'
+                    className: 'dt-button-split-drop-button dt-button',
+                    tag: 'button'
                 },
-                dropdown : {
+                dropdown: {
                     // button to trigger the dropdown
-                    align           : 'split-right',
-                    className       : 'dt-button-split-drop',
-                    dropHtml        : '<span class="dt-button-down-arrow">&#x25BC;</span>',
-                    splitAlignClass : 'dt-button-split-left',
-                    tag             : 'button'
+                    align: 'split-right',
+                    className: 'dt-button-split-drop',
+                    dropHtml: '<span class="dt-button-down-arrow">&#x25BC;</span>',
+                    splitAlignClass: 'dt-button-split-left',
+                    tag: 'button'
                 },
-                wrapper  : {
+                wrapper: {
                     // wrap around both
-                    className : 'dt-button-split',
-                    tag       : 'div'
+                    className: 'dt-button-split',
+                    tag: 'div'
                 }
             }
         }
@@ -1889,16 +1886,16 @@
     Buttons.version = '2.4.1';
 
     $.extend(_dtButtons, {
-        collection : {
-            text        : function(dt) {
+        collection: {
+            text: function(dt) {
                 return dt.i18n('buttons.collection', 'Collection');
             },
-            className   : 'buttons-collection',
-            closeButton : false,
-            init        : function(dt, button, config) {
+            className: 'buttons-collection',
+            closeButton: false,
+            init: function(dt, button, config) {
                 button.attr('aria-expanded', false);
             },
-            action      : function(e, dt, button, config) {
+            action: function(e, dt, button, config) {
                 if (config._collection.parents('body').length) {
                     this.popover(false, config);
                 }
@@ -1912,49 +1909,49 @@
                     $('a, button', config._collection).eq(0).focus();
                 }
             },
-            attr        : {
-                'aria-haspopup' : 'dialog'
+            attr: {
+                'aria-haspopup': 'dialog'
             }
             // Also the popover options, defined in Buttons.popover
         },
-        split      : {
-            text        : function(dt) {
+        split: {
+            text: function(dt) {
                 return dt.i18n('buttons.split', 'Split');
             },
-            className   : 'buttons-split',
-            closeButton : false,
-            init        : function(dt, button, config) {
+            className: 'buttons-split',
+            closeButton: false,
+            init: function(dt, button, config) {
                 return button.attr('aria-expanded', false);
             },
-            action      : function(e, dt, button, config) {
+            action: function(e, dt, button, config) {
                 this.popover(config._collection, config);
             },
-            attr        : {
-                'aria-haspopup' : 'dialog'
+            attr: {
+                'aria-haspopup': 'dialog'
             }
             // Also the popover options, defined in Buttons.popover
         },
-        copy       : function(dt, conf) {
+        copy: function(dt, conf) {
             if (_dtButtons.copyHtml5) {
                 return 'copyHtml5';
             }
         },
-        csv        : function(dt, conf) {
+        csv: function(dt, conf) {
             if (_dtButtons.csvHtml5 && _dtButtons.csvHtml5.available(dt, conf)) {
                 return 'csvHtml5';
             }
         },
-        excel      : function(dt, conf) {
+        excel: function(dt, conf) {
             if (_dtButtons.excelHtml5 && _dtButtons.excelHtml5.available(dt, conf)) {
                 return 'excelHtml5';
             }
         },
-        pdf        : function(dt, conf) {
+        pdf: function(dt, conf) {
             if (_dtButtons.pdfHtml5 && _dtButtons.pdfHtml5.available(dt, conf)) {
                 return 'pdfHtml5';
             }
         },
-        pageLength : function(dt) {
+        pageLength: function(dt) {
             var lengthMenu = dt.settings()[0].aLengthMenu;
             var vals = [];
             var lang = [];
@@ -1962,8 +1959,8 @@
                 return dt.i18n(
                     'buttons.pageLength',
                     {
-                        '-1' : 'Show all rows',
-                        _    : 'Show %d rows'
+                        '-1': 'Show all rows',
+                        _: 'Show %d rows'
                     },
                     dt.page.len()
                 );
@@ -1991,18 +1988,18 @@
             }
 
             return {
-                extend    : 'collection',
-                text      : text,
-                className : 'buttons-page-length',
-                autoClose : true,
-                buttons   : $.map(vals, function(val, i) {
+                extend: 'collection',
+                text: text,
+                className: 'buttons-page-length',
+                autoClose: true,
+                buttons: $.map(vals, function(val, i) {
                     return {
-                        text      : lang[i],
-                        className : 'button-page-length',
-                        action    : function(e, dt) {
+                        text: lang[i],
+                        className: 'button-page-length',
+                        action: function(e, dt) {
                             dt.page.len(val).draw();
                         },
-                        init      : function(dt, node, conf) {
+                        init: function(dt, node, conf) {
                             var that = this;
                             var fn = function() {
                                 that.active(dt.page.len() === val);
@@ -2011,26 +2008,26 @@
                             dt.on('length.dt' + conf.namespace, fn);
                             fn();
                         },
-                        destroy   : function(dt, node, conf) {
+                        destroy: function(dt, node, conf) {
                             dt.off('length.dt' + conf.namespace);
                         }
                     };
                 }),
-                init      : function(dt, node, conf) {
+                init: function(dt, node, conf) {
                     var that = this;
                     dt.on('length.dt' + conf.namespace, function() {
                         that.text(conf.text);
                     });
                 },
-                destroy   : function(dt, node, conf) {
+                destroy: function(dt, node, conf) {
                     dt.off('length.dt' + conf.namespace);
                 }
             };
         },
-        spacer     : {
-            style  : 'empty',
-            spacer : true,
-            text   : function(dt) {
+        spacer: {
+            style: 'empty',
+            spacer: true,
+            text: function(dt) {
                 return dt.i18n('buttons.spacer', '');
             }
         }
@@ -2332,10 +2329,10 @@
         }
 
         return {
-            filename      : _filename(conf),
-            title         : _title(conf),
-            messageTop    : _message(this, conf.message || conf.messageTop, 'top'),
-            messageBottom : _message(this, conf.messageBottom, 'bottom')
+            filename: _filename(conf),
+            title: _title(conf),
+            messageTop: _message(this, conf.message || conf.messageTop, 'top'),
+            messageBottom: _message(this, conf.messageBottom, 'bottom')
         };
     });
 
@@ -2435,29 +2432,29 @@
             true,
             {},
             {
-                rows           : null,
-                columns        : '',
-                modifier       : {
-                    search : 'applied',
-                    order  : 'applied'
+                rows: null,
+                columns: '',
+                modifier: {
+                    search: 'applied',
+                    order: 'applied'
                 },
-                orthogonal     : 'display',
-                stripHtml      : true,
-                stripNewlines  : true,
-                decodeEntities : true,
-                trim           : true,
-                format         : {
-                    header : function(d) {
+                orthogonal: 'display',
+                stripHtml: true,
+                stripNewlines: true,
+                decodeEntities: true,
+                trim: true,
+                format: {
+                    header: function(d) {
                         return Buttons.stripData(d, config);
                     },
-                    footer : function(d) {
+                    footer: function(d) {
                         return Buttons.stripData(d, config);
                     },
-                    body   : function(d) {
+                    body: function(d) {
                         return Buttons.stripData(d, config);
                     }
                 },
-                customizeData  : null
+                customizeData: null
             },
             inOpts
         );
@@ -2487,8 +2484,8 @@
         // a `selected` modifier to control directly.
         var modifier = $.extend({}, config.modifier);
         if (dt.select && typeof dt.select.info === 'function' && modifier.selected === undefined) {
-            if (dt.rows(config.rows, $.extend({selected : true}, modifier)).any()) {
-                $.extend(modifier, {selected : true});
+            if (dt.rows(config.rows, $.extend({selected: true}, modifier)).any()) {
+                $.extend(modifier, {selected: true});
             }
         }
 
@@ -2514,9 +2511,9 @@
         }
 
         var data = {
-            header : header,
-            footer : footer,
-            body   : body
+            header: header,
+            footer: footer,
+            body: body
         };
 
         if (config.customizeData) {
@@ -2560,8 +2557,8 @@
 
     // DataTables `dom` feature option
     DataTable.ext.feature.push({
-        fnInit   : _init,
-        cFeature : 'B'
+        fnInit: _init,
+        cFeature: 'B'
     });
 
     // DataTables 2 layout feature

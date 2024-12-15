@@ -2,8 +2,6 @@ define(["jquery"], function($) {
     return {
         init : function() {
 
-            console.log("aaaa");
-
             $('#open-startup').click(function(event) {
                 event.preventDefault();
                 openModal();
@@ -24,7 +22,6 @@ define(["jquery"], function($) {
 });
 
 function openModal() {
-    console.log("bbbb");
     if ($(window).width() < 1000) {
         var popupHref = $('.dashboard-load-popup').attr('href');
         if (popupHref) {

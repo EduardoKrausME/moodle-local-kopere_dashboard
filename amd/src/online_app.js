@@ -89,7 +89,6 @@ define(["jquery", "local_kopere_dashboard/socket.io"], function($, io) {
 
                     window[table].rows().draw();
                 }
-                //console.log ( allUsers );
             });
 
             socketio.on("statusOnlineUser", function(status, user) {

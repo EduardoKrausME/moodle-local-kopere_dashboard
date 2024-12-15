@@ -6,8 +6,6 @@ define([
     return {
         init : function() {
 
-            console.log("form_popup.js");
-
             if ($(".kopere-modal-content form.validate").length) {
                 $(".kopere-modal-content form.validate").validator();
             }

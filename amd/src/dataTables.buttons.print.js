@@ -9,8 +9,7 @@
         define(['jquery', "local_kopere_dashboard/dataTables", "local_kopere_dashboard/dataTables.buttons"], function($) {
             return factory($, window, document);
         });
-    }
-    else if (typeof exports === 'object') {
+    } else if (typeof exports === 'object') {
         // CommonJS
         var jq = require('jquery');
         var cjsRequires = function(root, $) {
@@ -38,13 +37,11 @@
                 cjsRequires(root, $);
                 return factory($, root, root.document);
             };
-        }
-        else {
+        } else {
             cjsRequires(window, jq);
             module.exports = factory(jq, window, window.document);
         }
-    }
-    else {
+    } else {
         // Browser
         factory(jQuery, window, document);
     }
@@ -94,15 +91,15 @@
     };
 
     DataTable.ext.buttons.print = {
-        className : 'buttons-print',
+        className: 'buttons-print',
 
-        text : function(dt) {
+        text: function(dt) {
             return dt.i18n('buttons.print', 'Print');
         },
 
-        action : function(e, dt, button, config) {
+        action: function(e, dt, button, config) {
             var data = dt.buttons.exportData(
-                $.extend({decodeEntities : false}, config.exportOptions) // XSS protection
+                $.extend({decodeEntities: false}, config.exportOptions) // XSS protection
             );
             var exportInfo = dt.buttons.exportInfo(config);
             var columnClasses = dt
@@ -211,21 +208,21 @@
             }
         },
 
-        title : '*',
+        title: '*',
 
-        messageTop : '*',
+        messageTop: '*',
 
-        messageBottom : '*',
+        messageBottom: '*',
 
-        exportOptions : {},
+        exportOptions: {},
 
-        header : true,
+        header: true,
 
-        footer : false,
+        footer: false,
 
-        autoPrint : true,
+        autoPrint: true,
 
-        customize : null
+        customize: null
     };
 
     return DataTable;
