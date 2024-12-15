@@ -567,3 +567,5 @@ $string['contextcohort'] = 'Cohort';
 $string['contextcompetency'] = 'Competency';
 $string['contextdefault'] = '...';
 $string['contextsystem'] = 'System';
+
+$string['courses_visible'] = 'Visible';
