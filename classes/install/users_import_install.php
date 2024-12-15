@@ -46,8 +46,8 @@ class users_import_install {
             "\\local_kopere_dashboard\\event\\import_course_enrol",
             "admin",
             "student",
-            get_string_kopere("userimport_event_import_course_enrol_subject"),
-            get_string_kopere("userimport_event_import_course_enrol_message")
+            get_string("userimport_event_import_course_enrol_subject", "local_kopere_dashboard"),
+            get_string("userimport_event_import_course_enrol_message", "local_kopere_dashboard")
         );
         $event->status = 0;
         self::insert($event);
@@ -57,8 +57,8 @@ class users_import_install {
             "\\local_kopere_dashboard\\event\\import_user_created",
             "admin",
             "student",
-            get_string_kopere("userimport_event_import_user_created_subject"),
-            get_string_kopere("userimport_event_import_user_created_message")
+            get_string("userimport_event_import_user_created_subject", "local_kopere_dashboard"),
+            get_string("userimport_event_import_user_created_message", "local_kopere_dashboard")
         );
         $event->status = 0;
         self::insert($event);
@@ -68,8 +68,8 @@ class users_import_install {
             "\\local_kopere_dashboard\\event\\import_user_created_and_enrol",
             "admin",
             "student",
-            get_string_kopere("userimport_event_import_user_created_and_enrol_subject"),
-            get_string_kopere("userimport_event_import_user_created_and_enrol_message")
+            get_string("userimport_event_import_user_created_and_enrol_subject", "local_kopere_dashboard"),
+            get_string("userimport_event_import_user_created_and_enrol_message", "local_kopere_dashboard")
         );
         $event->status = 0;
         self::insert($event);
