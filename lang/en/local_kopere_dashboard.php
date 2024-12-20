@@ -572,3 +572,5 @@ $string['contextdefault'] = '...';
 $string['contextsystem'] = 'System';
 
 $string['courses_visible'] = 'Visible';
+
+$string['cachedef_courses_all_courses'] = 'Cache list all course';
