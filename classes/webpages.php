@@ -555,6 +555,13 @@ class webpages {
                 ->set_required()
         );
 
+        $form->add_input(
+            input_checkbox_select::new_instance()
+                ->set_title(get_string_kopere("webpages_menu_inheader"))
+                ->set_name("inheader")
+                ->set_value($menus->inheader)
+        );
+
         $form->create_submit_input(get_string_kopere("webpages_menu_save"));
         $form->close();
 
@@ -581,7 +588,9 @@ class webpages {
 
         $menus = $DB->get_records("local_kopere_dashboard_menu", ["menuid" => $menuid]);
 
-        $listmenus = [];
+        $listmenus = [
+            ["key" => 0, "value" => "Root"]
+        ];
         if ($menus) {
             /** @var local_kopere_dashboard_menu $menu */
             foreach ($menus as $menu) {

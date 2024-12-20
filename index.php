@@ -153,7 +153,7 @@ if ($pagelink) {
 
         $PAGE->navbar->add(get_string_kopere("webpages_allpages"), new moodle_url("/local/kopere_dashboard/"));
 
-        $menus = $DB->get_records("local_kopere_dashboard_menu");
+        $menus = $DB->get_records_sql("SELECT * FROM {local_kopere_dashboard_menu} WHERE inheader = 1");
     }
     echo $OUTPUT->header();
 

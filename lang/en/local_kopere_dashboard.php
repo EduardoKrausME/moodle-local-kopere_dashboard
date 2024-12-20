@@ -498,6 +498,7 @@ $string['webpages_menu_deleted'] = 'Menu deleted successfully!';
 $string['webpages_menu_edit'] = 'Editing Menu';
 $string['webpages_menu_error'] = 'All data must be filled in!';
 $string['webpages_menu_help'] = 'Help with Menus';
+$string['webpages_menu_inheader'] = 'Display in the top menu';
 $string['webpages_menu_link'] = 'Menu Link';
 $string['webpages_menu_link_duplicate'] = '"Link" is duplicated!';
 $string['webpages_menu_menuid'] = 'Sub-menu';

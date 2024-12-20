@@ -43,6 +43,12 @@ class local_kopere_dashboard_menu extends \stdClass {
     /** @var int */
     public $menuid;
 
+    /** @var int */
+    public $inheader;
+
+    /** @var string */
+    public $icon;
+
     /**
      * Function create_by_object
      *
@@ -58,6 +64,8 @@ class local_kopere_dashboard_menu extends \stdClass {
         $return->link = optional_param("link", $item->link, PARAM_TEXT);
         $return->title = optional_param("title", $item->title, PARAM_TEXT);
         $return->menuid = optional_param("menuid", $item->menuid, PARAM_INT);
+        $return->inheader = optional_param("inheader", $item->inheader, PARAM_INT);
+        $return->icon = optional_param("icon", $item->icon, PARAM_TEXT);
 
         return $return;
     }
@@ -75,6 +83,8 @@ class local_kopere_dashboard_menu extends \stdClass {
         $return->link = optional_param("link", "", PARAM_TEXT);
         $return->title = optional_param("title", "", PARAM_TEXT);
         $return->menuid = optional_param("menuid", 0, PARAM_INT);
+        $return->inheader = optional_param("inheader", 1, PARAM_INT);
+        $return->icon = optional_param("icon", "", PARAM_TEXT);
 
         return $return;
     }
