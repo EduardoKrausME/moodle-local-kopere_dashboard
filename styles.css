@@ -11692,6 +11692,13 @@ body.remove-overflow {
   font-size: 22px;
   font-weight: 700;
 }
+.kopere-dashboard-pages .box-page .content p {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .kopere-dashboard-pages .box-page .content .price .current-price {
   font-size: 24px;
   font-weight: 700;
