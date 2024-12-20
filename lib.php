@@ -72,12 +72,12 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
                 has_capability("local/kopere_dashboard:manage", $context)) {
 
                 $node = $nav->add(
-                    get_string_kopere("pluginname"),
+                    get_string("pluginname", "local_kopere_dashboard"),
                     new moodle_url(local_kopere_dashboard_makeurl("dashboard", "start")),
                     navigation_node::TYPE_CUSTOM,
                     null,
                     "kopere_dashboard",
-                    new pix_icon("icon", get_string_kopere("pluginname"), "local_kopere_dashboard")
+                    new pix_icon("icon", get_string("pluginname"), "local_kopere_dashboard")
                 );
 
                 $node->showinflatnavigation = true;
@@ -100,7 +100,7 @@ function add_pages_custommenuitems_400() {
     global $CFG;
 
     $cache = \cache::make("local_kopere_dashboard", "report_getdata_cache");
-    if ($cache->has("local_kopere_dashboard_menu")) {
+    if (false && $cache->has("local_kopere_dashboard_menu")) {
         $CFG->extramenu = $cache->get("local_kopere_dashboard_menu");
     } else {
 
@@ -126,7 +126,12 @@ function add_pages_custommenuitems_400() {
 function local_kopere_dashboard_extend_navigation__get_menus($menuid, $prefix) {
     global $DB, $CFG;
 
-    $menus = $DB->get_records("local_kopere_dashboard_menu", ["menuid" => $menuid]);
+    $menus = $DB->get_records_sql("
+                SELECT *
+                  FROM {local_kopere_dashboard_menu}
+                 WHERE menuid   = :menuid
+                   AND inheader = 1",
+        ["menuid" => $menuid]);
 
     foreach ($menus as $menu) {
         $where = ["visible" => 1, "menuid" => $menu->id];
