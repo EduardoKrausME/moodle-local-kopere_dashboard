@@ -347,7 +347,7 @@ class webpages {
         echo "<div class='col-md'>";
         $form->add_input(
             input_select::new_instance()
-                ->set_title("Curso")
+                ->set_title(get_string_kopere("contextcourse"))
                 ->set_name("courseid")
                 ->set_value($webpages->courseid)
                 ->set_values($courses, "id", "fullname"));
@@ -587,16 +587,22 @@ class webpages {
         global $DB;
 
         $menus = $DB->get_records("local_kopere_dashboard_menu", ["menuid" => $menuid]);
-
-        $listmenus = [
-            ["key" => 0, "value" => "Root"]
-        ];
+        if ($menuid == 0) {
+            $listmenus = [
+                ["key" => 0, "value" => "Root"]
+            ];
+        } else {
+            $listmenus = [];
+        }
         if ($menus) {
             /** @var local_kopere_dashboard_menu $menu */
             foreach ($menus as $menu) {
-                $listmenus[] = ["key" => $menu->id, "value" => "{$spaces}{$menu->title}"];
+                $listmenus[] = ["key" => $menu->id, "value" => "    {$spaces}{$menu->title}"];
                 if ($notmenuid != $menu->id) {
-                    self::list_menus($menu->id, $notmenuid, "  ");
+                    $listmenussub = self::list_menus($menu->id, $notmenuid, "{$spaces}    ");
+                    if ($listmenussub) {
+                        $listmenus = array_merge($listmenus, $listmenussub);
+                    }
                 }
             }
         }
