@@ -2230,7 +2230,7 @@ function displayToast(bg, title, message, id = "top-toast") {
 
 function clearHtml() {
     var html = Vvveb.Builder.getHtml();
-    html = html.replace(/<link.*?vvveb-remove".*?>/s, "");
+    html = html.replace(/<.*?vvveb-remove.*?>/s, "");
     html = html.split(/<html>|<html.*?>|<head>|<body>|<body.*?>|<\/html>|<\/head>|<\/body>/s).join("");
 
     html = html.replace(/<script.*?jquery.*?<\/script>/s, "");
