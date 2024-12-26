@@ -334,7 +334,6 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2024121500, "local", "kopere_dashboard");
     }
 
-
     if ($oldversion < 2024121804) {
         $table = new xmldb_table("local_kopere_dashboard_menu");
         $field = new xmldb_field("inheader", XMLDB_TYPE_TEXT, 1, null, null, null, null, "link");

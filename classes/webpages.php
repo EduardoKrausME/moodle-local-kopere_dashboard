@@ -589,7 +589,7 @@ class webpages {
         $menus = $DB->get_records("local_kopere_dashboard_menu", ["menuid" => $menuid]);
         if ($menuid == 0) {
             $listmenus = [
-                ["key" => 0, "value" => "Root"]
+                ["key" => 0, "value" => "Root"],
             ];
         } else {
             $listmenus = [];
