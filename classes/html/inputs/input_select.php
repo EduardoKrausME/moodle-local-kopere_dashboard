@@ -145,8 +145,8 @@ class input_select extends input_base {
             }
 
             $return .= "{$extra}>";
-
-            $return .= htmlentities($value, ENT_COMPAT) . '</option>';
+            $value = preg_replace('/\s/', '&nbsp;', htmlentities($value, ENT_COMPAT));
+            $return .= "{$value}</option>";
         }
 
         $return .= "\n</select>";
