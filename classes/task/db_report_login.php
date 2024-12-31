@@ -38,7 +38,7 @@ class db_report_login extends \core\task\scheduled_task {
      * @throws \coding_exception
      */
     public function get_name() {
-        return get_string_kopere("crontask_db_report_login");
+        return get_string("crontask_db_report_login", "local_kopere_dashboard");
     }
 
     /**
