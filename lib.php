@@ -77,7 +77,7 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
                     navigation_node::TYPE_CUSTOM,
                     null,
                     "kopere_dashboard",
-                    new pix_icon("icon", get_string("pluginname"), "local_kopere_dashboard")
+                    new pix_icon("icon", get_string("pluginname", "local_kopere_dashboard"), "local_kopere_dashboard")
                 );
 
                 $node->showinflatnavigation = true;
