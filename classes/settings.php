@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard;
 
+use local_kopere_dashboard\html\inputs\input_htmleditor;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\mensagem;
 use local_kopere_dashboard\util\string_util;
@@ -46,14 +47,17 @@ class settings {
 
         $post = string_util::clear_all_params(null, null, PARAM_RAW);
         foreach ($post as $keyname => $value) {
-            if ($keyname == "POST") {
-                continue;
-            }
-            if ($keyname == "action") {
-                continue;
-            }
-            if ($keyname == "redirect") {
-                continue;
+            switch ($keyname) {
+                case "POST":
+                case "action":
+                case "redirect":
+                    continue;
+                case "kopere_pay-meiodeposito-conta":
+                case "formulario_pedir_aceite":
+                    if (!input_htmleditor::$editorhtml) {
+                        $value = "<div style=\"white-space:break-spaces;\">{$value}</div>";
+                    }
+                    break;
             }
 
             set_config($keyname, $value, "local_kopere_dashboard");

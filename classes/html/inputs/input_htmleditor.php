@@ -26,14 +26,14 @@
 
 namespace local_kopere_dashboard\html\inputs;
 
-use editor_tiny\manager;
-
 /**
  * Class input_textarea
  *
  * @package local_kopere_dashboard\html\inputs
  */
 class input_htmleditor extends input_textarea {
+
+    public static $editorhtml = true;
 
     /**
      * Function new_instance
@@ -50,23 +50,26 @@ class input_htmleditor extends input_textarea {
      * @return mixed|string
      */
     public function to_string() {
-        global $PAGE;
+        global $PAGE, $CFG;
 
-        $return = parent::to_string();
+        if (file_exists("{$CFG->dirroot}/lib/editor/tiny/classes/manager.php")) {
+            $config = $this->tyni_editor_config();
 
-        $config = $this->tyni_editor_config();
+            $PAGE->requires->js_amd_inline("
+                    M.util.js_pending( 'editor_tiny/editor' );
+                    require( [ 'editor_tiny/editor' ], ( tiny ) => {
+                        tiny.setupForElementId( {
+                            elementId : '{$this->inputid}',
+                            options   : {$config},
+                        } );
+                        M.util.js_complete( 'editor_tiny/editor' );
+                    } );");
+        } else {
+            $this->value = strip_tags($this->value);
+            self::$editorhtml = false;
+        }
 
-        $PAGE->requires->js_amd_inline("
-            M.util.js_pending( 'editor_tiny/editor' );
-            require( [ 'editor_tiny/editor' ], ( tiny ) => {
-                tiny.setupForElementId( {
-                    elementId : '{$this->inputid}',
-                    options   : {$config},
-                } );
-                M.util.js_complete( 'editor_tiny/editor' );
-            } );");
-
-        return $return;
+        return parent::to_string();
     }
 
     /**
@@ -96,7 +99,7 @@ class input_htmleditor extends input_textarea {
             ],
 
             "placeholderSelectors" => [],
-            "plugins" => (new manager())->get_plugin_configuration($context, $options, [], null),
+            "plugins" => (new \editor_tiny\manager())->get_plugin_configuration($context, $options, [], null),
             "nestedmenu" => true,
         ];
 
