@@ -47,11 +47,13 @@ class settings {
 
         $post = string_util::clear_all_params(null, null, PARAM_RAW);
         foreach ($post as $keyname => $value) {
+            $save = true;
             switch ($keyname) {
                 case "POST":
                 case "action":
                 case "redirect":
-                    continue;
+                    $save = false;
+                    break;
                 case "kopere_pay-meiodeposito-conta":
                 case "formulario_pedir_aceite":
                     if (!input_htmleditor::$editorhtml) {
@@ -60,7 +62,9 @@ class settings {
                     break;
             }
 
-            set_config($keyname, $value, "local_kopere_dashboard");
+            if ($save) {
+                set_config($keyname, $value, "local_kopere_dashboard");
+            }
         }
 
         mensagem::agenda_mensagem_success(get_string_kopere("setting_saved"));
