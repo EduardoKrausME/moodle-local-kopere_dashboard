@@ -33,6 +33,11 @@ namespace local_kopere_dashboard\html\inputs;
  */
 class input_htmleditor extends input_textarea {
 
+    /**
+     * Var editorhtml
+     *
+     * @var bool
+     */
     public static $editorhtml = true;
 
     /**
