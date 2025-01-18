@@ -78,6 +78,7 @@ if ($pagelink) {
 
     /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_menu $menu */
     $menu = $DB->get_record("local_kopere_dashboard_menu", ["id" => $webpages->menuid]);
+
     $PAGE->navbar->add(get_string_kopere("webpages_allpages"), new moodle_url("/local/kopere_dashboard/"));
     $PAGE->navbar->add($menu->title, new moodle_url("/local/kopere_dashboard/?menu={$menu->link}"));
     $PAGE->navbar->add($webpages->title);
