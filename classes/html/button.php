@@ -241,13 +241,7 @@ class button {
             "paddingtop" => $this->paddingtop,
         ];
 
-
         $bt = $OUTPUT->render_from_template("local_kopere_dashboard/html/button", $data);
-
-        //$bt = "<a href='{$this->link}' class='{$class}' {$this->tags}>{$text}</a>";
-        //if ($paragraph) {
-        //    $bt = "<div style='width:100%;min-height:30px;padding:0 0 20px;'>{$bt}</div>";
-        //}
 
         if ($return) {
             return $bt;
