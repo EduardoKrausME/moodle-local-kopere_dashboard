@@ -63,7 +63,11 @@ class settings {
             }
 
             if ($save) {
-                set_config($keyname, $value, "local_kopere_dashboard");
+                if (is_array($value)) {
+                    set_config($keyname, implode(",", $value), "local_kopere_dashboard");
+                } else {
+                    set_config($keyname, $value, "local_kopere_dashboard");
+                }
             }
         }
 
