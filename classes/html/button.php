@@ -30,18 +30,234 @@ namespace local_kopere_dashboard\html;
  * @package local_kopere_dashboard\html
  */
 class button {
+
     /**
-     * btn size
+     * Function get_instance
+     *
+     * @return button
      */
-    const BTN_PEQUENO = "btn-xs";
+    public static function get_instance() {
+        return new button();
+    }
+
+    /** @var array */
+    private $class = ["btn"];
+
     /**
-     * btn size
+     * Function set_no_btn
+     *
+     * @return button
      */
-    const BTN_MEDIO = "btn-sm";
+    public function set_no_btn() {
+        $this->class = [];
+
+        return $this;
+    }
+
     /**
-     * btn size
+     * Function set_primary
+     *
+     * @return button
      */
-    const BTN_GRANDE = "btn-lg";
+    public function set_primary() {
+        $this->class[] = "btn-primary";
+
+        return $this;
+    }
+
+    /**
+     * Function set_success
+     *
+     * @return button
+     */
+    public function set_success() {
+        $this->class[] = "btn-success";
+
+        return $this;
+    }
+
+    /**
+     * Function set_danger
+     *
+     * @return button
+     */
+    public function set_danger() {
+        $this->class[] = "btn-danger";
+
+        return $this;
+    }
+
+    /**
+     * Function set_info
+     *
+     * @return button
+     */
+    public function set_info() {
+        $this->class[] = "btn-info";
+
+        return $this;
+    }
+
+    /**
+     * Function set_warning
+     *
+     * @return button
+     */
+    public function set_warning() {
+        $this->class[] = "btn-warning";
+
+        return $this;
+    }
+
+    /**
+     * Function set_size_xs
+     *
+     * @return button
+     */
+    public function set_size_xs() {
+        $this->class[] = "btn-xs";
+
+        return $this;
+    }
+
+    /**
+     * Function set_size_sm
+     *
+     * @return button
+     */
+    public function set_size_sm() {
+        $this->class[] = "btn-sm";
+
+        return $this;
+    }
+
+    /**
+     * Function set_size_lg
+     *
+     * @return button
+     */
+    public function set_size_lg() {
+        $this->class[] = "btn-lg";
+
+        return $this;
+    }
+
+    /**
+     * Function set_class
+     *
+     * @param $class
+     *
+     * @return button
+     */
+    public function set_class($class) {
+        $this->class[] = $class;
+
+        return $this;
+    }
+
+    /**
+     * Function set_target
+     *
+     * @param $target
+     *
+     * @return button
+     */
+    public function set_target($target) {
+        $this->tags = "{$this->tags} target='{$target}'";
+
+        return $this;
+    }
+
+    /** @var string */
+    private $link;
+
+    /**
+     * Function setLink
+     *
+     * @param $link
+     *
+     * @return button
+     */
+    public function set_link($link) {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    /**
+     * Var tags
+     *
+     * @var string
+     */
+    private $tags = "";
+
+    /**
+     * Function add_tag
+     *
+     * @param $tag
+     *
+     * @return $this
+     */
+    public function add_tag($tag) {
+        $this->tags = "{$this->tags} {$tag}";
+
+        return $this;
+    }
+
+    /**
+     * Var paddingtop
+     *
+     * @var int
+     */
+    private $paddingtop = 20;
+
+    /**
+     * Function set_padding_top
+     *
+     * @param $top
+     */
+    public function set_padding_top($top) {
+        $this->paddingtop = $top;
+    }
+
+    /**
+     * Function to_string
+     *
+     * @param string $text
+     * @param bool $paragraph
+     * @param bool $return
+     *
+     * @return string
+     */
+    public function to_string($text, $paragraph = true, $return = false) {
+        global $OUTPUT;
+
+        $data = [
+            "link" => $this->link,
+            "tags" => $this->tags,
+            "class" => $this->class,
+            "text" => $text,
+            "paragraph" => $paragraph,
+            "paddingtop" => $this->paddingtop,
+        ];
+
+
+        $bt = $OUTPUT->render_from_template("local_kopere_dashboard/html/button", $data);
+
+        //$bt = "<a href='{$this->link}' class='{$class}' {$this->tags}>{$text}</a>";
+        //if ($paragraph) {
+        //    $bt = "<div style='width:100%;min-height:30px;padding:0 0 20px;'>{$bt}</div>";
+        //}
+
+        if ($return) {
+            return $bt;
+        } else {
+            echo $bt;
+        }
+        return "";
+    }
+
+    // Old static function.
 
     /**
      * Function close_popup
@@ -198,7 +414,7 @@ class button {
         ];
         $PAGE->requires->js_call_amd("local_kopere_dashboard/button_icon", "action",
             [$data["button_id"], $data["link"]]);
-        return $OUTPUT->render_from_template("local_kopere_dashboard/button_icon", $data);
+        return $OUTPUT->render_from_template("local_kopere_dashboard/html/button_icon", $data);
     }
 
     /**
@@ -230,9 +446,7 @@ class button {
      * @return string
      */
     private static function create_button($text, $link, $p, $class, $return) {
-        $target = "";
-
-        $bt = "<a href='{$link}' class='{$class}' {$target}>{$text}</a>";
+        $bt = "<a href='{$link}' class='{$class}' >{$text}</a>";
         if ($p) {
             $bt = "<div style='width:100%;min-height:30px;padding:0 0 20px;'>{$bt}</div>";
         }
