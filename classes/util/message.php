@@ -48,7 +48,7 @@ class message {
     }
 
     /**
-     * Function get_message_agendada
+     * Function get_message_schedule
      *
      * @return null|string
      */
