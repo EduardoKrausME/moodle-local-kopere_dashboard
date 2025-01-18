@@ -82,9 +82,6 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
 
                 $node->showinflatnavigation = true;
             }
-
-            require_once(__DIR__ . "/classes/util/node.php");
-            \local_kopere_dashboard\util\node::add_admin_code();
         }
     } else {
         if ($CFG->branch > 400 && @get_config("local_kopere_dashboard", "menu")) {
