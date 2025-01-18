@@ -38,7 +38,7 @@ use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\end_util;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\html;
-use local_kopere_dashboard\util\mensagem;
+use local_kopere_dashboard\util\message;
 use local_kopere_dashboard\util\server_util;
 use local_kopere_dashboard\util\title_util;
 use local_kopere_dashboard\vo\local_kopere_dashboard_menu;
@@ -371,7 +371,7 @@ class webpages {
         echo "</div>";
 
         if (!$webpages->id) {
-            $text = mensagem::info(get_string_kopere("webpages_table_text_not"));
+            $text = message::info(get_string_kopere("webpages_table_text_not"));
             $form->print_row(get_string_kopere("webpages_table_text"), $text);
         } else {
             $href = "{$CFG->wwwroot}/local/kopere_dashboard/_editor/?page=webpages&id={$webpages->id}&link={$webpages->link}";
@@ -411,7 +411,7 @@ class webpages {
         $webpages->id = optional_param("id", 0, PARAM_INT);
 
         if ($webpages->title == "") {
-            mensagem::agenda_mensagem_warning(get_string_kopere("webpages_page_error"));
+            message::schedule_message_warning(get_string_kopere("webpages_page_error"));
             $this->page_edit();
         } else {
             if ($webpages->id) {
@@ -420,7 +420,7 @@ class webpages {
                     "link = :link AND id != :id",
                     ["link" => $webpages->link, "id" => $webpages->id]);
                 if ($exists) {
-                    mensagem::agenda_mensagem_danger(get_string_kopere("webpages_menu_link_duplicate"));
+                    message::schedule_message_danger(get_string_kopere("webpages_menu_link_duplicate"));
                 } else {
                     try {
                         unset($webpages->text);
@@ -428,28 +428,28 @@ class webpages {
                         (\cache::make("local_kopere_dashboard", "report_getdata_cache"))->delete("local_kopere_dashboard_menu");
 
                         self::cache_delete();
-                        mensagem::agenda_mensagem_success(get_string_kopere("webpages_page_updated"));
+                        message::schedule_message_success(get_string_kopere("webpages_page_updated"));
                         header::location(
                             local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]));
                     } catch (\dml_exception $e) {
-                        mensagem::print_danger($e->getMessage());
+                        message::print_danger($e->getMessage());
                     }
                 }
             } else {
                 $exists = $DB->record_exists("local_kopere_dashboard_pages", ["link" => $webpages->link]);
                 if ($exists) {
-                    mensagem::agenda_mensagem_danger(get_string_kopere("webpages_menu_link_duplicate"));
+                    message::schedule_message_danger(get_string_kopere("webpages_menu_link_duplicate"));
                 } else {
                     try {
                         $webpages->id = $DB->insert_record("local_kopere_dashboard_pages", $webpages);
-                        mensagem::agenda_mensagem_success(get_string_kopere("webpages_page_created"));
+                        message::schedule_message_success(get_string_kopere("webpages_page_created"));
                         (\cache::make("local_kopere_dashboard", "report_getdata_cache"))->delete("local_kopere_dashboard_menu");
 
                         self::cache_delete();
                         header::location(
                             local_kopere_dashboard_makeurl("webpages", "page_details", ["id" => $webpages->id]));
                     } catch (\dml_exception $e) {
-                        mensagem::print_danger($e->getMessage());
+                        message::print_danger($e->getMessage());
                     }
                 }
             }
@@ -476,7 +476,7 @@ class webpages {
             (\cache::make("local_kopere_dashboard", "report_getdata_cache"))->delete("local_kopere_dashboard_menu");
 
             self::cache_delete();
-            mensagem::agenda_mensagem_success(get_string_kopere("webpages_page_deleted"));
+            message::schedule_message_success(get_string_kopere("webpages_page_deleted"));
             header::location(local_kopere_dashboard_makeurl("webpages", "dashboard"));
         }
 
@@ -623,25 +623,25 @@ class webpages {
         $menu->id = optional_param("id", 0, PARAM_INT);
 
         if ($menu->title == "") {
-            mensagem::agenda_mensagem_warning(get_string_kopere("webpages_menu_error"));
+            message::schedule_message_warning(get_string_kopere("webpages_menu_error"));
         } else {
             if ($menu->id) {
                 $exists = $DB->record_exists_select("local_kopere_dashboard_menu",
                     "link = :link AND id != :id",
                     ["link" => $menu->link, "id" => $menu->id]);
                 if ($exists) {
-                    mensagem::agenda_mensagem_danger(get_string_kopere("webpages_menu_link_duplicate"));
+                    message::schedule_message_danger(get_string_kopere("webpages_menu_link_duplicate"));
                 } else {
-                    mensagem::agenda_mensagem_success(get_string_kopere("webpages_menu_updated"));
+                    message::schedule_message_success(get_string_kopere("webpages_menu_updated"));
                     $DB->update_record("local_kopere_dashboard_menu", $menu);
                     (\cache::make("local_kopere_dashboard", "report_getdata_cache"))->delete("local_kopere_dashboard_menu");
                 }
             } else {
                 $exists = $DB->record_exists("local_kopere_dashboard_menu", ["link" => $menu->link]);
                 if ($exists) {
-                    mensagem::agenda_mensagem_danger(get_string_kopere("webpages_menu_link_duplicate"));
+                    message::schedule_message_danger(get_string_kopere("webpages_menu_link_duplicate"));
                 } else {
-                    mensagem::agenda_mensagem_success(get_string_kopere("webpages_menu_created"));
+                    message::schedule_message_success(get_string_kopere("webpages_menu_created"));
                     $menu->id = $DB->insert_record("local_kopere_dashboard_menu", $menu);
                     (\cache::make("local_kopere_dashboard", "report_getdata_cache"))->delete("local_kopere_dashboard_menu");
                 }
@@ -683,7 +683,7 @@ class webpages {
                 (\cache::make("local_kopere_dashboard", "report_getdata_cache"))->delete("local_kopere_dashboard_menu");
 
                 self::cache_delete();
-                mensagem::agenda_mensagem_success(get_string_kopere("webpages_menu_deleted"));
+                message::schedule_message_success(get_string_kopere("webpages_menu_deleted"));
                 header::location(local_kopere_dashboard_makeurl("webpages", "dashboard"));
             }
 

@@ -32,7 +32,7 @@ use local_kopere_dashboard\util\bytes_util;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\end_util;
 use local_kopere_dashboard\util\header;
-use local_kopere_dashboard\util\mensagem;
+use local_kopere_dashboard\util\message;
 use local_kopere_dashboard\util\server_util;
 use local_kopere_dashboard\util\title_util;
 
@@ -56,10 +56,10 @@ class backup {
         echo '<div class="element-box">';
 
         if (strtoupper(substr(PHP_OS, 0, 3)) === "WIN") {
-            mensagem::print_warning(get_string_kopere("backup_windows"));
+            message::print_warning(get_string_kopere("backup_windows"));
         } else {
             if (server_util::function_enable("shell_exec")) {
-                mensagem::print_info(get_string_kopere("backup_hours"));
+                message::print_info(get_string_kopere("backup_hours"));
                 echo '<div style="text-align: center;">
                           <p>' . get_string_kopere("backup_sleep") . '</p>';
 
@@ -68,7 +68,7 @@ class backup {
 
                 echo "</div>";
             } else {
-                mensagem::print_danger(get_string_kopere("backup_noshell"));
+                message::print_danger(get_string_kopere("backup_noshell"));
             }
 
             $backups = glob(self::get_backup_path(false) . "backup_*");
@@ -103,7 +103,7 @@ class backup {
                 $table->set_row($backupslista);
                 $table->close(true, ["order" => [[1, "desc"]]]);
             } else {
-                mensagem::print_warning(get_string_kopere("backup_none"));
+                message::print_warning(get_string_kopere("backup_none"));
             }
         }
         echo "</div>";
@@ -120,7 +120,7 @@ class backup {
         global $CFG;
 
         if (!server_util::function_enable("shell_exec")) {
-            mensagem::agenda_mensagem_danger(get_string_kopere("backup_noshell"));
+            message::schedule_message_danger(get_string_kopere("backup_noshell"));
             header::location(local_kopere_dashboard_makeurl("backup", "dashboard"));
         }
 
@@ -134,7 +134,7 @@ class backup {
 
         unlink("{$backupfullpath}.sql");
 
-        mensagem::agenda_mensagem_success(get_string_kopere("backup_execute_success"));
+        message::schedule_message_success(get_string_kopere("backup_execute_success"));
         header::location(local_kopere_dashboard_makeurl("backup", "dashboard"));
     }
 
@@ -224,7 +224,7 @@ class backup {
             }
         }
 
-        mensagem::print_success(get_string_kopere("backup_execute_complete"));
+        message::print_success(get_string_kopere("backup_execute_complete"));
 
         echo '<div id="end-page-to" style="text-align: center;">';
         button::add(get_string_kopere("backup_returnlist"), local_kopere_dashboard_makeurl("backup", "dashboard"));
@@ -253,7 +253,7 @@ class backup {
             if ($status) {
                 @unlink($backupfile);
 
-                mensagem::agenda_mensagem_success(get_string_kopere("backup_deletesucessfull"));
+                message::schedule_message_success(get_string_kopere("backup_deletesucessfull"));
                 header::location(local_kopere_dashboard_makeurl("backup", "dashboard"));
             } else {
 

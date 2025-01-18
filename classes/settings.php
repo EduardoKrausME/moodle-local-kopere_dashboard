@@ -28,7 +28,7 @@ namespace local_kopere_dashboard;
 
 use local_kopere_dashboard\html\inputs\input_htmleditor;
 use local_kopere_dashboard\util\header;
-use local_kopere_dashboard\util\mensagem;
+use local_kopere_dashboard\util\message;
 use local_kopere_dashboard\util\string_util;
 
 /**
@@ -71,7 +71,7 @@ class settings {
             }
         }
 
-        mensagem::agenda_mensagem_success(get_string_kopere("setting_saved"));
+        message::schedule_message_success(get_string_kopere("setting_saved"));
 
         $redirect = optional_param("redirect", false, PARAM_TEXT);
         if ($redirect) {

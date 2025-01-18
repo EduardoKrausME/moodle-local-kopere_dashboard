@@ -40,7 +40,7 @@ use local_kopere_dashboard\util\enroll_util;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\html;
 use local_kopere_dashboard\util\json;
-use local_kopere_dashboard\util\mensagem;
+use local_kopere_dashboard\util\message;
 use local_kopere_dashboard\util\user_util;
 use local_kopere_dashboard\util\string_util;
 use local_kopere_dashboard\util\title_util;
@@ -274,7 +274,7 @@ class courses {
             $tilast = strtoupper(substr($user->lastname, 0, 1));
             $linkenrol = "{$CFG->wwwroot}/user/index.php?id={$course->id}&tifirst={$tifirst}&tilast={$tilast}";
             if (enroll_util::enrolled($course, $user)) {
-                mensagem::print_info(get_string_kopere("courses_student_cadastrado", $linkenrol));
+                message::print_info(get_string_kopere("courses_student_cadastrado", $linkenrol));
             } else {
 
                 $matricular = optional_param("matricular", false, PARAM_INT);
@@ -320,19 +320,19 @@ class courses {
 
                 $errors = user_util::validate_new_user($newuser);
                 if ($errors) {
-                    mensagem::print_danger($errors);
+                    message::print_danger($errors);
                 } else {
                     try {
                         require_once("{$CFG->dirroot}/user/lib.php");
                         $newuser->id = user_create_user($newuser);
 
                         $a = (object)["login" => $newuser->username, "senha" => $password];
-                        mensagem::agenda_mensagem_success(get_string_kopere("courses_student_ok", $a));
+                        message::schedule_message_success(get_string_kopere("courses_student_ok", $a));
                         header::location(
                             local_kopere_dashboard_makeurl("courses", "enrol_new",
                                 ["courseid" => "{$course->id}&userid={$newuser->id}"]));
                     } catch (\moodle_exception $e) {
-                        mensagem::print_danger($e->getMessage());
+                        message::print_danger($e->getMessage());
                     }
                 }
             }

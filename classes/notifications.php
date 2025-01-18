@@ -27,7 +27,6 @@
 namespace local_kopere_dashboard;
 
 use core\event\base;
-use core\message\message;
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
@@ -38,7 +37,7 @@ use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\header;
-use local_kopere_dashboard\util\mensagem;
+use local_kopere_dashboard\util\message;
 use local_kopere_dashboard\util\release;
 use local_kopere_dashboard\vo\local_kopere_dashboard_event;
 
@@ -61,7 +60,7 @@ class notifications extends notificationsutil {
         dashboard_util::add_breadcrumb(get_string_kopere("notification_title"));
         dashboard_util::start_page(local_kopere_dashboard_makeurl("notifications", "settings"));
 
-        notificationsutil::mensagem_no_smtp();
+        notificationsutil::message_no_smtp();
 
         echo '<div class="element-box">';
 
@@ -113,7 +112,7 @@ class notifications extends notificationsutil {
             $table->set_row($events);
             $table->close();
         } else {
-            mensagem::print_warning(get_string_kopere("notification_table_empty"));
+            message::print_warning(get_string_kopere("notification_table_empty"));
         }
 
         echo '</div>';
@@ -288,7 +287,7 @@ class notifications extends notificationsutil {
             button::help('TAGS-substituídas-nas-mensagens-de-Notificações', 'Quais as TAGS substituídas nas mensagens?'));
 
         if (!$evento->id) {
-            $text = mensagem::info(get_string_kopere("notification_message_not"));
+            $text = message::info(get_string_kopere("notification_message_not"));
             $form->print_row(get_string_kopere("notification_message"), $text);
         } else {
             $href = "{$CFG->wwwroot}/local/kopere_dashboard/_editor/?page=notification&id={$evento->id}&link=";
@@ -326,31 +325,31 @@ class notifications extends notificationsutil {
                 'module = :module AND event = :event AND id != :id',
                 ["module" => $event->module, "event" => $event->event, "id" => $event->id]);
             if ($eventexist) {
-                mensagem::agenda_mensagem_danger(get_string_kopere("notification_duplicate"));
+                message::schedule_message_danger(get_string_kopere("notification_duplicate"));
             } else {
                 try {
                     unset($event->message);
                     $DB->update_record("local_kopere_dashboard_event", $event);
 
-                    mensagem::agenda_mensagem_success(get_string_kopere("notification_created"));
+                    message::schedule_message_success(get_string_kopere("notification_created"));
                     header::location(local_kopere_dashboard_makeurl("notifications", "dashboard"));
                 } catch (\dml_exception $e) {
-                    mensagem::print_danger($e->getMessage());
+                    message::print_danger($e->getMessage());
                 }
             }
         } else {
             $eventexist = $DB->record_exists("local_kopere_dashboard_event",
                 ["module" => $event->module, "event" => $event->event]);
             if ($eventexist) {
-                mensagem::agenda_mensagem_danger(get_string_kopere("notification_duplicate"));
+                message::schedule_message_danger(get_string_kopere("notification_duplicate"));
             } else {
                 try {
                     $DB->insert_record("local_kopere_dashboard_event", $event);
 
-                    mensagem::agenda_mensagem_success(get_string_kopere("notification_created"));
+                    message::schedule_message_success(get_string_kopere("notification_created"));
                     header::location(local_kopere_dashboard_makeurl("notifications", "dashboard"));
                 } catch (\dml_exception $e) {
-                    mensagem::print_danger($e->getMessage());
+                    message::print_danger($e->getMessage());
                 }
             }
         }
@@ -374,7 +373,7 @@ class notifications extends notificationsutil {
         if ($status == "sim") {
             $DB->delete_records("local_kopere_dashboard_event", ["id" => $id]);
 
-            mensagem::agenda_mensagem_success(get_string_kopere("notification_delete_success"));
+            message::schedule_message_success(get_string_kopere("notification_delete_success"));
             header::location(local_kopere_dashboard_makeurl("notifications", "dashboard"));
         }
 
@@ -423,7 +422,7 @@ class notifications extends notificationsutil {
                 ->set_title(get_string_kopere("notification_setting_edit"))
                 ->set_name('notificacao-template-html'));
 
-        $form->print_panel(get_string_kopere("notification_setting_preview"), "<div id='area-mensagem-preview'></div>");
+        $form->print_panel(get_string_kopere("notification_setting_preview"), "<div id='area-message-preview'></div>");
 
         $form->create_submit_input(get_string("savechanges"));
 
@@ -450,10 +449,10 @@ class notifications extends notificationsutil {
         dashboard_util::start_page();
 
         if (!$CFG->debugdisplay || $CFG->debug == 0) {
-            mensagem::print_danger("Você precisa ativar o Modo desenvolvedor e Mostrar as mensagens de debug");
+            message::print_danger("Você precisa ativar o Modo desenvolvedor e Mostrar as mensagens de debug");
         }
 
-        notificationsutil::mensagem_no_smtp();
+        notificationsutil::message_no_smtp();
         $CFG->debugsmtp = true;
 
         $htmlmessage = get_string_kopere("notification_testsmtp_message") . date('d/m/Y H:i');

@@ -50,7 +50,7 @@ class enroll_util {
         // Evita erro.
         $context = \context_course::instance($course->id, IGNORE_MISSING);
         if ($context == null) {
-            mensagem::print_danger('"context_course::instance" not found');
+            message::print_danger('"context_course::instance" not found');
             return false;
         }
 

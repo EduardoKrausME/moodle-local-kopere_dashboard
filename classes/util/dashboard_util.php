@@ -141,7 +141,7 @@ class dashboard_util {
                         <div class='content-box'>";
 
             echo self::set_titulo(self::$currenttitle, $settingurl, $infourl);
-            echo mensagem::get_mensagem_agendada();
+            echo message::get_message_schedule();
         }
     }
 

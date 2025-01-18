@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * mensagem file
+ * message file
  *
  * introduced 31/01/17 06:01
  *
@@ -27,32 +27,32 @@
 namespace local_kopere_dashboard\util;
 
 /**
- * Class mensagem
+ * Class message
  *
  * @package local_kopere_dashboard\util
  */
-class mensagem {
+class message {
 
     /**
-     * Function agenda_mensagem
+     * Function schedule_message
      *
-     * @param $mensagem
+     * @param $message
      */
-    public static function agenda_mensagem($mensagem) {
+    public static function schedule_message($message) {
         $cookie = session::get("kopere_message");
         if (!$cookie) {
-            session::set("kopere_message", $mensagem);
+            session::set("kopere_message", $message);
         } else {
-            session::set("kopere_message", $cookie . $mensagem);
+            session::set("kopere_message", $cookie . $message);
         }
     }
 
     /**
-     * Function get_mensagem_agendada
+     * Function get_message_agendada
      *
      * @return null|string
      */
-    public static function get_mensagem_agendada() {
+    public static function get_message_schedule() {
         $cookie = session::get("kopere_message");
         if ($cookie) {
             session::set("kopere_message", null);
@@ -64,7 +64,7 @@ class mensagem {
     /**
      * return void
      */
-    public static function clear_mensagem() {
+    public static function clear_message() {
         session::set("kopere_message", null);
     }
 
@@ -93,12 +93,12 @@ class mensagem {
     }
 
     /**
-     * Function agenda_mensagem_warning
+     * Function schedule_message_warning
      *
      * @param $texto
      */
-    public static function agenda_mensagem_warning($texto) {
-        self::agenda_mensagem(self::warning($texto));
+    public static function schedule_message_warning($texto) {
+        self::schedule_message(self::warning($texto));
     }
 
     /**
@@ -126,12 +126,12 @@ class mensagem {
     }
 
     /**
-     * Function agenda_mensagem_success
+     * Function schedule_message_success
      *
      * @param $texto
      */
-    public static function agenda_mensagem_success($texto) {
-        self::agenda_mensagem(self::success($texto));
+    public static function schedule_message_success($texto) {
+        self::schedule_message(self::success($texto));
     }
 
     /**
@@ -161,12 +161,12 @@ class mensagem {
     }
 
     /**
-     * Function agenda_mensagem_info
+     * Function schedule_message_info
      *
      * @param $texto
      */
-    public static function agenda_mensagem_info($texto) {
-        self::agenda_mensagem(self::info($texto));
+    public static function schedule_message_info($texto) {
+        self::schedule_message(self::info($texto));
     }
 
     /**
@@ -194,11 +194,11 @@ class mensagem {
     }
 
     /**
-     * Function agenda_mensagem_danger
+     * Function schedule_message_danger
      *
      * @param $texto
      */
-    public static function agenda_mensagem_danger($texto) {
-        self::agenda_mensagem(self::danger($texto));
+    public static function schedule_message_danger($texto) {
+        self::schedule_message(self::danger($texto));
     }
 }

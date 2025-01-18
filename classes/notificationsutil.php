@@ -32,7 +32,7 @@ use local_kopere_dashboard\html\form;
 use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\end_util;
-use local_kopere_dashboard\util\mensagem;
+use local_kopere_dashboard\util\message;
 use local_kopere_dashboard\util\release;
 
 /**
@@ -254,12 +254,12 @@ class notificationsutil {
     }
 
     /**
-     * Function mensagem_no_smtp
+     * Function message_no_smtp
      *
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public static function mensagem_no_smtp() {
+    public static function message_no_smtp() {
         global $CFG;
         if (strlen(get_config("moodle", "smtphosts")) > 5) {
             return;
@@ -267,10 +267,10 @@ class notificationsutil {
 
         if (release::version() < 3.2) {
             $CFG->mail = "messagesettingemail";
-            mensagem::print_danger(get_string_kopere("notification_error_smtp", $CFG));
+            message::print_danger(get_string_kopere("notification_error_smtp", $CFG));
         } else {
             $CFG->mail = "outgoingmailconfig";
-            mensagem::print_danger(get_string_kopere("notification_error_smtp", $CFG));
+            message::print_danger(get_string_kopere("notification_error_smtp", $CFG));
         }
     }
 

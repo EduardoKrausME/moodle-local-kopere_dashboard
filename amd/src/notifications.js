@@ -35,7 +35,7 @@ define(["jquery"], function($) {
 
                 $.getJSON(url, function(data) {
                     loaded_data = data;
-                    $('#area-mensagem-preview').html(replace_tags(data.content));
+                    $('#area-message-preview').html(replace_tags(data.content));
                     $('#notificacaotemplatehtml').val(data.content);
                 });
             }
@@ -44,10 +44,10 @@ define(["jquery"], function($) {
 
             $('#notificacaotemplatehtml')
                 .on("change", function() {
-                    $('#area-mensagem-preview').html(replace_tags($('#notificacaotemplatehtml').val()));
+                    $('#area-message-preview').html(replace_tags($('#notificacaotemplatehtml').val()));
                 })
                 .on("keyup", function() {
-                    $('#area-mensagem-preview').html(replace_tags($('#notificacaotemplatehtml').val()));
+                    $('#area-message-preview').html(replace_tags($('#notificacaotemplatehtml').val()));
                 });
         },
     };

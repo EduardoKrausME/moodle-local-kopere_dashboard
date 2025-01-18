@@ -31,7 +31,7 @@ use local_kopere_dashboard\report\report_benchmark;
 use local_kopere_dashboard\report\report_benchmark_test;
 use local_kopere_dashboard\server\performancemonitor;
 use local_kopere_dashboard\util\dashboard_util;
-use local_kopere_dashboard\util\mensagem;
+use local_kopere_dashboard\util\message;
 use local_kopere_dashboard\util\title_util;
 
 /**
@@ -54,7 +54,7 @@ class benchmark {
         echo performancemonitor::load_monitor();
 
         echo '<div class="element-box">';
-        mensagem::print_info(get_string_kopere("benchmark_based") . '
+        message::print_info(get_string_kopere("benchmark_based") . '
                     <a class="alert-link" href="https://moodle.org/plugins/report_benchmark"
                        target="_blank">report_benchmark</a>');
 
@@ -89,13 +89,13 @@ class benchmark {
 
         $score = $test->get_total();
         if ($score < 4) {
-            mensagem::print_info("<strong>" . get_string_kopere("benchmark_timetotal") . '</strong>
+            message::print_info("<strong>" . get_string_kopere("benchmark_timetotal") . '</strong>
                 ' . $this->format_number($score) . ' ' . get_string_kopere("benchmark_seconds"));
         } else if ($score < 8) {
-            mensagem::print_warning("<strong>" . get_string_kopere("benchmark_timetotal") . '</strong>
+            message::print_warning("<strong>" . get_string_kopere("benchmark_timetotal") . '</strong>
                 ' . $this->format_number($score) . ' ' . get_string_kopere("benchmark_seconds"));
         } else {
-            mensagem::print_danger("<strong>" . get_string_kopere("benchmark_timetotal") . '</strong>
+            message::print_danger("<strong>" . get_string_kopere("benchmark_timetotal") . '</strong>
                 ' . $this->format_number($score) . ' ' . get_string_kopere("benchmark_seconds"));
         }
 

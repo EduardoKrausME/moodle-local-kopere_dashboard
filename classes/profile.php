@@ -26,7 +26,7 @@
 
 namespace local_kopere_dashboard;
 
-use local_kopere_dashboard\util\mensagem;
+use local_kopere_dashboard\util\message;
 
 /**
  * Class profile
@@ -100,7 +100,7 @@ class profile {
         $courses = enrol_get_all_users_courses($userid);
 
         if (!count($courses)) {
-            return mensagem::warning(get_string_kopere("profile_notenrol"));
+            return message::warning(get_string_kopere("profile_notenrol"));
         }
 
         $html = "";

@@ -32,7 +32,7 @@ use local_kopere_dashboard\html\inputs\input_date_range;
 use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\header;
-use local_kopere_dashboard\util\mensagem;
+use local_kopere_dashboard\util\message;
 
 /**
  * Class userenrolment
@@ -145,7 +145,7 @@ class userenrolment {
 
         $DB->update_record("user_enrolments", $enrolment);
 
-        mensagem::agenda_mensagem_success(get_string_kopere("userenrolment_updatesuccess"));
+        message::schedule_message_success(get_string_kopere("userenrolment_updatesuccess"));
         header::reload();
     }
 }
