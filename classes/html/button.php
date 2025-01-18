@@ -143,13 +143,13 @@ class button {
     }
 
     /**
-     * Function set_class
+     * Function add_class
      *
-     * @param $class
+     * @param string $class
      *
      * @return button
      */
-    public function set_class($class) {
+    public function add_class($class) {
         $this->class[] = $class;
 
         return $this;
@@ -158,7 +158,7 @@ class button {
     /**
      * Function set_target
      *
-     * @param $target
+     * @param string $target
      *
      * @return button
      */
@@ -174,7 +174,7 @@ class button {
     /**
      * Function setLink
      *
-     * @param $link
+     * @param string $link
      *
      * @return button
      */
@@ -194,7 +194,7 @@ class button {
     /**
      * Function add_tag
      *
-     * @param $tag
+     * @param string $tag
      *
      * @return $this
      */
@@ -214,7 +214,7 @@ class button {
     /**
      * Function set_padding_top
      *
-     * @param $top
+     * @param int $top
      */
     public function set_padding_top($top) {
         $this->paddingtop = $top;
@@ -262,7 +262,7 @@ class button {
     /**
      * Function close_popup
      *
-     * @param $text
+     * @param string $text
      */
     public static function close_popup($text) {
         echo "<button class=\"btn btn-primary margin-left-10\" data-dismiss=\"modal\">{$text}</button>";
@@ -271,8 +271,8 @@ class button {
     /**
      * Function add
      *
-     * @param $text
-     * @param $link
+     * @param string $text
+     * @param string $link
      * @param string $class
      * @param bool $p
      * @param bool $return
@@ -288,8 +288,8 @@ class button {
     /**
      * Function edit
      *
-     * @param $text
-     * @param $link
+     * @param string $text
+     * @param string $link
      * @param string $class
      * @param bool $p
      * @param bool $return
@@ -305,8 +305,8 @@ class button {
     /**
      * Function delete
      *
-     * @param $text
-     * @param $link
+     * @param string $text
+     * @param string $link
      * @param string $class
      * @param bool $p
      * @param bool $return
@@ -322,8 +322,8 @@ class button {
     /**
      * Function primary
      *
-     * @param $text
-     * @param $link
+     * @param string $text
+     * @param string $link
      * @param string $class
      * @param bool $p
      * @param bool $return
@@ -339,8 +339,8 @@ class button {
     /**
      * Function info
      *
-     * @param $text
-     * @param $link
+     * @param string $text
+     * @param string $link
      * @param string $class
      * @param bool $p
      * @param bool $return
@@ -356,7 +356,7 @@ class button {
     /**
      * Function help
      *
-     * @param $infourl
+     * @param string $infourl
      * @param null $text
      * @param string $hastag
      *
@@ -420,8 +420,8 @@ class button {
     /**
      * Function icon_popup_table
      *
-     * @param $icon
-     * @param $link
+     * @param string $icon
+     * @param string $link
      *
      * @return string
      */
@@ -437,11 +437,11 @@ class button {
     /**
      * Function create_button
      *
-     * @param $text
-     * @param $link
-     * @param $p
-     * @param $class
-     * @param $return
+     * @param string $text
+     * @param string $link
+     * @param bool $p
+     * @param string $class
+     * @param bool $return
      *
      * @return string
      */
