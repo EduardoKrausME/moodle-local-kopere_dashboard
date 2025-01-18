@@ -186,9 +186,9 @@ class courses {
         echo '<div class="element-box">
                   <h3>' . get_string_kopere("courses_sumary") . ' ' .
             button::info(get_string_kopere("courses_edit"),
-                "{$CFG->wwwroot}/course/edit.php?id={$course->id}#id_summary_editor", button::BTN_PEQUENO, false, true) . ' ' .
+                "{$CFG->wwwroot}/course/edit.php?id={$course->id}#id_summary_editor", "btn-xs", false, true) . ' ' .
             button::primary(get_string_kopere("courses_access"),
-                "{$CFG->wwwroot}/course/view.php?id={$course->id}", button::BTN_PEQUENO, false, true) . '
+                "{$CFG->wwwroot}/course/view.php?id={$course->id}", "btn-xs", false, true) . '
                   </h3>
                   <div class="panel panel-default">
                       <div class="panel-body">' . $course->summary . '</div>';
