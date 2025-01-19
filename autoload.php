@@ -106,3 +106,7 @@ function get_path_query() {
 function get_string_kopere($identifier, $object = null) {
     return get_string($identifier, "local_kopere_dashboard", $object);
 }
+
+// Alias this class to the old name.
+// In future all uses of this class will be corrected and the legacy references will be removed.
+class_alias( \local_kopere_dashboard\util\message::class, "local_kopere_dashboard\\util\\mensagem");
