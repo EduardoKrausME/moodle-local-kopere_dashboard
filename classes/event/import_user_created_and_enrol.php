@@ -52,6 +52,6 @@ class import_user_created_and_enrol extends base {
      * @throws \coding_exception
      */
     public static function get_name() {
-        return get_string_kopere("userimport_import_user_created_and_enrol_name");
+        return get_string("userimport_import_user_created_and_enrol_name", "local_kopere_dashboard");
     }
 }
