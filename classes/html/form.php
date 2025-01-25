@@ -63,15 +63,31 @@ class form {
      * @param string $type
      */
     public function print_row($titulo, $input, $name = "", $adicionaltext = "", $type = "") {
+        echo $this->print_row_return($titulo, $input, $name, $adicionaltext, $type);
+    }
+
+    /**
+     * Function print_row_return
+     *
+     * @param $titulo
+     * @param $input
+     * @param string $name
+     * @param string $adicionaltext
+     * @param string $type
+     *
+     * @return string
+     */
+    public function print_row_return($titulo, $input, $name = "", $adicionaltext = "", $type = "") {
         if ($titulo) {
             $titulo = "<label for='{$name}'>{$titulo}</label>";
         }
 
         $id = html::retira_caracteres_nao_ascii($name);
-        echo "<div id='area_{$id}' class='form-group area_{$name} type_{$type}'>
-                  {$titulo} {$input}
-                  <div class='help-block form-text with-errors'>{$adicionaltext}</div>
-              </div>";
+        return "
+            <div id='area_{$id}' class='form-group area_{$name} type_{$type}'>
+                {$titulo} {$input}
+                <div class='help-block form-text with-errors'>{$adicionaltext}</div>
+            </div>";
     }
 
     /**
@@ -130,6 +146,23 @@ class form {
      */
     public function add_input(i_input $input) {
         $this->print_row(
+            $input->get_title(),
+            $input->to_string(),
+            $input->get_name(),
+            $input->get_description(),
+            $input->get_type()
+        );
+    }
+
+    /**
+     * Function add_input
+     *
+     * @param i_input $input
+     *
+     * @return string
+     */
+    public function add_input_return(i_input $input) {
+        return $this->print_row_return(
             $input->get_title(),
             $input->to_string(),
             $input->get_name(),
