@@ -112,7 +112,7 @@ class header {
                   <div class='text404 text-danger'>{$printtext}</div>
                   <p>
                       <a href='#' onclick='window.history.back();return false;'
-                         class='btn btn-primary'>Voltar</a>
+                         class='btn btn-primary'>" . get_string("back") . "</a>
                   </p>
               </div>";
 
