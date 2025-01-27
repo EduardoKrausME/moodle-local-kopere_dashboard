@@ -70,11 +70,6 @@ class menu {
                         ->set_title(get_string_kopere("useronline_title"))
                         ->set_icon("users-online"),
                     (new submenu_util())
-                        ->set_classname("userimport")
-                        ->set_methodname("dashboard")
-                        ->set_title(get_string_kopere("userimport_title"))
-                        ->set_icon("users-import"),
-                    (new submenu_util())
                         ->set_classname("useraccess")
                         ->set_methodname("dashboard")
                         ->set_title(get_string_kopere("useraccess_title"))
