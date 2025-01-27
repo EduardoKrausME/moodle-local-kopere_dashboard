@@ -164,6 +164,9 @@ class reports {
                 title_util::print_h3($titlereport, false);
 
                 $columns = json_decode($koperereports->columns);
+                if (!$columns) {
+                    throw new \Exception("Error decoding JSON columns: '{$koperereports->columns}'");
+                }
                 if (!isset($columns->header)) {
                     $columns->header = [];
                 }
