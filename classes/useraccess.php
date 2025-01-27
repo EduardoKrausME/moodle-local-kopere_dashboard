@@ -88,8 +88,11 @@ class useraccess {
      *
      * @throws \coding_exception
      * @throws \dml_exception
+     * @throws \Exception
      */
     public function load_all_users() {
+        global $CFG;
+
         $changuemes = required_param("changue_mes", PARAM_TEXT);
 
         $columns = [
@@ -104,12 +107,20 @@ class useraccess {
         ];
         $search = new datatable_search_util($columns);
 
+        if ($CFG->dbtype == "mysqli" || $CFG->dbtype = "mariadb") {
+            $where = "date_format( from_unixtime(l.timecreated), '%Y-%m' ) LIKE '{$changuemes}'";
+        } else if ($CFG->dbtype == "pgsql") {
+            $where = "to_char(to_timestamp(l.timecreated), 'YYYY-MM') LIKE '{$changuemes}'";
+        } else {
+            throw new \Exception("only mysqli and pgsql");
+        }
+
         $search->execute_sql_and_return("
                SELECT {[columns]}
                  FROM {logstore_standard_log} l
                  JOIN {user}                  u ON l.userid = u.id
                 WHERE action LIKE 'loggedin'
-                  AND date_format( from_unixtime(l.timecreated), '%Y-%m' ) LIKE '{$changuemes}'
+                  AND {$where}
             ", 'GROUP BY l.userid', null,
             "\\local_kopere_dashboard\\util\\user_util::column_fullname");
 
