@@ -41,7 +41,7 @@
         }
         
         .table {
-            background: #fff0;
+            background: var(--bs-transparent, #0000);
         }
         table.dataTable {
             th {
@@ -71,7 +71,7 @@
         .box-page {
             background: #fff1;
             .content .title a {
-                color: #98b6d9;
+                color: var(--bs-link-color, #98b6d9);
             }
         }
     }

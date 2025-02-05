@@ -40,7 +40,7 @@
 .filemanager .top-right {
     right: 0;
     font-size: 17px;
-    background-color: var(--bs-body-bg);
+    background-color: var(--bs-gray-1100);
     color: var(--bs-primary-text);
     display: block;
     position: sticky;
@@ -97,7 +97,7 @@
     white-space: nowrap;
     -webkit-user-select: none;
     cursor: pointer;
-    //text-shadow: 1px 1px var(--bs-body-bg);
+    //text-shadow: 1px 1px var(--bs-gray-1100);
     font-size: 1rem;
     font-weight: 500;
     box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.07), -1px 1px 2px 0 rgba(255, 255, 255, 0.15) inset;
@@ -262,7 +262,7 @@
             &:after {
                 content: 'x';
                 position: absolute;
-                color: var(--bs-body-bg);
+                color: var(--bs-gray-1100);
                 font-size: 12em;
                 margin-right: 2rem;
                 line-height: 0.76;
@@ -333,7 +333,7 @@
     z-index: 10000;
     max-width: 50%;
     max-height: 100%;
-    background-color: var(--bs-body-bg);
+    background-color: var(--bs-gray-1100);
     border-left: 1px solid var(--bs-border-color);
     border-bottom: 1px solid var(--bs-border-color);
 }
@@ -394,7 +394,7 @@
 }
 .icon.folder.full:after {
     height: 2.15em;
-    box-shadow: 0 -0.12em 0 0 var(--bs-body-bg);
+    box-shadow: 0 -0.12em 0 0 var(--bs-gray-1100);
 }
 .icon.file {
     width: 2.5em;
@@ -402,7 +402,7 @@
     line-height: 3em;
     text-align: center;
     border-radius: 0.25em;
-    color: var(--bs-body-bg);
+    color: var(--bs-gray-1100);
     display: inline-block;
     margin: 15px 20px 0 5px;
     position: relative;
@@ -576,7 +576,7 @@
     cursor: pointer;
     font-size: 1rem;
     font-weight: 500;
-    box-shadow: 1px 1px 2px 1px rgba(var(--bs-body-color-rgb), 0.07), -1px 1px 2px 0 rgba(var(--bs-body-bg-rgb), 0.15) inset;
+    box-shadow: 1px 1px 2px 1px rgba(var(--bs-body-color-rgb), 0.07), -1px 1px 2px 0 rgba(var(--bs-gray-1100-rgb), 0.15) inset;
 }
 .upload-collapse input[type=file]:hover::before {
     border-color: rgba(var(--bs-link-color-rgb), 0.7);

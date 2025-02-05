@@ -11778,7 +11778,7 @@ body.remove-overflow {
   }
   [data-bs-theme=auto] .kopere-dashboard-bootstrap_page .table,
   [data-bs-theme=auto] .kopere_dashboard_div .table {
-    background: rgba(255, 255, 255, 0);
+    background: var(--bs-transparent, rgba(0, 0, 0, 0));
   }
   [data-bs-theme=auto] .kopere-dashboard-bootstrap_page table.dataTable th,
   [data-bs-theme=auto] .kopere_dashboard_div table.dataTable th {
@@ -11808,7 +11808,7 @@ body.remove-overflow {
     background: rgba(255, 255, 255, 0.0666666667);
   }
   [data-bs-theme=auto] .kopere-dashboard-pages .box-page .content .title a {
-    color: #98b6d9;
+    color: var(--bs-link-color, #98b6d9);
   }
 }
 [data-bs-theme=dark] {
@@ -11856,7 +11856,7 @@ body.remove-overflow {
 }
 [data-bs-theme=dark] .kopere-dashboard-bootstrap_page .table,
 [data-bs-theme=dark] .kopere_dashboard_div .table {
-  background: rgba(255, 255, 255, 0);
+  background: var(--bs-transparent, rgba(0, 0, 0, 0));
 }
 [data-bs-theme=dark] .kopere-dashboard-bootstrap_page table.dataTable th,
 [data-bs-theme=dark] .kopere_dashboard_div table.dataTable th {
@@ -11886,7 +11886,7 @@ body.remove-overflow {
   background: rgba(255, 255, 255, 0.0666666667);
 }
 [data-bs-theme=dark] .kopere-dashboard-pages .box-page .content .title a {
-  color: #98b6d9;
+  color: var(--bs-link-color, #98b6d9);
 }
 
 /*# sourceMappingURL=styles.css.map */

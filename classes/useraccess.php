@@ -107,7 +107,7 @@ class useraccess {
         ];
         $search = new datatable_search_util($columns);
 
-        if ($CFG->dbtype == "mysqli" || $CFG->dbtype = "mariadb") {
+        if ($CFG->dbtype == "mysqli" || $CFG->dbtype == "mariadb") {
             $where = "date_format( from_unixtime(l.timecreated), '%Y-%m' ) LIKE '{$changuemes}'";
         } else if ($CFG->dbtype == "pgsql") {
             $where = "to_char(to_timestamp(l.timecreated), 'YYYY-MM') LIKE '{$changuemes}'";
