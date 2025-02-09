@@ -49,7 +49,7 @@ class menu {
 
         $isadmin = has_capability("local/kopere_dashboard:manage", \context_system::instance());
 
-        echo "<ul class='main-menu block_tree list menu-kopere main-menu'>";
+        echo "<ul class='kopere-main-menu block_tree list menu-kopere'>";
 
         echo dashboard_util::add_menu(
             (new menu_util())->set_classname("dashboard")
