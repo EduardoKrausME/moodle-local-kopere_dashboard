@@ -134,6 +134,11 @@ class menu {
                             ->set_methodname("dashboard")
                             ->set_title(get_string_kopere("webpages_title"))
                             ->set_icon("webpages"),
+                        (new submenu_util())
+                            ->set_classname("webpages")
+                            ->set_methodname("settings")
+                            ->set_title(get_string_kopere("settings"))
+                            ->set_icon("settings"),
                     ]));
         }
 
