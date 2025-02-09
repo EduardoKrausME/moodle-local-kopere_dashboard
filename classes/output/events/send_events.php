@@ -26,7 +26,6 @@
 
 namespace local_kopere_dashboard\output\events;
 
-use core\message\message;
 use local_kopere_dashboard\notificationsutil;
 use local_kopere_dashboard\util\release;
 use local_kopere_dashboard\vo\local_kopere_dashboard_event;
@@ -210,7 +209,7 @@ class send_events {
             $magager = "<a href='{$CFG->wwwroot}/message/notificationpreferences.php'>Gerenciar mensagens</a>";
             $htmlmessage = str_replace("{[manager]}", $magager, $htmlmessage);
 
-            $eventdata = new message();
+            $eventdata = new \core\message\message();
             if (release::version() >= 3.2) {
                 $eventdata->courseid = SITEID;
                 $eventdata->modulename = "moodle";

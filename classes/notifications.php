@@ -457,7 +457,7 @@ class notifications extends notificationsutil {
 
         $htmlmessage = get_string_kopere("notification_testsmtp_message") . date('d/m/Y H:i');
 
-        $eventdata = new message();
+        $eventdata = new \core\message\message();
         if (release::version() >= 3.2) {
             $eventdata->courseid = SITEID;
             $eventdata->modulename = "moodle";
