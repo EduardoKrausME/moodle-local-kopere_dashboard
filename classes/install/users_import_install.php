@@ -85,8 +85,8 @@ class users_import_install {
     public static function insert($event) {
         global $DB;
 
-        $evento = $DB->record_exists("local_kopere_dashboard_event", ["module" => $event->module, "event" => $event->event]);
-        if (!$evento) {
+        $saveevent = $DB->record_exists("local_kopere_dashboard_event", ["module" => $event->module, "event" => $event->event]);
+        if (!$saveevent) {
             $DB->insert_record("local_kopere_dashboard_event", $event);
         }
     }

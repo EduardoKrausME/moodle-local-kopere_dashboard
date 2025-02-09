@@ -140,8 +140,8 @@ if ($action) {
                 $events = $DB->get_record("local_kopere_dashboard_event", ["id" => $id]);
                 $events->message = $html;
                 $DB->update_record("local_kopere_dashboard_event", $events);
-            } else {
-                set_config($page, $html, "local_kopere_dashboard");
+            } else if ($page == "settings") {
+                set_config($id, $html, "local_kopere_dashboard");
             }
             echo json_encode([
                 "success" => 1,

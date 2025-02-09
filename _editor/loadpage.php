@@ -32,6 +32,8 @@ $link = optional_param("link", "", PARAM_TEXT);
 
 $html = "";
 
+$aos = true;
+
 if (file_exists(__DIR__ . "/_default/default-{$page}.html")) {
     if ($page == "webpages") {
         $html = $DB->get_field("local_kopere_dashboard_pages", "text", ["id" => $id]);
@@ -44,14 +46,16 @@ if (file_exists(__DIR__ . "/_default/default-{$page}.html")) {
         $html = vvveb__changue_langs($html, "local_kopere_dashboard");
     }
 } else {
-    $html = get_config("local_kopere_dashboard", $page);
+    $html = get_config("local_kopere_dashboard", $id);
+    $aos = false;
 }
 
 if (!strpos($html, "vvvebjs-styles")) {
     $html .= "\n<style id=\"vvvebjs-styles\"></style>";
 }
 
-$html = "
+if ($aos) {
+    $html = "
 <html>
     <head>
         <link vvveb-remove=\"true\" href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/css/bootstrap-vvveb.css\" rel=\"stylesheet\">
@@ -62,5 +66,5 @@ $html = "
         {$html}
     </body>
 </html>";
-
+}
 die($html);

@@ -35,6 +35,7 @@
  * @throws dml_exception
  * @throws downgrade_exception
  * @throws upgrade_exception
+ * @throws moodle_exception
  */
 function xmldb_local_kopere_dashboard_upgrade($oldversion) {
     global $DB, $CFG;
@@ -343,6 +344,13 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         }
 
         upgrade_plugin_savepoint(true, 2024121804, "local", "kopere_dashboard");
+    }
+
+    if ($oldversion < 2025020901) {
+        $html = file_get_contents(__DIR__ . "/notification-template.html");
+        set_config("notification-template", $html, "local_kopere_dashboard");
+
+        upgrade_plugin_savepoint(true, 2025020901, "local", "kopere_dashboard");
     }
 
     return true;

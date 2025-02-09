@@ -30,9 +30,9 @@ use core\event\base;
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
+use local_kopere_dashboard\html\inputs\input_htmleditor;
 use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\html\inputs\input_text;
-use local_kopere_dashboard\html\inputs\input_textarea;
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\dashboard_util;
@@ -58,7 +58,7 @@ class notifications extends notificationsutil {
         global $DB;
 
         dashboard_util::add_breadcrumb(get_string_kopere("notification_title"));
-        dashboard_util::start_page(local_kopere_dashboard_makeurl("notifications", "settings"));
+        dashboard_util::start_page();
 
         notificationsutil::message_no_smtp();
 
@@ -98,7 +98,7 @@ class notifications extends notificationsutil {
 
         if ($events) {
             $table = new data_table();
-            $table->add_header('#', "id", table_header_item::TYPE_INT);
+            $table->add_header("#", "id", table_header_item::TYPE_INT);
             $table->add_header(get_string_kopere("notification_table_module"), "module_name");
             $table->add_header(get_string_kopere("notification_table_action"), "event_name");
             $table->add_header(get_string_kopere("notification_table_subject"), "subject");
@@ -115,7 +115,7 @@ class notifications extends notificationsutil {
             message::print_warning(get_string_kopere("notification_table_empty"));
         }
 
-        echo '</div>';
+        echo "</div>";
         dashboard_util::end_page();
     }
 
@@ -154,13 +154,13 @@ class notifications extends notificationsutil {
                 ->set_add_selecione(true)
                 ->set_description(get_string_kopere("notification_add_moduledesc"))
         );
-        echo '<div id="restante-form">' . get_string_kopere("notification_add_selectmodule") . '</div>';
+        echo '<div id="restante-form">' . get_string_kopere("notification_add_selectmodule") . "</div>";
 
         $form->close();
 
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/notifications', "notifications_add_form_extra");
+        $PAGE->requires->js_call_amd("local_kopere_dashboard/notifications", "notifications_add_form_extra");
 
-        echo '</div>';
+        echo "</div>";
         dashboard_util::end_page();
     }
 
@@ -179,19 +179,19 @@ class notifications extends notificationsutil {
         $id = optional_param("id", 0, PARAM_INT);
 
         if ($id) {
-            /** @var local_kopere_dashboard_event $evento */
-            $evento = $DB->get_record("local_kopere_dashboard_event", ["id" => $id]);
-            header::notfound_null($evento, get_string_kopere("notification_notound"));
+            /** @var local_kopere_dashboard_event $saveevent */
+            $saveevent = $DB->get_record("local_kopere_dashboard_event", ["id" => $id]);
+            header::notfound_null($saveevent, get_string_kopere("notification_notound"));
 
-            $eventclass = $evento->event;
-            $module = $evento->module;
+            $eventclass = $saveevent->event;
+            $module = $saveevent->module;
 
             dashboard_util::add_breadcrumb(
                 get_string_kopere("notification_title"), local_kopere_dashboard_makeurl("notifications", "dashboard"));
             dashboard_util::add_breadcrumb(
                 get_string_kopere("notification_editing"));
         } else {
-            $evento = local_kopere_dashboard_event::create_by_default();
+            $saveevent = local_kopere_dashboard_event::create_by_default();
 
             dashboard_util::add_breadcrumb(
                 get_string_kopere("notification_title"), local_kopere_dashboard_makeurl("notifications", "dashboard"));
@@ -220,7 +220,7 @@ class notifications extends notificationsutil {
                     ->set_title(get_string_kopere("notification_status"))
                     ->set_name("status")
                     ->set_values($status)
-                    ->set_value($evento->status)
+                    ->set_value($saveevent->status)
                     ->set_description(get_string_kopere("notification_statusdesc")));
         }
 
@@ -232,7 +232,7 @@ class notifications extends notificationsutil {
                 ->set_title(get_string_kopere("notification_from"))
                 ->set_name("userfrom")
                 ->set_values($valuefrom)
-                ->set_value($evento->userfrom)
+                ->set_value($saveevent->userfrom)
                 ->set_description(get_string_kopere("notification_fromdesc")));
 
         $valueto = [
@@ -246,55 +246,55 @@ class notifications extends notificationsutil {
                 ->set_title(get_string_kopere("notification_to"))
                 ->set_name("userto")
                 ->set_values($valueto)
-                ->set_value($evento->userto)
+                ->set_value($saveevent->userto)
                 ->set_description(get_string_kopere("notification_todesc")));
 
         $form->add_input(
             input_text::new_instance()
                 ->set_title(get_string_kopere("notification_subject"))
                 ->set_name("subject")
-                ->set_value($evento->subject)
+                ->set_value($saveevent->subject)
                 ->set_description(get_string_kopere("notification_subjectdesc")));
-
-        $template = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/" .
-            config::get_key('notificacao-template');
-        $templatecontent = file_get_contents($template);
 
         if (!$id) {
             if (strpos($module, "mod_") === 0) {
-                $mailtext = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail-text/mod.html";
+                $htmltext = get_string_kopere("notification_message_html_mod");
                 $modulename = get_string("modulename", $module);
             } else {
-                $mailtext = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail-text/{$module}.html";
+                $modules = ["core_course", "core_course_category", "core_user", "core_user_enrolment"];
+
+                if (in_array($module, $modules)) {
+                    $htmltext = get_string_kopere("notification_message_html_{$module}");
+                } else {
+                    $htmltext = get_string_kopere("notification_message_html");
+                }
                 $modulename = "";
             }
 
-            if (file_exists($mailtext)) {
-                $htmltext = file_get_contents($mailtext);
-            } else {
-                $htmltext = get_string_kopere("notification_message_html");
-            }
-
-            $htmltext = str_replace('{[event.name]}', $eventclass::get_name(), $htmltext);
-            $htmltext = str_replace('{[module.name]}', $modulename, $htmltext);
-
-            $form->create_hidden_input("message", $htmltext);
+            $htmltext = str_replace("{[event.name]}", $eventclass::get_name(), $htmltext);
+            $htmltext = str_replace("{[module.name]}", $modulename, $htmltext);
         } else {
-            $htmltext = $evento->message;
+            $htmltext = $saveevent->message;
         }
 
         $form->print_row(null,
-            button::help('TAGS-substituídas-nas-mensagens-de-Notificações', 'Quais as TAGS substituídas nas mensagens?'));
+            button::help("TAGS-substituídas-nas-mensagens-de-Notificações", get_string_kopere("notification_tags")));
 
-        if (!$evento->id) {
-            $text = message::info(get_string_kopere("notification_message_not"));
-            $form->print_row(get_string_kopere("notification_message"), $text);
+        $htmltexteditor = input_htmleditor::new_instance()
+            ->set_name("event_message")
+            ->set_value($htmltext)
+            ->to_string();
+        $templatecontent = config::get_key("notification-template");
+
+        $href = "{$CFG->wwwroot}/local/kopere_dashboard/_editor/?page=settings&id=notification-template";
+        $edittemplate = "<a href='{$href}' class='btn btn-info mt-2'>" .
+            get_string_kopere("notification_message_edit_template") .
+            "</a>";
+        if (strpos($templatecontent, "{[message]}") === false) {
+            message::print_danger(get_string_kopere("notification_message_template_error") . "<br>" . $edittemplate);
         } else {
-            $href = "{$CFG->wwwroot}/local/kopere_dashboard/_editor/?page=notification&id={$evento->id}&link=";
-            $text = get_string_kopere("notification_message_edit");
-            $link = "<a class='btn btn-info' target=\"editor\" href='{$href}'>{$text}</a>";
-            $templatecontent = str_replace('{[message]}', $htmltext . $link, $templatecontent);
-            $form->print_panel(get_string_kopere("notification_message"), $templatecontent);
+            $templatecontent = str_replace("{[message]}", $htmltexteditor, $templatecontent);
+            $form->print_panel(get_string_kopere("notification_message"), $templatecontent . $edittemplate);
         }
 
         if ($id) {
@@ -305,7 +305,7 @@ class notifications extends notificationsutil {
 
         $form->close();
 
-        echo '</div>';
+        echo "</div>";
         dashboard_util::end_page();
     }
 
@@ -322,32 +322,36 @@ class notifications extends notificationsutil {
 
         if ($event->id) {
             $eventexist = $DB->record_exists_select("local_kopere_dashboard_event",
-                'module = :module AND event = :event AND id != :id',
+                "module = :module AND event = :event AND id != :id",
                 ["module" => $event->module, "event" => $event->event, "id" => $event->id]);
             if ($eventexist) {
                 message::schedule_message_danger(get_string_kopere("notification_duplicate"));
             } else {
                 try {
-                    unset($event->message);
                     $DB->update_record("local_kopere_dashboard_event", $event);
 
                     message::schedule_message_success(get_string_kopere("notification_created"));
-                    header::location(local_kopere_dashboard_makeurl("notifications", "dashboard"));
+                    header::location(local_kopere_dashboard_makeurl("notifications", "add_second_stage",
+                        ["id" => $event->id]));
                 } catch (\dml_exception $e) {
                     message::print_danger($e->getMessage());
                 }
             }
         } else {
-            $eventexist = $DB->record_exists("local_kopere_dashboard_event",
+            $eventexist = $DB->get_record("local_kopere_dashboard_event",
                 ["module" => $event->module, "event" => $event->event]);
             if ($eventexist) {
                 message::schedule_message_danger(get_string_kopere("notification_duplicate"));
+                header::location(local_kopere_dashboard_makeurl("notifications", "add_second_stage",
+                    ["id" => $eventexist->id]));
+
             } else {
                 try {
-                    $DB->insert_record("local_kopere_dashboard_event", $event);
+                    $eventid = $DB->insert_record("local_kopere_dashboard_event", $event);
 
                     message::schedule_message_success(get_string_kopere("notification_created"));
-                    header::location(local_kopere_dashboard_makeurl("notifications", "dashboard"));
+                    header::location(local_kopere_dashboard_makeurl("notifications", "add_second_stage",
+                        ["id" => $eventid]));
                 } catch (\dml_exception $e) {
                     message::print_danger($e->getMessage());
                 }
@@ -384,52 +388,7 @@ class notifications extends notificationsutil {
         button::delete(get_string("yes"),
             local_kopere_dashboard_makeurl("notifications", "delete", ["status" => "sim", "id" => $event->id]), "", false);
         button::add(get_string("no"),
-            local_kopere_dashboard_makeurl("notifications", "dashboard"), 'margin-left-10', false);
-
-        dashboard_util::end_page();
-    }
-
-    /**
-     * Function settings
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
-     */
-    public function settings() {
-        global $CFG, $PAGE;
-
-        ob_clean();
-        $redirect = urlencode("classname=notifications&method=dashboard");
-        dashboard_util::add_breadcrumb(get_string_kopere("notification_setting_config"));
-        dashboard_util::start_page();
-
-        $form = new form(local_kopere_dashboard_makeurl("settings", "save", ["redirect" => "{$redirect}"]));
-
-        $values = [];
-        $templates = glob("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/*.html");
-        foreach ($templates as $template) {
-            $values[] = ["key" => pathinfo($template, PATHINFO_BASENAME)];
-        }
-
-        $form->add_input(
-            input_select::new_instance()
-                ->set_title(get_string_kopere("notification_setting_template"))
-                ->set_values($values, "key", "key")
-                ->set_value_by_config('notificacao-template'));
-
-        $form->add_input(
-            input_textarea::new_instance()
-                ->set_title(get_string_kopere("notification_setting_edit"))
-                ->set_name('notificacao-template-html'));
-
-        $form->print_panel(get_string_kopere("notification_setting_preview"), "<div id='area-message-preview'></div>");
-
-        $form->create_submit_input(get_string("savechanges"));
-
-        $form->close();
-
-        $PAGE->requires->js_call_amd('local_kopere_dashboard/notifications', "notifications_settings_load_template");
-        echo "<style>.table-messagem{max-width:600px;}</style>";
+            local_kopere_dashboard_makeurl("notifications", "dashboard"), "margin-left-10", false);
 
         dashboard_util::end_page();
     }
@@ -455,7 +414,7 @@ class notifications extends notificationsutil {
         notificationsutil::message_no_smtp();
         $CFG->debugsmtp = true;
 
-        $htmlmessage = get_string_kopere("notification_testsmtp_message") . date('d/m/Y H:i');
+        $htmlmessage = get_string_kopere("notification_testsmtp_message") . date("d/m/Y H:i");
 
         $eventdata = new \core\message\message();
         if (release::version() >= 3.2) {
@@ -466,7 +425,7 @@ class notifications extends notificationsutil {
         $eventdata->name = "kopere_dashboard_messages";
         $eventdata->userfrom = get_admin();
         $eventdata->userto = $USER;
-        $eventdata->subject = get_string_kopere("notification_testsmtp_subject") . date('d/m/Y H:i');
+        $eventdata->subject = get_string_kopere("notification_testsmtp_subject") . date("d/m/Y H:i");
         $eventdata->fullmessage = html_to_text($htmlmessage);
         $eventdata->fullmessageformat = FORMAT_HTML;
         $eventdata->fullmessagehtml = $htmlmessage;

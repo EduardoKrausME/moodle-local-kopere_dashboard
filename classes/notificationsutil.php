@@ -155,40 +155,6 @@ class notificationsutil {
     }
 
     /**
-     * Function settings_load_template
-     *
-     * @throws \coding_exception
-     */
-    public function settings_load_template() {
-        global $CFG, $COURSE;
-
-        $template = optional_param("template", "blue.html", PARAM_RAW);
-        $templatefile = "{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$template}";
-
-        $content = file_get_contents($templatefile);
-
-        $linkmanager
-            = "<a href='{$CFG->wwwroot}/message/notificationpreferences.php'
-                  target=\"_blank\" style='border-bottom:1px #777777 dotted; text-decoration:none; color:#777777;'>
-                   " . get_string_kopere("notification_manager") . "
-               </a>";
-
-        $data = [
-            "content" => $content,
-            "tags" => [
-                "moodle_fullname" => $COURSE->fullname,
-                "moodle_shortname" => $COURSE->shortname,
-                "message" => get_string_kopere("tags_message"),
-                "date_year" => userdate(time(), "%Y"),
-                "manager" => $linkmanager,
-            ],
-        ];
-
-        ob_clean();
-        die(json_encode($data));
-    }
-
-    /**
      * Function module_name
      *
      * @param $component
@@ -272,28 +238,5 @@ class notificationsutil {
             $CFG->mail = "outgoingmailconfig";
             message::print_danger(get_string_kopere("notification_error_smtp", $CFG));
         }
-    }
-
-    /**
-     * Function get_template_html
-     *
-     * @return bool|mixed|string
-     */
-    public static function get_template_html() {
-        global $CFG;
-
-        $notificacaotemplatehtml = config::get_key("notificacao-template-html");
-        if ($notificacaotemplatehtml) {
-            return $notificacaotemplatehtml;
-        }
-
-        $notificacaotemplate = config::get_key("notificacao-template");
-        if ($notificacaotemplate) {
-            if (file_exists("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$notificacaotemplate}")) {
-                return file_get_contents("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/{$notificacaotemplate}");
-            }
-        }
-
-        return file_get_contents("{$CFG->dirroot}/local/kopere_dashboard/assets/mail/Blue.html");
     }
 }

@@ -231,9 +231,24 @@ $string['notification_local_kopere_moocommerce'] = 'Kopere MooCommerce';
 $string['notification_local_kopere_pay'] = 'Kopere Pagamento';
 $string['notification_manager'] = 'Manage Messages';
 $string['notification_message'] = 'Message';
-$string['notification_message_edit'] = 'Edit the message content';
+$string['notification_message_edit_template'] = 'Edit the base email template';
 $string['notification_message_html'] = '<p>Hi {[to.fullname]},</p><p>&nbsp;</p><p>Att,<br>{[from.fullname]}.</p>';
-$string['notification_message_not'] = 'First, save the notification in order to create the message.';
+$string['notification_message_html_core_course'] = '<p>Hello {[to.fullname]},</p>
+<p>The user {[to.fullname]} has just performed the action <strong>{[event.name]}</strong> in the course {[course.fullname]}.</p>
+<p>Best regards,<br>{[admin.fullname]}.</p>';
+$string['notification_message_html_core_course_category'] = '<p>Hello {[to.fullname]},</p>
+<p>The user {[to.fullname]} has just performed the action <strong>{[event.name]}</strong> in the category {[category.fullname]}.</p>
+<p>Best regards,<br>{[admin.fullname]}.</p>';
+$string['notification_message_html_core_user'] = '<p>Hello {[to.fullname]},</p>
+<p>The user {[to.fullname]} has just performed the action <strong>{[event.name]}</strong>.</p>
+<p>Best regards,<br>{[admin.fullname]}.</p>';
+$string['notification_message_html_core_user_enrolment'] = '<p>Hello {[to.fullname]},</p>
+<p>The user {[from.fullname]} has performed the action <strong>{[event.name]}</strong> for the user {[usertarget.fullname]}.</p>
+<p>Best regards,<br>{[admin.fullname]}.</p>';
+$string['notification_message_html_mod'] = '<p>Hello {[to.fullname]},</p>
+<p>The user {[to.fullname]} has performed the action <strong>{[event.name]}</strong> in the module {[module.name]} in the course {[course.fullname]}.</p>
+<p>Best regards,<br>{[admin.fullname]}.</p>';
+$string['notification_message_template_error'] = 'The template must include the "{[message]}" tag to allow the insertion of custom content.';
 $string['notification_new'] = 'New notification';
 $string['notification_notfound'] = 'Notification not found!';
 $string['notification_notound'] = 'Notification not found!';
@@ -253,6 +268,7 @@ $string['notification_table_active'] = 'Active';
 $string['notification_table_empty'] = 'No notification!';
 $string['notification_table_module'] = 'Module';
 $string['notification_table_subject'] = 'Subject';
+$string['notification_tags'] = 'What TAGS are replaced in the messages?';
 $string['notification_testsmtp'] = 'Test if SMTP settings are correct.';
 $string['notification_testsmtp_error'] = 'Moodle does not send email when recipient and sender are the same! <br> And you are the main administrator of this moodle. So to test you must log in with another administrator.';
 $string['notification_testsmtp_message'] = '<p> This is an Email submission test. </p>';

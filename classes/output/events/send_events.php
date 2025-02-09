@@ -27,6 +27,7 @@
 namespace local_kopere_dashboard\output\events;
 
 use local_kopere_dashboard\notificationsutil;
+use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\release;
 use local_kopere_dashboard\vo\local_kopere_dashboard_event;
 
@@ -233,7 +234,7 @@ class send_events {
      */
     private function load_template() {
 
-        $templatecontent = notificationsutil::get_template_html();
+        $templatecontent = config::get_key("notification-template");
 
         $this->subject = $this->koperedashboardevents->subject;
         $this->message = str_replace("{[message]}", $this->koperedashboardevents->message, $templatecontent);

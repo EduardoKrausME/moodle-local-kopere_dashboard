@@ -120,11 +120,6 @@ class menu {
                             ->set_methodname("dashboard")
                             ->set_title(get_string_kopere("notification_title"))
                             ->set_icon("notifications"),
-                        (new submenu_util())
-                            ->set_classname("notifications")
-                            ->set_methodname("settings")
-                            ->set_title(get_string_kopere("settings"))
-                            ->set_icon("settings"),
                     ]));
 
             echo dashboard_util::add_menu(
@@ -139,11 +134,6 @@ class menu {
                             ->set_methodname("dashboard")
                             ->set_title(get_string_kopere("webpages_title"))
                             ->set_icon("webpages"),
-                        (new submenu_util())
-                            ->set_classname("webpages")
-                            ->set_methodname("settings")
-                            ->set_title(get_string_kopere("settings"))
-                            ->set_icon("settings"),
                     ]));
         }
 
