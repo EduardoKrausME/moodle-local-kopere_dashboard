@@ -53,6 +53,7 @@ class input_htmleditor extends input_textarea {
      * Function to_string
      *
      * @return mixed|string
+     * @throws \dml_exception
      */
     public function to_string() {
         global $PAGE, $CFG;
