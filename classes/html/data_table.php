@@ -216,16 +216,18 @@ class data_table {
             }
             $return .= "</th>";
 
-            $this->columndata[] = (object)["data" => $column->chave];
+            $columndata = (object)["data" => $column->chave];
 
             if ($column->type == table_header_item::TYPE_INT) {
                 $this->columndefs[] = (object)["render" => "numberRenderer", "targets" => $key];
+                $columndata->type = "num";
             } else if ($column->type == table_header_item::TYPE_CURRENCY) {
                 $this->columndefs[] = (object)["render" => "currencyRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_DATE) {
                 $this->columndefs[] = (object)["targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_FILESIZE) {
                 $this->columndefs[] = (object)["render" => "filesizeRenderer", "targets" => $key];
+                $columndata->type = "num";
             } else if ($column->type == table_header_item::RENDERER_DATE) {
                 $this->columndefs[] = (object)["render" => "dateRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_DATETIME) {
@@ -249,6 +251,8 @@ class data_table {
             } else {
                 $this->columndefs[] = (object)["render" => "default", "targets" => $key];
             }
+
+            $this->columndata[] = $columndata;
         }
         $return .= "</tr>";
         $return .= "</thead>";
