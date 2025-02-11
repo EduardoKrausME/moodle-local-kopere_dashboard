@@ -70,7 +70,8 @@ class enroll {
         $courseid = optional_param("courseid", 0, PARAM_INT);
 
         $sql
-            = "SELECT DISTINCT ue.userid AS id, firstname, lastname, u.email, ue.status
+            = "
+               SELECT DISTINCT ue.userid AS id, firstname, lastname, u.email, ue.status
 		         FROM {user_enrolments} ue
                     LEFT JOIN {user} u ON u.id = ue.userid
                     LEFT JOIN {enrol} e ON e.id = ue.enrolid

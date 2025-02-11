@@ -241,7 +241,7 @@ class button {
             "paddingtop" => $this->paddingtop,
         ];
 
-        $bt = $OUTPUT->render_from_template("local_kopere_dashboard/html/button", $data);
+        $bt = $OUTPUT->render_from_template("local_kopere_dashboard/html-button", $data);
 
         if ($return) {
             return $bt;
@@ -408,7 +408,7 @@ class button {
         ];
         $PAGE->requires->js_call_amd("local_kopere_dashboard/button_icon", "action",
             [$data["button_id"], $data["link"]]);
-        return $OUTPUT->render_from_template("local_kopere_dashboard/html/button_icon", $data);
+        return $OUTPUT->render_from_template("local_kopere_dashboard/html-button_icon", $data);
     }
 
     /**
