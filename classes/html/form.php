@@ -106,6 +106,28 @@ class form {
     }
 
     /**
+     * Function panel_start
+     *
+     * @param $titulo
+     */
+    public function panel_start($titulo) {
+        echo "<div class='form-group'>
+                  <label>{$titulo}</label>
+                  <div class='panel panel-default'>
+                      <div class='panel-body'>";
+    }
+
+    /**
+     * Function panel_close
+     */
+    public function panel_close() {
+        echo "
+                      </div>
+                  </div>
+              </div>";
+    }
+
+    /**
      * Function print_row_one
      *
      * @param $titulo
