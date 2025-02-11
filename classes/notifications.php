@@ -283,6 +283,7 @@ class notifications extends notificationsutil {
         $htmltexteditor = input_htmleditor::new_instance()
             ->set_name("event_message")
             ->set_value($htmltext)
+            ->set_style("height:400px;")
             ->to_string();
         $templatecontent = config::get_key("notification-template");
 
