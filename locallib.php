@@ -51,6 +51,7 @@ function get_kopere_lang() {
 
     global $PAGE;
 
+    $PAGE->requires->strings_for_js(["decsep", "thousandssep"], "langconfig");
     $PAGE->requires->strings_for_js(["yes", "no"], "moodle");
     $PAGE->requires->strings_for_js([
         "visible",
