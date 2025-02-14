@@ -220,14 +220,12 @@ class data_table {
 
             if ($column->type == table_header_item::TYPE_INT) {
                 $this->columndefs[] = (object)["render" => "numberRenderer", "targets" => $key];
-                $columndata->type = "num";
             } else if ($column->type == table_header_item::TYPE_CURRENCY) {
                 $this->columndefs[] = (object)["render" => "currencyRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_DATE) {
                 $this->columndefs[] = (object)["targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_FILESIZE) {
                 $this->columndefs[] = (object)["render" => "filesizeRenderer", "targets" => $key];
-                $columndata->type = "num";
             } else if ($column->type == table_header_item::RENDERER_DATE) {
                 $this->columndefs[] = (object)["render" => "dateRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_DATETIME) {
