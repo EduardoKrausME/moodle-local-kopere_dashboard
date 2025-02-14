@@ -7,7 +7,7 @@
         background: #fff;
         box-shadow: 0 10px 50px 0 rgba(26, 46, 85, 0.1);
         border-radius: 5px;
-        padding: 20px;
+        font-family: "Mulish", sans-serif;
         .thumbnail {
             position: relative;
             transition: 0.3s;
@@ -29,11 +29,12 @@
             transform: scale(1.1);
         }
         .content {
+            padding: 29px 20px 20px 20px;
             .title {
                 a {
                     color: #192336;
                     font-size: 22px;
-                    font-weight: 700;
+                    font-weight: 500;
                 }
             }
             p {
@@ -42,8 +43,13 @@
                 -webkit-box-orient: vertical;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                font-size: 16px;
+                line-height: 30px;
+                margin-bottom: 15px;
+                font-weight: normal;
             }
             .price {
+                float: right;
                 .current-price {
                     font-size: 24px;
                     font-weight: 700;
