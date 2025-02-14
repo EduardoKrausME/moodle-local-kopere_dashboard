@@ -108,10 +108,11 @@ class form {
     /**
      * Function panel_start
      *
-     * @param $titulo
+     * @param string $titulo
+     * @param string $class
      */
-    public function panel_start($titulo) {
-        echo "<div class='form-group'>
+    public function panel_start($titulo, $class="") {
+        echo "<div class='form-group {$class}'>
                   <label>{$titulo}</label>
                   <div class='panel panel-default'>
                       <div class='panel-body'>";
