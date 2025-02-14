@@ -8,7 +8,15 @@ define([
     "local_kopere_dashboard/jszip",
 ], function($) {
     var dataTables_init = {
+        language: "en",
+
         init: function(tableid, params) {
+
+            var langClass = $('body').attr('class').match(/lang-\w+/);
+            if (langClass) {
+                var language = langClass[0].replace('lang-', '');
+                dataTables_init.language = language.replace(/_(\w+)/, (_, match) => `-${match.toUpperCase()}`);
+            }
 
             if (!params) {
                 var params_json = $(`#tableparams_${tableid}`).val();
@@ -17,7 +25,17 @@ define([
 
             var renderer = {
                 mustacheRenderer: function(data, type, row, info) {
-                    if (type != 'display') {
+                    if (type == "sort") {
+                        var d = data.replace(/<[^>]*>/g, '');
+                        if (/^\d/.test(data)) {
+                            d = d.split(",").join(".");
+                            d = parseFloat(d);
+
+                            return d;
+                        }
+                        return d;
+
+                    } else if (type != 'display') {
                         return data;
                     }
 
@@ -33,12 +51,23 @@ define([
                     }
                 },
                 numberRenderer: function(data, type, row, info) {
+                    if (type == "sort") {
+                        if (/^\d/.test(data)) {
+                            data = data.split(",").join(".");
+                            data = parseFloat(data);
+
+                            return data;
+                        }
+                        return data;
+                    }
                     if (data === null) {
                         return "";
                     }
                     if (type != 'display') {
                         return data;
                     }
+
+                    data = dataTables_init.numberFormat(data, 2);
 
                     return '<div class="text-center text-nowrap">' + data + '</div>';
                 },
@@ -371,6 +400,7 @@ define([
                     }
                 };
                 params.responsive = true;
+                params.locale = dataTables_init.language;
 
                 if (params.export_title) {
                     params.buttons = [
@@ -425,8 +455,13 @@ define([
                     count_error++;
                 };
 
-                params.initComplete = function(settings, json) {
-                    var element = $("<div class='group-controls'>");
+                var preDrawCallback_complete = false;
+                params.preDrawCallback = function(settings) {
+
+                    if (preDrawCallback_complete) return;
+                    preDrawCallback_complete = true;
+
+                    var element = $("<div class='group-controls' style='display:none'>");
                     var wrapper = $("#" + tableid + "_wrapper");
                     wrapper.prepend(element);
                     wrapper.find(".dataTables_length").appendTo(element);
@@ -441,9 +476,39 @@ define([
                     wrapper.find(".dataTables_paginate").appendTo($area);
                 };
 
+                params.infoCallback = function(settings, start, end, max, total, pre) {
+                    if (end) {
+                        $("#" + tableid + "_wrapper .group-controls").show(200);
+                    } else {
+                        $("#" + tableid + "_wrapper .group-controls").hide(200);
+                    }
+                };
+
                 window[tableid] = $("#" + tableid).DataTable(params);
             });
         },
+
+        numberFormat: function(number, decimals) {
+
+            let options = {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            };
+
+            let formatted = number.toLocaleString(dataTables_init.language, options);
+
+            return formatted;
+
+            var decPoint = M.util.get_string('decsep', "langconfig");
+            var thousandsSep = M.util.get_string('thousandssep', "langconfig");
+
+            if (decPoint !== "," || thousandsSep !== ".") {
+                formatted = formatted.replace(",", "TEMP").replace(".", thousandsSep).replace("TEMP", decPoint);
+            }
+
+            return formatted;
+        },
+
 
         click: function(tableid, clickchave, clickurl) {
             $('#' + tableid + ' tbody').on('click', 'tr', function() {
