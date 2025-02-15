@@ -71,7 +71,7 @@ class courses {
         $table->add_header(get_string_kopere("courses_name"), "fullname");
         $table->add_header(get_string_kopere("courses_shortname"), "shortname");
         $table->add_header(get_string_kopere("visible"), "visible", table_header_item::RENDERER_VISIBLE);
-        $table->add_header(get_string_kopere("courses_enrol"), "inscritos",
+        $table->add_header(get_string_kopere("courses_enrol"), "enrolments",
             table_header_item::TYPE_INT, null, "width:50px;white-space:nowrap;");
 
         $table->set_ajax_url(local_kopere_dashboard_makeurl("courses", "load_all_courses"));
@@ -98,18 +98,12 @@ class courses {
             $data = $cache->get($cachekey);
         } else {
             $data = $DB->get_records_sql("
-                SELECT c.id, c.fullname, c.shortname, c.visible,
-                         (
-                             SELECT COUNT(DISTINCT ue.id)
-                               FROM {user_enrolments} ue
-                               JOIN {role_assignments} ra ON ue.userid = ra.userid
-                               JOIN {enrol} e             ON e.id = ue.enrolid
-                               JOIN {user} u              ON u.id = ue.userid
-                              WHERE e.courseid = c.id
-                                AND u.deleted = 0
-                         ) AS inscritos
-                  FROM {course} c
-                 WHERE c.id > 1"
+                SELECT c.id, c.fullname, c.shortname, c.visible, COUNT(DISTINCT ue.id) AS enrolments
+                  FROM {course}           c
+                  JOIN {enrol}            e ON e.courseid = c.id
+                  JOIN {user_enrolments} ue ON ue.enrolid = e.id
+                 WHERE c.id > 1
+              GROUP BY c.id, c.fullname, c.shortname, c.visible;"
             );
 
             $cache->set($cachekey, $data);
