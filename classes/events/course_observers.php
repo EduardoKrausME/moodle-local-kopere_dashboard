@@ -35,7 +35,7 @@ class course_observers {
      *
      * @param \core\event\base $event
      */
-    public static function process_event(\core\event\base $event){
+    public static function process_event(\core\event\base $event) {
         $eventname = str_replace("\\\\", "\\", $event->eventname);
         switch ($eventname) {
             case "\\core\\event\\course_deleted":
