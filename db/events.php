@@ -29,5 +29,18 @@ $observers = [
         "eventname" => "*",
         "callback" => "\\local_kopere_dashboard\\events\\event_observers::process_event",
     ],
+
+    [
+        "eventname" => "\\core\\event\\course_deleted",
+        "callback" => "\\local_kopere_dashboard\\events\\course_observers::process_event",
+    ],
+    [
+        "eventname" => "\\core\\event\\course_updated",
+        "callback" => "\\local_kopere_dashboard\\events\\course_observers::process_event",
+    ],
+    [
+        "eventname" => "\\core\\event\\course_created",
+        "callback" => "\\local_kopere_dashboard\\events\\course_observers::process_event",
+    ],
 ];
 
