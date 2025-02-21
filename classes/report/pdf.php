@@ -38,7 +38,7 @@ class pdf {
      *
      * @throws \coding_exception
      */
-    public static function create_pdf(){
+    public static function create_pdf() {
         global $CFG, $USER;
 
         require_once($CFG->libdir . "/tcpdf/tcpdf.php");
