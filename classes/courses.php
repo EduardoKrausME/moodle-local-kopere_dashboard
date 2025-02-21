@@ -92,12 +92,14 @@ class courses {
     public function load_all_courses() {
         global $DB;
 
+        $mycourses = optional_param("mycourses", false, PARAM_INT);
+
         $cache = \cache::make("local_kopere_dashboard", "courses_all_courses");
         $cachekey = "load_all_courses";
-        if ($cache->has($cachekey)) {
-            $data = $cache->get($cachekey);
+        if (!$mycourses && $cache->has($cachekey)) {
+            $courses = $cache->get($cachekey);
         } else {
-            $data = $DB->get_records_sql("
+            $courses = $DB->get_records_sql("
                 SELECT c.id, c.fullname, c.shortname, c.visible, COUNT(DISTINCT ue.id) AS enrolments
                   FROM {course}           c
                   JOIN {enrol}            e ON e.courseid = c.id
@@ -106,10 +108,22 @@ class courses {
               GROUP BY c.id, c.fullname, c.shortname, c.visible;"
             );
 
-            $cache->set($cachekey, $data);
+            if ($mycourses) {
+                $returncourses = [];
+                foreach ($courses as $course) {
+                    $coursecontext = \context_course::instance($course->id);
+                    if (has_capability("moodle/course:view", $coursecontext)) {
+                        $returncourses[] = $course;
+                    }
+                }
+
+                $courses = $returncourses;
+            } else {
+                $cache->set($cachekey, $courses);
+            }
         }
 
-        json::encode($data);
+        json::encode($courses);
     }
 
     /**
