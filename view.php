@@ -45,7 +45,7 @@ if ($html = optional_param("html-pdf", false, PARAM_RAW)) {
     die();
 }
 
-// Revvo Smart LMS;
+// Revvo Smart LMS.
 if ($CFG->theme == "smartlms") {
     $preferencedraweropennav = @$USER->preference["drawer-open-nav"];
     $preferencesidebaropennav = @$USER->preference["sidebar-open-nav"];
