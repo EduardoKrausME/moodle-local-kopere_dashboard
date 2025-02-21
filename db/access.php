@@ -25,6 +25,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = [
+    "local/kopere_dashboard:ajax" => [
+        "captype" => "read",
+        "contextlevel" => CONTEXT_SYSTEM,
+        "archetypes" => [
+            "manager" => CAP_ALLOW,
+        ],
+    ],
     "local/kopere_dashboard:view" => [
         "captype" => "write",
         "contextlevel" => CONTEXT_SYSTEM,

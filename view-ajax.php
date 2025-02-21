@@ -35,8 +35,7 @@ ob_clean();
 try {
     require_login();
     $context = context_system::instance();
-    require_capability("local/kopere_dashboard:view", $context);
-    require_capability("local/kopere_dashboard:manage", $context);
+    require_capability("local/kopere_dashboard:ajax", $context);
 } catch (Exception $e) {
     \local_kopere_dashboard\util\json::error($e->getMessage());
 }

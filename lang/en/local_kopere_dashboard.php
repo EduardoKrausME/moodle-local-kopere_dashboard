@@ -183,6 +183,7 @@ $string['help_title'] = 'Help with this page';
 $string['inactive'] = 'Inactive';
 $string['integracaoroot'] = 'Integration';
 $string['invisible'] = 'Hidden';
+$string['kopere_dashboard:ajax'] = 'Load ajax for Kopere Dashboard';
 $string['kopere_dashboard:emailconfirmsubmission'] = 'Send Notifications';
 $string['kopere_dashboard:manage'] = 'Manage Kopere Dashboard';
 $string['kopere_dashboard:view'] = 'View Kopere Dashboard';
