@@ -102,8 +102,8 @@ if (optional_param("file", false, PARAM_RAW)) {
     $file = sanitizeFileName(optional_param("file", false, PARAM_RAW));
 }
 
-if (optional_param("action", false, PARAM_RAW)) {
-    $action = htmlspecialchars(strip_tags(optional_param("action", false, PARAM_RAW)), ENT_COMPAT);
+if (optional_param("action", false, PARAM_TEXT)) {
+    $action = htmlspecialchars(strip_tags(optional_param("action", false, PARAM_TEXT)), ENT_COMPAT);
 }
 
 if ($action) {

@@ -42,7 +42,7 @@ class pdf {
         global $CFG, $USER;
 
         require_once($CFG->libdir . "/tcpdf/tcpdf.php");
-        $title = optional_param("title", false, PARAM_RAW);
+        $title = optional_param("title", false, PARAM_TEXT);
         $html = optional_param("html-pdf", false, PARAM_RAW);
 
         // Crie uma nova instância de TCPDF.

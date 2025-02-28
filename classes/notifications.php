@@ -174,8 +174,8 @@ class notifications extends notificationsutil {
         global $CFG, $DB;
 
         /** @var base $eventclass */
-        $eventclass = optional_param("event", "", PARAM_RAW);
-        $module = optional_param("module", "", PARAM_RAW);
+        $eventclass = optional_param("event", "", PARAM_TEXT);
+        $module = optional_param("module", "", PARAM_TEXT);
         $id = optional_param("id", 0, PARAM_INT);
 
         if ($id) {
