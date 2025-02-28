@@ -61,61 +61,6 @@
         list-style: none !important;
     }
 }
-#block-region-side-post,
-#block-region-side-pre,
-[data-region=drawer] {
-    @import "assets/css/kopere-main-menu";
-    .kopere-list-group-item {
-        margin-bottom: 16px;
-        padding: 0;
-    }
-    .menu-kopere {
-        .submenu-kopere {
-            display: none;
-            margin: 0;
-        }
-        .active {
-            .submenu-kopere {
-                display: block !important;
-            }
-            > a > span {
-                font-weight: bold;
-            }
-        }
-        > li {
-            line-height: 1.5rem;
-            padding: 1px 0 !important;
-            a {
-                .menu-icon {
-                    width: 35px !important;
-                    height: 35px !important;
-                }
-                span {
-                    padding: 11px !important;
-                }
-            }
-        }
-    }
-    .dashboard_menu_html {
-        .logo-w {
-            img {
-                width: 100%;
-                max-width: 270px;
-            }
-        }
-        .kopere-logo {
-            text-align: center;
-            margin: 10% 10% 0;
-            img {
-                width: 100%;
-                max-width: 270px;
-            }
-        }
-    }
-}
-.modal-backdrop.fade.in {
-    opacity: .8;
-}
 .kopere_dashboard_modal_item {
     color: #3a3a3a;
     .modal-header {
@@ -127,8 +72,6 @@
         text-align: center;
     }
 }
-// popup
-@import "assets/css/popup";
 
 .kopere-dashboard {
     @import "assets/css/botao-add";
