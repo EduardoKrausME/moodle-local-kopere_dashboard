@@ -51,53 +51,61 @@ class reports {
      *
      * @throws \coding_exception
      * @throws \dml_exception
+     * @throws \moodle_exception
      */
     public function dashboard() {
         global $CFG, $DB;
+
+        if (file_exists("{$CFG->dirroot}/local/kopere_bi/version.php")) {
+            redirect("/local/kopere_dashboard/view.php?classname=bi-dashboard&method=start");
+        }
 
         dashboard_util::add_breadcrumb(get_string_kopere("reports_title"));
         dashboard_util::start_page();
 
         echo '<div class="element-box">';
 
-        $type = optional_param("type", null, PARAM_TEXT);
+        if (!$DB->get_manager()->table_exists("local_kopere_dashboard_acess")) {
+            title_util::print_h3("install_kopere_bi_title");
+            echo get_string_kopere("install_kopere_bi_desc");
+        } else {
+            $koperereportcats = $DB->get_records("local_kopere_dashboard_rcat");
 
-        $koperereportcats = $DB->get_records("local_kopere_dashboard_rcat");
-
-        /** @var local_kopere_dashboard_rcat $koperereportcat */
-        foreach ($koperereportcats as $koperereportcat) {
-            // Executa o SQL e vrifica se o SQL retorna status>0.
-            if (strlen($koperereportcat->enablesql)) {
-                $status = $DB->get_record_sql($koperereportcat->enablesql);
-                if ($status == null || $status->status == 0) {
-                    continue;
-                }
-            }
-
-            if (strpos($koperereportcat->image, "assets/") === 0) {
-                $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$koperereportcat->image}";
-            } else {
-                $icon = "{$CFG->wwwroot}/{$koperereportcat->image}";
-            }
-
-            title_util::print_h3("<img src='{$icon}' alt=\"Icon\" height=\"23\" width=\"23\" > " .
-                self::get_title($koperereportcat), false);
-
-            $koperereportss = $DB->get_records("local_kopere_dashboard_reprt",
-                ["reportcatid" => $koperereportcat->id]);
-
-            /** @var local_kopere_dashboard_reprt $koperereports */
-            foreach ($koperereportss as $koperereports) {
-                $title = self::get_title($koperereports);
-                $extraenable = "";
-                if (!$koperereports->enable) {
-                    $extraenable = get_string_kopere("reports_disabled");
+            /** @var local_kopere_dashboard_rcat $koperereportcat */
+            foreach ($koperereportcats as $koperereportcat) {
+                // Executa o SQL e vrifica se o SQL retorna status>0.
+                if (strlen($koperereportcat->enablesql)) {
+                    $status = $DB->get_record_sql($koperereportcat->enablesql);
+                    if ($status == null || $status->status == 0) {
+                        continue;
+                    }
                 }
 
-                $url = local_kopere_dashboard_makeurl("reports", "load_report", ["report" => $koperereports->id]);
-                echo "<h4 style='padding-left:31px;'>
+                if (strpos($koperereportcat->image, "assets/") === 0) {
+                    $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$koperereportcat->image}";
+                } else {
+                    $icon = "{$CFG->wwwroot}/{$koperereportcat->image}";
+                }
+
+                title_util::print_h3("<img src='{$icon}' alt=\"Icon\" height=\"23\" width=\"23\" > " .
+                    self::get_title($koperereportcat), false);
+
+                $koperereportss = $DB->get_records("local_kopere_dashboard_reprt",
+                    ["reportcatid" => $koperereportcat->id]);
+
+                /** @var local_kopere_dashboard_reprt $koperereports */
+                foreach ($koperereportss as $koperereports) {
+                    $title = self::get_title($koperereports);
+                    $extraenable = "";
+                    if (!$koperereports->enable) {
+                        $extraenable = get_string_kopere("reports_disabled");
+                    }
+
+                    $url = local_kopere_dashboard_makeurl("reports", "load_report", ["report" => $koperereports->id]);
+                    echo "<h4 style='padding-left:31px;'>
                           {$extraenable} <a href='{$url}'>{$title}</a>
                       </h4>";
+                }
             }
         }
 

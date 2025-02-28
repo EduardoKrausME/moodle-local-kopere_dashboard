@@ -230,6 +230,7 @@ $string['notification_local_kopere_dashboard_payment'] = 'Kopere Payment';
 $string['notification_local_kopere_hotmoodle'] = 'Kopere HotMoodle';
 $string['notification_local_kopere_moocommerce'] = 'Kopere MooCommerce';
 $string['notification_local_kopere_pay'] = 'Kopere Pagamento';
+
 $string['notification_manager'] = 'Manage Messages';
 $string['notification_message'] = 'Message';
 $string['notification_message_edit_template'] = 'Edit the base email template';
@@ -582,7 +583,8 @@ $string['contextcohort'] = 'Cohort';
 $string['contextcompetency'] = 'Competency';
 $string['contextdefault'] = '...';
 $string['contextsystem'] = 'System';
-
 $string['courses_visible'] = 'Visible';
-
 $string['cachedef_courses_all_courses'] = 'Cache list all course';
+
+$string['install_kopere_bi_title'] = 'Install Kopere BI';
+$string['install_kopere_bi_desc'] = '<p>Install <a href="https://moodle.org/plugins/local_kopere_bi" target="_blank">Kopere BI</a> and gain access to advanced and detailed reports for better data analysis.</p>';

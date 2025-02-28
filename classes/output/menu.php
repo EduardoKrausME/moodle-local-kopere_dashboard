@@ -97,14 +97,16 @@ class menu {
             }
         }
 
-        echo dashboard_util::add_menu(
-            (new menu_util())
-                ->set_classname("reports")
-                ->set_methodname("dashboard")
-                ->set_icon("report")
-                ->set_name(get_string_kopere("reports_title"))
-                ->set_submenus(reports::global_menus())
-        );
+        if (!file_exists("{$CFG->dirroot}/local/kopere_bi/version.php")) {
+            echo dashboard_util::add_menu(
+                (new menu_util())
+                    ->set_classname("reports")
+                    ->set_methodname("dashboard")
+                    ->set_icon("report")
+                    ->set_name(get_string_kopere("reports_title"))
+                    ->set_submenus(reports::global_menus())
+            );
+        }
 
         if ($isadmin) {
 
@@ -113,14 +115,7 @@ class menu {
                     ->set_classname("notifications")
                     ->set_methodname("dashboard")
                     ->set_icon("notifications")
-                    ->set_name(get_string_kopere("notification_title"))
-                    ->set_submenus([
-                        (new submenu_util())
-                            ->set_classname("notifications")
-                            ->set_methodname("dashboard")
-                            ->set_title(get_string_kopere("notification_title"))
-                            ->set_icon("notifications"),
-                    ]));
+                    ->set_name(get_string_kopere("notification_title")));
 
             echo dashboard_util::add_menu(
                 (new menu_util())
