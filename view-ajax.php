@@ -45,4 +45,4 @@ $PAGE->set_pagetype("reports");
 $PAGE->set_context(context_system::instance());
 
 session_write_close();
-load_class();
+kopere_dashboard_load_class();

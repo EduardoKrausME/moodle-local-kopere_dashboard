@@ -58,11 +58,11 @@ function kopere_dashboard_autoload($classname) {
 }
 
 /**
- * Function load_class
+ * Function kopere_dashboard_load_class
  *
  * @throws coding_exception
  */
-function load_class() {
+function kopere_dashboard_load_class() {
     $classname = optional_param("classname", false, PARAM_TEXT);
     $method = optional_param("method", "", PARAM_TEXT);
     if (!$classname) {
