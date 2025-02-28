@@ -45,9 +45,14 @@ class db_report_login extends \core\task\scheduled_task {
      * Function execute
      *
      * @throws \dml_exception
+     * @throws \ddl_exception
      */
     public function execute() {
         global $DB;
+
+        if (!$DB->get_manager()->table_exists("local_kopere_dashboard_login")) {
+            return;
+        }
 
         $reportsql = "
                 SELECT lsl.userid + lsl.timecreated as u, lsl.userid, lsl.timecreated, lsl.ip

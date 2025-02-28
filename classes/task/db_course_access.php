@@ -45,9 +45,14 @@ class db_course_access extends \core\task\scheduled_task {
      * Function execute
      *
      * @throws \dml_exception
+     * @throws \ddl_exception
      */
     public function execute() {
         global $DB, $CFG;
+
+        if (!$DB->get_manager()->table_exists("local_kopere_dashboard_acess")) {
+            return;
+        }
 
         if ($CFG->dbtype == "pgsql") {
             $reportsql = "

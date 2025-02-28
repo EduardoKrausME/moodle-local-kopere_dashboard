@@ -156,7 +156,7 @@ class course_access_grade {
                 $printsessoes .= '<th bgcolor="#979797" align="center"
                                        colspan="' . $countmodinfo . '" style="text-align:center;">';
 
-                if (strlen($section->name)) {
+                if (isset($section->name[2])) {
                     $printsessoes .= $section->name;
                 } else {
                     $printsessoes .= "Sessão {$key}";

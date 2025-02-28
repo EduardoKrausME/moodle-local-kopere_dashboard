@@ -27,11 +27,11 @@ namespace local_kopere_dashboard\install;
 use local_kopere_dashboard\vo\local_kopere_dashboard_event;
 
 /**
- * Class users_import_install
+ * Class event_install
  *
  * @package local_kopere_dashboard\install
  */
-class users_import_install {
+class event_install {
 
     /**
      * Function install_or_update

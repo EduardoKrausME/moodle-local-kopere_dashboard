@@ -324,10 +324,7 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
 
     if ($oldversion < 2024121500) {
         try {
-            \local_kopere_dashboard\install\report_install::create_categores();
-            \local_kopere_dashboard\install\report_install::create_reports();
-
-            \local_kopere_dashboard\install\users_import_install::install_or_update();
+            \local_kopere_dashboard\install\event_install::install_or_update();
         } catch (Exception $e) {
             echo "ignored..";
         }
