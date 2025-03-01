@@ -349,7 +349,7 @@ class webpages {
             input_select::new_instance()
                 ->set_title(get_string_kopere("contextcourse"))
                 ->set_name("courseid")
-                ->set_value($webpages->courseid)
+                ->set_value($webpages->courseid, PARAM_INT)
                 ->set_values($courses, "id", "fullname"));
         echo "</div>";
         echo "<div class='col-md'>";
@@ -358,7 +358,7 @@ class webpages {
                 ->set_title(get_string_kopere("webpages_page_menu"))
                 ->set_name("menuid")
                 ->set_values(self::list_menus())
-                ->set_value($webpages->menuid));
+                ->set_value($webpages->menuid, PARAM_INT));
         echo "</div>";
         echo "<div class='col-md'>";
         $form->add_input(
@@ -401,8 +401,6 @@ class webpages {
      *
      * @throws \coding_exception
      * @throws \dml_exception
-     * @throws \file_exception
-     * @throws \stored_file_creation_exception
      */
     public function page_edit_save() {
         global $DB;
@@ -548,10 +546,8 @@ class webpages {
             input_select::new_instance()
                 ->set_title(get_string_kopere("webpages_menu_menuid"))
                 ->set_name("menuid")
-                ->set_values(
-                    self::list_menus(0, $menus->id)
-                )
-                ->set_value($menus->menuid)
+                ->set_values(self::list_menus(0, $menus->id))
+                ->set_value($menus->menuid, PARAM_INT)
                 ->set_required()
         );
 

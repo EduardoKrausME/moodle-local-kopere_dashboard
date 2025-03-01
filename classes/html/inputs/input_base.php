@@ -218,9 +218,9 @@ class input_base implements i_input {
      * @return $this|mixed
      * @throws \coding_exception
      */
-    public function set_value($value) {
+    public function set_value($value, $type = PARAM_TEXT) {
         if ($this->value == null && $this->name != null) {
-            $this->value = optional_param($this->name, $value, PARAM_RAW);
+            $this->value = optional_param($this->name, $value, $type);
         } else {
             $this->value = $value;
         }
@@ -245,7 +245,13 @@ class input_base implements i_input {
             $value = $default;
         }
 
-        $this->set_value($value);
+        if ((strip_tags($value) != $value)) {
+            $this->set_value($value, PARAM_RAW);
+        } else if (is_int($value)) {
+            $this->set_value($value, PARAM_INT);
+        } else {
+            $this->set_value($value);
+        }
 
         return $this;
     }

@@ -45,7 +45,7 @@ class input_checkbox extends input_base {
      */
     public static function new_instance() {
         $input = new input_checkbox();
-        $input->set_value(1);
+        $input->set_value(1, PARAM_INT);
 
         return $input;
     }

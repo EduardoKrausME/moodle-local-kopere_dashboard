@@ -55,7 +55,8 @@ class input_password extends input_base {
      * @throws \coding_exception
      */
     public function to_string() {
-        $this->set_value(null);
+        // Password can be anything.
+        $this->set_value(null, PARAM_RAW);
 
         return parent::to_string();
     }
