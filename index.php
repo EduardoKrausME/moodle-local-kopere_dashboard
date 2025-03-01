@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * phpcs:disable moodle.Files.RequireLogin.Missing
+ *
  * index file
  *
  * introduced 23/05/17 17:59
@@ -29,11 +31,6 @@ use local_kopere_dashboard\util\config;
 require_once("../../config.php");
 require_once("autoload.php");
 global $DB, $PAGE, $OUTPUT;
-
-if (false) {
-    // Only for PHPCS.
-    require_login();
-}
 
 $menulink = optional_param("menu", false, PARAM_TEXT);
 $pagelink = optional_param("p", false, PARAM_TEXT);
