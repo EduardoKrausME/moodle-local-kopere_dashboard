@@ -108,9 +108,9 @@ class useraccess {
         $search = new datatable_search_util($columns);
 
         if ($CFG->dbtype == "mysqli" || $CFG->dbtype == "mariadb") {
-            $where = "date_format( from_unixtime(l.timecreated), '%Y-%m' ) LIKE '{$changuemes}'";
+            $where = "date_format( from_unixtime(l.timecreated), '%Y-%m' ) LIKE :changuemes";
         } else if ($CFG->dbtype == "pgsql") {
-            $where = "to_char(to_timestamp(l.timecreated), 'YYYY-MM') LIKE '{$changuemes}'";
+            $where = "to_char(to_timestamp(l.timecreated), 'YYYY-MM') LIKE :changuemes";
         } else {
             throw new \Exception("only mysqli and pgsql");
         }
@@ -121,9 +121,9 @@ class useraccess {
                  JOIN {user}                  u ON l.userid = u.id
                 WHERE action LIKE 'loggedin'
                   AND {$where}
-            ", 'GROUP BY l.userid', null,
-            "\\local_kopere_dashboard\\util\\user_util::column_fullname");
-
+            ", 'GROUP BY l.userid',
+            ["changuemes" => $changuemes],
+            "\\local_kdashboard\\util\\user_util::column_fullname");
     }
 
     /**
