@@ -43,9 +43,9 @@ class report_benchmark_test extends report_benchmark {
         return [
             "limit" => .5,
             "over" => .8,
-            "start" => BENCHSTART,
-            "stop" => BENCHSTOP,
-            "fail" => BENCHFAIL_SLOWSERVER,
+            "start" => KOPERE_BENCHSTART,
+            "stop" => KOPERE_BENCHSTOP,
+            "fail" => "slowserver",
         ];
 
     }
@@ -208,14 +208,14 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
                          LEFT JOIN
                          {block_positions} bp
                             ON     bp.blockinstanceid = bi.id
-                               AND bp.contextid = '26'
+                               AND bp.contextid = 1
                                AND bp.pagetype = 'mod-forum-discuss'
                                AND bp.subpage = ''
                          LEFT JOIN {context} ctx
-                            ON (ctx.instanceid = bi.id AND ctx.contextlevel = '80')
+                            ON (ctx.instanceid = bi.id AND ctx.contextlevel = 80)
                    WHERE     (   bi.parentcontextid = '26'
                               OR (    bi.showinsubcontexts = 1
-                                  AND bi.parentcontextid IN ('16', '3', '1')))
+                                  AND bi.parentcontextid IN (1,2,5)))
                          AND bi.pagetypepattern IN
                                 ('mod-forum-discuss',
                                  'mod-forum-discuss-*',
@@ -235,7 +235,6 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         }
 
         return ["limit" => .5, "over" => .7, "fail" => "slowdatabase"];
-
     }
 
     /**

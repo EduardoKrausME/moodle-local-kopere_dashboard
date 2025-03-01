@@ -26,9 +26,9 @@
 define("AJAX_SCRIPT", false);
 define("OPEN_INTERNAL", true);
 
-define("BENCHSTART", microtime(true));
+define("KOPERE_BENCHSTART", microtime(true));
 require_once("../../config.php");
-define("BENCHSTOP", microtime(true));
+define("KOPERE_BENCHSTOP", microtime(true));
 require_once("autoload.php");
 require_once("locallib.php");
 
