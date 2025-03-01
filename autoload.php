@@ -28,12 +28,6 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once(__DIR__ . "/locallib.php");
 
-$debug = optional_param("debug", false, PARAM_INT);
-if ($debug) {
-    global $DB;
-    $DB->set_debug(true);
-}
-
 spl_autoload_register("kopere_dashboard_autoload");
 /**
  * Function kopere_dashboard_autoload
