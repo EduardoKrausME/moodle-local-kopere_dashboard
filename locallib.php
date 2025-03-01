@@ -45,9 +45,9 @@ function local_kopere_dashboard_makeurl($classname, $method, $params = [], $file
 }
 
 /**
- * Function get_kopere_lang
+ * Function local_kopere_dashboard_lang
  */
-function get_kopere_lang() {
+function local_kopere_dashboard_lang() {
 
     global $PAGE;
 

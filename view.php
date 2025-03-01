@@ -64,6 +64,6 @@ $PAGE->requires->jquery_plugin("ui-css");
 
 $PAGE->requires->js_call_amd("local_kopere_dashboard/start_load", "init");
 
-get_kopere_lang();
+local_kopere_dashboard_lang();
 
 kopere_dashboard_load_class();
