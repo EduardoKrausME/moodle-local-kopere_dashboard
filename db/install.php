@@ -28,11 +28,11 @@ defined('MOODLE_INTERNAL') || die();
  * Function xmldb_local_kopere_dashboard_install
  *
  * @return bool
+ *
+ * @throws coding_exception
+ * @throws dml_exception
  */
 function xmldb_local_kopere_dashboard_install() {
-    set_config("enablegravatar", 1);
-    set_config("gravatardefaulturl", "mm");
-
     set_config("webpages_theme", "standard", "local_kopere_dashboard");
 
     $fonts = "<style>\n@import url('https://fonts.googleapis.com/css2?family=Acme" .
@@ -51,7 +51,8 @@ function xmldb_local_kopere_dashboard_install() {
     $html = file_get_contents(__DIR__ . "/notification-template.html");
     set_config("notification-template", $html, "local_kopere_dashboard");
 
+    \local_kopere_dashboard\install\event_install::install_or_update();
+
     return true;
 }
 
-\local_kopere_dashboard\install\event_install::install_or_update();
