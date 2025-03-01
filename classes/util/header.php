@@ -24,8 +24,6 @@
 
 namespace local_kopere_dashboard\util;
 
-use Matrix\Exception;
-
 /**
  * Class header
  *
@@ -58,12 +56,11 @@ class header {
      */
     public static function reload($isdie = true) {
         ob_clean();
-        $url = url_util::querystring();
-        header("Location: {$url}");
-        echo "<meta http-equiv='refresh' content='0;url={$url}'>";
+        header("Location: {$_SERVER["QUERY_STRING"]}");
+        echo "<meta http-equiv='refresh' content='0;url={$_SERVER["QUERY_STRING"]}'>";
 
         if ($isdie) {
-            end_util::end_script_header("Redirecionando para {$url}");
+            end_util::end_script_header("Redirect to {$_SERVER["QUERY_STRING"]}");
         }
     }
 

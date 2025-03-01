@@ -96,7 +96,7 @@ class course_access {
 
         $sections = $DB->get_records("course_sections", ["course" => $cursosid], "section asc");
 
-        button::info(get_string_kopere("reports_export"), url_util::querystring() . "&export=xls");
+        button::info(get_string_kopere("reports_export"), "{$_SERVER["QUERY_STRING"]}&export=xls");
 
         session_write_close();
         $export = optional_param("export", "xls", PARAM_TEXT);
