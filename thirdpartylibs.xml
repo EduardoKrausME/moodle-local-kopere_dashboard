@@ -2,9 +2,9 @@
 <libraries>
     <library>
         <location>_editor</location>
-        <name>GrapsJS</name>
-        <version>0.21.10</version>
-        <license>BSD 3-Clause</license>
+        <name>VvvebJs</name>
+        <version>2.0.1</version>
+        <license>Apache-2.0 license</license>
     </library>
     <library>
         <location>amd/src/dataTables.buttons.html5.js</location>
@@ -34,7 +34,9 @@
         <location>amd/src/iosCheckbox.js</location>
         <name>iosCheckbox.js</name>
         <version>1.0.0</version>
-        <license>Ron Masas</license>
+        <author>Ron Masas</author>
+        <license>undefined</license>
+        <url>https://github.com/masasron/iosCheckbox.js</url>
     </library>
     <library>
         <location>amd/src/jszip.js</location>
@@ -52,6 +54,12 @@
         <location>amd/src/validate.js</location>
         <name>jQuery Validation Plugin</name>
         <version>1.15.0</version>
+        <license>MIT license</license>
+    </library>
+    <library>
+        <location>assets/dropzone</location>
+        <name>Dropzone</name>
+        <version>4.1.0</version>
         <license>MIT license</license>
     </library>
 </libraries>
