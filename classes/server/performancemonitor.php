@@ -167,13 +167,9 @@ class performancemonitor {
 
         session_write_close();
 
-        $filecache = "{$CFG->dataroot}/disk_moodledata.txt";
-        $size = filesize($filecache);
-
-        $cache = \cache::make("local_kopere_dashboard", "performancemonitor_cache");
-        if ($cache->has("disk_moodledata-{$size}")) {
-            unlink($filecache);
-            return $cache->get("disk_moodledata-{$size}");
+        $cache = \cache::make("local_kdashboard", "performancemonitor_cache");
+        if ($cache->has("disk_moodledata")) {
+            return $cache->get("disk_moodledata");
         }
 
         if (!server_util::function_enable("shell_exec")) {
@@ -183,17 +179,18 @@ class performancemonitor {
             return "Function \"shell_exec\" disabled by hosting";
         }
 
-        if (file_exists($filecache)) {
+        $filecache = "{$CFG->tempdir}/disk_moodledata.txt";
+        if (!file_exists($filecache)) {
+            shell_exec("du -h {$CFG->dataroot} > {$filecache} &");
+
             $lines = trim(file_get_contents($filecache));
             $pos = strrpos($lines, "\n");
             $lastline = substr($lines, $pos);
             $bytes = explode("\t", $lastline)[0];
 
-            $cache->set("disk_moodledata-{$size}", $bytes);
+            $cache->set("disk_moodledata", $bytes);
 
             return $bytes;
-        } else {
-            shell_exec("du -h {$CFG->dataroot} > {$filecache} &");
         }
 
         return "...";
