@@ -72,8 +72,12 @@ class performancemonitor extends external_api {
      * Function disk_moodledata
      *
      * @return array
+     * @throws \dml_exception
      */
     public static function disk_moodledata() {
+        $context = \context_system::instance();
+        require_capability("local/kopere_dashboard:ajax", $context);
+        self::validate_context($context);
 
         return [
             "disk" => \local_kopere_dashboard\server\performancemonitor::disk_moodledata(false),
