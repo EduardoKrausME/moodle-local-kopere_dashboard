@@ -92,7 +92,8 @@ class users {
         $search->execute_sql_and_return("
                SELECT {[columns]}
                  FROM {user} u
-                WHERE id > 1 AND deleted = 0 ", "", null,
+                WHERE id > 1 AND deleted = 0 ", "",
+            [],
             "\\local_kopere_dashboard\\util\\user_util::column_fullname");
     }
 

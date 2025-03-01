@@ -44,6 +44,8 @@ class datatable_search_util {
     private $orderdir;
     /** @var string */
     private $where;
+    /** @var array */
+    private $params = [];
 
     /**
      * Datatable_search_util constructor.
@@ -63,29 +65,41 @@ class datatable_search_util {
 
     /**
      * Function process_where
+     *
+     * @throws \coding_exception
      */
     public function process_where() {
         global $CFG;
 
-        $search = string_util::clear_all_params("search", false, PARAM_TEXT);
+        $count = 0;
+        $search = optional_param_array("search", [], PARAM_TEXT);
 
         if ($search && isset($search["value"]) && isset($search["value"][0])) {
             $like = [];
             foreach ($this->columnselect as $column) {
-                $find = $search["value"];
-                $find = str_replace("'", "\'", $find);
-                $find = str_replace("--", "", $find);
+                $searchvalue = $search["value"];
+                $searchvalue = str_replace("'", "\'", $searchvalue);
+                $searchvalue = str_replace(["\n", "\r"], "", $searchvalue);
+                $searchvalue = str_replace("--", "", $searchvalue);
                 if ($CFG->dbtype == "pgsql") {
                     if (is_array($column)) {
-                        $like[] = " cast( {$column[0]} as text ) LIKE '%{$find}%'";
+                        $count++;
+                        $like[] = " cast( {$column[0]} as text ) LIKE :searchparam{$count}";
+                        $this->params["searchparam{$count}"] = "%{$searchvalue}%";
                     } else {
-                        $like[] = "cast( {$column} as text ) LIKE '%{$find}%'";
+                        $count++;
+                        $like[] = "cast( {$column} as text ) LIKE :searchparam{$count}";
+                        $this->params["searchparam{$count}"] = "%{$searchvalue}%";
                     }
                 } else {
                     if (is_array($column)) {
-                        $like[] = "{$column[0]} LIKE '%{$find}%'";
+                        $count++;
+                        $like[] = "{$column[0]} LIKE :searchparam{$count}";
+                        $this->params["searchparam{$count}"] = "%{$searchvalue}%";
                     } else {
-                        $like[] = "{$column} LIKE '%{$find}%'";
+                        $count++;
+                        $like[] = "{$column} LIKE :searchparam{$count}";
+                        $this->params["searchparam{$count}"] = "%{$searchvalue}%";
                     }
                 }
             }
@@ -99,16 +113,17 @@ class datatable_search_util {
     private function proccess_order() {
 
         $order = string_util::clear_all_params("order", [], PARAM_TEXT);
-        $columns = string_util::clear_all_params("columns", [], PARAM_TEXT);
 
-        if ($order && $columns) {
-            $column = $order[0]["column"];
+        if ($order) {
+            $column = intval($order[0]["column"]);
             if (is_array($this->columnselect[$column])) {
                 $this->order = $this->columnselect[$column][0];
             } else {
                 $this->order = $this->columnselect[$column];
             }
-            $this->orderdir = $order[0]["dir"];
+
+            // Check if it is ASC to avoid adding the value from the user.
+            $this->orderdir = $order[0]["dir"] == "asc" ? "ASC" : "DESC";
         }
     }
 
@@ -126,13 +141,15 @@ class datatable_search_util {
     public function execute_sql_and_return($sql, $group = null, $params = null, $functionbeforereturn = null) {
         global $DB, $CFG;
 
-        $find = str_replace("GROUP BY", "", $group);
+        $params = array_merge($params, $this->params);
+
+        $groupfind = str_replace("GROUP BY", "", $group);
 
         $sqlsearch = "{$sql} {$this->where}";
         $sqltotal = $sql;
         if ($group) {
-            $sqlsearch = str_replace("{[columns]}", "count(DISTINCT {$find}) as num", $sqlsearch);
-            $sqltotal = str_replace("{[columns]}", "count(DISTINCT {$find}) as num", $sqltotal);
+            $sqlsearch = str_replace("{[columns]}", "count(DISTINCT {$groupfind}) as num", $sqlsearch);
+            $sqltotal = str_replace("{[columns]}", "count(DISTINCT {$groupfind}) as num", $sqltotal);
         } else {
             $sqlsearch = str_replace("{[columns]}", "count(*) as num", $sqlsearch);
             $sqltotal = str_replace("{[columns]}", "count(*) as num", $sqltotal);
