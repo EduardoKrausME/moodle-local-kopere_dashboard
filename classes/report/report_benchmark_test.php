@@ -26,12 +26,6 @@
 
 namespace local_kopere_dashboard\report;
 
-define("BENCHFAIL_SLOWSERVER", "slowserver");
-define("BENCHFAIL_SLOWPROCESSOR", "slowprocessor");
-define("BENCHFAIL_SLOWHARDDRIVE", "slowharddrive");
-define("BENCHFAIL_SLOWDATABASE", "slowdatabase");
-define("BENCHFAIL_SLOWWEB", "slowweb");
-
 /**
  * Class report_benchmark_test
  *
@@ -73,7 +67,7 @@ class report_benchmark_test extends report_benchmark {
             ++$i;
         }
 
-        return ["limit" => .5, "over" => .8, "fail" => BENCHFAIL_SLOWPROCESSOR];
+        return ["limit" => .5, "over" => .8, "fail" => "slowprocessor"];
 
     }
 
@@ -94,7 +88,7 @@ class report_benchmark_test extends report_benchmark {
         }
         unlink("{$CFG->tempdir}/benchmark.temp");
 
-        return ["limit" => .5, "over" => .8, "fail" => BENCHFAIL_SLOWHARDDRIVE];
+        return ["limit" => .5, "over" => .8, "fail" => "slowharddrive"];
 
     }
 
@@ -126,7 +120,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         }
         unlink("{$CFG->tempdir}/benchmark.temp");
 
-        return ["limit" => 1, "over" => 1.25, "fail" => BENCHFAIL_SLOWHARDDRIVE];
+        return ["limit" => 1, "over" => 1.25, "fail" => "slowharddrive"];
 
     }
 
@@ -146,7 +140,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             $DB->get_record("course", ["id" => SITEID]);
         }
 
-        return ["limit" => .75, "over" => 1, "fail" => BENCHFAIL_SLOWDATABASE];
+        return ["limit" => .75, "over" => 1, "fail" => "slowdatabase"];
 
     }
 
@@ -176,7 +170,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         $DB->delete_records("course", ["shortname" => $newrecord->shortname]);
         unset($newrecord);
 
-        return ["limit" => 1, "over" => 1.25, "fail" => BENCHFAIL_SLOWDATABASE];
+        return ["limit" => 1, "over" => 1.25, "fail" => "slowdatabase"];
 
     }
 
@@ -240,7 +234,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             $DB->get_records_sql($sql);
         }
 
-        return ["limit" => .5, "over" => .7, "fail" => BENCHFAIL_SLOWDATABASE];
+        return ["limit" => .5, "over" => .7, "fail" => "slowdatabase"];
 
     }
 
@@ -277,7 +271,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
             $DB->get_records_sql($sql);
         }
 
-        return ["limit" => .3, "over" => .5, "fail" => BENCHFAIL_SLOWDATABASE];
+        return ["limit" => .3, "over" => .5, "fail" => "slowdatabase"];
 
     }
 
@@ -292,7 +286,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         $fakeuser = ["username" => "guest", "password" => "guest"];
         download_file_content("{$CFG->wwwroot}/login/index.php", null, $fakeuser, true);
 
-        return ["limit" => .3, "over" => .8, "fail" => BENCHFAIL_SLOWWEB];
+        return ["limit" => .3, "over" => .8, "fail" => "slowweb"];
 
     }
 
@@ -325,7 +319,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         $DB->delete_records("user", ["id" => $user->id]);
         unset($user);
 
-        return ["limit" => .3, "over" => .8, "fail" => BENCHFAIL_SLOWWEB];
+        return ["limit" => .3, "over" => .8, "fail" => "slowweb"];
 
     }
 
