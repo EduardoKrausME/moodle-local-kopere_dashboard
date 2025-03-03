@@ -36,7 +36,7 @@ class url_util {
      *
      * @return string
      */
-   public static function makeurl($classname, $method, $params = [], $file = "view") {
+    public static function makeurl($classname, $method, $params = [], $file = "view") {
         $query = "classname={$classname}&method={$method}";
         foreach ($params as $key => $param) {
             $query .= "&{$key}={$param}";
@@ -44,5 +44,28 @@ class url_util {
 
         global $CFG;
         return "{$CFG->wwwroot}/local/kopere_dashboard/{$file}.php?{$query}";
+    }
+
+    /**
+     * Function params
+     *
+     * @return array
+     * @throws \coding_exception
+     */
+    public static function params() {
+        parse_str($_SERVER["QUERY_STRING"], $params);
+
+        $returnparams = [];
+        foreach ($params as $key => $value) {
+            if ($key === "classname" || $key === "method") {
+                $returnparams[$key] = required_param($key, PARAM_TEXT);
+            } else if (str_ends_with($key, "id")) {
+                $returnparams[$key] = required_param($key, PARAM_INT);
+            } else {
+                $returnparams[$key] = required_param($key, PARAM_TEXT);
+            }
+        }
+
+        return $returnparams;
     }
 }

@@ -23,6 +23,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_kopere_dashboard\util\url_util;
+
 define("AJAX_SCRIPT", false);
 define("OPEN_INTERNAL", true);
 
@@ -53,7 +55,7 @@ if ($CFG->theme == "smartlms") {
     @$USER->preference["sidebar-open-nav"] = false;
 }
 
-$PAGE->set_url(new moodle_url("/local/kopere_dashboard/view.php?{$_SERVER["QUERY_STRING"]}"));
+$PAGE->set_url(new moodle_url("/local/kopere_dashboard/view.php", url_util::params()));
 $PAGE->set_context($context);
 $PAGE->set_pagetype("admin-setting");
 $PAGE->set_pagelayout("admin");
