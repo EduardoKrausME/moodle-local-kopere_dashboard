@@ -141,7 +141,11 @@ class datatable_search_util {
     public function execute_sql_and_return($sql, $group = null, $params = null, $functionbeforereturn = null) {
         global $DB, $CFG;
 
-        $params = array_merge($params, $this->params);
+        if ($params == null) {
+            $params = $this->params;
+        } else {
+            $params = array_merge($params, $this->params);
+        }
 
         $groupfind = str_replace("GROUP BY", "", $group);
 
@@ -155,13 +159,17 @@ class datatable_search_util {
             $sqltotal = str_replace("{[columns]}", "count(*) as num", $sqltotal);
         }
 
-        if ($CFG->dbtype == "pgsql") {
-            $sqlreturn = "{$sql} $this->where $group ORDER BY $this->order $this->orderdir \n
-                                LIMIT $this->length OFFSET $this->start";
-        } else {
-            $sqlreturn = "{$sql} $this->where $group ORDER BY $this->order $this->orderdir \n
-                                LIMIT $this->start, $this->length";
+        $order = "";
+        if ($this->order) {
+            $order = "ORDER BY $this->order $this->orderdir";
         }
+
+        if ($CFG->dbtype == "pgsql") {
+            $sqlreturn = "{$sql} $this->where $group {$order} LIMIT $this->length OFFSET $this->start";
+        } else {
+            $sqlreturn = "{$sql} $this->where $group {$order} LIMIT $this->start, $this->length";
+        }
+
         $sqlreturn = str_replace("{[columns]}", implode(", ", $this->columnselect), $sqlreturn);
 
         $result = $DB->get_records_sql($sqlreturn, $params);
