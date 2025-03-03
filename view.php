@@ -32,7 +32,6 @@ define("KOPERE_BENCHSTART", microtime(true));
 require_once("../../config.php");
 define("KOPERE_BENCHSTOP", microtime(true));
 require_once("autoload.php");
-require_once("lib.php");
 
 global $PAGE, $CFG, $OUTPUT, $USER;
 
