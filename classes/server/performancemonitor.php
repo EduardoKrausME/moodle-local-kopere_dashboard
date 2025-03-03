@@ -148,6 +148,10 @@ class performancemonitor {
         $free = $outputmemfreee[1];
         $all = $outputmemtotal[1];
 
+        if (!$all) {
+            return 0;
+        }
+
         if ($returnnumber) {
             return 100 - (($free / $all) * 100);
         } else {
