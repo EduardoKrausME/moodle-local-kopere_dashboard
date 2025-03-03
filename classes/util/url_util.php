@@ -24,7 +24,11 @@
 
 namespace local_kopere_dashboard\util;
 
-
+/**
+ * Class url_util
+ *
+ * @package local_kopere_dashboard\util
+ */
 class url_util {
     /**
      * make url.
