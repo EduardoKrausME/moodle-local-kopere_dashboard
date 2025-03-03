@@ -26,7 +26,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once(__DIR__ . "/locallib.php");
+require_once(__DIR__ . "/lib.php");
 
 spl_autoload_register("kopere_dashboard_autoload");
 /**

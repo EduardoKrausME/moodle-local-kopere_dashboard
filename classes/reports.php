@@ -36,6 +36,7 @@ use local_kopere_dashboard\util\json;
 use local_kopere_dashboard\util\submenu_util;
 use local_kopere_dashboard\util\title_util;
 use local_kopere_dashboard\util\export;
+use local_kopere_dashboard\util\url_util;
 use local_kopere_dashboard\vo\local_kopere_dashboard_rcat;
 use local_kopere_dashboard\vo\local_kopere_dashboard_reprt;
 
@@ -101,7 +102,7 @@ class reports {
                         $extraenable = get_string_kopere("reports_disabled");
                     }
 
-                    $url = local_kopere_dashboard_makeurl("reports", "load_report", ["report" => $koperereports->id]);
+                    $url = url_util::makeurl("reports", "load_report", ["report" => $koperereports->id]);
                     echo "<h4 style='padding-left:31px;'>
                           {$extraenable} <a href='{$url}'>{$title}</a>
                       </h4>";
@@ -139,9 +140,9 @@ class reports {
         $titlereport = self::get_title($koperereports);
 
         dashboard_util::add_breadcrumb(get_string_kopere("reports_title"),
-            local_kopere_dashboard_makeurl("reports", "dashboard"));
+            url_util::makeurl("reports", "dashboard"));
         dashboard_util::add_breadcrumb($titlecat,
-            local_kopere_dashboard_makeurl("reports", "dashboard", ["type" => $koperereportcat->type]));
+            url_util::makeurl("reports", "dashboard", ["type" => $koperereportcat->type]));
         dashboard_util::add_breadcrumb($titlereport);
         dashboard_util::start_page();
 
@@ -179,7 +180,7 @@ class reports {
                     $columns->header = [];
                 }
 
-                $url = local_kopere_dashboard_makeurl("reports", "getdata", ["report" => $report, "courseid" => $courseid]);
+                $url = url_util::makeurl("reports", "getdata", ["report" => $report, "courseid" => $courseid]);
                 $table = new data_table($columns->columns, $columns->header);
 
                 $table->set_ajax_url($url);
@@ -187,7 +188,7 @@ class reports {
                 $extra = ["searching" => false, "ordering" => false];
                 $table->close(true, $extra, false, $titlereport);
 
-                $urldow = local_kopere_dashboard_makeurl("reports", "download", ["report" => $report, "courseid" => $courseid]);
+                $urldow = url_util::makeurl("reports", "download", ["report" => $report, "courseid" => $courseid]);
                 button::primary(get_string_kopere("reports_download"), $urldow);
             }
         }
@@ -215,9 +216,9 @@ class reports {
             $table->add_header(get_string_kopere("courses_enrol"), "enrolments",
                 table_header_item::TYPE_INT, null, "width:50px;white-space:nowrap;");
 
-            $table->set_ajax_url(local_kopere_dashboard_makeurl("courses", "load_all_courses"));
+            $table->set_ajax_url(url_util::makeurl("courses", "load_all_courses"));
             $table->set_click_redirect(
-                local_kopere_dashboard_makeurl("reports", "load_report",
+                url_util::makeurl("reports", "load_report",
                     ["type" => "course", "report" => $report, "courseid" => "{id}"]), "id");
             $table->print_header();
             $table->close();

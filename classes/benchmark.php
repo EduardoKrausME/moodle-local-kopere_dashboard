@@ -33,6 +33,7 @@ use local_kopere_dashboard\server\performancemonitor;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\message;
 use local_kopere_dashboard\util\title_util;
+use local_kopere_dashboard\util\url_util;
 
 /**
  * Class benchmark
@@ -59,7 +60,7 @@ class benchmark {
                        target="_blank">report_benchmark</a>');
 
         echo '<div style="text-align: center;">' . get_string_kopere("benchmark_info");
-        button::add(get_string_kopere("benchmark_execute"), local_kopere_dashboard_makeurl("benchmark", "execute"));
+        button::add(get_string_kopere("benchmark_execute"), url_util::makeurl("benchmark", "execute"));
         echo "</div>";
 
         echo "</div>";
@@ -76,7 +77,7 @@ class benchmark {
     public function execute() {
         global $CFG;
 
-        dashboard_util::add_breadcrumb(get_string_kopere("benchmark_title"), local_kopere_dashboard_makeurl("benchmark", "test"));
+        dashboard_util::add_breadcrumb(get_string_kopere("benchmark_title"), url_util::makeurl("benchmark", "test"));
         dashboard_util::add_breadcrumb(get_string_kopere("benchmark_executing"));
         dashboard_util::add_breadcrumb(get_string_kopere("benchmark_title2"));
         dashboard_util::start_page();

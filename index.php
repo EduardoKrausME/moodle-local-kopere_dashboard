@@ -27,6 +27,7 @@
  */
 
 use local_kopere_dashboard\util\config;
+use local_kopere_dashboard\util\url_util;
 
 require_once("../../config.php");
 require_once("autoload.php");
@@ -67,7 +68,7 @@ if ($pagelink) {
     $edit = "";
     $hascapability = has_capability("local/kopere_dashboard:manage", $context);
     if ($hascapability) {
-        $href = local_kopere_dashboard_makeurl("webpages", "page_edit", ["id" => $webpages->id]);
+        $href = url_util::makeurl("webpages", "page_edit", ["id" => $webpages->id]);
         $edittext = get_string_kopere("webpages_page_edit");
         $edit = " - <a href='{$href}' target=\"_blank\" style='text-decoration:underline'>{$edittext}</a>";
     }

@@ -30,6 +30,7 @@ use local_kopere_dashboard\report\files;
 use local_kopere_dashboard\server\performancemonitor;
 use local_kopere_dashboard\util\bytes_util;
 use local_kopere_dashboard\util\dashboard_util;
+use local_kopere_dashboard\util\url_util;
 
 /**
  * Class dashboard
@@ -86,14 +87,14 @@ class dashboard {
                     <div class="col-sm-3">
                         <div class="element-box color_user">
                             <div class="label">' . get_string_kopere("dashboard_title_user") . '</div>
-                            <div class="value"><a href="' . local_kopere_dashboard_makeurl("users", "dashboard") . '">
+                            <div class="value"><a href="' . url_util::makeurl("users", "dashboard") . '">
                                 ' . users::count_all(true) . ' / ' . users::count_all_learners(true) . '</a></div>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="element-box color_online">
                             <div class="label">' . get_string_kopere("dashboard_title_online") . '</div>
-                            <div class="value"><a href="' . local_kopere_dashboard_makeurl("useronline", "dashboard") . '">
+                            <div class="value"><a href="' . url_util::makeurl("useronline", "dashboard") . '">
                                 <span id="user-count-online">' . useronline::count(5) . '</span>
                                 / ' . useronline::count(60) . '</a></div>
                         </div>
@@ -101,7 +102,7 @@ class dashboard {
                     <div class="col-sm-3">
                         <div class="element-box color_course">
                             <div class="label">' . get_string_kopere("dashboard_title_course") . '</div>
-                            <div class="value"><a href="' . local_kopere_dashboard_makeurl("courses", "dashboard") . '">
+                            <div class="value"><a href="' . url_util::makeurl("courses", "dashboard") . '">
                             ' . courses::count_all(true) . '
                                 / ' . courses::count_all_visibles(true) . '</a></div>
                         </div>
@@ -110,7 +111,7 @@ class dashboard {
                         <div class="element-box color_disk">
                             <div class="label">' . get_string_kopere("dashboard_title_disk") . '</div>
                             <div class="value"><a href=' .
-            local_kopere_dashboard_makeurl("reports", "dashboard", ["type" => "server"]) . '">
+            url_util::makeurl("reports", "dashboard", ["type" => "server"]) . '">
                             ' . bytes_util::size_to_byte(files::count_all_space()) . '</a></div>
                         </div>
                     </div>
@@ -152,8 +153,8 @@ class dashboard {
             $data = [
                 "user_fullname" => fullname($user),
                 "profileimageurl" => $profileimageurl,
-                "users_details" => local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id]),
-                "users_details_ajax" => local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id], "view-ajax"),
+                "users_details" => url_util::makeurl("users", "details", ["userid" => $user->id]),
+                "users_details_ajax" => url_util::makeurl("users", "details", ["userid" => $user->id], "view-ajax"),
                 "dashboard_grade_text" =>
                     get_string_kopere("dashboard_grade_text",
                         ["grade" => $gradetext, "evaluation" => $evaluation]),
@@ -195,7 +196,7 @@ class dashboard {
                 $data = [
                     "user_fullname" => fullname($user),
                     "profileimageurl" => $profileimageurl,
-                    "users_details" => local_kopere_dashboard_makeurl("users", "details", ["userid" => $user->id]),
+                    "users_details" => url_util::makeurl("users", "details", ["userid" => $user->id]),
                     "dashboard_enrol_text" => get_string_kopere("dashboard_enrol_text", $enrol),
                     "matricula_status" => $statusmatricula,
                     "matricula_date" => userdate($enrol->timemodified, get_string_kopere("dateformat")),

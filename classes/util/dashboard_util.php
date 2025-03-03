@@ -205,7 +205,7 @@ class dashboard_util {
                 $iconurl = self::get_icon("/local/{$plugin}/assets/dashboard/img/iconactive/{$submenu->get_icon()}.svg");
             }
 
-            $url = local_kopere_dashboard_makeurl($submenu->get_classname(), $submenu->get_methodname());
+            $url = url_util::makeurl($submenu->get_classname(), $submenu->get_methodname());
             $submenuhtml .= "
                 <li class='contains_branch {$classsub}'>
                     <a href='{$url}{$submenu->get_urlextra()}' class=\"kopere_link\">
@@ -219,7 +219,7 @@ class dashboard_util {
         }
 
         $iconurl = self::get_icon("/local/{$plugin}/assets/dashboard/img/icon{$class}/{$menu->get_icon()}.svg");
-        $url = local_kopere_dashboard_makeurl($menu->get_classname(), $menu->get_methodname());
+        $url = url_util::makeurl($menu->get_classname(), $menu->get_methodname());
         $retorno .= "
                 <li class='$class'>
                     <a href='{$url}' class=\"kopere_link\">

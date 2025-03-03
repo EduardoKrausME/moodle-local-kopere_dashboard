@@ -36,6 +36,7 @@ use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\json;
 use local_kopere_dashboard\util\node;
+use local_kopere_dashboard\util\url_util;
 use local_kopere_dashboard\util\user_util;
 
 /**
@@ -62,7 +63,7 @@ class useronline {
         $table->add_header(get_string_kopere("useronline_table_fullname"), "fullname");
         $table->add_header(get_string_kopere("useronline_table_date"), "servertime", table_header_item::RENDERER_DATE);
 
-        $table->set_ajax_url(local_kopere_dashboard_makeurl("useronline", "load_all_users"));
+        $table->set_ajax_url(url_util::makeurl("useronline", "load_all_users"));
         $table->print_header();
         $tablename = $table->close(false, ["order" => [[1, "asc"]]]);
 

@@ -27,6 +27,7 @@
 namespace local_kopere_dashboard;
 
 use local_kopere_dashboard\util\message;
+use local_kopere_dashboard\util\url_util;
 
 /**
  * Class profile
@@ -143,7 +144,7 @@ class profile {
                     get_string_kopere("profile_enrol_active") . "</span>";
             }
 
-            $url = local_kopere_dashboard_makeurl("userenrolment", "mathedit",
+            $url = url_util::makeurl("userenrolment", "mathedit",
                 ["courseid" => $course->id, "ueid" => $enrolment->id], "view");
             $html .=
                 "<li>
