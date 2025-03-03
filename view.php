@@ -28,9 +28,9 @@ use local_kopere_dashboard\util\url_util;
 define("AJAX_SCRIPT", false);
 define("OPEN_INTERNAL", true);
 
-define("KOPERE_BENCHSTART", microtime(true));
+define("LOCAL_KOPERE_DASHBOARD_BENCHSTART", microtime(true));
 require_once("../../config.php");
-define("KOPERE_BENCHSTOP", microtime(true));
+define("LOCAL_KOPERE_DASHBOARD_BENCHSTOP", microtime(true));
 require_once("autoload.php");
 
 global $PAGE, $CFG, $OUTPUT, $USER;
