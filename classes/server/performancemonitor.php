@@ -171,7 +171,7 @@ class performancemonitor {
 
         session_write_close();
 
-        $cache = \cache::make("local_kdashboard", "performancemonitor_cache");
+        $cache = \cache::make("local_kopere_dashboard", "performancemonitor_cache");
         if ($cache->has("disk_moodledata")) {
             return $cache->get("disk_moodledata");
         }

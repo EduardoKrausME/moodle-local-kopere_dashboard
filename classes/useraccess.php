@@ -124,7 +124,7 @@ class useraccess {
                   AND {$where}
             ", 'GROUP BY l.userid',
             ["changuemes" => $changuemes],
-            "\\local_kdashboard\\util\\user_util::column_fullname");
+            "\\local_kopere_dashboard\\util\\user_util::column_fullname");
     }
 
     /**
