@@ -103,5 +103,23 @@ function get_string_kopere($identifier, $object = null) {
 
 // Alias this class to the old name.
 // In future all uses of this class will be corrected and the legacy references will be removed.
-class_alias( \local_kopere_dashboard\util\message::class, "local_kopere_dashboard\\util\\mensagem");
-class_alias( \local_kopere_dashboard\install\event_install::class, "local_kopere_dashboard\\install\\users_import_install");
+class_alias(\local_kopere_dashboard\util\message::class, "local_kopere_dashboard\\util\\mensagem");
+class_alias(\local_kopere_dashboard\install\event_install::class, "local_kopere_dashboard\\install\\users_import_install");
+
+if (!function_exists('str_ends_with')) {
+    /**
+     * Function str_ends_with
+     *
+     * @param $haystack
+     * @param $needle
+     *
+     * @return bool
+     */
+    function str_ends_with($haystack, $needle) {
+        $strlen_needle = mb_strlen($needle);
+        if (mb_substr($haystack, -$strlen_needle, $strlen_needle) == $needle) {
+            return true;
+        }
+        return false;
+    }
+}
