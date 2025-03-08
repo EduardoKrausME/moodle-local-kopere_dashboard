@@ -26,7 +26,6 @@
 
 namespace local_kopere_dashboard\output\events;
 
-use local_kopere_dashboard\notificationsutil;
 use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\release;
 use local_kopere_dashboard\vo\local_kopere_dashboard_event;
@@ -38,15 +37,15 @@ use local_kopere_dashboard\vo\local_kopere_dashboard_event;
  */
 class send_events {
     /** @var local_kopere_dashboard_event */
-    private $koperedashboardevents;
+    protected $koperedashboardevents;
 
     /** @var \core\event\base */
-    private $event;
+    protected $event;
 
     /** @var string */
-    private $subject;
+    protected $subject;
     /** @var string */
-    private $message;
+    protected $message;
 
     /**
      * Function get_local_kopere_dashboard_event
@@ -123,8 +122,8 @@ class send_events {
         if ($this->event->objecttable == "user") {
             $usertarget = $DB->get_record("user", ["id" => $this->event->objectid]);
 
-            $this->subject = $this->replace_tag_user($this->subject, $usertarget, "usertarget");
-            $this->message = $this->replace_tag_user($this->message, $usertarget, "usertarget");
+            $this->subject = self::replace_tag_user($this->subject, $usertarget, "usertarget");
+            $this->message = self::replace_tag_user($this->message, $usertarget, "usertarget");
         }
 
         if ($courseid) {
@@ -151,14 +150,14 @@ class send_events {
         }
 
         $userfrom->fullname = fullname($userfrom);
-        $this->subject = $this->replace_tag_user($this->subject, $userfrom, "from");
-        $this->message = $this->replace_tag_user($this->message, $userfrom, "from");
+        $this->subject = self::replace_tag_user($this->subject, $userfrom, "from");
+        $this->message = self::replace_tag_user($this->message, $userfrom, "from");
 
         // Admins: {[admin.???]}.
         $admin = get_admin();
         $admin->fullname = fullname($admin);
-        $this->subject = $this->replace_tag_user($this->subject, $admin, "admin");
-        $this->message = $this->replace_tag_user($this->message, $admin, "admin");
+        $this->subject = self::replace_tag_user($this->subject, $admin, "admin");
+        $this->message = self::replace_tag_user($this->message, $admin, "admin");
 
         // Para: {[to.???]}.
         $usersto = [];
@@ -204,10 +203,11 @@ class send_events {
                 $userto->password = $USER->tmp_password;
             }
 
-            $sendsubject = $this->replace_tag_user($this->subject, $userto, "to");
-            $htmlmessage = $this->replace_tag_user($this->message, $userto, "to");
+            $sendsubject = self::replace_tag_user($this->subject, $userto, "to");
+            $htmlmessage = self::replace_tag_user($this->message, $userto, "to");
 
-            $magager = "<a href='{$CFG->wwwroot}/message/notificationpreferences.php'>Gerenciar mensagens</a>";
+            $magager = "<a href='{$CFG->wwwroot}/message/notificationpreferences.php'>" .
+                get_string("notification_manager", "local_kopere_dashboard") . "</a>";
             $htmlmessage = str_replace("{[manager]}", $magager, $htmlmessage);
 
             $eventdata = new \core\message\message();
@@ -232,7 +232,7 @@ class send_events {
     /**
      * Function load_template
      */
-    private function load_template() {
+    protected function load_template() {
 
         $templatecontent = config::get_key("notification-template");
 
@@ -247,7 +247,7 @@ class send_events {
      *
      * @return mixed
      */
-    private function replace_date($text) {
+    protected function replace_date($text) {
         if (strpos($text, "{[date") === false) {
             return $text;
         }
@@ -284,7 +284,7 @@ class send_events {
      *
      * @return mixed
      */
-    private function replace_tag($text, $course, $keyname) {
+    protected function replace_tag($text, $course, $keyname) {
         if (strpos($text, "{[{$keyname}") === false) {
             return $text;
         }
@@ -312,7 +312,7 @@ class send_events {
      *
      * @return mixed
      */
-    private function replace_tag_user($text, $user, $keyname) {
+    public static function replace_tag_user($text, $user, $keyname) {
         if (strpos($text, "{[{$keyname}") === false) {
             return $text;
         }
@@ -339,7 +339,7 @@ class send_events {
      * @return mixed
      * @throws \dml_exception
      */
-    private function login_generate_password($user) {
+    protected function login_generate_password($user) {
         global $DB;
         $resetrecord = (object)[
             "timerequested" => strtotime("+48 hours", time()),
