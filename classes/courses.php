@@ -106,7 +106,7 @@ class courses {
                   JOIN {enrol}            e ON e.courseid = c.id
                   JOIN {user_enrolments} ue ON ue.enrolid = e.id
                  WHERE c.id > 1
-              GROUP BY c.id, c.fullname, c.shortname, c.visible;"
+              GROUP BY c.id, c.fullname, c.shortname, c.visible"
             );
 
             if ($mycourses) {
