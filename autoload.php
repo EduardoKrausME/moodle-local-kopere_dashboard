@@ -116,8 +116,8 @@ if (!function_exists('str_ends_with')) {
      * @return bool
      */
     function str_ends_with($haystack, $needle) {
-        $strlen_needle = mb_strlen($needle);
-        if (mb_substr($haystack, -$strlen_needle, $strlen_needle) == $needle) {
+        $len = mb_strlen($needle);
+        if (mb_substr($haystack, -$len, $len) == $needle) {
             return true;
         }
         return false;
