@@ -92,7 +92,7 @@ class useraccess {
      * @throws \Exception
      */
     public function load_all_users() {
-        global $CFG;
+        global $DB;
 
         $changuemes = required_param("changue_mes", PARAM_TEXT);
 
@@ -108,9 +108,9 @@ class useraccess {
         ];
         $search = new datatable_search_util($columns);
 
-        if ($CFG->dbtype == "mysqli" || $CFG->dbtype == "mariadb") {
+        if ($DB->get_dbfamily() == "mysql") {
             $where = "date_format( from_unixtime(l.timecreated), '%Y-%m' ) LIKE :changuemes";
-        } else if ($CFG->dbtype == "pgsql") {
+        } else if ($DB->get_dbfamily() == "postgres") {
             $where = "to_char(to_timestamp(l.timecreated), 'YYYY-MM') LIKE :changuemes";
         } else {
             throw new \Exception("only mysqli and pgsql");

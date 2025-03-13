@@ -40,10 +40,10 @@ class grade {
      * @throws \dml_exception
      */
     public function get_last_grades() {
-        global $DB, $CFG;
+        global $DB;
 
         $group = "";
-        if ($CFG->dbtype == "mysqli") {
+        if ($DB->get_dbfamily() == "mysql") {
             $group = "GROUP BY gg.id";
         }
         $data = $DB->get_records_sql("

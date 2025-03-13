@@ -232,7 +232,7 @@ class reports {
      * @throws \dml_exception
      */
     public function getdata() {
-        global $DB, $CFG;
+        global $DB;
 
         $report = optional_param("report", 0, PARAM_INT);
         $courseid = optional_param("courseid", 0, PARAM_INT);
@@ -251,7 +251,7 @@ class reports {
         /** @var local_kopere_dashboard_reprt $koperereports */
         $koperereports = $DB->get_record("local_kopere_dashboard_reprt", ["id" => $report]);
 
-        if ($CFG->dbtype == "pgsql") {
+        if ($DB->get_dbfamily() == "postgres") {
             $sql = "{$koperereports->reportsql} LIMIT {$length} OFFSET {$start}";
         } else {
             $sql = "{$koperereports->reportsql} LIMIT {$start}, {$length}";

@@ -69,7 +69,7 @@ class datatable_search_util {
      * @throws \coding_exception
      */
     public function process_where() {
-        global $CFG;
+        global $DB;
 
         $count = 0;
         $search = optional_param_array("search", [], PARAM_TEXT);
@@ -81,7 +81,7 @@ class datatable_search_util {
                 $searchvalue = str_replace("'", "\'", $searchvalue);
                 $searchvalue = str_replace(["\n", "\r"], "", $searchvalue);
                 $searchvalue = str_replace("--", "", $searchvalue);
-                if ($CFG->dbtype == "pgsql") {
+                if ($DB->get_dbfamily() == "postgres") {
                     if (is_array($column)) {
                         $count++;
                         $like[] = " cast( {$column[0]} as text ) LIKE :searchparam{$count}";
@@ -139,7 +139,7 @@ class datatable_search_util {
      * @throws \coding_exception
      */
     public function execute_sql_and_return($sql, $group = null, $params = null, $functionbeforereturn = null) {
-        global $DB, $CFG;
+        global $DB;
 
         if ($params == null) {
             $params = $this->params;
@@ -164,7 +164,7 @@ class datatable_search_util {
             $order = "ORDER BY $this->order $this->orderdir";
         }
 
-        if ($CFG->dbtype == "pgsql") {
+        if ($DB->get_dbfamily() == "postgres") {
             $sqlreturn = "{$sql} $this->where $group {$order} LIMIT $this->length OFFSET $this->start";
         } else {
             $sqlreturn = "{$sql} $this->where $group {$order} LIMIT $this->start, $this->length";

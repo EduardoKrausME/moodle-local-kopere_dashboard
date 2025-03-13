@@ -48,13 +48,13 @@ class db_course_access extends \core\task\scheduled_task {
      * @throws \ddl_exception
      */
     public function execute() {
-        global $DB, $CFG;
+        global $DB;
 
         if (!$DB->get_manager()->table_exists("local_kopere_dashboard_acess")) {
             return;
         }
 
-        if ($CFG->dbtype == "pgsql") {
+        if ($DB->get_dbfamily() == "postgres") {
             $reportsql = "
                 SELECT CONCAT(courseid::text, userid::text, contextinstanceid::text) AS a, COUNT(*) AS contagem,
                        courseid, userid, contextinstanceid, timecreated
