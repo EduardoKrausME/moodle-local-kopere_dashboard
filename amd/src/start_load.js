@@ -176,6 +176,11 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
                     $menu.append(link);
                     return;
                 }
+                $menu = $("#main-navigation .mb2mm");
+                if ($menu.length) {
+                    $menu.append(link);
+                    return;
+                }
             }
         };
     });
