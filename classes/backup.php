@@ -67,12 +67,12 @@ class backup {
                           <p>' . get_string("backup_sleep", "local_kopere_dashboard") . '</p>';
 
                 if ($DB->get_dbfamily() == "mysql") {
-                    button::add(get_string("backup_newnow", "local_kopere_dashboard"), 
+                    button::add(get_string("backup_newnow", "local_kopere_dashboard"),
                         url_util::makeurl("backup", "execute"));
-                    button::add(get_string("backup_newsqlnow", "local_kopere_dashboard"), 
+                    button::add(get_string("backup_newsqlnow", "local_kopere_dashboard"),
                         url_util::makeurl("backup", "execute_dumpsql"));
                 } else if ($DB->get_dbfamily() == "postgres") {
-                    button::add(get_string("backup_newsqlnow", "local_kopere_dashboard"), 
+                    button::add(get_string("backup_newsqlnow", "local_kopere_dashboard"),
                         url_util::makeurl("backup", "execute_dumpsql_pgsql"));
                 }
 
