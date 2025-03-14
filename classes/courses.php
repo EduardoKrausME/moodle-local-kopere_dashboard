@@ -341,7 +341,10 @@ class courses {
                         require_once("{$CFG->dirroot}/user/lib.php");
                         $newuser->id = user_create_user($newuser);
 
-                        $a = (object)["login" => $newuser->username, "senha" => $password];
+                        $a = [
+                            "login" => $newuser->username,
+                            "password" => $password,
+                        ];
                         message::schedule_message_success(get_string("courses_student_ok", "local_kopere_dashboard", $a));
                         header::location(
                             url_util::makeurl("courses", "enrol_new",
