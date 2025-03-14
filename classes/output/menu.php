@@ -55,33 +55,36 @@ class menu {
             (new menu_util())->set_classname("dashboard")
                 ->set_methodname("start")
                 ->set_icon("dashboard")
-                ->set_name(get_string_kopere("dashboard")));
+                ->set_name(get_string("dashboard", "local_kopere_dashboard")));
 
+        $submenus = [
+            (new submenu_util())
+                ->set_classname("useronline")
+                ->set_methodname("dashboard")
+                ->set_title(get_string("useronline_title", "local_kopere_dashboard"))
+                ->set_icon("users-online"),
+        ];
+        if ($DB->get_dbfamily() == "mysql") {
+            $submenus[] = (new submenu_util())
+                ->set_classname("useraccess")
+                ->set_methodname("dashboard")
+                ->set_title(get_string("useraccess_title", "local_kopere_dashboard"))
+                ->set_icon("users-access");
+        }
         echo dashboard_util::add_menu(
             (new menu_util())
                 ->set_classname("users")
                 ->set_methodname("dashboard")
                 ->set_icon("users")
-                ->set_name(get_string_kopere("user_title"))
-                ->set_submenus([
-                    (new submenu_util())
-                        ->set_classname("useronline")
-                        ->set_methodname("dashboard")
-                        ->set_title(get_string_kopere("useronline_title"))
-                        ->set_icon("users-online"),
-                    (new submenu_util())
-                        ->set_classname("useraccess")
-                        ->set_methodname("dashboard")
-                        ->set_title(get_string_kopere("useraccess_title"))
-                        ->set_icon("users-access"),
-                ]));
+                ->set_name(get_string("user_title", "local_kopere_dashboard"))
+                ->set_submenus($submenus));
 
         echo dashboard_util::add_menu(
             (new menu_util())
                 ->set_classname("courses")
                 ->set_methodname("dashboard")
                 ->set_icon("courses")
-                ->set_name(get_string_kopere("courses_title")));
+                ->set_name(get_string("courses_title", "local_kopere_dashboard")));
 
         $sql = "SELECT plugin
                   FROM {config_plugins}
@@ -103,7 +106,7 @@ class menu {
                     ->set_classname("reports")
                     ->set_methodname("dashboard")
                     ->set_icon("report")
-                    ->set_name(get_string_kopere("reports_title"))
+                    ->set_name(get_string("reports_title", "local_kopere_dashboard"))
                     ->set_submenus(reports::global_menus())
             );
         }
@@ -115,24 +118,31 @@ class menu {
                     ->set_classname("notifications")
                     ->set_methodname("dashboard")
                     ->set_icon("notifications")
-                    ->set_name(get_string_kopere("notification_title")));
+                    ->set_name(get_string("notification_title", "local_kopere_dashboard"))
+                    ->set_submenus([
+                        (new submenu_util())
+                            ->set_classname("notifications")
+                            ->set_methodname("dashboard")
+                            ->set_title(get_string("notification_title", "local_kopere_dashboard"))
+                            ->set_icon("notifications"),
+                    ]));
 
             echo dashboard_util::add_menu(
                 (new menu_util())
                     ->set_classname("webpages")
                     ->set_methodname("dashboard")
                     ->set_icon("webpages")
-                    ->set_name(get_string_kopere("webpages_title"))
+                    ->set_name(get_string("webpages_title", "local_kopere_dashboard"))
                     ->set_submenus([
                         (new submenu_util())
                             ->set_classname("webpages")
                             ->set_methodname("dashboard")
-                            ->set_title(get_string_kopere("webpages_title"))
+                            ->set_title(get_string("webpages_title", "local_kopere_dashboard"))
                             ->set_icon("webpages"),
                         (new submenu_util())
                             ->set_classname("webpages")
                             ->set_methodname("settings")
-                            ->set_title(get_string_kopere("settings"))
+                            ->set_title(get_string("settings", "local_kopere_dashboard"))
                             ->set_icon("settings"),
                     ]));
         }
@@ -142,15 +152,15 @@ class menu {
                 ->set_classname("benchmark")
                 ->set_methodname("test")
                 ->set_icon("performace")
-                ->set_name(get_string_kopere("benchmark_title")));
+                ->set_name(get_string("benchmark_title", "local_kopere_dashboard")));
 
-        if ($isadmin && $CFG->dbtype == "mysqli") {
+        if ($isadmin && $DB->get_dbfamily() == "mysql") {
             echo dashboard_util::add_menu(
                 (new menu_util())
                     ->set_classname("backup")
                     ->set_methodname("dashboard")
                     ->set_icon("data")
-                    ->set_name(get_string_kopere("backup_title")));
+                    ->set_name(get_string("backup_title", "local_kopere_dashboard")));
         }
 
         echo dashboard_util::add_menu(
@@ -158,7 +168,7 @@ class menu {
                 ->set_classname("about")
                 ->set_methodname("dashboard")
                 ->set_icon("about")
-                ->set_name(get_string_kopere("about_title")));
+                ->set_name(get_string("about_title", "local_kopere_dashboard")));
         echo "</ul>";
     }
 }

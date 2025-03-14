@@ -110,10 +110,8 @@ class useraccess {
 
         if ($DB->get_dbfamily() == "mysql") {
             $where = "date_format( from_unixtime(l.timecreated), '%Y-%m' ) LIKE :changuemes";
-        } else if ($DB->get_dbfamily() == "postgres") {
-            $where = "to_char(to_timestamp(l.timecreated), 'YYYY-MM') LIKE :changuemes";
         } else {
-            throw new \Exception("only mysqli and pgsql");
+            throw new \Exception("only mysqli");
         }
 
         $search->execute_sql_and_return("
