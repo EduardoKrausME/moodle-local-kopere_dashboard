@@ -49,7 +49,9 @@ class form {
             echo "<form method=\"post\" class='validate {$classextra}' enctype='multipart/form-data'
                         action='{$this->formaction}' >";
             echo '<div class="displayErroForm alert alert-danger" style="display: none;"><span></span></div>';
-            echo '<input name="POST" type="hidden" value="true" />';
+
+            $this->create_hidden_input("POST", "true");
+            $this->create_hidden_input("sesskey", sesskey());
         }
     }
 
@@ -111,7 +113,7 @@ class form {
      * @param string $titulo
      * @param string $class
      */
-    public function panel_start($titulo, $class="") {
+    public function panel_start($titulo, $class = "") {
         echo "<div class='form-group {$class}'>
                   <label>{$titulo}</label>
                   <div class='panel panel-default'>

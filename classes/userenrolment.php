@@ -124,9 +124,12 @@ class userenrolment {
      *
      * @throws \coding_exception
      * @throws \dml_exception
+     * @throws \moodle_exception
      */
     public function mathedit_save() {
         global $DB;
+
+        require_sesskey();
 
         $ueid = optional_param("ueid", 0, PARAM_INT);
         $status = optional_param("status", 0, PARAM_INT);

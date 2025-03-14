@@ -316,9 +316,12 @@ class notifications extends notificationsutil {
      *
      * @throws \coding_exception
      * @throws \dml_exception
+     * @throws \moodle_exception
      */
     public function add_save() {
         global $DB;
+
+        require_sesskey();
 
         $event = local_kopere_dashboard_event::create_by_default();
 

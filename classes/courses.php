@@ -268,6 +268,8 @@ class courses {
 
         echo '<div class="element-box table-responsive table-new-enrol">';
 
+        require_sesskey();
+
         $userid = optional_param("userid", 0, PARAM_INT);
         $email = optional_param("usuario-email", "", PARAM_EMAIL);
         $user = $DB->get_record_select("user", "email = '{$email}' OR id = '{$userid}'");

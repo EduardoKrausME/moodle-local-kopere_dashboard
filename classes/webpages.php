@@ -402,9 +402,12 @@ class webpages {
      *
      * @throws \coding_exception
      * @throws \dml_exception
+     * @throws \moodle_exception
      */
     public function page_edit_save() {
         global $DB;
+
+        require_sesskey();
 
         $webpages = local_kopere_dashboard_pages::create_by_default();
         $webpages->id = optional_param("id", 0, PARAM_INT);

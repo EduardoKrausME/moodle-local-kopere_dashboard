@@ -42,8 +42,11 @@ class settings {
      * Function save
      *
      * @throws \coding_exception
+     * @throws \moodle_exception
      */
     public function save() {
+
+        require_sesskey();
 
         $post = string_util::clear_all_params(null, null, PARAM_RAW);
         foreach ($post as $keyname => $value) {
