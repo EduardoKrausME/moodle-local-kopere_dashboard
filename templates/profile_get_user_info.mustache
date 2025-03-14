@@ -32,25 +32,36 @@
 }}
 
 <h3>{{#str}}profile_access_title, local_kopere_dashboard{{/str}}</h3>
-{{#user.firstaccess}}
-    <p>{{#str}}profile_access_first, local_kopere_dashboard{{/str}}<br>
-        <strong>{{#userdate}}{{{user.firstaccess}}}, {{#str}}
-            dateformat, local_kopere_dashboard{{/str}}{{/userdate}}</strong></p>
-{{/user.firstaccess}}
 
-{{#user.lastaccess}}
-    <p>{{#str}}profile_access_last, local_kopere_dashboard{{/str}}<br>
-        <strong>{{#userdate}}{{{user.lastaccess}}}, {{#str}}
-            dateformat, local_kopere_dashboard{{/str}}{{/userdate}}</strong>
-    </p>
-{{/user.lastaccess}}
+<p>{{#str}}profile_access_first, local_kopere_dashboard{{/str}}<br>
+    {{#user.firstaccess}}
+        <strong>{{#userdate}}{{{user.firstaccess}}},
+            {{#str}}dateformat, local_kopere_dashboard{{/str}}{{/userdate}}</strong>
+    {{/user.firstaccess}}
+    {{^user.firstaccess}}
+        <strong>{{#str}}never{{/str}}</strong>
+    {{/user.firstaccess}}
+</p>
 
-{{#user.lastlogin}}
-    <p>{{#str}}profile_access_lastlogin, local_kopere_dashboard{{/str}}<br>
-        <strong>{{#userdate}}{{{user.lastlogin}}}, {{#str}}
-            dateformat, local_kopere_dashboard{{/str}}{{/userdate}}</strong>
-    </p>
-{{/user.lastlogin}}
+<p>{{#str}}profile_access_last, local_kopere_dashboard{{/str}}<br>
+    {{#user.lastaccess}}
+        <strong>{{#userdate}}{{{user.lastaccess}}},
+            {{#str}}dateformat, local_kopere_dashboard{{/str}}{{/userdate}}</strong>
+    {{/user.lastaccess}}
+    {{^user.lastaccess}}
+        <strong>{{#str}}never{{/str}}</strong>
+    {{/user.lastaccess}}
+</p>
+
+<p>{{#str}}profile_access_lastlogin, local_kopere_dashboard{{/str}}<br>
+    {{#user.lastlogin}}
+        <strong>{{#userdate}}{{{user.lastlogin}}},
+            {{#str}}dateformat, local_kopere_dashboard{{/str}}{{/userdate}}</strong>
+    {{/user.lastlogin}}
+    {{^user.lastlogin}}
+        <strong>{{#str}}never{{/str}}</strong>
+    {{/user.lastlogin}}
+</p>
 
 <h3>{{#str}}profile_userdate_title, local_kopere_dashboard{{/str}}</h3>
 <p><a href="mailto:{{{user.email}}}">{{{user.email}}}</a></p>
