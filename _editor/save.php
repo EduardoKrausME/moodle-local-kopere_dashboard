@@ -47,11 +47,11 @@ define("ALLOWED_OEMBED_DOMAINS", [
  * Function sanitize_file_name
  *
  * @param $file
- * @param string $allowedExtension
+ * @param string $allowedextension
  *
  * @return null|string|string[]
  */
-function sanitize_file_name($file, $allowedExtension = "html") {
+function sanitize_file_name($file, $allowedextension = "html") {
     $basename = basename($file);
     $disallow = [".htaccess", "passwd"];
     if (in_array($basename, $disallow)) {
@@ -69,8 +69,8 @@ function sanitize_file_name($file, $allowedExtension = "html") {
     }
 
     // Allow only .html extension.
-    if ($allowedExtension) {
-        $file = preg_replace('/\.[^.]+$/', "", $file) . ".$allowedExtension";
+    if ($allowedextension) {
+        $file = preg_replace('/\.[^.]+$/', "", $file) . ".$allowedextension";
     }
     return $file;
 }
