@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * phpcs:disable
  * Editor.
  *
  * @package   local_kopere_dashboard

@@ -31,8 +31,8 @@ $page = required_param("page", PARAM_TEXT);
 $id = required_param("id", PARAM_TEXT);
 $link = optional_param("link", "", PARAM_TEXT);
 
-define("MAX_FILE_LIMIT", 1024 * 1024 * 2);//2 Megabytes max html file size
-define("ALLOW_PHP", false);//check if saved html contains php tag and don't save if not allowed
+define("MAX_FILE_LIMIT", 1024 * 1024 * 2); //2 Megabytes max html file size.
+define("ALLOW_PHP", false); //check if saved html contains php tag and don't save if not allowed.
 define("ALLOWED_OEMBED_DOMAINS", [
     "https://www.youtube.com/",
     "https://www.vimeo.com/",
@@ -41,8 +41,16 @@ define("ALLOWED_OEMBED_DOMAINS", [
     "https://publish.twitter.com/",
     "https://www.twitter.com/",
     "https://www.reddit.com/",
-]);//load urls only from allowed websites for oembed
+]); //load urls only from allowed websites for oembed.
 
+/**
+ * Function sanitizeFileName
+ *
+ * @param $file
+ * @param string $allowedExtension
+ *
+ * @return null|string|string[]
+ */
 function sanitizeFileName($file, $allowedExtension = "html") {
     $basename = basename($file);
     $disallow = [".htaccess", "passwd"];
@@ -51,7 +59,7 @@ function sanitizeFileName($file, $allowedExtension = "html") {
         return "";
     }
 
-    //sanitize, remove double dot .. and remove get parameters if any
+    //sanitize, remove double dot .. and remove get parameters if any.
     $file = preg_replace('@\?.*$@', "", preg_replace('@\.{2,}@', "", preg_replace('@[^\/\\a-zA-Z0-9\-\._]@', "", $file)));
 
     if ($file) {
@@ -60,18 +68,30 @@ function sanitizeFileName($file, $allowedExtension = "html") {
         return "";
     }
 
-    //allow only .html extension
+    //allow only .html extension.
     if ($allowedExtension) {
         $file = preg_replace('/\.[^.]+$/', "", $file) . ".$allowedExtension";
     }
     return $file;
 }
 
+/**
+ * Function showError
+ *
+ * @param $error
+ */
 function showError($error) {
     header($_SERVER["SERVER_PROTOCOL"] . " 404", true, 500);
     die($error);
 }
 
+/**
+ * Function validOembedUrl
+ *
+ * @param $url
+ *
+ * @return bool
+ */
 function validOembedUrl($url) {
     foreach (ALLOWED_OEMBED_DOMAINS as $domain) {
         if (strpos($url, $domain) === 0) {
@@ -112,19 +132,19 @@ if (optional_param("action", false, PARAM_TEXT)) {
 }
 
 if ($action) {
-    //file manager actions, delete and rename
+    //file manager actions, delete and rename.
     switch ($action) {
         case "delete":
             $json = file_get_contents("php://input");
             $data = json_decode($json);
-            preg_match('/pluginfile.php\/(\d+)\/local_kopere_dashboard\/(\w+)\/(\d+)\/(.*)/', $data->file, $filePartes);
+            preg_match('/pluginfile.php\/(\d+)\/local_kopere_dashboard\/(\w+)\/(\d+)\/(.*)/', $data->file, $filepartes);
 
-            if (isset($filePartes[4])) {
-                $contextid = $filePartes[1];
+            if (isset($filepartes[4])) {
+                $contextid = $filepartes[1];
                 $component = "local_kopere_dashboard";
-                $filearea = $filePartes[2];
-                $itemid = $filePartes[3];
-                $filename = $filePartes[4];
+                $filearea = $filepartes[2];
+                $itemid = $filepartes[3];
+                $filename = $filepartes[4];
 
                 $fs = get_file_storage();
                 $fs->delete_area_files($contextid, $component, $filearea, $itemid);
@@ -159,7 +179,7 @@ if ($action) {
                 $options = [
                     "http" => [
                         "method" => "GET",
-                        "header" => "User-Agent: {$_SERVER["HTTP_USER_AGENT"]}\r\n"
+                        "header" => "User-Agent: {$_SERVER["HTTP_USER_AGENT"]}\r\n",
                     ]
                 ];
                 $context = stream_context_create($options);
@@ -170,7 +190,7 @@ if ($action) {
             }
             break;
         default:
-            showError("Invalid action '$action'!");
+            showError("Invalid action '{$action}'!");
     }
 } else {
     echo json_encode([

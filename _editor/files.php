@@ -42,7 +42,7 @@ if (isset($_FILES["file"]["name"])) {
         "png", "jpg", "jpeg", "gif", "svg", "webp",
         "webm", "mp4",
         "mp3",
-        "pdf"
+        "pdf",
     ];
 
     $extension = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
@@ -61,7 +61,8 @@ if (isset($_FILES["file"]["name"])) {
 
         $url = moodle_url::make_file_url(
             "$CFG->wwwroot/pluginfile.php",
-            "/{$contextid}/local_kopere_dashboard/{$filerecord->filearea}/{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}");
+            "/{$contextid}/local_kopere_dashboard/{$filerecord->filearea}/" .
+            "{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}");
 
         echo json_encode([
             "name" => $_FILES["file"]["name"],
@@ -72,7 +73,6 @@ if (isset($_FILES["file"]["name"])) {
 
         die();
     } else {
-        // header($_SERVER["SERVER_PROTOCOL"] . " 404", true, 500);
         die("File type {$extension} not allowed!");
     }
 }
@@ -85,7 +85,8 @@ $items = [];
 foreach ($files as $file) {
     $url = moodle_url::make_file_url(
         "$CFG->wwwroot/pluginfile.php",
-        "/{$contextid}/local_kopere_dashboard/{$file->get_filearea()}/{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}");
+        "/{$contextid}/local_kopere_dashboard/{$file->get_filearea()}/" .
+        "{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}");
     $items[] = [
         "name" => $file->get_filename(),
         "type" => "file",
@@ -123,6 +124,6 @@ echo json_encode([
     "name" => "",
     "type" => "folder",
     "path" => "",
-    "items" => $items
+    "items" => $items,
 ]);
 die();

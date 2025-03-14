@@ -26,6 +26,9 @@ require_once("../../../config.php");
 require_once("./function.php");
 $PAGE->set_context(\context_system::instance());
 
+require_login();
+require_capability("moodle/site:config", context_system::instance());
+
 $page = required_param("page", PARAM_TEXT);
 $id = required_param("id", PARAM_TEXT);
 $link = optional_param("link", "", PARAM_TEXT);
@@ -58,7 +61,8 @@ if ($aos) {
     $html = "
 <html>
     <head>
-        <link vvveb-remove=\"true\" href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/VvvebJs/css/bootstrap-vvveb.css\" rel=\"stylesheet\">
+        <link vvveb-remove=\"true\" href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/VvvebJs/css/bootstrap-vvveb.css\"
+              rel=\"stylesheet\">
         <link href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/VvvebJs/libs/aos/aos.css\" rel=\"stylesheet\">
         <link href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/VvvebJs/libs/aos/aos.js\" rel=\"stylesheet\">
     </head>
