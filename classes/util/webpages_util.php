@@ -44,7 +44,7 @@ class webpages_util {
      * @throws \dml_exception
      * @throws \moodle_exception
      */
-    public function notfound($printtext) {
+    public static function notfound($printtext) {
         global $PAGE, $OUTPUT, $CFG;
 
         header("HTTP/1.0 404 Not Found");

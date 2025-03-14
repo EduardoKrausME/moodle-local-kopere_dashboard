@@ -78,7 +78,9 @@ if ($pagelink) {
     $menu = $DB->get_record("local_kopere_dashboard_menu", ["id" => $webpages->menuid]);
 
     $PAGE->navbar->add(get_string("webpages_allpages", "local_kopere_dashboard"), new moodle_url("/local/kopere_dashboard/"));
-    $PAGE->navbar->add($menu->title, new moodle_url("/local/kopere_dashboard/?menu={$menu->link}"));
+    if ($menu) {
+        $PAGE->navbar->add($menu->title, new moodle_url("/local/kopere_dashboard/?menu={$menu->link}"));
+    }
     $PAGE->navbar->add($webpages->title);
 
     echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
