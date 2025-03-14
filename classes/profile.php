@@ -172,26 +172,11 @@ class profile {
      * @throws \coding_exception
      */
     public static function get_user_info($user) {
-        global $CFG;
+        global $OUTPUT;
 
-        return "
-        <h3>" . get_string("profile_access_title", "local_kopere_dashboard") . "</h3>
-        <p>" . get_string("profile_access_first", "local_kopere_dashboard") . "<br>
-           <strong>" . userdate($user->firstaccess, get_string("dateformat", "local_kopere_dashboard")) . "</strong></p>
-        <p>" . get_string("profile_access_last", "local_kopere_dashboard") . "<br>
-           <strong>" . userdate($user->lastaccess, get_string("dateformat", "local_kopere_dashboard")) . "</strong></p>
-        <p>" . get_string("profile_access_lastlogin", "local_kopere_dashboard") . "<br>
-           <strong>" . userdate($user->lastlogin, get_string("dateformat", "local_kopere_dashboard")) . "</strong></p>
-        <h3>" . get_string("profile_userdate_title", "local_kopere_dashboard") . "</h3>
-        <p><a href='mailto:{$user->email}''>{$user->email}</a></p>
-        <p>{$user->phone1}</p>
-        <p>{$user->phone2}</p>
-        <h3>" . get_string("profile_link_title", "local_kopere_dashboard") . "</h3>
-        <p><a target=\"_blank\" href='{$CFG->wwwroot}/user/profile.php?id={$user->id}'>" .
-            get_string("profile_link_profile", "local_kopere_dashboard") . "</a></p>
-        <p><a target=\"_blank\" href='{$CFG->wwwroot}/user/editadvanced.php?id={$user->id}'>" .
-            get_string("profile_link_edit", "local_kopere_dashboard") . "</a></p>
-        <p><a target=\"_blank\" href='{$CFG->wwwroot}/course/loginas.php?id=1&user={$user->id}&sesskey=" . sesskey() . "'>" .
-            get_string("profile_access", "local_kopere_dashboard") . "</a></p>";
+        $data = [
+            "user" => $user,
+        ];
+        return $OUTPUT->render_from_template("local_kopere_dashboard/profile_get_user_info", $data);
     }
 }

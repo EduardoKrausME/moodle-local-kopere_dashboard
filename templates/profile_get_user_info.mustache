@@ -1,0 +1,65 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_kopere_dashboard/profile_get_user_info
+
+    Example context (json):
+    {
+        "user": {
+            "firstaccess": "1622520000",
+            "lastaccess": "1704067200",
+            "lastlogin": "1706659200",
+            "email": "usuario@example.com",
+            "phone1": "+55 11 99999-9999",
+            "phone2": "+55 11 98888-8888",
+            "id": "12345"
+        }
+    }
+}}
+
+<h3>{{#str}}profile_access_title, local_kopere_dashboard{{/str}}</h3>
+{{#user.firstaccess}}
+    <p>{{#str}}profile_access_first, local_kopere_dashboard{{/str}}<br>
+        <strong>{{#userdate}}{{{user.firstaccess}}}, {{#str}}
+            dateformat, local_kopere_dashboard{{/str}}{{/userdate}}</strong></p>
+{{/user.firstaccess}}
+
+{{#user.lastaccess}}
+    <p>{{#str}}profile_access_last, local_kopere_dashboard{{/str}}<br>
+        <strong>{{#userdate}}{{{user.lastaccess}}}, {{#str}}
+            dateformat, local_kopere_dashboard{{/str}}{{/userdate}}</strong>
+    </p>
+{{/user.lastaccess}}
+
+{{#user.lastlogin}}
+    <p>{{#str}}profile_access_lastlogin, local_kopere_dashboard{{/str}}<br>
+        <strong>{{#userdate}}{{{user.lastlogin}}}, {{#str}}
+            dateformat, local_kopere_dashboard{{/str}}{{/userdate}}</strong>
+    </p>
+{{/user.lastlogin}}
+
+<h3>{{#str}}profile_userdate_title, local_kopere_dashboard{{/str}}</h3>
+<p><a href="mailto:{{{user.email}}}">{{{user.email}}}</a></p>
+<p>{{{user.phone1}}}</p>
+<p>{{{user.phone2}}}</p>
+<h3>{{#str}}profile_link_title, local_kopere_dashboard{{/str}}</h3>
+<p><a target=\"_blank\" href="{{{config.wwwroot}}}/user/profile.php?id={{{user.id}}}">
+    {{#str}}profile_link_profile, local_kopere_dashboard{{/str}}</a></p>
+<p><a target=\"_blank\" href="{{{config.wwwroot}}}/user/editadvanced.php?id={{{user.id}}}">
+    {{#str}}profile_link_edit, local_kopere_dashboard{{/str}}</a></p>
+<p><a target=\"_blank\" href="{{{config.wwwroot}}}/course/loginas.php?id=1&user={{{user.id}}}
+    &sesskey={{{config.sesskey}}}">{{#str}}profile_access, local_kopere_dashboard{{/str}}</a></p>
