@@ -78,8 +78,8 @@ class report_benchmark {
                     "during" => $stop,
                     "id" => $idtest,
                     "class" => $this->get_feedback_class($stop, $result["limit"], $result["over"]),
-                    "name" => get_string_kopere("{$name}name"),
-                    "info" => get_string_kopere("{$name}moreinfo"),
+                    "name" => get_string("{$name}name", "local_kopere_dashboard"),
+                    "info" => get_string("{$name}moreinfo", "local_kopere_dashboard"),
                 ] + $result;
         }
 

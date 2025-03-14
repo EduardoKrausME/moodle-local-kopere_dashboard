@@ -46,7 +46,7 @@ if (file_exists(__DIR__ . "/VvvebJs/_default/default-{$page}.html")) {
 
     if (!isset($html[40])) {
         $html = file_get_contents(__DIR__ . "/VvvebJs/_default/default-{$page}.html");
-        $html = vvveb__changue_langs($html, "local_kopere_dashboard");
+        $html = local_kopere_dashboard__vvveb__changue_langs($html, "local_kopere_dashboard");
     }
 } else {
     $html = get_config("local_kopere_dashboard", $id);

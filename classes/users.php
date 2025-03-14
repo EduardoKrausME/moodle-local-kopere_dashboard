@@ -47,19 +47,19 @@ class users {
      * @throws \dml_exception
      */
     public function dashboard() {
-        dashboard_util::add_breadcrumb(get_string_kopere("user_title"));
+        dashboard_util::add_breadcrumb(get_string("user_title", "local_kopere_dashboard"));
         dashboard_util::start_page();
 
         echo '<div class="element-box table-responsive">';
 
         $table = new data_table();
         $table->add_header("#", "id", table_header_item::TYPE_INT);
-        $table->add_header(get_string_kopere("user_table_fullname"), "fullname");
-        $table->add_header(get_string_kopere("user_table_username"), "username");
-        $table->add_header(get_string_kopere("user_table_email"), "email");
-        $table->add_header(get_string_kopere("user_table_phone"), "phone1");
-        $table->add_header(get_string_kopere("user_table_celphone"), "phone2");
-        $table->add_header(get_string_kopere("user_table_city"), "city");
+        $table->add_header(get_string("user_table_fullname", "local_kopere_dashboard"), "fullname");
+        $table->add_header(get_string("user_table_username", "local_kopere_dashboard"), "username");
+        $table->add_header(get_string("user_table_email", "local_kopere_dashboard"), "email");
+        $table->add_header(get_string("user_table_phone", "local_kopere_dashboard"), "phone1");
+        $table->add_header(get_string("user_table_celphone", "local_kopere_dashboard"), "phone2");
+        $table->add_header(get_string("user_table_city", "local_kopere_dashboard"), "city");
 
         $table->set_ajax_url(url_util::makeurl("users", "load_all_users"));
         $table->set_click_redirect(url_util::makeurl("users", "details", ["userid" => "{id}"]), "id");
@@ -110,9 +110,9 @@ class users {
         $userid = optional_param("userid", 0, PARAM_INT);
 
         $user = $DB->get_record("user", ["id" => $userid]);
-        header::notfound_null($user, get_string_kopere("profile_notfound"));
+        header::notfound_null($user, get_string("profile_notfound", "local_kopere_dashboard"));
 
-        dashboard_util::add_breadcrumb(get_string_kopere("profile_title"), url_util::makeurl("users", "dashboard"));
+        dashboard_util::add_breadcrumb(get_string("profile_title", "local_kopere_dashboard"), url_util::makeurl("users", "dashboard"));
         dashboard_util::add_breadcrumb(fullname($user));
         dashboard_util::start_page();
 

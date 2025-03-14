@@ -42,21 +42,21 @@ class about {
      * @throws \dml_exception
      */
     public function dashboard() {
-        dashboard_util::add_breadcrumb(get_string_kopere("about_title"));
+        dashboard_util::add_breadcrumb(get_string("about_title", "local_kopere_dashboard"));
         dashboard_util::start_page();
 
         echo '<div class="element-box">
                   <p><img src="https://www.eduardokraus.com/logos/kopere_dashboard.svg" style="max-width: 100%" /></p>
                   <p>&nbsp;</p>
-                  <p>' . get_string_kopere("about_project") . '
+                  <p>' . get_string("about_project", "local_kopere_dashboard") . '
                      <a target="_blank" href="https://www.eduardokraus.com/kopere-dashboard">Eduardo Kraus</a>.</p>
-                  <p>' . get_string_kopere("about_code") . '
+                  <p>' . get_string("about_code", "local_kopere_dashboard") . '
                      <a target="_blank" href="https://github.com/EduardoKrausME/moodle-local-kopere_dashboard"
                      >github.com/EduardoKrausME/moodle-local-kopere_dashboard</a>.</p>
-                  <p>' . get_string_kopere("about_help") . '
+                  <p>' . get_string("about_help", "local_kopere_dashboard") . '
                      <a target="_blank" href="https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki"
                      >Wiki</a>.</p>
-                  <p>' . get_string_kopere("about_bug") . '
+                  <p>' . get_string("about_bug", "local_kopere_dashboard") . '
                      <a href="https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/issues"
                         target="_blank">issue</a>.</p>
               </div>';

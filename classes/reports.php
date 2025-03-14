@@ -61,14 +61,14 @@ class reports {
             redirect("/local/kopere_dashboard/view.php?classname=bi-dashboard&method=start");
         }
 
-        dashboard_util::add_breadcrumb(get_string_kopere("reports_title"));
+        dashboard_util::add_breadcrumb(get_string("reports_title", "local_kopere_dashboard"));
         dashboard_util::start_page();
 
         echo '<div class="element-box">';
 
         if (!$DB->get_manager()->table_exists("local_kopere_dashboard_acess")) {
             title_util::print_h3("install_kopere_bi_title");
-            echo get_string_kopere("install_kopere_bi_desc");
+            echo get_string("install_kopere_bi_desc", "local_kopere_dashboard");
         } else {
             $koperereportcats = $DB->get_records("local_kopere_dashboard_rcat");
 
@@ -99,7 +99,7 @@ class reports {
                     $title = self::get_title($koperereports);
                     $extraenable = "";
                     if (!$koperereports->enable) {
-                        $extraenable = get_string_kopere("reports_disabled");
+                        $extraenable = get_string("reports_disabled", "local_kopere_dashboard");
                     }
 
                     $url = url_util::makeurl("reports", "load_report", ["report" => $koperereports->id]);
@@ -129,17 +129,17 @@ class reports {
         /** @var local_kopere_dashboard_reprt $koperereports */
         $koperereports = $DB->get_record("local_kopere_dashboard_reprt",
             ["id" => $report]);
-        header::notfound_null($koperereports, get_string_kopere("reports_notfound"));
+        header::notfound_null($koperereports, get_string("reports_notfound", "local_kopere_dashboard"));
 
         /** @var local_kopere_dashboard_rcat $koperereportcat */
         $koperereportcat = $DB->get_record("local_kopere_dashboard_rcat",
             ["id" => $koperereports->reportcatid]);
-        header::notfound_null($koperereportcat, get_string_kopere("reports_notfound"));
+        header::notfound_null($koperereportcat, get_string("reports_notfound", "local_kopere_dashboard"));
 
         $titlecat = self::get_title($koperereportcat);
         $titlereport = self::get_title($koperereports);
 
-        dashboard_util::add_breadcrumb(get_string_kopere("reports_title"),
+        dashboard_util::add_breadcrumb(get_string("reports_title", "local_kopere_dashboard"),
             url_util::makeurl("reports", "dashboard"));
         dashboard_util::add_breadcrumb($titlecat,
             url_util::makeurl("reports", "dashboard", ["type" => $koperereportcat->type]));
@@ -189,7 +189,7 @@ class reports {
                 $table->close(true, $extra, false, $titlereport);
 
                 $urldow = url_util::makeurl("reports", "download", ["report" => $report, "courseid" => $courseid]);
-                button::primary(get_string_kopere("reports_download"), $urldow);
+                button::primary(get_string("reports_download", "local_kopere_dashboard"), $urldow);
             }
         }
         echo "</div>";
@@ -210,10 +210,10 @@ class reports {
 
             $table = new data_table();
             $table->add_header("#", "id", table_header_item::TYPE_INT, null, "width: 20px");
-            $table->add_header(get_string_kopere("courses_name"), "fullname");
-            $table->add_header(get_string_kopere("courses_shortname"), "shortname");
-            $table->add_header(get_string_kopere("visible"), "visible", table_header_item::RENDERER_VISIBLE);
-            $table->add_header(get_string_kopere("courses_enrol"), "enrolments",
+            $table->add_header(get_string("courses_name", "local_kopere_dashboard"), "fullname");
+            $table->add_header(get_string("courses_shortname", "local_kopere_dashboard"), "shortname");
+            $table->add_header(get_string("visible", "local_kopere_dashboard"), "visible", table_header_item::RENDERER_VISIBLE);
+            $table->add_header(get_string("courses_enrol", "local_kopere_dashboard"), "enrolments",
                 table_header_item::TYPE_INT, null, "width:50px;white-space:nowrap;");
 
             $table->set_ajax_url(url_util::makeurl("courses", "load_all_courses"));
@@ -299,7 +299,7 @@ class reports {
         /** @var local_kopere_dashboard_reprt $koperereports */
         $koperereports = $DB->get_record("local_kopere_dashboard_reprt",
             ["id" => $report]);
-        header::notfound_null($koperereports, get_string_kopere("reports_notfound"));
+        header::notfound_null($koperereports, get_string("reports_notfound", "local_kopere_dashboard"));
 
         export::header("xls", self::get_title($koperereports));
 
@@ -340,7 +340,7 @@ class reports {
         if (strpos($obj->title, "[[[") === 0) {
             return get_string(substr($obj->title, 3, -3));
         } else if (strpos($obj->title, "[[") === 0) {
-            return get_string_kopere(substr($obj->title, 2, -2));
+            return get_string(substr($obj->title, 2, -2), "local_kopere_dashboard");
         } else {
             return $obj->title;
         }

@@ -51,7 +51,7 @@ class notificationsutil {
         $module = optional_param("module", "", PARAM_TEXT);
 
         if (!isset($module[1])) {
-            end_util::end_script_show(get_string_kopere("notification_add_selectmodule"));
+            end_util::end_script_show(get_string("notification_add_selectmodule", "local_kopere_dashboard"));
         }
 
         $events = $this->list_events();
@@ -68,11 +68,11 @@ class notificationsutil {
         $form = new form();
         $form->add_input(
             input_select::new_instance()
-                ->set_title(get_string_kopere("notification_add_action"))
+                ->set_title(get_string("notification_add_action", "local_kopere_dashboard"))
                 ->set_name("event")
                 ->set_values($eventslist)
                 ->set_add_selecione(true));
-        $form->create_submit_input(get_string_kopere("notification_add_create"));
+        $form->create_submit_input(get_string("notification_add_create", "local_kopere_dashboard"));
     }
 
     /**
@@ -169,35 +169,35 @@ class notificationsutil {
 
         switch ($component) {
             case "core_course_category":
-                return get_string_kopere("notification_core_course_category");
+                return get_string("notification_core_course_category", "local_kopere_dashboard");
             case "core_course":
-                return get_string_kopere("notification_core_course");
+                return get_string("notification_core_course", "local_kopere_dashboard");
             case "core_course_completion":
-                return get_string_kopere("notification_core_course_completion");
+                return get_string("notification_core_course_completion", "local_kopere_dashboard");
             case "course_module_created":
-                return get_string_kopere("notification_course_module_created");
+                return get_string("notification_course_module_created", "local_kopere_dashboard");
             case "core_course_content":
-                return get_string_kopere("notification_core_course_content");
+                return get_string("notification_core_course_content", "local_kopere_dashboard");
             case "core_course_module":
-                return get_string_kopere("notification_core_course_module");
+                return get_string("notification_core_course_module", "local_kopere_dashboard");
             case "core_course_section":
-                return get_string_kopere("notification_core_course_section");
+                return get_string("notification_core_course_section", "local_kopere_dashboard");
 
             case "core_user":
-                return get_string_kopere("notification_core_user");
+                return get_string("notification_core_user", "local_kopere_dashboard");
             case "core_user_enrolment":
-                return get_string_kopere("notification_core_user_enrolment");
+                return get_string("notification_core_user_enrolment", "local_kopere_dashboard");
             case "core_user_password":
-                return get_string_kopere("notification_core_user_password");
+                return get_string("notification_core_user_password", "local_kopere_dashboard");
 
             case "local_kopere_dashboard":
-                return get_string_kopere("notification_local_kopere_dashboard");
+                return get_string("notification_local_kopere_dashboard", "local_kopere_dashboard");
             case "local_kopere_hotmoodle":
-                return get_string_kopere("notification_local_kopere_hotmoodle");
+                return get_string("notification_local_kopere_hotmoodle", "local_kopere_dashboard");
             case "local_kopere_moocommerce":
-                return get_string_kopere("notification_local_kopere_moocommerce");
+                return get_string("notification_local_kopere_moocommerce", "local_kopere_dashboard");
             case "local_kopere_pay":
-                return get_string_kopere("notification_local_kopere_pay");
+                return get_string("notification_local_kopere_pay", "local_kopere_dashboard");
         }
 
         if (strpos($component, "mod_") === 0) {
@@ -233,10 +233,10 @@ class notificationsutil {
 
         if (release::version() < 3.2) {
             $CFG->mail = "messagesettingemail";
-            message::print_danger(get_string_kopere("notification_error_smtp", $CFG));
+            message::print_danger(get_string("notification_error_smtp", "local_kopere_dashboard", $CFG));
         } else {
             $CFG->mail = "outgoingmailconfig";
-            message::print_danger(get_string_kopere("notification_error_smtp", $CFG));
+            message::print_danger(get_string("notification_error_smtp", "local_kopere_dashboard", $CFG));
         }
     }
 }

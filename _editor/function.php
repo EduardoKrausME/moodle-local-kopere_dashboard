@@ -23,14 +23,14 @@
  */
 
 /**
- * Function vvveb__changue_langs
+ * Function local_kopere_dashboard__vvveb__changue_langs
  *
  * @param $html
  *
  * @return mixed
  * @throws coding_exception
  */
-function vvveb__changue_langs($html, $component) {
+function local_kopere_dashboard__vvveb__changue_langs($html, $component) {
     global $CFG, $SITE;
 
     $CFG->debug = false;

@@ -361,7 +361,7 @@ class button {
         global $CFG;
 
         if ($text == null) {
-            $text = get_string_kopere("help_title");
+            $text = get_string("help_title", "local_kopere_dashboard");
         }
 
         return "<a href='https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/wiki/{$infourl}#{$hastag}'

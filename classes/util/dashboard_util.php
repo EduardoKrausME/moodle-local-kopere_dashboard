@@ -125,7 +125,7 @@ class dashboard_util {
                 }
             }
 
-            $PAGE->set_title("{$title}: " . get_string_kopere("modulename"));
+            $PAGE->set_title("{$title}: " . get_string("modulename", "local_kopere_dashboard"));
             echo $OUTPUT->header();
 
             echo "

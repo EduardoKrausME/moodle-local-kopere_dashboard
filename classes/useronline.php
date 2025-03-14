@@ -53,15 +53,15 @@ class useronline {
      * @throws \dml_exception
      */
     public function dashboard() {
-        dashboard_util::add_breadcrumb(get_string_kopere("useronline_title"));
+        dashboard_util::add_breadcrumb(get_string("useronline_title", "local_kopere_dashboard"));
         dashboard_util::start_page(null, "Usuários-Online");
 
         echo '<div class="element-box table-responsive">';
 
         $table = new data_table();
         $table->add_header("#", "userid", table_header_item::TYPE_INT);
-        $table->add_header(get_string_kopere("useronline_table_fullname"), "fullname");
-        $table->add_header(get_string_kopere("useronline_table_date"), "servertime", table_header_item::RENDERER_DATE);
+        $table->add_header(get_string("useronline_table_fullname", "local_kopere_dashboard"), "fullname");
+        $table->add_header(get_string("useronline_table_date", "local_kopere_dashboard"), "servertime", table_header_item::RENDERER_DATE);
 
         $table->set_ajax_url(url_util::makeurl("useronline", "load_all_users"));
         $table->print_header();

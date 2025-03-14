@@ -44,18 +44,18 @@ define("ALLOWED_OEMBED_DOMAINS", [
 ]); // Load urls only from allowed websites for oembed.
 
 /**
- * Function sanitize_file_name
+ * Function local_kopere_dashboard__sanitize_file_name
  *
  * @param $file
  * @param string $allowedextension
  *
  * @return null|string|string[]
  */
-function sanitize_file_name($file, $allowedextension = "html") {
+function local_kopere_dashboard__sanitize_file_name($file, $allowedextension = "html") {
     $basename = basename($file);
     $disallow = [".htaccess", "passwd"];
     if (in_array($basename, $disallow)) {
-        show_error("Filename not allowed!");
+        local_kopere_dashboard__show_error("Filename not allowed!");
         return "";
     }
 
@@ -76,23 +76,23 @@ function sanitize_file_name($file, $allowedextension = "html") {
 }
 
 /**
- * Function show_error
+ * Function local_kopere_dashboard__show_error
  *
  * @param $error
  */
-function show_error($error) {
+function local_kopere_dashboard__show_error($error) {
     header($_SERVER["SERVER_PROTOCOL"] . " 404", true, 500);
     die($error);
 }
 
 /**
- * Function valid_oembed_url
+ * Function local_kopere_dashboard__valid_oembed_url
  *
  * @param $url
  *
  * @return bool
  */
-function valid_oembed_url($url) {
+function local_kopere_dashboard__valid_oembed_url($url) {
     foreach (ALLOWED_OEMBED_DOMAINS as $domain) {
         if (strpos($url, $domain) === 0) {
             return true;
@@ -107,7 +107,7 @@ $file = "";
 $action = "";
 
 if (optional_param("startTemplateUrl", false, PARAM_RAW)) {
-    $starttemplateurl = sanitize_file_name(optional_param("startTemplateUrl", false, PARAM_RAW));
+    $starttemplateurl = local_kopere_dashboard__sanitize_file_name(optional_param("startTemplateUrl", false, PARAM_RAW));
     $html = "";
     if ($starttemplateurl) {
         $html = file_get_contents($starttemplateurl);
@@ -116,14 +116,14 @@ if (optional_param("startTemplateUrl", false, PARAM_RAW)) {
     $html = substr(optional_param("html", false, PARAM_RAW), 0, MAX_FILE_LIMIT);
     if (!ALLOW_PHP) {
         if (preg_match('@<\?php|<\? |<\?=|<\s*script\s*language\s*=\s*"\s*php\s*"\s*>@', $html)) {
-            show_error("PHP not allowed!");
+            local_kopere_dashboard__show_error("PHP not allowed!");
         }
     }
     $html = str_replace("body >", "", $html);
 }
 
 if (optional_param("file", false, PARAM_RAW)) {
-    $file = sanitize_file_name(optional_param("file", false, PARAM_RAW));
+    $file = local_kopere_dashboard__sanitize_file_name(optional_param("file", false, PARAM_RAW));
 }
 
 if (optional_param("action", false, PARAM_TEXT)) {
@@ -174,7 +174,7 @@ if ($action) {
             break;
         case "oembedProxy":
             $url = optional_param("url", false, PARAM_RAW) ?? "";
-            if (valid_oembed_url($url)) {
+            if (local_kopere_dashboard__valid_oembed_url($url)) {
                 $options = [
                     "http" => [
                         "method" => "GET",
@@ -185,11 +185,11 @@ if ($action) {
                 header("Content-Type: application/json");
                 echo file_get_contents($url, false, $context);
             } else {
-                show_error("Invalid url!");
+                local_kopere_dashboard__show_error("Invalid url!");
             }
             break;
         default:
-            show_error("Invalid action '{$action}'!");
+            local_kopere_dashboard__show_error("Invalid action '{$action}'!");
     }
 } else {
     echo json_encode([

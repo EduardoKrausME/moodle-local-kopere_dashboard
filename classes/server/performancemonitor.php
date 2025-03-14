@@ -58,7 +58,7 @@ class performancemonitor {
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="element-box color_cpu">
-                            <div class="label">' . get_string_kopere("performancemonitor_cpu") . '</div>
+                            <div class="label">' . get_string("performancemonitor_cpu", "local_kopere_dashboard") . '</div>
                             <div class="value"><span>
                             ' . self::cpu(false) . '
                             </span></div>
@@ -66,7 +66,7 @@ class performancemonitor {
                     </div>
                     <div class="col-sm-2">
                         <div class="element-box color_memory">
-                            <div class="label">' . get_string_kopere("performancemonitor_memory") . '</div>
+                            <div class="label">' . get_string("performancemonitor_memory", "local_kopere_dashboard") . '</div>
                             <div class="value"><span>
                                 ' . self::memory(false) . '%
                             </span></div>
@@ -74,13 +74,13 @@ class performancemonitor {
                     </div>
                     <div class="col-sm-2">
                         <div class="element-box color_hd">
-                            <div class="label">' . get_string_kopere("performancemonitor_hd") . '</div>
+                            <div class="label">' . get_string("performancemonitor_hd", "local_kopere_dashboard") . '</div>
                             <div class="value"><span id="load_monitor-performancemonitor_hd"></span></div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="element-box color_performance">
-                            <div class="label">' . get_string_kopere("performancemonitor_performance") . '</div>
+                            <div class="label">' . get_string("performancemonitor_performance", "local_kopere_dashboard") . '</div>
                             <div class="value"><span>
                                 ' . self::load_average(false) . '
                             </span></div>
@@ -224,8 +224,8 @@ class performancemonitor {
             return $outputload[1];
         }
 
-        $return = get_string_kopere("performancemonitor_min", 1) . $outputload[1] . "%, ";
-        $return .= get_string_kopere("performancemonitor_min", 5) . $outputload[3] . "%";
+        $return = get_string("performancemonitor_min", "local_kopere_dashboard", 1) . $outputload[1] . "%, ";
+        $return .= get_string("performancemonitor_min", "local_kopere_dashboard", 5) . $outputload[3] . "%";
 
         return $return;
     }

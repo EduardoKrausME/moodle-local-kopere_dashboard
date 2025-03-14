@@ -61,18 +61,18 @@ class courses {
      * @throws \dml_exception
      */
     public function dashboard() {
-        dashboard_util::add_breadcrumb(get_string_kopere("courses_title"));
-        dashboard_util::add_breadcrumb(get_string_kopere("courses_title1"));
+        dashboard_util::add_breadcrumb(get_string("courses_title", "local_kopere_dashboard"));
+        dashboard_util::add_breadcrumb(get_string("courses_title1", "local_kopere_dashboard"));
         dashboard_util::start_page();
 
         echo '<div class="element-box">';
 
         $table = new data_table();
         $table->add_header("#", "id", table_header_item::TYPE_INT, null, "width: 20px");
-        $table->add_header(get_string_kopere("courses_name"), "fullname");
-        $table->add_header(get_string_kopere("courses_shortname"), "shortname");
-        $table->add_header(get_string_kopere("visible"), "visible", table_header_item::RENDERER_VISIBLE);
-        $table->add_header(get_string_kopere("courses_enrol"), "enrolments",
+        $table->add_header(get_string("courses_name", "local_kopere_dashboard"), "fullname");
+        $table->add_header(get_string("courses_shortname", "local_kopere_dashboard"), "shortname");
+        $table->add_header(get_string("visible", "local_kopere_dashboard"), "visible", table_header_item::RENDERER_VISIBLE);
+        $table->add_header(get_string("courses_enrol", "local_kopere_dashboard"), "enrolments",
             table_header_item::TYPE_INT, null, "width:50px;white-space:nowrap;");
 
         $table->set_ajax_url(url_util::makeurl("courses", "load_all_courses"));
@@ -182,21 +182,21 @@ class courses {
 
         $courseid = optional_param("courseid", 0, PARAM_INT);
         if ($courseid == 0) {
-            header::notfound(get_string_kopere("courses_invalid"));
+            header::notfound(get_string("courses_invalid", "local_kopere_dashboard"));
         }
 
         $course = $DB->get_record("course", ["id" => $courseid]);
-        header::notfound_null($course, get_string_kopere("courses_notound"));
+        header::notfound_null($course, get_string("courses_notound", "local_kopere_dashboard"));
 
-        dashboard_util::add_breadcrumb(get_string_kopere("courses_title"), url_util::makeurl("courses", "dashboard"));
+        dashboard_util::add_breadcrumb(get_string("courses_title", "local_kopere_dashboard"), url_util::makeurl("courses", "dashboard"));
         dashboard_util::add_breadcrumb($course->fullname);
         dashboard_util::start_page();
 
         echo '<div class="element-box">
-                  <h3>' . get_string_kopere("courses_sumary") . ' ' .
-            button::info(get_string_kopere("courses_edit"),
+                  <h3>' . get_string("courses_sumary", "local_kopere_dashboard") . ' ' .
+            button::info(get_string("courses_edit", "local_kopere_dashboard"),
                 "{$CFG->wwwroot}/course/edit.php?id={$course->id}#id_summary_editor", "btn-xs", false, true) . ' ' .
-            button::primary(get_string_kopere("courses_access"),
+            button::primary(get_string("courses_access", "local_kopere_dashboard"),
                 "{$CFG->wwwroot}/course/view.php?id={$course->id}", "btn-xs", false, true) . '
                   </h3>
                   <div class="panel panel-default">
@@ -211,10 +211,10 @@ class courses {
         $form->add_input(
             input_email::new_instance()
                 ->set_name("usuario-email")
-                ->set_title(get_string_kopere("courses_student_email"))
+                ->set_title(get_string("courses_student_email", "local_kopere_dashboard"))
                 ->set_required()
         );
-        $form->create_submit_input(get_string_kopere("courses_validate_user"));
+        $form->create_submit_input(get_string("courses_validate_user", "local_kopere_dashboard"));
         $form->close();
 
         echo "</div>";
@@ -222,15 +222,15 @@ class courses {
         echo '<div class="element-box table-responsive table-list-enrol">';
         echo
             "<h3>" .
-            get_string_kopere("courses_titleenrol") .
-            ' <span class="btn btn-primary bt-courses_enrol_new">' . get_string_kopere("courses_enrol_new") . "</span>" .
+            get_string("courses_titleenrol", "local_kopere_dashboard") .
+            ' <span class="btn btn-primary bt-courses_enrol_new">' . get_string("courses_enrol_new", "local_kopere_dashboard") . "</span>" .
             "</h3>";
 
         $table = new data_table();
         $table->add_header("#", "id", table_header_item::TYPE_INT);
-        $table->add_header(get_string_kopere("courses_student_name"), "nome");
-        $table->add_header(get_string_kopere("courses_student_email"), "email");
-        $table->add_header(get_string_kopere("courses_student_status"), "status", table_header_item::RENDERER_STATUS);
+        $table->add_header(get_string("courses_student_name", "local_kopere_dashboard"), "nome");
+        $table->add_header(get_string("courses_student_email", "local_kopere_dashboard"), "email");
+        $table->add_header(get_string("courses_student_status", "local_kopere_dashboard"), "status", table_header_item::RENDERER_STATUS);
 
         $table->set_ajax_url(url_util::makeurl("enroll", "ajax_dashboard", ["courseid" => "{$courseid}"]));
         $table->set_click_redirect(url_util::makeurl("users", "details", ["userid" => "{id}"]), "id");
@@ -255,15 +255,15 @@ class courses {
 
         $courseid = optional_param("courseid", 0, PARAM_INT);
         if ($courseid == 0) {
-            header::notfound(get_string_kopere("courses_invalid"));
+            header::notfound(get_string("courses_invalid", "local_kopere_dashboard"));
         }
 
         $course = $DB->get_record("course", ["id" => $courseid]);
-        header::notfound_null($course, get_string_kopere("courses_notound"));
+        header::notfound_null($course, get_string("courses_notound", "local_kopere_dashboard"));
 
-        dashboard_util::add_breadcrumb(get_string_kopere("courses_title"), url_util::makeurl("courses", "dashboard"));
+        dashboard_util::add_breadcrumb(get_string("courses_title", "local_kopere_dashboard"), url_util::makeurl("courses", "dashboard"));
         dashboard_util::add_breadcrumb($course->fullname);
-        dashboard_util::add_breadcrumb(get_string_kopere("courses_enrol_new"));
+        dashboard_util::add_breadcrumb(get_string("courses_enrol_new", "local_kopere_dashboard"));
         dashboard_util::start_page();
 
         echo '<div class="element-box table-responsive table-new-enrol">';
@@ -285,17 +285,17 @@ class courses {
             $tilast = strtoupper(substr($user->lastname, 0, 1));
             $linkenrol = "{$CFG->wwwroot}/user/index.php?id={$course->id}&tifirst={$tifirst}&tilast={$tilast}";
             if (enroll_util::enrolled($course, $user)) {
-                message::print_info(get_string_kopere("courses_student_cadastrado", $linkenrol));
+                message::print_info(get_string("courses_student_cadastrado", "local_kopere_dashboard", $linkenrol));
             } else {
 
                 $matricular = optional_param("matricular", false, PARAM_INT);
                 if ($matricular) {
                     enroll_util::enrol($course, $user, time(), 0);
 
-                    redirect($linkenrol, get_string_kopere("courses_student_cadastrar_ok"));
+                    redirect($linkenrol, get_string("courses_student_cadastrar_ok", "local_kopere_dashboard"));
                 }
 
-                button::add(get_string_kopere("courses_student_cadastrar"),
+                button::add(get_string("courses_student_cadastrar", "local_kopere_dashboard"),
                     url_util::makeurl("courses", "enrol_new",
                         ["courseid" => "{$course->id}&userid={$user->id}&matricular=1"]));
             }
@@ -338,7 +338,7 @@ class courses {
                         $newuser->id = user_create_user($newuser);
 
                         $a = (object)["login" => $newuser->username, "senha" => $password];
-                        message::schedule_message_success(get_string_kopere("courses_student_ok", $a));
+                        message::schedule_message_success(get_string("courses_student_ok", "local_kopere_dashboard", $a));
                         header::location(
                             url_util::makeurl("courses", "enrol_new",
                                 ["courseid" => "{$course->id}&userid={$newuser->id}"]));
@@ -355,21 +355,21 @@ class courses {
                 input_text::new_instance()
                     ->set_name("usuario-nome")
                     ->set_value($nome)
-                    ->set_title(get_string_kopere("courses_student_name"))
+                    ->set_title(get_string("courses_student_name", "local_kopere_dashboard"))
                     ->set_class(input_base::VAL_NOME)
                     ->set_required()
             );
             $form->add_input(
                 input_email::new_instance()
                     ->set_name("usuario-email")
-                    ->set_title(get_string_kopere("courses_student_email"))
+                    ->set_title(get_string("courses_student_email", "local_kopere_dashboard"))
                     ->set_value($email)
                     ->set_required()
             );
             $form->add_input(
                 input_text::new_instance()
                     ->set_name("usuario-senha")
-                    ->set_title(get_string_kopere("courses_student_password"))
+                    ->set_title(get_string("courses_student_password", "local_kopere_dashboard"))
                     ->set_value($password)
                     ->set_required()
             );
@@ -398,7 +398,7 @@ class courses {
             );
             echo "</div></div></div>";
 
-            $form->create_submit_input(get_string_kopere("courses_user_create"));
+            $form->create_submit_input(get_string("courses_user_create", "local_kopere_dashboard"));
             $form->close();
         }
         echo "</div>";
@@ -441,14 +441,14 @@ class courses {
             $form->create_hidden_input("link", html::link($course->fullname));
             $form->add_input(
                 input_select::new_instance()
-                    ->set_title(get_string_kopere("webpages_table_menutitle"))
+                    ->set_title(get_string("webpages_table_menutitle", "local_kopere_dashboard"))
                     ->set_name("menuid")
                     ->set_values($menus)
             );
             $form->create_hidden_input("theme", config::get_key("webpages_theme"));
             $form->create_hidden_input("text", $course->summary);
             $form->create_hidden_input("visible", 1);
-            $form->create_submit_input(get_string_kopere("courses_page_create"), "margin-left-15");
+            $form->create_submit_input(get_string("courses_page_create", "local_kopere_dashboard"), "margin-left-15");
             $form->close();
             echo "</div>";
         }

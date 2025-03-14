@@ -28,13 +28,13 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once(__DIR__ . "/lib.php");
 
-spl_autoload_register("kopere_dashboard_autoload");
+spl_autoload_register("local_kopere_dashboard_autoload");
 /**
- * Function kopere_dashboard_autoload
+ * Function local_kopere_dashboard_autoload
  *
  * @param $classname
  */
-function kopere_dashboard_autoload($classname) {
+function local_kopere_dashboard_autoload($classname) {
     global $CFG;
 
     if (strpos($classname, "kopere") === false) {
@@ -52,11 +52,11 @@ function kopere_dashboard_autoload($classname) {
 }
 
 /**
- * Function kopere_dashboard_load_class
+ * Function local_kopere_dashboard_load_class
  *
  * @throws coding_exception
  */
-function kopere_dashboard_load_class() {
+function local_kopere_dashboard_load_class() {
     $classname = optional_param("classname", false, PARAM_TEXT);
     $method = optional_param("method", "", PARAM_TEXT);
     if (!$classname) {
@@ -74,31 +74,6 @@ function kopere_dashboard_load_class() {
 
     $instance = new $class();
     $instance->$method();
-}
-
-/**
- * Function get_path_query
- *
- * @return string
- * @throws coding_exception
- */
-function get_path_query() {
-    $classname = optional_param("classname", "", PARAM_TEXT);
-    $method = optional_param("method", "", PARAM_TEXT);
-    return "{$classname}-{$method}";
-}
-
-/**
- * Function get_string_kopere
- *
- * @param $identifier
- * @param null $object
- *
- * @return string
- * @throws coding_exception
- */
-function get_string_kopere($identifier, $object = null) {
-    return get_string($identifier, "local_kopere_dashboard", $object);
 }
 
 // Alias this class to the old name.

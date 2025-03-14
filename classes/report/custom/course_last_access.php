@@ -45,7 +45,7 @@ class course_last_access {
      */
     public function name() {
         $cursosid = optional_param("courseid", 0, PARAM_INT);
-        return get_string_kopere("reports_report_courses-3") . " " . get_course($cursosid)->fullname;
+        return get_string("reports_report_courses-3", "local_kopere_dashboard") . " " . get_course($cursosid)->fullname;
     }
 
     /**
@@ -68,7 +68,7 @@ class course_last_access {
 
         $cursosid = optional_param("courseid", 0, PARAM_INT);
         if ($cursosid == 0) {
-            header::notfound(get_string_kopere("courses_notound"));
+            header::notfound(get_string("courses_notound", "local_kopere_dashboard"));
         }
 
         $perpage = 10;
@@ -76,7 +76,7 @@ class course_last_access {
         $startlimit = ($atualpage - 1) * $perpage;
 
         $course = $DB->get_record("course", ["id" => $cursosid]);
-        header::notfound_null($course, get_string_kopere("courses_notound"));
+        header::notfound_null($course, get_string("courses_notound", "local_kopere_dashboard"));
 
         session_write_close();
         $export = optional_param("export", "xls", PARAM_TEXT);
@@ -94,9 +94,9 @@ class course_last_access {
         echo '<thead>
                   <tr bgcolor="#C5C5C5" style="background-color: #c5c5c5;" >
                       <td align="center" bgcolor="#979797" style="text-align:center;">' .
-            get_string_kopere("user_table_fullname") . '</td>
+            get_string("user_table_fullname", "local_kopere_dashboard") . '</td>
                       <td align="center" bgcolor="#979797" style="text-align:center;">' .
-            get_string_kopere("user_table_email") . '</td>
+            get_string("user_table_email", "local_kopere_dashboard") . '</td>
                       ' . $filds . '
                       <td align="center" bgcolor="#979797" style="text-align:center;">Primeiro acesso</td>
                       <td align="center" bgcolor="#979797" style="text-align:center;">Último acesso</td>
@@ -167,7 +167,7 @@ class course_last_access {
             if ($logresult && $logresult->timecreated) {
                 $this->td(userdate($logresult->timecreated, get_string("strftimedatetime")), "text-nowrap bg-success", "DFF0D8");
             } else {
-                $this->td('<span style="color: #282828">' . get_string_kopere("reports_noneaccess") .
+                $this->td('<span style="color: #282828">' . get_string("reports_noneaccess", "local_kopere_dashboard") .
                     "</span>", "bg-warning text-nowrap", "#FCF8E3");
             }
 
@@ -189,7 +189,7 @@ class course_last_access {
             if ($logresult && $logresult->timecreated) {
                 $this->td(userdate($logresult->timecreated, get_string("strftimedatetime")), "text-nowrap bg-success", "DFF0D8");
             } else {
-                $this->td('<span style="color: #282828">' . get_string_kopere("reports_noneaccess") .
+                $this->td('<span style="color: #282828">' . get_string("reports_noneaccess", "local_kopere_dashboard") .
                     "</span>", "bg-warning text-nowrap", "#FCF8E3");
             }
 

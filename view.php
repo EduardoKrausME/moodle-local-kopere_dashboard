@@ -67,4 +67,4 @@ $PAGE->requires->js_call_amd("local_kopere_dashboard/start_load", "init");
 
 local_kopere_dashboard_lang();
 
-kopere_dashboard_load_class();
+local_kopere_dashboard_load_class();

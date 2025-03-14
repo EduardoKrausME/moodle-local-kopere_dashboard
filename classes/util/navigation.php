@@ -48,7 +48,7 @@ class navigation {
             $countpages += 1;
         }
 
-        echo "<span class='pagination-info'>" . get_string_kopere("navigation_page",
+        echo "<span class='pagination-info'>" . get_string("navigation_page", "local_kopere_dashboard",
                 ["atualPage" => $atualpage, "countPages" => $countpages]) . "</span>";
 
         echo "<ul class=\"pagination\">";

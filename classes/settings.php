@@ -74,7 +74,7 @@ class settings {
             }
         }
 
-        message::schedule_message_success(get_string_kopere("setting_saved"));
+        message::schedule_message_success(get_string("setting_saved", "local_kopere_dashboard"));
 
         $redirect = optional_param("redirect", false, PARAM_TEXT);
         if ($redirect) {

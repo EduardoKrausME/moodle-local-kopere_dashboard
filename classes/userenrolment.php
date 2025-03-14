@@ -54,22 +54,22 @@ class userenrolment {
         $ueid = optional_param("ueid", 0, PARAM_INT);
         $enrolment = $DB->get_record("user_enrolments", ["id" => $ueid], "*");
 
-        header::notfound_null($enrolment, get_string_kopere("userenrolment_notfound"));
+        header::notfound_null($enrolment, get_string("userenrolment_notfound", "local_kopere_dashboard"));
 
         ob_clean();
-        dashboard_util::add_breadcrumb(get_string_kopere("userenrolment_detail"));
+        dashboard_util::add_breadcrumb(get_string("userenrolment_detail", "local_kopere_dashboard"));
         dashboard_util::start_page();
 
         $form = new form(url_util::makeurl("userenrolment", "mathedit_save"));
         $form->create_hidden_input("ueid", $ueid);
 
         $statusvalues = [
-            ["key" => 0, "value" => get_string_kopere("userenrolment_status_active")],
-            ["key" => 1, "value" => get_string_kopere("userenrolment_status_inactive")],
+            ["key" => 0, "value" => get_string("userenrolment_status_active", "local_kopere_dashboard")],
+            ["key" => 1, "value" => get_string("userenrolment_status_inactive", "local_kopere_dashboard")],
         ];
         $form->add_input(
             input_select::new_instance()
-                ->set_title(get_string_kopere("userenrolment_status"))
+                ->set_title(get_string("userenrolment_status", "local_kopere_dashboard"))
                 ->set_name("status")
                 ->set_values($statusvalues)
                 ->set_value($enrolment->status));
@@ -78,9 +78,9 @@ class userenrolment {
 
         $form->add_input(
             input_date_range::new_instance()
-                ->set_title(get_string_kopere("userenrolment_timestart"))
+                ->set_title(get_string("userenrolment_timestart", "local_kopere_dashboard"))
                 ->set_name("timestart")
-                ->set_value(userdate($enrolment->timestart, get_string_kopere("datetime")))
+                ->set_value(userdate($enrolment->timestart, get_string("datetime", "local_kopere_dashboard")))
                 ->set_datetimerange()
                 ->set_required());
 
@@ -88,7 +88,7 @@ class userenrolment {
 
         $form->add_input(
             input_checkbox_select::new_instance()
-                ->set_title(get_string_kopere("userenrolment_timeendstatus"))
+                ->set_title(get_string("userenrolment_timeendstatus", "local_kopere_dashboard"))
                 ->set_name("timeend-status")
                 ->set_checked($enrolment->timeend));
 
@@ -96,19 +96,19 @@ class userenrolment {
 
         $form->add_input(
             input_date_range::new_instance()
-                ->set_title(get_string_kopere("userenrolment_timeend"))
+                ->set_title(get_string("userenrolment_timeend", "local_kopere_dashboard"))
                 ->set_name("timeend")
-                ->set_value(userdate($enrolment->timeend ? $enrolment->timeend : time(), get_string_kopere("datetime")))
+                ->set_value(userdate($enrolment->timeend ? $enrolment->timeend : time(), get_string("datetime", "local_kopere_dashboard")))
                 ->set_datetimerange()
                 ->set_required());
 
         echo "</div>";
 
         $form->print_spacer(10);
-        $form->print_row(get_string_kopere("userenrolment_created"),
-            userdate($enrolment->timecreated, get_string_kopere("dateformat")));
-        $form->print_row(get_string_kopere("userenrolment_updated"),
-            userdate($enrolment->timemodified, get_string_kopere("dateformat")));
+        $form->print_row(get_string("userenrolment_created", "local_kopere_dashboard"),
+            userdate($enrolment->timecreated, get_string("dateformat", "local_kopere_dashboard")));
+        $form->print_row(get_string("userenrolment_updated", "local_kopere_dashboard"),
+            userdate($enrolment->timemodified, get_string("dateformat", "local_kopere_dashboard")));
 
         $form->create_submit_input(get_string("savechanges"));
 
@@ -140,16 +140,16 @@ class userenrolment {
         $enrolment = $DB->get_record("user_enrolments", ["id" => $ueid], "*");
 
         $enrolment->status = $status;
-        $enrolment->timestart = \DateTime::createFromFormat(get_string_kopere("php_datetime"), $timestart)->format("U");
+        $enrolment->timestart = \DateTime::createFromFormat(get_string("php_datetime", "local_kopere_dashboard"), $timestart)->format("U");
         if ($timeendstatus) {
-            $enrolment->timeend = \DateTime::createFromFormat(get_string_kopere("php_datetime"), $timeend)->format("U");
+            $enrolment->timeend = \DateTime::createFromFormat(get_string("php_datetime", "local_kopere_dashboard"), $timeend)->format("U");
         } else {
             $enrolment->timeend = 0;
         }
 
         $DB->update_record("user_enrolments", $enrolment);
 
-        message::schedule_message_success(get_string_kopere("userenrolment_updatesuccess"));
+        message::schedule_message_success(get_string("userenrolment_updatesuccess", "local_kopere_dashboard"));
         header::reload();
     }
 }

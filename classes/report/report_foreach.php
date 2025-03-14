@@ -144,42 +144,42 @@ class report_foreach {
 
         switch ($item->type) {
             case 0:
-                $item->context = get_string_kopere("contextfunction");
+                $item->context = get_string("contextfunction", "local_kopere_dashboard");
                 break;
             case 1:
-                $item->context = get_string_kopere("contextactivity");
+                $item->context = get_string("contextactivity", "local_kopere_dashboard");
                 break;
             case 2:
-                $item->context = get_string_kopere("contextduration");
+                $item->context = get_string("contextduration", "local_kopere_dashboard");
                 break;
             case 3:
-                $item->context = get_string_kopere("contextgrade");
+                $item->context = get_string("contextgrade", "local_kopere_dashboard");
                 break;
             case 4:
             case 6:
-                $item->context = get_string_kopere("contextcourse");
+                $item->context = get_string("contextcourse", "local_kopere_dashboard");
                 break;
             case 5:
-                $item->context = get_string_kopere("contextcoursegroup");
+                $item->context = get_string("contextcoursegroup", "local_kopere_dashboard");
                 break;
             case 7:
-                $item->context = get_string_kopere("contextbadgecompletion");
+                $item->context = get_string("contextbadgecompletion", "local_kopere_dashboard");
                 break;
             case 8:
-                $item->context = get_string_kopere("contextcohort");
+                $item->context = get_string("contextcohort", "local_kopere_dashboard");
                 break;
             case 9:
-                $item->context = get_string_kopere("contextcompetency");
+                $item->context = get_string("contextcompetency", "local_kopere_dashboard");
                 break;
             default:
-                $item->context = get_string_kopere("contextdefault");
+                $item->context = get_string("contextdefault", "local_kopere_dashboard");
         }
 
         if ($item->type == 1) {
-            $item->context = get_string_kopere("contextsystem");
+            $item->context = get_string("contextsystem", "local_kopere_dashboard");
         }
         if ($item->type == 1) {
-            $item->context = get_string_kopere("contextcourse");
+            $item->context = get_string("contextcourse", "local_kopere_dashboard");
         }
 
         return $item;

@@ -48,14 +48,14 @@ class useraccess {
     public function dashboard() {
         global $PAGE;
 
-        dashboard_util::add_breadcrumb(get_string_kopere("useraccess_title"));
+        dashboard_util::add_breadcrumb(get_string("useraccess_title", "local_kopere_dashboard"));
         dashboard_util::start_page();
 
         echo '<div class="element-box bloco_changue_mes">';
         $changuemes = optional_param("changue_mes", date("Y-m"), PARAM_TEXT);
         $form = new form(url_util::makeurl("useraccess", "dashboard"));
         $form->add_input(input_select::new_instance()
-            ->set_title(get_string_kopere("select_month"))
+            ->set_title(get_string("select_month", "local_kopere_dashboard"))
             ->set_name("changue_mes")
             ->set_values($this->list_meses())
             ->set_value($changuemes));
@@ -65,11 +65,11 @@ class useraccess {
         echo '<div class="element-box">';
         $table = new data_table();
         $table->add_header("#", "userid", table_header_item::TYPE_INT, null, "width: 20px");
-        $table->add_header(get_string_kopere("user_table_fullname"), "fullname");
-        $table->add_header(get_string_kopere("user_table_email"), "email");
-        $table->add_header(get_string_kopere("user_table_phone"), "phone1");
-        $table->add_header(get_string_kopere("user_table_celphone"), "phone2");
-        $table->add_header(get_string_kopere("user_table_city"), "city");
+        $table->add_header(get_string("user_table_fullname", "local_kopere_dashboard"), "fullname");
+        $table->add_header(get_string("user_table_email", "local_kopere_dashboard"), "email");
+        $table->add_header(get_string("user_table_phone", "local_kopere_dashboard"), "phone1");
+        $table->add_header(get_string("user_table_celphone", "local_kopere_dashboard"), "phone2");
+        $table->add_header(get_string("user_table_city", "local_kopere_dashboard"), "city");
 
         $table->set_ajax_url(url_util::makeurl("useraccess", "load_all_users", ["changue_mes" => $changuemes]));
         $table->set_click_redirect(url_util::makeurl("users", "details", ["userid" => "{userid}"]), "userid");

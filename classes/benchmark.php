@@ -49,18 +49,18 @@ class benchmark {
      * @throws \dml_exception
      */
     public function test() {
-        dashboard_util::add_breadcrumb(get_string_kopere("benchmark_title"));
+        dashboard_util::add_breadcrumb(get_string("benchmark_title", "local_kopere_dashboard"));
         dashboard_util::start_page(null, "Performace");
 
         echo performancemonitor::load_monitor();
 
         echo '<div class="element-box">';
-        message::print_info(get_string_kopere("benchmark_based") . '
+        message::print_info(get_string("benchmark_based", "local_kopere_dashboard") . '
                     <a class="alert-link" href="https://moodle.org/plugins/report_benchmark"
                        target="_blank">report_benchmark</a>');
 
-        echo '<div style="text-align: center;">' . get_string_kopere("benchmark_info");
-        button::add(get_string_kopere("benchmark_execute"), url_util::makeurl("benchmark", "execute"));
+        echo '<div style="text-align: center;">' . get_string("benchmark_info", "local_kopere_dashboard");
+        button::add(get_string("benchmark_execute", "local_kopere_dashboard"), url_util::makeurl("benchmark", "execute"));
         echo "</div>";
 
         echo "</div>";
@@ -77,9 +77,9 @@ class benchmark {
     public function execute() {
         global $CFG;
 
-        dashboard_util::add_breadcrumb(get_string_kopere("benchmark_title"), url_util::makeurl("benchmark", "test"));
-        dashboard_util::add_breadcrumb(get_string_kopere("benchmark_executing"));
-        dashboard_util::add_breadcrumb(get_string_kopere("benchmark_title2"));
+        dashboard_util::add_breadcrumb(get_string("benchmark_title", "local_kopere_dashboard"), url_util::makeurl("benchmark", "test"));
+        dashboard_util::add_breadcrumb(get_string("benchmark_executing", "local_kopere_dashboard"));
+        dashboard_util::add_breadcrumb(get_string("benchmark_title2", "local_kopere_dashboard"));
         dashboard_util::start_page();
 
         require_once("{$CFG->libdir}/filelib.php");
@@ -90,24 +90,24 @@ class benchmark {
 
         $score = $test->get_total();
         if ($score < 4) {
-            message::print_info("<strong>" . get_string_kopere("benchmark_timetotal") . '</strong>
-                ' . $this->format_number($score) . ' ' . get_string_kopere("benchmark_seconds"));
+            message::print_info("<strong>" . get_string("benchmark_timetotal", "local_kopere_dashboard") . '</strong>
+                ' . $this->format_number($score) . ' ' . get_string("benchmark_seconds", "local_kopere_dashboard"));
         } else if ($score < 8) {
-            message::print_warning("<strong>" . get_string_kopere("benchmark_timetotal") . '</strong>
-                ' . $this->format_number($score) . ' ' . get_string_kopere("benchmark_seconds"));
+            message::print_warning("<strong>" . get_string("benchmark_timetotal", "local_kopere_dashboard") . '</strong>
+                ' . $this->format_number($score) . ' ' . get_string("benchmark_seconds", "local_kopere_dashboard"));
         } else {
-            message::print_danger("<strong>" . get_string_kopere("benchmark_timetotal") . '</strong>
-                ' . $this->format_number($score) . ' ' . get_string_kopere("benchmark_seconds"));
+            message::print_danger("<strong>" . get_string("benchmark_timetotal", "local_kopere_dashboard") . '</strong>
+                ' . $this->format_number($score) . ' ' . get_string("benchmark_seconds", "local_kopere_dashboard"));
         }
 
         echo '<table class="table" id="benchmarkresult">
                   <thead>
                       <tr>
                           <th class="text-center media-middle">#</th>
-                          <th>' . get_string_kopere("benchmark_decription") . '</th>
-                          <th class="media-middle">' . get_string_kopere("benchmark_timesec") . '</th>
-                          <th class="media-middle">' . get_string_kopere("benchmark_max") . '</th>
-                          <th class="media-middle">' . get_string_kopere("benchmark_critical") . '</th>
+                          <th>' . get_string("benchmark_decription", "local_kopere_dashboard") . '</th>
+                          <th class="media-middle">' . get_string("benchmark_timesec", "local_kopere_dashboard") . '</th>
+                          <th class="media-middle">' . get_string("benchmark_max", "local_kopere_dashboard") . '</th>
+                          <th class="media-middle">' . get_string("benchmark_critical", "local_kopere_dashboard") . '</th>
                       </tr>
                   </thead>
                   <tbody>';
@@ -143,10 +143,10 @@ class benchmark {
 
         echo "<table class=\"table\" id=\"benchmarkresult\">
                   <tr>
-                      <th>" . get_string_kopere("benchmark_testconf_problem") . "</th>
-                      <th>" . get_string_kopere("benchmark_testconf_status") . "</th>
-                      <th>" . get_string_kopere("benchmark_testconf_description") . "</th>
-                      <th>" . get_string_kopere("benchmark_testconf_action") . "</th>
+                      <th>" . get_string("benchmark_testconf_problem", "local_kopere_dashboard") . "</th>
+                      <th>" . get_string("benchmark_testconf_status", "local_kopere_dashboard") . "</th>
+                      <th>" . get_string("benchmark_testconf_description", "local_kopere_dashboard") . "</th>
+                      <th>" . get_string("benchmark_testconf_action", "local_kopere_dashboard") . "</th>
                   </tr>";
 
         $tests = [

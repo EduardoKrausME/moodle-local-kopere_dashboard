@@ -69,7 +69,7 @@ if ($pagelink) {
     $hascapability = has_capability("local/kopere_dashboard:manage", $context);
     if ($hascapability) {
         $href = url_util::makeurl("webpages", "page_edit", ["id" => $webpages->id]);
-        $edittext = get_string_kopere("webpages_page_edit");
+        $edittext = get_string("webpages_page_edit", "local_kopere_dashboard");
         $edit = " - <a href='{$href}' target=\"_blank\" style='text-decoration:underline'>{$edittext}</a>";
     }
     $PAGE->set_heading("{$webpages->title} {$edit}", false);
@@ -77,7 +77,7 @@ if ($pagelink) {
     /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_menu $menu */
     $menu = $DB->get_record("local_kopere_dashboard_menu", ["id" => $webpages->menuid]);
 
-    $PAGE->navbar->add(get_string_kopere("webpages_allpages"), new moodle_url("/local/kopere_dashboard/"));
+    $PAGE->navbar->add(get_string("webpages_allpages", "local_kopere_dashboard"), new moodle_url("/local/kopere_dashboard/"));
     $PAGE->navbar->add($menu->title, new moodle_url("/local/kopere_dashboard/?menu={$menu->link}"));
     $PAGE->navbar->add($webpages->title);
 
@@ -140,17 +140,17 @@ if ($pagelink) {
         $PAGE->set_title($menu->title);
         $PAGE->set_heading($menu->title);
 
-        $PAGE->navbar->add(get_string_kopere("webpages_allpages"), new moodle_url("/local/kopere_dashboard/"));
+        $PAGE->navbar->add(get_string("webpages_allpages", "local_kopere_dashboard"), new moodle_url("/local/kopere_dashboard/"));
         $PAGE->navbar->add($menu->title);
 
         $menus = [$menu];
     } else {
         $PAGE->set_url(new moodle_url("/local/kopere_dashboard/"));
         $PAGE->set_pagelayout(get_config("local_kopere_dashboard", "webpages_theme"));
-        $PAGE->set_title(get_string_kopere("webpages_allpages"));
-        $PAGE->set_heading(get_string_kopere("webpages_allpages"));
+        $PAGE->set_title(get_string("webpages_allpages", "local_kopere_dashboard"));
+        $PAGE->set_heading(get_string("webpages_allpages", "local_kopere_dashboard"));
 
-        $PAGE->navbar->add(get_string_kopere("webpages_allpages"), new moodle_url("/local/kopere_dashboard/"));
+        $PAGE->navbar->add(get_string("webpages_allpages", "local_kopere_dashboard"), new moodle_url("/local/kopere_dashboard/"));
 
         $menus = $DB->get_records_sql("SELECT * FROM {local_kopere_dashboard_menu} WHERE inheader = 1");
     }
@@ -174,7 +174,7 @@ if ($pagelink) {
         foreach ($webpagess as $webpages) {
 
             $webpages->link = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";
-            $webpages->access = get_string_kopere("webpages_access");
+            $webpages->access = get_string("webpages_access", "local_kopere_dashboard");
 
             if (file_exists(__DIR__ . "/../kopere_pay/lib.php") && $webpages->courseid) {
                 $koperepaydetalhe = $DB->get_record("kopere_pay_detalhe", ["course" => $webpages->courseid]);
@@ -183,7 +183,7 @@ if ($pagelink) {
                 $precoint = floatval("0{$precoint}");
 
                 if (!$precoint) {
-                    $webpages->cursopreco = get_string_kopere("webpages_free");
+                    $webpages->cursopreco = get_string("webpages_free", "local_kopere_dashboard");
                 } else {
                     $webpages->cursopreco = "R$ {$koperepaydetalhe->preco}";
                 }

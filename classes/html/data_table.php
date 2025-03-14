@@ -171,7 +171,7 @@ class data_table {
         $return = "";
 
         if ($this->isexport && $this->ajaxurl == null) {
-            button::info(get_string_kopere("reports_export"), "{$_SERVER["QUERY_STRING"]}&export=xls");
+            button::info(get_string("reports_export", "local_kopere_dashboard"), "{$_SERVER["QUERY_STRING"]}&export=xls");
         }
 
         $return .= "<table id='{$this->tableid}' class='table table-hover' >";
@@ -186,7 +186,7 @@ class data_table {
                 if (strpos($columninfo->title, "[[[") === 0) {
                     $return .= get_string(substr($columninfo->title, 3, -3));
                 } else if (strpos($columninfo->title, "[[") === 0) {
-                    $return .= get_string_kopere(substr($columninfo->title, 2, -2));
+                    $return .= get_string(substr($columninfo->title, 2, -2), "local_kopere_dashboard");
                 } else {
                     $return .= $columninfo->title;
                 }
@@ -209,7 +209,7 @@ class data_table {
                 if (strpos($column->title, "[[[") === 0) {
                     $return .= get_string(substr($column->title, 3, -3));
                 } else if (strpos($column->title, "[[") === 0) {
-                    $return .= get_string_kopere(substr($column->title, 2, -2));
+                    $return .= get_string(substr($column->title, 2, -2), "local_kopere_dashboard");
                 } else {
                     $return .= $column->title;
                 }
@@ -324,21 +324,21 @@ class data_table {
                         $html = date("Y-m-d H:i:s", $html);
                     } else if ($column->type == table_header_item::RENDERER_VISIBLE) {
                         if ($html == 0) {
-                            $html = get_string_kopere("invisible");
+                            $html = get_string("invisible", "local_kopere_dashboard");
                         } else {
-                            $html = get_string_kopere("visible");
+                            $html = get_string("visible", "local_kopere_dashboard");
                         }
                     } else if ($column->type == table_header_item::RENDERER_STATUS) {
                         if ($html == 1) {
-                            $html = get_string_kopere("inactive");
+                            $html = get_string("inactive", "local_kopere_dashboard");
                         } else {
-                            $html = get_string_kopere("active");
+                            $html = get_string("active", "local_kopere_dashboard");
                         }
                     } else if ($column->type == table_header_item::RENDERER_DELETED) {
                         if ($html == 0) {
-                            $html = get_string_kopere("inactive");
+                            $html = get_string("inactive", "local_kopere_dashboard");
                         } else {
-                            $html = get_string_kopere("active");
+                            $html = get_string("active", "local_kopere_dashboard");
                         }
                     } else if ($column->type == table_header_item::RENDERER_TRUEFALSE) {
                         if ($html == 0 || $html == false || $html == "false") {

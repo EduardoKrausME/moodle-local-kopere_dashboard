@@ -1687,7 +1687,7 @@ require_capability("moodle/site:config", context_system::instance());
         foreach ($files as $file) {
             $html = file_get_contents($file);
             $html = str_replace("{wwwroot}", $CFG->wwwroot, $html);
-            $html = vvveb__changue_langs($html, "local_kopere_dashboard");
+            $html = local_kopere_dashboard__vvveb__changue_langs($html, "local_kopere_dashboard");
 
             preg_match('/\/([a-z0-9\-]*)\/([a-z0-9\-]*)\.html/', $file, $info);
             $name = ucfirst(str_replace("-", " ", $info[2]));

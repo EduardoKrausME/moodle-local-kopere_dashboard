@@ -48,7 +48,7 @@ class course_access {
      */
     public function name() {
         $cursosid = optional_param("courseid", 0, PARAM_INT);
-        return get_string_kopere("reports_report_courses-3") . " " . get_course($cursosid)->fullname;
+        return get_string("reports_report_courses-3", "local_kopere_dashboard") . " " . get_course($cursosid)->fullname;
     }
 
     /**
@@ -78,7 +78,7 @@ class course_access {
 
         $cursosid = optional_param("courseid", 0, PARAM_INT);
         if ($cursosid == 0) {
-            header::notfound(get_string_kopere("courses_notound"));
+            header::notfound(get_string("courses_notound", "local_kopere_dashboard"));
         }
 
         $perpage = 10;
@@ -86,7 +86,7 @@ class course_access {
         $startlimit = ($atualpage - 1) * $perpage;
 
         $course = $DB->get_record("course", ["id" => $cursosid]);
-        header::notfound_null($course, get_string_kopere("courses_notound"));
+        header::notfound_null($course, get_string("courses_notound", "local_kopere_dashboard"));
 
         $groups = $DB->get_records("groups", ["courseid" => $course->id]);
 
@@ -96,7 +96,7 @@ class course_access {
 
         $sections = $DB->get_records("course_sections", ["course" => $cursosid], "section asc");
 
-        button::info(get_string_kopere("reports_export"), "{$_SERVER["QUERY_STRING"]}&export=xls");
+        button::info(get_string("reports_export", "local_kopere_dashboard"), "{$_SERVER["QUERY_STRING"]}&export=xls");
 
         session_write_close();
         $export = optional_param("export", "xls", PARAM_TEXT);
@@ -160,20 +160,20 @@ class course_access {
         $groupscols = "";
         if ($groups) {
             $groupscols = '<th rowspan="2" align="center" bgcolor="#979797" style="text-align:center;" >' .
-                get_string_kopere("reports_groupname") . '</th>';
+                get_string("reports_groupname", "local_kopere_dashboard") . '</th>';
         }
 
         echo '<tr bgcolor="#979797" style="background-color: #979797;">
                   <th colspan="2" align="center" bgcolor="#979797" style="text-align:center;" >' .
-            get_string_kopere("courses_titleenrol") . '</th>
+            get_string("courses_titleenrol", "local_kopere_dashboard") . '</th>
                   ' . $groupscols . $printsessoes . '
               </tr>';
 
         echo '<tr bgcolor="#C5C5C5" style="background-color: #c5c5c5;" >
                 <td align="center" bgcolor="#979797" style="text-align:center;">' .
-            get_string_kopere("user_table_fullname") . '</td>
+            get_string("user_table_fullname", "local_kopere_dashboard") . '</td>
                 <td align="center" bgcolor="#979797" style="text-align:center;">' .
-            get_string_kopere("user_table_email") . "</td>";
+            get_string("user_table_email", "local_kopere_dashboard") . "</td>";
 
         foreach ($modinfo as $infos) {
             $link = "{$CFG->wwwroot}/course/view.php?id={$infos->course}#module-{$infos->course_modules_id}";
@@ -258,12 +258,12 @@ class course_access {
                     ]);
 
                 if ($logresult && $logresult->contagem) {
-                    $this->td(get_string_kopere("reports_access_n", $logresult->contagem),
+                    $this->td(get_string("reports_access_n", "local_kopere_dashboard", $logresult->contagem),
                         "text-nowrap bg-success", "DFF0D8");
                     $this->td(userdate($logresult->timecreated, get_string("strftimedatetime")),
                         "text-nowrap bg-success", "#DFF0D8");
                 } else {
-                    $this->td2('<span style="color: #282828">' . get_string_kopere("reports_noneaccess") .
+                    $this->td2('<span style="color: #282828">' . get_string("reports_noneaccess", "local_kopere_dashboard") .
                         "</span>", "bg-warning text-nowrap", "#FCF8E3");
                 }
             }
