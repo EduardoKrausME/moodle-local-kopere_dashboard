@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <libraries>
     <library>
-        <location>_editor</location>
+        <location>_editor/VvvebJs</location>
         <name>VvvebJs</name>
         <version>2.0.1</version>
         <license>Apache-2.0 license</license>

@@ -34,7 +34,7 @@ $html = "";
 
 $aos = true;
 
-if (file_exists(__DIR__ . "/_default/default-{$page}.html")) {
+if (file_exists(__DIR__ . "/VvvebJs/_default/default-{$page}.html")) {
     if ($page == "webpages") {
         $html = $DB->get_field("local_kopere_dashboard_pages", "text", ["id" => $id]);
     } else if ($page == "notification") {
@@ -42,7 +42,7 @@ if (file_exists(__DIR__ . "/_default/default-{$page}.html")) {
     }
 
     if (!isset($html[40])) {
-        $html = file_get_contents(__DIR__ . "/_default/default-{$page}.html");
+        $html = file_get_contents(__DIR__ . "/VvvebJs/_default/default-{$page}.html");
         $html = vvveb__changue_langs($html, "local_kopere_dashboard");
     }
 } else {
@@ -58,9 +58,9 @@ if ($aos) {
     $html = "
 <html>
     <head>
-        <link vvveb-remove=\"true\" href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/css/bootstrap-vvveb.css\" rel=\"stylesheet\">
-        <link href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/libs/aos/aos.css\" rel=\"stylesheet\">
-        <link href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/libs/aos/aos.js\" rel=\"stylesheet\">
+        <link vvveb-remove=\"true\" href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/VvvebJs/css/bootstrap-vvveb.css\" rel=\"stylesheet\">
+        <link href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/VvvebJs/libs/aos/aos.css\" rel=\"stylesheet\">
+        <link href=\"{$CFG->wwwroot}/local/kopere_dashboard/_editor/VvvebJs/libs/aos/aos.js\" rel=\"stylesheet\">
     </head>
     <body>
         {$html}

@@ -43,8 +43,8 @@ require_capability("moodle/site:config", context_system::instance());
 
     <title>VvvebJs</title>
 
-    <link href="css/bootstrap-vvveb.css" rel="stylesheet">
-    <link href="css/editor.css" rel="stylesheet">
+    <link href="VvvebJs/css/bootstrap-vvveb.css" rel="stylesheet">
+    <link href="VvvebJs/css/editor.css" rel="stylesheet">
 </head>
 <body>
 
@@ -54,11 +54,11 @@ require_capability("moodle/site:config", context_system::instance());
         <div class="btn-group float-start" role="group">
             <button class="btn btn-light active" title="Toggle left column" id="toggle-left-column-btn"
                     data-vvveb-action="toggleLeftColumn" data-bs-toggle="button" aria-pressed="false">
-                <img src="libs/builder/icons/left-column-layout.svg" width="18" height="18" alt="" role="presentation">
+                <img src="VvvebJs/libs/builder/icons/left-column-layout.svg" width="18" height="18" alt="" role="presentation">
             </button>
             <button class="btn btn-light" title="Toggle right column" id="toggle-right-column-btn"
                     data-vvveb-action="toggleRightColumn" data-bs-toggle="button" aria-pressed="false">
-                <img src="libs/builder/icons/right-column-layout.svg" width="18" height="18" alt="" role="presentation">
+                <img src="VvvebJs/libs/builder/icons/right-column-layout.svg" width="18" height="18" alt="" role="presentation">
             </button>
         </div>
 
@@ -1636,46 +1636,46 @@ require_capability("moodle/site:config", context_system::instance());
 </script>
 
 <!-- bootstrap-->
-<script src="js/popper.js"></script>
-<script src="js/bootstrap.js"></script>
+<script src="VvvebJs/js/popper.js"></script>
+<script src="VvvebJs/js/bootstrap.js"></script>
 
 <!-- builder code-->
-<script src="libs/builder/builder.js"></script>
+<script src="VvvebJs/libs/builder/builder.js"></script>
 <!-- undo manager-->
-<script src="libs/builder/undo.js"></script>
+<script src="VvvebJs/libs/builder/undo.js"></script>
 <!-- inputs-->
-<script src="libs/builder/inputs.js"></script>
+<script src="VvvebJs/libs/builder/inputs.js"></script>
 
 <!-- media gallery -->
-<link href="libs/media/media.css" rel="stylesheet">
-<script src="libs/media/media.js"></script>
+<link href="VvvebJs/libs/media/media.css" rel="stylesheet">
+<script src="VvvebJs/libs/media/media.js"></script>
 <!--
-<script src="libs/media/openverse.js"></script>
+<script src="VvvebJs/libs/media/openverse.js"></script>
 -->
-<script src="libs/builder/plugin-media.js"></script>
+<script src="VvvebJs/libs/builder/plugin-media.js"></script>
 
 <!-- bootstrap colorpicker //uncomment bellow scripts to enable -->
 <!--
-<script src="libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-<link href="libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
-<script src="libs/builder/plugin-bootstrap-colorpicker.js"></script>
+<script src="VvvebJs/libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<link href="VvvebJs/libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+<script src="VvvebJs/libs/builder/plugin-bootstrap-colorpicker.js"></script>
 -->
 
 <!-- components-->
-<!-- script src="libs/builder/components-server.js"></script -->
-<script src="libs/builder/plugin-google-fonts.js"></script>
-<script src="libs/builder/components-common.js"></script>
-<script src="libs/builder/plugin-aos.js"></script>
-<script src="libs/builder/components-html.js"></script>
-<script src="libs/builder/components-elements.js"></script>
-<script src="libs/builder/section.js"></script>
-<script src="libs/builder/oembed.js"></script>
-<script src="libs/builder/components-bootstrap5.js"></script>
-<script src="libs/builder/components-widgets.js"></script>
-<script src="libs/builder/components-embeds.js"></script>
+<!-- script src="VvvebJs/libs/builder/components-server.js"></script -->
+<script src="VvvebJs/libs/builder/plugin-google-fonts.js"></script>
+<script src="VvvebJs/libs/builder/components-common.js"></script>
+<script src="VvvebJs/libs/builder/plugin-aos.js"></script>
+<script src="VvvebJs/libs/builder/components-html.js"></script>
+<script src="VvvebJs/libs/builder/components-elements.js"></script>
+<script src="VvvebJs/libs/builder/section.js"></script>
+<script src="VvvebJs/libs/builder/oembed.js"></script>
+<script src="VvvebJs/libs/builder/components-bootstrap5.js"></script>
+<script src="VvvebJs/libs/builder/components-widgets.js"></script>
+<script src="VvvebJs/libs/builder/components-embeds.js"></script>
 
 <!-- sections-->
-<script src="libs/builder/sections-bootstrap4.js"></script>
+<script src="VvvebJs/libs/builder/sections-bootstrap4.js"></script>
 
 <script>
     <?php
@@ -1711,24 +1711,24 @@ require_capability("moodle/site:config", context_system::instance());
 <!-- plugins -->
 
 <!-- code mirror - code editor syntax highlight -->
-<link href="libs/codemirror/lib/codemirror.css" rel="stylesheet"/>
-<link href="libs/codemirror/theme/material.css" rel="stylesheet"/>
-<script src="libs/codemirror/lib/codemirror.js"></script>
-<script src="libs/codemirror/lib/xml.js"></script>
-<script src="libs/codemirror/lib/css.js"></script>
-<script src="libs/codemirror/lib/formatting.js"></script>
-<script src="libs/builder/plugin-codemirror.js"></script>
+<link href="VvvebJs/libs/codemirror/lib/codemirror.css" rel="stylesheet"/>
+<link href="VvvebJs/libs/codemirror/theme/material.css" rel="stylesheet"/>
+<script src="VvvebJs/libs/codemirror/lib/codemirror.js"></script>
+<script src="VvvebJs/libs/codemirror/lib/xml.js"></script>
+<script src="VvvebJs/libs/codemirror/lib/css.js"></script>
+<script src="VvvebJs/libs/codemirror/lib/formatting.js"></script>
+<script src="VvvebJs/libs/builder/plugin-codemirror.js"></script>
 
 <!--
 Tinymce plugin
-Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
+Clone or copy https://github.com/tinymce/tinymce-dist to VvvebJs/libs/tinymce-dist
 -->
-<script src="libs/tinymce-dist/tinymce.js"></script>
-<script src="libs/builder/plugin-tinymce.js"></script>
+<script src="VvvebJs/libs/tinymce-dist/tinymce.js"></script>
+<script src="VvvebJs/libs/builder/plugin-tinymce.js"></script>
 
 <!-- autocomplete plugin used by autocomplete input-->
 <!--
-<script src="libs/autocomplete/jquery.autocomplete.js"></script>
+<script src="VvvebJs/libs/autocomplete/jquery.autocomplete.js"></script>
 -->
 <script>
     deleteUrl = "<?php echo "save.php?action=delete&page={$page}&id={$id}&link={$link}"; ?>";
