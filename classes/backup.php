@@ -67,10 +67,13 @@ class backup {
                           <p>' . get_string("backup_sleep", "local_kopere_dashboard") . '</p>';
 
                 if ($DB->get_dbfamily() == "mysql") {
-                    button::add(get_string("backup_newnow", "local_kopere_dashboard"), url_util::makeurl("backup", "execute"));
-                    button::add(get_string("backup_newsqlnow", "local_kopere_dashboard"), url_util::makeurl("backup", "execute_dumpsql"));
+                    button::add(get_string("backup_newnow", "local_kopere_dashboard"), 
+                        url_util::makeurl("backup", "execute"));
+                    button::add(get_string("backup_newsqlnow", "local_kopere_dashboard"), 
+                        url_util::makeurl("backup", "execute_dumpsql"));
                 } else if ($DB->get_dbfamily() == "postgres") {
-                    button::add(get_string("backup_newsqlnow", "local_kopere_dashboard"), url_util::makeurl("backup", "execute_dumpsql_pgsql"));
+                    button::add(get_string("backup_newsqlnow", "local_kopere_dashboard"), 
+                        url_util::makeurl("backup", "execute_dumpsql_pgsql"));
                 }
 
                 echo "</div>";
@@ -132,19 +135,19 @@ class backup {
             header::location(url_util::makeurl("backup", "dashboard"));
         }
 
-        $backupfullpath = $this->get_backup_path() . "backup_" . date('Y-m-d-H-i');
+        $backupdir = $this->get_backup_path() . "backup_" . date('Y-m-d-H-i');
 
         if ($DB->get_dbfamily() == "mysql") {
-            $comando = "/usr/bin/mysqldump -h {$CFG->dbhost} -u {$CFG->dbuser} -p{$CFG->dbpass} {$CFG->dbname} > {$backupfullpath}.sql";
+            $comando = "/usr/bin/mysqldump -h {$CFG->dbhost} -u {$CFG->dbuser} -p{$CFG->dbpass} {$CFG->dbname} > {$backupdir}.sql";
             shell_exec($comando);
         } else {
-            self::execute_dumpsql_pgsql($backupfullpath, true);
+            self::execute_dumpsql_pgsql($backupdir, true);
         }
 
-        $comando = "tar -zcvf {$backupfullpath}.tar.gz {$CFG->dataroot}/filedir {$CFG->dataroot}/kopere* {$backupfullpath}.sql";
+        $comando = "tar -zcvf {$backupdir}.tar.gz {$CFG->dataroot}/filedir {$CFG->dataroot}/kopere* {$backupdir}.sql";
         shell_exec($comando);
 
-        @unlink("{$backupfullpath}.sql");
+        @unlink("{$backupdir}.sql");
 
         message::schedule_message_success(get_string("backup_execute_success", "local_kopere_dashboard"));
         header::location(url_util::makeurl("backup", "dashboard"));
@@ -161,15 +164,16 @@ class backup {
 
         set_time_limit(0);
 
-        dashboard_util::add_breadcrumb(get_string("backup_title", "local_kopere_dashboard"), url_util::makeurl("backup", "dashboard"));
+        dashboard_util::add_breadcrumb(get_string("backup_title", "local_kopere_dashboard"),
+            url_util::makeurl("backup", "dashboard"));
         dashboard_util::add_breadcrumb(get_string("backup_execute_exec", "local_kopere_dashboard"));
         dashboard_util::add_breadcrumb(get_string("backup_execute_exec", "local_kopere_dashboard") . ": {$CFG->dbname}");
         dashboard_util::start_page();
 
         echo '<div class="element-box">';
 
-        $backupfullpath = $this->get_backup_path() . "backup_" . date("Y-m-d-H-i");
-        $backupfile = "{$backupfullpath}.sql";
+        $backupdir = $this->get_backup_path() . "backup_" . date("Y-m-d-H-i");
+        $backupfile = "{$backupdir}.sql";
 
         $dumpstart = "-- " . get_string("pluginname", "local_kopere_dashboard") . " SQL Dump\n-- Host: {$CFG->dbhost}\n-- " .
             get_string("backup_execute_date", "local_kopere_dashboard") . " " . date("d/m/Y \à\s H-i") . "\n\n";
@@ -183,7 +187,8 @@ class backup {
 
         foreach ($tables as $table => $val) {
 
-            echo "<p id='tabela-dump-{$table}'>" . get_string("backup_execute_table", "local_kopere_dashboard") . " <strong>{$table}</strong></p>";
+            echo "<p id='tabela-dump-{$table}'>" .
+                get_string("backup_execute_table", "local_kopere_dashboard") . " <strong>{$table}</strong></p>";
 
             $dbstart = "\n\n\n--\n-- " . get_string("backup_execute_structure", "local_kopere_dashboard") . " `{$table}`\n--\n\n";
             file_put_contents($backupfile, $dbstart, FILE_APPEND);
@@ -247,13 +252,13 @@ class backup {
     /**
      * Function execute_dumpsql_pgsql
      *
-     * @param string $backupfullpath
+     * @param string $backupdir
      * @param bool $execute
      *
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public function execute_dumpsql_pgsql($backupfullpath = null, $execute = false) {
+    public function execute_dumpsql_pgsql($backupdir = null, $execute = false) {
         global $DB, $CFG;
 
         $decsep = get_string("decsep", "langconfig");
@@ -264,7 +269,8 @@ class backup {
             session_write_close();
             ob_end_flush();
 
-            dashboard_util::add_breadcrumb(get_string("backup_title", "local_kopere_dashboard"), url_util::makeurl("backup", "dashboard"));
+            dashboard_util::add_breadcrumb(get_string("backup_title", "local_kopere_dashboard"),
+                url_util::makeurl("backup", "dashboard"));
             dashboard_util::add_breadcrumb(get_string("backup_execute_exec", "local_kopere_dashboard"));
             dashboard_util::add_breadcrumb(get_string("backup_execute_exec", "local_kopere_dashboard") . ": {$CFG->dbname}");
             dashboard_util::start_page();
@@ -272,10 +278,10 @@ class backup {
             echo '<div class="element-box">';
         }
 
-        if (!$backupfullpath) {
-            $backupfullpath = $this->get_backup_path() . "backup_" . date("Y-m-d-H-i");
+        if (!$backupdir) {
+            $backupdir = $this->get_backup_path() . "backup_" . date("Y-m-d-H-i");
         }
-        $backupfile = "{$backupfullpath}.sql";
+        $backupfile = "{$backupdir}.sql";
 
         $dumpstart = "-- " . get_string("pluginname", "local_kopere_dashboard") . " SQL Dump\n-- Host: {$CFG->dbhost}\n-- " .
             get_string("backup_execute_date", "local_kopere_dashboard") . " " . date("d/m/Y \à\s H-i") . "\n\n";
@@ -323,7 +329,9 @@ class backup {
                       </tr>";
             }
 
-            if ($execute || optional_param("{$inputname}-table", false, PARAM_INT) || optional_param("{$inputname}-data", false, PARAM_INT)) {
+            if ($execute ||
+                optional_param("{$inputname}-table", false, PARAM_INT) ||
+                optional_param("{$inputname}-data", false, PARAM_INT)) {
                 $dbstart = "\n\n\n--\n-- " . get_string("backup_execute_structure", "local_kopere_dashboard") . " `{$table}`\n--\n\n";
                 file_put_contents($backupfile, $dbstart, FILE_APPEND);
             }

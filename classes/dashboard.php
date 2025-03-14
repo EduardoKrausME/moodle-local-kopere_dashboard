@@ -67,20 +67,20 @@ class dashboard {
     public function monitor() {
         global $OUTPUT;
 
-        $data=[
-          "users_link"=>url_util::makeurl("users", "dashboard"),
-          "users_count"=>users::count_all(true) . ' / ' . users::count_all_learners(true),
+        $data = [
+            "users_link" => url_util::makeurl("users", "dashboard"),
+            "users_count" => users::count_all(true) . ' / ' . users::count_all_learners(true),
 
-            "useronline_link"=>url_util::makeurl("useronline", "dashboard"),
-            "useronline_count_5"=>useronline::count(5),
-            "useronline_count_60"=>useronline::count(60),
+            "useronline_link" => url_util::makeurl("useronline", "dashboard"),
+            "useronline_count_5" => useronline::count(5),
+            "useronline_count_60" => useronline::count(60),
 
-            "courses_link"=>url_util::makeurl("courses", "dashboard"),
-            "courses_count_all"=>courses::count_all(true),
-            "courses_count_all_visibles"=>courses::count_all_visibles(true),
+            "courses_link" => url_util::makeurl("courses", "dashboard"),
+            "courses_count_all" => courses::count_all(true),
+            "courses_count_all_visibles" => courses::count_all_visibles(true),
 
-            "disk_link"=>url_util::makeurl("reports", "dashboard", ["type" => "server"]),
-            "disk_size"=>bytes_util::size_to_byte(files::count_all_space()),
+            "disk_link" => url_util::makeurl("reports", "dashboard", ["type" => "server"]),
+            "disk_size" => bytes_util::size_to_byte(files::count_all_space()),
         ];
         echo $OUTPUT->render_from_template("local_kopere_dashboard/dashboard_monitor", $data);
     }
