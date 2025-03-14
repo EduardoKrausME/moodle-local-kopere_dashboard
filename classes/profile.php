@@ -45,21 +45,14 @@ class profile {
      * @throws \dml_exception
      */
     public static function details($user) {
-        echo "<div class='profile-content'>
-                  <div class=\"table\">
-                      <div class=\"profile\">
-                          " . self::user_data($user, 110) . "
-                          <h2>" . get_string("profile_courses_title", "local_kopere_dashboard") . "</h2>
-                          <ul class=\"personalDev\">
-                              " . self::list_courses($user->id) . "
-                          </ul>
-                       </div>
+        global $OUTPUT;
 
-                       <div class=\"info\">
-                            " . self::get_user_info($user) . "
-                      </div>
-                  </div>
-              </div>";
+        $data = [
+            "user_data" => self::user_data($user, 110),
+            "list_courses" => self::list_courses($user->id),
+            "get_user_info" => self::get_user_info($user),
+        ];
+        echo $OUTPUT->render_from_template("local_kopere_dashboard/profile_details", $data);
     }
 
     /**
@@ -69,21 +62,20 @@ class profile {
      * @param $imgheight
      *
      * @return string
-     * @throws \coding_exception
      */
     public static function user_data($user, $imgheight) {
-        global $PAGE;
+        global $PAGE, $OUTPUT;
 
         $userpicture = new \user_picture($user);
         $userpicture->size = 110;
-        $profileimageurl = $userpicture->get_url($PAGE)->out(false);
-        return "
-            <img src='{$profileimageurl}' alt='" . fullname($user) . "' height='{$imgheight}'>
-            <h3 class=\"name\">{$user->firstname}
-                <span class=\"last\">{$user->lastname}</span>
-            </h3>
-            <span class=\"city\">{$user->city}</span>
-            <div class=\"desc\">{$user->description}</div>";
+        $user->profileimageurl = $userpicture->get_url($PAGE)->out(false);
+        $user->fullname = fullname($user);
+
+        $data = [
+            "user" => $user,
+            "imgheight" => $imgheight,
+        ];
+        echo $OUTPUT->render_from_template("local_kopere_dashboard/profile_user_data", $data);
     }
 
     /**
@@ -96,7 +88,7 @@ class profile {
      * @throws \dml_exception
      */
     public static function list_courses($userid) {
-        global $DB;
+        global $DB, $OUTPUT;
 
         $courses = enrol_get_all_users_courses($userid);
 
@@ -146,19 +138,15 @@ class profile {
 
             $url = url_util::makeurl("userenrolment", "mathedit",
                 ["courseid" => $course->id, "ueid" => $enrolment->id], "view");
-            $html .=
-                "<li>
-                    <h4 class=\"title\">{$course->fullname}
-                        <span class=\"status\">{$matriculastatus}</span>
-                    </h4>
-                    <div>" . get_string("profile_enrol_start", "local_kopere_dashboard") . '
-                        <em>' . userdate($enrolment->timestart, get_string("dateformat", "local_kopere_dashboard")) . "</em>
-                        {$expirationend} -
-                        <a class='btn btn-info btn-xs'
-                           href='{$url}'>" . get_string("profile_edit", "local_kopere_dashboard") . '</a>
-                    </div>
-                    <div class="roles">' . get_string("profile_enrol_profile", "local_kopere_dashboard") . ": {$rolehtml}</div>
-                </li>";
+            $data = [
+                "course" => $course,
+                "url" => $url,
+                "rolehtml" => $rolehtml,
+                "expirationend" => $expirationend,
+                "matriculastatus" => $matriculastatus,
+                "date" => userdate($enrolment->timestart, get_string("dateformat", "local_kopere_dashboard")),
+            ];
+            $html .= $OUTPUT->render_from_template("local_kopere_dashboard/profile_list_courses", $data);
         }
         return $html;
     }
@@ -169,14 +157,10 @@ class profile {
      * @param $user
      *
      * @return string
-     * @throws \coding_exception
      */
     public static function get_user_info($user) {
         global $OUTPUT;
 
-        $data = [
-            "user" => $user,
-        ];
-        return $OUTPUT->render_from_template("local_kopere_dashboard/profile_get_user_info", $data);
+        return $OUTPUT->render_from_template("local_kopere_dashboard/profile_get_user_info", ["user" => $user]);
     }
 }

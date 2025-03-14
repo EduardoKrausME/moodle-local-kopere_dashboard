@@ -1,0 +1,41 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_kopere_dashboard/profile_user_data
+
+    Example context (json):
+    {
+        "user": {
+            "profileimageurl": "https://example.com/profile.jpg",
+            "fullname": "Eduardo Kraus",
+            "firstname": "Eduardo",
+            "lastname": "Kraus",
+            "city": "Florianópolis",
+            "description": "Professor, Programador e Apaixonado por Moodle."
+        },
+        "imgheight": "100"
+    }
+}}
+
+<img src="{{{user.profileimageurl}}}"
+     alt="{{{user.fullname}}}"
+     height="{{{imgheight}}}">
+<h3 class="name">{{{user.firstname}}}
+    <span class="last">{{{user.lastname}}}</span>
+</h3>
+<span class="city">{{{user.city}}}</span>
+<div class="desc">{{{user.description}}}</div>

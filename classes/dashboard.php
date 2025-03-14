@@ -46,30 +46,14 @@ class dashboard {
      * @throws \dml_exception
      */
     public function start() {
-        global $PAGE;
+        global $PAGE, $OUTPUT;
 
         dashboard_util::add_breadcrumb("Kopere Dashboard");
         dashboard_util::start_page();
 
         echo performancemonitor::load_monitor();
 
-        echo '
-            <div id="dashboard-moodleinfo"></div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="element-box">
-                        <h3>' . get_string("dashboard_grade_title", "local_kopere_dashboard") . '</h3>
-                        <div id="dashboard-last_grades"></div>
-                    </div>
-                </div>
-                <div class="col-sm-6 ">
-                    <div class="element-box">
-                        <h3>' . get_string("dashboard_enrol_title", "local_kopere_dashboard") . '</h3>
-                        <div id="dashboard-last_enroll"></div>
-                    </div>
-                </div>
-            </div>';
-
+        echo $OUTPUT->render_from_template("local_kopere_dashboard/dashboard_start", []);
         $PAGE->requires->js_call_amd('local_kopere_dashboard/dashboard', "start");
         dashboard_util::end_page();
     }
@@ -81,42 +65,24 @@ class dashboard {
      * @throws \dml_exception
      */
     public function monitor() {
-        echo '
-            <div class="element-content">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="element-box color_user">
-                            <div class="label">' . get_string("dashboard_title_user", "local_kopere_dashboard") . '</div>
-                            <div class="value"><a href="' . url_util::makeurl("users", "dashboard") . '">
-                                ' . users::count_all(true) . ' / ' . users::count_all_learners(true) . '</a></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="element-box color_online">
-                            <div class="label">' . get_string("dashboard_title_online", "local_kopere_dashboard") . '</div>
-                            <div class="value"><a href="' . url_util::makeurl("useronline", "dashboard") . '">
-                                <span id="user-count-online">' . useronline::count(5) . '</span>
-                                / ' . useronline::count(60) . '</a></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="element-box color_course">
-                            <div class="label">' . get_string("dashboard_title_course", "local_kopere_dashboard") . '</div>
-                            <div class="value"><a href="' . url_util::makeurl("courses", "dashboard") . '">
-                            ' . courses::count_all(true) . '
-                                / ' . courses::count_all_visibles(true) . '</a></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="element-box color_disk">
-                            <div class="label">' . get_string("dashboard_title_disk", "local_kopere_dashboard") . '</div>
-                            <div class="value"><a href=' .
-            url_util::makeurl("reports", "dashboard", ["type" => "server"]) . '">
-                            ' . bytes_util::size_to_byte(files::count_all_space()) . '</a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>';
+        global $OUTPUT;
+
+        $data=[
+          "users_link"=>url_util::makeurl("users", "dashboard"),
+          "users_count"=>users::count_all(true) . ' / ' . users::count_all_learners(true),
+
+            "useronline_link"=>url_util::makeurl("useronline", "dashboard"),
+            "useronline_count_5"=>useronline::count(5),
+            "useronline_count_60"=>useronline::count(60),
+
+            "courses_link"=>url_util::makeurl("courses", "dashboard"),
+            "courses_count_all"=>courses::count_all(true),
+            "courses_count_all_visibles"=>courses::count_all_visibles(true),
+
+            "disk_link"=>url_util::makeurl("reports", "dashboard", ["type" => "server"]),
+            "disk_size"=>bytes_util::size_to_byte(files::count_all_space()),
+        ];
+        echo $OUTPUT->render_from_template("local_kopere_dashboard/dashboard_monitor", $data);
     }
 
     /**

@@ -75,7 +75,7 @@ class benchmark {
      * @throws \dml_exception
      */
     public function execute() {
-        global $CFG;
+        global $CFG, $OUTPUT;
 
         dashboard_util::add_breadcrumb(get_string("benchmark_title", "local_kopere_dashboard"),
             url_util::makeurl("benchmark", "test"));
@@ -101,29 +101,10 @@ class benchmark {
                 ' . $this->format_number($score) . ' ' . get_string("benchmark_seconds", "local_kopere_dashboard"));
         }
 
-        echo '<table class="table" id="benchmarkresult">
-                  <thead>
-                      <tr>
-                          <th class="text-center media-middle">#</th>
-                          <th>' . get_string("benchmark_decription", "local_kopere_dashboard") . '</th>
-                          <th class="media-middle">' . get_string("benchmark_timesec", "local_kopere_dashboard") . '</th>
-                          <th class="media-middle">' . get_string("benchmark_max", "local_kopere_dashboard") . '</th>
-                          <th class="media-middle">' . get_string("benchmark_critical", "local_kopere_dashboard") . '</th>
-                      </tr>
-                  </thead>
-                  <tbody>';
-
-        foreach ($test->get_results() as $result) {
-            echo "<tr class='{$result["class"]}' >
-                      <td class='text-center media-middle'>{$result["id"]}</td>
-                      <td >{$result["name"]}<div><small>{$result["info"]}</small></div></td>
-                      <td class='text-center media-middle'>{$this->format_number($result["during"])}</td>
-                      <td class='text-center media-middle'>{$this->format_number($result["limit"])}</td>
-                      <td class='text-center media-middle'>{$this->format_number($result["over"])}</td>
-                  </tr>";
-        }
-
-        echo "</tbody></table>";
+        $data = [
+            "tests" => array_values($test->get_results()),
+        ];
+        echo $OUTPUT->render_from_template("local_kopere_dashboard/benchmark_execute", $data);
 
         title_util::print_h3("benchmark_testconf");
         $this->performance();
@@ -140,15 +121,7 @@ class benchmark {
      * @throws \dml_exception
      */
     public function performance() {
-        global $CFG;
-
-        echo "<table class=\"table\" id=\"benchmarkresult\">
-                  <tr>
-                      <th>" . get_string("benchmark_testconf_problem", "local_kopere_dashboard") . "</th>
-                      <th>" . get_string("benchmark_testconf_status", "local_kopere_dashboard") . "</th>
-                      <th>" . get_string("benchmark_testconf_description", "local_kopere_dashboard") . "</th>
-                      <th>" . get_string("benchmark_testconf_action", "local_kopere_dashboard") . "</th>
-                  </tr>";
+        global $OUTPUT;
 
         $tests = [
             report_benchmark_test::themedesignermode(),
@@ -157,17 +130,8 @@ class benchmark {
             report_benchmark_test::backup_auto_active(),
             report_benchmark_test::enablestats(),
         ];
+        echo $OUTPUT->render_from_template("local_kopere_dashboard/benchmark_performance", ["tests" => $tests]);
 
-        foreach ($tests as $test) {
-            echo "<tr class='{$test["class"]}'>
-                      <td>{$test["title"]}</td>
-                      <td>{$test["resposta"]}</td>
-                      <td>{$test["description"]}</td>
-                      <td><a target=\"_blank\" href='{$CFG->wwwroot}/admin/{$test["url"]}'>" . get_string("edit") . "</a></td>
-                  </tr>";
-        }
-
-        echo "</tbody></table>";
     }
 
     /**
