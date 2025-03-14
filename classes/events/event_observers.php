@@ -49,14 +49,6 @@ class event_observers {
 
         $eventname = str_replace('\\\\', '\\', $event->eventname);
 
-        switch ($eventname) {
-            case '\core\event\course_deleted':
-            case '\core\event\course_updated':
-            case '\core\event\course_created':
-                $cache = \cache::make("local_kopere_dashboard", "courses_all_courses");
-                $cache->delete("load_all_courses");
-        }
-
         if ($event->get_data()["action"] == "viewed") {
             return;
         }
