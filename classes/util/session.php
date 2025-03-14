@@ -39,8 +39,11 @@ class session {
      * @return null
      */
     public static function get($key) {
-        if (isset($_SESSION["kopere-dashboard-{$key}"])) {
-            return $_SESSION["kopere-dashboard-{$key}"];
+        global $USER;
+
+        $key = "kopere-dashboard-{$key}";
+        if (isset($USER->$key)) {
+            return $USER->$key;
         } else {
             return null;
         }
@@ -53,6 +56,9 @@ class session {
      * @param $value
      */
     public static function set($key, $value) {
-        $_SESSION["kopere-dashboard-{$key}"] = $value;
+        global $USER;
+
+        $key = "kopere-dashboard-{$key}";
+        $USER->$key = $value;
     }
 }
