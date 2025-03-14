@@ -168,7 +168,7 @@ if ($pagelink) {
         }
 
         $sql = "SELECT * FROM {local_kopere_dashboard_pages} WHERE visible = 1 AND menuid = :menuid ORDER BY pageorder ASC";
-        $webpagess = $DB->get_records_sql($sql, ["menuid"=>$menu->id]);
+        $webpagess = $DB->get_records_sql($sql, ["menuid" => $menu->id]);
 
         /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_pages $webpages */
         foreach ($webpagess as $webpages) {
