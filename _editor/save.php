@@ -31,8 +31,8 @@ $page = required_param("page", PARAM_TEXT);
 $id = required_param("id", PARAM_TEXT);
 $link = optional_param("link", "", PARAM_TEXT);
 
-define("MAX_FILE_LIMIT", 1024 * 1024 * 2); //2 Megabytes max html file size.
-define("ALLOW_PHP", false); //check if saved html contains php tag and don't save if not allowed.
+define("MAX_FILE_LIMIT", 1024 * 1024 * 2); // 2 Megabytes max html file size.
+define("ALLOW_PHP", false); // Check if saved html contains php tag and don't save if not allowed.
 define("ALLOWED_OEMBED_DOMAINS", [
     "https://www.youtube.com/",
     "https://www.vimeo.com/",
@@ -41,25 +41,25 @@ define("ALLOWED_OEMBED_DOMAINS", [
     "https://publish.twitter.com/",
     "https://www.twitter.com/",
     "https://www.reddit.com/",
-]); //load urls only from allowed websites for oembed.
+]); // Load urls only from allowed websites for oembed.
 
 /**
- * Function sanitizeFileName
+ * Function sanitize_file_name
  *
  * @param $file
  * @param string $allowedExtension
  *
  * @return null|string|string[]
  */
-function sanitizeFileName($file, $allowedExtension = "html") {
+function sanitize_file_name($file, $allowedExtension = "html") {
     $basename = basename($file);
     $disallow = [".htaccess", "passwd"];
     if (in_array($basename, $disallow)) {
-        showError("Filename not allowed!");
+        show_error("Filename not allowed!");
         return "";
     }
 
-    //sanitize, remove double dot .. and remove get parameters if any.
+    // Sanitize, remove double dot .. and remove get parameters if any.
     $file = preg_replace('@\?.*$@', "", preg_replace('@\.{2,}@', "", preg_replace('@[^\/\\a-zA-Z0-9\-\._]@', "", $file)));
 
     if ($file) {
@@ -68,7 +68,7 @@ function sanitizeFileName($file, $allowedExtension = "html") {
         return "";
     }
 
-    //allow only .html extension.
+    // Allow only .html extension.
     if ($allowedExtension) {
         $file = preg_replace('/\.[^.]+$/', "", $file) . ".$allowedExtension";
     }
@@ -76,23 +76,23 @@ function sanitizeFileName($file, $allowedExtension = "html") {
 }
 
 /**
- * Function showError
+ * Function show_error
  *
  * @param $error
  */
-function showError($error) {
+function show_error($error) {
     header($_SERVER["SERVER_PROTOCOL"] . " 404", true, 500);
     die($error);
 }
 
 /**
- * Function validOembedUrl
+ * Function valid_oembed_url
  *
  * @param $url
  *
  * @return bool
  */
-function validOembedUrl($url) {
+function valid_oembed_url($url) {
     foreach (ALLOWED_OEMBED_DOMAINS as $domain) {
         if (strpos($url, $domain) === 0) {
             return true;
@@ -107,24 +107,23 @@ $file = "";
 $action = "";
 
 if (optional_param("startTemplateUrl", false, PARAM_RAW)) {
-    $startTemplateUrl = sanitizeFileName(optional_param("startTemplateUrl", false, PARAM_RAW));
+    $starttemplateurl = sanitize_file_name(optional_param("startTemplateUrl", false, PARAM_RAW));
     $html = "";
-    if ($startTemplateUrl) {
-        $html = file_get_contents($startTemplateUrl);
+    if ($starttemplateurl) {
+        $html = file_get_contents($starttemplateurl);
     }
 } else if (optional_param("html", false, PARAM_RAW)) {
     $html = substr(optional_param("html", false, PARAM_RAW), 0, MAX_FILE_LIMIT);
     if (!ALLOW_PHP) {
-        //if (strpos($html, '<?php') !== false) {
         if (preg_match('@<\?php|<\? |<\?=|<\s*script\s*language\s*=\s*"\s*php\s*"\s*>@', $html)) {
-            showError("PHP not allowed!");
+            show_error("PHP not allowed!");
         }
     }
     $html = str_replace("body >", "", $html);
 }
 
 if (optional_param("file", false, PARAM_RAW)) {
-    $file = sanitizeFileName(optional_param("file", false, PARAM_RAW));
+    $file = sanitize_file_name(optional_param("file", false, PARAM_RAW));
 }
 
 if (optional_param("action", false, PARAM_TEXT)) {
@@ -132,7 +131,7 @@ if (optional_param("action", false, PARAM_TEXT)) {
 }
 
 if ($action) {
-    //file manager actions, delete and rename.
+    // File manager actions, delete and rename.
     switch ($action) {
         case "delete":
             $json = file_get_contents("php://input");
@@ -175,22 +174,22 @@ if ($action) {
             break;
         case "oembedProxy":
             $url = optional_param("url", false, PARAM_RAW) ?? "";
-            if (validOembedUrl($url)) {
+            if (valid_oembed_url($url)) {
                 $options = [
                     "http" => [
                         "method" => "GET",
                         "header" => "User-Agent: {$_SERVER["HTTP_USER_AGENT"]}\r\n",
-                    ]
+                    ],
                 ];
                 $context = stream_context_create($options);
                 header("Content-Type: application/json");
                 echo file_get_contents($url, false, $context);
             } else {
-                showError("Invalid url!");
+                show_error("Invalid url!");
             }
             break;
         default:
-            showError("Invalid action '{$action}'!");
+            show_error("Invalid action '{$action}'!");
     }
 } else {
     echo json_encode([
