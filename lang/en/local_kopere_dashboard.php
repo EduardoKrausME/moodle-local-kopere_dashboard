@@ -124,7 +124,6 @@ $string['coursewritemoreinfo'] = 'Test the database speed to write a course';
 $string['coursewritename'] = 'Writing course';
 $string['crontask_db_report_login'] = 'Cron to store user logins in temporary table';
 $string['crontask_performance'] = 'Cron to save performance data';
-$string['crontask_tmp'] = 'Cron clear tmp folder';
 $string['dashboard'] = 'Dashboard';
 $string['dashboard_enrol_active'] = 'the enrolment is active';
 $string['dashboard_enrol_inactive'] = 'the enrolment is inactive';
@@ -230,7 +229,6 @@ $string['notification_local_kopere_dashboard_payment'] = 'Kopere Payment';
 $string['notification_local_kopere_hotmoodle'] = 'Kopere HotMoodle';
 $string['notification_local_kopere_moocommerce'] = 'Kopere MooCommerce';
 $string['notification_local_kopere_pay'] = 'Kopere Pagamento';
-
 $string['notification_manager'] = 'Manage Messages';
 $string['notification_message'] = 'Message';
 $string['notification_message_edit_template'] = 'Edit the base email template';
@@ -588,3 +586,9 @@ $string['cachedef_courses_all_courses'] = 'Cache list all course';
 
 $string['install_kopere_bi_title'] = 'Install Kopere BI';
 $string['install_kopere_bi_desc'] = '<p>Install <a href="https://moodle.org/plugins/local_kopere_bi" target="_blank">Kopere BI</a> and gain access to advanced and detailed reports for better data analysis.</p>';
+
+$string['none_course'] = '(Nenhum curso)';
+$string['deleted_successfully'] = 'Deleted successfully';
+$string['saved_successfully'] = 'Saved successfully';
+$string['select'] = 'Selecione';
+$string['enable_debugmode'] = 'Você precisa ativar o Modo desenvolvedor e Mostrar as mensagens de debug';

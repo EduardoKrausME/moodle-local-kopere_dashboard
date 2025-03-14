@@ -101,6 +101,7 @@ class input_select extends input_base {
      * Function to_string
      *
      * @return mixed|string
+     * @throws \coding_exception
      */
     public function to_string() {
         $return = "<select id='{$this->inputid}' name='{$this->name}' ";
@@ -118,7 +119,7 @@ class input_select extends input_base {
         $return .= ">";
 
         if ($this->addselecione) {
-            $return .= "\n\t<option value=''>..::Selecione::..</option>";
+            $return .= "\n\t<option value=''>..::" . get_string("select", "local_kopere_dashboard") . "::..</option>";
         }
 
         foreach ($this->values as $row) {

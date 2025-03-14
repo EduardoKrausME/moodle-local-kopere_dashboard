@@ -415,7 +415,7 @@ class notifications extends notificationsutil {
         dashboard_util::start_page();
 
         if (!$CFG->debugdisplay || $CFG->debug == 0) {
-            message::print_danger("Você precisa ativar o Modo desenvolvedor e Mostrar as mensagens de debug");
+            message::print_danger(get_string("enable_debugmode", "local_kopere_dashboard"));
         }
 
         notificationsutil::message_no_smtp();

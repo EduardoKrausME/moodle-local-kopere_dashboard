@@ -152,7 +152,7 @@ if ($action) {
             header("Content-Type: application/json");
             echo json_encode([
                 "success" => 1,
-                "message" => "Deleted successfully",
+                "message" => get_string("deleted_successfully", "local_kopere_dashboard"),
             ]);
             break;
         case "save":
@@ -169,7 +169,7 @@ if ($action) {
             }
             echo json_encode([
                 "success" => 1,
-                "message" => "Saved successfully",
+                "message" => get_string("saved_successfully", "local_kopere_dashboard"),
             ]);
             break;
         case "oembedProxy":

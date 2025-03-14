@@ -340,7 +340,7 @@ class webpages {
 
         $courses1 = [(object)[
             "id" => 0,
-            "fullname" => "(Nenhum curso)"]];
+            "fullname" => get_string("none_course", "local_kopere_dashboard")]];
         $courses2 = $DB->get_records_sql("SELECT id, fullname FROM {course} WHERE id > 1 ORDER BY fullname ASC");
         $courses = array_merge($courses1, $courses2);;
 
