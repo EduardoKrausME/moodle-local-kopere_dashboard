@@ -429,7 +429,6 @@ class webpages {
                         $DB->update_record("local_kopere_dashboard_pages", $webpages);
                         (\cache::make("local_kopere_dashboard", "report_getdata_cache"))->delete("local_kopere_dashboard_menu");
 
-                        self::cache_delete();
                         message::schedule_message_success(get_string("webpages_page_updated", "local_kopere_dashboard"));
                         header::location(
                             url_util::makeurl("webpages", "page_details", ["id" => $webpages->id]));
@@ -447,7 +446,6 @@ class webpages {
                         message::schedule_message_success(get_string("webpages_page_created", "local_kopere_dashboard"));
                         (\cache::make("local_kopere_dashboard", "report_getdata_cache"))->delete("local_kopere_dashboard_menu");
 
-                        self::cache_delete();
                         header::location(
                             url_util::makeurl("webpages", "page_details", ["id" => $webpages->id]));
                     } catch (\dml_exception $e) {
@@ -477,7 +475,6 @@ class webpages {
             $DB->delete_records("local_kopere_dashboard_pages", ["id" => $id]);
             (\cache::make("local_kopere_dashboard", "report_getdata_cache"))->delete("local_kopere_dashboard_menu");
 
-            self::cache_delete();
             message::schedule_message_success(get_string("webpages_page_deleted", "local_kopere_dashboard"));
             header::location(url_util::makeurl("webpages", "dashboard"));
         }
@@ -647,7 +644,6 @@ class webpages {
                 }
             }
 
-            self::cache_delete();
             header::location(url_util::makeurl("webpages", "dashboard"));
         }
     }
@@ -682,7 +678,6 @@ class webpages {
                 $DB->delete_records("local_kopere_dashboard_menu", ["id" => $id]);
                 (\cache::make("local_kopere_dashboard", "report_getdata_cache"))->delete("local_kopere_dashboard_menu");
 
-                self::cache_delete();
                 message::schedule_message_success(get_string("webpages_menu_deleted", "local_kopere_dashboard"));
                 header::location(url_util::makeurl("webpages", "dashboard"));
             }
@@ -849,28 +844,5 @@ class webpages {
         $form->close();
 
         dashboard_util::end_page();
-    }
-
-    /**
-     * Function cache_get_dir
-     *
-     * @return string
-     */
-    public static function cache_get_dir() {
-        $path = server_util::get_kopere_pathath(true) . "cache";
-
-        @mkdir($path);
-
-        return "{$path}/";
-    }
-
-    /**
-     * Function cache_delete
-     */
-    private static function cache_delete() {
-        $caches = glob(self::cache_get_dir() . "*");
-        foreach ($caches as $cache) {
-            unlink($cache);
-        }
     }
 }

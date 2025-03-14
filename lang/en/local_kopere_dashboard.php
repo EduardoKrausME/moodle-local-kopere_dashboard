@@ -229,6 +229,19 @@ $string['notification_local_kopere_dashboard_payment'] = 'Kopere Payment';
 $string['notification_local_kopere_hotmoodle'] = 'Kopere HotMoodle';
 $string['notification_local_kopere_moocommerce'] = 'Kopere MooCommerce';
 $string['notification_local_kopere_pay'] = 'Kopere Pagamento';
+
+$string['notificationsend_course'] = 'Course to send the message';
+$string['notificationsend_criteria'] = 'Criteria';
+$string['notificationsend_criteria_days'] = 'How many days since last course access?';
+$string['notificationsend_criteria_days_desc'] = 'Defines the number of days without course access to trigger the notification. Zero applies to ALL students.';
+$string['notificationsend_criteria_enrol'] = 'How many days since enrollment in the course?';
+$string['notificationsend_criteria_enrol_desc'] = 'Defines the number of days since enrollment in the course to trigger the notification. Zero applies to ALL students.';
+$string['notificationsend_send'] = 'Send messages';
+$string['notificationsend_title'] = 'Send notification';
+$string['notificationsend_test_title'] = 'Users who will receive the email';
+$string['notificationsend_to'] = 'Send messages';
+$string['notificationsend_viewstudentswithcriteria'] = 'View students with these criteria';
+
 $string['notification_manager'] = 'Manage Messages';
 $string['notification_message'] = 'Message';
 $string['notification_message_edit_template'] = 'Edit the base email template';
