@@ -78,8 +78,6 @@ class course_last_access {
         $course = $DB->get_record("course", ["id" => $cursosid]);
         header::notfound_null($course, get_string_kopere("courses_notound"));
 
-        button::info(get_string_kopere("reports_export"), url_util::querystring() . "&export=xls");
-
         session_write_close();
         $export = optional_param("export", "xls", PARAM_TEXT);
         export::header($export, $course->fullname);
