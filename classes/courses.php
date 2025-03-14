@@ -188,7 +188,8 @@ class courses {
         $course = $DB->get_record("course", ["id" => $courseid]);
         header::notfound_null($course, get_string("courses_notound", "local_kopere_dashboard"));
 
-        dashboard_util::add_breadcrumb(get_string("courses_title", "local_kopere_dashboard"), url_util::makeurl("courses", "dashboard"));
+        dashboard_util::add_breadcrumb(get_string("courses_title", "local_kopere_dashboard"),
+            url_util::makeurl("courses", "dashboard"));
         dashboard_util::add_breadcrumb($course->fullname);
         dashboard_util::start_page();
 
@@ -223,14 +224,16 @@ class courses {
         echo
             "<h3>" .
             get_string("courses_titleenrol", "local_kopere_dashboard") .
-            ' <span class="btn btn-primary bt-courses_enrol_new">' . get_string("courses_enrol_new", "local_kopere_dashboard") . "</span>" .
+            ' <span class="btn btn-primary bt-courses_enrol_new">' .
+            get_string("courses_enrol_new", "local_kopere_dashboard") . "</span>" .
             "</h3>";
 
         $table = new data_table();
         $table->add_header("#", "id", table_header_item::TYPE_INT);
         $table->add_header(get_string("courses_student_name", "local_kopere_dashboard"), "nome");
         $table->add_header(get_string("courses_student_email", "local_kopere_dashboard"), "email");
-        $table->add_header(get_string("courses_student_status", "local_kopere_dashboard"), "status", table_header_item::RENDERER_STATUS);
+        $table->add_header(get_string("courses_student_status", "local_kopere_dashboard"),
+            "status", table_header_item::RENDERER_STATUS);
 
         $table->set_ajax_url(url_util::makeurl("enroll", "ajax_dashboard", ["courseid" => "{$courseid}"]));
         $table->set_click_redirect(url_util::makeurl("users", "details", ["userid" => "{id}"]), "id");
@@ -261,7 +264,8 @@ class courses {
         $course = $DB->get_record("course", ["id" => $courseid]);
         header::notfound_null($course, get_string("courses_notound", "local_kopere_dashboard"));
 
-        dashboard_util::add_breadcrumb(get_string("courses_title", "local_kopere_dashboard"), url_util::makeurl("courses", "dashboard"));
+        dashboard_util::add_breadcrumb(get_string("courses_title", "local_kopere_dashboard"),
+            url_util::makeurl("courses", "dashboard"));
         dashboard_util::add_breadcrumb($course->fullname);
         dashboard_util::add_breadcrumb(get_string("courses_enrol_new", "local_kopere_dashboard"));
         dashboard_util::start_page();

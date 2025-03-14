@@ -77,7 +77,8 @@ class benchmark {
     public function execute() {
         global $CFG;
 
-        dashboard_util::add_breadcrumb(get_string("benchmark_title", "local_kopere_dashboard"), url_util::makeurl("benchmark", "test"));
+        dashboard_util::add_breadcrumb(get_string("benchmark_title", "local_kopere_dashboard"),
+            url_util::makeurl("benchmark", "test"));
         dashboard_util::add_breadcrumb(get_string("benchmark_executing", "local_kopere_dashboard"));
         dashboard_util::add_breadcrumb(get_string("benchmark_title2", "local_kopere_dashboard"));
         dashboard_util::start_page();

@@ -279,7 +279,8 @@ class notifications extends notificationsutil {
         }
 
         $form->print_row(null,
-            button::help("TAGS-substituídas-nas-mensagens-de-Notificações", get_string("notification_tags", "local_kopere_dashboard")));
+            button::help("TAGS-substituídas-nas-mensagens-de-Notificações",
+                get_string("notification_tags", "local_kopere_dashboard")));
 
         $htmltexteditor = input_htmleditor::new_instance()
             ->set_name("event_message")
@@ -293,7 +294,8 @@ class notifications extends notificationsutil {
             get_string("notification_message_edit_template", "local_kopere_dashboard") .
             "</a>";
         if (strpos($templatecontent, "{[message]}") === false) {
-            message::print_danger(get_string("notification_message_template_error", "local_kopere_dashboard") . "<br>" . $edittemplate);
+            message::print_danger(get_string("notification_message_template_error", "local_kopere_dashboard") .
+                "<br>" . $edittemplate);
         } else {
             $templatecontent = str_replace("{[message]}", $htmltexteditor, $templatecontent);
             $form->print_panel(get_string("notification_message", "local_kopere_dashboard"), $templatecontent . $edittemplate);

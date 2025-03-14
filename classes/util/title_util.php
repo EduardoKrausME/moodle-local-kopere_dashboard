@@ -41,7 +41,7 @@ class title_util {
      */
     public static function print_h1($title, $iskeylang = true) {
         if ($iskeylang) {
-            echo "<h1>" . get_string($title, "local_kopere_dashboard",) . "</h1>";
+            echo "<h1>" . get_string($title, "local_kopere_dashboard") . "</h1>";
         } else {
             echo "<h1>{$title}</h1>";
         }
@@ -57,7 +57,7 @@ class title_util {
      */
     public static function print_h2($title, $iskeylang = true) {
         if ($iskeylang) {
-            echo "<h2>" . get_string($title, "local_kopere_dashboard",) . "</h2>";
+            echo "<h2>" . get_string($title, "local_kopere_dashboard") . "</h2>";
         } else {
             echo "<h2>{$title}</h2>";
         }
@@ -73,7 +73,7 @@ class title_util {
      */
     public static function print_h3($title, $iskeylang = true) {
         if ($iskeylang) {
-            echo "<h3>" . get_string($title, "local_kopere_dashboard",) . "</h3>";
+            echo "<h3>" . get_string($title, "local_kopere_dashboard") . "</h3>";
         } else {
             echo "<h3>{$title}</h3>";
         }
@@ -89,7 +89,7 @@ class title_util {
      */
     public static function print_h4($title, $iskeylang = true) {
         if ($iskeylang) {
-            echo "<h4>" . get_string($title, "local_kopere_dashboard",) . "</h4>";
+            echo "<h4>" . get_string($title, "local_kopere_dashboard") . "</h4>";
         } else {
             echo "<h4>{$title}</h4>";
         }
@@ -105,7 +105,7 @@ class title_util {
      */
     public static function print_h5($title, $iskeylang = true) {
         if ($iskeylang) {
-            echo "<h5>" . get_string($title, "local_kopere_dashboard",) . "</h5>";
+            echo "<h5>" . get_string($title, "local_kopere_dashboard") . "</h5>";
         } else {
             echo "<h5>{$title}</h5>";
         }
@@ -121,7 +121,7 @@ class title_util {
      */
     public static function print_h6($title, $iskeylang = true) {
         if ($iskeylang) {
-            echo "<h6>" . get_string($title, "local_kopere_dashboard",) . "</h6>";
+            echo "<h6>" . get_string($title, "local_kopere_dashboard") . "</h6>";
         } else {
             echo "<h6>{$title}</h6>";
         }

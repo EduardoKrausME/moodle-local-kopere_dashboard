@@ -140,7 +140,6 @@ require_capability("moodle/site:config", context_system::instance());
         <div class="float-end me-3">
 
             <button class="btn btn-light border-0 btn-sm btn-dark-mode" data-vvveb-action="darkMode">
-                <!-- i class="la la-adjust la-lg"></i -->
                 <i class="la la-sun"></i>
             </button>
 
@@ -186,35 +185,24 @@ require_capability("moodle/site:config", context_system::instance());
                             <a class="nav-link active" id="sections-tab" data-bs-toggle="tab" href="#sections"
                                role="tab" aria-controls="sections" aria-selected="true" title="Sections">
                                 <i class="icon-layers-outline"></i>
-                                <!-- img src="../../../js/vvvebjs/icons/list_group.svg" height="23" -->
-                                <!-- div><small>Sections</small></div -->
                             </a>
                         </li>
                         <li class="nav-item component-tab">
                             <a class="nav-link" id="components-tab" data-bs-toggle="tab" href="#components-tabs"
                                role="tab" aria-controls="components" aria-selected="false" title="Components">
                                 <i class="icon-cube-outline"></i>
-                                <!-- img src="../../../js/vvvebjs/icons/product.svg" height="23" -->
-                                <!-- div><small>Components</small></div -->
                             </a>
                         </li>
-                        <!-- li class="nav-item sections-tab">
-                          <a class="nav-link" id="sections-tab" data-bs-toggle="tab" href="#sections" role="tab" aria-controls="sections" aria-selected="false" title="Sections"><img src="../../../js/vvvebjs/icons/list_group.svg" width="24" height="23"> <div><small>Sections</small></div></a>
-                        </li -->
                         <li class="nav-item component-properties-tab d-none">
                             <a class="nav-link" id="properties-tab" data-bs-toggle="tab" href="#properties" role="tab"
                                aria-controls="properties" aria-selected="false" title="Properties">
                                 <i class="icon-settings-outline"></i>
-                                <!-- img src="../../../js/vvvebjs/icons/filters.svg" height="23"-->
-                                <!-- div><small>Properties</small></div -->
                             </a>
                         </li>
                         <li class="nav-item component-configuration-tab">
                             <a class="nav-link" id="configuration-tab" data-bs-toggle="tab" href="#configuration"
                                role="tab" aria-controls="configuration" aria-selected="false" title="Styles">
                                 <i class="icon-color-wand-outline"></i>
-                                <!-- img src="../../../js/vvvebjs/icons/filters.svg" height="23"-->
-                                <!-- div><small>Properties</small></div -->
                             </a>
                         </li>
                     </ul>
@@ -280,26 +268,6 @@ require_capability("moodle/site:config", context_system::instance());
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- div class="section-item" draggable="true">
-                                                    <div class="controls">
-                                                        <div class="handle"></div>
-                                                        <div class="info">
-                                                            <div class="name">welcome area
-                                                                <div class="type">section</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="buttons"> <a class="delete-btn" href="" title="Remove section"><i class="la la-trash text-danger"></i></a>
-
-                                                            <a class="properties-btn" href="" title="Properties"><i class="icon-settings-outline"></i></a> </div>
-                                                    </div>
-                                                    <input class="header_check" type="checkbox" id="section-components-9338">
-                                                    <label for="section-components-9338">
-                                                        <div class="header-arrow"></div>
-                                                    </label>
-                                                    <div class="tree">
-                                                        <ol></ol>
-                                                    </div>
-                                                </div -->
 
                                             </div>
                                         </div>
@@ -475,11 +443,6 @@ require_capability("moodle/site:config", context_system::instance());
                                     <div class="drag-elements-sidepane sidepane">
                                         <div data-offset="80">
                                             <div class="component-properties">
-                                                <!-- color palette -->
-                                                <!--
-                                                <label class="header" data-header="default" for="header_pallette"><span>Global styles</span>
-                        <div class="header-arrow"></div>
-                                                </label> -->
                                                 <input class="header_check" type="checkbox" checked
                                                        id="header_pallette">
                                                 <div class="tab-pane section px-0" data-section="content">
@@ -502,7 +465,7 @@ require_capability("moodle/site:config", context_system::instance());
 
                             </div>
 
-                        </div><!-- end configuration tab -->
+                        </div>
 
                     </div>
                 </div>
@@ -548,23 +511,6 @@ require_capability("moodle/site:config", context_system::instance());
                 <div id="select-box">
 
                     <div id="wysiwyg-editor" class="default-editor">
-                        <!--
-                        <a id="bold-btn" href="" title="Bold">
-                            <svg height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
-                                <path clip-rule="evenodd" d="M56 40V216H148C176.719 216 200 192.719 200 164C200 147.849 192.637 133.418 181.084 123.88C187.926 115.076 192 104.014 192 92C192 63.2812 168.719 40 140 40H56ZM88 144V184H148C159.046 184 168 175.046 168 164C168 152.954 159.046 144 148 144H88ZM88 112V72H140C151.046 72 160 80.9543 160 92C160 103.046 151.046 112 140 112H88Z" fill="#252525" fill-rule="evenodd"/>
-                            </svg>
-                        </a>
-                        <a id="italic-btn" href="" title="Italic">
-                            <svg height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M202 40H84V64H126.182L89.8182 192H54V216H172V192H129.818L166.182 64H202V40Z" fill="#252525"/>
-                            </svg>
-                        </a>
-                        <a id="underline-btn" href="" title="Underline">
-                            <svg height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
-                                <path clip-rule="evenodd" d="M88 40H60V108.004C60 145.56 90.4446 176.004 128 176.004C165.555 176.004 196 145.56 196 108.004V40H168V108C168 130.091 150.091 148 128 148C105.909 148 88 130.091 88 108V40ZM204 216V192H52V216H204Z" fill="#252525" fill-rule="evenodd"/>
-                            </svg>
-                        </a>
-                        -->
 
                         <a id="bold-btn" class="hint" href="" title="Bold" aria-label="Bold">
                             <svg height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
@@ -737,11 +683,6 @@ require_capability("moodle/site:config", context_system::instance());
                                     <small>Blocks</small>
                                 </a>
                             </li>
-                            <!--
-                                            <li class="nav-item component-properties-tab" style="display:none">
-                                              <a class="nav-link" id="box-properties-tab" data-bs-toggle="tab" href="#box-properties" role="tab" aria-controls="properties" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
-                                            </li>
-                            -->
                         </ul>
 
                         <div class="section-box-actions">
@@ -824,16 +765,6 @@ require_capability("moodle/site:config", context_system::instance());
                                 </div>
 
                             </div>
-
-                            <!-- div class="tab-pane" id="box-properties" role="tabpanel" aria-labelledby="blocks-tab">
-                                <div class="component-properties-sidepane">
-                                    <div>
-                                        <div class="component-properties">
-                                            <div class="mt-4 text-center">Click on an element to edit.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div -->
                         </div>
                     </div>
 
@@ -1146,11 +1077,6 @@ require_capability("moodle/site:config", context_system::instance());
                 </div>
                 <div class="buttons">
                     <a class="delete-btn" href="" title="Remove section"><i class="icon-trash-outline text-danger"></i></a>
-                    <!--
-                    <a class="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
-                    <a class="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
-                    <a class="properties-btn" href="" title="Properties"><i class="icon-settings-outline"></i></a>
-                    -->
                 </div>
             </div>
 
@@ -1470,10 +1396,6 @@ require_capability("moodle/site:config", context_system::instance());
             </div>
             <div class="buttons">
                 <a class="delete-btn" href="" title="Remove section"><i class="la la-trash text-danger"></i></a>
-                <!--
-                <a class="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
-                <a class="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
-                -->
                 <a class="properties-btn" href="" title="Properties"><i class="icon-settings-outline"></i></a>
             </div>
         </div>
@@ -1486,16 +1408,6 @@ require_capability("moodle/site:config", context_system::instance());
 
         <div class="tree">
             <ol>
-                <!--
-                <li data-component="Products" class="file">
-                    <label for="idNaN" style="background-image:url(/js/vvvebjs/icons/products.svg)"><span>Products</span></label>
-                    <input type="checkbox" id="idNaN">
-                </li>
-                <li data-component="Posts" class="file">
-                    <label for="idNaN" style="background-image:url(/js/vvvebjs/icons/posts.svg)"><span>Posts</span></label>
-                    <input type="checkbox" id="idNaN">
-                </li>
-                -->
             </ol>
         </div>
     </div>
@@ -1512,16 +1424,6 @@ require_capability("moodle/site:config", context_system::instance());
     </div>
     <div class="tree">
         <ol>
-            <!--
-          <li data-component="Products" class="file">
-              <label for="idNaN" style="background-image:url(/js/vvvebjs/icons/products.svg)"><span>Products</span></label>
-              <input type="checkbox" id="idNaN">
-          </li>
-          <li data-component="Posts" class="file">
-              <label for="idNaN" style="background-image:url(/js/vvvebjs/icons/posts.svg)"><span>Posts</span></label>
-              <input type="checkbox" id="idNaN">
-          </li>
-          -->
         </ol>
     </div>
 </div>
@@ -1594,14 +1496,12 @@ require_capability("moodle/site:config", context_system::instance());
             <div class="modal-header">
                 <p class="modal-title text-primary"><i class="la la-lg la-comment"></i> VvvebJs</p>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <!-- span aria-hidden="true"><small><i class="la la-times"></i></small></span -->
                 </button>
             </div>
             <div class="modal-body">
                 <p>Page was successfully saved!.</p>
             </div>
             <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-primary">Ok</button> -->
                 <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal"><i
                             class="la la-times"></i> Close
                 </button>
@@ -1615,7 +1515,6 @@ require_capability("moodle/site:config", context_system::instance());
     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header text-white">
             <strong class="me-auto">Page save</strong>
-            <!-- <small class="badge bg-success">status</small> -->
             <button type="button" class="btn-close text-white px-2" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body ">
@@ -1624,9 +1523,6 @@ require_capability("moodle/site:config", context_system::instance());
                     <div>Template backup was saved!</div>
                     <div>Template was saved!</div>
                 </div>
-                <!--
-                <div><a class="btn btn-success  btn-icon btn-sm w-100 mt-2" href="">View page</a></div>
-                -->
             </div>
         </div>
     </div>
@@ -1663,7 +1559,6 @@ require_capability("moodle/site:config", context_system::instance());
 -->
 
 <!-- components-->
-<!-- script src="VvvebJs/libs/builder/components-server.js"></script -->
 <script src="VvvebJs/libs/builder/plugin-google-fonts.js"></script>
 <script src="VvvebJs/libs/builder/components-common.js"></script>
 <script src="VvvebJs/libs/builder/plugin-aos.js"></script>

@@ -315,7 +315,6 @@ class data_table {
                     } else if ($column->type == table_header_item::TYPE_CURRENCY) {
                         $html = "R$ {$html}";
                     } else if ($column->type == table_header_item::TYPE_DATE) { // phpcs:disable
-                        // $this->columndefs[] = (object)["type" => "date-uk", "targets" => $key];
                     } else if ($column->type == table_header_item::RENDERER_FILESIZE) {
                         $html = number_util::bytes($html);
                     } else if ($column->type == table_header_item::RENDERER_DATE) {
@@ -350,9 +349,7 @@ class data_table {
                         $html = '<img class="media-object" src="' . $CFG->wwwroot .
                             '/local/kopere_dashboard/profile-image.php?type=photo_user&id=' . $html . '" />';
                     } else if ($column->type == table_header_item::RENDERER_SECONDS) {// phpcs:disable
-                        // $this->columndefs[] = (object)["render" => "secondsRenderer", "targets" => $key];
                     } else if ($column->type == table_header_item::RENDERER_TIME) {// phpcs:disable
-                        // $this->columndefs[] = (object)["render" => "timeRenderer", "targets" => $key];
                     }
                 }
 

@@ -287,11 +287,6 @@ class OpenVerseDisplay extends OpenVerse {
                         </label>
                     </div>
                 </div>
-
-                <!-- div class="pagination">
-                    <button type="button" name="page" value="1" class="btn btn-primary me-1">1</button>
-                    <button type="button" name="page" value="2" class="btn btn-secondary me-1">2</button>
-                </div -->
             </form>`)[0];
         ;
     }

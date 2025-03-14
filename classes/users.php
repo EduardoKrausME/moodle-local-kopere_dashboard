@@ -112,7 +112,8 @@ class users {
         $user = $DB->get_record("user", ["id" => $userid]);
         header::notfound_null($user, get_string("profile_notfound", "local_kopere_dashboard"));
 
-        dashboard_util::add_breadcrumb(get_string("profile_title", "local_kopere_dashboard"), url_util::makeurl("users", "dashboard"));
+        dashboard_util::add_breadcrumb(get_string("profile_title", "local_kopere_dashboard"),
+            url_util::makeurl("users", "dashboard"));
         dashboard_util::add_breadcrumb(fullname($user));
         dashboard_util::start_page();
 

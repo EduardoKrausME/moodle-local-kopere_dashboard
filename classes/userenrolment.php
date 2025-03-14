@@ -98,7 +98,8 @@ class userenrolment {
             input_date_range::new_instance()
                 ->set_title(get_string("userenrolment_timeend", "local_kopere_dashboard"))
                 ->set_name("timeend")
-                ->set_value(userdate($enrolment->timeend ? $enrolment->timeend : time(), get_string("datetime", "local_kopere_dashboard")))
+                ->set_value(userdate($enrolment->timeend ? $enrolment->timeend : time(),
+                    get_string("datetime", "local_kopere_dashboard")))
                 ->set_datetimerange()
                 ->set_required());
 
@@ -140,9 +141,11 @@ class userenrolment {
         $enrolment = $DB->get_record("user_enrolments", ["id" => $ueid], "*");
 
         $enrolment->status = $status;
-        $enrolment->timestart = \DateTime::createFromFormat(get_string("php_datetime", "local_kopere_dashboard"), $timestart)->format("U");
+        $enrolment->timestart = \DateTime::createFromFormat(get_string("php_datetime", "local_kopere_dashboard"),
+            $timestart)->format("U");
         if ($timeendstatus) {
-            $enrolment->timeend = \DateTime::createFromFormat(get_string("php_datetime", "local_kopere_dashboard"), $timeend)->format("U");
+            $enrolment->timeend = \DateTime::createFromFormat(get_string("php_datetime", "local_kopere_dashboard"),
+                $timeend)->format("U");
         } else {
             $enrolment->timeend = 0;
         }

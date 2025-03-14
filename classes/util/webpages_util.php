@@ -60,8 +60,9 @@ class webpages_util {
 
         echo "<div class='element-box text-center page404'>
                   <h2>" . get_string("error") . "</h2>
-                  <div>" . get_string($printtext, "local_kopere_dashboard",) . "</div>
-                  <p><a href='{$CFG->wwwroot}/local/kopere_dashboard/'>" . get_string("webpages_allpages", "local_kopere_dashboard") . "</a></p>
+                  <div>" . get_string($printtext, "local_kopere_dashboard") . "</div>
+                  <p><a href='{$CFG->wwwroot}/local/kopere_dashboard/'>" .
+            get_string("webpages_allpages", "local_kopere_dashboard") . "</a></p>
               </div>";
 
         echo $OUTPUT->footer();

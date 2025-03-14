@@ -275,7 +275,8 @@ class course_access_grade {
                     ]);
 
                 if ($logresult && $logresult->contagem) {
-                    $this->td(get_string("reports_access_n", "local_kopere_dashboard", $logresult->contagem), "text-nowrap bg-success", "DFF0D8");
+                    $this->td(get_string("reports_access_n", "local_kopere_dashboard", $logresult->contagem),
+                        "text-nowrap bg-success", "DFF0D8");
                     $this->td(userdate($logresult->timecreated, get_string("strftimedatetime")),
                         "text-nowrap bg-success", "#DFF0D8");
 

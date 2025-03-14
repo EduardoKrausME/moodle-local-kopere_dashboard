@@ -505,7 +505,6 @@ Vvveb.Components.extend("_base", "widgets/paypal", {
     image      : "icons/paypal.svg",
     html       : '<form action="https://www.paypal.com/cgi-bin/webscr" method="post" data-component-paypal>\
 \
-                <!-- Identify your business so that you can collect the payments. -->\
                 <input type="hidden" name="business"\
                     value="givanz@yahoo.com">\
 \
