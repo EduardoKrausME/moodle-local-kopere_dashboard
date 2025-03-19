@@ -71,7 +71,7 @@ class notificationsutil {
                 ->set_title(get_string("notification_add_action", "local_kopere_dashboard"))
                 ->set_name("event")
                 ->set_values($eventslist)
-                ->set_add_selecione(true));
+                ->set_add_select(true));
         $form->create_submit_input(get_string("notification_add_create", "local_kopere_dashboard"));
     }
 

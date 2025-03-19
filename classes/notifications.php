@@ -152,7 +152,7 @@ class notifications extends notificationsutil {
                 ->set_title(get_string("notification_add_module", "local_kopere_dashboard"))
                 ->set_name("module")
                 ->set_values($moduleslist)
-                ->set_add_selecione(true)
+                ->set_add_select(true)
                 ->set_description(get_string("notification_add_moduledesc", "local_kopere_dashboard"))
         );
         echo '<div id="restante-form">' . get_string("notification_add_selectmodule", "local_kopere_dashboard") . "</div>";

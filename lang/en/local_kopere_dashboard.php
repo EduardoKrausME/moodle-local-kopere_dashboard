@@ -600,8 +600,9 @@ $string['cachedef_courses_all_courses'] = 'Cache list all course';
 $string['install_kopere_bi_title'] = 'Install Kopere BI';
 $string['install_kopere_bi_desc'] = '<p>Install <a href="https://moodle.org/plugins/local_kopere_bi" target="_blank">Kopere BI</a> and gain access to advanced and detailed reports for better data analysis.</p>';
 
-$string['none_course'] = '(Nenhum curso)';
+$string['none_course'] = '(No course)';
 $string['deleted_successfully'] = 'Deleted successfully';
 $string['saved_successfully'] = 'Saved successfully';
-$string['select'] = 'Selecione';
-$string['enable_debugmode'] = 'Você precisa ativar o Modo desenvolvedor e Mostrar as mensagens de debug';
+$string['select'] = 'Select';
+$string['enable_debugmode'] = 'You need to enable Developer Mode and Show debug messages';
+

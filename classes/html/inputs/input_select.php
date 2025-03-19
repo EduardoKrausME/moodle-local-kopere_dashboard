@@ -40,7 +40,7 @@ class input_select extends input_base {
     private $valuesvalue;
 
     /** @var bool */
-    private $addselecione = false;
+    private $addselect = false;
 
     /**
      * input_select constructor.
@@ -85,14 +85,14 @@ class input_select extends input_base {
     }
 
     /**
-     * Function set_add_selecione
+     * Function set_add_select
      *
-     * @param $addselecione
+     * @param $addselect
      *
      * @return $this
      */
-    public function set_add_selecione($addselecione) {
-        $this->addselecione = $addselecione;
+    public function set_add_select($addselect) {
+        $this->addselect = $addselect;
 
         return $this;
     }
@@ -118,8 +118,8 @@ class input_select extends input_base {
 
         $return .= ">";
 
-        if ($this->addselecione) {
-            $return .= "\n\t<option value=''>..::" . get_string("select", "local_kopere_dashboard") . "::..</option>";
+        if ($this->addselect) {
+            $return .= "\n\t<option value=''>..:: " . get_string("select", "local_kopere_dashboard") . " ::..</option>";
         }
 
         foreach ($this->values as $row) {
