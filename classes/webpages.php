@@ -710,11 +710,11 @@ class webpages {
 
         $title = html::link($title);
 
-        $sql
-            = "SELECT *
-                 FROM {local_kopere_dashboard_pages}
-                WHERE id    !=   :id
-                  AND title LIKE :title";
+        $sql = "
+            SELECT *
+              FROM {local_kopere_dashboard_pages}
+             WHERE id    !=   :id
+               AND title LIKE :title";
 
         $webpages = $DB->get_record_sql($sql,
             [
@@ -746,11 +746,11 @@ class webpages {
 
         $title = html::link($title);
 
-        $sql
-            = "SELECT *
-                 FROM {local_kopere_dashboard_menu}
-                WHERE id    !=   :id
-                  AND title LIKE :title";
+        $sql = "
+            SELECT *
+              FROM {local_kopere_dashboard_menu}
+             WHERE id    !=   :id
+               AND title LIKE :title";
 
         $webpages = $DB->get_record_sql($sql,
             [
@@ -821,7 +821,6 @@ class webpages {
      * @throws \dml_exception
      */
     public function settings() {
-        ob_clean();
         $redirect = urlencode("classname=webpages&method=dashboard");
         dashboard_util::add_breadcrumb(get_string("webpages_page_settigs", "local_kopere_dashboard"));
         dashboard_util::start_page();
