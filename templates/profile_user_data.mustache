@@ -37,5 +37,9 @@
 <h3 class="name">{{{user.firstname}}}
     <span class="last">{{{user.lastname}}}</span>
 </h3>
-<span class="city">{{{user.city}}}</span>
-<div class="desc">{{{user.description}}}</div>
+{{#user.city}}
+    <span class="city">{{{user.city}}}</span>
+{{/user.city}}
+{{#user.description}}
+    <div class="desc">{{{user.description}}}</div>
+{{/user.description}}

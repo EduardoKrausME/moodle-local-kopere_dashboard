@@ -40,19 +40,54 @@ class profile {
      * Function details
      *
      * @param $user
+     * @param bool $echo
+     *
+     * @return
      *
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public static function details($user) {
+    public static function details($user, $echo = true) {
         global $OUTPUT;
 
         $data = [
-            "user_data" => self::user_data($user, 110),
+            "user_data" => self::user_data($user, 110, false),
             "list_courses" => self::list_courses($user->id),
             "get_user_info" => self::get_user_info($user),
         ];
-        echo $OUTPUT->render_from_template("local_kopere_dashboard/profile_details", $data);
+        $details = $OUTPUT->render_from_template("local_kopere_dashboard/profile_details", $data);
+        if ($echo) {
+            echo $details;
+        } else {
+            return $details;
+        }
+    }
+
+    /**
+     * Function details
+     *
+     * @param $user
+     * @param bool $echo
+     *
+     * @return
+     *
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
+    public static function details2($user, $echo = true) {
+        global $OUTPUT;
+
+        $data = [
+            "user_data" => self::user_data($user, 110, false),
+            "list_courses" => self::list_courses($user->id),
+            "get_user_info" => self::get_user_info($user),
+        ];
+        $details = $OUTPUT->render_from_template("local_kopere_dashboard/profile_details_2", $data);
+        if ($echo) {
+            echo $details;
+        } else {
+            return $details;
+        }
     }
 
     /**
@@ -60,10 +95,11 @@ class profile {
      *
      * @param $user
      * @param $imgheight
+     * @param bool $echo
      *
      * @return string
      */
-    public static function user_data($user, $imgheight) {
+    public static function user_data($user, $imgheight, $echo = true) {
         global $PAGE, $OUTPUT;
 
         $userpicture = new \user_picture($user);
@@ -75,7 +111,12 @@ class profile {
             "user" => $user,
             "imgheight" => $imgheight,
         ];
-        echo $OUTPUT->render_from_template("local_kopere_dashboard/profile_user_data", $data);
+        $userdata = $OUTPUT->render_from_template("local_kopere_dashboard/profile_user_data", $data);
+        if ($echo) {
+            echo $userdata;
+        } else {
+            return $userdata;
+        }
     }
 
     /**
@@ -108,8 +149,7 @@ class profile {
                 "courseid" => $course->id,
             ];
 
-            $enrolment = $DB->get_record_sql($sql, $params);
-
+            $enrolment = $DB->get_record_sql($sql, $params, IGNORE_MULTIPLE);
             if ($enrolment->timeend == 0) {
                 $expirationend = get_string("profile_enrol_notexpires", "local_kopere_dashboard");
             } else {
@@ -126,7 +166,7 @@ class profile {
             $rolehtml = "";
             foreach ($roleassignments as $roleassignment) {
                 $role = $DB->get_record("role", ["id" => $roleassignment->roleid]);
-                $rolehtml .= '<span class="btn btn-default">' . role_get_name($role) . "</span>";
+                $rolehtml .= '<span class="badge badge-primary">' . role_get_name($role) . "</span>";
             }
 
             $matriculastatus = '<span class="btn-dangerpadding-0-8 border-radius-5 text-nowrap">' .
