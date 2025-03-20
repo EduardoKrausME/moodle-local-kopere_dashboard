@@ -208,7 +208,8 @@ class courses {
 
         echo '<div class="element-box table-responsive table-new-enrol" style="display:none">';
         title_util::print_h3("courses_enrol_new");
-        $form = new form(url_util::makeurl("courses", "enrol_new", ["courseid" => $course->id]));
+        $form = new form(url_util::makeurl("courses", "enrol_new",
+            ["courseid" => $course->id, "sesskey" => sesskey()]));
         $form->add_input(
             input_email::new_instance()
                 ->set_name("usuario-email")
@@ -301,7 +302,7 @@ class courses {
 
                 button::add(get_string("courses_student_cadastrar", "local_kopere_dashboard"),
                     url_util::makeurl("courses", "enrol_new",
-                        ["courseid" => "{$course->id}&userid={$user->id}&matricular=1&sesskey=" . sesskey()]));
+                        ["courseid" => $course->id, "userid" => $user->id, "matricular" => 1, "sesskey" => sesskey()]));
             }
 
         } else {
@@ -348,7 +349,7 @@ class courses {
                         message::schedule_message_success(get_string("courses_student_ok", "local_kopere_dashboard", $a));
                         header::location(
                             url_util::makeurl("courses", "enrol_new",
-                                ["courseid" => "{$course->id}&userid={$newuser->id}"]));
+                                ["courseid" => $course->id, "userid" => $newuser->id, "sesskey" => sesskey()]));
                     } catch (\moodle_exception $e) {
                         message::print_danger($e->getMessage());
                     }
@@ -356,7 +357,7 @@ class courses {
             }
 
             title_util::print_h3("courses_enrol_new_form");
-            $form = new form(url_util::makeurl("courses", "enrol_new", ["courseid" => "{$course->id}"]));
+            $form = new form(url_util::makeurl("courses", "enrol_new", ["courseid" => $course->id, "sesskey" => sesskey()]));
 
             $form->add_input(
                 input_text::new_instance()
