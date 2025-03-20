@@ -259,7 +259,7 @@ class backup {
      * @throws \dml_exception
      */
     public function execute_dumpsql_pgsql($backupdir = null, $execute = false) {
-        global $DB, $CFG;
+        global $DB, $CFG, $PAGE;
 
         $decsep = get_string("decsep", "langconfig");
         $thousandssep = get_string("thousandssep", "langconfig");
@@ -300,11 +300,14 @@ class backup {
 
         $exporttables = 0;
         if (!$execute) {
+            $mark = get_string("backup_mark_all", "local_kopere_dashboard");
             echo "<form method='post'>
                       <table class='table table-hover'>
                           <tr>
-                              <th>Tabela</th>
-                              <th>Dados</th>
+                              <th>Tabela<br>
+                                <span class='btn btn-success mark-all-table'>{$mark}</span></th>
+                              <th>Dados<br>
+                                <span class='btn btn-success mark-all-data'>{$mark}</span></th>
                               <th>Nome da coluna</th>
                               <th>Linhas</th>
                           </tr>";
@@ -317,14 +320,16 @@ class backup {
             $numrows = number_format($rows->count, 0, $decsep, $thousandssep);
 
             $checked = "";
-            if ($rows->count < 100000) {
+            if ($rows->count < 1000000) {
                 $checked = "checked";
             }
             if (!$execute) {
                 echo "<tr>
-                          <td><input type='checkbox' name='{$inputname}-table' value='1' checked></td>
-                          <td><input type='checkbox' name='{$inputname}-data'  value='1' {$checked}></td>
-                          <td>{$table}</td>
+                          <td><input type='checkbox' name='{$inputname}-table' value='1'
+                                     class='table-checkbox-table' checked></td>
+                          <td><input type='checkbox' name='{$inputname}-data'  value='1'
+                                     class='table-checkbox-data' {$checked}></td>
+                          <td>{$table} - <span class='btn btn-success mark-line-table'>{$mark}</span></td>
                           <td>{$numrows}</td>
                       </tr>";
             }
@@ -384,7 +389,16 @@ class backup {
         }
 
         if (!$execute) {
-            echo "  </table>
+            echo "
+                        <tr>
+                            <th>Tabela<br>
+                              <span class='btn btn-success mark-all-table'>{$mark}</span></th>
+                            <th>Dados<br>
+                              <span class='btn btn-success mark-all-data'>{$mark}</span></th>
+                            <th>Nome da coluna</th>
+                            <th>Linhas</th>
+                        </tr>
+                    </table>
                     <input type='submit' value='Executar' class='btn btn-success'>
                 </form>";
         }
@@ -402,6 +416,9 @@ class backup {
             button::add(get_string("backup_returnlist", "local_kopere_dashboard"), url_util::makeurl("backup", "dashboard"));
             echo "</div>";
             echo "</div>";
+
+            $PAGE->requires->js_call_amd("local_kopere_dashboard/backup", "mark", ["#tabela-dump-{$table}"]);
+
 
             dashboard_util::end_page();
         }

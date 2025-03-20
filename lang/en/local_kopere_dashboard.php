@@ -53,6 +53,7 @@ $string['backup_list_action'] = 'Action';
 $string['backup_list_created'] = 'Created in';
 $string['backup_list_file'] = 'File';
 $string['backup_list_size'] = 'Size';
+$string['backup_mark_all'] = 'Mark/Unmark';
 $string['backup_newnow'] = 'Create new Backup now';
 $string['backup_newsqlnow'] = 'Create new database backup now';
 $string['backup_none'] = 'No backups found!';
