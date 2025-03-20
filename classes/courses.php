@@ -301,7 +301,7 @@ class courses {
 
                 button::add(get_string("courses_student_cadastrar", "local_kopere_dashboard"),
                     url_util::makeurl("courses", "enrol_new",
-                        ["courseid" => "{$course->id}&userid={$user->id}&matricular=1"]));
+                        ["courseid" => "{$course->id}&userid={$user->id}&matricular=1&sesskey=" . sesskey()]));
             }
 
         } else {
