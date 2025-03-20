@@ -111,7 +111,7 @@ $string['courses_student_cadastrar'] = 'Matrícular aluno neste curso';
 $string['courses_student_cadastrar_ok'] = 'Usuário matrículado com sucesso!';
 $string['courses_student_email'] = 'E-mail do aluno';
 $string['courses_student_name'] = 'Nome do aluno';
-$string['courses_student_ok'] = 'Usuário criado com sucesso:<br><strong>Login:</strong> {$a->login}<br><strong>Senha:</strong> {$a->senha}';
+$string['courses_student_ok'] = 'Usuário criado com sucesso:<br><strong>Login:</strong> {$a->login}<br><strong>Senha:</strong> {$a->password}';
 $string['courses_student_password'] = 'Sugestão de senha para o aluno';
 $string['courses_student_status'] = 'Status da matrícula';
 $string['courses_sumary'] = 'Sumário';
@@ -124,7 +124,6 @@ $string['coursewritemoreinfo'] = 'Testar a velocidade do banco de dados para esc
 $string['coursewritename'] = 'Criando um curso';
 $string['crontask_db_report_login'] = 'Cron para guardar logins de usuários em tabela temporária';
 $string['crontask_performance'] = 'Cron para salvar os dados de desempenho';
-$string['crontask_tmp'] = 'Cron que limpa a pasta TMP';
 $string['dashboard'] = 'Dashboard';
 $string['dashboard_enrol_active'] = 'a matrícula esta ativa';
 $string['dashboard_enrol_inactive'] = 'a matrícula esta inativa';
@@ -481,7 +480,7 @@ $string['webpages_access'] = 'Ir para a página';
 $string['webpages_allpages'] = 'Todas as páginas';
 $string['webpages_error_menu'] = 'Menu não localizado!';
 $string['webpages_error_page'] = 'Página não localizada!';
-$string['webpages_free'] = 'Gratis';
+$string['webpages_free'] = 'Grátis';
 $string['webpages_menu_create'] = 'Criar novo Menu';
 $string['webpages_menu_created'] = 'Menu criado!';
 $string['webpages_menu_delete'] = 'Excluíndo Menu';
@@ -561,3 +560,37 @@ $string['contextcompetency'] = 'Competência';
 $string['contextdefault'] = '...';
 $string['contextsystem'] = 'Sistema';
 $string['courses_visible'] = 'Visível';
+
+$string['notificationsend_course'] = 'Curso para enviar a mensagem';
+$string['notificationsend_criteria'] = 'Critérios';
+$string['notificationsend_criteria_days'] = 'Não acessou o curso há quantos dias?';
+$string['notificationsend_criteria_days_desc'] = 'Define o número de dias sem acesso ao curso para disparar a notificação. Zero define TODOS os alunos.';
+$string['notificationsend_criteria_enrol'] = 'Está matriculado no curso há quantos dias?';
+$string['notificationsend_criteria_enrol_desc'] = 'Define o número de dias desde a matrícula no curso para disparar a notificação. Zero define TODOS os alunos.';
+$string['notificationsend_send'] = 'Enviar mensagens';
+$string['notificationsend_title'] = 'Enviar notificação';
+$string['notificationsend_test_title'] = 'Usuários que receberão o email';
+$string['notificationsend_to'] = 'Enviar mensagens';
+$string['notification_manager'] = 'Manage Messages';
+$string['notification_message'] = 'Message';
+$string['notification_message_edit_template'] = 'Edit the base email template';
+$string['notification_message_html'] = '<p>Hi {[to.fullname]},</p><p>&nbsp;</p><p>Best regards,<br>{[from.fullname]}.</p>';
+$string['notification_message_html_core_course'] = '<p>Hello {[to.fullname]},</p>
+<p>The user {[to.fullname]} has just performed the action <strong>{[event.name]}</strong> in the course {[course.fullname]}.</p>
+<p>Best regards,<br>{[admin.fullname]}.</p>';
+$string['notification_message_html_core_course_category'] = '<p>Hello {[to.fullname]},</p>
+<p>The user {[to.fullname]} has just performed the action <strong>{[event.name]}</strong> in the category {[category.fullname]}.</p>
+<p>Best regards,<br>{[admin.fullname]}.</p>';
+$string['notification_message_html_core_user'] = '<p>Hello {[to.fullname]},</p>
+<p>The user {[to.fullname]} has just performed the action <strong>{[event.name]}</strong>.</p>
+<p>Best regards,<br>{[admin.fullname]}.</p>';
+$string['notification_message_html_core_user_enrolment'] = '<p>Hello {[to.fullname]},</p>
+<p>The user {[from.fullname]} has performed the action <strong>{[event.name]}</strong> for the user {[usertarget.fullname]}.</p>
+<p>Best regards,<br>{[admin.fullname]}.</p>';
+$string['notification_message_html_mod'] = '<p>Hello {[to.fullname]},</p>
+<p>The user {[to.fullname]} has performed the action <strong>{[event.name]}</strong> in the module {[module.name]} in the course {[course.fullname]}.</p>
+<p>Best regards,<br>{[admin.fullname]}.</p>';
+$string['notification_message_template_error'] = 'The template must include the "{[message]}" tag to allow the insertion of custom content.';
+$string['notification_manager'] = 'Manage Messages';
+$string['notification_message'] = 'Message';
+$string['notification_message_edit_template'] = 'Edit the base email template';
