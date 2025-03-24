@@ -11412,7 +11412,7 @@
   }
   [data-bs-theme=auto] .kopere-dashboard-bootstrap_page .content-w .content-i .content-box .element-box,
   [data-bs-theme=auto] .kopere_dashboard_div .content-w .content-i .content-box .element-box {
-    background-color: rgba(255, 255, 255, 0.0666666667);
+    background-color: rgba(255, 255, 255, 0.0666666667) !important;
   }
   [data-bs-theme=auto] .kopere-dashboard-bootstrap_page .menu-w,
   [data-bs-theme=auto] .kopere_dashboard_div .menu-w {
@@ -11490,7 +11490,7 @@
 }
 [data-bs-theme=dark] .kopere-dashboard-bootstrap_page .content-w .content-i .content-box .element-box,
 [data-bs-theme=dark] .kopere_dashboard_div .content-w .content-i .content-box .element-box {
-  background-color: rgba(255, 255, 255, 0.0666666667);
+  background-color: rgba(255, 255, 255, 0.0666666667) !important;
 }
 [data-bs-theme=dark] .kopere-dashboard-bootstrap_page .menu-w,
 [data-bs-theme=dark] .kopere_dashboard_div .menu-w {
