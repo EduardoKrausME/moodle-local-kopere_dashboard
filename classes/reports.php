@@ -351,36 +351,39 @@ class reports {
      *
      * @return array
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public static function global_menus() {
         global $DB, $CFG;
 
         $menus = [];
 
-        $koperereportcats = $DB->get_records("local_kopere_dashboard_rcat", ["enable" => 1]);
-        /** @var local_kopere_dashboard_rcat $koperereportcat */
-        foreach ($koperereportcats as $koperereportcat) {
-            // Executa o SQL e vrifica se o SQL retorna status>0.
-            if (strlen($koperereportcat->enablesql)) {
-                $status = $DB->get_record_sql($koperereportcat->enablesql);
-                if ($status == null || $status->status == 0) {
-                    continue;
+        try {
+            $koperereportcats = $DB->get_records("local_kopere_dashboard_rcat", ["enable" => 1]);
+            /** @var local_kopere_dashboard_rcat $koperereportcat */
+            foreach ($koperereportcats as $koperereportcat) {
+                // Executa o SQL e vrifica se o SQL retorna status>0.
+                if (strlen($koperereportcat->enablesql)) {
+                    $status = $DB->get_record_sql($koperereportcat->enablesql);
+                    if ($status == null || $status->status == 0) {
+                        continue;
+                    }
                 }
-            }
 
-            if (strpos($koperereportcat->image, "assets/") === 0) {
-                $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$koperereportcat->image}";
-            } else {
-                $icon = "{$CFG->wwwroot}/{$koperereportcat->image}";
-            }
+                if (strpos($koperereportcat->image, "assets/") === 0) {
+                    $icon = "{$CFG->wwwroot}/local/kopere_dashboard/{$koperereportcat->image}";
+                } else {
+                    $icon = "{$CFG->wwwroot}/{$koperereportcat->image}";
+                }
 
-            $menus[] = (new submenu_util())
-                ->set_classname("reports")
-                ->set_methodname("dashboard")
-                ->set_urlextra("&type={$koperereportcat->type}")
-                ->set_title(self::get_title($koperereportcat))
-                ->set_icon($icon);
+                $menus[] = (new submenu_util())
+                    ->set_classname("reports")
+                    ->set_methodname("dashboard")
+                    ->set_urlextra("&type={$koperereportcat->type}")
+                    ->set_title(self::get_title($koperereportcat))
+                    ->set_icon($icon);
+            }
+        } catch (\dml_exception $e) {
+            return [];
         }
 
         return $menus;
