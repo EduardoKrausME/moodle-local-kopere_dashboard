@@ -41,7 +41,6 @@ class event_observers {
      *
      * @param \core\event\base $event
      *
-     * @throws \dml_exception
      * @throws \coding_exception
      */
     public static function process_event(\core\event\base $event) {
@@ -53,16 +52,22 @@ class event_observers {
             return;
         }
 
-        $where = ["event" => $eventname, "status" => 1];
-        $kopereeventss = $DB->get_records("local_kopere_dashboard_event", $where);
+        try {
+            $where = [
+                "event" => $eventname,
+                "status" => 1,
+            ];
+            $kopereeventss = $DB->get_records("local_kopere_dashboard_event", $where);
 
-        /** @var local_kopere_dashboard_event $kopereevents */
-        foreach ($kopereeventss as $kopereevents) {
-            $sendevents = new send_events();
-            $sendevents->set_event($event);
-            $sendevents->set_local_kopere_dashboard_event($kopereevents);
+            /** @var local_kopere_dashboard_event $kopereevents */
+            foreach ($kopereeventss as $kopereevents) {
+                $sendevents = new send_events();
+                $sendevents->set_event($event);
+                $sendevents->set_local_kopere_dashboard_event($kopereevents);
 
-            $sendevents->send();
+                $sendevents->send();
+            }
+        } catch (\dml_exception $e) {// phpcs:disable
         }
     }
 }
