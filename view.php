@@ -16,7 +16,6 @@
 
 /**
  * View File
- * introduced 16/11/18 02:01
  *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
