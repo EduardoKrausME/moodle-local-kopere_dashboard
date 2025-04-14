@@ -44,7 +44,6 @@ class db_course_access extends \core\task\scheduled_task {
     /**
      * Function execute
      *
-     * @throws \dml_exception
      * @throws \ddl_exception
      */
     public function execute() {
@@ -74,7 +73,11 @@ class db_course_access extends \core\task\scheduled_task {
               ORDER BY timecreated DESC";
         }
 
-        $logstorestandardlogs = $DB->get_records_sql($reportsql);
+        try {
+            $logstorestandardlogs = $DB->get_records_sql($reportsql);
+        } catch (\dml_exception $e) {
+            return;
+        }
 
         foreach ($logstorestandardlogs as $logstorestandardlog) {
 
