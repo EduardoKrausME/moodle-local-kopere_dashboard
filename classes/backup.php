@@ -84,16 +84,17 @@ class backup {
             $backups = glob(self::get_backup_path(false) . "backup_*");
             $backupslista = [];
             foreach ($backups as $backup) {
-                preg_match("/backup_(\d+)-(\d+)-(\d+)-(\d+)-(\d+)\..*/", $backup, $p);
+                preg_match("/backup_(\d+)-(\d+)-(\d+)-(\d+)-(\d+)(.*?)\./", $backup, $p);
+                $file = substr($p[0], 0, -1);
                 $backupslista[] = [
-                    "file" => $p[0],
+                    "file" => $file,
                     "data" => "{$p[3]}/{$p[2]}/{$p[1]} às {$p[4]}:{$p[5]}",
                     "size" => bytes_util::size_to_byte(filesize($backup)),
                     "acoes" =>
                         "<div class='text-center'>" .
-                        button::icon("download", url_util::makeurl("backup", "download", ["file" => $p[0]])) .
+                        button::icon("download", url_util::makeurl("backup", "download", ["file" => $file])) .
                         "&nbsp;&nbsp;&nbsp; " .
-                        button::icon_popup_table("delete", url_util::makeurl("backup", "delete", ["file" => $p[0]])) .
+                        button::icon_popup_table("delete", url_util::makeurl("backup", "delete", ["file" => $file])) .
                         "</div>",
                 ];
             }
@@ -160,7 +161,7 @@ class backup {
      * @throws \dml_exception
      */
     public function execute_dumpsql() {
-        global $DB, $CFG, $PAGE;
+        global $DB, $CFG;
 
         set_time_limit(0);
 
@@ -173,7 +174,8 @@ class backup {
         echo '<div class="element-box">';
 
         $backupdir = $this->get_backup_path() . "backup_" . date("Y-m-d-H-i");
-        $backupfile = "{$backupdir}.sql";
+        $unique = uniqid();
+        $backupfile = "{$backupdir}-{$unique}.sql";
 
         $dumpstart = "-- " . get_string("pluginname", "local_kopere_dashboard") . " SQL Dump\n-- Host: {$CFG->dbhost}\n-- " .
             get_string("backup_execute_date", "local_kopere_dashboard") . " " . date("d/m/Y \à\s H-i") . "\n\n";
@@ -281,7 +283,8 @@ class backup {
         if (!$backupdir) {
             $backupdir = $this->get_backup_path() . "backup_" . date("Y-m-d-H-i");
         }
-        $backupfile = "{$backupdir}.sql";
+        $unique = uniqid();
+        $backupfile = "{$backupdir}-{$unique}.sql";
 
         $dumpstart = "-- " . get_string("pluginname", "local_kopere_dashboard") . " SQL Dump\n-- Host: {$CFG->dbhost}\n-- " .
             get_string("backup_execute_date", "local_kopere_dashboard") . " " . date("d/m/Y \à\s H-i") . "\n\n";
@@ -372,8 +375,6 @@ class backup {
                         foreach ($colunas as $coluna) {
                             if (is_null($record->$coluna)) {
                                 $parametros[] = "NULL";
-                            } elseif (is_numeric($record->$coluna)) {
-                                $parametros[] = $record->$coluna;
                             } else {
                                 $parametros[] = "'" . addslashes($record->$coluna) . "'";
                             }
@@ -483,7 +484,7 @@ class backup {
         $file = optional_param("file", "", PARAM_TEXT);
         $status = optional_param("status", false, PARAM_TEXT);
 
-        $backupfile = $this->get_backup_path() . $file;
+        $backupfile = $this->get_backup_path() . $file . ".sql";
 
         if (file_exists($backupfile)) {
             if ($status) {
