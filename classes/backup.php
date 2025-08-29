@@ -429,6 +429,11 @@ class backup {
         // Gerando as colunas para o CREATE TABLE.
         $columns = [];
         foreach ($colunas as $coluna) {
+
+            if ($coluna->data_type == "text") {
+                $coluna->data_type = "longtext";
+            }
+
             if ($coluna->column_name == "id") {
                 $columndefinition = "id int NOT NULL AUTO_INCREMENT";
             } else if ($coluna->data_type == "character varying") {
