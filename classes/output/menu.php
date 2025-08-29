@@ -125,6 +125,11 @@ class menu {
                             ->set_methodname("dashboard")
                             ->set_title(get_string("notification_title", "local_kopere_dashboard"))
                             ->set_icon("notifications"),
+                        (new submenu_util())
+                            ->set_classname("notificationsend")
+                            ->set_methodname("create")
+                            ->set_title(get_string("notificationsend_title", "local_kopere_dashboard"))
+                            ->set_icon("send"),
                     ]));
 
             echo dashboard_util::add_menu(
