@@ -99,6 +99,8 @@ class input_checkbox_select extends input_select {
      */
     public function set_checked_by_config($configname) {
         $this->set_name($configname);
+
+        $this->checked = config::get_key_int($configname);
         if ($this->checked) {
             $this->set_value(1, PARAM_INT);
         } else {
