@@ -9,7 +9,7 @@
             color: #9c9a9a;
         }
         .content-w {
-            background: #0000;
+            background: #00000000;
             .content-i {
                 .content-box {
                     .element-header {
@@ -41,7 +41,7 @@
         }
         
         .table {
-            background: var(--bs-transparent, #0000);
+            background: var(--bs-transparent, #00000000);
         }
         table.dataTable {
             th {
@@ -76,12 +76,12 @@
         }
     }
 }
-@media (prefers-color-scheme: dark) {
-    [data-bs-theme=auto] {
-        color-scheme: dark;
-        @include local_kopere_dashboard_darkmodecode;
-    }
-}
+//@media (prefers-color-scheme: dark) {
+//    [data-bs-theme=auto] {
+//        color-scheme: dark;
+//        @include local_kopere_dashboard_darkmodecode;
+//    }
+//}
 [data-bs-theme=dark] {
     color-scheme: dark;
     @include local_kopere_dashboard_darkmodecode;
