@@ -20,7 +20,7 @@
  * introduced 21/05/17 04:39
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -64,7 +64,7 @@ class useronline {
         $table->add_header(get_string("useronline_table_date", "local_kopere_dashboard"),
             "servertime", table_header_item::RENDERER_DATE);
 
-        $table->set_ajax_url(url_util::makeurl("useronline", "load_all_users"));
+        $table->set_ajax_url(url_util::makeurl("useronline", "load_all_users",[],"view-ajax"));
         $table->print_header();
         $tablename = $table->close(false, ["order" => [[1, "asc"]]]);
 

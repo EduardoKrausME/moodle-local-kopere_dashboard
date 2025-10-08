@@ -1,11 +1,11 @@
-define(["jquery", 'core/ajax', 'core/notification'], function($, ajax, notification) {
+define(["jquery", "core/ajax", "core/notification"], function($, ajax, notification) {
     return {
         init: function() {
 
             setInterval(function() {
 
                 ajax.call([{
-                    methodname: 'kopere_dashboard_performancemonitor_disk_moodledata',
+                    methodname: "kopere_dashboard_performancemonitor_disk_moodledata",
                     args: {}
                 }])[0].then(function(data) {
                     $("#load_monitor-performancemonitor_hd").html(data.disk)

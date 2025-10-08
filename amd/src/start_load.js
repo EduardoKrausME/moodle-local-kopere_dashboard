@@ -151,7 +151,7 @@ define(["jquery", "local_kopere_dashboard/maskedinput", "local_kopere_dashboard/
             },
 
             moremenu: function(name, href) {
-                var link = `<li class="nav-item">
+                var link = `<li data-key="koperedashboard" class="nav-item">
                                 <a class="nav-link" href="${href}">${name}</a>
                             </li>`;
 

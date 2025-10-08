@@ -20,7 +20,7 @@
  * introduced 13/05/17 13:29
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -180,7 +180,7 @@ class reports {
                     $columns->header = [];
                 }
 
-                $url = url_util::makeurl("reports", "getdata", ["report" => $report, "courseid" => $courseid]);
+                $url = url_util::makeurl("reports", "getdata", ["report" => $report, "courseid" => $courseid], "view-ajax");
                 $table = new data_table($columns->columns, $columns->header);
 
                 $table->set_ajax_url($url);
@@ -216,7 +216,7 @@ class reports {
             $table->add_header(get_string("courses_enrol", "local_kopere_dashboard"), "enrolments",
                 table_header_item::TYPE_INT, null, "width:50px;white-space:nowrap;");
 
-            $table->set_ajax_url(url_util::makeurl("courses", "load_all_courses"));
+            $table->set_ajax_url(url_util::makeurl("courses", "load_all_courses", [], "view-ajax"));
             $table->set_click_redirect(
                 url_util::makeurl("reports", "load_report",
                     ["type" => "course", "report" => $report, "courseid" => "{id}"]), "id");

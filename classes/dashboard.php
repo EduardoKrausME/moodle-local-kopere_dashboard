@@ -20,16 +20,18 @@
  * introduced 30/01/17 09:39
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard;
 
+use Exception;
 use local_kopere_dashboard\report\files;
 use local_kopere_dashboard\server\performancemonitor;
 use local_kopere_dashboard\util\bytes_util;
 use local_kopere_dashboard\util\dashboard_util;
+use local_kopere_dashboard\util\json;
 use local_kopere_dashboard\util\url_util;
 
 /**
@@ -42,8 +44,7 @@ class dashboard {
     /**
      * Function start
      *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function start() {
         global $PAGE, $OUTPUT;
@@ -61,8 +62,7 @@ class dashboard {
     /**
      * Function monitor
      *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function monitor() {
         global $OUTPUT;
@@ -82,18 +82,20 @@ class dashboard {
             "disk_link" => url_util::makeurl("reports", "dashboard", ["type" => "server"]),
             "disk_size" => bytes_util::size_to_byte(files::count_all_space()),
         ];
-        echo $OUTPUT->render_from_template("local_kopere_dashboard/dashboard_monitor", $data);
+        $html = $OUTPUT->render_from_template("local_kopere_dashboard/dashboard_monitor", $data);
+
+        json::encode(["html" => $html]);
     }
 
     /**
      * Function last_grades
      *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function last_grades() {
         global $DB, $PAGE, $OUTPUT;
 
+        $html = "";
         $grade = new grade();
         $lastgrades = $grade->get_last_grades();
 
@@ -126,20 +128,21 @@ class dashboard {
                         ["grade" => $gradetext, "evaluation" => $evaluation]),
                 "grade_date" => userdate($grade->timemodified, get_string("dateformat", "local_kopere_dashboard")),
             ];
-            echo $OUTPUT->render_from_template("local_kopere_dashboard/last_grades", $data);
+            $html= $OUTPUT->render_from_template("local_kopere_dashboard/last_grades", $data);
         }
-        die();
+
+        json::encode(["html" => $html]);
     }
 
     /**
      * Function last_enroll
      *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function last_enroll() {
         global $DB, $PAGE, $OUTPUT;
 
+        $html = "";
         $enrol = new enroll();
         $lastenroll = $enrol->last_enroll();
 
@@ -167,8 +170,10 @@ class dashboard {
                     "matricula_status" => $statusmatricula,
                     "matricula_date" => userdate($enrol->timemodified, get_string("dateformat", "local_kopere_dashboard")),
                 ];
-                echo $OUTPUT->render_from_template("local_kopere_dashboard/last_enroll", $data);
+                $html = $OUTPUT->render_from_template("local_kopere_dashboard/last_enroll", $data);
             }
         }
+
+        json::encode(["html" => $html]);
     }
 }

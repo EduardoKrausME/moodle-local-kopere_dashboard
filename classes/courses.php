@@ -20,7 +20,7 @@
  * introduced 31/01/17 05:32
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -75,7 +75,7 @@ class courses {
         $table->add_header(get_string("courses_enrol", "local_kopere_dashboard"), "enrolments",
             table_header_item::TYPE_INT, null, "width:50px;white-space:nowrap;");
 
-        $table->set_ajax_url(url_util::makeurl("courses", "load_all_courses"));
+        $table->set_ajax_url(url_util::makeurl("courses", "load_all_courses", [], "view-ajax"));
         $table->set_click_redirect(url_util::makeurl("courses", "details", ["courseid" => "{id}"]), "id");
         $table->print_header();
         $table->close();

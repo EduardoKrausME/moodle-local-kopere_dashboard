@@ -18,7 +18,7 @@
  * services file
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,9 +26,9 @@ defined('MOODLE_INTERNAL') || die();
 
 $functions = [
     "kopere_dashboard_performancemonitor_disk_moodledata" => [
-        "classname" => "\\local_kopere_dashboard\\external\\performancemonitor",
+        "classname" => '\local_kopere_dashboard\external\performancemonitor',
         "methodname" => "disk_moodledata",
-        "classpath" => 'local/kopere_dashboard/classes/external/performancemonitor.php',
+        "classpath" => "local/kopere_dashboard/classes/external/performancemonitor.php",
         "description" => "Disk Moodledata",
         "type" => "read",
         "ajax" => true,

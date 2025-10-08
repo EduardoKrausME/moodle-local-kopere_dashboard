@@ -18,7 +18,7 @@
  * Introduced  10/04/2020 18:05
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -71,7 +71,7 @@ class useraccess {
         $table->add_header(get_string("user_table_celphone", "local_kopere_dashboard"), "phone2");
         $table->add_header(get_string("user_table_city", "local_kopere_dashboard"), "city");
 
-        $table->set_ajax_url(url_util::makeurl("useraccess", "load_all_users", ["changue_mes" => $changuemes]));
+        $table->set_ajax_url(url_util::makeurl("useraccess", "load_all_users", ["changue_mes" => $changuemes], "view-ajax"));
         $table->set_click_redirect(url_util::makeurl("users", "details", ["userid" => "{userid}"]), "userid");
         $table->print_header();
         $table->close(true, ["order" => [[1, "asc"]]]);
