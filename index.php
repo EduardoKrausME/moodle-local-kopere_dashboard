@@ -45,6 +45,9 @@ $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->add_body_class("kopere-dashboard-pages");
 $PAGE->set_pagetype("my-index");
+$PAGE->requires->jquery();
+$PAGE->requires->jquery_plugin('ui');
+$PAGE->requires->jquery_plugin('ui-css');
 
 if ($pagelink) {
     $sql = "SELECT * FROM {local_kopere_dashboard_pages} WHERE link LIKE :link";
@@ -83,8 +86,8 @@ if ($pagelink) {
     }
     $PAGE->navbar->add($webpages->title);
 
-    echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
     echo $OUTPUT->header();
+    echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
 
     preg_match_all('/\[\[(kopere_\w+)::(\w+)(->|-&gt;)(\w+)\((.*?)\)]]/', $webpages->text, $classes);
 
