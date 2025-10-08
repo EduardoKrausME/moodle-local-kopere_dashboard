@@ -20,7 +20,7 @@
  * introduced 13/05/17 13:28
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -344,6 +344,7 @@ class backup {
                 file_put_contents($backupfile, $dbstart, FILE_APPEND);
             }
 
+            $tablenoprefix = str_replace($CFG->prefix, "", $table);
             if ($execute || optional_param("{$inputname}-table", false, PARAM_INT)) {
                 $exporttables++;
                 $colunas = $DB->get_records_sql("
@@ -356,7 +357,6 @@ class backup {
                 $dbdumpstart = "--\n-- " . get_string("backup_execute_dump", "local_kopere_dashboard") . " `{$table}`\n--\n";
                 file_put_contents($backupfile, $dbdumpstart, FILE_APPEND);
 
-                $tablenoprefix = str_replace($CFG->prefix, "", $table);
                 $columns = $DB->get_columns($tablenoprefix);
 
                 $colunas = [];
