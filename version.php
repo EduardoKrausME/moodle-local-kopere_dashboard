@@ -20,13 +20,13 @@
  * introduced 23/05/17 17:59
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2025062600;
+$plugin->version = 2025072100;
 $plugin->requires = 2021041900;
 $plugin->release = "2.9.25";
 $plugin->maturity = MATURITY_STABLE;
