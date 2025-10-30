@@ -26,10 +26,12 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$settings = new admin_settingpage("kopere_dashboard", get_string("pluginname", "local_kopere_dashboard"));
-$ADMIN->add("localplugins", $settings);
-
 if ($hassiteconfig) {
+    global $CFG, $PAGE, $ADMIN;
+
+    $settings = new admin_settingpage("kopere_dashboard", get_string("pluginname", "local_kopere_dashboard"));
+    $ADMIN->add("localplugins", $settings);
+
     if (!$ADMIN->locate("integracaoroot")) {
         $ADMIN->add("root", new admin_category("integracaoroot", get_string("integracaoroot", "local_kopere_dashboard")));
     }
