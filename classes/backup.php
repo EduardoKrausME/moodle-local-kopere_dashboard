@@ -347,24 +347,22 @@ class backup {
             $tablenoprefix = str_replace($CFG->prefix, "", $table);
             if ($execute || optional_param("{$inputname}-table", false, PARAM_INT)) {
                 $exporttables++;
-                $colunas = $DB->get_records_sql("
+                $colunas = $DB->get_records_sql(
+                    "
                     SELECT column_name, data_type, character_maximum_length, column_default, is_nullable
                       FROM information_schema.columns
-                     WHERE table_name = '{$table}'");
+                     WHERE table_name = '{$table}'"
+                );
                 $tablesql = self::execute_dumpsql_pgsql_createtable($table, $colunas);
                 file_put_contents($backupfile, $tablesql, FILE_APPEND);
 
                 $dbdumpstart = "--\n-- " . get_string("backup_execute_dump", "local_kopere_dashboard") . " `{$table}`\n--\n";
                 file_put_contents($backupfile, $dbdumpstart, FILE_APPEND);
-
-                $columns = $DB->get_columns($tablenoprefix);
-
-                $colunas = [];
-                foreach ($columns as $colum => $value) {
-                    $colunas[] = $colum;
-                }
-                $listcol = implode("`, `", $colunas); // phpcs:disable
             }
+
+            $columns = $DB->get_columns($tablenoprefix);
+            $listcol = implode("`, `", array_keys($columns)); // phpcs:disable
+
             if (optional_param("{$inputname}-data", false, PARAM_INT)) {
                 $insertheader = "\nINSERT INTO `{$table}` (`{$listcol}`) VALUES\n";
                 $registros = 0;
