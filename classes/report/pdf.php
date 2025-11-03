@@ -26,7 +26,6 @@
 
 namespace local_kopere_dashboard\report;
 
-
 /**
  * Class pdf
  *

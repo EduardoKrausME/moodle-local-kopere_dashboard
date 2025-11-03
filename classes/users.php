@@ -61,7 +61,7 @@ class users {
         $table->add_header(get_string("user_table_celphone", "local_kopere_dashboard"), "phone2");
         $table->add_header(get_string("user_table_city", "local_kopere_dashboard"), "city");
 
-        $table->set_ajax_url(url_util::makeurl("users", "load_all_users",[],"view-ajax"));
+        $table->set_ajax_url(url_util::makeurl("users", "load_all_users", [], "view-ajax"));
         $table->set_click_redirect(url_util::makeurl("users", "details", ["userid" => "{id}"]), "id");
         $table->print_header();
         $table->close(true, ["order" => [[1, "asc"]]]);

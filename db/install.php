@@ -53,4 +53,3 @@ function xmldb_local_kopere_dashboard_install() {
 
     return true;
 }
-

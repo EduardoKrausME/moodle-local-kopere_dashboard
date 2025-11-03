@@ -131,7 +131,6 @@ class benchmark {
             report_benchmark_test::enablestats(),
         ];
         echo $OUTPUT->render_from_template("local_kopere_dashboard/benchmark_performance", ["tests" => $tests]);
-
     }
 
     /**

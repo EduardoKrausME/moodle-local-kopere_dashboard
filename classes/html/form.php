@@ -260,6 +260,5 @@ class form {
      */
     public static function check_post() {
         return optional_param("POST", false, PARAM_TEXT);
-
     }
 }

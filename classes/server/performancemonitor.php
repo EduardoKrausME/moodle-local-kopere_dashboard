@@ -253,4 +253,3 @@ class performancemonitor {
         return $online->cont;
     }
 }
-

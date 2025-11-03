@@ -64,7 +64,7 @@ class useronline {
         $table->add_header(get_string("useronline_table_date", "local_kopere_dashboard"),
             "servertime", table_header_item::RENDERER_DATE);
 
-        $table->set_ajax_url(url_util::makeurl("useronline", "load_all_users",[],"view-ajax"));
+        $table->set_ajax_url(url_util::makeurl("useronline", "load_all_users", [], "view-ajax"));
         $table->print_header();
         $tablename = $table->close(false, ["order" => [[1, "asc"]]]);
 

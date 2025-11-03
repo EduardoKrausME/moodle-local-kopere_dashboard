@@ -418,7 +418,6 @@ class backup {
 
             $PAGE->requires->js_call_amd("local_kopere_dashboard/backup", "mark", ["#tabela-dump-{$table}"]);
 
-
             dashboard_util::end_page();
         }
     }

@@ -128,7 +128,7 @@ class dashboard {
                         ["grade" => $gradetext, "evaluation" => $evaluation]),
                 "grade_date" => userdate($grade->timemodified, get_string("dateformat", "local_kopere_dashboard")),
             ];
-            $html= $OUTPUT->render_from_template("local_kopere_dashboard/last_grades", $data);
+            $html = $OUTPUT->render_from_template("local_kopere_dashboard/last_grades", $data);
         }
 
         json::encode(["html" => $html]);

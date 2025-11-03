@@ -287,7 +287,6 @@ class webpages {
         echo "</div>";
 
         dashboard_util::end_page();
-
     }
 
     /**
@@ -314,7 +313,7 @@ class webpages {
             dashboard_util::add_breadcrumb(get_string("webpages_title", "local_kopere_dashboard"),
                 url_util::makeurl("webpages", "dashboard"));
             dashboard_util::add_breadcrumb($webpages->title,
-                url_util::makeurl("webpages", "page_details", ["id" => $webpages->id]));;
+                url_util::makeurl("webpages", "page_details", ["id" => $webpages->id]));
             dashboard_util::add_breadcrumb(get_string("webpages_page_edit", "local_kopere_dashboard"));
         }
         dashboard_util::start_page();
@@ -342,7 +341,7 @@ class webpages {
             "id" => 0,
             "fullname" => get_string("none_course", "local_kopere_dashboard")]];
         $courses2 = $DB->get_records_sql("SELECT id, fullname FROM {course} WHERE id > 1 ORDER BY fullname ASC");
-        $courses = array_merge($courses1, $courses2);;
+        $courses = array_merge($courses1, $courses2);
 
         echo "<div class=\"row\">";
         echo "<div class='col-md'>";
@@ -482,7 +481,7 @@ class webpages {
         dashboard_util::add_breadcrumb(get_string("webpages_title", "local_kopere_dashboard"),
             url_util::makeurl("webpages", "dashboard"));
         dashboard_util::add_breadcrumb($webpages->title,
-            url_util::makeurl("webpages", "page_details", ["id" => $webpages->id]));;
+            url_util::makeurl("webpages", "page_details", ["id" => $webpages->id]));
         dashboard_util::add_breadcrumb(get_string("webpages_page_delete", "local_kopere_dashboard"));
         dashboard_util::start_page();
 

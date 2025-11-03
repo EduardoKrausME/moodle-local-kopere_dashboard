@@ -47,7 +47,6 @@ class report_benchmark_test extends report_benchmark {
             "stop" => LOCAL_KOPERE_DASHBOARD_BENCHSTOP,
             "fail" => "slowserver",
         ];
-
     }
 
     /**
@@ -68,7 +67,6 @@ class report_benchmark_test extends report_benchmark {
         }
 
         return ["limit" => .5, "over" => .8, "fail" => "slowprocessor"];
-
     }
 
     /**
@@ -89,7 +87,6 @@ class report_benchmark_test extends report_benchmark {
         unlink("{$CFG->tempdir}/benchmark.temp");
 
         return ["limit" => .5, "over" => .8, "fail" => "slowharddrive"];
-
     }
 
     /**
@@ -121,7 +118,6 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         unlink("{$CFG->tempdir}/benchmark.temp");
 
         return ["limit" => 1, "over" => 1.25, "fail" => "slowharddrive"];
-
     }
 
     /**
@@ -141,7 +137,6 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         }
 
         return ["limit" => .75, "over" => 1, "fail" => "slowdatabase"];
-
     }
 
     /**
@@ -171,7 +166,6 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         unset($newrecord);
 
         return ["limit" => 1, "over" => 1.25, "fail" => "slowdatabase"];
-
     }
 
     /**
@@ -271,7 +265,6 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         }
 
         return ["limit" => .3, "over" => .5, "fail" => "slowdatabase"];
-
     }
 
     /**
@@ -286,7 +279,6 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         download_file_content("{$CFG->wwwroot}/login/index.php", null, $fakeuser, true);
 
         return ["limit" => .3, "over" => .8, "fail" => "slowweb"];
-
     }
 
     /**
@@ -319,7 +311,6 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
         unset($user);
 
         return ["limit" => .3, "over" => .8, "fail" => "slowweb"];
-
     }
 
     /**
