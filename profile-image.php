@@ -24,6 +24,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_kopere_dashboard\util\photo;
+
 require_once("../../config.php");
 
 require_login();
@@ -36,6 +38,6 @@ $id = required_param("id", PARAM_TEXT);
 
 switch ($type) {
     case "photo_user":
-        \local_kopere_dashboard\util\photo::get_photo_user($id);
+        photo::get_photo_user($id);
         break;
 }

@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_kopere_dashboard\report\pdf as report_pdf;
 use local_kopere_dashboard\util\url_util;
 
 define("AJAX_SCRIPT", false);
@@ -41,7 +42,7 @@ $context = context_system::instance();
 require_capability("local/kopere_dashboard:view", $context);
 
 if ($html = optional_param("html-pdf", false, PARAM_RAW)) {
-    \local_kopere_dashboard\report\pdf::create_pdf();
+    report_pdf::create_pdf();
     die();
 }
 

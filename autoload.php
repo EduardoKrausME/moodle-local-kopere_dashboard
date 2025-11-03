@@ -24,6 +24,9 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_kopere_dashboard\install\event_install;
+use local_kopere_dashboard\util\message;
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once(__DIR__ . "/lib.php");
@@ -78,8 +81,8 @@ function local_kopere_dashboard_load_class() {
 
 // Alias this class to the old name.
 // In future all uses of this class will be corrected and the legacy references will be removed.
-class_alias(\local_kopere_dashboard\util\message::class, "local_kopere_dashboard\\util\\mensagem");
-class_alias(\local_kopere_dashboard\install\event_install::class, "local_kopere_dashboard\\install\\users_import_install");
+class_alias(message::class, "local_kopere_dashboard\\util\\mensagem");
+class_alias(event_install::class, "local_kopere_dashboard\\install\\users_import_install");
 
 if (!function_exists('str_ends_with')) {
     /**

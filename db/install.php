@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_kopere_dashboard\install\event_install;
+
 /**
  * Function xmldb_local_kopere_dashboard_install
  *
@@ -49,7 +51,7 @@ function xmldb_local_kopere_dashboard_install() {
     $html = file_get_contents(__DIR__ . "/notification-template.html");
     set_config("notification-template", $html, "local_kopere_dashboard");
 
-    \local_kopere_dashboard\install\event_install::install_or_update();
+    event_install::install_or_update();
 
     return true;
 }

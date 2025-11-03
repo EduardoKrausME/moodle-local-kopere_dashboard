@@ -26,8 +26,13 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_kopere_dashboard\fonts\font_util;
 use local_kopere_dashboard\util\config;
+use local_kopere_dashboard\util\html;
 use local_kopere_dashboard\util\url_util;
+use local_kopere_dashboard\util\webpages_util;
+use local_kopere_dashboard\vo\local_kopere_dashboard_menu;
+use local_kopere_dashboard\vo\local_kopere_dashboard_pages;
 
 require_once("../../config.php");
 require_once("autoload.php");
@@ -52,12 +57,12 @@ $PAGE->requires->jquery_plugin('ui-css');
 if ($pagelink) {
     $sql = "SELECT * FROM {local_kopere_dashboard_pages} WHERE link LIKE :link";
 
-    /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_pages $webpages */
+    /** @var local_kopere_dashboard_pages $webpages */
     $webpages = $DB->get_record_sql($sql, ["link" => $pagelink]);
 
     if ($webpages == null) {
         $PAGE->set_url(new moodle_url("/local/kopere_dashboard/"));
-        \local_kopere_dashboard\util\webpages_util::notfound("webpages_error_page");
+        webpages_util::notfound("webpages_error_page");
     }
 
     if ($htmldata && confirm_sesskey()) {
@@ -77,7 +82,7 @@ if ($pagelink) {
     }
     $PAGE->set_heading("{$webpages->title} {$edit}", false);
 
-    /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_menu $menu */
+    /** @var local_kopere_dashboard_menu $menu */
     $menu = $DB->get_record("local_kopere_dashboard_menu", ["id" => $webpages->menuid]);
 
     $PAGE->navbar->add(get_string("webpages_allpages", "local_kopere_dashboard"), new moodle_url("/local/kopere_dashboard/"));
@@ -87,7 +92,7 @@ if ($pagelink) {
     $PAGE->navbar->add($webpages->title);
 
     echo $OUTPUT->header();
-    echo \local_kopere_dashboard\fonts\font_util::print_only_unique();
+    echo font_util::print_only_unique();
 
     preg_match_all('/\[\[(kopere_\w+)::(\w+)(->|-&gt;)(\w+)\((.*?)\)]]/', $webpages->text, $classes);
 
@@ -130,14 +135,14 @@ if ($pagelink) {
 
     echo "</div>";
 
-    \local_kopere_dashboard\util\webpages_util::analytics();
+    webpages_util::analytics();
     echo $OUTPUT->footer();
 } else {
     if ($menulink) {
-        /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_menu $menu */
+        /** @var local_kopere_dashboard_menu $menu */
         $menu = $DB->get_record("local_kopere_dashboard_menu", ["link" => $menulink]);
         if ($menu == null) {
-            \local_kopere_dashboard\util\webpages_util::notfound("webpages_error_menu");
+            webpages_util::notfound("webpages_error_menu");
         }
 
         $PAGE->set_url(new moodle_url("/local/kopere_dashboard/?menu={$menu->link}"));
@@ -163,7 +168,7 @@ if ($pagelink) {
 
     $data = ["menus" => []];
 
-    /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_menu $menu */
+    /** @var local_kopere_dashboard_menu $menu */
     foreach ($menus as $menu) {
         if (!$menulink) {
             $menu->menulink = [
@@ -175,7 +180,7 @@ if ($pagelink) {
         $sql = "SELECT * FROM {local_kopere_dashboard_pages} WHERE visible = 1 AND menuid = :menuid ORDER BY pageorder ASC";
         $webpagess = $DB->get_records_sql($sql, ["menuid" => $menu->id]);
 
-        /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_pages $webpages */
+        /** @var local_kopere_dashboard_pages $webpages */
         foreach ($webpagess as $webpages) {
 
             $webpages->link = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpages->link}";
@@ -200,7 +205,7 @@ if ($pagelink) {
             }
 
             $webpages->imagem = $OUTPUT->image_url("course-default", "local_kopere_dashboard")->out(false);
-            $webpages->text = \local_kopere_dashboard\util\html::truncate_text(strip_tags($webpages->text), 300);
+            $webpages->text = html::truncate_text(strip_tags($webpages->text), 300);
 
             if (!isset($menu->webpages)) {
                 $menu->webpages = [];
@@ -212,6 +217,6 @@ if ($pagelink) {
 
     echo $OUTPUT->render_from_template("local_kopere_dashboard/index_webpages", $data);
 
-    \local_kopere_dashboard\util\webpages_util::analytics();
+    webpages_util::analytics();
     echo $OUTPUT->footer();
 }

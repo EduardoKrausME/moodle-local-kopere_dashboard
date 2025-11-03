@@ -23,6 +23,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_kopere_dashboard\util\json;
+
 define("AJAX_SCRIPT", true);
 
 require_once("../../config.php");
@@ -37,7 +39,7 @@ try {
     $context = context_system::instance();
     require_capability("local/kopere_dashboard:ajax", $context);
 } catch (Exception $e) {
-    \local_kopere_dashboard\util\json::error($e->getMessage());
+    json::error($e->getMessage());
 }
 
 $PAGE->set_url(new moodle_url("/local/kopere_dashboard/view-ajax.php"));

@@ -25,6 +25,7 @@
  */
 
 use local_kopere_dashboard\util\url_util;
+use local_kopere_dashboard\vo\local_kopere_dashboard_pages;
 
 /**
  * Function local_kopere_dashboard_lang
@@ -176,7 +177,7 @@ function local_kopere_dashboard_extend_navigation__get_menus($menuid, $prefix) {
         $webpages = $DB->get_records("local_kopere_dashboard_pages", $where, "pageorder ASC");
         $CFG->extramenu .= "{$prefix} {$menu->title}|{$CFG->wwwroot}/local/kopere_dashboard/?menu={$menu->link}\n";
         if ($webpages) {
-            /** @var \local_kopere_dashboard\vo\local_kopere_dashboard_pages $webpage */
+            /** @var local_kopere_dashboard_pages $webpage */
             foreach ($webpages as $webpage) {
                 $link = "{$CFG->wwwroot}/local/kopere_dashboard/?p={$webpage->link}";
                 $CFG->extramenu .= "{$prefix}- {$webpage->title}|{$link}\n";
