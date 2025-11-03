@@ -71,7 +71,7 @@ jobs:
       ubuntu-latest
 
     env:
-      PLUGIN: mod_supervideo
+      PLUGIN: local_kopere_dashboard
       CURL: curl -s
       ENDPOINT: https://moodle.org/webservice/rest/server.php
       TOKEN: ${{ secrets.MOODLE_ORG_TOKEN }}
