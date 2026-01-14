@@ -60,6 +60,7 @@ class dashboard {
 
     /**
      * Function monitor
+     *
      * @throws Exception
      */
     public function monitor() {
@@ -87,6 +88,7 @@ class dashboard {
 
     /**
      * Function last_grades
+     *
      * @throws Exception
      */
     public function last_grades() {
