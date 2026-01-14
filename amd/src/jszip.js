@@ -8599,7 +8599,7 @@
 
             var ENOUGH_LENS = 852;
             var ENOUGH_DISTS = 592;
-            //var ENOUGH =  (ENOUGH_LENS+ENOUGH_DISTS);
+            //var ENOUGH = (ENOUGH_LENS+ENOUGH_DISTS);
 
             var MAX_WBITS = 15;
             /* 32K LZ77 window */
