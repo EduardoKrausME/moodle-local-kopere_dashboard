@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard;
 
+use Exception;
 use local_kopere_dashboard\util\message;
 use local_kopere_dashboard\util\url_util;
 
@@ -43,9 +44,7 @@ class profile {
      * @param bool $echo
      *
      * @return
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function details($user, $echo = true) {
         global $OUTPUT;
@@ -70,9 +69,7 @@ class profile {
      * @param bool $echo
      *
      * @return
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function details2($user, $echo = true) {
         global $OUTPUT;
@@ -125,8 +122,7 @@ class profile {
      * @param $userid
      *
      * @return null|string
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function list_courses($userid) {
         global $DB, $OUTPUT;

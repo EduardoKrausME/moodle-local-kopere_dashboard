@@ -24,6 +24,7 @@
 
 namespace local_kopere_dashboard\html;
 
+use Exception;
 use local_kopere_dashboard\html\inputs\i_input;
 use local_kopere_dashboard\util\html;
 
@@ -213,8 +214,7 @@ class form {
      * @param string $value
      * @param string $class
      * @param string $additionaltext
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function create_submit_input($value = "", $class = "", $additionaltext = "") {
         if (AJAX_SCRIPT) {
@@ -256,7 +256,7 @@ class form {
      * Function check_post
      *
      * @return mixed
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function check_post() {
         return optional_param("POST", false, PARAM_TEXT);

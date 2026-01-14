@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard\util;
 
+use Exception;
 use local_kopere_dashboard\fonts\font_util;
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\output\menu;
@@ -50,6 +51,7 @@ class dashboard_util {
      * @param string $extra
      */
     public static function add_breadcrumb($titulo, $link = null, $extra = "") {
+        return;
         if ($link) {
             self::$breadcrumb[] = [$titulo, $link];
         } else {
@@ -67,7 +69,7 @@ class dashboard_util {
      * @param $infourl
      *
      * @return string
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function set_titulo($title, $settingurl, $infourl) {
         global $CFG;
@@ -106,9 +108,7 @@ class dashboard_util {
      *
      * @param null $settingurl
      * @param null $infourl
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function start_page($settingurl = null, $infourl = null) {
         global $PAGE, $OUTPUT;
@@ -119,7 +119,7 @@ class dashboard_util {
             $title = "";
             foreach (self::$breadcrumb as $item) {
                 if (is_string($item)) {
-                    $PAGE->navbar->add($item);
+                    $PAGE->navbar->add($item, "");
                     $title = $item;
                 } else {
                     $PAGE->navbar->add($item[0], $item[1]);
@@ -149,8 +149,7 @@ class dashboard_util {
 
     /**
      * Function end_page
-     *
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function end_page() {
         global $OUTPUT;
@@ -180,7 +179,7 @@ class dashboard_util {
      * @param menu_util $menu
      *
      * @return string
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function add_menu(menu_util $menu) {
         $retorno = "";
@@ -252,7 +251,7 @@ class dashboard_util {
      * @param $classname
      *
      * @return string
-     * @throws \coding_exception
+     * @throws Exception
      */
     private static function test_menu_active($classname) {
 

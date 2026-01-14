@@ -27,11 +27,12 @@ namespace local_kopere_dashboard\external;
 defined('MOODLE_INTERNAL') || die;
 require_once($CFG->libdir . '/externallib.php');
 
+use Exception;
 use external_api;
 use external_function_parameters;
 use external_single_structure;
 use external_value;
-use local_kopere_dashboard\server\performancemonitor as server_performancemonitor;
+use local_kopere_dashboard\server\performancemonitor as performancemonitorAlias;
 
 /**
  * Class performancemonitor
@@ -73,7 +74,7 @@ class performancemonitor extends external_api {
      * Function disk_moodledata
      *
      * @return array
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function disk_moodledata() {
         $context = \context_system::instance();
@@ -81,7 +82,7 @@ class performancemonitor extends external_api {
         self::validate_context($context);
 
         return [
-            "disk" => server_performancemonitor::disk_moodledata(false),
+            "disk" => performancemonitorAlias::disk_moodledata(false),
         ];
     }
 }

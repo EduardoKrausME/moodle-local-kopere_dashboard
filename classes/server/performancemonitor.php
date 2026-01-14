@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard\server;
 
+use Exception;
 use local_kopere_dashboard\util\server_util;
 
 /**
@@ -39,8 +40,7 @@ class performancemonitor {
      * Function load_monitor
      *
      * @return string
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function load_monitor() {
         global $PAGE;
@@ -96,7 +96,7 @@ class performancemonitor {
      * @param $returnnumber
      *
      * @return int|string
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function cpu($returnnumber) {
 
@@ -206,7 +206,7 @@ class performancemonitor {
      * @param $returnnumber
      *
      * @return int|string
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function load_average($returnnumber) {
 
@@ -234,7 +234,7 @@ class performancemonitor {
      * Function online
      *
      * @return mixed
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function online() {
         global $DB;

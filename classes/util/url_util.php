@@ -24,6 +24,8 @@
 
 namespace local_kopere_dashboard\util;
 
+use Exception;
+
 /**
  * Class url_util
  *
@@ -54,7 +56,7 @@ class url_util {
      * Function params
      *
      * @return array
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function params() {
         parse_str($_SERVER["QUERY_STRING"], $params);

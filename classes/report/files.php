@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard\report;
 
+use Exception;
 use local_kopere_dashboard\util\bytes_util;
 
 /**
@@ -39,7 +40,7 @@ class files {
      * Function count_all_space
      *
      * @return mixed
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function count_all_space() {
         global $DB;
@@ -53,7 +54,7 @@ class files {
      * Function count_all_course_space
      *
      * @return mixed
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function count_all_course_space() {
         global $DB;
@@ -67,7 +68,7 @@ class files {
      * Function count_all_user_space
      *
      * @return mixed
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function count_all_user_space() {
         global $DB;
@@ -81,8 +82,7 @@ class files {
      * Function list_sizes_courses
      *
      * @return array
-     * @throws \dml_exception
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function list_sizes_courses() {
         global $DB;

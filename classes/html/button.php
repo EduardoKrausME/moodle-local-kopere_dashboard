@@ -24,6 +24,8 @@
 
 namespace local_kopere_dashboard\html;
 
+use Exception;
+
 /**
  * Class button
  *
@@ -355,7 +357,7 @@ class button {
      * @param string $hastag
      *
      * @return string
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function help($infourl, $text = null, $hastag = "wiki-wrapper") {
         global $CFG;

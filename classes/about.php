@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard;
 
+use Exception;
 use local_kopere_dashboard\util\dashboard_util;
 
 /**
@@ -37,9 +38,7 @@ class about {
 
     /**
      * Function dashboard
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function dashboard() {
         global $OUTPUT;

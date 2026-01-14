@@ -27,6 +27,7 @@
 namespace local_kopere_dashboard;
 
 use context_system;
+use Exception;
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\table;
 use local_kopere_dashboard\html\form;
@@ -55,9 +56,7 @@ class webpages {
 
     /**
      * Function dashboard
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function dashboard() {
         global $DB, $CFG, $PAGE, $OUTPUT;
@@ -127,9 +126,7 @@ class webpages {
 
     /**
      * Function menu_get_itens
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function menu_get_itens() {
         global $DB, $CFG, $OUTPUT;
@@ -213,9 +210,7 @@ class webpages {
 
     /**
      * Function page_details
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function page_details() {
         global $DB, $CFG, $PAGE;
@@ -291,9 +286,7 @@ class webpages {
 
     /**
      * Function page_edit
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function page_edit() {
         global $DB, $PAGE, $CFG;
@@ -398,10 +391,7 @@ class webpages {
 
     /**
      * Function page_edit_save
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws Exception
      */
     public function page_edit_save() {
         global $DB;
@@ -457,9 +447,7 @@ class webpages {
 
     /**
      * Function page_delete
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function page_delete() {
         global $DB;
@@ -495,9 +483,7 @@ class webpages {
 
     /**
      * Function menu_edit
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function menu_edit() {
         global $DB, $PAGE;
@@ -576,8 +562,7 @@ class webpages {
      * @param string $spaces
      *
      * @return array
-     *
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function list_menus($menuid = 0, $notmenuid = 0, $spaces = "") {
         global $DB;
@@ -608,9 +593,7 @@ class webpages {
 
     /**
      * Function menu_edit_save
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function menu_edit_save() {
         global $DB;
@@ -649,9 +632,7 @@ class webpages {
 
     /**
      * Function menu_delete
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function menu_delete() {
         global $DB;
@@ -693,9 +674,7 @@ class webpages {
 
     /**
      * Function page_ajax_get_url
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function page_ajax_get_url() {
         global $DB;
@@ -712,7 +691,7 @@ class webpages {
         $sql = "
             SELECT *
               FROM {local_kopere_dashboard_pages}
-             WHERE id    !=   :id
+             WHERE id    !=  :id
                AND title LIKE :title";
 
         $webpages = $DB->get_record_sql($sql,
@@ -729,9 +708,7 @@ class webpages {
 
     /**
      * Function menu_ajax_get_url
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function menu_ajax_get_url() {
         global $DB;
@@ -748,7 +725,7 @@ class webpages {
         $sql = "
             SELECT *
               FROM {local_kopere_dashboard_menu}
-             WHERE id    !=   :id
+             WHERE id    !=  :id
                AND title LIKE :title";
 
         $webpages = $DB->get_record_sql($sql,
@@ -815,9 +792,7 @@ class webpages {
 
     /**
      * Function settings
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function settings() {
         $redirect = urlencode("classname=webpages&method=dashboard");

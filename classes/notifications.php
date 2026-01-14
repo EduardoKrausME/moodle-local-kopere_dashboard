@@ -27,6 +27,7 @@
 namespace local_kopere_dashboard;
 
 use core\event\base;
+use Exception;
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
@@ -51,9 +52,7 @@ class notifications extends notificationsutil {
 
     /**
      * Function dashboard
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function dashboard() {
         global $DB;
@@ -122,9 +121,7 @@ class notifications extends notificationsutil {
 
     /**
      * Function add
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function add() {
         global $PAGE;
@@ -167,9 +164,7 @@ class notifications extends notificationsutil {
 
     /**
      * Function add_second_stage
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function add_second_stage() {
         global $CFG, $DB;
@@ -315,10 +310,7 @@ class notifications extends notificationsutil {
 
     /**
      * Function add_save
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws Exception
      */
     public function add_save() {
         global $DB;
@@ -368,9 +360,7 @@ class notifications extends notificationsutil {
 
     /**
      * Function delete
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function delete() {
         global $DB;
@@ -402,9 +392,7 @@ class notifications extends notificationsutil {
 
     /**
      * Function test_smtp
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function test_smtp() {
         global $CFG, $USER;

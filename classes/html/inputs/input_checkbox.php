@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard\html\inputs;
 
+use Exception;
 use local_kopere_dashboard\util\config;
 
 /**
@@ -41,7 +42,7 @@ class input_checkbox extends input_base {
      * Function new_instance
      *
      * @return input_checkbox
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function new_instance() {
         $input = new input_checkbox();

@@ -24,6 +24,8 @@
 
 namespace local_kopere_dashboard\util;
 
+use Exception;
+
 /**
  * Class bytes_util
  *
@@ -40,7 +42,7 @@ class bytes_util {
      * @param $bytes
      *
      * @return mixed
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function size_to_byte($bytes) {
         $bytes = intval($bytes);

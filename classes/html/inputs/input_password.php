@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard\html\inputs;
 
+use Exception;
+
 /**
  * Class input_password
  *
@@ -52,7 +54,7 @@ class input_password extends input_base {
      * Function to_string
      *
      * @return mixed|string
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function to_string() {
         // Password can be anything.

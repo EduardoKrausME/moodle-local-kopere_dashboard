@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard;
 
+use Exception;
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
@@ -56,9 +57,7 @@ class courses {
 
     /**
      * Function dashboard
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function dashboard() {
         dashboard_util::add_breadcrumb(get_string("courses_title", "local_kopere_dashboard"));
@@ -86,9 +85,7 @@ class courses {
 
     /**
      * Function load_all_courses
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function load_all_courses() {
         global $DB;
@@ -133,8 +130,7 @@ class courses {
      * @param $format
      *
      * @return string
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function count_all($format) {
         global $DB;
@@ -155,8 +151,7 @@ class courses {
      * @param $format
      *
      * @return string
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function count_all_visibles($format) {
         global $DB;
@@ -173,9 +168,7 @@ class courses {
 
     /**
      * Function details
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function details() {
         global $DB, $CFG, $PAGE;
@@ -249,10 +242,7 @@ class courses {
 
     /**
      * Function enrol_new
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws Exception
      */
     public function enrol_new() {
         global $DB, $CFG, $PAGE, $USER;
@@ -418,9 +408,7 @@ class courses {
      * Function create_static_page
      *
      * @param $course
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function create_static_page($course) {
         global $DB;

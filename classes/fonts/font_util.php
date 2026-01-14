@@ -25,6 +25,8 @@
 
 namespace local_kopere_dashboard\fonts;
 
+use Exception;
+
 /**
  * Class font_util
  *
@@ -36,7 +38,7 @@ class font_util {
      * Function list_fonts
      *
      * @return array
-     * @throws \dml_exception
+     * @throws Exception
      */
     private static function list_fonts() {
         static $fontlist;
@@ -119,7 +121,7 @@ class font_util {
      * Function css
      *
      * @return mixed
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function css() {
         return self::list_fonts()["css"];
@@ -129,7 +131,7 @@ class font_util {
      * Function grapsjs
      *
      * @return mixed
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function grapsjs() {
         return self::list_fonts()["grapsjs"];
@@ -139,7 +141,7 @@ class font_util {
      * Function ckeditor
      *
      * @return mixed
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function ckeditor() {
         return self::list_fonts()["ckeditor"];
@@ -149,7 +151,7 @@ class font_util {
      * Function print_only_unique
      *
      * @return string
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function print_only_unique() {
         static $printed = false;

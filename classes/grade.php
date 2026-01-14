@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard;
 
+use Exception;
+
 /**
  * Class grade
  *
@@ -37,7 +39,7 @@ class grade {
      * Function get_last_grades
      *
      * @return array
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function get_last_grades() {
         global $DB;

@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard\report;
 
+use Exception;
+
 /**
  * Class report_foreach
  *
@@ -39,7 +41,7 @@ class report_foreach {
      * @param $item
      *
      * @return mixed
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function userfullname($item) {
         $item->userfullname = self::internal_userfullname($item);
@@ -53,7 +55,7 @@ class report_foreach {
      * @param $user
      *
      * @return mixed|null|string|string[]
-     * @throws \coding_exception
+     * @throws Exception
      */
     private static function internal_userfullname($user) {
         global $CFG, $SESSION;
@@ -191,7 +193,7 @@ class report_foreach {
      * @param $item
      *
      * @return mixed
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function badge_criteria_type($item) {
         $item->criteriatype = get_string("criteria_{$item->criteriatype}", "badges");
@@ -206,7 +208,7 @@ class report_foreach {
      * @param $item
      *
      * @return mixed
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function courses_group_mode($item) {
         if ($item->groupmode == 0) {

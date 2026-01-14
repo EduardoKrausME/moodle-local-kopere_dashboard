@@ -25,6 +25,7 @@
 namespace local_kopere_dashboard\util;
 
 use course_enrolment_manager;
+use Exception;
 
 /**
  * Class enroll_util
@@ -38,7 +39,7 @@ class enroll_util {
      * @param $course
      *
      * @return bool
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function status_enrol_manual($course) {
         global $DB;
@@ -68,7 +69,7 @@ class enroll_util {
      * @param $user
      *
      * @return bool
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function enrolled($course, $user) {
         global $DB;
@@ -109,8 +110,7 @@ class enroll_util {
      *
      * @param $cohortid
      * @param $userid
-     *
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function cohort_enrol($cohortid, $userid) {
         global $CFG;
@@ -125,8 +125,7 @@ class enroll_util {
      *
      * @param $cohortid
      * @param $userid
-     *
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function cohort_unenrol($cohortid, $userid) {
         global $CFG;
@@ -153,9 +152,7 @@ class enroll_util {
      * @param int $roleid
      *
      * @return bool
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function enrol($course, $user, $timestart = 0, $timeend = 0, $roleid = 5) {
         global $DB, $PAGE, $CFG;
@@ -199,7 +196,7 @@ class enroll_util {
      * @param $user
      *
      * @return bool
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function unenrol($course, $user) {
         global $DB, $PAGE, $CFG;

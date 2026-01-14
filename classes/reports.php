@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard;
 
+use Exception;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\html\button;
@@ -49,10 +50,7 @@ class reports {
 
     /**
      * Function dashboard
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws Exception
      */
     public function dashboard() {
         global $CFG, $DB;
@@ -116,9 +114,7 @@ class reports {
 
     /**
      * Function load_report
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function load_report() {
         global $DB;
@@ -151,7 +147,7 @@ class reports {
         if (strlen($koperereports->prerequisit) && $courseid == 0) {
             try {
                 ini_set("max_execution_time", 0);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 debugging($e->getMessage());
             }
             $this->prerequisit($report, $koperereports->prerequisit);
@@ -174,7 +170,7 @@ class reports {
 
                 $columns = json_decode($koperereports->columns);
                 if (!$columns) {
-                    throw new \Exception("Error decoding JSON columns: '{$koperereports->columns}'");
+                    throw new Exception("Error decoding JSON columns: '{$koperereports->columns}'");
                 }
                 if (!isset($columns->header)) {
                     $columns->header = [];
@@ -201,8 +197,7 @@ class reports {
      *
      * @param $report
      * @param $pre
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     private function prerequisit($report, $pre) {
         if ($pre == "listCourses") {
@@ -227,9 +222,7 @@ class reports {
 
     /**
      * Function getdata
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function getdata() {
         global $DB;
@@ -286,9 +279,7 @@ class reports {
 
     /**
      * Function download
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function download() {
         global $DB;
@@ -334,7 +325,7 @@ class reports {
      * @param $obj
      *
      * @return string
-     * @throws \coding_exception
+     * @throws Exception
      */
     private static function get_title($obj) {
         if (strpos($obj->title, "[[[") === 0) {
@@ -350,7 +341,7 @@ class reports {
      * Function global_menus
      *
      * @return array
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function global_menus() {
         global $DB, $CFG;

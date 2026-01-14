@@ -57,7 +57,7 @@ function local_kopere_dashboard_autoload($classname) {
 /**
  * Function local_kopere_dashboard_load_class
  *
- * @throws coding_exception
+ * @throws Exception
  */
 function local_kopere_dashboard_load_class() {
     $classname = optional_param("classname", false, PARAM_TEXT);

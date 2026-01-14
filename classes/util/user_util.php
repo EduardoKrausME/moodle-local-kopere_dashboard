@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard\util;
 
+use Exception;
+
 /**
  * Class user_util
  *
@@ -74,8 +76,7 @@ class user_util {
      * @param $newuser
      *
      * @return string
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function validate_new_user($newuser) {
         global $CFG, $DB;

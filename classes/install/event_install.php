@@ -24,6 +24,7 @@
 
 namespace local_kopere_dashboard\install;
 
+use Exception;
 use local_kopere_dashboard\vo\local_kopere_dashboard_event;
 
 /**
@@ -35,9 +36,7 @@ class event_install {
 
     /**
      * Function install_or_update
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function install_or_update() {
 
@@ -79,8 +78,7 @@ class event_install {
      * Function insert
      *
      * @param $event
-     *
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function insert($event) {
         global $DB;

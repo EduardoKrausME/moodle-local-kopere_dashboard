@@ -28,6 +28,7 @@ namespace local_kopere_dashboard;
 
 use core\event\base;
 use core_table\external\dynamic\get;
+use Exception;
 use local_kopere_dashboard\html\form;
 use local_kopere_dashboard\html\inputs\input_select;
 use local_kopere_dashboard\util\config;
@@ -44,8 +45,7 @@ class notificationsutil {
 
     /**
      * Function add_form_extra
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function add_form_extra() {
         $module = optional_param("module", "", PARAM_TEXT);
@@ -142,7 +142,7 @@ class notificationsutil {
                         $eventinformation[] = $tmp;
                     }
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 debugging($e->getMessage());
             }
         }
@@ -161,8 +161,7 @@ class notificationsutil {
      * @param $onlyused
      *
      * @return null|string
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     protected function module_name($component, $onlyused) {
         global $DB;
@@ -221,9 +220,7 @@ class notificationsutil {
 
     /**
      * Function message_no_smtp
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function message_no_smtp() {
         global $CFG;

@@ -26,16 +26,11 @@
 
 namespace local_kopere_dashboard;
 
-use local_kopere_dashboard\html\button;
+use Exception;
 use local_kopere_dashboard\html\data_table;
-use local_kopere_dashboard\html\form;
-use local_kopere_dashboard\html\inputs\input_base;
-use local_kopere_dashboard\html\inputs\input_checkbox_select;
-use local_kopere_dashboard\html\inputs\input_text;
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\json;
-use local_kopere_dashboard\util\node;
 use local_kopere_dashboard\util\url_util;
 use local_kopere_dashboard\util\user_util;
 
@@ -48,9 +43,7 @@ class useronline {
 
     /**
      * Function dashboard
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function dashboard() {
         dashboard_util::add_breadcrumb(get_string("useronline_title", "local_kopere_dashboard"));
@@ -78,9 +71,7 @@ class useronline {
      * Function load_all_users
      *
      * @param int $time
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function load_all_users($time = 10) {
         global $DB;
@@ -105,7 +96,7 @@ class useronline {
      * @param $time
      *
      * @return int
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function count($time) {
         global $DB;

@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard\html\inputs;
 
+use Exception;
 use local_kopere_dashboard\util\config;
 
 /**
@@ -39,8 +40,7 @@ class input_checkbox_select extends input_select {
 
     /**
      * input_checkbox_select constructor.
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function __construct() {
         $this->set_value("false");
@@ -54,7 +54,7 @@ class input_checkbox_select extends input_select {
      * Function new_instance
      *
      * @return input_checkbox_select|input_select
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function new_instance() {
         return new input_checkbox_select();
@@ -75,7 +75,7 @@ class input_checkbox_select extends input_select {
      * @param $checked
      *
      * @return $this
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function set_checked($checked) {
         $this->checked = $checked;
@@ -95,7 +95,7 @@ class input_checkbox_select extends input_select {
      * @param $configname
      *
      * @return $this
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function set_checked_by_config($configname) {
         $this->set_name($configname);

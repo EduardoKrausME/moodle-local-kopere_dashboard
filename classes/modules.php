@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard;
 
+use Exception;
+
 /**
  * Class modules
  *
@@ -37,7 +39,7 @@ class modules {
      * Function count_all
      *
      * @return mixed
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function count_all() {
         global $DB;

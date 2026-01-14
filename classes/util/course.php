@@ -25,6 +25,7 @@
 namespace local_kopere_dashboard\util;
 
 use core_course_list_element;
+use Exception;
 
 /**
  * Class course
@@ -38,7 +39,7 @@ class course {
      * @param $courseid
      *
      * @return bool|string
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function overview_image($courseid) {
         global $CFG, $OUTPUT;

@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard\output;
 
+use Exception;
 use local_kopere_dashboard\reports;
 use local_kopere_dashboard\util\dashboard_util;
 use local_kopere_dashboard\util\menu_util;
@@ -40,9 +41,7 @@ class menu {
 
     /**
      * Function create_menu
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function create_menu() {
         global $DB, $CFG;
@@ -89,7 +88,7 @@ class menu {
         $sql = "SELECT plugin
                   FROM {config_plugins}
                  WHERE plugin LIKE 'local\_kopere\_%'
-                   AND plugin !=   'local_kopere_dashboard'
+                   AND plugin !=  'local_kopere_dashboard'
                    AND name LIKE 'version'";
         $plugins = $DB->get_records_sql($sql);
         foreach ($plugins as $plugin) {

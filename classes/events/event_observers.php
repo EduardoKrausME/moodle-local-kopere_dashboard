@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard\events;
 
+use core\event\base;
+use Exception;
 use local_kopere_dashboard\output\events\send_events;
 use local_kopere_dashboard\vo\local_kopere_dashboard_event;
 
@@ -39,11 +41,10 @@ class event_observers {
     /**
      * Function process_event
      *
-     * @param \core\event\base $event
-     *
-     * @throws \coding_exception
+     * @param base $event
+     * @throws Exception
      */
-    public static function process_event(\core\event\base $event) {
+    public static function process_event(base $event) {
         global $DB;
 
         $eventname = str_replace('\\\\', '\\', $event->eventname);

@@ -24,6 +24,8 @@
 
 namespace local_kopere_dashboard\util;
 
+use Exception;
+
 /**
  * Class header
  *
@@ -51,8 +53,7 @@ class header {
      * Function reload
      *
      * @param bool $isdie
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function reload($isdie = true) {
         ob_clean();
@@ -69,9 +70,7 @@ class header {
      *
      * @param $testparam
      * @param $printtext
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function notfound_null($testparam, $printtext) {
         if ($testparam == null) {
@@ -83,9 +82,7 @@ class header {
      * Function notfound
      *
      * @param $printtext
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function notfound($printtext) {
         global $PAGE, $OUTPUT;

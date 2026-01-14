@@ -24,6 +24,8 @@
 
 namespace local_kopere_dashboard\util;
 
+use Exception;
+
 /**
  * Class photo
  *
@@ -35,9 +37,7 @@ class photo {
      * Function get_photo_user
      *
      * @param $userid
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function get_photo_user($userid) {
         global $DB, $PAGE;

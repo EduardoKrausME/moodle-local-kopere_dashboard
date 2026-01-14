@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard\html;
 
+use Exception;
 use local_kopere_dashboard\util\export;
 use local_kopere_dashboard\util\number_util;
 use local_kopere_dashboard\util\url_util;
@@ -164,7 +165,7 @@ class data_table {
      * @param bool $returnhtml
      *
      * @return string
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function print_header($class = "", $printbody = true, $returnhtml = false) {
 
@@ -273,8 +274,7 @@ class data_table {
      *
      * @param $linhas
      * @param string $class
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function set_row($linhas, $class = "") {
         global $CFG;

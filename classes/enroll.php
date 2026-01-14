@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard;
 
+use Exception;
 use local_kopere_dashboard\util\json;
 use local_kopere_dashboard\util\user_util;
 
@@ -40,7 +41,7 @@ class enroll {
      * Function last_enroll
      *
      * @return array
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function last_enroll() {
         global $DB;
@@ -60,9 +61,7 @@ class enroll {
 
     /**
      * Function ajax_dashboard
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function ajax_dashboard() {
         global $DB;

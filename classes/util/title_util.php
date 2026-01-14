@@ -24,6 +24,8 @@
 
 namespace local_kopere_dashboard\util;
 
+use Exception;
+
 /**
  * Class title_util
  *
@@ -36,8 +38,7 @@ class title_util {
      *
      * @param $title
      * @param bool $iskeylang
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function print_h1($title, $iskeylang = true) {
         if ($iskeylang) {
@@ -52,8 +53,7 @@ class title_util {
      *
      * @param $title
      * @param bool $iskeylang
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function print_h2($title, $iskeylang = true) {
         if ($iskeylang) {
@@ -68,8 +68,7 @@ class title_util {
      *
      * @param $title
      * @param bool $iskeylang
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function print_h3($title, $iskeylang = true) {
         if ($iskeylang) {
@@ -84,8 +83,7 @@ class title_util {
      *
      * @param $title
      * @param bool $iskeylang
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function print_h4($title, $iskeylang = true) {
         if ($iskeylang) {
@@ -100,8 +98,7 @@ class title_util {
      *
      * @param $title
      * @param bool $iskeylang
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function print_h5($title, $iskeylang = true) {
         if ($iskeylang) {
@@ -116,8 +113,7 @@ class title_util {
      *
      * @param $title
      * @param bool $iskeylang
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function print_h6($title, $iskeylang = true) {
         if ($iskeylang) {

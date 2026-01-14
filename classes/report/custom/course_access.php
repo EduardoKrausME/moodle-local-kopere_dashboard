@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard\report\custom;
 
+use Exception;
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\task\db_course_access;
 use local_kopere_dashboard\util\export;
@@ -43,8 +44,7 @@ class course_access {
      * Function name
      *
      * @return string
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function name() {
         $cursosid = optional_param("courseid", 0, PARAM_INT);
@@ -62,9 +62,7 @@ class course_access {
 
     /**
      * Function generate
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function generate() {
         global $DB, $CFG;

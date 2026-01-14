@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard;
 
+use Exception;
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\report\report_benchmark;
 use local_kopere_dashboard\report\report_benchmark_test;
@@ -44,9 +45,7 @@ class benchmark {
 
     /**
      * Function test
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function test() {
         dashboard_util::add_breadcrumb(get_string("benchmark_title", "local_kopere_dashboard"));
@@ -70,9 +69,7 @@ class benchmark {
 
     /**
      * Function execute
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function execute() {
         global $CFG, $OUTPUT;
@@ -116,9 +113,7 @@ class benchmark {
 
     /**
      * Function performance
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function performance() {
         global $OUTPUT;
@@ -139,7 +134,7 @@ class benchmark {
      * @param $number
      *
      * @return mixed
-     * @throws \coding_exception
+     * @throws Exception
      */
     private function format_number($number) {
         return str_replace(".", get_string("decsep", "langconfig"), $number);

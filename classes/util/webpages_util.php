@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard\util;
 
+use Exception;
 use moodle_url;
 
 /**
@@ -39,10 +40,7 @@ class webpages_util {
      * Function notfound
      *
      * @param $printtext
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws Exception
      */
     public static function notfound($printtext) {
         global $PAGE, $OUTPUT, $CFG;
@@ -71,8 +69,7 @@ class webpages_util {
 
     /**
      * Function analytics
-     *
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function analytics() {
         $webpagesanalyticsid = get_config("local_kopere_dashboard", "webpages_analytics_id");

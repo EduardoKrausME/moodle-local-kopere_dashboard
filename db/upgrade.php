@@ -30,14 +30,14 @@ use local_kopere_dashboard\install\event_install;
  * @param $oldversion
  *
  * @return bool
- * @throws coding_exception
+ * @throws Exception
  * @throws ddl_change_structure_exception
  * @throws ddl_exception
  * @throws ddl_table_missing_exception
- * @throws dml_exception
+ * @throws Exception
  * @throws downgrade_exception
  * @throws upgrade_exception
- * @throws moodle_exception
+ * @throws Exception
  */
 function xmldb_local_kopere_dashboard_upgrade($oldversion) {
     global $DB, $CFG;

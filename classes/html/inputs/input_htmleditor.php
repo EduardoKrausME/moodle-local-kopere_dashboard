@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard\html\inputs;
 
+use Exception;
+
 /**
  * Class input_textarea
  *
@@ -53,7 +55,7 @@ class input_htmleditor extends input_textarea {
      * Function to_string
      *
      * @return mixed|string
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function to_string() {
         global $PAGE, $CFG;
@@ -82,7 +84,7 @@ class input_htmleditor extends input_textarea {
      * Use this editor for given element.
      *
      * @return string
-     * @throws \dml_exception
+     * @throws Exception
      */
     private function tyni_editor_config() {
         global $PAGE;

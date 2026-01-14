@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard;
 
+use Exception;
 use local_kopere_dashboard\html\button;
 use local_kopere_dashboard\html\table;
 use local_kopere_dashboard\util\bytes_util;
@@ -46,9 +47,7 @@ class backup {
 
     /**
      * Function dashboard
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function dashboard() {
         global $DB;
@@ -124,9 +123,7 @@ class backup {
 
     /**
      * Function execute
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function execute() {
         global $CFG, $DB;
@@ -156,9 +153,7 @@ class backup {
 
     /**
      * Function execute_dumpsql
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function execute_dumpsql() {
         global $DB, $CFG;
@@ -256,9 +251,7 @@ class backup {
      *
      * @param string $backupdir
      * @param bool $execute
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function execute_dumpsql_pgsql($backupdir = null, $execute = false) {
         global $DB, $CFG, $PAGE;
@@ -478,9 +471,7 @@ class backup {
 
     /**
      * Function delete
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function delete() {
         $file = optional_param("file", "", PARAM_TEXT);
@@ -521,9 +512,7 @@ class backup {
 
     /**
      * Function download
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function download() {
         ob_clean();

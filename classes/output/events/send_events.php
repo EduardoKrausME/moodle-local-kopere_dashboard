@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard\output\events;
 
+use Exception;
 use local_kopere_dashboard\util\config;
 use local_kopere_dashboard\util\release;
 use local_kopere_dashboard\vo\local_kopere_dashboard_event;
@@ -86,9 +87,7 @@ class send_events {
     /**
      * phpcs:disable
      * Function send
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function send() {
         global $COURSE, $CFG, $DB, $USER;
@@ -337,7 +336,7 @@ class send_events {
      * @param $user
      *
      * @return mixed
-     * @throws \dml_exception
+     * @throws Exception
      */
     protected function login_generate_password($user) {
         global $DB;

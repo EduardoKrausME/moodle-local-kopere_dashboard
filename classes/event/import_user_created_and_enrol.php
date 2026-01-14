@@ -27,6 +27,7 @@
 namespace local_kopere_dashboard\event;
 
 use core\event\base;
+use Exception;
 
 /**
  * Class import_user_created_and_enrol
@@ -49,7 +50,7 @@ class import_user_created_and_enrol extends base {
      * Function get_name
      *
      * @return string
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function get_name() {
         return get_string("userimport_import_user_created_and_enrol_name", "local_kopere_dashboard");

@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard;
 
+use Exception;
 use local_kopere_dashboard\html\inputs\input_htmleditor;
 use local_kopere_dashboard\util\header;
 use local_kopere_dashboard\util\message;
@@ -40,9 +41,7 @@ class settings {
 
     /**
      * Function save
-     *
-     * @throws \coding_exception
-     * @throws \moodle_exception
+     * @throws Exception
      */
     public function save() {
 

@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard\html\inputs;
 
+use Exception;
 use local_kopere_dashboard\util\config;
 
 /**
@@ -216,7 +217,7 @@ class input_base implements i_input {
      * @param $value
      *
      * @return $this|mixed
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function set_value($value, $type = PARAM_TEXT) {
         if ($this->value == null && $this->name != null) {
@@ -235,7 +236,7 @@ class input_base implements i_input {
      * @param string $default
      *
      * @return $this|mixed
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function set_value_by_config($configname, $default = "") {
         $this->set_name($configname);

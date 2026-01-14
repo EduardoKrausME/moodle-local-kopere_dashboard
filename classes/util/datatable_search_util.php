@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard\util;
 
+use Exception;
+
 /**
  * Class datatable_search_util
  *
@@ -51,8 +53,7 @@ class datatable_search_util {
      * Datatable_search_util constructor.
      *
      * @param $columnselect
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function __construct($columnselect) {
         $this->columnselect = $columnselect;
@@ -65,8 +66,7 @@ class datatable_search_util {
 
     /**
      * Function process_where
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function process_where() {
         global $DB;
@@ -134,9 +134,7 @@ class datatable_search_util {
      * @param null $group
      * @param null $params
      * @param null $functionbeforereturn
-     *
-     * @throws \dml_exception
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function execute_sql_and_return($sql, $group = null, $params = null, $functionbeforereturn = null) {
         global $DB;
@@ -152,11 +150,11 @@ class datatable_search_util {
         $sqlsearch = "{$sql} {$this->where}";
         $sqltotal = $sql;
         if ($group) {
-            $sqlsearch = str_replace("{[columns]}", "count(DISTINCT {$groupfind}) as num", $sqlsearch);
-            $sqltotal = str_replace("{[columns]}", "count(DISTINCT {$groupfind}) as num", $sqltotal);
+            $sqlsearch = str_replace("{[columns]}", "count(DISTINCT {$groupfind}) AS num", $sqlsearch);
+            $sqltotal = str_replace(" {[columns]}", "count(DISTINCT {$groupfind}) AS num", $sqltotal);
         } else {
-            $sqlsearch = str_replace("{[columns]}", "count(*) as num", $sqlsearch);
-            $sqltotal = str_replace("{[columns]}", "count(*) as num", $sqltotal);
+            $sqlsearch = str_replace("{[columns]}", "count(*) AS num", $sqlsearch);
+            $sqltotal = str_replace(" {[columns]}", "count(*) AS num", $sqltotal);
         }
 
         $order = "";
@@ -187,6 +185,6 @@ class datatable_search_util {
             $result = call_user_func($functionbeforereturn, $result);
         }
 
-        json::encode($result, $totalnum, $searchnum);
+        json::encode($result, $totalnum, $searchnum, $sqlreturn);
     }
 }

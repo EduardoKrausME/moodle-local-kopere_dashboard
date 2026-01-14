@@ -24,6 +24,8 @@
 
 namespace local_kopere_dashboard\util;
 
+use Exception;
+
 /**
  * Class finder_user_util
  *
@@ -38,7 +40,7 @@ class finder_user_util {
      * @param $value
      *
      * @return mixed|null
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function find($key, $value) {
         global $DB;

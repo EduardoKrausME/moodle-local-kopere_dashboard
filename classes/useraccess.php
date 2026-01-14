@@ -24,6 +24,7 @@
 
 namespace local_kopere_dashboard;
 
+use Exception;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\form;
 use local_kopere_dashboard\html\inputs\input_select;
@@ -41,9 +42,7 @@ class useraccess {
 
     /**
      * Function dashboard
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function dashboard() {
         global $PAGE;
@@ -86,10 +85,7 @@ class useraccess {
 
     /**
      * Function load_all_users
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
-     * @throws \Exception
+     * @throws Exception
      */
     public function load_all_users() {
         global $DB;
@@ -111,7 +107,7 @@ class useraccess {
         if ($DB->get_dbfamily() == "mysql") {
             $where = "date_format( from_unixtime(l.timecreated), '%Y-%m' ) LIKE :changuemes";
         } else {
-            throw new \Exception("only mysqli");
+            throw new Exception("only mysqli");
         }
 
         $search->execute_sql_and_return("

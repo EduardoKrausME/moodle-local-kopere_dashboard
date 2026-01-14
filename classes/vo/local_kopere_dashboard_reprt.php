@@ -24,6 +24,8 @@
 
 namespace local_kopere_dashboard\vo;
 
+use Exception;
+
 /**
  * Class local_kopere_dashboard_reprt
  *
@@ -67,7 +69,7 @@ class local_kopere_dashboard_reprt extends \stdClass {
      * @param $item
      *
      * @return local_kopere_dashboard_reprt
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function create_by_object($item) {
         $return = new local_kopere_dashboard_reprt();
@@ -90,7 +92,7 @@ class local_kopere_dashboard_reprt extends \stdClass {
      * Function create_by_default
      *
      * @return local_kopere_dashboard_reprt
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function create_by_default() {
         $return = new local_kopere_dashboard_reprt();

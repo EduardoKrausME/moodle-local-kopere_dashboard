@@ -160,7 +160,7 @@ function local_kopere_dashboard_extend_navigation_400() {
  * @param $menuid
  * @param $prefix
  *
- * @throws dml_exception
+ * @throws Exception
  */
 function local_kopere_dashboard_extend_navigation__get_menus($menuid, $prefix) {
     global $DB, $CFG;
@@ -199,7 +199,7 @@ function local_kopere_dashboard_extend_navigation__get_menus($menuid, $prefix) {
  * @param array $options
  *
  * @return bool
- * @throws coding_exception
+ * @throws Exception
  */
 function local_kopere_dashboard_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
 

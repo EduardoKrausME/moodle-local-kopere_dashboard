@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard\report;
 
+use Exception;
+
 /**
  * Class pdf
  *
@@ -34,8 +36,7 @@ namespace local_kopere_dashboard\report;
 class pdf {
     /**
      * Function create_pdf
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function create_pdf() {
         global $CFG, $USER;

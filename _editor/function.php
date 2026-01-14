@@ -28,7 +28,7 @@
  * @param $html
  *
  * @return mixed
- * @throws coding_exception
+ * @throws Exception
  */
 function local_kopere_dashboard__vvveb__changue_langs($html, $component) {
     global $CFG, $SITE;

@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard\report;
 
+use Exception;
+
 /**
  * Class report_benchmark_test
  *
@@ -124,7 +126,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Reading course
      *
      * @return array Contains the test results
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function courseread() {
         global $DB;
@@ -143,7 +145,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Writing course
      *
      * @return array Contains the test results
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function coursewrite() {
         global $DB;
@@ -172,7 +174,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Complex request (n°1)
      *
      * @return array Contains the test results
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function querytype1() {
         global $DB;
@@ -235,7 +237,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Complex request (n°2)
      *
      * @return array Contains the test results
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function querytype2() {
         global $DB;
@@ -285,7 +287,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Time to connect with the user account
      *
      * @return array Contains the test results
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function loginuser() {
         global $CFG, $DB;
@@ -317,8 +319,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Function themedesignermode
      *
      * @return array
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function themedesignermode() {
         $config = get_config("moodle", "themedesignermode");
@@ -343,8 +344,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Function cachejs
      *
      * @return array
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function cachejs() {
         $config = get_config("moodle", "cachejs");
@@ -369,8 +369,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Function debug
      *
      * @return array
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function debug() {
         $config = get_config("moodle", "debug");
@@ -408,8 +407,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Function backup_auto_active
      *
      * @return array
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function backup_auto_active() {
         $config = get_config("backup", "backup_auto_active");
@@ -439,8 +437,7 @@ ut lectus quis semper. Curabitur viverra vitae augue id.';
      * Function enablestats
      *
      * @return array
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function enablestats() {
         $config = get_config("backup", "enablestats");

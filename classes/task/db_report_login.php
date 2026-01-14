@@ -24,6 +24,8 @@
 
 namespace local_kopere_dashboard\task;
 
+use Exception;
+
 /**
  * Class db_report_login
  *
@@ -35,7 +37,7 @@ class db_report_login extends \core\task\scheduled_task {
      * Function get_name
      *
      * @return string
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function get_name() {
         return get_string("crontask_db_report_login", "local_kopere_dashboard");
@@ -43,8 +45,7 @@ class db_report_login extends \core\task\scheduled_task {
 
     /**
      * Function execute
-     *
-     * @throws \dml_exception
+     * @throws Exception
      * @throws \ddl_exception
      */
     public function execute() {

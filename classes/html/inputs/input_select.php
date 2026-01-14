@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard\html\inputs;
 
+use Exception;
+
 /**
  * Class input_select
  *
@@ -101,7 +103,7 @@ class input_select extends input_base {
      * Function to_string
      *
      * @return mixed|string
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function to_string() {
         $return = "<select id='{$this->inputid}' name='{$this->name}' ";

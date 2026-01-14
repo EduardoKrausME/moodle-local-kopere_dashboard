@@ -29,8 +29,7 @@ use local_kopere_dashboard\install\event_install;
  *
  * @return bool
  *
- * @throws coding_exception
- * @throws dml_exception
+ * @throws Exception
  */
 function xmldb_local_kopere_dashboard_install() {
     set_config("webpages_theme", "standard", "local_kopere_dashboard");

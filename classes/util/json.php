@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard\util;
 
+use Exception;
+
 /**
  * Class json
  *
@@ -39,8 +41,7 @@ class json {
      * @param int $recordstotal
      * @param int $recordsfiltered
      * @param null $sql
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function encode($data, $recordstotal = -1, $recordsfiltered = 0, $sql = null) {
         ob_clean();

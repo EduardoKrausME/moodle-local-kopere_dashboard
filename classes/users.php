@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard;
 
+use Exception;
 use local_kopere_dashboard\html\data_table;
 use local_kopere_dashboard\html\table_header_item;
 use local_kopere_dashboard\util\dashboard_util;
@@ -42,9 +43,7 @@ class users {
 
     /**
      * Function dashboard
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function dashboard() {
         dashboard_util::add_breadcrumb(get_string("user_title", "local_kopere_dashboard"));
@@ -73,9 +72,7 @@ class users {
 
     /**
      * Function load_all_users
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function load_all_users() {
         $columns = [
@@ -100,9 +97,7 @@ class users {
 
     /**
      * Function details
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function details() {
         global $DB;
@@ -132,8 +127,7 @@ class users {
      * @param bool $format
      *
      * @return string
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function count_all($format = false) {
         global $DB;
@@ -153,8 +147,7 @@ class users {
      * @param bool $format
      *
      * @return string
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public static function count_all_learners($format = false) {
         global $DB;

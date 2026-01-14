@@ -24,6 +24,7 @@
 
 namespace local_kopere_dashboard\vo;
 
+use Exception;
 use local_kopere_dashboard\util\html;
 
 /**
@@ -69,7 +70,7 @@ class local_kopere_dashboard_pages extends \stdClass {
      * @param $item
      *
      * @return local_kopere_dashboard_pages
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function create_by_object($item) {
         $return = new local_kopere_dashboard_pages();
@@ -92,7 +93,7 @@ class local_kopere_dashboard_pages extends \stdClass {
      * Function create_by_default
      *
      * @return local_kopere_dashboard_pages
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function create_by_default() {
         $return = new local_kopere_dashboard_pages();

@@ -26,6 +26,7 @@
 
 namespace local_kopere_dashboard;
 
+use Exception;
 use local_kopere_dashboard\html\form;
 use local_kopere_dashboard\html\inputs\input_checkbox_select;
 use local_kopere_dashboard\html\inputs\input_date_range;
@@ -44,9 +45,7 @@ class userenrolment {
 
     /**
      * Function mathedit
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function mathedit() {
         global $DB, $PAGE;
@@ -122,10 +121,7 @@ class userenrolment {
 
     /**
      * Function mathedit_save
-     *
-     * @throws \coding_exception
-     * @throws \dml_exception
-     * @throws \moodle_exception
+     * @throws Exception
      */
     public function mathedit_save() {
         global $DB;

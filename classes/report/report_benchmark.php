@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard\report;
 
+use Exception;
+
 /**
  * Class report_benchmark
  *
@@ -37,8 +39,7 @@ class report_benchmark {
 
     /**
      * report_benchmark constructor.
-     *
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function __construct() {
         $tests = [

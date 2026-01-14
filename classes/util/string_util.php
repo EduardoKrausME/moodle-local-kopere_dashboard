@@ -26,6 +26,8 @@
 
 namespace local_kopere_dashboard\util;
 
+use Exception;
+
 /**
  * Class string_util
  *
@@ -164,7 +166,7 @@ class string_util {
      * @param $maxlength
      *
      * @return string
-     * @throws \coding_exception
+     * @throws Exception
      */
     public static function trunc($string, $maxlength) {
         $stringarray = preg_split('/\s+/', strip_tags($string));
