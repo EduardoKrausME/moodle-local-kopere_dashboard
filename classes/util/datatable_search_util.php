@@ -145,16 +145,23 @@ class datatable_search_util {
             $params = array_merge($params, $this->params);
         }
 
+
         $groupfind = str_replace("GROUP BY", "", $group);
 
         $sqlsearch = "{$sql} {$this->where}";
         $sqltotal = $sql;
+        /**
+         * Fix for https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/issues/146
+         *
+         * Ensures that both '{[columns]}' and ' {[columns]}' patterns are replaced,
+         * always inserting a leading space as required for correct SQL formatting.
+         */
         if ($group) {
-            $sqlsearch = str_replace("{[columns]}", "count(DISTINCT {$groupfind}) AS num", $sqlsearch);
-            $sqltotal = str_replace(" {[columns]}", "count(DISTINCT {$groupfind}) AS num", $sqltotal);
+            $sqlsearch = str_replace([" {[columns]}", "{[columns]}", "{[columns]}"], " count(DISTINCT {$groupfind}) AS num", $sqlsearch);
+            $sqltotal = str_replace([" {[columns]}", "{[columns]}", "{[columns]}"], " count(DISTINCT {$groupfind}) AS num", $sqltotal);
         } else {
-            $sqlsearch = str_replace("{[columns]}", "count(*) AS num", $sqlsearch);
-            $sqltotal = str_replace(" {[columns]}", "count(*) AS num", $sqltotal);
+            $sqlsearch = str_replace([" {[columns]}", "{[columns]}", "{[columns]}"], " count(*) AS num", $sqlsearch);
+            $sqltotal = str_replace([" {[columns]}", "{[columns]}", "{[columns]}"], " count(*) AS num", $sqltotal);
         }
 
         $order = "";
