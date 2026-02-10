@@ -58,12 +58,11 @@ class json {
         if ($sql) {
             $returnarray["sql"] = $sql;
         }
-
-        $json = json_encode($returnarray);
-
-        $json = str_replace('"data":{', '"data":[', $json);
-        $json = str_replace("}}}", "}]}", $json);
-        $json = preg_replace("/\"\d+\":{/", "{", $json);
+        /**
+         * Fix for https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/issues/146
+         * STEP 4: Added JSON_UNESCAPED_UNICODE option to json_encode to ensure that all Unicode characters are properly encoded and displayed in the JSON response, preventing issues with special characters in user data.
+         */
+        $json = json_encode($returnarray, JSON_UNESCAPED_UNICODE);
 
         end_util::end_script_show($json);
     }
