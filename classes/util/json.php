@@ -53,6 +53,13 @@ class json {
             $returnarray["recordsTotal"] = intval($recordstotal);
             $returnarray["recordsFiltered"] = intval($recordsfiltered);
         }
+         /**
+         * Fix for https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/issues/146
+         * STEP 5: Ensure DataTables receives an array, not an object
+         */
+        if (is_array($data) && !empty($data) && array_keys($data) !== range(0, count($data) - 1)) {
+            $data = array_values($data);
+        }
         $returnarray["data"] = $data;
 
         if ($sql) {
