@@ -409,6 +409,12 @@ $string['reports_timecreated'] = 'Registered in';
 $string['reports_title'] = 'Reports';
 $string['setting_saved'] = 'Settings saved!';
 $string['settings'] = 'Settings';
+ /**
+* Fix for https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/issues/146
+* STEP 3: Added language strings for 'user_table_firstname' and 'user_table_lastname' to display correct column headers in the users table.
+*/
+$string['user_table_firstname'] = 'First Name';
+$string['user_table_lastname'] = 'Last Name';
 $string['user_table_celphone'] = 'Mobile';
 $string['user_table_city'] = 'City';
 $string['user_table_email'] = 'E-mail';

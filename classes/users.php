@@ -53,6 +53,12 @@ class users {
 
         $table = new data_table();
         $table->add_header("#", "id", table_header_item::TYPE_INT);
+         /**
+         * Fix for https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/issues/146
+         * STEP 2: Added 'firstname' and 'lastname' columns to table header to match AJAX response fields and ensure all user data is displayed correctly.
+         */
+        $table->add_header(get_string("user_table_firstname", "local_kopere_dashboard"), "firstname");
+        $table->add_header(get_string("user_table_lastname", "local_kopere_dashboard"), "lastname");
         $table->add_header(get_string("user_table_fullname", "local_kopere_dashboard"), "fullname");
         $table->add_header(get_string("user_table_username", "local_kopere_dashboard"), "username");
         $table->add_header(get_string("user_table_email", "local_kopere_dashboard"), "email");

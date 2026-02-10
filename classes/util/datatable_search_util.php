@@ -152,7 +152,7 @@ class datatable_search_util {
         $sqltotal = $sql;
         /**
          * Fix for https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/issues/146
-         *
+         * STEP 1: There are two patterns to be replaced: '{[columns]}' and ' {[columns]}'.
          * Ensures that both '{[columns]}' and ' {[columns]}' patterns are replaced,
          * always inserting a leading space as required for correct SQL formatting.
          */
