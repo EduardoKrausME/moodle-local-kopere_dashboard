@@ -1418,7 +1418,6 @@
                     return _link.protocol + '//' + linkHost + _link.pathname + _link.search;
                 };
 
-
                 var data = dt.buttons.exportData(
                     $.extend({decodeEntities: false}, config.exportOptions) // XSS protection
                 );

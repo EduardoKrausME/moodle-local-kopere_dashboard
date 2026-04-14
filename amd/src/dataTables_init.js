@@ -509,7 +509,6 @@ define([
             return formatted;
         },
 
-
         click: function(tableid, clickchave, clickurl) {
             $('#' + tableid + ' tbody').on('click', 'tr', function() {
                 var data = window[tableid].row(this).data();

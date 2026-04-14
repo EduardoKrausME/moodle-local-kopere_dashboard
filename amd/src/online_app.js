@@ -137,7 +137,6 @@ define(["jquery", "local_kopere_dashboard/socket.io"], function($, io) {
         },
     };
 });
-
 function createPageLink(user) {
     return '<a target="_blank" href="' + user.atualurl + '">' + user.title + '</a>';
 }

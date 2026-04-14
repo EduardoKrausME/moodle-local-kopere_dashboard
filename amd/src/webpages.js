@@ -1,6 +1,5 @@
 define(["jquery", "jqueryui"], function($, $ui) {
     return {
-
         load_pages: function() {
 
             function webpages_menu_open_click() {
