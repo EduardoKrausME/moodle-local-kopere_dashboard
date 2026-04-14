@@ -200,7 +200,8 @@ if ($pagelink) {
 
                 $offprice = config::get_key("builder_offprice_{$koperepaydetalhe->course}");
                 if ($offprice) {
-                    $data["offprice"] = get_string_koperepay("pedido_resumo_moeda", preg_replace('/[^0-9]/', "", $offprice));
+                    $data["offprice"] =
+                        get_string("pedido_resumo_moeda", "local_kopere_pay", preg_replace('/[^0-9]/', "", $offprice));
                 }
             }
 
