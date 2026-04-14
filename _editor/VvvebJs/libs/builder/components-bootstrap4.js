@@ -70,7 +70,6 @@ function changeNodeName(node, newNodeName) {
 Vvveb.ComponentsGroup['Bootstrap 4'] =
     ["html/container", "html/gridrow", "html/button", "html/buttongroup", "html/buttontoolbar", "html/heading", "html/image", "html/jumbotron", "html/alert", "html/card", "html/listgroup", "html/hr", "html/taglabel", "html/badge", "html/progress", "html/navbar", "html/breadcrumbs", "html/pagination", "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/table", "html/paragraph", "html/link", "html/video", "html/button"];
 
-
 var base_sort = 100;//start sorting for base component from 100 to allow extended properties to be first
 var style_section = 'style';
 
@@ -693,7 +692,6 @@ Vvveb.Components.extend("_base", "_base", {
     }]
 });
 
-
 //Border
 Vvveb.Components.extend("_base", "_base", {
     properties : [{
@@ -747,7 +745,6 @@ Vvveb.Components.extend("_base", "_base", {
         inputtype : ColorInput,
     }]
 });
-
 
 //Border radius
 Vvveb.Components.extend("_base", "_base", {
@@ -2283,7 +2280,6 @@ Vvveb.Components.add("html/gridrow", {
     }]
 });
 
-
 Vvveb.Components.extend("_base", "html/paragraph", {
     nodes      : ["p"],
     name       : "Paragraph",
@@ -2376,7 +2372,6 @@ Vvveb.Components.extend("_base", "html/video", {
         inputtype : CheckboxInput
     }]
 });
-
 
 Vvveb.Components.extend("_base", "html/button", {
     nodes      : ["button"],

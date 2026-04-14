@@ -109,7 +109,6 @@ Vvveb.Components.extend("_base", "elements/figure", {
     }]
 });
 
-
 //Icon
 Vvveb.Components.extend("_base", "elements/font-icon", {
     classes    : ["la", "lab"],
@@ -511,7 +510,6 @@ Vvveb.Components.add("elements/tabs", {
     }
     ]
 });
-
 
 //Accordion
 Vvveb.Components.add("elements/accordion", {
@@ -1136,7 +1134,6 @@ Vvveb.Components.add("elements/slider", {
         </div>`,
     afterDrop : carouselAfterDrop,
 });
-
 
 Vvveb.Components.add("elements/icon-list", {
     nodes      : [".counter"],

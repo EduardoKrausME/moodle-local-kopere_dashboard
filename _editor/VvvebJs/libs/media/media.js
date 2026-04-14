@@ -31,7 +31,6 @@ class MediaModal {
                                 <div class="breadcrumbs"></div>
                             </div>
 
-
                             <div class="align-right">
                                 <div class="search">
                                     <input type="search" id="media-search-input" placeholder="Find a file.." />
@@ -494,7 +493,6 @@ class MediaModal {
             formData.append("mediaPath", Vvveb.MediaModal.currentPath);
             formData.append("onlyFilename", true);
 
-
             fetch(mediaServerUrl, {method: "POST", body: formData})
                 .then((response) => {
                     console.log(response);
@@ -581,7 +579,6 @@ class MediaModal {
             icon = `<span class="icon file f-${fileType}">.${fileType}</span>`;
         }
 
-
         actions += `<a href="javascript:void(0);"
                        title="Delete"
                        class="btn btn-outline-danger btn-sm border-0 btn-delete">
@@ -635,7 +632,6 @@ class MediaModal {
 
         return file;
     }
-
 
     render(data) {
 

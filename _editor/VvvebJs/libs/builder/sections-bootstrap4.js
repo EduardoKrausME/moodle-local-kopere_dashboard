@@ -138,7 +138,6 @@ Vvveb.Sections.add("bootstrap4/video-header", {
         </div>
     </div>
 
-
     <div class="my-5">
         <div class="container">
             <div class="row">

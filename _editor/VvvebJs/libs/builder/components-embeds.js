@@ -16,7 +16,6 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-
 Vvveb.ComponentsGroup['Embeds'] = ["embeds/embed"];
 
 Vvveb.Components.extend("_base", "embeds/embed", {
@@ -29,7 +28,6 @@ Vvveb.Components.extend("_base", "embeds/embed", {
                 <img width="64" src="${Vvveb.baseUrl}icons/code.svg">
                 <h6>Enter url to embed</h6>
             </div></div>`,
-
 
     properties : [{
         name      : "Url",

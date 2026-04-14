@@ -64,7 +64,6 @@ var tinyMceOptions = {
     branding : false,
 };
 
-
 Vvveb.WysiwygEditor = {
     isActive : false,
     oldValue : '',

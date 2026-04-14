@@ -291,7 +291,6 @@ Vvveb.Components = {
         this.add(type, newData);
     },
 
-
     matchNode : function(node) {
         let component = {};
 
@@ -590,13 +589,11 @@ Vvveb.Sections = {
     },
 };
 
-
 Vvveb.WysiwygEditor = {
 
     isActive : false,
     oldValue : '',
     doc      : false,
-
 
     editorSetStyle : function(tag, style = {}, toggle = false) {
         let iframeWindow = Vvveb.Builder.iframe.contentWindow;
@@ -708,7 +705,6 @@ Vvveb.WysiwygEditor = {
             return false;
         });
 
-
         document.getElementById("back-color").addEventListener("change", function(e) {
             //doc.execCommand('hiliteColor',false,this.value);
             self.editorSetStyle(false, {"background-color" : this.value});
@@ -777,7 +773,6 @@ Vvveb.WysiwygEditor = {
 
         document.getElementById("wysiwyg-editor").style.display = "none";
         this.isActive = false;
-
 
         node = this.element;
         Vvveb.Undo.addMutation({
@@ -953,7 +948,6 @@ Vvveb.Builder = {
             let SelectBox = document.getElementById("select-box");
 
             highlightBox.style.display = "none";
-
 
             window.FrameWindow.addEventListener("beforeunload", function(event) {
                 if (Vvveb.Undo.undoIndex >= 0) {
@@ -1169,7 +1163,6 @@ Vvveb.Builder = {
 
     },
 
-
     selectNode : function(node) {
         let SelectBox = document.getElementById("select-box");
 
@@ -1334,7 +1327,6 @@ Vvveb.Builder = {
                     }
 
                     let parentTagName = parent.tagName.toLowerCase();
-
 
                     try {
                         if ((pos.top < (y - halfHeight)) || (pos.left < (x - halfWidth))) {
@@ -1558,7 +1550,6 @@ Vvveb.Builder = {
             if (event.which == 1) {//left click
                 self.isDragging = true;
                 document.querySelectorAll("#section-actions, #highlight-name, #select-box").forEach(el => el.style.display = "");
-
 
                 if (self.designerMode) {
                     self.dragElement = self.selectedEl;
@@ -1793,7 +1784,6 @@ Vvveb.Builder = {
                 addSectionBox.style.display = "none";
             }
         });
-
 
         addSectionBox.addEventListener("click", function(event) {
             let element = event.target.closest(".sections-list li ol li");
@@ -2311,7 +2301,6 @@ Vvveb.Gui = {
         });
     },
 
-
     viewport : function() {
         document.getElementById("canvas").setAttribute("class", this.dataset.view);
         document.getElementById("iframe1").removeAttribute("style");
@@ -2679,7 +2668,6 @@ Vvveb.StyleManager = {
         return this.cssContainer.innerHTML = css;
     },
 
-
     _getCssStyle : function(element, styleProp) {
         let value = "";
         let el;
@@ -2867,7 +2855,6 @@ Vvveb.SectionList = {
             }
         });
 
-
         document.querySelector(this.selector).addEventListener("click", function(e) {
             let element = e.target.closest("li[data-component] label");
             if (element) {
@@ -2951,7 +2938,6 @@ Vvveb.SectionList = {
         });
         */
 
-
         let self = this;
         document.querySelector(".sections-list").addEventListener("click", function(e) {
             let element = e.target.closest(".add-section-btn");
@@ -2998,7 +2984,6 @@ Vvveb.SectionList = {
                 delay(() => node.click(), 1000);
                 */
 
-
                 node = node;
                 Vvveb.Undo.addMutation({
                     type        : 'childList',
@@ -3006,7 +2991,6 @@ Vvveb.SectionList = {
                     addedNodes  : [node],
                     nextSibling : node.nextSibling
                 });
-
 
                 self.loadSections();
                 Vvveb.TreeList.loadComponents();
@@ -3059,7 +3043,6 @@ Vvveb.SectionList = {
         let html = drawComponentsTree(tree);
         document.querySelector("ol", sectionListItem).replaceWith(html);
     },
-
 
     addSection : function(data) {
         let section = generateElements(tmpl("vvveb-section", data))[0];
@@ -3449,7 +3432,6 @@ Vvveb.ColorPaletteManager = {
                             let name = style[k];
                             let value = style.getPropertyValue(name).trim();
                             let type = "";
-
 
                             if (name.startsWith("--")) {
                                 //ignore bootstrap rgb variables

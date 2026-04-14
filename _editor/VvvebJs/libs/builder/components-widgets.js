@@ -27,7 +27,6 @@ Vvveb.Components.extend("_base", "widgets/googlemaps", {
     resizable  : true,//show select box resize handlers
     resizeMode : "css",
 
-
     //url parameters
     z   : 3, //zoom
     q   : 'Paris',//location
@@ -104,7 +103,6 @@ Vvveb.Components.extend("_base", "widgets/openstreetmap", {
     resizable  : true,//show select box resize handlers
     resizeMode : "css",
 
-
     //url parameters
     bbox  : '',//location
     layer : 'mapnik', //map type
@@ -165,7 +163,6 @@ Vvveb.Components.extend("_base", "widgets/embed-video", {
     image      : "icons/youtube.svg",
     dragHtml   : '<img src="' + Vvveb.baseUrl + 'icons/youtube.svg" width="100" height="100">', //use image for drag and swap with iframe on drop for drag performance
     html       : '<div data-component-video style="width:640px;height:480px;"><iframe frameborder="0" src="https://player.vimeo.com/video/24253126?autoplay=false&controls=false&loop=false&playsinline=true&muted=false" width="100%" height="100%"></iframe></div>',
-
 
     //url parameters set with onChange
     t            : 'y',//video type
@@ -616,7 +613,6 @@ Vvveb.Components.extend("_base", "widgets/facebookpage", {
         frameBody.querySelector("[data-fbcssmodules]").remove();
         frameHead.querySelector("script[src^='https://connect.facebook.net']").remove();
 
-
         node.parent().html(newElement.html());
         return newElement;
     }
@@ -684,7 +680,6 @@ Vvveb.Components.extend("_base", "widgets/chartjs", {
         return node;
     },
 
-
     drawChart : function() {
         if (this.chartjs != null) this.chartjs.destroy();
         this.node.dataset.chart = JSON.stringify(this.config);
@@ -701,7 +696,6 @@ Vvveb.Components.extend("_base", "widgets/chartjs", {
 
         return node;
     },
-
 
     beforeInit : function(node) {
         return node;
@@ -765,7 +759,6 @@ function lottieAfterDrop(node) {
         let lottie = [];
         function initLottie(onlyNew = false) {
             if (typeof bodymovin == "undefined") return;
-
 
             let list = document.querySelectorAll('.lottie' + (onlyNew ? ":not(.lottie-initialized)" : "") );
             list.forEach(el => {

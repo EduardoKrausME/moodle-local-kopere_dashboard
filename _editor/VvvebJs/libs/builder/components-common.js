@@ -795,7 +795,6 @@ Vvveb.Components.extend("_base", "_base", {
     }]
 });
 
-
 //Border radius
 Vvveb.Components.extend("_base", "_base", {
     properties : [{

@@ -416,7 +416,6 @@ let ComponentSectionContent = [{
     ...sectionSeparatorProperties("bottom", "Bottom"),
 ];
 
-
 let ComponentSectionStyle = [];
 /*[{
         key: "Section Style",

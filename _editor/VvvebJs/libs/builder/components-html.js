@@ -50,7 +50,6 @@ Vvveb.Components.extend("_base", "html/heading", {
     }]
 });
 
-
 let linkComponentProperties = [
     /*    {
             name: "Text",
@@ -351,7 +350,6 @@ Vvveb.Components.extend("_base", "html/label", {
         inputtype : TextInput
     }]
 });
-
 
 Vvveb.Components.extend("_base", "html/textinput", {
     name       : "Input",
@@ -786,7 +784,6 @@ Vvveb.Components.extend("_base", "html/video", {
         }
     }]
 });
-
 
 Vvveb.Components.extend("_base", "html/button", {
     nodes      : ["button"],
@@ -1304,7 +1301,6 @@ Vvveb.Components.extend("_base", "html/audio", {
         col       : 4
     }]
 });
-
 
 Vvveb.Components.extend("_base", "html/pdf", {
     attributes : ["data-component-pdf"],

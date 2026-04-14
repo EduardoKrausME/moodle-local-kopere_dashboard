@@ -16,7 +16,6 @@ class OpenVerse {
             "token_type"   : "Bearer"
         };
 
-
         this.filters = {
             "license"      : ["BY-ND", "PDM", "BY-NC", "BY-NC-SA", "BY-NC-ND", "BY-SA", "BY", "CC0"],
             "license_type" : ["all", "all-cc", "commercial", "modification"],
@@ -57,7 +56,6 @@ class OpenVerse {
                 displayToast("bg-danger", "Error", "Openverse authentication failed!");
             });
     }
-
 
     setFiltersParams(filtersParameters) {
         this.filtersParameters = filtersParameters;
@@ -267,8 +265,6 @@ class OpenVerseDisplay extends OpenVerse {
                         Filters
                     </a>
                 </div>
-
-
 
                 <div id="openverse-filters" class="row collapse">
                     <div class="col-sm-6 col-md-4 col-lg-3">

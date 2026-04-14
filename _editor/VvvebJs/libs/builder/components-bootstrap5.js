@@ -33,7 +33,6 @@ Vvveb.ComponentsGroup['Bootstrap 5'] = [
     "html/pagination",
 ];
 
-
 Vvveb.Components.extend("_base", "html/container", {
     classes    : ["container", "container-fluid"],
     image      : "icons/container.svg",

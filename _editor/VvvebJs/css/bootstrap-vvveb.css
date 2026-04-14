@@ -13186,7 +13186,6 @@ body > section, body > footer, body > header {
   &.overlay {
       position: relative;
 
-
       &:before {
           z-index: 1;
           position: absolute;
