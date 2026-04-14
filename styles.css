@@ -893,7 +893,7 @@
 .kopere-dashboard-bootstrap_page blockquote footer:before,
 .kopere-dashboard-bootstrap_page blockquote small:before,
 .kopere-dashboard-bootstrap_page blockquote .small:before {
-  content: "— ";
+  content: "-";
 }
 .kopere_dashboard_div .blockquote-reverse,
 .kopere_dashboard_div blockquote.pull-right,
@@ -931,7 +931,7 @@
 .kopere-dashboard-bootstrap_page blockquote.pull-right small:after,
 .kopere-dashboard-bootstrap_page .blockquote-reverse .small:after,
 .kopere-dashboard-bootstrap_page blockquote.pull-right .small:after {
-  content: " —";
+  content: "-";
 }
 .kopere_dashboard_div address,
 .kopere-dashboard-bootstrap_page address {
