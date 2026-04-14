@@ -408,6 +408,7 @@ class notifications extends notificationsutil {
 
         notificationsutil::message_no_smtp();
         $CFG->debugsmtp = true;
+        $CFG->debugdeveloper = true;
 
         $htmlmessage = get_string("notification_testsmtp_message", "local_kopere_dashboard") . date("d/m/Y H:i");
 
