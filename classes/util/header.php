@@ -24,6 +24,7 @@
 
 namespace local_kopere_dashboard\util;
 
+use context_system;
 use Exception;
 
 /**
@@ -92,14 +93,16 @@ class header {
         }
 
         if (!$PAGE->requires->is_head_done()) {
-            $PAGE->set_context(\context_system::instance());
+            $PAGE->set_context(context_system::instance());
             $PAGE->set_pagetype("admin-setting");
             $PAGE->set_pagelayout("standard");
             $PAGE->set_title("Erro");
             $PAGE->set_heading("Erro");
         }
 
-        dashboard_util::start_page();
+        if (!AJAX_SCRIPT) {
+            echo $OUTPUT->header();
+        }
 
         echo "<div class='element-box text-center page404'>
                   <h2>OOPS!</h2>
@@ -110,9 +113,9 @@ class header {
                   </p>
               </div>";
 
-        echo $OUTPUT->footer();
+        if (!AJAX_SCRIPT) {
+            echo $OUTPUT->footer();
+        }
         end_util::end_script_show();
-
-        dashboard_util::end_page();
     }
 }
