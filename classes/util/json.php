@@ -56,7 +56,7 @@ class json {
         $returnarray["data"] = $data;
 
         if ($sql) {
-            $returnarray["sql"] = $sql;
+            // $returnarray["sql"] = $sql;
         }
 
         $json = json_encode($returnarray);
