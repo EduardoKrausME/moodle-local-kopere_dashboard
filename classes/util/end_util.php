@@ -46,7 +46,7 @@ class end_util {
      * @param $motivo
      */
     public static function end_script_header($motivo) {
-        header("die-motivo:{$motivo}");
+        header("die-reason:{$motivo}");
         die();
     }
 }
