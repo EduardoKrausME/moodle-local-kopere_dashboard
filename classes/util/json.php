@@ -54,20 +54,18 @@ class json {
             $returnarray["recordsFiltered"] = intval($recordsfiltered);
         }
 
-        /**
-         * Fix for https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/issues/146
-         * STEP 5: Ensure DataTables receives an array, not an object
-         */
+         // Fix for https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/issues/146.
+         // STEP 5: Ensure DataTables receives an array, not an object.
         if (is_array($data) && !empty($data) && array_keys($data) !== range(0, count($data) - 1)) {
             $data = array_values($data);
         }
 
         $returnarray["data"] = $data;
 
-        /**
-         * Fix for https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/issues/146
-         * STEP 4: Added JSON_UNESCAPED_UNICODE option to json_encode to ensure that all Unicode characters are properly encoded and displayed in the JSON response, preventing issues with special characters in user data.
-         */
+         // Fix for https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/issues/146.
+         // STEP 4: Added JSON_UNESCAPED_UNICODE option to json_encode to ensure that all...
+         // Unicode characters are properly encoded and displayed in the JSON response,
+         // preventing issues with special characters in user data.
         $json = json_encode($returnarray, JSON_UNESCAPED_UNICODE);
 
         end_util::end_script_show($json);
