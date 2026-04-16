@@ -136,7 +136,7 @@ class datatable_search_util {
      * @param null $functionbeforereturn
      * @throws Exception
      */
-    public function execute_sql_and_return($sql, $group = "", $params = null, $functionbeforereturn = null, $countparams = null) {
+    public function execute_sql_and_return($sql, $group = null, $params = null, $functionbeforereturn = null) {
         global $DB;
 
         if ($params == null) {
@@ -145,48 +145,46 @@ class datatable_search_util {
             $params = array_merge($params, $this->params);
         }
 
-        $order = "";
-        if ($this->order) {
-            $order = "ORDER BY {$this->order} {$this->orderdir}";
+        $groupfind = str_replace("GROUP BY", "", $group);
+
+        $sqlsearch = "{$sql} {$this->where}";
+        $sqltotal = $sql;
+        if ($group) {
+            $sqlsearch = str_replace("{[columns]}", "count(DISTINCT {$groupfind}) AS num", $sqlsearch);
+            $sqltotal = str_replace(" {[columns]}", " count(DISTINCT {$groupfind}) AS num", $sqltotal);
+        } else {
+            $sqlsearch = str_replace("{[columns]}", "count(*) AS num", $sqlsearch);
+            $sqltotal = str_replace(" {[columns]}", " count(*) AS num", $sqltotal);
         }
 
-        if ($group || $countparams) {
-            if (!$countparams && $group) {
-                $countparams = str_replace("GROUP BY", "", $group);
-            }
-            $sqlcolumns = str_replace("{[columns]}", "count(DISTINCT {$countparams}) AS num, {[columns]}", $sql);
-            $sql = str_replace("{[columns]}", "count(DISTINCT {$countparams}) AS num", $sql);
-        } else {
-            $sqlcolumns = str_replace("{[columns]}", "count(*) AS num, {[columns]}", $sql);
-            $sql = str_replace("{[columns]}", "count(*) AS num", $sql);
+        $order = "";
+        if ($this->order) {
+            $order = "ORDER BY $this->order $this->orderdir";
         }
 
         if ($DB->get_dbfamily() == "postgres") {
-            $sqlsearch      = "{$sqlcolumns} \n{$this->where} \n{$group} \n{$order} \nLIMIT {$this->length} OFFSET {$this->start}";
-            $sqlsearchcount = "{$sql}        \n{$this->where} \n{$group} \n{$order}";
-            $sqltotal       = "{$sql}                         \n{$group} \n{$order}";
+            $sqlreturn = "{$sql} $this->where $group {$order} LIMIT $this->length OFFSET $this->start";
         } else {
-            $sqlsearch      = "{$sqlcolumns} \n{$this->where} \n{$group} \n{$order} \nLIMIT {$this->start}, {$this->length}";
-            $sqlsearchcount = "{$sql}        \n{$this->where} \n{$group} \n{$order}";
-            $sqltotal       = "{$sql}                         \n{$group} \n{$order}";
+            $sqlreturn = "{$sql} $this->where $group {$order} LIMIT $this->start, $this->length";
         }
 
-        echo '<pre>';
-        $sqlsearch = str_replace("{[columns]}", implode(", ", $this->columnselect), $sqlsearch);
+        $sqlreturn = str_replace("{[columns]}", implode(", ", $this->columnselect), $sqlreturn);
 
-        $result = $DB->get_records_sql($sqlsearch, $params);
+        $result = $DB->get_records_sql($sqlreturn, $params);
         $total = $DB->get_record_sql($sqltotal, $params);
-        $searchnum = $total->num;
+        $totalnum = $total->num;
 
         if ($this->where) {
-            $search = $DB->get_record_sql($sqlsearchcount, $params);
+            $search = $DB->get_record_sql($sqlsearch, $params);
             $searchnum = $search->num;
+        } else {
+            $searchnum = $totalnum;
         }
 
         if ($functionbeforereturn) {
             $result = call_user_func($functionbeforereturn, $result);
         }
 
-        json::encode($result, $total->num, $searchnum, $sqlsearch);
+        json::encode($result, $totalnum, $searchnum, $sqlreturn);
     }
 }
