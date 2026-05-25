@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <XMLDB PATH="local/kopere_dashboard/db" VERSION="20250228" COMMENT="XMLDB file for Moodle local/kopere_dashboard"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
->
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
     <TABLES>
         <TABLE NAME="local_kopere_dashboard_menu" COMMENT="Webpages Menus">
             <FIELDS>
@@ -34,7 +33,6 @@
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
             </KEYS>
         </TABLE>
-
         <TABLE NAME="local_kopere_dashboard_audit" COMMENT="Central audit log for Kopere Dashboard subplugins.">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
@@ -59,6 +57,5 @@
                 <INDEX NAME="idx_user" UNIQUE="false" FIELDS="userid"/>
             </INDEXES>
         </TABLE>
-
     </TABLES>
 </XMLDB>
