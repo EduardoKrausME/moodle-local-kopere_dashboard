@@ -160,10 +160,6 @@ if ($action) {
                 $webpages = $DB->get_record("local_kopere_dashboard_pages", ["id" => $id]);
                 $webpages->text = $html;
                 $DB->update_record("local_kopere_dashboard_pages", $webpages);
-            } else if ($page == "notification") {
-                $events = $DB->get_record("local_kopere_dashboard_event", ["id" => $id]);
-                $events->message = $html;
-                $DB->update_record("local_kopere_dashboard_event", $events);
             } else if ($page == "settings") {
                 set_config($id, $html, "local_kopere_dashboard");
             }

@@ -47,8 +47,5 @@ function xmldb_local_kopere_dashboard_install() {
         "&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');\n</style>";
     set_config("pagefonts", $fonts, "local_kopere_dashboard");
 
-    $html = file_get_contents(__DIR__ . "/notification-template.html");
-    set_config("notification-template", $html, "local_kopere_dashboard");
-
     return true;
 }

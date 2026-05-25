@@ -22,8 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use local_kopere_dashboard\install\event_install;
-
 /**
  * Function xmldb_local_kopere_dashboard_upgrade
  *
@@ -40,7 +38,7 @@ use local_kopere_dashboard\install\event_install;
  * @throws Exception
  */
 function xmldb_local_kopere_dashboard_upgrade($oldversion) {
-    global $DB, $CFG;
+    global $DB;
 
     $dbman = $DB->get_manager();
 
@@ -71,6 +69,15 @@ function xmldb_local_kopere_dashboard_upgrade($oldversion) {
         }
 
         upgrade_plugin_savepoint(true, 2026051002, "local", "kopere_dashboard");
+    }
+
+    if ($oldversion < 2026052400) {
+        $table = new xmldb_table("local_kopere_dashboard_event");
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        upgrade_plugin_savepoint(true, 2026052400, "local", "kopere_dashboard");
     }
 
     return true;

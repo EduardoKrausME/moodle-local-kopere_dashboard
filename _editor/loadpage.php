@@ -40,8 +40,6 @@ $aos = true;
 if (file_exists(__DIR__ . "/VvvebJs/_default/default-{$page}.html")) {
     if ($page == "webpages") {
         $html = $DB->get_field("local_kopere_dashboard_pages", "text", ["id" => $id]);
-    } else if ($page == "notification") {
-        $html = $DB->get_field("local_kopere_dashboard_event", "message", ["id" => $id]);
     }
 
     if (!isset($html[40])) {
