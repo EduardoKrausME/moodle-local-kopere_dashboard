@@ -17,17 +17,15 @@
 /**
  * Version File
  *
- * introduced 23/05/17 17:59
- *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
-$plugin->version = 2026031401;
-$plugin->release = "2.10.3";
-$plugin->requires = 2021041900;
+$plugin->version = 2026052400;
+$plugin->release = "3.0.0";
+$plugin->requires = 2024042200;
 $plugin->maturity = MATURITY_STABLE;
 $plugin->component = "local_kopere_dashboard";
