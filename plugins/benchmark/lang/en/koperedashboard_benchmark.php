@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * koperedashboard_benchmark.php
+ * Lang file
  *
  * @package   koperedashboard_benchmark
  * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}

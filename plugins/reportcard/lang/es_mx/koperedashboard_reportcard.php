@@ -1,0 +1,40 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Lang file
+ *
+ * @package   koperedashboard_reportcard
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+$string['finalgrade_label'] = 'Calificación final';
+$string['grade_item'] = 'Elemento calificado';
+$string['grade_range'] = 'Escala / rango';
+$string['grade_type'] = 'Tipo';
+$string['grade_value'] = 'Calificación';
+$string['manualitem'] = 'Elemento manual';
+$string['menu_desc'] = 'Vista en línea de las calificaciones del curso, incluida la calificación final y los elementos basados en escalas.';
+$string['menu_title'] = 'Boleta de calificaciones';
+$string['nocourses'] = 'No tienes cursos visibles disponibles para consultar en este momento.';
+$string['nogradesinselectedcourse'] = 'Este curso aún no tiene elementos de calificación visibles para mostrar en la boleta.';
+$string['notgraded'] = 'Sin calificar';
+$string['pluginname'] = 'Boleta de calificaciones';
+$string['reportcard:view'] = 'Ver boleta de calificaciones';
+$string['select_course'] = 'Seleccionar curso';
+$string['select_course_placeholder'] = 'Elige un curso';
+$string['unnameditem'] = 'Elemento sin nombre';

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * local_kopere_dashboard.php
+ * Lang file
  *
  * @package   local_kopere_dashboard
  * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * koperedashboard_users.php
+ * Lang file
  *
  * @package   koperedashboard_users
  * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}

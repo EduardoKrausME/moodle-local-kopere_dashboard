@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component koperedashboard_userimport.
+ * Lang file
  *
  * @package   koperedashboard_userimport
  * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}

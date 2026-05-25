@@ -1,0 +1,99 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Lang file
+ *
+ * @package   koperedashboard_attest
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+$string['actions_title'] = 'Acciones';
+$string['already_has_valid'] = 'Ya existe una constancia válida';
+$string['attest:manage'] = 'Gestionar constancias';
+$string['attest:view'] = 'Ver constancias';
+$string['audit_issue_create'] = 'Constancia generada.';
+$string['audit_tpl_create'] = 'Plantilla creada.';
+$string['audit_tpl_delete'] = 'Plantilla eliminada.';
+$string['audit_tpl_update'] = 'Plantilla actualizada.';
+$string['available_desc'] = 'Solo constancias de cursos con matrícula.';
+$string['available_title'] = 'Constancias disponibles';
+$string['cap_manage'] = 'Gestor de constancias';
+$string['cap_manage_desc'] = 'Puede crear y gestionar plantillas de constancias.';
+$string['cap_view'] = 'Acceso a constancias';
+$string['cap_view_desc'] = 'Puede ver y generar sus propias constancias.';
+$string['choose_course'] = 'Elija un curso';
+$string['choose_course_help'] = 'Primero seleccione el curso para ver las constancias disponibles.';
+$string['choose_course_placeholder'] = 'Seleccione un curso';
+$string['close_modal'] = 'Cerrar';
+$string['course_removed'] = 'Curso eliminado';
+$string['delete_template'] = 'Eliminar';
+$string['edit_template'] = 'Editar plantilla';
+$string['empty_available'] = 'No hay constancias disponibles para sus matrículas.';
+$string['empty_available_for_course'] = 'No hay constancias disponibles para el curso seleccionado.';
+$string['empty_available_select_course'] = 'Seleccione un curso para listar las constancias disponibles.';
+$string['empty_courses'] = 'Actualmente no está matriculado en ningún curso.';
+$string['empty_issued'] = 'Aún no ha generado ninguna constancia.';
+$string['field_active'] = 'Activo';
+$string['field_allcourses'] = 'Válido para todos los cursos';
+$string['field_courses'] = 'Cursos';
+$string['field_courses_help'] = 'Seleccione los cursos en los que se puede usar esta plantilla. Si "Válido para todos los cursos" está marcado, esta configuración será ignorada.';
+$string['field_html'] = 'Plantilla HTML';
+$string['field_html_help'] = 'Introduzca el HTML que se usará para generar el PDF de la constancia. Puede usar los marcadores disponibles para insertar datos dinámicos del estudiante, curso, fecha y validez.';
+$string['field_name'] = 'Nombre';
+$string['field_validmonths'] = 'Válido por (meses)';
+$string['footer_created'] = 'Creado el';
+$string['footer_desc'] = 'Documento electrónico con validación mediante código QR o el enlace de abajo.';
+$string['footer_hash'] = 'Firma';
+$string['footer_title'] = 'Firma digital';
+$string['footer_validuntil'] = 'Válido hasta';
+$string['generate'] = 'Generar PDF';
+$string['generate_new'] = 'Generar constancia';
+$string['generate_new_button'] = 'Generar nueva constancia';
+$string['home_kpi_subtitle'] = 'Documentos emitidos y válidos';
+$string['home_kpi_title'] = 'Constancias válidas';
+$string['issued_desc'] = 'Vea las constancias ya generadas y si todavía son válidas.';
+$string['issued_title'] = 'Constancias generadas';
+$string['manage_title'] = 'Plantillas de constancias';
+$string['menu_desc'] = 'Genere constancias en PDF basadas en plantillas HTML.';
+$string['menu_title'] = 'Constancias';
+$string['new_template'] = 'Nueva plantilla';
+$string['open_attestation'] = 'Abrir constancia';
+$string['open_valid'] = 'Abrir constancia válida';
+$string['placeholders_title'] = 'Marcadores disponibles';
+$string['pluginname'] = 'Constancias';
+$string['recreate_valid'] = 'Recrear constancia válida';
+$string['status_expired'] = 'Caducado';
+$string['status_notgenerated'] = 'Aún no generado';
+$string['status_title'] = 'Estado';
+$string['status_valid'] = 'Válido';
+$string['status_valid_expiring'] = 'Válido y próximo a caducar';
+$string['student_title'] = 'Mis constancias';
+$string['studentcard'] = 'Carné de estudiante';
+$string['studentcard_desc'] = '';
+$string['studentcardgenerate'] = 'Generar PDF';
+$string['studentcardnophoto'] = '<h5>No tiene una foto de perfil.</h5>Edite su perfil y añada una foto para generar su carné de estudiante.';
+$string['studentcardnovisiblecourses'] = 'El carné de estudiante solo está disponible para usuarios matriculados en cursos visibles.';
+$string['studentcardsignaturedesc'] = 'Esta página contiene el código de validación y el enlace público de validación del PDF del carné de estudiante.';
+$string['studentcardsignaturetitle'] = 'Firma digital y validador';
+$string['studentcardvalidationinvalid'] = 'Código de validación no válido.';
+$string['studentcardvalidationlabel'] = 'Validador';
+$string['studentcardvalidationtitle'] = 'Validación del carné de estudiante';
+$string['studentcardvalidationvalid'] = 'Carné de estudiante válido.';
+$string['template_removed'] = 'Plantilla eliminada';
+$string['title_view'] = 'Constancias';
+$string['verify_title'] = 'Verificación de constancia';
