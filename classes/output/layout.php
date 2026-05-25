@@ -34,10 +34,6 @@ use moodle_url;
  */
 class layout {
 
-    public static function set_breadcrumb( $title, $url=null) {
-
-    }
-
     /**
      * Function page_render
      *
@@ -219,7 +215,8 @@ class layout {
      * @throws \coding_exception
      * @throws \core\exception\moodle_exception
      */
-    private static function build_breadcrumb(string $currenttitle, bool $addpage, ?array $activeparent, ?array $activechild): array {
+    private static function build_breadcrumb(string $currenttitle, bool $addpage, ?array $activeparent, ?array $activechild
+    ): array {
         $breadcrumb = [];
 
         self::add_breadcrumb_item(
