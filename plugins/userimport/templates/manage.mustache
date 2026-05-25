@@ -1,0 +1,251 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_userimport/manage
+
+    Example context (json):
+    {
+        Aqui tem que criar o context em inglês
+    }
+}}
+
+{{!
+    @template koperedashboard_userimport/manage
+}}
+
+{{#errors.0}}
+    <div class="kopere_dashboard-card">
+        <div class="alert alert-danger" role="alert" style="margin-bottom:0;">
+            <ul style="margin:0; padding-left:18px;">
+                {{#errors}}
+                    <li>{{{message}}}</li>
+                {{/errors}}
+            </ul>
+        </div>
+    </div>
+{{/errors.0}}
+
+{{#mode_upload}}
+    <div class="kopere_dashboard-card">
+        <p>{{{intro}}}</p>
+
+        <ul style="margin: 16px 0 0 0; padding-left: 18px;">
+            {{#tips}}
+                <li>{{{text}}}</li>
+            {{/tips}}
+        </ul>
+
+        <form action="{{{uploadurl}}}" method="post" enctype="multipart/form-data" style="margin-top: 18px;">
+            <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+            <div class="form-group">
+                <label for="id_csvfile"><strong>{{#str}}upload_csv, koperedashboard_userimport{{/str}}</strong></label>
+                <input id="id_csvfile" class="form-control" type="file" name="csvfile" accept=".csv,.txt" required>
+            </div>
+            <button class="btn btn-primary" type="submit" style="margin-top: 12px;">
+                {{#str}}upload_submit, koperedashboard_userimport{{/str}}
+            </button>
+        </form>
+    </div>
+{{/mode_upload}}
+
+{{#mode_mapping}}
+    <div class="kopere_dashboard-card">
+        <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:flex-start;">
+            <div>
+                <h5 style="margin-bottom:8px;">{{#str}}preview_title, koperedashboard_userimport{{/str}}</h5>
+                <p style="margin-bottom:0;">{{#str}}preview_intro, koperedashboard_userimport{{/str}}</p>
+            </div>
+            <div>
+                <div><strong>{{#str}}filename, koperedashboard_userimport{{/str}}:</strong> {{{filename}}}</div>
+                <div><strong>{{#str}}separator, koperedashboard_userimport{{/str}}:</strong> {{{separatorlabel}}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="kopere_dashboard-card" style="margin-top:16px;">
+        <table class="table table-striped kopere_dashboard-card-table" style="margin-bottom:0;">
+            <thead>
+            <tr>
+                {{#headers}}
+                    <th>{{{value}}}</th>
+                {{/headers}}
+            </tr>
+            </thead>
+            <tbody>
+            {{#previewrows}}
+                <tr>
+                    {{#cells}}
+                        <td>
+                            {{#empty}}<span class="text-muted">(empty)</span>{{/empty}}
+                            {{^empty}}{{{value}}}{{/empty}}
+                        </td>
+                    {{/cells}}
+                </tr>
+            {{/previewrows}}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="kopere_dashboard-card" style="margin-top:16px;">
+        <form action="{{{wwwroot}}}/local/kopere_dashboard/plugins/userimport/manage.php?action=preview" method="post">
+            <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+            <input type="hidden" name="token" value="{{{token}}}">
+
+            <h5>{{#str}}preview_title, koperedashboard_userimport{{/str}}</h5>
+            <div class="row" style="margin-top: 12px;">
+                {{#fields}}
+                    <div class="col-md-6" style="margin-bottom:12px;">
+                        <label for="id_map_{{{name}}}"><strong>{{{label}}}</strong>{{#required}} *{{/required}}</label>
+                        <select id="id_map_{{{name}}}" class="custom-select" name="map[{{{name}}}]">
+                            {{#options}}
+                                <option value="{{{value}}}" {{#selected}}selected{{/selected}}>{{{label}}}</option>
+                            {{/options}}
+                        </select>
+                    </div>
+                {{/fields}}
+            </div>
+
+            {{#customfields.0}}
+                <hr>
+                <h5>{{#str}}customfields, koperedashboard_userimport{{/str}}</h5>
+                <div class="row" style="margin-top: 12px;">
+                    {{#customfields}}
+                        <div class="col-md-6" style="margin-bottom:12px;">
+                            <label for="id_custommap_{{{id}}}"><strong>{{{name}}}</strong> <span
+                                    class="text-muted">({{{shortname}}})</span></label>
+                            <select id="id_custommap_{{{id}}}" class="custom-select" name="custommap[{{{id}}}]">
+                                {{#options}}
+                                    <option value="{{{value}}}" {{#selected}}selected{{/selected}}>{{{label}}}</option>
+                                {{/options}}
+                            </select>
+                        </div>
+                    {{/customfields}}
+                </div>
+            {{/customfields.0}}
+
+            <button class="btn btn-primary" type="submit" style="margin-top: 12px;">
+                {{#str}}run_preview, koperedashboard_userimport{{/str}}
+            </button>
+        </form>
+    </div>
+{{/mode_mapping}}
+
+{{#mode_preview}}
+    <div class="kopere_dashboard-card">
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:12px;">
+            <div class="kopere_dashboard-userimport-stat"><strong>{{{summary_total}}}</strong><span>{{#str}}
+                summary_total, koperedashboard_userimport{{/str}}</span></div>
+            <div class="kopere_dashboard-userimport-stat"><strong>{{{summary_create}}}</strong><span>{{#str}}
+                summary_create, koperedashboard_userimport{{/str}}</span></div>
+            <div class="kopere_dashboard-userimport-stat"><strong>{{{summary_existing}}}</strong><span>{{#str}}
+                summary_existing, koperedashboard_userimport{{/str}}</span></div>
+            <div class="kopere_dashboard-userimport-stat"><strong>{{{summary_withcourse}}}</strong><span>{{#str}}
+                summary_withcourse, koperedashboard_userimport{{/str}}</span></div>
+            <div class="kopere_dashboard-userimport-stat"><strong>{{{summary_errors}}}</strong><span>{{#str}}
+                summary_errors, koperedashboard_userimport{{/str}}</span></div>
+        </div>
+    </div>
+
+    <div class="kopere_dashboard-card" style="margin-top:16px;">
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+            <a class="btn btn-secondary" href="{{{backurl}}}">{{#str}}
+                back_mapping, koperedashboard_userimport{{/str}}</a>
+            <form action="{{{wwwroot}}}/local/kopere_dashboard/plugins/userimport/manage.php?action=import" method="post"
+                  style="margin:0;">
+                <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+                <input type="hidden" name="token" value="{{{token}}}">
+                <input type="hidden" name="mappingjson" value="{{{mappingjson}}}">
+                <button class="btn btn-primary" type="submit">{{#str}}
+                    confirm_import, koperedashboard_userimport{{/str}}</button>
+            </form>
+        </div>
+
+        <table class="table table-striped kopere_dashboard-card-table" style="margin-bottom:0;">
+            <thead>
+            <tr>
+                <th>{{#str}}table_username, koperedashboard_userimport{{/str}}</th>
+                <th>{{#str}}table_firstname, koperedashboard_userimport{{/str}}</th>
+                <th>{{#str}}table_lastname, koperedashboard_userimport{{/str}}</th>
+                <th>{{#str}}table_email, koperedashboard_userimport{{/str}}</th>
+                <th>{{#str}}table_course, koperedashboard_userimport{{/str}}</th>
+                <th>{{#str}}table_group, koperedashboard_userimport{{/str}}</th>
+                <th>{{#str}}table_status, koperedashboard_userimport{{/str}}</th>
+                <th>{{#str}}table_message, koperedashboard_userimport{{/str}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#rows}}
+                <tr>
+                    <td>{{{username}}}</td>
+                    <td>{{{firstname}}}</td>
+                    <td>{{{lastname}}}</td>
+                    <td>{{{email}}}</td>
+                    <td>{{{course}}}</td>
+                    <td>{{{group}}}</td>
+                    <td><span class="badge text-bg-{{{statusclass}}}">{{{statuslabel}}}</span></td>
+                    <td>{{{message}}}</td>
+                </tr>
+            {{/rows}}
+            </tbody>
+        </table>
+    </div>
+{{/mode_preview}}
+
+{{#mode_result}}
+    <div class="kopere_dashboard-card">
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:12px;">
+            <div class="kopere_dashboard-userimport-stat"><strong>{{{summary_total}}}</strong><span>{{#str}}
+                summary_total, koperedashboard_userimport{{/str}}</span></div>
+            <div class="kopere_dashboard-userimport-stat"><strong>{{{summary_created}}}</strong><span>{{#str}}
+                summary_created, koperedashboard_userimport{{/str}}</span></div>
+            <div class="kopere_dashboard-userimport-stat"><strong>{{{summary_existing}}}</strong><span>{{#str}}
+                summary_existing, koperedashboard_userimport{{/str}}</span></div>
+            <div class="kopere_dashboard-userimport-stat"><strong>{{{summary_enrolled}}}</strong><span>{{#str}}
+                summary_enrolled, koperedashboard_userimport{{/str}}</span></div>
+            <div class="kopere_dashboard-userimport-stat"><strong>{{{summary_errors}}}</strong><span>{{#str}}
+                summary_errors, koperedashboard_userimport{{/str}}</span></div>
+        </div>
+
+        <div style="margin-top:16px;">
+            <a class="btn btn-secondary" href="{{{restarturl}}}">{{#str}}
+                start_over, koperedashboard_userimport{{/str}}</a>
+        </div>
+    </div>
+
+    <div class="kopere_dashboard-card" style="margin-top:16px;">
+        <table class="table table-striped kopere_dashboard-card-table" style="margin-bottom:0;">
+            <thead>
+            <tr>
+                <th>{{#str}}table_line, koperedashboard_userimport{{/str}}</th>
+                <th>{{#str}}table_username, koperedashboard_userimport{{/str}}</th>
+                <th>{{#str}}table_status, koperedashboard_userimport{{/str}}</th>
+                <th>{{#str}}table_message, koperedashboard_userimport{{/str}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#rows}}
+                <tr>
+                    <td>{{{line}}}</td>
+                    <td>{{{username}}}</td>
+                    <td><span class="badge text-bg-{{{statusclass}}}">{{{statuslabel}}}</span></td>
+                    <td>{{{message}}}</td>
+                </tr>
+            {{/rows}}
+            </tbody>
+        </table>
+    </div>
+{{/mode_result}}

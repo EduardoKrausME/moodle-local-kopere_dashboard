@@ -17,10 +17,8 @@
 /**
  * data_table file
  *
- * introduced 14/05/17 22:54
- *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +27,6 @@ namespace local_kopere_dashboard\html;
 use Exception;
 use local_kopere_dashboard\util\export;
 use local_kopere_dashboard\util\number_util;
-use local_kopere_dashboard\util\url_util;
 
 /**
  * Class data_table
@@ -38,9 +35,9 @@ use local_kopere_dashboard\util\url_util;
  */
 class data_table {
     /** @var array */
-    private $column = [];
+    private $column;
     /** @var array */
-    private $columninfo = [];
+    private $columninfo;
     /** @var array */
     private $columndata = [];
     /** @var array */
@@ -53,7 +50,7 @@ class data_table {
     private $clickredirect = null;
 
     /** @var string */
-    private $tableid = "";
+    private $tableid;
 
     /** @var bool */
     private $isexport = false;
@@ -68,6 +65,62 @@ class data_table {
         $this->tableid = "datatable_" . uniqid();
         $this->column = $column;
         $this->columninfo = $columninfo;
+
+        $this->lang();
+    }
+
+    /**
+     * Function lang
+     *
+     * @return void
+     */
+    public static function lang() {
+        static $loaded = 0;
+        if ($loaded++) {
+            return;
+        }
+
+        global $PAGE;
+
+        $PAGE->requires->strings_for_js([
+            "yes",
+            "no",
+        ], "moodle");
+        $PAGE->requires->strings_for_js([
+            "visible",
+            "invisible",
+            "active",
+            "inactive",
+            "datatables_sEmptyTable",
+            "datatables_sInfo",
+            "datatables_sInfoEmpty",
+            "datatables_sInfoFiltered",
+            "datatables_sInfoPostFix",
+            "datatables_sInfoThousands",
+            "datatables_sLengthMenu",
+            "datatables_sLoadingRecords",
+            "datatables_sProcessing",
+            "datatables_sErrorMessage",
+            "datatables_sZeroRecords",
+            "datatables_sSearch",
+            "datatables_buttons_print_text",
+            "datatables_buttons_copy_text",
+            "datatables_buttons_csv_text",
+            "datatables_buttons_copySuccess1",
+            "datatables_buttons_copySuccess_",
+            "datatables_buttons_copyTitle",
+            "datatables_buttons_copyKeys",
+            "datatables_buttons_select_rows_",
+            "datatables_buttons_select_rows1",
+            "datatables_buttons_pageLength_",
+            "datatables_buttons_pageLength_1",
+            "datatables_oPaginate_sNext",
+            "datatables_oPaginate_sPrevious",
+            "datatables_oPaginate_sFirst",
+            "datatables_oPaginate_sLast",
+            "datatables_oAria_sSortAscending",
+            "datatables_oAria_sSortDescending",
+        ], "local_kopere_dashboard");
     }
 
     /**
@@ -143,8 +196,10 @@ class data_table {
      * @param null $styleheader
      * @param null $stylecol
      */
-    public function add_header($title, $chave = null, $type = table_header_item::TYPE_TEXT,
-                               $funcao = null, $styleheader = null, $stylecol = null) {
+    public function add_header(
+        $title, $chave = null, $type = table_header_item::TYPE_TEXT,
+        $funcao = null, $styleheader = null, $stylecol = null
+    ) {
         $column = new table_header_item();
         $column->chave = $chave;
         $column->type = $type;
@@ -196,7 +251,7 @@ class data_table {
             }
             $return .= "</tr>";
 
-            $this->columndefs[] = (object)["visible" => false, "targets" => -1];
+            $this->columndefs[] = (object) ["visible" => false, "targets" => -1];
         }
 
         $return .= "<tr class='{$class}'>";
@@ -217,38 +272,38 @@ class data_table {
             }
             $return .= "</th>";
 
-            $columndata = (object)["data" => $column->chave];
+            $columndata = (object) ["data" => $column->chave];
 
             if ($column->type == table_header_item::TYPE_INT) {
-                $this->columndefs[] = (object)["render" => "numberRenderer", "targets" => $key];
+                $this->columndefs[] = (object) ["render" => "numberRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_CURRENCY) {
-                $this->columndefs[] = (object)["render" => "currencyRenderer", "targets" => $key];
+                $this->columndefs[] = (object) ["render" => "currencyRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_DATE) {
-                $this->columndefs[] = (object)["targets" => $key];
+                $this->columndefs[] = (object) ["targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_FILESIZE) {
-                $this->columndefs[] = (object)["render" => "filesizeRenderer", "targets" => $key];
+                $this->columndefs[] = (object) ["render" => "filesizeRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_DATE) {
-                $this->columndefs[] = (object)["render" => "dateRenderer", "targets" => $key];
+                $this->columndefs[] = (object) ["render" => "dateRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_DATETIME) {
-                $this->columndefs[] = (object)["render" => "datetimeRenderer", "targets" => $key];
+                $this->columndefs[] = (object) ["render" => "datetimeRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_VISIBLE) {
-                $this->columndefs[] = (object)["render" => "visibleRenderer", "targets" => $key];
+                $this->columndefs[] = (object) ["render" => "visibleRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_STATUS) {
-                $this->columndefs[] = (object)["render" => "statusRenderer", "targets" => $key];
+                $this->columndefs[] = (object) ["render" => "statusRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_DELETED) {
-                $this->columndefs[] = (object)["render" => "deletedRenderer", "targets" => $key];
+                $this->columndefs[] = (object) ["render" => "deletedRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_TRUEFALSE) {
-                $this->columndefs[] = (object)["render" => "trueFalseRenderer", "targets" => $key];
+                $this->columndefs[] = (object) ["render" => "trueFalseRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_USERPHOTO) {
-                $this->columndefs[] = (object)["render" => "userphotoRenderer", "targets" => $key];
+                $this->columndefs[] = (object) ["render" => "userphotoRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_SECONDS) {
-                $this->columndefs[] = (object)["render" => "secondsRenderer", "targets" => $key];
+                $this->columndefs[] = (object) ["render" => "secondsRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::RENDERER_TIME) {
-                $this->columndefs[] = (object)["render" => "timeRenderer", "targets" => $key];
+                $this->columndefs[] = (object) ["render" => "timeRenderer", "targets" => $key];
             } else if ($column->type == table_header_item::TYPE_ACTION) {
-                $this->columndefs[] = (object)["orderable" => false, "targets" => $key];
+                $this->columndefs[] = (object) ["orderable" => false, "targets" => $key];
             } else {
-                $this->columndefs[] = (object)["render" => "default", "targets" => $key];
+                $this->columndefs[] = (object) ["render" => "default", "targets" => $key];
             }
 
             $this->columndata[] = $columndata;
@@ -274,19 +329,23 @@ class data_table {
      *
      * @param $linhas
      * @param string $class
-     * @throws Exception
+     * @param bool $returnhtml
+     * @return string|void
+     * @throws \coding_exception
      */
-    public function set_row($linhas, $class = "") {
+    public function set_row($linhas, $class = "", $returnhtml = false) {
         global $CFG;
 
+        $html = "";
+
         if ($this->clickredirect != null) {
-            echo '<tbody class="hover-pointer">';
+            $html .= '<tbody class="hover-pointer">';
         } else {
-            echo "<tbody>";
+            $html .= "<tbody>";
         }
 
         foreach ($linhas as $linha) {
-            echo "<tr>";
+            $html .= "<tr>";
             /** @var table_header_item $column */
             foreach ($this->column as $column) {
 
@@ -355,9 +414,15 @@ class data_table {
 
                 $this->print_row($html, $thisclass);
             }
-            echo "</tr>";
+            $html .= "</tr>";
         }
-        echo "</tbody>";
+        $html .= "</tbody>";
+
+        if ($returnhtml) {
+            return $html;
+        } else {
+            echo $html;
+        }
     }
 
     /**
@@ -408,7 +473,7 @@ class data_table {
         }
 
         if ($this->ajaxurl) {
-            $initparams["ajax"] = (object)[
+            $initparams["ajax"] = (object) [
                 "url" => $this->ajaxurl = str_replace("view.php", "view-ajax.php", $this->ajaxurl),
                 "type" => "POST",
             ];
@@ -449,7 +514,9 @@ class data_table {
             $clickchave = [$clickchave];
         }
 
-        $PAGE->requires->js_call_amd("local_kopere_dashboard/dataTables_init", "click",
-            [$this->tableid, $clickchave, $clickurl]);
+        $PAGE->requires->js_call_amd(
+            "local_kopere_dashboard/dataTables_init", "click",
+            [$this->tableid, $clickchave, $clickurl]
+        );
     }
 }

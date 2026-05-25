@@ -1,0 +1,8 @@
+{
+  "subplugintypes": {
+    "koperedashboard": "plugins"
+  },
+  "plugintypes": {
+    "koperedashboard": "local/kopere_dashboard/plugins"
+  }
+}

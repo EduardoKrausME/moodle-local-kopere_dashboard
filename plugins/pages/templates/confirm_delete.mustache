@@ -1,0 +1,42 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_pages/confirm_delete
+
+    Example context (json):
+    {
+        Aqui tem que criar o context em inglês
+    }
+}}
+
+{{!
+    @template koperedashboard_pages/confirm_delete
+}}
+<div class="kopere_dashboard-card kopere_dashboard-pages-confirm">
+    {{#haserror}}
+        <div class="alert alert-danger">{{{error}}}</div>
+    {{/haserror}}
+
+    <h3>{{{title}}}</h3>
+    <p>{{{message}}}</p>
+
+    <form method="post" action="{{{actionurl}}}">
+        <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+        <button type="submit" class="btn btn-danger">{{#str}}delete, moodle{{/str}}</button>
+        <a class="btn btn-outline-secondary" href="{{{cancelurl}}}">{{#str}}cancel{{/str}}</a>
+    </form>
+</div>

@@ -17,10 +17,8 @@
 /**
  * message file
  *
- * introduced 31/01/17 06:01
- *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +30,6 @@ namespace local_kopere_dashboard\util;
  * @package local_kopere_dashboard\util
  */
 class message {
-
     /**
      * Function schedule_message
      *

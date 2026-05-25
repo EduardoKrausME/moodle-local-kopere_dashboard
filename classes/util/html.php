@@ -18,7 +18,7 @@
  * html file
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -49,7 +49,7 @@ class html {
         "ï", "ó", "ò", "ô", "õ", "ö", "ú", "ù", "û", "ü", "ç", "Á",
         "À", "Â", "Ã", "Ä", "É", "È", "Ê", "Ë", "Í", "Ì", "Î", "Ï",
         "Ó", "Ò", "Ô", "Õ", "Ö", "Ú", "Ù", "Û", "Ü", "Ç", "'", '´',  // phpcs:disable
-        "`", "/", "\\", "~", "^", "¨", "ª", ",", ":", "_"];
+        "`", "/", "\\", "~", "^", "¨", "ª", ",", ":", "_"]; // phpcs:disable
     /** @var array */
     private static $semacento = [
         "a", "a", "a", "a", "a", "e", "e", "e", "e", "i", "i", "i",
@@ -63,7 +63,7 @@ class html {
      *
      * @param $html
      *
-     * @return mixed
+     * @return array|string|string[]
      */
     public static function caracter_spacial($html) {
         return str_replace(self::$acentosascii, self::$acentoshtml, $html);
@@ -74,7 +74,7 @@ class html {
      *
      * @param $html
      *
-     * @return mixed
+     * @return array|string|string[]
      */
     public static function retira_acentos($html) {
         $html = str_replace(self::$acentoshtml, self::$semacento, $html);
@@ -88,7 +88,7 @@ class html {
      *
      * @param $html
      *
-     * @return mixed|null|string|string[]
+     * @return string|string[]|null
      */
     public static function trim($html) {
         for ($i = 0; $i < 10; $i++) {

@@ -1,0 +1,139 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_benchmark/index
+
+    Example context (json):
+    {
+        Aqui tem que criar o context em inglês
+    }
+}}
+
+{{!
+    @template koperedashboard_benchmark/execute
+}}
+
+<div class="kopere_dashboard-card">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+        {{#hasexecute}}
+            <div>
+                <h5>{{#str}}summary_title, koperedashboard_benchmark{{/str}}</h5>
+                <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:8px;">
+                    <span class="badge text-bg-{{summary.statusclass}}">{{summary.statuslabel}}</span>
+                    <span><strong>{{#str}}
+                        total_time, koperedashboard_benchmark{{/str}}:</strong> {{{summary.totalseconds}}}</span>
+                    <span><strong>{{#str}}
+                        peakmemory, koperedashboard_benchmark{{/str}}:</strong> {{{summary.peakmemory}}}
+                        MB</span>
+                </div>
+            </div>
+        {{/hasexecute}}
+        <div>
+            <div style="display:flex; justify-content:flex-end; margin-bottom:16px;">
+                <a class="btn btn-primary" href="{{{runurl}}}">
+                    {{#str}}run_benchmark, koperedashboard_benchmark{{/str}}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#hasexecute}}
+    <div class="kopere_dashboard-card" style="margin-top:16px;">
+        <h5>{{#str}}results_title, koperedashboard_benchmark{{/str}}</h5>
+        <table class="table table-striped kopere_dashboard-card-table" style="margin-top:12px;">
+            <thead>
+            <tr>
+                <th>{{#str}}test_name, koperedashboard_benchmark{{/str}}</th>
+                <th>{{#str}}iterations, koperedashboard_benchmark{{/str}}</th>
+                <th>{{#str}}time_elapsed, koperedashboard_benchmark{{/str}}</th>
+                <th>{{#str}}result_status, koperedashboard_benchmark{{/str}}</th>
+                <th>{{#str}}recommendation, koperedashboard_benchmark{{/str}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#results}}
+                <tr>
+                    <td><strong>{{{name}}}</strong></td>
+                    <td>{{{iterations}}}</td>
+                    <td>{{{seconds}}}</td>
+                    <td><span class="badge text-bg-{{{statusclass}}}">{{{statuslabel}}}</span></td>
+                    <td>{{{description}}}</td>
+                </tr>
+            {{/results}}
+            </tbody>
+        </table>
+    </div>
+{{/hasexecute}}
+
+<div class="kopere_dashboard-card" style="margin-top:16px;">
+    <h5>{{#str}}environment_title, koperedashboard_benchmark{{/str}}</h5>
+
+    <table class="table table-striped kopere_dashboard-card-table" style="margin-top:12px;">
+        <thead>
+        <tr>
+            <th>{{#str}}test_name, koperedashboard_benchmark{{/str}}</th>
+            <th>{{#str}}value, koperedashboard_benchmark{{/str}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#environment}}
+            <tr>
+                <td>{{{label}}}</td>
+                <td>
+                    <span class="{{{valueclass}}}">{{{value}}}</span>
+                    {{#hasmessage}}
+                        <div class="{{{messageclass}}}">{{{message}}}</div>
+                    {{/hasmessage}}
+                </td>
+            </tr>
+        {{/environment}}
+        </tbody>
+    </table>
+</div>
+
+<div class="kopere_dashboard-card" style="margin-top:16px;">
+    <h5>{{#str}}recommendations_title, koperedashboard_benchmark{{/str}}</h5>
+
+    <p class="text-muted">{{#str}}help_recommendations, koperedashboard_benchmark{{/str}}</p>
+
+    <table class="table table-striped kopere_dashboard-card-table" style="margin-top:12px;">
+        <thead>
+        <tr>
+            <th>{{#str}}test_name, koperedashboard_benchmark{{/str}}</th>
+            <th>{{#str}}value, koperedashboard_benchmark{{/str}}</th>
+            <th>{{#str}}result_status, koperedashboard_benchmark{{/str}}</th>
+            <th>{{#str}}recommendation, koperedashboard_benchmark{{/str}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#checks}}
+            <tr>
+                <td>{{{name}}}</td>
+                <td>
+                    <span class="{{{valueclass}}}">{{{value}}}</span>
+                    {{#hasmessage}}
+                        <div class="{{{messageclass}}}">{{{message}}}</div>
+                    {{/hasmessage}}
+                </td>
+                <td><span class="badge text-bg-{{{statusclass}}}">{{{statuslabel}}}</span></td>
+                <td>{{{recommendation}}}</td>
+            </tr>
+        {{/checks}}
+        </tbody>
+    </table>
+</div>

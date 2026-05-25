@@ -1,0 +1,54 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_pages/settings
+
+    Example context (json):
+    {
+        Aqui tem que criar o context em inglês
+    }
+}}
+
+{{!
+    @template koperedashboard_pages/settings
+}}
+<div class="kopere_dashboard-card kopere_dashboard-pages-form">
+    <form method="post" action="{{{actionurl}}}">
+        <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+
+        <div class="form-group">
+            <label for="webpages_theme">{{#str}}field_default_theme, koperedashboard_pages{{/str}}</label>
+            <select class="form-control" id="webpages_theme" name="webpages_theme">
+                {{#themeoptions}}
+                    <option value="{{{key}}}" {{#selected}}selected{{/selected}}>{{{value}}}</option>
+                {{/themeoptions}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="webpages_analytics_id">{{#str}}field_analytics, koperedashboard_pages{{/str}}</label>
+            <textarea class="form-control" id="webpages_analytics_id" name="webpages_analytics_id"
+                      rows="5">{{{analytics}}}</textarea>
+            <small class="form-text text-muted">{{#str}}field_analytics_help, koperedashboard_pages{{/str}}</small>
+        </div>
+
+        <div class="kopere_dashboard-pages-form-actions">
+            <button type="submit" class="btn btn-primary">{{#str}}savechanges{{/str}}</button>
+            <a class="btn btn-outline-secondary" href="{{{cancelurl}}}">{{#str}}cancel{{/str}}</a>
+        </div>
+    </form>
+</div>

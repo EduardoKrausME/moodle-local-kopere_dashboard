@@ -1,0 +1,68 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_kopere_dashboard/permissions_list
+
+    Example context (json):
+    {
+        "items": [
+            {
+                "name": "Finance - Manage plans",
+                "capability": "kopere_dashboard/financial:manageplans",
+                "description": "Allows users to create and manage payment plans, assign students, and override installment rules.",
+                "manageurl": "https://moodle.example.com/local/kopere_dashboard/permissions/edit.php?cap=local%2Fkopere_dashboard_financial%3Amanageplans"
+            },
+            {
+                "name": "Academic - Manage requests",
+                "capability": "kopere_dashboard/requests:manage",
+                "description": "Allows users to respond to academic requests (waivers, grade review, certificate issues) according to category responsibility rules.",
+                "manageurl": "https://moodle.example.com/local/kopere_dashboard/permissions/edit.php?cap=local%2Fkopere_dashboard_requests%3Amanage"
+            },
+            {
+                "name": "Courses - View participants",
+                "capability": "kopere_dashboard/courses:viewparticipants",
+                "description": "Allows users to view the participants list and last access information inside the Kopere Dashboard course view.",
+                "manageurl": "https://moodle.example.com/local/kopere_dashboard/permissions/edit.php?cap=kopere_dashboard%2Fcourses%3Aviewparticipants"
+            }
+        ]
+    }
+}}
+
+<div class="alert alert-info" style="margin-bottom: 16px;">
+    <div style="margin-top: 8px;">
+        {{#str}}permissions_desc, local_kopere_dashboard{{/str}}
+    </div>
+</div>
+{{#groups}}
+
+    <div class="kopere_dashboard-card">
+
+        <h2 class="kopere_dashboard-card-title">{{{pluginname}}}</h2>
+
+        {{#items}}
+            <div class="kopere_dashboard-card">
+                <h3>{{{name}}}</h3>
+                <div class="muted">{{{description}}}</div>
+
+                <div class="mt-4">
+                    <a class="btn btn-primary" href="{{{manageurl}}}">
+                        {{#str}}permissions_manage, local_kopere_dashboard{{/str}}</a>
+                </div>
+            </div>
+        {{/items}}
+    </div>
+{{/groups}}

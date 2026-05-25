@@ -17,10 +17,8 @@
 /**
  * json file
  *
- * introduced 15/05/17 00:23
- *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -68,7 +66,7 @@ class json {
          // preventing issues with special characters in user data.
         $json = json_encode($returnarray, JSON_UNESCAPED_UNICODE);
 
-        end_util::end_script_show($json);
+        die($json);
     }
 
     /**
@@ -85,6 +83,6 @@ class json {
 
         $json = json_encode($returnarray);
 
-        end_util::end_script_show($json);
+        die($json);
     }
 }

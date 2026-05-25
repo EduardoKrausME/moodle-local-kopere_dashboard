@@ -1,0 +1,48 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_kopere_dashboard/about
+
+    Example context (json):
+    {
+        Aqui tem que criar o context em inglês
+    }
+}}
+
+<div class="card-body p-4 text-center">
+    <p><img src="https://www.eduardokraus.com/logos/kopere_dashboard.svg" alt="Logo"></p>
+</div>
+
+<div class="kopere_dashboard-card shadow-sm border-0 h-100">
+    <div class="card-body p-4">
+        <h4 class="h5 mb-3">{{#str}}about_description_title, local_kopere_dashboard{{/str}}</h4>
+        <p class="mb-0">{{#str}}about_description_text, local_kopere_dashboard{{/str}}</p>
+    </div>
+    <div class="card-body p-4">
+        <h4 class="h5 mb-3">{{#str}}about_support_title, local_kopere_dashboard{{/str}}</h4>
+        <p>{{#str}}about_support_text, local_kopere_dashboard{{/str}}</p>
+        <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-outline-primary" href="https://eduardokraus.com" target="_blank" rel="noopener noreferrer">
+                {{#str}}about_website_label, local_kopere_dashboard{{/str}}
+            </a>
+            <a class="btn btn-outline-secondary" href="https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/" 
+               target="_blank" rel="noopener noreferrer">
+                {{#str}}about_github_label, local_kopere_dashboard{{/str}}
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,32 +1,45 @@
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * dataTables_init.js
+ *
+ * @package   local_kopere_dashboard
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 define([
     "jquery",
     "local_kopere_dashboard/dataTables",
     "local_kopere_dashboard/dataTables.buttons",
     "local_kopere_dashboard/dataTables.buttons.html5",
     "local_kopere_dashboard/dataTables.buttons.print",
-    "local_kopere_dashboard/dataTables.responsive",
     "local_kopere_dashboard/jszip",
-], function($) {
-    var dataTables_init = {
-        language: "en",
-
-        init: function(tableid, params) {
-
-            var langClass = $('body').attr('class').match(/lang-\w+/);
-            if (langClass) {
-                var language = langClass[0].replace('lang-', '');
-                dataTables_init.language = language.replace(/_(\w+)/, (_, match) => `-${match.toUpperCase()}`);
-            }
-
+], function ($) {
+    let dataTables_init = {
+        init: function (tableid, params) {
             if (!params) {
-                var params_json = $(`#tableparams_${tableid}`).val();
+                let params_json = $(`#tableparams_${tableid}`).val();
                 params = JSON.parse(params_json);
             }
 
-            var renderer = {
-                mustacheRenderer: function(data, type, row, info) {
+            let renderer = {
+                mustacheRenderer: function (data, type, row, info) {
                     if (type == "sort") {
-                        var d = data.replace(/<[^>]*>/g, '');
+                        let d = data.replace(/<[^>]*>/g, '');
                         if (/^\d/.test(data)) {
                             d = d.split(",").join(".");
                             d = parseFloat(d);
@@ -39,10 +52,10 @@ define([
                         return data;
                     }
 
-                    var columns = info.settings.aoColumns;
-                    var col = info.col;
-                    var column = columns[col];
-                    var columnname = column.data;
+                    let columns = info.settings.aoColumns;
+                    let col = info.col;
+                    let column = columns[col];
+                    let columnname = column.data;
 
                     if (row[`${columnname}_mustache`]) {
                         return row[`${columnname}_mustache`];
@@ -50,7 +63,7 @@ define([
                         return data;
                     }
                 },
-                numberRenderer: function(data, type, row, info) {
+                numberRenderer: function (data, type) {
                     if (type == "sort") {
                         if (/^\d/.test(data)) {
                             data = data.split(",").join(".");
@@ -71,14 +84,14 @@ define([
 
                     return '<div class="text-center text-nowrap">' + data + '</div>';
                 },
-                currencyRenderer: function(data, type, row, info) {
+                currencyRenderer: function (data, type) {
                     if (type != 'display') {
                         return data;
                     }
 
-                    return '<div class="text-center text-nowrap">R$ ' + data + '</div>';
+                    return `<div class="text-center text-nowrap">R$ ${data}</div>`;
                 },
-                filesizeRenderer: function(data, type, row, info) {
+                filesizeRenderer: function (data, type) {
                     if (type != 'display') {
                         return data;
                     }
@@ -100,7 +113,7 @@ define([
                         return data.toFixed(2) + ' Tb';
                     }
                 },
-                dateRenderer: function(data, type, row, info) {
+                dateRenderer: function (data, type) {
                     if (type != 'display') {
                         return data;
                     }
@@ -116,19 +129,18 @@ define([
                         return $value;
                     }
 
-                    var a = new Date(data * 1000);
-                    var year = a.getFullYear();
-                    var month = twoDigit(a.getMonth() + 1);
-                    var day = twoDigit(a.getDate());
+                    let a = new Date(data * 1000);
+                    let year = a.getFullYear();
+                    let month = twoDigit(a.getMonth() + 1);
+                    let day = twoDigit(a.getDate());
 
-                    var result = M.util.get_string('date_renderer_format', "local_kopere_dashboard");
-                    result = result.replace("day", day);
-                    result = result.replace("month", month);
-                    result = result.replace("year", year);
-
-                    return '<div class="text-nowrap">' + result + '</div>';
+                    if (M.cfg.language == "en") {
+                        return `<div class="text-nowrap">${month}/${day}/${year}</div>`;
+                    } else {
+                        return `<div class="text-nowrap">${day}/${month}/${year}</div>`;
+                    }
                 },
-                datetimeRenderer: function(data, type, row, info) {
+                datetimeRenderer: function (data, type) {
                     if (type != 'display') {
                         return data;
                     }
@@ -144,23 +156,20 @@ define([
                         return $value;
                     }
 
-                    var a = new Date(data * 1000);
-                    var year = a.getFullYear();
-                    var month = twoDigit(a.getMonth() + 1);
-                    var day = twoDigit(a.getDate());
-                    var hour = twoDigit(a.getHours());
-                    var min = twoDigit(a.getMinutes());
+                    let a = new Date(data * 1000);
+                    let year = a.getFullYear();
+                    let month = twoDigit(a.getMonth() + 1);
+                    let day = twoDigit(a.getDate());
+                    let hour = twoDigit(a.getHours());
+                    let min = twoDigit(a.getMinutes());
 
-                    var result = M.util.get_string('datetime_renderer_format', "local_kopere_dashboard");
-                    result = result.replace("day", day);
-                    result = result.replace("month", month);
-                    result = result.replace("year", year);
-                    result = result.replace("hour", hour);
-                    result = result.replace("min", min);
-
-                    return '<div class="text-nowrap">' + result + '</div>';
+                    if (M.cfg.language == "en") {
+                        return `<div class="text-nowrap">${month}/${day}/${year} ${hour}:${min}</div>`;
+                    } else {
+                        return `<div class="text-nowrap">${day}/${month}/${year} ${hour}:${min}</div>`;
+                    }
                 },
-                visibleRenderer: function(data, type, row, info) {
+                visibleRenderer: function (data, type) {
                     if (type != 'display') {
                         if (type == 'filter') {
                             if (!data) {
@@ -181,7 +190,7 @@ define([
                             '"></div>';
                     }
                 },
-                statusRenderer: function(data, type, row, info) {
+                statusRenderer: function (data, type) {
                     if (type != 'display') {
                         if (type == 'filter') {
                             if (data) {
@@ -203,7 +212,7 @@ define([
                             '"></div>';
                     }
                 },
-                deletedRenderer: function(data, type, row, info) {
+                deletedRenderer: function (data, type) {
                     if (type != 'display') {
                         if (type == 'filter') {
                             if (!data) {
@@ -223,7 +232,7 @@ define([
                                      title="${M.util.get_string('active', "local_kopere_dashboard")}"></div>`;
                     }
                 },
-                trueFalseRenderer: function(data, type, row, info) {
+                trueFalseRenderer: function (data, type) {
                     if (type != 'display') {
                         return data;
                     }
@@ -234,7 +243,7 @@ define([
                         return M.util.get_string('yes');
                     }
                 },
-                userphotoRenderer: function(data, type, row, info) {
+                userphotoRenderer: function (data, type) {
                     if (type != 'display') {
                         return data;
                     }
@@ -243,18 +252,18 @@ define([
                                  src="${M.cfg.wwwroot}/local/kopere_dashboard/profile-image.php?type=photo_user&id=${data}"
                                  style="width:35px;height:35px" />`;
                 },
-                secondsRenderer: function(data, type, row, info) {
+                secondsRenderer: function (data, type) {
                     if (type != 'display') {
                         return data;
                     }
 
-                    var tempo = parseInt(data);
+                    let tempo = parseInt(data);
                     if (isNaN(tempo) || tempo < 1) {
                         return '00:00:00';
                     }
 
-                    var min = parseInt(tempo / 60);
-                    var hor = parseInt(min / 60);
+                    let min = parseInt(tempo / 60);
+                    let hor = parseInt(min / 60);
 
                     min = min % 60;
                     if (min < 10) {
@@ -262,7 +271,7 @@ define([
                         min = min.substr(0, 2);
                     }
 
-                    var seg = tempo % 60;
+                    let seg = tempo % 60;
                     if (seg <= 9) {
                         seg = "0" + seg;
                     }
@@ -273,18 +282,18 @@ define([
 
                     return `${hor}:${min}:${seg}`;
                 },
-                timeRenderer: function(data, type, row, info) {
+                timeRenderer: function (data, type) {
                     if (type != 'display') {
                         return data;
                     }
 
-                    var tempo = parseInt(data);
+                    let tempo = parseInt(data);
                     if (isNaN(tempo) || tempo < 1) {
                         return '00:00:00';
                     }
 
-                    var min = parseInt(tempo / 60);
-                    var hor = parseInt(min / 60);
+                    let min = parseInt(tempo / 60);
+                    let hor = parseInt(min / 60);
 
                     min = min % 60;
                     if (min < 10) {
@@ -292,7 +301,7 @@ define([
                         min = min.substr(0, 2);
                     }
 
-                    var seg = tempo % 60;
+                    let seg = tempo % 60;
                     if (seg <= 9) {
                         seg = "0" + seg;
                     }
@@ -305,8 +314,8 @@ define([
                 },
             };
 
-            var newColumnDefs = [];
-            var iterate = $.each(params.columnDefs, function(id, columnDef) {
+            let newColumnDefs = [];
+            let iterate = $.each(params.columnDefs, function (id, columnDef) {
                 switch (columnDef.render) {
                     case "numberRenderer":
                         columnDef.render = renderer.numberRenderer;
@@ -351,8 +360,7 @@ define([
                 }
                 newColumnDefs.push(columnDef);
             });
-            $.when(iterate).done(function() {
-
+            $.when(iterate).done(function () {
                 params.columnDefs = newColumnDefs;
                 params.oLanguage = {
                     sEmptyTable: M.util.get_string('datatables_sEmptyTable', "local_kopere_dashboard"),
@@ -388,19 +396,19 @@ define([
                             1: M.util.get_string('datatables_buttons_select_rows1', "local_kopere_dashboard"),
                         }
                     },
-                    oPaginate: {
-                        sNext: M.util.get_string('datatables_oPaginate_sNext', "local_kopere_dashboard"),
-                        sPrevious: M.util.get_string('datatables_oPaginate_sPrevious', "local_kopere_dashboard"),
-                        sFirst: M.util.get_string('datatables_oPaginate_sFirst', "local_kopere_dashboard"),
-                        sLast: M.util.get_string('datatables_oPaginate_sLast', "local_kopere_dashboard"),
-                    },
                     oAria: {
                         sSortAscending: M.util.get_string('datatables_oAria_sSortAscending', "local_kopere_dashboard"),
                         sSortDescending: M.util.get_string('datatables_oAria_sSortDescending', "local_kopere_dashboard"),
+                        paginate: {
+                            next: M.util.get_string('datatables_oPaginate_sNext', "local_kopere_dashboard"),
+                            previous: M.util.get_string('datatables_oPaginate_sPrevious', "local_kopere_dashboard"),
+                            first: M.util.get_string('datatables_oPaginate_sFirst', "local_kopere_dashboard"),
+                            last: M.util.get_string('datatables_oPaginate_sLast', "local_kopere_dashboard"),
+                        },
                     }
                 };
                 params.responsive = true;
-                params.locale = dataTables_init.language;
+                params.locale = M.cfg.language;
 
                 if (params.export_title) {
                     params.buttons = [
@@ -431,19 +439,19 @@ define([
                     params.select = true;
                 }
 
-                var count_error = 0;
-                $.fn.dataTable.ext.errMode = function(settings, helpPage, message) {
+                let count_error = 0;
+                $.fn.dataTable.ext.errMode = function () {
                     if (count_error < 20) {
-                        var _processing = $("#" + tableid + "_processing");
-                        setTimeout(function() {
+                        let _processing = $("#" + tableid + "_processing");
+                        setTimeout(function () {
                             _processing.show().html(
                                 "<div style='color:#e91e63'>" +
                                 M.util.get_string('datatables_sErrorMessage', "local_kopere_dashboard", "<span class='counter'>30</span>") +
                                 "</div>");
                         }, 500);
 
-                        var timer = 30;
-                        var _inteval = setInterval(function() {
+                        let timer = 30;
+                        let _inteval = setInterval(function () {
                             if (--timer <= 0) {
                                 _processing.html(M.util.get_string('datatables_sProcessing', "local_kopere_dashboard"));
                                 clearInterval(_inteval);
@@ -455,69 +463,66 @@ define([
                     count_error++;
                 };
 
-                var preDrawCallback_complete = false;
-                params.preDrawCallback = function(settings) {
-
+                let preDrawCallback_complete = false;
+                params.preDrawCallback = function () {
+                    console.log("preDrawCallback");
                     if (preDrawCallback_complete) return;
                     preDrawCallback_complete = true;
 
-                    var element = $("<div class='group-controls' style='display:none'>");
-                    var wrapper = $("#" + tableid + "_wrapper");
-                    wrapper.prepend(element);
-                    wrapper.find(".dataTables_length").appendTo(element);
-                    wrapper.find(".dataTables_filter").appendTo(element);
+                    const $wrapper = $(`#${tableid}_wrapper`);
+                    const $search = $wrapper.find('> .dt-search');
+                    const $controls = $wrapper
+                        .prev('.block-heading')
+                        .find('> .block-controls');
 
-                    wrapper.find(".footer")
-                        .css({"justify-content": "space-between"})
-                        .prepend("<div class='dataTables_navigate_area d-flex align-items-center'></div>");
+                    if ($search.length && $controls.length) {
+                        $search.addClass("simplesearchform").css({
+                            "margin-top": "-2px",
+                            "margin-right": "24px",
+                        });
+                        $search.appendTo($controls);
+                    }
 
-                    var $area = wrapper.find(".dataTables_navigate_area");
-                    wrapper.find(".dataTables_info").appendTo($area);
-                    wrapper.find(".dataTables_paginate").appendTo($area);
+                    $(`#${tableid}`).wrap('<div class="table-responsive"></div>');
+
+                    const $paging = $wrapper.find(".dt-paging");
+                    const $buttons = $wrapper.find(".dt-buttons");
+                    const $newDiv = $("<div>", {class: "dt-area-buttons"});
+                    $newDiv.insertBefore($paging);
+                    $newDiv.append($paging);
+                    $newDiv.append($buttons);
                 };
 
-                params.infoCallback = function(settings, start, end, max, total, pre) {
-                    if (end) {
-                        $("#" + tableid + "_wrapper .group-controls").show(200);
-                    } else {
-                        $("#" + tableid + "_wrapper .group-controls").hide(200);
-                    }
+                params.infoCallback = function (settings, start, end) {
+                    console.log([settings, start, end]);
+                    // if (end) {
+                    //     $("#" + tableid + "_wrapper .group-controls").show(200);
+                    // } else {
+                    //     $("#" + tableid + "_wrapper .group-controls").hide(200);
+                    // }
                 };
 
                 window[tableid] = $("#" + tableid).DataTable(params);
             });
         },
 
-        numberFormat: function(number, decimals) {
-
+        numberFormat: function (number, decimals) {
             let options = {
                 minimumFractionDigits: decimals,
                 maximumFractionDigits: decimals
             };
-
-            let formatted = number.toLocaleString(dataTables_init.language, options);
-
-            return formatted;
-
-            var decPoint = M.util.get_string('decsep', "langconfig");
-            var thousandsSep = M.util.get_string('thousandssep', "langconfig");
-
-            if (decPoint !== "," || thousandsSep !== ".") {
-                formatted = formatted.replace(",", "TEMP").replace(".", thousandsSep).replace("TEMP", decPoint);
-            }
-
-            return formatted;
+            return number.toLocaleString(M.cfg.language, options);
         },
 
-        click: function(tableid, clickchave, clickurl) {
-            $('#' + tableid + ' tbody').on('click', 'tr', function() {
-                var data = window[tableid].row(this).data();
+        click: function (tableid, clickchave, clickurl) {
+            $('#' + tableid + ' tbody').on('click', 'tr', function () {
+                let data = window[tableid].row(this).data();
                 dataTables_init._click_internal(data, clickchave, clickurl)
             });
         },
 
-        _click_internal: function(data, clickchave, clickurl) {
-            $.each(clickchave, function(id, chave) {
+        _click_internal: function (data, clickchave, clickurl) {
+            $.each(clickchave, function (id, chave) {
                 clickurl = clickurl.replace('{' + chave + '}', data[chave]);
             });
 

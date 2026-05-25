@@ -1,0 +1,73 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_pages/public_listing
+
+    Example context (json):
+    {
+        Aqui tem que criar o context em inglês
+    }
+}}
+
+{{!
+    @template koperedashboard_pages/public_listing
+}}
+<div class="kopere_dashboard-public-listing container">
+    {{#hasmenus}}
+        {{#menus}}
+            <section class="kopere_dashboard-public-menu-section">
+                <div class="kopere_dashboard-public-menu-heading">
+                    {{#showlink}}
+                        <h3><a href="{{{url}}}">{{{title}}}</a></h3>
+                    {{/showlink}}
+                    {{^showlink}}
+                        <h3>{{{title}}}</h3>
+                    {{/showlink}}
+                </div>
+
+                {{#haspages}}
+                    <div class="row kopere_dashboard-public-page-grid">
+                        {{#pages}}
+                            <div class="col-md-4 d-flex">
+                                <a class="kopere_dashboard-public-page-card" href="{{{link}}}">
+                                    <div class="kopere_dashboard-public-page-image">
+                                        <img src="{{{image}}}" alt="">
+                                    </div>
+                                    <div class="kopere_dashboard-public-page-body">
+                                        <h4>{{{title}}}</h4>
+                                        <p>{{{summary}}}</p>
+                                        {{#hascourseprice}}
+                                            <div class="kopere_dashboard-public-page-price">{{{courseprice}}}</div>
+                                        {{/hascourseprice}}
+                                        <span class="btn btn-primary btn-sm">{{{access}}}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        {{/pages}}
+                    </div>
+                {{/haspages}}
+                {{^haspages}}
+                    <div class="alert alert-info">{{#str}}empty_public_menu, koperedashboard_pages{{/str}}</div>
+                {{/haspages}}
+            </section>
+        {{/menus}}
+    {{/hasmenus}}
+    {{^hasmenus}}
+        <div class="alert alert-info">{{#str}}empty_public, koperedashboard_pages{{/str}}</div>
+    {{/hasmenus}}
+</div>
+{{{analytics}}}

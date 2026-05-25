@@ -1,0 +1,57 @@
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * accept.js
+ *
+ * @package   koperedashboard_contracts
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+define(["jquery"], function ($) {
+    function init() {
+        var start = Date.now();
+        var $timer = $("#kopere_dashboard-timer");
+        var $read = $("#kopere_dashboard-readseconds");
+        var $btn = $("#kopere_dashboard-accept-btn");
+
+        if (!$timer.length || !$read.length || !$btn.length) {
+            return;
+        }
+
+        window.setInterval(function () {
+            var seconds = Math.floor((Date.now() - start) / 1000);
+            $timer.text(seconds);
+            $read.val(seconds);
+        }, 1000);
+
+        $("#kopere_dashboard-contract-accept-form").on("submit", function () {
+            try {
+                var s = Math.floor((Date.now() - start) / 1000);
+                $read.val(s);
+            } catch (e) {
+            }
+
+            // Keep UX consistent with long server operations (even though this is fast).
+            $btn.prop("disabled", true);
+            $btn.text(M.util.get_string("js_processing", "local_kopere_dashboard"));
+        });
+    }
+
+    return {
+        init: init
+    };
+});

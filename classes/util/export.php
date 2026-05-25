@@ -17,10 +17,8 @@
 /**
  * export file
  *
- * introduced 22/05/17 05:32
- *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -50,11 +48,7 @@ class export {
      * @param $format
      * @param null $filename
      */
-    public static function header($format, $filename = null) {
-        if ($filename == null) {
-            $filename = dashboard_util::$currenttitle;
-        }
-
+    public static function header($format, $filename) {
         self::$format = $format;
         if (self::$format == "xls") {
             ob_clean();
@@ -83,7 +77,7 @@ class export {
     public static function close() {
         if (self::$format == "xls") {
             echo '</body></html>';
-            end_util::end_script_show();
+            die;
         }
     }
 }

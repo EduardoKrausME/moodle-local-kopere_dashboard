@@ -17,8 +17,6 @@
 /**
  * datatable_search_util file
  *
- * introduced 18/05/17 04:58
- *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -74,7 +72,7 @@ class datatable_search_util {
         $count = 0;
         $search = optional_param_array("search", [], PARAM_TEXT);
 
-        if ($search && isset($search["value"]) && isset($search["value"][0])) {
+        if (isset($search["value"][0]) && $search) {
             $like = [];
             foreach ($this->columnselect as $column) {
                 $searchvalue = $search["value"];
@@ -82,25 +80,21 @@ class datatable_search_util {
                 $searchvalue = str_replace(["\n", "\r"], "", $searchvalue);
                 $searchvalue = str_replace("--", "", $searchvalue);
                 if ($DB->get_dbfamily() == "postgres") {
+                    $count++;
                     if (is_array($column)) {
-                        $count++;
                         $like[] = " cast( {$column[0]} as text ) LIKE :searchparam{$count}";
-                        $this->params["searchparam{$count}"] = "%{$searchvalue}%";
                     } else {
-                        $count++;
                         $like[] = "cast( {$column} as text ) LIKE :searchparam{$count}";
-                        $this->params["searchparam{$count}"] = "%{$searchvalue}%";
                     }
+                    $this->params["searchparam{$count}"] = "%{$searchvalue}%";
                 } else {
+                    $count++;
                     if (is_array($column)) {
-                        $count++;
                         $like[] = "{$column[0]} LIKE :searchparam{$count}";
-                        $this->params["searchparam{$count}"] = "%{$searchvalue}%";
                     } else {
-                        $count++;
                         $like[] = "{$column} LIKE :searchparam{$count}";
-                        $this->params["searchparam{$count}"] = "%{$searchvalue}%";
                     }
+                    $this->params["searchparam{$count}"] = "%{$searchvalue}%";
                 }
             }
             $this->where = "AND (" . implode(" OR ", $like) . ")";
@@ -131,10 +125,12 @@ class datatable_search_util {
      * Function execute_sql_and_return
      *
      * @param $sql
-     * @param null $group
+     * @param string $group
      * @param null $params
      * @param null $functionbeforereturn
-     * @throws Exception
+     * @param null $countparams
+     * @throws \dml_exception
+     * @throws \Exception
      */
     public function execute_sql_and_return($sql, $group = "", $params = null, $functionbeforereturn = null, $countparams = null) {
         global $DB;
@@ -163,13 +159,11 @@ class datatable_search_util {
 
         if ($DB->get_dbfamily() == "postgres") {
             $sqlsearch      = "{$sqlcolumns} \n{$this->where} \n{$group} \n{$order} \nLIMIT {$this->length} OFFSET {$this->start}";
-            $sqlsearchcount = "{$sql}        \n{$this->where} \n{$group} \n{$order}";
-            $sqltotal       = "{$sql}                         \n{$group} \n{$order}";
         } else {
             $sqlsearch      = "{$sqlcolumns} \n{$this->where} \n{$group} \n{$order} \nLIMIT {$this->start}, {$this->length}";
-            $sqlsearchcount = "{$sql}        \n{$this->where} \n{$group} \n{$order}";
-            $sqltotal       = "{$sql}                         \n{$group} \n{$order}";
         }
+        $sqlsearchcount = "{$sql}        \n{$this->where} \n{$group} \n{$order}";
+        $sqltotal       = "{$sql}                         \n{$group} \n{$order}";
 
         echo '<pre>';
         $sqlsearch = str_replace("{[columns]}", implode(", ", $this->columnselect), $sqlsearch);

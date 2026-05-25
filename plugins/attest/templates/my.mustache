@@ -1,0 +1,188 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_attest/my
+
+    Example context (json):
+    {
+    }
+}}
+
+<div class="kopere_dashboard-card">
+    <div class="kopere_dashboard-attest-toolbar">
+        <div>
+            <h3 style="margin: 0 0 6px 0;">{{#str}}issued_title, koperedashboard_attest{{/str}}</h3>
+            <div class="text-muted">{{#str}}issued_desc, koperedashboard_attest{{/str}}</div>
+        </div>
+
+        <button type="button"
+                class="btn btn-primary"
+                data-kopere_dashboard-attest-open-modal="1" disabled>
+            {{#str}}generate_new_button, koperedashboard_attest{{/str}}
+        </button>
+    </div>
+</div>
+
+<div class="kopere_dashboard-card">
+    {{#hasissues}}
+        <div class="table-responsive">
+            <table class="table table-striped kopere_dashboard-card-table">
+                <thead>
+                <tr>
+                    <th>{{#str}}field_courses, koperedashboard_attest{{/str}}</th>
+                    <th>{{#str}}field_name, koperedashboard_attest{{/str}}</th>
+                    <th>{{#str}}footer_created, koperedashboard_attest{{/str}}</th>
+                    <th>{{#str}}footer_validuntil, koperedashboard_attest{{/str}}</th>
+                    <th>{{#str}}status_title, koperedashboard_attest{{/str}}</th>
+                    <th>{{#str}}actions_title, koperedashboard_attest{{/str}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#issues}}
+                    <tr>
+                        <td>{{{coursename}}}</td>
+                        <td>{{{tplname}}}</td>
+                        <td style="white-space:nowrap;">{{{created}}}</td>
+                        <td style="white-space:nowrap;">{{{validuntil}}}</td>
+                        <td><span class="badge text-bg-{{{statuslabelclass}}}">{{{statuslabel}}}</span></td>
+                        <td>
+                            <div class="kopere_dashboard-attest-row-actions">
+                                {{#hasopenurl}}
+                                    <a class="btn btn-outline-primary btn-sm text-nowrap" target="_blank"
+                                       href="{{{openurl}}}">
+                                        {{#str}}open_attestation, koperedashboard_attest{{/str}}
+                                    </a>
+                                {{/hasopenurl}}
+                                {{#showrecreate}}
+                                    <a class="btn btn-outline-secondary btn-sm"
+                                       style="white-space:nowrap;"
+                                       href="{{{recreateurl}}}">
+                                        {{#str}}recreate_valid, koperedashboard_attest{{/str}}
+                                    </a>
+                                {{/showrecreate}}
+                            </div>
+                        </td>
+                    </tr>
+                {{/issues}}
+                </tbody>
+            </table>
+        </div>
+    {{/hasissues}}
+
+    {{^hasissues}}
+        <div class="text-muted">{{#str}}empty_issued, koperedashboard_attest{{/str}}</div>
+    {{/hasissues}}
+</div>
+
+<div class="kopere_dashboard-attest-modal" data-kopere_dashboard-attest-modal hidden>
+    <div class="kopere_dashboard-attest-modal-backdrop" data-kopere_dashboard-attest-close="1"></div>
+
+    <div class="kopere_dashboard-attest-modal-dialog" role="dialog" aria-modal="true"
+         aria-labelledby="kopere_dashboard-attest-modal-title">
+        <div class="kopere_dashboard-attest-modal-header">
+            <div>
+                <h3 id="kopere_dashboard-attest-modal-title" style="margin: 0;">
+                    {{#str}}available_title, koperedashboard_attest{{/str}}</h3>
+                <div class="text-muted">{{#str}}available_desc, koperedashboard_attest{{/str}}</div>
+            </div>
+
+            <button type="button" class="btn btn-link" data-kopere_dashboard-attest-close="1">
+                {{#str}}close_modal, koperedashboard_attest{{/str}}
+            </button>
+        </div>
+
+        <div class="kopere_dashboard-attest-modal-body">
+            {{#hascourses}}
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label for="kopere_dashboard-attest-course-select" class="form-label">
+                        {{#str}}choose_course, koperedashboard_attest{{/str}}
+                    </label>
+                    <select id="kopere_dashboard-attest-course-select"
+                            class="form-control"
+                            data-kopere_dashboard-attest-course-select="1">
+                        <option value="">{{#str}}choose_course_placeholder, koperedashboard_attest{{/str}}</option>
+                        {{#courses}}
+                            <option value="{{{id}}}">{{{fullname}}}</option>
+                        {{/courses}}
+                    </select>
+                    <div class="form-text text-muted">
+                        {{#str}}choose_course_help, koperedashboard_attest{{/str}}
+                    </div>
+                </div>
+            {{/hascourses}}
+
+            {{^hascourses}}
+                <div class="text-muted">{{#str}}empty_courses, koperedashboard_attest{{/str}}</div>
+            {{/hascourses}}
+
+            <div class="text-muted"
+                 data-kopere_dashboard-attest-empty-select="1">{{#str}}
+                empty_available_select_course, koperedashboard_attest{{/str}}</div>
+
+            <div class="text-muted"
+                 data-kopere_dashboard-attest-empty-course="1"
+                 hidden>{{#str}}empty_available_for_course, koperedashboard_attest{{/str}}</div>
+
+            {{#hasavailableitems}}
+                <div class="kopere_dashboard-attest-available-list" data-kopere_dashboard-attest-available-list="1"
+                     hidden>
+                    {{#availableitems}}
+                        <div class="kopere_dashboard-attest-available-item"
+                             data-kopere_dashboard-attest-course-item="{{{courseid}}}"
+                             hidden>
+                            <div class="kopere_dashboard-attest-available-main">
+                                <div class="kopere_dashboard-attest-available-title">{{{tplname}}}</div>
+                                <div class="kopere_dashboard-attest-available-course">{{{coursename}}}</div>
+                                <div class="kopere_dashboard-attest-available-meta">
+                                    <span>{{{statuslabel}}}</span>
+                                    {{#haslastissue}}
+                                        <span>• {{#str}}footer_created, koperedashboard_attest{{/str}}
+                                            : {{{lastcreated}}}</span>{{/haslastissue}}
+                                    {{#haslastissue}}
+                                        <span>• {{#str}}footer_validuntil, koperedashboard_attest{{/str}}
+                                            : {{{lastvaliduntil}}}</span>{{/haslastissue}}
+                                </div>
+                            </div>
+
+                            <div class="kopere_dashboard-attest-row-actions">
+                                {{#hasopenvalidurl}}
+                                    <a class="btn btn-outline-primary btn-sm" href="{{{openvalidurl}}}">
+                                        {{#str}}open_valid, koperedashboard_attest{{/str}}
+                                    </a>
+                                {{/hasopenvalidurl}}
+
+                                {{#cangenerate}}
+                                    <a class="btn btn-primary btn-sm"
+                                       href="{{{generateurl}}}">{{{generatebuttonlabel}}}</a>
+                                {{/cangenerate}}
+
+                                {{#disabledgenerate}}
+                                    <button type="button" class="btn btn-secondary btn-sm"
+                                            disabled>{{{disabledreason}}}</button>
+                                {{/disabledgenerate}}
+                            </div>
+                        </div>
+                    {{/availableitems}}
+                </div>
+            {{/hasavailableitems}}
+
+            {{^hasavailableitems}}
+                <div class="text-muted">{{#str}}empty_available, koperedashboard_attest{{/str}}</div>
+            {{/hasavailableitems}}
+        </div>
+    </div>
+</div>

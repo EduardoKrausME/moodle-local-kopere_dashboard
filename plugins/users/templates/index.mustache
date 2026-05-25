@@ -1,0 +1,128 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_users/index
+
+    Example context (json):
+    {
+        "q": "alice",
+        "placeholder": "Search by name, username, email or ID number",
+        "help": "Tip: you can paste multiple user IDs separated by commas (e.g. 12, 34, 56).",
+
+        "emptytitle": "Start typing to search users",
+        "noresults": "No users found for your search.",
+
+        "hasresults": true,
+        "results": [
+            {
+                "name": "Alice Johnson",
+                "username": "alice",
+                "email": "alice@example.com",
+                "lastaccess": "3 Mar 2026, 11:03",
+
+                "picture": "https://moodle.example.com/theme/image.php/boost/core/1/u/f1",
+                "suspended": false,
+
+                "viewurl": "https://moodle.example.com/local/kopere_dashboard/users/view.php?id=501",
+                "profileurl": "https://moodle.example.com/user/profile.php?id=501"
+            },
+            {
+                "name": "Bruno Silva",
+                "username": "bruno.silva",
+                "email": "bruno@example.com",
+                "lastaccess": "1 Mar 2026, 18:22",
+
+                "picture": "https://moodle.example.com/theme/image.php/boost/core/1/u/f2",
+                "suspended": true,
+
+                "viewurl": "https://moodle.example.com/local/kopere_dashboard/users/view.php?id=502",
+                "profileurl": "https://moodle.example.com/user/profile.php?id=502"
+            }
+        ]
+    }
+}}
+
+<div class="kopere_dashboard-card">
+    <div class="kopere_dashboard-student-grid">
+        <div class="form-group" style="position: relative;">
+            <label for="kopere_dashboard-users-search">{{#str}}search_label, koperedashboard_users{{/str}}</label>
+            <div class="input-group">
+                <input type="text"
+                       id="kopere_dashboard-users-search"
+                       class="form-control"
+                       name="q"
+                       value="{{{q}}}"
+                       placeholder="{{{placeholder}}}"
+                       autocomplete="off">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-primary" id="kopere_dashboard-users-search-btn">
+                        {{#str}}search, core{{/str}}
+                    </button>
+                </div>
+            </div>
+            <small class="form-text text-muted">{{{help}}}</small>
+
+            <div id="kopere_dashboard-users-suggest"
+                 class="list-group"
+                 style="position: absolute; left: 0; right: 0; top: 86px; z-index: 10; display: none;"></div>
+        </div>
+    </div>
+</div>
+
+<div class="kopere_dashboard-card" style="margin-top: 16px;">
+    {{^q}}
+        <h4 style="margin: 0 0 12px 0;">{{{emptytitle}}}</h4>
+    {{/q}}
+
+    {{#hasresults}}
+        <table class="table table-striped kopere_dashboard-card-table">
+            <thead>
+            <tr>
+                <th>{{#str}}col_name, koperedashboard_users{{/str}}</th>
+                <th>{{#str}}col_username, koperedashboard_users{{/str}}</th>
+                <th>{{#str}}col_email, koperedashboard_users{{/str}}</th>
+                <th>{{#str}}col_lastaccess, koperedashboard_users{{/str}}</th>
+                <th style="width: 220px;">{{#str}}col_actions, koperedashboard_users{{/str}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#results}}
+                <tr class="{{#suspended}}table-warning{{/suspended}}">
+                    <td>
+                        <img src="{{{picture}}}" alt=""
+                             style="width: 28px; height: 28px; border-radius: 14px; margin-right: 8px;">
+                        <strong><a href="{{{viewurl}}}">{{{name}}}</a></strong>
+                    </td>
+                    <td>{{{username}}}</td>
+                    <td>{{{email}}}</td>
+                    <td>{{{lastaccess}}}</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="{{{viewurl}}}">
+                            {{#str}}action_open, koperedashboard_users{{/str}}</a>
+                        <a class="btn btn-secondary btn-sm" href="{{{profileurl}}}">
+                            {{#str}}action_profile, koperedashboard_users{{/str}}</a>
+                    </td>
+                </tr>
+            {{/results}}
+            </tbody>
+        </table>
+    {{/hasresults}}
+
+    {{^hasresults}}
+        <div class="alert alert-info" style="margin-bottom: 0;">{{{noresults}}}</div>
+    {{/hasresults}}
+</div>

@@ -1,0 +1,49 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_attest/verify
+
+    Example context (json):
+    {
+        "username": "Eduardo Kraus",
+        "coursename": "Advanced Moodle Development",
+        "created": "08/03/2026 10:30",
+        "validuntil": "08/03/2027 10:30",
+        "htmlsha1": "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3"
+    }
+}}
+
+<div class="kopere_dashboard-card">
+    <div><strong>{{#str}}user{{/str}}:</strong> {{{username}}}</div>
+    <div><strong>{{#str}}email{{/str}}:</strong> {{{useremail}}}</div>
+    {{#userecpf}}
+        <div><strong>CPF:</strong> {{{userecpf}}}</div>
+    {{/userecpf}}
+    <div><strong>{{#str}}course{{/str}}:</strong> {{{coursename}}}</div>
+
+    <hr>
+
+    <div><strong>{{#str}}footer_created, koperedashboard_attest{{/str}}:</strong> {{{created}}}</div>
+    <div><strong>{{#str}}footer_validuntil, koperedashboard_attest{{/str}}:</strong> {{{validuntil}}}</div>
+
+    <hr>
+
+    <div class="muted">
+        <strong>{{#str}}footer_title, koperedashboard_attest{{/str}}:</strong>
+        <code>{{{htmlsha1}}}</code>
+    </div>
+</div>

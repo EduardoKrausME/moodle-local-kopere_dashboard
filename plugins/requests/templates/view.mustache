@@ -1,0 +1,135 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_requests/view
+
+    Example context (json):
+    {
+        "id": 1042,
+        "category": "Grade review",
+        "subject": "Request to review final grade",
+        "status": "Open",
+        "created": "2 Mar 2026, 09:12",
+
+        "isclosed": false,
+        "closeurl": "https://moodle.example.com/local/kopere_dashboard/requests/view.php?id=1042&action=close",
+        "reopenurl": "https://moodle.example.com/local/kopere_dashboard/requests/view.php?id=1042&action=reopen",
+
+        "files": [
+            {
+                "name": "assignment-feedback.pdf",
+                "url": "https://moodle.example.com/pluginfile.php/999/local_koperedashboard_requests/attachments/1042/assignment-feedback.pdf",
+                "size": "245 KB"
+            },
+            {
+                "name": "screenshot.png",
+                "url": "https://moodle.example.com/pluginfile.php/999/local_koperedashboard_requests/attachments/1042/screenshot.png",
+                "size": "98 KB"
+            }
+        ],
+
+        "messages": [
+            {
+                "author": "Alice Johnson",
+                "rolelabel": "Student",
+                "time": "2 Mar 2026, 09:12",
+                "messagehtml": "<p>Hello, I believe my final grade might be incorrect. Could you please review it?</p>"
+            },
+            {
+                "author": "Prof. Daniel Moreau",
+                "rolelabel": "Teacher",
+                "time": "2 Mar 2026, 15:40",
+                "messagehtml": "<p>Thanks for reaching out. I will review your submission and the grading rubric today.</p>"
+            },
+            {
+                "author": "Finance Manager",
+                "rolelabel": "Manager",
+                "time": "3 Mar 2026, 10:05",
+                "messagehtml": "<p>This request is Kopere Dashboard and will be handled by the teacher. If you need contract support, please open a Contract category request.</p>"
+            }
+        ],
+
+        "canreply": true,
+        "formhtml": "<form method=\"post\" action=\"https://moodle.example.com/local/kopere_dashboard/requests/reply.php?id=1042\"><input type=\"hidden\" name=\"sesskey\" value=\"abc123XYZ987\"><div class=\"form-group\"><label>Message</label><textarea class=\"form-control\" name=\"message\" rows=\"4\" placeholder=\"Write your reply...\"></textarea></div><button class=\"btn btn-primary\" type=\"submit\">Send reply</button></form>"
+    }
+}}
+
+<div class="kopere_dashboard-card">
+    <div style="display:flex; justify-content: space-between; align-items:flex-start; gap: 16px; flex-wrap: wrap;">
+        <div>
+            <div class="kopere_dashboard-card-badge">{{{category}}}</div>
+            <h3 style="margin-top: 10px;">{{{subject}}}</h3>
+            <div class="muted">#{{{id}}} - {{{status}}} - {{{created}}}</div>
+        </div>
+
+        <div>
+            {{#isclosed}}
+                <a class="btn btn-secondary" href="{{{reopenurl}}}">
+                    {{#str}}reopen_request, koperedashboard_requests{{/str}}</a>
+            {{/isclosed}}
+            {{^isclosed}}
+                <a class="btn btn-danger" href="{{{closeurl}}}">{{#str}}
+                    close_request, koperedashboard_requests{{/str}}</a>
+            {{/isclosed}}
+        </div>
+    </div>
+
+    {{#files}}
+        <div style="margin-top: 12px;">
+            <strong>Attachments</strong>
+            <div><a href="{{{url}}}" target="_blank" rel="noopener">{{{name}}}</a> <span class="muted">({{{size}}}
+                )</span>
+            </div>
+        </div>
+    {{/files}}
+</div>
+
+<div class="kopere_dashboard-card" style="margin-top: 16px;">
+    <h4>Timeline</h4>
+
+    {{#messages}}
+        <div style="padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,.06);">
+            <div style="display:flex; justify-content: space-between; gap: 12px;">
+                <div>
+                    <strong>{{{author}}}</strong>
+                    {{#rolelabel}}<span class="kopere_dashboard-card-badge">{{{rolelabel}}}</span>{{/rolelabel}}
+                </div>
+                <div class="muted">{{{time}}}</div>
+            </div>
+            <div style="margin-top: 8px;">
+                {{{messagehtml}}}
+            </div>
+
+            {{#files}}
+                <div style="margin-top: 10px;">
+                    <strong>{{#str}}request_attachments, koperedashboard_requests{{/str}}</strong>
+                    <div>
+                        <a href="{{{url}}}" target="_blank" rel="noopener">{{{name}}}</a>
+                        <span class="muted">({{{size}}})</span>
+                    </div>
+                </div>
+            {{/files}}
+        </div>
+    {{/messages}}
+</div>
+
+{{#canreply}}
+    <div class="kopere_dashboard-card" style="margin-top: 16px;">
+        <h4>{{#str}}reply, koperedashboard_requests{{/str}}</h4>
+        {{{formhtml}}}
+    </div>
+{{/canreply}}

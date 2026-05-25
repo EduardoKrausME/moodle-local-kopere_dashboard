@@ -1,0 +1,106 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_pages/manage
+
+    Example context (json):
+    {
+        Aqui tem que criar o context em inglês
+    }
+}}
+
+{{!
+    @template koperedashboard_pages/manage
+}}
+<div class="kopere_dashboard-pages-toolbar kopere_dashboard-card mb-3">
+    <div class="kopere_dashboard-pages-actions">
+        <a class="btn btn-primary" href="{{{createpageurl}}}">{{#str}}page_new, koperedashboard_pages{{/str}}</a>
+        <a class="btn btn-outline-primary" href="{{{createmenuurl}}}">{{#str}}
+            menu_new, koperedashboard_pages{{/str}}</a>
+        <a class="btn btn-outline-secondary" href="{{{settingsurl}}}">{{#str}}
+            settings_title, koperedashboard_pages{{/str}}</a>
+        <a class="btn btn-outline-secondary" target="_blank" href="{{{publicurl}}}">{{#str}}
+            public_pages, koperedashboard_pages{{/str}}</a>
+    </div>
+</div>
+
+{{{flash}}}
+
+<div class="kopere_dashboard-card kopere_dashboard-pages-manager">
+    {{#hasrows}}
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                <tr>
+                    <th>{{#str}}table_title, koperedashboard_pages{{/str}}</th>
+                    <th>{{#str}}table_type, koperedashboard_pages{{/str}}</th>
+                    <th>{{#str}}table_link, koperedashboard_pages{{/str}}</th>
+                    <th>{{#str}}table_visible, koperedashboard_pages{{/str}}</th>
+                    <th class="text-right">{{#str}}table_actions, koperedashboard_pages{{/str}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#rows}}
+                    <tr>
+                        <td>
+                            <div class="kopere_dashboard-pages-rowtitle" style="padding-left: {{{indent}}}px;">
+                                <span class="kopere_dashboard-material-icon kopere_dashboard-pages-rowicon"
+                                      aria-hidden="true">{{{icon}}}</span>
+                                <span>{{{title}}}</span>
+                            </div>
+                        </td>
+                        <td>{{{typelabel}}}</td>
+                        <td><a href="{{{publicurl}}}" target="_blank">{{{link}}}</a></td>
+                        <td>{{{visiblelabel}}}</td>
+                        <td class="text-right kopere_dashboard-pages-table-actions">
+                            {{#ismenu}}
+                                <a class="btn btn-sm btn-outline-primary" href="{{{pagecreateurl}}}">{{#str}}
+                                    page_new_short, koperedashboard_pages{{/str}}</a>
+                                <a class="btn btn-sm btn-outline-secondary" href="{{{menucreateurl}}}">{{#str}}
+                                    menu_new_short, koperedashboard_pages{{/str}}</a>
+                                <a class="btn btn-sm btn-outline-secondary" href="{{{editurl}}}">{{#str}}
+                                    edit, moodle{{/str}}</a>
+                                <a class="btn btn-sm btn-outline-danger" href="{{{deleteurl}}}">{{#str}}
+                                    delete, moodle{{/str}}</a>
+                            {{/ismenu}}
+                            {{#ispage}}
+                                <a class="btn btn-sm btn-outline-secondary" href="{{{moveupurl}}}"
+                                   title="{{#str}}moveup, local_kopere_dashboard{{/str}}">↑</a>
+                                <a class="btn btn-sm btn-outline-secondary" href="{{{movedownurl}}}"
+                                   title="{{#str}}movedown, local_kopere_dashboard{{/str}}">↓</a>
+                                <a class="btn btn-sm btn-outline-primary" href="{{{viewurl}}}">{{#str}}
+                                    view, moodle{{/str}}</a>
+                                <a class="btn btn-sm btn-outline-secondary" href="{{{editurl}}}">{{#str}}
+                                    edit, moodle{{/str}}</a>
+                                <a class="btn btn-sm btn-outline-danger" href="{{{deleteurl}}}">{{#str}}
+                                    delete, moodle{{/str}}</a>
+                            {{/ispage}}
+                        </td>
+                    </tr>
+                {{/rows}}
+                </tbody>
+            </table>
+        </div>
+    {{/hasrows}}
+    {{^hasrows}}
+        <div class="kopere_dashboard-pages-empty">
+            <h4>{{#str}}empty_title, koperedashboard_pages{{/str}}</h4>
+            <p>{{#str}}empty_desc, koperedashboard_pages{{/str}}</p>
+            <a class="btn btn-primary" href="{{{createmenuurl}}}">{{#str}}menu_new, koperedashboard_pages{{/str}}</a>
+        </div>
+    {{/hasrows}}
+</div>

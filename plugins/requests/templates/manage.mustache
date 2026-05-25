@@ -1,0 +1,86 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_requests/manage
+
+    Example context (json):
+    {
+        "categoriesurl": "https://moodle.example.com/local/kopere_dashboard/requests/categories.php",
+
+        "rows": [
+            {
+                "id": 1042,
+                "category": "Grade review",
+                "subject": "Request to review final grade",
+                "user": "Alice Johnson (alice@example.com)",
+                "status": "Open",
+                "updated": "3 Mar 2026, 14:25",
+                "url": "https://moodle.example.com/local/kopere_dashboard/requests/view.php?id=1042"
+            },
+            {
+                "id": 1037,
+                "category": "Certificate / documents",
+                "subject": "Certificate not generating",
+                "user": "Bruno Silva (bruno@example.com)",
+                "status": "Resolved",
+                "updated": "1 Mar 2026, 09:10",
+                "url": "https://moodle.example.com/local/kopere_dashboard/requests/view.php?id=1037"
+            }
+        ]
+    }
+}}
+
+<div class="kopere_dashboard-card">
+    <div style="display:flex; justify-content: space-between; align-items:center;">
+        <a class="btn btn-secondary" href="{{{categoriesurl}}}">
+            {{#str}}categories_title, koperedashboard_requests{{/str}}</a>
+    </div>
+
+    <table class="table table-striped kopere_dashboard-card-table" style="margin-top: 12px;">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>{{#str}}request_category, koperedashboard_requests{{/str}}</th>
+            <th>{{#str}}request_subject, koperedashboard_requests{{/str}}</th>
+            <th>User</th>
+            <th>{{#str}}request_status, koperedashboard_requests{{/str}}</th>
+            <th>Updated</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#rows}}
+            <tr>
+                <td>{{{id}}}</td>
+                <td>{{{category}}}</td>
+                <td>{{{subject}}}</td>
+                <td>{{{user}}}</td>
+                <td>{{{status}}}</td>
+                <td>{{{updated}}}</td>
+                <td><a class="btn btn-secondary" href="{{{url}}}">
+                    {{#str}}view_request, koperedashboard_requests{{/str}}</a>
+                </td>
+            </tr>
+        {{/rows}}
+        {{^rows}}
+            <tr>
+                <td colspan="7" class="muted">No requests available for you.</td>
+            </tr>
+        {{/rows}}
+        </tbody>
+    </table>
+</div>

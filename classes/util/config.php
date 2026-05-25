@@ -24,6 +24,9 @@
 
 namespace local_kopere_dashboard\util;
 
+use coding_exception;
+use dml_exception;
+
 /**
  * Class config
  *
@@ -42,13 +45,13 @@ class config {
     public static function get_key($key, $default = "") {
         try {
             $value = get_config("local_kopere_dashboard", $key);
-        } catch (\dml_exception $e) {
+        } catch (dml_exception) {
             return $default;
         }
 
         try {
             return optional_param($key, $value, PARAM_RAW);
-        } catch (\coding_exception $e) {
+        } catch (coding_exception) {
             return $default;
         }
     }
@@ -64,13 +67,13 @@ class config {
     public static function get_key_int($key, $default = 0) {
         try {
             $value = get_config("local_kopere_dashboard", $key);
-        } catch (\dml_exception $e) {
+        } catch (dml_exception) {
             return intval($default);
         }
 
         try {
             return optional_param($key, $value, PARAM_INT);
-        } catch (\coding_exception $e) {
+        } catch (coding_exception) {
             return intval($default);
         }
     }

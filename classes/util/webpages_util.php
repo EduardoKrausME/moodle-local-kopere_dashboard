@@ -17,8 +17,6 @@
 /**
  * webpages_util file
  *
- * introduced 15/12/2023 12:43
- *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,6 +24,7 @@
 
 namespace local_kopere_dashboard\util;
 
+use context_system;
 use Exception;
 use moodle_url;
 
@@ -46,7 +45,7 @@ class webpages_util {
         global $PAGE, $OUTPUT, $CFG;
 
         header("HTTP/1.0 404 Not Found");
-        $PAGE->set_context(\context_system::instance());
+        $PAGE->set_context(context_system::instance());
         $PAGE->set_pagelayout(get_config("local_kopere_dashboard", "webpages_theme"));
         $PAGE->set_title(get_string("error"));
         $PAGE->set_heading(get_string("error"));

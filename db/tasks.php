@@ -15,32 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * task file
+ * tasks.php
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
 $tasks = [
     [
-        "classname" => "\\local_kopere_dashboard\\task\\db_report_login",
-        "blocking" => 1,
-        "minute" => "0",
-        "hour" => "0",
+        "classname" => "local_kopere_dashboard\\audit\\cleanup_task",
+        "blocking" => 0,
+        "minute" => "R",
+        "hour" => "3",
         "day" => "*",
-        "dayofweek" => "*",
         "month" => "*",
-    ],
-    [
-        "classname" => "\\local_kopere_dashboard\\task\\db_course_access",
-        "blocking" => 1,
-        "minute" => "0",
-        "hour" => "0",
-        "day" => "*",
         "dayofweek" => "*",
-        "month" => "*",
     ],
 ];

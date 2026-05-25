@@ -34,7 +34,7 @@ class release {
     /**
      * Function version
      *
-     * @return float|int
+     * @return float
      */
     public static function version() {
         global $CFG;

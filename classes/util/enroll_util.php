@@ -24,6 +24,7 @@
 
 namespace local_kopere_dashboard\util;
 
+use context_course;
 use course_enrolment_manager;
 use Exception;
 
@@ -49,7 +50,7 @@ class enroll_util {
         }
 
         // Evita erro.
-        $context = \context_course::instance($course->id, IGNORE_MISSING);
+        $context = context_course::instance($course->id, IGNORE_MISSING);
         if ($context == null) {
             message::print_danger('"context_course::instance" not found');
             return false;
@@ -79,7 +80,7 @@ class enroll_util {
         }
 
         // Evita erro.
-        $context = \context_course::instance($course, IGNORE_MISSING);
+        $context = context_course::instance($course, IGNORE_MISSING);
         if ($context == null) {
             return false;
         }
@@ -165,7 +166,7 @@ class enroll_util {
         require_once("{$CFG->dirroot}/enrol/locallib.php");
         $manager = new course_enrolment_manager($PAGE, $course);
         $instances = $manager->get_enrolment_instances();
-        $plugins = $manager->get_enrolment_plugins(true); // Do not allow actions on disabled plugins.
+        $plugins = $manager->get_enrolment_plugins(); // Do not allow actions on disabled plugins.
         if (!array_key_exists($enrol->id, $instances)) {
             return false;
         }

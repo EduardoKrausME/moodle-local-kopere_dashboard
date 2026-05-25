@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Introduced  06/05/2018 12:45
+ * Class number_util
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -110,7 +110,7 @@ class number_util {
      * @param $texto
      * @param $count
      *
-     * @return mixed
+     * @return array|string|string[]
      */
     private static function remove_zero($texto, $count) {
         if ($count == 3) {

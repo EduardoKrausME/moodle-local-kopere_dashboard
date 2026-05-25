@@ -17,10 +17,8 @@
 /**
  * Profile image for datatable
  *
- * introduced 18/05/2023 22:00
- *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +29,6 @@ require_once("../../config.php");
 require_login();
 $context = context_system::instance();
 require_capability("local/kopere_dashboard:view", $context);
-require_capability("local/kopere_dashboard:manage", $context);
 
 $type = required_param("type", PARAM_TEXT);
 $id = required_param("id", PARAM_TEXT);

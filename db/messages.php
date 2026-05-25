@@ -18,12 +18,12 @@
  * messages file
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
 $messageproviders = [
-    "kopere_dashboard_messages" => [],
+    "local_kopere_dashboard_messages" => [],
 ];

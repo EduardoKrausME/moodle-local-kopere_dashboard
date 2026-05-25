@@ -1,84 +1,726 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito:300,400,700);
+@import "scss/MaterialIcons";
 
-// Bootstrap
-.kopere_dashboard_div,
-.kopere-dashboard-bootstrap_page {
-    @import "assets/css/bootstrap";
-}
-.kopere_dashboard_div {
-    color: #3a3a3a;
-    margin: -1px -12px;
-    .table {
-        color: rgba(0, 0, 0, 0.9);
-        th {
-            color: rgba(58, 58, 58, 0.95);
-            &:hover {
-                color: #3a3a3a;
+.local-kopere_dashboard,
+.path-local-kopere_dashboard {
+    #page.drawers {
+        .main-inner {
+            margin: 0;
+            max-width: initial;
+            padding: 0;
+            #page-header {
+                display: none;
             }
-        }
-        td {
-            &:hover {
-                color: #3a3a3a;
+            div[role=main] {
+                padding: 0;
+                box-shadow: none;
             }
         }
     }
-    @import "assets/css/dashboard";
-    @import "assets/dataTables/jquery.dataTables";
-    @import "assets/dropzone/css/dropzone";
-    @import "assets/css/iosCheckbox";
-    @import "assets/css/daterangepicker";
-    @import "assets/css/css_alert";
-    .breadcrumb {
-        display: none !important;
+    #page-content,
+    #region-main {
+        background: transparent;
     }
-    .element-header {
-        .setting {
-            display: inline-block;
-            float: right;
-            margin-left: 14px;
-            img {
-                width: 25px;
-                height: 25px;
-            }
-        }
-        .help {
-            font-size: 14px;
-            float: right;
-            line-height: 2.3;
-        }
+    #region-main {
+        border: 0;
+        padding: 0;
+        box-shadow: none;
     }
-    .content-w {
-        //background: transparent !important;
-        border-radius: 6px;
-        .content-i .content-box {
-            padding: 12px !important;
+    .activity-header,
+    .secondary-navigation,
+    .tertiary-navigation,
+    .page-context-header,
+    .breadcrumb-nav {
+        display: none;
+    }
+    .kopere_dashboard-card-shell {
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        color: #2c3650;
+        * {
+            box-sizing: border-box;
+        }
+        a {
+            text-decoration: none;
         }
     }
-    .menu-kopere {
-        padding: 0 !important;
+    .kopere_dashboard-mobile-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(17, 24, 39, 0.45);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .2s ease;
+        z-index: 29;
     }
-    .submenu-kopere li {
-        list-style: none !important;
+    .kopere_dashboard-card-sidenav {
+        position: relative;
+        background: #ffffff;
+        border-right: 1px solid #d8dde6;
+        overflow-y: auto;
+        max-width: 300px;
+        z-index: 40;
+        color: #ffffff;
     }
-}
-.kopere_dashboard_modal_item {
-    color: #3a3a3a;
-    .modal-header {
-        display: block !important;
-    }
-    .close {
-        height: 27px;
-        width: 27px;
+    .kopere_dashboard-card-brand {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid #d8dde6;
         text-align: center;
+        padding: 0 10px;
     }
+    .kopere_dashboard-card-brandlink {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 134px;
+        color: #2c3650;
+        width: 100%;
+        @media (max-width: 991.98px) {
+            min-height: 84px;
+        }
+    }
+    .kopere_dashboard-card-brandlink,
+    .kopere_dashboard-card-navitem,
+    .kopere_dashboard-card-navlink {
+        color: rgba(255, 255, 255, .88);
+    }
+    .kopere_dashboard-card-brandmark {
+        display: inline-block;
+        line-height: 1.05;
+        img {
+            max-width: 170px;
+            max-height: 88px;
+            width: auto;
+            height: auto;
+        }
+    }
+    .kopere_dashboard-mobile-close,
+    .kopere_dashboard-mobile-toggle {
+        display: none;
+    }
+    .kopere_dashboard-card-nav {
+        padding: 10px 0;
+    }
+    .kopere_dashboard-card-navgroup {
+        & + & {
+            margin-top: 6px;
+        }
+    }
+    .kopere_dashboard-card-navgroup-title {
+        padding: 12px 22px 8px;
+        color: #7d8797;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+    .kopere_dashboard-card-navitem,
+    .kopere_dashboard-card-navsummary {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-height: 54px;
+        padding: 0 20px;
+        border-bottom: 1px solid #edf1f6;
+        color: #2c3650;
+        transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+        &:hover {
+            background: #f7faff;
+            color: #274f96;
+        }
+        &.is-active {
+            background: #eaf2ff;
+            color: #254a8d;
+            box-shadow: inset 4px 0 0 var(--bs-primary, #3f7ee8);
+            font-weight: 700;
+        }
+    }
+    .kopere_dashboard-card-navicon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        min-width: 30px;
+        color: #7a8599;
+        transition: color 0.2s ease;
+        .kopere_dashboard-material-icon {
+            font-size: 33px;
+        }
+    }
+    .kopere_dashboard-card-navlabel,
+    .kopere_dashboard-card-navlink {
+        color: inherit;
+        font-size: 1rem;
+        line-height: 1.25;
+    }
+    .kopere_dashboard-card-navsummary {
+        padding-right: 16px;
+        &.is-active {
+            + .kopere_dashboard-card-navchildren {
+                display: block;
+            }
+        }
+    }
+    .kopere_dashboard-card-navcaret {
+        margin-left: auto;
+        width: 8px;
+        height: 8px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: rotate(45deg);
+        opacity: .55;
+    }
+    .kopere_dashboard-card-navchildren {
+        background: #fafbfd;
+        border-bottom: 1px solid #edf1f6;
+        display: none;
+        &.is-expanded {
+            display: block;
+        }
+    }
+    .kopere_dashboard-card-navitem.is-active,
+    .kopere_dashboard-card-navsummary.is-active,
+    .kopere_dashboard-card-navsummary.is-expanded,
+    .kopere_dashboard-card-navchildren .kopere_dashboard-card-navitem.is-active {
+        > .kopere_dashboard-card-navicon {
+            color: #3f7ee8;
+        }
+    }
+    .kopere_dashboard-card-navicon,
+    .kopere_dashboard-card-navicon .kopere_dashboard-material-icon {
+        color: #60a5fa;
+    }
+    .kopere_dashboard-card-navitem,
+    .kopere_dashboard-card-navsummary {
+        &:hover {
+            color: #173b7c;
+            background-color: rgba(255, 255, 255, .10);
+            .kopere_dashboard-card-navicon,
+            .kopere_dashboard-material-icon {
+                color: #173b7c;
+            }
+        }
+        &.is-active {
+            color: #075985;
+            background-color: #dbeafe;
+            .kopere_dashboard-card-navicon,
+            .kopere_dashboard-material-icon {
+                color: #075985;
+            }
+        }
+    }
+    .kopere_dashboard-card-navitem--child {
+        min-height: 44px;
+        padding-left: 34px;
+        .kopere_dashboard-card-navlabel {
+            font-size: .93rem;
+        }
+        .kopere_dashboard-material-icon {
+            font-size: 28px;
+        }
+    }
+    .kopere_dashboard-card-main {
+        width: 100%;
+        min-width: 0;
+        padding: 0;
+    }
+    .kopere_dashboard-dashboard {
+        min-height: 100%;
+        padding: 26px 28px 30px;
+    }
+    .kopere_dashboard-toprow {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 22px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid #d8dde6;
+    }
+    .kopere_dashboard-breadcrumb {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        color: #7d8797;
+        font-size: .92rem;
+        a {
+            color: #2c3650;
+            opacity: .82;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    .kopere_dashboard-bc-sep {
+        color: #a3acb8;
+    }
+    .kopere_dashboard-title {
+        position: relative;
+        margin: 0;
+        padding-bottom: 12px;
+        color: #2c3650;
+        font-size: 2.2rem;
+        font-weight: 700;
+        line-height: 1.15;
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 5px;
+            border-radius: 999px;
+            background: var(--bs-primary, #3f7ee8);
+        }
+    }
+    .kopere_dashboard-pagecontent {
+        min-width: 0;
+    }
+    .kopere_dashboard-card,
+    .kopere_dashboard-hero,
+    .kopere_dashboard-student-course,
+    .kopere_dashboard-student-link {
+        background: #ffffff;
+        border: 1px solid #d8dde6;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(31, 52, 97, 0.05);
+    }
+    .kopere_dashboard-card {
+        padding: 18px 18px 16px;
+        margin-bottom: 16px;
+    }
+    .kopere_dashboard-card-title {
+        margin-bottom: 16px;
+        color: #2c3650;
+        font-size: 1.18rem;
+        font-weight: 700;
+    }
+    .kopere_dashboard-hero {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 22px 24px;
+        margin-bottom: 18px;
+        background: linear-gradient(135deg, #ffffff 0%, #f7fbff 100%);
+    }
+    .kopere_dashboard-hero-left {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+    .kopere_dashboard-hero-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        background: #eaf2ff;
+        img,
+        .icon {
+            width: 38px;
+            height: 38px;
+        }
+    }
+    .kopere_dashboard-hero-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2c3650;
+    }
+    .kopere_dashboard-hero-desc {
+        margin-top: 4px;
+        color: #7d8797;
+        font-size: .98rem;
+        line-height: 1.5;
+    }
+    .kopere_dashboard-hero-illu {
+        width: min(42%, 380px);
+        opacity: .9;
+        svg {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .kopere_dashboard-kpis {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+    .kopere_dashboard-kpi {
+        position: relative;
+        min-height: 112px;
+        padding: 16px 18px;
+        border-radius: 10px;
+        color: #ffffff;
+        box-shadow: 0 8px 20px rgba(31, 52, 97, 0.05);
+        &::after {
+            content: "";
+            position: absolute;
+            right: 14px;
+            bottom: 12px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.16);
+        }
+    }
+    .kopere_dashboard-kpi-title {
+        margin-bottom: 6px;
+        font-size: .86rem;
+        font-weight: 700;
+        opacity: .95;
+    }
+    .kopere_dashboard-kpi-value {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.05;
+    }
+    .kopere_dashboard-kpi-sub {
+        margin-top: 6px;
+        font-size: .8rem;
+        opacity: .88;
+    }
+    .kopere_dashboard-kpi-teal {
+        background: linear-gradient(135deg, #f65c56 0%, #e74b44 100%);
+    }
+    .kopere_dashboard-kpi-teal2 {
+        background: linear-gradient(135deg, #ffbc4f 0%, #f1a92e 100%);
+    }
+    .kopere_dashboard-kpi-orange {
+        background: linear-gradient(135deg, #64b3f5 0%, #4a97e6 100%);
+    }
+    .kopere_dashboard-kpi-white {
+        background: linear-gradient(135deg, #88cf84 0%, #70b86d 100%);
+    }
+    .kopere_dashboard-kpi-purple {
+        background: linear-gradient(135deg, #9b7cf6 0%, #7c5be8 100%);
+    }
+    .kopere_dashboard-kpi-pink {
+        background: linear-gradient(135deg, #ff7eb3 0%, #f25f9c 100%);
+    }
+    .kopere_dashboard-kpi-cyan {
+        background: linear-gradient(135deg, #4fd1c5 0%, #38b2ac 100%);
+    }
+    .kopere_dashboard-kpi-indigo {
+        background: linear-gradient(135deg, #667eea 0%, #5a67d8 100%);
+    }
+    .kopere_dashboard-kpi-yellow {
+        background: linear-gradient(135deg, #f6d365 0%, #f6b93b 100%);
+    }
+    .kopere_dashboard-kpi-green {
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    }
+    .kopere_dashboard-kpi-red {
+        background: linear-gradient(135deg, #fc8181 0%, #e53e3e 100%);
+    }
+    .kopere_dashboard-kpi-blue {
+        background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+    }
+    .kopere_dashboard-kpi-violet {
+        background: linear-gradient(135deg, #b794f4 0%, #805ad5 100%);
+    }
+    .kopere_dashboard-kpi-lime {
+        background: linear-gradient(135deg, #a3e635 0%, #84cc16 100%);
+    }
+    .kopere_dashboard-kpi-slate {
+        background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+    }
+    .kopere_dashboard-charts,
+    .kopere_dashboard-student-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.65fr) minmax(320px, 1fr);
+        gap: 18px;
+        margin-bottom: 18px;
+    }
+    .kopere_dashboard-chartwrap {
+        min-height: 240px;
+    }
+    .kopere_dashboard-chartwrap-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .kopere_dashboard-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+    }
+    .kopere_dashboard-card-table {
+        margin-bottom: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+        thead th {
+            padding: 14px 12px;
+            background: #f5f7fa;
+            border-top: 1px solid #d8dde6;
+            border-bottom: 1px solid #c6ceda;
+            color: #44506a;
+            font-size: .92rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        tbody td {
+            padding: 13px 12px;
+            color: #2c3650;
+            vertical-align: middle;
+            border-top: 0;
+            border-bottom: 1px solid #edf1f6;
+            background: #ffffff;
+        }
+        tbody tr:hover td {
+            background: #f8fbff;
+        }
+    }
+    .kopere_dashboard-student-courses,
+    .kopere_dashboard-student-links {
+        display: grid;
+        gap: 14px;
+    }
+    .kopere_dashboard-student-course,
+    .kopere_dashboard-student-link {
+        display: block;
+        padding: 16px;
+        color: inherit;
+        transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+        &:hover {
+            transform: translateY(-1px);
+            border-color: #c9d7ef;
+            box-shadow: 0 12px 24px rgba(31, 52, 97, 0.08);
+        }
+    }
+    .kopere_dashboard-student-course-head,
+    .kopere_dashboard-student-progress-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+    .kopere_dashboard-student-course-title,
+    .kopere_dashboard-student-link-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #2c3650;
+    }
+    .kopere_dashboard-student-course-meta,
+    .kopere_dashboard-student-link-desc,
+    .kopere_dashboard-student-lastaccess,
+    .kopere_dashboard-student-empty {
+        color: #7d8797;
+        font-size: .9rem;
+        line-height: 1.45;
+    }
+    .kopere_dashboard-student-status {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 0 10px;
+        border-radius: 999px;
+        background: #eaf2ff;
+        color: #244983;
+        font-size: .78rem;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+    .kopere_dashboard-student-progress-row {
+        margin-top: 14px;
+        color: #2c3650;
+        font-size: .88rem;
+    }
+    .kopere_dashboard-student-progressbar {
+        margin-top: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #e7edf6;
+        overflow: hidden;
+        span {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #3f7ee8 0%, #57c4df 100%);
+        }
+    }
+    .kopere_dashboard-student-lastaccess {
+        margin-top: 12px;
+    }
+    .kopere_dashboard-pagecontent {
+        .form-control,
+        select,
+        input[type=text],
+        input[type=search],
+        input[type=number],
+        textarea {
+            min-height: 42px;
+            border: 1px solid #c6ceda;
+            border-radius: 8px;
+            box-shadow: none;
+            color: #2c3650;
+            &:focus {
+                border-color: #88afea;
+                box-shadow: 0 0 0 3px rgba(63, 126, 232, 0.12);
+            }
+        }
+        .dt-search input[type=search]{
+            width: 200px !important;
+            &:empty {
+                width: 160px !important;
+            }
+            &:focus {
+                width: 200px !important;
+            }
+
+        }
+        .custom-select,
+        .singleselect select {
+            min-height: 42px;
+            border-radius: 8px;
+        }
+        .paging,
+        .pagination {
+            margin-top: 14px;
+        }
+    }
+    @media (max-width: 1199.98px) {
+        .kopere_dashboard-kpis {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .kopere_dashboard-charts,
+        .kopere_dashboard-student-grid {
+            grid-template-columns: 1fr;
+        }
+        .kopere_dashboard-hero {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+        .kopere_dashboard-hero-illu {
+            width: 100%;
+            max-width: 340px;
+        }
+    }
+    @media (max-width: 991.98px) {
+        .kopere_dashboard-mobile-backdrop {
+            z-index: 39;
+        }
+        .kopere_dashboard-card-brandmark,
+        .kopere_dashboard-card-navchildren,
+        .kopere_dashboard-card-navgroup-title,
+        .kopere_dashboard-card-navlabel,
+        .kopere_dashboard-card-navlink,
+        .kopere_dashboard-card-navcaret,
+        .kopere_dashboard-mobile-close {
+            transition: all .3s ease;
+        }
+        .kopere_dashboard-card-shell:not(.is-sidebar-open) {
+            .kopere_dashboard-card-sidenav {
+                width: 74px;
+                .kopere_dashboard-card-brandmark,
+                .kopere_dashboard-card-navchildren,
+                .kopere_dashboard-card-navlabel,
+                .kopere_dashboard-card-navlink,
+                .kopere_dashboard-card-navcaret {
+                    width: 0;
+                    height: 0;
+                    min-width: 0;
+                    min-height: 0;
+                    overflow: hidden;
+                }
+                .kopere_dashboard-card-navgroup-title {
+                    padding: 12px 0 8px;
+                    font-size: 10px;
+                    text-align: center;
+                }
+                .kopere_dashboard-mobile-close {
+                    display: none;
+                }
+            }
+        }
+        .kopere_dashboard-mobile-close,
+        .kopere_dashboard-mobile-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .kopere_dashboard-mobile-close {
+            min-width: 36px;
+            min-height: 36px;
+            color: #7d8797;
+            text-decoration: none;
+        }
+        .kopere_dashboard-mobile-toggle {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            min-height: 40px;
+            padding: 0;
+            border-radius: 10px;
+            background: #ffffff;
+        }
+        .kopere_dashboard-mobile-toggle-icon {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 4px;
+            span {
+                display: block;
+                width: 18px;
+                height: 2px;
+                border-radius: 999px;
+                background: #2c3650;
+            }
+        }
+        .kopere_dashboard-card-main {
+            width: 100%;
+        }
+        .kopere_dashboard-dashboard {
+            padding: 14px 18px 18px;
+        }
+        .kopere_dashboard-title {
+            font-size: 1.85rem;
+        }
+        .kopere_dashboard-card-shell.is-sidebar-open {
+            .kopere_dashboard-mobile-backdrop {
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
+    }
+    @media (max-width: 575.98px) {
+        .kopere_dashboard-dashboard {
+            padding: 64px 14px 14px;
+        }
+        .kopere_dashboard-kpis {
+            grid-template-columns: 1fr;
+        }
+        .kopere_dashboard-card,
+        .kopere_dashboard-hero {
+            padding: 14px;
+        }
+        .kopere_dashboard-title {
+            font-size: 1.65rem;
+        }
+        .kopere_dashboard-hero-left {
+            align-items: flex-start;
+        }
+    }
+
+    @import "amd/src/dataTables";
+    @import "amd/src/dataTables-buttons";
+    @import "amd/src/select2";
 }
 
-.kopere-dashboard {
-    @import "assets/css/botao-add";
-}
-@import "assets/css/statics-pages";
 
-// print
-@import "assets/css/print";
 
-@import "assets/css/dark-mode";
+
+
+
+
+
+
+
+

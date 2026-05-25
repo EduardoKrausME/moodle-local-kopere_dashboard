@@ -15,16 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Introduced  18/05/2023 22:01
+ * Class photo
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace local_kopere_dashboard\util;
 
 use Exception;
+use user_picture;
 
 /**
  * Class photo
@@ -43,7 +44,7 @@ class photo {
         global $DB, $PAGE;
         $user = $DB->get_record("user", ["id" => $userid]);
 
-        $userpicture = new \user_picture($user);
+        $userpicture = new user_picture($user);
         $userpicture->size = 1;
         $profileimageurl = $userpicture->get_url($PAGE)->out(false);
 

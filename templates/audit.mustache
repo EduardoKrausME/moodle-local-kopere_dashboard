@@ -1,0 +1,103 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_kopere_dashboard/audit
+
+    Example context (json):
+    {
+        "q": "plan",
+        "component": "koperedashboard_recurringpayments",
+        "userid": 501,
+
+        "rows": [
+            {
+                "time": "3 Mar 2026, 14:25",
+                "component": "koperedashboard_recurringpayments",
+                "action": "plan_updated",
+                "user": "Finance Manager (id: 12)",
+                "description": "Updated plan \"Monthly Plan - 12 installments\" (amount: R$ 149,90, dueday: 10)."
+            },
+            {
+                "time": "3 Mar 2026, 10:05",
+                "component": "koperedashboard_requests",
+                "action": "request_replied",
+                "user": "Prof. Daniel Moreau (id: 77)",
+                "description": "Replied to request #1042: \"Request to review final grade\"."
+            },
+            {
+                "time": "2 Mar 2026, 09:12",
+                "component": "koperedashboard_requests",
+                "action": "request_created",
+                "user": "Alice Johnson (id: 501)",
+                "description": "Created request #1042 in category \"Grade review\"."
+            },
+            {
+                "time": "28 Feb 2026, 16:40",
+                "component": "koperedashboard_courses",
+                "action": "course_quicklink_opened",
+                "user": "Bruno Silva (id: 502)",
+                "description": "Opened quick link \"Grades\" for course \"Project Management Essentials\" (courseid: 77)."
+            }
+        ]
+    }
+}}
+
+<div class="kopere_dashboard-card">
+    <form method="get">
+        <div class="form-group">
+            <label>{{#str}}audit_search, local_kopere_dashboard{{/str}}</label>
+            <input type="text" class="form-control" name="q" value="{{{q}}}">
+        </div>
+
+        <div class="form-group">
+            <label>{{#str}}audit_component, local_kopere_dashboard{{/str}}</label>
+            <input type="text" class="form-control" name="component" value="{{{component}}}">
+        </div>
+
+        <div class="form-group">
+            <label>{{#str}}audit_user, local_kopere_dashboard{{/str}}</label>
+            <input type="number" class="form-control" name="userid" value="{{{userid}}}">
+        </div>
+
+        <button class="btn btn-secondary" type="submit">{{#str}}audit_filter, local_kopere_dashboard{{/str}}</button>
+    </form>
+</div>
+
+<div class="kopere_dashboard-card" style="margin-top: 16px;">
+    <table class="table table-striped kopere_dashboard-card-table">
+        <thead>
+        <tr>
+            <th>{{#str}}audit_time, local_kopere_dashboard{{/str}}</th>
+            <th>{{#str}}audit_component, local_kopere_dashboard{{/str}}</th>
+            <th>{{#str}}audit_action, local_kopere_dashboard{{/str}}</th>
+            <th>{{#str}}audit_user, local_kopere_dashboard{{/str}}</th>
+            <th>{{#str}}audit_description, local_kopere_dashboard{{/str}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#rows}}
+            <tr>
+                <td>{{{time}}}</td>
+                <td>{{{component}}}</td>
+                <td>{{{action}}}</td>
+                <td>{{{user}}}</td>
+                <td>{{{description}}}</td>
+            </tr>
+        {{/rows}}
+        </tbody>
+    </table>
+</div>

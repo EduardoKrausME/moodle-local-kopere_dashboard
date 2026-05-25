@@ -1,0 +1,151 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_kopere_dashboard/dashboard
+
+    Example context (json):
+    {
+        "kpis": [
+            {
+                "title": "Parcelas vencidas",
+                "value": "12",
+                "subtitle": "Pagamentos recorrentes",
+                "style": "kopere_dashboard-kpi-teal",
+                "url": "/local/kopere_dashboard/plugins/recurringpayments/students.php",
+                "hasurl": true
+            }
+        ],
+
+        "linejson": "{\"labels\":[\"Oct\",\"Nov\",\"Dec\",\"Jan\",\"Feb\",\"Mar\"],\"datasets\":[{\"label\":\"Enrollments\",\"data\":[62,71,58,83,92,96]}]}",
+        "donutjson": "{\"labels\":[\"Accepted\",\"Pending\",\"Rejected\"],\"datasets\":[{\"data\":[412,31,9]}]}",
+
+        "auditrows": [
+            {
+                "user": "Finance Manager",
+                "action": "plan_updated",
+                "time": "3 Mar 2026, 14:25"
+            },
+            {
+                "user": "Prof. Daniel Moreau",
+                "action": "request_replied",
+                "time": "3 Mar 2026, 10:05"
+            },
+            {
+                "user": "Alice Johnson",
+                "action": "request_created",
+                "time": "2 Mar 2026, 09:12"
+            },
+            {
+                "user": "Bruno Silva",
+                "action": "course_opened",
+                "time": "28 Feb 2026, 16:40"
+            }
+        ]
+    }
+}}
+
+<div class="kopere_dashboard-hero">
+    <div class="kopere_dashboard-hero-left">
+        <div class="kopere_dashboard-hero-icon">
+            {{#pix}}home/welcome-icon, local_kopere_dashboard{{/pix}}
+        </div>
+        <div>
+            <div class="kopere_dashboard-hero-title">
+                {{#str}}welcome_title, local_kopere_dashboard{{/str}}
+            </div>
+            <div class="kopere_dashboard-hero-desc">
+                {{#str}}welcome_desc, local_kopere_dashboard{{/str}}
+            </div>
+        </div>
+    </div>
+
+    <div class="kopere_dashboard-hero-illu" aria-hidden="true">
+        <svg viewBox="0 0 520 140" role="img">
+            <rect x="0" y="0" width="520" height="140" rx="16" ry="16" fill="rgba(0,0,0,.02)"></rect>
+            <rect x="285" y="18" width="210" height="104" rx="12" fill="rgba(0,188,212,.16)"></rect>
+            <rect x="305" y="38" width="60" height="60" rx="10" fill="rgba(21,54,95,.35)"></rect>
+            <rect x="375" y="38" width="96" height="12" rx="6" fill="rgba(21,54,95,.25)"></rect>
+            <rect x="375" y="58" width="76" height="12" rx="6" fill="rgba(21,54,95,.18)"></rect>
+            <rect x="375" y="78" width="88" height="12" rx="6" fill="rgba(21,54,95,.14)"></rect>
+            <circle cx="120" cy="70" r="34" fill="rgba(21,54,95,.18)"></circle>
+            <circle cx="160" cy="55" r="14" fill="rgba(0,188,212,.28)"></circle>
+            <circle cx="160" cy="85" r="14" fill="rgba(243,156,18,.28)"></circle>
+        </svg>
+    </div>
+</div>
+
+<div class="kopere_dashboard-kpis">
+    {{#kpis}}
+        {{#hasurl}}
+            <a class="kopere_dashboard-kpi {{{style}}}" href="{{{url}}}">
+                <div class="kopere_dashboard-kpi-title">{{{title}}}</div>
+                <div class="kopere_dashboard-kpi-value">{{{value}}}</div>
+                <div class="kopere_dashboard-kpi-sub">{{{subtitle}}}</div>
+            </a>
+        {{/hasurl}}
+        {{^hasurl}}
+            <div class="kopere_dashboard-kpi {{{style}}}">
+                <div class="kopere_dashboard-kpi-title">{{{title}}}</div>
+                <div class="kopere_dashboard-kpi-value">{{{value}}}</div>
+                <div class="kopere_dashboard-kpi-sub">{{{subtitle}}}</div>
+            </div>
+        {{/hasurl}}
+    {{/kpis}}
+</div>
+
+<div class="kopere_dashboard-charts">
+    <div class="kopere_dashboard-card">
+        <div class="kopere_dashboard-card-title">{{#str}}chart_enrollments_title, local_kopere_dashboard{{/str}}</div>
+        <div class="kopere_dashboard-chartwrap">
+            <canvas id="kopere_dashboard-line" height="180" style="width: 100%;"></canvas>
+        </div>
+        <script type="application/json" id="kopere_dashboard-line-data">{{{linejson}}}</script>
+    </div>
+
+    <div class="kopere_dashboard-card">
+        <div class="kopere_dashboard-card-title">{{#str}}chart_contracts_title, local_kopere_dashboard{{/str}}</div>
+        <div class="kopere_dashboard-chartwrap kopere_dashboard-chartwrap-center">
+            <canvas id="kopere_dashboard-donut" width="280" height="180"></canvas>
+        </div>
+        <div class="kopere_dashboard-legend" id="kopere_dashboard-donut-legend"></div>
+        <script type="application/json" id="kopere_dashboard-donut-data">{{{donutjson}}}</script>
+    </div>
+</div>
+
+<div class="kopere_dashboard-card">
+    <div class="kopere_dashboard-card-title">{{#str}}audit_latest, local_kopere_dashboard{{/str}}</div>
+
+    <table class="table table-striped kopere_dashboard-card-table">
+        <thead>
+        <tr>
+            <th>{{#str}}audit_user, local_kopere_dashboard{{/str}}</th>
+            <th>{{#str}}audit_action, local_kopere_dashboard{{/str}}</th>
+            <th>{{#str}}audit_time, local_kopere_dashboard{{/str}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#auditrows}}
+            <tr>
+                <td>{{{user}}}</td>
+                <td>{{{action}}}</td>
+                <td>{{{time}}}</td>
+            </tr>
+        {{/auditrows}}
+        </tbody>
+    </table>
+</div>
+

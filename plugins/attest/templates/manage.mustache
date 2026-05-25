@@ -1,0 +1,94 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_attest/manage
+
+    Example context (json):
+    {
+        "newurl": "https://example.com/local/kopere_dashboard/plugins/attest/edit.php",
+        "rows": [
+            {
+                "id": 1,
+                "name": "Enrollment Certificate",
+                "validmonths": 12,
+                "allcourses": true,
+                "active": true,
+                "editurl": "https://example.com/local/kopere_dashboard/plugins/attest/edit.php?id=1",
+                "delurl": "https://example.com/local/kopere_dashboard/plugins/attest/delete.php?id=1"
+            },
+            {
+                "id": 2,
+                "name": "Student ID Declaration",
+                "validmonths": 6,
+                "allcourses": false,
+                "active": false,
+                "editurl": "https://example.com/local/kopere_dashboard/plugins/attest/edit.php?id=2",
+                "delurl": "https://example.com/local/kopere_dashboard/plugins/attest/delete.php?id=2"
+            }
+        ]
+    }
+}}
+
+<div class="kopere_dashboard-card">
+    <div style="display:flex; justify-content: space-between; align-items:center;">
+        <a class="btn btn-primary" href="{{{newurl}}}">{{#str}}new_template, koperedashboard_attest{{/str}}</a>
+    </div>
+
+    <table class="table table-striped local-kopere_dashboard-table" style="margin-top: 12px;">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>{{#str}}field_name, koperedashboard_attest{{/str}}</th>
+            <th>{{#str}}field_validmonths, koperedashboard_attest{{/str}}</th>
+            <th>{{#str}}field_allcourses, koperedashboard_attest{{/str}}</th>
+            <th>{{#str}}field_active, koperedashboard_attest{{/str}}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#rows}}
+            <tr>
+                <td>{{{id}}}</td>
+                <td>{{{name}}}</td>
+                <td>{{{validmonths}}}</td>
+                <td>
+                    {{#allcourses}}
+                        {{#str}}yes{{/str}}
+                    {{/allcourses}}
+                    {{^allcourses}}
+                        {{#str}}no{{/str}}
+                    {{/allcourses}}
+                </td>
+                <td>
+                    {{#active}}
+                        {{#str}}yes{{/str}}
+                    {{/active}}
+                    {{^active}}
+                        {{#str}}no{{/str}}
+                    {{/active}}
+                </td>
+                <td style="white-space: nowrap;">
+                    <a class="btn btn-secondary" href="{{{editurl}}}">
+                        {{#str}}edit_template, koperedashboard_attest{{/str}}</a>
+                    <a class="btn btn-danger" href="{{{delurl}}}">
+                        {{#str}}delete_template, koperedashboard_attest{{/str}}</a>
+                </td>
+            </tr>
+        {{/rows}}
+        </tbody>
+    </table>
+</div>

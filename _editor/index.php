@@ -19,13 +19,11 @@
  * Editor.
  *
  * @package   local_kopere_dashboard
- * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once("../../../config.php");
-require_once("../lib.php");
-require_once("../autoload.php");
 require_once("./function.php");
 $PAGE->set_context(\context_system::instance());
 
@@ -102,7 +100,7 @@ require_capability("moodle/site:config", context_system::instance());
             <?php
             $pagePreview = false;
             if ($page == "webpages") {
-                $pagePreview = "{$CFG->wwwroot}/local/kopere_dashboard/";
+                $pagePreview = "{$CFG->wwwroot}/local/kopere_dashboard/page/";
             }
             if ($pagePreview) { ?>
             <form class="form-preview" method="post" target="editor-preview"
@@ -1586,7 +1584,7 @@ require_capability("moodle/site:config", context_system::instance());
 
             preg_match('/\/([a-z0-9\-]*)\/([a-z0-9\-]*)\.html/', $file, $info);
             $name = ucfirst(str_replace("-", " ", $info[2]));
-            $groupname = ucfirst(str_replace("-", " ", $info[1]));;
+            $groupname = ucfirst(str_replace("-", " ", $info[1]));
             $groups[] = "{$info[1]}/{$info[2]}";
             echo "
                 Vvveb.Sections.add('{$info[1]}/{$info[2]}', {

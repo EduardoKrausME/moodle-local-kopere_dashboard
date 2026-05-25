@@ -1,0 +1,218 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_kopere_dashboard/page
+
+    Example context (json):
+    {
+        "brand": "Kopere Dashboard",
+        "brandurl": "https://moodle.example.com/local/kopere_dashboard/",
+
+        "primaryitems": [
+            {
+                "title": "Dashboard",
+                "url": "https://moodle.example.com/local/kopere_dashboard/",
+                "icon": "home",
+                "active": true
+            },
+            {
+                "title": "Users",
+                "url": "https://moodle.example.com/local/kopere_dashboard/users/",
+                "icon": "group",
+                "active": false
+            }
+        ],
+
+        "groups": [
+            {
+                "title": "Academic",
+                "items": [
+                    {
+                        "title": "Courses",
+                        "url": "https://moodle.example.com/local/kopere_dashboard/courses/",
+                        "description": "Search courses and view quick links, cohorts, contracts, plans and requests.",
+                        "icon": "school",
+                        "active": false,
+                        "haschildren": false
+                    },
+                    {
+                        "title": "Requests",
+                        "url": "https://moodle.example.com/local/kopere_dashboard/requests/manage.php",
+                        "description": "Manage academic requests (waivers, grade reviews, etc.).",
+                        "icon": "support_agent",
+                        "active": false,
+                        "haschildren": false
+                    }
+                ]
+            },
+            {
+                "title": "Finance",
+                "items": [
+                    {
+                        "title": "Recurring payments",
+                        "url": "https://moodle.example.com/local/kopere_dashboard/recurringpayments/",
+                        "description": "Create plans, assign users and track installments.",
+                        "icon": "shopping_cart",
+                        "active": false,
+                        "haschildren": false
+                    }
+                ]
+            },
+            {
+                "title": "System",
+                "items": [
+                    {
+                        "title": "Audit log",
+                        "url": "https://moodle.example.com/local/kopere_dashboard/audit.php",
+                        "description": "Track who did what and when across Kopere Dashboard.",
+                        "icon": "settings",
+                        "active": false,
+                        "haschildren": false
+                    }
+                ]
+            }
+        ],
+
+        "kopere_dashboard-title": "Enrollments",
+
+        "breadcrumb": [
+            {"label": "Kopere Dashboard", "url": "https://moodle.example.com/local/kopere_dashboard/"},
+            {"label": "Academic", "url": "https://moodle.example.com/local/kopere_dashboard/#academic"}
+        ],
+
+        "content-class": "plugin-class",
+        "content": "<div class=\"kopere_dashboard-card\"><h3>Page content</h3><p>This HTML is injected by the controller.</p></div>"
+    }
+}}
+
+<div class="kopere_dashboard-card-shell" data-kopere_dashboard-shell>
+    <div class="kopere_dashboard-mobile-backdrop" data-kopere_dashboard-sidebar-backdrop></div>
+
+    <aside class="kopere_dashboard-card-sidenav" id="kopere_dashboard-sidebar-nav"
+           aria-label="{{#str}}menu_navigation, local_kopere_dashboard{{/str}}" data-kopere_dashboard-sidebar>
+        <div class="kopere_dashboard-card-brand">
+            <button type="button"
+                    class="btn btn-outline-secondary kopere_dashboard-mobile-toggle"
+                    data-kopere_dashboard-sidebar-open
+                    aria-controls="kopere_dashboard-sidebar-nav"
+                    aria-expanded="false">
+                <span class="kopere_dashboard-mobile-toggle-icon" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+
+            <a class="kopere_dashboard-card-brandlink" href="{{{brandurl}}}">
+                <!--span class="kopere_dashboard-card-brandmark">{{{brand}}}</span-->
+                <span class="kopere_dashboard-card-brandmark">
+                    <img src="https://www.eduardokraus.com/logos/kopere_dashboard.svg" alt="Logo">
+                </span>
+            </a>
+
+            <button type="button"
+                    class="btn btn-link kopere_dashboard-mobile-close"
+                    data-kopere_dashboard-sidebar-close
+                    aria-label="{{#str}}menu_close, local_kopere_dashboard{{/str}}">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <nav class="kopere_dashboard-card-nav">
+            {{#primaryitems}}
+                <a class="kopere_dashboard-card-navitem {{#active}}is-active{{/active}}" href="{{{url}}}">
+                    <span class="kopere_dashboard-card-navicon">{{#icon}}<span class="kopere_dashboard-material-icon" aria-hidden="true">{{{icon}}}</span>{{/icon}}</span>
+                    <span class="kopere_dashboard-card-navlabel">{{{title}}}</span>
+                </a>
+            {{/primaryitems}}
+
+            {{#groups}}
+                <div class="kopere_dashboard-card-navgroup">
+                    <div class="kopere_dashboard-card-navgroup-title">{{{title}}}</div>
+
+                    {{#items}}
+                        {{#haschildren}}
+                            <div class="kopere_dashboard-card-navitem kopere_dashboard-card-navsummary {{#active}}is-active{{/active}} {{#expanded}}is-expanded{{/expanded}}"
+                                 title="{{{description}}}">
+                                <span class="kopere_dashboard-card-navicon">
+                                    {{#icon}}<span class="kopere_dashboard-material-icon" aria-hidden="true">{{{icon}}}</span>{{/icon}}</span>
+                                <a class="kopere_dashboard-card-navlink" href="{{{url}}}">{{{title}}}</a>
+                                <span class="kopere_dashboard-card-navcaret" aria-hidden="true"></span>
+                            </div>
+                            <div class="kopere_dashboard-card-navchildren {{#expanded}}is-expanded{{/expanded}}">
+                                {{#children}}
+                                    <a class="kopere_dashboard-card-navitem kopere_dashboard-card-navitem--child {{#active}}is-active{{/active}}"
+                                       href="{{{url}}}" title="{{{description}}}">
+                                        <span class="kopere_dashboard-card-navicon">{{#icon}}<span class="kopere_dashboard-material-icon" aria-hidden="true">{{{icon}}}</span>{{/icon}}</span>
+                                        <span class="kopere_dashboard-card-navlabel">{{{title}}}</span>
+                                    </a>
+                                {{/children}}
+                            </div>
+                        {{/haschildren}}
+
+                        {{^haschildren}}
+                            <a class="kopere_dashboard-card-navitem {{#active}}is-active{{/active}}" href="{{{url}}}"
+                               title="{{{description}}}">
+                                <span class="kopere_dashboard-card-navicon">{{#icon}}<span class="kopere_dashboard-material-icon" aria-hidden="true">{{{icon}}}</span>{{/icon}}</span>
+                                <span class="kopere_dashboard-card-navlabel">{{{title}}}</span>
+                            </a>
+                        {{/haschildren}}
+                    {{/items}}
+                </div>
+            {{/groups}}
+
+            {{#hasfooteritems}}
+                <hr class="my-3 mx-2">
+                {{#footeritems}}
+                    <a class="kopere_dashboard-card-navitem {{#active}}is-active{{/active}}" href="{{{url}}}"
+                       title="{{{description}}}">
+                        <span class="kopere_dashboard-card-navicon">{{#icon}}<span class="kopere_dashboard-material-icon" aria-hidden="true">{{{icon}}}</span>{{/icon}}</span>
+                        <span class="kopere_dashboard-card-navlabel">{{{title}}}</span>
+                    </a>
+                {{/footeritems}}
+            {{/hasfooteritems}}
+        </nav>
+    </aside>
+
+    <main class="kopere_dashboard-card-main ">
+        <div class="kopere_dashboard-dashboard">
+            <div class="kopere_dashboard-toprow">
+                <div class="kopere_dashboard-breadcrumb">
+                    {{#breadcrumb}}
+                        {{#url}}
+                            <a href="{{{url}}}">{{{label}}}</a>
+                        {{/url}}
+                        {{^url}}
+                            <span class="kopere_dashboard-bc-current">{{{label}}}</span>
+                        {{/url}}
+                        {{#hasseparator}}
+                            <span class="kopere_dashboard-bc-sep">/</span>
+                        {{/hasseparator}}
+                    {{/breadcrumb}}
+                </div>
+
+                <div class="kopere_dashboard-toprow-left">
+                    <h2 class="kopere_dashboard-title">{{kopere_dashboard-title}}</h2>
+                </div>
+            </div>
+
+            <div class="kopere_dashboard-pagecontent {{{class-pluginname}}} {{{content-class}}}">
+                {{{content}}}
+            </div>
+        </div>
+    </main>
+</div>

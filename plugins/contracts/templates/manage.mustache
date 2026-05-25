@@ -1,0 +1,93 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_contracts/manage
+
+    Example context (json):
+    {
+        "newurl": "https://moodle.example.com/local/koperedashboard_contracts/edit.php",
+        "rows": [
+            {
+                "id": 12,
+                "name": "Monthly Tuition Contract (2026)",
+                "active": true,
+                "modified": "2026-03-04 10:25",
+                "editurl": "https://moodle.example.com/local/koperedashboard_contracts/edit.php?id=12",
+                "deleteurl": "https://moodle.example.com/local/koperedashboard_contracts/delete.php?id=12&amp;sesskey=abc123XYZ987"
+            },
+            {
+                "id": 13,
+                "name": "Scholarship Agreement - 50%",
+                "active": false,
+                "modified": "2026-02-18 14:02",
+                "editurl": "https://moodle.example.com/local/koperedashboard_contracts/edit.php?id=13",
+                "deleteurl": "https://moodle.example.com/local/koperedashboard_contracts/delete.php?id=13&amp;sesskey=abc123XYZ987"
+            }
+        ]
+    }
+}}
+
+<div class="kopere_dashboard-card">
+    <div style="display:flex; justify-content: space-between; align-items:center; gap: 8px;">
+        <div>
+            <a class="btn btn-primary" href="{{{newurl}}}">{{#str}}newcontract, koperedashboard_contracts{{/str}}</a>
+            <a class="btn btn-secondary" href="{{{signaturesurl}}}">{{#str}}
+                viewsignatures, koperedashboard_contracts{{/str}}</a>
+        </div>
+    </div>
+
+    <table class="table table-striped kopere_dashboard-card-table" style="margin-top: 12px;">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>{{#str}}field_name, koperedashboard_contracts{{/str}}</th>
+            <th>{{#str}}field_active, koperedashboard_contracts{{/str}}</th>
+            <th>{{#str}}modified{{/str}}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#rows}}
+            <tr>
+                <td>{{{id}}}</td>
+                <td>{{{name}}}</td>
+                <td>
+                    {{#active}}
+                        <span class="kopere_dashboard-card-badge">
+                            {{#str}}yes{{/str}}
+                        </span>
+                    {{/active}}
+                    {{^active}}
+                        <span class="kopere_dashboard-card-badge">
+                            {{#str}}no{{/str}}
+                        </span>
+                    {{/active}}
+                </td>
+                <td>{{{modified}}}</td>
+                <td class="text-nowrap">
+                    <a class="btn btn-secondary" href="{{{editurl}}}">
+                        {{#str}}editcontract, koperedashboard_contracts{{/str}}</a>
+                    <a class="btn btn-secondary" href="{{{signaturesurl}}}">
+                        {{#str}}viewsignatures, koperedashboard_contracts{{/str}}</a>
+                    <a class="btn btn-danger" href="{{{deleteurl}}}">
+                        {{#str}}deletecontract, koperedashboard_contracts{{/str}}</a>
+                </td>
+            </tr>
+        {{/rows}}
+        </tbody>
+    </table>
+</div>

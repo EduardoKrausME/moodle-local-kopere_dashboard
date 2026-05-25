@@ -50,7 +50,5 @@ function xmldb_local_kopere_dashboard_install() {
     $html = file_get_contents(__DIR__ . "/notification-template.html");
     set_config("notification-template", $html, "local_kopere_dashboard");
 
-    event_install::install_or_update();
-
     return true;
 }

@@ -1,0 +1,336 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_courses/view
+
+    Example context (json):
+    {
+        "fullname": "Introduction to Data Science",
+        "shortname": "DS101",
+        "idnumber": "COURSE-000123",
+        "visible": true,
+
+        "startdate": "1 Jan 2026",
+        "enddate": "31 Dec 2026",
+        "modified": "3 Mar 2026, 14:25",
+
+        "searchurl": "https://moodle.example.com/local/kopere_dashboard/courses/?q=data",
+
+        "quicklinks": [
+            {"type": "primary", "url": "https://moodle.example.com/course/view.php?id=42", "title": "Open course"},
+            {"type": "secondary", "url": "https://moodle.example.com/user/?id=42", "title": "Participants"},
+            {"type": "info", "url": "https://moodle.example.com/report/completion/?course=42", "title": "Completion report"},
+            {"type": "success", "url": "https://moodle.example.com/grade/report/grader/?id=42", "title": "Grades"}
+        ],
+
+        "metrics": [
+            {"label": "Enrolled users", "value": "128"},
+            {"label": "Active users (7 days)", "value": "47"},
+            {"label": "Completion rate", "value": "62%"},
+            {"label": "Last access (avg.)", "value": "2 days ago"}
+        ],
+
+        "hascohorts": true,
+        "cohorts": [
+            {"id": 12, "name": "Cohort 2026-A"},
+            {"id": 18, "name": "Onboarding - Partners"}
+        ],
+
+        "hascontracts": true,
+        "contracts": [
+            {"name": "Standard Enrollment Contract", "active": true, "accepted": "98 / 128"},
+            {"name": "Legacy Contract (Deprecated)", "active": false, "accepted": "4 / 128"}
+        ],
+
+        "hasplans": true,
+        "plans": [
+            {
+                "name": "Monthly Plan - 12 installments",
+                "active": true,
+                "installments": "12",
+                "amount": "R$ 149,90",
+                "activeusers": "86",
+                "pending": "9",
+                "overdue": "3",
+                "nextdue": "10 Mar 2026"
+            },
+            {
+                "name": "Scholarship Plan",
+                "active": false,
+                "installments": "0",
+                "amount": "R$ 0,00",
+                "activeusers": "12",
+                "pending": "0",
+                "overdue": "0",
+                "nextdue": "-"
+            }
+        ],
+
+        "hasrequests": true,
+        "requests": [
+            {
+                "id": 1042,
+                "url": "https://moodle.example.com/local/kopere_dashboard/requests/view.php?id=1042",
+                "subject": "Grade review request",
+                "status": "Open",
+                "category": "Assessment",
+                "user": "Alice Johnson (alice@example.com)",
+                "timecreated": "2 Mar 2026, 09:12"
+            },
+            {
+                "id": 1037,
+                "url": "https://moodle.example.com/local/kopere_dashboard/requests/view.php?id=1037",
+                "subject": "Certificate issue",
+                "status": "Resolved",
+                "category": "Certification",
+                "user": "Bruno Silva (bruno@example.com)",
+                "timecreated": "28 Feb 2026, 16:40"
+            }
+        ],
+
+        "canviewparticipants": true,
+        "hasparticipants": true,
+        "participants": [
+            {
+                "name": "Alice Johnson",
+                "profileurl": "https://moodle.example.com/user/profile.php?id=501",
+                "email": "alice@example.com",
+                "lastaccess": "3 Mar 2026, 11:03"
+            },
+            {
+                "name": "Bruno Silva",
+                "profileurl": "https://moodle.example.com/user/profile.php?id=502",
+                "email": "bruno@example.com",
+                "lastaccess": "1 Mar 2026, 18:22"
+            }
+        ]
+    }
+}}
+
+<div class="kopere_dashboard-card">
+    <div style="display: flex; align-items: flex-start; gap: 16px;">
+        <div style="flex: 1;">
+            <div style="font-size: 22px; font-weight: 800; line-height: 1.2;">{{{fullname}}}</div>
+            <div style="opacity: .85; margin-top: 2px;">
+                <span><strong>{{#str}}label_shortname, koperedashboard_courses{{/str}}:</strong> {{{shortname}}}</span>
+                <span style="margin: 0 8px;">•</span>
+                <span><strong>{{#str}}label_idnumber, koperedashboard_courses{{/str}}:</strong> {{{idnumber}}}</span>
+                <span style="margin: 0 8px;">•</span>
+                <span>
+                    {{#visible}}
+                        <span class="badge text-bg-success">{{#str}}visible_yes, koperedashboard_courses{{/str}}</span>
+                    {{/visible}}
+                    {{^visible}}
+                        <span class="badge text-bg-secondary">{{#str}}visible_no, koperedashboard_courses{{/str}}</span>
+                    {{/visible}}
+                </span>
+            </div>
+            <div style="opacity: .8; margin-top: 6px;">
+                <span><strong>{{#str}}label_startdate, koperedashboard_courses{{/str}}:</strong> {{{startdate}}}</span>
+                <span style="margin: 0 8px;">•</span>
+                <span><strong>{{#str}}label_enddate, koperedashboard_courses{{/str}}:</strong> {{{enddate}}}</span>
+                <span style="margin: 0 8px;">•</span>
+                <span><strong>{{#str}}label_modified, koperedashboard_courses{{/str}}:</strong> {{{modified}}}</span>
+            </div>
+
+            <div style="margin-top: 10px;">
+                <a class="btn btn-link p-0" href="{{{searchurl}}}">←
+                    {{#str}}search_back, koperedashboard_courses{{/str}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="kopere_dashboard-card" style="margin-top: 16px;">
+    <h4 style="margin: 0 0 12px 0;">{{#str}}quick_links, koperedashboard_courses{{/str}}</h4>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        {{#quicklinks}}
+            <a class="btn btn-{{{type}}} btn-sm" href="{{{url}}}">{{{title}}}</a>
+        {{/quicklinks}}
+    </div>
+</div>
+
+<div class="kopere_dashboard-card" style="margin-top: 16px;">
+    <h4 style="margin: 0 0 12px 0;">{{#str}}section_overview, koperedashboard_courses{{/str}}</h4>
+
+    <div class="kopere_dashboard-student-grid"
+         style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+        {{#metrics}}
+            <div class="kopere_dashboard-card" style="margin: 0;">
+                <div style="opacity: .75; font-size: 13px;">{{{label}}}</div>
+                <div style="font-size: 26px; font-weight: 800; line-height: 1.1;">{{{value}}}</div>
+            </div>
+        {{/metrics}}
+    </div>
+</div>
+
+{{#hascohorts}}
+    <div class="kopere_dashboard-card" style="margin-top: 16px;">
+        <h4 style="margin: 0 0 12px 0;">{{#str}}section_cohorts, koperedashboard_courses{{/str}}</h4>
+        <ul style="margin: 0;">
+            {{#cohorts}}
+                <li>{{{name}}} <small style="opacity:.7;">(#{{{id}}})</small></li>
+            {{/cohorts}}
+        </ul>
+    </div>
+{{/hascohorts}}
+
+<div class="kopere_dashboard-card" style="margin-top: 16px;">
+    <h4 style="margin: 0 0 12px 0;">{{#str}}section_contracts, koperedashboard_courses{{/str}}</h4>
+
+    {{#hascontracts}}
+        <table class="table table-striped kopere_dashboard-table">
+            <thead>
+            <tr>
+                <th>{{#str}}col_contract, koperedashboard_courses{{/str}}</th>
+                <th style="width: 110px;">{{#str}}col_active, koperedashboard_courses{{/str}}</th>
+                <th style="width: 170px;">{{#str}}col_accepted, koperedashboard_courses{{/str}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#contracts}}
+                <tr class="{{^active}}table-warning{{/active}}">
+                    <td>{{{name}}}</td>
+                    <td>
+                        {{#active}}<span class="badge text-bg-success">{{#str}}yes, core{{/str}}</span>{{/active}}
+                        {{^active}}<span class="badge text-bg-secondary">{{#str}}no, core{{/str}}</span>{{/active}}
+                    </td>
+                    <td>{{{accepted}}}</td>
+                </tr>
+            {{/contracts}}
+            </tbody>
+        </table>
+    {{/hascontracts}}
+
+    {{^hascontracts}}
+        <div class="alert alert-light" style="margin-bottom: 0;">-</div>
+    {{/hascontracts}}
+</div>
+
+<div class="kopere_dashboard-card" style="margin-top: 16px;">
+    <h4 style="margin: 0 0 12px 0;">{{#str}}section_plans, koperedashboard_courses{{/str}}</h4>
+
+    {{#hasplans}}
+        <table class="table table-striped kopere_dashboard-table">
+            <thead>
+            <tr>
+                <th>{{#str}}col_plan, koperedashboard_courses{{/str}}</th>
+                <th style="width: 110px;">{{#str}}col_active, koperedashboard_courses{{/str}}</th>
+                <th style="width: 120px;">{{#str}}col_installments, koperedashboard_courses{{/str}}</th>
+                <th style="width: 140px;">{{#str}}col_amount, koperedashboard_courses{{/str}}</th>
+                <th style="width: 150px;">{{#str}}col_plan_users, koperedashboard_courses{{/str}}</th>
+                <th style="width: 120px;">{{#str}}col_pending, koperedashboard_courses{{/str}}</th>
+                <th style="width: 120px;">{{#str}}col_overdue, koperedashboard_courses{{/str}}</th>
+                <th style="width: 170px;">{{#str}}col_nextdue, koperedashboard_courses{{/str}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#plans}}
+                <tr class="{{^active}}table-warning{{/active}}">
+                    <td>{{{name}}}</td>
+                    <td>
+                        {{#active}}<span class="badge text-bg-success">{{#str}}yes, core{{/str}}</span>{{/active}}
+                        {{^active}}<span class="badge text-bg-secondary">{{#str}}no, core{{/str}}</span>{{/active}}
+                    </td>
+                    <td>{{{installments}}}</td>
+                    <td>{{{amount}}}</td>
+                    <td>{{{activeusers}}}</td>
+                    <td>{{{pending}}}</td>
+                    <td>{{{overdue}}}</td>
+                    <td>{{{nextdue}}}</td>
+                </tr>
+            {{/plans}}
+            </tbody>
+        </table>
+    {{/hasplans}}
+
+    {{^hasplans}}
+        <div class="alert alert-light" style="margin-bottom: 0;">-</div>
+    {{/hasplans}}
+</div>
+
+<div class="kopere_dashboard-card" style="margin-top: 16px;">
+    <h4 style="margin: 0 0 12px 0;">{{#str}}section_requests, koperedashboard_courses{{/str}}</h4>
+
+    {{#hasrequests}}
+        <table class="table table-striped kopere_dashboard-table">
+            <thead>
+            <tr>
+                <th style="width: 80px;">{{#str}}col_id, koperedashboard_courses{{/str}}</th>
+                <th>{{#str}}col_subject, koperedashboard_courses{{/str}}</th>
+                <th style="width: 110px;">{{#str}}col_status, koperedashboard_courses{{/str}}</th>
+                <th style="width: 220px;">{{#str}}col_category, koperedashboard_courses{{/str}}</th>
+                <th style="width: 260px;">{{#str}}col_user, koperedashboard_courses{{/str}}</th>
+                <th style="width: 170px;">{{#str}}col_created, koperedashboard_courses{{/str}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#requests}}
+                <tr>
+                    <td><a href="{{{url}}}">{{{id}}}</a></td>
+                    <td>{{{subject}}}</td>
+                    <td>{{{status}}}</td>
+                    <td>{{{category}}}</td>
+                    <td>{{{user}}}</td>
+                    <td>{{{timecreated}}}</td>
+                </tr>
+            {{/requests}}
+            </tbody>
+        </table>
+    {{/hasrequests}}
+
+    {{^hasrequests}}
+        <div class="alert alert-light" style="margin-bottom: 0;">-</div>
+    {{/hasrequests}}
+</div>
+
+<div class="kopere_dashboard-card" style="margin-top: 16px;">
+    <h4 style="margin: 0 0 12px 0;">{{#str}}section_participants, koperedashboard_courses{{/str}}</h4>
+
+    {{#canviewparticipants}}
+        {{#hasparticipants}}
+            <table class="table table-striped kopere_dashboard-table">
+                <thead>
+                <tr>
+                    <th>{{#str}}col_name, koperedashboard_courses{{/str}}</th>
+                    <th>{{#str}}col_email, koperedashboard_courses{{/str}}</th>
+                    <th style="width: 170px;">{{#str}}col_lastaccess, koperedashboard_courses{{/str}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#participants}}
+                    <tr>
+                        <td><a href="{{{profileurl}}}">{{{name}}}</a></td>
+                        <td>{{{email}}}</td>
+                        <td>{{{lastaccess}}}</td>
+                    </tr>
+                {{/participants}}
+                </tbody>
+            </table>
+        {{/hasparticipants}}
+
+        {{^hasparticipants}}
+            <div class="alert alert-light" style="margin-bottom: 0;">-</div>
+        {{/hasparticipants}}
+    {{/canviewparticipants}}
+
+    {{^canviewparticipants}}
+        <div class="alert alert-warning" style="margin-bottom: 0;">
+            {{#str}}no_participants_cap, koperedashboard_courses{{/str}}
+        </div>
+    {{/canviewparticipants}}
+</div>

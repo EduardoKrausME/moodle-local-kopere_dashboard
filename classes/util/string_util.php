@@ -17,8 +17,6 @@
 /**
  * string_util file
  *
- * introduced 23/05/17 18:24
- *
  * @package   local_kopere_dashboard
  * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

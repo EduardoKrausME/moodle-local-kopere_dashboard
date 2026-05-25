@@ -1,0 +1,137 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_kopere_dashboard/student_dashboard
+
+    Example context (json):
+    {
+    }
+}}
+
+<div class="kopere_dashboard-hero kopere_dashboard-hero-student">
+    <div class="kopere_dashboard-hero-left">
+        <div class="kopere_dashboard-hero-icon">
+            <span class="material-symbols-outlined">person</span>
+        </div>
+        <div>
+            <div class="kopere_dashboard-hero-title">
+                {{#str}}student_welcome_title, local_kopere_dashboard{{/str}}
+            </div>
+            <div class="kopere_dashboard-hero-desc">
+                {{#str}}student_welcome_desc, local_kopere_dashboard{{/str}} {{{student_name}}}.
+            </div>
+        </div>
+    </div>
+
+    <div class="kopere_dashboard-hero-illu" aria-hidden="true">
+        <svg viewBox="0 0 520 140" role="img">
+            <rect x="0" y="0" width="520" height="140" rx="16" ry="16" fill="rgba(0,0,0,.02)"></rect>
+            <rect x="285" y="18" width="210" height="104" rx="12" fill="rgba(0,188,212,.14)"></rect>
+            <rect x="304" y="34" width="168" height="14" rx="7" fill="rgba(21,54,95,.26)"></rect>
+            <rect x="304" y="58" width="142" height="12" rx="6" fill="rgba(21,54,95,.18)"></rect>
+            <rect x="304" y="80" width="92" height="12" rx="6" fill="rgba(0,188,212,.28)"></rect>
+            <rect x="72" y="30" width="130" height="84" rx="14" fill="rgba(21,54,95,.10)"></rect>
+            <rect x="88" y="44" width="98" height="12" rx="6" fill="rgba(21,54,95,.18)"></rect>
+            <rect x="88" y="68" width="78" height="12" rx="6" fill="rgba(0,188,212,.22)"></rect>
+            <rect x="88" y="90" width="58" height="12" rx="6" fill="rgba(243,156,18,.24)"></rect>
+        </svg>
+    </div>
+</div>
+
+<div class="kopere_dashboard-kpis">
+    <div class="kopere_dashboard-kpi kopere_dashboard-kpi-teal">
+        <div class="kopere_dashboard-kpi-title">{{#str}}student_kpi_enrolled_courses, local_kopere_dashboard{{/str}}</div>
+        <div class="kopere_dashboard-kpi-value">{{{kpi_enrolled_courses}}}</div>
+        <div class="kopere_dashboard-kpi-sub">{{#str}}student_kpi_enrolled_courses_sub, local_kopere_dashboard{{/str}}</div>
+    </div>
+
+    <div class="kopere_dashboard-kpi kopere_dashboard-kpi-teal2">
+        <div class="kopere_dashboard-kpi-title">{{#str}}student_kpi_completed_courses, local_kopere_dashboard{{/str}}</div>
+        <div class="kopere_dashboard-kpi-value">{{{kpi_completed_courses}}}</div>
+        <div class="kopere_dashboard-kpi-sub">{{#str}}student_kpi_completed_courses_sub, local_kopere_dashboard{{/str}}</div>
+    </div>
+
+    <div class="kopere_dashboard-kpi kopere_dashboard-kpi-orange">
+        <div class="kopere_dashboard-kpi-title">{{#str}}student_kpi_in_progress_courses, local_kopere_dashboard{{/str}}</div>
+        <div class="kopere_dashboard-kpi-value">{{{kpi_in_progress_courses}}}</div>
+        <div class="kopere_dashboard-kpi-sub">{{#str}}student_kpi_in_progress_courses_sub, local_kopere_dashboard{{/str}}</div>
+    </div>
+
+    <div class="kopere_dashboard-kpi kopere_dashboard-kpi-white">
+        <div class="kopere_dashboard-kpi-title">{{#str}}student_kpi_tracked_courses, local_kopere_dashboard{{/str}}</div>
+        <div class="kopere_dashboard-kpi-value">{{{kpi_tracked_courses}}}</div>
+        <div class="kopere_dashboard-kpi-sub">{{#str}}student_kpi_tracked_courses_sub, local_kopere_dashboard{{/str}}</div>
+    </div>
+</div>
+
+<div class="kopere_dashboard-student-grid">
+    <div class="kopere_dashboard-card">
+        <div class="kopere_dashboard-card-title">{{#str}}student_courses_title, local_kopere_dashboard{{/str}}</div>
+
+        {{#hascourses}}
+            <div class="kopere_dashboard-student-courses">
+                {{#courses}}
+                    <a class="kopere_dashboard-student-course" href="{{{courseurl}}}">
+                        <div class="kopere_dashboard-student-course-head">
+                            <div>
+                                <div class="kopere_dashboard-student-course-title">{{{fullname}}}</div>
+                                <div class="kopere_dashboard-student-course-meta">
+                                    {{#categoryname}}{{{categoryname}}} · {{/categoryname}}{{{shortname}}}
+                                </div>
+                            </div>
+                            <span class="kopere_dashboard-student-status">{{{statuslabel}}}</span>
+                        </div>
+
+                        <div class="kopere_dashboard-student-progress-row">
+                            <span>{{#str}}student_progress, local_kopere_dashboard{{/str}}</span>
+                            <strong>{{{progresslabel}}}</strong>
+                        </div>
+
+                        {{#hasprogress}}
+                            <div class="kopere_dashboard-student-progressbar">
+                                <span style="width: {{{progress}}}%;"></span>
+                            </div>
+                        {{/hasprogress}}
+
+                        <div class="kopere_dashboard-student-lastaccess">
+                            {{#str}}student_lastaccess, local_kopere_dashboard{{/str}}: {{{lastaccess}}}
+                        </div>
+                    </a>
+                {{/courses}}
+            </div>
+        {{/hascourses}}
+
+        {{^hascourses}}
+            <div class="kopere_dashboard-student-empty">
+                {{#str}}student_courses_empty, local_kopere_dashboard{{/str}}
+            </div>
+        {{/hascourses}}
+    </div>
+
+    <div class="kopere_dashboard-card">
+        <div class="kopere_dashboard-card-title">{{#str}}student_quicklinks_title, local_kopere_dashboard{{/str}}</div>
+
+        <div class="kopere_dashboard-student-links">
+            {{#quicklinks}}
+                <a class="kopere_dashboard-student-link" href="{{{url}}}">
+                    <span class="kopere_dashboard-student-link-title">{{{title}}}</span>
+                    <span class="kopere_dashboard-student-link-desc">{{{description}}}</span>
+                </a>
+            {{/quicklinks}}
+        </div>
+    </div>
+</div>

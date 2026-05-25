@@ -41,7 +41,7 @@ class bytes_util {
      *
      * @param $bytes
      *
-     * @return mixed
+     * @return array|string|string[]
      * @throws Exception
      */
     public static function size_to_byte($bytes) {
@@ -79,7 +79,7 @@ class bytes_util {
      * @param $texto
      * @param $count
      *
-     * @return mixed
+     * @return array|string|string[]
      */
     private static function remove_zero($texto, $count) {
         if ($count == 3) {
@@ -95,12 +95,11 @@ class bytes_util {
      * Function et_duration_segundos
      *
      * @param $value
-     *
-     * @return float|int
+     * @return int
      */
     public static function et_duration_segundos($value) {
         $partes = explode(":", $value);
 
-        return ($partes[0] * 60 * 60) + ($partes[1] * 60) + $partes[2];
+        return (int)((int)$partes[0] * 60 * 60) + ((int)$partes[1] * 60) + (int)$partes[2];
     }
 }

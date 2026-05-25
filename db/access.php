@@ -15,35 +15,29 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * access file
+ * access.php
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
 $capabilities = [
-    "local/kopere_dashboard:ajax" => [
+    "local/kopere_dashboard:view" => [
         "captype" => "read",
         "contextlevel" => CONTEXT_SYSTEM,
-        "archetypes" => [
-            "manager" => CAP_ALLOW,
-        ],
+        "archetypes" => [],
     ],
-    "local/kopere_dashboard:view" => [
+    "local/kopere_dashboard:viewaudit" => [
+        "captype" => "read",
+        "contextlevel" => CONTEXT_SYSTEM,
+        "archetypes" => [],
+    ],
+    "local/kopere_dashboard:managepermissions" => [
         "captype" => "write",
         "contextlevel" => CONTEXT_SYSTEM,
-        "archetypes" => [
-            "manager" => CAP_ALLOW,
-        ],
-    ],
-    "local/kopere_dashboard:manage" => [
-        "captype" => "write",
-        "contextlevel" => CONTEXT_SYSTEM,
-        "archetypes" => [
-            "manager" => CAP_ALLOW,
-        ],
+        "archetypes" => [],
     ],
 ];

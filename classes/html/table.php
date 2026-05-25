@@ -18,7 +18,7 @@
  * table file
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -184,16 +184,20 @@ class table {
      *
      * @param $linhas
      * @param string $class
+     * @param bool $returnhtml
+     * @return string|void
      */
-    public function set_row($linhas, $class = "") {
+    public function set_row($linhas, $class = "", $returnhtml = false) {
+        $html = "";
+
         if (!$this->isprint && count($this->colunas)) {
             $this->print_header($this->colunas);
         }
 
         if ($this->click != null) {
-            echo '<tbody class="hover-pointer">';
+            $html .= '<tbody class="hover-pointer">';
         } else {
-            echo "<tbody>";
+            $html .= "<tbody>";
         }
         foreach ($linhas as $linha) {
 
@@ -209,19 +213,15 @@ class table {
             }
 
             if ($this->click != null) {
-                echo "<tr {$textid} onClick='{$this->get_click($linha)}'>";
+                $html .= "<tr {$textid} onClick='{$this->get_click($linha)}'>";
             } else {
-                echo "<tr>";
+                $html .= "<tr>";
             }
             foreach ($this->colunas as $col) {
                 $class = "{$class} {$col->style_col}";
                 if ($col->funcao != null) {
                     $funcao = $col->funcao;
-                    if (is_array($linha)) {
-                        $html = $funcao($linha, $col->chave);
-                    } else {
-                        $html = $funcao($linha, $col->chave);
-                    }
+                    $html = $funcao($linha, $col->chave);
 
                     $this->print_row($html, $class);
                 } else {
@@ -234,9 +234,15 @@ class table {
                 }
 
             }
-            echo "</tr>";
+            $html .= "</tr>";
         }
-        echo "</tbody>";
+        $html .= "</tbody>";
+
+        if ($returnhtml) {
+            return $html;
+        } else {
+            echo $html;
+        }
     }
 
     /**
@@ -257,10 +263,10 @@ class table {
      * @param bool $datatable
      * @param null $extras
      */
-    public function close($datatable = false, $extras = null) {
+    public function close($datatable = false, $extras = null, $returnhtml = false) {
         global $PAGE;
 
-        echo "</table>";
+        $html = "</table>";
         if ($datatable) {
 
             $initparams = [
@@ -273,11 +279,17 @@ class table {
             $json = json_encode($initparams);
             if (isset($json[800])) {
                 $json = htmlspecialchars($json, ENT_COMPAT);
-                echo "\n<input type=\"hidden\" id='tableparams_{$this->tableid}' value='{$json}'/>\n";
+                $html .= "\n<input type=\"hidden\" id='tableparams_{$this->tableid}' value='{$json}'/>\n";
                 $PAGE->requires->js_call_amd("local_kopere_dashboard/dataTables_init", "init", [$this->tableid, null]);
             } else {
                 $PAGE->requires->js_call_amd("local_kopere_dashboard/dataTables_init", "init", [$this->tableid, $initparams]);
             }
+        }
+
+        if ($returnhtml) {
+            return $html;
+        } else {
+            echo $html;
         }
     }
 }

@@ -18,7 +18,7 @@
  * header file
  *
  * @package   local_kopere_dashboard
- * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -46,7 +46,8 @@ class header {
         echo "<meta http-equiv='refresh' content='0;url={$url}'>";
 
         if ($isdie) {
-            end_util::end_script_header("Redirecionando para {$url}");
+            header("die-reason: Redirect to {$url}");
+            die;
         }
     }
 
@@ -62,7 +63,8 @@ class header {
         echo "<meta http-equiv='refresh' content='0;url={$_SERVER["QUERY_STRING"]}'>";
 
         if ($isdie) {
-            end_util::end_script_header("Redirect to {$_SERVER["QUERY_STRING"]}");
+            header("die-reason: Redirect to {$_SERVER["QUERY_STRING"]}");
+            die;
         }
     }
 
@@ -116,6 +118,6 @@ class header {
         if (!AJAX_SCRIPT) {
             echo $OUTPUT->footer();
         }
-        end_util::end_script_show();
+        die;
     }
 }

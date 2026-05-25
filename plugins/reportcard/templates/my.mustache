@@ -1,0 +1,119 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_reportcard/my
+
+    Example context (json):
+    {
+        "coursename": "name"
+    }
+}}
+
+<div class="kopere_dashboard-card">
+    <form method="get">
+        {{#userid}}
+            <input type="hidden" name="userid" value="{{{userid}}}">
+        {{/userid}}
+        <div class="form-group">
+            <label for="kopere_dashboard-reportcard-courseid">
+                {{#str}}select_course, koperedashboard_reportcard{{/str}}
+            </label>
+            <select class="form-control" id="kopere_dashboard-reportcard-courseid" name="courseid" required
+                    onchange="this.form.submit()">
+                <option value="">{{#str}}select_course_placeholder, koperedashboard_reportcard{{/str}}</option>
+                {{#courses}}
+                    <option value="{{{id}}}" {{#selected}}selected{{/selected}}>{{{fullname}}}</option>
+                {{/courses}}
+            </select>
+        </div>
+        <button type="submit" style="display:none"></button>
+    </form>
+
+    {{^hascourses}}
+        <div class="alert alert-info" style="margin-top: 16px;">
+            {{#str}}nocourses, koperedashboard_reportcard{{/str}}
+        </div>
+    {{/hascourses}}
+</div>
+
+{{#coursename}}
+    <div class="kopere_dashboard-card">
+        <div style="display:flex; justify-content: space-between; gap: 16px; align-items: start; flex-wrap: wrap;">
+            <div>
+                <h4 style="margin-bottom: 4px;">{{{coursename}}}</h4>
+
+                {{#student}}
+                    <div style="display:flex; gap:12px; align-items:center; margin-top: 12px;">
+                        <a href="{{{profileurl}}}">
+                            <img src="{{{picture}}}" alt="{{{name}}}"
+                                 style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover;">
+                        </a>
+                        <div>
+                            <div style="font-weight: 700; line-height: 1.2;">{{{name}}}</div>
+                            {{#email}}
+                                <div class="text-muted" style="font-size: 13px;">{{{email}}}</div>
+                            {{/email}}
+                        </div>
+                    </div>
+                {{/student}}
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped kopere_dashboard-card-table" style="margin-top: 16px;">
+        <thead>
+        <tr>
+            <th>{{#str}}grade_item, koperedashboard_reportcard{{/str}}</th>
+            <th>{{#str}}grade_type, koperedashboard_reportcard{{/str}}</th>
+            <th>{{#str}}grade_value, koperedashboard_reportcard{{/str}}</th>
+            <th>{{#str}}grade_range, koperedashboard_reportcard{{/str}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#grades}}
+            <tr>
+                <td>
+                    {{#itemurl}}
+                        <a href="{{{itemurl}}}" target="_blank" rel="noopener noreferrer">{{{itemname}}}</a>
+                    {{/itemurl}}
+                    {{^itemurl}}
+                        {{{itemname}}}
+                    {{/itemurl}}
+                </td>
+                <td>{{{itemtype}}}</td>
+                <td><strong>{{{gradevalue}}}</strong></td>
+                <td>{{{graderange}}}</td>
+            </tr>
+        {{/grades}}
+        {{^hasgrades}}
+            <tr>
+                <td colspan="4" class="text-muted">
+                    {{#str}}nogradesinselectedcourse, koperedashboard_reportcard{{/str}}
+                </td>
+            </tr>
+        {{/hasgrades}}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="2">{{#str}}finalgrade_label, koperedashboard_reportcard{{/str}}</th>
+            <th>{{{finalgrade}}}</th>
+            <th>{{{finalgraderange}}}</th>
+        </tr>
+        </tfoot>
+    </table>
+    </div>
+{{/coursename}}

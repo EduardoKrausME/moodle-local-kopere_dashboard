@@ -1,0 +1,113 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_requests/categories
+
+    Example context (json):
+    {
+        "posturl": "https://moodle.example.com/local/kopere_dashboard/requests/categories.php",
+        "sesskey": "abc123XYZ987",
+
+        "rows": [
+            {
+                "id": 1,
+                "name": "Grade review",
+                "allowteacher": true,
+                "active": true,
+                "editurl": "https://moodle.example.com/local/kopere_dashboard/requests/categories.php?edit=1"
+            },
+            {
+                "id": 2,
+                "name": "Contract issues",
+                "allowteacher": false,
+                "active": true,
+                "editurl": "https://moodle.example.com/local/kopere_dashboard/requests/categories.php?edit=2"
+            },
+            {
+                "id": 3,
+                "name": "Certificate / documents",
+                "allowteacher": true,
+                "active": false,
+                "editurl": "https://moodle.example.com/local/kopere_dashboard/requests/categories.php?edit=3"
+            }
+        ],
+
+        "edit": {
+            "id": 2,
+            "name": "Contract issues",
+            "description": "Questions and requests related to student contracts, renewals, and terms.",
+            "allowteacher": false,
+            "responsiblecaps": "koperedashboard/contracts:manage\nkoperedashboard/financial:manage",
+            "active": true
+        }
+    }
+}}
+
+{{^edit}}
+    <div class="kopere_dashboard-card">
+        <div style="display:flex; justify-content: space-between; align-items:center;">
+            <a class="btn btn-primary" href="{{{posturl}}}?edit=0">
+                {{#str}}category_new, koperedashboard_requests{{/str}}</a>
+        </div>
+
+        <table class="table table-striped kopere_dashboard-card-table" style="margin-top: 12px;">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>{{#str}}category_name, koperedashboard_requests{{/str}}</th>
+                <th>{{#str}}category_allowteacher, koperedashboard_requests{{/str}}</th>
+                <th>{{#str}}category_active, koperedashboard_requests{{/str}}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#rows}}
+                <tr>
+                    <td>{{{id}}}</td>
+                    <td>{{{name}}}</td>
+                    <td>
+                        {{#allowteacher}}
+                            {{#str}}yes{{/str}}
+                        {{/allowteacher}}
+                        {{^allowteacher}}
+                            {{#str}}no{{/str}}
+                        {{/allowteacher}}</td>
+                    <td>
+                        {{#active}}
+                            {{#str}}yes{{/str}}
+                        {{/active}}
+                        {{^active}}
+                            {{#str}}no{{/str}}
+                        {{/active}}</td>
+                    <td><a class="btn btn-secondary" href="{{{editurl}}}">Edit</a></td>
+                </tr>
+            {{/rows}}
+            {{^rows}}
+                <tr>
+                    <td colspan="5" class="muted">No categories.</td>
+                </tr>
+            {{/rows}}
+            </tbody>
+        </table>
+    </div>
+{{/edit}}
+
+{{#edit}}
+    <div class="kopere_dashboard-card" style="margin-top: 16px;">
+        {{{formhtml}}}
+    </div>
+{{/edit}}
