@@ -2354,12 +2354,6 @@
   align-items: center;
   justify-content: center;
 }
-.local-kopere_dashboard div.dt-buttons .dt-button span:not(.dt-button-down-arrow),
-.local-kopere_dashboard div.dt-paging .dt-button span:not(.dt-button-down-arrow),
-.path-local-kopere_dashboard div.dt-buttons .dt-button span:not(.dt-button-down-arrow),
-.path-local-kopere_dashboard div.dt-paging .dt-button span:not(.dt-button-down-arrow) {
-  display: none;
-}
 .local-kopere_dashboard div.dt-buttons .dt-button.buttons-page-length,
 .local-kopere_dashboard div.dt-paging .dt-button.buttons-page-length,
 .path-local-kopere_dashboard div.dt-buttons .dt-button.buttons-page-length,
