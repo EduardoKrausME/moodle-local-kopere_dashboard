@@ -21,80 +21,98 @@
     {
         "brand": "Kopere Dashboard",
         "brandurl": "https://moodle.example.com/local/kopere_dashboard/",
-
         "primaryitems": [
             {
                 "title": "Dashboard",
+                "description": "Dashboard home page",
                 "url": "https://moodle.example.com/local/kopere_dashboard/",
-                "icon": "home",
+                "icon": "dashboard",
                 "active": true
-            },
-            {
-                "title": "Users",
-                "url": "https://moodle.example.com/local/kopere_dashboard/users/",
-                "icon": "group",
-                "active": false
             }
         ],
-
         "groups": [
             {
                 "title": "Academic",
                 "items": [
                     {
                         "title": "Courses",
-                        "url": "https://moodle.example.com/local/kopere_dashboard/courses/",
                         "description": "Search courses and view quick links, cohorts, contracts, plans and requests.",
+                        "url": "https://moodle.example.com/local/kopere_dashboard/plugins/courses/",
                         "icon": "school",
                         "active": false,
                         "haschildren": false
                     },
                     {
                         "title": "Requests",
-                        "url": "https://moodle.example.com/local/kopere_dashboard/requests/manage.php",
-                        "description": "Manage academic requests (waivers, grade reviews, etc.).",
+                        "description": "Manage academic requests by category.",
+                        "url": "https://moodle.example.com/local/kopere_dashboard/plugins/requests/manage.php",
                         "icon": "support_agent",
-                        "active": false,
-                        "haschildren": false
+                        "active": true,
+                        "haschildren": true,
+                        "expanded": true,
+                        "children": [
+                            {
+                                "title": "My requests",
+                                "description": "View the requests created by the current user.",
+                                "url": "https://moodle.example.com/local/kopere_dashboard/plugins/requests/my.php",
+                                "icon": "inbox",
+                                "active": false
+                            },
+                            {
+                                "title": "Manage requests",
+                                "description": "Reply to pending academic requests.",
+                                "url": "https://moodle.example.com/local/kopere_dashboard/plugins/requests/manage.php",
+                                "icon": "task_alt",
+                                "active": true
+                            }
+                        ]
                     }
                 ]
             },
             {
-                "title": "Finance",
+                "title": "Settings",
                 "items": [
                     {
-                        "title": "Recurring payments",
-                        "url": "https://moodle.example.com/local/kopere_dashboard/recurringpayments/",
-                        "description": "Create plans, assign users and track installments.",
-                        "icon": "shopping_cart",
-                        "active": false,
-                        "haschildren": false
-                    }
-                ]
-            },
-            {
-                "title": "System",
-                "items": [
-                    {
-                        "title": "Audit log",
-                        "url": "https://moodle.example.com/local/kopere_dashboard/audit.php",
-                        "description": "Track who did what and when across Kopere Dashboard.",
-                        "icon": "settings",
+                        "title": "Permissions",
+                        "description": "Manage dashboard permissions.",
+                        "url": "https://moodle.example.com/local/kopere_dashboard/permissions.php",
+                        "icon": "admin_panel_settings",
                         "active": false,
                         "haschildren": false
                     }
                 ]
             }
         ],
-
-        "kopere_dashboard-title": "Enrollments",
-
-        "breadcrumb": [
-            {"label": "Kopere Dashboard", "url": "https://moodle.example.com/local/kopere_dashboard/"},
-            {"label": "Academic", "url": "https://moodle.example.com/local/kopere_dashboard/#academic"}
+        "hasfooteritems": true,
+        "footeritems": [
+            {
+                "title": "About",
+                "description": "About Kopere Dashboard",
+                "url": "https://moodle.example.com/local/kopere_dashboard/about.php",
+                "icon": "logo_dev",
+                "active": false
+            }
         ],
-
-        "content-class": "plugin-class",
+        "breadcrumb": [
+            {
+                "label": "Kopere Dashboard",
+                "url": "https://moodle.example.com/local/kopere_dashboard/",
+                "hasseparator": true
+            },
+            {
+                "label": "Requests",
+                "url": "https://moodle.example.com/local/kopere_dashboard/plugins/requests/manage.php",
+                "hasseparator": true
+            },
+            {
+                "label": "Manage requests",
+                "url": null,
+                "hasseparator": false
+            }
+        ],
+        "kopere_dashboard-title": "Manage requests",
+        "class-pluginname": "koperedashboard_requests",
+        "content-class": "requests-manage",
         "content": "<div class=\"kopere_dashboard-card\"><h3>Page content</h3><p>This HTML is injected by the controller.</p></div>"
     }
 }}

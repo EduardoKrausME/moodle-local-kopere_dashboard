@@ -21,38 +21,34 @@
     {
         "kpis": [
             {
-                "title": "Parcelas vencidas",
-                "value": "12",
-                "subtitle": "Pagamentos recorrentes",
-                "style": "kopere_dashboard-kpi-teal",
-                "url": "/local/kopere_dashboard/plugins/recurringpayments/students.php",
+                "title": "Active students",
+                "value": "428",
+                "subtitle": "Students with active enrolments",
+                "style": "kopere_dashboard-kpi-blue",
+                "url": "https://moodle.example.com/local/kopere_dashboard/plugins/users/",
                 "hasurl": true
+            },
+            {
+                "title": "Pending contracts",
+                "value": "31",
+                "subtitle": "Contracts waiting for acceptance",
+                "style": "kopere_dashboard-kpi-indigo",
+                "url": "",
+                "hasurl": false
             }
         ],
-
-        "linejson": "{\"labels\":[\"Oct\",\"Nov\",\"Dec\",\"Jan\",\"Feb\",\"Mar\"],\"datasets\":[{\"label\":\"Enrollments\",\"data\":[62,71,58,83,92,96]}]}",
-        "donutjson": "{\"labels\":[\"Accepted\",\"Pending\",\"Rejected\"],\"datasets\":[{\"data\":[412,31,9]}]}",
-
+        "linejson": "{\"labels\":[\"Oct\",\"Nov\",\"Dec\",\"Jan\",\"Feb\",\"Mar\"],\"values\":[62,71,58,83,92,96],\"title\":\"Enrollments\"}",
+        "donutjson": "{\"labels\":[\"Signed\",\"Pending\",\"Expired\"],\"values\":[412,31,9],\"title\":\"Contracts\"}",
         "auditrows": [
             {
                 "user": "Finance Manager",
-                "action": "plan_updated",
-                "time": "3 Mar 2026, 14:25"
+                "action": "Updated recurring payment plan",
+                "time": "2 hours ago"
             },
             {
                 "user": "Prof. Daniel Moreau",
-                "action": "request_replied",
-                "time": "3 Mar 2026, 10:05"
-            },
-            {
-                "user": "Alice Johnson",
-                "action": "request_created",
-                "time": "2 Mar 2026, 09:12"
-            },
-            {
-                "user": "Bruno Silva",
-                "action": "course_opened",
-                "time": "28 Feb 2026, 16:40"
+                "action": "Replied to an academic request",
+                "time": "Yesterday"
             }
         ]
     }

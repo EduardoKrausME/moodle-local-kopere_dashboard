@@ -19,24 +19,31 @@
 
     Example context (json):
     {
-        "items": [
+        "groups": [
             {
-                "name": "Finance - Manage plans",
-                "capability": "kopere_dashboard/financial:manageplans",
-                "description": "Allows users to create and manage payment plans, assign students, and override installment rules.",
-                "manageurl": "https://moodle.example.com/local/kopere_dashboard/permissions/edit.php?cap=local%2Fkopere_dashboard_financial%3Amanageplans"
+                "pluginname": "Kopere Dashboard",
+                "items": [
+                    {
+                        "name": "Manage permissions",
+                        "description": "Allows users to manage who can access each Kopere Dashboard area.",
+                        "manageurl": "https://moodle.example.com/local/kopere_dashboard/permissions.php?actionform=edit&capability=local%2Fkopere_dashboard%3Amanagepermissions"
+                    },
+                    {
+                        "name": "View audit log",
+                        "description": "Allows users to view dashboard audit records.",
+                        "manageurl": "https://moodle.example.com/local/kopere_dashboard/permissions.php?actionform=edit&capability=local%2Fkopere_dashboard%3Aviewaudit"
+                    }
+                ]
             },
             {
-                "name": "Academic - Manage requests",
-                "capability": "kopere_dashboard/requests:manage",
-                "description": "Allows users to respond to academic requests (waivers, grade review, certificate issues) according to category responsibility rules.",
-                "manageurl": "https://moodle.example.com/local/kopere_dashboard/permissions/edit.php?cap=local%2Fkopere_dashboard_requests%3Amanage"
-            },
-            {
-                "name": "Courses - View participants",
-                "capability": "kopere_dashboard/courses:viewparticipants",
-                "description": "Allows users to view the participants list and last access information inside the Kopere Dashboard course view.",
-                "manageurl": "https://moodle.example.com/local/kopere_dashboard/permissions/edit.php?cap=kopere_dashboard%2Fcourses%3Aviewparticipants"
+                "pluginname": "Recurring payments",
+                "items": [
+                    {
+                        "name": "Manage plans",
+                        "description": "Allows users to create plans, assign students and override installment rules.",
+                        "manageurl": "https://moodle.example.com/local/kopere_dashboard/permissions.php?actionform=edit&capability=kopere_dashboard%2Frecurringpayments%3Amanageplans"
+                    }
+                ]
             }
         ]
     }

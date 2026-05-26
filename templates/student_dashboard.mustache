@@ -19,6 +19,64 @@
 
     Example context (json):
     {
+        "student_name": "Alice Johnson",
+        "kpi_enrolled_courses": 6,
+        "kpi_completed_courses": 2,
+        "kpi_in_progress_courses": 3,
+        "kpi_tracked_courses": 5,
+        "hascourses": true,
+        "courses": [
+            {
+                "fullname": "Project Management Essentials",
+                "shortname": "PME101",
+                "categoryname": "Business",
+                "courseurl": "https://moodle.example.com/course/view.php?id=77",
+                "progress": 74,
+                "hasprogress": true,
+                "progresslabel": "74%",
+                "statuslabel": "In progress",
+                "lastaccess": "3 Mar 2026, 11:20"
+            },
+            {
+                "fullname": "Workplace Safety Basics",
+                "shortname": "SAFE101",
+                "categoryname": "Compliance",
+                "courseurl": "https://moodle.example.com/course/view.php?id=81",
+                "progress": 100,
+                "hasprogress": true,
+                "progresslabel": "100%",
+                "statuslabel": "Completed",
+                "lastaccess": "28 Feb 2026, 09:10"
+            },
+            {
+                "fullname": "Introduction to Data Analysis",
+                "shortname": "DATA101",
+                "categoryname": "",
+                "courseurl": "https://moodle.example.com/course/view.php?id=95",
+                "progress": 0,
+                "hasprogress": false,
+                "progresslabel": "Progress not available",
+                "statuslabel": "Not started",
+                "lastaccess": "Never accessed"
+            }
+        ],
+        "quicklinks": [
+            {
+                "title": "My courses",
+                "description": "Open the full list of available courses.",
+                "url": "https://moodle.example.com/my/courses.php"
+            },
+            {
+                "title": "Calendar",
+                "description": "Check upcoming activities and deadlines.",
+                "url": "https://moodle.example.com/calendar/view.php?view=month"
+            },
+            {
+                "title": "Profile",
+                "description": "Review your profile information.",
+                "url": "https://moodle.example.com/user/profile.php?id=501"
+            }
+        ]
     }
 }}
 
