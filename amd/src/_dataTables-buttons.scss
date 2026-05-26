@@ -88,7 +88,7 @@ div.dt-paging {
         align-items: center;
         justify-content: center;
         span:not(.dt-button-down-arrow) {
-            display: none;
+           // display: none;
         }
         &.buttons-page-length {
             text-overflow: inherit;
