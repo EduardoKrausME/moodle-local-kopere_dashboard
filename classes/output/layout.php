@@ -186,13 +186,14 @@ class layout {
      * @param moodle_url|moodle_url[] $url
      * @param string $icon
      * @param string $description
+     * @param mixed $activeurls
      * @return array
      * @throws \moodle_exception
      * @throws \core\exception\moodle_exception
      */
-    private static function item(string $title, $url, string $icon, string $description = ""): array {
+    private static function item(string $title, $url, string $icon, string $description = "", $activeurls = null): array {
         $primaryurl = self::to_url($url);
-        $active = self::is_active_url($url);
+        $active = self::is_active_url($activeurls ?? $url);
 
         return [
             "title" => $title,
@@ -305,6 +306,8 @@ class layout {
      * Check if the current page matches one of the menu URLs.
      *
      * This comparison ignores a trailing "/index.php" and trailing slashes.
+     * If the menu URL has query parameters, those parameters must also match
+     * the current page URL. Extra parameters on the current page are allowed.
      *
      * @param mixed $url
      * @return bool
@@ -316,30 +319,74 @@ class layout {
             $url = [$url];
         }
 
+        if (!is_array($url)) {
+            return false;
+        }
+
         $normalizepath = static function(string $path): string {
             $parsedpath = parse_url($path, PHP_URL_PATH);
             if (is_string($parsedpath) && $parsedpath !== "") {
                 $path = $parsedpath;
             }
 
-            $path = preg_replace("#/index\\.php$#", "", $path);
+            $path = preg_replace("#/index\.php$#", "", $path);
             $path = rtrim($path, "/");
 
             return $path === "" ? "/" : $path;
         };
 
-        $currentpath = $normalizepath($PAGE->url->get_path());
+        $parseparams = static function(string $url): array {
+            $query = parse_url($url, PHP_URL_QUERY);
+            if (!is_string($query) || $query === "") {
+                return [];
+            }
+
+            $params = [];
+            parse_str($query, $params);
+
+            return $params;
+        };
+
+        $matchparams = static function(array $expected, array $current): bool {
+            foreach ($expected as $key => $value) {
+                if (!array_key_exists($key, $current)) {
+                    return false;
+                }
+
+                if (is_array($value) || is_array($current[$key])) {
+                    if ($value != $current[$key]) {
+                        return false;
+                    }
+                    continue;
+                }
+
+                if ((string)$value !== (string)$current[$key]) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+
+        $currenturl = $PAGE->url->out(false);
+        $currentpath = $normalizepath($currenturl);
+        $currentparams = $parseparams($currenturl);
 
         foreach ($url as $menuurl) {
             if ($menuurl instanceof moodle_url) {
-                $path = $menuurl->get_path();
+                $candidateurl = $menuurl->out(false);
             } else if (is_string($menuurl)) {
-                $path = $menuurl;
+                $candidateurl = $menuurl;
             } else {
                 continue;
             }
 
-            if ($normalizepath($path) === $currentpath) {
+            if ($normalizepath($candidateurl) !== $currentpath) {
+                continue;
+            }
+
+            $candidateparams = $parseparams($candidateurl);
+            if (empty($candidateparams) || $matchparams($candidateparams, $currentparams)) {
                 return true;
             }
         }
@@ -367,7 +414,8 @@ class layout {
         $icon = $definition["icon"] ?? "menu";
         $url = $definition["url"] ?? "";
 
-        $item = self::item($title, $url, $icon, $description);
+        $activeurls = $definition["activeurls"] ?? $url;
+        $item = self::item($title, $url, $icon, $description, $activeurls);
 
         $children = [];
         $hasactivechild = false;
@@ -380,11 +428,13 @@ class layout {
                 continue;
             }
 
+            $childactiveurls = $childdef["activeurls"] ?? $childdef["url"];
             $child = self::item(
                 $childdef["title"],
                 $childdef["url"],
                 $childdef["icon"] ?? "menu",
-                $childdef["description"] ?? ""
+                $childdef["description"] ?? "",
+                $childactiveurls
             );
             $child["ischild"] = true;
 
