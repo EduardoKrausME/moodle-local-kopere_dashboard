@@ -522,11 +522,14 @@ define([
         },
 
         _click_internal: function (data, clickchave, clickurl) {
-            $.each(clickchave, function (id, chave) {
+            let iterate1 = $.each(clickchave, function (id, chave) {
                 clickurl = clickurl.replace('{' + chave + '}', data[chave]);
+                clickurl = clickurl.replace('%7B' + chave + '%7D', data[chave]);
             });
 
-            location.href = clickurl;
+            $.when(iterate1).done(function () {
+                location.href = clickurl;
+            });
         }
     };
 
