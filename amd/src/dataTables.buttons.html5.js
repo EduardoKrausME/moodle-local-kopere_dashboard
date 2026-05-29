@@ -32,7 +32,7 @@
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD
-        define(["jquery", "local_gimidashboard/jszip", "local_gimidashboard/dataTables", "local_gimidashboard/dataTables.buttons"], function ($, jszip) {
+        define(["jquery", "local_kopere_dashboard/jszip", "local_kopere_dashboard/dataTables", "local_kopere_dashboard/dataTables.buttons"], function ($, jszip) {
             window.JSZip = jszip;
             return factory($, window, document);
         });
@@ -41,11 +41,11 @@
         var jq = require("jquery");
         var cjsRequires = function (root, $) {
             if (!$.fn.dataTable) {
-                require("local_gimidashboard/dataTables")(root, $);
+                require("local_kopere_dashboard/dataTables")(root, $);
             }
 
             if (!$.fn.dataTable.Buttons) {
-                require("local_gimidashboard/dataTables.buttons")(root, $);
+                require("local_kopere_dashboard/dataTables.buttons")(root, $);
             }
         };
 
