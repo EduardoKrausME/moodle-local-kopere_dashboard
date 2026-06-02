@@ -1,0 +1,21 @@
+<div class="kopere-profile-course-item mb-3 p-2 border rounded">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <div class="course-name font-weight-bold">
+            <a href="{{url}}">{{course.fullname}}</a>
+        </div>
+        <div class="course-status">
+            {{{matriculastatus}}}
+        </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center flex-wrap mt-1">
+        <div class="course-roles small">
+            {{{rolehtml}}}
+        </div>
+        <div class="course-date small text-muted">
+            {{date}}
+        </div>
+    </div>
+    <div class="course-expiry small text-muted mt-1">
+        {{{expirationend}}}
+    </div>
+</div>
