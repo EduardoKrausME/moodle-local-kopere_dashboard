@@ -151,7 +151,7 @@ class profile {
                 $expirationend = get_string("profile_enrol_notexpires", "local_kopere_dashboard");
             } else {
                 $expirationend = "<br>" . get_string("profile_enrol_expires", "local_kopere_dashboard") . " <em>" .
-                    userdate($enrolment->timeend, get_string("dateformat", "local_kopere_dashboard")) . "</em>";
+                    userdate($enrolment->timeend, get_string("strftimedatefullshort", "langconfig")) . "</em>";
             }
 
             $roleassignments = $DB->get_records("role_assignments",
@@ -181,7 +181,7 @@ class profile {
                 "rolehtml" => $rolehtml,
                 "expirationend" => $expirationend,
                 "matriculastatus" => $matriculastatus,
-                "date" => userdate($enrolment->timestart, get_string("dateformat", "local_kopere_dashboard")),
+                "date" => userdate($enrolment->timestart, get_string("strftimedatefullshort", "langconfig")),
             ];
             $html .= $OUTPUT->render_from_template("local_kopere_dashboard/profile_list_courses", $data);
         }
