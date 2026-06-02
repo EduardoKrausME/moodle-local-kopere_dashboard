@@ -28,7 +28,14 @@
  * @param global_navigation $nav
  */
 function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
-    global $PAGE, $CFG;
+    global $PAGE, $CFG, $USER;
+
+    if (!isset(get_admins()[$USER->id])) {
+        $showmenu = get_config("local_kopere_dashboard", "showmenu");
+        if (!$showmenu) {
+            return;
+        }
+    }
 
     $CFG->custommenuitems = preg_replace('/.*\/local\/kopere_dashboard.*/', '', $CFG->custommenuitems);
 

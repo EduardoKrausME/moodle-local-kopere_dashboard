@@ -59,6 +59,15 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string("managekopere_dashboardplugins", "local_kopere_dashboard"));
 
 echo html_writer::div(
+    html_writer::link(
+        new moodle_url("/admin/settings.php", ["section" => "local_kopere_dashboard"]),
+        get_string("settings"),
+        ["class" => "btn btn-secondary"]
+    ),
+    "mb-3"
+);
+
+echo html_writer::div(
     get_string("managekopere_dashboardplugins_desc", "local_kopere_dashboard"),
     "alert alert-info"
 );
