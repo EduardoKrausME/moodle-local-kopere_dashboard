@@ -23,7 +23,12 @@
  */
 
 defined('MOODLE_INTERNAL') || die;
-
+$string['profile_notenrol'] = 'User is not enrolled in any course.';
+$string['profile_enrol_notexpires'] = 'No expiry date';
+$string['profile_enrol_expires'] = 'Expires on';
+$string['profile_enrol_inactive'] = 'Inactive';
+$string['profile_enrol_active'] = 'Active';
+$string['dateformat'] = 'd/m/Y';
 $string['about_description_text'] = 'Kopere Dashboard centralizes academic, financial, operational, and administrative routines in a single interface within Moodle.';
 $string['about_description_title'] = 'About the plugin';
 $string['about_github_label'] = 'GitHub';
@@ -122,8 +127,6 @@ $string['permissions_users_title'] = 'Assign users';
 $string['plugin_external'] = 'External plugin';
 $string['pluginmenu_hidden'] = 'Hidden in menu';
 $string['pluginname'] = 'Kopere Dashboard';
-$string['showmenu'] = 'Show menu';
-$string['showmenu_desc'] = 'When enabled, Kopere Dashboard adds its link to the Moodle navigation and custom menu. When disabled, the navigation hook is ignored.';
 $string['pluginstatus_activate'] = 'Activate';
 $string['pluginstatus_active'] = 'Active';
 $string['pluginstatus_deactivate'] = 'Deactivate';

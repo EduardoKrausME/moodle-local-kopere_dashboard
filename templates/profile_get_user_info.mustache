@@ -1,0 +1,38 @@
+<div class="kopere-profile-user-info">
+    {{#user.email}}
+    <div class="info-row d-flex mb-1">
+        <div class="info-label text-muted mr-2" style="min-width:120px;">Email:</div>
+        <div class="info-value">{{user.email}}</div>
+    </div>
+    {{/user.email}}
+    {{#user.phone1}}
+    <div class="info-row d-flex mb-1">
+        <div class="info-label text-muted mr-2" style="min-width:120px;">Phone:</div>
+        <div class="info-value">{{user.phone1}}</div>
+    </div>
+    {{/user.phone1}}
+    {{#user.city}}
+    <div class="info-row d-flex mb-1">
+        <div class="info-label text-muted mr-2" style="min-width:120px;">City:</div>
+        <div class="info-value">{{user.city}}</div>
+    </div>
+    {{/user.city}}
+    {{#user.country}}
+    <div class="info-row d-flex mb-1">
+        <div class="info-label text-muted mr-2" style="min-width:120px;">Country:</div>
+        <div class="info-value">{{user.country}}</div>
+    </div>
+    {{/user.country}}
+    {{#user.lang}}
+    <div class="info-row d-flex mb-1">
+        <div class="info-label text-muted mr-2" style="min-width:120px;">Language:</div>
+        <div class="info-value">{{user.lang}}</div>
+    </div>
+    {{/user.lang}}
+    {{#user.lastaccess}}
+    <div class="info-row d-flex mb-1">
+        <div class="info-label text-muted mr-2" style="min-width:120px;">Last access:</div>
+        <div class="info-value">{{user.lastaccess}}</div>
+    </div>
+    {{/user.lastaccess}}
+</div>
