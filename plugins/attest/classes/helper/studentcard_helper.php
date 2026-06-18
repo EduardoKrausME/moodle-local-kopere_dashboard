@@ -44,6 +44,12 @@ class studentcard_helper {
     /** Credit card height in millimeters. */
     public const CARD_HEIGHT = 53.98;
 
+    /** Unicode PDF font used to support Cyrillic and other non-Latin characters. */
+    private const PDF_FONT = "freesans";
+
+    /** Unicode monospace PDF font used for validation codes. */
+    private const PDF_MONO_FONT = "freemono";
+
     /**
      * Returns the target user if the current user can access the card.
      *
@@ -201,6 +207,8 @@ class studentcard_helper {
         $pdf->SetAutoPageBreak(false);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
+        $pdf->setFontSubsetting(true);
+        $pdf->SetFont(self::PDF_FONT, "", 10);
 
         self::render_front_page($pdf, $user);
         self::render_back_page($pdf, $user);
@@ -226,7 +234,7 @@ class studentcard_helper {
         $pdf->SetDrawColor(215, 220, 228);
         $pdf->RoundedRect(1.5, 1.5, self::CARD_WIDTH - 3, self::CARD_HEIGHT - 3, 3);
 
-        $pdf->SetFont("helvetica", "B", 15);
+        $pdf->SetFont(self::PDF_FONT, "B", 15);
         $pdf->SetTextColor(35, 43, 56);
         $pdf->SetXY(5, 5);
         $pdf->Cell(76, 5, get_string("studentcard", "koperedashboard_attest"), 0, 1, "C");
@@ -249,13 +257,21 @@ class studentcard_helper {
             throw new moodle_exception("studentcardnovisiblecourses", "koperedashboard_attest");
         }
 
-        $pdf->SetFont("helvetica", "", 6.9);
+        $userfullname = s($userfullname);
+        $useremail = s($user->email);
+        $cpf = s($cpf);
+        $labelcourse = s($labelcourse);
+        $coursefullname = s(format_string($course->fullname));
+
+        $pdf->SetFont(self::PDF_FONT, "", 6.9);
         $html = "
-            <h3>{$userfullname}</h3>
-            <div>{$user->email}</div>
-            <div><b>CPF</b>: {$cpf}</div>
-            <div><b>{$labelcourse}</b>: {$course->fullname}</div>";
-        $pdf->writeHTMLCell(50, 40, 35, 14, $html, 0, 0, false, true, 'L');
+            <div style=\"font-family:" . self::PDF_FONT . ";\">
+                <h3>{$userfullname}</h3>
+                <div>{$useremail}</div>
+                <div><b>CPF</b>: {$cpf}</div>
+                <div><b>{$labelcourse}</b>: {$coursefullname}</div>
+            </div>";
+        $pdf->writeHTMLCell(50, 40, 35, 14, $html, 0, 0, false, true, "L");
     }
 
     /**
@@ -278,22 +294,22 @@ class studentcard_helper {
         $code = self::build_validation_code($user->id);
         $validationurl = self::build_validation_url($user->id, $code)->out(false);
 
-        $pdf->SetFont("helvetica", "B", 8.5);
+        $pdf->SetFont(self::PDF_FONT, "B", 8.5);
         $pdf->SetTextColor(35, 43, 56);
         $pdf->SetXY(5, 5);
         $pdf->Cell(45, 5, get_string("studentcardsignaturetitle", "koperedashboard_attest"), 0, 1, "L");
 
-        $pdf->SetFont("helvetica", "", 6.3);
+        $pdf->SetFont(self::PDF_FONT, "", 6.3);
         $pdf->SetXY(5, 12);
         $label = get_string("studentcardsignaturedesc", "koperedashboard_attest");
         $pdf->MultiCell(46, 10, $label, 0, "L");
 
-        $pdf->SetFont("helvetica", "B", 6.5);
+        $pdf->SetFont(self::PDF_FONT, "B", 6.5);
         $pdf->SetXY(5, 32);
         $label = get_string("footer_title", "koperedashboard_attest");
         $pdf->MultiCell(46, 10, "{$label}:", 0, "L");
 
-        $pdf->SetFont("courier", "", 6.4);
+        $pdf->SetFont(self::PDF_MONO_FONT, "", 6.4);
         $pdf->SetXY(5, 35);
         $pdf->MultiCell(70, 8, $code, 0, "L");
 
@@ -306,11 +322,11 @@ class studentcard_helper {
 
         $pdf->write2DBarcode($validationurl, "QRCODE", 58, 10, 22, 22, $qrcodestyle, "N");
 
-        $pdf->SetFont("helvetica", "", 5.5);
-        $pdf->SetFont('helvetica', '', 5.5);
-        $url = htmlspecialchars($validationurl, ENT_QUOTES, 'UTF-8');
-        $html = '<a href="' . $url . '" style="color:#000000; text-decoration:none;">' . $url . '</a>';
-        $pdf->writeHTMLCell(76, 8, 5, 39.5, $html, 0, 0, false, true, 'L');
+        $pdf->SetFont(self::PDF_FONT, "", 5.5);
+        $url = htmlspecialchars($validationurl, ENT_QUOTES, "UTF-8");
+        $html = '<a href="' . $url . '" style="font-family:' . self::PDF_FONT . '; color:#000000; ' .
+            'text-decoration:none;">' . $url . '</a>';
+        $pdf->writeHTMLCell(76, 8, 5, 39.5, $html, 0, 0, false, true, "L");
 
         self::apply_existing_attest_signature($pdf);
     }
