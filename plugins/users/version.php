@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version = 2026051002;
-$plugin->release = "1.0.1";
+$plugin->version = 2026061800;
+$plugin->release = "1.0.2";
 $plugin->component = "koperedashboard_users";
 $plugin->requires = 2024042200;
 $plugin->maturity = MATURITY_STABLE;

@@ -28,6 +28,26 @@ define(["jquery", "core/str"], function ($, Str) {
         return $("<div>").text(text).html();
     }
 
+    function normalizeUrl(url) {
+        if (typeof url === "string") {
+            return url;
+        }
+
+        if (url && typeof url === "object") {
+            if (typeof url.url === "string") {
+                return url.url;
+            }
+            if (typeof url.href === "string") {
+                return url.href;
+            }
+            if (typeof url.out === "string") {
+                return url.out;
+            }
+        }
+
+        return M.cfg.wwwroot + "/local/kopere_dashboard/plugins/users/";
+    }
+
     function renderSuggest($box, users) {
         if (!users.length) {
             $box.hide().empty();
@@ -36,7 +56,7 @@ define(["jquery", "core/str"], function ($, Str) {
 
         var html = "";
         users.forEach(function (u) {
-            html += '<a href="' + escapeHtml(u.url) + '" class="list-group-item list-group-item-action">';
+            html += '<a href="' + escapeHtml(normalizeUrl(u.url)) + '" class="list-group-item list-group-item-action">';
             html += '<div style="display:flex;justify-content:space-between;gap:8px;">';
             html += '<div><strong>' + escapeHtml(u.name) + '</strong><br><small style="opacity:.8;">' +
                 escapeHtml(u.email) + "</small></div>";
