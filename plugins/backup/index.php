@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use core\output\notification;
 use koperedashboard_backup\backup_manager;
 use local_kopere_dashboard\output\layout;
 
@@ -54,17 +55,21 @@ if (optional_param("action", "", PARAM_ALPHA) !== "") {
         if ($action === "moodledata") {
             $filepath = backup_manager::create_moodledata_backup();
             $message = get_string("moodledata_success", "koperedashboard_backup", basename($filepath));
-            $messagetype = \core\output\notification::NOTIFY_SUCCESS;
+            $messagetype = notification::NOTIFY_SUCCESS;
         } else if ($action === "database") {
             $filepath = backup_manager::create_database_backup($dbformat, (bool) $separatelogs);
             $message = get_string("database_success", "koperedashboard_backup", basename($filepath));
-            $messagetype = \core\output\notification::NOTIFY_SUCCESS;
+            $messagetype = notification::NOTIFY_SUCCESS;
+        } else if ($action === "friendly_installation") {
+            $filepath = backup_manager::create_friendly_installation_backup();
+            $message = get_string("friendly_installation_success", "koperedashboard_backup");
+            $messagetype = notification::NOTIFY_SUCCESS;
         } else {
             throw new moodle_exception("invalidaction", "koperedashboard_backup");
         }
     } catch (Throwable $e) {
         $message = $e->getMessage();
-        $messagetype = \core\output\notification::NOTIFY_ERROR;
+        $messagetype = notification::NOTIFY_ERROR;
     }
 }
 
@@ -92,20 +97,16 @@ foreach (backup_manager::get_database_export_formats() as $format) {
 
 $templatecontext = [
     "cangenerate" => has_capability("koperedashboard/backup:generate", $context),
-    "moodledata_title" => get_string("moodledata_title", "koperedashboard_backup"),
-    "moodledata_desc" => get_string("moodledata_desc", "koperedashboard_backup"),
-    "database_title" => get_string("database_title", "koperedashboard_backup"),
-    "database_desc" => get_string("database_desc", "koperedashboard_backup"),
-    "backupdir" => backup_manager::get_backup_dir(),
     "sourcedblabel" => backup_manager::get_source_database_label(),
     "sesskey" => sesskey(),
     "formats" => $formats,
     "separatelogs" => $separatelogs,
     "files" => $backups,
     "hasfiles" => !empty($backups),
-    "emptyfiles" => get_string("emptyfiles", "koperedashboard_backup"),
+    "is_alternative_file_system" => backup_manager::is_alternative_file_system_ready(),
+    "alternative_file_system_settings" => "{$CFG->wwwroot}/admin/settings.php?section=local_alternative_file_system",
 ];
 
 $content = $OUTPUT->render_from_template("koperedashboard_backup/index", $templatecontext);
-$afterheader = $OUTPUT->notification($message, $messagetype);
+$afterheader = $message ? $OUTPUT->notification($message, $messagetype) : "";
 layout::page_render($context, $content, true, $afterheader);

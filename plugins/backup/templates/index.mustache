@@ -25,34 +25,11 @@
 }}
 
 <div class="kopere_dashboard-card">
-    <div class="alert alert-info" style="margin-bottom: 16px;">
-        <strong>{{#str}}storage_title, koperedashboard_backup{{/str}}</strong><br>
-        {{#str}}storage_desc, koperedashboard_backup{{/str}}<br>
-        <code>{{{backupdir}}}</code>
-    </div>
-
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="border rounded p-3 h-100">
-                <h4>{{{moodledata_title}}}</h4>
-                <p class="text-muted">{{{moodledata_desc}}}</p>
-
-                {{#cangenerate}}
-                    <form method="post" action="">
-                        <input type="hidden" name="sesskey" value="{{{sesskey}}}">
-                        <input type="hidden" name="action" value="moodledata">
-                        <button type="submit" class="btn btn-primary">
-                            {{#str}}action_generate_moodledata, koperedashboard_backup{{/str}}
-                        </button>
-                    </form>
-                {{/cangenerate}}
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="border rounded p-3 h-100">
-                <h4>{{{database_title}}}</h4>
-                <p class="text-muted">{{{database_desc}}}</p>
+                <h4>{{#str}}database_title, koperedashboard_backup{{/str}}</h4>
+                <p class="text-muted">{{#str}}database_desc, koperedashboard_backup{{/str}}</p>
 
                 <div class="alert alert-light" style="margin-bottom: 16px;">
                     <strong>{{#str}}current_source_label, koperedashboard_backup{{/str}}</strong>
@@ -97,6 +74,54 @@
                 {{/cangenerate}}
             </div>
         </div>
+
+        <div class="col-md-4">
+            <div class="border rounded p-3 h-100">
+                <h4>{{#str}}moodledata_title, koperedashboard_backup{{/str}}</h4>
+                <p class="text-muted">{{#str}}moodledata_desc, koperedashboard_backup{{/str}}</p>
+
+                {{#cangenerate}}
+                    <form method="post" action="">
+                        <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+                        <input type="hidden" name="action" value="moodledata">
+                        <button type="submit" class="btn btn-primary">
+                            {{#str}}action_generate_moodledata, koperedashboard_backup{{/str}}
+                        </button>
+                    </form>
+                {{/cangenerate}}
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="border rounded p-3 h-100">
+                <h4>{{#str}}friendly_installation_title, koperedashboard_backup{{/str}}</h4>
+                <p class="text-muted">{{#str}}friendly_installation_desc, koperedashboard_backup{{/str}}</p>
+
+                {{^is_alternative_file_system}}
+                    <div class="alert alert-warning">
+                        <h4>{{#str}}friendly_installation_alternative_not_title, koperedashboard_backup{{/str}}</h4>
+                        <p>{{#str}}friendly_installation_alternative_not_desc, koperedashboard_backup{{/str}}</p>
+                    </div>
+                {{/is_alternative_file_system}}
+                {{#is_alternative_file_system}}
+                    <div class="alert alert-info">
+                        <h4>{{#str}}friendly_installation_alternative_ok_title, koperedashboard_backup{{/str}}</h4>
+                        <p>{{#str}}friendly_installation_alternative_ok_desc, koperedashboard_backup, {{alternative_file_system_settings}} {{/str}}</p>
+                    </div>
+
+                {{/is_alternative_file_system}}
+
+                {{#cangenerate}}
+                    <form method="post" action="">
+                        <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+                        <input type="hidden" name="action" value="friendly_installation">
+                        <button type="submit" class="btn btn-primary">
+                            {{#str}}friendly_installation_generate, koperedashboard_backup{{/str}}
+                        </button>
+                    </form>
+                {{/cangenerate}}
+            </div>
+        </div>
     </div>
 </div>
 
@@ -133,6 +158,7 @@
     {{/hasfiles}}
 
     {{^hasfiles}}
-        <div class="alert alert-light" style="margin-bottom: 0;">{{{emptyfiles}}}</div>
+        <div class="alert alert-light" style="margin-bottom: 0;">{{#str}}
+            emptyfiles, koperedashboard_backup{{/str}}</div>
     {{/hasfiles}}
 </div>

@@ -61,7 +61,7 @@ class backup_manager {
 
         $backupdir = self::get_backup_dir();
         $filename = self::TYPE_MOODLEDATA . "-" . date("Ymd-His") . ".tar.gz";
-        $filepath = $backupdir . "/" . $filename;
+        $filepath = "{$backupdir}/{$filename}";
 
         if (self::command_exists("tar")) {
             $command = "tar --exclude=" . escapeshellarg(self::BACKUPDIRNAME) .
@@ -73,7 +73,7 @@ class backup_manager {
         }
 
         $filename = self::TYPE_MOODLEDATA . "-" . date("Ymd-His") . ".zip";
-        $filepath = $backupdir . "/" . $filename;
+        $filepath = "{$backupdir}/{$filename}";
         self::create_moodledata_zip($CFG->dataroot, $filepath);
 
         return $filepath;
@@ -105,7 +105,7 @@ class backup_manager {
         $basename = self::TYPE_DATABASE . "-{$sourcetype}-to-{$outputformat}-{$timestamp}";
 
         if (!$separatelogs) {
-            $filepath = $backupdir . "/{$basename}.sql.gz";
+            $filepath = "{$backupdir}/{$basename}.sql.gz";
             $exportscopefull = get_string("exportscope_full", "koperedashboard_backup");
             self::export_tables_to_gzip($filepath, $tables, $outputformat, $exportscopefull);
             return $filepath;
@@ -121,29 +121,29 @@ class backup_manager {
             }
         }
 
-        $tempdir = $backupdir . "/{$basename}-tmp-" . uniqid("", true);
+        $tempdir = "{$backupdir}/{$basename}-tmp-" . uniqid("", true);
         mkdir($tempdir, 0700, true);
 
         try {
-            $mainfile = $tempdir . "/database-main.sql.gz";
+            $mainfile = "{$tempdir}/database-main.sql.gz";
             self::export_tables_to_gzip(
                 $mainfile, $maintables, $outputformat, get_string("exportscope_main", "koperedashboard_backup")
             );
 
             $files = [$mainfile];
             if (!empty($logtables)) {
-                $logfile = $tempdir . "/database-logs.sql.gz";
+                $logfile = "{$tempdir}/database-logs.sql.gz";
                 self::export_tables_to_gzip(
                     $logfile, $logtables, $outputformat, get_string("exportscope_logs", "koperedashboard_backup")
                 );
                 $files[] = $logfile;
             }
 
-            $manifest = $tempdir . "/manifest.txt";
+            $manifest = "{$tempdir}/manifest.txt";
             self::write_manifest($manifest, $sourcetype, $outputformat, $maintables, $logtables);
             $files[] = $manifest;
 
-            $zipfile = $backupdir . "/{$basename}.zip";
+            $zipfile = "{$backupdir}/{$basename}.zip";
             self::create_zip_bundle($zipfile, $files);
         } catch (Throwable $e) {
             self::delete_path($tempdir);
@@ -151,6 +151,61 @@ class backup_manager {
         }
 
         self::delete_path($tempdir);
+        return $zipfile;
+    }
+
+    /**
+     * Function create_friendly_installation_backup
+     *
+     * @return string
+     * @throws \dml_exception
+     * @throws \moodle_exception
+     * @throws \Throwable
+     */
+    public static function create_friendly_installation_backup(): string {
+        global $CFG;
+
+        raise_memory_limit(MEMORY_EXTRA);
+        @set_time_limit(0);
+
+        $tables = self::list_database_tables();
+        if (empty($tables)) {
+            throw new moodle_exception("notablesfound", "koperedashboard_backup");
+        }
+
+        $exportdir = self::get_friendly_installation_dir();
+        $schemadir = "{$exportdir}/schema";
+        $datadir = "{$exportdir}/data";
+
+        self::delete_path($schemadir);
+        self::delete_path($datadir);
+
+        mkdir($schemadir, $CFG->directorypermissions, true);
+        mkdir($datadir, $CFG->directorypermissions, true);
+
+        foreach ($tables as $table) {
+            $columns = self::get_table_columns($table);
+            $indexes = self::get_table_indexes($table);
+            $exportname = self::get_friendly_installation_table_name($table);
+
+            self::write_friendly_installation_schema("{$schemadir}/{$exportname}.json", $exportname, $columns, $indexes);
+            self::write_friendly_installation_data("{$datadir}/{$exportname}.csv", $table, $columns);
+        }
+
+        $manifest = "{$exportdir}/manifest.json";
+        self::write_friendly_installation_manifest($manifest, $tables);
+
+        $zipfile = self::get_backup_dir() . "/friendly_installation-" . date("Ymd-His") . ".zip";
+        $extradirs = [];
+        if (!self::is_alternative_file_system_ready()) {
+            $moodledatafilesdir = self::get_moodledata_files_dir();
+            if ($moodledatafilesdir !== null) {
+                $extradirs["backup/moodledata/files"] = $moodledatafilesdir;
+            }
+        }
+
+        self::create_directory_zip($zipfile, $exportdir, "backup", $extradirs);
+
         return $zipfile;
     }
 
@@ -194,13 +249,28 @@ class backup_manager {
     }
 
     /**
+     * Function is_alternative_file_system_ready
+     *
+     * @return bool
+     * @throws \dml_exception
+     */
+    public static function is_alternative_file_system_ready(): bool {
+        global $CFG;
+
+        $configuredclass = $CFG->alternative_file_system_class ?? "";
+        $settingslocal = get_config("local_alternative_file_system", "storage_destination");
+
+        return $configuredclass == '\\local_alternative_file_system\\external_file_system' && isset($settingslocal[1]);
+    }
+
+    /**
      * Function list_backups
      *
      * @return array
      */
     public static function list_backups(): array {
         $backupdir = self::get_backup_dir();
-        $files = glob($backupdir . "/*");
+        $files = glob("{$backupdir}/*");
         if (empty($files)) {
             return [];
         }
@@ -237,7 +307,7 @@ class backup_manager {
             throw new moodle_exception("invalidfilename", "koperedashboard_backup");
         }
 
-        $filepath = self::get_backup_dir() . "/" . $filename;
+        $filepath = self::get_backup_dir() . "/{$filename}";
         if (!is_file($filepath)) {
             throw new moodle_exception("filenotfound", "koperedashboard_backup", "", $filename);
         }
@@ -250,10 +320,26 @@ class backup_manager {
      *
      * @return string
      */
-    public static function get_backup_dir(): string {
+    private static function get_backup_dir(): string {
         global $CFG;
 
         $backupdir = $CFG->dataroot . "/" . self::BACKUPDIRNAME;
+        if (!is_dir($backupdir)) {
+            mkdir($backupdir, $CFG->directorypermissions, true);
+        }
+
+        return $backupdir;
+    }
+
+    /**
+     * Function get_friendly_installation_dir
+     *
+     * @return string
+     */
+    private static function get_friendly_installation_dir(): string {
+        global $CFG;
+
+        $backupdir = "{$CFG->dataroot}/schema";
         if (!is_dir($backupdir)) {
             mkdir($backupdir, $CFG->directorypermissions, true);
         }
@@ -301,6 +387,338 @@ class backup_manager {
     }
 
     /**
+     * Function get_moodledata_files_dir
+     *
+     * @return string|null
+     */
+    private static function get_moodledata_files_dir(): ?string {
+        global $CFG;
+
+        $filesdir = "{$CFG->dataroot}/files";
+        if (is_dir($filesdir)) {
+            return $filesdir;
+        }
+
+        $filedir = "{$CFG->dataroot}/filedir";
+        if (is_dir($filedir)) {
+            return $filedir;
+        }
+
+        return null;
+    }
+
+    /**
+     * Function write_friendly_installation_schema
+     *
+     * @param string $filepath
+     * @param string $tablename
+     * @param array $columns
+     * @param array $indexes
+     * @return void
+     * @throws \moodle_exception
+     */
+    private static function write_friendly_installation_schema(string $filepath, string $tablename, array $columns, array $indexes
+    ): void {
+        $primarycolumns = self::get_primary_columns_from_indexes($indexes);
+        $fields = [];
+
+        foreach ($columns as $column) {
+            $field = [
+                "name" => $column["name"],
+                "type" => self::get_friendly_installation_field_type($column),
+                "nullable" => (bool) $column["nullable"],
+                "auto_increment" => !empty($column["auto_increment"]),
+            ];
+
+            if (array_key_exists("default", $column) && $column["default"] !== null && $column["default"] !== "") {
+                $field["default"] = (string) $column["default"];
+            }
+
+            if (in_array($column["name"], $primarycolumns, true)) {
+                $field["primary"] = true;
+            }
+
+            if ($column["length"] !== null && in_array($field["type"], ["string", "binary"], true)) {
+                $field["length"] = (int) $column["length"];
+            }
+
+            if ($column["precision"] !== null && in_array($field["type"], ["decimal", "float"], true)) {
+                $field["precision"] = (int) $column["precision"];
+            }
+
+            if ($column["scale"] !== null && $field["type"] === "decimal") {
+                $field["scale"] = (int) $column["scale"];
+            }
+
+            $fields[] = $field;
+        }
+
+        $schema = [
+            "table" => $tablename,
+            "fields" => $fields,
+        ];
+
+        $schemaindexes = [];
+        foreach ($indexes as $index) {
+            if (!empty($index["isprimary"]) || empty($index["columns"])) {
+                continue;
+            }
+
+            $schemaindexes[] = [
+                "name" => $index["name"],
+                "unique" => !empty($index["isunique"]),
+                "fields" => array_values($index["columns"]),
+            ];
+        }
+
+        if (!empty($schemaindexes)) {
+            $schema["indexes"] = $schemaindexes;
+        }
+
+        $json = json_encode($schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        if ($json === false || file_put_contents($filepath, "{$json}\n") === false) {
+            throw new moodle_exception("cannotopenexportfile", "koperedashboard_backup", "", $filepath);
+        }
+    }
+
+    /**
+     * Function write_friendly_installation_data
+     *
+     * @param string $filepath
+     * @param string $table
+     * @param array $columns
+     * @return void
+     * @throws \dml_exception
+     * @throws \moodle_exception
+     */
+    private static function write_friendly_installation_data(string $filepath, string $table, array $columns): void {
+        global $DB;
+
+        $handle = fopen($filepath, "wb");
+        if ($handle === false) {
+            throw new moodle_exception("cannotopenexportfile", "koperedashboard_backup", "", $filepath);
+        }
+
+        if (empty($columns)) {
+            fclose($handle);
+            return;
+        }
+
+        $columnnames = array_column($columns, "name");
+        $columnsql = implode(", ", array_map(static function(string $columnname): string {
+            return self::quote_identifier($columnname, self::get_source_database_family());
+        }, $columnnames));
+
+        $prefixless = self::remove_table_prefix($table);
+        $recordset = $DB->get_recordset_sql("SELECT {$columnsql} FROM {{$prefixless}}");
+
+        try {
+            foreach ($recordset as $record) {
+                $values = [];
+                foreach ($columns as $column) {
+                    $name = $column["name"];
+                    $values[] = self::format_value_for_restore_moodle($record->{$name} ?? null, $column);
+                }
+
+                if (fputcsv($handle, $values, ";", '"', "\\") === false) {
+                    throw new moodle_exception("cannotopenexportfile", "koperedashboard_backup", "", $filepath);
+                }
+            }
+        } catch (Throwable $e) {
+            $recordset->close();
+            fclose($handle);
+            throw $e;
+        }
+
+        $recordset->close();
+        fclose($handle);
+    }
+
+    /**
+     * Function write_friendly_installation_manifest
+     *
+     * @param string $filepath
+     * @param array $tables
+     * @return void
+     * @throws \moodle_exception
+     */
+    private static function write_friendly_installation_manifest(string $filepath, array $tables): void {
+        global $CFG;
+
+        $manifest = [
+            "type" => "restore_moodle",
+            "generated_at" => date("c"),
+            "source_database" => self::get_source_database_family(),
+            "source_moodle" => [
+                "version" => (string) ($CFG->version ?? ""),
+                "release" => (string) ($CFG->release ?? ""),
+                "branch" => (string) ($CFG->branch ?? ""),
+            ],
+            "table_count" => count($tables),
+            "tables" => array_map(static function(string $table): string {
+                return self::get_friendly_installation_table_name($table);
+            }, $tables),
+        ];
+
+        $json = json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        if ($json === false || file_put_contents($filepath, "{$json}\n") === false) {
+            throw new moodle_exception("cannotopenexportfile", "koperedashboard_backup", "", $filepath);
+        }
+    }
+
+    /**
+     * Function get_primary_columns_from_indexes
+     *
+     * @param array $indexes
+     * @return array
+     */
+    private static function get_primary_columns_from_indexes(array $indexes): array {
+        foreach ($indexes as $index) {
+            if (!empty($index["isprimary"])) {
+                return $index["columns"];
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * Function get_friendly_installation_table_name
+     *
+     * @param string $table
+     * @return string
+     */
+    private static function get_friendly_installation_table_name(string $table): string {
+        $tablename = self::remove_table_prefix($table);
+        $tablename = preg_replace('/[^a-zA-Z0-9_\-]/', "_", $tablename);
+
+        return trim($tablename, "_") ?: "table";
+    }
+
+    /**
+     * Function get_friendly_installation_field_type
+     *
+     * @param array $column
+     * @return string
+     */
+    private static function get_friendly_installation_field_type(array $column): string {
+        if (self::is_datetime_like_column($column)) {
+            return "datetime";
+        }
+
+        switch ($column["abstracttype"]) {
+            case "boolean":
+                return "boolean";
+            case "smallint":
+            case "integer":
+            case "bigint":
+                return "integer";
+            case "decimal":
+                return "decimal";
+            case "float":
+                return "float";
+            case "char":
+            case "varchar":
+                return "string";
+            case "date":
+                return "date";
+            case "time":
+                return "time";
+            case "binary":
+                return "binary";
+            default:
+                return "text";
+        }
+    }
+
+    /**
+     * Function format_value_for_restore_moodle
+     *
+     * @param mixed $value
+     * @param array $column
+     * @return string
+     */
+    private static function format_value_for_restore_moodle($value, array $column): string {
+        if ($value === null) {
+            return "";
+        }
+
+        if (self::is_datetime_like_column($column)) {
+            return self::format_datetime_for_restore_moodle($value);
+        }
+
+        switch ($column["abstracttype"]) {
+            case "boolean":
+                return (string) ((int) (bool) $value);
+            case "smallint":
+            case "integer":
+            case "bigint":
+                return (string) (int) $value;
+            case "decimal":
+            case "float":
+                return is_numeric($value) ? (string) $value : "0";
+            case "binary":
+                return base64_encode((string) $value);
+            default:
+                return (string) $value;
+        }
+    }
+
+    /**
+     * Function format_datetime_for_restore_moodle
+     *
+     * @param mixed $value
+     * @return string
+     */
+    private static function format_datetime_for_restore_moodle($value): string {
+        if ($value === "" || $value === false) {
+            return "";
+        }
+
+        if (is_numeric($value)) {
+            return gmdate("Y-m-d\\TH:i:s", (int) $value);
+        }
+
+        $timestamp = strtotime((string) $value);
+        if ($timestamp === false) {
+            return (string) $value;
+        }
+
+        return gmdate("Y-m-d\\TH:i:s", $timestamp);
+    }
+
+    /**
+     * Function is_datetime_like_column
+     *
+     * @param array $column
+     * @return bool
+     */
+    private static function is_datetime_like_column(array $column): bool {
+        if ($column["abstracttype"] === "timestamp") {
+            return true;
+        }
+
+        if (!in_array($column["abstracttype"], ["smallint", "integer", "bigint"], true)) {
+            return false;
+        }
+
+        $name = strtolower($column["name"]);
+        if (strpos($name, "time") === 0 || substr($name, -4) === "time" || substr($name, -4) === "date") {
+            return true;
+        }
+
+        return in_array($name, [
+            "added",
+            "modified",
+            "lastaccess",
+            "firstaccess",
+            "lastlogin",
+            "currentlogin",
+            "lastcron",
+        ], true);
+    }
+
+    /**
      * Function export_tables_to_gzip
      *
      * @param string $filepath
@@ -345,8 +763,8 @@ class backup_manager {
         $header[] = "-- Kopere Dashboard database export";
         $header[] = "-- Generated at: " . date("c");
         $header[] = "-- Source database: " . self::get_source_database_family();
-        $header[] = "-- Output format: " . $outputformat;
-        $header[] = "-- Scope: " . $scope;
+        $header[] = "-- Output format: {$outputformat}";
+        $header[] = "-- Scope: {$scope}";
         $header[] = "-- Total tables: " . count($tables);
         $header[] = "";
 
@@ -1175,6 +1593,73 @@ class backup_manager {
     }
 
     /**
+     * Function create_directory_zip
+     *
+     * @param string $zipfile
+     * @param string $source
+     * @param string $rootname
+     * @param array $extradirs
+     * @return void
+     * @throws \moodle_exception
+     */
+    private static function create_directory_zip(
+        string $zipfile,
+        string $source,
+        string $rootname,
+        array $extradirs = []
+    ): void {
+        $zip = new ZipArchive();
+        if ($zip->open($zipfile, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
+            throw new moodle_exception("zipcreatefailed", "koperedashboard_backup");
+        }
+
+        self::add_directory_to_zip($zip, $source, $rootname);
+        foreach ($extradirs as $zippath => $dirpath) {
+            if (is_dir($dirpath)) {
+                self::add_directory_to_zip($zip, $dirpath, $zippath);
+            }
+        }
+
+        $zip->close();
+    }
+
+    /**
+     * Function add_directory_to_zip
+     *
+     * @param ZipArchive $zip
+     * @param string $source
+     * @param string $rootname
+     * @return void
+     */
+    private static function add_directory_to_zip(ZipArchive $zip, string $source, string $rootname): void {
+        $source = rtrim($source, "/");
+        $rootname = trim($rootname, "/");
+
+        if ($rootname !== "") {
+            $zip->addEmptyDir($rootname);
+        }
+
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($source, FilesystemIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::SELF_FIRST
+        );
+
+        foreach ($iterator as $item) {
+            $pathname = $item->getPathname();
+            $relativepath = ltrim(substr($pathname, strlen($source)), "/");
+            $relativepath = str_replace(DIRECTORY_SEPARATOR, "/", $relativepath);
+            $zippath = $rootname === "" ? $relativepath : "{$rootname}/{$relativepath}";
+
+            if ($item->isDir()) {
+                $zip->addEmptyDir($zippath);
+                continue;
+            }
+
+            $zip->addFile($pathname, $zippath);
+        }
+    }
+
+    /**
      * Function create_zip_bundle
      *
      * @param string $zipfile
@@ -1278,7 +1763,7 @@ class backup_manager {
      */
     private static function command_exists(string $command): bool {
         $result = shell_exec("command -v " . escapeshellarg($command) . " 2>/dev/null");
-        return trim((string) $result) !== "";
+        return trim($result) !== "";
     }
 
     /**
@@ -1290,6 +1775,10 @@ class backup_manager {
     private static function detect_type(string $filename): string {
         if (strpos($filename, self::TYPE_MOODLEDATA . "-") === 0) {
             return self::TYPE_MOODLEDATA;
+        }
+
+        if (strpos($filename, "friendly_installation-") === 0) {
+            return "friendly_installation";
         }
 
         return self::TYPE_DATABASE;
