@@ -42,6 +42,9 @@ table.dataTable {
     tfoot:empty {
         display: none;
     }
+    tbody.hover-pointer td {
+        cursor: pointer;
+    }
 }
 div.dt-scroll {
     width: 100%;
