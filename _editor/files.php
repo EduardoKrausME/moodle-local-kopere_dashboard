@@ -48,7 +48,7 @@ if (isset($_FILES["file"]["name"])) {
     $extension = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
     if (in_array($extension, $aloweb)) {
         $fs = get_file_storage();
-        $filerecord = (object)[
+        $filerecord = (object) [
             "component" => $component,
             "contextid" => $contextid,
             "userid" => $adminid,
@@ -60,9 +60,10 @@ if (isset($_FILES["file"]["name"])) {
         $fs->create_file_from_pathname($filerecord, $_FILES["file"]["tmp_name"]);
 
         $url = moodle_url::make_file_url(
-            "$CFG->wwwroot/pluginfile.php",
+            "{$CFG->wwwroot}/pluginfile.php",
             "/{$contextid}/local_kopere_dashboard/{$filerecord->filearea}/" .
-            "{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}");
+            "{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}"
+        );
 
         echo json_encode([
             "name" => $_FILES["file"]["name"],
@@ -84,9 +85,10 @@ $items = [];
 /** @var stored_file $file */
 foreach ($files as $file) {
     $url = moodle_url::make_file_url(
-        "$CFG->wwwroot/pluginfile.php",
+        "{$CFG->wwwroot}/pluginfile.php",
         "/{$contextid}/local_kopere_dashboard/{$file->get_filearea()}/" .
-        "{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}");
+        "{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}"
+    );
     $items[] = [
         "name" => $file->get_filename(),
         "type" => "file",
@@ -104,9 +106,14 @@ foreach ($courses as $course) {
     foreach ($courseobj->get_course_overviewfiles() as $file) {
         $isimage = $file->is_valid_image();
         if ($isimage) {
-            $courseimage = file_encode_url("{$CFG->wwwroot}/pluginfile.php",
-                "/{$file->get_contextid()}/{$file->get_component()}/" .
-                "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}", !$isimage);
+            $courseimage = moodle_url::make_pluginfile_url(
+                $file->get_contextid(),
+                $file->get_component(),
+                $file->get_filearea(),
+                null,
+                $file->get_filepath(),
+                $file->get_filename()
+            )->out();
 
             $items[] = [
                 "name" => $file->get_filename(),
