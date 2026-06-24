@@ -990,6 +990,10 @@
 .path-local-kopere_dashboard table.dataTable tfoot:empty {
   display: none;
 }
+.local-kopere_dashboard table.dataTable tbody.hover-pointer td,
+.path-local-kopere_dashboard table.dataTable tbody.hover-pointer td {
+  cursor: pointer;
+}
 .local-kopere_dashboard div.dt-scroll,
 .path-local-kopere_dashboard div.dt-scroll {
   width: 100%;
