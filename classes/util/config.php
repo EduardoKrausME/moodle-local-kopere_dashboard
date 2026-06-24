@@ -60,21 +60,13 @@ class config {
      * Function get_key_int
      *
      * @param $key
-     * @param int $default
      *
      * @return int|mixed
+     * @throws \dml_exception
+     * @throws \coding_exception
      */
-    public static function get_key_int($key, $default = 0) {
-        try {
-            $value = get_config("local_kopere_dashboard", $key);
-        } catch (dml_exception) {
-            return intval($default);
-        }
-
-        try {
-            return optional_param($key, $value, PARAM_INT);
-        } catch (coding_exception) {
-            return intval($default);
-        }
+    public static function get_key_int($key) {
+        $value = get_config("local_kopere_dashboard", $key);
+        return (int) optional_param($key, $value, PARAM_INT);
     }
 }
