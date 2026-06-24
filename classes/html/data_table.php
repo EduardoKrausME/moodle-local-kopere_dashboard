@@ -336,16 +336,16 @@ class data_table {
     public function set_row($linhas, $class = "", $returnhtml = false) {
         global $CFG;
 
-        $html = "";
+        $return = "";
 
         if ($this->clickredirect != null) {
-            $html .= '<tbody class="hover-pointer">';
+            $return .= '<tbody class="hover-pointer">';
         } else {
-            $html .= "<tbody>";
+            $return .= "<tbody>";
         }
 
         foreach ($linhas as $linha) {
-            $html .= "<tr>";
+            $return .= "<tr>";
             /** @var table_header_item $column */
             foreach ($this->column as $column) {
 
@@ -412,16 +412,16 @@ class data_table {
                     }
                 }
 
-                $this->print_row($html, $thisclass);
+                $return .= $this->print_row($html, $thisclass);
             }
-            $html .= "</tr>";
+            $return .= "</tr>";
         }
-        $html .= "</tbody>";
+        $return .= "</tbody>";
 
         if ($returnhtml) {
-            return $html;
+            return $return;
         } else {
-            echo $html;
+            echo $return;
         }
     }
 
@@ -430,16 +430,20 @@ class data_table {
      *
      * @param $html
      * @param string $class
+     * @return string
      */
-    public function print_row($html, $class = "") {
+    private function print_row($html, $class = "") {
+        $return = "";
         if ($class == "" || $class == " ") {
-            echo "<td>";
+            $return .= "<td>";
         } else {
-            echo "<td class='{$class}'>";
+            $return .= "<td class='{$class}'>";
         }
 
-        echo $html;
-        echo "</td>";
+        $return .= $html;
+        $return .= "</td>";
+
+        return $return;
     }
 
     /**
