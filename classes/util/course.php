@@ -26,6 +26,7 @@ namespace local_kopere_dashboard\util;
 
 use core_course_list_element;
 use Exception;
+use moodle_url;
 
 /**
  * Class course
@@ -53,10 +54,14 @@ class course {
                 $isimage = $file->is_valid_image();
                 if ($isimage) {
                     $courseimage =
-                        file_encode_url("{$CFG->wwwroot}/pluginfile.php",
-                            "/{$file->get_contextid()}/local_kopere_dashboard/" .
-                            "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}", !$isimage);
-
+                         moodle_url::make_pluginfile_url(
+                            $file->get_contextid(),
+                            $file->get_component(),
+                            $file->get_filearea(),
+                            null,
+                            $file->get_filepath(),
+                            $file->get_filename()
+                        )->out();
                 }
             }
         }
