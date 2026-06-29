@@ -165,7 +165,6 @@ class datatable_search_util {
         $sqlsearchcount = "{$sql}        \n{$this->where} \n{$group} \n{$order}";
         $sqltotal       = "{$sql}                         \n{$group} \n{$order}";
 
-        echo '<pre>';
         $sqlsearch = str_replace("{[columns]}", implode(", ", $this->columnselect), $sqlsearch);
 
         $result = $DB->get_records_sql($sqlsearch, $params);
