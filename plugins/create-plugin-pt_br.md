@@ -736,4 +736,4 @@ Se o template não renderiza:
 
 Se a página abre fora do layout do dashboard:
 
-- Verifique se a página chamou `layout::page_render($context, $content, true)`.
+- Verifique se a página chamou `layout::page_render($context, $content, true, $classname, $afterheader)`.
