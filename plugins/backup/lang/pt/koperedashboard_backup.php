@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['action_delete'] = 'Eliminar';
 $string['action_download'] = 'Transferir';
 $string['action_generate_database'] = 'Exportar base de dados';
 $string['action_generate_moodledata'] = 'Gerar cópia de segurança do moodledata';
@@ -40,6 +41,12 @@ $string['current_source_label'] = 'Base de dados atual:';
 $string['database_desc'] = 'Exporta a estrutura e os dados da base de dados em PHP, permitindo escolher o formato de saída e, opcionalmente, separar os registos num ficheiro próprio.';
 $string['database_success'] = 'Exportação da base de dados gerada com sucesso: {$a}';
 $string['database_title'] = 'Exportação da base de dados';
+$string['delete_cancel'] = 'Cancelar';
+$string['delete_confirm_button'] = 'Sim, eliminar ficheiro';
+$string['delete_confirm_message'] = 'Tem a certeza de que pretende eliminar este ficheiro de backup gerado? Esta ação não pode ser anulada.';
+$string['delete_confirm_title'] = 'Eliminar ficheiro de backup';
+$string['delete_success'] = 'Ficheiro de backup eliminado com sucesso: {$a}';
+$string['deletefailed'] = 'Não foi possível eliminar o ficheiro de backup: {$a}';
 $string['emptyfiles'] = 'Ainda não foram gerados ficheiros de cópia de segurança.';
 $string['exportscope_full'] = 'Base de dados completa';
 $string['exportscope_logs'] = 'Apenas registos';

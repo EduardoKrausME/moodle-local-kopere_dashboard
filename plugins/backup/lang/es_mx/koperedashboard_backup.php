@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['action_delete'] = 'Eliminar';
 $string['action_download'] = 'Descargar';
 $string['action_generate_database'] = 'Exportar base de datos';
 $string['action_generate_moodledata'] = 'Generar respaldo de moodledata';
@@ -40,6 +41,12 @@ $string['current_source_label'] = 'Base de datos actual:';
 $string['database_desc'] = 'Exporta la estructura y los datos de la base de datos en PHP, lo que permite elegir el formato de salida y, opcionalmente, separar los registros en su propio archivo.';
 $string['database_success'] = 'Exportación de la base de datos generada correctamente: {$a}';
 $string['database_title'] = 'Exportación de la base de datos';
+$string['delete_cancel'] = 'Cancelar';
+$string['delete_confirm_button'] = 'Sí, eliminar archivo';
+$string['delete_confirm_message'] = '¿Seguro que desea eliminar este archivo de respaldo generado? Esta acción no se puede deshacer.';
+$string['delete_confirm_title'] = 'Eliminar archivo de respaldo';
+$string['delete_success'] = 'Archivo de respaldo eliminado correctamente: {$a}';
+$string['deletefailed'] = 'No se pudo eliminar el archivo de respaldo: {$a}';
 $string['emptyfiles'] = 'Aún no se han generado archivos de respaldo.';
 $string['exportscope_full'] = 'Base de datos completa';
 $string['exportscope_logs'] = 'Solo registros';

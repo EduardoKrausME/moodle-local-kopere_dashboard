@@ -47,6 +47,9 @@ class backup_manager {
     /** @var int */
     private const INSERT_BATCH_SIZE = 100;
 
+    /** @var string */
+    private const FRIENDLY_INSTALLATION_BASE64_PREFIX = "__BASE64__:";
+
     /**
      * Function create_moodledata_backup
      *
@@ -257,10 +260,15 @@ class backup_manager {
     public static function is_alternative_file_system_ready(): bool {
         global $CFG;
 
-        $configuredclass = $CFG->alternative_file_system_class ?? "";
-        $settingslocal = get_config("local_alternative_file_system", "storage_destination");
+        if (!isset($CFG->alternative_file_system_class[50])) {
+            return false;
+        }
+        else if ($CFG->alternative_file_system_class != '\\local_alternative_file_system\\external_file_system') {
+            return false;
+        }
 
-        return $configuredclass == '\\local_alternative_file_system\\external_file_system' && isset($settingslocal[1]);
+        $settingslocal = get_config("local_alternative_file_system", "storage_destination");
+        return isset($settingslocal[1]);
     }
 
     /**
@@ -313,6 +321,21 @@ class backup_manager {
         }
 
         return $filepath;
+    }
+
+    /**
+     * Delete a generated backup file.
+     *
+     * @param string $filename
+     * @return void
+     * @throws \moodle_exception
+     */
+    public static function delete_backup_file(string $filename): void {
+        $filepath = self::get_backup_file_path($filename);
+
+        if (!unlink($filepath)) {
+            throw new moodle_exception("deletefailed", "koperedashboard_backup", "", $filename);
+        }
     }
 
     /**
@@ -426,28 +449,35 @@ class backup_manager {
             $field = [
                 "name" => $column["name"],
                 "type" => self::get_friendly_installation_field_type($column),
-                "nullable" => (bool) $column["nullable"],
-                "auto_increment" => !empty($column["auto_increment"]),
             ];
 
-            if (array_key_exists("default", $column) && $column["default"] !== null && $column["default"] !== "") {
-                $field["default"] = (string) $column["default"];
+            $length = self::get_friendly_installation_field_length($column);
+            if ($length !== null) {
+                $field["length"] = $length;
             }
+
+            $decimals = self::get_friendly_installation_field_decimals($column);
+            if ($decimals !== null) {
+                $field["decimals"] = $decimals;
+            }
+
+            $field["nullable"] = (bool) $column["nullable"];
+            $field["notnull"] = empty($column["nullable"]);
+
+            if (!empty($column["unsigned"])) {
+                $field["unsigned"] = true;
+            }
+
+            $default = self::get_friendly_installation_default_value($column);
+            if ($default !== null) {
+                $field["default"] = $default;
+            }
+
+            $field["auto_increment"] = !empty($column["auto_increment"]);
+            $field["sequence"] = !empty($column["auto_increment"]);
 
             if (in_array($column["name"], $primarycolumns, true)) {
                 $field["primary"] = true;
-            }
-
-            if ($column["length"] !== null && in_array($field["type"], ["string", "binary"], true)) {
-                $field["length"] = (int) $column["length"];
-            }
-
-            if ($column["precision"] !== null && in_array($field["type"], ["decimal", "float"], true)) {
-                $field["precision"] = (int) $column["precision"];
-            }
-
-            if ($column["scale"] !== null && $field["type"] === "decimal") {
-                $field["scale"] = (int) $column["scale"];
             }
 
             $fields[] = $field;
@@ -457,6 +487,23 @@ class backup_manager {
             "table" => $tablename,
             "fields" => $fields,
         ];
+
+        $schemakeys = [];
+        foreach ($indexes as $index) {
+            if (empty($index["isprimary"]) || empty($index["columns"])) {
+                continue;
+            }
+
+            $schemakeys[] = [
+                "name" => "primary",
+                "type" => "primary",
+                "fields" => array_values($index["columns"]),
+            ];
+        }
+
+        if (!empty($schemakeys)) {
+            $schema["keys"] = $schemakeys;
+        }
 
         $schemaindexes = [];
         foreach ($indexes as $index) {
@@ -517,7 +564,8 @@ class backup_manager {
                 $values = [];
                 foreach ($columns as $column) {
                     $name = $column["name"];
-                    $values[] = self::format_value_for_restore_moodle($record->{$name} ?? null, $column);
+                    $value = self::format_value_for_restore_moodle($record->{$name} ?? null, $column);
+                    $values[] = self::encode_value_for_friendly_installation_csv($value, $column);
                 }
 
                 if (fputcsv($handle, $values, ";", '"', "\\") === false) {
@@ -550,9 +598,9 @@ class backup_manager {
             "generated_at" => date("c"),
             "source_database" => self::get_source_database_family(),
             "source_moodle" => [
-                "version" => (string) ($CFG->version ?? ""),
-                "release" => (string) ($CFG->release ?? ""),
-                "branch" => (string) ($CFG->branch ?? ""),
+                "version" => $CFG->version ?? "",
+                "release" => $CFG->release ?? "",
+                "branch" => $CFG->branch ?? "",
             ],
             "table_count" => count($tables),
             "tables" => array_map(static function(string $table): string {
@@ -608,27 +656,139 @@ class backup_manager {
 
         switch ($column["abstracttype"]) {
             case "boolean":
-                return "boolean";
             case "smallint":
             case "integer":
             case "bigint":
-                return "integer";
+                return "int";
             case "decimal":
-                return "decimal";
+                return "number";
             case "float":
                 return "float";
             case "char":
             case "varchar":
-                return "string";
+                return "char";
             case "date":
-                return "date";
             case "time":
-                return "time";
+            case "timestamp":
+                return "datetime";
             case "binary":
                 return "binary";
             default:
                 return "text";
         }
+    }
+
+    /**
+     * Function get_friendly_installation_field_length
+     *
+     * @param array $column
+     * @return int|string|null
+     */
+    private static function get_friendly_installation_field_length(array $column) {
+        switch ($column["abstracttype"]) {
+            case "boolean":
+                return 1;
+            case "smallint":
+            case "integer":
+            case "bigint":
+                return self::get_integer_display_length($column);
+            case "decimal":
+            case "float":
+                return $column["precision"] !== null ? (int) $column["precision"] : null;
+            case "char":
+            case "varchar":
+                return $column["length"] !== null ? (int) $column["length"] : 255;
+            case "text":
+            case "binary":
+                return self::get_large_field_length($column);
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Function get_friendly_installation_field_decimals
+     *
+     * @param array $column
+     * @return int|null
+     */
+    private static function get_friendly_installation_field_decimals(array $column): ?int {
+        if (!in_array($column["abstracttype"], ["decimal", "float"], true)) {
+            return null;
+        }
+
+        return $column["scale"] !== null ? (int) $column["scale"] : null;
+    }
+
+    /**
+     * Function get_friendly_installation_default_value
+     *
+     * @param array $column
+     * @return string|null
+     */
+    private static function get_friendly_installation_default_value(array $column): ?string {
+        if (!array_key_exists("default", $column) || $column["default"] === null || !empty($column["auto_increment"])) {
+            return null;
+        }
+
+        $default = self::normalize_default_expression((string) $column["default"]);
+        if (strtolower($default) === "null") {
+            return null;
+        }
+
+        if ($column["abstracttype"] === "boolean") {
+            $normalized = strtolower($default);
+            if (in_array($normalized, ["1", "true", "t", "yes"], true)) {
+                return "1";
+            }
+
+            if (in_array($normalized, ["0", "false", "f", "no"], true)) {
+                return "0";
+            }
+        }
+
+        return $default;
+    }
+
+    /**
+     * Function get_integer_display_length
+     *
+     * @param array $column
+     * @return int
+     */
+    private static function get_integer_display_length(array $column): int {
+        if (preg_match('/\((\d+)\)/', (string) $column["columntype"], $matches)) {
+            return (int) $matches[1];
+        }
+
+        if ($column["abstracttype"] === "smallint") {
+            return 4;
+        }
+
+        return 10;
+    }
+
+    /**
+     * Function get_large_field_length
+     *
+     * @param array $column
+     * @return string|null
+     */
+    private static function get_large_field_length(array $column): ?string {
+        $columntype = (string) $column["columntype"];
+        if (strpos($columntype, "tiny") !== false) {
+            return "small";
+        }
+
+        if (strpos($columntype, "medium") !== false) {
+            return "medium";
+        }
+
+        if (strpos($columntype, "long") !== false) {
+            return "big";
+        }
+
+        return null;
     }
 
     /**
@@ -656,12 +816,45 @@ class backup_manager {
                 return (string) (int) $value;
             case "decimal":
             case "float":
-                return is_numeric($value) ? (string) $value : "0";
+                return is_numeric($value) ? $value : "0";
             case "binary":
-                return base64_encode((string) $value);
-            default:
                 return (string) $value;
+            default:
+                return $value;
         }
+    }
+
+    /**
+     * Function encode_value_for_friendly_installation_csv
+     *
+     * @param string $value
+     * @param array $column
+     * @return string
+     */
+    private static function encode_value_for_friendly_installation_csv(string $value, array $column): string {
+        if ($value === "") {
+            return "";
+        }
+
+        if ($column["abstracttype"] === "binary") {
+            return self::FRIENDLY_INSTALLATION_BASE64_PREFIX . base64_encode($value);
+        }
+
+        if (self::is_text_like_column($column) && preg_match('/[^A-Za-z0-9]/', $value)) {
+            return self::FRIENDLY_INSTALLATION_BASE64_PREFIX . base64_encode($value);
+        }
+
+        return $value;
+    }
+
+    /**
+     * Function is_text_like_column
+     *
+     * @param array $column
+     * @return bool
+     */
+    private static function is_text_like_column(array $column): bool {
+        return in_array($column["abstracttype"], ["char", "varchar", "text", "binary"], true);
     }
 
     /**
@@ -679,9 +872,9 @@ class backup_manager {
             return gmdate("Y-m-d\\TH:i:s", (int) $value);
         }
 
-        $timestamp = strtotime((string) $value);
+        $timestamp = strtotime($value);
         if ($timestamp === false) {
-            return (string) $value;
+            return $value;
         }
 
         return gmdate("Y-m-d\\TH:i:s", $timestamp);
@@ -694,28 +887,7 @@ class backup_manager {
      * @return bool
      */
     private static function is_datetime_like_column(array $column): bool {
-        if ($column["abstracttype"] === "timestamp") {
-            return true;
-        }
-
-        if (!in_array($column["abstracttype"], ["smallint", "integer", "bigint"], true)) {
-            return false;
-        }
-
-        $name = strtolower($column["name"]);
-        if (strpos($name, "time") === 0 || substr($name, -4) === "time" || substr($name, -4) === "date") {
-            return true;
-        }
-
-        return in_array($name, [
-            "added",
-            "modified",
-            "lastaccess",
-            "firstaccess",
-            "lastlogin",
-            "currentlogin",
-            "lastcron",
-        ], true);
+        return in_array($column["abstracttype"], ["date", "time", "timestamp"], true);
     }
 
     /**
@@ -1141,13 +1313,13 @@ class backup_manager {
 
             case "decimal":
             case "float":
-                return is_numeric($value) ? (string) $value : "0";
+                return is_numeric($value) ? $value : "0";
 
             case "binary":
-                return self::format_binary_literal((string) $value, $outputformat);
+                return self::format_binary_literal($value, $outputformat);
 
             default:
-                return self::format_string_literal((string) $value, $outputformat);
+                return self::format_string_literal($value, $outputformat);
         }
     }
 
@@ -1279,24 +1451,25 @@ class backup_manager {
             if (self::get_source_database_family() === "mysql") {
                 $auto = strpos((string) $record->extra, "auto_increment") !== false;
             } else {
-                $defaultvalue = (string) ($record->defaultvalue ?? "");
-                $auto = ((string) ($record->isidentity ?? "") === "YES") || strpos($defaultvalue, "nextval(") !== false;
+                $defaultvalue = $record->defaultvalue ?? "";
+                $auto = $record->isidentity ?? "" == "YES" || strpos($defaultvalue, "nextval(") !== false;
             }
+
+            $datatype = strtolower((string) $record->datatype);
+            $columntype = strtolower((string) $record->columntype);
 
             $columns[] = [
                 "name" => $record->columnname,
-                "datatype" => strtolower((string) $record->datatype),
-                "columntype" => strtolower((string) $record->columntype),
+                "datatype" => $datatype,
+                "columntype" => $columntype,
                 "nullable" => ((string) $record->isnullable) === "YES",
                 "default" => $record->defaultvalue,
                 "auto_increment" => $auto,
+                "unsigned" => strpos($columntype, "unsigned") !== false,
                 "length" => $record->charmaxlength !== null ? (int) $record->charmaxlength : null,
                 "precision" => $record->numericprecision !== null ? (int) $record->numericprecision : null,
                 "scale" => $record->numericscale !== null ? (int) $record->numericscale : null,
-                "abstracttype" => self::normalize_abstract_type(
-                    strtolower((string) $record->datatype),
-                    strtolower((string) $record->columntype)
-                ),
+                "abstracttype" => self::normalize_abstract_type($datatype, $columntype),
             ];
         }
 
@@ -1390,7 +1563,7 @@ class backup_manager {
             return $value;
         }
 
-        $normalized = strtolower((string) $value);
+        $normalized = strtolower($value);
         return in_array($normalized, ["1", "t", "true", "y", "yes"], true);
     }
 

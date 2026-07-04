@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['action_delete'] = 'Odstrániť';
 $string['action_download'] = 'Stiahnuť';
 $string['action_generate_database'] = 'Exportovať databázu';
 $string['action_generate_moodledata'] = 'Vygenerovať zálohu moodledata';
@@ -40,6 +41,12 @@ $string['current_source_label'] = 'Aktuálna databáza:';
 $string['database_desc'] = 'Exportuje štruktúru a údaje databázy v PHP, umožňuje vybrať výstupný formát a voliteľne oddeliť logy do samostatného súboru.';
 $string['database_success'] = 'Export databázy bol úspešne vygenerovaný: {$a}';
 $string['database_title'] = 'Export databázy';
+$string['delete_cancel'] = 'Zrušiť';
+$string['delete_confirm_button'] = 'Áno, odstrániť súbor';
+$string['delete_confirm_message'] = 'Naozaj chcete odstrániť tento vygenerovaný záložný súbor? Túto akciu nie je možné vrátiť späť.';
+$string['delete_confirm_title'] = 'Odstrániť záložný súbor';
+$string['delete_success'] = 'Záložný súbor bol úspešne odstránený: {$a}';
+$string['deletefailed'] = 'Nepodarilo sa odstrániť záložný súbor: {$a}';
 $string['emptyfiles'] = 'Zatiaľ neboli vygenerované žiadne záložné súbory.';
 $string['exportscope_full'] = 'Celá databáza';
 $string['exportscope_logs'] = 'Iba logy';

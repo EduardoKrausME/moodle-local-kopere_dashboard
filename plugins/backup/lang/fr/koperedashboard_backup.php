@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['action_delete'] = 'Supprimer';
 $string['action_download'] = 'Télécharger';
 $string['action_generate_database'] = 'Exporter la base de données';
 $string['action_generate_moodledata'] = 'Générer une sauvegarde de moodledata';
@@ -40,6 +41,12 @@ $string['current_source_label'] = 'Base de données actuelle :';
 $string['database_desc'] = 'Exporte la structure et les données de la base de données en PHP, ce qui permet de choisir le format de sortie et, éventuellement, de séparer les journaux dans leur propre fichier.';
 $string['database_success'] = 'Exportation de la base de données générée avec succès : {$a}';
 $string['database_title'] = 'Exportation de la base de données';
+$string['delete_cancel'] = 'Annuler';
+$string['delete_confirm_button'] = 'Oui, supprimer le fichier';
+$string['delete_confirm_message'] = 'Voulez-vous vraiment supprimer ce fichier de sauvegarde généré ? Cette action est irréversible.';
+$string['delete_confirm_title'] = 'Supprimer le fichier de sauvegarde';
+$string['delete_success'] = 'Fichier de sauvegarde supprimé avec succès : {$a}';
+$string['deletefailed'] = 'Impossible de supprimer le fichier de sauvegarde : {$a}';
 $string['emptyfiles'] = 'Aucun fichier de sauvegarde n’a encore été généré.';
 $string['exportscope_full'] = 'Base de données complète';
 $string['exportscope_logs'] = 'Journaux uniquement';

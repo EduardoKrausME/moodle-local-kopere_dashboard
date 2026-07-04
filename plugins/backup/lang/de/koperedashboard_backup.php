@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['action_delete'] = 'Löschen';
 $string['action_download'] = 'Herunterladen';
 $string['action_generate_database'] = 'Datenbank exportieren';
 $string['action_generate_moodledata'] = 'Moodledata-Sicherung erstellen';
@@ -40,6 +41,12 @@ $string['current_source_label'] = 'Aktuelle Datenbank:';
 $string['database_desc'] = 'Exportiert die Datenbankstruktur und -daten in PHP, sodass das Ausgabeformat gewählt und Protokolle optional in eine eigene Datei getrennt werden können.';
 $string['database_success'] = 'Datenbankexport erfolgreich erstellt: {$a}';
 $string['database_title'] = 'Datenbankexport';
+$string['delete_cancel'] = 'Abbrechen';
+$string['delete_confirm_button'] = 'Ja, Datei löschen';
+$string['delete_confirm_message'] = 'Möchten Sie diese erzeugte Sicherungsdatei wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.';
+$string['delete_confirm_title'] = 'Sicherungsdatei löschen';
+$string['delete_success'] = 'Sicherungsdatei erfolgreich gelöscht: {$a}';
+$string['deletefailed'] = 'Die Sicherungsdatei konnte nicht gelöscht werden: {$a}';
 $string['emptyfiles'] = 'Es wurden noch keine Sicherungsdateien erstellt.';
 $string['exportscope_full'] = 'Vollständige Datenbank';
 $string['exportscope_logs'] = 'Nur Protokolle';

@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['action_delete'] = 'Удалить';
 $string['action_download'] = 'Скачать';
 $string['action_generate_database'] = 'Экспортировать базу данных';
 $string['action_generate_moodledata'] = 'Создать резервную копию moodledata';
@@ -40,6 +41,12 @@ $string['current_source_label'] = 'Текущая база данных:';
 $string['database_desc'] = 'Экспортирует структуру и данные базы данных в PHP, позволяя выбрать формат вывода и при необходимости отделить журналы в отдельный файл.';
 $string['database_success'] = 'Экспорт базы данных успешно создан: {$a}';
 $string['database_title'] = 'Экспорт базы данных';
+$string['delete_cancel'] = 'Отмена';
+$string['delete_confirm_button'] = 'Да, удалить файл';
+$string['delete_confirm_message'] = 'Вы уверены, что хотите удалить этот созданный файл резервной копии? Это действие нельзя отменить.';
+$string['delete_confirm_title'] = 'Удалить файл резервной копии';
+$string['delete_success'] = 'Файл резервной копии успешно удален: {$a}';
+$string['deletefailed'] = 'Не удалось удалить файл резервной копии: {$a}';
 $string['emptyfiles'] = 'Файлы резервных копий еще не созданы.';
 $string['exportscope_full'] = 'Полная база данных';
 $string['exportscope_logs'] = 'Только журналы';

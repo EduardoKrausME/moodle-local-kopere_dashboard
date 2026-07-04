@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['action_delete'] = 'Hapus';
 $string['action_download'] = 'Unduh';
 $string['action_generate_database'] = 'Ekspor basis data';
 $string['action_generate_moodledata'] = 'Buat cadangan moodledata';
@@ -40,6 +41,12 @@ $string['current_source_label'] = 'Basis data saat ini:';
 $string['database_desc'] = 'Mengekspor struktur dan data basis data dalam PHP, memungkinkan Anda memilih format keluaran dan secara opsional memisahkan log ke file tersendiri.';
 $string['database_success'] = 'Ekspor basis data berhasil dibuat: {$a}';
 $string['database_title'] = 'Ekspor basis data';
+$string['delete_cancel'] = 'Batal';
+$string['delete_confirm_button'] = 'Ya, hapus file';
+$string['delete_confirm_message'] = 'Yakin ingin menghapus file cadangan yang dihasilkan ini? Tindakan ini tidak dapat dibatalkan.';
+$string['delete_confirm_title'] = 'Hapus file cadangan';
+$string['delete_success'] = 'File cadangan berhasil dihapus: {$a}';
+$string['deletefailed'] = 'Tidak dapat menghapus file cadangan: {$a}';
 $string['emptyfiles'] = 'Belum ada file cadangan yang dibuat.';
 $string['exportscope_full'] = 'Basis data lengkap';
 $string['exportscope_logs'] = 'Log saja';

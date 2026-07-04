@@ -103,23 +103,43 @@
                         <p>{{#str}}friendly_installation_alternative_not_desc, koperedashboard_backup{{/str}}</p>
                     </div>
                 {{/is_alternative_file_system}}
-                {{#is_alternative_file_system}}
-                    <div class="alert alert-info">
-                        <h4>{{#str}}friendly_installation_alternative_ok_title, koperedashboard_backup{{/str}}</h4>
-                        <p>{{#str}}friendly_installation_alternative_ok_desc, koperedashboard_backup, {{alternative_file_system_settings}} {{/str}}</p>
-                    </div>
 
+                {{#is_alternative_file_system}}
+                    {{^is_alternative_missing}}
+                        <div class="alert alert-warning">
+                            <h4>{{#str}}friendly_installation_alternative_ok_title, koperedashboard_backup{{/str}}</h4>
+                            <p>{{#str}}friendly_installation_alternative_ok_desc, koperedashboard_backup,
+                                {{alternative_file_system_settings}} {{/str}}</p>
+                        </div>
+                    {{/is_alternative_missing}}
                 {{/is_alternative_file_system}}
 
-                {{#cangenerate}}
-                    <form method="post" action="">
-                        <input type="hidden" name="sesskey" value="{{{sesskey}}}">
-                        <input type="hidden" name="action" value="friendly_installation">
-                        <button type="submit" class="btn btn-primary">
-                            {{#str}}friendly_installation_generate, koperedashboard_backup{{/str}}
-                        </button>
-                    </form>
-                {{/cangenerate}}
+                {{#is_alternative_file_system}}
+                    {{#is_alternative_missing}}
+                        {{#cangenerate}}
+                            <form method="post">
+                                {{#alternative_storagename}}
+                                    <p>
+                                        <strong>Storage</strong>:
+                                        {{#alternative_storageurl}}
+                                            <a href="{{{alternative_storageurl}}}"
+                                               target="_blank">{{{alternative_storagename}}}</a>
+                                        {{/alternative_storageurl}}
+                                        {{^alternative_storageurl}}
+                                            {{{alternative_storagename}}}
+                                        {{/alternative_storageurl}}
+                                    </p>
+                                {{/alternative_storagename}}
+
+                                <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+                                <input type="hidden" name="action" value="friendly_installation">
+                                <button type="submit" class="btn btn-primary">
+                                    {{#str}}friendly_installation_generate, koperedashboard_backup{{/str}}
+                                </button>
+                            </form>
+                        {{/cangenerate}}
+                    {{/is_alternative_missing}}
+                {{/is_alternative_file_system}}
             </div>
         </div>
     </div>
@@ -146,9 +166,12 @@
                     <td><code>{{{filename}}}</code></td>
                     <td>{{{size}}}</td>
                     <td>{{{timecreated}}}</td>
-                    <td>
+                    <td style="white-space:nowrap;">
                         <a class="btn btn-secondary btn-sm" href="{{{downloadurl}}}">
                             {{#str}}action_download, koperedashboard_backup{{/str}}
+                        </a>
+                        <a class="btn btn-danger btn-sm" href="{{{deleteurl}}}">
+                            {{#str}}action_delete, koperedashboard_backup{{/str}}
                         </a>
                     </td>
                 </tr>

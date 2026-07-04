@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['action_delete'] = 'حذف';
 $string['action_download'] = 'تنزيل';
 $string['action_generate_database'] = 'تصدير قاعدة البيانات';
 $string['action_generate_moodledata'] = 'إنشاء نسخة احتياطية من moodledata';
@@ -40,6 +41,12 @@ $string['current_source_label'] = 'قاعدة البيانات الحالية:';
 $string['database_desc'] = 'يصدر بنية قاعدة البيانات وبياناتها بصيغة PHP، مما يتيح لك اختيار تنسيق الإخراج وفصل السجلات اختياريًا في ملف مستقل.';
 $string['database_success'] = 'تم إنشاء تصدير قاعدة البيانات بنجاح: {$a}';
 $string['database_title'] = 'تصدير قاعدة البيانات';
+$string['delete_cancel'] = 'إلغاء';
+$string['delete_confirm_button'] = 'نعم، احذف الملف';
+$string['delete_confirm_message'] = 'هل أنت متأكد من رغبتك في حذف ملف النسخة الاحتياطية هذا؟ لا يمكن التراجع عن هذا الإجراء.';
+$string['delete_confirm_title'] = 'حذف ملف النسخة الاحتياطية';
+$string['delete_success'] = 'تم حذف ملف النسخة الاحتياطية بنجاح: {$a}';
+$string['deletefailed'] = 'تعذر حذف ملف النسخة الاحتياطية: {$a}';
 $string['emptyfiles'] = 'لم يتم إنشاء أي ملفات نسخ احتياطي بعد.';
 $string['exportscope_full'] = 'قاعدة البيانات كاملة';
 $string['exportscope_logs'] = 'السجلات فقط';

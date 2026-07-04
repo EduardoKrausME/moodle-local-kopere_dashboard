@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['action_delete'] = 'Delete';
 $string['action_download'] = 'Download';
 $string['action_generate_database'] = 'Export database';
 $string['action_generate_moodledata'] = 'Generate moodledata backup';
@@ -40,6 +41,12 @@ $string['current_source_label'] = 'Current database:';
 $string['database_desc'] = 'Exports the database structure and data in PHP, allowing you to choose the output format and optionally separate logs into their own file.';
 $string['database_success'] = 'Database export generated successfully: {$a}';
 $string['database_title'] = 'Database export';
+$string['delete_cancel'] = 'Cancel';
+$string['delete_confirm_button'] = 'Yes, delete file';
+$string['delete_confirm_message'] = 'Are you sure you want to delete this generated backup file? This action cannot be undone.';
+$string['delete_confirm_title'] = 'Delete backup file';
+$string['delete_success'] = 'Backup file deleted successfully: {$a}';
+$string['deletefailed'] = 'Could not delete the backup file: {$a}';
 $string['emptyfiles'] = 'No backup files have been generated yet.';
 $string['exportscope_full'] = 'Full database';
 $string['exportscope_logs'] = 'Logs only';

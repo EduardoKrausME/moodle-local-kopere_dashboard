@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['action_delete'] = 'Excluir';
 $string['action_download'] = 'Baixar';
 $string['action_generate_database'] = 'Exportar banco de dados';
 $string['action_generate_moodledata'] = 'Gerar backup do moodledata';
@@ -40,6 +41,12 @@ $string['current_source_label'] = 'Banco de dados atual:';
 $string['database_desc'] = 'Exporta a estrutura e os dados do banco de dados em PHP, permitindo escolher o formato de saída e, opcionalmente, separar os logs em um arquivo próprio.';
 $string['database_success'] = 'Exportação do banco de dados gerada com sucesso: {$a}';
 $string['database_title'] = 'Exportação do banco de dados';
+$string['delete_cancel'] = 'Cancelar';
+$string['delete_confirm_button'] = 'Sim, excluir arquivo';
+$string['delete_confirm_message'] = 'Tem certeza que deseja excluir este arquivo de backup gerado? Esta ação não poderá ser desfeita.';
+$string['delete_confirm_title'] = 'Excluir arquivo de backup';
+$string['delete_success'] = 'Arquivo de backup excluído com sucesso: {$a}';
+$string['deletefailed'] = 'Não foi possível excluir o arquivo de backup: {$a}';
 $string['emptyfiles'] = 'Nenhum arquivo de backup foi gerado ainda.';
 $string['exportscope_full'] = 'Banco de dados completo';
 $string['exportscope_logs'] = 'Apenas logs';
