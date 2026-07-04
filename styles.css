@@ -92,10 +92,6 @@
 .path-local-kopere_dashboard .kopere_dashboard-card-shell * {
   box-sizing: border-box;
 }
-.local-kopere_dashboard .kopere_dashboard-card-shell a,
-.path-local-kopere_dashboard .kopere_dashboard-card-shell a {
-  text-decoration: none;
-}
 .local-kopere_dashboard .kopere_dashboard-mobile-backdrop,
 .path-local-kopere_dashboard .kopere_dashboard-mobile-backdrop {
   position: fixed;
