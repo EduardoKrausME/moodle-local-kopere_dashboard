@@ -777,10 +777,29 @@ class backup_manager {
      */
     private static function is_boolean_like_tiny_integer_column(array $column): bool {
         $name = strtolower($column["name"] ?? "");
-        if (preg_match(
-            '/(^|_)(enabled|enable|active|visible|hidden|deleted|locked|required|confirmed|suspended|archived|valid|available|completed|disabled|default|protected|mandatory|optional)($|_)/',
-            $name
-        )) {
+
+        $columns = [
+            "enabled",
+            "enable",
+            "active",
+            "visible",
+            "hidden",
+            "deleted",
+            "locked",
+            "required",
+            "confirmed",
+            "suspended",
+            "archived",
+            "valid",
+            "available",
+            "completed",
+            "disabled",
+            "default",
+            "protected",
+            "mandatory",
+            "optional",
+        ];
+        if (preg_match('/(^|_)(' . implode("|", $columns) . ')($|_)/', $name)) {
             return true;
         }
 
