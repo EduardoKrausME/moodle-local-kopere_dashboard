@@ -41,13 +41,12 @@ class layout {
      * @param $content
      * @param $addpage
      * @param string $classname
-     * @param string $afterheader
      * @return array
      * @throws \coding_exception
      * @throws \core\exception\moodle_exception
      * @throws \moodle_exception
      */
-    public static function page_render(context $context, $content, $addpage, $classname = "", $afterheader = ""): array {
+    public static function page_render(context $context, $content, $addpage, $classname = ""): array {
         global $PAGE, $OUTPUT;
 
         $titles = explode($PAGE::TITLE_SEPARATOR, $PAGE->title);
@@ -173,7 +172,6 @@ class layout {
         $PAGE->requires->js_call_amd("local_kopere_dashboard/sidebar", "init");
 
         echo $OUTPUT->header();
-        echo $afterheader;
         echo $OUTPUT->render_from_template("local_kopere_dashboard/page", $layoutdata);
         echo $OUTPUT->footer();
         die;

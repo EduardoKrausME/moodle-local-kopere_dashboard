@@ -391,7 +391,7 @@ $templatecontext = [
 ];
 
 $content = $OUTPUT->render_from_template("koperedashboard_example/index", $templatecontext);
-layout::page_render($context, $content, true);
+layout::page_render($context, $content, true, $classname);
 ```
 
 The `layout::page_render()` call is important because it places the page inside the official Kopere Dashboard layout, with sidebar menu, breadcrumb, and visual identity.
