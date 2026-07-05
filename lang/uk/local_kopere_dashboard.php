@@ -73,7 +73,6 @@ $string['datatables_sErrorMessage'] = '<strong>Помилка завантаже
 $string['datatables_sInfo'] = '_START_ до _END_ з _TOTAL_';
 $string['datatables_sInfoEmpty'] = '0 записів';
 $string['datatables_sInfoFiltered'] = '(Відфільтровано з _MAX_ записів)';
-$string['datatables_sInfoPostFix'] = '';
 $string['datatables_sInfoThousands'] = '.';
 $string['datatables_sLengthMenu'] = '_MENU_ на сторінку';
 $string['datatables_sLoadingRecords'] = 'Завантаження ...';

@@ -95,7 +95,6 @@ class data_table {
             "datatables_sInfo",
             "datatables_sInfoEmpty",
             "datatables_sInfoFiltered",
-            "datatables_sInfoPostFix",
             "datatables_sInfoThousands",
             "datatables_sLengthMenu",
             "datatables_sLoadingRecords",
@@ -120,6 +119,10 @@ class data_table {
             "datatables_oPaginate_sLast",
             "datatables_oAria_sSortAscending",
             "datatables_oAria_sSortDescending",
+            "datatables_sErrorMessage",
+            "datatables_sSearch",
+            "datatables_sLengthMenu",
+            "datatables_sLoadingRecords",
         ], "local_kopere_dashboard");
     }
 

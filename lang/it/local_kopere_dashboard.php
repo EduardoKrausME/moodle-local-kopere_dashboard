@@ -73,7 +73,6 @@ $string['datatables_sErrorMessage'] = '<strong>Errore durante il caricamento dei
 $string['datatables_sInfo'] = 'Da _START_ a _END_ di _TOTAL_';
 $string['datatables_sInfoEmpty'] = '0 record';
 $string['datatables_sInfoFiltered'] = '(Filtrati da _MAX_ record)';
-$string['datatables_sInfoPostFix'] = '';
 $string['datatables_sInfoThousands'] = '.';
 $string['datatables_sLengthMenu'] = '_MENU_ per pagina';
 $string['datatables_sLoadingRecords'] = 'Caricamento ...';

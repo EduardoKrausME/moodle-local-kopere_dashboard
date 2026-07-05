@@ -73,7 +73,6 @@ $string['datatables_sErrorMessage'] = '<strong>Kesalahan memuat data</strong><di
 $string['datatables_sInfo'] = '_START_ sampai _END_ dari _TOTAL_';
 $string['datatables_sInfoEmpty'] = '0 catatan';
 $string['datatables_sInfoFiltered'] = '(Difilter dari _MAX_ catatan)';
-$string['datatables_sInfoPostFix'] = '';
 $string['datatables_sInfoThousands'] = '.';
 $string['datatables_sLengthMenu'] = '_MENU_ per halaman';
 $string['datatables_sLoadingRecords'] = 'Memuat ...';

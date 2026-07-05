@@ -72,7 +72,6 @@ $string['datatables_sErrorMessage'] = '<strong>Error loading data</strong><div>T
 $string['datatables_sInfo'] = '_START_ to _END_ of _TOTAL_';
 $string['datatables_sInfoEmpty'] = '0 records';
 $string['datatables_sInfoFiltered'] = '(Filtered from _MAX_ records)';
-$string['datatables_sInfoPostFix'] = '';
 $string['datatables_sInfoThousands'] = '.';
 $string['datatables_sLengthMenu'] = '_MENU_ per page';
 $string['datatables_sLoadingRecords'] = 'Loading ...';

@@ -73,7 +73,6 @@ $string['datatables_sErrorMessage'] = '<strong>خطأ في تحميل البيا
 $string['datatables_sInfo'] = '_START_ إلى _END_ من _TOTAL_';
 $string['datatables_sInfoEmpty'] = '0 سجل';
 $string['datatables_sInfoFiltered'] = '(تمت التصفية من _MAX_ سجل)';
-$string['datatables_sInfoPostFix'] = '';
 $string['datatables_sInfoThousands'] = '.';
 $string['datatables_sLengthMenu'] = '_MENU_ لكل صفحة';
 $string['datatables_sLoadingRecords'] = 'جارٍ التحميل ...';

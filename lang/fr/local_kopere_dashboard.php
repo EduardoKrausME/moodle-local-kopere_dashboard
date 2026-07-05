@@ -73,7 +73,6 @@ $string['datatables_sErrorMessage'] = '<strong>Erreur lors du chargement des don
 $string['datatables_sInfo'] = '_START_ à _END_ sur _TOTAL_';
 $string['datatables_sInfoEmpty'] = '0 enregistrement';
 $string['datatables_sInfoFiltered'] = '(Filtré à partir de _MAX_ enregistrements)';
-$string['datatables_sInfoPostFix'] = '';
 $string['datatables_sInfoThousands'] = '.';
 $string['datatables_sLengthMenu'] = '_MENU_ par page';
 $string['datatables_sLoadingRecords'] = 'Chargement ...';

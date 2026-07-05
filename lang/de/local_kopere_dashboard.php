@@ -73,7 +73,6 @@ $string['datatables_sErrorMessage'] = '<strong>Fehler beim Laden der Daten</stro
 $string['datatables_sInfo'] = '_START_ bis _END_ von _TOTAL_';
 $string['datatables_sInfoEmpty'] = '0 Einträge';
 $string['datatables_sInfoFiltered'] = '(Gefiltert aus _MAX_ Einträgen)';
-$string['datatables_sInfoPostFix'] = '';
 $string['datatables_sInfoThousands'] = '.';
 $string['datatables_sLengthMenu'] = '_MENU_ pro Seite';
 $string['datatables_sLoadingRecords'] = 'Wird geladen ...';

@@ -73,7 +73,6 @@ $string['datatables_sErrorMessage'] = '<strong>データの読み込みエラー
 $string['datatables_sInfo'] = '_TOTAL_ 件中 _START_ から _END_ まで';
 $string['datatables_sInfoEmpty'] = '0 件';
 $string['datatables_sInfoFiltered'] = '（_MAX_ 件から絞り込み）';
-$string['datatables_sInfoPostFix'] = '';
 $string['datatables_sInfoThousands'] = '.';
 $string['datatables_sLengthMenu'] = '1ページあたり _MENU_ 件';
 $string['datatables_sLoadingRecords'] = '読み込み中 ...';

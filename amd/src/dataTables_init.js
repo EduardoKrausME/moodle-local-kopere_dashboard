@@ -367,8 +367,6 @@ define([
                     sInfo: M.util.get_string('datatables_sInfo', "local_kopere_dashboard"),
                     sInfoEmpty: M.util.get_string('datatables_sInfoEmpty', "local_kopere_dashboard"),
                     sInfoFiltered: M.util.get_string('datatables_sInfoFiltered', "local_kopere_dashboard"),
-                    sInfoPostFix: M.util.get_string('datatables_sInfoPostFix', "local_kopere_dashboard"),
-                    sInfoThousands: M.util.get_string('datatables_sInfoThousands', "local_kopere_dashboard"),
                     sLengthMenu: M.util.get_string('datatables_sLengthMenu', "local_kopere_dashboard"),
                     sLoadingRecords: M.util.get_string('datatables_sLoadingRecords', "local_kopere_dashboard"),
                     sProcessing: M.util.get_string('datatables_sProcessing', "local_kopere_dashboard"),

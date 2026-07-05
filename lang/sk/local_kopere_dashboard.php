@@ -73,7 +73,6 @@ $string['datatables_sErrorMessage'] = '<strong>Chyba pri načítavaní údajov</
 $string['datatables_sInfo'] = '_START_ až _END_ z _TOTAL_';
 $string['datatables_sInfoEmpty'] = '0 záznamov';
 $string['datatables_sInfoFiltered'] = '(Filtrované z _MAX_ záznamov)';
-$string['datatables_sInfoPostFix'] = '';
 $string['datatables_sInfoThousands'] = '.';
 $string['datatables_sLengthMenu'] = '_MENU_ na stránku';
 $string['datatables_sLoadingRecords'] = 'Načítava sa ...';
