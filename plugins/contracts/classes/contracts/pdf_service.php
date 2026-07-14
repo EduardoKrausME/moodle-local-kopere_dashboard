@@ -195,7 +195,9 @@ class pdf_service {
      * @throws \coding_exception
      * @throws \Exception
      */
-    private static function build_contract_html(stdClass $contract, stdClass $course, stdClass $user, context_course $coursecontext): string {
+    private static function build_contract_html(
+        stdClass $contract, stdClass $course, stdClass $user, context_course $coursecontext
+    ): string {
         global $USER;
 
         $originaluser = $USER;
