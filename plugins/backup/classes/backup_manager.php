@@ -1188,6 +1188,10 @@ class backup_manager {
                 case "boolean":
                     return "TINYINT(1)";
                 case "smallint":
+                    if (self::is_mysql_tinyint_one_column($column)) {
+                        return $autoincrement ? "TINYINT(1) AUTO_INCREMENT" : "TINYINT(1)";
+                    }
+
                     return $autoincrement ? "SMALLINT AUTO_INCREMENT" : "SMALLINT";
                 case "integer":
                     return $autoincrement ? "INT AUTO_INCREMENT" : "INT";
@@ -1338,7 +1342,7 @@ class backup_manager {
 
         switch ($column["abstracttype"]) {
             case "boolean":
-                $bool = (bool) $value;
+                $bool = self::database_bool_to_php($value);
                 if ($outputformat === "pgsql") {
                     return $bool ? "TRUE" : "FALSE";
                 }
@@ -1592,6 +1596,20 @@ class backup_manager {
     }
 
     /**
+     * Check whether the source column is a MySQL TINYINT(1).
+     *
+     * MySQL and MariaDB expose BOOLEAN aliases as TINYINT(1). Moodle XMLDB fields with length 1
+     * are integers, so PostgreSQL exports must keep them numeric and map them to SMALLINT.
+     *
+     * @param array $column
+     * @return bool
+     */
+    private static function is_mysql_tinyint_one_column(array $column): bool {
+        return ($column["datatype"] ?? "") === "tinyint" &&
+            preg_match('/^tinyint\(1\)(?:\s+unsigned)?$/', $column["columntype"] ?? "") === 1;
+    }
+
+    /**
      * Function database_bool_to_php
      *
      * @param mixed $value
@@ -1615,10 +1633,6 @@ class backup_manager {
      */
     private static function normalize_abstract_type(string $datatype, string $columntype): string {
         if ($datatype === "boolean" || $datatype === "bool" || $columntype === "bool") {
-            return "boolean";
-        }
-
-        if ($datatype === "tinyint" && preg_match('/tinyint\(1\)/', $columntype)) {
             return "boolean";
         }
 
