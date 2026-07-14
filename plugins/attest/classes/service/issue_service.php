@@ -33,7 +33,6 @@ use Exception;
 use local_kopere_dashboard\service\placeholders;
 use local_kopere_dashboard\util\userdate;
 use moodle_url;
-use Mustache_Engine;
 use pdf;
 use required_capability_exception;
 use stdClass;
@@ -272,7 +271,10 @@ class issue_service {
      * @return string
      */
     public static function render_html(string $htmltemplate, array $data): string {
-        $engine = new Mustache_Engine([
+        if (!class_exists('Mustache_Engine')) {
+            class_alias('Mustache\Engine', 'Mustache_Engine');
+        }
+        $engine = new \Mustache_Engine([
             "escape" => function($value) {
                 return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
             },

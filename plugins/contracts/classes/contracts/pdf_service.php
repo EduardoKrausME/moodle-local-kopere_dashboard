@@ -29,7 +29,6 @@ use context_system;
 use core_user;
 use local_kopere_dashboard\service\placeholders;
 use local_kopere_dashboard\util\userdate;
-use Mustache_Engine;
 use pdf;
 use stdClass;
 use stored_file;
@@ -196,9 +195,7 @@ class pdf_service {
      * @throws \coding_exception
      * @throws \Exception
      */
-    private static function build_contract_html(
-        stdClass $contract, stdClass $course, stdClass $user, context_course $coursecontext
-    ): string {
+    private static function build_contract_html(stdClass $contract, stdClass $course, stdClass $user, context_course $coursecontext): string {
         global $USER;
 
         $originaluser = $USER;
@@ -210,7 +207,10 @@ class pdf_service {
             $USER = $originaluser;
         }
 
-        $engine = new Mustache_Engine([
+        if (!class_exists('Mustache_Engine')) {
+            class_alias('Mustache\Engine', 'Mustache_Engine');
+        }
+        $engine = new \Mustache_Engine([
             "escape" => static function($value) {
                 return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
             },

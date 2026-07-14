@@ -67,8 +67,11 @@ if (optional_param("accept", 0, PARAM_INT) == 1 && confirm_sesskey()) {
     redirect($dest);
 }
 
+if (!class_exists('Mustache_Engine')) {
+    class_alias('Mustache\Engine', 'Mustache_Engine');
+}
 $placeholderdata = placeholders::build_data($courseid);
-$engine = new Mustache_Engine([
+$engine = new \Mustache_Engine([
     "escape" => static function($value) {
         return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
     },
