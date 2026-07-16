@@ -114,6 +114,9 @@
         letter-spacing: .08em;
         text-transform: uppercase;
     }
+    .kopere_dashboard-card-navitem {
+        text-decoration: none;
+    }
     .kopere_dashboard-card-navitem,
     .kopere_dashboard-card-navsummary {
         position: relative;
@@ -564,7 +567,7 @@
                 box-shadow: 0 0 0 3px rgba(63, 126, 232, 0.12);
             }
         }
-        .dt-search input[type=search]{
+        .dt-search input[type=search] {
             width: 200px !important;
             &:empty {
                 width: 160px !important;
@@ -572,7 +575,6 @@
             &:focus {
                 width: 200px !important;
             }
-
         }
         .custom-select,
         .singleselect select {
@@ -705,7 +707,6 @@
             align-items: flex-start;
         }
     }
-
     @import "amd/src/dataTables";
     @import "amd/src/dataTables-buttons";
     @import "amd/src/select2";

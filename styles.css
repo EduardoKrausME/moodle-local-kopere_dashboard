@@ -183,6 +183,10 @@
   text-transform: uppercase;
 }
 .local-kopere_dashboard .kopere_dashboard-card-navitem,
+.path-local-kopere_dashboard .kopere_dashboard-card-navitem {
+  text-decoration: none;
+}
+.local-kopere_dashboard .kopere_dashboard-card-navitem,
 .local-kopere_dashboard .kopere_dashboard-card-navsummary,
 .path-local-kopere_dashboard .kopere_dashboard-card-navitem,
 .path-local-kopere_dashboard .kopere_dashboard-card-navsummary {
