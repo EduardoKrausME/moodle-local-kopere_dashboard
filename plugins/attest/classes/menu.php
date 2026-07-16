@@ -41,25 +41,23 @@ class menu {
      * @throws coding_exception
      */
     public static function get_definition(context $context): array {
-        global $USER;
-
         if (has_capability("koperedashboard/attest:manage", $context)) {
             return [
                 "category" => subplugin_manager::CAT_ACADEMIC,
                 "items" => [
                     [
-                        "title" => get_string("manage_title", "koperedashboard_attest"),
+                        "title" => get_string("pluginname", "koperedashboard_attest"),
                         "description" => get_string("menu_desc", "koperedashboard_attest"),
-                        "url" => [
-                            "/local/kopere_dashboard/plugins/attest/manage.php",
-                            "/local/kopere_dashboard/plugins/attest/edit.php",
-                        ],
+                        "url" => "/local/kopere_dashboard/plugins/attest/manage.php",
                         "icon" => "docs",
                         "capability" => "koperedashboard/attest:manage",
                         "children" => [
                             [
                                 "title" => get_string("manage_title", "koperedashboard_attest"),
-                                "url" => "/local/kopere_dashboard/plugins/attest/manage.php",
+                                "url" => [
+                                    "/local/kopere_dashboard/plugins/attest/manage.php",
+                                    "/local/kopere_dashboard/plugins/attest/edit.php",
+                                ],
                                 "icon" => "docs",
                                 "capability" => "koperedashboard/attest:manage",
                             ], [
@@ -72,6 +70,11 @@ class menu {
                                 "url" => "/local/kopere_dashboard/plugins/attest/studentcard.php",
                                 "icon" => "badge",
                                 "capability" => "koperedashboard/attest:view",
+                            ], [
+                                "title" => get_string("settings"),
+                                "url" => "/local/kopere_dashboard/plugins/attest/settings.php",
+                                "icon" => "settings",
+                                "capability" => "koperedashboard/attest:manage",
                             ],
                         ],
                     ],
