@@ -25,8 +25,8 @@ function xmldb_koperedashboard_attest_install() {
     set_config("sortorder", 101, "koperedashboard_attest");
 
     $templates = [
-        "studentcard_front_mustache" => "studentcard_front.mustache",
-        "studentcard_back_mustache" => "studentcard_back.mustache",
+        "studentcard_front_mustache" => "studentcard_front.html",
+        "studentcard_back_mustache" => "studentcard_back.html",
     ];
 
     foreach ($templates as $configname => $filename) {

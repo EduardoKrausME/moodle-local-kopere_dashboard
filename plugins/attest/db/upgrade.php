@@ -35,8 +35,8 @@
 function xmldb_koperedashboard_attest_upgrade(int $oldversion): bool {
     if ($oldversion < 2026071601) {
         $templates = [
-            "studentcard_front_mustache" => "studentcard_front.mustache",
-            "studentcard_back_mustache" => "studentcard_back.mustache",
+            "studentcard_front_mustache" => "studentcard_front.html",
+            "studentcard_back_mustache" => "studentcard_back.html",
         ];
 
         foreach ($templates as $configname => $filename) {
