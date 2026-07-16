@@ -31,7 +31,7 @@ require_once(__DIR__ . "/../../../../../config.php");
 
 $token = required_param("token", PARAM_ALPHANUMEXT);
 
-$PAGE->set_url(new moodle_url("/local/kopere_dashboard/plugins/attest/v/", ["token" => $token]));
+$PAGE->set_url(new moodle_url("/local/kopere_dashboard/v/", ["t" => $token]));
 $PAGE->set_context(context_system::instance());
 $PAGE->set_title(get_string("verify_title", "koperedashboard_attest"));
 

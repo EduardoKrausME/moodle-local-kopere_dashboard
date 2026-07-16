@@ -326,11 +326,9 @@ class issue_service {
      * @throws coding_exception
      */
     private static function draw_signature_box(pdf $pdf, $issue) {
-        global $CFG;
-
         $x = 115;
         $w = 86;
-        $h = 42;
+        $h = 46;
         $bottom = 18;
         $y = $pdf->getPageHeight() - $bottom - $h - 3;
 
@@ -368,7 +366,7 @@ class issue_service {
         $pdf->RoundedRect($qrpanelx, $qrpanely, $qrpanelw, $qrpanelh, 2.3, "1111", "DF");
 
         // QR code.
-        $verifyurl = new moodle_url("/local/kopere_dashboard/plugins/attest/v/", ["token" => $issue->token]);
+        $verifyurl = new moodle_url("/local/kopere_dashboard/v/", ["t" => $issue->token]);
         $pdf->write2DBarcode(
             "{$verifyurl}",
             "QRCODE,L",
@@ -408,14 +406,15 @@ class issue_service {
         self::draw_signature_line($pdf, $textx, $pdf->GetY(), $textw, "{$title}:", $validtxt);
 
         // Clickable area for the URL.
+        $verifybase = new moodle_url("/local/kopere_dashboard/v/");
         $pdf->SetTextColor($blue[0], $blue[1], $blue[2]);
         $pdf->SetFont("helvetica", "", 7.2);
         $urly = $pdf->GetY() + 0.3;
         $pdf->SetXY($textx, $urly);
-        $pdf->MultiCell($textw, 0, $CFG->wwwroot, 0, "L");
+        $pdf->MultiCell($textw, 0, $verifybase, 0, "L");
 
         // Area clicável sobre o texto.
-        $pdf->Link($textx, $urly, $pdf->GetStringWidth($CFG->wwwroot), 4.5, "{$verifyurl}");
+        $pdf->Link($textx, $urly, $pdf->GetStringWidth($verifybase), 4.5, "{$verifyurl}");
 
         // Clickable area for the URL.
         $pdf->SetTextColor($black[0], $black[1], $black[2]);
