@@ -24,5 +24,21 @@
 function xmldb_koperedashboard_attest_install() {
     set_config("sortorder", 101, "koperedashboard_attest");
 
+    $templates = [
+        "studentcard_front_mustache" => "studentcard_front.mustache",
+        "studentcard_back_mustache" => "studentcard_back.mustache",
+    ];
+
+    foreach ($templates as $configname => $filename) {
+        $templatefile = __DIR__ . "/files/{$filename}";
+        if (is_readable($templatefile)) {
+            set_config(
+                $configname,
+                file_get_contents($templatefile),
+                "koperedashboard_attest"
+            );
+        }
+    }
+
     return true;
 }

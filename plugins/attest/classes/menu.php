@@ -71,11 +71,11 @@ class menu {
                                 "icon" => "badge",
                                 "capability" => "koperedashboard/attest:view",
                             ], [
-                                "title" => get_string("settings"),
-                                "url" => "/local/kopere_dashboard/plugins/attest/settings.php",
-                                "icon" => "settings",
+                                "title" => get_string("studentcard_settings_menu", "koperedashboard_attest"),
+                                "url" => "/local/kopere_dashboard/plugins/attest/studentcard_settings.php",
+                                "icon" => "badge",
                                 "capability" => "koperedashboard/attest:manage",
-                            ],
+                            ]
                         ],
                     ],
                 ],

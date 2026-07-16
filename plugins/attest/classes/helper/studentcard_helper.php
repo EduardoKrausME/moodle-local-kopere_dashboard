@@ -33,6 +33,7 @@ use moodle_exception;
 use moodle_url;
 use stdClass;
 use TCPDF;
+use TCPDF2DBarcode;
 
 /**
  * Helper for student card PDF generation and validation.
@@ -43,12 +44,6 @@ class studentcard_helper {
 
     /** Credit card height in millimeters. */
     public const CARD_HEIGHT = 53.98;
-
-    /** Unicode PDF font used to support Cyrillic and other non-Latin characters. */
-    private const PDF_FONT = "freesans";
-
-    /** Unicode monospace PDF font used for validation codes. */
-    private const PDF_MONO_FONT = "freemono";
 
     /**
      * Returns the target user if the current user can access the card.
@@ -175,12 +170,7 @@ class studentcard_helper {
      * @throws \core\exception\moodle_exception
      */
     public static function build_validation_url(int $userid, string $code): moodle_url {
-        return new moodle_url(
-            "/local/kopere_dashboard/plugins/attest/v/index.php",
-            [
-                "token" => $code,
-            ]
-        );
+        return new moodle_url("/local/kopere_dashboard/v/", ["t" => $code]);
     }
 
     /**
@@ -197,6 +187,7 @@ class studentcard_helper {
         global $CFG, $SITE;
 
         require_once($CFG->libdir . "/tcpdf/tcpdf.php");
+        require_once($CFG->libdir . "/tcpdf/tcpdf_barcodes_2d.php");
 
         $pdf = new TCPDF("L", "mm", [self::CARD_WIDTH, self::CARD_HEIGHT], true, "UTF-8", false);
         $pdf->SetCreator("Kopere Dashboard");
@@ -207,8 +198,7 @@ class studentcard_helper {
         $pdf->SetAutoPageBreak(false);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
-        $pdf->setFontSubsetting(true);
-        $pdf->SetFont(self::PDF_FONT, "", 10);
+        $pdf->SetFont("freesans", "", 10);
 
         self::render_front_page($pdf, $user);
         self::render_back_page($pdf, $user);
@@ -219,7 +209,7 @@ class studentcard_helper {
     }
 
     /**
-     * Renders page 1 with user identity.
+     * Renders page 1 with user identity using the configured Mustache template.
      *
      * @param TCPDF $pdf
      * @param stdClass $user
@@ -234,48 +224,41 @@ class studentcard_helper {
         $pdf->SetDrawColor(215, 220, 228);
         $pdf->RoundedRect(1.5, 1.5, self::CARD_WIDTH - 3, self::CARD_HEIGHT - 3, 3);
 
-        $pdf->SetFont(self::PDF_FONT, "B", 15);
-        $pdf->SetTextColor(35, 43, 56);
-        $pdf->SetXY(5, 5);
-        $pdf->Cell(76, 5, get_string("studentcard", "koperedashboard_attest"), 0, 1, "C");
-
         $photopath = self::get_user_photo_tempfile($user);
-
-        if (!empty($photopath) && is_readable($photopath)) {
-            $pdf->Image($photopath, 5, 15, 28);
-        } else {
+        if (empty($photopath) || !is_readable($photopath)) {
             $url = new moodle_url("/local/kopere_dashboard/plugins/attest/studentcard.php");
             $message = get_string("studentcardnophoto", "koperedashboard_attest");
             redirect($url, $message, null, notification::NOTIFY_ERROR);
         }
 
-        $userfullname = fullname($user);
-        $cpf = self::get_user_cpf($user);
-        $labelcourse = get_string("course");
         $course = self::get_first_visible_enrolled_course($user->id);
         if (!$course) {
             throw new moodle_exception("studentcardnovisiblecourses", "koperedashboard_attest");
         }
 
-        $userfullname = s($userfullname);
-        $useremail = s($user->email);
-        $cpf = s($cpf);
-        $labelcourse = s($labelcourse);
-        $coursefullname = s(format_string($course->fullname));
+        $template = self::get_configured_template(
+            "studentcard_front_mustache",
+            "studentcard_front.mustache"
+        );
 
-        $pdf->SetFont(self::PDF_FONT, "", 6.9);
-        $html = "
-            <div style=\"font-family:" . self::PDF_FONT . ";\">
-                <h3>{$userfullname}</h3>
-                <div>{$useremail}</div>
-                <div><b>CPF</b>: {$cpf}</div>
-                <div><b>{$labelcourse}</b>: {$coursefullname}</div>
-            </div>";
-        $pdf->writeHTMLCell(50, 40, 35, 14, $html, 0, 0, false, true, "L");
+        $context = [
+            "title" => get_string("studentcard", "koperedashboard_attest"),
+            "photo" => self::image_to_data_uri($photopath),
+            "fullname" => fullname($user),
+            "email" => $user->email,
+            "cpflabel" => "CPF",
+            "cpf" => self::get_user_cpf($user),
+            "courselabel" => get_string("course"),
+            "coursefullname" => format_string($course->fullname),
+            "userid" => $user->id,
+        ];
+
+        $html = self::render_mustache($template, $context);
+        $pdf->writeHTMLCell(self::CARD_WIDTH, self::CARD_HEIGHT, 0, 0, $html, 0, 0, false, true, "L");
     }
 
     /**
-     * Renders page 2 with validator and digital signature info.
+     * Renders page 2 with validator and digital signature info using the configured Mustache template.
      *
      * @param TCPDF $pdf
      * @param stdClass $user
@@ -285,6 +268,8 @@ class studentcard_helper {
      * @throws \core\exception\moodle_exception
      */
     private static function render_back_page(TCPDF $pdf, stdClass $user): void {
+        global $CFG, $SITE;
+
         $pdf->AddPage("L", [self::CARD_WIDTH, self::CARD_HEIGHT]);
 
         $pdf->Rect(0, 0, self::CARD_WIDTH, self::CARD_HEIGHT, "F", [], [250, 250, 250]);
@@ -294,41 +279,89 @@ class studentcard_helper {
         $code = self::build_validation_code($user->id);
         $validationurl = self::build_validation_url($user->id, $code)->out(false);
 
-        $pdf->SetFont(self::PDF_FONT, "B", 8.5);
-        $pdf->SetTextColor(35, 43, 56);
-        $pdf->SetXY(5, 5);
-        $pdf->Cell(45, 5, get_string("studentcardsignaturetitle", "koperedashboard_attest"), 0, 1, "L");
+        $barcode = new TCPDF2DBarcode($validationurl, "QRCODE,L");
+        $qrpng = $barcode->getBarcodePngData(6, 6);
+        $qrcode = "data:image/png;base64," . base64_encode($qrpng);
 
-        $pdf->SetFont(self::PDF_FONT, "", 6.3);
-        $pdf->SetXY(5, 12);
-        $label = get_string("studentcardsignaturedesc", "koperedashboard_attest");
-        $pdf->MultiCell(46, 10, $label, 0, "L");
+        $template = self::get_configured_template(
+            "studentcard_back_mustache",
+            "studentcard_back.mustache"
+        );
 
-        $pdf->SetFont(self::PDF_FONT, "B", 6.5);
-        $pdf->SetXY(5, 32);
-        $label = get_string("footer_title", "koperedashboard_attest");
-        $pdf->MultiCell(46, 10, "{$label}:", 0, "L");
-
-        $pdf->SetFont(self::PDF_MONO_FONT, "", 6.4);
-        $pdf->SetXY(5, 35);
-        $pdf->MultiCell(70, 8, $code, 0, "L");
-
-        $qrcodestyle = [
-            "border" => 0,
-            "padding" => 0,
-            "fgcolor" => [0, 0, 0],
-            "bgcolor" => false,
+        $context = [
+            "title" => get_string("studentcardsignaturetitle", "koperedashboard_attest"),
+            "description" => get_string("studentcardsignaturedesc", "koperedashboard_attest"),
+            "hashlabel" => get_string("footer_title", "koperedashboard_attest"),
+            "validationcode" => $code,
+            "verifyurl" => $validationurl,
+            "qrcode" => $qrcode,
+            "wwwroot" => $CFG->wwwroot,
+            "sitefullname" => format_string($SITE->fullname),
+            "fullname" => fullname($user),
+            "userid" => $user->id,
         ];
 
-        $pdf->write2DBarcode($validationurl, "QRCODE", 58, 10, 22, 22, $qrcodestyle, "N");
-
-        $pdf->SetFont(self::PDF_FONT, "", 5.5);
-        $url = htmlspecialchars($validationurl, ENT_QUOTES, "UTF-8");
-        $html = '<a href="' . $url . '" style="font-family:' . self::PDF_FONT . '; color:#000000; ' .
-            'text-decoration:none;">' . $url . '</a>';
-        $pdf->writeHTMLCell(76, 8, 5, 39.5, $html, 0, 0, false, true, "L");
+        $html = self::render_mustache($template, $context);
+        $pdf->writeHTMLCell(self::CARD_WIDTH, self::CARD_HEIGHT, 0, 0, $html, 0, 0, false, true, "L");
 
         self::apply_existing_attest_signature($pdf);
+    }
+
+    /**
+     * Returns a configured Mustache template, falling back to its bundled file.
+     *
+     * @param string $configname
+     * @param string $filename
+     * @return string
+     * @throws \dml_exception
+     */
+    private static function get_configured_template(string $configname, string $filename): string {
+        $template = get_config("koperedashboard_attest", $configname);
+        if ($template !== false && trim((string) $template) !== "") {
+            return (string) $template;
+        }
+
+        $templatefile = __DIR__ . "/../../db/files/" . $filename;
+        if (is_readable($templatefile)) {
+            return (string) file_get_contents($templatefile);
+        }
+
+        return "";
+    }
+
+    /**
+     * Renders an editable inline Mustache template.
+     *
+     * @param string $template
+     * @param array $context
+     * @return string
+     */
+    private static function render_mustache(string $template, array $context): string {
+        if (!class_exists("Mustache_Engine")) {
+            class_alias('Mustache\\Engine', "Mustache_Engine");
+        }
+
+        $mustache = new \Mustache_Engine([
+            "escape" => static function($value): string {
+                return s((string) $value);
+            },
+        ]);
+
+        return $mustache->render($template, $context);
+    }
+
+    /**
+     * Converts a local image to a data URI accepted by TCPDF HTML rendering.
+     *
+     * @param string $path
+     * @return string
+     */
+    private static function image_to_data_uri(string $path): string {
+        $imageinfo = @getimagesize($path);
+        $mimetype = !empty($imageinfo["mime"]) ? $imageinfo["mime"] : "image/jpeg";
+        $content = file_get_contents($path);
+
+        return "data:" . $mimetype . ";base64," . base64_encode($content);
     }
 
     /**
