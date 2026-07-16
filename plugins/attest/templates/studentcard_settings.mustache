@@ -21,6 +21,31 @@
     * formhtml: rendered Moodle form.
     * frontplaceholders: variables available in the front template.
     * backplaceholders: variables available in the back template.
+
+    Example context (json):
+    {
+        "formhtml": "<form><button type=\"submit\">Save changes</button></form>",
+        "frontplaceholders": [
+            {
+                "key": "\u007b\u007bfullname\u007d\u007d",
+                "description": "Full name of the student."
+            },
+            {
+                "key": "\u007b\u007bcoursefullname\u007d\u007d",
+                "description": "Full name of the course."
+            }
+        ],
+        "backplaceholders": [
+            {
+                "key": "\u007b\u007bvalidationcode\u007d\u007d",
+                "description": "Public validation code."
+            },
+            {
+                "key": "\u007b\u007bverifyurl\u007d\u007d",
+                "description": "Public validation URL."
+            }
+        ]
+    }
 }}
 
 <div class="local-kopere_dashboard-grid">
