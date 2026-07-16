@@ -160,15 +160,16 @@
 
                             <div class="kopere_dashboard-attest-row-actions">
                                 {{#hasopenvalidurl}}
-                                    <a class="btn btn-outline-primary btn-sm" href="{{{openvalidurl}}}">
+                                    <a class="btn btn-outline-primary btn-sm"
+                                       href="{{{openvalidurl}}}"
+                                    target="_blank">
                                         {{#str}}open_valid, koperedashboard_attest{{/str}}
                                     </a>
                                 {{/hasopenvalidurl}}
 
                                 {{#cangenerate}}
                                     <a class="btn btn-primary btn-sm"
-                                       href="{{{generateurl}}}"
-                                       target="_blank">{{{generatebuttonlabel}}}</a>
+                                       href="{{{generateurl}}}">{{{generatebuttonlabel}}}</a>
                                 {{/cangenerate}}
 
                                 {{#disabledgenerate}}
