@@ -75,7 +75,7 @@ class menu {
                                 "url" => "/local/kopere_dashboard/plugins/attest/studentcard_settings.php",
                                 "icon" => "badge",
                                 "capability" => "koperedashboard/attest:manage",
-                            ]
+                            ],
                         ],
                     ],
                 ],
