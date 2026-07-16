@@ -182,7 +182,9 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+.local-kopere_dashboard .kopere_dashboard-card-navlink,
 .local-kopere_dashboard .kopere_dashboard-card-navitem,
+.path-local-kopere_dashboard .kopere_dashboard-card-navlink,
 .path-local-kopere_dashboard .kopere_dashboard-card-navitem {
   text-decoration: none;
 }
