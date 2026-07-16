@@ -349,7 +349,7 @@ class webpages_service {
                 "value" => $prefix . format_string($menu->title),
             ];
 
-            $children = self::menu_options($notmenuid, (int) $menu->id, $prefix . "— ");
+            $children = self::menu_options($notmenuid, (int) $menu->id, $prefix . "- ");
             if (!empty($children)) {
                 $options = array_merge($options, $children);
             }
