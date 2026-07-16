@@ -84,7 +84,7 @@ foreach ($enrolledcourses as $course) {
             "lastvaliduntil" => $latestissue ? userdate::format($latestissue->validuntil) : "-",
             "hasopenvalidurl" => $hasvalidissue,
             "openvalidurl" => $hasvalidissue ? new moodle_url("/local/kopere_dashboard/plugins/attest/pdf.php", [
-                "issueid" => $latestvalidissue->id,
+                "token" => $latestvalidissue->token,
             ]) : null,
             "cangenerate" => $cangenerate,
             "generateurl" => $cangenerate ? new moodle_url("/local/kopere_dashboard/plugins/attest/pdf.php", [
@@ -141,7 +141,7 @@ foreach (issue_service::get_user_issues($USER->id) as $issue) {
         "statuslabelclass" => $statuslabelclass,
         "hasopenurl" => $hasrenderableissue,
         "openurl" => $hasrenderableissue ? new moodle_url("/local/kopere_dashboard/plugins/attest/pdf.php", [
-            "issueid" => $issue->id,
+            "token" => $issue->token,
         ]) : null,
         "showrecreate" => !empty($recreateurl),
         "recreateurl" => $recreateurl,

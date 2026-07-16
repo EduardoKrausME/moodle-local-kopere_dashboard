@@ -28,6 +28,7 @@
                 "allcourses": true,
                 "active": true,
                 "editurl": "https://example.com/local/kopere_dashboard/plugins/attest/edit.php?id=1",
+                "allissuesurl": "https://example.com/local/kopere_dashboard/plugins/attest/all.php?tplid=1",
                 "delurl": "https://example.com/local/kopere_dashboard/plugins/attest/delete.php?id=1"
             },
             {
@@ -37,6 +38,7 @@
                 "allcourses": false,
                 "active": false,
                 "editurl": "https://example.com/local/kopere_dashboard/plugins/attest/edit.php?id=2",
+                "allissuesurl": "https://example.com/local/kopere_dashboard/plugins/attest/all.php?tplid=2",
                 "delurl": "https://example.com/local/kopere_dashboard/plugins/attest/delete.php?id=2"
             }
         ]
@@ -44,8 +46,12 @@
 }}
 
 <div class="kopere_dashboard-card">
-    <div style="display:flex; justify-content: space-between; align-items:center;">
-        <a class="btn btn-primary" href="{{{newurl}}}">{{#str}}new_template, koperedashboard_attest{{/str}}</a>
+    <div style="display:flex; flex-wrap:wrap; justify-content: space-between; align-items:center; gap: 8px;">
+        <div style="display:flex; flex-wrap:wrap; gap: 8px;">
+            <a class="btn btn-primary" href="{{{newurl}}}">
+                {{#str}}new_template, koperedashboard_attest{{/str}}
+            </a>
+        </div>
     </div>
 
     <table class="table table-striped local-kopere_dashboard-table" style="margin-top: 12px;">
@@ -82,6 +88,8 @@
                     {{/active}}
                 </td>
                 <td style="white-space: nowrap;">
+                    <a class="btn btn-secondary" href="{{{allissuesurl}}}">
+                        {{#str}}all_issues_button, koperedashboard_attest{{/str}}</a>
                     <a class="btn btn-secondary" href="{{{editurl}}}">
                         {{#str}}edit_template, koperedashboard_attest{{/str}}</a>
                     <a class="btn btn-danger" href="{{{delurl}}}">

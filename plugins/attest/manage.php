@@ -61,6 +61,7 @@ foreach ($templates as $t) {
         "validmonths" => $t->validmonths,
         "allcourses" => !empty($t->allcourses),
         "editurl" => new moodle_url("/local/kopere_dashboard/plugins/attest/edit.php", ["id" => $t->id]),
+        "allissuesurl" => new moodle_url("/local/kopere_dashboard/plugins/attest/all.php", ["tplid" => $t->id]),
         "delurl" => new moodle_url(
             "/local/kopere_dashboard/plugins/attest/manage.php",
             ["delete" => $t->id, "sesskey" => sesskey()]

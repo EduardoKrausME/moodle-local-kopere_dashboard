@@ -1,0 +1,147 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_attest/all
+
+    Example context (json):
+    {
+        "tplid": 4,
+        "templatename": "Enrollment Certificate",
+        "description": "25 generated attestations.",
+        "filterurl": "https://example.com/local/kopere_dashboard/plugins/attest/all.php?tplid=4",
+        "clearurl": "https://example.com/local/kopere_dashboard/plugins/attest/all.php?tplid=4",
+        "backurl": "https://example.com/local/kopere_dashboard/plugins/attest/manage.php",
+        "courseoptions": [],
+        "useroptions": [],
+        "hasrows": false,
+        "rows": [],
+        "pagingbar": ""
+    }
+}}
+
+<div class="kopere_dashboard-card">
+    <div class="d-flex flex-wrap justify-content-between align-items-center" style="gap: 12px;">
+        <div>
+            <h3 style="margin: 0 0 6px 0;">{{#str}}all_issues_title, koperedashboard_attest{{/str}}</h3>
+            <div><strong>{{{templatename}}}</strong></div>
+            <div class="text-muted">{{{description}}}</div>
+        </div>
+        <a class="btn btn-secondary" href="{{{backurl}}}">
+            {{#str}}back_to_templates, koperedashboard_attest{{/str}}
+        </a>
+    </div>
+</div>
+
+<div class="kopere_dashboard-card">
+    <form method="get" action="{{{filterurl}}}">
+        <input type="hidden" name="tplid" value="{{tplid}}">
+        <div class="row align-items-end">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="koperedashboard-attest-courseid">
+                        {{#str}}filter_course, koperedashboard_attest{{/str}}
+                    </label>
+                    <select class="form-control" id="koperedashboard-attest-courseid" name="courseid">
+                        <option value="0">{{#str}}filter_all_courses, koperedashboard_attest{{/str}}</option>
+                        {{#courseoptions}}
+                            <option value="{{id}}" {{#selected}}selected{{/selected}}>{{{name}}}</option>
+                        {{/courseoptions}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="koperedashboard-attest-userid">
+                        {{#str}}filter_student, koperedashboard_attest{{/str}}
+                    </label>
+                    <select class="form-control" id="koperedashboard-attest-userid" name="userid">
+                        <option value="0">{{#str}}filter_all_students, koperedashboard_attest{{/str}}</option>
+                        {{#useroptions}}
+                            <option value="{{id}}" {{#selected}}selected{{/selected}}>{{name}}</option>
+                        {{/useroptions}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group d-flex" style="gap: 6px;">
+                    <button type="submit" class="btn btn-primary">
+                        {{#str}}filter_apply, koperedashboard_attest{{/str}}
+                    </button>
+                    <a class="btn btn-secondary" href="{{{clearurl}}}" title="{{#str}}filter_clear, koperedashboard_attest{{/str}}">
+                        {{#str}}filter_clear, koperedashboard_attest{{/str}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="kopere_dashboard-card">
+    {{#hasrows}}
+        <div class="table-responsive">
+            <table class="table table-striped kopere_dashboard-card-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>{{#str}}filter_student, koperedashboard_attest{{/str}}</th>
+                    <th>{{#str}}filter_course, koperedashboard_attest{{/str}}</th>
+                    <th>{{#str}}footer_created, koperedashboard_attest{{/str}}</th>
+                    <th>{{#str}}footer_validuntil, koperedashboard_attest{{/str}}</th>
+                    <th>{{#str}}status_title, koperedashboard_attest{{/str}}</th>
+                    <th>{{#str}}actions_title, koperedashboard_attest{{/str}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#rows}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>
+                            <div>{{studentname}}</div>
+                            {{#hasstudentemail}}
+                                <small class="text-muted">{{studentemail}}</small>
+                            {{/hasstudentemail}}
+                        </td>
+                        <td>{{{coursename}}}</td>
+                        <td class="text-nowrap">{{created}}</td>
+                        <td class="text-nowrap">{{validuntil}}</td>
+                        <td>
+                            <span class="badge text-bg-{{statuslabelclass}}">{{statuslabel}}</span>
+                        </td>
+                        <td class="text-nowrap">
+                            {{#hasopenurl}}
+                                <a class="btn btn-outline-primary btn-sm" target="_blank" href="{{{openurl}}}">
+                                    {{#str}}open_attestation, koperedashboard_attest{{/str}}
+                                </a>
+                            {{/hasopenurl}}
+                            {{^hasopenurl}}
+                                <span class="text-muted">-</span>
+                            {{/hasopenurl}}
+                        </td>
+                    </tr>
+                {{/rows}}
+                </tbody>
+            </table>
+        </div>
+        {{{pagingbar}}}
+    {{/hasrows}}
+
+    {{^hasrows}}
+        <div class="text-muted">{{#str}}empty_all_issues, koperedashboard_attest{{/str}}</div>
+    {{/hasrows}}
+</div>
