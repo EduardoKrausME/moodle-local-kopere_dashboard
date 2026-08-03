@@ -1,0 +1,18 @@
+# (RFC §4.1). Authors update their listing with an ordinary commit; camp
+# ingests and hash-pins it at each tagged release. Listing for local_kopere_dashboard.
+
+name: "Kopere Dashboard"
+summary: "Modern administrative dashboard that makes platform management simpler, faster, and smarter."
+description: |
+  Modern administrative dashboard that makes platform management simpler, faster, and smarter.
+
+  Benchmark is the act of performing a set of operations in order to evaluate the relative performance of an object, usually running a series of tests and tests on it.
+
+  Supported Moodle versions in the supplied plugin list: 3.11 - 5.0.
+
+labels:
+  - fully-free
+category: "administration"
+links:
+  docs: https://github.com/EduardoKrausME/moodle-local-kopere_dashboard#readme
+  issues: https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/issues
