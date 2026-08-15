@@ -1,14 +1,14 @@
 name: Auto-release via commit message
 
-on:
-  push:
-    branches: [ master ]
+on: [push]
 
 permissions:
   contents: write
 
 jobs:
   auto-release:
+    if: startsWith(github.event.head_commit.message, 'V ')
+
     runs-on:
       ubuntu-latest
 
@@ -71,7 +71,7 @@ jobs:
       ubuntu-latest
 
     env:
-      PLUGIN: local_kopere_dashboard
+      PLUGIN: local_alternative_file_system
       CURL: curl -s
       ENDPOINT: https://moodle.org/webservice/rest/server.php
       TOKEN: ${{ secrets.MOODLE_ORG_TOKEN }}
@@ -79,6 +79,38 @@ jobs:
       TAGNAME: ${{ needs.auto-release.outputs.tag }}
 
     steps:
+      - name: Checkout plugin at tag
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: ${{ env.TAGNAME }}
+
+      - name: Validate PLUGIN matches version.php
+        run: |
+          COMPONENT=$(php -r 'define("MOODLE_INTERNAL", true);define("MATURITY_STABLE", true); $plugin=new stdClass(); require "version.php"; echo $plugin->component ?? "";')
+          RELEASE=$(php -r 'define("MOODLE_INTERNAL", true);define("MATURITY_STABLE", true); $plugin=new stdClass(); require "version.php"; echo $plugin->release ?? "";')
+
+          echo "version.php component: $COMPONENT"
+          echo "version.php release:   $RELEASE"
+          echo "ENV PLUGIN:            ${PLUGIN}"
+          echo "ENV TAGNAME:           ${TAGNAME}"
+
+          if [[ -z "$COMPONENT" ]]; then
+            echo "::error::Não consegui ler \$plugin->component do version.php"
+            exit 1
+          fi
+
+          if [[ "$COMPONENT" != "${PLUGIN}" ]]; then
+            echo "::error::PLUGIN (${PLUGIN}) != \$plugin->component (${COMPONENT}) no version.php"
+            exit 1
+          fi
+
+          # Opcional, mas recomendado: garante que o tag (1.2.3) bate com $plugin->release
+          if [[ -n "$RELEASE" && "$RELEASE" != "${TAGNAME}" ]]; then
+            echo "::error::TAGNAME (${TAGNAME}) != \$plugin->release (${RELEASE}) no version.php"
+            exit 1
+          fi
+
       - name: Call the service function
         id: add-version
         run: |
