@@ -29,3 +29,7 @@ $plugin->release = "1.0.4";
 $plugin->component = "koperedashboard_attest";
 $plugin->requires = 2024042200;
 $plugin->maturity = MATURITY_STABLE;
+
+$plugin->dependencies = [
+    "local_kopere_dashboard" => 2026052400,
+];
