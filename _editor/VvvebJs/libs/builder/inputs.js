@@ -929,7 +929,13 @@ let TagsInput = {
 
             this.element = this.render("tagsinput", data);
 
-            $('input', this.element).tagsInput(data);//using default parameters
+            let safeData = Object.assign({}, data);
+            for (let key in safeData) {
+                if (typeof safeData[key] === 'string') {
+                    safeData[key] = $('<div>').text(safeData[key]).html();
+                }
+            }
+            $('input', this.element).tagsInput(safeData);//using default parameters
 
             return this.element;
         }
