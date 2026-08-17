@@ -25,6 +25,7 @@
 require_once("../../../config.php");
 
 require_login();
+require_sesskey();
 require_capability("moodle/site:config", context_system::instance());
 
 $page = required_param("page", PARAM_TEXT);
