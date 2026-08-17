@@ -2027,7 +2027,7 @@ Vvveb.Builder = {
             Vvveb.Builder.loadSectionGroups();
         }
 
-        let data = {type, name, html : element.outerHTML};
+        let data = {type, name, html : element.outerHTML, sesskey : M.cfg.sesskey};
 
         fetch(saveReusableUrl, {method : "POST", body : new URLSearchParams(data)})
             .then((response) => {
@@ -2059,6 +2059,8 @@ Vvveb.Builder = {
         if (!data["startTemplateUrl"]) {
             data["html"] = clearHtml();
         }
+
+        data["sesskey"] = M.cfg.sesskey;
 
         return fetch(saveUrl, {
             method  : "POST",
