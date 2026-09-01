@@ -62,8 +62,8 @@ class student_dashboard {
             "courses" => array_slice($courses, 0, 6),
             "quicklinks" => [
                 [
-                    "title" => get_string("student_quicklink_mycourses", "local_kopere_dashboard"),
-                    "description" => get_string("student_quicklink_mycourses_desc", "local_kopere_dashboard"),
+                    "title" => get_string("student_courses_title", "local_kopere_dashboard"),
+                    "description" => get_string("student_courses_title_desc", "local_kopere_dashboard"),
                     "url" => new moodle_url("/my/courses.php"),
                 ],
                 [
@@ -77,6 +77,7 @@ class student_dashboard {
                     "url" => new moodle_url("/user/profile.php", ["id" => $userid]),
                 ],
             ],
+            "isloggedin" => isloggedin() && !isguestuser(),
         ];
     }
 

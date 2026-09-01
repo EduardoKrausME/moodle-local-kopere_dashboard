@@ -25,6 +25,7 @@
         "kpi_in_progress_courses": 3,
         "kpi_tracked_courses": 5,
         "hascourses": true,
+        "isloggedin": true,
         "courses": [
             {
                 "fullname": "Project Management Essentials",
@@ -110,33 +111,33 @@
     </div>
 </div>
 
-<div class="kopere_dashboard-kpis">
-    <div class="kopere_dashboard-kpi kopere_dashboard-kpi-teal">
-        <div class="kopere_dashboard-kpi-title">{{#str}}student_kpi_enrolled_courses, local_kopere_dashboard{{/str}}</div>
-        <div class="kopere_dashboard-kpi-value">{{{kpi_enrolled_courses}}}</div>
-        <div class="kopere_dashboard-kpi-sub">{{#str}}student_kpi_enrolled_courses_sub, local_kopere_dashboard{{/str}}</div>
-    </div>
+{{#isloggedin}}
+    <div class="kopere_dashboard-kpis">
+        <div class="kopere_dashboard-kpi kopere_dashboard-kpi-teal">
+            <div class="kopere_dashboard-kpi-title">{{#str}}student_kpi_enrolled_courses, local_kopere_dashboard{{/str}}</div>
+            <div class="kopere_dashboard-kpi-value">{{{kpi_enrolled_courses}}}</div>
+            <div class="kopere_dashboard-kpi-sub">{{#str}}student_kpi_enrolled_courses_sub, local_kopere_dashboard{{/str}}</div>
+        </div>
 
-    <div class="kopere_dashboard-kpi kopere_dashboard-kpi-teal2">
-        <div class="kopere_dashboard-kpi-title">{{#str}}student_kpi_completed_courses, local_kopere_dashboard{{/str}}</div>
-        <div class="kopere_dashboard-kpi-value">{{{kpi_completed_courses}}}</div>
-        <div class="kopere_dashboard-kpi-sub">{{#str}}student_kpi_completed_courses_sub, local_kopere_dashboard{{/str}}</div>
-    </div>
+        <div class="kopere_dashboard-kpi kopere_dashboard-kpi-teal2">
+            <div class="kopere_dashboard-kpi-title">{{#str}}student_kpi_completed_courses, local_kopere_dashboard{{/str}}</div>
+            <div class="kopere_dashboard-kpi-value">{{{kpi_completed_courses}}}</div>
+            <div class="kopere_dashboard-kpi-sub">{{#str}}student_kpi_completed_courses_sub, local_kopere_dashboard{{/str}}</div>
+        </div>
 
-    <div class="kopere_dashboard-kpi kopere_dashboard-kpi-orange">
-        <div class="kopere_dashboard-kpi-title">{{#str}}student_kpi_in_progress_courses, local_kopere_dashboard{{/str}}</div>
-        <div class="kopere_dashboard-kpi-value">{{{kpi_in_progress_courses}}}</div>
-        <div class="kopere_dashboard-kpi-sub">{{#str}}student_kpi_in_progress_courses_sub, local_kopere_dashboard{{/str}}</div>
-    </div>
+        <div class="kopere_dashboard-kpi kopere_dashboard-kpi-orange">
+            <div class="kopere_dashboard-kpi-title">{{#str}}student_kpi_in_progress_courses, local_kopere_dashboard{{/str}}</div>
+            <div class="kopere_dashboard-kpi-value">{{{kpi_in_progress_courses}}}</div>
+            <div class="kopere_dashboard-kpi-sub">{{#str}}student_kpi_in_progress_courses_sub, local_kopere_dashboard{{/str}}</div>
+        </div>
 
-    <div class="kopere_dashboard-kpi kopere_dashboard-kpi-white">
-        <div class="kopere_dashboard-kpi-title">{{#str}}student_kpi_tracked_courses, local_kopere_dashboard{{/str}}</div>
-        <div class="kopere_dashboard-kpi-value">{{{kpi_tracked_courses}}}</div>
-        <div class="kopere_dashboard-kpi-sub">{{#str}}student_kpi_tracked_courses_sub, local_kopere_dashboard{{/str}}</div>
+        <div class="kopere_dashboard-kpi kopere_dashboard-kpi-white">
+            <div class="kopere_dashboard-kpi-title">{{#str}}student_kpi_tracked_courses, local_kopere_dashboard{{/str}}</div>
+            <div class="kopere_dashboard-kpi-value">{{{kpi_tracked_courses}}}</div>
+            <div class="kopere_dashboard-kpi-sub">{{#str}}student_kpi_tracked_courses_sub, local_kopere_dashboard{{/str}}</div>
+        </div>
     </div>
-</div>
-
-<div class="kopere_dashboard-student-grid">
+    <div class="kopere_dashboard-student-grid">
     <div class="kopere_dashboard-card">
         <div class="kopere_dashboard-card-title">{{#str}}student_courses_title, local_kopere_dashboard{{/str}}</div>
 
@@ -193,3 +194,4 @@
         </div>
     </div>
 </div>
+{{/isloggedin}}
