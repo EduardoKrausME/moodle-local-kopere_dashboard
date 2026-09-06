@@ -76,7 +76,7 @@ jobs:
       run: moodle-plugin-ci phpmd
 
     - name: Validate Moodle plugin
-      uses: EduardoKrausME/moodle-plugin-validate@1.0.0
+      uses: EduardoKrausME/moodle-plugin-validate@main
       with:
         plugin: ./plugin
 
