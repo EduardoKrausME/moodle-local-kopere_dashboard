@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/kopere_dashboard/plugins/contracts/db" VERSION="2026030500" COMMENT="Contracts tables"
+<XMLDB PATH="local/kopere_dashboard/plugins/contracts/db" VERSION="20260305" COMMENT="Contracts tables"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd">
     <TABLES>

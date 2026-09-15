@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/kopere_dashboard/plugins/requests/db" VERSION="2026030500" COMMENT="Kopere Dashboard requests tables"
+<XMLDB PATH="local/kopere_dashboard/plugins/requests/db" VERSION="20260305" COMMENT="Kopere Dashboard requests tables"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd">
     <TABLES>
