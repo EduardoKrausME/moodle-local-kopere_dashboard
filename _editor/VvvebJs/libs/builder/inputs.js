@@ -929,12 +929,22 @@ let TagsInput = {
 
             this.element = this.render("tagsinput", data);
 
-            let safeData = Object.assign({}, data);
-            for (let key in safeData) {
-                if (typeof safeData[key] === 'string') {
-                    safeData[key] = $('<div>').text(safeData[key]).html();
+            let escapeHtml = function(value) {
+                if (typeof value === 'string') {
+                    return $('<div>').text(value).html();
+                } else if (Array.isArray(value)) {
+                    return value.map(escapeHtml);
+                } else if (value && typeof value === 'object') {
+                    let escaped = {};
+                    for (let key in value) {
+                        escaped[key] = escapeHtml(value[key]);
+                    }
+                    return escaped;
                 }
-            }
+                return value;
+            };
+
+            let safeData = escapeHtml(Object.assign({}, data));
             $('input', this.element).tagsInput(safeData);//using default parameters
 
             return this.element;
