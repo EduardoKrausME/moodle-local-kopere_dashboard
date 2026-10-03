@@ -28,6 +28,8 @@ use coding_exception;
 use moodleform;
 
 // phpcs:disable moodle.Files.MoodleInternal.MoodleInternalGlobalState
+defined('MOODLE_INTERNAL') || die;
+
 require_once("{$CFG->libdir}/formslib.php");
 
 /**

@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['back_mapping'] = 'Späť na mapovanie';
 $string['cannotreadcsv'] = 'Nepodarilo sa prečítať súbor CSV.';
 $string['cap_manage'] = 'Spravovať importy používateľov';

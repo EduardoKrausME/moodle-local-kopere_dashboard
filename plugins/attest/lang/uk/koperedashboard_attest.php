@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['actions_title'] = 'Дії';
 $string['all_issues_button'] = 'Переглянути всі довідки';
 $string['all_issues_desc'] = 'Знайдено довідок: {$a}.';

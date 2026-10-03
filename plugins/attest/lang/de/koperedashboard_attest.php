@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['actions_title'] = 'Aktionen';
 $string['all_issues_button'] = 'Alle Bescheinigungen anzeigen';
 $string['all_issues_desc'] = '{$a} Bescheinigung(en) gefunden.';

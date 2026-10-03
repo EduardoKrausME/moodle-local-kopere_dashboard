@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['back_to_benchmark'] = 'Zurück zum Benchmark';
 $string['cap_run'] = 'Benchmark ausführen';
 $string['cap_run_desc'] = 'Kann synthetische Benchmark-Tests im Kopere Dashboard ausführen.';

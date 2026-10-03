@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['finalgrade_label'] = '最終評点';
 $string['grade_item'] = '評定項目';
 $string['grade_range'] = '尺度 / 範囲';

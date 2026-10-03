@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['back_to_benchmark'] = 'ベンチマークに戻る';
 $string['cap_run'] = 'ベンチマークを実行する';
 $string['cap_run_desc'] = 'Kopere Dashboard で合成ベンチマークテストを実行できます。';

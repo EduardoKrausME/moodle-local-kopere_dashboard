@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['back_to_benchmark'] = 'Назад до тесту продуктивності';
 $string['cap_run'] = 'Запустити тест продуктивності';
 $string['cap_run_desc'] = 'Може запускати синтетичні тести продуктивності в Kopere Dashboard.';

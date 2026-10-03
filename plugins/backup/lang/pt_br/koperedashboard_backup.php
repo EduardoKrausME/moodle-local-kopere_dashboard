@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['action_delete'] = 'Excluir';
 $string['action_download'] = 'Baixar';
 $string['action_generate_database'] = 'Exportar banco de dados';

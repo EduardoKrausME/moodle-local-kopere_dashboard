@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['actions_title'] = 'Akcie';
 $string['all_issues_button'] = 'Zobraziť všetky potvrdenia';
 $string['all_issues_desc'] = 'Nájdených potvrdení: {$a}.';

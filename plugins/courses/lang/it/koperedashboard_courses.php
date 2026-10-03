@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['action_edit_course'] = 'Modifica impostazioni';
 $string['action_gradebook'] = 'Registro valutatore';
 $string['action_logs'] = 'Log';

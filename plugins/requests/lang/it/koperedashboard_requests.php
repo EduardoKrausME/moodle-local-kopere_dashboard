@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['audit_category_create'] = 'Categoria creata.';
 $string['audit_category_update'] = 'Categoria aggiornata.';
 $string['audit_request_close'] = 'Richiesta chiusa.';

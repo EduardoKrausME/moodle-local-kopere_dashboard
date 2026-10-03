@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['accept_title'] = '契約の同意';
 $string['accepted'] = '同意済み';
 $string['btn_accept'] = '同意して承諾します';

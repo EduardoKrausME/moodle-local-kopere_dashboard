@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['accept_title'] = 'Penerimaan kontrak';
 $string['accepted'] = 'Diterima';
 $string['btn_accept'] = 'Saya setuju dan menerima';

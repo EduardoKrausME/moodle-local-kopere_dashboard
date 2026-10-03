@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['action_open'] = '開く';
 $string['action_profile'] = 'プロフィール';
 $string['cap_manage'] = 'ユーザーセンターを管理する';

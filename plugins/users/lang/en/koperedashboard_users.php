@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['action_open'] = 'Open';
 $string['action_profile'] = 'Profile';
 $string['cap_manage'] = 'Manage user center';

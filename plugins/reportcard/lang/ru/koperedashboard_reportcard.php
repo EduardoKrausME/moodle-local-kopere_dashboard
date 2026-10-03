@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['finalgrade_label'] = 'Итоговая оценка';
 $string['grade_item'] = 'Оцениваемый элемент';
 $string['grade_range'] = 'Шкала / диапазон';

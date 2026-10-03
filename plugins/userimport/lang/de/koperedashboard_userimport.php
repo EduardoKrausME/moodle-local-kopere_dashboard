@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['back_mapping'] = 'Zurück zur Zuordnung';
 $string['cannotreadcsv'] = 'Die CSV-Datei konnte nicht gelesen werden.';
 $string['cap_manage'] = 'Benutzerimporte verwalten';

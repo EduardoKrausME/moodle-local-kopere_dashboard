@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['back_mapping'] = 'Kembali ke pemetaan';
 $string['cannotreadcsv'] = 'Tidak dapat membaca file CSV.';
 $string['cap_manage'] = 'Kelola impor pengguna';

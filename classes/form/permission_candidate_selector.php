@@ -29,6 +29,8 @@ use dml_exception;
 use user_selector_base;
 
 // phpcs:disable moodle.Files.MoodleInternal.MoodleInternalGlobalState
+defined('MOODLE_INTERNAL') || die;
+
 require_once("{$CFG->dirroot}/user/selector/lib.php");
 
 /**

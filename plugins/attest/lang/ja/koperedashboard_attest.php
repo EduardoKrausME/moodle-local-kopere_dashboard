@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['actions_title'] = '操作';
 $string['all_issues_button'] = 'すべての証明書を表示';
 $string['all_issues_desc'] = '{$a} 件の証明書が見つかりました。';

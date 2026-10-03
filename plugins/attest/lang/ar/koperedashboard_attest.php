@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['actions_title'] = 'الإجراءات';
 $string['all_issues_button'] = 'عرض جميع الإفادات';
 $string['all_issues_desc'] = 'تم العثور على {$a} إفادة.';

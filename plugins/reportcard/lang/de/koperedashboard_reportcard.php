@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 $string['finalgrade_label'] = 'Abschlussbewertung';
 $string['grade_item'] = 'Bewertetes Element';
 $string['grade_range'] = 'Skala / Bereich';
