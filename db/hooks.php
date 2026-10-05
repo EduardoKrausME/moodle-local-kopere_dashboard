@@ -22,12 +22,14 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_kopere_dashboard\hooks\before_http_headers;
+
 defined('MOODLE_INTERNAL') || die;
 
 $callbacks = [
     [
         "hook" => \core\hook\output\before_http_headers::class,
-        "callback" => [\local_kopere_dashboard\hooks\before_http_headers::class, "callback"],
+        "callback" => [before_http_headers::class, "callback"],
         "priority" => 500,
     ],
 ];
