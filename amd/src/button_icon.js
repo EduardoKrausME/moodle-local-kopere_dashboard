@@ -16,37 +16,52 @@
 /**
  * Confirmation button handling.
  *
- * @module     local_kopere_dashboard/button_icon
- * @copyright  Eduardo Kraus
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   local_kopere_dashboard
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import Notification from 'core/notification';
+define(['core/notification'], function(Notification) {
+    /**
+     * Initialise confirmation action.
+     *
+     * @param {String} buttonId
+     * @param {String} link
+     */
+    function action(buttonId, link) {
+        var button = document.getElementById('btn-' + buttonId);
+        var dialog = document.getElementById('confirm-' + buttonId);
 
-export const action = (buttonId, link) => {
-    const button = document.getElementById(`btn-${buttonId}`);
-    const dialog = document.getElementById(`confirm-${buttonId}`);
+        if (!button || !dialog) {
+            return;
+        }
 
-    if (!button || !dialog) {
-        return;
+        button.style.display = '';
+
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            var title = dialog.getAttribute('title') || '';
+            var message = '';
+            var paragraph = dialog.querySelector('p');
+
+            if (paragraph) {
+                message = paragraph.textContent;
+            }
+
+            Notification.confirm(
+                title,
+                message,
+                'Yes',
+                'No',
+                function() {
+                    window.location.href = link;
+                }
+            );
+        });
     }
 
-    button.style.display = '';
-
-    button.addEventListener('click', (event) => {
-        event.preventDefault();
-
-        const title = dialog.getAttribute('title') || '';
-        const message = dialog.querySelector('p')?.textContent || '';
-
-        Notification.confirm(
-            title,
-            message,
-            'Yes',
-            'No',
-            () => {
-                window.location.href = link;
-            }
-        );
-    });
-};
+    return {
+        action: action
+    };
+});
