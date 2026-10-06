@@ -927,14 +927,16 @@ let TagsInput = {
 
         init : function(data) {
 
-            this.element = this.render("tagsinput", data);
-
+            // Escape only top-level string values before they reach either rendering sink.
+            // Keep arrays and objects untouched because they are configuration data, not HTML.
             let safeData = Object.assign({}, data);
             for (let key in safeData) {
                 if (typeof safeData[key] === 'string') {
                     safeData[key] = $('<div>').text(safeData[key]).html();
                 }
             }
+
+            this.element = this.render("tagsinput", safeData);
             $('input', this.element).tagsInput(safeData);//using default parameters
 
             return this.element;
