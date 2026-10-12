@@ -82,6 +82,7 @@ $string['deleted_successfully'] = 'Deleted successfully';
 $string['globalsettings'] = 'Global settings';
 $string['help_title'] = 'Help';
 $string['inactive'] = 'Inactive';
+$string['integracaoroot'] = 'Integration';
 $string['invisible'] = 'Hidden';
 $string['js_completed'] = 'Completed';
 $string['js_processing'] = 'Processing...';
