@@ -378,7 +378,11 @@ class import_service {
                 $newuser->password = self::prepare_password($mapped["password"] ?? "");
 
                 try {
-                    $newuserid = user_create_user($newuser, false, false);
+                    if (method_exists(\core\user::class, "create_user")) {
+                        $newuserid = \core\user::create_user($newuser, false, false);
+                    } else {
+                        $newuserid = user_create_user($newuser, false, false);
+                    }
                     set_user_preference("auth_forcepasswordchange", 1, $newuserid);
                     $user = core_user::get_user($newuserid, "*");
                     $creatednow = true;
