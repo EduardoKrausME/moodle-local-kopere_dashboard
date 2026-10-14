@@ -38,7 +38,6 @@ $string['col_created'] = 'Created at';
 $string['col_file'] = 'File';
 $string['col_size'] = 'Size';
 $string['col_type'] = 'Type';
-$string['commandnotfound'] = 'The required system command was not found: {$a}.';
 $string['current_source_label'] = 'Current database:';
 $string['database_desc'] = 'Exports the database structure and data in PHP, allowing you to choose the output format and optionally separate logs into their own file.';
 $string['database_success'] = 'Database export generated successfully: {$a}';

@@ -38,7 +38,6 @@ $string['col_created'] = 'Dibuat pada';
 $string['col_file'] = 'File';
 $string['col_size'] = 'Ukuran';
 $string['col_type'] = 'Jenis';
-$string['commandnotfound'] = 'Perintah sistem yang diperlukan tidak ditemukan: {$a}.';
 $string['current_source_label'] = 'Basis data saat ini:';
 $string['database_desc'] = 'Mengekspor struktur dan data basis data dalam PHP, memungkinkan Anda memilih format keluaran dan secara opsional memisahkan log ke file tersendiri.';
 $string['database_success'] = 'Ekspor basis data berhasil dibuat: {$a}';

@@ -38,7 +38,6 @@ $string['col_created'] = 'Creado el';
 $string['col_file'] = 'Archivo';
 $string['col_size'] = 'Tamaño';
 $string['col_type'] = 'Tipo';
-$string['commandnotfound'] = 'No se encontró el comando del sistema requerido: {$a}.';
 $string['current_source_label'] = 'Base de datos actual:';
 $string['database_desc'] = 'Exporta la estructura y los datos de la base de datos en PHP, lo que permite elegir el formato de salida y, opcionalmente, separar los registros en su propio archivo.';
 $string['database_success'] = 'Exportación de la base de datos generada correctamente: {$a}';

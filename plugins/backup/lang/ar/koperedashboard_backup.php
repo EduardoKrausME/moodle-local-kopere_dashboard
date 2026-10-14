@@ -38,7 +38,6 @@ $string['col_created'] = 'تم الإنشاء في';
 $string['col_file'] = 'ملف';
 $string['col_size'] = 'الحجم';
 $string['col_type'] = 'النوع';
-$string['commandnotfound'] = 'لم يتم العثور على أمر النظام المطلوب: {$a}.';
 $string['current_source_label'] = 'قاعدة البيانات الحالية:';
 $string['database_desc'] = 'يصدر بنية قاعدة البيانات وبياناتها بصيغة PHP، مما يتيح لك اختيار تنسيق الإخراج وفصل السجلات اختياريًا في ملف مستقل.';
 $string['database_success'] = 'تم إنشاء تصدير قاعدة البيانات بنجاح: {$a}';

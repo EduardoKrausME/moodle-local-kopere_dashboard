@@ -38,7 +38,6 @@ $string['col_created'] = 'Erstellt am';
 $string['col_file'] = 'Datei';
 $string['col_size'] = 'Größe';
 $string['col_type'] = 'Typ';
-$string['commandnotfound'] = 'Der erforderliche Systembefehl wurde nicht gefunden: {$a}.';
 $string['current_source_label'] = 'Aktuelle Datenbank:';
 $string['database_desc'] = 'Exportiert die Datenbankstruktur und -daten in PHP, sodass das Ausgabeformat gewählt und Protokolle optional in eine eigene Datei getrennt werden können.';
 $string['database_success'] = 'Datenbankexport erfolgreich erstellt: {$a}';

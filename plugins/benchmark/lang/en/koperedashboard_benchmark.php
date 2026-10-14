@@ -24,11 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$string['back_to_benchmark'] = 'Back to benchmark';
 $string['cap_run'] = 'Run benchmark';
 $string['cap_run_desc'] = 'Can run synthetic benchmark tests in Kopere Dashboard.';
-$string['cap_view'] = 'View benchmark';
-$string['cap_view_desc'] = 'Can access the benchmark area and view performance recommendations.';
 $string['check_backup_auto_active'] = 'Automatic backup';
 $string['check_cachejs'] = 'JavaScript cache';
 $string['check_debug'] = 'Debug level';
@@ -36,7 +33,6 @@ $string['check_debugdisplay'] = 'Display debug messages';
 $string['check_themedesignermode'] = 'Theme designer mode';
 $string['debug_value'] = 'Enabled ({$a})';
 $string['environment_db'] = 'Database';
-$string['environment_kopere_dashboard'] = 'Kopere Dashboard';
 $string['environment_memory'] = 'memory_limit';
 $string['environment_moodle'] = 'Moodle';
 $string['environment_opcache'] = 'OPcache';
@@ -48,13 +44,10 @@ $string['environment_php'] = 'PHP';
 $string['environment_title'] = 'Environment';
 $string['environment_xsendfile'] = 'X-Sendfile';
 $string['environment_xsendfile_warning'] = 'Keep X-Sendfile enabled in production. It lets the web server deliver files directly, reducing PHP memory usage and improving large file downloads.';
-$string['execute_title'] = 'Run benchmark';
 $string['help_recommendations'] = 'These recommendations help interpret whether the environment is configured for production. They do not replace a detailed analysis of the database, Redis, cron, disks or reverse cache.';
 $string['iterations'] = 'Iterations';
 $string['label_disabled'] = 'Disabled';
 $string['label_enabled'] = 'Enabled';
-$string['manage_intro'] = 'Run a short set of synthetic tests to get a quick overview of the Moodle server’s general performance. The tests measure simple database reads, disk roundtrip, JSON, hash and string processing.';
-$string['manage_warning'] = 'The results are comparative. Ideally, always run them on the same server and compare before/after changes to PHP, database, disk, cache, Redis, Nginx or plugins.';
 $string['menu_desc'] = 'Measures database, disk and CPU time with quick production recommendations.';
 $string['menu_title'] = 'Benchmark';
 $string['opcache_details_value'] = 'CLI: {$a->enablecli}<br>memory: {$a->memory} MB<br>max files: {$a->maxfiles}<br>validate timestamps: {$a->timestamps}<br>revalidate freq: {$a->revalidate}';

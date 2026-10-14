@@ -38,7 +38,6 @@ $string['col_created'] = 'Vytvorené';
 $string['col_file'] = 'Súbor';
 $string['col_size'] = 'Veľkosť';
 $string['col_type'] = 'Typ';
-$string['commandnotfound'] = 'Požadovaný systémový príkaz nebol nájdený: {$a}.';
 $string['current_source_label'] = 'Aktuálna databáza:';
 $string['database_desc'] = 'Exportuje štruktúru a údaje databázy v PHP, umožňuje vybrať výstupný formát a voliteľne oddeliť logy do samostatného súboru.';
 $string['database_success'] = 'Export databázy bol úspešne vygenerovaný: {$a}';

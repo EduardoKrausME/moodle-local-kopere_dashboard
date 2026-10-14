@@ -24,11 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$string['back_to_benchmark'] = 'Kembali ke benchmark';
 $string['cap_run'] = 'Jalankan benchmark';
 $string['cap_run_desc'] = 'Dapat menjalankan pengujian benchmark sintetis di Kopere Dashboard.';
-$string['cap_view'] = 'Lihat benchmark';
-$string['cap_view_desc'] = 'Dapat mengakses area benchmark dan melihat rekomendasi performa.';
 $string['check_backup_auto_active'] = 'Backup otomatis';
 $string['check_cachejs'] = 'Cache JavaScript';
 $string['check_debug'] = 'Level debug';
@@ -36,7 +33,6 @@ $string['check_debugdisplay'] = 'Tampilkan pesan debug';
 $string['check_themedesignermode'] = 'Mode desainer tema';
 $string['debug_value'] = 'Aktif ({$a})';
 $string['environment_db'] = 'Database';
-$string['environment_kopere_dashboard'] = 'Kopere Dashboard';
 $string['environment_memory'] = 'memory_limit';
 $string['environment_moodle'] = 'Moodle';
 $string['environment_opcache'] = 'OPcache';
@@ -48,13 +44,10 @@ $string['environment_php'] = 'PHP';
 $string['environment_title'] = 'Lingkungan';
 $string['environment_xsendfile'] = 'X-Sendfile';
 $string['environment_xsendfile_warning'] = 'Biarkan X-Sendfile aktif di produksi. Ini memungkinkan server web mengirim file secara langsung, mengurangi penggunaan memori PHP, dan meningkatkan unduhan file besar.';
-$string['execute_title'] = 'Jalankan benchmark';
 $string['help_recommendations'] = 'Rekomendasi ini membantu menafsirkan apakah lingkungan sudah dikonfigurasi untuk produksi. Rekomendasi ini tidak menggantikan analisis mendetail terhadap database, Redis, cron, disk, atau cache balik.';
 $string['iterations'] = 'Iterasi';
 $string['label_disabled'] = 'Nonaktif';
 $string['label_enabled'] = 'Aktif';
-$string['manage_intro'] = 'Jalankan serangkaian pengujian sintetis singkat untuk mendapatkan gambaran cepat tentang performa umum server Moodle. Pengujian mengukur pembacaan database sederhana, putaran baca/tulis disk, JSON, hash, dan pemrosesan string.';
-$string['manage_warning'] = 'Hasil bersifat komparatif. Idealnya, selalu jalankan pada server yang sama dan bandingkan sebelum/sesudah perubahan pada PHP, database, disk, cache, Redis, Nginx, atau plugin.';
 $string['menu_desc'] = 'Mengukur waktu database, disk, dan CPU dengan rekomendasi produksi cepat.';
 $string['menu_title'] = 'Benchmark';
 $string['opcache_details_value'] = 'CLI: {$a->enablecli}<br>memori: {$a->memory} MB<br>maks. file: {$a->maxfiles}<br>validasi timestamp: {$a->timestamps}<br>freq. validasi ulang: {$a->revalidate}';

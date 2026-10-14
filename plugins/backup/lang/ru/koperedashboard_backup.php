@@ -38,7 +38,6 @@ $string['col_created'] = 'Создано';
 $string['col_file'] = 'Файл';
 $string['col_size'] = 'Размер';
 $string['col_type'] = 'Тип';
-$string['commandnotfound'] = 'Не найдена требуемая системная команда: {$a}.';
 $string['current_source_label'] = 'Текущая база данных:';
 $string['database_desc'] = 'Экспортирует структуру и данные базы данных в PHP, позволяя выбрать формат вывода и при необходимости отделить журналы в отдельный файл.';
 $string['database_success'] = 'Экспорт базы данных успешно создан: {$a}';

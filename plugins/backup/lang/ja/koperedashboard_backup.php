@@ -38,7 +38,6 @@ $string['col_created'] = '作成日時';
 $string['col_file'] = 'ファイル';
 $string['col_size'] = 'サイズ';
 $string['col_type'] = '種類';
-$string['commandnotfound'] = '必要なシステムコマンドが見つかりませんでした: {$a}。';
 $string['current_source_label'] = '現在のデータベース:';
 $string['database_desc'] = 'データベースの構造とデータをPHPでエクスポートし、出力形式を選択したり、必要に応じてログを別ファイルに分離したりできます。';
 $string['database_success'] = 'データベースのエクスポートが正常に生成されました: {$a}';

@@ -24,11 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$string['back_to_benchmark'] = 'العودة إلى اختبار الأداء';
 $string['cap_run'] = 'تشغيل اختبار الأداء';
 $string['cap_run_desc'] = 'يمكنه تشغيل اختبارات أداء اصطناعية في Kopere Dashboard.';
-$string['cap_view'] = 'عرض اختبار الأداء';
-$string['cap_view_desc'] = 'يمكنه الوصول إلى منطقة اختبار الأداء وعرض توصيات الأداء.';
 $string['check_backup_auto_active'] = 'نسخ احتياطي تلقائي';
 $string['check_cachejs'] = 'ذاكرة JavaScript المؤقتة';
 $string['check_debug'] = 'مستوى التصحيح';
@@ -36,7 +33,6 @@ $string['check_debugdisplay'] = 'عرض رسائل التصحيح';
 $string['check_themedesignermode'] = 'وضع مصمم القالب';
 $string['debug_value'] = 'مفعل ({$a})';
 $string['environment_db'] = 'قاعدة البيانات';
-$string['environment_kopere_dashboard'] = 'Kopere Dashboard';
 $string['environment_memory'] = 'memory_limit';
 $string['environment_moodle'] = 'Moodle';
 $string['environment_opcache'] = 'OPcache';
@@ -48,13 +44,10 @@ $string['environment_php'] = 'PHP';
 $string['environment_title'] = 'البيئة';
 $string['environment_xsendfile'] = 'X-Sendfile';
 $string['environment_xsendfile_warning'] = 'أبقِ X-Sendfile مفعلاً في بيئة الإنتاج. فهو يتيح لخادم الويب تسليم الملفات مباشرة، مما يقلل استخدام ذاكرة PHP ويحسن تنزيل الملفات الكبيرة.';
-$string['execute_title'] = 'تشغيل اختبار الأداء';
 $string['help_recommendations'] = 'تساعد هذه التوصيات في تفسير ما إذا كانت البيئة مضبوطة للإنتاج. وهي لا تغني عن تحليل تفصيلي لقاعدة البيانات وRedis وcron والأقراص أو الذاكرة المؤقتة العكسية.';
 $string['iterations'] = 'التكرارات';
 $string['label_disabled'] = 'معطل';
 $string['label_enabled'] = 'مفعل';
-$string['manage_intro'] = 'شغّل مجموعة قصيرة من الاختبارات الاصطناعية للحصول على نظرة سريعة على الأداء العام لخادم Moodle. تقيس الاختبارات قراءات بسيطة من قاعدة البيانات، ودورة القرص، وJSON، والتجزئة، ومعالجة النصوص.';
-$string['manage_warning'] = 'النتائج للمقارنة. من الأفضل تشغيلها دائماً على الخادم نفسه والمقارنة قبل/بعد التغييرات في PHP أو قاعدة البيانات أو القرص أو الذاكرة المؤقتة أو Redis أو Nginx أو الإضافات.';
 $string['menu_desc'] = 'يقيس زمن قاعدة البيانات والقرص ووحدة المعالجة المركزية مع توصيات إنتاج سريعة.';
 $string['menu_title'] = 'اختبار الأداء';
 $string['opcache_details_value'] = 'CLI: {$a->enablecli}<br>الذاكرة: {$a->memory} MB<br>الحد الأقصى للملفات: {$a->maxfiles}<br>التحقق من الطوابع الزمنية: {$a->timestamps}<br>تكرار إعادة التحقق: {$a->revalidate}';

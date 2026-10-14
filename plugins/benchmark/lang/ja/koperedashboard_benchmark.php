@@ -24,11 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$string['back_to_benchmark'] = 'ベンチマークに戻る';
 $string['cap_run'] = 'ベンチマークを実行する';
 $string['cap_run_desc'] = 'Kopere Dashboard で合成ベンチマークテストを実行できます。';
-$string['cap_view'] = 'ベンチマークを表示する';
-$string['cap_view_desc'] = 'ベンチマーク領域にアクセスし、パフォーマンス推奨事項を表示できます。';
 $string['check_backup_auto_active'] = '自動バックアップ';
 $string['check_cachejs'] = 'JavaScript キャッシュ';
 $string['check_debug'] = 'デバッグレベル';
@@ -36,7 +33,6 @@ $string['check_debugdisplay'] = 'デバッグメッセージを表示する';
 $string['check_themedesignermode'] = 'テーマデザイナーモード';
 $string['debug_value'] = '有効 ({$a})';
 $string['environment_db'] = 'データベース';
-$string['environment_kopere_dashboard'] = 'Kopere Dashboard';
 $string['environment_memory'] = 'memory_limit';
 $string['environment_moodle'] = 'Moodle';
 $string['environment_opcache'] = 'OPcache';
@@ -48,13 +44,10 @@ $string['environment_php'] = 'PHP';
 $string['environment_title'] = '環境';
 $string['environment_xsendfile'] = 'X-Sendfile';
 $string['environment_xsendfile_warning'] = '本番環境では X-Sendfile を有効にしてください。Web サーバーがファイルを直接配信できるようになり、PHP のメモリ使用量を削減し、大きなファイルのダウンロードを改善します。';
-$string['execute_title'] = 'ベンチマークを実行する';
 $string['help_recommendations'] = 'これらの推奨事項は、環境が本番向けに設定されているかを判断するためのものです。データベース、Redis、cron、ディスク、またはリバースキャッシュの詳細な分析に代わるものではありません。';
 $string['iterations'] = '反復回数';
 $string['label_disabled'] = '無効';
 $string['label_enabled'] = '有効';
-$string['manage_intro'] = '短い合成テストセットを実行して、Moodle サーバー全体のパフォーマンス概要をすばやく確認します。テストでは、単純なデータベース読み取り、ディスク往復、JSON、ハッシュ、文字列処理を測定します。';
-$string['manage_warning'] = '結果は比較用です。理想的には常に同じサーバーで実行し、PHP、データベース、ディスク、キャッシュ、Redis、Nginx、プラグインの変更前後を比較してください。';
 $string['menu_desc'] = 'データベース、ディスク、CPU の時間を測定し、本番向けの簡易推奨事項を表示します。';
 $string['menu_title'] = 'ベンチマーク';
 $string['opcache_details_value'] = 'CLI: {$a->enablecli}<br>メモリ: {$a->memory} MB<br>最大ファイル数: {$a->maxfiles}<br>タイムスタンプ検証: {$a->timestamps}<br>再検証頻度: {$a->revalidate}';

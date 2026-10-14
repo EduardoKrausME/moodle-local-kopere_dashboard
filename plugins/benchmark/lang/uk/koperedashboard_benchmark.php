@@ -24,11 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$string['back_to_benchmark'] = 'Назад до тесту продуктивності';
 $string['cap_run'] = 'Запустити тест продуктивності';
 $string['cap_run_desc'] = 'Може запускати синтетичні тести продуктивності в Kopere Dashboard.';
-$string['cap_view'] = 'Перегляд тесту продуктивності';
-$string['cap_view_desc'] = 'Може відкривати область тестування продуктивності та переглядати рекомендації щодо швидкодії.';
 $string['check_backup_auto_active'] = 'Автоматичне резервне копіювання';
 $string['check_cachejs'] = 'Кеш JavaScript';
 $string['check_debug'] = 'Рівень налагодження';
@@ -36,7 +33,6 @@ $string['check_debugdisplay'] = 'Показувати повідомлення �
 $string['check_themedesignermode'] = 'Режим дизайнера теми';
 $string['debug_value'] = 'Увімкнено ({$a})';
 $string['environment_db'] = 'База даних';
-$string['environment_kopere_dashboard'] = 'Kopere Dashboard';
 $string['environment_memory'] = 'memory_limit';
 $string['environment_moodle'] = 'Moodle';
 $string['environment_opcache'] = 'OPcache';
@@ -48,13 +44,10 @@ $string['environment_php'] = 'PHP';
 $string['environment_title'] = 'Середовище';
 $string['environment_xsendfile'] = 'X-Sendfile';
 $string['environment_xsendfile_warning'] = 'Тримайте X-Sendfile увімкненим у робочому середовищі. Це дає змогу вебсерверу віддавати файли напряму, зменшуючи використання памʼяті PHP та покращуючи завантаження великих файлів.';
-$string['execute_title'] = 'Запустити тест продуктивності';
 $string['help_recommendations'] = 'Ці рекомендації допомагають зрозуміти, чи налаштоване середовище для роботи в production. Вони не замінюють детальний аналіз бази даних, Redis, cron, дисків або зворотного кешу.';
 $string['iterations'] = 'Ітерації';
 $string['label_disabled'] = 'Вимкнено';
 $string['label_enabled'] = 'Увімкнено';
-$string['manage_intro'] = 'Запустіть короткий набір синтетичних тестів, щоб швидко оцінити загальну продуктивність сервера Moodle. Тести вимірюють прості читання з бази даних, цикл запису/читання диска, JSON, хешування та обробку рядків.';
-$string['manage_warning'] = 'Результати є порівняльними. В ідеалі завжди запускайте їх на тому самому сервері та порівнюйте до/після змін у PHP, базі даних, диску, кеші, Redis, Nginx або плагінах.';
 $string['menu_desc'] = 'Вимірює час роботи бази даних, диска та CPU з швидкими рекомендаціями для production.';
 $string['menu_title'] = 'Тест продуктивності';
 $string['opcache_details_value'] = 'CLI: {$a->enablecli}<br>памʼять: {$a->memory} MB<br>макс. файлів: {$a->maxfiles}<br>перевіряти timestamps: {$a->timestamps}<br>частота повторної перевірки: {$a->revalidate}';

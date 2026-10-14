@@ -24,11 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$string['back_to_benchmark'] = 'Späť na benchmark';
 $string['cap_run'] = 'Spustiť benchmark';
 $string['cap_run_desc'] = 'Môže spúšťať syntetické benchmark testy v Kopere Dashboard.';
-$string['cap_view'] = 'Zobraziť benchmark';
-$string['cap_view_desc'] = 'Môže pristupovať do oblasti benchmarku a zobrazovať odporúčania k výkonu.';
 $string['check_backup_auto_active'] = 'Automatické zálohovanie';
 $string['check_cachejs'] = 'JavaScript cache';
 $string['check_debug'] = 'Úroveň ladenia';
@@ -36,7 +33,6 @@ $string['check_debugdisplay'] = 'Zobrazovať ladiace správy';
 $string['check_themedesignermode'] = 'Režim návrhára témy';
 $string['debug_value'] = 'Povolené ({$a})';
 $string['environment_db'] = 'Databáza';
-$string['environment_kopere_dashboard'] = 'Kopere Dashboard';
 $string['environment_memory'] = 'memory_limit';
 $string['environment_moodle'] = 'Moodle';
 $string['environment_opcache'] = 'OPcache';
@@ -48,13 +44,10 @@ $string['environment_php'] = 'PHP';
 $string['environment_title'] = 'Prostredie';
 $string['environment_xsendfile'] = 'X-Sendfile';
 $string['environment_xsendfile_warning'] = 'V produkcii ponechajte X-Sendfile povolený. Umožňuje webovému serveru doručovať súbory priamo, čím znižuje využitie pamäte PHP a zlepšuje sťahovanie veľkých súborov.';
-$string['execute_title'] = 'Spustiť benchmark';
 $string['help_recommendations'] = 'Tieto odporúčania pomáhajú posúdiť, či je prostredie nakonfigurované pre produkciu. Nenahrádzajú podrobnú analýzu databázy, Redis, cronu, diskov ani reverznej cache.';
 $string['iterations'] = 'Iterácie';
 $string['label_disabled'] = 'Zakázané';
 $string['label_enabled'] = 'Povolené';
-$string['manage_intro'] = 'Spustite krátku sériu syntetických testov, aby ste získali rýchly prehľad o všeobecnom výkone servera Moodle. Testy merajú jednoduché čítania databázy, diskový cyklus, JSON, hash a spracovanie reťazcov.';
-$string['manage_warning'] = 'Výsledky sú porovnávacie. Ideálne ich vždy spúšťajte na tom istom serveri a porovnávajte stav pred/po zmenách v PHP, databáze, disku, cache, Redis, Nginx alebo pluginoch.';
 $string['menu_desc'] = 'Meria čas databázy, disku a CPU s rýchlymi produkčnými odporúčaniami.';
 $string['menu_title'] = 'Benchmark';
 $string['opcache_details_value'] = 'CLI: {$a->enablecli}<br>pamäť: {$a->memory} MB<br>max. súborov: {$a->maxfiles}<br>overovať časové značky: {$a->timestamps}<br>frekvencia revalidácie: {$a->revalidate}';

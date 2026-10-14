@@ -38,7 +38,6 @@ $string['col_created'] = 'Creato il';
 $string['col_file'] = 'File';
 $string['col_size'] = 'Dimensione';
 $string['col_type'] = 'Tipo';
-$string['commandnotfound'] = 'Il comando di sistema richiesto non è stato trovato: {$a}.';
 $string['current_source_label'] = 'Database corrente:';
 $string['database_desc'] = 'Esporta la struttura e i dati del database in PHP, consentendo di scegliere il formato di output e, facoltativamente, separare i log in un file dedicato.';
 $string['database_success'] = 'Esportazione del database generata correttamente: {$a}';

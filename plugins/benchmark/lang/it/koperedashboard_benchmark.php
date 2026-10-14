@@ -24,11 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$string['back_to_benchmark'] = 'Torna al benchmark';
 $string['cap_run'] = 'Esegui benchmark';
 $string['cap_run_desc'] = 'Può eseguire test benchmark sintetici in Kopere Dashboard.';
-$string['cap_view'] = 'Visualizza benchmark';
-$string['cap_view_desc'] = 'Può accedere all\'area benchmark e visualizzare le raccomandazioni sulle prestazioni.';
 $string['check_backup_auto_active'] = 'Backup automatico';
 $string['check_cachejs'] = 'Cache JavaScript';
 $string['check_debug'] = 'Livello di debug';
@@ -36,7 +33,6 @@ $string['check_debugdisplay'] = 'Mostra messaggi di debug';
 $string['check_themedesignermode'] = 'Modalità designer del tema';
 $string['debug_value'] = 'Abilitato ({$a})';
 $string['environment_db'] = 'Database';
-$string['environment_kopere_dashboard'] = 'Kopere Dashboard';
 $string['environment_memory'] = 'memory_limit';
 $string['environment_moodle'] = 'Moodle';
 $string['environment_opcache'] = 'OPcache';
@@ -48,13 +44,10 @@ $string['environment_php'] = 'PHP';
 $string['environment_title'] = 'Ambiente';
 $string['environment_xsendfile'] = 'X-Sendfile';
 $string['environment_xsendfile_warning'] = 'Mantieni X-Sendfile abilitato in produzione. Consente al server web di distribuire direttamente i file, riducendo l\'uso di memoria PHP e migliorando i download di file grandi.';
-$string['execute_title'] = 'Esegui benchmark';
 $string['help_recommendations'] = 'Queste raccomandazioni aiutano a interpretare se l\'ambiente è configurato per la produzione. Non sostituiscono un\'analisi dettagliata di database, Redis, cron, dischi o cache inversa.';
 $string['iterations'] = 'Iterazioni';
 $string['label_disabled'] = 'Disabilitato';
 $string['label_enabled'] = 'Abilitato';
-$string['manage_intro'] = 'Esegui una breve serie di test sintetici per ottenere una rapida panoramica delle prestazioni generali del server Moodle. I test misurano semplici letture del database, andata e ritorno su disco, JSON, hash ed elaborazione delle stringhe.';
-$string['manage_warning'] = 'I risultati sono comparativi. Idealmente, eseguili sempre sullo stesso server e confronta prima/dopo le modifiche a PHP, database, disco, cache, Redis, Nginx o plugin.';
 $string['menu_desc'] = 'Misura il tempo di database, disco e CPU con rapide raccomandazioni per la produzione.';
 $string['menu_title'] = 'Benchmark';
 $string['opcache_details_value'] = 'CLI: {$a->enablecli}<br>memoria: {$a->memory} MB<br>file max: {$a->maxfiles}<br>valida timestamp: {$a->timestamps}<br>freq. rivalidazione: {$a->revalidate}';

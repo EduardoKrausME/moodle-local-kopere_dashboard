@@ -38,7 +38,6 @@ $string['col_created'] = 'Créé le';
 $string['col_file'] = 'Fichier';
 $string['col_size'] = 'Taille';
 $string['col_type'] = 'Type';
-$string['commandnotfound'] = 'La commande système requise est introuvable : {$a}.';
 $string['current_source_label'] = 'Base de données actuelle :';
 $string['database_desc'] = 'Exporte la structure et les données de la base de données en PHP, ce qui permet de choisir le format de sortie et, éventuellement, de séparer les journaux dans leur propre fichier.';
 $string['database_success'] = 'Exportation de la base de données générée avec succès : {$a}';
