@@ -79,11 +79,17 @@ class subplugin_manager {
         $plugins = core_component::get_plugin_list(self::PLUGINTYPE_KOPERE_DASHBOARD);
         $ordered = [];
 
-        foreach (self::get_plugins_state() as $pluginstate) {
-            if ($pluginstate["plugintype"] != self::PLUGINTYPE_KOPERE_DASHBOARD) {
-                continue;
+        // Keep native plugininfo discovery independent from external plugin scans.
+        // core_plugin_manager may call this during its own initialization.
+        $nativeplugins = self::get_kopere_dashboard_plugins_state();
+        usort($nativeplugins, static function(array $a, array $b): int {
+            if ($a["sortorder"] == $b["sortorder"]) {
+                return strcmp(strtolower($a["displayname"]), strtolower($b["displayname"]));
             }
+            return $a["sortorder"] <=> $b["sortorder"];
+        });
 
+        foreach ($nativeplugins as $pluginstate) {
             $name = $pluginstate["name"];
             if (!array_key_exists($name, $plugins)) {
                 continue;
