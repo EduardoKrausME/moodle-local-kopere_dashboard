@@ -711,6 +711,8 @@ php admin/cli/purge_caches.php
 
 ## 16. Erros comuns
 
+Os subplugins nativos do Kopere Dashboard **devem** implementar o método público estático `menu::get_definition(context $context): array` em `classes/menu.php`. Plugins externos do Moodle são descobertos pelo mesmo contrato, sem necessidade do prefixo `local_kopere_*`, incluindo plugins locais, ferramentas administrativas e módulos de atividade. Para integrar as permissões ao Dashboard, forneça opcionalmente `classes/capabilities_provider.php`.
+
 Se o plugin não aparece no menu:
 
 - Verifique se a classe `classes/menu.php` existe.
