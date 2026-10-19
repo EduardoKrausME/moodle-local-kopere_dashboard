@@ -147,7 +147,7 @@ class subplugin_manager {
     }
 
     /**
-     * Return compatible local_kopere_* plugin state rows.
+     * Return compatible local_kopere_* plugins and the Helpdesk integration.
      *
      * @return array
      */
@@ -155,7 +155,7 @@ class subplugin_manager {
         $rows = [];
 
         foreach (core_component::get_plugin_list(self::PLUGINTYPE_LOCAL) as $name => $path) {
-            if (strpos($name, self::LOCAL_KOPERE_PREFIX) !== 0) {
+            if ($name !== "helpdesk" && strpos($name, self::LOCAL_KOPERE_PREFIX) !== 0) {
                 continue;
             }
 
