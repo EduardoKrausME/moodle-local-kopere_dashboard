@@ -27,6 +27,7 @@ namespace local_kopere_dashboard\api;
 use coding_exception;
 use context;
 use core_component;
+use core_plugin_manager;
 
 /**
  * Class subplugin_manager
@@ -51,12 +52,6 @@ class subplugin_manager {
     private const PLUGINTYPE_KOPERE_DASHBOARD = "koperedashboard";
 
     /** @var string */
-    private const PLUGINTYPE_LOCAL = "local";
-
-    /** @var string */
-    private const LOCAL_KOPERE_PREFIX = "kopere_";
-
-    /** @var string */
     private const CLASS_MENU = "menu";
 
     /** @var string */
@@ -73,7 +68,7 @@ class subplugin_manager {
      *
      * This method keeps the original return format used by Moodle's plugininfo
      * class: keys are raw Kopere Dashboard subplugin names and values are paths.
-     * External local_kopere_* plugins are exposed by get_plugins_state(), menus
+     * External plugins are exposed by get_plugins_state(), menus
      * and capability providers, but are not returned here as Kopere Dashboard
      * subplugins.
      *
@@ -105,18 +100,17 @@ class subplugin_manager {
     }
 
     /**
-     * Return installed Kopere Dashboard plugins plus compatible local_kopere_* plugins.
+     * Discover native Dashboard subplugins and compatible Moodle plugins by convention.
      *
-     * local_kopere_* plugins are included only when they expose both classes:
-     * - \local_kopere_xxx\menu
-     * - \local_kopere_xxx\capabilities_provider
+     * External integrations expose classes/menu.php and a static menu::get_definition().
+     * A capabilities_provider class is optional.
      *
      * @return array
      */
     public static function get_plugins_state(): array {
         $rows = array_merge(
             self::get_kopere_dashboard_plugins_state(),
-            self::get_local_kopere_plugins_state()
+            self::get_external_plugins_state()
         );
 
         usort($rows, static function(array $a, array $b): int {
@@ -140,6 +134,8 @@ class subplugin_manager {
 
         foreach (core_component::get_plugin_list(self::PLUGINTYPE_KOPERE_DASHBOARD) as $name => $path) {
             $component = "koperedashboard_{$name}";
+            // All native subplugins must implement the Dashboard menu contract.
+            self::require_menu_contract($component);
             $rows[] = self::build_plugin_state($name, $component, self::PLUGINTYPE_KOPERE_DASHBOARD, $path);
         }
 
@@ -147,27 +143,49 @@ class subplugin_manager {
     }
 
     /**
-     * Return compatible local_kopere_* plugins and the Helpdesk integration.
+     * Discover external integrations like local_mcp, using the installed plugin registry.
      *
      * @return array
      */
-    private static function get_local_kopere_plugins_state(): array {
+    private static function get_external_plugins_state(): array {
         $rows = [];
 
-        foreach (core_component::get_plugin_list(self::PLUGINTYPE_LOCAL) as $name => $path) {
-            if ($name !== "helpdesk" && strpos($name, self::LOCAL_KOPERE_PREFIX) !== 0) {
+        foreach (core_component::get_plugin_types() as $type => $directory) {
+            if ($type === self::PLUGINTYPE_KOPERE_DASHBOARD) {
                 continue;
             }
 
-            $component = "local_{$name}";
-            if (!self::has_kopere_dashboard_integration($component)) {
-                continue;
-            }
+            foreach (core_component::get_plugin_list_with_file($type, "classes/menu.php") as $name => $file) {
+                $component = "{$type}_{$name}";
+                if ($component === "local_kopere_dashboard" || !self::has_kopere_dashboard_integration($component)) {
+                    continue;
+                }
 
-            $rows[] = self::build_plugin_state($name, $component, self::PLUGINTYPE_LOCAL, $path);
+                $info = core_plugin_manager::instance()->get_plugin_info($component);
+                if (!$info || $info->is_enabled() === false) {
+                    continue;
+                }
+
+                $rows[] = self::build_plugin_state($name, $component, $type, dirname(dirname($file)));
+            }
         }
 
         return $rows;
+    }
+
+    /**
+     * Enforce the menu contract of native Kopere Dashboard subplugins.
+     *
+     * @param string $component Plugin component.
+     * @return void
+     * @throws coding_exception
+     */
+    private static function require_menu_contract(string $component): void {
+        if (!self::has_kopere_dashboard_integration($component)) {
+            throw new coding_exception(
+                "{$component} must define a public static menu::get_definition() method."
+            );
+        }
     }
 
     /**
@@ -192,14 +210,14 @@ class subplugin_manager {
     }
 
     /**
-     * Check if a local_kopere_* plugin exposes the Kopere Dashboard integration classes.
+     * Whether a plugin implements the Dashboard's public static menu contract.
      *
-     * @param string $component
+     * @param string $component Moodle component.
      * @return bool
      */
     private static function has_kopere_dashboard_integration(string $component): bool {
-        return class_exists("\\{$component}\\" . self::CLASS_MENU)
-            && class_exists("\\{$component}\\" . self::CLASS_CAPABILITIES_PROVIDER);
+        $class = "\\{$component}\\" . self::CLASS_MENU;
+        return class_exists($class) && is_callable([$class, "get_definition"]);
     }
 
     /**
@@ -257,8 +275,8 @@ class subplugin_manager {
      * @return void
      */
     public static function move_plugin(string $pluginname, string $direction): void {
-        $pluginname = self::resolve_plugin_name($pluginname);
-        $orderednames = array_column(self::get_plugins_state(), "name");
+        $pluginname = self::resolve_component_name($pluginname);
+        $orderednames = array_column(self::get_plugins_state(), "component");
         $index = array_search($pluginname, $orderednames, true);
 
         if ($index === false) {
@@ -535,21 +553,23 @@ class subplugin_manager {
      * @return string
      */
     private static function resolve_component_name(string $pluginname): string {
-        if (strpos($pluginname, "koperedashboard_") === 0 || strpos($pluginname, "local_") === 0) {
+        $types = core_component::get_plugin_types();
+        $separator = strpos($pluginname, "_");
+        if ($separator !== false && isset($types[substr($pluginname, 0, $separator)])) {
             return $pluginname;
         }
 
-        $koperedashboardplugins = core_component::get_plugin_list(self::PLUGINTYPE_KOPERE_DASHBOARD);
-        if (array_key_exists($pluginname, $koperedashboardplugins)) {
+        $native = core_component::get_plugin_list(self::PLUGINTYPE_KOPERE_DASHBOARD);
+        if (array_key_exists($pluginname, $native)) {
             return "koperedashboard_{$pluginname}";
         }
 
-        $localplugins = core_component::get_plugin_list(self::PLUGINTYPE_LOCAL);
-        if (array_key_exists($pluginname, $localplugins)) {
+        $locals = core_component::get_plugin_list("local");
+        if (array_key_exists($pluginname, $locals)) {
             return "local_{$pluginname}";
         }
 
-        return "koperedashboard_{$pluginname}";
+        return $pluginname;
     }
 
     /**
