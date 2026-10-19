@@ -223,7 +223,8 @@ class subplugin_manager {
      */
     private static function has_kopere_dashboard_integration(string $component): bool {
         $class = "\\{$component}\\" . self::CLASS_MENU;
-        return class_exists($class) && is_callable([$class, "get_definition"]);
+        return class_exists($class) && method_exists($class, "get_definition")
+            && is_callable([$class, "get_definition"]);
     }
 
     /**
