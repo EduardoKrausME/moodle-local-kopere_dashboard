@@ -76,20 +76,24 @@ $plugins = subplugin_manager::get_plugins_state();
 $categorysort = subplugin_manager::categorysorts();
 
 foreach ($plugins as $index => $row) {
-    $class = "";
-    if (class_exists("\\koperedashboard_{$row["name"]}\\menu")) {
-        $class = "\\koperedashboard_{$row["name"]}\\menu";
-    } else if (class_exists("\\local_{$row["name"]}\\menu")) {
-        $class = "\\local_{$row["name"]}\\menu";
-    }
-
+    $class = "\\{$row["component"]}\\menu";
     $category = "";
-    if ($class) {
-        $definition = (new $class())->get_definition($context);
-        $category = $definition["category"] ?? "";
+    if (is_callable([$class, "get_definition"])) {
+        try {
+            $definition = $class::get_definition($context);
+            if (is_array($definition)) {
+                $category = $definition["category"] ?? "";
+            }
+        } catch (\Throwable $e) {
+            debugging("Invalid Kopere Dashboard menu in {$row["component"]}: " . $e->getMessage(), DEBUG_DEVELOPER);
+        }
     }
 
     $plugins[$index]["categorykey"] = $category;
+
+    if (!isset($categorysort[$category])) {
+        continue;
+    }
 
     if ($row["sortorder"] < $categorysort[$category]) {
         $sortorder = $categorysort[$category] + $row["sortorder"];
@@ -132,7 +136,7 @@ foreach ($categorysort as $category => $num) {
 
         $toggleurl = new moodle_url($baseurl, [
             "action" => "toggle",
-            "plugin" => $row["name"],
+            "plugin" => $row["component"],
             "sesskey" => sesskey(),
         ]);
 
@@ -155,7 +159,7 @@ foreach ($categorysort as $category => $num) {
         if ($index > 0 && $plugins[$index - 1]["categorykey"] == $category) {
             $moveupurl = new moodle_url($baseurl, [
                 "action" => "moveup",
-                "plugin" => $row["name"],
+                "plugin" => $row["component"],
                 "sesskey" => sesskey(),
             ]);
             $orderactions[] = html_writer::link(
@@ -168,7 +172,7 @@ foreach ($categorysort as $category => $num) {
         if ($index < $lastindex && $plugins[$index + 1]["categorykey"] == $category) {
             $movedownurl = new moodle_url($baseurl, [
                 "action" => "movedown",
-                "plugin" => $row["name"],
+                "plugin" => $row["component"],
                 "sesskey" => sesskey(),
             ]);
             $orderactions[] = html_writer::link(
@@ -179,21 +183,17 @@ foreach ($categorysort as $category => $num) {
         }
 
         $uninstall = "";
-        if ($uninstallurl = core_plugin_manager::instance()->get_uninstall_url("koperedashboard_{$row["name"]}", "manage")) {
+        if ($row["plugintype"] === "koperedashboard"
+            && $uninstallurl = core_plugin_manager::instance()->get_uninstall_url($row["component"], "manage")) {
             $uninstall = html_writer::link($uninstallurl, get_string("uninstallplugin", "core_admin"));
         } else {
             $uninstall = get_string("plugin_external", "local_kopere_dashboard");
         }
 
         $version = "";
-        $versionfile = get_config("koperedashboard_{$row["name"]}");
-        if (!empty($versionfile->version)) {
-            $version = $versionfile->version;
-        } else {
-            $versionfile = get_config("local_{$row["name"]}");
-            if (!empty($versionfile->version)) {
-                $version = $versionfile->version;
-            }
+        $versionconfig = get_config($row["component"]);
+        if ($versionconfig && !empty($versionconfig->version)) {
+            $version = $versionconfig->version;
         }
 
         $table->add_data([
