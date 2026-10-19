@@ -154,7 +154,7 @@ In addition to internal modules, the dashboard can also recognize some external 
 
 This is useful when a resource is too large to stay inside the dashboard’s `plugins/` folder or when it needs to be distributed separately.
 
-In this case, the external plugin must follow the `local_kopere_*` pattern and provide the required integration classes to appear in the menu and permissions screen.
+External plugins are discovered automatically across installed Moodle plugin types when they provide `classes/menu.php` with a public static `menu::get_definition(context $context): array` method. The `classes/capabilities_provider.php` class is optional and exposes role permissions in the unified dashboard permission manager. Native `koperedashboard_*` subplugins must implement the menu method.
 
 In practice, this allows several plugins from the Kopere family to communicate with the same dashboard, while maintaining a unified experience for the end user.
 
