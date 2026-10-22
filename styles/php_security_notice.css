@@ -1,0 +1,91 @@
+/* Critical upstream PHP security advisory; shown only on the admin homepage. */
+.local-kopere_dashboard .kopere_dashboard-php-security-notice,
+.path-local-kopere_dashboard .kopere_dashboard-php-security-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 22px;
+  margin-bottom: 20px;
+  border: 1px solid #dc2626;
+  border-left: 5px solid #b91c1c;
+  border-radius: 12px;
+  background: #fff1f2;
+  color: #7f1d1d;
+  box-shadow: 0 6px 18px rgba(127, 29, 29, 0.07);
+}
+.local-kopere_dashboard .kopere_dashboard-php-security-symbol,
+.path-local-kopere_dashboard .kopere_dashboard-php-security-symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #b91c1c;
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 800;
+}
+.local-kopere_dashboard .kopere_dashboard-php-security-content,
+.path-local-kopere_dashboard .kopere_dashboard-php-security-content {
+  min-width: 0;
+  flex: 1;
+}
+.local-kopere_dashboard .kopere_dashboard-php-security-label,
+.path-local-kopere_dashboard .kopere_dashboard-php-security-label {
+  display: inline-block;
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.local-kopere_dashboard .kopere_dashboard-php-security-content h2,
+.path-local-kopere_dashboard .kopere_dashboard-php-security-content h2 {
+  margin: 0 0 8px;
+  color: #991b1b;
+  font-size: 1.2rem;
+  font-weight: 750;
+}
+.local-kopere_dashboard .kopere_dashboard-php-security-content p,
+.path-local-kopere_dashboard .kopere_dashboard-php-security-content p {
+  margin: 0 0 8px;
+  line-height: 1.55;
+}
+.local-kopere_dashboard .kopere_dashboard-php-security-cves,
+.path-local-kopere_dashboard .kopere_dashboard-php-security-cves {
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+.local-kopere_dashboard .kopere_dashboard-php-security-content a,
+.path-local-kopere_dashboard .kopere_dashboard-php-security-content a {
+  color: #991b1b;
+  text-decoration: underline;
+  font-weight: 700;
+}
+.local-kopere_dashboard .kopere_dashboard-php-security-dismiss button,
+.path-local-kopere_dashboard .kopere_dashboard-php-security-dismiss button {
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #991b1b;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0 8px;
+}
+.local-kopere_dashboard .kopere_dashboard-php-security-dismiss button:focus-visible,
+.path-local-kopere_dashboard .kopere_dashboard-php-security-dismiss button:focus-visible {
+  outline: 2px solid #991b1b;
+  outline-offset: 3px;
+}
+@media (max-width: 640px) {
+  .local-kopere_dashboard .kopere_dashboard-php-security-notice,
+  .path-local-kopere_dashboard .kopere_dashboard-php-security-notice {
+    padding: 16px;
+    gap: 10px;
+  }
+  .local-kopere_dashboard .kopere_dashboard-php-security-symbol,
+  .path-local-kopere_dashboard .kopere_dashboard-php-security-symbol {
+    display: none;
+  }
+}

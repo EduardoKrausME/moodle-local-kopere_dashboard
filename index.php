@@ -26,6 +26,7 @@ use local_kopere_dashboard\api\subplugin_manager;
 use local_kopere_dashboard\output\layout;
 use local_kopere_dashboard\report\dashboard;
 use local_kopere_dashboard\report\student_dashboard;
+use local_kopere_dashboard\security\php_security_notice;
 
 require_once(__DIR__ . "/../../config.php");
 
@@ -37,6 +38,19 @@ if ($menu !== false || $page !== false) {
 
 $context = context_system::instance();
 require_login();
+
+if (optional_param("dismissphpsecuritynotice", false, PARAM_BOOL)) {
+    if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+        throw new moodle_exception("invalidrequest", "error");
+    }
+    require_sesskey();
+    require_capability("moodle/site:config", $context);
+    if (!is_siteadmin()) {
+        throw new moodle_exception("nopermissions", "error", "", "dismissphpsecuritynotice");
+    }
+    set_user_preference(php_security_notice::PREFERENCE_DISMISSED_VERSION, PHP_VERSION);
+    redirect(new moodle_url("/local/kopere_dashboard/"));
+}
 
 $canviewdashboard = has_capability("local/kopere_dashboard:view", $context);
 
@@ -58,6 +72,23 @@ if ($canviewdashboard) {
         "donutjson" => json_encode($report->get_contracts_status()),
         "auditrows" => $report->get_latest_audit_rows(),
     ];
+    if (php_security_notice::should_show()) {
+        $templatecontext["show_php_security_notice"] = true;
+        $fixedversion = php_security_notice::fixed_version(PHP_VERSION_ID);
+        if ($fixedversion === null) {
+            $templatecontext["php_security_description"] = get_string(
+                "php_security_notice_unsupported_description", "local_kopere_dashboard", PHP_VERSION
+            );
+        } else {
+            $templatecontext["php_security_description"] = get_string(
+                "php_security_notice_description", "local_kopere_dashboard",
+                (object)["version" => PHP_VERSION, "fixedversion" => $fixedversion]
+            );
+        }
+        $templatecontext["php_security_dismiss_url"] = new moodle_url("/local/kopere_dashboard/");
+        $templatecontext["php_security_sesskey"] = sesskey();
+        $PAGE->requires->css(new moodle_url("/local/kopere_dashboard/styles/php_security_notice.css"));
+    }
 } else {
     $report = new student_dashboard();
     $template = "local_kopere_dashboard/student_dashboard";
