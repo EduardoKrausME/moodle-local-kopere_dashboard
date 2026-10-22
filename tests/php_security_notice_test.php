@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
  * Tests for the PHP October 2026 security advisory.
@@ -29,6 +29,10 @@ use local_kopere_dashboard\security\php_security_notice;
 
 /**
  * Checks PHP branch thresholds and administrator-only visibility.
+ *
+ * @covers \local_kopere_dashboard\security\php_security_notice::is_affected_version
+ * @covers \local_kopere_dashboard\security\php_security_notice::fixed_version
+ * @return void
  */
 final class php_security_notice_test extends advanced_testcase {
     /**
