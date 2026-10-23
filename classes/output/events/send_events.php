@@ -91,8 +91,8 @@ class send_events {
 
         require_once("{$CFG->dirroot}/login/lib.php");
 
-        $this->subject = $this->koperedashboardevents->subject;
-        $this->message = $this->koperedashboardevents->message;
+        $this->subject = (string)($this->koperedashboardevents->subject ?? "");
+        $this->message = (string)($this->koperedashboardevents->message ?? "");
 
         $this->subject = $this->replace_date($this->subject);
         $this->message = $this->replace_date($this->message);
@@ -191,7 +191,7 @@ class send_events {
 
             if (isset($this->event->other["password"])) {
                 $userto->password = $this->event->other["password"];
-            } else if (strpos($this->message, "{[to.password]}")) {
+            } else if (strpos($this->message, "{[to.password]}") !== false) {
                 $newpassword = $this->login_generate_password($userto);
                 $userto->password = "{$CFG->wwwroot}/login/forgot_password.php?token={$newpassword}";
             } else if (isset($USER->tmp_password)) {
@@ -232,6 +232,7 @@ class send_events {
      * @return mixed
      */
     protected function replace_date($text) {
+        $text = (string)($text ?? "");
         if (strpos($text, "{[date") === false) {
             return $text;
         }
@@ -269,6 +270,7 @@ class send_events {
      * @return mixed
      */
     protected function replace_tag($text, $course, $keyname) {
+        $text = (string)($text ?? "");
         if (strpos($text, "{[{$keyname}") === false) {
             return $text;
         }
@@ -297,6 +299,7 @@ class send_events {
      * @return mixed
      */
     public static function replace_tag_user($text, $user, $keyname) {
+        $text = (string)($text ?? "");
         if (strpos($text, "{[{$keyname}") === false) {
             return $text;
         }
