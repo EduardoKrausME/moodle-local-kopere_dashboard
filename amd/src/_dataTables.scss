@@ -109,7 +109,10 @@ table.dataTable {
     thead > tr > td.dt-ordering-desc .dt-column-order {
         position: relative;
         width: 12px;
-        height: 20px;
+        height: 22px;
+        &:focus{
+            box-shadow:none;
+        }
     }
     thead > tr > th.dt-orderable-asc .dt-column-order:before,
     thead > tr > th.dt-orderable-asc .dt-column-order:after,
@@ -130,7 +133,7 @@ table.dataTable {
         left: 0;
         opacity: 0.125;
         line-height: 9px;
-        font-size: 0.8em;
+        font-size: 1.1em;
     }
     thead > tr > th.dt-orderable-asc,
     thead > tr > th.dt-orderable-desc,
@@ -778,8 +781,8 @@ div.dt-container {
     }
     /* Header destacado */
     table.dataTable thead th {
-        background: linear-gradient(0deg, #34495e, #2c3e50);
-        color: #ffffff;
+        background: #eef2f7;
+        color: #334155;
         font-size: 13px;
         font-weight: 700;
         text-transform: uppercase;
@@ -796,7 +799,7 @@ div.dt-container {
         }
         /* Hover no header */
         &:hover {
-            background: linear-gradient(180deg, #34495e, #2c3e50);
+            background: #e2e8f0;
         }
     }
     /* Corpo da tabela */

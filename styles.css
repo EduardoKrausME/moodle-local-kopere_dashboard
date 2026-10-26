@@ -1088,7 +1088,25 @@
 .path-local-kopere_dashboard table.dataTable thead > tr > td.dt-ordering-desc .dt-column-order {
   position: relative;
   width: 12px;
-  height: 20px;
+  height: 22px;
+}
+.local-kopere_dashboard table.dataTable thead > tr > th.dt-orderable-asc .dt-column-order:focus,
+.local-kopere_dashboard table.dataTable thead > tr > th.dt-orderable-desc .dt-column-order:focus,
+.local-kopere_dashboard table.dataTable thead > tr > th.dt-ordering-asc .dt-column-order:focus,
+.local-kopere_dashboard table.dataTable thead > tr > th.dt-ordering-desc .dt-column-order:focus,
+.local-kopere_dashboard table.dataTable thead > tr > td.dt-orderable-asc .dt-column-order:focus,
+.local-kopere_dashboard table.dataTable thead > tr > td.dt-orderable-desc .dt-column-order:focus,
+.local-kopere_dashboard table.dataTable thead > tr > td.dt-ordering-asc .dt-column-order:focus,
+.local-kopere_dashboard table.dataTable thead > tr > td.dt-ordering-desc .dt-column-order:focus,
+.path-local-kopere_dashboard table.dataTable thead > tr > th.dt-orderable-asc .dt-column-order:focus,
+.path-local-kopere_dashboard table.dataTable thead > tr > th.dt-orderable-desc .dt-column-order:focus,
+.path-local-kopere_dashboard table.dataTable thead > tr > th.dt-ordering-asc .dt-column-order:focus,
+.path-local-kopere_dashboard table.dataTable thead > tr > th.dt-ordering-desc .dt-column-order:focus,
+.path-local-kopere_dashboard table.dataTable thead > tr > td.dt-orderable-asc .dt-column-order:focus,
+.path-local-kopere_dashboard table.dataTable thead > tr > td.dt-orderable-desc .dt-column-order:focus,
+.path-local-kopere_dashboard table.dataTable thead > tr > td.dt-ordering-asc .dt-column-order:focus,
+.path-local-kopere_dashboard table.dataTable thead > tr > td.dt-ordering-desc .dt-column-order:focus {
+  box-shadow: none;
 }
 .local-kopere_dashboard table.dataTable thead > tr > th.dt-orderable-asc .dt-column-order:before,
 .local-kopere_dashboard table.dataTable thead > tr > th.dt-orderable-asc .dt-column-order:after,
@@ -1125,7 +1143,7 @@
   left: 0;
   opacity: 0.125;
   line-height: 9px;
-  font-size: 0.8em;
+  font-size: 1.1em;
 }
 .local-kopere_dashboard table.dataTable thead > tr > th.dt-orderable-asc,
 .local-kopere_dashboard table.dataTable thead > tr > th.dt-orderable-desc,
@@ -2028,8 +2046,8 @@
 }
 .local-kopere_dashboard div.dt-container table.dataTable thead th,
 .path-local-kopere_dashboard div.dt-container table.dataTable thead th {
-  background: linear-gradient(0deg, #34495e, #2c3e50);
-  color: #ffffff;
+  background: #eef2f7;
+  color: #334155;
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
@@ -2052,7 +2070,7 @@
 }
 .local-kopere_dashboard div.dt-container table.dataTable thead th:hover,
 .path-local-kopere_dashboard div.dt-container table.dataTable thead th:hover {
-  background: linear-gradient(180deg, #34495e, #2c3e50);
+  background: #e2e8f0;
 }
 .local-kopere_dashboard div.dt-container,
 .path-local-kopere_dashboard div.dt-container {
