@@ -305,14 +305,42 @@ HTML;
         $fieldwidth = $width - 42.0;
         $contentwidth = $width - 12.0;
         $items = [
-            "title" => ["text" => $title, "width" => $width - 24.0, "font" => "helvetica", "style" => "B", "size" => 10.0],
-            "description" => ["text" => $description, "width" => $contentwidth, "font" => "helvetica", "style" => "", "size" => 8.0],
-            "hashlabel" => ["text" => "SHA-256:", "width" => $contentwidth, "font" => "helvetica", "style" => "B", "size" => 8.0],
-            "hash" => ["text" => strtoupper($hash), "width" => $contentwidth, "font" => "courier", "style" => "", "size" => 7.0],
+            "title" => [
+                "text" => $title,
+                "width" => $width - 24.0,
+                "font" => "helvetica",
+                "style" => "B",
+                "size" => 10.0,
+            ],
+            "description" => [
+                "text" => $description,
+                "width" => $contentwidth,
+                "font" => "helvetica",
+                "style" => "",
+                "size" => 8.0,
+            ],
+            "hashlabel" => [
+                "text" => "SHA-256:",
+                "width" => $contentwidth,
+                "font" => "helvetica",
+                "style" => "B",
+                "size" => 8.0,
+            ],
+            "hash" => [
+                "text" => strtoupper($hash),
+                "width" => $contentwidth,
+                "font" => "courier",
+                "style" => "",
+                "size" => 7.0,
+            ],
         ];
         foreach ($fields as $index => $field) {
             $items["field{$index}"] = [
-                "text" => $field[1], "width" => $fieldwidth, "font" => "helvetica", "style" => "", "size" => 8.0,
+                "text" => $field[1],
+                "width" => $fieldwidth,
+                "font" => "helvetica",
+                "style" => "",
+                "size" => 8.0,
             ];
         }
 
