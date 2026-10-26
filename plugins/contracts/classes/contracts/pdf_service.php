@@ -171,7 +171,7 @@ class pdf_service {
         $pdf->SetTitle(format_string($contract->name));
         $pdf->SetSubject(format_string($course->fullname));
         $pdf->SetMargins(12, 12, 12);
-        $pdf->SetAutoPageBreak(true, 50);
+        $pdf->SetAutoPageBreak(true, 12);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
         $pdf->setAllowLocalFiles(true);
@@ -221,12 +221,10 @@ class pdf_service {
         $renderedcontent = $engine->render($contract->content, $placeholderdata);
         $content = format_text($renderedcontent, $contract->contentformat ?? FORMAT_HTML, [
             "context" => $coursecontext,
-            "overflowdiv" => true,
+            "overflowdiv" => false,
         ]);
 
-        $title = format_string($contract->name);
-        $coursename = format_string($course->fullname);
-
+        // The contract editor owns the document header: do not prepend the course/name again.
         return <<<HTML
 <style>
     body { font-family: helvetica, arial, sans-serif; color: #202124; font-size: 10.5pt; }
@@ -234,15 +232,8 @@ class pdf_service {
     table { border-collapse: collapse; width: 100%; }
     td, th { padding: 4px; }
     img { max-width: 100%; height: auto; }
-    .contract-header { margin-bottom: 14px; }
-    .contract-title { font-size: 18pt; font-weight: bold; color: #123b78; }
-    .contract-subtitle { font-size: 9.5pt; color: #555555; }
     .contract-content { line-height: 1.45; }
 </style>
-<div class="contract-header">
-    <div class="contract-title">{$title}</div>
-    <div class="contract-subtitle">{$coursename}</div>
-</div>
 <div class="contract-content">{$content}</div>
 HTML;
     }
@@ -314,76 +305,86 @@ HTML;
         string $hash,
         bool $hassignature
     ): void {
-        $x = 112;
-        $w = 89;
-        $h = 44;
-        $bottom = 6;
-        $y = $pdf->getPageHeight() - $bottom - $h;
+        $margins = $pdf->getMargins();
+        $x = (float) $margins["left"];
+        $w = $pdf->getPageWidth() - $x - (float) $margins["right"];
+        $bottommargin = (float) $margins["bottom"];
+        $gap = 5.0;
+        $headerheight = 9.0;
+        $labelwidth = 30.0;
+        $valuewidth = $w - 12.0 - $labelwidth;
 
-        $radius = 3;
-        $headerh = 9;
-        $padding = 2.5;
+        $fields = [
+            ["Aluno:", fullname($user)],
+            ["Curso:", format_string($course->shortname)],
+            ["Contrato:", format_string($contract->name)],
+            ["Assinado em:", userdate::format($accept->timeaccepted)],
+            ["IP:", (string) ($accept->ip ?? "-")],
+        ];
 
-        $blue = [0, 66, 125];
-        $black = [0, 0, 0];
-        $border = [185, 185, 185];
+        // Measure wrapped metadata before choosing the page. The evidence must remain one block.
+        $pdf->SetFont("helvetica", "", 8.0);
+        $rowheights = [];
+        foreach ($fields as $field) {
+            $rowheights[] = max(5.0, $pdf->getStringHeight($valuewidth, $field[1]));
+        }
+        $h = $headerheight + 7.0 + array_sum($rowheights) + 4.0 + 7.0 + 4.0;
+        $y = $pdf->GetY() + $gap;
+        if ($y + $h > $pdf->getPageHeight() - $bottommargin) {
+            $pdf->AddPage();
+            $y = $pdf->GetY() + $gap;
+        }
 
-        $pdf->SetFillColor($blue[0], $blue[1], $blue[2]);
-        $pdf->SetDrawColor($blue[0], $blue[1], $blue[2]);
-        $pdf->RoundedRect($x, $y, $w, $h, $radius, "1111", "DF");
+        // TCPDF's automatic break can otherwise split a Cell/MultiCell inside the stamp.
+        $pdf->SetAutoPageBreak(false, 0);
 
         $pdf->SetFillColor(255, 255, 255);
-        $pdf->SetDrawColor(255, 255, 255);
-        $pdf->RoundedRect($x, $y + $headerh, $w, $h - $headerh, $radius, "0011", "DF");
-
+        $pdf->RoundedRect($x, $y, $w, $h, 3, "1111", "F");
+        $pdf->SetFillColor(0, 66, 125);
+        $pdf->Rect($x, $y, $w, $headerheight, "F");
+        $pdf->SetDrawColor(185, 185, 185);
         $pdf->SetLineWidth(0.25);
-        $pdf->SetDrawColor($border[0], $border[1], $border[2]);
-        $pdf->RoundedRect($x, $y, $w, $h, $radius, "1111", "D");
+        $pdf->RoundedRect($x, $y, $w, $h, 3, "1111", "D");
 
-        $iconx = $x + $padding;
-        $icony = $y + $padding + 0.6;
-        $iconw = 22;
-        $iconh = 22;
-
-        $pdf->SetFillColor(245, 248, 252);
-        $pdf->SetDrawColor(225, 232, 240);
-        $pdf->RoundedRect($iconx, $icony, $iconw, $iconh, 2.3, "1111", "DF");
-
-        $pdf->SetTextColor($blue[0], $blue[1], $blue[2]);
-        $pdf->SetFont("helvetica", "B", 22);
-        $pdf->SetXY($iconx, $icony + 4.2);
-        $pdf->Cell($iconw, 8, "✓", 0, 0, "C");
-
-        $textx = $iconx + $iconw + 2.4;
-        $textw = ($x + $w - $padding) - $textx;
+        // Draw the check mark with vector lines; no font glyph or Unicode fallback.
+        $iconx = $x + 6.0;
+        $icony = $y + 1.2;
+        $pdf->SetDrawColor(255, 255, 255);
+        $pdf->SetLineWidth(1.1);
+        $pdf->Line($iconx, $icony + 3.5, $iconx + 2.4, $icony + 5.7);
+        $pdf->Line($iconx + 2.4, $icony + 5.7, $iconx + 7.0, $icony + 0.7);
 
         $pdf->SetTextColor(255, 255, 255);
-        $pdf->SetFont("helvetica", "B", 12.5);
-        $pdf->SetXY($textx, $y + 1.8);
-        $pdf->Cell($textw, $headerh - 3.5, "Assinatura digital", 0, 0, "C");
+        $pdf->SetFont("helvetica", "B", 10);
+        $pdf->SetXY($x + 18, $y + 2.0);
+        $pdf->Cell($w - 24, 5, get_string("accept_title", "koperedashboard_contracts"), 0, 0, "L");
 
-        $pdf->SetTextColor($black[0], $black[1], $black[2]);
-        $pdf->SetFont("helvetica", "", 8.1);
-        $pdf->SetXY($textx, $y + $headerh + 1.8);
-        $pdf->MultiCell($textw, 3.5, "Contrato aceito eletronicamente no Kopere Dashboard.", 0, "L");
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetFont("helvetica", "", 8.0);
+        $pdf->SetXY($x + 6, $y + $headerheight + 1.0);
+        $pdf->Cell($w - 12, 5, "Contrato aceite eletronicamente no Kopere Dashboard.", 0, 0, "L");
 
-        $pdf->SetFont("helvetica", "", 7.1);
-        self::draw_signature_line($pdf, $textx, $pdf->GetY() + 0.5, $textw, "Aluno:", fullname($user));
-        self::draw_signature_line($pdf, $textx, $pdf->GetY(), $textw, "Curso:", format_string($course->shortname));
-        self::draw_signature_line($pdf, $textx, $pdf->GetY(), $textw, "Contrato:", format_string($contract->name), 6.6);
-        self::draw_signature_line($pdf, $textx, $pdf->GetY(), $textw, "Assinado em:", userdate::format($accept->timeaccepted), 6.8);
-        self::draw_signature_line($pdf, $textx, $pdf->GetY(), $textw, "IP:", (string) ($accept->ip ?? "-"), 6.8);
+        $rowy = $y + $headerheight + 7.0;
+        foreach ($fields as $i => $field) {
+            self::draw_signature_line($pdf, $x + 6, $rowy, $w - 12, $field[0], $field[1], $rowheights[$i]);
+            $rowy += $rowheights[$i];
+        }
 
-        $pdf->SetXY($x + $padding, $y + $h - 7.7);
-        $pdf->SetTextColor($black[0], $black[1], $black[2]);
-        $pdf->SetFont("helvetica", "B", 6.5);
-        $pdf->Cell(10.5, 4.1, "Hash:", 0, 0, "L");
-        $pdf->SetFont("helvetica", "", 6.0);
-        $pdf->Cell($w - 16, 4.1, strtoupper(substr($hash, 0, 48)), 0, 1, "L");
+        $hashy = $rowy + 2.0;
+        $pdf->SetDrawColor(185, 185, 185);
+        $pdf->SetLineWidth(0.25);
+        $pdf->Line($x + 5, $hashy, $x + $w - 5, $hashy);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetFont("helvetica", "B", 8.0);
+        $pdf->SetXY($x + 6, $hashy + 2.0);
+        $pdf->Cell(17, 5, "SHA-256:", 0, 0, "L");
+        $pdf->SetFont("courier", "", 7.0);
+        $pdf->Cell($w - 29, 5, strtoupper($hash), 0, 0, "L");
 
         if ($hassignature) {
-            $pdf->setSignatureAppearance($iconx, $icony, $iconw, $iconh);
+            $pdf->setSignatureAppearance($x + 4.0, $y + 1.0, 10.0, 7.0);
         }
+        $pdf->SetAutoPageBreak(true, $bottommargin);
     }
 
     /**
@@ -399,16 +400,19 @@ HTML;
      * @return void
      */
     private static function draw_signature_line(
-        pdf $pdf, float $x, float $y, float $w, string $title, string $text, float $size = 7.1
+        pdf $pdf, float $x, float $y, float $w, string $title, string $text, float $rowheight
     ): void {
-        $pdf->SetXY($x, $y);
+        $labelwidth = 30.0;
         $pdf->SetTextColor(0, 0, 0);
-        $pdf->SetFont("helvetica", "B", $size);
-        $titlew = $pdf->GetStringWidth($title . " ") + 0.7;
-        $pdf->Cell($titlew, 3.8, $title, 0, 0, "L");
+        $pdf->SetFont("helvetica", "B", 8.0);
+        $pdf->SetXY($x, $y);
+        $pdf->Cell($labelwidth, 5.0, $title, 0, 0, "L");
 
-        $pdf->SetFont("helvetica", "", $size);
-        $pdf->Cell($w - $titlew, 3.8, shorten_text($text, 42, true), 0, 1, "L");
+        $pdf->SetFont("helvetica", "", 8.0);
+        $pdf->MultiCell(
+            $w - $labelwidth, $rowheight, $text, 0, "L", false, 1,
+            $x + $labelwidth, $y, true, 0, false, true, $rowheight, "T", false
+        );
     }
 
     /**
