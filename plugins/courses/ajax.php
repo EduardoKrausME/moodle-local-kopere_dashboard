@@ -52,7 +52,7 @@ foreach ($records as $course) {
         "fullname" => format_string($course->fullname),
         "shortname" => $course->shortname,
         "category" => format_string($course->categoryname),
-        "url" => new moodle_url("/local/kopere_dashboard/plugins/courses/view.php", ["id" => $course->id]),
+        "url" => (new moodle_url("/local/kopere_dashboard/plugins/courses/view.php", ["id" => $course->id]))->out(false),
     ];
 }
 
