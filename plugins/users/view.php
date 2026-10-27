@@ -24,6 +24,7 @@
 
 use koperedashboard_users\service\user_service;
 use local_kopere_dashboard\myoverview_helper;
+use local_kopere_dashboard\bi_entity_reports;
 use local_kopere_dashboard\output\layout;
 use local_kopere_dashboard\util\userdate;
 
@@ -284,6 +285,8 @@ $templatecontext += [
         ],
     ],
 ];
+
+$templatecontext["bi"] = bi_entity_reports::for_user($userid, array_column($courseitems, "id"));
 
 $content = $OUTPUT->render_from_template("koperedashboard_users/view", $templatecontext);
 layout::page_render($context, $content, true);
