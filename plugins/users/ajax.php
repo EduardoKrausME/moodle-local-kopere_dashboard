@@ -54,7 +54,7 @@ foreach ($records as $user) {
         "name" => fullname($u),
         "username" => $u->username,
         "email" => $u->email,
-        "url" => new moodle_url("/local/kopere_dashboard/plugins/users/view.php", ["id" => $u->id]),
+        "url" => (new moodle_url("/local/kopere_dashboard/plugins/users/view.php", ["id" => $u->id]))->out(false),
     ];
 }
 
