@@ -117,7 +117,7 @@ class bi_entity_reports {
             foreach ($records as $record) {
                 $rows[] = [
                     "name" => format_string($record->fullname),
-                    "url" => (new moodle_url("/local/kopere_dashboard/plugins/courses/view.php",
+                    "url" => (new moodle_url("/course/view.php",
                         ["id" => $record->id]))->out(false),
                     "visits" => format_float($record->visits, 0),
                     "time" => format_time((int)$record->seconds),
@@ -172,7 +172,7 @@ class bi_entity_reports {
             foreach ($records as $record) {
                 $rows[] = [
                     "name" => fullname($record),
-                    "url" => (new moodle_url("/local/kopere_dashboard/plugins/users/view.php",
+                    "url" => (new moodle_url("/user/profile.php",
                         ["id" => $record->id]))->out(false),
                     "visits" => format_float($record->visits, 0),
                     "time" => format_time((int)$record->seconds),
@@ -200,6 +200,7 @@ class bi_entity_reports {
     private static function summary($stats, int $distinctcount, string $distinctlabel,
             array $reportkeys, array $urlparams, array $rows, string $detailkey,
             bool $globalreports): array {
+         $reports = self::reports($reportkeys, $urlparams);
         return [
             "metrics" => [
                 ["label" => get_string("bi_metric_visits", "local_kopere_dashboard"),
@@ -212,8 +213,10 @@ class bi_entity_reports {
                     "value" => !empty($stats->lastaccess) ? userdate((int)$stats->lastaccess) :
                         get_string("bi_never_accessed", "local_kopere_dashboard")],
             ],
-            "reports" => self::reports($reportkeys, $urlparams),
+            "reports" => $reports,
+            "hasreports" => !empty($reports),
             "details" => $rows,
+            "hasdetails" => !empty($rows),
             "detailtitle" => get_string($detailkey, "local_kopere_dashboard"),
             "isglobalreports" => $globalreports,
         ];
