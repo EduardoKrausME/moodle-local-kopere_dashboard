@@ -1,0 +1,67 @@
+{{!
+    Optional, permission-checked Kopere BI summary.
+    Data is scoped by the server; the template must never choose entity IDs.
+    @template local_kopere_dashboard/bi_entity_reports
+
+    Example context (json):
+    {
+        "metrics": [{"label": "Recorded visits", "value": "12"}],
+        "details": [{"name": "Example", "url": "/course/view.php?id=3", "visits": "12", "time": "1 hour"}],
+        "hasdetails": true,
+        "reports": [{"title": "Course statistics", "url": "/local/kopere_bi/index.php?page_id=1"}],
+        "hasreports": true,
+        "detailtitle": "Recently accessed courses",
+        "isglobalreports": false
+    }
+}}
+<div class="kopere_dashboard-card" style="margin-top: 16px;">
+    <h4 style="margin: 0 0 8px 0;">{{#str}}bi_section_title, local_kopere_dashboard{{/str}}</h4>
+    <p class="text-muted small">
+        {{#str}}bi_tracking_note, local_kopere_dashboard{{/str}}
+    </p>
+    <div class="kopere_dashboard-student-grid"
+         style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+        {{#metrics}}
+            <div class="kopere_dashboard-card" style="margin: 0;">
+                <div style="opacity: .75; font-size: 13px;">{{label}}</div>
+                <div style="font-size: 24px; font-weight: 700;">{{value}}</div>
+            </div>
+        {{/metrics}}
+    </div>
+
+    {{#hasdetails}}
+        <h5 style="margin: 16px 0 8px 0;">{{detailtitle}}</h5>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">{{#str}}bi_detail_name, local_kopere_dashboard{{/str}}</th>
+                        <th scope="col">{{#str}}bi_metric_visits, local_kopere_dashboard{{/str}}</th>
+                        <th scope="col">{{#str}}bi_metric_time, local_kopere_dashboard{{/str}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#details}}
+                        <tr>
+                            <td><a href="{{url}}">{{name}}</a></td>
+                            <td>{{visits}}</td>
+                            <td>{{time}}</td>
+                        </tr>
+                    {{/details}}
+                </tbody>
+            </table>
+        </div>
+    {{/hasdetails}}
+
+    {{#hasreports}}
+        <h5 style="margin: 16px 0 8px 0;">{{#str}}bi_reports_title, local_kopere_dashboard{{/str}}</h5>
+        {{#isglobalreports}}
+            <p class="text-muted small">{{#str}}bi_global_reports_note, local_kopere_dashboard{{/str}}</p>
+        {{/isglobalreports}}
+        <div class="d-flex flex-wrap" style="gap: 8px;">
+            {{#reports}}
+                <a class="btn btn-outline-secondary btn-sm" href="{{url}}">{{title}}</a>
+            {{/reports}}
+        </div>
+    {{/hasreports}}
+</div>

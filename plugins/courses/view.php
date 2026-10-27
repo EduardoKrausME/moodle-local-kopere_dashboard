@@ -24,6 +24,7 @@
 
 use koperedashboard_courses\service\course_service;
 use local_kopere_dashboard\output\layout;
+use local_kopere_dashboard\bi_entity_reports;
 use local_kopere_dashboard\util\userdate;
 
 require_once(__DIR__ . "/../../../../config.php");
@@ -314,6 +315,8 @@ $templatecontext["metrics"] = [
         "value" => $openrequests,
     ],
 ];
+
+$templatecontext["bi"] = bi_entity_reports::for_course($courseid, $canviewparticipants);
 
 $content = $OUTPUT->render_from_template("koperedashboard_courses/view", $templatecontext);
 layout::page_render($context, $content, true);
