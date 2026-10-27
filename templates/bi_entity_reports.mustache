@@ -43,7 +43,7 @@
                 <tbody>
                     {{#details}}
                         <tr>
-                            <td><a href="{{url}}">{{name}}</a></td>
+                            <td><a href="{{{url}}}">{{name}}</a></td>
                             <td>{{visits}}</td>
                             <td>{{time}}</td>
                         </tr>
@@ -60,7 +60,7 @@
         {{/isglobalreports}}
         <div class="d-flex flex-wrap" style="gap: 8px;">
             {{#reports}}
-                <a class="btn btn-outline-secondary btn-sm" href="{{url}}">{{title}}</a>
+                <a class="btn btn-outline-secondary btn-sm" href="{{{url}}}">{{title}}</a>
             {{/reports}}
         </div>
     {{/hasreports}}

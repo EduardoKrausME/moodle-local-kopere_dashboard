@@ -8,11 +8,11 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <https://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
  * Tests graceful degradation when the optional Kopere BI is unavailable.
@@ -28,6 +28,8 @@ use advanced_testcase;
 use core_component;
 
 /**
+ * Tests optional Kopere BI integration without requiring its installation.
+ *
  * @covers \local_kopere_dashboard\bi_entity_reports
  */
 final class bi_entity_reports_test extends advanced_testcase {

@@ -8,11 +8,11 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
  * Optional Kopere BI summaries in the Dashboard's user and course detail pages.
@@ -200,7 +200,7 @@ class bi_entity_reports {
     private static function summary($stats, int $distinctcount, string $distinctlabel,
             array $reportkeys, array $urlparams, array $rows, string $detailkey,
             bool $globalreports): array {
-         $reports = self::reports($reportkeys, $urlparams);
+        $reports = self::reports($reportkeys, $urlparams);
         return [
             "metrics" => [
                 ["label" => get_string("bi_metric_visits", "local_kopere_dashboard"),
