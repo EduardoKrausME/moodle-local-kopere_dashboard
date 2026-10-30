@@ -39,10 +39,15 @@ $PAGE->add_body_class("local-kopere_dashboard");
 $PAGE->set_context($context);
 $PAGE->set_title(get_string("new_title", "koperedashboard_requests"));
 
-$cats = $DB->get_records("koperedashboard_req_category", ["active" => 1], "name ASC", "id,name");
+$cats = $DB->get_records("koperedashboard_req_category", ["active" => 1], "name ASC", "id,name,description");
 $catoptions = [];
+$catdescriptions = [];
 foreach ($cats as $c) {
     $catoptions[$c->id] = format_string($c->name);
+    $description = trim((string) $c->description);
+    if ($description !== "") {
+        $catdescriptions[$c->id] = $description;
+    }
 }
 
 $courses = [0 => "-"];
@@ -113,6 +118,8 @@ if ($data = $form->get_data()) {
 
     redirect(new moodle_url("/local/kopere_dashboard/plugins/requests/view.php", ["id" => $requestid]));
 }
+
+$PAGE->requires->js_call_amd("koperedashboard_requests/category_description", "init", [$catdescriptions]);
 
 $content = $OUTPUT->render_from_template("koperedashboard_requests/new", [
     "formhtml" => $form->render(),
