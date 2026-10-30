@@ -53,9 +53,16 @@ class request_form extends moodleform {
         $mform->setType("subject", PARAM_TEXT);
         $mform->addRule("subject", null, "required", null, "client");
 
-        $mform->addElement("select", "categoryid", get_string("request_category", "koperedashboard_requests"), $categories);
+        $mform->addElement("select", "categoryid", get_string("request_category", "koperedashboard_requests"),
+            $categories, ["aria-describedby" => "kopere_dashboard-requests-category-description"]);
         $mform->setType("categoryid", PARAM_INT);
         $mform->addRule("categoryid", null, "required", null, "client");
+        $mform->addElement("html", \html_writer::tag("div", "", [
+            "id" => "kopere_dashboard-requests-category-description",
+            "class" => "form-text text-muted small",
+            "aria-live" => "polite",
+            "style" => "white-space: pre-line;",
+        ]));
 
         $mform->addElement("select", "courseid", get_string("request_course", "koperedashboard_requests"), $courses);
         $mform->setType("courseid", PARAM_INT);
