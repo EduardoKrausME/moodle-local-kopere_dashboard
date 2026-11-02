@@ -2,6 +2,22 @@
 
 This file documents only the two most recent published GitHub releases, based on the changes between the published tags. Changes made after tag `3.1.1` are not included.
 
+## 3.1.3 - 2026-10-30
+
+- Added accessible helpdesk category descriptions to the ticket creation form and updated them when the selected category changes.
+- Included the production AMD module for dynamic category descriptions.
+
+**Full comparison:** [3.1.2...3.1.3](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/compare/3.1.2...3.1.3)
+
+## 3.1.2 - 2026-10-27
+
+- Added permission-aware Kopere BI summaries to user and course detail pages, including reusable report templates and tests for installations without Kopere BI.
+- Fixed URL serialization for user and course autocomplete suggestions.
+- Improved contract PDF acceptance-receipt layout and handling of missing notification text.
+- Aligned subplugin requirements, localization and Moodle coding-standard checks.
+
+**Full comparison:** [3.1.1...3.1.2](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/compare/3.1.1...3.1.2)
+
 ## 3.1.1 - 2026-10-22
 
 ### Added
