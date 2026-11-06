@@ -51,6 +51,15 @@ define(["jquery"], function ($) {
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
+    function chartTheme(canvas) {
+        var style = window.getComputedStyle(canvas);
+        return {
+            grid: style.getPropertyValue("--kopere-chart-grid").trim() || "rgba(0,0,0,.08)",
+            text: style.getPropertyValue("--kopere-chart-text").trim() || "rgba(0,0,0,.55)",
+            center: style.getPropertyValue("--kopere-chart-center").trim() || "#ffffff"
+        };
+    }
+
     function drawLineChart(canvas, data) {
         if (!canvas || !data || !data.labels || !data.values) {
             return;
@@ -58,6 +67,7 @@ define(["jquery"], function ($) {
 
         resizeCanvas(canvas);
 
+        var theme = chartTheme(canvas);
         var ctx = canvas.getContext("2d");
         var w = canvas.getBoundingClientRect().width;
         var h = canvas.getBoundingClientRect().height || 180;
@@ -78,7 +88,7 @@ define(["jquery"], function ($) {
 
         ctx.globalAlpha = 1;
         ctx.lineWidth = 1;
-        ctx.strokeStyle = "rgba(0,0,0,.08)";
+        ctx.strokeStyle = theme.grid;
         ctx.beginPath();
         ctx.moveTo(left, bottom);
         ctx.lineTo(right, bottom);
@@ -124,7 +134,7 @@ define(["jquery"], function ($) {
         ctx.fill();
         ctx.globalAlpha = 1;
 
-        ctx.fillStyle = "rgba(0,0,0,.55)";
+        ctx.fillStyle = theme.text;
         ctx.font = "12px sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "top";
@@ -137,7 +147,7 @@ define(["jquery"], function ($) {
             ctx.fillStyle = "rgba(0,188,212,1)";
             ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2);
             ctx.fill();
-            ctx.fillStyle = "rgba(0,0,0,.55)";
+            ctx.fillStyle = theme.text;
         }
     }
 
@@ -148,6 +158,7 @@ define(["jquery"], function ($) {
 
         resizeCanvas(canvas);
 
+        var theme = chartTheme(canvas);
         var ctx = canvas.getContext("2d");
         var w = canvas.getBoundingClientRect().width;
         var h = canvas.getBoundingClientRect().height || 180;
@@ -188,7 +199,7 @@ define(["jquery"], function ($) {
         }
 
         ctx.beginPath();
-        ctx.fillStyle = "white";
+        ctx.fillStyle = theme.center;
         ctx.arc(cx, cy, inner, 0, Math.PI * 2);
         ctx.fill();
 
@@ -228,9 +239,17 @@ define(["jquery"], function ($) {
         }
 
         render();
-        $(window).on("resize", function () {
-            render();
-        });
+        $(window).on("resize", render);
+
+        // Moodle/Bootstrap may change the theme without reloading the page.
+        if (window.MutationObserver) {
+            var observer = new MutationObserver(render);
+            var options = {attributes: true, attributeFilter: ["data-bs-theme", "class"]};
+            observer.observe(document.documentElement, options);
+            if (document.body) {
+                observer.observe(document.body, options);
+            }
+        }
     }
 
     return {init: init};
