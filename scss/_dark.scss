@@ -1,0 +1,141 @@
+/* Match the Moodle/Bootstrap theme. Do not use the OS preference here. */
+[data-bs-theme="dark"] .kopere_dashboard-card-shell {
+    --kopere-dashboard-surface: #192334;
+    --kopere-dashboard-surface-alt: #111a28;
+    --kopere-dashboard-text: #e8eef7;
+    --kopere-dashboard-muted: #b2bfd1;
+    --kopere-dashboard-border: #354254;
+    --kopere-chart-grid: rgba(216, 229, 246, .18);
+    --kopere-chart-text: #b2bfd1;
+    --kopere-chart-center: #192334;
+    color: var(--kopere-dashboard-text);
+    color-scheme: dark;
+}
+[data-bs-theme="dark"] .kopere_dashboard-card-sidenav {
+    background: var(--kopere-dashboard-surface-alt);
+    border-right-color: var(--kopere-dashboard-border);
+    color: var(--kopere-dashboard-text);
+}
+[data-bs-theme="dark"] .kopere_dashboard-card-brand {
+    border-bottom-color: var(--kopere-dashboard-border);
+}
+[data-bs-theme="dark"] .kopere_dashboard-card-brandmark {
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: #f8fafc; /* Keep the original logo legible. */
+}
+[data-bs-theme="dark"] .kopere_dashboard-card-brandlink,
+[data-bs-theme="dark"] .kopere_dashboard-card-navlink,
+[data-bs-theme="dark"] .kopere_dashboard-card-navitem,
+[data-bs-theme="dark"] .kopere_dashboard-card-navsummary {
+    color: var(--kopere-dashboard-text);
+}
+[data-bs-theme="dark"] .kopere_dashboard-card-navgroup-title,
+[data-bs-theme="dark"] .kopere_dashboard-breadcrumb,
+[data-bs-theme="dark"] .kopere_dashboard-bc-sep,
+[data-bs-theme="dark"] .kopere_dashboard-hero-desc,
+[data-bs-theme="dark"] .kopere_dashboard-student-course-meta,
+[data-bs-theme="dark"] .kopere_dashboard-student-link-desc,
+[data-bs-theme="dark"] .kopere_dashboard-student-lastaccess,
+[data-bs-theme="dark"] .kopere_dashboard-student-empty {
+    color: var(--kopere-dashboard-muted);
+}
+[data-bs-theme="dark"] .kopere_dashboard-card-navitem,
+[data-bs-theme="dark"] .kopere_dashboard-card-navsummary,
+[data-bs-theme="dark"] .kopere_dashboard-card-navchildren {
+    border-color: var(--kopere-dashboard-border);
+}
+[data-bs-theme="dark"] .kopere_dashboard-card-navchildren {
+    background: #162133;
+}
+[data-bs-theme="dark"] .kopere_dashboard-card-navitem:hover,
+[data-bs-theme="dark"] .kopere_dashboard-card-navsummary:hover {
+    background: #23334b;
+    color: #ffffff;
+}
+[data-bs-theme="dark"] .kopere_dashboard-card-navitem.is-active,
+[data-bs-theme="dark"] .kopere_dashboard-card-navsummary.is-active,
+[data-bs-theme="dark"] .kopere_dashboard-card-navsummary.is-expanded {
+    background: #253e60;
+    color: #e4f1ff;
+}
+[data-bs-theme="dark"] .kopere_dashboard-card-navitem.is-active .kopere_dashboard-card-navicon,
+[data-bs-theme="dark"] .kopere_dashboard-card-navsummary.is-active .kopere_dashboard-card-navicon,
+[data-bs-theme="dark"] .kopere_dashboard-card-navitem.is-active .kopere_dashboard-material-icon,
+[data-bs-theme="dark"] .kopere_dashboard-card-navsummary.is-active .kopere_dashboard-material-icon {
+    color: #8bc6ff;
+}
+[data-bs-theme="dark"] .kopere_dashboard-toprow {
+    border-bottom-color: var(--kopere-dashboard-border);
+}
+[data-bs-theme="dark"] .kopere_dashboard-title,
+[data-bs-theme="dark"] .kopere_dashboard-breadcrumb a,
+[data-bs-theme="dark"] .kopere_dashboard-card-title,
+[data-bs-theme="dark"] .kopere_dashboard-hero-title,
+[data-bs-theme="dark"] .kopere_dashboard-student-course-title,
+[data-bs-theme="dark"] .kopere_dashboard-student-link-title,
+[data-bs-theme="dark"] .kopere_dashboard-student-progress-row {
+    color: var(--kopere-dashboard-text);
+}
+[data-bs-theme="dark"] .kopere_dashboard-card,
+[data-bs-theme="dark"] .kopere_dashboard-student-course,
+[data-bs-theme="dark"] .kopere_dashboard-student-link {
+    background: var(--kopere-dashboard-surface);
+    border-color: var(--kopere-dashboard-border);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .16);
+}
+[data-bs-theme="dark"] .kopere_dashboard-hero {
+    background: linear-gradient(125deg, #192334 0%, #1b314b 100%);
+    border-color: var(--kopere-dashboard-border);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .16);
+}
+[data-bs-theme="dark"] .kopere_dashboard-hero-icon,
+[data-bs-theme="dark"] .kopere_dashboard-student-status {
+    background: #263d5b;
+    color: #c5e1ff;
+}
+[data-bs-theme="dark"] .kopere_dashboard-student-progressbar {
+    background: #35465e;
+}
+[data-bs-theme="dark"] .kopere_dashboard-student-course:hover,
+[data-bs-theme="dark"] .kopere_dashboard-student-link:hover {
+    border-color: #5583b7;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, .25);
+}
+[data-bs-theme="dark"] .kopere_dashboard-card-table thead th {
+    background: #243449;
+    color: var(--kopere-dashboard-text);
+    border-color: var(--kopere-dashboard-border);
+}
+[data-bs-theme="dark"] .kopere_dashboard-card-table tbody td {
+    background: var(--kopere-dashboard-surface);
+    color: var(--kopere-dashboard-text);
+    border-bottom-color: var(--kopere-dashboard-border);
+}
+[data-bs-theme="dark"] .kopere_dashboard-card-table tbody tr:hover td {
+    background: #24364b;
+}
+[data-bs-theme="dark"] .kopere_dashboard-pagecontent :is(.form-control, .custom-select, select, textarea, input[type="text"], input[type="search"], input[type="number"]),
+[data-bs-theme="dark"] .kopere_dashboard-mobile-toggle {
+    background: #111a28;
+    color: var(--kopere-dashboard-text);
+    border-color: var(--kopere-dashboard-border);
+}
+[data-bs-theme="dark"] .kopere_dashboard-pagecontent :is(input, textarea)::placeholder {
+    color: var(--kopere-dashboard-muted);
+}
+[data-bs-theme="dark"] .kopere_dashboard-mobile-toggle-icon span {
+    background: var(--kopere-dashboard-text);
+}
+[data-bs-theme="dark"] .kopere_dashboard-pagecontent :is(.table, .dataTable) {
+    --bs-table-bg: var(--kopere-dashboard-surface);
+    --bs-table-color: var(--kopere-dashboard-text);
+    --bs-table-border-color: var(--kopere-dashboard-border);
+    color: var(--kopere-dashboard-text);
+}
+[data-bs-theme="dark"] .kopere_dashboard-pagecontent :is(.dataTables_wrapper, .dt-container, .dataTables_info, .dt-info, .dt-paging) {
+    color: var(--kopere-dashboard-text);
+}
+[data-bs-theme="dark"] .kopere_dashboard-legend {
+    color: var(--kopere-dashboard-muted);
+}
