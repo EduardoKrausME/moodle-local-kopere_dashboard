@@ -1,6 +1,14 @@
 # Changelog
 
-This file documents only the two most recent published GitHub releases, based on the changes between the published tags. Changes made after tag `3.1.1` are not included.
+This changelog documents published GitHub releases using changes verified between consecutive published release tags.
+
+## 3.1.4 - 2026-11-06
+
+- Added dark-mode styling for Kopere Dashboard navigation, cards and other interface elements using Moodle's active Bootstrap theme.
+- Updated line and donut charts to use theme-derived CSS colors and redraw after theme changes without reloading the page.
+- Updated the compiled CSS and dashboard AMD build for the new styling.
+
+**Full comparison:** [3.1.3...3.1.4](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/compare/3.1.3...3.1.4)
 
 ## 3.1.3 - 2026-10-30
 
