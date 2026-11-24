@@ -66,5 +66,6 @@ function local_kopere_dashboard_extend_navigation(global_navigation $nav) {
         $CFG->custommenuitems .= "\n{$name}|{$url}";
     } catch (Exception $e) {
         // Navigation may not be available in every page context.
+        return;
     }
 }
