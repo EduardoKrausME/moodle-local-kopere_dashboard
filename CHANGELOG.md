@@ -2,6 +2,13 @@
 
 This changelog documents published GitHub releases using changes verified between consecutive published release tags.
 
+## 3.1.5 - 2026-11-24
+
+- Added a security reporting policy with coordinated vulnerability disclosure guidance.
+- Updated release metadata; no functional dashboard changes were made in this tag.
+
+**Comparison:** [3.1.4...3.1.5](https://github.com/EduardoKrausME/moodle-local-kopere_dashboard/compare/3.1.4...3.1.5)
+
 ## 3.1.4 - 2026-11-06
 
 - Added dark-mode styling for Kopere Dashboard navigation, cards and other interface elements using Moodle's active Bootstrap theme.
